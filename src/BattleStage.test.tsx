@@ -81,16 +81,17 @@ afterEach(async () => {
 });
 
 describe('battle presentation', () => {
-  it.each([720, 360])('keeps ally icons stationary at width %i while enemies idle', async width => {
+  it.each([720, 360])('draws only enemies at width %i while they idle', async width => {
     vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width, height: 460, left: 0, top: 0} as DOMRect);
-    await render({...base, activeActorKey: 'a0', targetKeys: ['a0'], selectedTarget: 'a0'});
+    await render({...base, targetKeys: ['a0'], selectedTarget: 'a0'});
     frame(100);
-    const allies = teamTransforms();
     const enemies = teamTransforms(true);
-    expect(allies).toHaveLength(5);
+    expect(glyphs.map(glyph => glyph.text)).toEqual(party.enemies.map(unit => unit.monster.icon));
+    expect(teamTransforms()).toHaveLength(0);
     expect(enemies).toHaveLength(5);
+    expect(document.querySelector('canvas')?.getAttribute('aria-label')).toContain('敵だけ');
     frame(600);
-    expect(teamTransforms()).toEqual(allies);
+    expect(glyphs).toHaveLength(5);
     expect(teamTransforms(true)).not.toEqual(enemies);
   });
 
@@ -98,81 +99,62 @@ describe('battle presentation', () => {
     ['slash', '通常攻撃'],
     ['wind', '疾風斬り'],
     ['fire', '狐火'],
-  ])('keeps allied %s casts fixed through the enemy camera zoom', async (type, skill) => {
+  ])('keeps allied %s casts offscreen while preserving enemy camera zoom', async (type, skill) => {
     await render(base);
     frame(100);
-    const allies = teamTransforms();
     const enemies = teamTransforms(true);
     const event: BattleEvent = {...cast, skill};
     await render({...base, effect: {text: skill, type, tick: 1}, impact: event});
     frame(200);
     frame(800);
-    expect(teamTransforms()).toEqual(allies);
+    expect(glyphs.map(glyph => glyph.text)).toEqual(party.enemies.map(unit => unit.monster.icon));
+    expect(teamTransforms()).toHaveLength(0);
     expect(teamTransforms(true)[0][0]).toBeGreaterThan(enemies[0][0]);
     expect(labels()).toContain(skill);
     frame(1450);
-    expect(teamTransforms()).toEqual(allies);
+    expect(glyphs).toHaveLength(5);
   });
 
-  it('preserves enemy lunges and recoil while ally icons stay fixed during camera shake', async () => {
+  it('preserves enemy lunges and recoil without drawing allied damage in the arena', async () => {
     await render(base);
     frame(100);
-    const allies = teamTransforms();
     const attack: BattleEvent = {kind: 'cast', actor: 'e0', target: 'a0', skill: '通常攻撃', effect: 'hit'};
     await render({...base, effect: {text: '通常攻撃', type: 'slash', tick: 1}, impact: attack});
     frame(200);
     frame(800);
-    expect(teamTransforms()).toEqual(allies);
-    expect(teamTransforms(true)[0][1]).not.toBe(0); // The attacking enemy still tilts.
+    expect(glyphs).toHaveLength(5);
+    expect(teamTransforms(true)[0][1]).not.toBe(0);
     expect(teamTransforms(true)[1][1]).toBe(0);
-
     const damage: BattleEvent = {kind: 'damage', actor: 'e0', target: 'a0', amount: 33, hp: 117};
     await render({...base, allies: base.allies.map(unit => unit.key === 'a0' ? {...unit, hp: 117} : unit), impact: damage});
     frame(1500);
-    const enemiesBeforeShake = teamTransforms(true);
-    frame(1545);
-    expect(teamTransforms()).toEqual(allies);
-    expect(teamTransforms(true)[1][4]).not.toBe(enemiesBeforeShake[1][4]);
-    expect(labels()).toContain('33');
+    expect(labels()).not.toContain('33');
     expect(document.querySelector('[aria-live]')?.textContent).toContain('妖狐 ダメージ 33');
-
     const enemyHit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 44, hp: 206};
     await render({...base, impact: enemyHit});
     frame(1800);
     const enemyGap = teamTransforms(true)[0][4] - teamTransforms(true)[1][4];
     frame(1845);
     expect(teamTransforms(true)[0][4] - teamTransforms(true)[1][4]).not.toBe(enemyGap);
-    expect(teamTransforms()).toEqual(allies);
+    expect(glyphs).toHaveLength(5);
     expect(labels()).toContain('44');
   });
 
-  it('keeps defeated ally icons in place and preserves status, HP, and healing targets', async () => {
+  it.each(['damage', 'heal', 'guard', 'poison', 'defeat'] as const)('keeps allied %s feedback and healing hit targets outside the arena', async kind => {
     const select = vi.fn();
-    await render(base);
-    frame(100);
-    const allies = teamTransforms();
-    const defeat: BattleEvent = {kind: 'defeat', actor: 'e0', target: 'a0'};
+    const event: BattleEvent = {kind, actor: 'a2', target: 'a1', amount: 65, hp: 105};
     const units = base.allies.map(unit => unit.key === 'a0' ? {...unit, hp: 0} : unit.key === 'a1' ? {...unit, hp: 105, guard: true, poison: 2} : unit);
-    await render({...base, allies: units, impact: defeat, targetKeys: ['a0', 'a1'], selectedTarget: 'a1', onSelectTarget: select});
+    await render({...base, allies: units, impact: event, impacts: [event], targetKeys: ['a0', 'a1'], selectedTarget: 'a1', onSelectTarget: select});
     for (const time of [200, 475, 900, 1300]) {
       frame(time);
-      expect(teamTransforms()).toEqual(allies);
+      expect(glyphs.map(glyph => glyph.text)).toEqual(party.enemies.map(unit => unit.monster.icon));
+      expect(labels()).not.toContain('+65');
+      expect(labels()).not.toContain('65');
+      expect(labels()).not.toContain('•');
     }
-    expect(labels()).toContain('•');
-    expect((context as unknown as CanvasRenderingContext2D).roundRect).toHaveBeenCalledWith(189, 377, 66, 6, 3);
-    const target = document.querySelector<HTMLButtonElement>('.battleTarget')!;
-    expect(document.querySelectorAll('.battleTarget')).toHaveLength(1);
-    expect(target.dataset.target).toBe('a1');
-    expect(target.getAttribute('aria-label')).toContain('バステトを対象にする HP 105/170');
-    expect(target.getAttribute('aria-pressed')).toBe('true');
-    target.click();
-    expect(select).toHaveBeenCalledWith('a1');
-    const heal: BattleEvent = {kind: 'heal', actor: 'a2', target: 'a1', amount: 65, hp: 170};
-    await render({...base, allies: units, impact: heal});
-    frame(1400);
-    frame(1600);
-    expect(teamTransforms()).toEqual(allies);
-    expect(labels()).toContain('+65');
+    expect(document.querySelectorAll('.battleTarget')).toHaveLength(0);
+    document.querySelector('canvas')!.dispatchEvent(new MouseEvent('click', {clientX: 222, clientY: 331, bubbles: true}));
+    expect(select).not.toHaveBeenCalled();
   });
 
   it('paints every monster with an opaque brush rather than inherited arena transparency', async () => {
@@ -180,7 +162,8 @@ describe('battle presentation', () => {
     context.fillText.mockImplementation((text: string) => { painted.push({text, fill: (context as unknown as CanvasRenderingContext2D).fillStyle}); });
     await render(base);
     frame(100);
-    for (const unit of [...party.allies, ...party.enemies]) {
+    for (const unit of party.enemies) {
+      expect(painted.some(item => item.text === unit.monster.icon)).toBe(true);
       expect(painted.filter(item => item.text === unit.monster.icon).every(item => item.fill === '#ffffff')).toBe(true);
     }
     context.fillText.mockReset();
@@ -217,7 +200,7 @@ describe('battle presentation', () => {
   });
 
   it('shows healing as positive recovery, and clears lingering effects on skip', async () => {
-    const heal: BattleEvent = {kind: 'heal', actor: 'a1', target: 'a0', amount: 65, hp: 150};
+    const heal: BattleEvent = {kind: 'heal', actor: 'e1', target: 'e0', amount: 65, hp: 150};
     await render({...base, effect: {text: '生命の雫', type: 'water', tick: 2}, impact: heal, impacts: [heal]});
     frame(100);
     expect(labels()).toContain('+65');
@@ -238,6 +221,16 @@ describe('battle presentation', () => {
     expect(targets[0].textContent).toBe('');
     targets[0].click();
     expect(select).toHaveBeenCalledWith('e0');
+  });
+
+  it('selects an enemy by its centered canvas position and ignores empty foreground', async () => {
+    const select = vi.fn();
+    await render({...base, targetKeys: ['e0'], onSelectTarget: select});
+    const canvas = document.querySelector('canvas')!;
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: 84, clientY: 216, bubbles: true}));
+    expect(select).toHaveBeenCalledExactlyOnceWith('e0');
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: 84, clientY: 336, bubbles: true}));
+    expect(select).toHaveBeenCalledTimes(1);
   });
 
   it('preserves glyph proportions as a tall mobile stage resizes', async () => {

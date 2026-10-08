@@ -599,3 +599,87 @@ describe('30-second command deadline', () => {
     root = createRoot(document.getElementById('test-root')!);
   });
 });
+
+describe('bottom-only allied battle feedback', () => {
+  const hp = (name: string) => label(`${name}の行動を選択`).querySelector('.commanderHp')?.textContent;
+  it('shows party HP below the enemy-only arena and keeps healing selection exclusively in the bottom panel', async () => {
+    await enterBattle();
+    expect(document.querySelectorAll('.commanderHp')).toHaveLength(5);
+    expect(hp('妖狐')).toBe('HP 150/150');
+    expect(document.querySelector('canvas')?.getAttribute('aria-label')).toContain('敵だけ');
+    await click(label('バステトの行動を選択'));
+    await chooseSkill('生命の雫');
+    expect(targets()).toHaveLength(5);
+    expect(document.querySelectorAll('.battleStage .battleTarget')).toHaveLength(0);
+    expect(document.querySelector('.allyTargets')?.closest('.commandDock')).toBeTruthy();
+    await click(button('特技に戻る'));
+    expect(document.querySelector('.skillButtons')).toBeTruthy();
+    await chooseSkill('生命の雫');
+    await click(target('妖狐'));
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
+  });
+
+  it('updates all allied area hits, poison, and defeat together at impact, then clears feedback on skip', async () => {
+    vi.spyOn(engine, 'advanceWithEvents').mockImplementationOnce(state => ({
+      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 0 : unit.hp - 33, poison: 3}))},
+      events: [
+        {kind: 'cast', actor: 'e3', skill: '毒霧', effect: 'poison'},
+        ...state.allies.flatMap((unit, i): engine.BattleEvent[] => [
+          {kind: 'damage', actor: 'e3', target: unit.key, amount: i === 0 ? 150 : 33, hp: i === 0 ? 0 : unit.hp - 33},
+          {kind: 'poison', actor: 'e3', target: unit.key},
+          ...(i === 0 ? [{kind: 'defeat' as const, target: unit.key}] : []),
+        ]),
+      ],
+    }));
+    await enterBattle();
+    await click(button('この指示でターン開始'));
+    await act(async () => vi.advanceTimersByTime(799));
+    expect(hp('妖狐')).toBe('HP 150/150');
+    expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
+    await act(async () => vi.advanceTimersByTime(1));
+    expect(hp('妖狐')).toBe('HP 0/150');
+    expect(hp('バステト')).toBe('HP 137/170');
+    expect(document.querySelectorAll('.partyImpact.damage')).toHaveLength(5);
+    expect(label('妖狐の行動を選択').textContent).toContain('戦闘不能');
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toContain('毒3');
+    expect(document.querySelector('.battleStage .partyImpact')).toBeNull();
+    await click(button('演出をスキップ'));
+    expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
+    expect(label('妖狐の行動を選択').disabled).toBe(true);
+    expect(activeCommander()).toContain('バステト');
+    expect(hp('バステト')).toBe('HP 137/170');
+    expect(document.querySelector('[role="timer"]')?.textContent).toContain('30');
+  });
+
+  it('shows allied casting, guard, and positive healing on the fixed bottom icons', async () => {
+    const start = engine.start;
+    vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
+      const state = start(...args); state.allies[0].hp = 50; return state;
+    });
+    vi.spyOn(engine, 'advanceWithEvents').mockImplementationOnce(state => ({
+      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 115 : unit.hp, guard: i === 1}))},
+      events: [
+        {kind: 'cast', actor: 'a1', skill: 'ぼうぎょ', effect: 'guard'},
+        {kind: 'guard', actor: 'a1', target: 'a1'},
+        {kind: 'cast', actor: 'a2', target: 'a0', skill: '生命の雫', effect: 'heal'},
+        {kind: 'heal', actor: 'a2', target: 'a0', amount: 65, hp: 115},
+      ],
+    }));
+    await enterBattle();
+    await click(button('この指示でターン開始'));
+    await act(async () => vi.advanceTimersByTime(1));
+    expect(label('バステトの行動を選択').classList.contains('acting')).toBe(true);
+    await act(async () => vi.advanceTimersByTime(799));
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('防御');
+    await act(async () => vi.advanceTimersByTime(700));
+    expect(label('ドリュアスの行動を選択').classList.contains('acting')).toBe(true);
+    expect(document.querySelector('.partyImpact')).toBeNull();
+    await act(async () => vi.advanceTimersByTime(800));
+    expect(hp('妖狐')).toBe('HP 115/150');
+    expect(label('妖狐の行動を選択').querySelector('.partyImpact.heal')?.textContent).toBe('+65');
+    await act(async () => vi.advanceTimersByTime(850));
+    expect(document.querySelector('.partyImpact')).toBeNull();
+    expect(document.querySelector('.acting')).toBeNull();
+    expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 2');
+  });
+});
