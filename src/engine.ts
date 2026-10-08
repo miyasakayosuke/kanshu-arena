@@ -18,31 +18,207 @@ export const monsters:Monster[]=[
 [10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard]],
 [11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2)]]
 ].map(([id,name,icon,cost,hp,atk,speed,skills])=>({id:id as number,name:name as string,icon:icon as string,cost:cost as number,hp:hp as number,atk:atk as number,speed:speed as number,skills:skills as Skill[]}));
-export type Unit={key:string;monster:Monster;hp:number;guard:boolean;poison:number};
-export type State={turn:number;seed:number;allies:Unit[];enemies:Unit[];log:string[];winner:null|'win'|'lose'|'draw'};
-export type Order={key:string;skill:number;target?:string};
-export const cost=(team:number[])=>team.reduce((n,id)=>n+(monsters[id]?.cost??0),0);
-export const start=(team:number[],enemy:number[],seed=42):State=>({turn:1,seed,allies:team.map((id,i)=>({key:'a'+i,monster:monsters[id],hp:monsters[id].hp,guard:false,poison:0})),enemies:enemy.map((id,i)=>({key:'e'+i,monster:monsters[id],hp:monsters[id].hp,guard:false,poison:0})),log:['戦闘開始！'],winner:null});
-const random=(seed:number)=>((Math.imul(seed,1664525)+1013904223)>>>0);
-export type BattleEvent={kind:'cast'|'damage'|'heal'|'guard'|'poison'|'defeat';actor?:string;target?:string;skill?:string;amount?:number;hp?:number;effect?:string};
-export function advanceWithEvents(old:State,orders:Order[]):{state:State;events:BattleEvent[]}{
- const events:BattleEvent[]=[];
- if(old.winner)return {state:old,events};
- const b:State={...old,allies:old.allies.map(x=>({...x,guard:false})),enemies:old.enemies.map(x=>({...x,guard:false})),log:[...old.log,`── TURN ${old.turn} ──`]};
- let seed=b.seed;const actions:{unit:Unit;skill:Skill;side:'a'|'e';target?:string;tie:number}[]=[];
- for(const [side,units] of [['a',b.allies],['e',b.enemies]] as const){for(const u of units){if(u.hp<=0)continue;const order=orders.find(o=>o.key===u.key);const index=side==='e'?seed%u.monster.skills.length:order?.skill??0;const skill=u.monster.skills[index]??u.monster.skills[0];seed=random(seed);actions.push({unit:u,skill,side,target:order?.target,tie:seed})}}
- actions.sort((a,c)=>c.skill.priority-a.skill.priority||c.unit.monster.speed-a.unit.monster.speed||a.tie-c.tie);
- for(const a of actions){const u=a.unit;if(u.hp<=0)continue;const opponents=a.side==='a'?b.enemies:b.allies;const friends=a.side==='a'?b.allies:b.enemies;
- b.log.push(`${u.monster.name}の「${a.skill.name}」！`);events.push({kind:'cast',actor:u.key,skill:a.skill.name,effect:a.skill.kind});
- if(a.skill.kind==='guard'){u.guard=true;events.push({kind:'guard',actor:u.key,target:u.key});continue}
- if(a.skill.kind==='heal'){const t=friends.filter(x=>x.hp>0).sort((x,y)=>x.hp/x.monster.hp-y.hp/y.monster.hp)[0];if(t){const value=Math.min(a.skill.power,t.monster.hp-t.hp);t.hp+=value;events.push({kind:'heal',actor:u.key,target:t.key,amount:value,hp:t.hp});b.log.push(`${t.monster.name} HP +${value}`)}continue}
- const living=opponents.filter(x=>x.hp>0);if(!living.length)continue;const targets=a.skill.all?living:[living.find(x=>x.key===a.target)??living[seed%living.length]];
- for(const t of targets){seed=random(seed);const dmg=Math.max(1,Math.floor((a.skill.power+u.monster.atk*.38)*(0.9+(seed%21)/100)*(t.guard?.5:1)));t.hp=Math.max(0,t.hp-dmg);events.push({kind:'damage',actor:u.key,target:t.key,amount:dmg,hp:t.hp});if(t.hp===0)events.push({kind:'defeat',actor:u.key,target:t.key});b.log.push(`${t.monster.name}に ${dmg} ダメージ${t.hp===0?'・撃破！':''}`);if(a.skill.kind==='poison'&&t.hp>0){t.poison=3;events.push({kind:'poison',actor:u.key,target:t.key});b.log.push(`${t.monster.name}は毒を受けた`)}}
- }
- for(const u of [...b.allies,...b.enemies])if(u.hp>0&&u.poison>0){const dmg=Math.max(1,Math.floor(u.monster.hp*.06));u.hp=Math.max(0,u.hp-dmg);u.poison--;events.push({kind:'damage',target:u.key,amount:dmg,hp:u.hp,effect:'poison'});if(u.hp===0)events.push({kind:'defeat',target:u.key});b.log.push(`${u.monster.name}は毒で${dmg}ダメージ`)}
- const aliveA=b.allies.some(x=>x.hp>0),aliveE=b.enemies.some(x=>x.hp>0);
- b.winner=!aliveA&&!aliveE?'draw':!aliveA?'lose':!aliveE?'win':null;
- if(!b.winner&&b.turn>=20){const sum=(units:Unit[])=>units.reduce((n,u)=>n+u.hp/u.monster.hp,0);b.winner=sum(b.allies)===sum(b.enemies)?'draw':sum(b.allies)>sum(b.enemies)?'win':'lose'}
- if(b.winner)b.log.push(b.winner==='win'?'勝利！':b.winner==='lose'?'敗北…':'引き分け');b.turn++;b.seed=seed;return {state:b,events};
+export type Unit = { key: string; monster: Monster; hp: number; guard: boolean; poison: number };
+export type State = {
+  turn: number;
+  seed: number;
+  allies: Unit[];
+  enemies: Unit[];
+  log: string[];
+  winner: null | 'win' | 'lose' | 'draw';
+};
+export type Order = { key: string; skill: number; target?: string };
+export type BattleEvent = {
+  kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'defeat';
+  actor?: string;
+  target?: string;
+  skill?: string;
+  amount?: number;
+  hp?: number;
+  effect?: string;
+};
+
+export const MAX_TURNS = 20;
+export const cost = (team: number[]) => team.reduce((total, id) => total + (monsters[id]?.cost ?? 0), 0);
+
+export function start(team: number[], enemy: number[], seed = 42): State {
+  const units = (ids: number[], prefix: string): Unit[] => ids.map((id, i) => {
+    const monster = monsters[id];
+    if (!monster) throw new Error(`Unknown monster id: ${id}`);
+    return { key: prefix + i, monster, hp: monster.hp, guard: false, poison: 0 };
+  });
+  return {
+    turn: 1,
+    seed: seed >>> 0,
+    allies: units(team, 'a'),
+    enemies: units(enemy, 'e'),
+    log: ['戦闘開始！'],
+    winner: null,
+  };
 }
-export function advance(old:State,orders:Order[]):State{return advanceWithEvents(old,orders).state}
+
+// Area hits trade per-target strength for coverage; poison retains its status-focused tuning.
+const AREA_HIT_DAMAGE_SCALE = 0.5;
+const baseDamage = (unit: Unit, skill: Skill) =>
+  (skill.power + unit.monster.atk * 0.38) * (skill.all && skill.kind === 'hit' ? AREA_HIT_DAMAGE_SCALE : 1);
+
+const random = (seed: number) => ((Math.imul(seed, 1664525) + 1013904223) >>> 0);
+const living = (units: Unit[]) => units.filter(unit => unit.hp > 0);
+const weakest = (units: Unit[]) => living(units).reduce<Unit | undefined>((best, unit) => (
+  !best || unit.hp / unit.monster.hp < best.hp / best.monster.hp ? unit : best
+), undefined);
+
+/** Choose orders without changing the state or consuming the battle's random seed. */
+export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'): Order[] {
+  if (state.winner) return [];
+  const friends = living(state[side]);
+  const opponents = living(side === 'allies' ? state.enemies : state.allies);
+  const injured = weakest(friends);
+  const target = opponents.reduce<Unit | undefined>((best, unit) => (
+    !best || unit.hp < best.hp ? unit : best
+  ), undefined);
+
+  return friends.map(unit => {
+    const healing = unit.monster.skills.findIndex(skill => skill.kind === 'heal');
+    if (healing >= 0 && injured && injured.hp / injured.monster.hp <= 0.6) {
+      return { key: unit.key, skill: healing, target: injured.key };
+    }
+
+    let skillIndex = 0;
+    let bestScore = -1;
+    unit.monster.skills.forEach((skill, index) => {
+      let score = 0;
+      if (skill.kind === 'hit' || skill.kind === 'poison') {
+        const targets = skill.all ? opponents : target ? [target] : [];
+        score = targets.reduce((total, opponent) => {
+          const damage = Math.min(opponent.hp, baseDamage(unit, skill));
+          const poisonDamage = skill.kind === 'poison' && opponent.poison === 0
+            ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * 2)
+            : 0;
+          return total + damage + poisonDamage;
+        }, 0);
+        // For an otherwise equal attack, favor acting sooner.
+        score += skill.priority * 0.01;
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        skillIndex = index;
+      }
+    });
+    const skill = unit.monster.skills[skillIndex];
+    return {
+      key: unit.key,
+      skill: skillIndex,
+      target: skill?.kind === 'heal' ? injured?.key : skill?.kind === 'guard' ? unit.key : target?.key,
+    };
+  });
+}
+
+export function advanceWithEvents(old: State, orders: Order[]): { state: State; events: BattleEvent[] } {
+  const events: BattleEvent[] = [];
+  if (old.winner) return { state: old, events };
+
+  const battle: State = {
+    ...old,
+    allies: old.allies.map(unit => ({ ...unit, guard: false })),
+    enemies: old.enemies.map(unit => ({ ...unit, guard: false })),
+    log: [...old.log, `── TURN ${old.turn} ──`],
+  };
+  let seed = battle.seed;
+  const enemyOrders = autoOrders(battle, 'enemies');
+  const actions: { unit: Unit; skill: Skill; side: 'allies' | 'enemies'; target?: string; tie: number }[] = [];
+
+  for (const side of ['allies', 'enemies'] as const) {
+    const sideOrders = side === 'allies' ? orders : enemyOrders;
+    for (const unit of living(battle[side])) {
+      const order = sideOrders.find(candidate => candidate.key === unit.key);
+      // Varied, seeded opponent skills keep the introductory fights from becoming an AoE burst race.
+      const skillIndex = side === 'enemies' ? seed % unit.monster.skills.length : order?.skill ?? 0;
+      const skill = unit.monster.skills[skillIndex] ?? unit.monster.skills[0];
+      if (!skill) continue;
+      seed = random(seed);
+      actions.push({ unit, skill, side, target: order?.target, tie: seed });
+    }
+  }
+  actions.sort((a, b) => b.skill.priority - a.skill.priority || b.unit.monster.speed - a.unit.monster.speed || a.tie - b.tie);
+
+  const damage = (target: Unit, requested: number, actor?: string, effect?: string) => {
+    const amount = Math.min(target.hp, Math.max(1, Math.floor(requested)));
+    target.hp -= amount;
+    events.push({ kind: 'damage', actor, target: target.key, amount, hp: target.hp, effect });
+    if (target.hp === 0) events.push({ kind: 'defeat', actor, target: target.key, hp: 0, effect });
+    return amount;
+  };
+
+  for (const action of actions) {
+    const { unit, skill, side } = action;
+    if (unit.hp <= 0) continue;
+    const opponents = side === 'allies' ? battle.enemies : battle.allies;
+    const friends = battle[side];
+    if ((skill.kind === 'hit' || skill.kind === 'poison') && !opponents.some(target => target.hp > 0)) continue;
+    battle.log.push(`${unit.monster.name}の「${skill.name}」！`);
+    const cast: BattleEvent = { kind: 'cast', actor: unit.key, skill: skill.name, effect: skill.kind };
+    events.push(cast);
+
+    if (skill.kind === 'guard') {
+      cast.target = unit.key;
+      unit.guard = true;
+      events.push({ kind: 'guard', actor: unit.key, target: unit.key });
+      continue;
+    }
+    if (skill.kind === 'heal') {
+      const target = friends.find(friend => friend.key === action.target && friend.hp > 0) ?? weakest(friends);
+      if (target) {
+        cast.target = target.key;
+        const amount = Math.max(0, Math.min(skill.power, target.monster.hp - target.hp));
+        target.hp += amount;
+        events.push({ kind: 'heal', actor: unit.key, target: target.key, amount, hp: target.hp });
+        battle.log.push(`${target.monster.name} HP +${amount}`);
+      }
+      continue;
+    }
+
+    const alive = living(opponents);
+    if (!alive.length) continue;
+    const targets = skill.all ? alive : [alive.find(target => target.key === action.target) ?? alive[seed % alive.length]];
+    if (!skill.all) cast.target = targets[0].key;
+    for (const target of targets) {
+      seed = random(seed);
+      const requested = baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * (target.guard ? 0.5 : 1);
+      const amount = damage(target, requested, unit.key);
+      battle.log.push(`${target.monster.name}に ${amount} ダメージ${target.hp === 0 ? '・撃破！' : ''}`);
+      if (skill.kind === 'poison' && target.hp > 0) {
+        target.poison = 3;
+        events.push({ kind: 'poison', actor: unit.key, target: target.key });
+        battle.log.push(`${target.monster.name}は毒を受けた`);
+      }
+    }
+  }
+
+  // Poison lasts for three end-of-turn ticks, including the turn it is applied.
+  for (const unit of [...battle.allies, ...battle.enemies]) {
+    if (unit.hp <= 0 || unit.poison <= 0) continue;
+    const amount = damage(unit, unit.monster.hp * 0.06, undefined, 'poison');
+    unit.poison--;
+    battle.log.push(`${unit.monster.name}は毒で${amount}ダメージ`);
+  }
+
+  const aliveAllies = battle.allies.some(unit => unit.hp > 0);
+  const aliveEnemies = battle.enemies.some(unit => unit.hp > 0);
+  battle.winner = !aliveAllies && !aliveEnemies ? 'draw' : !aliveAllies ? 'lose' : !aliveEnemies ? 'win' : null;
+  if (!battle.winner && battle.turn >= MAX_TURNS) {
+    const remaining = (units: Unit[]) => units.reduce((total, unit) => total + unit.hp / unit.monster.hp, 0);
+    const allyHealth = remaining(battle.allies);
+    const enemyHealth = remaining(battle.enemies);
+    const difference = allyHealth - enemyHealth;
+    battle.winner = Math.abs(difference) < 1e-9 ? 'draw' : difference > 0 ? 'win' : 'lose';
+  }
+  if (battle.winner) battle.log.push(battle.winner === 'win' ? '勝利！' : battle.winner === 'lose' ? '敗北…' : '引き分け');
+  battle.turn++;
+  battle.seed = seed;
+  return { state: battle, events };
+}
+
+export function advance(old: State, orders: Order[]): State {
+  return advanceWithEvents(old, orders).state;
+}
