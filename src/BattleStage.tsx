@@ -494,6 +494,8 @@ export default function BattleStage(props: Props) {
         ctx.shadowColor = '#58716624';
         ctx.shadowBlur = 6;
         ctx.shadowOffsetY = 4;
+        // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
+        ctx.fillStyle = '#ffffff';
         ctx.fillText(unit.monster.icon, 0, 0);
         ctx.restore();
         ctx.restore();

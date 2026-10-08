@@ -57,6 +57,17 @@ afterEach(async () => {
 });
 
 describe('battle presentation', () => {
+  it('paints every monster with an opaque brush rather than inherited arena transparency', async () => {
+    const painted: {text: string; fill: unknown}[] = [];
+    context.fillText.mockImplementation((text: string) => { painted.push({text, fill: (context as unknown as CanvasRenderingContext2D).fillStyle}); });
+    await render(base);
+    frame(100);
+    for (const unit of [...party.allies, ...party.enemies]) {
+      expect(painted.filter(item => item.text === unit.monster.icon).every(item => item.fill === '#ffffff')).toBe(true);
+    }
+    context.fillText.mockReset();
+  });
+
   it('keeps one animation clock across HP and target-selection rerenders', async () => {
     await render({...base, effect, impact: cast, impacts: []});
     frame(100);
