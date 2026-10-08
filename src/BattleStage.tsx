@@ -1,12 +1,12 @@
 import {useEffect,useRef} from 'react';
-import type {Unit} from './engine';
+import type {Unit,BattleEvent} from './engine';
 type Effect={text:string;type:string;tick:number}|null;
-export default function BattleStage({allies,enemies,effect}:{allies:Unit[];enemies:Unit[];effect:Effect}){
+export default function BattleStage({allies,enemies,effect,impact}:{allies:Unit[];enemies:Unit[];effect:Effect;impact:BattleEvent|null}){
  const canvas=useRef<HTMLCanvasElement>(null);
  useEffect(()=>{const el=canvas.current;if(!el)return;const ctx=el.getContext('2d');if(!ctx)return;
  let frame=0;let handle=0;let last=0;const duration=1100;
  const draw=(now:number)=>{if(!last)last=now;const t=now/1000;const phase=effect?Math.min(1,(now-last)/duration):0;const w=el.width=720,h=el.height=680;
- const shake=effect&&phase>.42&&phase<.72?Math.sin(now*.14)*10*(1-phase):0;
+ const shake=impact?.kind==='damage'?Math.sin(now*.14)*7:effect&&phase>.42&&phase<.72?Math.sin(now*.14)*10*(1-phase):0;
  ctx.save();ctx.translate(shake,shake*.5);
  const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#111c36');bg.addColorStop(.55,'#283d53');bg.addColorStop(1,'#101c2e');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
  for(let i=0;i<22;i++){const x=(i*79+31)%w,y=(i*47+21)%320;ctx.fillStyle='rgba(255,230,164,.12)';ctx.beginPath();ctx.arc(x,y,1.2+Math.sin(t+i)*.6,0,Math.PI*2);ctx.fill()}
@@ -18,7 +18,7 @@ export default function BattleStage({allies,enemies,effect}:{allies:Unit[];enemi
  const y=baseY+bob+lunge;
  ctx.save();ctx.globalAlpha=alive?1:.22;
  ctx.fillStyle='#0b1226aa';ctx.beginPath();ctx.ellipse(x,baseY+44,42,11,0,0,Math.PI*2);ctx.fill();
- if(effect&&phase>.47&&phase<.75&&!attacker&&i===effect.tick%5){ctx.translate(Math.sin(now*.13)*10,0)}
+ if(impact?.target===u.key&&impact.kind==='damage'){ctx.translate(Math.sin(now*.13)*10,0)}
  ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='70px system-ui';ctx.shadowColor=enemy?'#f26b6b':'#69caff';ctx.shadowBlur=attacker?30:8;ctx.fillText(u.monster.icon,x,y);ctx.shadowBlur=0;
  ctx.fillStyle='#070f1c';ctx.fillRect(x-44,baseY+57,88,10);ctx.fillStyle=enemy?'#eb7467':'#5ad6a3';ctx.fillRect(x-43,baseY+58,86*u.hp/u.monster.hp,8);
  ctx.fillStyle='#fff4dc';ctx.font='bold 16px system-ui';ctx.fillText(u.monster.name,x,baseY+82);ctx.restore()});
@@ -30,8 +30,9 @@ export default function BattleStage({allies,enemies,effect}:{allies:Unit[];enemi
  ctx.fillStyle='#fff4cf';ctx.strokeStyle='#131b2d';ctx.lineWidth=7;ctx.font='bold 33px system-ui';ctx.textAlign='center';ctx.strokeText(effect.text,cx,110);ctx.fillText(effect.text,cx,110);
  if(phase>.55&&phase<.9){ctx.fillStyle='#fff8c7';ctx.font='bold 31px system-ui';ctx.fillText('HIT!',cx,360-(phase-.55)*100)}
  }
+ if(impact?.amount!==undefined&&impact.target){const units=[...enemies,...allies];const idx=units.findIndex(u=>u.key===impact.target);if(idx>=0){const enemy=idx<5;const pos=enemy?idx:idx-5;ctx.fillStyle=impact.kind==='heal'?'#90ffba':'#ffe7a2';ctx.strokeStyle='#2b1322';ctx.lineWidth=5;ctx.font='bold 38px system-ui';ctx.textAlign='center';const px=110+pos*125,py=enemy?168:420;ctx.strokeText(String(impact.amount),px,py);ctx.fillText(String(impact.amount),px,py)}}
  ctx.restore();frame++;handle=requestAnimationFrame(draw)};
  handle=requestAnimationFrame(draw);return()=>cancelAnimationFrame(handle)
- },[allies,enemies,effect]);
+ },[allies,enemies,effect,impact]);
  return <canvas className="battleCanvas" ref={canvas} aria-label="モンスターが攻撃・被弾する戦闘フィールド"/>;
 }
