@@ -13,7 +13,7 @@ export default function BattleStage({allies,enemies,effect,impact}:{allies:Unit[
  ctx.fillStyle='#3b4c56';ctx.beginPath();ctx.ellipse(w/2,440,370,125,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#b9a06a';ctx.lineWidth=3;ctx.stroke();
  for(let k=0;k<3;k++){ctx.strokeStyle='rgba(240,213,139,.16)';ctx.beginPath();ctx.ellipse(w/2,440,140+k*95,45+k*30,0,0,Math.PI*2);ctx.stroke()}
  const zoom=effect?1+Math.sin(phase*Math.PI)*.09:1;ctx.translate(w/2,h/2);ctx.scale(zoom,zoom);ctx.translate(-w/2,-h/2);
- const drawTeam=(units:Unit[],enemy:boolean)=>units.forEach((u,i)=>{const x=110+i*125+(enemy?0:0),baseY=enemy?238:490;const alive=u.hp>0;const bob=alive?Math.sin(t*2.5+i)*5:0;const attacker=effect&&((enemy&&effect.tick%2===1)||(!enemy&&effect.tick%2===0))&&i===effect.tick%5;
+ const drawTeam=(units:Unit[],enemy:boolean)=>units.forEach((u,i)=>{const x=110+i*125+(enemy?0:0),baseY=enemy?238:490;const alive=u.hp>0;const bob=alive?Math.sin(t*2.5+i)*5:0;const attacker=effect&&impact?.kind==='cast'&&impact.actor===u.key;
  const lunge=attacker?Math.sin(phase*Math.PI)*(enemy?65:-65):0;
  const y=baseY+bob+lunge;
  ctx.save();ctx.globalAlpha=alive?1:.22;
