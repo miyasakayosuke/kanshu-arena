@@ -21,5 +21,6 @@
 @media(max-height:670px){.commandButtons button,.skillButtons button{min-height:44px;padding:5px 2px}.commandButtons strong{font-size:11px}}
 @media(max-height:480px) and (min-width:500px){.commandButtons button,.skillButtons button{min-height:44px}.playingPanel{min-height:186px}}
 
-/* A fixed deadline keeps counting while command and target menus change. */
-.commandClock{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:23px;margin:0 1px 5px;color:#b8c8be;font-size:9px}.commandClock output{flex-shrink:0;color:#e6dbb4;font-size:11px;font-variant-numeric:tabular-nums}.commandClock b{font-size:16px}.commandClock.urgent output{color:#ffb59c}
+/* Keep the deadline in the existing top row so it never pushes thumb controls offscreen. */
+.battleTop>span{gap:6px}.commandClock{display:inline-flex;align-items:baseline;gap:2px;flex-shrink:0;border:1px solid #b6aa7555;border-radius:5px;padding:1px 5px;color:#e6dbb4;font-size:9px;font-variant-numeric:tabular-nums}.commandClock b{font-size:14px;letter-spacing:0;color:inherit}.commandClock.urgent{color:#ffb59c;border-color:#c7826477}
+@media(max-height:550px) and (max-width:499px){.battle{grid-template-rows:32px minmax(90px,1fr) 23px auto}}

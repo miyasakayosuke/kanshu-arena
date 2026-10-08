@@ -435,6 +435,8 @@ describe('30-second command deadline', () => {
     expect(advance).not.toHaveBeenCalled();
     await click(button('この編成で対戦する'));
     expect(timer()?.textContent).toContain('30');
+    expect(timer()?.closest('.battleTop')).toBeTruthy();
+    expect(document.querySelector('.commandDock [role="timer"]')).toBeNull();
     await tick(29000);
     expect(timer()?.getAttribute('aria-label')).toContain('残り1秒');
     expect(document.querySelector('.commandClock.urgent')).toBeTruthy();
