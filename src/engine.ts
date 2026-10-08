@@ -1,10 +1,24 @@
 export type Skill={name:string;power:number;priority:number;kind:'hit'|'heal'|'guard'|'poison';all?:boolean};
-export type Monster={id:number;name:string;icon:string;cost:number;hp:number;atk:number;speed:number;skills:Skill[]};
+export type SpecialSkills = readonly [] | readonly [Skill] | readonly [Skill, Skill] | readonly [Skill, Skill, Skill] | readonly [Skill, Skill, Skill, Skill];
+export type Monster={id:number;name:string;icon:string;cost:number;hp:number;atk:number;speed:number;skills:SpecialSkills};
+export const BASIC_ATTACK = -1;
+export const DEFEND = -2;
+export const MAX_SPECIAL_SKILLS = 4;
 const hit=(name:string,power:number,priority=0,all=false):Skill=>({name,power,priority,kind:'hit',all});
 const heal:Skill={name:'生命の雫',power:65,priority:0,kind:'heal'};
 const guard:Skill={name:'鉄壁の構え',power:0,priority:1,kind:'guard'};
 const poison:Skill={name:'毒霧',power:12,priority:0,kind:'poison',all:true};
-export const monsters:Monster[]=[
+const defend: Skill = { name: 'ぼうぎょ', power: 0, priority: 1, kind: 'guard' };
+
+/** Universal commands do not occupy learned-special slots or change their indexes. */
+export function battleSkill(monster: Monster, index: number): Skill | undefined {
+  // Combined with the existing 0.38 * atk contribution, a basic hit starts at 1 * atk.
+  if (index === BASIC_ATTACK) return hit('通常攻撃', monster.atk * 0.62);
+  if (index === DEFEND) return defend;
+  return Number.isInteger(index) && index >= 0 && index < MAX_SPECIAL_SKILLS ? monster.skills[index] : undefined;
+}
+
+const roster: [number, string, string, number, number, number, number, SpecialSkills][] = [
 [0,'妖狐','🦊',4,150,47,85,[hit('狐火',55),hit('疾風斬り',38,2),hit('炎嵐',28,0,true)]],
 [1,'トロル','🪨',3,250,53,23,[hit('巨人の鉄槌',65),hit('終焉の一撃',110,-2),guard]],
 [2,'バステト','🐈',3,170,30,57,[hit('爪撃',45),heal,guard]],
@@ -17,7 +31,8 @@ export const monsters:Monster[]=[
 [9,'烏天狗','🐦',3,166,41,79,[hit('風切り',51),hit('疾風斬り',36,2),poison]],
 [10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard]],
 [11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2)]]
-].map(([id,name,icon,cost,hp,atk,speed,skills])=>({id:id as number,name:name as string,icon:icon as string,cost:cost as number,hp:hp as number,atk:atk as number,speed:speed as number,skills:skills as Skill[]}));
+];
+export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, atk, speed, skills }));
 export type Unit = { key: string; monster: Monster; hp: number; guard: boolean; poison: number };
 export type State = {
   turn: number;
@@ -79,14 +94,15 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
   ), undefined);
 
   return friends.map(unit => {
-    const healing = unit.monster.skills.findIndex(skill => skill.kind === 'heal');
+    const specials = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS);
+    const healing = specials.findIndex(skill => skill.kind === 'heal');
     if (healing >= 0 && injured && injured.hp / injured.monster.hp <= 0.6) {
       return { key: unit.key, skill: healing, target: injured.key };
     }
 
-    let skillIndex = 0;
+    let skillIndex = specials.length ? 0 : BASIC_ATTACK;
     let bestScore = -1;
-    unit.monster.skills.forEach((skill, index) => {
+    specials.forEach((skill, index) => {
       let score = 0;
       if (skill.kind === 'hit' || skill.kind === 'poison') {
         const targets = skill.all ? opponents : target ? [target] : [];
@@ -105,7 +121,7 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
         skillIndex = index;
       }
     });
-    const skill = unit.monster.skills[skillIndex];
+    const skill = battleSkill(unit.monster, skillIndex);
     return {
       key: unit.key,
       skill: skillIndex,
@@ -133,9 +149,11 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     for (const unit of living(battle[side])) {
       const order = sideOrders.find(candidate => candidate.key === unit.key);
       // Varied, seeded opponent skills keep the introductory fights from becoming an AoE burst race.
-      const skillIndex = side === 'enemies' ? seed % unit.monster.skills.length : order?.skill ?? 0;
-      const skill = unit.monster.skills[skillIndex] ?? unit.monster.skills[0];
-      if (!skill) continue;
+      const specialCount = Math.min(unit.monster.skills.length, MAX_SPECIAL_SKILLS);
+      const skillIndex = side === 'enemies'
+        ? specialCount ? seed % specialCount : BASIC_ATTACK
+        : order?.skill ?? 0;
+      const skill = battleSkill(unit.monster, skillIndex) ?? battleSkill(unit.monster, 0) ?? battleSkill(unit.monster, BASIC_ATTACK)!;
       seed = random(seed);
       actions.push({ unit, skill, side, target: order?.target, tie: seed });
     }

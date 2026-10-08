@@ -11,6 +11,7 @@ const targets = () => [...document.querySelectorAll<HTMLButtonElement>('.targetB
 const target = (name: string) => document.querySelector<HTMLButtonElement>(`.targetButtons button[aria-label="${name}を対象に選択"]`)!;
 const activeCommander = () => document.querySelector('.commander.active')?.getAttribute('aria-label');
 async function click(el: HTMLElement) { expect(el).toBeTruthy(); await act(async () => el.click()); }
+async function chooseSkill(name: string) { if (!document.querySelector('.skillButtons')) await click(button('とくぎ')); await click(button(name)); }
 async function mount() { await act(async () => root.render(<App />)); }
 async function enterBattle() { await mount(); await click(button('この編成で対戦する')); }
 beforeEach(() => {
@@ -34,8 +35,8 @@ describe('complete playtest flow', () => {
   it('replaces skills with enemy targets, advances to the next ally, and resets all orders next turn', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
-    const skillRegion = document.querySelector('.skillButtons')?.parentElement;
-    await click(button('狐火'));
+    const skillRegion = document.querySelector('.commandButtons')?.parentElement;
+    await chooseSkill('狐火');
     expect(button('対象を選んでください').disabled).toBe(true);
     expect(document.querySelector('.skillButtons')).toBeNull();
     expect(document.querySelector('.targetButtons')?.parentElement).toBe(skillRegion);
@@ -49,7 +50,7 @@ describe('complete playtest flow', () => {
     expect(activeCommander()).toContain('バステト');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
     expect(document.querySelector('.targetButtons')).toBeNull();
-    expect(document.querySelector('.skillButtons')).toBeTruthy();
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
     await click(button('この指示でターン開始'));
     expect(advance.mock.calls[0][1]).toContainEqual({ key: 'a0', skill: 0, target: 'e0' });
     await click(button('演出をスキップ'));
@@ -57,7 +58,7 @@ describe('complete playtest flow', () => {
     expect(document.querySelector('.turnStart')).toBeTruthy();
     expect(document.querySelectorAll('.commander:not([disabled])').length).toBeGreaterThan(0);
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
-    expect([...document.querySelectorAll('.commander:not([disabled]) i')].every(el => el.textContent === 'おまかせ')).toBe(true);
+    expect([...document.querySelectorAll('.commander:not([disabled]) i')].every(el => el.textContent === '未選択')).toBe(true);
   });
   it('keeps HP unchanged during the windup and updates only at impact', async () => {
     await mount(); await click(button('この編成で対戦する'));
@@ -114,7 +115,7 @@ describe('command and target controls', () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
     await click(label('バステトの行動を選択'));
-    await click(button('生命の雫'));
+    await chooseSkill('生命の雫');
     expect(document.querySelector('.skillButtons')).toBeNull();
     expect(targets().map(b => b.getAttribute('aria-label'))).toEqual(
       ['妖狐', 'バステト', 'ドリュアス', 'バンシー', 'ガルーダ'].map(name => `${name}を対象に選択`),
@@ -135,9 +136,9 @@ describe('command and target controls', () => {
       ['鉄壁の構え', 'ドリュアス', 2],
       ['毒霧', 'バンシー', 3],
     ] as const) {
-      await click(button(skill));
+      await chooseSkill(skill);
       expect(document.querySelector('.targetButtons')).toBeNull();
-      expect(document.querySelector('.skillButtons')).toBeTruthy();
+      expect(document.querySelector('.commandButtons')).toBeTruthy();
       expect(activeCommander()).toContain(nextActor);
       expect(document.querySelectorAll('.commander.ordered')).toHaveLength(ready);
       expect(button('この指示でターン開始').disabled).toBe(false);
@@ -155,21 +156,21 @@ describe('command and target controls', () => {
     await enterBattle();
     const automatic = engine.autoOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
     expect(button('全員おまかせ').disabled).toBe(false);
-    await click(button('炎嵐'));
-    await click(button('鉄壁の構え'));
+    await chooseSkill('炎嵐');
+    await chooseSkill('鉄壁の構え');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(2);
-    await click(button('生命の雫'));
+    await chooseSkill('生命の雫');
     expect(targets()).toHaveLength(5);
     const reset = button('全員おまかせ');
     expect(reset.disabled).toBe(false);
     await act(async () => { reset.click(); reset.click(); });
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     expect(document.querySelector('.targetButtons')).toBeNull();
-    expect(document.querySelector('.skillButtons')).toBeTruthy();
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
     expect(document.querySelector('.skillButtons .chosen')).toBeNull();
     expect(activeCommander()).toContain('妖狐');
     expect(button('この指示でターン開始').disabled).toBe(false);
-    expect([...document.querySelectorAll('.commander i')].every(el => el.textContent === 'おまかせ')).toBe(true);
+    expect([...document.querySelectorAll('.commander i')].every(el => el.textContent === '未選択')).toBe(true);
     await click(button('この指示でターン開始'));
     expect(advance.mock.calls[0][1]).toEqual(automatic);
   });
@@ -193,10 +194,10 @@ describe('command and target controls', () => {
   it('returns to skills without erasing an existing order or committing a replacement', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
-    await click(button('狐火'));
+    await chooseSkill('狐火');
     await click(target('トロル'));
     await click(label('妖狐の行動を選択'));
-    await click(button('疾風斬り'));
+    await chooseSkill('疾風斬り');
     const back = button('特技に戻る');
     expect(back.closest('.commandHeading')).toBeTruthy();
     await click(back);
@@ -211,18 +212,18 @@ describe('command and target controls', () => {
 
   it('cancels pending targets with Escape or an actor change without creating orders', async () => {
     await enterBattle();
-    await click(button('狐火'));
+    await chooseSkill('狐火');
     await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
     expect(document.querySelector('.targetButtons')).toBeNull();
     expect(document.querySelector('.skillButtons')).toBeTruthy();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     expect(button('この指示でターン開始').disabled).toBe(false);
-    await click(button('疾風斬り'));
+    await chooseSkill('疾風斬り');
     await click(label('バステトの行動を選択'));
     expect(document.querySelector('.targetButtons')).toBeNull();
-    expect(document.querySelector('.skillButtons')?.textContent).toContain('生命の雫');
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
-    await click(button('生命の雫'));
+    await chooseSkill('生命の雫');
     expect(target('妖狐')).toBeTruthy();
     expect(target('トロル')).toBeNull();
     await click(button('特技に戻る'));
@@ -232,16 +233,16 @@ describe('command and target controls', () => {
   it('handles repeated target clicks and repeated order edits without ordering another actor', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
-    await click(button('狐火'));
+    await chooseSkill('狐火');
     const firstTarget = target('トロル');
     await act(async () => { firstTarget.click(); firstTarget.click(); });
     expect(activeCommander()).toContain('バステト');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
     for (const name of ['ナーガ', 'イフリート']) {
       await click(label('妖狐の行動を選択'));
-      await click(button('疾風斬り'));
+      await chooseSkill('疾風斬り');
       await click(button('特技に戻る'));
-      await click(button('狐火'));
+      await chooseSkill('狐火');
       await click(target(name));
       expect(activeCommander()).toContain('バステト');
       expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
@@ -262,16 +263,16 @@ describe('command and target controls', () => {
     await enterBattle();
     expect(label('妖狐の行動を選択').disabled).toBe(true);
     expect(activeCommander()).toContain('バステト');
-    await click(button('爪撃'));
+    await chooseSkill('爪撃');
     expect(targets()).toHaveLength(4);
     expect(target('トロル')).toBeNull();
     await click(button('特技に戻る'));
-    await click(button('生命の雫'));
+    await chooseSkill('生命の雫');
     expect(targets()).toHaveLength(4);
     expect(target('妖狐')).toBeNull();
     await click(target('バステト'));
     expect(activeCommander()).toContain('ドリュアス');
-    await click(button('樹海の槍'));
+    await chooseSkill('樹海の槍');
     await click(button('全員おまかせ'));
     expect(activeCommander()).toContain('バステト');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
@@ -281,8 +282,8 @@ describe('command and target controls', () => {
 
   it('clears pending selection when leaving and restarting a battle', async () => {
     await enterBattle();
-    await click(button('炎嵐'));
-    await click(button('生命の雫'));
+    await chooseSkill('炎嵐');
+    await chooseSkill('生命の雫');
     await click(label('対戦を中断して編成へ'));
     await click(button('この編成で対戦する'));
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
@@ -291,5 +292,131 @@ describe('command and target controls', () => {
     expect(activeCommander()).toContain('妖狐');
     expect(button('この指示でターン開始').disabled).toBe(false);
     expect(button('全員おまかせ').disabled).toBe(false);
+  });
+});
+
+describe('four-command actor menu', () => {
+  const actorAuto = () => document.querySelector<HTMLButtonElement>('.commandButtons button:last-child')!;
+
+  it('starts with four separate commands and opens only the learned specials', async () => {
+    await enterBattle();
+    expect([...document.querySelectorAll('.commandButtons strong')].map(el => el.textContent)).toEqual(['たたかう', 'ぼうぎょ', 'とくぎ', 'おまかせ']);
+    expect(document.querySelector('.skillButtons')).toBeNull();
+    expect(button('とくぎ').textContent).toContain('3 / 4 習得');
+    await click(button('とくぎ'));
+    expect(document.querySelectorAll('.skillButtons button')).toHaveLength(3);
+    expect(document.querySelector('.commandHeading')?.textContent).toContain('とくぎ 3/4');
+    await click(button('コマンドに戻る'));
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+  });
+
+  it('targets basic attacks at enemies and returns directly to commands on Back', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await click(button('たたかう'));
+    expect(targets()).toHaveLength(5);
+    expect(document.querySelector('.commandHeading')?.textContent).toContain('通常攻撃');
+    expect(target('妖狐')).toBeNull();
+    expect(button('対象を選んでください').disabled).toBe(true);
+    await click(button('コマンドに戻る'));
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+    await click(button('たたかう'));
+    await click(target('ケツァルコアトル'));
+    expect(activeCommander()).toContain('バステト');
+    expect(document.querySelector('.commandButtons')).toBeTruthy();
+    await click(button('この指示でターン開始'));
+    expect(advance.mock.calls[0][1]).toContainEqual({ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e1' });
+  });
+
+  it('defends without a target even for a monster without a learned guard skill', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await click(button('ぼうぎょ'));
+    expect(document.querySelector('.targetButtons')).toBeNull();
+    expect(activeCommander()).toContain('バステト');
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
+    await click(label('妖狐の行動を選択'));
+    expect(document.querySelector('.commandButtons .chosen')?.textContent).toContain('ぼうぎょ');
+    await click(button('この指示でターン開始'));
+    expect(advance.mock.calls[0][1]).toContainEqual({ key: 'a0', skill: engine.DEFEND, target: undefined });
+  });
+
+  it('replaces just one manual order with automatic, advances, and resets next turn', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    const automatic = engine.autoOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
+    await click(button('ぼうぎょ'));
+    await click(button('ぼうぎょ'));
+    await click(label('妖狐の行動を選択'));
+    await chooseSkill('狐火');
+    await click(button('特技に戻る'));
+    await click(button('コマンドに戻る'));
+    const auto = actorAuto();
+    await act(async () => { auto.click(); auto.click(); });
+    expect(activeCommander()).toContain('ドリュアス');
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(2);
+    expect(label('妖狐の行動を選択').textContent).toContain('おまかせ ✓');
+    expect(label('バステトの行動を選択').textContent).toContain('指示済 ✓');
+    await click(label('妖狐の行動を選択'));
+    expect(document.querySelector('.commandButtons .chosen')?.textContent).toContain('おまかせ');
+    await click(button('この指示でターン開始'));
+    expect(advance.mock.calls[0][1]).toContainEqual(automatic[0]);
+    expect(advance.mock.calls[0][1]).toContainEqual({ key: 'a1', skill: engine.DEFEND, target: undefined });
+    await click(button('演出をスキップ'));
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+    expect(document.querySelector('.commandButtons .chosen')).toBeNull();
+    expect([...document.querySelectorAll('.commander:not([disabled]) i')].every(el => el.textContent === '未選択')).toBe(true);
+  });
+
+  it('lets manual commands replace automatic choices and whole-party auto clear both', async () => {
+    await enterBattle();
+    await click(actorAuto());
+    expect(activeCommander()).toContain('バステト');
+    await click(label('妖狐の行動を選択'));
+    await click(button('ぼうぎょ'));
+    expect(label('妖狐の行動を選択').textContent).toContain('指示済 ✓');
+    await click(actorAuto());
+    await click(button('たたかう'));
+    await click(button('全員おまかせ'));
+    expect(document.querySelector('.targetButtons')).toBeNull();
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+    expect(activeCommander()).toContain('妖狐');
+    expect(document.querySelector('.commandButtons .chosen')).toBeNull();
+  });
+
+  it('renders and commits a fourth learned special without counting attack or defend', async () => {
+    const start = engine.start;
+    vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
+      const state = start(...args);
+      state.allies[0].monster = { ...state.allies[0].monster, skills: [
+        state.allies[0].monster.skills[0]!, state.allies[0].monster.skills[1]!, state.allies[0].monster.skills[2]!,
+        { name: '第四の特技', power: 40, priority: 0, kind: 'hit' },
+      ] };
+      return state;
+    });
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    expect(button('とくぎ').textContent).toContain('4 / 4 習得');
+    await click(button('とくぎ'));
+    expect(document.querySelectorAll('.skillButtons button')).toHaveLength(4);
+    expect(document.querySelector('.skillButtons')?.textContent).not.toContain('通常攻撃');
+    await click(button('第四の特技'));
+    await click(target('ナーガ'));
+    await click(button('この指示でターン開始'));
+    expect(advance.mock.calls[0][1]).toContainEqual({ key: 'a0', skill: 3, target: 'e3' });
+  });
+
+  it('backs out one level at a time with Escape and keeps the saved order', async () => {
+    await enterBattle();
+    await click(button('ぼうぎょ'));
+    await click(label('妖狐の行動を選択'));
+    await chooseSkill('狐火');
+    await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
+    expect(document.querySelector('.skillButtons')).toBeTruthy();
+    await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
+    expect(document.querySelector('.commandButtons .chosen')?.textContent).toContain('ぼうぎょ');
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
   });
 });

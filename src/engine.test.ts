@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { advance, advanceWithEvents, autoOrders, cost, MAX_TURNS, monsters, start } from './engine';
-import type { BattleEvent, Monster, Skill, State, Unit } from './engine';
+import { advance, advanceWithEvents, autoOrders, BASIC_ATTACK, battleSkill, cost, DEFEND, MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, start } from './engine';
+import type { BattleEvent, Monster, Skill, SpecialSkills, State, Unit } from './engine';
 
 const attack: Skill = { name: '攻撃', power: 40, priority: 0, kind: 'hit' };
 const guard: Skill = { name: '防御', power: 0, priority: 1, kind: 'guard' };
@@ -9,7 +9,7 @@ const poison: Skill = { name: '毒', power: 12, priority: 0, kind: 'poison', all
 const team = [0, 2, 3, 4, 6];
 const enemy = [1, 5, 8, 10, 6];
 
-function unit(key: string, skills: Skill[] = [guard], options: Partial<Monster> = {}): Unit {
+function unit(key: string, skills: SpecialSkills = [guard], options: Partial<Monster> = {}): Unit {
   const monster: Monster = { id: 0, name: key, icon: '⚔️', cost: 1, hp: 100, atk: 0, speed: 50, skills, ...options };
   return { key, monster, hp: monster.hp, guard: false, poison: 0 };
 }
@@ -96,6 +96,128 @@ describe('battle setup and determinism', () => {
     const initial = battle([unit('a0')], [unit('e0')], { winner: 'win' });
     expect(advanceWithEvents(initial, [])).toEqual({ state: initial, events: [] });
     expect(autoOrders(initial)).toEqual([]);
+  });
+});
+
+describe('universal commands and learned-special slots', () => {
+  const fourSpecials: SpecialSkills = [
+    { ...attack, name: '特技1', power: 10 },
+    { ...attack, name: '特技2', power: 20 },
+    { ...attack, name: '特技3', power: 30 },
+    { ...attack, name: '特技4', power: 40 },
+  ];
+
+  it('reserves separate universal command IDs and keeps all four special indexes', () => {
+    const monster = unit('a0', fourSpecials, { atk: 50 }).monster;
+    expect(BASIC_ATTACK).toBe(-1);
+    expect(DEFEND).toBe(-2);
+    expect(MAX_SPECIAL_SKILLS).toBe(4);
+    expect(battleSkill(monster, BASIC_ATTACK)).toMatchObject({ name: '通常攻撃', power: 31, priority: 0, kind: 'hit' });
+    expect(battleSkill(monster, DEFEND)).toEqual({ name: 'ぼうぎょ', power: 0, priority: 1, kind: 'guard' });
+    fourSpecials.forEach((skill, index) => expect(battleSkill(monster, index)).toBe(skill));
+    for (const invalid of [-3, 4, 99, 0.5, Number.NaN]) expect(battleSkill(monster, invalid)).toBeUndefined();
+    expect(monster.skills).toHaveLength(4);
+  });
+
+  it('keeps existing named guards unchanged', () => {
+    const troll = monsters[1];
+    expect(battleSkill(troll, 2)).toBe(troll.skills[2]);
+    expect(battleSkill(troll, 2)?.name).toBe('鉄壁の構え');
+    expect(battleSkill(troll, DEFEND)?.name).toBe('ぼうぎょ');
+  });
+
+  it('uses attack-stat baseline damage and honors an explicit enemy for a basic attack', () => {
+    const idle = { ...heal, power: 0 };
+    const initial = battle([unit('a0', [], { atk: 50 })], [unit('e0', [idle]), unit('e1', [idle])]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: BASIC_ATTACK, target: 'e1' }]);
+    expect(result.events).toContainEqual({ kind: 'cast', actor: 'a0', target: 'e1', skill: '通常攻撃', effect: 'hit' });
+    const damage = result.events.find(event => event.kind === 'damage' && event.actor === 'a0')!;
+    expect(damage.target).toBe('e1');
+    expect(damage.amount).toBeGreaterThanOrEqual(45);
+    expect(damage.amount).toBeLessThanOrEqual(55);
+    expect(result.state.enemies[0].hp).toBe(100);
+    expectHpReplay(initial, result.state, result.events);
+  });
+
+  it('retargets a basic attack away from a defeated or friendly target', () => {
+    for (const target of ['e0', 'a0', 'missing']) {
+      const initial = battle([unit('a0', [], { atk: 50 })], [unit('e0'), unit('e1')]);
+      initial.enemies[0].hp = 0;
+      const result = advanceWithEvents(initial, [{ key: 'a0', skill: BASIC_ATTACK, target }]);
+      expect(result.events.find(event => event.kind === 'cast' && event.actor === 'a0')?.target).toBe('e1');
+      expect(result.state.enemies[0].hp).toBe(0);
+      expect(result.state.enemies[1].hp).toBeLessThan(100);
+      expect(result.state.allies[0].hp).toBe(100);
+    }
+  });
+
+  it.each(monsters.map(monster => [monster.name, monster] as const))('lets %s defend without using a learned-special slot', (_name, monster) => {
+    const initial = battle([unit('a0', monster.skills, { ...monster, hp: 1000, speed: 5 })], [unit('e0', [attack], { speed: 100 })]);
+    const guarded = advanceWithEvents(initial, [{ key: 'a0', skill: DEFEND, target: 'e0' }]);
+    const unguarded = advanceWithEvents(initial, [{ key: 'a0', skill: BASIC_ATTACK }]);
+    const damageToAlly = (events: BattleEvent[]) => events.find(event => event.kind === 'damage' && event.target === 'a0')!.amount!;
+    expect(guarded.events[0]).toEqual({ kind: 'cast', actor: 'a0', target: 'a0', skill: 'ぼうぎょ', effect: 'guard' });
+    expect(guarded.events).toContainEqual({ kind: 'guard', actor: 'a0', target: 'a0' });
+    expect(damageToAlly(guarded.events)).toBe(Math.floor(damageToAlly(unguarded.events) / 2));
+    expect(guarded.state.allies[0].guard).toBe(true);
+    expect(guarded.state.allies[0].monster.skills).toBe(monster.skills);
+  });
+
+  it('lets a monster with no specials defend, then clears guard next turn', () => {
+    const initial = battle([unit('a0', [], { atk: 20 })], [unit('e0', [], { atk: 20 })]);
+    const guarded = advanceWithEvents(initial, [{ key: 'a0', skill: DEFEND }]);
+    expect(guarded.state.allies[0].guard).toBe(true);
+    expect(guarded.events).toContainEqual({ kind: 'guard', actor: 'a0', target: 'a0' });
+    expect(advance(guarded.state, [{ key: 'a0', skill: BASIC_ATTACK }]).allies[0].guard).toBe(false);
+  });
+
+  it('falls back to basic attack for automatic and missing orders with no specials on either side', () => {
+    const initial = freeze(battle([unit('a0', [], { atk: 30 })], [unit('e0', [], { atk: 30 })]));
+    expect(autoOrders(initial)).toEqual([{ key: 'a0', skill: BASIC_ATTACK, target: 'e0' }]);
+    expect(autoOrders(initial, 'enemies')).toEqual([{ key: 'e0', skill: BASIC_ATTACK, target: 'a0' }]);
+    const result = advanceWithEvents(initial, []);
+    expect(result.events.filter(event => event.kind === 'cast').map(event => event.skill)).toEqual(['通常攻撃', '通常攻撃']);
+    expect(result.state.allies[0].hp).toBeLessThan(100);
+    expect(result.state.enemies[0].hp).toBeLessThan(100);
+    expect(advanceWithEvents(initial, [{ key: 'a0', skill: 99 }])).toEqual(result);
+    expectHpReplay(initial, result.state, result.events);
+  });
+
+  it.each([0, 1, 2, 3])('executes learned special slot %s without shifting its index', index => {
+    const initial = battle([unit('a0', fourSpecials)], [unit('e0')]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: index, target: 'e0' }]);
+    expect(result.events.find(event => event.kind === 'cast' && event.actor === 'a0')?.skill).toBe(fourSpecials[index]!.name);
+    expect(autoOrders(initial)[0].skill).toBe(3);
+  });
+
+  it('can automatically use healing in the fourth special slot', () => {
+    const initial = battle([unit('a0', [attack, guard, poison, heal]), unit('a1')], [unit('e0')]);
+    initial.allies[1].hp = 10;
+    expect(autoOrders(initial)[0]).toEqual({ key: 'a0', skill: 3, target: 'a1' });
+  });
+
+  it('caps malformed external skill lists at four in lookup, manual orders, and both AIs', () => {
+    // Simulate untyped imported data; a fifth entry is rejected by the Monster type.
+    // @ts-expect-error SpecialSkills permits at most four entries.
+    const excess: SpecialSkills = [attack, attack, attack, attack, attack];
+    expect(excess).toHaveLength(5);
+    const malformed = [...fourSpecials, { ...attack, power: 10000 }, heal] as unknown as SpecialSkills;
+    const initial = battle([unit('a0', malformed)], [unit('e0', malformed)]);
+    initial.allies[0].hp = 50;
+    initial.enemies[0].hp = 50;
+    expect(battleSkill(initial.allies[0].monster, 4)).toBeUndefined();
+    expect(autoOrders(initial)[0].skill).toBe(3);
+    expect(autoOrders(initial, 'enemies')[0].skill).toBe(3);
+    expect(advanceWithEvents(initial, [{ key: 'a0', skill: 4 }])).toEqual(advanceWithEvents(initial, [{ key: 'a0', skill: 0 }]));
+    const capped = battle([unit('a0', fourSpecials)], [unit('e0', fourSpecials)]);
+    capped.allies[0].hp = 50;
+    capped.enemies[0].hp = 50;
+    for (const seed of [0, 1, 2, 3, 4, 5, 42]) {
+      const result = advanceWithEvents({ ...initial, seed }, autoOrders(initial));
+      const reference = advanceWithEvents({ ...capped, seed }, autoOrders(capped));
+      expect(result.events).toEqual(reference.events);
+      expect(result.state.seed).toBe(reference.state.seed);
+    }
   });
 });
 
