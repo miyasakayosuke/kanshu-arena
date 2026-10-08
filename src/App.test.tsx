@@ -80,7 +80,7 @@ describe('complete playtest flow', () => {
     await act(async () => { start.click(); start.click(); });
     await click(label('対戦を中断して編成へ'));
     await click(button('この編成で対戦する'));
-    await act(async () => vi.runAllTimers());
+    await act(async () => vi.advanceTimersByTime(5000));
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
     expect(document.querySelector('.playingPanel')).toBeNull();
   });
@@ -418,5 +418,182 @@ describe('four-command actor menu', () => {
     await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
     expect(document.querySelector('.commandButtons .chosen')?.textContent).toContain('ぼうぎょ');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
+  });
+});
+
+
+describe('30-second command deadline', () => {
+  const timer = () => document.querySelector('[role="timer"]');
+  const tick = async (ms: number) => { await act(async () => vi.advanceTimersByTime(ms)); };
+  const initialState = () => engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008);
+
+  it('starts at 30 seconds only in battle and expires into one automatic turn', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await mount();
+    expect(timer()).toBeNull();
+    await tick(60000);
+    expect(advance).not.toHaveBeenCalled();
+    await click(button('この編成で対戦する'));
+    expect(timer()?.textContent).toContain('30');
+    await tick(29000);
+    expect(timer()?.getAttribute('aria-label')).toContain('残り1秒');
+    expect(document.querySelector('.commandClock.urgent')).toBeTruthy();
+    expect(advance).not.toHaveBeenCalled();
+    await tick(1000);
+    expect(advance).toHaveBeenCalledTimes(1);
+    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(initialState()));
+    expect(timer()).toBeNull();
+    expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
+  });
+
+  it('keeps confirmed orders and fills missing orders while a target is pending', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await click(button('ぼうぎょ'));
+    await chooseSkill('生命の雫');
+    expect(targets()).toHaveLength(5);
+    await tick(30000);
+    const automatic = engine.autoOrders(initialState());
+    expect(advance.mock.calls[0][1]).toEqual([
+      { key: 'a0', skill: engine.DEFEND, target: undefined }, ...automatic.slice(1),
+    ]);
+    expect(document.querySelector('.targetButtons')).toBeNull();
+    expect(advance).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not replace a confirmed order with its unfinished edit at timeout', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await click(button('たたかう'));
+    await click(target('ナーガ'));
+    await click(label('妖狐の行動を選択'));
+    await chooseSkill('狐火');
+    await tick(30000);
+    expect(advance.mock.calls[0][1][0]).toEqual({ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e3' });
+  });
+
+  it('continues the same deadline through menus, actor changes, speed, auto, details, and logs', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await tick(5000);
+    await chooseSkill('狐火');
+    await click(button('特技に戻る'));
+    await click(button('コマンドに戻る'));
+    await click(label('バステトの行動を選択'));
+    await click(label('演出速度'));
+    await click(button('全員おまかせ'));
+    await click(button('詳細'));
+    await tick(5000);
+    await click(label('詳細を閉じる'));
+    await click(button('ログ'));
+    expect(timer()?.getAttribute('aria-label')).toContain('残り20秒');
+    await tick(20000);
+    expect(advance).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('.logModal')).toBeNull();
+  });
+
+  it('uses the original deadline on background visibility and focus resume', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await tick(5000);
+    // Move wall time without running any timer callbacks, as with a suspended tab.
+    vi.setSystemTime(Date.now() + 60000);
+    await act(async () => {
+      document.dispatchEvent(new Event('visibilitychange'));
+      window.dispatchEvent(new Event('focus'));
+    });
+    expect(advance).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('.playingPanel')).toBeTruthy();
+  });
+
+  it('rejects a late command when the timer callback has not run yet', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await chooseSkill('狐火');
+    vi.setSystemTime(Date.now() + 30001);
+    await click(target('ナーガ'));
+    expect(advance).toHaveBeenCalledTimes(1);
+    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(initialState()));
+  });
+
+  it.each(['manual-first', 'timeout-first'])('resolves a manual/timeout race once: %s', async order => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    const startButton = button('この指示でターン開始');
+    await tick(29800);
+    await act(async () => {
+      if (order === 'manual-first') startButton.click();
+      vi.advanceTimersByTime(200);
+      if (order === 'timeout-first') startButton.click();
+      window.dispatchEvent(new Event('focus'));
+    });
+    expect(advance).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('.playingPanel')).toBeTruthy();
+  });
+
+  it('does not count during playback and gives the next turn a fresh 30 seconds', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await tick(29000);
+    await click(button('この指示でターン開始'));
+    expect(timer()).toBeNull();
+    await tick(1000);
+    expect(advance).toHaveBeenCalledTimes(1);
+    await click(button('演出をスキップ'));
+    expect(timer()?.textContent).toContain('30');
+    await tick(29800);
+    expect(advance).toHaveBeenCalledTimes(1);
+    await tick(200);
+    expect(advance).toHaveBeenCalledTimes(2);
+    expect(advance.mock.calls[1][0].turn).toBe(2);
+  });
+
+  it('resets after natural playback without retaining previous confirmed orders', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await click(button('ぼうぎょ'));
+    await tick(30000);
+    await act(async () => vi.runAllTimers());
+    expect(timer()?.textContent).toContain('30');
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+    expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 2');
+    expect(advance).toHaveBeenCalledTimes(1);
+  });
+
+  it('cancels the old deadline on interrupt and restarts with a full new deadline', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await tick(28000);
+    await click(label('対戦を中断して編成へ'));
+    await tick(60000);
+    expect(advance).not.toHaveBeenCalled();
+    expect(timer()).toBeNull();
+    await click(button('この編成で対戦する'));
+    await tick(29800);
+    expect(advance).not.toHaveBeenCalled();
+    expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
+    await tick(200);
+    expect(advance).toHaveBeenCalledTimes(1);
+  });
+
+  it('stops on the result screen and releases command callbacks on unmount', async () => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
+      await click(button('この指示でターン開始'));
+      await click(button('演出をスキップ'));
+    }
+    expect(document.querySelector('.result')).toBeTruthy();
+    expect(timer()).toBeNull();
+    const count = advance.mock.calls.length;
+    await tick(60000);
+    expect(advance).toHaveBeenCalledTimes(count);
+    await click(button('編成に戻る'));
+    await click(button('この編成で対戦する'));
+    await act(async () => root.unmount());
+    await tick(60000);
+    await act(async () => window.dispatchEvent(new Event('focus')));
+    expect(advance).toHaveBeenCalledTimes(count);
+    root = createRoot(document.getElementById('test-root')!);
   });
 });
