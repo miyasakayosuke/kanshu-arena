@@ -26,3 +26,7 @@
 @keyframes windSpin{0%{opacity:0;transform:scale(.2) rotate(0)}40%{opacity:1}100%{opacity:0;transform:scale(1.6) rotate(260deg)}}
 @keyframes flash{50%{opacity:0}62%{opacity:.65}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.effectCore,.effectBurst,.effectFlash,.skillBanner{animation-duration:.01ms}}
+
+.battleCanvas{display:block;width:100%;height:auto;aspect-ratio:720/680;border:1px solid #766342;border-radius:14px;box-shadow:inset 0 0 40px #0c1526,0 8px 28px #0008;background:#172337}
+.battleStatus{text-align:center;font-size:12px;color:#d6c49b;margin:10px 0 20px}
+.battle .commands{margin-top:10px}
