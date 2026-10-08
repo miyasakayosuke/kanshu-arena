@@ -62,19 +62,24 @@ export default function App() {
   const living = battle?.allies.filter(u => u.hp > 0) ?? [];
   const active = living.find(u => u.key === activeKey) ?? living[0];
   const selectedSkill = pendingSkill !== null && active ? active.monster.skills[pendingSkill] : null;
-  const targetKeys = battle && selectedSkill ? (selectedSkill.kind === 'heal' ? battle.allies : battle.enemies).filter(u => u.hp > 0).map(u => u.key) : [];
+  const targets = battle && selectedSkill ? (selectedSkill.kind === 'heal' ? battle.allies : battle.enemies).filter(u => u.hp > 0) : [];
+  const targetKeys = targets.map(u => u.key);
   const commitOrder = (skill: number, target?: string) => {
-    if (!active || playingLock.current) return;
+    if (!active || battle?.winner || playingLock.current) return;
     const next = { ...orders, [active.key]: { key: active.key, skill, target } };
     setOrders(next); setPendingSkill(null);
     const unselected = living.find(u => !next[u.key]);
     if (unselected) setActiveKey(unselected.key);
   };
   const selectSkill = (index: number) => {
-    if (!active || playingLock.current) return;
+    if (!active || battle?.winner || playingLock.current) return;
     const skill = active.monster.skills[index];
     if (skill.all || skill.kind === 'guard') commitOrder(index);
     else setPendingSkill(index);
+  };
+  const resetOrders = () => {
+    if (!battle || battle.winner || playingLock.current) return;
+    setOrders({}); setPendingSkill(null); setActiveKey(living[0]?.key ?? 'a0');
   };
   const finishPlayback = () => {
     clearTimers();
@@ -147,15 +152,14 @@ export default function App() {
     {page === 'battle' && battle && <main className="battle">
       <div className="battleTop"><button className="iconButton" onClick={returnHome} aria-label="対戦を中断して編成へ">‹ 編成</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small></span><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div>
       <BattleStage allies={battle.allies} enemies={battle.enemies} effect={effect} impact={impact} impacts={impacts} activeActorKey={active?.key} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />
-      <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：${selectedSkill.kind === 'heal' ? '味方' : '敵'}のアイコンをタップ` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
+      <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${selectedSkill.kind === 'heal' ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
       {battle.winner ? <section className="result"><span className="eyebrow">BATTLE RESULT</span><h2>{battle.winner === 'win' ? 'VICTORY' : battle.winner === 'lose' ? 'DEFEAT' : 'DRAW'}</h2><p>{battle.winner === 'win' ? '見事な采配。次の相手に挑もう。' : battle.winner === 'lose' ? '先制・回復・アンカーを組み合わせて再挑戦。' : '互角の勝負。編成を変えてもう一度。'}</p><button className="primary" onClick={returnHome}>編成に戻る →</button></section> : <section className="commandDock" aria-label="行動指示">
         <div className="commanderRow">{battle.allies.map(u => <button key={u.key} className={`commander ${active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''}`} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={active?.key === u.key} onClick={() => { setActiveKey(u.key); setPendingSkill(null); }}><span>{u.monster.icon}</span><i>{u.hp <= 0 ? '戦闘不能' : orders[u.key] ? '指示済 ✓' : 'おまかせ'}</i><div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div>
-        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>モンスターが行動中</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className="commandHeading"><span>{active.monster.name} <small>HP {active.hp}/{active.monster.hp}</small></span><button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button></div>
-          <div className="skillButtons">{active.monster.skills.map((s, i) => <button key={i} className={`${pendingSkill === i || orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} onClick={() => selectSkill(i)}><strong>{s.name}</strong><small>{s.priority > 0 ? '先制 / ' : s.priority < 0 ? 'アンカー / ' : ''}{s.kind === 'guard' ? '防御' : s.kind === 'heal' ? '回復 65' : `${s.all ? '全体' : '単体'} ${s.power}`}</small></button>)}</div>
-          <div className="turnControls"><button className="autoButton" onClick={() => { setOrders({}); setPendingSkill(null); setActiveKey(living[0]?.key ?? 'a0'); }}>全員おまかせ</button><button className="speedButton" aria-label="演出速度" onClick={() => setSpeed(speed === 1 ? 2 : 1)}>演出 ×{speed}</button></div>
-          <button className="primary turnStart" disabled={pendingSkill !== null} onClick={execute}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>
-          {pendingSkill !== null && <button className="cancelTarget" onClick={() => setPendingSkill(null)}>対象選択をやめる</button>}
+        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>モンスターが行動中</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className="commandHeading"><span>{selectedSkill ? `${selectedSkill.name} · ${selectedSkill.kind === 'heal' ? '味方' : '敵'}を選択` : <>{active.monster.name} <small>HP {active.hp}/{active.monster.hp}</small></>}</span>{selectedSkill ? <button className="backToSkills" onClick={() => setPendingSkill(null)}>‹ 特技に戻る</button> : <button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button>}</div>
+          {selectedSkill ? <div className={`targetButtons ${selectedSkill.kind === 'heal' ? 'allyTargets' : 'enemyTargets'}`} aria-label={`${selectedSkill.kind === 'heal' ? '味方' : '敵'}の対象を選択`}>{targets.map(u => <button key={u.key} aria-label={`${u.monster.name}を対象に選択`} onClick={() => { if (pendingSkill !== null) commitOrder(pendingSkill, u.key); }}><span aria-hidden="true">{u.monster.icon}</span><small>{u.hp}/{u.monster.hp}</small><div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div> : <div className="skillButtons">{active.monster.skills.map((s, i) => <button key={i} className={`${orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} onClick={() => selectSkill(i)}><strong>{s.name}</strong><small>{s.priority > 0 ? '先制 / ' : s.priority < 0 ? 'アンカー / ' : ''}{s.kind === 'guard' ? '防御' : s.kind === 'heal' ? '回復 65' : `${s.all ? '全体' : '単体'} ${s.power}`}</small></button>)}</div>}
         </>}
+        <div className="turnControls"><button className="autoButton" disabled={playing} onClick={resetOrders}>全員おまかせ</button><button className="speedButton" disabled={playing} aria-label="演出速度" onClick={() => setSpeed(speed === 1 ? 2 : 1)}>演出 ×{speed}</button></div>
+        {!playing && <button className="primary turnStart" disabled={pendingSkill !== null} onClick={execute}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>}
       </section>}
     </main>}
     {focus !== null && <div className="overlay" onClick={() => setFocus(null)}><section className="modal" role="dialog" aria-modal="true" aria-label={`${monsters[focus].name}の詳細`} onClick={e => e.stopPropagation()}><button className="close" aria-label="詳細を閉じる" onClick={() => setFocus(null)}>×</button><div className="heroIcon">{monsters[focus].icon}</div><span className="eyebrow">MONSTER PROFILE · COST {monsters[focus].cost}</span><h2>{monsters[focus].name}</h2><div className="stats">{[['HP', monsters[focus].hp], ['攻撃', monsters[focus].atk], ['素早さ', monsters[focus].speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div><h3>特技</h3>{monsters[focus].skills.map(s => <div className="skill" key={s.name}><strong>{s.name}</strong><small>{skillHint(s)}{s.power > 0 ? ` · 威力${s.power}` : ''}</small></div>)}
