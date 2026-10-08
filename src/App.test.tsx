@@ -74,6 +74,8 @@ describe('complete playtest flow', () => {
     }
     expect(document.querySelector('.result')).toBeTruthy();
     await click(button('ログ')); expect(document.querySelector('.logModal')).toBeTruthy();
+    const played = [...(document.querySelector('.log')?.textContent ?? '').matchAll(/── TURN (\d+) ──/g)];
+    expect(document.querySelector('.battleTop')?.textContent).toContain(`TURN ${played.at(-1)![1]}`);
     await click(label('戦闘ログを閉じる'));
     await click(button('編成に戻る')); expect(document.querySelector('footer')?.textContent).toContain('第2戦');
     await click(button('この編成で対戦する'));
