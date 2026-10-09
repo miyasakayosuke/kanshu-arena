@@ -36,7 +36,7 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     controls[next].focus();
   }}>
     <button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button>
-    <div className="profileHeading"><span className="heroIcon"><MonsterArt monster={monster} /></span><div><span className="eyebrow">MONSTER PROFILE · COST {monster.cost}</span><h2>{monster.id === 12 ? '破縛の魔狼 フェンリル' : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><small>閲覧のみ · 入れ替えは編成の枠から</small></div></div>
+    <div className="profileHeading"><span className="heroIcon"><MonsterArt monster={monster} /></span><div><span className="eyebrow">MONSTER PROFILE · COST {monster.cost}</span><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><small>閲覧のみ · 入れ替えは編成の枠から</small></div></div>
     <div className="roleBrief"><strong>{role.name}</strong><p>{role.strength}</p><small>{role.tradeoff}</small></div>
     <div className="leaderBanner"><span>リーダー効果 · {leaderFor(id).name}</span><small>{leaderFor(id).description}</small></div>
     {monster.id === 12 && <p className="familyExplanation">獣系は本作の哺乳類モチーフの分類です。リーダー効果は先頭にいる時だけ。さらに編成中は「群れの遠吠え」が開幕に一度だけ発動し、味方の獣系へ攻撃/素早さ+5%の群気を2ターン付与。素早さが行動順へ反映されるのは2ターン目。重複せず、連牙で解除可能。獣系以外にはかかりません。先制で狙われると脆く、MP60で連牙は4回まで。リーダー効果や毒は解除しません。</p>}

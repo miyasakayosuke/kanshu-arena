@@ -287,6 +287,6 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <summary>保存した編成<span>このブラウザに3枠</span></summary>
       <div className="slotGrid">{slots.map((slot, i) => <div className="teamSlot" key={i}><strong>編成 {i + 1}</strong><span className="slotIcons">{slot ? slot.team.map(id => monsters[id].icon).join('') : '未保存'}</span><small>{slot ? `${rules[slot.rule].name} · C${cost(slot.team)}` : 'リーダーも保存'}</small><div><button aria-label={`編成${i + 1}を呼び出す`} disabled={!slot} onClick={() => load(i)}>呼出</button><button aria-label={`編成${i + 1}に保存`} disabled={!isValidTeam(team, budget)} onClick={() => save(i)}>{slot ? '上書き' : '保存'}</button></div></div>)}</div>
     </details>
-    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { setBrowsing(true); if (costFilter === 'fit') setCostFilter('all'); }}>モンスター図鑑を開く <span>12体の役割・特技を見る</span></button>}
+    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { setBrowsing(true); if (costFilter === 'fit') setCostFilter('all'); }}>モンスター図鑑を開く <span>{monsters.length}体の役割・特技を見る</span></button>}
   </main>;
 }
