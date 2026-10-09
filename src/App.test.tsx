@@ -13,10 +13,15 @@ const activeCommander = () => document.querySelector('.commander.active')?.getAt
 async function click(el: HTMLElement) { expect(el).toBeTruthy(); await act(async () => el.click()); }
 async function chooseSkill(name: string) { if (!document.querySelector('.skillButtons')) await click(button('とくぎ')); await click(button(name)); }
 async function mount() { await act(async () => root.render(<App />)); }
-async function enterBattle() { await mount(); await click(button('この編成で対戦する')); }
+async function openTeam() { if (window.location.hash !== '#team') await click(label('編成・図鑑')); }
+async function openArena() { if (window.location.hash !== '#arena') await click(label('闘技場')); }
+async function startBattle() { await openArena(); await click(button('この編成で対戦する')); }
+async function leaveBattle() { await click(label('闘技場に戻る')); await click(button('中断して移動')); }
+async function enterBattle() { await mount(); await startBattle(); }
 beforeEach(() => {
   vi.useFakeTimers();
   localStorage.clear();
+  window.history.replaceState(null, '', '#home');
   document.body.innerHTML = '<div id="test-root"></div>';
   Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
@@ -28,7 +33,7 @@ describe('complete playtest flow', () => {
     localStorage.setItem('kanshu-team', '[99,99,99,99,99]');
     await mount();
     expect(document.querySelectorAll('.teamUnit')).toHaveLength(5);
-    await click(button('この編成で対戦する'));
+    await startBattle();
     expect(document.querySelector('.battleMode')).toBeTruthy();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
   });
@@ -61,7 +66,7 @@ describe('complete playtest flow', () => {
     expect([...document.querySelectorAll('.commander:not([disabled]) i')].every(el => el.textContent === '未選択')).toBe(true);
   });
   it('keeps HP unchanged during the windup and updates only at impact', async () => {
-    await mount(); await click(button('この編成で対戦する'));
+    await mount(); await startBattle();
     const bars = () => [...document.querySelectorAll('.hpBar b')].map(b => b.getAttribute('style'));
     const before = bars();
     await click(button('この指示でターン開始'));
@@ -75,17 +80,17 @@ describe('complete playtest flow', () => {
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 2');
   });
   it('ignores repeated start clicks and can interrupt then start a clean battle', async () => {
-    await mount(); await click(button('この編成で対戦する'));
+    await mount(); await startBattle();
     const start = button('この指示でターン開始');
     await act(async () => { start.click(); start.click(); });
-    await click(label('対戦を中断して編成へ'));
-    await click(button('この編成で対戦する'));
+    await leaveBattle();
+    await startBattle();
     await act(async () => vi.advanceTimersByTime(5000));
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
     expect(document.querySelector('.playingPanel')).toBeNull();
   });
   it('reaches a result, opens and closes the log, and can play the next opponent', async () => {
-    await mount(); await click(button('この編成で対戦する'));
+    await mount(); await startBattle();
     for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
       await click(button('この指示でターン開始'));
       await click(button('演出をスキップ'));
@@ -95,16 +100,19 @@ describe('complete playtest flow', () => {
     const played = [...(document.querySelector('.log')?.textContent ?? '').matchAll(/── TURN (\d+) ──/g)];
     expect(document.querySelector('.battleTop')?.textContent).toContain(`TURN ${played.at(-1)![1]}`);
     await click(label('戦闘ログを閉じる'));
-    await click(button('編成に戻る')); expect(document.querySelector('footer')?.textContent).toContain('第2戦');
-    await click(button('この編成で対戦する'));
+    await click(button('闘技場に戻る → 次の相手')); expect(document.querySelector('footer')?.textContent).toContain('第2戦');
+    await startBattle();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
   });
   it('filters anchors and preserves an edited party across remount', async () => {
-    await mount(); await click(button('アンカー'));
+    await mount(); await openTeam(); await click(button('アンカー'));
     expect(document.querySelectorAll('.rosterItem')).toHaveLength(3);
     await click(label('妖狐の詳細')); await click(button('編成から外す'));
+    await openArena();
     expect(button('この編成で対戦する').disabled).toBe(true);
+    await openTeam();
     await click(label('トロルの詳細')); await click(button('編成に加える'));
+    await openArena();
     expect(button('この編成で対戦する').disabled).toBe(false);
     expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toContain(1);
   });
@@ -284,8 +292,8 @@ describe('command and target controls', () => {
     await enterBattle();
     await chooseSkill('炎嵐');
     await chooseSkill('生命の雫');
-    await click(label('対戦を中断して編成へ'));
-    await click(button('この編成で対戦する'));
+    await leaveBattle();
+    await startBattle();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
     expect(document.querySelector('.targetButtons')).toBeNull();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
@@ -509,7 +517,7 @@ describe('30-second command deadline', () => {
     expect(timer()).toBeNull();
     await tick(60000);
     expect(advance).not.toHaveBeenCalled();
-    await click(button('この編成で対戦する'));
+    await startBattle();
     expect(timer()?.textContent).toContain('30');
     expect(timer()?.closest('.battleTop')).toBeTruthy();
     expect(document.querySelector('.commandDock [role="timer"]')).toBeNull();
@@ -642,11 +650,11 @@ describe('30-second command deadline', () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
     await tick(28000);
-    await click(label('対戦を中断して編成へ'));
+    await leaveBattle();
     await tick(60000);
     expect(advance).not.toHaveBeenCalled();
     expect(timer()).toBeNull();
-    await click(button('この編成で対戦する'));
+    await startBattle();
     await tick(29800);
     expect(advance).not.toHaveBeenCalled();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
@@ -666,8 +674,8 @@ describe('30-second command deadline', () => {
     const count = advance.mock.calls.length;
     await tick(60000);
     expect(advance).toHaveBeenCalledTimes(count);
-    await click(button('編成に戻る'));
-    await click(button('この編成で対戦する'));
+    await click(button('闘技場に戻る → 次の相手'));
+    await startBattle();
     await act(async () => root.unmount());
     await tick(60000);
     await act(async () => window.dispatchEvent(new Event('focus')));

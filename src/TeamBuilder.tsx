@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { monsters, cost, leaderFor } from './engine';
-import { rules, monsterRole, loadTeamSlots, saveTeamSlots, isValidTeam, type RuleId } from './strategy';
+import { rules, monsterRole, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
 
-type Props = { team: number[]; setTeam: (team: number[]) => void; rule: RuleId; setRule: (rule: RuleId) => void; onFocus: (id: number) => void; notice: string; setNotice: (message: string) => void; practice: boolean; leavePractice: () => void };
-export default function TeamBuilder({team,setTeam,rule,setRule,onFocus,notice,setNotice,practice,leavePractice}:Props) {
+type Props = { slots: (TeamSlot | null)[]; setSlots: (slots: (TeamSlot | null)[]) => void; team: number[]; setTeam: (team: number[]) => void; rule: RuleId; setRule: (rule: RuleId) => void; onFocus: (id: number) => void; notice: string; setNotice: (message: string) => void; practice: boolean; leavePractice: () => void };
+export default function TeamBuilder({slots,setSlots,team,setTeam,rule,setRule,onFocus,notice,setNotice,practice,leavePractice}:Props) {
   const [filter,setFilter]=useState('');
   const [role,setRole]=useState('all');
   const [sort,setSort]=useState('id');
   const [leaderFilter,setLeaderFilter]=useState('all');
   const [costFilter,setCostFilter]=useState('all');
-  const [slots,setSlots]=useState(()=>{try{return loadTeamSlots(localStorage);}catch{return [null,null,null] as ReturnType<typeof loadTeamSlots>;}});
   const budget=rules[rule].budget;
   const leader=team.length ? leaderFor(team[0]) : null;
   const visible=monsters.filter(m=>{
@@ -25,16 +24,16 @@ export default function TeamBuilder({team,setTeam,rule,setRule,onFocus,notice,se
     const next=slots.map((slot,i)=>i===index?{team:[...team],rule}:slot);
     setSlots(next);
     let stored=false;try{stored=saveTeamSlots(localStorage,next);}catch{/* Blocked storage still permits this-session experimentation. */}
-    setNotice(stored?`編成${index+1}に保存しました`:'このブラウザでは保存できません。この画面を閉じるまでは呼び出せます。');
+    setNotice(stored?`編成${index+1}に保存しました`:'このブラウザでは保存できません。再読み込みするまでは呼び出せます。');
   };
   const load=(index:number)=>{
     const slot=slots[index];if(!slot)return;
     setRule(slot.rule);setTeam([...slot.team]);setNotice(`編成${index+1}を呼び出しました`);
   };
   return <main className="home">
-    <div className="intro"><span className="eyebrow">BUILD YOUR STRATEGY</span><h2>組み合わせが、勝ち筋になる。</h2><p>リーダーと役割を選び、読み合いを楽しもう。</p></div>
+    <div className="intro"><span className="eyebrow">TEAM & BESTIARY</span><h2>編成・図鑑</h2><p>リーダーと役割を選んで、5体を組み合わせよう。</p></div>
     <div className="ruleTabs" aria-label="対戦ルール">{Object.values(rules).map(value=><button key={value.id} aria-pressed={rule===value.id} onClick={()=>setRule(value.id)}><strong>{value.name}</strong><small>COST {value.budget}</small></button>)}</div>
-    <p className="hint ruleHint">{rules[rule].description} 相手の編成は対戦開始時に公開。特技は発動時にMPを消費し、戦闘中の自然回復はありません。再戦を含む対戦開始時に全回復します。</p>
+    <p className="hint ruleHint">{rules[rule].description}</p>
     {practice&&<div className="practiceNotice">同じ相手・同じ条件で再挑戦 <button onClick={leavePractice}>通常の対戦へ</button></div>}
     <section className="partyCard"><div className="sectionTitle">出場パーティ <span>{team.length}/5体 <b className={cost(team)>budget?'overBudget':''}>COST {cost(team)}/{budget}</b></span></div>
       <div className="team">{team.map((id,index)=><button key={id} className={`teamUnit ${index===0?'teamLeader':''}`} aria-label={`${monsters[id].name}の詳細`} onClick={()=>onFocus(id)}><small>{index===0?'LEADER':`0${index+1}`}</small><span>{monsters[id].icon}</span><i>C{monsters[id].cost}</i></button>)}{Array.from({length:5-team.length},(_,i)=><div className="empty" key={i}>＋</div>)}</div>

@@ -4,7 +4,10 @@ import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage from './BattleStage';
 import TeamBuilder from './TeamBuilder';
 import TacticsPanel from './TacticsPanel';
-import { rules, opponentTeams, isValidTeam, initialTeam, monsterLore, monsterRole, skillLore, resultSummary, type RuleId } from './strategy';
+import HomeScreen, { ArenaLobby } from './HomeScreen';
+import LeaveBattleDialog from './LeaveBattleDialog';
+import { useScreenNavigation } from './navigation';
+import { rules, opponentTeams, isValidTeam, initialTeam, monsterLore, monsterRole, skillLore, resultSummary, loadTeamSlots, type RuleId } from './strategy';
 import './style.css';
 
 const COMMAND_SECONDS = 30;
@@ -17,9 +20,17 @@ function loadTeam() {
   } catch { /* A blocked or old save must never prevent playing. */ }
   return initial;
 }
+function loadWorkshop() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('kanshu-workshop-v1') ?? 'null');
+    if (saved && ['standard', 'light'].includes(saved.rule) && Array.isArray(saved.team) && saved.team.length <= 5 && new Set(saved.team).size === saved.team.length && saved.team.every((id: unknown) => Number.isInteger(id) && monsters[id as number]) && cost(saved.team) <= 17) return saved as { team: number[]; rule: RuleId };
+  } catch { /* Optional local save. */ }
+  return { team: loadTeam(), rule: 'standard' as RuleId };
+}
 export default function App() {
-  const [team, setTeam] = useState<number[]>(loadTeam);
-  const [page, setPage] = useState<'home' | 'battle'>('home');
+  const [workshop] = useState(loadWorkshop);
+  const [team, setTeam] = useState<number[]>(workshop.team);
+  const [slots, setSlots] = useState(() => { try { return loadTeamSlots(localStorage); } catch { return [null, null, null] as ReturnType<typeof loadTeamSlots>; } });
   const [battle, setBattle] = useState<State | null>(null);
   const [orders, setOrders] = useState<Record<string, Order>>({});
   const [activeKey, setActiveKey] = useState('a0');
@@ -27,7 +38,7 @@ export default function App() {
   const [showSkills, setShowSkills] = useState(false);
   const [automaticKeys, setAutomaticKeys] = useState<string[]>([]);
   const [focus, setFocus] = useState<number | null>(null);
-  const [rule, setRule] = useState<RuleId>('standard');
+  const [rule, setRule] = useState<RuleId>(workshop.rule);
   const [practice, setPractice] = useState(false);
   const [encounter, setEncounter] = useState<{ enemy:number[]; seed:number; rule:RuleId } | null>(null);
   const [showTactics, setShowTactics] = useState(false);
@@ -49,30 +60,53 @@ export default function App() {
   const playbackId = useRef(0);
   const playingLock = useRef(false);
   const latestResult = useRef<State | null>(null);
+  const leavingForPractice = useRef(false);
   const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
-  useEffect(() => () => clearTimers(), []);
+  const discardBattle = () => {
+    commandDeadline.current = null;
+    ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
+    setBattle(null); setPlaying(false); setOrders({}); setAutomaticKeys([]); setEffect(null); setVisualCast(null); setImpact(null); setImpacts([]);
+    setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setFocus(null); setReplayProgress('');
+    if (battle?.winner && !leavingForPractice.current) setRound(n => n + 1);
+    setPractice(leavingForPractice.current); leavingForPractice.current = false;
+  };
+  const navigation = useScreenNavigation(!!battle && !battle.winner, discardBattle);
+  const { page, navigate } = navigation;
+  useEffect(() => () => { ++playbackId.current; clearTimers(); commandDeadline.current = null; }, []);
+  useEffect(() => { setFocus(null); setShowLog(false); setShowTactics(false); window.scrollTo(0, 0); }, [page]);
   useEffect(() => {
-    if (team.length === 5) try { localStorage.setItem('kanshu-team', JSON.stringify(team)); } catch { /* optional */ }
-  }, [team]);
+    if (page !== 'battle' || !battle || battle.winner) return;
+    const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [page, battle?.winner]);
   useEffect(() => {
-    const close = (e: KeyboardEvent) => { if (e.key === 'Escape') { setFocus(null); setShowLog(false); setShowTactics(false); setPendingSkill(null); if (pendingSkill === null) setShowSkills(false); } };
+    try { localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule })); if (team.length === 5) localStorage.setItem('kanshu-team', JSON.stringify(team)); } catch { /* optional */ }
+  }, [team, rule]);
+  useEffect(() => {
+    const close = (e: KeyboardEvent) => { if (e.key === 'Escape') { if (navigation.pending) { navigation.cancel(); return; } setFocus(null); setShowLog(false); setShowTactics(false); setPendingSkill(null); if (pendingSkill === null) setShowSkills(false); } };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, [pendingSkill]);
+  }, [pendingSkill, navigation.pending]);
   const choose = (id: number) => {
     if (team.includes(id)) { setTeam(team.filter(x => x !== id)); setFocus(null); return; }
     if (team.length >= 5 || cost([...team, id]) > rules[rule].budget) return;
     setTeam([...team, id]); setFocus(null);
   };
+  const startLock = useRef(false);
+  useEffect(() => { startLock.current = false; }, [page, battle?.winner]);
   const begin = (retry = false) => {
+    if (startLock.current || (page !== 'arena' && !(page === 'battle' && battle?.winner))) return;
     if (!isValidTeam(team, rules[rule].budget)) return;
+    startLock.current = true;
+    ++playbackId.current;
     const nextEncounter = (retry || practice) && encounter && encounter.rule === rule ? encounter : { enemy: opponentTeams(rule)[round % opponentTeams(rule).length], seed: round + 20261008, rule };
     setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
     setTimedOut(false);
     setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
     setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setImpact(null); setImpacts([]);
-    setPlaying(false); setShowLog(false); setShowTactics(false); setPage('battle'); setNotice('');
+    setPlaying(false); setShowLog(false); setShowTactics(false); navigate('battle'); setNotice('');
   };
   const living = battle?.allies.filter(u => u.hp > 0) ?? [];
   const active = living.find(u => u.key === activeKey) ?? living[0];
@@ -156,7 +190,7 @@ export default function App() {
         }
       }, cue.at / speed));
     }
-    timers.current.push(setTimeout(finishPlayback, timeline.duration / speed));
+    timers.current.push(setTimeout(() => { if (id === playbackId.current) finishPlayback(); }, timeline.duration / speed));
   };
   timeoutAction.current = () => execute(true);
   useEffect(() => {
@@ -181,25 +215,23 @@ export default function App() {
       if (commandDeadline.current === deadline) commandDeadline.current = null;
     };
   }, [page, battle?.turn, battle?.winner, playing]);
-  const returnHome = (retry = false) => {
-    commandDeadline.current = null;
-    ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
-    setPlaying(false); setEffect(null); setVisualCast(null); setImpact(null); setImpacts([]); setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setPage('home'); setPractice(retry);
-    if (battle?.winner && !retry) setRound(n => n + 1);
-  };
+  const rebuild = () => { leavingForPractice.current = true; navigate('team'); };
+  const leavePractice = () => { setPractice(false); setRound(n => n + 1); };
   const changeRule = (next: RuleId) => { if (next !== rule) { setRule(next); setPractice(false); setNotice(''); } };
   const ready = living.filter(u => orders[u.key]).length;
   const incomingArea = playing && visualCast?.scope === 'all' && (visualCast.targets ?? []).some(key => battle?.allies.some(unit => unit.key === key));
   const areaLanded = incomingArea && impacts.some(event => event.kind === 'damage' && event.actor === visualCast?.actor);
   const scopeLabel = visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
-  return <div className={`app ${page === 'battle' ? 'battleMode' : ''}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.6</div><h1>環獣のアリーナ</h1></div>{page === 'home' && <span className="previewBadge">5 vs 5</span>}</header>
-    {page === 'home' && <TeamBuilder team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={()=>{setPractice(false);setRound(n=>n+1);}} />}
+  return <div className={`app ${page === 'battle' ? 'battleMode' : `screen-${page}`}`}>
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.7</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
+    {page === 'home' && <HomeScreen team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
+    {page === 'arena' && <ArenaLobby team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
+    {page === 'team' && <TeamBuilder slots={slots} setSlots={setSlots} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
     {page === 'battle' && battle && <main className="battle">
-      <div className="battleTop"><button className="iconButton" onClick={()=>returnHome()} aria-label="対戦を中断して編成へ">‹ 編成</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
+      <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
       <BattleStage allies={battle.allies} enemies={battle.enemies} effect={effect} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />
       <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
-      {battle.winner ? <section className="result"><span className="eyebrow">BATTLE RESULT</span><h2>{battle.winner === 'win' ? 'VICTORY' : battle.winner === 'lose' ? 'DEFEAT' : 'DRAW'}</h2><p>{battle.winner === 'win' ? '見事な采配。次の相手に挑もう。' : battle.winner === 'lose' ? '先制・回復・アンカーを組み合わせて再挑戦。' : '互角の勝負。編成を変えてもう一度。'}</p><div className="resultMetrics">{resultSummary(battle).turns}ターン · 残りHP 味方 {resultSummary(battle).allyHpPercent}% / 敵 {resultSummary(battle).enemyHpPercent}%</div><div className="rematchActions"><button className="primary" onClick={()=>begin(true)}>同じ編成ですぐ再戦</button><button className="secondary" onClick={()=>returnHome(true)}>編成を見直して再戦</button><button className="detailButton" onClick={()=>returnHome()}>編成に戻る → 次の相手</button></div></section> : <section className="commandDock" aria-label="行動指示">
+      {battle.winner ? <section className="result"><span className="eyebrow">BATTLE RESULT</span><h2>{battle.winner === 'win' ? 'VICTORY' : battle.winner === 'lose' ? 'DEFEAT' : 'DRAW'}</h2><p>{battle.winner === 'win' ? '見事な采配。次の相手に挑もう。' : battle.winner === 'lose' ? '先制・回復・アンカーを組み合わせて再挑戦。' : '互角の勝負。編成を変えてもう一度。'}</p><div className="resultMetrics">{resultSummary(battle).turns}ターン · 残りHP 味方 {resultSummary(battle).allyHpPercent}% / 敵 {resultSummary(battle).enemyHpPercent}%</div><div className="rematchActions"><button className="primary" onClick={()=>begin(true)}>同じ編成ですぐ再戦</button><button className="secondary" onClick={rebuild}>編成を見直して再戦</button><button className="detailButton" onClick={()=>navigate('arena')}>闘技場に戻る → 次の相手</button></div></section> : <section className="commandDock" aria-label="行動指示">
         <div className={`commanderRow ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
           {incomingArea && <span key={`${effect?.tick}-${areaLanded}`} className="partySweep" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}
           {battle.allies.map(u => {
@@ -232,10 +264,13 @@ export default function App() {
       </section>}
     </main>}
     {focus !== null && <div className="overlay" onClick={() => setFocus(null)}><section className="modal" role="dialog" aria-modal="true" aria-label={`${monsters[focus].name}の詳細`} onClick={e => e.stopPropagation()}><button className="close" aria-label="詳細を閉じる" onClick={() => setFocus(null)}>×</button><div className="heroIcon">{monsters[focus].icon}</div><span className="eyebrow">MONSTER PROFILE · COST {monsters[focus].cost}</span><h2>{monsters[focus].name}</h2><p className="monsterLore">{monsterLore(focus)}</p><div className="roleBrief"><strong>{monsterRole(focus).name}</strong><p>{monsterRole(focus).strength}</p><small>{monsterRole(focus).tradeoff}</small></div><div className="leaderBanner"><span>リーダー効果 · {leaderFor(focus).name}</span><small>{leaderFor(focus).description}</small></div><h3>基礎能力（リーダー補正前）</h3><div className="stats">{[['HP', monsters[focus].hp], ['MP', monsters[focus].mp], ['攻撃', monsters[focus].atk], ['素早さ', monsters[focus].speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div><h3>特技</h3>{monsters[focus].skills.map(s => <div className="skill" key={s.name}><strong>{s.name}</strong><small>{skillHint(s)}{s.power > 0 ? ` · ${s.kind==='heal'||s.kind==='cleanse'?'回復':'威力'}${s.power}` : ''}</small><p className="skillLore">{skillLore(s.name)}</p></div>)}
-      {page === 'home' && <>{team.includes(focus)&&<button className="secondary leaderChoice" disabled={team[0]===focus} onClick={()=>{setTeam([focus,...team.filter(id=>id!==focus)]);setFocus(null);setNotice(`${monsters[focus].name}をリーダーにしました`);}}>{team[0]===focus?'この編成のリーダー':'リーダーにする'}</button>}<button className="primary" disabled={!team.includes(focus) && (team.length >= 5 || cost([...team, focus]) > rules[rule].budget)} onClick={() => choose(focus)}>{team.includes(focus) ? '編成から外す' : team.length >= 5 ? '先に1体外してください' : cost([...team, focus]) > rules[rule].budget ? 'コスト上限を超えています' : '編成に加える'}</button></>}
+      {page === 'team' && <>{team.includes(focus)&&<button className="secondary leaderChoice" disabled={team[0]===focus} onClick={()=>{setTeam([focus,...team.filter(id=>id!==focus)]);setFocus(null);setNotice(`${monsters[focus].name}をリーダーにしました`);}}>{team[0]===focus?'この編成のリーダー':'リーダーにする'}</button>}<button className="primary" disabled={!team.includes(focus) && (team.length >= 5 || cost([...team, focus]) > rules[rule].budget)} onClick={() => choose(focus)}>{team.includes(focus) ? '編成から外す' : team.length >= 5 ? '先に1体外してください' : cost([...team, focus]) > rules[rule].budget ? 'コスト上限を超えています' : '編成に加える'}</button></>}
     </section></div>}
     {showTactics && battle && <TacticsPanel battle={battle} orders={orders} playing={playing} rule={rule} onClose={()=>setShowTactics(false)} />}
     {showLog && battle && <div className="overlay" onClick={() => setShowLog(false)}><section className="modal logModal" role="dialog" aria-modal="true" aria-label="戦闘ログ" onClick={e => e.stopPropagation()}><button className="close" aria-label="戦闘ログを閉じる" onClick={() => setShowLog(false)}>×</button><h2>戦闘ログ</h2>{playing && <p className="hint">現在のターンの記録は演出後に表示されます。</p>}<div className="log">{battle.log.map((line, i) => <div key={i}>{line}</div>)}</div></section></div>}
-    {page === 'home' && <footer><p>{team.length === 5 ? `第${round + 1}戦 · ${rules[rule].name} · コスト${cost(team)}/${rules[rule].budget} · 20ターン決着` : `あと${5 - team.length}体を編成してください`}</p><button className="primary" disabled={!isValidTeam(team,rules[rule].budget)} onClick={()=>begin()}>{practice?'この編成で同じ相手に再戦 →':'この編成で対戦する →'}</button></footer>}
+    {(page === 'arena' || page === 'team') && <footer className="screenAction"><p>{page === 'team' ? `${rules[rule].name} · ${team.length}/5体 · COST ${cost(team)}/${rules[rule].budget}` : team.length !== 5 ? `あと${5 - team.length}体を編成してください` : cost(team) > rules[rule].budget ? `あとCOST ${cost(team) - rules[rule].budget}減らすと出場できます` : `第${round + 1}戦 · ${rules[rule].name} · 準備完了`}</p><button className="primary" disabled={page === 'arena' && !isValidTeam(team, rules[rule].budget)} onClick={() => page === 'team' ? navigate('arena') : begin()}>{page === 'team' ? '闘技場へ →' : practice ? 'この編成で同じ相手に再戦 →' : 'この編成で対戦する →'}</button></footer>}
+    {page !== 'battle' && <nav className="mainNav" aria-label="メインメニュー">{([['home', 'ホーム', '⌂'], ['team', '編成・図鑑', '✦'], ['arena', '闘技場', '⚔']] as const).map(([target, label, icon]) => <button key={target} aria-label={label} aria-current={page === target ? 'page' : undefined} onClick={() => navigate(target)}><span aria-hidden="true">{icon}</span>{label}</button>)}</nav>}
+    {navigation.pending && <LeaveBattleDialog onCancel={navigation.cancel} onConfirm={navigation.confirm} finished={!!battle?.winner} />}
+
   </div>;
 }
