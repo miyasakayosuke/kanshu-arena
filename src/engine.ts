@@ -73,7 +73,7 @@ export function skillOrderLabel(skill: Skill): string {
   return skill.priority >= 3 ? '最速' : skill.priority >= 2 ? '先制' : skill.priority > 0 ? '防御順' : skill.priority < 0 ? 'アンカー' : '通常順';
 }
 
-export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number };
+export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number; /** Isolated simulation override; gameplay uses RALLY_PERCENT. */ rallyPercent?: number };
 export type State = {
   turn: number;
   seed: number;
@@ -131,9 +131,9 @@ export const cost = (team: number[]) => team.reduce((total, id) => total + (mons
 export const RALLY_PERCENT = 5;
 export const OPENING_RALLY_TURNS = 2;
 /** HP/MP stay fixed; the dispellable opening aura is separate from the persistent leader. */
-export const attackFor = (unit: Unit) => Math.round(unit.monster.atk * (1 + (unit.rally ? RALLY_PERCENT / 100 : 0)));
+export const attackFor = (unit: Unit) => Math.round(unit.monster.atk * (1 + (unit.rally ? (unit.rallyPercent ?? RALLY_PERCENT) / 100 : 0)));
 // The first-turn order is established before the opening aura; turn two can gain speed.
-export const speedFor = (unit: Unit, turn: number) => Math.round(unit.monster.speed * (1 + (unit.rally && turn > 1 ? RALLY_PERCENT / 100 : 0)));
+export const speedFor = (unit: Unit, turn: number) => Math.round(unit.monster.speed * (1 + (unit.rally && turn > 1 ? (unit.rallyPercent ?? RALLY_PERCENT) / 100 : 0)));
 export type StartOptions = { leaders?: boolean; familySupport?: boolean };
 export function start(team: number[], enemy: number[], seed = 42, options: StartOptions = {}): State {
   const units = (ids: number[], prefix: string): Unit[] => {
@@ -247,7 +247,9 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
   });
 }
 
-export function advanceWithEvents(old: State, orders: Order[]): { state: State; events: BattleEvent[] } {
+/** Opt-in explicit opposing orders for headless tests. Omission preserves the gameplay CPU. */
+export type AdvanceOptions = { enemyOrders?: Order[] };
+export function advanceWithEvents(old: State, orders: Order[], options: AdvanceOptions = {}): { state: State; events: BattleEvent[] } {
   const events: BattleEvent[] = [];
   if (old.winner) return { state: old, events };
   const recordedOrders: BattleOrderRecord[] = [];
@@ -263,13 +265,14 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     if (unit.hp <= 0 && unit.poison) { unit.poison = 0; emit({ kind: 'expire', target: unit.key, effect: 'poison', poison: 0 }); }
   }
   const alliedAutomatic = autoOrders(battle);
-  const enemyOrders = autoOrders(battle, 'enemies');
+  const enemyAutomatic = autoOrders(battle, 'enemies');
+  const enemyOrders = options.enemyOrders ?? enemyAutomatic;
   const actions: { unit: Unit; skill: Skill; side: 'allies' | 'enemies'; target?: string; tie: number }[] = [];
   for (const side of ['allies', 'enemies'] as const) {
     for (const unit of living(battle[side])) {
       let order = (side === 'allies' ? orders : enemyOrders).find(candidate => candidate.key === unit.key)
-        ?? alliedAutomatic.find(candidate => candidate.key === unit.key);
-      if (side === 'enemies') {
+        ?? (side === 'allies' ? alliedAutomatic : enemyAutomatic).find(candidate => candidate.key === unit.key);
+      if (side === 'enemies' && options.enemyOrders === undefined) {
         const automatic = order && battleSkill(unit.monster, order.skill);
         const tacticalSupport = automatic && skillTargetsAllies(automatic);
         // Keep the approachable seeded opponent variation, restricted to legal, useful casts.
@@ -286,7 +289,7 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
       const rejection = !skill ? 'invalid-skill' : badTarget ? 'invalid-target' : !canUseSkill(unit, skill) ? 'insufficient-mp' : undefined;
       recordedOrders.push({
         key: unit.key, skill: order?.skill ?? BASIC_ATTACK, ...(order?.target !== undefined ? { target: order.target } : {}),
-        side, source: side === 'allies' && orders.some(candidate => candidate.key === unit.key) ? 'explicit' : 'automatic',
+        side, source: (side === 'allies' ? orders : options.enemyOrders ?? []).some(candidate => candidate.key === unit.key) ? 'explicit' : 'automatic',
         ...(skill ? { skillName: skill.name, skillKind: skill.kind, skillPower: skill.power } : {}),
         accepted: rejection === undefined, ...(rejection ? { rejection } : {}),
       });

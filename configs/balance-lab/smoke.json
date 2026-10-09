@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "arena-smoke",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "beast-core",
+      "role": "獣系3体・解除連撃・回復・低コスト支援",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "role": "先制・高速度・毒",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "guard-heal",
+      "role": "守護・回復・持久",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ]
+    },
+    {
+      "id": "area",
+      "role": "全体攻撃・アンカー",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "poison",
+      "role": "毒・回復・浄化",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "replacement",
+      "role": "同コストのアヌビス置換・攻撃リーダー",
+      "ids": [
+        11,
+        0,
+        2,
+        6,
+        10
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "beast-vs-priority",
+      "a": "beast-core",
+      "b": "priority",
+      "complaintIds": [],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-priority",
+      "a": "replacement",
+      "b": "priority",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-guard-heal",
+      "a": "beast-core",
+      "b": "guard-heal",
+      "complaintIds": [],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-guard-heal",
+      "a": "replacement",
+      "b": "guard-heal",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-area",
+      "a": "beast-core",
+      "b": "area",
+      "complaintIds": [],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-area",
+      "a": "replacement",
+      "b": "area",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-poison",
+      "a": "beast-core",
+      "b": "poison",
+      "complaintIds": [],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-poison",
+      "a": "replacement",
+      "b": "poison",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-replacement",
+      "a": "beast-core",
+      "b": "replacement",
+      "complaintIds": [],
+      "keyUnitId": 12
+    }
+  ],
+  "candidate": {
+    "id": "identity",
+    "label": "変更なし・再現性の対照",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 4,
+    "seed": 20261009
+  }
+}

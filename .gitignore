@@ -2,3 +2,6 @@ node_modules
 dist/
 playwright-report/
 test-results/
+
+# Local simulation reports/replays; CI can preserve them as run artifacts.
+lab-results/

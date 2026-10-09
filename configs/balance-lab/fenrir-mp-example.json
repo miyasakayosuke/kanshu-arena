@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "fenrir-mp-hypothesis",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "beast-core",
+      "role": "獣系3体・解除連撃・回復・低コスト支援",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "role": "先制・高速度・毒",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "guard-heal",
+      "role": "守護・回復・持久",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ]
+    },
+    {
+      "id": "area",
+      "role": "全体攻撃・アンカー",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "poison",
+      "role": "毒・回復・浄化",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "replacement",
+      "role": "同コストのアヌビス置換・攻撃リーダー",
+      "ids": [
+        11,
+        0,
+        2,
+        6,
+        10
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "beast-vs-priority",
+      "a": "beast-core",
+      "b": "priority",
+      "complaintIds": [
+        "mp-opportunity-example"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-priority",
+      "a": "replacement",
+      "b": "priority",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-guard-heal",
+      "a": "beast-core",
+      "b": "guard-heal",
+      "complaintIds": [
+        "mp-opportunity-example"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-guard-heal",
+      "a": "replacement",
+      "b": "guard-heal",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-area",
+      "a": "beast-core",
+      "b": "area",
+      "complaintIds": [
+        "mp-opportunity-example"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-area",
+      "a": "replacement",
+      "b": "area",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-poison",
+      "a": "beast-core",
+      "b": "poison",
+      "complaintIds": [
+        "mp-opportunity-example"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "replacement-vs-poison",
+      "a": "replacement",
+      "b": "poison",
+      "complaintIds": [],
+      "keyUnitId": 11
+    },
+    {
+      "id": "beast-vs-replacement",
+      "a": "beast-core",
+      "b": "replacement",
+      "complaintIds": [
+        "mp-opportunity-example"
+      ],
+      "keyUnitId": 12
+    }
+  ],
+  "candidate": {
+    "id": "fenrir-mp-65",
+    "label": "未採用の例：フェンリル最大MP 60→65",
+    "overrides": {
+      "monsters": {
+        "12": {
+          "mp": 65
+        }
+      }
+    }
+  },
+  "complaints": [
+    {
+      "id": "mp-opportunity-example",
+      "status": "hypothesis",
+      "source": null,
+      "complaint": "検証書式の例：MP不足で特技を選べなくなる機会を測りたい。実際のプレイヤー投稿を引用した主張ではない。",
+      "hypothesis": "フェンリルの最大MPを60から65に増やすと、MP13の連撃を最大5回まで使える。ただし生存時間やAI選択により実際の発動回数は変わらない可能性がある。",
+      "scenarioIds": [
+        "beast-vs-priority",
+        "beast-vs-guard-heal",
+        "beast-vs-area",
+        "beast-vs-poison",
+        "beast-vs-replacement"
+      ],
+      "metrics": [
+        {
+          "name": "meanPaidCasts",
+          "direction": "increase",
+          "rationale": "実際に発動した正のMP消費技が増えるか。チーム指標なのでkeyUnitも確認。"
+        },
+        {
+          "name": "meanNoAffordableSpecialTurns",
+          "direction": "decrease",
+          "rationale": "生存したまま全ての有料特技を使えない機会が減るか。"
+        },
+        {
+          "name": "scoreRate",
+          "direction": "observe",
+          "rationale": "過剰な勝率変化や特定対面への偏りを確認。"
+        }
+      ],
+      "limitations": [
+        "未採用の仮説例であり公開バランスを変更しない。",
+        "戦闘が早く終わるとMP増加の差は出ない。",
+        "同一ルール変更を両軍に適用するため相手のフェンリルも変わる。"
+      ]
+    }
+  ],
+  "sampling": {
+    "count": 4,
+    "seed": 20261009
+  }
+}

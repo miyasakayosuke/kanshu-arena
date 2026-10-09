@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lab": "node scripts/balance-lab/cli.mjs",
+    "lab:smoke": "node scripts/balance-lab/cli.mjs run --config configs/balance-lab/smoke.json --out lab-results/smoke --overwrite"
   },
   "dependencies": {
     "react": "^19.1.1",

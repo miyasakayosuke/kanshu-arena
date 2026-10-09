@@ -23,6 +23,12 @@ jobs:
           node-version: '22'
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - run: npm run lab:smoke
+      - uses: actions/upload-artifact@v4
+        with:
+          name: balance-lab-smoke
+          path: lab-results/smoke/
+          retention-days: 7
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
