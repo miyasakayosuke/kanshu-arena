@@ -303,6 +303,76 @@ describe('targeting and healing', () => {
   });
 });
 
+describe('cast visual scope and target snapshots', () => {
+  it.each([
+    { ...attack, all: true },
+    poison,
+  ])('snapshots only living targets for an all-target $kind cast', skill => {
+    const initial = battle([unit('a0', [skill])], [unit('e0'), unit('e1'), unit('e2')]);
+    initial.enemies[1].hp = 0;
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'e1' }]);
+    const cast = result.events.find(event => event.kind === 'cast' && event.actor === 'a0')!;
+    expect(cast).toMatchObject({ scope: 'all', targets: ['e0', 'e2'] });
+    expect(cast).not.toHaveProperty('target');
+    expect(result.events.filter(event => event.kind === 'damage' && event.actor === 'a0').map(event => event.target)).toEqual(cast.targets);
+    expect(result.state.enemies[1].hp).toBe(0);
+    expectHpReplay(initial, result.state, result.events);
+  });
+
+  it('excludes opponents defeated earlier this turn and keeps all scope with one survivor', () => {
+    const initial = battle([
+      unit('a0', [{ ...attack, power: 1000, priority: 2 }]),
+      unit('a1', [{ ...attack, all: true }]),
+    ], [unit('e0'), unit('e1'), unit('e2')]);
+    initial.enemies[2].hp = 0;
+    const result = advanceWithEvents(initial, [
+      { key: 'a0', skill: 0, target: 'e0' },
+      { key: 'a1', skill: 0, target: 'e0' },
+    ]);
+    const cast = result.events.find(event => event.kind === 'cast' && event.actor === 'a1')!;
+    expect(cast).toMatchObject({ scope: 'all', targets: ['e1'] });
+    expect(cast).not.toHaveProperty('target');
+    expect(result.events.filter(event => event.kind === 'damage' && event.actor === 'a1').map(event => event.target)).toEqual(['e1']);
+  });
+
+  it('records the living allied subset for an enemy all-target cast', () => {
+    const initial = battle([unit('a0'), unit('a1'), unit('a2')], [unit('e0', [{ ...attack, all: true }])]);
+    initial.allies[1].hp = 0;
+    const result = advanceWithEvents(initial, []);
+    const cast = result.events.find(event => event.kind === 'cast' && event.actor === 'e0')!;
+    expect(cast).toMatchObject({ scope: 'all', targets: ['a0', 'a2'] });
+    expect(cast).not.toHaveProperty('target');
+    expect(result.events.filter(event => event.kind === 'damage' && event.actor === 'e0').map(event => event.target)).toEqual(cast.targets);
+    expect(result.state.allies[1].hp).toBe(0);
+  });
+
+  it('retains the cast-time snapshot after all targets are defeated without mutating inputs', () => {
+    const initial = battle([unit('a0', [{ ...attack, power: 1000, priority: 2, all: true }])], [unit('e0'), unit('e1')]);
+    const snapshot = structuredClone(initial);
+    const orders = freeze([{ key: 'a0', skill: 0 }]);
+    freeze(initial);
+    const result = advanceWithEvents(initial, orders);
+    expect(result.state.enemies.every(target => target.hp === 0)).toBe(true);
+    expect(result.events.find(event => event.kind === 'cast')).toMatchObject({ scope: 'all', targets: ['e0', 'e1'] });
+    expect(initial).toEqual(snapshot);
+    expectHpReplay(initial, result.state, result.events);
+  });
+
+  it('keeps normal attacks, guard, and healing single-target with their actual recipients', () => {
+    const initial = battle([unit('a0', [attack]), unit('a1', [heal]), unit('a2', [guard])], [unit('e0')]);
+    initial.allies[1].hp = 20;
+    const result = advanceWithEvents(initial, [
+      { key: 'a0', skill: 0, target: 'e0' },
+      { key: 'a1', skill: 0, target: 'a1' },
+      { key: 'a2', skill: 0, target: 'e0' },
+    ]);
+    for (const [actor, target] of [['a0', 'e0'], ['a1', 'a1'], ['a2', 'a2']]) {
+      expect(result.events.find(event => event.kind === 'cast' && event.actor === actor)).toMatchObject({ scope: 'single', target, targets: [target] });
+    }
+    expectHpReplay(initial, result.state, result.events);
+  });
+});
+
 describe('action order, guard, and defeat', () => {
   it('orders priority before speed, and places an anchor after normal actions', () => {
     const initial = battle([

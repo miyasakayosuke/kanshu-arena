@@ -713,10 +713,16 @@ describe('bottom-only allied battle feedback', () => {
     await act(async () => vi.advanceTimersByTime(799));
     expect(hp('妖狐')).toBe('HP 150/150');
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
+    expect(document.querySelector('.partyArea.charging')).toBeTruthy();
+    expect(document.querySelectorAll('.commander.areaTarget')).toHaveLength(5);
+    expect(document.querySelectorAll('.partySweep')).toHaveLength(1);
+    expect(document.querySelector('.battleMessage')?.textContent).toContain('味方全体 5体');
     await act(async () => vi.advanceTimersByTime(1));
     expect(hp('妖狐')).toBe('HP 0/150');
     expect(hp('バステト')).toBe('HP 137/170');
     expect(document.querySelectorAll('.partyImpact.damage')).toHaveLength(5);
+    expect(document.querySelector('.partyArea.landed')).toBeTruthy();
+    expect(document.querySelectorAll('.commander.areaTarget')).toHaveLength(5);
     expect(label('妖狐の行動を選択').textContent).toContain('戦闘不能');
     expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残3回');
     expect(document.querySelector('.battleStage .partyImpact')).toBeNull();
@@ -733,6 +739,8 @@ describe('bottom-only allied battle feedback', () => {
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
     expect(label('妖狐の行動を選択').disabled).toBe(true);
     expect(activeCommander()).toContain('バステト');
+    expect(document.querySelector('.partyArea')).toBeNull();
+    expect(document.querySelector('.partySweep')).toBeNull();
     expect(hp('バステト')).toBe('HP 127/170');
     expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残2回');
     expect(document.querySelector('[role="timer"]')?.textContent).toContain('30');

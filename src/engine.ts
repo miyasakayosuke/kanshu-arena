@@ -78,6 +78,9 @@ export type BattleEvent = {
   kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'cleanse' | 'break' | 'defeat' | 'resource' | 'expire' | 'phase';
   actor?: string;
   target?: string;
+  /** Cast intent and living targets at cast time, independent of survivor count. */
+  scope?: 'single' | 'all';
+  targets?: string[];
   skill?: string;
   amount?: number;
   hp?: number;
@@ -269,7 +272,7 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     if (!targets.length) { phase('action-end', unit.key); continue; }
     phase('action', unit.key);
     battle.log.push(`${unit.monster.name}の「${skill.name}」！${skill.mpCost ? `（MP −${skill.mpCost}）` : ''}`);
-    emit({ kind: 'cast', actor: unit.key, ...(!skill.all ? { target: targets[0].key } : {}), skill: skill.name, effect: skill.kind });
+    emit({ kind: 'cast', actor: unit.key, scope: skill.all ? 'all' : 'single', targets: targets.map(target => target.key), ...(!skill.all ? { target: targets[0].key } : {}), skill: skill.name, effect: skill.kind });
     // Spending is absolute and emitted at the cast, before any hit or healing animation.
     if (skill.mpCost) {
       unit.mp -= skill.mpCost;

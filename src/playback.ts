@@ -3,6 +3,10 @@ import type { BattleEvent, State, Unit } from './engine';
 export type BattleCue = { at: number; cast: BattleEvent | null; impacts: BattleEvent[]; updates?: BattleEvent[] };
 export type BattleTimeline = { cues: BattleCue[]; duration: number };
 
+/** Shared by the event timeline and visuals so windup ends at the HP change. */
+export const CAST_IMPACT_MS = 800;
+export const ACTION_DURATION_MS = 1500;
+
 export function effectType(name: string, kind?: string) {
   if (kind === 'heal' || kind === 'cleanse') return 'water';
   if (kind === 'guard' || kind === 'protect') return 'guard';
@@ -49,10 +53,21 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
   let time = 0;
   if (before.length) cues.push({ at: 0, cast: null, impacts: [], updates: before });
   for (const group of groups) {
-    const cast = group.cast ? { ...group.cast, target: group.cast.target ?? group.impacts.find(e => e.target)?.target } : null;
+    let cast: BattleEvent | null = null;
+    if (group.cast) {
+      // Older event streams lack scope metadata. Count distinct impact recipients,
+      // never cast-time resource updates, and retain explicit all even for one survivor.
+      const targets = [...new Set(group.cast.targets ?? group.impacts.flatMap(event =>
+        event.kind !== 'resource' && event.target ? [event.target] : []))];
+      if (!targets.length && group.cast.targets === undefined && group.cast.target) targets.push(group.cast.target);
+      const scope = group.cast.scope ?? (targets.length > 1 ? 'all' : 'single');
+      cast = { ...group.cast, scope, targets };
+      if (scope === 'all') delete cast.target;
+      else cast.target = group.cast.target ?? targets[0];
+    }
     cues.push({ at: time, cast, impacts: [], ...(group.updates.length ? { updates: group.updates } : {}) });
-    if (group.impacts.length) cues.push({ at: time + (cast ? 800 : 240), cast, impacts: group.impacts });
-    time += cast ? 1500 : 950;
+    if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts });
+    time += cast ? ACTION_DURATION_MS : 950;
   }
   if (after.length) cues.push({ at: time, cast: null, impacts: [], updates: after });
   return { cues, duration: time + 150 };

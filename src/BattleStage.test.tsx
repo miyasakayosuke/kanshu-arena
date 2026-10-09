@@ -3,6 +3,7 @@ import React, {act} from 'react';
 import {createRoot, type Root} from 'react-dom/client';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import BattleStage from './BattleStage';
+import * as areaEffects from './areaEffects';
 import {start, type BattleEvent} from './engine';
 
 let root: Root;
@@ -39,6 +40,7 @@ function teamTransforms(enemy = false) {
 }
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.spyOn(areaEffects, 'drawAreaEffect');
   Object.assign(globalThis, {IS_REACT_ACT_ENVIRONMENT: true});
   nextFrame = 0;
   frames = new Map();
@@ -271,5 +273,57 @@ describe('battle presentation', () => {
     expect(observerDisconnect).toHaveBeenCalledOnce();
     expect(frames.size).toBe(0);
     root = createRoot(document.getElementById('stage-test')!);
+  });
+});
+
+
+describe('scope-correct battlefield effects', () => {
+  it.each(['fire', 'wind', 'shadow'])('draws one shared %s field for every enemy rather than a single destination', async type => {
+    const event: BattleEvent = {...cast, scope: 'all', targets: party.enemies.map(u => u.key), target: undefined};
+    await render({...base, effect: {...effect, type}, impact:event});
+    frame(100); frame(700);
+    const args = vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1];
+    expect(args.targets.map(p => p.x)).toEqual([84,222,360,498,636]);
+    expect(args.incoming).toBe(false); expect(args.impacted).toBe(false);
+    expect(labels()).toContain('敵全体 · 5体');
+    expect(glyphs).toHaveLength(5);
+  });
+  it('keeps ordinary single-target casts out of the area renderer', async () => {
+    await render({...base,effect,impact:{...cast,scope:'single',targets:['e2'],target:'e2'}});
+    frame(100); frame(700);
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    expect(labels()).not.toContain('敵全体 · 5体');
+  });
+  it('retains area scope with one survivor and includes a lethal target at impact', async () => {
+    const enemies = base.enemies.map((u,i) => ({...u,hp:i===3?20:0}));
+    await render({...base,enemies,effect,impact:{...cast,scope:'all',targets:['e3'],target:undefined}});
+    frame(100); frame(700);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].targets).toEqual([{x:498,y:224}]);
+    expect(labels()).toContain('敵全体 · 1体');
+    const hit:BattleEvent={kind:'damage',actor:'a0',target:'e3',amount:20,hp:0};
+    await render({...base,enemies:enemies.map(u=>({...u,hp:0})),effect,impact:hit,impacts:[hit]});
+    frame(900);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].targets).toHaveLength(1);
+    expect(labels()).toContain('20');
+  });
+  it('directs enemy area effects to the lower edge while leaving only enemies on the battlefield', async () => {
+    await render({...base,effect,impact:{kind:'cast',actor:'e1',scope:'all',targets:party.allies.map(u=>u.key),skill:'嵐の息吹',effect:'hit'}});
+    frame(100); frame(700);
+    const args=vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1];
+    expect(args.incoming).toBe(true); expect(args.targets).toEqual([]);
+    expect(labels()).toContain('味方全体 · 5体');
+    expect(glyphs.map(g=>g.text)).toEqual(party.enemies.map(u=>u.monster.icon));
+  });
+  it('restarts release timing at a delayed impact and clears every field on skip', async () => {
+    await render({...base,effect,impact:{...cast,scope:'all',targets:['e0','e1'],target:undefined}});
+    frame(100); frame(1700);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].impacted).toBe(false);
+    const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',amount:35,hp:215};
+    await render({...base,effect,impact:hit,impacts:[hit]}); frame(2000);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1]).toMatchObject({age:800,impacted:true});
+    frame(2150); expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].age).toBe(950);
+    const calls=vi.mocked(areaEffects.drawAreaEffect).mock.calls.length;
+    await render({...base,impacts:[]}); frame(2200);
+    expect(areaEffects.drawAreaEffect).toHaveBeenCalledTimes(calls);
   });
 });
