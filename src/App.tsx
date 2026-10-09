@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { monsters, cost, start, advanceWithEvents, autoOrders, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, effectStatus, type State, type Order, type BattleEvent } from './engine';
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage from './BattleStage';
-import {motionKind, NUMBER_DURATION_MS} from './battleMotion';
-import {ACTION_DURATION_MS, CAST_IMPACT_MS} from './playback';
+import {NUMBER_DURATION_MS} from './battleMotion';
 import TeamBuilder from './TeamBuilder';
 import TacticsPanel from './TacticsPanel';
 import HomeScreen, { ArenaLobby } from './HomeScreen';
@@ -231,7 +230,7 @@ export default function App() {
       {!battle.winner && <BattleStage allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
       <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
       {battle.winner ? <BattleResult battle={battle} onRematch={() => begin(true)} onRebuild={rebuild} onNext={() => navigate('arena')} onLog={() => setShowLog(true)} /> : <section className="commandDock" aria-label="行動指示">
-        <div className={`commanderRow ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--cast-duration': `${CAST_IMPACT_MS / speed}ms`, '--recovery-duration': `${(ACTION_DURATION_MS - CAST_IMPACT_MS) / speed}ms`, '--hit-duration': `${300 / speed}ms`, '--number-duration': `${NUMBER_DURATION_MS / speed}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
+        <div className={`commanderRow ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--hit-duration': `${300 / speed}ms`, '--number-duration': `${NUMBER_DURATION_MS / speed}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
           {incomingArea && <span key={`${effect?.tick}-${areaLanded}`} className="partySweep" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}
           {battle.allies.map(u => {
           const feedback = impacts.find(event => event.target === u.key && (event.kind === 'damage' || event.kind === 'heal'));
@@ -239,8 +238,8 @@ export default function App() {
           const landed = acting && impacts.some(event => event.actor === u.key);
           const areaTarget = incomingArea && visualCast?.targets?.includes(u.key);
           const status = u.hp <= 0 ? '戦闘不能' : effectStatus(u);
-          return <button key={u.key} className={`commander ${!playing && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting motion-${motionKind(visualCast!)} ${landed ? 'recovering' : 'preparing'}` : ''} ${u.hp <= 0 ? 'fallen' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={!playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key}`} onClick={() => { setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
-            <span className="commanderIcon" key={`icon-${effect?.tick ?? 0}-${feedback ? feedback.kind : acting ? landed ? 'recover' : 'cast' : 'idle'}`} aria-hidden="true">{u.monster.icon}</span>
+          return <button key={u.key} className={`commander ${!playing && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${u.hp <= 0 ? 'fallen' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={!playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key}`} onClick={() => { setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
+            <span className="commanderIcon" aria-hidden="true">{u.monster.icon}</span>
             {areaTarget && <span key={`${effect?.tick}-${areaLanded}`} className="partyAura" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}
             <small className="commanderHp" id={`party-hp-${u.key}`}>HP {u.hp}/{u.monster.hp}</small>
             <div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div>

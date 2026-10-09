@@ -799,7 +799,7 @@ describe('bottom-only allied battle feedback', () => {
   });
 });
 
-describe('phase-synchronized bottom icon motion', () => {
+describe('phase-synchronized static bottom feedback', () => {
   it.each([1, 2])('starts recovery and damage together at %ix, then clears on skip', async speed => {
     vi.spyOn(engine, 'advanceWithEvents').mockImplementationOnce(state => ({
       state:{...state,turn:2,enemies:state.enemies.map((unit,i)=>i===0?{...unit,hp:unit.hp-33}:unit)},
@@ -811,16 +811,17 @@ describe('phase-synchronized bottom icon motion', () => {
     await click(button('この指示でターン開始'));
     await act(async()=>vi.advanceTimersByTime(1));
     const actor=()=>label('妖狐の行動を選択');
-    expect(actor().className).toContain('motion-strike preparing');
+    expect(actor().className).toContain('acting preparing');
+    const glyph=actor().querySelector('.commanderIcon');
     const row=document.querySelector<HTMLElement>('.commanderRow')!;
-    expect(row.style.getPropertyValue('--cast-duration')).toBe(`${800/speed}ms`);
-    expect(row.style.getPropertyValue('--recovery-duration')).toBe(`${700/speed}ms`);
     expect(row.style.getPropertyValue('--hp-duration')).toBe(`${180/speed}ms`);
     await act(async()=>vi.advanceTimersByTime(800/speed-2));
     expect(actor().classList.contains('recovering')).toBe(false);
     await act(async()=>vi.advanceTimersByTime(1));
     expect(actor().classList.contains('recovering')).toBe(true);
     expect(actor().classList.contains('preparing')).toBe(false);
+    expect(actor().querySelector('.commanderIcon')).toBe(glyph);
+    expect(glyph?.getAttribute('style')).toBeNull();
     await click(button('演出をスキップ'));
     expect(document.querySelector('.acting')).toBeNull();
     expect(document.querySelector('.partyImpact')).toBeNull();
