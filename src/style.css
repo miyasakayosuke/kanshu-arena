@@ -70,3 +70,21 @@
    landscape command-dock placement before laying out the two-column review. */
 .resultMode .battle{grid-template-columns:minmax(0,1fr)}
 .resultMode .result{grid-column:1;align-self:stretch;min-height:0;max-height:100%}
+
+/* Original, restrained choreography: fixed cards and text, moving glyphs only. */
+.commanderRow .hpBar b{transition-duration:var(--hp-duration,180ms)}
+.commander.acting .commanderIcon{transform-origin:50% 80%;animation:partyCast var(--cast-duration,800ms) both}
+.commander.acting.motion-strike .commanderIcon{animation-name:partyStrike}
+.commander.acting.recovering .commanderIcon{animation:partyRecover var(--recovery-duration,700ms) both}
+.commander.acting.motion-strike.recovering .commanderIcon{animation-name:partyStrikeRecover}
+.commander.party-damage .commanderIcon{animation:partyRecoil var(--hit-duration,300ms) both}
+.commander.party-heal .commanderIcon{animation:partyRestore var(--hit-duration,300ms) both}
+.partyImpact{animation:partyNumber var(--number-duration,680ms) both;pointer-events:none}
+@keyframes partyCast{0%{transform:translateY(0) scale(1)}43%,55%{transform:translateY(2px) scale(.96,1.04)}100%{transform:translateY(-4px) scale(1.04,.98)}}
+@keyframes partyStrike{0%{transform:translateY(0) scale(1)}43%,76%{transform:translateY(3px) scale(1.04,.94)}100%{transform:translateY(-7px) scale(.96,1.06)}}
+@keyframes partyRecover{0%,13%{transform:translateY(-4px) scale(1.04,.98)}79%,100%{transform:translateY(0) scale(1)}}
+@keyframes partyStrikeRecover{0%,13%{transform:translateY(-7px) scale(.96,1.06)}79%,100%{transform:translateY(0) scale(1)}}
+@keyframes partyRecoil{0%,30%{transform:translateY(3px) scale(1.05,.94)}100%{transform:translateY(0) scale(1)}}
+@keyframes partyRestore{0%{transform:translateY(0)}45%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes partyNumber{0%{opacity:1;transform:translateY(3px) scale(.93)}22%{opacity:1;transform:translateY(-5px) scale(1.06)}35%,80%{opacity:1;transform:translateY(-7px) scale(1)}100%{opacity:0;transform:translateY(-7px) scale(1)}}
+@media(prefers-reduced-motion:reduce){.commander.acting .commanderIcon,.commander.party-damage .commanderIcon,.commander.party-heal .commanderIcon{animation:none!important;transform:none!important}.partyImpact{animation:none!important;opacity:1;transform:none}.commandDock .playPulse{animation:none!important}}

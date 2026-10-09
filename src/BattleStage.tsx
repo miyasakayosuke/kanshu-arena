@@ -2,6 +2,7 @@ import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
 import {CAST_IMPACT_MS} from './playback';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleHitMotion, sampleNumberMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -9,6 +10,8 @@ type Props = {
   enemies: Unit[];
   effect: Effect;
   impact: BattleEvent | null;
+  /** Retain cast metadata even if a delayed frame only sees its impact. */
+  castEvent?: BattleEvent | null;
   impacts?: BattleEvent[];
   playbackRate?: number;
   targetKeys?: string[];
@@ -185,8 +188,8 @@ function drawCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduce
     shield(ctx, from.x, from.y, 41, .8);
   } else if (type !== 'slash' && age < 800) {
     glow(ctx, from.x, from.y + 3, 48, `${palette.core}68`);
-    if (!reduced && age >= 370) {
-      const progress = ease((age - 370) / (CAST_IMPACT_MS - 370));
+    if (!reduced && age >= 430) {
+      const progress = clamp((age - 430) / (CAST_IMPACT_MS - 430)) ** 2;
       const x = mix(from.x, to.x, progress);
       const y = mix(from.y, to.y, progress) - Math.sin(progress * Math.PI) * 35;
       for (let index = 5; index >= 0; index--) {
@@ -206,11 +209,11 @@ function drawCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduce
 function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number) {
   const {event, type, at} = impact;
   const palette = palettes[type];
-  const duration = event.kind === 'defeat' ? 850 : 900;
+  const duration = event.kind === 'defeat' ? 650 : NUMBER_DURATION_MS;
   const progress = clamp(age / duration);
   const fade = 1 - ease(clamp((progress - .45) / .55));
-  const burst = Math.sin(clamp(age / 430) * Math.PI);
-  const movement = reduced ? .3 : 1;
+  const burst = reduced ? .6 : Math.sin(clamp(age / 430) * Math.PI);
+  const movement = reduced ? 0 : 1;
   const x = at.x;
   const y = at.y;
   ctx.save();
@@ -222,7 +225,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     for (let index = 0; index < 8; index++) {
       const angle = index / 8 * TAU;
       const distance = 18 + progress * 42 * movement;
-      ellipse(ctx, x + Math.cos(angle) * distance, y + Math.sin(angle) * distance * .6 - progress * 20, 2, 2, '#fff7d2');
+      ellipse(ctx, x + Math.cos(angle) * distance, y + Math.sin(angle) * distance * .6 - progress * 20 * movement, 2, 2, '#fff7d2');
     }
   } else if (event.kind === 'guard') {
     shield(ctx, x, y, 38 + ease(progress) * 10 * movement, .9);
@@ -251,7 +254,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
       ctx.stroke();
     }
   } else {
-    ctx.globalAlpha = burst * .85;
+    ctx.globalAlpha = burst * .85 * fade;
     glow(ctx, x, y, 55 + burst * 15, `${palette.core}6b`);
     if (type === 'slash') {
       for (let index = 0; index < 2; index++) {
@@ -326,12 +329,13 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
   }
   // Numbers belong to the actual impact, never to a cast or an unrelated heal.
   if (event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal')) {
-    ctx.globalAlpha = fade;
+    const number = sampleNumberMotion(age, reduced);
+    ctx.globalAlpha = number.alpha;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = '800 31px system-ui, sans-serif';
+    ctx.font = `800 ${31 * number.scale}px system-ui, sans-serif`;
     const label = event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
-    const py = y - 44 - ease(progress) * 26 * movement;
+    const py = y - 44 - number.rise;
     ctx.lineJoin = 'round';
     ctx.lineWidth = 5;
     ctx.strokeStyle = '#fffbed';
@@ -346,6 +350,9 @@ export default function BattleStage(props: Props) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const latest = useRef(props);
   latest.current = props;
+  const clearVersion = useRef(0);
+  // A cleared React commit must not be lost between two animation frames.
+  useEffect(() => {if (!props.effect && !props.impact) ++clearVersion.current;}, [props.effect, props.impact]);
   useEffect(() => {
     const element = canvas.current;
     if (!element) return;
@@ -354,6 +361,8 @@ export default function BattleStage(props: Props) {
     let handle = 0;
     let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
+    let lastCast: BattleEvent | null = null;
+    let observedClear = clearVersion.current;
     let lastImpacts: BattleEvent[] | undefined;
     const seenImpacts = new WeakSet<BattleEvent>();
     let cast: Cast | null = null;
@@ -385,22 +394,28 @@ export default function BattleStage(props: Props) {
       previous = now;
       // The rAF clock lives for the entire mounted battle. New HP arrays do not restart it.
       const rate = Math.max(.5, Math.min(4, data.playbackRate ?? 1));
+      if (observedClear !== clearVersion.current) {
+        observedClear = clearVersion.current;
+        cast = null; lastCast = null; lastImpact = null; lastImpacts = undefined; impacts = []; health.clear();
+      }
+      if (data.castEvent === null) {cast = null; lastCast = null;}
+      const activeCast = data.castEvent ?? (data.impact?.kind === 'cast' ? data.impact : null);
+      if (activeCast && activeCast !== lastCast) {
+        lastCast = activeCast;
+        impacts = [];
+        const event = activeCast;
+        // Party members act from below the frame; no ally occupies the arena.
+        const from = locate(event.actor, data) ?? {x: WIDTH / 2, y: HEIGHT + 70};
+        const fallback = ['guard', 'protect', 'heal', 'cleanse'].includes(event.effect ?? '') ? from : {x: WIDTH / 2, y: HEIGHT + 70};
+        const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data); return at ? [at] : [];});
+        const incoming = (event.targets ?? []).some(key => data.allies.some(unit => unit.key === key));
+        cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
+      }
       if (data.impact !== lastImpact || data.impacts !== lastImpacts) {
-        const impactChanged = data.impact !== lastImpact;
         lastImpact = data.impact;
         lastImpacts = data.impacts;
-        if (data.impact?.kind === 'cast') {
-          if (impactChanged) {
-            const event = data.impact;
-            // Party members act from below the frame; no ally occupies the arena.
-            const from = locate(event.actor, data) ?? {x: WIDTH / 2, y: HEIGHT + 70};
-            const fallback = event.effect === 'guard' || event.effect === 'heal' ? from : {x: WIDTH / 2, y: HEIGHT + 70};
-            const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data); return at ? [at] : [];});
-            const incoming = (event.targets ?? []).some(key => data.allies.some(unit => unit.key === key));
-            cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
-          }
-        } else for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
-          if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
+        if (data.impact?.kind !== 'cast') for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
+          if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'cleanse', 'break'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
           if (seenImpacts.has(event)) continue;
           seenImpacts.add(event);
           const at = locate(event.target, data);
@@ -412,17 +427,17 @@ export default function BattleStage(props: Props) {
           }
         }
       }
-      if (!data.effect && !data.impact) {cast = null; impacts = [];}
+      if (!data.effect && !data.impact) {cast = null; lastCast = null; impacts = [];}
       impacts = impacts.filter(impact => (now - impact.started) * impact.rate < 1000);
       const elapsed = cast ? (now - cast.started) * cast.rate : 2000;
-      const age = elapsed;
-      const castPower = cast && age < 1200 ? Math.sin(clamp(age / 1200) * Math.PI) : 0;
+      const age = cast ? actionAge(elapsed, cast.impactedAt === undefined ? undefined : (now - cast.impactedAt) * cast.rate) : 2000;
+      const motion = sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       arena(ctx, reduced ? 0 : now / 1000);
       const latestHit = [...impacts].reverse().find(impact => impact.event.kind === 'damage' && (impact.event.amount ?? 0) > 0 && (now - impact.started) * impact.rate < 190);
-      const shake = !reduced && latestHit && latestHit.type !== 'poison' ? Math.sin((now - latestHit.started) * latestHit.rate * .08) * 2.5 * (1 - (now - latestHit.started) * latestHit.rate / 190) : 0;
-      const zoom = reduced ? 1 : 1 + castPower * .023;
+      const shake = latestHit ? sampleHitMotion((now - latestHit.started) * latestHit.rate, reduced, latestHit.type !== 'poison').shake : 0;
+      const zoom = 1 + motion.camera;
       const center = cast ? {x: mix(360, (cast.from.x + cast.to.x) / 2, .16), y: 246} : {x: 360, y: 246};
       // Frame enemy effects with the same camera, leaving the offscreen party origin below it.
       const frameEffectPoint = (point: Point): Point => point.y < HEIGHT ? {
@@ -435,23 +450,19 @@ export default function BattleStage(props: Props) {
         const hit = [...impacts].reverse().find(impact => impact.event.target === unit.key && impact.event.kind === 'damage' && (now - impact.started) * impact.rate < 260);
         const death = impacts.find(impact => impact.event.target === unit.key && impact.event.kind === 'defeat');
         const deathProgress = death ? clamp((now - death.started) * death.rate / 550) : 1;
-        const attacker = cast?.event.actor === unit.key && age < 1200;
+        const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
-        if (attacker && cast && !reduced) {
-          if (type === 'slash' || type === 'wind' && /斬|翼|降下/.test(cast.name)) {
-            const lunge = age < 800 ? ease((age - 410) / 390) : 1 - ease((age - 800) / 330);
-            const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
-            x += (cast.to.x - point.x) / distance * 62 * lunge;
-            y += (cast.to.y - point.y) / distance * 62 * lunge - Math.sin(clamp(age / 1130) * Math.PI) * 11;
-            tilt = -.11 * lunge;
-          } else {
-            y -= Math.sin(clamp(age / 1150) * Math.PI) * 7;
-          }
+        if (attacker && cast) {
+          const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
+          x += (cast.to.x - point.x) / distance * motion.travel;
+          y += (cast.to.y - point.y) / distance * motion.travel - motion.lift;
+          tilt = motion.tilt;
         }
-        if (hit && !reduced) x += Math.sin((now - hit.started) * hit.rate * .075) * 5 * (1 - (now - hit.started) * hit.rate / 260);
+        const reaction = sampleHitMotion(hit ? (now - hit.started) * hit.rate : 300, reduced, hit?.type !== 'poison');
+        if (hit) {y -= reaction.recoil; x += reaction.recoil * .25;}
         if (!alive && !reduced) y += deathProgress * 13;
         ctx.save();
         ctx.globalAlpha = alive ? 1 : mix(.85, .24, deathProgress);
@@ -483,10 +494,15 @@ export default function BattleStage(props: Props) {
         ctx.scale(1, scaleY);
         ctx.translate(-x, -y);
         if (unit.guard && alive) shield(ctx, x, y, 35, .38);
-        if (attacker) glow(ctx, x, y, 40, `${palettes[type].core}59`);
+        if (attacker) {
+          glow(ctx, x, y, 40, `${palettes[type].core}59`);
+          ellipse(ctx, point.x, point.y + 33, 36, 11);
+          ctx.strokeStyle = palettes[type].dark; ctx.lineWidth = 2; ctx.stroke();
+        }
         ctx.save();
         ctx.translate(x, y);
         ctx.rotate(tilt);
+        ctx.scale((attacker ? motion.scaleX : 1) / reaction.squash, (attacker ? motion.scaleY : 1) * reaction.squash);
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.font = `57px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", system-ui, sans-serif`;
@@ -501,8 +517,8 @@ export default function BattleStage(props: Props) {
         let hp = health.get(unit.key);
         if (!hp) {hp = {value: unit.hp, trail: unit.hp, target: unit.hp, changed: now}; health.set(unit.key, hp);}
         if (hp.target !== unit.hp) {hp.target = unit.hp; hp.changed = now;}
-        hp.value = reduced ? hp.target : mix(hp.value, hp.target, 1 - Math.exp(-dt / 95));
-        if (now - hp.changed > 240 || hp.trail < hp.target || reduced) hp.trail = mix(hp.trail, hp.target, reduced ? 1 : 1 - Math.exp(-dt / 180));
+        hp.value = reduced ? hp.target : mix(hp.value, hp.target, 1 - Math.exp(-dt * rate / 95));
+        if ((now - hp.changed) * rate > 160 || hp.trail < hp.target || reduced) hp.trail = mix(hp.trail, hp.target, reduced ? 1 : 1 - Math.exp(-dt * rate / 150));
         const barY = point.y + 46 * scaleY;
         ctx.fillStyle = '#6574682b';
         ctx.beginPath();
@@ -533,18 +549,18 @@ export default function BattleStage(props: Props) {
       ctx.translate(center.x + shake, center.y + shake * .4);
       ctx.scale(zoom, zoom);
       ctx.translate(-center.x, -center.y);
-      if (cast?.event.scope === 'all') drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: cast.impactedAt === undefined ? age : CAST_IMPACT_MS + (now - cast.impactedAt) * cast.rate, impacted: cast.impacted, reduced, scaleY});
+      if (cast?.event.scope === 'all') drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
       drawEnemies();
       ctx.restore();
       if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) drawCast(ctx, {...cast, from: frameEffectPoint(cast.from), to: frameEffectPoint(cast.to)}, age, reduced);
       for (const impact of impacts) drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, (now - impact.started) * impact.rate, reduced, scaleY);
       // The title stays still while the action is framed underneath it.
-      if (cast && age < 1400) {
+      if (cast && motion.titleAlpha > 0) {
         ctx.save();
         ctx.translate(0, 38);
         ctx.scale(1, scaleY);
         ctx.translate(0, -38);
-        ctx.globalAlpha = Math.min(1, age / 90, (1400 - age) / 220);
+        ctx.globalAlpha = motion.titleAlpha;
         ctx.font = '700 19px system-ui, sans-serif';
         const width = Math.min(430, Math.max(210, ctx.measureText(cast.name).width + 88));
         ctx.beginPath();
@@ -565,6 +581,10 @@ export default function BattleStage(props: Props) {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(cast.name, WIDTH / 2 + 8, 38);
+        const actor = [...data.allies, ...data.enemies].find(unit => unit.key === cast!.event.actor);
+        ctx.font = '700 12px system-ui, sans-serif';
+        ctx.fillStyle = '#53604f';
+        ctx.fillText(`${actor?.key.startsWith('e') ? '敵' : '味方'} · ${actor?.monster.name ?? ''}`, WIDTH / 2, 80);
         ctx.restore();
         if (cast.event.scope === 'all') {
           ctx.save();

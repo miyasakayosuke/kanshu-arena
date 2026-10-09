@@ -183,6 +183,10 @@ describe('battle presentation', () => {
     expect(requestAnimationFrame).toHaveBeenCalledTimes(scheduled);
     expect(cancelAnimationFrame).not.toHaveBeenCalled();
     frame(1501);
+    expect(labels()).toContain('狐火'); // Delayed impact keeps its cast context.
+    const hit: BattleEvent = {kind:'damage', actor:'a0', target:'e0', amount:33, hp:217};
+    await render({...base, effect, castEvent:cast, impact:hit, impacts:[hit]});
+    frame(1600); frame(2300);
     expect(labels()).not.toContain('狐火');
   });
 
@@ -266,7 +270,9 @@ describe('battle presentation', () => {
   it('scales the cast clock with playback speed and releases observers on unmount', async () => {
     await render({...base, effect, impact: cast, playbackRate: 2});
     frame(100);
-    frame(801);
+    const hit: BattleEvent = {kind:'damage', actor:'a0', target:'e0', amount:33, hp:217};
+    await render({...base, effect, castEvent:cast, impact:hit, impacts:[hit], playbackRate:2});
+    frame(500); frame(821);
     expect(labels()).not.toContain('狐火');
     await act(async () => root.unmount());
     expect(cancelAnimationFrame).toHaveBeenCalled();
@@ -325,5 +331,90 @@ describe('scope-correct battlefield effects', () => {
     const calls=vi.mocked(areaEffects.drawAreaEffect).mock.calls.length;
     await render({...base,impacts:[]}); frame(2200);
     expect(areaEffects.drawAreaEffect).toHaveBeenCalledTimes(calls);
+  });
+});
+
+
+describe('frame-delayed motion lifecycle', () => {
+  it.each([1, 2])('retains fire area identity when a frame misses the entire cast at %ix', async playbackRate => {
+    const areaCast: BattleEvent = {...cast, scope:'all', targets:['e0','e1'], target:undefined};
+    await render({...base, effect, castEvent:areaCast, impact:areaCast, impacts:[], playbackRate});
+    const hit: BattleEvent = {kind:'damage', actor:'a0', target:'e0', amount:33, hp:217};
+    await render({...base, effect, castEvent:areaCast, impact:hit, impacts:[hit], playbackRate});
+    frame(900);
+    expect(labels()).toContain('狐火');
+    expect(labels()).toContain('味方 · 妖狐');
+    expect(labels()).toContain('33');
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1]).toMatchObject({type:'fire', impacted:true, age:800});
+  });
+  it('honors a skipped render even when a new cast arrives before the next frame', async () => {
+    const hit: BattleEvent = {kind:'damage', actor:'a0', target:'e0', amount:33, hp:217};
+    await render({...base, effect, impact:hit, impacts:[hit]}); frame(100);
+    expect(labels()).toContain('33');
+    await render({...base, impacts:[]});
+    const nextCast: BattleEvent = {...cast, actor:'a1', skill:'次の攻撃'};
+    await render({...base, effect:{...effect,text:'次の攻撃',tick:2}, castEvent:nextCast, impact:nextCast, impacts:[]});
+    frame(150); frame(250);
+    expect(labels()).not.toContain('33');
+    expect(labels()).toContain('次の攻撃');
+  });
+  it('clears the previous cast before a castless poison tick', async () => {
+    await render({...base, effect, castEvent:cast, impact:cast, impacts:[]}); frame(100);
+    const poison: BattleEvent = {kind:'damage', target:'e0', effect:'poison', amount:9, hp:208};
+    await render({...base, effect:{text:'毒のダメージ',type:'shadow',tick:2}, castEvent:null, impact:poison, impacts:[poison]}); frame(1000);
+    expect(labels()).not.toContain('狐火');
+    expect(labels()).toContain('9');
+  });
+});
+
+describe('motion accessibility and delayed recovery', () => {
+  it.each([1,2])('waits for a delayed enemy strike at %ix and returns home afterward', async playbackRate => {
+    const enemyCast: BattleEvent = {kind:'cast',actor:'e0',target:'a0',targets:['a0'],scope:'single',skill:'通常攻撃',effect:'hit'};
+    await render({...base,effect:{text:'通常攻撃',type:'slash',tick:1},castEvent:enemyCast,impact:enemyCast,playbackRate}); frame(100);
+    frame(100+1800/playbackRate);
+    expect(teamTransforms(true)[0][1]).not.toBe(0);
+    const hit:BattleEvent={kind:'damage',actor:'e0',target:'a0',amount:33,hp:117};
+    await render({...base,effect:{text:'通常攻撃',type:'slash',tick:1},castEvent:enemyCast,impact:hit,impacts:[hit],playbackRate});
+    frame(100+2000/playbackRate);
+    expect(teamTransforms(true)[0][1]).not.toBe(0);
+    frame(100+2600/playbackRate);
+    expect(teamTransforms(true)[0][1]).toBe(0);
+    expect(teamTransforms(true)[0][0]).toBe(1);
+  });
+  it('reacts to a live reduced-motion preference without restarting the renderer', async () => {
+    const media={matches:false,addEventListener:vi.fn(),removeEventListener:vi.fn()};
+    vi.mocked(window.matchMedia).mockReturnValue(media as unknown as MediaQueryList);
+    const enemyCast: BattleEvent={kind:'cast',actor:'e0',target:'a0',skill:'通常攻撃',effect:'hit'};
+    await render({...base,effect:{text:'通常攻撃',type:'slash',tick:1},castEvent:enemyCast,impact:enemyCast}); frame(100); frame(800);
+    expect(teamTransforms(true)[0][1]).not.toBe(0);
+    media.matches=true; media.addEventListener.mock.calls[0][1](); frame(850);
+    expect(teamTransforms(true)[0][1]).toBe(0);
+    expect(teamTransforms(true)[0][0]).toBe(1);
+    expect(labels()).toContain('通常攻撃');
+    expect(labels()).toContain('敵 · トロル');
+    expect(cancelAnimationFrame).not.toHaveBeenCalled();
+  });
+});
+
+
+describe('reduced-motion effect cleanup', () => {
+  it('keeps defeat particles stationary when motion is reduced', async () => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const defeat:BattleEvent={kind:'defeat',target:'e0',hp:0};
+    await render({...base,enemies:base.enemies.map((unit,i)=>i===0?{...unit,hp:0}:unit),impact:defeat,impacts:[defeat]});
+    vi.mocked((context as unknown as CanvasRenderingContext2D).ellipse).mockClear(); frame(100);
+    const particles=()=>vi.mocked((context as unknown as CanvasRenderingContext2D).ellipse).mock.calls.filter(args=>args[2]===2&&args[3]===2);
+    const initial=particles(); expect(initial).toHaveLength(8);
+    vi.mocked((context as unknown as CanvasRenderingContext2D).ellipse).mockClear(); frame(400);
+    expect(particles()).toEqual(initial);
+  });
+  it('fades the static offensive accent away during reduced-motion recovery', async () => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',hp:217};
+    await render({...base,effect,impact:hit,impacts:[hit]}); frame(100);
+    const ctx=context as unknown as CanvasRenderingContext2D;
+    expect(ctx.globalAlpha).toBeGreaterThan(0);
+    frame(790);
+    expect(ctx.globalAlpha).toBe(0);
   });
 });
