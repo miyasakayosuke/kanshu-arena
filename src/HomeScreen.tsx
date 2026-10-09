@@ -1,3 +1,4 @@
+import MonsterArt from './MonsterArt';
 import { monsters, cost, leaderFor } from './engine';
 import { rules, isValidTeam, type RuleId } from './strategy';
 
@@ -7,7 +8,7 @@ export function PartySummary({ team, rule, onFocus, compact = false }: PartyProp
   const ready = Boolean(isValidTeam(team, rules[rule].budget));
   return <section className={`partyCard partySummary ${compact ? 'compactParty' : ''}`} aria-label="現在のパーティ">
     <div className="sectionTitle">{compact ? '現在のパーティ' : '出場パーティ'} <span>{team.length}/5体{!compact && <b className={cost(team) > rules[rule].budget ? 'overBudget' : ''}>COST {cost(team)}/{rules[rule].budget}</b>}</span></div>
-    <div className="team">{team.map((id, i) => <button className={`teamUnit ${i === 0 ? 'teamLeader' : ''}`} key={id} data-monster-id={id} onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><small>{i === 0 ? 'LEADER' : `0${i + 1}`}</small><span>{monsters[id].icon}</span><i>{monsters[id].name}</i></button>)}{Array.from({ length: 5 - team.length }, (_, i) => <div className="empty" key={i}>＋</div>)}</div>
+    <div className="team">{team.map((id, i) => <button className={`teamUnit ${i === 0 ? 'teamLeader' : ''}`} key={id} data-monster-id={id} onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><small>{i === 0 ? 'LEADER' : `0${i + 1}`}</small><span><MonsterArt monster={monsters[id]} portrait /></span><i>{monsters[id].name}</i></button>)}{Array.from({ length: 5 - team.length }, (_, i) => <div className="empty" key={i}>＋</div>)}</div>
     {leader && <div className="leaderBanner"><span>✦ {compact ? monsters[team[0]].name : leader.name}</span><small>{leader.description}</small></div>}
     {compact && <p className={`homeReadiness ${ready ? '' : 'overBudget'}`}>{ready ? `${rules[rule].name}に出場できます` : team.length < 5 ? `あと${5 - team.length}体を編成しよう` : `${rules[rule].name}の上限までCOST ${cost(team) - rules[rule].budget}調整が必要`}</p>}
   </section>;

@@ -47,8 +47,8 @@ function expectHpReplay(before: State, after: State, events: BattleEvent[]) {
 }
 
 describe('battle setup and determinism', () => {
-  it('preserves the original twelve-monster roster and team costs', () => {
-    expect(monsters).toHaveLength(12);
+  it('preserves the original twelve IDs and team costs while adding Fenrir', () => {
+    expect(monsters).toHaveLength(13);
     expect(cost(team)).toBe(15);
     expect(cost(team)).toBeLessThanOrEqual(17);
     expect(cost([])).toBe(0);
@@ -603,7 +603,7 @@ describe('automatic orders and complete battles', () => {
 
 describe('leader traits', () => {
   it('provides twelve distinct original traits with bounded, explained boosts', () => {
-    const traits = monsters.map(monster => leaderFor(monster.id));
+    const traits = monsters.slice(0, 12).map(monster => leaderFor(monster.id));
     expect(new Set(traits.map(trait => trait.name)).size).toBe(12);
     expect(new Set(traits.map(trait => trait.stat))).toEqual(new Set(['hp', 'atk', 'speed']));
     for (const trait of traits) {
@@ -688,7 +688,7 @@ describe('bounded counter-skill contracts', () => {
       ['灼熱拳', '火炎旋風', '終焉の一撃'], ['風切り', '疾風斬り', '毒霧'],
       ['蛇牙', '毒霧', '鉄壁の構え'], ['冥府の刃', '影斬り', '終焉の一撃'],
     ];
-    monsters.forEach((monster, index) => {
+    monsters.slice(0, 12).forEach((monster, index) => {
       expect(monster.skills.slice(0, 3).map(skill => skill.name)).toEqual(firstThree[index]);
       expect(monster.skills.length).toBeLessThanOrEqual(MAX_SPECIAL_SKILLS);
     });

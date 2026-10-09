@@ -241,7 +241,7 @@ describe('slot-first team workshop', () => {
     expect(slotButton(0).getAttribute('aria-pressed')).toBe('true');
     expect(updates).toEqual([]);
     await click(byLabel('絞り込みをリセット'));
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(12);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(13);
   });
 
   it('filters by replacement eligibility rather than requiring an empty team slot', async () => {
@@ -249,7 +249,7 @@ describe('slot-first team workshop', () => {
     await click(slotButton(0));
     await disclose('.filterDisclosure');
     await chooseSelect('コストで絞り込み', 'fit');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(7);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(8);
     expect([...document.querySelectorAll<HTMLButtonElement>('.candidateSelect')].every(button => !button.disabled)).toBe(true);
     await click(candidateButton(7));
     await click(confirmButton());
@@ -261,7 +261,7 @@ describe('slot-first team workshop', () => {
     await mount();
     await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
     expect(document.querySelector('#candidate-heading')!.textContent).toBe('モンスター図鑑');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(12);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(13);
     expect(document.querySelector('.candidateSelect')).toBeNull();
     await click(byLabel('アヌビスの詳細'));
     await click(byText('詳細を閉じる'));

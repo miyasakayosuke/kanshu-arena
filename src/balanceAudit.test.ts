@@ -40,9 +40,9 @@ function legalTeamIncluding(id: number, budget: number): number[] {
   return team;
 }
 
-describe('all twelve roles remain selectable under the two real 5v5 rules', () => {
+describe('all thirteen roles remain selectable under the two real 5v5 rules', () => {
   it.each<RuleId>(['standard', 'light'])('gives each distinct role a legal five-member %s team', rule => {
-    expect(monsters).toHaveLength(12);
+    expect(monsters).toHaveLength(13);
     const names = new Set<string>();
     for (const monster of monsters) {
       const team = legalTeamIncluding(monster.id, rules[rule].budget);
@@ -51,7 +51,7 @@ describe('all twelve roles remain selectable under the two real 5v5 rules', () =
       expect(cost(team)).toBeLessThanOrEqual(rules[rule].budget);
       names.add(monsterRole(monster.id).name);
     }
-    expect(names.size).toBe(12);
+    expect(names.size).toBe(13);
   });
 
   it('makes COST17 vs COST15 a real tradeoff while keeping the same roster', () => {

@@ -1,6 +1,7 @@
-export type Skill={name:string;power:number;priority:number;mpCost:number;kind:'hit'|'heal'|'guard'|'poison'|'protect'|'cleanse';all?:boolean;breaksGuard?:boolean};
+export type Skill={name:string;power:number;priority:number;mpCost:number;kind:'hit'|'heal'|'guard'|'poison'|'protect'|'cleanse';all?:boolean;breaksGuard?:boolean;randomHits?:number;breaksGuardAfterHit?:boolean};
 export type SpecialSkills = readonly [] | readonly [Skill] | readonly [Skill, Skill] | readonly [Skill, Skill, Skill] | readonly [Skill, Skill, Skill, Skill];
-export type Monster={id:number;name:string;icon:string;cost:number;hp:number;mp:number;atk:number;speed:number;skills:SpecialSkills};
+export type Family = 'beast';
+export type Monster={id:number;name:string;icon:string;cost:number;hp:number;mp:number;atk:number;speed:number;family?:Family;skills:SpecialSkills};
 export const BASIC_ATTACK = -1;
 export const DEFEND = -2;
 export const MAX_SPECIAL_SKILLS = 4;
@@ -33,26 +34,35 @@ const roster: [number, string, string, number, number, number, number, SpecialSk
 [8,'イフリート','🔥',3,187,52,42,[hit('灼熱拳',69),hit('火炎旋風',33,0,true),hit('終焉の一撃',99,-2),guardBreaker('破城の拳')]],
 [9,'烏天狗','🐦',3,166,41,79,[hit('風切り',51),hit('疾風斬り',36,2),poison]],
 [10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard,{ ...protect, name: '蛇鱗の庇護' }]],
-[11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2),guardBreaker('冥府の断罪')]]
+[11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2),guardBreaker('冥府の断罪')]],
+[12,'フェンリル','🐺',4,150,54,93,[{ ...hit('破縛の連牙',0,0,false,13), randomHits:5, breaksGuardAfterHit:true },hit('月下の一咬',55)]]
 ];
 // Original resource budgets: three heavy casts or several economical actions.
-const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50];
-export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, skills }));
-export type LeaderTrait = { name: string; stat: 'hp' | 'atk' | 'speed'; percent: number; description: string };
+const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50, 60];
+// Game-only mammalian motifs. Unassigned creatures are not forced into a mythological taxonomy.
+const beastIds = new Set([0, 2, 7, 11, 12]);
+export const familyLabel = (monster: Monster): string => monster.family === 'beast' ? '獣系' : '系統未設定';
+export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, ...(beastIds.has(id) ? { family: 'beast' as const } : {}), skills }));
+export type LeaderTrait = { name: string; stat: 'hp' | 'atk' | 'speed'; percent: number; description: string; family?: Family; secondary?: { stat: 'atk' | 'speed'; percent: number } };
 const leaderTraits: readonly [string, LeaderTrait['stat']][] = [
   ['暁の追い風', 'speed'], ['岩山の誓い', 'hp'], ['守り猫の祈り', 'hp'], ['森羅の息吹', 'hp'],
   ['月影の号令', 'atk'], ['天空の威光', 'atk'], ['飛翼の陣', 'speed'], ['潮騒の祝福', 'hp'],
   ['灼熱の闘志', 'atk'], ['山風の導き', 'speed'], ['蛇鱗の結束', 'hp'], ['冥路の先導', 'atk'],
 ];
 
-/** Every monster has one original, universal team trait; the first slot is the leader. */
+/** One trait from the first slot only. Family restrictions apply to each recipient. */
 export function leaderFor(id: number): LeaderTrait {
+  if (id === 12) return { name: '解き放つ群れ', stat: 'speed', percent: 12, secondary: { stat: 'atk', percent: 8 }, family: 'beast', description: '味方の獣系だけ 素早さ +12%・攻撃力 +8%' };
   const trait = leaderTraits[id];
   if (!trait) throw new Error(`Unknown monster id: ${id}`);
   const [name, stat] = trait;
   const percent = stat === 'hp' ? 12 : 8;
   const label = stat === 'hp' ? '最大HP' : stat === 'atk' ? '攻撃力' : '素早さ';
   return { name, stat, percent, description: `味方全員の${label} +${percent}%` };
+}
+
+export function leaderAppliesTo(trait: LeaderTrait, monster: Monster): boolean {
+  return !trait.family || monster.family === trait.family;
 }
 
 /** These three supports require a living same-side target, including the actor. */
@@ -63,7 +73,7 @@ export function skillOrderLabel(skill: Skill): string {
   return skill.priority >= 3 ? '最速' : skill.priority >= 2 ? '先制' : skill.priority > 0 ? '防御順' : skill.priority < 0 ? 'アンカー' : '通常順';
 }
 
-export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number };
+export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number };
 export type State = {
   turn: number;
   seed: number;
@@ -81,7 +91,12 @@ export type BattleEvent = {
   actor?: string;
   target?: string;
   /** Cast intent and living targets at cast time, independent of survivor count. */
-  scope?: 'single' | 'all';
+  scope?: 'single' | 'all' | 'random';
+  /** Random barrages resolve one living target per hit, in this exact order. */
+  hitTargets?: string[];
+  hits?: number;
+  hitIndex?: number;
+  removed?: ('guard' | 'rally')[];
   targets?: string[];
   skill?: string;
   amount?: number;
@@ -89,6 +104,7 @@ export type BattleEvent = {
   mp?: number;
   poison?: number;
   guard?: boolean;
+  rally?: number;
   phase?: BattlePhase;
   effect?: string;
 };
@@ -112,16 +128,26 @@ export type BattleTurnRecord = {
 export const MAX_TURNS = 20;
 export const cost = (team: number[]) => team.reduce((total, id) => total + (monsters[id]?.cost ?? 0), 0);
 
-export type StartOptions = { leaders?: boolean };
+export const RALLY_PERCENT = 5;
+export const OPENING_RALLY_TURNS = 2;
+/** HP/MP stay fixed; the dispellable opening aura is separate from the persistent leader. */
+export const attackFor = (unit: Unit) => Math.round(unit.monster.atk * (1 + (unit.rally ? RALLY_PERCENT / 100 : 0)));
+// The first-turn order is established before the opening aura; turn two can gain speed.
+export const speedFor = (unit: Unit, turn: number) => Math.round(unit.monster.speed * (1 + (unit.rally && turn > 1 ? RALLY_PERCENT / 100 : 0)));
+export type StartOptions = { leaders?: boolean; familySupport?: boolean };
 export function start(team: number[], enemy: number[], seed = 42, options: StartOptions = {}): State {
   const units = (ids: number[], prefix: string): Unit[] => {
     const leader = options.leaders && ids.length ? leaderFor(ids[0]) : undefined;
+    const rally = options.familySupport !== false && ids.includes(12);
     return ids.map((id, i) => {
       const source = monsters[id];
       if (!source) throw new Error(`Unknown monster id: ${id}`);
       // Derive battle-only stats; never accumulate boosts in the shared roster.
-      const monster = leader ? { ...source, [leader.stat]: Math.round(source[leader.stat] * (1 + leader.percent / 100)) } : source;
-      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0 };
+      const monster = leader && leaderAppliesTo(leader, source) ? {
+        ...source, [leader.stat]: Math.round(source[leader.stat] * (1 + leader.percent / 100)),
+        ...(leader.secondary ? { [leader.secondary.stat]: Math.round(source[leader.secondary.stat] * (1 + leader.secondary.percent / 100)) } : {}),
+      } : source;
+      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0, ...(rally && source.family === 'beast' ? { rally: OPENING_RALLY_TURNS } : {}) };
     });
   };
   return {
@@ -133,6 +159,9 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     log: ['戦闘開始！', 'MPは対戦ごとに全回復。戦闘中の自然回復はありません。', ...(options.leaders ? [
       ...(team.length ? [`味方リーダー ${monsters[team[0]].name}「${leaderFor(team[0]).name}」：${leaderFor(team[0]).description}`] : []),
       ...(enemy.length ? [`敵リーダー ${monsters[enemy[0]].name}「${leaderFor(enemy[0]).name}」：${leaderFor(enemy[0]).description}`] : []),
+    ] : []), ...(options.familySupport !== false ? [
+      ...(team.includes(12) ? ['味方「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。'] : []),
+      ...(enemy.includes(12) ? ['敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。'] : []),
     ] : [])],
     winner: null,
   };
@@ -141,7 +170,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
 // Area hits trade per-target strength for coverage; poison retains its status-focused tuning.
 const AREA_HIT_DAMAGE_SCALE = 0.5;
 const baseDamage = (unit: Unit, skill: Skill) =>
-  (skill.power + unit.monster.atk * 0.38) * (skill.all && skill.kind === 'hit' ? AREA_HIT_DAMAGE_SCALE : 1);
+  (skill.name === '通常攻撃' ? attackFor(unit) : skill.power + attackFor(unit) * 0.38) * (skill.all && skill.kind === 'hit' ? AREA_HIT_DAMAGE_SCALE : 1);
 
 const random = (seed: number) => ((Math.imul(seed, 1664525) + 1013904223) >>> 0);
 const living = (units: Unit[]) => units.filter(unit => unit.hp > 0);
@@ -157,7 +186,7 @@ export function canUseSkill(unit: Unit, skill: Skill): boolean {
 /** Poison is measured in remaining end-of-turn ticks, not actor turns. */
 export function effectStatus(unit: Unit): string {
   if (unit.hp <= 0) return '戦闘不能';
-  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : ''].filter(Boolean).join('・');
+  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : '', unit.rally ? `群気:残${unit.rally}T` : ''].filter(Boolean).join('・');
 }
 
 /** Choose orders without changing state or consuming the battle's random seed. */
@@ -166,7 +195,7 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
   const friends = living(state[side]);
   const opponents = living(side === 'allies' ? state.enemies : state.allies);
   const target = opponents.reduce<Unit | undefined>((best, unit) => !best || unit.hp < best.hp ? unit : best, undefined);
-  const incomingThreat = opponents.reduce((largest, opponent) => Math.max(largest, opponent.monster.atk,
+  const incomingThreat = opponents.reduce((largest, opponent) => Math.max(largest, attackFor(opponent),
     ...opponent.monster.skills.filter(skill => canUseSkill(opponent, skill) && (skill.kind === 'hit' || skill.kind === 'poison')).map(skill => baseDamage(opponent, skill))), 0);
   const protectedTargets = new Set<string>();
   const cleansedTargets = new Set<string>();
@@ -196,10 +225,10 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
     // Keep a free attack available. Spend only when a special adds useful damage or utility.
     const score = (skill: Skill) => {
       if (skill.kind !== 'hit' && skill.kind !== 'poison') return -1;
-      const targets = skill.all ? opponents : target ? [target] : [];
+      const targets = skill.all || skill.randomHits ? opponents : target ? [target] : [];
       return targets.reduce((total, opponent) => {
-        const mitigation = opponent.guard && skill.priority < 1 && !skill.breaksGuard ? 0.5 : 1;
-        const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation);
+        const mitigation = opponent.guard && skill.priority < 1 && !skill.breaksGuard ? (skill.breaksGuardAfterHit ? 0.75 : 0.5) : 1;
+        const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation * (skill.randomHits ? skill.randomHits / Math.max(1, opponents.length) : 1));
         const poisonDamage = skill.kind === 'poison' && opponent.poison === 0
           ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * 2) : 0;
         return total + damage + poisonDamage;
@@ -269,14 +298,15 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
       actions.push({ unit, skill, side, target: order?.target, tie: seed });
     }
   }
-  actions.sort((a, b) => b.skill.priority - a.skill.priority || b.unit.monster.speed - a.unit.monster.speed || a.tie - b.tie);
-  const damage = (target: Unit, requested: number, actor?: string, effect?: string) => {
+  actions.sort((a, b) => b.skill.priority - a.skill.priority || speedFor(b.unit, battle.turn) - speedFor(a.unit, battle.turn) || a.tie - b.tie);
+  const damage = (target: Unit, requested: number, actor?: string, effect?: string, hitIndex?: number) => {
     const amount = Math.min(target.hp, Math.max(1, Math.floor(requested)));
     target.hp -= amount;
-    emit({ kind: 'damage', actor, target: target.key, amount, hp: target.hp, ...(effect === 'poison' ? { poison: target.poison } : {}), effect });
+    emit({ kind: 'damage', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, amount, hp: target.hp, ...(effect === 'poison' ? { poison: target.poison } : {}), effect });
     if (target.hp === 0) {
       target.guard = false; target.poison = 0;
-      emit({ kind: 'defeat', actor, target: target.key, hp: 0, guard: false, poison: 0, effect });
+      if (target.rally !== undefined) target.rally = 0;
+      emit({ kind: 'defeat', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, hp: 0, guard: false, poison: 0, ...(target.rally !== undefined ? { rally: 0 } : {}), effect });
     }
     return amount;
   };
@@ -294,12 +324,13 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
       targets = target ? [target] : [];
     } else {
       const alive = living(opponents);
-      targets = skill.all ? alive : [alive.find(target => target.key === action.target) ?? alive[seed % alive.length]];
+      targets = skill.all || skill.randomHits ? alive : [alive.find(target => target.key === action.target) ?? alive[seed % alive.length]];
     }
     if (!targets.length) { phase('action-end', unit.key); continue; }
     phase('action', unit.key);
     battle.log.push(`${unit.monster.name}の「${skill.name}」！${skill.mpCost ? `（MP −${skill.mpCost}）` : ''}`);
-    emit({ kind: 'cast', actor: unit.key, scope: skill.all ? 'all' : 'single', targets: targets.map(target => target.key), ...(!skill.all ? { target: targets[0].key } : {}), skill: skill.name, effect: skill.kind });
+    const castEventIndex = events.length;
+    emit({ kind: 'cast', actor: unit.key, scope: skill.randomHits ? 'random' : skill.all ? 'all' : 'single', targets: targets.map(target => target.key), ...(!skill.all && !skill.randomHits ? { target: targets[0].key } : {}), ...(skill.randomHits ? { hits: skill.randomHits, hitTargets: [] } : {}), skill: skill.name, effect: skill.kind });
     // Spending is absolute and emitted at the cast, before any hit or healing animation.
     if (skill.mpCost) {
       unit.mp -= skill.mpCost;
@@ -324,20 +355,41 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
       emit({ kind: 'heal', actor: unit.key, target: target.key, amount, hp: target.hp });
       battle.log.push(`${target.monster.name} HP +${amount}`);
     } else {
-      for (const target of targets) {
+      const hitTargets: string[] = [];
+      const hitCount = skill.randomHits ?? targets.length;
+      for (let hitIndex = 0; hitIndex < hitCount; hitIndex++) {
+        const alive = living(opponents);
+        if (!alive.length) break;
+        // Use high-quality upper bits via a fraction; low LCG parity would bias 2-target barrages.
+        if (skill.randomHits) seed = random(seed);
+        const target = skill.randomHits ? alive[Math.floor(seed / 0x100000000 * alive.length)] : targets[hitIndex];
+        if (target.hp <= 0) continue;
+        hitTargets.push(target.key);
+        const wasGuarded = target.guard;
+        const hadRally = !!target.rally;
         if (skill.kind === 'hit' && skill.breaksGuard && target.guard) {
           target.guard = false;
           emit({ kind: 'break', actor: unit.key, target: target.key, guard: false });
           battle.log.push(`${target.monster.name}の防御を解除！`);
         }
         seed = random(seed);
-        const amount = damage(target, baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * (target.guard ? 0.5 : 1), unit.key);
-        battle.log.push(`${target.monster.name}に ${amount} ダメージ${target.guard ? '（防御で半減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
+        const amount = damage(target, baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * (target.guard ? 0.5 : 1), unit.key, undefined, skill.randomHits ? hitIndex : undefined);
+        battle.log.push(`${target.monster.name}に ${amount} ダメージ${wasGuarded && !skill.breaksGuard ? '（防御で半減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
+        if (skill.breaksGuardAfterHit && (wasGuarded || hadRally) && target.hp > 0) {
+          target.guard = false;
+          if (hadRally) target.rally = 0;
+          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadRally ? { rally: 0 } : {}), removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadRally ? ['rally' as const] : [])], hitIndex, effect: hadRally ? 'rally' : 'guard' });
+          battle.log.push(`${target.monster.name}の${[wasGuarded ? '守り' : '', hadRally ? '群気' : ''].filter(Boolean).join('・')}を命中後に解除！`);
+        }
         if (skill.kind === 'poison' && target.hp > 0) {
           target.poison = 3;
           emit({ kind: 'poison', actor: unit.key, target: target.key, poison: 3 });
           battle.log.push(`${target.monster.name}は毒を受けた（ターン終了時・残り3回）`);
         }
+      }
+      if (skill.randomHits) {
+        events[castEventIndex].hitTargets = hitTargets;
+        events[castEventIndex].targets = [...new Set(hitTargets)];
       }
     }
     phase('action-end', unit.key);
@@ -351,6 +403,10 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     battle.log.push(`${unit.monster.name}は毒で${amount}ダメージ${unit.hp > 0 ? unit.poison ? `（残り${unit.poison}回）` : '（毒が切れた）' : '・撃破！'}`);
   }
   for (const unit of [...battle.allies, ...battle.enemies]) {
+    if (unit.rally) {
+      unit.rally--;
+      emit({ kind: 'expire', target: unit.key, effect: 'rally', rally: unit.rally });
+    }
     if (unit.guard) {
       unit.guard = false;
       emit({ kind: 'expire', target: unit.key, effect: 'guard', guard: false });
@@ -372,7 +428,7 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
   battle.history = [...(old.history ?? []), {
     turn: old.turn,
     orders: recordedOrders,
-    events: events.map(event => ({ ...event, ...(event.targets ? { targets: [...event.targets] } : {}) })),
+    events: events.map(event => ({ ...event, ...(event.targets ? { targets: [...event.targets] } : {}), ...(event.hitTargets ? { hitTargets: [...event.hitTargets] } : {}), ...(event.removed ? { removed: [...event.removed] } : {}) })),
     log: battle.log.slice(old.log.length),
   }];
   return { state: battle, events };

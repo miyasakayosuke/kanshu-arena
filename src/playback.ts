@@ -6,6 +6,8 @@ export type BattleTimeline = { cues: BattleCue[]; duration: number };
 /** Shared by the event timeline and visuals so windup ends at the HP change. */
 export const CAST_IMPACT_MS = 800;
 export const ACTION_DURATION_MS = 1500;
+export const MULTIHIT_INTERVAL_MS = 180;
+export const barrageDuration = (hits: number) => ACTION_DURATION_MS + Math.max(0, hits - 1) * MULTIHIT_INTERVAL_MS;
 
 export function effectType(name: string, kind?: string) {
   if (kind === 'heal' || kind === 'cleanse') return 'water';
@@ -22,6 +24,7 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
       hp: event.hp ?? current.hp,
       mp: event.mp ?? current.mp,
       guard: event.guard ?? (event.kind === 'guard' ? true : event.kind === 'break' || event.kind === 'defeat' ? false : current.guard),
+      ...(event.rally !== undefined ? { rally: event.rally } : current.rally !== undefined && event.kind === 'defeat' ? { rally: 0 } : {}),
       poison: event.poison ?? (event.kind === 'poison' ? 3 : event.kind === 'cleanse' || event.kind === 'defeat' ? 0 : current.poison),
     };
   }, unit);
@@ -62,12 +65,21 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
       if (!targets.length && group.cast.targets === undefined && group.cast.target) targets.push(group.cast.target);
       const scope = group.cast.scope ?? (targets.length > 1 ? 'all' : 'single');
       cast = { ...group.cast, scope, targets };
-      if (scope === 'all') delete cast.target;
+      if (scope === 'all' || scope === 'random') delete cast.target;
       else cast.target = group.cast.target ?? targets[0];
     }
     cues.push({ at: time, cast, impacts: [], ...(group.updates.length ? { updates: group.updates } : {}) });
-    if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts });
-    time += cast ? ACTION_DURATION_MS : 950;
+    if (cast?.scope === 'random') {
+      const hits = Math.max(1, cast.hitTargets?.length ?? cast.hits ?? 1);
+      for (let index = 0; index < hits; index++) {
+        const impacts = group.impacts.filter(event => (event.hitIndex ?? 0) === index);
+        if (impacts.length) cues.push({ at: time + CAST_IMPACT_MS + index * MULTIHIT_INTERVAL_MS, cast, impacts });
+      }
+      time += barrageDuration(hits);
+    } else {
+      if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts });
+      time += cast ? ACTION_DURATION_MS : 950;
+    }
   }
   if (after.length) cues.push({ at: time, cast: null, impacts: [], updates: after });
   return { cues, duration: time + 150 };

@@ -148,16 +148,16 @@ export function battleEventLine(state: State, event: BattleEvent): string {
   const actor = battleUnitLabel(state, event.actor);
   const target = battleUnitLabel(state, event.target);
   switch (event.kind) {
-    case 'cast': return `${actor}「${event.skill ?? '行動'}」を発動 → ${(event.targets ?? (event.target ? [event.target] : [])).map(key => battleUnitLabel(state, key)).join('、') || '対象なし'}`;
-    case 'damage': return `${event.effect === 'poison' ? '毒の継続ダメージ' : `${actor}の直接攻撃`} → ${target} HP −${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
+    case 'cast': return `${actor}「${event.skill ?? '行動'}」を発動${event.scope === 'random' ? `（ランダム${event.hits}回）` : ''} → ${(event.targets ?? (event.target ? [event.target] : [])).map(key => battleUnitLabel(state, key)).join('、') || '対象なし'}`;
+    case 'damage': return `${event.effect === 'poison' ? '毒の継続ダメージ' : `${actor}の直接攻撃${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目）` : ''}`} → ${target} HP −${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
     case 'heal': return `${actor} → ${target} HP ＋${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
     case 'defeat': return `${target}が戦闘不能${event.effect === 'poison' ? '（毒）' : event.actor ? `（${actor}の攻撃）` : ''}`;
     case 'guard': return `${actor} → ${target}に守り（このターンの直接ダメージ半減）`;
     case 'poison': return `${actor} → ${target}に毒（残り ${event.poison ?? 3}回）`;
     case 'cleanse': return `${actor} → ${target}を浄化（毒は0）`;
-    case 'break': return `${actor} → ${target}の守りを解除`;
+    case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
     case 'resource': return `${actor} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
-    case 'expire': return `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
+    case 'expire': return event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
     case 'phase': return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;
   }
 }

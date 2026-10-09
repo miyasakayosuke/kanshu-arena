@@ -1,5 +1,5 @@
 import type {BattleEvent} from './engine';
-import {ACTION_DURATION_MS, CAST_IMPACT_MS, effectType} from './playback';
+import {ACTION_DURATION_MS, CAST_IMPACT_MS, effectType, MULTIHIT_INTERVAL_MS, barrageDuration} from './playback';
 
 /** Presentation-only timing. None of these phases changes combat resolution. */
 export const ANTICIPATION_MS = 340;
@@ -58,4 +58,25 @@ export function sampleHitMotion(age: number, reduced = false, harmful = true) {
 export function sampleNumberMotion(age: number, reduced = false) {
   const fade = 1 - clamp((age - NUMBER_DURATION_MS + 130) / 130);
   return {rise: reduced ? 0 : 22 * out(age / 210), scale: reduced ? 1 : 1 + .16 * Math.sin(clamp(age / 170) * Math.PI), alpha: fade};
+}
+
+/** Original wolf choreography: low stance, forward pounce, linked strikes, settle. */
+export function sampleFenrirMotion(age: number, hits = 5, reduced = false) {
+  const lastHit = CAST_IMPACT_MS + Math.max(0, hits - 1) * MULTIHIT_INTERVAL_MS;
+  const effectiveAge = age < CAST_IMPACT_MS ? age : age < lastHit ? CAST_IMPACT_MS : CAST_IMPACT_MS + age - lastHit;
+  const base = sampleActionMotion('strike', effectiveAge, reduced);
+  const charge = smooth(age / ANTICIPATION_MS);
+  const release = smooth((age - 460) / (CAST_IMPACT_MS - 460));
+  const preparing = age < CAST_IMPACT_MS;
+  const returning = age >= lastHit ? 1 - out((age - lastHit - HIT_HOLD_MS) / RECOVERY_MS) : 1;
+  const pulse = age >= CAST_IMPACT_MS && age < lastHit ? Math.sin((age - CAST_IMPACT_MS) / MULTIHIT_INTERVAL_MS * Math.PI) : 0;
+  return {
+    ...base,
+    travel: reduced ? 0 : (preparing ? -12 * charge * (1 - release) + 84 * release : 84 + pulse * 6) * returning,
+    lift: reduced ? 0 : (preparing ? -6 * charge * (1 - release) + 12 * Math.sin(release * Math.PI) : Math.abs(pulse) * 3) * returning,
+    tilt: reduced || !returning ? 0 : (preparing ? .045 * charge * (1 - release) - .1 * release : -.1) * returning,
+    scaleX: reduced ? 1 : 1 + (preparing ? .08 * charge * (1 - release) + .04 * release : .04) * returning,
+    scaleY: reduced ? 1 : 1 + (preparing ? -.12 * charge * (1 - release) - .025 * release : -.025) * returning,
+    titleAlpha: Math.min(1, Math.max(0, age / 90), Math.max(0, (barrageDuration(hits) - 60 - age) / 180)),
+  };
 }

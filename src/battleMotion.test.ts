@@ -52,3 +52,20 @@ describe('action choreography', () => {
     }
   });
 });
+
+describe('original Fenrir choreography', () => {
+  it('crouches, pounces, holds all five impacts, and then settles completely', async () => {
+    const {sampleFenrirMotion}=await import('./battleMotion');
+    const crouch=sampleFenrirMotion(340);
+    expect(crouch.travel).toBe(-12);expect(crouch.scaleY).toBe(.88);expect(crouch.lift).toBe(-6);
+    expect(sampleFenrirMotion(799).travel).toBeGreaterThan(83);
+    for (const time of [800,980,1160,1340,1520]) expect(sampleFenrirMotion(time).phase).toBe('impact');
+    expect(sampleFenrirMotion(1800).phase).toBe('recover');
+    expect(sampleFenrirMotion(2220)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+  });
+  it('ends an interrupted barrage at its actual last hit and honors reduced motion', async () => {
+    const {sampleFenrirMotion}=await import('./battleMotion');
+    expect(sampleFenrirMotion(1500,1).phase).toBe('rest');
+    for(const time of [0,340,799,800,1000,1520,1800,2220]) expect(sampleFenrirMotion(time,5,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+  });
+});

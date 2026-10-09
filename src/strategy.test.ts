@@ -19,10 +19,10 @@ describe('team rules and opponents', () => {
     expect(isValidTeam(initialTeam, rules.light.budget)).toBe(true);
   });
 
-  it.each<RuleId>(['standard', 'light'])('provides three distinct legal %s opponents', rule => {
+  it.each<RuleId>(['standard', 'light'])('provides four distinct legal %s opponents', rule => {
     const teams = opponentTeams(rule);
-    expect(teams).toHaveLength(3);
-    expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(3);
+    expect(teams).toHaveLength(4);
+    expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(4);
     for (const team of teams) {
       expect(isValidTeam(team, rules[rule].budget)).toBe(true);
       expect(cost(team)).toBeLessThanOrEqual(rules[rule].budget);
@@ -33,7 +33,7 @@ describe('team rules and opponents', () => {
   });
 
   it('preserves standard opponents and protects them from preview mutations', () => {
-    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2]];
+    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]];
     expect(opponentTeams('standard')).toEqual(expected);
     const teams = opponentTeams('standard');
     teams[0][0] = 11;

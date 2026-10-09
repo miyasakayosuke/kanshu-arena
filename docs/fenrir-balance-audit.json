@@ -1,0 +1,1926 @@
+{
+  "methodology": {
+    "seedCountPerOrientationPerOpponent": 128,
+    "seeds": [
+      2674696770,
+      1034165235,
+      3688600996,
+      2048069461,
+      407537926,
+      3061973687,
+      1421442152,
+      4075877913,
+      2435346378,
+      794814843,
+      3449250604,
+      1808719069,
+      168187534,
+      2822623295,
+      1182091760,
+      3836527521,
+      2195995986,
+      555464451,
+      3209900212,
+      1569368677,
+      4223804438,
+      2583272903,
+      942741368,
+      3597177129,
+      1956645594,
+      316114059,
+      2970549820,
+      1330018285,
+      3984454046,
+      2343922511,
+      703390976,
+      3357826737,
+      1717295202,
+      76763667,
+      2731199428,
+      1090667893,
+      3745103654,
+      2104572119,
+      464040584,
+      3118476345,
+      1477944810,
+      4132380571,
+      2491849036,
+      851317501,
+      3505753262,
+      1865221727,
+      224690192,
+      2879125953,
+      1238594418,
+      3893030179,
+      2252498644,
+      611967109,
+      3266402870,
+      1625871335,
+      4280307096,
+      2639775561,
+      999244026,
+      3653679787,
+      2013148252,
+      372616717,
+      3027052478,
+      1386520943,
+      4040956704,
+      2400425169,
+      759893634,
+      3414329395,
+      1773797860,
+      133266325,
+      2787702086,
+      1147170551,
+      3801606312,
+      2161074777,
+      520543242,
+      3174979003,
+      1534447468,
+      4188883229,
+      2548351694,
+      907820159,
+      3562255920,
+      1921724385,
+      281192850,
+      2935628611,
+      1295097076,
+      3949532837,
+      2309001302,
+      668469767,
+      3322905528,
+      1682373993,
+      41842458,
+      2696278219,
+      1055746684,
+      3710182445,
+      2069650910,
+      429119375,
+      3083555136,
+      1443023601,
+      4097459362,
+      2456927827,
+      816396292,
+      3470832053,
+      1830300518,
+      189768983,
+      2844204744,
+      1203673209,
+      3858108970,
+      2217577435,
+      577045900,
+      3231481661,
+      1590950126,
+      4245385887,
+      2604854352,
+      964322817,
+      3618758578,
+      1978227043,
+      337695508,
+      2992131269,
+      1351599734,
+      4006035495,
+      2365503960,
+      724972425,
+      3379408186,
+      1738876651,
+      98345116,
+      2752780877,
+      1112249342,
+      3766685103,
+      2126153568,
+      485622033
+    ],
+    "leaders": true,
+    "policy": "Allied side uses autoOrders; enemy side uses existing seeded legal-skill variation. Each matchup repeats with candidate on both sides to expose this policy asymmetry. Reported wins belong to the candidate team in either orientation.",
+    "caveats": [
+      "Win rates compare specified CPU policies and teams, not human balance or optimized play.",
+      "Costs are legal but not equal across all opponents; the same-cost Anubis replacements isolate roster swaps better.",
+      "The passive ablation disables familySupport globally, affecting both sides in the Fenrir mirror.",
+      "No win-rate threshold determines pass or failure."
+    ],
+    "runSource": "src/engine.ts",
+    "engineSha256": "1c167be4fe69932c98466d9ff0b4d7e828cc07c7c76ec7bdaff07257892e9cc7"
+  },
+  "opponents": [
+    {
+      "name": "Existing heavy/guard opponent",
+      "team": [
+        1,
+        5,
+        8,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "name": "Existing Anubis/poison opponent",
+      "team": [
+        11,
+        9,
+        4,
+        7,
+        10
+      ],
+      "cost": 16
+    },
+    {
+      "name": "Existing fox/healing opponent",
+      "team": [
+        0,
+        3,
+        1,
+        6,
+        2
+      ],
+      "cost": 15
+    },
+    {
+      "name": "New Fenrir mixed opponent",
+      "team": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "name": "Priority-rich roster",
+      "team": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "name": "Guard/healing roster",
+      "team": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    }
+  ],
+  "variants": [
+    {
+      "name": "Fenrir leader / 3 beasts / cost 15",
+      "team": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ],
+      "cost": 15,
+      "total": {
+        "games": 1536,
+        "wins": 785,
+        "losses": 751,
+        "draws": 0,
+        "winPercent": 51.107,
+        "meanTurns": 4.221,
+        "turnRange": [
+          2,
+          19
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 21.325,
+        "fenrir": {
+          "turnOneDeathPercent": 5.534,
+          "survivalPercent": 37.956,
+          "meanBarrages": 2.018,
+          "meanBites": 0.642,
+          "meanBasics": 0.165,
+          "meanDirectDamage": 246.076,
+          "meanMpSpent": 32.648,
+          "meanLandedBarrageHits": 4.916
+        }
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 737,
+        "losses": 31,
+        "draws": 0,
+        "winPercent": 95.964,
+        "meanTurns": 4.035,
+        "turnRange": [
+          2,
+          18
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 40.884,
+        "fenrir": {
+          "turnOneDeathPercent": 3.776,
+          "survivalPercent": 70.964,
+          "meanBarrages": 2.81,
+          "meanBites": 0.026,
+          "meanBasics": 0.238,
+          "meanDirectDamage": 271.796,
+          "meanMpSpent": 36.789,
+          "meanLandedBarrageHits": 4.881
+        }
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 48,
+        "losses": 720,
+        "draws": 0,
+        "winPercent": 6.25,
+        "meanTurns": 4.408,
+        "turnRange": [
+          2,
+          19
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 1.766,
+        "fenrir": {
+          "turnOneDeathPercent": 7.292,
+          "survivalPercent": 4.948,
+          "meanBarrages": 1.225,
+          "meanBites": 1.258,
+          "meanBasics": 0.092,
+          "meanDirectDamage": 220.357,
+          "meanMpSpent": 28.507,
+          "meanLandedBarrageHits": 4.995
+        }
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 119,
+          "losses": 137,
+          "draws": 0,
+          "winPercent": 46.484,
+          "meanTurns": 3.988,
+          "turnRange": [
+            2,
+            18
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 14.628,
+          "fenrir": {
+            "turnOneDeathPercent": 3.516,
+            "survivalPercent": 28.125,
+            "meanBarrages": 1.934,
+            "meanBites": 0.52,
+            "meanBasics": 0.117,
+            "meanDirectDamage": 231.117,
+            "meanMpSpent": 30.332,
+            "meanLandedBarrageHits": 4.954
+          }
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 122,
+          "losses": 134,
+          "draws": 0,
+          "winPercent": 47.656,
+          "meanTurns": 4.336,
+          "turnRange": [
+            3,
+            14
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 17.437,
+          "fenrir": {
+            "turnOneDeathPercent": 10.156,
+            "survivalPercent": 26.953,
+            "meanBarrages": 1.781,
+            "meanBites": 0.59,
+            "meanBasics": 0.109,
+            "meanDirectDamage": 223.133,
+            "meanMpSpent": 29.055,
+            "meanLandedBarrageHits": 4.95
+          }
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 162,
+          "losses": 94,
+          "draws": 0,
+          "winPercent": 63.281,
+          "meanTurns": 5.449,
+          "turnRange": [
+            3,
+            19
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 29.51,
+          "fenrir": {
+            "turnOneDeathPercent": 3.125,
+            "survivalPercent": 53.516,
+            "meanBarrages": 2.344,
+            "meanBites": 0.91,
+            "meanBasics": 0.395,
+            "meanDirectDamage": 306.93,
+            "meanMpSpent": 39.57,
+            "meanLandedBarrageHits": 4.978
+          }
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 128,
+          "losses": 128,
+          "draws": 0,
+          "winPercent": 50,
+          "meanTurns": 3.297,
+          "turnRange": [
+            2,
+            6
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 19.981,
+          "fenrir": {
+            "turnOneDeathPercent": 1.172,
+            "survivalPercent": 39.063,
+            "meanBarrages": 1.871,
+            "meanBites": 0.578,
+            "meanBasics": 0.086,
+            "meanDirectDamage": 220.793,
+            "meanMpSpent": 30.105,
+            "meanLandedBarrageHits": 4.875
+          }
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 123,
+          "losses": 133,
+          "draws": 0,
+          "winPercent": 48.047,
+          "meanTurns": 3.441,
+          "turnRange": [
+            2,
+            8
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 15.709,
+          "fenrir": {
+            "turnOneDeathPercent": 0.781,
+            "survivalPercent": 34.766,
+            "meanBarrages": 1.766,
+            "meanBites": 0.605,
+            "meanBasics": 0.098,
+            "meanDirectDamage": 216.047,
+            "meanMpSpent": 29.008,
+            "meanLandedBarrageHits": 4.863
+          }
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 131,
+          "losses": 125,
+          "draws": 0,
+          "winPercent": 51.172,
+          "meanTurns": 4.816,
+          "turnRange": [
+            3,
+            12
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 30.687,
+          "fenrir": {
+            "turnOneDeathPercent": 14.453,
+            "survivalPercent": 45.313,
+            "meanBarrages": 2.41,
+            "meanBites": 0.648,
+            "meanBasics": 0.188,
+            "meanDirectDamage": 278.438,
+            "meanMpSpent": 37.816,
+            "meanLandedBarrageHits": 4.87
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fenrir member / fox leader / cost 15",
+      "team": [
+        0,
+        12,
+        2,
+        6,
+        10
+      ],
+      "cost": 15,
+      "total": {
+        "games": 1536,
+        "wins": 754,
+        "losses": 781,
+        "draws": 1,
+        "winPercent": 49.089,
+        "meanTurns": 4.386,
+        "turnRange": [
+          2,
+          20
+        ],
+        "turnLimitGames": 1,
+        "meanFinalTeamHpPercent": 20.264,
+        "fenrir": {
+          "turnOneDeathPercent": 4.557,
+          "survivalPercent": 36.914,
+          "meanBarrages": 2.049,
+          "meanBites": 0.706,
+          "meanBasics": 0.195,
+          "meanDirectDamage": 238.297,
+          "meanMpSpent": 33.707,
+          "meanLandedBarrageHits": 4.936
+        }
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 716,
+        "losses": 51,
+        "draws": 1,
+        "winPercent": 93.229,
+        "meanTurns": 4.253,
+        "turnRange": [
+          2,
+          19
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 39.309,
+        "fenrir": {
+          "turnOneDeathPercent": 2.604,
+          "survivalPercent": 69.661,
+          "meanBarrages": 2.923,
+          "meanBites": 0.017,
+          "meanBasics": 0.263,
+          "meanDirectDamage": 266.654,
+          "meanMpSpent": 38.171,
+          "meanLandedBarrageHits": 4.91
+        }
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 38,
+        "losses": 730,
+        "draws": 0,
+        "winPercent": 4.948,
+        "meanTurns": 4.52,
+        "turnRange": [
+          2,
+          20
+        ],
+        "turnLimitGames": 1,
+        "meanFinalTeamHpPercent": 1.22,
+        "fenrir": {
+          "turnOneDeathPercent": 6.51,
+          "survivalPercent": 4.167,
+          "meanBarrages": 1.176,
+          "meanBites": 1.396,
+          "meanBasics": 0.126,
+          "meanDirectDamage": 209.94,
+          "meanMpSpent": 29.243,
+          "meanLandedBarrageHits": 4.998
+        }
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 109,
+          "losses": 147,
+          "draws": 0,
+          "winPercent": 42.578,
+          "meanTurns": 4.051,
+          "turnRange": [
+            2,
+            16
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 13.725,
+          "fenrir": {
+            "turnOneDeathPercent": 2.734,
+            "survivalPercent": 25.781,
+            "meanBarrages": 1.863,
+            "meanBites": 0.582,
+            "meanBasics": 0.152,
+            "meanDirectDamage": 215.813,
+            "meanMpSpent": 30.043,
+            "meanLandedBarrageHits": 4.96
+          }
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 115,
+          "losses": 141,
+          "draws": 0,
+          "winPercent": 44.922,
+          "meanTurns": 4.465,
+          "turnRange": [
+            3,
+            19
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 15.509,
+          "fenrir": {
+            "turnOneDeathPercent": 9.766,
+            "survivalPercent": 33.594,
+            "meanBarrages": 2.012,
+            "meanBites": 0.648,
+            "meanBasics": 0.246,
+            "meanDirectDamage": 237.254,
+            "meanMpSpent": 32.637,
+            "meanLandedBarrageHits": 4.944
+          }
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 150,
+          "losses": 106,
+          "draws": 0,
+          "winPercent": 58.594,
+          "meanTurns": 5.742,
+          "turnRange": [
+            3,
+            17
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 27.812,
+          "fenrir": {
+            "turnOneDeathPercent": 3.125,
+            "survivalPercent": 45.313,
+            "meanBarrages": 2.285,
+            "meanBites": 1.066,
+            "meanBasics": 0.398,
+            "meanDirectDamage": 290.918,
+            "meanMpSpent": 40.371,
+            "meanLandedBarrageHits": 4.969
+          }
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 125,
+          "losses": 131,
+          "draws": 0,
+          "winPercent": 48.828,
+          "meanTurns": 3.695,
+          "turnRange": [
+            2,
+            18
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 18.767,
+          "fenrir": {
+            "turnOneDeathPercent": 0,
+            "survivalPercent": 34.766,
+            "meanBarrages": 1.871,
+            "meanBites": 0.566,
+            "meanBasics": 0.051,
+            "meanDirectDamage": 203.762,
+            "meanMpSpent": 29.988,
+            "meanLandedBarrageHits": 4.925
+          }
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 121,
+          "losses": 134,
+          "draws": 1,
+          "winPercent": 47.266,
+          "meanTurns": 3.43,
+          "turnRange": [
+            2,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 15.225,
+          "fenrir": {
+            "turnOneDeathPercent": 0.391,
+            "survivalPercent": 33.594,
+            "meanBarrages": 1.754,
+            "meanBites": 0.648,
+            "meanBasics": 0.074,
+            "meanDirectDamage": 203.855,
+            "meanMpSpent": 29.285,
+            "meanLandedBarrageHits": 4.92
+          }
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 134,
+          "losses": 122,
+          "draws": 0,
+          "winPercent": 52.344,
+          "meanTurns": 4.934,
+          "turnRange": [
+            3,
+            13
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 30.548,
+          "fenrir": {
+            "turnOneDeathPercent": 11.328,
+            "survivalPercent": 48.438,
+            "meanBarrages": 2.512,
+            "meanBites": 0.727,
+            "meanBasics": 0.246,
+            "meanDirectDamage": 278.18,
+            "meanMpSpent": 39.918,
+            "meanLandedBarrageHits": 4.899
+          }
+        }
+      ]
+    },
+    {
+      "name": "Anubis leader replacement / cost 15",
+      "team": [
+        11,
+        0,
+        2,
+        6,
+        10
+      ],
+      "cost": 15,
+      "total": {
+        "games": 1536,
+        "wins": 643,
+        "losses": 891,
+        "draws": 2,
+        "winPercent": 41.862,
+        "meanTurns": 5.352,
+        "turnRange": [
+          2,
+          20
+        ],
+        "turnLimitGames": 2,
+        "meanFinalTeamHpPercent": 14.651
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 612,
+        "losses": 154,
+        "draws": 2,
+        "winPercent": 79.688,
+        "meanTurns": 6.349,
+        "turnRange": [
+          3,
+          20
+        ],
+        "turnLimitGames": 2,
+        "meanFinalTeamHpPercent": 28.579
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 31,
+        "losses": 737,
+        "draws": 0,
+        "winPercent": 4.036,
+        "meanTurns": 4.354,
+        "turnRange": [
+          2,
+          16
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 0.723
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 106,
+          "losses": 150,
+          "draws": 0,
+          "winPercent": 41.406,
+          "meanTurns": 5.176,
+          "turnRange": [
+            2,
+            19
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 10.845
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 100,
+          "losses": 156,
+          "draws": 0,
+          "winPercent": 39.063,
+          "meanTurns": 5.906,
+          "turnRange": [
+            3,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 11.235
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 139,
+          "losses": 117,
+          "draws": 0,
+          "winPercent": 54.297,
+          "meanTurns": 6.652,
+          "turnRange": [
+            3,
+            16
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 21.943
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 106,
+          "losses": 150,
+          "draws": 0,
+          "winPercent": 41.406,
+          "meanTurns": 4.477,
+          "turnRange": [
+            2,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 12.672
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 63,
+          "losses": 191,
+          "draws": 2,
+          "winPercent": 24.609,
+          "meanTurns": 4.008,
+          "turnRange": [
+            3,
+            11
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 4.046
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 129,
+          "losses": 127,
+          "draws": 0,
+          "winPercent": 50.391,
+          "meanTurns": 5.891,
+          "turnRange": [
+            3,
+            14
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 27.164
+        }
+      ]
+    },
+    {
+      "name": "Anubis member replacement / fox leader / cost 15",
+      "team": [
+        0,
+        11,
+        2,
+        6,
+        10
+      ],
+      "cost": 15,
+      "total": {
+        "games": 1536,
+        "wins": 654,
+        "losses": 881,
+        "draws": 1,
+        "winPercent": 42.578,
+        "meanTurns": 5.53,
+        "turnRange": [
+          2,
+          20
+        ],
+        "turnLimitGames": 3,
+        "meanFinalTeamHpPercent": 15.172
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 638,
+        "losses": 129,
+        "draws": 1,
+        "winPercent": 83.073,
+        "meanTurns": 6.591,
+        "turnRange": [
+          3,
+          20
+        ],
+        "turnLimitGames": 3,
+        "meanFinalTeamHpPercent": 29.904
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 16,
+        "losses": 752,
+        "draws": 0,
+        "winPercent": 2.083,
+        "meanTurns": 4.469,
+        "turnRange": [
+          2,
+          17
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 0.441
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 107,
+          "losses": 149,
+          "draws": 0,
+          "winPercent": 41.797,
+          "meanTurns": 5.496,
+          "turnRange": [
+            2,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 10.36
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 111,
+          "losses": 145,
+          "draws": 0,
+          "winPercent": 43.359,
+          "meanTurns": 5.961,
+          "turnRange": [
+            3,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 14.59
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 140,
+          "losses": 116,
+          "draws": 0,
+          "winPercent": 54.688,
+          "meanTurns": 6.953,
+          "turnRange": [
+            3,
+            17
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 22.799
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 96,
+          "losses": 160,
+          "draws": 0,
+          "winPercent": 37.5,
+          "meanTurns": 4.527,
+          "turnRange": [
+            2,
+            18
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 11.6
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 71,
+          "losses": 184,
+          "draws": 1,
+          "winPercent": 27.734,
+          "meanTurns": 4.133,
+          "turnRange": [
+            3,
+            12
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 4.911
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 129,
+          "losses": 127,
+          "draws": 0,
+          "winPercent": 50.391,
+          "meanTurns": 6.109,
+          "turnRange": [
+            3,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 26.774
+        }
+      ]
+    },
+    {
+      "name": "Fenrir leader / 4 beasts / cost 17",
+      "team": [
+        12,
+        0,
+        11,
+        2,
+        6
+      ],
+      "cost": 17,
+      "total": {
+        "games": 1536,
+        "wins": 763,
+        "losses": 773,
+        "draws": 0,
+        "winPercent": 49.674,
+        "meanTurns": 5.004,
+        "turnRange": [
+          2,
+          20
+        ],
+        "turnLimitGames": 9,
+        "meanFinalTeamHpPercent": 16.036,
+        "fenrir": {
+          "turnOneDeathPercent": 4.036,
+          "survivalPercent": 28.516,
+          "meanBarrages": 2.059,
+          "meanBites": 0.695,
+          "meanBasics": 0.23,
+          "meanDirectDamage": 266.466,
+          "meanMpSpent": 33.715,
+          "meanLandedBarrageHits": 4.98
+        }
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 656,
+        "losses": 112,
+        "draws": 0,
+        "winPercent": 85.417,
+        "meanTurns": 5.805,
+        "turnRange": [
+          3,
+          20
+        ],
+        "turnLimitGames": 9,
+        "meanFinalTeamHpPercent": 29.738,
+        "fenrir": {
+          "turnOneDeathPercent": 3.125,
+          "survivalPercent": 50.26,
+          "meanBarrages": 2.945,
+          "meanBites": 0.023,
+          "meanBasics": 0.423,
+          "meanDirectDamage": 316.358,
+          "meanMpSpent": 38.523,
+          "meanLandedBarrageHits": 4.989
+        }
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 107,
+        "losses": 661,
+        "draws": 0,
+        "winPercent": 13.932,
+        "meanTurns": 4.203,
+        "turnRange": [
+          2,
+          13
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 2.334,
+        "fenrir": {
+          "turnOneDeathPercent": 4.948,
+          "survivalPercent": 6.771,
+          "meanBarrages": 1.172,
+          "meanBites": 1.367,
+          "meanBasics": 0.038,
+          "meanDirectDamage": 216.574,
+          "meanMpSpent": 28.906,
+          "meanLandedBarrageHits": 4.958
+        }
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 95,
+          "losses": 161,
+          "draws": 0,
+          "winPercent": 37.109,
+          "meanTurns": 5.246,
+          "turnRange": [
+            2,
+            20
+          ],
+          "turnLimitGames": 6,
+          "meanFinalTeamHpPercent": 10.263,
+          "fenrir": {
+            "turnOneDeathPercent": 3.125,
+            "survivalPercent": 16.406,
+            "meanBarrages": 1.902,
+            "meanBites": 0.598,
+            "meanBasics": 0.23,
+            "meanDirectDamage": 245.531,
+            "meanMpSpent": 30.707,
+            "meanLandedBarrageHits": 4.996
+          }
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 131,
+          "losses": 125,
+          "draws": 0,
+          "winPercent": 51.172,
+          "meanTurns": 5.055,
+          "turnRange": [
+            3,
+            17
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 14.597,
+          "fenrir": {
+            "turnOneDeathPercent": 3.906,
+            "survivalPercent": 26.172,
+            "meanBarrages": 1.969,
+            "meanBites": 0.863,
+            "meanBasics": 0.18,
+            "meanDirectDamage": 270.953,
+            "meanMpSpent": 34.227,
+            "meanLandedBarrageHits": 4.982
+          }
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 175,
+          "losses": 81,
+          "draws": 0,
+          "winPercent": 68.359,
+          "meanTurns": 6.164,
+          "turnRange": [
+            3,
+            15
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 23.033,
+          "fenrir": {
+            "turnOneDeathPercent": 0.781,
+            "survivalPercent": 37.109,
+            "meanBarrages": 2.25,
+            "meanBites": 0.852,
+            "meanBasics": 0.285,
+            "meanDirectDamage": 297.496,
+            "meanMpSpent": 37.766,
+            "meanLandedBarrageHits": 4.97
+          }
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 115,
+          "losses": 141,
+          "draws": 0,
+          "winPercent": 44.922,
+          "meanTurns": 4.086,
+          "turnRange": [
+            2,
+            20
+          ],
+          "turnLimitGames": 1,
+          "meanFinalTeamHpPercent": 13.153,
+          "fenrir": {
+            "turnOneDeathPercent": 0.391,
+            "survivalPercent": 29.297,
+            "meanBarrages": 1.965,
+            "meanBites": 0.582,
+            "meanBasics": 0.078,
+            "meanDirectDamage": 242.566,
+            "meanMpSpent": 31.363,
+            "meanLandedBarrageHits": 4.968
+          }
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 112,
+          "losses": 144,
+          "draws": 0,
+          "winPercent": 43.75,
+          "meanTurns": 3.793,
+          "turnRange": [
+            2,
+            11
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 9.873,
+          "fenrir": {
+            "turnOneDeathPercent": 0,
+            "survivalPercent": 27.344,
+            "meanBarrages": 1.895,
+            "meanBites": 0.719,
+            "meanBasics": 0.098,
+            "meanDirectDamage": 244.543,
+            "meanMpSpent": 31.816,
+            "meanLandedBarrageHits": 4.961
+          }
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 135,
+          "losses": 121,
+          "draws": 0,
+          "winPercent": 52.734,
+          "meanTurns": 5.68,
+          "turnRange": [
+            3,
+            20
+          ],
+          "turnLimitGames": 2,
+          "meanFinalTeamHpPercent": 25.298,
+          "fenrir": {
+            "turnOneDeathPercent": 16.016,
+            "survivalPercent": 34.766,
+            "meanBarrages": 2.371,
+            "meanBites": 0.559,
+            "meanBasics": 0.512,
+            "meanDirectDamage": 297.707,
+            "meanMpSpent": 36.41,
+            "meanLandedBarrageHits": 4.998
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fenrir leader / only self beast / cost 14",
+      "team": [
+        12,
+        4,
+        8,
+        6,
+        10
+      ],
+      "cost": 14,
+      "total": {
+        "games": 1536,
+        "wins": 878,
+        "losses": 654,
+        "draws": 4,
+        "winPercent": 57.161,
+        "meanTurns": 3.501,
+        "turnRange": [
+          2,
+          13
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 20.858,
+        "fenrir": {
+          "turnOneDeathPercent": 6.12,
+          "survivalPercent": 36.393,
+          "meanBarrages": 1.682,
+          "meanBites": 0.535,
+          "meanBasics": 0.099,
+          "meanDirectDamage": 205.081,
+          "meanMpSpent": 27.215,
+          "meanLandedBarrageHits": 4.935
+        }
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 762,
+        "losses": 5,
+        "draws": 1,
+        "winPercent": 99.219,
+        "meanTurns": 2.943,
+        "turnRange": [
+          2,
+          9
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 39.446,
+        "fenrir": {
+          "turnOneDeathPercent": 3.516,
+          "survivalPercent": 66.927,
+          "meanBarrages": 2.267,
+          "meanBites": 0.014,
+          "meanBasics": 0.19,
+          "meanDirectDamage": 220.477,
+          "meanMpSpent": 29.613,
+          "meanLandedBarrageHits": 4.916
+        }
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 116,
+        "losses": 649,
+        "draws": 3,
+        "winPercent": 15.104,
+        "meanTurns": 4.06,
+        "turnRange": [
+          2,
+          13
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 2.27,
+        "fenrir": {
+          "turnOneDeathPercent": 8.724,
+          "survivalPercent": 5.859,
+          "meanBarrages": 1.098,
+          "meanBites": 1.055,
+          "meanBasics": 0.008,
+          "meanDirectDamage": 189.686,
+          "meanMpSpent": 24.816,
+          "meanLandedBarrageHits": 4.974
+        }
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 125,
+          "losses": 131,
+          "draws": 0,
+          "winPercent": 48.828,
+          "meanTurns": 3.176,
+          "turnRange": [
+            2,
+            7
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 16.037,
+          "fenrir": {
+            "turnOneDeathPercent": 3.516,
+            "survivalPercent": 29.297,
+            "meanBarrages": 1.734,
+            "meanBites": 0.504,
+            "meanBasics": 0.047,
+            "meanDirectDamage": 209.109,
+            "meanMpSpent": 27.586,
+            "meanLandedBarrageHits": 4.948
+          }
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 129,
+          "losses": 127,
+          "draws": 0,
+          "winPercent": 50.391,
+          "meanTurns": 3.414,
+          "turnRange": [
+            2,
+            9
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 16.556,
+          "fenrir": {
+            "turnOneDeathPercent": 13.672,
+            "survivalPercent": 27.734,
+            "meanBarrages": 1.539,
+            "meanBites": 0.422,
+            "meanBasics": 0.109,
+            "meanDirectDamage": 189.422,
+            "meanMpSpent": 24.227,
+            "meanLandedBarrageHits": 4.934
+          }
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 199,
+          "losses": 56,
+          "draws": 1,
+          "winPercent": 77.734,
+          "meanTurns": 4.191,
+          "turnRange": [
+            2,
+            13
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 26.57,
+          "fenrir": {
+            "turnOneDeathPercent": 1.172,
+            "survivalPercent": 50.391,
+            "meanBarrages": 1.887,
+            "meanBites": 0.672,
+            "meanBasics": 0.117,
+            "meanDirectDamage": 227.066,
+            "meanMpSpent": 31.246,
+            "meanLandedBarrageHits": 4.849
+          }
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 142,
+          "losses": 112,
+          "draws": 2,
+          "winPercent": 55.469,
+          "meanTurns": 3.063,
+          "turnRange": [
+            2,
+            9
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 21.026,
+          "fenrir": {
+            "turnOneDeathPercent": 0.391,
+            "survivalPercent": 37.891,
+            "meanBarrages": 1.516,
+            "meanBites": 0.559,
+            "meanBasics": 0.141,
+            "meanDirectDamage": 190.777,
+            "meanMpSpent": 25.289,
+            "meanLandedBarrageHits": 4.961
+          }
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 137,
+          "losses": 118,
+          "draws": 1,
+          "winPercent": 53.516,
+          "meanTurns": 2.98,
+          "turnRange": [
+            2,
+            5
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 15.751,
+          "fenrir": {
+            "turnOneDeathPercent": 0.781,
+            "survivalPercent": 24.219,
+            "meanBarrages": 1.379,
+            "meanBites": 0.527,
+            "meanBasics": 0.105,
+            "meanDirectDamage": 180.867,
+            "meanMpSpent": 23.199,
+            "meanLandedBarrageHits": 4.986
+          }
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 146,
+          "losses": 110,
+          "draws": 0,
+          "winPercent": 57.031,
+          "meanTurns": 4.184,
+          "turnRange": [
+            3,
+            13
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 29.208,
+          "fenrir": {
+            "turnOneDeathPercent": 17.188,
+            "survivalPercent": 48.828,
+            "meanBarrages": 2.039,
+            "meanBites": 0.523,
+            "meanBasics": 0.074,
+            "meanDirectDamage": 233.246,
+            "meanMpSpent": 31.742,
+            "meanLandedBarrageHits": 4.948
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fenrir leader / opening rally disabled for both sides / cost 15",
+      "team": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ],
+      "familySupport": false,
+      "cost": 15,
+      "total": {
+        "games": 1536,
+        "wins": 766,
+        "losses": 769,
+        "draws": 1,
+        "winPercent": 49.87,
+        "meanTurns": 4.306,
+        "turnRange": [
+          2,
+          19
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 20.05,
+        "fenrir": {
+          "turnOneDeathPercent": 5.469,
+          "survivalPercent": 35.482,
+          "meanBarrages": 2.025,
+          "meanBites": 0.631,
+          "meanBasics": 0.167,
+          "meanDirectDamage": 239.635,
+          "meanMpSpent": 32.639,
+          "meanLandedBarrageHits": 4.922
+        }
+      },
+      "candidateAsPlayer": {
+        "games": 768,
+        "wins": 725,
+        "losses": 42,
+        "draws": 1,
+        "winPercent": 94.401,
+        "meanTurns": 4.219,
+        "turnRange": [
+          2,
+          18
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 38.488,
+        "fenrir": {
+          "turnOneDeathPercent": 3.776,
+          "survivalPercent": 66.406,
+          "meanBarrages": 2.816,
+          "meanBites": 0.02,
+          "meanBasics": 0.246,
+          "meanDirectDamage": 263.695,
+          "meanMpSpent": 36.809,
+          "meanLandedBarrageHits": 4.888
+        }
+      },
+      "candidateAsEnemy": {
+        "games": 768,
+        "wins": 41,
+        "losses": 727,
+        "draws": 0,
+        "winPercent": 5.339,
+        "meanTurns": 4.393,
+        "turnRange": [
+          2,
+          19
+        ],
+        "turnLimitGames": 0,
+        "meanFinalTeamHpPercent": 1.612,
+        "fenrir": {
+          "turnOneDeathPercent": 7.161,
+          "survivalPercent": 4.557,
+          "meanBarrages": 1.234,
+          "meanBites": 1.242,
+          "meanBasics": 0.087,
+          "meanDirectDamage": 215.576,
+          "meanMpSpent": 28.469,
+          "meanLandedBarrageHits": 4.998
+        }
+      },
+      "matchups": [
+        {
+          "opponent": "Existing heavy/guard opponent",
+          "games": 256,
+          "wins": 113,
+          "losses": 143,
+          "draws": 0,
+          "winPercent": 44.141,
+          "meanTurns": 4.063,
+          "turnRange": [
+            2,
+            18
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 13.441,
+          "fenrir": {
+            "turnOneDeathPercent": 3.516,
+            "survivalPercent": 23.828,
+            "meanBarrages": 1.918,
+            "meanBites": 0.523,
+            "meanBasics": 0.121,
+            "meanDirectDamage": 222.898,
+            "meanMpSpent": 30.168,
+            "meanLandedBarrageHits": 4.957
+          }
+        },
+        {
+          "opponent": "Existing Anubis/poison opponent",
+          "games": 256,
+          "wins": 117,
+          "losses": 139,
+          "draws": 0,
+          "winPercent": 45.703,
+          "meanTurns": 4.344,
+          "turnRange": [
+            3,
+            16
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 16.259,
+          "fenrir": {
+            "turnOneDeathPercent": 10.156,
+            "survivalPercent": 25.391,
+            "meanBarrages": 1.777,
+            "meanBites": 0.578,
+            "meanBasics": 0.078,
+            "meanDirectDamage": 213.289,
+            "meanMpSpent": 28.887,
+            "meanLandedBarrageHits": 4.954
+          }
+        },
+        {
+          "opponent": "Existing fox/healing opponent",
+          "games": 256,
+          "wins": 159,
+          "losses": 97,
+          "draws": 0,
+          "winPercent": 62.109,
+          "meanTurns": 5.516,
+          "turnRange": [
+            3,
+            19
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 28.738,
+          "fenrir": {
+            "turnOneDeathPercent": 3.125,
+            "survivalPercent": 53.125,
+            "meanBarrages": 2.371,
+            "meanBites": 0.863,
+            "meanBasics": 0.41,
+            "meanDirectDamage": 299.07,
+            "meanMpSpent": 39.457,
+            "meanLandedBarrageHits": 4.956
+          }
+        },
+        {
+          "opponent": "New Fenrir mixed opponent",
+          "games": 256,
+          "wins": 128,
+          "losses": 128,
+          "draws": 0,
+          "winPercent": 50,
+          "meanTurns": 3.5,
+          "turnRange": [
+            2,
+            9
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 18.284,
+          "fenrir": {
+            "turnOneDeathPercent": 0.781,
+            "survivalPercent": 34.766,
+            "meanBarrages": 1.848,
+            "meanBites": 0.629,
+            "meanBasics": 0.098,
+            "meanDirectDamage": 220.117,
+            "meanMpSpent": 30.309,
+            "meanLandedBarrageHits": 4.905
+          }
+        },
+        {
+          "opponent": "Priority-rich roster",
+          "games": 256,
+          "wins": 119,
+          "losses": 136,
+          "draws": 1,
+          "winPercent": 46.484,
+          "meanTurns": 3.477,
+          "turnRange": [
+            2,
+            8
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 13.788,
+          "fenrir": {
+            "turnOneDeathPercent": 0.781,
+            "survivalPercent": 32.031,
+            "meanBarrages": 1.789,
+            "meanBites": 0.59,
+            "meanBasics": 0.086,
+            "meanDirectDamage": 209.57,
+            "meanMpSpent": 29.156,
+            "meanLandedBarrageHits": 4.873
+          }
+        },
+        {
+          "opponent": "Guard/healing roster",
+          "games": 256,
+          "wins": 130,
+          "losses": 126,
+          "draws": 0,
+          "winPercent": 50.781,
+          "meanTurns": 4.938,
+          "turnRange": [
+            3,
+            16
+          ],
+          "turnLimitGames": 0,
+          "meanFinalTeamHpPercent": 29.789,
+          "fenrir": {
+            "turnOneDeathPercent": 14.453,
+            "survivalPercent": 43.75,
+            "meanBarrages": 2.449,
+            "meanBites": 0.602,
+            "meanBasics": 0.207,
+            "meanDirectDamage": 272.867,
+            "meanMpSpent": 37.855,
+            "meanLandedBarrageHits": 4.885
+          }
+        }
+      ]
+    }
+  ],
+  "damageProfiles": [
+    {
+      "name": "Fenrir barrage, base stats, no rally, 5 targets",
+      "id": 12,
+      "skill": 0,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": false,
+      "seeds": 512,
+      "totalDamageMean": 100.18,
+      "totalDamageRange": [
+        92,
+        108
+      ],
+      "meanDamageOnEnemyZero": 20.213,
+      "meanFirstHit": 20.201,
+      "meanDistinctTargets": 3.326,
+      "meanMaximumHitsOnOneTarget": 2.316,
+      "repeatedTargetPercent": 96.484,
+      "mpCost": 13
+    },
+    {
+      "name": "Fenrir barrage, opening rally, 5 targets",
+      "id": 12,
+      "skill": 0,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": true,
+      "seeds": 512,
+      "totalDamageMean": 105.908,
+      "totalDamageRange": [
+        97,
+        114
+      ],
+      "meanDamageOnEnemyZero": 21.404,
+      "meanFirstHit": 21.365,
+      "meanDistinctTargets": 3.326,
+      "meanMaximumHitsOnOneTarget": 2.316,
+      "repeatedTargetPercent": 96.484,
+      "mpCost": 13
+    },
+    {
+      "name": "Fenrir barrage, leader plus opening rally, 5 targets",
+      "id": 12,
+      "skill": 0,
+      "targets": 5,
+      "leaders": true,
+      "familySupport": true,
+      "seeds": 512,
+      "totalDamageMean": 113.807,
+      "totalDamageRange": [
+        105,
+        123
+      ],
+      "meanDamageOnEnemyZero": 22.986,
+      "meanFirstHit": 22.971,
+      "meanDistinctTargets": 3.326,
+      "meanMaximumHitsOnOneTarget": 2.316,
+      "repeatedTargetPercent": 96.484,
+      "mpCost": 13
+    },
+    {
+      "name": "Fenrir bite, opening rally, 5 targets",
+      "id": 12,
+      "skill": 1,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": true,
+      "seeds": 512,
+      "totalDamageMean": 76.152,
+      "totalDamageRange": [
+        68,
+        84
+      ],
+      "meanDamageOnEnemyZero": 76.152,
+      "meanFirstHit": 76.152,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 10
+    },
+    {
+      "name": "Fenrir basic, opening rally, 5 targets",
+      "id": 12,
+      "skill": -1,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": true,
+      "seeds": 512,
+      "totalDamageMean": 56.533,
+      "totalDamageRange": [
+        51,
+        62
+      ],
+      "meanDamageOnEnemyZero": 56.533,
+      "meanFirstHit": 56.533,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 0
+    },
+    {
+      "name": "Fenrir barrage, opening rally, single unguarded",
+      "id": 12,
+      "skill": 0,
+      "targets": 1,
+      "leaders": false,
+      "familySupport": true,
+      "seeds": 512,
+      "totalDamageMean": 105.939,
+      "totalDamageRange": [
+        98,
+        113
+      ],
+      "meanDamageOnEnemyZero": 105.939,
+      "meanFirstHit": 21.16,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 5,
+      "repeatedTargetPercent": 100,
+      "mpCost": 13
+    },
+    {
+      "name": "Fenrir barrage, opening rally, single guarding",
+      "id": 12,
+      "skill": 0,
+      "targets": 1,
+      "leaders": false,
+      "familySupport": true,
+      "guarded": true,
+      "seeds": 512,
+      "totalDamageMean": 95.125,
+      "totalDamageRange": [
+        87,
+        101
+      ],
+      "meanDamageOnEnemyZero": 95.125,
+      "meanFirstHit": 10.346,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 5,
+      "repeatedTargetPercent": 100,
+      "mpCost": 13
+    },
+    {
+      "name": "Fenrir barrage, opening rally, all five guarding",
+      "id": 12,
+      "skill": 0,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": true,
+      "guarded": true,
+      "seeds": 512,
+      "totalDamageMean": 69.592,
+      "totalDamageRange": [
+        49,
+        92
+      ],
+      "meanDamageOnEnemyZero": 14.021,
+      "meanFirstHit": 10.285,
+      "meanDistinctTargets": 3.326,
+      "meanMaximumHitsOnOneTarget": 2.316,
+      "repeatedTargetPercent": 96.484,
+      "mpCost": 13
+    },
+    {
+      "name": "Fox area attack, base stats, 5 targets",
+      "id": 0,
+      "skill": 2,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": false,
+      "seeds": 512,
+      "totalDamageMean": 112.365,
+      "totalDamageRange": [
+        102,
+        122
+      ],
+      "meanDamageOnEnemyZero": 22.43,
+      "meanFirstHit": 22.43,
+      "meanDistinctTargets": 5,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 18
+    },
+    {
+      "name": "Quetzalcoatl area attack, base stats, 5 targets",
+      "id": 5,
+      "skill": 1,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": false,
+      "seeds": 512,
+      "totalDamageMean": 132.254,
+      "totalDamageRange": [
+        121,
+        143
+      ],
+      "meanDamageOnEnemyZero": 26.383,
+      "meanFirstHit": 26.383,
+      "meanDistinctTargets": 5,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 18
+    },
+    {
+      "name": "Anubis focused attack, base stats, 5 targets",
+      "id": 11,
+      "skill": 0,
+      "targets": 5,
+      "leaders": false,
+      "familySupport": false,
+      "seeds": 512,
+      "totalDamageMean": 88.016,
+      "totalDamageRange": [
+        79,
+        97
+      ],
+      "meanDamageOnEnemyZero": 88.016,
+      "meanFirstHit": 88.016,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 10
+    },
+    {
+      "name": "Anubis guard breaker, base stats, single guarding",
+      "id": 11,
+      "skill": 3,
+      "targets": 1,
+      "leaders": false,
+      "familySupport": false,
+      "guarded": true,
+      "seeds": 512,
+      "totalDamageMean": 78.053,
+      "totalDamageRange": [
+        70,
+        86
+      ],
+      "meanDamageOnEnemyZero": 78.053,
+      "meanFirstHit": 78.053,
+      "meanDistinctTargets": 1,
+      "meanMaximumHitsOnOneTarget": 1,
+      "repeatedTargetPercent": 0,
+      "mpCost": 14
+    }
+  ]
+}

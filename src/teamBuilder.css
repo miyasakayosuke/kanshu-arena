@@ -88,3 +88,7 @@
 .teamBuilder .currentMemberBrief>div{min-width:0;display:grid;gap:3px}
 .teamBuilder .currentMemberBrief strong{font-size:12px;line-height:1.5}
 .teamBuilder .currentMemberBrief small{font-size:9px;color:#b3c4ad;line-height:1.4}
+
+.advancedFilters:has([aria-label="系統で絞り込み"]){grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.newBeast{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:14px 0;padding:12px;background:linear-gradient(110deg,#23433d,#1a3038);border:1px solid #7fb8a54f;border-radius:10px}.newBeast strong,.newBeast small{display:block}.newBeast strong{font-size:12px;color:#d6e6cd;margin:4px 0}.newBeast small{font-size:10px;color:#a5bdb1}.newBeast .secondary{white-space:nowrap;padding:9px;font-size:10px}

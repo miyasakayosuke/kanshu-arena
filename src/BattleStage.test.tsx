@@ -12,10 +12,11 @@ let frames: Map<number, FrameRequestCallback>;
 let resize: () => void;
 let observerDisconnect: ReturnType<typeof vi.fn>;
 type Matrix = [number, number, number, number, number, number];
+let sprites: Matrix[];
 let glyphs: {text: string; matrix: Matrix; font: string}[];
 const context = {
   ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
-  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(),
+  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(),
   createLinearGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   createRadialGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   measureText: vi.fn(() => ({width: 90})),
@@ -31,7 +32,7 @@ function frame(time: number) {
   const [id, callback] = frames.entries().next().value!;
   frames.delete(id);
   context.fillText.mockClear();
-  glyphs = [];
+  glyphs = []; sprites = [];
   callback(time);
 }
 function labels() {return context.fillText.mock.calls.map(call => call[0]);}
@@ -62,6 +63,7 @@ beforeEach(() => {
   vi.mocked(ctx.translate).mockImplementation((x, y) => multiply([1, 0, 0, 1, x, y]));
   vi.mocked(ctx.scale).mockImplementation((x, y) => multiply([x, 0, 0, y, 0, 0]));
   vi.mocked(ctx.rotate).mockImplementation(angle => multiply([Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), 0, 0]));
+  context.drawImage.mockImplementation(() => {sprites.push([...matrix]);});
   context.fillText.mockImplementation((text: string) => {
     if (ctx.font.includes('Apple Color Emoji')) glyphs.push({text, matrix: [...matrix], font: ctx.font});
   });
@@ -416,5 +418,41 @@ describe('reduced-motion effect cleanup', () => {
     expect(ctx.globalAlpha).toBeGreaterThan(0);
     frame(790);
     expect(ctx.globalAlpha).toBe(0);
+  });
+});
+
+
+describe('original wolf enemy asset and random-hit presentation', () => {
+  it('renders the full-body asset and keeps its pounce active until the last actual hit', async () => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const state=start([0,2,3,4,6],[12,0,2,6,10],42,{leaders:true});
+    const barrage:BattleEvent={kind:'cast',actor:'e0',scope:'random',skill:'破縛の連牙',effect:'hit',hits:5,targets:['a0'],hitTargets:['a0','a0','a0','a0','a0']};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'破縛の連牙',type:'slash',tick:1},impact:barrage,castEvent:barrage};
+    await render(props);frame(100);
+    expect(context.drawImage).toHaveBeenCalled();expect(sprites).toHaveLength(1);
+    expect(glyphs.map(value=>value.text)).toEqual(state.enemies.slice(1).map(unit=>unit.monster.icon));
+    const idle=sprites[0];frame(440);expect(sprites[0]).not.toEqual(idle);
+    frame(899);const released=sprites[0];
+    for(let index=0;index<5;index++) {
+      const hit:BattleEvent={kind:'damage',actor:'e0',target:'a0',hitIndex:index,amount:20,hp:130-index*20};
+      await render({...props,impact:hit,impacts:[hit]});frame(900+index*180);
+      expect(labels()).toContain(`ランダム5回 · ${index+1}/5撃`);
+    }
+    frame(1710);expect(sprites[0]).not.toEqual(idle);
+    // A delayed final hit starts recovery at its observed time, not from a stale timer.
+    frame(2320);expect(sprites[0]).not.toEqual(released);
+    expect(labels()).not.toContain('破縛の連牙');
+  });
+
+  it('draws strip fragments only for actual break events, including reduced motion', async () => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const barrage:BattleEvent={kind:'cast',actor:'a0',scope:'random',skill:'破縛の連牙',effect:'hit',hits:5,targets:['e0'],hitTargets:['e0','e0','e0','e0','e0']};
+    const props={...base,effect:{text:'破縛の連牙',type:'slash',tick:1},impact:barrage,castEvent:barrage};
+    await render(props);frame(100);expect(labels()).not.toContain('群気解除');
+    const strip:BattleEvent={kind:'break',actor:'a0',target:'e0',hitIndex:0,rally:0,guard:false,removed:['rally']};
+    await render({...props,impact:strip,impacts:[strip]});frame(900);
+    expect(labels()).toContain('群気解除');expect(labels()).not.toContain('群気・守り解除');
+    await render({...base,castEvent:null,impacts:[]});frame(910);
+    expect(labels()).not.toContain('群気解除');
   });
 });

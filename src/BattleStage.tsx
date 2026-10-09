@@ -1,8 +1,9 @@
 import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
-import {CAST_IMPACT_MS} from './playback';
-import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleHitMotion, sampleNumberMotion} from './battleMotion';
+import {FENRIR_ART_URL} from './fenrirArt';
+import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleHitMotion, sampleNumberMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
 };
 type Point = {x: number; y: number};
 type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison';
-type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number};
+type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
 type Health = {value: number; trail: number; target: number; changed: number};
 const WIDTH = 720;
@@ -174,7 +175,7 @@ function arena(ctx: CanvasRenderingContext2D, time: number) {
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }
 function drawCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean) {
-  if (age > 950 || cast.event.scope === 'all') return;
+  if (age > 950 || cast.event.scope === 'all' || cast.event.scope === 'random') return;
   const {from, to, type} = cast;
   const palette = palettes[type];
   const strength = Math.sin(clamp(age / 950) * Math.PI);
@@ -229,6 +230,21 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
   } else if (event.kind === 'guard') {
     shield(ctx, x, y, 38 + ease(progress) * 10 * movement, .9);
+  } else if (event.kind === 'break') {
+    // This is the actual post-hit strip event, never a decorative promise at cast.
+    const distance = 22 + ease(progress) * 28 * movement;
+    for (let index = 0; index < 6; index++) {
+      const angle = index / 6 * TAU;
+      const px = x + Math.cos(angle) * distance;
+      const py = y + Math.sin(angle) * distance;
+      ctx.beginPath();
+      ctx.moveTo(px - 5, py - 9); ctx.lineTo(px + 10, py - 3); ctx.lineTo(px + 3, py + 10); ctx.closePath();
+      ctx.fillStyle = index % 2 ? '#e8c983bb' : '#81e3cfaa'; ctx.fill();
+      ctx.strokeStyle = '#fff7db'; ctx.lineWidth = 1; ctx.stroke();
+    }
+    line(ctx, [{x:x-17,y:y-31},{x:x+2,y:y-9},{x:x-8,y:y+8},{x:x+19,y:y+30}], '#b6ffec', 3);
+    ctx.globalAlpha = fade; ctx.fillStyle = '#566f62'; ctx.font = '700 12px system-ui'; ctx.textAlign = 'center';
+    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : '守り').join('・') : '守り'}解除`, x, y + 48);
   } else if (event.kind === 'heal') {
     glow(ctx, x, y + 12, 57, '#84d9aa5c');
     for (let index = 0; index < 3; index++) {
@@ -335,13 +351,14 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     ctx.textBaseline = 'middle';
     ctx.font = `800 ${31 * number.scale}px system-ui, sans-serif`;
     const label = event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
-    const py = y - 44 - number.rise;
+    const px = x + (event.hitIndex === undefined ? 0 : (event.hitIndex % 3 - 1) * 21);
+    const py = y - 44 - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
     ctx.lineJoin = 'round';
     ctx.lineWidth = 5;
     ctx.strokeStyle = '#fffbed';
-    ctx.strokeText(label, x, py);
+    ctx.strokeText(label, px, py);
     ctx.fillStyle = event.kind === 'heal' ? '#238467' : type === 'poison' ? '#777644' : '#9c5435';
-    ctx.fillText(label, x, py);
+    ctx.fillText(label, px, py);
   }
   ctx.restore();
 }
@@ -358,6 +375,8 @@ export default function BattleStage(props: Props) {
     if (!element) return;
     const ctx = element.getContext('2d');
     if (!ctx) return;
+    const fenrirImage = new Image();
+    fenrirImage.src = FENRIR_ART_URL;
     let handle = 0;
     let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
@@ -416,6 +435,7 @@ export default function BattleStage(props: Props) {
         lastImpacts = data.impacts;
         if (data.impact?.kind !== 'cast') for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
           if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'cleanse', 'break'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
+          if (cast && event.actor === cast.event.actor && event.hitIndex !== undefined && (cast.lastHitIndex === undefined || event.hitIndex > cast.lastHitIndex)) {cast.lastHitIndex = event.hitIndex; cast.lastHitAt = now;}
           if (seenImpacts.has(event)) continue;
           seenImpacts.add(event);
           const at = locate(event.target, data);
@@ -430,8 +450,15 @@ export default function BattleStage(props: Props) {
       if (!data.effect && !data.impact) {cast = null; lastCast = null; impacts = [];}
       impacts = impacts.filter(impact => (now - impact.started) * impact.rate < 1000);
       const elapsed = cast ? (now - cast.started) * cast.rate : 2000;
-      const age = cast ? actionAge(elapsed, cast.impactedAt === undefined ? undefined : (now - cast.impactedAt) * cast.rate) : 2000;
-      const motion = sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
+      let age = cast ? actionAge(elapsed, cast.impactedAt === undefined ? undefined : (now - cast.impactedAt) * cast.rate) : 2000;
+      const barrage = cast?.event.scope === 'random';
+      const hitCount = cast?.event.hitTargets?.length ?? cast?.event.hits ?? 5;
+      if (barrage && cast?.lastHitIndex !== undefined) {
+        age = cast.lastHitIndex >= hitCount - 1 && cast.lastHitAt !== undefined
+          ? CAST_IMPACT_MS + (hitCount - 1) * MULTIHIT_INTERVAL_MS + (now - cast.lastHitAt) * cast.rate
+          : Math.min(age, CAST_IMPACT_MS + (cast.lastHitIndex + 1) * MULTIHIT_INTERVAL_MS - 1);
+      }
+      const motion = barrage ? sampleFenrirMotion(age, hitCount, reduced) : sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       arena(ctx, reduced ? 0 : now / 1000);
@@ -511,7 +538,9 @@ export default function BattleStage(props: Props) {
         ctx.shadowOffsetY = 4;
         // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(unit.monster.icon, 0, 0);
+        if (unit.monster.id === 12 && fenrirImage.complete && fenrirImage.naturalWidth > 0) {
+          ctx.drawImage(fenrirImage, -55, -47, 110, 82.5);
+        } else ctx.fillText(unit.monster.icon, 0, 0);
         ctx.restore();
         ctx.restore();
         let hp = health.get(unit.key);
@@ -586,12 +615,12 @@ export default function BattleStage(props: Props) {
         ctx.fillStyle = '#53604f';
         ctx.fillText(`${actor?.key.startsWith('e') ? '敵' : '味方'} · ${actor?.monster.name ?? ''}`, WIDTH / 2, 80);
         ctx.restore();
-        if (cast.event.scope === 'all') {
+        if (cast.event.scope === 'all' || cast.event.scope === 'random') {
           ctx.save();
           ctx.translate(0, 67); ctx.scale(1, scaleY); ctx.translate(0, -67);
           ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center';
           ctx.fillStyle = palettes[cast.type].dark;
-          ctx.fillText(`${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
+          ctx.fillText(cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
           ctx.restore();
         }
       }
@@ -607,7 +636,7 @@ export default function BattleStage(props: Props) {
   }, []);
   const selectable = props.enemies.map((unit, index) => ({unit, point: position(index, props.enemies.length)})).filter(({unit}) => unit.hp > 0 && props.targetKeys?.includes(unit.key));
   const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal'));
-  const announcement = feedback.length > 1 ? `${feedback.length}体に同時着弾。${feedback.map(event => `${[...props.allies, ...props.enemies].find(unit => unit.key === event.target)?.monster.name ?? ''} ${event.kind === 'heal' ? '回復' : 'ダメージ'} ${event.amount}`).join('、')}` : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
+  const announcement = feedback.length > 1 ? `${feedback.length}体に同時着弾。${feedback.map(event => `${[...props.allies, ...props.enemies].find(unit => unit.key === event.target)?.monster.name ?? ''} ${event.kind === 'heal' ? '回復' : 'ダメージ'} ${event.amount}`).join('、')}` : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
     : props.impact?.amount !== undefined ? `${[...props.allies, ...props.enemies].find(unit => unit.key === props.impact?.target)?.monster.name ?? ''} ${props.impact.kind === 'heal' ? '回復' : 'ダメージ'} ${props.impact.amount}` : '';
   return <div className="battleStage" style={{position: 'relative', width: '100%', height: '100%', minHeight: 0}}>
     <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}
