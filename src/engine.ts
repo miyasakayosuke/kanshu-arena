@@ -1,4 +1,4 @@
-export type Skill={name:string;power:number;priority:number;kind:'hit'|'heal'|'guard'|'poison';all?:boolean};
+export type Skill={name:string;power:number;priority:number;kind:'hit'|'heal'|'guard'|'poison'|'protect'|'cleanse';all?:boolean;breaksGuard?:boolean};
 export type SpecialSkills = readonly [] | readonly [Skill] | readonly [Skill, Skill] | readonly [Skill, Skill, Skill] | readonly [Skill, Skill, Skill, Skill];
 export type Monster={id:number;name:string;icon:string;cost:number;hp:number;atk:number;speed:number;skills:SpecialSkills};
 export const BASIC_ATTACK = -1;
@@ -8,6 +8,9 @@ const hit=(name:string,power:number,priority=0,all=false):Skill=>({name,power,pr
 const heal:Skill={name:'生命の雫',power:65,priority:0,kind:'heal'};
 const guard:Skill={name:'鉄壁の構え',power:0,priority:1,kind:'guard'};
 const poison:Skill={name:'毒霧',power:12,priority:0,kind:'poison',all:true};
+const protect: Skill = { name: '護りの結界', power: 0, priority: 3, kind: 'protect' };
+const cleanse: Skill = { name: '清めの雫', power: 35, priority: 0, kind: 'cleanse' };
+const guardBreaker = (name: string): Skill => ({ ...hit(name, 58), breaksGuard: true });
 const defend: Skill = { name: 'ぼうぎょ', power: 0, priority: 1, kind: 'guard' };
 
 /** Universal commands do not occupy learned-special slots or change their indexes. */
@@ -20,19 +23,44 @@ export function battleSkill(monster: Monster, index: number): Skill | undefined 
 
 const roster: [number, string, string, number, number, number, number, SpecialSkills][] = [
 [0,'妖狐','🦊',4,150,47,85,[hit('狐火',55),hit('疾風斬り',38,2),hit('炎嵐',28,0,true)]],
-[1,'トロル','🪨',3,250,53,23,[hit('巨人の鉄槌',65),hit('終焉の一撃',110,-2),guard]],
-[2,'バステト','🐈',3,170,30,57,[hit('爪撃',45),heal,guard]],
+[1,'トロル','🪨',3,250,53,23,[hit('巨人の鉄槌',65),hit('終焉の一撃',110,-2),guard,{ ...protect, name: '守護の誓い' }]],
+[2,'バステト','🐈',3,170,30,57,[hit('爪撃',45),heal,guard,{ ...cleanse, name: '清めの鈴' }]],
 [3,'ドリュアス','🌳',3,180,35,67,[hit('樹海の槍',60),heal,poison]],
 [4,'バンシー','👻',3,155,38,75,[hit('悲鳴',54),poison,hit('影縫い',35,2)]],
 [5,'ケツァルコアトル','🐉',4,200,52,47,[hit('竜の牙',65),hit('嵐の息吹',34,0,true),guard]],
 [6,'ガルーダ','🦅',2,138,39,96,[hit('急降下',48),hit('先制の翼',35,2),hit('旋風',25,0,true)]],
-[7,'セルキー','🦭',4,190,34,61,[hit('水刃',55),heal,guard]],
-[8,'イフリート','🔥',3,187,52,42,[hit('灼熱拳',69),hit('火炎旋風',33,0,true),hit('終焉の一撃',99,-2)]],
+[7,'セルキー','🦭',4,190,34,61,[hit('水刃',55),heal,guard,{ ...cleanse, name: '潮騒の浄化' }]],
+[8,'イフリート','🔥',3,187,52,42,[hit('灼熱拳',69),hit('火炎旋風',33,0,true),hit('終焉の一撃',99,-2),guardBreaker('破城の拳')]],
 [9,'烏天狗','🐦',3,166,41,79,[hit('風切り',51),hit('疾風斬り',36,2),poison]],
-[10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard]],
-[11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2)]]
+[10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard,{ ...protect, name: '蛇鱗の庇護' }]],
+[11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2),guardBreaker('冥府の断罪')]]
 ];
 export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, atk, speed, skills }));
+export type LeaderTrait = { name: string; stat: 'hp' | 'atk' | 'speed'; percent: number; description: string };
+const leaderTraits: readonly [string, LeaderTrait['stat']][] = [
+  ['暁の追い風', 'speed'], ['岩山の誓い', 'hp'], ['守り猫の祈り', 'hp'], ['森羅の息吹', 'hp'],
+  ['月影の号令', 'atk'], ['天空の威光', 'atk'], ['飛翼の陣', 'speed'], ['潮騒の祝福', 'hp'],
+  ['灼熱の闘志', 'atk'], ['山風の導き', 'speed'], ['蛇鱗の結束', 'hp'], ['冥路の先導', 'atk'],
+];
+
+/** Every monster has one original, universal team trait; the first slot is the leader. */
+export function leaderFor(id: number): LeaderTrait {
+  const trait = leaderTraits[id];
+  if (!trait) throw new Error(`Unknown monster id: ${id}`);
+  const [name, stat] = trait;
+  const percent = stat === 'hp' ? 12 : 8;
+  const label = stat === 'hp' ? '最大HP' : stat === 'atk' ? '攻撃力' : '素早さ';
+  return { name, stat, percent, description: `味方全員の${label} +${percent}%` };
+}
+
+/** These three supports require a living same-side target, including the actor. */
+export const skillTargetsAllies = (skill: Skill): boolean =>
+  skill.kind === 'heal' || skill.kind === 'protect' || skill.kind === 'cleanse';
+
+export function skillOrderLabel(skill: Skill): string {
+  return skill.priority >= 3 ? '最速' : skill.priority >= 2 ? '先制' : skill.priority > 0 ? '防御順' : skill.priority < 0 ? 'アンカー' : '通常順';
+}
+
 export type Unit = { key: string; monster: Monster; hp: number; guard: boolean; poison: number };
 export type State = {
   turn: number;
@@ -44,7 +72,7 @@ export type State = {
 };
 export type Order = { key: string; skill: number; target?: string };
 export type BattleEvent = {
-  kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'defeat';
+  kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'cleanse' | 'break' | 'defeat';
   actor?: string;
   target?: string;
   skill?: string;
@@ -56,18 +84,27 @@ export type BattleEvent = {
 export const MAX_TURNS = 20;
 export const cost = (team: number[]) => team.reduce((total, id) => total + (monsters[id]?.cost ?? 0), 0);
 
-export function start(team: number[], enemy: number[], seed = 42): State {
-  const units = (ids: number[], prefix: string): Unit[] => ids.map((id, i) => {
-    const monster = monsters[id];
-    if (!monster) throw new Error(`Unknown monster id: ${id}`);
-    return { key: prefix + i, monster, hp: monster.hp, guard: false, poison: 0 };
-  });
+export type StartOptions = { leaders?: boolean };
+export function start(team: number[], enemy: number[], seed = 42, options: StartOptions = {}): State {
+  const units = (ids: number[], prefix: string): Unit[] => {
+    const leader = options.leaders && ids.length ? leaderFor(ids[0]) : undefined;
+    return ids.map((id, i) => {
+      const source = monsters[id];
+      if (!source) throw new Error(`Unknown monster id: ${id}`);
+      // Derive battle-only stats; never accumulate boosts in the shared roster.
+      const monster = leader ? { ...source, [leader.stat]: Math.round(source[leader.stat] * (1 + leader.percent / 100)) } : source;
+      return { key: prefix + i, monster, hp: monster.hp, guard: false, poison: 0 };
+    });
+  };
   return {
     turn: 1,
     seed: seed >>> 0,
     allies: units(team, 'a'),
     enemies: units(enemy, 'e'),
-    log: ['戦闘開始！'],
+    log: ['戦闘開始！', ...(options.leaders ? [
+      ...(team.length ? [`味方リーダー ${monsters[team[0]].name}「${leaderFor(team[0]).name}」：${leaderFor(team[0]).description}`] : []),
+      ...(enemy.length ? [`敵リーダー ${monsters[enemy[0]].name}「${leaderFor(enemy[0]).name}」：${leaderFor(enemy[0]).description}`] : []),
+    ] : [])],
     winner: null,
   };
 }
@@ -93,8 +130,29 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
     !best || unit.hp < best.hp ? unit : best
   ), undefined);
 
+  const incomingThreat = opponents.reduce((largest, opponent) => {
+    const attacks = opponent.monster.skills.slice(0, MAX_SPECIAL_SKILLS).filter(skill => skill.kind === 'hit' || skill.kind === 'poison');
+    return Math.max(largest, ...attacks.map(skill => baseDamage(opponent, skill)), opponent.monster.atk);
+  }, 0);
+
+  const protectedTargets = new Set<string>();
+  const cleansedTargets = new Set<string>();
   return friends.map(unit => {
     const specials = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS);
+    const cleansing = specials.findIndex(skill => skill.kind === 'cleanse');
+    const poisoned = weakest(friends.filter(friend => friend.poison > 0 && !cleansedTargets.has(friend.key)));
+    if (cleansing >= 0 && poisoned) {
+      cleansedTargets.add(poisoned.key);
+      return { key: unit.key, skill: cleansing, target: poisoned.key };
+    }
+    const protecting = specials.findIndex(skill => skill.kind === 'protect');
+    // Save a threatened ally when halving a hit can matter. Avoid endless solo turtling
+    // and shields on allies too frail to survive even the mitigated hit.
+    const vulnerable = weakest(friends.filter(friend => !protectedTargets.has(friend.key) && friend.hp > incomingThreat * 0.5));
+    if (protecting >= 0 && friends.length > 1 && vulnerable && vulnerable.hp / vulnerable.monster.hp <= 0.45 && incomingThreat > 0) {
+      protectedTargets.add(vulnerable.key);
+      return { key: unit.key, skill: protecting, target: vulnerable.key };
+    }
     const healing = specials.findIndex(skill => skill.kind === 'heal');
     if (healing >= 0 && injured && injured.hp / injured.monster.hp <= 0.6) {
       return { key: unit.key, skill: healing, target: injured.key };
@@ -107,7 +165,10 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
       if (skill.kind === 'hit' || skill.kind === 'poison') {
         const targets = skill.all ? opponents : target ? [target] : [];
         score = targets.reduce((total, opponent) => {
-          const damage = Math.min(opponent.hp, baseDamage(unit, skill));
+          // A prior defensive stance is a useful clue; guard itself still resets each turn.
+          const likelyGuard = opponent.guard;
+          const mitigation = likelyGuard && skill.priority < 1 && !(skill.kind === 'hit' && skill.breaksGuard) ? 0.5 : 1;
+          const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation);
           const poisonDamage = skill.kind === 'poison' && opponent.poison === 0
             ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * 2)
             : 0;
@@ -125,7 +186,7 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
     return {
       key: unit.key,
       skill: skillIndex,
-      target: skill?.kind === 'heal' ? injured?.key : skill?.kind === 'guard' ? unit.key : target?.key,
+      target: skill && skillTargetsAllies(skill) ? injured?.key : skill?.kind === 'guard' ? unit.key : target?.key,
     };
   });
 }
@@ -149,9 +210,12 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     for (const unit of living(battle[side])) {
       const order = sideOrders.find(candidate => candidate.key === unit.key);
       // Varied, seeded opponent skills keep the introductory fights from becoming an AoE burst race.
-      const specialCount = Math.min(unit.monster.skills.length, MAX_SPECIAL_SKILLS);
+      const specialIndexes = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((_, index) => index)
+        .filter(index => !['protect', 'cleanse'].includes(unit.monster.skills[index]!.kind));
+      const chosen = order ? battleSkill(unit.monster, order.skill) : undefined;
+      const tacticalSupport = chosen && (chosen.kind === 'protect' || chosen.kind === 'cleanse');
       const skillIndex = side === 'enemies'
-        ? specialCount ? seed % specialCount : BASIC_ATTACK
+        ? tacticalSupport ? order!.skill : specialIndexes.length ? specialIndexes[seed % specialIndexes.length] : order?.skill ?? BASIC_ATTACK
         : order?.skill ?? 0;
       const skill = battleSkill(unit.monster, skillIndex) ?? battleSkill(unit.monster, 0) ?? battleSkill(unit.monster, BASIC_ATTACK)!;
       seed = random(seed);
@@ -178,16 +242,28 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     const cast: BattleEvent = { kind: 'cast', actor: unit.key, skill: skill.name, effect: skill.kind };
     events.push(cast);
 
-    if (skill.kind === 'guard') {
-      cast.target = unit.key;
-      unit.guard = true;
-      events.push({ kind: 'guard', actor: unit.key, target: unit.key });
-      continue;
-    }
-    if (skill.kind === 'heal') {
-      const target = friends.find(friend => friend.key === action.target && friend.hp > 0) ?? weakest(friends);
+    if (skill.kind === 'guard' || skill.kind === 'protect') {
+      const target = skill.kind === 'guard' ? unit : friends.find(friend => friend.key === action.target && friend.hp > 0) ?? weakest(friends);
       if (target) {
         cast.target = target.key;
+        const alreadyGuarded = target.guard;
+        target.guard = true;
+        events.push({ kind: 'guard', actor: unit.key, target: target.key });
+        battle.log.push(`${target.monster.name}はこのターン直接ダメージ半減${alreadyGuarded ? '（重ねがけなし）' : ''}`);
+      }
+      continue;
+    }
+    if (skill.kind === 'heal' || skill.kind === 'cleanse') {
+      const fallback = skill.kind === 'cleanse' ? weakest(friends.filter(friend => friend.poison > 0)) ?? weakest(friends) : weakest(friends);
+      const target = friends.find(friend => friend.key === action.target && friend.hp > 0) ?? fallback;
+      if (target) {
+        cast.target = target.key;
+        if (skill.kind === 'cleanse') {
+          const wasPoisoned = target.poison > 0;
+          target.poison = 0;
+          events.push({ kind: 'cleanse', actor: unit.key, target: target.key });
+          battle.log.push(wasPoisoned ? `${target.monster.name}の毒が消えた` : `${target.monster.name}は清められた（毒なし）`);
+        }
         const amount = Math.max(0, Math.min(skill.power, target.monster.hp - target.hp));
         target.hp += amount;
         events.push({ kind: 'heal', actor: unit.key, target: target.key, amount, hp: target.hp });
@@ -201,10 +277,15 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
     const targets = skill.all ? alive : [alive.find(target => target.key === action.target) ?? alive[seed % alive.length]];
     if (!skill.all) cast.target = targets[0].key;
     for (const target of targets) {
+      if (skill.kind === 'hit' && skill.breaksGuard && target.guard) {
+        target.guard = false;
+        events.push({ kind: 'break', actor: unit.key, target: target.key });
+        battle.log.push(`${target.monster.name}の防御を解除！`);
+      }
       seed = random(seed);
       const requested = baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * (target.guard ? 0.5 : 1);
       const amount = damage(target, requested, unit.key);
-      battle.log.push(`${target.monster.name}に ${amount} ダメージ${target.hp === 0 ? '・撃破！' : ''}`);
+      battle.log.push(`${target.monster.name}に ${amount} ダメージ${target.guard ? '（防御で半減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
       if (skill.kind === 'poison' && target.hp > 0) {
         target.poison = 3;
         events.push({ kind: 'poison', actor: unit.key, target: target.key });

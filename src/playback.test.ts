@@ -28,3 +28,53 @@ describe('battle presentation timeline', () => {
     expect(effectType('毒霧', 'poison')).toBe('shadow');
   });
 });
+
+describe('counter-skill playback', () => {
+  it('uses friendly support effects for protection and cleansing', () => {
+    expect(effectType('守護の誓い', 'protect')).toBe('guard');
+    expect(effectType('蛇鱗の庇護', 'protect')).toBe('guard');
+    expect(effectType('清めの鈴', 'cleanse')).toBe('water');
+    expect(effectType('潮騒の浄化', 'cleanse')).toBe('water');
+  });
+
+  it('replays guard breaking together with its hit and in the original impact order', () => {
+    const events: BattleEvent[] = [
+      { kind: 'cast', actor: 'a0', target: 'e0', skill: '破城の拳', effect: 'hit' },
+      { kind: 'break', actor: 'a0', target: 'e0' },
+      { kind: 'damage', actor: 'a0', target: 'e0', amount: 50, hp: 50 },
+    ];
+    const { cues } = buildTimeline(events);
+    expect(cues).toHaveLength(2);
+    expect(cues[1].impacts).toEqual(events.slice(1));
+    expect(cues[1].at - cues[0].at).toBe(800);
+  });
+
+  it('clears poison and restores HP at one shared impact after the cleanse windup', () => {
+    const events: BattleEvent[] = [
+      { kind: 'cast', actor: 'a0', target: 'a1', skill: '清めの鈴', effect: 'cleanse' },
+      { kind: 'cleanse', actor: 'a0', target: 'a1' },
+      { kind: 'heal', actor: 'a0', target: 'a1', amount: 35, hp: 80 },
+    ];
+    const { cues } = buildTimeline(events);
+    expect(cues[0].impacts).toEqual([]);
+    expect(cues[1].impacts).toEqual(events.slice(1));
+    expect(cues[1].cast?.target).toBe('a1');
+  });
+
+  it('preserves protection followed by an attack and a separate poison tick without mutating events', () => {
+    const events: BattleEvent[] = [
+      { kind: 'cast', actor: 'a0', target: 'a1', skill: '守護の誓い', effect: 'protect' },
+      { kind: 'guard', actor: 'a0', target: 'a1' },
+      { kind: 'cast', actor: 'e0', target: 'a1', skill: '影斬り', effect: 'hit' },
+      { kind: 'damage', actor: 'e0', target: 'a1', amount: 20, hp: 80 },
+      { kind: 'damage', target: 'a1', amount: 6, hp: 74, effect: 'poison' },
+    ];
+    const before = structuredClone(events);
+    events.forEach(Object.freeze);
+    Object.freeze(events);
+    const { cues } = buildTimeline(events);
+    expect(cues.map(cue => cue.impacts).flat()).toEqual(events.filter(event => event.kind !== 'cast'));
+    expect(cues.filter(cue => cue.impacts.length).map(cue => cue.at)).toEqual([800, 2300, 3240]);
+    expect(events).toEqual(before);
+  });
+});

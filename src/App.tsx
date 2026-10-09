@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { monsters, cost, start, advanceWithEvents, autoOrders, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, type State, type Order, type BattleEvent, type Skill } from './engine';
+import { monsters, cost, start, advanceWithEvents, autoOrders, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, leaderFor, skillTargetsAllies, skillOrderLabel, type State, type Order, type BattleEvent, type Skill } from './engine';
 import { buildTimeline, effectType } from './playback';
 import BattleStage from './BattleStage';
+import TeamBuilder from './TeamBuilder';
+import TacticsPanel from './TacticsPanel';
+import { rules, opponentTeams, isValidTeam, initialTeam, monsterLore, monsterRole, skillLore, resultSummary, type RuleId } from './strategy';
 import './style.css';
 
 const COMMAND_SECONDS = 30;
-const initial = [0, 2, 3, 4, 6];
-const opponents = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2]];
-const skillHint = (s: Skill) => `${s.priority > 0 ? '先制 · ' : s.priority < 0 ? 'アンカー · ' : ''}${s.kind === 'heal' ? '味方1体を回復' : s.kind === 'guard' ? '自分の被ダメージ半減' : s.all ? '敵全体' : '敵1体'}${s.kind === 'poison' ? ' · 毒3ターン' : ''}`;
+const initial = initialTeam;
+const skillHint = (s: Skill) => `${skillOrderLabel(s)} · ${s.kind === 'heal' ? '味方1体を回復' : s.kind === 'cleanse' ? '味方1体の毒解除＋回復' : s.kind === 'protect' ? '味方1体を守る・このターン直接ダメージ半減' : s.kind === 'guard' ? '自分の直接ダメージ半減' : s.all ? '敵全体' : '敵1体'}${s.kind === 'poison' ? ' · 毒3ターン' : ''}${s.breaksGuard ? ' · 防御を解除して攻撃' : ''}`;
 function loadTeam() {
   try {
     const saved: unknown = JSON.parse(localStorage.getItem('kanshu-team') ?? 'null');
@@ -25,9 +27,10 @@ export default function App() {
   const [showSkills, setShowSkills] = useState(false);
   const [automaticKeys, setAutomaticKeys] = useState<string[]>([]);
   const [focus, setFocus] = useState<number | null>(null);
-  const [filter, setFilter] = useState('');
-  const [role, setRole] = useState('all');
-  const [sort, setSort] = useState('id');
+  const [rule, setRule] = useState<RuleId>('standard');
+  const [practice, setPractice] = useState(false);
+  const [encounter, setEncounter] = useState<{ enemy:number[]; seed:number; rule:RuleId } | null>(null);
+  const [showTactics, setShowTactics] = useState(false);
   const [round, setRound] = useState(0);
   const [showLog, setShowLog] = useState(false);
   const [effect, setEffect] = useState<{ text: string; type: string; tick: number } | null>(null);
@@ -51,26 +54,29 @@ export default function App() {
     if (team.length === 5) try { localStorage.setItem('kanshu-team', JSON.stringify(team)); } catch { /* optional */ }
   }, [team]);
   useEffect(() => {
-    const close = (e: KeyboardEvent) => { if (e.key === 'Escape') { setFocus(null); setShowLog(false); setPendingSkill(null); if (pendingSkill === null) setShowSkills(false); } };
+    const close = (e: KeyboardEvent) => { if (e.key === 'Escape') { setFocus(null); setShowLog(false); setShowTactics(false); setPendingSkill(null); if (pendingSkill === null) setShowSkills(false); } };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
   }, [pendingSkill]);
   const choose = (id: number) => {
     if (team.includes(id)) { setTeam(team.filter(x => x !== id)); setFocus(null); return; }
-    if (team.length >= 5 || cost([...team, id]) > 17) return;
+    if (team.length >= 5 || cost([...team, id]) > rules[rule].budget) return;
     setTeam([...team, id]); setFocus(null);
   };
-  const begin = () => {
+  const begin = (retry = false) => {
+    if (!isValidTeam(team, rules[rule].budget)) return;
+    const nextEncounter = (retry || practice) && encounter && encounter.rule === rule ? encounter : { enemy: opponentTeams(rule)[round % opponentTeams(rule).length], seed: round + 20261008, rule };
+    setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
     setTimedOut(false);
-    setBattle(start(team, opponents[round % opponents.length], round + 20261008));
+    setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
     setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setImpact(null); setImpacts([]);
-    setPlaying(false); setShowLog(false); setPage('battle'); setNotice('');
+    setPlaying(false); setShowLog(false); setShowTactics(false); setPage('battle'); setNotice('');
   };
   const living = battle?.allies.filter(u => u.hp > 0) ?? [];
   const active = living.find(u => u.key === activeKey) ?? living[0];
   const selectedSkill = pendingSkill !== null && active ? battleSkill(active.monster, pendingSkill) : null;
-  const targets = battle && selectedSkill ? (selectedSkill.kind === 'heal' ? battle.allies : battle.enemies).filter(u => u.hp > 0) : [];
+  const targets = battle && selectedSkill ? (skillTargetsAllies(selectedSkill) ? battle.allies : battle.enemies).filter(u => u.hp > 0) : [];
   const targetKeys = targets.map(u => u.key);
   // A delayed browser timer must not accept a command after the real deadline.
   const commandsExpired = () => {
@@ -116,7 +122,7 @@ export default function App() {
     if (page !== 'battle' || !battle || battle.winner || playingLock.current || commandDeadline.current === null || (!expired && pendingSkill !== null)) return;
     // Lock synchronously: a manual click and the deadline can resolve this turn only once.
     playingLock.current = true; commandDeadline.current = null;
-    setTimedOut(expired); setFocus(null); setShowLog(false);
+    setTimedOut(expired); setFocus(null); setShowLog(false); setShowTactics(false);
     const automatic = autoOrders(battle);
     const cmds = living.map(u => orders[u.key] ?? automatic.find(o => o.key === u.key)!);
     const result = advanceWithEvents(battle, cmds);
@@ -146,7 +152,7 @@ export default function App() {
             const update = (u: State['allies'][number]) => {
               const evs = cue.impacts.filter(e => e.target === u.key);
               const hp = evs.filter(e => e.hp !== undefined).at(-1)?.hp ?? u.hp;
-              return { ...u, hp, guard: u.guard || evs.some(e => e.kind === 'guard'), poison: evs.some(e => e.kind === 'poison') ? 3 : u.poison };
+              return { ...u, hp, guard: evs.reduce((value,e)=>e.kind==='break'?false:e.kind==='guard'?true:value,u.guard), poison: evs.reduce((value,e)=>e.kind==='cleanse'?0:e.kind==='poison'?3:value,u.poison) };
             };
             return { ...prev, allies: prev.allies.map(update), enemies: prev.enemies.map(update) };
           });
@@ -178,32 +184,22 @@ export default function App() {
       if (commandDeadline.current === deadline) commandDeadline.current = null;
     };
   }, [page, battle?.turn, battle?.winner, playing]);
-  const returnHome = () => {
+  const returnHome = (retry = false) => {
     commandDeadline.current = null;
     ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
-    setPlaying(false); setEffect(null); setImpact(null); setImpacts([]); setPendingSkill(null); setShowSkills(false); setShowLog(false); setPage('home');
-    if (battle?.winner) setRound(n => n + 1);
+    setPlaying(false); setEffect(null); setImpact(null); setImpacts([]); setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setPage('home'); setPractice(retry);
+    if (battle?.winner && !retry) setRound(n => n + 1);
   };
-  const visible = monsters.filter(m => (m.name.includes(filter) || m.skills.some(s => s.name.includes(filter))) && (role === 'all' || m.skills.some(s => role === 'fast' ? s.priority > 0 : role === 'anchor' ? s.priority < 0 : role === 'area' ? s.all : s.kind === role))).sort((a, b) => sort === 'speed' ? b.speed - a.speed : sort === 'hp' ? b.hp - a.hp : sort === 'atk' ? b.atk - a.atk : sort === 'cost' ? a.cost - b.cost : a.id - b.id);
+  const changeRule = (next: RuleId) => { if (next !== rule) { setRule(next); setPractice(false); setNotice(''); } };
   const ready = living.filter(u => orders[u.key]).length;
   return <div className={`app ${page === 'battle' ? 'battleMode' : ''}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.3</div><h1>環獣のアリーナ</h1></div>{page === 'home' && <span className="previewBadge">5 vs 5</span>}</header>
-    {page === 'home' && <main className="home">
-      <div className="intro"><span className="eyebrow">BUILD YOUR STRATEGY</span><h2>勝負は、編成から。</h2><p>5体の個性を組み合わせ、闘技場を制する。</p></div>
-      <section className="partyCard"><div className="sectionTitle">出場パーティ <span>{team.length}/5体 <b>COST {cost(team)}/17</b></span></div>
-        <div className="team">{team.map((id, index) => <button key={id} className="teamUnit" aria-label={`${monsters[id].name}の詳細`} onClick={() => setFocus(id)}><small>0{index + 1}</small><span>{monsters[id].icon}</span><i>C{monsters[id].cost}</i></button>)}{Array.from({ length: 5 - team.length }, (_, i) => <div className="empty" key={i}>＋</div>)}</div>
-        <p className="hint">アイコンで詳細を確認。入れ替えるときは、まず1体外します。</p></section>
-      <div className="sectionTitle">モンスター図鑑 <span>{visible.length} / {monsters.length}体</span></div>
-      <div className="tools"><input aria-label="検索" placeholder="名前・特技を検索" value={filter} onChange={e => setFilter(e.target.value)} /><select aria-label="並べ替え" value={sort} onChange={e => setSort(e.target.value)}><option value="id">図鑑順</option><option value="speed">素早さ順</option><option value="hp">HP順</option><option value="atk">攻撃力順</option><option value="cost">低コスト順</option></select></div>
-      <div className="filterChips" aria-label="特技で絞り込み">{[['all', 'すべて'], ['fast', '先制'], ['anchor', 'アンカー'], ['heal', '回復'], ['area', '全体'], ['poison', '毒'], ['guard', '防御']].map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => setRole(value)}>{label}</button>)}</div>
-      <div className="roster">{visible.map(m => <button className={`rosterItem ${team.includes(m.id) ? 'selected' : ''}`} key={m.id} aria-label={`${m.name}の詳細`} onClick={() => setFocus(m.id)}><span className="avatar">{m.icon}</span><span className="rosterText"><strong>{m.name}</strong><small>HP {m.hp} · ATK {m.atk} · SPD {m.speed}</small><em>{m.skills.some(s => s.priority > 0) ? '先制' : m.skills.some(s => s.priority < 0) ? 'アンカー' : m.skills.some(s => s.kind === 'heal') ? '回復' : '全体・妨害'}</em></span><span className="cost">C{m.cost}<br />{team.includes(m.id) ? '✓' : '＋'}</span></button>)}</div>
-      {!visible.length && <p className="emptySearch">該当するモンスターがいません。検索や絞り込みを変えてみてください。</p>}
-    </main>}
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.4</div><h1>環獣のアリーナ</h1></div>{page === 'home' && <span className="previewBadge">5 vs 5</span>}</header>
+    {page === 'home' && <TeamBuilder team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={()=>{setPractice(false);setRound(n=>n+1);}} />}
     {page === 'battle' && battle && <main className="battle">
-      <div className="battleTop"><button className="iconButton" onClick={returnHome} aria-label="対戦を中断して編成へ">‹ 編成</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div>
+      <div className="battleTop"><button className="iconButton" onClick={()=>returnHome()} aria-label="対戦を中断して編成へ">‹ 編成</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
       <BattleStage allies={battle.allies} enemies={battle.enemies} effect={effect} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />
-      <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${selectedSkill.kind === 'heal' ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
-      {battle.winner ? <section className="result"><span className="eyebrow">BATTLE RESULT</span><h2>{battle.winner === 'win' ? 'VICTORY' : battle.winner === 'lose' ? 'DEFEAT' : 'DRAW'}</h2><p>{battle.winner === 'win' ? '見事な采配。次の相手に挑もう。' : battle.winner === 'lose' ? '先制・回復・アンカーを組み合わせて再挑戦。' : '互角の勝負。編成を変えてもう一度。'}</p><button className="primary" onClick={returnHome}>編成に戻る →</button></section> : <section className="commandDock" aria-label="行動指示">
+      <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
+      {battle.winner ? <section className="result"><span className="eyebrow">BATTLE RESULT</span><h2>{battle.winner === 'win' ? 'VICTORY' : battle.winner === 'lose' ? 'DEFEAT' : 'DRAW'}</h2><p>{battle.winner === 'win' ? '見事な采配。次の相手に挑もう。' : battle.winner === 'lose' ? '先制・回復・アンカーを組み合わせて再挑戦。' : '互角の勝負。編成を変えてもう一度。'}</p><div className="resultMetrics">{resultSummary(battle).turns}ターン · 残りHP 味方 {resultSummary(battle).allyHpPercent}% / 敵 {resultSummary(battle).enemyHpPercent}%</div><div className="rematchActions"><button className="primary" onClick={()=>begin(true)}>同じ編成ですぐ再戦</button><button className="secondary" onClick={()=>returnHome(true)}>編成を見直して再戦</button><button className="detailButton" onClick={()=>returnHome()}>編成に戻る → 次の相手</button></div></section> : <section className="commandDock" aria-label="行動指示">
         <div className="commanderRow">{battle.allies.map(u => {
           const feedback = impacts.find(event => event.target === u.key && (event.kind === 'damage' || event.kind === 'heal'));
           const acting = playing && impact?.kind === 'cast' && impact.actor === u.key;
@@ -217,10 +213,10 @@ export default function App() {
             {feedback && feedback.amount !== undefined && <b className={`partyImpact ${feedback.kind}`} aria-label={`${feedback.kind === 'heal' ? '回復' : 'ダメージ'} ${feedback.amount}`}>{feedback.kind === 'heal' ? '+' : '−'}{feedback.amount}</b>}
           </button>;
         })}</div>
-        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>{timedOut ? '時間切れ · 未入力はおまかせで行動' : 'モンスターが行動中'}</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className="commandHeading"><span>{selectedSkill ? `${selectedSkill.name} · ${selectedSkill.kind === 'heal' ? '味方' : '敵'}を選択` : <>{active.monster.name} <small>{showSkills ? `とくぎ ${Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)}/${MAX_SPECIAL_SKILLS}` : `HP ${active.hp}/${active.monster.hp}`}</small></>}</span>{selectedSkill || showSkills ? <button className="backToSkills" onClick={() => { if (pendingSkill !== null) setPendingSkill(null); else setShowSkills(false); }}>‹ {selectedSkill && showSkills ? '特技に戻る' : 'コマンドに戻る'}</button> : <button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button>}</div>
-          {selectedSkill ? <div className={`targetButtons ${selectedSkill.kind === 'heal' ? 'allyTargets' : 'enemyTargets'}`} aria-label={`${selectedSkill.kind === 'heal' ? '味方' : '敵'}の対象を選択`}>{targets.map(u => <button key={u.key} aria-label={`${u.monster.name}を対象に選択`} onClick={() => { if (pendingSkill !== null) commitOrder(pendingSkill, u.key); }}><span aria-hidden="true">{u.monster.icon}</span><small>{u.hp}/{u.monster.hp}</small><div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div> : showSkills ? <div className="skillButtons" aria-label="とくぎを選択">{active.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((s, i) => <button key={i} className={`${!automaticKeys.includes(active.key) && orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} onClick={() => selectSkill(i)}><strong>{s.name}</strong><small>{s.priority > 0 ? '先制 / ' : s.priority < 0 ? 'アンカー / ' : ''}{s.kind === 'guard' ? '防御' : s.kind === 'heal' ? `回復 ${s.power}` : `${s.all ? '全体' : '単体'} ${s.power}`}</small></button>)}</div> : <div className="commandButtons" aria-label="コマンドを選択">
+        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>{timedOut ? '時間切れ · 未入力はおまかせで行動' : 'モンスターが行動中'}</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className="commandHeading"><span>{selectedSkill ? `${selectedSkill.name} · ${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : <>{active.monster.name} <small>{showSkills ? `とくぎ ${Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)}/${MAX_SPECIAL_SKILLS}` : `HP ${active.hp}/${active.monster.hp}`}</small></>}</span>{selectedSkill || showSkills ? <button className="backToSkills" onClick={() => { if (pendingSkill !== null) setPendingSkill(null); else setShowSkills(false); }}>‹ {selectedSkill && showSkills ? '特技に戻る' : 'コマンドに戻る'}</button> : <button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button>}</div>
+          {selectedSkill ? <div className={`targetButtons ${skillTargetsAllies(selectedSkill) ? 'allyTargets' : 'enemyTargets'}`} aria-label={`${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}の対象を選択`}>{targets.map(u => <button key={u.key} aria-label={`${u.monster.name}を対象に選択`} onClick={() => { if (pendingSkill !== null) commitOrder(pendingSkill, u.key); }}><span aria-hidden="true">{u.monster.icon}</span><small>{u.hp}/{u.monster.hp}</small><div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div> : showSkills ? <div className="skillButtons" aria-label="とくぎを選択">{active.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((s, i) => <button key={i} className={`${!automaticKeys.includes(active.key) && orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} onClick={() => selectSkill(i)}><strong>{s.name}</strong><small>{skillOrderLabel(s)} / {s.kind === 'guard' ? '防御' : s.kind === 'protect' ? '味方を守る' : s.kind === 'cleanse' ? '毒解除＋回復' : s.kind === 'heal' ? `回復 ${s.power}` : s.breaksGuard ? '防御解除' : `${s.all ? '全体' : '単体'} ${s.power}`} </small></button>)}</div> : <div className="commandButtons" aria-label="コマンドを選択">
             <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === BASIC_ATTACK ? 'chosen' : ''} onClick={() => selectSkill(BASIC_ATTACK)}><strong>たたかう</strong><small>通常攻撃</small></button>
-            <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === DEFEND ? 'chosen' : ''} onClick={() => commitOrder(DEFEND)}><strong>ぼうぎょ</strong><small>被ダメージ半減</small></button>
+            <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === DEFEND ? 'chosen' : ''} onClick={() => commitOrder(DEFEND)}><strong>ぼうぎょ</strong><small>直接ダメージ半減</small></button>
             <button className={!automaticKeys.includes(active.key) && (orders[active.key]?.skill ?? -1) >= 0 ? 'chosen' : ''} disabled={!active.monster.skills.length} onClick={() => setShowSkills(true)}><strong>とくぎ</strong><small>{Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)} / {MAX_SPECIAL_SKILLS} 習得</small></button>
             <button className={automaticKeys.includes(active.key) ? 'chosen' : ''} onClick={selectAutomatic}><strong>おまかせ</strong><small>この味方を自動選択</small></button>
           </div>}
@@ -229,10 +225,11 @@ export default function App() {
         {!playing && <button className="primary turnStart" disabled={pendingSkill !== null} onClick={() => execute()}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>}
       </section>}
     </main>}
-    {focus !== null && <div className="overlay" onClick={() => setFocus(null)}><section className="modal" role="dialog" aria-modal="true" aria-label={`${monsters[focus].name}の詳細`} onClick={e => e.stopPropagation()}><button className="close" aria-label="詳細を閉じる" onClick={() => setFocus(null)}>×</button><div className="heroIcon">{monsters[focus].icon}</div><span className="eyebrow">MONSTER PROFILE · COST {monsters[focus].cost}</span><h2>{monsters[focus].name}</h2><div className="stats">{[['HP', monsters[focus].hp], ['攻撃', monsters[focus].atk], ['素早さ', monsters[focus].speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div><h3>特技</h3>{monsters[focus].skills.map(s => <div className="skill" key={s.name}><strong>{s.name}</strong><small>{skillHint(s)}{s.power > 0 ? ` · 威力${s.power}` : ''}</small></div>)}
-      {page === 'home' && <><button className="primary" disabled={!team.includes(focus) && (team.length >= 5 || cost([...team, focus]) > 17)} onClick={() => choose(focus)}>{team.includes(focus) ? '編成から外す' : team.length >= 5 ? '先に1体外してください' : cost([...team, focus]) > 17 ? 'コスト上限を超えています' : '編成に加える'}</button></>}
+    {focus !== null && <div className="overlay" onClick={() => setFocus(null)}><section className="modal" role="dialog" aria-modal="true" aria-label={`${monsters[focus].name}の詳細`} onClick={e => e.stopPropagation()}><button className="close" aria-label="詳細を閉じる" onClick={() => setFocus(null)}>×</button><div className="heroIcon">{monsters[focus].icon}</div><span className="eyebrow">MONSTER PROFILE · COST {monsters[focus].cost}</span><h2>{monsters[focus].name}</h2><p className="monsterLore">{monsterLore(focus)}</p><div className="roleBrief"><strong>{monsterRole(focus).name}</strong><p>{monsterRole(focus).strength}</p><small>{monsterRole(focus).tradeoff}</small></div><div className="leaderBanner"><span>リーダー効果 · {leaderFor(focus).name}</span><small>{leaderFor(focus).description}</small></div><h3>基礎能力（リーダー補正前）</h3><div className="stats">{[['HP', monsters[focus].hp], ['攻撃', monsters[focus].atk], ['素早さ', monsters[focus].speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div><h3>特技</h3>{monsters[focus].skills.map(s => <div className="skill" key={s.name}><strong>{s.name}</strong><small>{skillHint(s)}{s.power > 0 ? ` · ${s.kind==='heal'||s.kind==='cleanse'?'回復':'威力'}${s.power}` : ''}</small><p className="skillLore">{skillLore(s.name)}</p></div>)}
+      {page === 'home' && <>{team.includes(focus)&&<button className="secondary leaderChoice" disabled={team[0]===focus} onClick={()=>{setTeam([focus,...team.filter(id=>id!==focus)]);setFocus(null);setNotice(`${monsters[focus].name}をリーダーにしました`);}}>{team[0]===focus?'この編成のリーダー':'リーダーにする'}</button>}<button className="primary" disabled={!team.includes(focus) && (team.length >= 5 || cost([...team, focus]) > rules[rule].budget)} onClick={() => choose(focus)}>{team.includes(focus) ? '編成から外す' : team.length >= 5 ? '先に1体外してください' : cost([...team, focus]) > rules[rule].budget ? 'コスト上限を超えています' : '編成に加える'}</button></>}
     </section></div>}
+    {showTactics && battle && <TacticsPanel battle={battle} orders={orders} playing={playing} rule={rule} onClose={()=>setShowTactics(false)} />}
     {showLog && battle && <div className="overlay" onClick={() => setShowLog(false)}><section className="modal logModal" role="dialog" aria-modal="true" aria-label="戦闘ログ" onClick={e => e.stopPropagation()}><button className="close" aria-label="戦闘ログを閉じる" onClick={() => setShowLog(false)}>×</button><h2>戦闘ログ</h2>{playing && <p className="hint">現在のターンの記録は演出後に表示されます。</p>}<div className="log">{battle.log.map((line, i) => <div key={i}>{line}</div>)}</div></section></div>}
-    {page === 'home' && <footer><p>{team.length === 5 ? `第${round + 1}戦 · コスト${cost(team)}/17 · 20ターン決着` : `あと${5 - team.length}体を編成してください`}</p><button className="primary" disabled={team.length !== 5} onClick={begin}>この編成で対戦する →</button>{notice && <small>{notice}</small>}</footer>}
+    {page === 'home' && <footer><p>{team.length === 5 ? `第${round + 1}戦 · ${rules[rule].name} · コスト${cost(team)}/${rules[rule].budget} · 20ターン決着` : `あと${5 - team.length}体を編成してください`}</p><button className="primary" disabled={!isValidTeam(team,rules[rule].budget)} onClick={()=>begin()}>{practice?'この編成で同じ相手に再戦 →':'この編成で対戦する →'}</button></footer>}
   </div>;
 }

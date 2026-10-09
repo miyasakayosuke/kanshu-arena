@@ -4,8 +4,8 @@ export type BattleCue = { at: number; cast: BattleEvent | null; impacts: BattleE
 export type BattleTimeline = { cues: BattleCue[]; duration: number };
 
 export function effectType(name: string, kind?: string) {
-  if (kind === 'heal') return 'water';
-  if (kind === 'guard') return 'guard';
+  if (kind === 'heal' || kind === 'cleanse') return 'water';
+  if (kind === 'guard' || kind === 'protect') return 'guard';
   if (kind === 'poison') return 'shadow';
   return /炎|火|灼熱|狐火/.test(name) ? 'fire' : /毒|影|冥府|悲鳴/.test(name) ? 'shadow' : /水|雫/.test(name) ? 'water' : /風|翼|疾風|旋風|嵐/.test(name) ? 'wind' : 'slash';
 }
