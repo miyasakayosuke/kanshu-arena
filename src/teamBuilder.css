@@ -1,0 +1,90 @@
+/* The workshop is slot-first. Details are read-only overlays owned by App. */
+.teamBuilder .builderSlots{gap:6px}
+.teamBuilder .builderSlots .teamUnit{padding:21px 3px 19px;min-height:104px;align-content:center;gap:3px}
+.teamBuilder .builderSlots .teamUnit>span{font-size:31px;line-height:1.25}
+.teamBuilder .builderSlots .teamUnit>strong{display:block;max-width:100%;font-size:9px;line-height:1.4;overflow-wrap:anywhere;font-weight:500}
+.teamBuilder .builderSlots .teamUnit[aria-pressed=true]{border-color:#efd798;background:#61704c66;box-shadow:0 0 0 1px #d7c48555}
+.teamBuilder .builderSlots .teamUnit>small{font-size:8px;color:#bfd0b6}
+.teamBuilder .builderSlots .emptySlot{border-style:dashed;background:#152731;color:#adc1ad}
+.teamBuilder .teamNotice{margin:6px 1px;min-height:0}
+.teamBuilder .teamNotice:empty{display:none}
+.teamBuilder .candidatePanel{margin:14px 0 18px;padding:13px 11px;border:1px solid #a5b28266;border-radius:12px;background:#142631}
+.teamBuilder .candidateHeading{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:12px}
+.teamBuilder .candidateHeading h3{margin:6px 0 0;font-size:16px;color:#e2d6b1}
+.teamBuilder .candidateHeading>.secondary{min-height:44px;padding:8px 10px;flex-shrink:0;font-size:11px}
+.teamBuilder .comparisonGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.teamBuilder .memberComparison{min-width:0;display:flex;flex-direction:column;gap:7px;border:1px solid #6f897355;border-radius:8px;background:#1b3037;padding:10px 8px}
+.teamBuilder .memberComparison+.memberComparison{border-color:#cab37577;background:#35423566}
+.teamBuilder .comparisonLabel{font-size:9px;color:#abc0b1}
+.teamBuilder .memberComparison>strong{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.teamBuilder .memberComparison>strong>span{font-size:23px;vertical-align:middle}
+.teamBuilder .comparisonRole{font-size:10px;line-height:1.6;color:#d6c995;overflow-wrap:anywhere}
+.teamBuilder .comparisonStats{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0}
+.teamBuilder .comparisonStats>div{display:flex;align-items:baseline;justify-content:space-between;gap:3px}
+.teamBuilder .comparisonStats dt{font-size:8px;color:#a8bbb0}
+.teamBuilder .comparisonStats dd{font-size:11px;margin:0;font-variant-numeric:tabular-nums}
+.teamBuilder .comparisonCost{margin-top:auto;font-size:10px;color:#e1ce9b}
+.teamBuilder .comparisonEmpty{font-size:11px;line-height:1.8;color:#a0b6ac}
+.teamBuilder .memberActions{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:7px 0}
+.teamBuilder .memberActions button{min-height:44px;font-size:10px}
+.teamBuilder .memberActions .secondary{margin-left:auto;padding:7px 9px}
+.teamBuilder .memberActions .detailButton:last-child{margin-left:auto}
+.teamBuilder .candidateImpact{padding:9px 10px;background:#2f413933;border-radius:7px;margin:8px 0}
+.teamBuilder .candidateImpact p{margin:0 0 5px;font-size:11px;line-height:1.7;color:#c2d0bd}
+.teamBuilder .candidateImpact strong{color:#ead399;margin-left:6px;font-variant-numeric:tabular-nums}
+.teamBuilder .candidateImpact p>span{display:inline-block;margin-left:10px;font-size:10px}
+.teamBuilder .candidateImpact small{display:block;font-size:10px;color:#b4c7b6;line-height:1.8}
+.teamBuilder .confirmReplacement{min-height:46px;font-size:12px}
+.teamBuilder .candidatePanel .sectionTitle{margin-top:18px;font-size:12px}
+.teamBuilder .builderDisclosure{margin:10px 0;border-top:1px solid #8fa28244;color:#c1d0b9}
+.teamBuilder .builderDisclosure summary{cursor:pointer;padding:13px 2px;min-height:46px;font-size:11px;line-height:1.7}
+.teamBuilder .builderDisclosure summary>span{float:right;color:#9caf9e;font-size:10px;margin-left:7px}
+.teamBuilder .builderDisclosure summary:focus-visible{outline:2px solid #a7f3d0;outline-offset:3px}
+.teamBuilder .filterDisclosure{margin:7px 0 0}
+.teamBuilder .filterDisclosure summary{padding-top:10px;padding-bottom:10px}
+.teamBuilder .filterChips{display:flex;flex-wrap:wrap;overflow:visible;padding:0 0 10px;gap:6px}
+.teamBuilder .filterChips button{min-height:40px;padding:8px 11px;font-size:11px}
+.teamBuilder .advancedFilters{grid-template-columns:1fr 1fr;margin-bottom:8px}
+.teamBuilder .tools input,.teamBuilder .tools select,.teamBuilder .advancedFilters select{min-height:44px;font-size:11px}
+.teamBuilder .resetFilters{display:block;min-height:36px;font-size:10px;margin:0 0 7px;padding-left:0}
+.teamBuilder .candidateList{grid-template-columns:1fr 1fr;gap:8px;max-height:420px;max-height:min(55dvh,420px);overflow-y:auto;overscroll-behavior:contain;padding:3px 3px 5px;scrollbar-width:thin;scrollbar-color:#78988a #142631}
+.teamBuilder .candidateCard{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:10px 8px}
+.teamBuilder .candidateCardBody{display:flex;align-items:flex-start;gap:6px;min-width:0}
+.teamBuilder .candidateCard .avatar{font-size:26px;line-height:1.5}
+.teamBuilder .candidateCard .cost{font-size:10px;padding-top:5px}
+.teamBuilder .candidateCard .rosterText strong{font-size:11px;white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+.teamBuilder .candidateCard .rosterText small{font-size:8px;line-height:1.5;white-space:normal}
+.teamBuilder .candidateCard .rosterText em{font-size:9px;white-space:normal;line-height:1.5}
+.teamBuilder .candidateCardActions{display:flex;align-items:center;gap:5px;margin-top:auto}
+.teamBuilder .candidateSelect{flex:1;min-width:0;min-height:44px;padding:8px 4px;border:1px solid #879d7955;border-radius:6px;background:#2c453e;color:#d9e1c3;font-size:10px}
+.teamBuilder .candidateSelect[aria-pressed=true]{background:#d7c58b;color:#243229;border-color:#ead49c}
+.teamBuilder .candidateSelect:disabled{opacity:.62;background:#172a32;border-style:dashed;color:#b2b9ae}
+.teamBuilder .candidateCardActions .detailButton{min-height:44px;min-width:40px;padding:5px;font-size:10px}
+.teamBuilder .candidateReason{font-size:9px;color:#b1bfa6;line-height:1.6;min-height:15px}
+.teamBuilder .savedTeams .teamSlot button{min-height:44px}
+.teamBuilder .browseBestiary{display:block;min-height:58px;width:100%;text-align:left;margin-top:17px;color:#d1dcc4}
+.teamBuilder .browseBestiary>span{display:block;font-size:10px;color:#9fb5a6;margin-top:5px}
+@media(max-width:390px){
+  .teamBuilder .candidateList{grid-template-columns:1fr}
+  .teamBuilder .candidateCard{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:5px 7px}
+  .teamBuilder .candidateCardActions{flex-direction:column;gap:0;margin-top:0}
+  .teamBuilder .candidateSelect{width:100%;flex:none}
+  .teamBuilder .candidateCardActions .detailButton{min-height:36px;width:100%}
+  .teamBuilder .candidateReason{grid-column:1 / -1}
+  .teamBuilder .builderSlots{gap:4px}
+  .teamBuilder .builderSlots .teamUnit>strong{font-size:8px}
+  .teamBuilder .builderSlots .teamUnit>small{font-size:7px;left:3px}
+  .teamBuilder .comparisonStats{grid-template-columns:1fr 1fr;gap:5px 6px}
+  .teamBuilder .comparisonStats>div{flex-direction:column;gap:0}
+}
+@media(max-height:500px) and (min-width:500px){
+  .teamBuilder .candidateList{max-height:300px}
+  .teamBuilder .builderSlots .teamUnit{min-height:92px}
+}
+/* Enter at the editor and return to comparison after choosing, without moving its list. */
+.teamBuilder #candidate-heading,.teamBuilder .candidatePreview{scroll-margin-top:14px;outline:none}
+.teamBuilder .currentMemberBrief{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #78907444;border-radius:7px;background:#1b3037}
+.teamBuilder .currentMemberBrief>span{font-size:30px;line-height:1.2}
+.teamBuilder .currentMemberBrief>div{min-width:0;display:grid;gap:3px}
+.teamBuilder .currentMemberBrief strong{font-size:12px;line-height:1.5}
+.teamBuilder .currentMemberBrief small{font-size:9px;color:#b3c4ad;line-height:1.4}

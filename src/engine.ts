@@ -70,6 +70,8 @@ export type State = {
   allies: Unit[];
   enemies: Unit[];
   log: string[];
+  /** Authoritative completed turns. Optional only for older/injected states. */
+  history?: BattleTurnRecord[];
   winner: null | 'win' | 'lose' | 'draw';
 };
 export type Order = { key: string; skill: number; target?: string };
@@ -89,6 +91,22 @@ export type BattleEvent = {
   guard?: boolean;
   phase?: BattlePhase;
   effect?: string;
+};
+export type BattleOrderRecord = Order & {
+  side: 'allies' | 'enemies';
+  /** An explicit order may itself have been selected with the UI's auto command. */
+  source: 'explicit' | 'automatic';
+  skillName?: string;
+  skillKind?: Skill['kind'];
+  skillPower?: number;
+  accepted: boolean;
+  rejection?: 'invalid-skill' | 'invalid-target' | 'insufficient-mp';
+};
+export type BattleTurnRecord = {
+  turn: number;
+  orders: BattleOrderRecord[];
+  events: BattleEvent[];
+  log: string[];
 };
 
 export const MAX_TURNS = 20;
@@ -111,6 +129,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     seed: seed >>> 0,
     allies: units(team, 'a'),
     enemies: units(enemy, 'e'),
+    history: [],
     log: ['戦闘開始！', 'MPは対戦ごとに全回復。戦闘中の自然回復はありません。', ...(options.leaders ? [
       ...(team.length ? [`味方リーダー ${monsters[team[0]].name}「${leaderFor(team[0]).name}」：${leaderFor(team[0]).description}`] : []),
       ...(enemy.length ? [`敵リーダー ${monsters[enemy[0]].name}「${leaderFor(enemy[0]).name}」：${leaderFor(enemy[0]).description}`] : []),
@@ -202,6 +221,7 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
 export function advanceWithEvents(old: State, orders: Order[]): { state: State; events: BattleEvent[] } {
   const events: BattleEvent[] = [];
   if (old.winner) return { state: old, events };
+  const recordedOrders: BattleOrderRecord[] = [];
   const battle: State = { ...old, allies: old.allies.map(unit => ({ ...unit })), enemies: old.enemies.map(unit => ({ ...unit })), log: [...old.log, `── TURN ${old.turn} ──`] };
   let seed = battle.seed;
   let currentPhase: BattlePhase = 'turn-start';
@@ -234,6 +254,13 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
       const skill = battleSkill(unit.monster, order?.skill ?? BASIC_ATTACK);
       const sameSide = skill && skillTargetsAllies(skill) ? battle[side] : side === 'allies' ? battle.enemies : battle.allies;
       const badTarget = skill && skill.kind !== 'guard' && order?.target !== undefined && !sameSide.some(target => target.key === order!.target);
+      const rejection = !skill ? 'invalid-skill' : badTarget ? 'invalid-target' : !canUseSkill(unit, skill) ? 'insufficient-mp' : undefined;
+      recordedOrders.push({
+        key: unit.key, skill: order?.skill ?? BASIC_ATTACK, ...(order?.target !== undefined ? { target: order.target } : {}),
+        side, source: side === 'allies' && orders.some(candidate => candidate.key === unit.key) ? 'explicit' : 'automatic',
+        ...(skill ? { skillName: skill.name, skillKind: skill.kind, skillPower: skill.power } : {}),
+        accepted: rejection === undefined, ...(rejection ? { rejection } : {}),
+      });
       if (!skill || !canUseSkill(unit, skill) || badTarget) {
         battle.log.push(`${unit.monster.name}の指示は取り消し（${!skill ? '不正な特技' : badTarget ? '対象が不正' : 'MP不足'}・MP消費なし）`);
         continue;
@@ -340,6 +367,14 @@ export function advanceWithEvents(old: State, orders: Order[]): { state: State; 
   if (battle.winner) battle.log.push(battle.winner === 'win' ? '勝利！' : battle.winner === 'lose' ? '敗北…' : '引き分け');
   battle.turn++;
   battle.seed = seed;
+  // Playback may repeat or skip cues; only this authoritative resolver records a turn.
+  // Keep independent event/target snapshots so presentation cannot alter the evidence.
+  battle.history = [...(old.history ?? []), {
+    turn: old.turn,
+    orders: recordedOrders,
+    events: events.map(event => ({ ...event, ...(event.targets ? { targets: [...event.targets] } : {}) })),
+    log: battle.log.slice(old.log.length),
+  }];
   return { state: battle, events };
 }
 

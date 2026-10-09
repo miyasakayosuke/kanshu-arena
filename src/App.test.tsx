@@ -13,7 +13,7 @@ const activeCommander = () => document.querySelector('.commander.active')?.getAt
 async function click(el: HTMLElement) { expect(el).toBeTruthy(); await act(async () => el.click()); }
 async function chooseSkill(name: string) { if (!document.querySelector('.skillButtons')) await click(button('とくぎ')); await click(button(name)); }
 async function mount() { await act(async () => root.render(<App />)); }
-async function openTeam() { if (window.location.hash !== '#team') await click(label('編成・図鑑')); }
+async function openTeam() { if (window.location.hash !== '#team') await click(label('編成')); }
 async function openArena() { if (window.location.hash !== '#arena') await click(label('闘技場')); }
 async function startBattle() { await openArena(); await click(button('この編成で対戦する')); }
 async function leaveBattle() { await click(label('闘技場に戻る')); await click(button('中断して移動')); }
@@ -104,17 +104,17 @@ describe('complete playtest flow', () => {
     await startBattle();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
   });
-  it('filters anchors and preserves an edited party across remount', async () => {
-    await mount(); await openTeam(); await click(button('アンカー'));
+  it('filters candidates and atomically replaces a member without an incomplete party', async () => {
+    await mount(); await openTeam(); await click(label('1枠・妖狐を入れ替える'));
+    await click(button('アンカー'));
     expect(document.querySelectorAll('.rosterItem')).toHaveLength(3);
-    await click(label('妖狐の詳細')); await click(button('編成から外す'));
-    await openArena();
-    expect(button('この編成で対戦する').disabled).toBe(true);
-    await openTeam();
-    await click(label('トロルの詳細')); await click(button('編成に加える'));
-    await openArena();
-    expect(button('この編成で対戦する').disabled).toBe(false);
-    expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toContain(1);
+    await click(label('トロルを候補に選ぶ'));
+    expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toEqual([0,2,3,4,6]);
+    await click(button('トロルに入れ替える'));
+    expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toEqual([1,2,3,4,6]);
+    await openArena(); expect(button('この編成で対戦する').disabled).toBe(false);
+    await act(async () => root.unmount()); root = createRoot(document.getElementById('test-root')!);
+    await mount(); expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toEqual([1,2,3,4,6]);
   });
 });
 

@@ -403,7 +403,11 @@ describe('action order, guard, and defeat', () => {
     const initial = battle([unit('a0', [attack], { speed: 5 })], [unit('e0', [attack], { speed: 100 })]);
     const reference = advance(initial, []);
     initial.allies[0].guard = true;
-    expect(advance(initial, [])).toEqual(reference);
+    const result = advance(initial, []);
+    // Combat is identical, while history faithfully includes the extra cleanup.
+    expect({ ...result, history: undefined }).toEqual({ ...reference, history: undefined });
+    expect(result.history![0].events).toContainEqual({ kind: 'expire', target: 'a0', effect: 'guard', guard: false, phase: 'turn-start' });
+    expect(result.history![0].events.filter(event => event.kind !== 'expire')).toEqual(reference.history![0].events);
     expect(reference.allies[0].guard).toBe(false);
   });
 

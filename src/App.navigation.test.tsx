@@ -10,12 +10,12 @@ const button = (text: string) => [...document.querySelectorAll<HTMLButtonElement
 const label = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 const dialog = () => document.querySelector('[role="alertdialog"][aria-label="対戦を中断しますか"]');
 const timer = () => document.querySelector('[role="timer"]');
-const team = () => [...document.querySelectorAll('.teamUnit')].map(element => element.getAttribute('aria-label'));
+const team = () => [...document.querySelectorAll('.teamUnit[data-monster-id]')].map(element => element.getAttribute('data-monster-id'));
 const partyVitals = () => [...document.querySelectorAll('.commanderHp, .commanderMp')].map(element => element.textContent);
 async function click(element: HTMLElement) { expect(element).toBeTruthy(); await act(async () => element.click()); }
 async function mount() { await act(async () => root.render(<App />)); }
 async function tick(milliseconds: number) { await act(async () => vi.advanceTimersByTime(milliseconds)); }
-async function navigate(name: 'ホーム' | '編成・図鑑' | '闘技場') { await click(label(name)); }
+async function navigate(name: 'ホーム' | '編成' | '闘技場') { await click(label(name)); }
 async function startBattle() {
   if (window.location.hash !== '#arena') await navigate('闘技場');
   await click(button('この編成で対戦する'));
@@ -57,7 +57,7 @@ describe('separate home, workshop, and arena screens', () => {
     expect(document.querySelector('[aria-label="ゲームホーム"]')).toBeTruthy();
     expect(team()).toHaveLength(5);
     expect(button('闘技場へ')).toBeTruthy();
-    expect(button('編成・図鑑')).toBeTruthy();
+    expect(button('編成')).toBeTruthy();
     expect(document.querySelector('.ruleTabs')).toBeNull();
     expect(document.querySelector('.roster')).toBeNull();
     expect(button('この編成で対戦する')).toBeUndefined();
@@ -99,11 +99,11 @@ describe('separate home, workshop, and arena screens', () => {
   it('keeps workshop edits and uses its footer to open the lobby rather than start a battle', async () => {
     const start = vi.spyOn(engine, 'start');
     await mount();
-    await navigate('編成・図鑑');
+    await navigate('編成');
     expect(window.location.hash).toBe('#team');
-    expect(document.querySelectorAll('.rosterItem')).toHaveLength(12);
-    await click(label('バステトの詳細'));
-    await click(button('リーダーにする'));
+    expect(document.querySelectorAll('.rosterItem')).toHaveLength(0);
+    await click(label('2枠・バステトを入れ替える'));
+    await click(label('バステトをリーダーにする'));
     const edited = team();
     await click(document.querySelector<HTMLButtonElement>('footer button')!);
     expect(window.location.hash).toBe('#arena');
@@ -120,8 +120,8 @@ describe('separate home, workshop, and arena screens', () => {
 
   it('allows an incomplete team to visit the lobby but does not allow it to fight', async () => {
     const start = vi.spyOn(engine, 'start');
-    await mount(); await navigate('編成・図鑑');
-    await click(label('妖狐の詳細')); await click(button('編成から外す'));
+    localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team: [2,3,4,6], rule: 'standard' }));
+    await mount(); await navigate('編成');
     expect(team()).toHaveLength(4);
     const gate = document.querySelector<HTMLButtonElement>('footer button')!;
     expect(gate.disabled).toBe(false);
@@ -130,19 +130,18 @@ describe('separate home, workshop, and arena screens', () => {
     expect(button('この編成で対戦する').disabled).toBe(true);
     await click(button('この編成で対戦する'));
     expect(start).not.toHaveBeenCalled();
-    await navigate('編成・図鑑');
+    await navigate('編成');
     expect(team()).toHaveLength(4);
   });
 
   it('restores a partial draft, its leader order, and the selected rule after remount', async () => {
     const start = vi.spyOn(engine, 'start');
-    await mount(); await navigate('闘技場'); await click(button('軽量戦'));
-    await navigate('編成・図鑑');
-    await click(label('妖狐の詳細')); await click(button('編成から外す'));
-    await click(label('ドリュアスの詳細')); await click(button('リーダーにする'));
+    localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team: [2,3,4,6], rule: 'light' }));
+    await mount(); await navigate('編成');
+    await click(label('2枠・ドリュアスを入れ替える')); await click(label('ドリュアスをリーダーにする'));
     const draft = team();
     expect(draft).toHaveLength(4);
-    expect(draft[0]).toBe('ドリュアスの詳細');
+    expect(draft[0]).toBe('3');
     expect(JSON.parse(localStorage.getItem('kanshu-workshop-v1')!)).toEqual({ team: [3, 2, 4, 6], rule: 'light' });
     await act(async () => root.unmount());
     root = createRoot(document.getElementById('test-root')!);
@@ -161,20 +160,20 @@ describe('separate home, workshop, and arena screens', () => {
   it('preserves all three session-only saved teams across screen and battle navigation', async () => {
     vi.spyOn(localStorage, 'getItem').mockImplementation(() => { throw Error('blocked'); });
     vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw Error('blocked'); });
-    await mount(); await navigate('編成・図鑑');
+    await mount(); await navigate('編成');
     await click(label('編成1に保存'));
     const first = team();
-    await click(label('バステトの詳細')); await click(button('リーダーにする'));
+    await click(label('2枠・バステトを入れ替える')); await click(label('バステトをリーダーにする'));
     await click(label('編成2に保存'));
     const second = team();
-    await click(label('ドリュアスの詳細')); await click(button('リーダーにする'));
+    await click(label('3枠・ドリュアスを入れ替える')); await click(label('ドリュアスをリーダーにする'));
     await click(label('編成3に保存'));
     const third = team();
     expect(document.querySelector('.saveNotice')?.textContent).toContain('保存できません');
     expect(document.querySelector('.saveNotice')?.textContent).toContain('再読み込みするまでは呼び出せます');
     await navigate('ホーム'); await startBattle();
     await click(label('闘技場に戻る')); await click(button('中断して移動'));
-    await navigate('編成・図鑑');
+    await navigate('編成');
     for (const [index, expected] of [first, second, third].entries()) {
       expect(label(`編成${index + 1}を呼び出す`).disabled).toBe(false);
       await click(label(`編成${index + 1}を呼び出す`));
@@ -184,10 +183,10 @@ describe('separate home, workshop, and arena screens', () => {
 
   it('handles ordinary browser Back and Forward without starting a battle', async () => {
     const start = vi.spyOn(engine, 'start');
-    await mount(); await navigate('編成・図鑑'); await navigate('闘技場');
+    await mount(); await navigate('編成'); await navigate('闘技場');
     await historyMove('back');
     expect(window.location.hash).toBe('#team');
-    expect(document.querySelector('.roster')).toBeTruthy();
+    expect(document.querySelector('.builderSlots')).toBeTruthy();
     await historyMove('back');
     expect(window.location.hash).toBe('#home');
     expect(document.querySelector('[aria-label="ゲームホーム"]')).toBeTruthy();
@@ -352,7 +351,7 @@ describe('safe battle navigation', () => {
 
   it('uses native unload protection only for an active battle, including playback', async () => {
     await mount(); expect(unloadingIsBlocked()).toBe(false);
-    await navigate('編成・図鑑'); expect(unloadingIsBlocked()).toBe(false);
+    await navigate('編成'); expect(unloadingIsBlocked()).toBe(false);
     await navigate('闘技場'); expect(unloadingIsBlocked()).toBe(false);
     await startBattle(); expect(unloadingIsBlocked()).toBe(true);
     await click(button('この指示でターン開始')); expect(unloadingIsBlocked()).toBe(true);

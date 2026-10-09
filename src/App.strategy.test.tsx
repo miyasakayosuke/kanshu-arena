@@ -8,7 +8,7 @@ let root:Root;
 const button=(text:string)=>[...document.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent?.includes(text))!;
 const label=(text:string)=>document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 async function click(element:HTMLElement){expect(element).toBeTruthy();await act(async()=>element.click());}
-async function openTeam(){if(window.location.hash!=='#team')await click(label('編成・図鑑'));}
+async function openTeam(){if(window.location.hash!=='#team')await click(label('編成'));}
 async function openArena(){if(window.location.hash!=='#arena')await click(label('闘技場'));}
 async function startBattle(){await openArena();await click(button('この編成で対戦する'));}
 async function mount(){await act(async()=>root.render(<App/>));await openTeam();}
@@ -19,8 +19,8 @@ afterEach(async()=>{await act(async()=>root.unmount());vi.restoreAllMocks();vi.u
 describe('strategy workshop and fair rules',()=>{
   it('changes a leader without changing membership and applies both leaders on battle start',async()=>{
     const start=vi.spyOn(engine,'start');await mount();
-    await click(label('バステトの詳細'));await click(button('リーダーにする'));
-    expect(document.querySelector('.teamUnit')?.getAttribute('aria-label')).toBe('バステトの詳細');
+    await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));
+    expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('2');
     expect(document.querySelector('.leaderBanner')?.textContent).toContain('最大HP +12%');
     expect(document.querySelectorAll('.teamUnit')).toHaveLength(5);
     await startBattle();
@@ -30,13 +30,13 @@ describe('strategy workshop and fair rules',()=>{
   });
   it('saves and restores three independent team slots including leader and rules',async()=>{
     await mount();await click(label('編成1に保存'));
-    await click(label('バステトの詳細'));await click(button('リーダーにする'));
+    await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));
     await click(button('軽量戦'));await click(label('編成2に保存'));
     await click(label('編成1を呼び出す'));
-    expect(document.querySelector('.teamUnit')?.getAttribute('aria-label')).toBe('妖狐の詳細');
+    expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('0');
     expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('標準戦');
     await click(label('編成2を呼び出す'));
-    expect(document.querySelector('.teamUnit')?.getAttribute('aria-label')).toBe('バステトの詳細');
+    expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('2');
     expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
     expect(label('編成3を呼び出す').disabled).toBe(true);
     const saved=JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!);
@@ -55,7 +55,7 @@ describe('strategy workshop and fair rules',()=>{
     await click(button('標準戦'));expect(button('この編成で対戦する').disabled).toBe(false);
   });
   it('combines role, leader and cost filters and can reset them',async()=>{
-    await mount();await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(2);
+    await mount();await click(button('モンスター図鑑を開く'));await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(2);
     await select('コストで絞り込み','2');await select('リーダー効果で絞り込み','hp');
     expect(document.querySelectorAll('.rosterItem')).toHaveLength(1);expect(document.querySelector('.rosterItem')?.textContent).toContain('ナーガ');
     await click(label('絞り込みをリセット'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(12);
@@ -103,7 +103,7 @@ describe('counterplay, reading opponents and practice',()=>{
     expect(start.mock.calls[1]).toEqual(original);expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
     expect([...document.querySelectorAll('.commanderMp')].map(el=>el.textContent)).toEqual(start.mock.results[1].value.allies.map((unit:engine.Unit)=>`MP ${unit.monster.mp}/${unit.monster.mp}`));
     await finish();await click(button('編成を見直して再戦'));expect(document.querySelector('.practiceNotice')).toBeTruthy();
-    await click(label('バステトの詳細'));await click(button('リーダーにする'));await openArena();await click(button('この編成で同じ相手に再戦'));
+    await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));await openArena();await click(button('この編成で同じ相手に再戦'));
     expect(start.mock.calls[2][0][0]).toBe(2);expect(start.mock.calls[2].slice(1)).toEqual(original.slice(1));
     expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
   });
