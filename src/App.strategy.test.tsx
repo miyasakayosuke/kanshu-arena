@@ -97,6 +97,7 @@ describe('counterplay, reading opponents and practice',()=>{
     const start=vi.spyOn(engine,'start');await mount();await click(button('この編成で対戦する'));const original=structuredClone(start.mock.calls[0]);
     await finish();await click(button('同じ編成ですぐ再戦'));
     expect(start.mock.calls[1]).toEqual(original);expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
+    expect([...document.querySelectorAll('.commanderMp')].map(el=>el.textContent)).toEqual(start.mock.results[1].value.allies.map((unit:engine.Unit)=>`MP ${unit.monster.mp}/${unit.monster.mp}`));
     await finish();await click(button('編成を見直して再戦'));expect(document.querySelector('.practiceNotice')).toBeTruthy();
     await click(label('バステトの詳細'));await click(button('リーダーにする'));await click(button('この編成で同じ相手に再戦'));
     expect(start.mock.calls[2][0][0]).toBe(2);expect(start.mock.calls[2].slice(1)).toEqual(original.slice(1));

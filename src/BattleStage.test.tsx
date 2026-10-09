@@ -142,7 +142,11 @@ describe('battle presentation', () => {
 
   it.each(['damage', 'heal', 'guard', 'poison', 'defeat'] as const)('keeps allied %s feedback and healing hit targets outside the arena', async kind => {
     const select = vi.fn();
-    const event: BattleEvent = {kind, actor: 'a2', target: 'a1', amount: 65, hp: 105};
+    const event: BattleEvent = {
+      kind, actor: 'a2', target: 'a1', amount: 65, hp: kind === 'defeat' ? 0 : 105,
+      ...(kind === 'guard' ? {guard: true} : {}),
+      ...(kind === 'poison' ? {poison: 2} : {}),
+    };
     const units = base.allies.map(unit => unit.key === 'a0' ? {...unit, hp: 0} : unit.key === 'a1' ? {...unit, hp: 105, guard: true, poison: 2} : unit);
     await render({...base, allies: units, impact: event, impacts: [event], targetKeys: ['a0', 'a1'], selectedTarget: 'a1', onSelectTarget: select});
     for (const time of [200, 475, 900, 1300]) {
@@ -216,11 +220,23 @@ describe('battle presentation', () => {
     const targets = document.querySelectorAll<HTMLButtonElement>('.battleTarget');
     expect(targets).toHaveLength(1);
     expect(targets[0].getAttribute('aria-label')).toContain('トロルを対象にする');
+    expect(targets[0].getAttribute('aria-label')).toContain(`MP ${party.enemies[0].mp}/${party.enemies[0].monster.mp}`);
     expect(targets[0].getAttribute('aria-pressed')).toBe('true');
     expect(targets[0].style.minWidth).toBe('44px');
     expect(targets[0].textContent).toBe('');
     targets[0].click();
     expect(select).toHaveBeenCalledWith('e0');
+  });
+
+  it('shows current and maximum enemy MP alongside their remaining effect timing', async () => {
+    const enemies = base.enemies.map((unit, index) => index === 0 ? {...unit, mp: 7, guard: true, poison: 2} : unit);
+    await render({...base, enemies});
+    expect(document.querySelectorAll('.enemyMp')).toHaveLength(5);
+    expect(document.querySelector('.enemyMp')?.textContent).toBe(`MP 7/${enemies[0].monster.mp}`);
+    const first = document.querySelector('.enemyVital');
+    expect(first?.getAttribute('aria-label')).toContain(`MP 7/${enemies[0].monster.mp}`);
+    expect(first?.querySelector('em')?.textContent).toContain('今T');
+    expect(first?.querySelector('em')?.textContent).toContain('残2回');
   });
 
   it('selects an enemy by its centered canvas position and ignores empty foreground', async () => {

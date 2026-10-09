@@ -1,5 +1,5 @@
 import {useEffect, useRef} from 'react';
-import type {BattleEvent, Unit} from './engine';
+import {effectStatus, type BattleEvent, type Unit} from './engine';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -575,7 +575,7 @@ export default function BattleStage(props: Props) {
     : props.impact?.amount !== undefined ? `${[...props.allies, ...props.enemies].find(unit => unit.key === props.impact?.target)?.monster.name ?? ''} ${props.impact.kind === 'heal' ? '回復' : 'ダメージ'} ${props.impact.amount}` : '';
   return <div className="battleStage" style={{position: 'relative', width: '100%', height: '100%', minHeight: 0}}>
     <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}
-      role="img" aria-label="敵だけが表示される戦闘フィールド。敵の下のバーは残りHPです。味方は画面下のアイコンで確認できます。"
+      role="img" aria-label="敵だけが表示される戦闘フィールド。敵の下のバーは残りHP、下部に各敵のHP・MP・状態を表示しています。味方は画面下のアイコンで確認できます。"
       style={{display: 'block', width: '100%', height: '100%'}}
       onClick={event => {
         if (!props.onSelectTarget) return;
@@ -587,12 +587,15 @@ export default function BattleStage(props: Props) {
       }}/>
     {props.onSelectTarget && <div className="battleTargets" role="group" aria-label="特技の対象を選択">
       {selectable.map(({unit, point}) => <button key={unit.key} type="button" className="battleTarget" data-target={unit.key}
-        aria-label={`${unit.monster.name}を対象にする HP ${unit.hp}/${unit.monster.hp}`}
+        aria-label={`${unit.monster.name}を対象にする HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp}`}
         aria-pressed={props.selectedTarget === unit.key}
-        title={`${unit.monster.name} · HP ${unit.hp}/${unit.monster.hp}`}
+        title={`${unit.monster.name} · HP ${unit.hp}/${unit.monster.hp} · MP ${unit.mp}/${unit.monster.mp}`}
         style={{position: 'absolute', left: `${point.x / WIDTH * 100}%`, top: `${point.y / HEIGHT * 100}%`, width: '13%', height: '22%', minWidth: 44, minHeight: 44, transform: 'translate(-50%, -50%)', padding: 0, background: 'transparent', border: 0, borderRadius: '50%', cursor: 'pointer', touchAction: 'manipulation'}}
         onClick={() => props.onSelectTarget?.(unit.key)}/>)}
     </div>}
+    <div className="enemyVitals" aria-label="敵のHP・MP・状態">{props.enemies.map(unit => <div className={`enemyVital ${unit.hp <= 0 ? 'fallen' : ''}`} key={unit.key} aria-label={`${unit.monster.name} HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp} ${unit.hp <= 0 ? '戦闘不能' : effectStatus(unit) || '状態異常なし'}`}>
+      <strong>{unit.monster.name}</strong><small>HP {unit.hp}/{unit.monster.hp}</small><small className="enemyMp">MP {unit.mp}/{unit.monster.mp}</small><em>{unit.hp <= 0 ? '戦闘不能' : effectStatus(unit)}</em>
+    </div>)}</div>
     <span aria-live="polite" aria-atomic="true" style={{position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0}}>{announcement}</span>
   </div>;
 }

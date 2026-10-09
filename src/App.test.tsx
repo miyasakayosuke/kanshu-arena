@@ -392,7 +392,7 @@ describe('four-command actor menu', () => {
       const state = start(...args);
       state.allies[0].monster = { ...state.allies[0].monster, skills: [
         state.allies[0].monster.skills[0]!, state.allies[0].monster.skills[1]!, state.allies[0].monster.skills[2]!,
-        { name: '第四の特技', power: 40, priority: 0, kind: 'hit' },
+        { name: '第四の特技', power: 40, priority: 0, kind: 'hit', mpCost: 8 },
       ] };
       return state;
     });
@@ -418,6 +418,82 @@ describe('four-command actor menu', () => {
     await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
     expect(document.querySelector('.commandButtons .chosen')?.textContent).toContain('ぼうぎょ');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
+  });
+});
+
+describe('MP-aware commands', () => {
+  const mp = (name: string) => label(`${name}の行動を選択`).querySelector('.commanderMp')?.textContent;
+
+  it('shows current and maximum MP and keeps unaffordable specials unavailable without blocking free commands', async () => {
+    const start = engine.start;
+    vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
+      const state = start(...args);
+      state.allies[0].mp = 0;
+      return state;
+    });
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    expect(document.querySelectorAll('.commanderMp')).toHaveLength(5);
+    expect(mp('妖狐')).toBe(`MP 0/${engine.monsters[0].mp}`);
+    expect(mp('バステト')).toBe(`MP ${engine.monsters[2].mp}/${engine.monsters[2].mp}`);
+    expect(label('妖狐の行動を選択').getAttribute('aria-describedby')).toContain('party-mp-a0');
+    await click(button('とくぎ'));
+    const specials = [...document.querySelectorAll<HTMLButtonElement>('.skillButtons button')];
+    expect(specials).toHaveLength(3);
+    expect(specials.every(skill => skill.disabled && skill.textContent?.includes('MP不足'))).toBe(true);
+    await click(specials[0]);
+    expect(document.querySelector('.targetButtons')).toBeNull();
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
+    await click(button('コマンドに戻る'));
+    expect(button('たたかう').disabled).toBe(false);
+    expect(button('ぼうぎょ').disabled).toBe(false);
+    await click(button('たたかう'));
+    await click(target('トロル'));
+    await click(label('妖狐の行動を選択'));
+    await click(button('ぼうぎょ'));
+    expect(mp('妖狐')).toBe(`MP 0/${engine.monsters[0].mp}`);
+    await click(button('この指示でターン開始'));
+    expect(advance.mock.calls[0][1]).toContainEqual({key: 'a0', skill: engine.DEFEND, target: undefined});
+  });
+
+  it('allows an exact-cost special and does not spend MP while selecting, canceling, or confirming its target', async () => {
+    const start = engine.start;
+    const cost = engine.monsters[0].skills[0]!.mpCost;
+    vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
+      const state = start(...args);
+      state.allies[0].mp = cost;
+      return state;
+    });
+    await enterBattle();
+    const before = `MP ${cost}/${engine.monsters[0].mp}`;
+    await click(button('とくぎ'));
+    expect(button('狐火').disabled).toBe(false);
+    expect(button('狐火').querySelector('.skillMp')?.textContent).toBe(`MP ${cost}`);
+    await click(button('狐火'));
+    expect(mp('妖狐')).toBe(before);
+    await click(button('特技に戻る'));
+    expect(mp('妖狐')).toBe(before);
+    await click(button('狐火'));
+    await click(target('トロル'));
+    expect(mp('妖狐')).toBe(before);
+    expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
+  });
+
+  it.each(['natural', 'skip'] as const)('retains the engine MP result after %s playback', async mode => {
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
+    await enterBattle();
+    await chooseSkill('狐火');
+    await click(target('トロル'));
+    await click(button('この指示でターン開始'));
+    const expected: engine.State = advance.mock.results[0].value.state;
+    expect(expected.allies[0].mp).toBe(engine.monsters[0].mp - engine.monsters[0].skills[0]!.mpCost);
+    if (mode === 'skip') await click(button('演出をスキップ'));
+    else await act(async () => vi.runAllTimers());
+    for (const unit of expected.allies) {
+      expect(mp(unit.monster.name)).toBe(`MP ${unit.mp}/${unit.monster.mp}`);
+    }
+    expect(document.querySelector('.playingPanel')).toBeNull();
+    expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 2');
   });
 });
 
@@ -619,16 +695,17 @@ describe('bottom-only allied battle feedback', () => {
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
   });
 
-  it('updates all allied area hits, poison, and defeat together at impact, then clears feedback on skip', async () => {
+  it.each(['natural', 'skip'] as const)('updates area hits and poison counts at their impacts, then clears feedback on %s playback', async mode => {
     vi.spyOn(engine, 'advanceWithEvents').mockImplementationOnce(state => ({
-      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 0 : unit.hp - 33, poison: 3}))},
+      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 0 : unit.hp - 33 - Math.floor(unit.monster.hp * .06), poison: i === 0 ? 0 : 2}))},
       events: [
         {kind: 'cast', actor: 'e3', skill: '毒霧', effect: 'poison'},
         ...state.allies.flatMap((unit, i): engine.BattleEvent[] => [
           {kind: 'damage', actor: 'e3', target: unit.key, amount: i === 0 ? 150 : 33, hp: i === 0 ? 0 : unit.hp - 33},
-          {kind: 'poison', actor: 'e3', target: unit.key},
-          ...(i === 0 ? [{kind: 'defeat' as const, target: unit.key}] : []),
+          ...(i === 0 ? [{kind: 'defeat' as const, target: unit.key, hp: 0, guard: false, poison: 0}] : [{kind: 'poison' as const, actor: 'e3', target: unit.key, poison: 3}]),
         ]),
+        {kind: 'phase', phase: 'turn-end'},
+        ...state.allies.slice(1).map((unit): engine.BattleEvent => ({kind: 'damage', target: unit.key, amount: Math.floor(unit.monster.hp * .06), hp: unit.hp - 33 - Math.floor(unit.monster.hp * .06), poison: 2, effect: 'poison', phase: 'turn-end'})),
       ],
     }));
     await enterBattle();
@@ -641,45 +718,67 @@ describe('bottom-only allied battle feedback', () => {
     expect(hp('バステト')).toBe('HP 137/170');
     expect(document.querySelectorAll('.partyImpact.damage')).toHaveLength(5);
     expect(label('妖狐の行動を選択').textContent).toContain('戦闘不能');
-    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toContain('毒3');
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残3回');
     expect(document.querySelector('.battleStage .partyImpact')).toBeNull();
-    await click(button('演出をスキップ'));
+    if (mode === 'skip') await click(button('演出をスキップ'));
+    else {
+      await act(async () => vi.advanceTimersByTime(939));
+      expect(hp('バステト')).toBe('HP 137/170');
+      expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残3回');
+      await act(async () => vi.advanceTimersByTime(1));
+      expect(hp('バステト')).toBe('HP 127/170');
+      expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残2回');
+      await act(async () => vi.advanceTimersByTime(860));
+    }
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
     expect(label('妖狐の行動を選択').disabled).toBe(true);
     expect(activeCommander()).toContain('バステト');
-    expect(hp('バステト')).toBe('HP 137/170');
+    expect(hp('バステト')).toBe('HP 127/170');
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('毒:残2回');
     expect(document.querySelector('[role="timer"]')?.textContent).toContain('30');
   });
 
   it('shows allied casting, guard, and positive healing on the fixed bottom icons', async () => {
     const start = engine.start;
+    const healingCost = engine.monsters[3].skills[1]!.mpCost;
+    const mp = () => label('ドリュアスの行動を選択').querySelector('.commanderMp')?.textContent;
     vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
       const state = start(...args); state.allies[0].hp = 50; return state;
     });
     vi.spyOn(engine, 'advanceWithEvents').mockImplementationOnce(state => ({
-      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 115 : unit.hp, guard: i === 1}))},
+      state: {...state, turn: 2, allies: state.allies.map((unit, i) => ({...unit, hp: i === 0 ? 115 : unit.hp, mp: i === 2 ? unit.mp - healingCost : unit.mp, guard: false}))},
       events: [
         {kind: 'cast', actor: 'a1', skill: 'ぼうぎょ', effect: 'guard'},
-        {kind: 'guard', actor: 'a1', target: 'a1'},
+        {kind: 'guard', actor: 'a1', target: 'a1', guard: true},
         {kind: 'cast', actor: 'a2', target: 'a0', skill: '生命の雫', effect: 'heal'},
+        {kind: 'resource', actor: 'a2', target: 'a2', mp: state.allies[2].mp - healingCost, amount: healingCost, effect: 'mp'},
         {kind: 'heal', actor: 'a2', target: 'a0', amount: 65, hp: 115},
+        {kind: 'phase', phase: 'turn-end'},
+        {kind: 'expire', target: 'a1', guard: false, effect: 'guard', phase: 'turn-end'},
       ],
     }));
     await enterBattle();
     await click(button('この指示でターン開始'));
     await act(async () => vi.advanceTimersByTime(1));
     expect(label('バステトの行動を選択').classList.contains('acting')).toBe(true);
+    expect(mp()).toBe(`MP ${engine.monsters[3].mp}/${engine.monsters[3].mp}`);
     await act(async () => vi.advanceTimersByTime(799));
-    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('防御');
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('守り:今T');
     await act(async () => vi.advanceTimersByTime(700));
     expect(label('ドリュアスの行動を選択').classList.contains('acting')).toBe(true);
+    expect(mp()).toBe(`MP ${engine.monsters[3].mp - healingCost}/${engine.monsters[3].mp}`);
+    expect(hp('妖狐')).toBe('HP 50/150');
     expect(document.querySelector('.partyImpact')).toBeNull();
     await act(async () => vi.advanceTimersByTime(800));
     expect(hp('妖狐')).toBe('HP 115/150');
     expect(label('妖狐の行動を選択').querySelector('.partyImpact.heal')?.textContent).toBe('+65');
-    await act(async () => vi.advanceTimersByTime(850));
+    await act(async () => vi.advanceTimersByTime(700));
+    expect(label('バステトの行動を選択').querySelector('.commanderStatus')?.textContent).toBe('');
+    expect(document.querySelector('.battleMessage')?.textContent).not.toContain('毒のダメージ');
+    await act(async () => vi.advanceTimersByTime(150));
     expect(document.querySelector('.partyImpact')).toBeNull();
     expect(document.querySelector('.acting')).toBeNull();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 2');
+    expect(mp()).toBe(`MP ${engine.monsters[3].mp - healingCost}/${engine.monsters[3].mp}`);
   });
 });
