@@ -105,9 +105,9 @@ describe('family-wave lab configuration', () => {
   });
 
   it.each([
-    { monsters: { 13: { family: 'dragon' } } },
-    { leaders: { 14: { ...leaderFor(14), family: 'dragon' } } },
-    { monsters: { 13: { skills: [{ ...monsters[13].skills[0], familyBonusHit: 'dragon' }] } } },
+    { monsters: { 13: { family: 'unknown-family' } } },
+    { leaders: { 14: { ...leaderFor(14), family: 'unknown-family' } } },
+    { monsters: { 13: { skills: [{ ...monsters[13].skills[0], familyBonusHit: 'unknown-family' }] } } },
     { monsters: { 13: { skills: [{ ...monsters[13].skills[1], familyBonusHit: 'beast' }] } } },
     { monsters: { 13: { skills: [{ ...monsters[13].skills[0], kind: 'heal' }] } } },
     { monsters: { 13: { skills: [{ ...monsters[13].skills[0], all: true }] } } },

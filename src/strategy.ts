@@ -1,4 +1,4 @@
-import { cost, MAX_TURNS, monsters, type State, type Unit } from './engine';
+import { baseDamage, cost, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, MAX_TURNS, monsters, type Skill, type State, type Unit } from './engine';
 
 export const initialTeam = [0, 2, 3, 4, 6];
 
@@ -15,9 +15,27 @@ export const rules = {
 } as const;
 
 const opponents: Record<RuleId, number[][]> = {
-  standard: [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10]],
+  standard: [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18]],
   light: [[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10], [14, 3, 6, 9, 10]],
 };
+
+/** Read-only examples: members are ordered leader first; no saved team is overwritten. */
+export const recommendedTeams = [
+  { name: '獣系の速攻', team: [12, 0, 2, 11, 13], note: '群気と獣系5体の連弾。回復役を守りながら先手を取る。' },
+  { name: '自然系の持久戦', team: [14, 3, 6, 9, 10], note: '開幕の自然障壁から回復と毒へつなぐ。軽量戦にも出場可能。' },
+  { name: '竜系の蓄積', team: [15, 5, 16, 17, 18], note: '全員が竜系。攻撃で竜気を溜め、アンカーの息へつなぐ。標準戦向け。' },
+  { name: '竜3体の混成', team: [15, 16, 18, 2, 6], note: '竜気の条件を満たす軽量戦の例。竜以外の攻撃では溜まらない。' },
+] as const;
+
+/** Fixed basis is distinct from final damage, and always comes from the engine values. */
+export function fixedDamageHint(skill: Skill, unit?: Unit): string {
+  if (!skill.fixedDamage) return '';
+  if (!skill.dragonChargeFinisher) return `1体あたり固定基礎${skill.power}`;
+  const formula = `${skill.power}＋竜気×${DRAGON_CHARGE_PER_POINT}`;
+  return unit
+    ? `1体あたり固定基礎${baseDamage(unit, skill)}（${unit.dragonCharge === undefined ? '竜気条件未成立' : `現在の竜気${unit.dragonCharge}`}）`
+    : `1体あたり固定基礎${formula}（最大${skill.power + DRAGON_CHARGE_CAP * DRAGON_CHARGE_PER_POINT}）`;
+}
 
 /** Return fresh teams so changing a preview cannot change a later opponent. */
 export function opponentTeams(rule: RuleId): number[][] {
@@ -89,6 +107,10 @@ const monsterStories: Record<number, string> = {
   11: '闘技場と冥府の境に立つ静かな番人。振り下ろす刃に迷いはなく、堅い守りも断ち切る。',
   13: '枝から枝へ、群れの合図を運ぶ小さな走り手。仲間の足音が五つそろうと、隠していた木の実をもう一つ投げ放つ。',
   14: '甲羅に森を、水面に星を宿す古い守り手。戦いのはじまりに自然の仲間を包み、海と山の響きをゆっくり解き放つ。',
+  15: '長い蛇身を輪にして、水の道をせき止める竜。仲間の攻めに呼応して輪の内へ力を蓄え、乾いた空へ一息に放つ。',
+  16: '二本の脚と長い尾で岩場を渡る竜。ざらついた鱗を盾のように立て、背後の仲間へ続く道を守る。',
+  17: '尾の先にも頭を持つ、両端で見張る蛇竜。前後の呼吸をそろえた瞬間、二つの牙が別々の隙を探しに走る。',
+  18: '青緑の翼と淡い腹を持つ雲の旅竜。雲間の水を携えて飛び、鋭い息と澄んだ湧き水を使い分ける。',
 };
 
 export function monsterLore(id: number): string {
@@ -156,7 +178,7 @@ const monsterRoles: Record<number, MonsterRole> = {
   },
   12: {
     name: '群れの突破役',
-    strength: '獣系の攻撃と速さを支え、5連撃で命中した敵の守り・群気・自然障壁を裂く。',
+    strength: '獣系の攻撃と速さを支え、5連撃で命中した敵の守り・群気・自然障壁・竜気を裂く。',
     tradeoff: 'COST4でHPは低め。先制技はなく、連撃の相手は指定できない。',
   },
   11: {
@@ -174,6 +196,26 @@ const monsterRoles: Record<number, MonsterRole> = {
     strength: '自然系に開幕の自然障壁を張り、回復・守護・全体アンカーを使い分ける。',
     tradeoff: 'COST5で動きは遅い。自然障壁は解除可能で、毒の継続ダメージを防げない。',
   },
+  15: {
+    name: '竜気を束ねる中核',
+    strength: '開戦時に竜系3体以上なら、仲間の攻撃で竜気を蓄えて全体の息へ使う。',
+    tradeoff: 'COST5で動きは遅い。竜気は解除や本人の撃破で失い、息はMP消費が重い。',
+  },
+  16: {
+    name: '岩場の竜盾',
+    strength: 'COST2の竜系。最速の守護で中核を守り、攻撃なら竜気の蓄積を助ける。',
+    tradeoff: '守護の手番では竜気は増えない。回復・毒解除・先制攻撃は持たない。',
+  },
+  17: {
+    name: '双頭の崩し役',
+    strength: 'ランダム2連撃と、命中前の守り・自然障壁・竜気解除を使い分ける。',
+    tradeoff: '連撃は相手を選べず、竜気の増加は2発でも1。回復や守護はできない。',
+  },
+  18: {
+    name: '雲渡りの支援竜',
+    strength: '攻撃力に依存しない息と、回復・毒解除を使い分ける竜系の支え。',
+    tradeoff: '回復や毒解除では竜気は増えない。息も守りや自然障壁で軽減される。',
+  },
 };
 
 export function monsterRole(id: number): MonsterRole {
@@ -185,6 +227,16 @@ export function monsterRole(id: number): MonsterRole {
 }
 
 const skillStories: Record<string, string> = {
+  渇天の息: '幾重にも巻いた体をほどき、溜めていた乾いた息を敵陣へ押し流す。',
+  雨裂きの牙: '水の幕を裂くように蛇身を伸ばし、狙った一点へ牙を打ち込む。',
+  蜷局の備え: '頭を幾重の輪で囲み、外側の鱗で衝撃を受け止める。',
+  石割りの牙: '岩の割れ目を探るように、狙った相手の隙へ太い牙を押し込む。',
+  鱗のかばい: '長い胴をひねって仲間の前へ鱗を立て、迫る力を受け流す。',
+  双頭の連突: '両端の頭が交互に伸び、別々に見つけた隙へ一度ずつ突きかかる。',
+  封鱗裂き: '尾先の頭が構えを崩し、もう一方の牙が残された隙を裂く。',
+  翠雲の息: '翼の間に抱えた青緑の雲を絞り、細い息の流れをまっすぐ送る。',
+  雲の湧き水: '翼から集めた雫を小さな水たまりに変え、仲間の傷へそっと注ぐ。',
+  雲払い: '柔らかな翼で淀んだ空気を追い払い、清らかな雫で仲間をいたわる。',
   破縛の連牙: '低く構え、五度の跳躍で敵を追う。牙が触れた守りから鎖のように裂けていく。',
   月下の一咬: '群れの隙間を駆け抜け、選んだ相手へ一度だけ牙を深く届かせる。',
   木の実の連弾: '蓄えた木の実を次々に放つ。群れの足並みがそろえば、最後の一粒も戦場へ躍る。',

@@ -1,7 +1,8 @@
 import MonsterArt from './MonsterArt';
 import { useEffect, useRef, useState } from 'react';
-import { monsters, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
-import { rules, monsterRole, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
+import { monsters, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
+import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
+import { activeFamilyOptions } from './families';
 import './teamBuilder.css';
 
 type Props = {
@@ -24,9 +25,7 @@ const roleOptions = [
   ['cleanse', '毒解除'], ['break', '防御解除'], ['guard', '防御'],
 ];
 
-const familyOptions = [
-  ['beast', '獣系'], ['nature', '自然系'], ['unassigned', '系統未設定'],
-] as const;
+const familyOptions = activeFamilyOptions(monsters);
 
 function FamilyRecipients({ team, applies }: { team: number[]; applies: (monster: Monster) => boolean }) {
   const eligible = team.filter(id => applies(monsters[id]));
@@ -61,6 +60,20 @@ function BeastBarrageBonus({ team }: { team: number[] }) {
     <strong>木の実の連弾 · 獣系 {beasts}/5体</strong>
     <small>{active ? '追加1発あり · ランダム4回' : '追加1発なし · ランダム3回'}</small>
     <small>開戦時の5体すべてが獣系なら+1回。戦闘不能になっても条件は変わりません。</small>
+  </div>;
+}
+
+function DragonChargePlan({ team }: { team: number[] }) {
+  const dragons = team.filter(id => monsters[id].family === 'dragon');
+  const hasCore = team.includes(DRAGON_CORE_ID);
+  if (!dragons.length && !hasCore) return null;
+  const active = dragonChargeEligible(team.map(id => ({ monster: monsters[id] })));
+  return <div className="dragonChargePlan" data-active={active} aria-label="竜気の編成条件">
+    <strong>竜気 · {active ? '条件成立' : '条件未成立'}</strong>
+    <small>中核 {monsters[DRAGON_CORE_ID].name}：{hasCore ? '編成中' : '未編成'} · 竜系 {dragons.length}体 / 必要3体</small>
+    <small>{active ? `開戦時に中核へ竜気0/${DRAGON_CHARGE_CAP}。味方が倒れても開始時の条件は変わりません。` : '中核を含む竜系3体以上で開戦すると有効。全員を竜系にする必要はありません。'}</small>
+    <small>味方の竜系がMPを払う攻撃特技を1回使い終えると+1。連撃も1、通常攻撃・支援・毒・渇天の息では増えません。</small>
+    <small>蓄積は中核だけが保持。防御解除で消え、本人が倒れると消失し以後は溜まりません。息の前に集中攻撃・解除・守護で対策できます。</small>
   </div>;
 }
 
@@ -246,15 +259,24 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small><FamilyRecipients team={team} applies={monster => leaderAppliesTo(leader, monster)} /></div>}
       <OpeningSupport team={team} />
       <BeastBarrageBonus team={team} />
+      <DragonChargePlan team={team} />
       <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
-    <aside className="newBeast"><div><span className="eyebrow">NEW · BEAST</span><strong>破縛の魔狼 フェンリル</strong><small>獣系を支え、五連の牙で守りを裂く。</small></div><button className="secondary" onClick={() => onFocus(12)}>詳しく見る</button></aside>
-    <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
-      <button className="familyArrival" onClick={() => onFocus(13)} aria-label="ラタトスクの詳細"><span aria-hidden="true"><MonsterArt monster={monsters[13]} portrait /></span><span><small>獣系 · COST 2</small><strong>ラタトスク</strong><em>5体の獣系で連弾がもう1発</em></span><b aria-hidden="true">›</b></button>
-      <button className="familyArrival natureArrival" onClick={() => onFocus(14)} aria-label="玄武の詳細"><span aria-hidden="true"><MonsterArt monster={monsters[14]} portrait /></span><span><small>自然系 · COST 5</small><strong>玄武</strong><em>自然障壁で開幕を支える守り手</em></span><b aria-hidden="true">›</b></button>
-    </aside>
+    <aside className="newDragon"><div><span className="eyebrow">NEW · DRAGON</span><strong>竜気を束ねる ヴリトラ</strong><small>仲間が溜め、遅い息で解き放つ。守るか、攻めるか。</small></div><button className="secondary" aria-label="ヴリトラの詳細" onClick={() => onFocus(DRAGON_CORE_ID)}>詳しく見る</button></aside>
+    <details className="builderDisclosure arrivalDisclosure">
+      <summary>新しい竜の仲間<span>守護・連撃・回復の3体</span></summary>
+      <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
+        {([16, 17, 18] as const).map(id => <button key={id} className="familyArrival dragonArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
+      </aside>
+      <p className="hint">これまでの仲間も、下のモンスター図鑑から全員の詳細を開けます。</p>
+    </details>
+    <details className="builderDisclosure recommendedTeams">
+      <summary>編成のヒント<span>{recommendedTeams.length}つの組み合わせ例</span></summary>
+      <p className="hint">左がリーダー。参考用の一覧です。入れ替えは出場パーティの枠から。</p>
+      {recommendedTeams.map(example => <div className="recommendedTeam" key={example.name}><strong>{example.name}<span>COST {cost([...example.team])}</span></strong><p>{example.team.map(id => monsters[id].name).join('・')}</p><small>{example.note}</small></div>)}
+    </details>
     <p className="saveNotice teamNotice" role="status">{notice}</p>
 
     {(editing || browsing) && <section className="candidatePanel" id="team-candidates" aria-labelledby="candidate-heading">
@@ -284,6 +306,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           {projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
           <OpeningSupport team={projectedTeam} />
           <BeastBarrageBonus team={projectedTeam} />
+          <DragonChargePlan team={projectedTeam} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}

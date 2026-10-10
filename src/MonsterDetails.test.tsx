@@ -104,9 +104,41 @@ describe('family monster profiles', () => {
 
   it('keeps pre-hit breakers distinct from Fenrir post-hit removal', async () => {
     await mount(8);
-    expect(document.querySelector('.profileModal')!.textContent).toContain('命中前に防御・守護・自然障壁を解除して攻撃');
+    expect(document.querySelector('.profileModal')!.textContent).toContain('命中前に防御・守護・自然障壁・竜気を解除して攻撃');
     await act(async () => root.render(<MonsterDetails id={12} onClose={() => root.render(null)} />));
-    expect(document.querySelector('.profileModal')!.textContent).toContain('各命中の後に守り（防御・守護）・群気・自然障壁を解除');
+    expect(document.querySelector('.profileModal')!.textContent).toContain('各命中の後に守り（防御・守護）・群気・自然障壁・竜気を解除');
     expect(document.querySelector('.profileModal')!.textContent).toContain('自然障壁だけなら10%軽減');
+  });
+});
+
+describe('dragon profiles', () => {
+  it('explains charge qualification, cast timing, fixed basis, and precise counterplay', async () => {
+    await mount(15);
+    const text = document.querySelector('.profileModal')!.textContent!;
+    for (const phrase of ['竜系3体以上', '先頭でなくても', '連撃も1回分', '竜気は0〜5', '発動時にMPを払い、竜気を全消費', '指示した時点では消費せず', '条件未成立でも息は使えます', '防御解除は命中前', 'フェンリルは命中後', '解除後は再び溜められます', '本人の戦闘不能後は増えません', '固定基礎10＋竜気×18（最大100）', '乱数±10%', '防御力・賢さ・属性相性は現在の戦闘では未導入']) expect(text).toContain(phrase);
+    expect(document.querySelectorAll('.skill')).toHaveLength(3);
+    expect(text).not.toContain('未知の役割');
+    expect(text).not.toContain('MPと竜気を全消費');
+  });
+
+  it.each([16, 17, 18])('has independent lore and no placeholder abilities for dragon %s', async id => {
+    await mount(id);
+    const text = document.querySelector('.profileModal')!.textContent!;
+    expect(text).toContain('竜系');
+    expect(text).not.toContain('まだ物語の記されていない');
+    expect(text).not.toContain('未知の役割');
+    expect(document.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
+    if (id === 16) expect(text).toContain('二本の脚');
+    if (id === 17) { expect(text).toContain('尾の先にも頭'); expect(text).toContain('敵ランダム2回（対象指定なし）'); }
+    if (id === 18) { expect(text).toContain('青緑の翼'); expect(text).toContain('固定基礎68'); expect(text).toContain('最終ダメージは乱数±10%'); }
+  });
+
+  it('keeps the existing breath attack-based instead of claiming all breaths use fixed damage', async () => {
+    await mount(5);
+    const text = document.querySelector('.legacyBreathExplanation')!.textContent!;
+    expect(text).toContain('従来の攻撃力を使う計算を維持');
+    expect(text).toContain('補正後攻撃力の38%');
+    expect(text).toContain('全体攻撃は半分');
+    expect(document.querySelector('.fixedBasisExplanation')).toBeNull();
   });
 });

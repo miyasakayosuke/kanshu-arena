@@ -1,10 +1,9 @@
 import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
-import {FENRIR_ART_URL} from './fenrirArt';
-import {GENBU_ART_URL, RATATOSKR_ART_URL} from './familyArt';
+import {CHARACTER_ART} from './MonsterArt';
 import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
-import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion} from './battleMotion';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -21,7 +20,7 @@ type Props = {
   onSelectTarget?: (key: string) => void;
 };
 type Point = {x: number; y: number};
-type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed';
+type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
 type Health = {value: number; trail: number; target: number; changed: number};
@@ -37,6 +36,8 @@ const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
   guard: {light: '#fff6c9', core: '#e5c264', dark: '#b69139'},
   poison: {light: '#e6f5c1', core: '#a5c76c', dark: '#75814b'},
   seed: {light: '#fff0bc', core: '#c38d4d', dark: '#638156'},
+  storm: {light: '#ece3ff', core: '#858ac9', dark: '#39416e'},
+  twin: {light: '#eef0e6', core: '#a694c0', dark: '#655076'},
 };
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const ease = (value: number) => 1 - (1 - clamp(value)) ** 3;
@@ -52,6 +53,9 @@ function locate(key: string | undefined, props: Props): Point | undefined {
   return enemy >= 0 ? position(enemy, props.enemies.length) : undefined;
 }
 function visual(effect: Effect, event: BattleEvent): Visual {
+  if (event.skill === '渇天の息') return 'storm';
+  if (event.skill === '双頭の連突') return 'twin';
+  if (['翠雲の息', '雲の湧き水', '雲払い'].includes(event.skill ?? '')) return 'water';
   if (event.skill === '木の実の連弾') return 'seed';
   if (event.skill === '海山の轟き') return 'water';
   if (event.kind === 'heal' || event.effect === 'heal') return 'water';
@@ -294,6 +298,88 @@ function drawGenbuField(ctx: CanvasRenderingContext2D, cast: Cast, age: number, 
   }
   ctx.restore();
 }
+/** One continuous breath fan; target hit cues still land together at impact. */
+function drawVritraStorm(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const {stormScale, spentCharge} = sampleVritraMotion(age, cast.event.dragonChargeSpent, reduced);
+  const sinceImpact = Math.max(0, age - CAST_IMPACT_MS);
+  if (cast.impacted && sinceImpact >= 550) return;
+  const fade = cast.impacted ? 1 - clamp((sinceImpact - 170) / 380) : 1;
+  const y = cast.incoming ? 472 : 231;
+  const sy = cast.incoming ? Math.max(.65, scaleY) : scaleY;
+  const preparation = clamp(age / CAST_IMPACT_MS);
+  const halfHeight = (cast.impacted ? 30 : 8) * stormScale;
+  ctx.save();
+  ctx.translate(0, y); ctx.scale(1, sy); ctx.translate(0, -y);
+  ctx.globalAlpha = (cast.impacted ? .48 : .18 + preparation * .18) * fade;
+  // Copper wind-lines mark the entire eventual hit field, without a Genbu ring.
+  for (const offset of [-1, 1]) {
+    line(ctx, [{x:35,y:y+offset*halfHeight},{x:230,y:y+offset*(halfHeight+5)},{x:485,y:y+offset*(halfHeight+5)},{x:685,y:y+offset*halfHeight}], '#b78364', cast.impacted ? 2 : 1.2);
+  }
+  if (cast.impacted) {
+    const breath = ctx.createLinearGradient(30, y, 690, y);
+    breath.addColorStop(0, '#6974ad20'); breath.addColorStop(.5, '#9ba0d591'); breath.addColorStop(1, '#6974ad20');
+    ctx.beginPath(); ctx.moveTo(30, y - halfHeight); ctx.lineTo(690, y - halfHeight);
+    ctx.lineTo(685, y + halfHeight); ctx.lineTo(35, y + halfHeight); ctx.closePath();
+    ctx.fillStyle = breath; ctx.fill();
+    // Reduced motion is a stationary band plus target marks, with no travelling fan.
+    if (!reduced) {
+      const sweep = ease(sinceImpact / 260);
+      const tipX = mix(48, 672, sweep);
+      const source = {x:cast.from.x, y:cast.from.y < HEIGHT ? cast.from.y + 8 : HEIGHT + 16};
+      for (let strand = 0; strand < 3; strand++) {
+        const offset = (strand - 1) * 16 * stormScale;
+        ctx.beginPath(); ctx.moveTo(source.x - 6, source.y);
+        ctx.quadraticCurveTo(mix(source.x,tipX,.65)-70, mix(source.y,y,.55), tipX, y + offset - 7 * stormScale);
+        ctx.quadraticCurveTo(mix(source.x,tipX,.55)+40, mix(source.y,y,.6), source.x + 6, source.y);
+        ctx.fillStyle = strand === 1 ? '#e7dbef' : '#858bc9'; ctx.fill();
+      }
+    }
+    // These jagged copper seams are a single fading cue, never flashing lightning.
+    for (let index=0; index<3+spentCharge; index++) {
+      const x = 64 + index * (590 / (2 + spentCharge));
+      line(ctx, [{x:x-14,y:y-17*stormScale},{x:x+2,y:y-3},{x:x-6,y:y+7},{x:x+16,y:y+20*stormScale}], '#e0b390', reduced ? 1.7 : 2.5);
+    }
+  }
+  // All authoritative targets remain marked at once, regardless of sweep position.
+  for (const point of cast.targets) {
+    const py = y + (point.y - y) / sy;
+    line(ctx, [{x:point.x-21,y:py+25},{x:point.x-7,y:py+30},{x:point.x+7,y:py+30},{x:point.x+21,y:py+25}], cast.impacted ? '#ead3b4' : '#747aa8', cast.impacted ? 3 : 1.5);
+  }
+  ctx.restore();
+}
+
+/** Each differently colored end supplies one stroke in the replay's target order. */
+function drawTwinStrikes(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, framePoint: (point: Point) => Point) {
+  if (reduced) return; // Still-colored target marks and damage numbers carry both hits.
+  const hits = cast.event.hitTargets?.length ?? cast.event.hits ?? 2;
+  for (let index=0; index<hits; index++) {
+    const progress = (age - (CAST_IMPACT_MS - 135 + index * MULTIHIT_INTERVAL_MS)) / 135;
+    if (progress < 0 || progress > 1 || (cast.lastHitIndex ?? -1) >= index) continue;
+    const targetKey = cast.event.hitTargets?.[index];
+    const targetIndex = cast.event.targets?.indexOf(targetKey ?? '') ?? -1;
+    const target = framePoint(cast.targets[targetIndex] ?? cast.to);
+    const source = framePoint({x:cast.from.x + (index % 2 ? 22 : -22), y:cast.from.y - 8});
+    const tip = {x:mix(source.x,target.x,progress), y:mix(source.y,target.y,progress)};
+    ctx.save(); ctx.globalAlpha = .7;
+    line(ctx, [source, {x:mix(source.x,tip.x,.55)+(index%2?12:-12),y:mix(source.y,tip.y,.5)}, tip], index % 2 ? '#cbd7da' : '#9c74b9', 4);
+    ellipse(ctx, tip.x, tip.y, 3.2, 5.5, index % 2 ? '#f2f4e6' : '#c8a3d6');
+    ctx.restore();
+  }
+}
+
+/** Only an enabled core receives live storm lights; the source SVG stays static. */
+function drawDragonCharge(ctx: CanvasRenderingContext2D, width: number, charge: number) {
+  const nodes = [[145,79],[157,102],[155,126],[177,149],[202,159]];
+  const count = Number.isFinite(charge) ? Math.max(0, Math.min(5, Math.floor(charge))) : 0;
+  const scale = width / 280;
+  for (let index=0; index<count; index++) {
+    const [nx,ny] = nodes[index];
+    const x = -width / 2 + nx * scale;
+    const y = 35.5 - width * .75 + ny * scale;
+    ellipse(ctx,x,y,3.8*scale,5.2*scale,'#f2d3a3');
+  }
+}
+
 function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number) {
   const {event, type, at} = impact;
   const palette = palettes[type];
@@ -331,7 +417,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
     line(ctx, [{x:x-17,y:y-31},{x:x+2,y:y-9},{x:x-8,y:y+8},{x:x+19,y:y+30}], '#b6ffec', 3);
     ctx.globalAlpha = fade; ctx.fillStyle = '#566f62'; ctx.font = '700 12px system-ui'; ctx.textAlign = 'center';
-    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : '守り').join('・') : '守り'}解除`, x, y + 48);
+    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : '守り').join('・') : '守り'}解除`, x, y + 48);
   } else if (event.kind === 'heal') {
     glow(ctx, x, y + 12, 57, '#84d9aa5c');
     for (let index = 0; index < 3; index++) {
@@ -368,6 +454,13 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
       }
       ellipse(ctx, x, y, 13 + progress * 17 * movement, 10 + progress * 8 * movement);
       ctx.strokeStyle = '#e8dfaa'; ctx.lineWidth = 1.5; ctx.stroke();
+    } else if (type === 'storm') {
+      for (const side of [-1, 1]) line(ctx, [{x:x+side*23,y:y-19},{x:x+side*9,y:y-5},{x:x+side*18,y:y+7},{x:x+side*4,y:y+24}], palette.light, 3);
+      ellipse(ctx,x,y,18,25,`${palette.core}55`);
+    } else if (type === 'twin') {
+      const side = (event.hitIndex ?? 0) % 2 ? 1 : -1;
+      line(ctx,[{x:x-side*22,y:y-25},{x:x+side*5,y:y-1},{x:x+side*21,y:y+21}],side > 0 ? '#e4eeee' : '#b786d2',5);
+      ellipse(ctx,x,y,14,19,side > 0 ? '#d5e2e44d' : '#b786d24d');
     } else if (type === 'slash') {
       for (let index = 0; index < 2; index++) {
         ctx.save();
@@ -472,8 +565,8 @@ export default function BattleStage(props: Props) {
     const ctx = element.getContext('2d');
     if (!ctx) return;
     const characterImages = new Map<number, HTMLImageElement>();
-    for (const [id, source] of [[12, FENRIR_ART_URL], [13, RATATOSKR_ART_URL], [14, GENBU_ART_URL]] as const) {
-      const image = new Image(); image.src = source; characterImages.set(id, image);
+    for (const [id, art] of Object.entries(CHARACTER_ART)) {
+      const image = new Image(); image.src = art.artUrl; characterImages.set(Number(id), image);
     }
     let handle = 0;
     let previous = performance.now();
@@ -532,6 +625,7 @@ export default function BattleStage(props: Props) {
         lastImpact = data.impact;
         lastImpacts = data.impacts;
         if (data.impact?.kind !== 'cast') for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
+          if (['charge', 'resource', 'expire', 'phase'].includes(event.kind)) continue;
           if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'cleanse', 'break'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
           if (cast && event.actor === cast.event.actor && event.hitIndex !== undefined && (cast.lastHitIndex === undefined || event.hitIndex > cast.lastHitIndex)) {cast.lastHitIndex = event.hitIndex; cast.lastHitAt = now;}
           if (seenImpacts.has(event)) continue;
@@ -552,13 +646,21 @@ export default function BattleStage(props: Props) {
       const barrage = cast?.event.scope === 'random';
       const seedBarrage = barrage && cast?.event.skill === '木の実の連弾';
       const genbuField = cast?.event.scope === 'all' && cast.event.skill === '海山の轟き';
+      const vritraStorm = cast?.event.scope === 'all' && cast.event.skill === '渇天の息';
+      const twinStrike = barrage && cast?.event.skill === '双頭の連突';
+      const caster = cast ? [...data.allies, ...data.enemies].find(unit => unit.key === cast!.event.actor) : undefined;
+      const actorId = caster?.monster.id;
       const hitCount = cast?.event.hitTargets?.length ?? cast?.event.hits ?? 5;
       if (barrage && cast?.lastHitIndex !== undefined) {
         age = cast.lastHitIndex >= hitCount - 1 && cast.lastHitAt !== undefined
           ? CAST_IMPACT_MS + (hitCount - 1) * MULTIHIT_INTERVAL_MS + (now - cast.lastHitAt) * cast.rate
           : Math.min(age, CAST_IMPACT_MS + (cast.lastHitIndex + 1) * MULTIHIT_INTERVAL_MS - 1);
       }
-      const motion = seedBarrage ? sampleRatatoskrMotion(age, hitCount, reduced)
+      const motion = vritraStorm ? sampleVritraMotion(age, cast?.event.dragonChargeSpent, reduced)
+        : twinStrike ? sampleAmphisbaenaMotion(age, hitCount, reduced)
+        : actorId === 16 ? sampleLindwurmMotion(age, ['guard', 'protect'].includes(cast?.event.effect ?? ''), reduced)
+        : actorId === 18 ? sampleZilantMotion(age, reduced)
+        : seedBarrage ? sampleRatatoskrMotion(age, hitCount, reduced)
         : barrage ? sampleFenrirMotion(age, hitCount, reduced)
         : genbuField ? sampleGenbuMotion(age, reduced)
         : sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
@@ -583,7 +685,7 @@ export default function BattleStage(props: Props) {
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && unit.monster.id !== 14 && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && ![14, 15, 16].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
@@ -644,10 +746,14 @@ export default function BattleStage(props: Props) {
         ctx.fillStyle = '#ffffff';
         const characterImage = characterImages.get(unit.monster.id);
         if (characterImage?.complete && characterImage.naturalWidth > 0) {
-          // Small squirrel / broad tortoise stay distinct beside the unchanged wolf.
-          const width = unit.monster.id === 13 ? 99 : unit.monster.id === 14 ? 121 : 110;
+          // Registry dimensions preserve every old silhouette and support later families.
+          const width = CHARACTER_ART[unit.monster.id].spriteWidth;
           const height = width * .75;
           ctx.drawImage(characterImage, -width / 2, 35.5 - height, width, height);
+          if (unit.monster.id === 15 && unit.dragonCharge !== undefined && alive) {
+            const heldForBreath = attacker && vritraStorm;
+            drawDragonCharge(ctx, width, heldForBreath ? age < CAST_IMPACT_MS ? cast?.event.dragonChargeSpent ?? 0 : 0 : unit.dragonCharge);
+          }
         } else ctx.fillText(unit.monster.icon, 0, 0);
         ctx.restore();
         ctx.restore();
@@ -688,7 +794,8 @@ export default function BattleStage(props: Props) {
       ctx.scale(zoom, zoom);
       ctx.translate(-center.x, -center.y);
       if (cast?.event.scope === 'all') {
-        if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
+        if (vritraStorm) drawVritraStorm(ctx, cast, age, reduced, scaleY);
+        else if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
         else drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
       }
       drawEnemies();
@@ -700,6 +807,7 @@ export default function BattleStage(props: Props) {
         const from = enemyOrigin ? {x: cast.from.x, y: cast.from.y + motion.travel - motion.lift} : cast.from;
         drawSeedBarrage(ctx, {...cast, from: frameEffectPoint(from), to: frameEffectPoint(cast.to)}, sequence, age, reduced);
       }
+      if (cast && twinStrike) drawTwinStrikes(ctx, cast, age, reduced, frameEffectPoint);
       for (const impact of impacts) drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, (now - impact.started) * impact.rate, reduced, scaleY);
       // The title stays still while the action is framed underneath it.
       if (cast && motion.titleAlpha > 0) {
@@ -733,6 +841,12 @@ export default function BattleStage(props: Props) {
         ctx.fillStyle = '#53604f';
         ctx.fillText(`${actor?.key.startsWith('e') ? '敵' : '味方'} · ${actor?.monster.name ?? ''}`, WIDTH / 2, 80);
         ctx.restore();
+        if (vritraStorm && caster?.monster.id === 15 && caster.dragonCharge !== undefined && cast.event.dragonChargeSpent !== undefined) {
+          ctx.save(); ctx.translate(0,101); ctx.scale(1,scaleY); ctx.translate(0,-101);
+          ctx.font = '700 12px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#65516b';
+          ctx.fillText(`竜気 ${cast.event.dragonChargeSpent} 消費 · ${cast.impacted ? '嵐を放出' : '息を圧縮'}`, WIDTH / 2, 101);
+          ctx.restore();
+        }
         if (cast.event.scope === 'all' || cast.event.scope === 'random') {
           ctx.save();
           ctx.translate(0, 67); ctx.scale(1, scaleY); ctx.translate(0, -67);

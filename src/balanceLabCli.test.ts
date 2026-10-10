@@ -16,7 +16,7 @@ const configuration = {
   candidate: { id: 'identity', label: 'Unchanged rules', overrides: {} },
 };
 type Report = {
-  source: { engineSha256: string; labSha256: string; configSha256: string };
+  source: { engineSha256: string; familySha256: string; labSha256: string; configSha256: string };
   config: typeof configuration;
   scheduleCounts: { matches: number };
   matches: { id: string; result: { traceHash: string } }[];
@@ -49,7 +49,7 @@ beforeAll(() => {
   // An isolated copy is deliberately broken to exercise the real failure CLI.
   // Never patch the production resolver, even temporarily.
   fixtureRoot = join(temporary, 'broken-fixture');
-  for (const file of ['scripts/balance-lab/cli.mjs', 'scripts/balance-lab/core.mjs', 'src/engine.ts', 'package.json']) {
+  for (const file of ['scripts/balance-lab/cli.mjs', 'scripts/balance-lab/core.mjs', 'src/engine.ts', 'src/families.ts', 'package.json']) {
     const destination = join(fixtureRoot, file);
     mkdirSync(dirname(destination), { recursive: true });
     copyFileSync(join(repository, file), destination);
@@ -84,9 +84,10 @@ describe('balance lab real CLI integration', () => {
     expect(replay.result.trace.turns.length).toBeGreaterThan(0);
   });
 
-  it.each(['engine', 'lab', 'config', 'trace'] as const)('rejects %s evidence tampering without producing a replay', kind => {
+  it.each(['engine', 'family', 'lab', 'config', 'trace'] as const)('rejects %s evidence tampering without producing a replay', kind => {
     const modified = structuredClone(report);
     if (kind === 'engine') modified.source.engineSha256 = '0'.repeat(64);
+    else if (kind === 'family') modified.source.familySha256 = '0'.repeat(64);
     else if (kind === 'lab') modified.source.labSha256 = '0'.repeat(64);
     else if (kind === 'config') modified.config.seeds = [43];
     else modified.matches[0].result.traceHash = '0'.repeat(64);

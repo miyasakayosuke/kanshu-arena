@@ -572,3 +572,119 @@ describe('new family art and enemy-only signature effects', () => {
     fill.mockReset();
   });
 });
+
+describe('dragon art and authoritative storm choreography', () => {
+  it('loads all four full bodies through the shared registry and never draws allied portraits', async () => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const {DRAGON_ART} = await import('./dragonArt');
+    const state = start([15,16,17,18,5],[15,16,17,18,5]);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
+    expect(sprites).toHaveLength(4);
+    const images = context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    expect(images.map(([image])=>image.src)).toEqual(Object.values(DRAGON_ART).map(art=>art.artUrl));
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([127,118,125,116].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+    expect(glyphs.map(glyph=>glyph.text)).toEqual([state.enemies[4].monster.icon]);
+    expect(teamTransforms()).toHaveLength(0);
+  });
+
+  it('lights only the enabled core storm chambers, including empty and removed charge', async () => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const fills: unknown[] = [];
+    const ctx = context as unknown as CanvasRenderingContext2D;
+    vi.mocked(ctx.fill).mockImplementation(()=>{fills.push(ctx.fillStyle);});
+    const state = start([0,2,3,4,6],[15,16,17,18,5]);
+    const props = {allies:state.allies,enemies:state.enemies.map((unit,index)=>({...unit,dragonCharge:index===0?3:5})),effect:null,impact:null};
+    await render(props);frame(100);
+    expect(fills.filter(fill=>fill==='#f2d3a3')).toHaveLength(3);
+    fills.length=0;
+    await render({...props,enemies:props.enemies.map(unit=>({...unit,dragonCharge:0}))});frame(200);
+    expect(fills).not.toContain('#f2d3a3');
+    const inactive = start([0,2,3,4,6],[15,16,0,2,6]);
+    fills.length=0;
+    await render({allies:inactive.allies,enemies:inactive.enemies,effect:null,impact:null});frame(300);
+    expect(fills).not.toContain('#f2d3a3');
+    vi.mocked(ctx.fill).mockReset();
+  });
+
+  it.each([0,5])('holds a %i-charge breath until the delayed area hit, then reads retained cast metadata', async spent => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const storm = vi.spyOn(battleMotion,'sampleVritraMotion');
+    const wolf = vi.spyOn(battleMotion,'sampleFenrirMotion');
+    const shell = vi.spyOn(battleMotion,'sampleGenbuMotion');
+    const state = start([15,16,17,18,5],[0,2,3,4,6]);
+    const event: BattleEvent = {kind:'cast',actor:'a0',scope:'all',targets:state.enemies.map(unit=>unit.key),skill:'渇天の息',effect:'hit',dragonChargeSpent:spent};
+    const props = {allies:state.allies.map(unit=>({...unit,dragonCharge:0})),enemies:state.enemies,effect:{text:'渇天の息',type:'wind',tick:1},castEvent:event,impact:event};
+    await render(props);frame(100);frame(2400);
+    expect(storm).toHaveBeenLastCalledWith(799,spent,false);
+    expect((context as unknown as CanvasRenderingContext2D).quadraticCurveTo).not.toHaveBeenCalled();
+    expect(labels()).toContain(`竜気 ${spent} 消費 · 息を圧縮`);
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();expect(wolf).not.toHaveBeenCalled();expect(shell).not.toHaveBeenCalled();
+    const hits: BattleEvent[] = state.enemies.map((unit,index)=>({kind:'damage',actor:'a0',target:unit.key,amount:20+index,hp:unit.hp-20-index}));
+    await render({...props,impact:hits[0],impacts:hits});frame(2500);frame(2620);
+    expect(storm).toHaveBeenLastCalledWith(920,spent,false);
+    expect((context as unknown as CanvasRenderingContext2D).quadraticCurveTo).toHaveBeenCalled();
+    expect(labels()).toEqual(expect.arrayContaining(['20','21','22','23','24',`竜気 ${spent} 消費 · 嵐を放出`]));
+    expect(teamTransforms()).toHaveLength(0);
+    frame(3200);expect(labels()).not.toContain('渇天の息');
+  });
+
+  it('does not expose a charge counter when the starting dragon threshold was not enabled', async () => {
+    const state=start([15,16,0,2,6],[0,2,3,4,6]);
+    expect(state.allies[0].dragonCharge).toBeUndefined();
+    const event:BattleEvent={kind:'cast',actor:'a0',scope:'all',targets:['e0'],skill:'渇天の息',effect:'hit',dragonChargeSpent:0};
+    await render({allies:state.allies,enemies:state.enemies,effect:{text:'渇天の息',type:'wind',tick:1},castEvent:event,impact:event});frame(100);frame(700);
+    expect(labels()).toContain('渇天の息');
+    expect(labels().some(label=>String(label).includes('竜気'))).toBe(false);
+  });
+
+  it('does not invent spent charge from current unit state when older cast metadata is missing', async () => {
+    const storm = vi.spyOn(battleMotion,'sampleVritraMotion');
+    const state = start([15,16,17,18,5],[0,2,3,4,6]);
+    const event:BattleEvent={kind:'cast',actor:'a0',scope:'all',targets:['e0'],skill:'渇天の息',effect:'hit'};
+    await render({allies:state.allies.map(unit=>({...unit,dragonCharge:5})),enemies:state.enemies,effect:{text:'渇天の息',type:'wind',tick:1},castEvent:event,impact:event});frame(100);frame(700);
+    expect(storm).toHaveBeenLastCalledWith(600,undefined,false);
+    expect(labels().some(label=>String(label).includes('消費'))).toBe(false);
+  });
+
+  it('preserves all hit cues with a still body, still camera and stationary storm in reduced motion', async () => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const state = start([0,2,3,4,6],[15,16,17,18,5]);
+    const event:BattleEvent={kind:'cast',actor:'e0',scope:'all',targets:state.allies.map(unit=>unit.key),skill:'渇天の息',effect:'hit',dragonChargeSpent:5};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'渇天の息',type:'wind',tick:1},castEvent:event,impact:event};
+    await render(props);frame(100);const before=sprites[0];frame(799);expect(sprites[0]).toEqual(before);
+    const hits:BattleEvent[]=state.allies.map(unit=>({kind:'damage',actor:'e0',target:unit.key,amount:45,hp:unit.hp-45}));
+    await render({...props,impact:hits[0],impacts:hits});frame(900);frame(1030);
+    expect(sprites[0]).toEqual(before);expect((context as unknown as CanvasRenderingContext2D).quadraticCurveTo).not.toHaveBeenCalled();
+    expect(labels()).toContain('味方全体 · 5体');expect(labels()).toContain('竜気 5 消費 · 嵐を放出');
+    expect(document.querySelector('[aria-live]')?.textContent).toContain('5体に同時着弾');
+    expect(teamTransforms()).toHaveLength(0);
+  });
+
+  it('uses both head directions and their exact hit order without borrowing the wolf pounce', async () => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const twin=vi.spyOn(battleMotion,'sampleAmphisbaenaMotion');const wolf=vi.spyOn(battleMotion,'sampleFenrirMotion');
+    const state=start([0,2,3,4,6],[17,0,2,6,10]);
+    const event:BattleEvent={kind:'cast',actor:'e0',scope:'random',targets:['a0','a1'],hitTargets:['a0','a1'],hits:2,skill:'双頭の連突',effect:'hit'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'双頭の連突',type:'slash',tick:1},castEvent:event,impact:event};
+    await render(props);frame(100);frame(800);expect(twin).toHaveBeenLastCalledWith(700,2,false);expect(wolf).not.toHaveBeenCalled();
+    for (let index=0;index<2;index++) {
+      const hit:BattleEvent={kind:'damage',actor:'e0',target:`a${index}`,amount:15,hp:135,hitIndex:index};
+      await render({...props,impact:hit,impacts:[hit]});frame(900+index*180);
+      expect(twin).toHaveBeenLastCalledWith(800+index*180,2,false);
+      expect(Math.sign(sprites[0][1])).toBe(index ? 1 : -1);
+      expect(labels()).toContain(`ランダム2回 · ${index+1}/2撃`);
+    }
+    frame(1800);expect(labels()).not.toContain('双頭の連突');
+  });
+
+  it('keeps charge bookkeeping quiet and labels a real charge break truthfully', async () => {
+    const ctx=context as unknown as CanvasRenderingContext2D;
+    const charge:BattleEvent={kind:'charge',target:'e0',dragonCharge:3,effect:'dragon-charge-gain'};
+    await render({...base,impact:charge,impacts:[charge]});frame(100);
+    expect(labels()).not.toContain('竜気解除');expect(ctx.strokeText).not.toHaveBeenCalled();
+    const broken:BattleEvent={kind:'break',actor:'a0',target:'e0',dragonCharge:0,removed:['dragonCharge']};
+    await render({...base,impact:broken,impacts:[broken]});frame(200);
+    expect(labels()).toContain('竜気解除');expect(labels()).not.toContain('守り解除');
+  });
+});

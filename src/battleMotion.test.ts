@@ -102,3 +102,52 @@ describe('family signature choreography', () => {
     }
   });
 });
+
+describe('original dragon choreography', () => {
+  it('compresses Vritra until the observed hit, exhales without a lunge, and settles', async () => {
+    const {sampleVritraMotion} = await import('./battleMotion');
+    const ready = sampleVritraMotion(actionAge(3200),5);
+    expect(ready).toMatchObject({phase:'release',travel:0,lift:-6,scaleX:.87,scaleY:.925});
+    expect(sampleVritraMotion(920,5).scaleX).toBeGreaterThan(1.08);
+    expect(sampleVritraMotion(920,5).lift).toBe(3);
+    expect(sampleVritraMotion(1350,5)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+    expect(sampleVritraMotion(ACTION_DURATION_MS,5).titleAlpha).toBe(0);
+  });
+
+  it('scales its storm only from bounded passed-in charge metadata', async () => {
+    const {sampleVritraMotion} = await import('./battleMotion');
+    const weak = sampleVritraMotion(920,0), strong = sampleVritraMotion(920,5);
+    expect(strong.stormScale).toBeGreaterThan(weak.stormScale);
+    expect(strong.camera).toBeGreaterThan(weak.camera);
+    expect(sampleVritraMotion(920)).toMatchObject({spentCharge:0,stormScale:.8});
+    expect(sampleVritraMotion(920,99).spentCharge).toBe(5);
+    expect(sampleVritraMotion(920,-2).spentCharge).toBe(0);
+    expect(sampleVritraMotion(920,NaN).spentCharge).toBe(0);
+  });
+
+  it('alternates the two head strikes and releases only after their final observed hit', async () => {
+    const {sampleAmphisbaenaMotion} = await import('./battleMotion');
+    expect(sampleAmphisbaenaMotion(800).tilt).toBeLessThan(0);
+    expect(sampleAmphisbaenaMotion(980).tilt).toBeGreaterThan(0);
+    expect(sampleAmphisbaenaMotion(800).travel).toBe(19);
+    expect(sampleAmphisbaenaMotion(980).phase).toBe('impact');
+    expect(sampleAmphisbaenaMotion(barrageDuration(2))).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+    expect(sampleAmphisbaenaMotion(ACTION_DURATION_MS,1).phase).toBe('rest');
+  });
+
+  it('keeps Lindwurm braced and Zilant light without pounce or support zoom', async () => {
+    const {sampleLindwurmMotion,sampleZilantMotion} = await import('./battleMotion');
+    expect(sampleLindwurmMotion(799,true)).toMatchObject({travel:0,lift:-4,camera:0});
+    expect(sampleLindwurmMotion(800,false).travel).toBe(24);
+    expect(sampleZilantMotion(799)).toMatchObject({travel:0,lift:9,camera:0,scaleX:1,scaleY:1});
+    for (const motion of [sampleLindwurmMotion(ACTION_DURATION_MS),sampleZilantMotion(ACTION_DURATION_MS)]) expect(motion).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+  });
+
+  it('removes every dragon body and camera movement in reduced motion', async () => {
+    const {sampleVritraMotion,sampleAmphisbaenaMotion,sampleLindwurmMotion,sampleZilantMotion} = await import('./battleMotion');
+    for (const time of [0,340,799,800,920,980,1100,1500,1680]) {
+      for (const motion of [sampleVritraMotion(time,5,true),sampleAmphisbaenaMotion(time,2,true),sampleLindwurmMotion(time,true,true),sampleZilantMotion(time,true)]) expect(motion).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+      expect(sampleVritraMotion(time,5,true).stormScale).toBe(1.35);
+    }
+  });
+});

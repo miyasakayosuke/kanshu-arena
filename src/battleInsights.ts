@@ -1,4 +1,4 @@
-import type { BattleEvent, BattleOrderRecord, BattleTurnRecord, State } from './engine';
+import { DRAGON_CHARGE_CAP, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
 
 export type BattleEvidence = {
   turn: number;
@@ -155,7 +155,8 @@ export function battleEventLine(state: State, event: BattleEvent): string {
     case 'guard': return `${actor} → ${target}に守り（このターンの直接ダメージ半減）`;
     case 'poison': return `${actor} → ${target}に毒（残り ${event.poison ?? 3}回）`;
     case 'cleanse': return `${actor} → ${target}を浄化（毒は0）`;
-    case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
+    case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
+    case 'charge': return `${actor} → ${target}の竜気${event.effect === 'dragon-charge-spend' ? 'を消費' : 'を蓄積'}（${event.dragonCharge ?? 0}/${DRAGON_CHARGE_CAP}）`;
     case 'resource': return `${actor} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
     case 'expire': return event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
     case 'phase': return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;

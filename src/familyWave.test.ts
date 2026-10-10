@@ -14,7 +14,7 @@ const damageBy = (events: BattleEvent[], actor: string) => events.filter(event =
 
 describe('two legal, contrasting family teams', () => {
   it('appends stable IDs and keeps original stats and skills, including Fenrir', () => {
-    expect(monsters.map(m => m.id)).toEqual(Array.from({ length: 15 }, (_, i) => i));
+    expect(monsters.slice(0, 15).map(m => m.id)).toEqual(Array.from({ length: 15 }, (_, i) => i));
     expect(monsters[12]).toMatchObject({ hp: 150, mp: 60, atk: 54, speed: 93, cost: 4 });
     expect(monsters[12].skills[0]).toMatchObject({ randomHits: 5, mpCost: 13 });
     expect(monsters[13]).toMatchObject({ family: 'beast', cost: 2, hp: 130, mp: 44, speed: 87 });

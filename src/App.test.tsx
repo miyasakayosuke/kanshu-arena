@@ -118,7 +118,7 @@ describe('complete playtest flow', () => {
   it('filters candidates and atomically replaces a member without an incomplete party', async () => {
     await mount(); await openTeam(); await click(label('1枠・妖狐を入れ替える'));
     await click(button('アンカー'));
-    expect(document.querySelectorAll('.rosterItem')).toHaveLength(4);
+    expect(document.querySelectorAll('.rosterItem')).toHaveLength(5);
     await click(label('トロルを候補に選ぶ'));
     expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toEqual([0,2,3,4,6]);
     await click(button('トロルに入れ替える'));

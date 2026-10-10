@@ -19,6 +19,7 @@ function sourceVersion(config) {
     gameVersion: load(resolve(root, 'package.json')).version,
     gitCommit: git(['rev-parse', 'HEAD']), workingTreeDirty: !!git(['status', '--porcelain']), nodeVersion: process.version,
     engineSha256: sha(readFileSync(resolve(root, 'src/engine.ts'))),
+    familySha256: sha(readFileSync(resolve(root, 'src/families.ts'))),
     labSha256: sha(['scripts/balance-lab/core.mjs', 'scripts/balance-lab/cli.mjs'].map(path => readFileSync(resolve(root, path), 'utf8')).join('\n')),
     configSha256: sha(JSON.stringify(config)),
   };
@@ -26,7 +27,7 @@ function sourceVersion(config) {
 function verifyVersion(source, config) {
   if (!source) throw new Error('Replay requires source metadata from a lab CLI report');
   const current = sourceVersion(config);
-  for (const field of ['engineSha256', 'labSha256', 'configSha256']) if (current[field] !== source[field]) throw new Error(`Replay blocked: ${field} differs. Check out the recorded source/config; do not treat a different version as reproduction.`);
+  for (const field of ['engineSha256', 'familySha256', 'labSha256', 'configSha256']) if (current[field] !== source[field]) throw new Error(`Replay blocked: ${field} differs. Check out the recorded source/config; do not treat a different version as reproduction.`);
 }
 const percent = value => value === undefined || value === null ? 'n/a' : `${(value * 100).toFixed(2)}%`;
 const numeric = value => value === undefined || value === null ? 'n/a' : value.toFixed(3);
@@ -37,6 +38,7 @@ function renderReport(report) {
     `Candidate: ${report.config.candidate.label} (${report.config.candidate.id})`, '',
     `- Engine: ${report.source.gameVersion}; commit: ${report.source.gitCommit ?? 'unavailable'}${report.source.workingTreeDirty ? ' (working tree has changes; hashes are authoritative)' : ''}`,
     `- Engine SHA-256: ${report.source.engineSha256}`,
+    `- Families SHA-256: ${report.source.familySha256}`,
     `- Lab SHA-256: ${report.source.labSha256}`,
     `- Config SHA-256: ${report.source.configSha256}`,
     `- Node: ${report.source.nodeVersion}`,
@@ -48,7 +50,7 @@ function renderReport(report) {
   ];
   const row = (label, field, format = numeric) => lines.push(`| ${label} | ${format(summary.baseline[field])} | ${format(summary.candidate[field])} |`);
   row('Games', 'games', value => String(value)); row('Win rate', 'winRate', percent); row('Score rate (win + half draw)', 'scoreRate', percent); row('Draw rate', 'drawRate', percent);
-  for (const [label, field] of [['Turns', 'meanTurns'], ['Direct damage, HP-clipped', 'meanDirectDamage'], ['Effective healing', 'meanHealing'], ['MP spent', 'meanMpSpent'], ['Paid casts', 'meanPaidCasts'], ['Unit-turns with no affordable paid special', 'meanNoAffordableSpecialTurns'], ['Unit-turns at exactly zero MP', 'meanZeroMpTurns'], ['Guard applications', 'meanGuardApplications'], ['Effective poison cleanses', 'meanEffectiveCleanses'], ['Dispel events', 'meanDispelApplications']]) row(label, field);
+  for (const [label, field] of [['Turns', 'meanTurns'], ['Direct damage, HP-clipped', 'meanDirectDamage'], ['Effective healing', 'meanHealing'], ['MP spent', 'meanMpSpent'], ['Paid casts', 'meanPaidCasts'], ['Unit-turns with no affordable paid special', 'meanNoAffordableSpecialTurns'], ['Unit-turns at exactly zero MP', 'meanZeroMpTurns'], ['Guard applications', 'meanGuardApplications'], ['Effective poison cleanses', 'meanEffectiveCleanses'], ['Dispel events', 'meanDispelApplications'], ['Dragon charge generated', 'meanDragonChargeGenerated'], ['Dragon charge spent (separate from MP)', 'meanDragonChargeSpent'], ['Dragon finishers', 'meanDragonFinishers'], ['Charged dragon finishers', 'meanChargedDragonFinishers'], ['Dragon finisher direct damage', 'meanDragonFinisherDamage'], ['Opponent charge dispelled', 'meanDragonChargeDispelled'], ['Own charge lost on defeat', 'meanDragonChargeLostOnDefeat'], ['Peak dragon charge', 'meanPeakDragonCharge']]) row(label, field);
   row('Deaths before first cast / unit appearances', 'zeroCastDeathRate', percent); row('Largest unit share of team direct damage', 'meanDamageConcentration', percent);
   const delta = summary.pairedDelta;
   lines.push('', `Paired score change: ${percent(delta.scoreRateChange)} points; ${delta.changedOutcomes ?? 0} changed outcomes across ${delta.pairs} pairs.`,
@@ -118,7 +120,7 @@ try {
     console.log(`Running ${schedule.cases.length} matches: identical policy, paired seeds, side swaps and mirrors.`);
     const report = runSuite(config, ({ completed, total }) => { if (completed % 1000 === 0) console.log(`${completed}/${total}`); });
     const afterSource = sourceVersion(report.config);
-    if (afterSource.engineSha256 !== activeSource.engineSha256 || afterSource.labSha256 !== activeSource.labSha256) throw new Error('Engine/lab source changed during this run. Rerun on a stable version before saving evidence.');
+    if (afterSource.engineSha256 !== activeSource.engineSha256 || afterSource.familySha256 !== activeSource.familySha256 || afterSource.labSha256 !== activeSource.labSha256) throw new Error('Engine/lab source changed during this run. Rerun on a stable version before saving evidence.');
     report.source = activeSource;
     const out = resolve(args.out);
     const quoted = path => JSON.stringify(relative(process.cwd(), path));

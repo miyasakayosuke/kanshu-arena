@@ -47,8 +47,8 @@ function expectHpReplay(before: State, after: State, events: BattleEvent[]) {
 }
 
 describe('battle setup and determinism', () => {
-  it('preserves the original twelve IDs and team costs while adding Fenrir', () => {
-    expect(monsters).toHaveLength(15);
+  it('preserves original team costs while extending the stable roster IDs', () => {
+    expect(monsters).toHaveLength(19);
     expect(cost(team)).toBe(15);
     expect(cost(team)).toBeLessThanOrEqual(17);
     expect(cost([])).toBe(0);

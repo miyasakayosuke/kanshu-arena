@@ -1,0 +1,1801 @@
+{
+  "path": "lab-results/dragon-initial-companion18-broad/report.json",
+  "phase": "exploratory",
+  "reportSha256": "f9001f72668cfb9ffcf529be382186a9e7f3aca45fefbf5761fc58aba0226677",
+  "source": {
+    "gameVersion": "0.12.0",
+    "gitCommit": "ff52abef77a2a719fd39e0b21a7a83ba7e534f28",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "4e5eda5ef96ff883c94b0ed10d599bd93ef77bde0f1280573a37d4230ce54dce",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ef451fc9084791e1138d88129b958061c8105fc13d61e36711a392723d431f9a",
+    "configSha256": "bd2908ef5ddc71f00731b2245b73408f68fb9d56552bd2b8ebe73e1bda67cd1a"
+  },
+  "suiteId": "dragon-companion18-broad",
+  "candidate": {
+    "id": "companion-charge18",
+    "label": "Exploratory companion-charge18: same HP220 and companion powers20/68",
+    "overrides": {
+      "dragonCharge": {
+        "perPoint": 18
+      },
+      "monsters": {
+        "15": {
+          "hp": 220
+        },
+        "17": {
+          "skills": [
+            {
+              "name": "双頭の連突",
+              "power": 20,
+              "priority": 0,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false,
+              "randomHits": 2
+            },
+            {
+              "name": "封鱗裂き",
+              "power": 50,
+              "priority": 0,
+              "mpCost": 14,
+              "kind": "hit",
+              "all": false,
+              "breaksGuard": true
+            }
+          ]
+        },
+        "18": {
+          "skills": [
+            {
+              "name": "翠雲の息",
+              "power": 68,
+              "priority": 0,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false,
+              "fixedDamage": true
+            },
+            {
+              "name": "雲の湧き水",
+              "power": 50,
+              "priority": 0,
+              "mpCost": 16,
+              "kind": "heal"
+            },
+            {
+              "name": "雲払い",
+              "power": 25,
+              "priority": 0,
+              "mpCost": 10,
+              "kind": "cleanse"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scheduleCounts": {
+    "teams": 37,
+    "curatedTeams": 37,
+    "sampledTeams": 0,
+    "matchupScenarios": 160,
+    "mirrorScenarios": 37,
+    "seeds": 16,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 12608
+  },
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522
+  ],
+  "teams": [
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "id": "threedragon",
+      "ids": [
+        15,
+        16,
+        18,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "twodragon",
+      "ids": [
+        15,
+        16,
+        3,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "core-replaced",
+      "ids": [
+        14,
+        5,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        5,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ]
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ]
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ]
+    },
+    {
+      "id": "generated-1",
+      "ids": [
+        8,
+        13,
+        17,
+        11,
+        4
+      ]
+    },
+    {
+      "id": "generated-2",
+      "ids": [
+        4,
+        18,
+        2,
+        14,
+        10
+      ]
+    },
+    {
+      "id": "generated-3",
+      "ids": [
+        4,
+        9,
+        2,
+        18,
+        17
+      ]
+    },
+    {
+      "id": "generated-4",
+      "ids": [
+        13,
+        0,
+        6,
+        1,
+        3
+      ]
+    },
+    {
+      "id": "generated-5",
+      "ids": [
+        6,
+        1,
+        14,
+        13,
+        10
+      ]
+    },
+    {
+      "id": "generated-6",
+      "ids": [
+        16,
+        7,
+        13,
+        10,
+        4
+      ]
+    },
+    {
+      "id": "generated-7",
+      "ids": [
+        11,
+        13,
+        6,
+        5,
+        18
+      ]
+    },
+    {
+      "id": "generated-8",
+      "ids": [
+        10,
+        9,
+        13,
+        8,
+        4
+      ]
+    },
+    {
+      "id": "generated-9",
+      "ids": [
+        8,
+        14,
+        9,
+        4,
+        1
+      ]
+    },
+    {
+      "id": "generated-10",
+      "ids": [
+        1,
+        18,
+        0,
+        16,
+        13
+      ]
+    },
+    {
+      "id": "generated-11",
+      "ids": [
+        12,
+        2,
+        3,
+        9,
+        4
+      ]
+    },
+    {
+      "id": "generated-12",
+      "ids": [
+        4,
+        2,
+        5,
+        17,
+        6
+      ]
+    },
+    {
+      "id": "generated-13",
+      "ids": [
+        5,
+        3,
+        0,
+        10,
+        13
+      ]
+    },
+    {
+      "id": "generated-14",
+      "ids": [
+        10,
+        2,
+        11,
+        12,
+        1
+      ]
+    },
+    {
+      "id": "generated-15",
+      "ids": [
+        1,
+        0,
+        17,
+        5,
+        16
+      ]
+    },
+    {
+      "id": "generated-16",
+      "ids": [
+        18,
+        1,
+        6,
+        16,
+        3
+      ]
+    },
+    {
+      "id": "generated-17",
+      "ids": [
+        2,
+        13,
+        11,
+        6,
+        3
+      ]
+    },
+    {
+      "id": "generated-18",
+      "ids": [
+        2,
+        10,
+        17,
+        1,
+        16
+      ]
+    },
+    {
+      "id": "generated-19",
+      "ids": [
+        3,
+        7,
+        8,
+        16,
+        2
+      ]
+    },
+    {
+      "id": "generated-20",
+      "ids": [
+        18,
+        0,
+        12,
+        6,
+        5
+      ]
+    },
+    {
+      "id": "generated-21",
+      "ids": [
+        4,
+        16,
+        18,
+        17,
+        3
+      ]
+    },
+    {
+      "id": "generated-22",
+      "ids": [
+        1,
+        5,
+        6,
+        16,
+        14
+      ]
+    },
+    {
+      "id": "generated-23",
+      "ids": [
+        1,
+        4,
+        9,
+        7,
+        16
+      ]
+    },
+    {
+      "id": "generated-24",
+      "ids": [
+        16,
+        10,
+        18,
+        13,
+        3
+      ]
+    }
+  ],
+  "mirrorPhysicalAllyScore": {
+    "baseline": 0.484797,
+    "candidate": 0.486486
+  },
+  "focalTeams": [
+    {
+      "id": "puredragon",
+      "baseline": {
+        "games": 1024,
+        "wins": 133,
+        "losses": 891,
+        "draws": 0,
+        "scoreRate": 0.129883,
+        "meanTurns": 4.618164,
+        "zeroCastDeathRate": 0.020703,
+        "meanMpSpent": 161.072266,
+        "meanNoAffordableSpecialTurns": 1.99707,
+        "meanHealing": 47.851563,
+        "meanGuardApplications": 0.155273,
+        "meanEffectiveCleanses": 1.369141,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.300781,
+        "meanDragonChargeGenerated": 6.600586,
+        "meanDragonChargeSpent": 4.336914,
+        "meanDragonFinishers": 0.891602,
+        "meanChargedDragonFinishers": 0.891602,
+        "meanDragonFinisherDamage": 144.408203,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 1.555664,
+        "meanPeakDragonCharge": 4.983398,
+        "meanDamageConcentration": 0.405549,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 111,
+          "meanChargeSpentPerFinisher": 4.864184,
+          "firstTurnDeaths": 5,
+          "noCastDeaths": 0
+        }
+      },
+      "candidate": {
+        "games": 1024,
+        "wins": 653,
+        "losses": 350,
+        "draws": 21,
+        "scoreRate": 0.647949,
+        "meanTurns": 4.143555,
+        "zeroCastDeathRate": 0.017188,
+        "meanMpSpent": 155.263672,
+        "meanNoAffordableSpecialTurns": 0.978516,
+        "meanHealing": 45.043945,
+        "meanGuardApplications": 0.182617,
+        "meanEffectiveCleanses": 1.310547,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.0625,
+        "meanDragonChargeGenerated": 6.400391,
+        "meanDragonChargeSpent": 4.638672,
+        "meanDragonFinishers": 0.951172,
+        "meanChargedDragonFinishers": 0.951172,
+        "meanDragonFinisherDamage": 311.415039,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0.56543,
+        "meanPeakDragonCharge": 4.990234,
+        "meanDamageConcentration": 0.438581,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 50,
+          "meanChargeSpentPerFinisher": 4.876797,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "pairedDelta": {
+        "pairs": 1024,
+        "seedClusters": 16,
+        "changedOutcomes": 561,
+        "scoreRateChange": 0.518066,
+        "approximate95Interval": [
+          0.494151,
+          0.541982
+        ],
+        "meanTurnsChange": -0.474609,
+        "meanDirectDamageChange": 159.381836,
+        "meanHealingChange": -2.807617,
+        "meanMpSpentChange": -5.808594
+      },
+      "curated": {
+        "baseline": {
+          "games": 256,
+          "wins": 2,
+          "losses": 254,
+          "draws": 0,
+          "scoreRate": 0.007813,
+          "meanTurns": 4.238281,
+          "zeroCastDeathRate": 0.001563,
+          "meanMpSpent": 154.40625,
+          "meanNoAffordableSpecialTurns": 1.390625,
+          "meanHealing": 42.285156,
+          "meanGuardApplications": 0.25,
+          "meanEffectiveCleanses": 1.472656,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.335938,
+          "meanDragonChargeGenerated": 6.082031,
+          "meanDragonChargeSpent": 4.34375,
+          "meanDragonFinishers": 0.90625,
+          "meanChargedDragonFinishers": 0.90625,
+          "meanDragonFinisherDamage": 147.332031,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.300781,
+          "meanPeakDragonCharge": 4.992188,
+          "meanDamageConcentration": 0.397401,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 24,
+            "meanChargeSpentPerFinisher": 4.793103,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 256,
+          "wins": 122,
+          "losses": 124,
+          "draws": 10,
+          "scoreRate": 0.496094,
+          "meanTurns": 4.253906,
+          "zeroCastDeathRate": 0.001563,
+          "meanMpSpent": 153.5625,
+          "meanNoAffordableSpecialTurns": 1.042969,
+          "meanHealing": 42.1875,
+          "meanGuardApplications": 0.25,
+          "meanEffectiveCleanses": 1.46875,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.25,
+          "meanDragonChargeGenerated": 6.3125,
+          "meanDragonChargeSpent": 4.460938,
+          "meanDragonFinishers": 0.9375,
+          "meanChargedDragonFinishers": 0.9375,
+          "meanDragonFinisherDamage": 305.371094,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0.789063,
+          "meanPeakDragonCharge": 4.992188,
+          "meanDamageConcentration": 0.446737,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 16,
+            "meanChargeSpentPerFinisher": 4.758333,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "generated": {
+        "baseline": {
+          "games": 768,
+          "wins": 131,
+          "losses": 637,
+          "draws": 0,
+          "scoreRate": 0.170573,
+          "meanTurns": 4.744792,
+          "zeroCastDeathRate": 0.027083,
+          "meanMpSpent": 163.294271,
+          "meanNoAffordableSpecialTurns": 2.199219,
+          "meanHealing": 49.707031,
+          "meanGuardApplications": 0.123698,
+          "meanEffectiveCleanses": 1.334635,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.289063,
+          "meanDragonChargeGenerated": 6.773438,
+          "meanDragonChargeSpent": 4.334635,
+          "meanDragonFinishers": 0.886719,
+          "meanChargedDragonFinishers": 0.886719,
+          "meanDragonFinisherDamage": 143.433594,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.640625,
+          "meanPeakDragonCharge": 4.980469,
+          "meanDamageConcentration": 0.408265,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 87,
+            "meanChargeSpentPerFinisher": 4.888399,
+            "firstTurnDeaths": 5,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 768,
+          "wins": 531,
+          "losses": 226,
+          "draws": 11,
+          "scoreRate": 0.698568,
+          "meanTurns": 4.106771,
+          "zeroCastDeathRate": 0.022396,
+          "meanMpSpent": 155.830729,
+          "meanNoAffordableSpecialTurns": 0.957031,
+          "meanHealing": 45.996094,
+          "meanGuardApplications": 0.160156,
+          "meanEffectiveCleanses": 1.257813,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 6.429688,
+          "meanDragonChargeSpent": 4.697917,
+          "meanDragonFinishers": 0.955729,
+          "meanChargedDragonFinishers": 0.955729,
+          "meanDragonFinisherDamage": 313.429688,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0.490885,
+          "meanPeakDragonCharge": 4.989583,
+          "meanDamageConcentration": 0.435863,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 34,
+            "meanChargeSpentPerFinisher": 4.915531,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "controls": [
+        {
+          "opponent": "fullbeast",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.5
+        },
+        {
+          "opponent": "fullnature",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "priority",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.65625
+        },
+        {
+          "opponent": "poison-cleanse",
+          "gamesPerVariant": 32,
+          "baselineScore": 0.0625,
+          "candidateScore": 0.78125
+        },
+        {
+          "opponent": "guard-heal",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.5
+        },
+        {
+          "opponent": "strip",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.75
+        },
+        {
+          "opponent": "area",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.59375
+        },
+        {
+          "opponent": "mp-pressure",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.1875
+        }
+      ]
+    },
+    {
+      "id": "threedragon",
+      "baseline": {
+        "games": 1024,
+        "wins": 99,
+        "losses": 925,
+        "draws": 0,
+        "scoreRate": 0.09668,
+        "meanTurns": 5.254883,
+        "zeroCastDeathRate": 0.021094,
+        "meanMpSpent": 163.080078,
+        "meanNoAffordableSpecialTurns": 2.305664,
+        "meanHealing": 113.462891,
+        "meanGuardApplications": 1.275391,
+        "meanEffectiveCleanses": 2.548828,
+        "meanPoisonApplications": 7.123047,
+        "meanDispelApplications": 0,
+        "meanDragonChargeGenerated": 4.142578,
+        "meanDragonChargeSpent": 2.617188,
+        "meanDragonFinishers": 0.930664,
+        "meanChargedDragonFinishers": 0.885742,
+        "meanDragonFinisherDamage": 102.509766,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 1.168945,
+        "meanPeakDragonCharge": 2.974609,
+        "meanDamageConcentration": 0.427397,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 71,
+          "meanChargeSpentPerFinisher": 2.812172,
+          "firstTurnDeaths": 10,
+          "noCastDeaths": 0
+        }
+      },
+      "candidate": {
+        "games": 1024,
+        "wins": 302,
+        "losses": 722,
+        "draws": 0,
+        "scoreRate": 0.294922,
+        "meanTurns": 5.4375,
+        "zeroCastDeathRate": 0.017383,
+        "meanMpSpent": 168.091797,
+        "meanNoAffordableSpecialTurns": 2.436523,
+        "meanHealing": 122.113281,
+        "meanGuardApplications": 1.392578,
+        "meanEffectiveCleanses": 2.610352,
+        "meanPoisonApplications": 6.990234,
+        "meanDispelApplications": 0,
+        "meanDragonChargeGenerated": 4.222656,
+        "meanDragonChargeSpent": 2.753906,
+        "meanDragonFinishers": 0.963867,
+        "meanChargedDragonFinishers": 0.930664,
+        "meanDragonFinisherDamage": 220.463867,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0.736328,
+        "meanPeakDragonCharge": 2.99707,
+        "meanDamageConcentration": 0.511737,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 37,
+          "meanChargeSpentPerFinisher": 2.857143,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "pairedDelta": {
+        "pairs": 1024,
+        "seedClusters": 16,
+        "changedOutcomes": 235,
+        "scoreRateChange": 0.198242,
+        "approximate95Interval": [
+          0.176279,
+          0.220205
+        ],
+        "meanTurnsChange": 0.182617,
+        "meanDirectDamageChange": 141.586914,
+        "meanHealingChange": 8.650391,
+        "meanMpSpentChange": 5.011719
+      },
+      "curated": {
+        "baseline": {
+          "games": 256,
+          "wins": 1,
+          "losses": 255,
+          "draws": 0,
+          "scoreRate": 0.003906,
+          "meanTurns": 4.742188,
+          "zeroCastDeathRate": 0,
+          "meanMpSpent": 149.96875,
+          "meanNoAffordableSpecialTurns": 1.753906,
+          "meanHealing": 90.800781,
+          "meanGuardApplications": 1.175781,
+          "meanEffectiveCleanses": 2.515625,
+          "meanPoisonApplications": 6.601563,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 3.949219,
+          "meanDragonChargeSpent": 2.585938,
+          "meanDragonFinishers": 0.921875,
+          "meanChargedDragonFinishers": 0.867188,
+          "meanDragonFinisherDamage": 102.082031,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.074219,
+          "meanPeakDragonCharge": 3,
+          "meanDamageConcentration": 0.416301,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 20,
+            "meanChargeSpentPerFinisher": 2.805085,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 256,
+          "wins": 38,
+          "losses": 218,
+          "draws": 0,
+          "scoreRate": 0.148438,
+          "meanTurns": 5.476563,
+          "zeroCastDeathRate": 0,
+          "meanMpSpent": 157.664063,
+          "meanNoAffordableSpecialTurns": 2.835938,
+          "meanHealing": 102.804688,
+          "meanGuardApplications": 1.308594,
+          "meanEffectiveCleanses": 2.582031,
+          "meanPoisonApplications": 6.671875,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 4.101563,
+          "meanDragonChargeSpent": 2.636719,
+          "meanDragonFinishers": 0.945313,
+          "meanChargedDragonFinishers": 0.882813,
+          "meanDragonFinisherDamage": 213.359375,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0.871094,
+          "meanPeakDragonCharge": 3.003906,
+          "meanDamageConcentration": 0.508514,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 14,
+            "meanChargeSpentPerFinisher": 2.789256,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "generated": {
+        "baseline": {
+          "games": 768,
+          "wins": 98,
+          "losses": 670,
+          "draws": 0,
+          "scoreRate": 0.127604,
+          "meanTurns": 5.425781,
+          "zeroCastDeathRate": 0.028125,
+          "meanMpSpent": 167.450521,
+          "meanNoAffordableSpecialTurns": 2.489583,
+          "meanHealing": 121.016927,
+          "meanGuardApplications": 1.308594,
+          "meanEffectiveCleanses": 2.559896,
+          "meanPoisonApplications": 7.296875,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 4.207031,
+          "meanDragonChargeSpent": 2.627604,
+          "meanDragonFinishers": 0.933594,
+          "meanChargedDragonFinishers": 0.891927,
+          "meanDragonFinisherDamage": 102.652344,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.200521,
+          "meanPeakDragonCharge": 2.966146,
+          "meanDamageConcentration": 0.431095,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 51,
+            "meanChargeSpentPerFinisher": 2.814505,
+            "firstTurnDeaths": 10,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 768,
+          "wins": 264,
+          "losses": 504,
+          "draws": 0,
+          "scoreRate": 0.34375,
+          "meanTurns": 5.424479,
+          "zeroCastDeathRate": 0.023177,
+          "meanMpSpent": 171.567708,
+          "meanNoAffordableSpecialTurns": 2.303385,
+          "meanHealing": 128.549479,
+          "meanGuardApplications": 1.420573,
+          "meanEffectiveCleanses": 2.619792,
+          "meanPoisonApplications": 7.096354,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 4.263021,
+          "meanDragonChargeSpent": 2.792969,
+          "meanDragonFinishers": 0.970052,
+          "meanChargedDragonFinishers": 0.946615,
+          "meanDragonFinisherDamage": 222.832031,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0.691406,
+          "meanPeakDragonCharge": 2.994792,
+          "meanDamageConcentration": 0.512811,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 23,
+            "meanChargeSpentPerFinisher": 2.879195,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "controls": [
+        {
+          "opponent": "fullbeast",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.1875
+        },
+        {
+          "opponent": "fullnature",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "priority",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "poison-cleanse",
+          "gamesPerVariant": 32,
+          "baselineScore": 0.03125,
+          "candidateScore": 0.65625
+        },
+        {
+          "opponent": "guard-heal",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.3125
+        },
+        {
+          "opponent": "strip",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.03125
+        },
+        {
+          "opponent": "area",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "mp-pressure",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        }
+      ]
+    },
+    {
+      "id": "twodragon",
+      "baseline": {
+        "games": 1024,
+        "wins": 160,
+        "losses": 864,
+        "draws": 0,
+        "scoreRate": 0.15625,
+        "meanTurns": 5.362305,
+        "zeroCastDeathRate": 0.020703,
+        "meanMpSpent": 172.3125,
+        "meanNoAffordableSpecialTurns": 2.040039,
+        "meanHealing": 154.610352,
+        "meanGuardApplications": 1.367188,
+        "meanEffectiveCleanses": 1.380859,
+        "meanPoisonApplications": 12.807617,
+        "meanDispelApplications": 0,
+        "meanDragonChargeGenerated": 0,
+        "meanDragonChargeSpent": 0,
+        "meanDragonFinishers": 0.324219,
+        "meanChargedDragonFinishers": 0,
+        "meanDragonFinisherDamage": 11.105469,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0,
+        "meanPeakDragonCharge": 0,
+        "meanDamageConcentration": 0.346317,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 627,
+          "meanChargeSpentPerFinisher": 0,
+          "firstTurnDeaths": 10,
+          "noCastDeaths": 0
+        }
+      },
+      "candidate": {
+        "games": 1024,
+        "wins": 138,
+        "losses": 886,
+        "draws": 0,
+        "scoreRate": 0.134766,
+        "meanTurns": 5.449219,
+        "zeroCastDeathRate": 0.017578,
+        "meanMpSpent": 175.115234,
+        "meanNoAffordableSpecialTurns": 1.956055,
+        "meanHealing": 151.859375,
+        "meanGuardApplications": 1.458984,
+        "meanEffectiveCleanses": 1.439453,
+        "meanPoisonApplications": 12.587891,
+        "meanDispelApplications": 0,
+        "meanDragonChargeGenerated": 0,
+        "meanDragonChargeSpent": 0,
+        "meanDragonFinishers": 0.380859,
+        "meanChargedDragonFinishers": 0,
+        "meanDragonFinisherDamage": 12.994141,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0,
+        "meanPeakDragonCharge": 0,
+        "meanDamageConcentration": 0.342145,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 561,
+          "meanChargeSpentPerFinisher": 0,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "pairedDelta": {
+        "pairs": 1024,
+        "seedClusters": 16,
+        "changedOutcomes": 70,
+        "scoreRateChange": -0.021484,
+        "approximate95Interval": [
+          -0.036507,
+          -0.006462
+        ],
+        "meanTurnsChange": 0.086914,
+        "meanDirectDamageChange": 5.464844,
+        "meanHealingChange": -2.750977,
+        "meanMpSpentChange": 2.802734
+      },
+      "curated": {
+        "baseline": {
+          "games": 256,
+          "wins": 8,
+          "losses": 248,
+          "draws": 0,
+          "scoreRate": 0.03125,
+          "meanTurns": 4.917969,
+          "zeroCastDeathRate": 0,
+          "meanMpSpent": 159.9375,
+          "meanNoAffordableSpecialTurns": 1.472656,
+          "meanHealing": 138.585938,
+          "meanGuardApplications": 1.332031,
+          "meanEffectiveCleanses": 1.230469,
+          "meanPoisonApplications": 12.171875,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0.238281,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 8.386719,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.32809,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 193,
+            "meanChargeSpentPerFinisher": 0,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 256,
+          "wins": 8,
+          "losses": 248,
+          "draws": 0,
+          "scoreRate": 0.03125,
+          "meanTurns": 5.164063,
+          "zeroCastDeathRate": 0,
+          "meanMpSpent": 165.414063,
+          "meanNoAffordableSpecialTurns": 1.46875,
+          "meanHealing": 137.449219,
+          "meanGuardApplications": 1.386719,
+          "meanEffectiveCleanses": 1.222656,
+          "meanPoisonApplications": 12.191406,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0.328125,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 11.453125,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.326461,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 168,
+            "meanChargeSpentPerFinisher": 0,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "generated": {
+        "baseline": {
+          "games": 768,
+          "wins": 152,
+          "losses": 616,
+          "draws": 0,
+          "scoreRate": 0.197917,
+          "meanTurns": 5.510417,
+          "zeroCastDeathRate": 0.027604,
+          "meanMpSpent": 176.4375,
+          "meanNoAffordableSpecialTurns": 2.229167,
+          "meanHealing": 159.951823,
+          "meanGuardApplications": 1.378906,
+          "meanEffectiveCleanses": 1.43099,
+          "meanPoisonApplications": 13.019531,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0.352865,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 12.011719,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.352393,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 434,
+            "meanChargeSpentPerFinisher": 0,
+            "firstTurnDeaths": 10,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 768,
+          "wins": 130,
+          "losses": 638,
+          "draws": 0,
+          "scoreRate": 0.169271,
+          "meanTurns": 5.544271,
+          "zeroCastDeathRate": 0.023438,
+          "meanMpSpent": 178.348958,
+          "meanNoAffordableSpecialTurns": 2.11849,
+          "meanHealing": 156.66276,
+          "meanGuardApplications": 1.483073,
+          "meanEffectiveCleanses": 1.511719,
+          "meanPoisonApplications": 12.720052,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0.398438,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 13.507813,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.347373,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 393,
+            "meanChargeSpentPerFinisher": 0,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "controls": [
+        {
+          "opponent": "fullbeast",
+          "gamesPerVariant": 32,
+          "baselineScore": 0.125,
+          "candidateScore": 0.125
+        },
+        {
+          "opponent": "fullnature",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "priority",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "poison-cleanse",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "guard-heal",
+          "gamesPerVariant": 32,
+          "baselineScore": 0.125,
+          "candidateScore": 0.125
+        },
+        {
+          "opponent": "strip",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "area",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "mp-pressure",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        }
+      ]
+    },
+    {
+      "id": "core-replaced",
+      "baseline": {
+        "games": 1024,
+        "wins": 3,
+        "losses": 1021,
+        "draws": 0,
+        "scoreRate": 0.00293,
+        "meanTurns": 4.583984,
+        "zeroCastDeathRate": 0.031445,
+        "meanMpSpent": 158.419922,
+        "meanNoAffordableSpecialTurns": 1.448242,
+        "meanHealing": 84.209961,
+        "meanGuardApplications": 1.384766,
+        "meanEffectiveCleanses": 1.176758,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.1875,
+        "meanDragonChargeGenerated": 0,
+        "meanDragonChargeSpent": 0,
+        "meanDragonFinishers": 0,
+        "meanChargedDragonFinishers": 0,
+        "meanDragonFinisherDamage": 0,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0,
+        "meanPeakDragonCharge": 0,
+        "meanDamageConcentration": 0.485707,
+        "core": {
+          "appearances": 0,
+          "defeatsBeforeFirstFinisher": 0,
+          "meanChargeSpentPerFinisher": null,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "candidate": {
+        "games": 1024,
+        "wins": 2,
+        "losses": 1022,
+        "draws": 0,
+        "scoreRate": 0.001953,
+        "meanTurns": 4.755859,
+        "zeroCastDeathRate": 0.025781,
+        "meanMpSpent": 162.570313,
+        "meanNoAffordableSpecialTurns": 1.697266,
+        "meanHealing": 90.927734,
+        "meanGuardApplications": 1.47168,
+        "meanEffectiveCleanses": 1.214844,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.0625,
+        "meanDragonChargeGenerated": 0,
+        "meanDragonChargeSpent": 0,
+        "meanDragonFinishers": 0,
+        "meanChargedDragonFinishers": 0,
+        "meanDragonFinisherDamage": 0,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0,
+        "meanPeakDragonCharge": 0,
+        "meanDamageConcentration": 0.451334,
+        "core": {
+          "appearances": 0,
+          "defeatsBeforeFirstFinisher": 0,
+          "meanChargeSpentPerFinisher": null,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "pairedDelta": {
+        "pairs": 1024,
+        "seedClusters": 16,
+        "changedOutcomes": 5,
+        "scoreRateChange": -0.000977,
+        "approximate95Interval": [
+          -0.004365,
+          0.002412
+        ],
+        "meanTurnsChange": 0.171875,
+        "meanDirectDamageChange": 83.455078,
+        "meanHealingChange": 6.717773,
+        "meanMpSpentChange": 4.150391
+      },
+      "curated": {
+        "baseline": {
+          "games": 256,
+          "wins": 0,
+          "losses": 256,
+          "draws": 0,
+          "scoreRate": 0,
+          "meanTurns": 4.242188,
+          "zeroCastDeathRate": 0.007813,
+          "meanMpSpent": 152.3125,
+          "meanNoAffordableSpecialTurns": 0.863281,
+          "meanHealing": 70.433594,
+          "meanGuardApplications": 1.492188,
+          "meanEffectiveCleanses": 1.21875,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.308594,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 0,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.497947,
+          "core": {
+            "appearances": 0,
+            "defeatsBeforeFirstFinisher": 0,
+            "meanChargeSpentPerFinisher": null,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 256,
+          "wins": 0,
+          "losses": 256,
+          "draws": 0,
+          "scoreRate": 0,
+          "meanTurns": 4.347656,
+          "zeroCastDeathRate": 0.007813,
+          "meanMpSpent": 153.195313,
+          "meanNoAffordableSpecialTurns": 1.242188,
+          "meanHealing": 84.84375,
+          "meanGuardApplications": 1.296875,
+          "meanEffectiveCleanses": 1.273438,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.25,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 0,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.456406,
+          "core": {
+            "appearances": 0,
+            "defeatsBeforeFirstFinisher": 0,
+            "meanChargeSpentPerFinisher": null,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "generated": {
+        "baseline": {
+          "games": 768,
+          "wins": 3,
+          "losses": 765,
+          "draws": 0,
+          "scoreRate": 0.003906,
+          "meanTurns": 4.697917,
+          "zeroCastDeathRate": 0.039323,
+          "meanMpSpent": 160.455729,
+          "meanNoAffordableSpecialTurns": 1.643229,
+          "meanHealing": 88.802083,
+          "meanGuardApplications": 1.348958,
+          "meanEffectiveCleanses": 1.16276,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.147135,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 0,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.481627,
+          "core": {
+            "appearances": 0,
+            "defeatsBeforeFirstFinisher": 0,
+            "meanChargeSpentPerFinisher": null,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 768,
+          "wins": 2,
+          "losses": 766,
+          "draws": 0,
+          "scoreRate": 0.002604,
+          "meanTurns": 4.891927,
+          "zeroCastDeathRate": 0.031771,
+          "meanMpSpent": 165.695313,
+          "meanNoAffordableSpecialTurns": 1.848958,
+          "meanHealing": 92.955729,
+          "meanGuardApplications": 1.529948,
+          "meanEffectiveCleanses": 1.195313,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 0,
+          "meanDragonChargeSpent": 0,
+          "meanDragonFinishers": 0,
+          "meanChargedDragonFinishers": 0,
+          "meanDragonFinisherDamage": 0,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0,
+          "meanPeakDragonCharge": 0,
+          "meanDamageConcentration": 0.449643,
+          "core": {
+            "appearances": 0,
+            "defeatsBeforeFirstFinisher": 0,
+            "meanChargeSpentPerFinisher": null,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "controls": [
+        {
+          "opponent": "fullbeast",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "fullnature",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "priority",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "poison-cleanse",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "guard-heal",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "strip",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "area",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "mp-pressure",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        }
+      ]
+    },
+    {
+      "id": "core-nonleader",
+      "baseline": {
+        "games": 1024,
+        "wins": 79,
+        "losses": 944,
+        "draws": 1,
+        "scoreRate": 0.077637,
+        "meanTurns": 4.158203,
+        "zeroCastDeathRate": 0.031445,
+        "meanMpSpent": 147.621094,
+        "meanNoAffordableSpecialTurns": 1.336914,
+        "meanHealing": 39.306641,
+        "meanGuardApplications": 0.142578,
+        "meanEffectiveCleanses": 1.166016,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.288086,
+        "meanDragonChargeGenerated": 6.189453,
+        "meanDragonChargeSpent": 3.708008,
+        "meanDragonFinishers": 0.766602,
+        "meanChargedDragonFinishers": 0.766602,
+        "meanDragonFinisherDamage": 124.852539,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 1.945313,
+        "meanPeakDragonCharge": 4.970703,
+        "meanDamageConcentration": 0.421859,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 239,
+          "meanChargeSpentPerFinisher": 4.836943,
+          "firstTurnDeaths": 13,
+          "noCastDeaths": 0
+        }
+      },
+      "candidate": {
+        "games": 1024,
+        "wins": 524,
+        "losses": 494,
+        "draws": 6,
+        "scoreRate": 0.514648,
+        "meanTurns": 3.960938,
+        "zeroCastDeathRate": 0.025781,
+        "meanMpSpent": 145.416016,
+        "meanNoAffordableSpecialTurns": 0.779297,
+        "meanHealing": 40.478516,
+        "meanGuardApplications": 0.157227,
+        "meanEffectiveCleanses": 1.102539,
+        "meanPoisonApplications": 0,
+        "meanDispelApplications": 0.0625,
+        "meanDragonChargeGenerated": 6.09375,
+        "meanDragonChargeSpent": 4.34668,
+        "meanDragonFinishers": 0.900391,
+        "meanChargedDragonFinishers": 0.900391,
+        "meanDragonFinisherDamage": 297.484375,
+        "meanDragonChargeDispelled": 0,
+        "meanDragonChargeLostOnDefeat": 0.755859,
+        "meanPeakDragonCharge": 4.979492,
+        "meanDamageConcentration": 0.446469,
+        "core": {
+          "appearances": 1024,
+          "defeatsBeforeFirstFinisher": 102,
+          "meanChargeSpentPerFinisher": 4.827549,
+          "firstTurnDeaths": 0,
+          "noCastDeaths": 0
+        }
+      },
+      "pairedDelta": {
+        "pairs": 1024,
+        "seedClusters": 16,
+        "changedOutcomes": 467,
+        "scoreRateChange": 0.437012,
+        "approximate95Interval": [
+          0.407775,
+          0.466248
+        ],
+        "meanTurnsChange": -0.197266,
+        "meanDirectDamageChange": 181.626953,
+        "meanHealingChange": 1.171875,
+        "meanMpSpentChange": -2.205078
+      },
+      "curated": {
+        "baseline": {
+          "games": 256,
+          "wins": 0,
+          "losses": 256,
+          "draws": 0,
+          "scoreRate": 0,
+          "meanTurns": 3.875,
+          "zeroCastDeathRate": 0.007813,
+          "meanMpSpent": 139.46875,
+          "meanNoAffordableSpecialTurns": 0.957031,
+          "meanHealing": 39.0625,
+          "meanGuardApplications": 0.25,
+          "meanEffectiveCleanses": 1.34375,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.332031,
+          "meanDragonChargeGenerated": 5.789063,
+          "meanDragonChargeSpent": 3.160156,
+          "meanDragonFinishers": 0.667969,
+          "meanChargedDragonFinishers": 0.667969,
+          "meanDragonFinisherDamage": 111.949219,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 2.308594,
+          "meanPeakDragonCharge": 4.960938,
+          "meanDamageConcentration": 0.427083,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 85,
+            "meanChargeSpentPerFinisher": 4.730994,
+            "firstTurnDeaths": 5,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 256,
+          "wins": 82,
+          "losses": 170,
+          "draws": 4,
+          "scoreRate": 0.328125,
+          "meanTurns": 3.953125,
+          "zeroCastDeathRate": 0.007813,
+          "meanMpSpent": 140.890625,
+          "meanNoAffordableSpecialTurns": 0.808594,
+          "meanHealing": 39.355469,
+          "meanGuardApplications": 0.25,
+          "meanEffectiveCleanses": 1.285156,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.25,
+          "meanDragonChargeGenerated": 5.839844,
+          "meanDragonChargeSpent": 4.054688,
+          "meanDragonFinishers": 0.867188,
+          "meanChargedDragonFinishers": 0.867188,
+          "meanDragonFinisherDamage": 284.914063,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.039063,
+          "meanPeakDragonCharge": 4.96875,
+          "meanDamageConcentration": 0.459328,
+          "core": {
+            "appearances": 256,
+            "defeatsBeforeFirstFinisher": 34,
+            "meanChargeSpentPerFinisher": 4.675676,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "generated": {
+        "baseline": {
+          "games": 768,
+          "wins": 79,
+          "losses": 688,
+          "draws": 1,
+          "scoreRate": 0.103516,
+          "meanTurns": 4.252604,
+          "zeroCastDeathRate": 0.039323,
+          "meanMpSpent": 150.338542,
+          "meanNoAffordableSpecialTurns": 1.463542,
+          "meanHealing": 39.388021,
+          "meanGuardApplications": 0.106771,
+          "meanEffectiveCleanses": 1.106771,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0.273438,
+          "meanDragonChargeGenerated": 6.322917,
+          "meanDragonChargeSpent": 3.890625,
+          "meanDragonFinishers": 0.799479,
+          "meanChargedDragonFinishers": 0.799479,
+          "meanDragonFinisherDamage": 129.153646,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 1.824219,
+          "meanPeakDragonCharge": 4.973958,
+          "meanDamageConcentration": 0.420118,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 154,
+            "meanChargeSpentPerFinisher": 4.86645,
+            "firstTurnDeaths": 8,
+            "noCastDeaths": 0
+          }
+        },
+        "candidate": {
+          "games": 768,
+          "wins": 442,
+          "losses": 324,
+          "draws": 2,
+          "scoreRate": 0.576823,
+          "meanTurns": 3.963542,
+          "zeroCastDeathRate": 0.031771,
+          "meanMpSpent": 146.924479,
+          "meanNoAffordableSpecialTurns": 0.769531,
+          "meanHealing": 40.852865,
+          "meanGuardApplications": 0.126302,
+          "meanEffectiveCleanses": 1.041667,
+          "meanPoisonApplications": 0,
+          "meanDispelApplications": 0,
+          "meanDragonChargeGenerated": 6.178385,
+          "meanDragonChargeSpent": 4.44401,
+          "meanDragonFinishers": 0.911458,
+          "meanChargedDragonFinishers": 0.911458,
+          "meanDragonFinisherDamage": 301.674479,
+          "meanDragonChargeDispelled": 0,
+          "meanDragonChargeLostOnDefeat": 0.661458,
+          "meanPeakDragonCharge": 4.983073,
+          "meanDamageConcentration": 0.442183,
+          "core": {
+            "appearances": 768,
+            "defeatsBeforeFirstFinisher": 68,
+            "meanChargeSpentPerFinisher": 4.875714,
+            "firstTurnDeaths": 0,
+            "noCastDeaths": 0
+          }
+        }
+      },
+      "controls": [
+        {
+          "opponent": "fullbeast",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.25
+        },
+        {
+          "opponent": "fullnature",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0
+        },
+        {
+          "opponent": "priority",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.59375
+        },
+        {
+          "opponent": "poison-cleanse",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.8125
+        },
+        {
+          "opponent": "guard-heal",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.25
+        },
+        {
+          "opponent": "strip",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.4375
+        },
+        {
+          "opponent": "area",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.1875
+        },
+        {
+          "opponent": "mp-pressure",
+          "gamesPerVariant": 32,
+          "baselineScore": 0,
+          "candidateScore": 0.09375
+        }
+      ]
+    }
+  ]
+}

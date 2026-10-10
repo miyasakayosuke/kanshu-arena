@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "dragon-companion18-broad",
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Pure dragon, core leader; COST17"
+    },
+    {
+      "id": "threedragon",
+      "ids": [
+        15,
+        16,
+        18,
+        2,
+        10
+      ],
+      "role": "Exactly three starting dragons plus healing/cleanse/protect; COST15"
+    },
+    {
+      "id": "twodragon",
+      "ids": [
+        15,
+        16,
+        3,
+        2,
+        10
+      ],
+      "role": "Exactly two dragons; charge inactive; COST15"
+    },
+    {
+      "id": "core-replaced",
+      "ids": [
+        14,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Exact COST5 core replacement by Genbu, other four slots retained; COST17"
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        5,
+        15,
+        16,
+        17,
+        18
+      ],
+      "role": "Same pure members, Quetzalcoatl leader; COST17"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "role": "Owns before-hit strip skills; CPU selection must be measured; COST14"
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "role": "Legacy area and anchor control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    },
+    {
+      "id": "generated-1",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        8,
+        13,
+        17,
+        11,
+        4
+      ]
+    },
+    {
+      "id": "generated-2",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        4,
+        18,
+        2,
+        14,
+        10
+      ]
+    },
+    {
+      "id": "generated-3",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        4,
+        9,
+        2,
+        18,
+        17
+      ]
+    },
+    {
+      "id": "generated-4",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        13,
+        0,
+        6,
+        1,
+        3
+      ]
+    },
+    {
+      "id": "generated-5",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        6,
+        1,
+        14,
+        13,
+        10
+      ]
+    },
+    {
+      "id": "generated-6",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        16,
+        7,
+        13,
+        10,
+        4
+      ]
+    },
+    {
+      "id": "generated-7",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        11,
+        13,
+        6,
+        5,
+        18
+      ]
+    },
+    {
+      "id": "generated-8",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        10,
+        9,
+        13,
+        8,
+        4
+      ]
+    },
+    {
+      "id": "generated-9",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        8,
+        14,
+        9,
+        4,
+        1
+      ]
+    },
+    {
+      "id": "generated-10",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        1,
+        18,
+        0,
+        16,
+        13
+      ]
+    },
+    {
+      "id": "generated-11",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        12,
+        2,
+        3,
+        9,
+        4
+      ]
+    },
+    {
+      "id": "generated-12",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        4,
+        2,
+        5,
+        17,
+        6
+      ]
+    },
+    {
+      "id": "generated-13",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        5,
+        3,
+        0,
+        10,
+        13
+      ]
+    },
+    {
+      "id": "generated-14",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        10,
+        2,
+        11,
+        12,
+        1
+      ]
+    },
+    {
+      "id": "generated-15",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        1,
+        0,
+        17,
+        5,
+        16
+      ]
+    },
+    {
+      "id": "generated-16",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        18,
+        1,
+        6,
+        16,
+        3
+      ]
+    },
+    {
+      "id": "generated-17",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        2,
+        13,
+        11,
+        6,
+        3
+      ]
+    },
+    {
+      "id": "generated-18",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        2,
+        10,
+        17,
+        1,
+        16
+      ]
+    },
+    {
+      "id": "generated-19",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        3,
+        7,
+        8,
+        16,
+        2
+      ]
+    },
+    {
+      "id": "generated-20",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        18,
+        0,
+        12,
+        6,
+        5
+      ]
+    },
+    {
+      "id": "generated-21",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        4,
+        16,
+        18,
+        17,
+        3
+      ]
+    },
+    {
+      "id": "generated-22",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        1,
+        5,
+        6,
+        16,
+        14
+      ]
+    },
+    {
+      "id": "generated-23",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        1,
+        4,
+        9,
+        7,
+        16
+      ]
+    },
+    {
+      "id": "generated-24",
+      "role": "Frozen seeded legal noncore membership; generated before outcome measurement; leader/slots shuffled",
+      "ids": [
+        16,
+        10,
+        18,
+        13,
+        3
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "puredragon-vs-fullbeast",
+      "a": "puredragon",
+      "b": "fullbeast",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-fullnature",
+      "a": "puredragon",
+      "b": "fullnature",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-priority",
+      "a": "puredragon",
+      "b": "priority",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-poison-cleanse",
+      "a": "puredragon",
+      "b": "poison-cleanse",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-guard-heal",
+      "a": "puredragon",
+      "b": "guard-heal",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-strip",
+      "a": "puredragon",
+      "b": "strip",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-area",
+      "a": "puredragon",
+      "b": "area",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-mp-pressure",
+      "a": "puredragon",
+      "b": "mp-pressure",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-1",
+      "a": "puredragon",
+      "b": "generated-1",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-2",
+      "a": "puredragon",
+      "b": "generated-2",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-3",
+      "a": "puredragon",
+      "b": "generated-3",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-4",
+      "a": "puredragon",
+      "b": "generated-4",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-5",
+      "a": "puredragon",
+      "b": "generated-5",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-6",
+      "a": "puredragon",
+      "b": "generated-6",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-7",
+      "a": "puredragon",
+      "b": "generated-7",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-8",
+      "a": "puredragon",
+      "b": "generated-8",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-9",
+      "a": "puredragon",
+      "b": "generated-9",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-10",
+      "a": "puredragon",
+      "b": "generated-10",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-11",
+      "a": "puredragon",
+      "b": "generated-11",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-12",
+      "a": "puredragon",
+      "b": "generated-12",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-13",
+      "a": "puredragon",
+      "b": "generated-13",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-14",
+      "a": "puredragon",
+      "b": "generated-14",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-15",
+      "a": "puredragon",
+      "b": "generated-15",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-16",
+      "a": "puredragon",
+      "b": "generated-16",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-17",
+      "a": "puredragon",
+      "b": "generated-17",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-18",
+      "a": "puredragon",
+      "b": "generated-18",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-19",
+      "a": "puredragon",
+      "b": "generated-19",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-20",
+      "a": "puredragon",
+      "b": "generated-20",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-21",
+      "a": "puredragon",
+      "b": "generated-21",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-22",
+      "a": "puredragon",
+      "b": "generated-22",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-23",
+      "a": "puredragon",
+      "b": "generated-23",
+      "keyUnitId": 15
+    },
+    {
+      "id": "puredragon-vs-generated-24",
+      "a": "puredragon",
+      "b": "generated-24",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-fullbeast",
+      "a": "threedragon",
+      "b": "fullbeast",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-fullnature",
+      "a": "threedragon",
+      "b": "fullnature",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-priority",
+      "a": "threedragon",
+      "b": "priority",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-poison-cleanse",
+      "a": "threedragon",
+      "b": "poison-cleanse",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-guard-heal",
+      "a": "threedragon",
+      "b": "guard-heal",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-strip",
+      "a": "threedragon",
+      "b": "strip",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-area",
+      "a": "threedragon",
+      "b": "area",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-mp-pressure",
+      "a": "threedragon",
+      "b": "mp-pressure",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-1",
+      "a": "threedragon",
+      "b": "generated-1",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-2",
+      "a": "threedragon",
+      "b": "generated-2",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-3",
+      "a": "threedragon",
+      "b": "generated-3",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-4",
+      "a": "threedragon",
+      "b": "generated-4",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-5",
+      "a": "threedragon",
+      "b": "generated-5",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-6",
+      "a": "threedragon",
+      "b": "generated-6",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-7",
+      "a": "threedragon",
+      "b": "generated-7",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-8",
+      "a": "threedragon",
+      "b": "generated-8",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-9",
+      "a": "threedragon",
+      "b": "generated-9",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-10",
+      "a": "threedragon",
+      "b": "generated-10",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-11",
+      "a": "threedragon",
+      "b": "generated-11",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-12",
+      "a": "threedragon",
+      "b": "generated-12",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-13",
+      "a": "threedragon",
+      "b": "generated-13",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-14",
+      "a": "threedragon",
+      "b": "generated-14",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-15",
+      "a": "threedragon",
+      "b": "generated-15",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-16",
+      "a": "threedragon",
+      "b": "generated-16",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-17",
+      "a": "threedragon",
+      "b": "generated-17",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-18",
+      "a": "threedragon",
+      "b": "generated-18",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-19",
+      "a": "threedragon",
+      "b": "generated-19",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-20",
+      "a": "threedragon",
+      "b": "generated-20",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-21",
+      "a": "threedragon",
+      "b": "generated-21",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-22",
+      "a": "threedragon",
+      "b": "generated-22",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-23",
+      "a": "threedragon",
+      "b": "generated-23",
+      "keyUnitId": 15
+    },
+    {
+      "id": "threedragon-vs-generated-24",
+      "a": "threedragon",
+      "b": "generated-24",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-fullbeast",
+      "a": "twodragon",
+      "b": "fullbeast",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-fullnature",
+      "a": "twodragon",
+      "b": "fullnature",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-priority",
+      "a": "twodragon",
+      "b": "priority",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-poison-cleanse",
+      "a": "twodragon",
+      "b": "poison-cleanse",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-guard-heal",
+      "a": "twodragon",
+      "b": "guard-heal",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-strip",
+      "a": "twodragon",
+      "b": "strip",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-area",
+      "a": "twodragon",
+      "b": "area",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-mp-pressure",
+      "a": "twodragon",
+      "b": "mp-pressure",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-1",
+      "a": "twodragon",
+      "b": "generated-1",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-2",
+      "a": "twodragon",
+      "b": "generated-2",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-3",
+      "a": "twodragon",
+      "b": "generated-3",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-4",
+      "a": "twodragon",
+      "b": "generated-4",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-5",
+      "a": "twodragon",
+      "b": "generated-5",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-6",
+      "a": "twodragon",
+      "b": "generated-6",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-7",
+      "a": "twodragon",
+      "b": "generated-7",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-8",
+      "a": "twodragon",
+      "b": "generated-8",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-9",
+      "a": "twodragon",
+      "b": "generated-9",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-10",
+      "a": "twodragon",
+      "b": "generated-10",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-11",
+      "a": "twodragon",
+      "b": "generated-11",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-12",
+      "a": "twodragon",
+      "b": "generated-12",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-13",
+      "a": "twodragon",
+      "b": "generated-13",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-14",
+      "a": "twodragon",
+      "b": "generated-14",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-15",
+      "a": "twodragon",
+      "b": "generated-15",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-16",
+      "a": "twodragon",
+      "b": "generated-16",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-17",
+      "a": "twodragon",
+      "b": "generated-17",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-18",
+      "a": "twodragon",
+      "b": "generated-18",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-19",
+      "a": "twodragon",
+      "b": "generated-19",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-20",
+      "a": "twodragon",
+      "b": "generated-20",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-21",
+      "a": "twodragon",
+      "b": "generated-21",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-22",
+      "a": "twodragon",
+      "b": "generated-22",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-23",
+      "a": "twodragon",
+      "b": "generated-23",
+      "keyUnitId": 15
+    },
+    {
+      "id": "twodragon-vs-generated-24",
+      "a": "twodragon",
+      "b": "generated-24",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-replaced-vs-fullbeast",
+      "a": "core-replaced",
+      "b": "fullbeast",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-fullnature",
+      "a": "core-replaced",
+      "b": "fullnature",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-priority",
+      "a": "core-replaced",
+      "b": "priority",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-poison-cleanse",
+      "a": "core-replaced",
+      "b": "poison-cleanse",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-guard-heal",
+      "a": "core-replaced",
+      "b": "guard-heal",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-strip",
+      "a": "core-replaced",
+      "b": "strip",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-area",
+      "a": "core-replaced",
+      "b": "area",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-mp-pressure",
+      "a": "core-replaced",
+      "b": "mp-pressure",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-1",
+      "a": "core-replaced",
+      "b": "generated-1",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-2",
+      "a": "core-replaced",
+      "b": "generated-2",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-3",
+      "a": "core-replaced",
+      "b": "generated-3",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-4",
+      "a": "core-replaced",
+      "b": "generated-4",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-5",
+      "a": "core-replaced",
+      "b": "generated-5",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-6",
+      "a": "core-replaced",
+      "b": "generated-6",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-7",
+      "a": "core-replaced",
+      "b": "generated-7",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-8",
+      "a": "core-replaced",
+      "b": "generated-8",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-9",
+      "a": "core-replaced",
+      "b": "generated-9",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-10",
+      "a": "core-replaced",
+      "b": "generated-10",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-11",
+      "a": "core-replaced",
+      "b": "generated-11",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-12",
+      "a": "core-replaced",
+      "b": "generated-12",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-13",
+      "a": "core-replaced",
+      "b": "generated-13",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-14",
+      "a": "core-replaced",
+      "b": "generated-14",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-15",
+      "a": "core-replaced",
+      "b": "generated-15",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-16",
+      "a": "core-replaced",
+      "b": "generated-16",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-17",
+      "a": "core-replaced",
+      "b": "generated-17",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-18",
+      "a": "core-replaced",
+      "b": "generated-18",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-19",
+      "a": "core-replaced",
+      "b": "generated-19",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-20",
+      "a": "core-replaced",
+      "b": "generated-20",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-21",
+      "a": "core-replaced",
+      "b": "generated-21",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-22",
+      "a": "core-replaced",
+      "b": "generated-22",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-23",
+      "a": "core-replaced",
+      "b": "generated-23",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-replaced-vs-generated-24",
+      "a": "core-replaced",
+      "b": "generated-24",
+      "keyUnitId": 14
+    },
+    {
+      "id": "core-nonleader-vs-fullbeast",
+      "a": "core-nonleader",
+      "b": "fullbeast",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-fullnature",
+      "a": "core-nonleader",
+      "b": "fullnature",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-priority",
+      "a": "core-nonleader",
+      "b": "priority",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-poison-cleanse",
+      "a": "core-nonleader",
+      "b": "poison-cleanse",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-guard-heal",
+      "a": "core-nonleader",
+      "b": "guard-heal",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-strip",
+      "a": "core-nonleader",
+      "b": "strip",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-area",
+      "a": "core-nonleader",
+      "b": "area",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-mp-pressure",
+      "a": "core-nonleader",
+      "b": "mp-pressure",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-1",
+      "a": "core-nonleader",
+      "b": "generated-1",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-2",
+      "a": "core-nonleader",
+      "b": "generated-2",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-3",
+      "a": "core-nonleader",
+      "b": "generated-3",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-4",
+      "a": "core-nonleader",
+      "b": "generated-4",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-5",
+      "a": "core-nonleader",
+      "b": "generated-5",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-6",
+      "a": "core-nonleader",
+      "b": "generated-6",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-7",
+      "a": "core-nonleader",
+      "b": "generated-7",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-8",
+      "a": "core-nonleader",
+      "b": "generated-8",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-9",
+      "a": "core-nonleader",
+      "b": "generated-9",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-10",
+      "a": "core-nonleader",
+      "b": "generated-10",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-11",
+      "a": "core-nonleader",
+      "b": "generated-11",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-12",
+      "a": "core-nonleader",
+      "b": "generated-12",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-13",
+      "a": "core-nonleader",
+      "b": "generated-13",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-14",
+      "a": "core-nonleader",
+      "b": "generated-14",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-15",
+      "a": "core-nonleader",
+      "b": "generated-15",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-16",
+      "a": "core-nonleader",
+      "b": "generated-16",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-17",
+      "a": "core-nonleader",
+      "b": "generated-17",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-18",
+      "a": "core-nonleader",
+      "b": "generated-18",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-19",
+      "a": "core-nonleader",
+      "b": "generated-19",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-20",
+      "a": "core-nonleader",
+      "b": "generated-20",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-21",
+      "a": "core-nonleader",
+      "b": "generated-21",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-22",
+      "a": "core-nonleader",
+      "b": "generated-22",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-23",
+      "a": "core-nonleader",
+      "b": "generated-23",
+      "keyUnitId": 15
+    },
+    {
+      "id": "core-nonleader-vs-generated-24",
+      "a": "core-nonleader",
+      "b": "generated-24",
+      "keyUnitId": 15
+    }
+  ],
+  "candidate": {
+    "id": "companion-charge18",
+    "label": "Exploratory companion-charge18: same HP220 and companion powers20/68",
+    "overrides": {
+      "dragonCharge": {
+        "perPoint": 18
+      },
+      "monsters": {
+        "15": {
+          "hp": 220
+        },
+        "17": {
+          "skills": [
+            {
+              "name": "双頭の連突",
+              "power": 20,
+              "priority": 0,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false,
+              "randomHits": 2
+            },
+            {
+              "name": "封鱗裂き",
+              "power": 50,
+              "priority": 0,
+              "mpCost": 14,
+              "kind": "hit",
+              "all": false,
+              "breaksGuard": true
+            }
+          ]
+        },
+        "18": {
+          "skills": [
+            {
+              "name": "翠雲の息",
+              "power": 68,
+              "priority": 0,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false,
+              "fixedDamage": true
+            },
+            {
+              "name": "雲の湧き水",
+              "power": 50,
+              "priority": 0,
+              "mpCost": 16,
+              "kind": "heal"
+            },
+            {
+              "name": "雲払い",
+              "power": 25,
+              "priority": 0,
+              "mpCost": 10,
+              "kind": "cleanse"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 20261010
+  }
+}

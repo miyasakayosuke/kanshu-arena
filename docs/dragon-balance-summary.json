@@ -1,0 +1,2446 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-candidate-with-final-source-validation",
+  "note": "Same-policy fixed-suite evidence, not human/PvP balance. Candidate applies on both sides. Draws score half. Per-core charge excludes MP. All original fullnature members [14,3,6,9,10] retained.",
+  "reports": [
+    {
+      "evidenceFile": "dragon-balance-summary-runs/01-exploratory-dragon-charge-disabled.json",
+      "evidenceSha256": "730646260f49741f1923326c6f2cd754ae59df0989a0dfc3620988cd04fe883e",
+      "rawReportPath": "lab-results/dragon-initial-disabled/report.json",
+      "rawReportSha256": "ad1c589cdae7110f42e647897af6fa696c09cfd319ce8c9d5120e2df062df19f",
+      "phase": "exploratory",
+      "suiteId": "dragon-charge-disabled"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/02-exploratory-dragon-charge14.json",
+      "evidenceSha256": "9f2705b94abd5bd803f74273d1d6d31ab561218dff0bc8860fcdc16ee0c0e840",
+      "rawReportPath": "lab-results/dragon-initial-charge14/report.json",
+      "rawReportSha256": "d25ced17d8d30f0c4944c5e8f1073f9a2bf7409015019dd823db16818f68527a",
+      "phase": "exploratory",
+      "suiteId": "dragon-charge14"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/03-exploratory-dragon-charge14-hp220.json",
+      "evidenceSha256": "a5e7c595beab8a753ba7baee9b300ac4162194e4564bf8f86894e610ed31a23d",
+      "rawReportPath": "lab-results/dragon-initial-charge14-hp220/report.json",
+      "rawReportSha256": "facfa4972bba9641e00ec7ccf995f5f282463a349b1e0352075938b2b767e2a5",
+      "phase": "exploratory",
+      "suiteId": "dragon-charge14-hp220"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/04-exploratory-dragon-companion-power.json",
+      "evidenceSha256": "2ac6d8d9ff4f867c823cec16729afd5f99e5eb2f694075583e307dc4379628f4",
+      "rawReportPath": "lab-results/dragon-initial-companion-power/report.json",
+      "rawReportSha256": "70c7f043da92dfffdfdcd9ef78da5fe4afd9c5a129ea46441296f376c2bd0440",
+      "phase": "exploratory",
+      "suiteId": "dragon-companion-power"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/05-exploratory-dragon-companion-charge18.json",
+      "evidenceSha256": "1ac40cab801731d41910c8c4da76999ad3c50673b6a4d01cdd98080135cf1278",
+      "rawReportPath": "lab-results/dragon-initial-companion-charge18/report.json",
+      "rawReportSha256": "707c2facadd8738bdf7a9ff7abce8d591558a457683da2a4fa601bc474114708",
+      "phase": "exploratory",
+      "suiteId": "dragon-companion-charge18"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/06-exploratory-dragon-companion-disabled.json",
+      "evidenceSha256": "95d6998e591b15128decba22f5411585bb8ab756a23247711a8393afbd1684fc",
+      "rawReportPath": "lab-results/dragon-initial-companion-disabled/report.json",
+      "rawReportSha256": "cb14f108e41f6d46e75592720698556d211077f07ca136436a3b8ac9bb2ac8b1",
+      "phase": "exploratory",
+      "suiteId": "dragon-companion-disabled"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/07-exploratory-dragon-broad.json",
+      "evidenceSha256": "a7cdccda09353e225e0d45e24bdf5dfddf642ef8f30e504a764956670b41fcd5",
+      "rawReportPath": "lab-results/dragon-initial-broad/report.json",
+      "rawReportSha256": "034d1d78d712ef6a5977beda9c4234cb7237ac227b367193a27430f2b467ca94",
+      "phase": "exploratory",
+      "suiteId": "dragon-broad"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/08-exploratory-dragon-companion-broad.json",
+      "evidenceSha256": "2294e2b37e120a432b7b6e3148803d0f433ff88b38832a88a4dce4894ea3c816",
+      "rawReportPath": "lab-results/dragon-initial-companion-broad/report.json",
+      "rawReportSha256": "be6ad0722c78d396d99feca7e7707018ef2a91e88a2507a377f3db36bbaceddd",
+      "phase": "exploratory",
+      "suiteId": "dragon-companion-broad"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/09-exploratory-dragon-companion18-broad.json",
+      "evidenceSha256": "abbae2f96016d936262049cdb1a9f6b33940ecfa29a821c14ee163cec22169de",
+      "rawReportPath": "lab-results/dragon-initial-companion18-broad/report.json",
+      "rawReportSha256": "f9001f72668cfb9ffcf529be382186a9e7f3aca45fefbf5761fc58aba0226677",
+      "phase": "exploratory",
+      "suiteId": "dragon-companion18-broad"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/10-final-source-dragon-identity.json",
+      "evidenceSha256": "a8a5e9904eb593396aff512c031409bf492246ea4c32f0ae29fc6609143a6dcb",
+      "rawReportPath": "lab-results/dragon-final-identity/report.json",
+      "rawReportSha256": "72c49d3eedbf26c87ec0ea500354c2deb9a7677a1573e8070c2707beffebea91",
+      "phase": "final-source",
+      "suiteId": "dragon-identity"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/11-final-source-dragon-charge-disabled.json",
+      "evidenceSha256": "4a699169aa317e3b7553980af4c00b4023915eca9ef401a9de775ba3e24b6194",
+      "rawReportPath": "lab-results/dragon-final-disabled/report.json",
+      "rawReportSha256": "8d270aec1fe331e90e87a04f47929ae516511a43c127671af88a1d9d978db006",
+      "phase": "final-source",
+      "suiteId": "dragon-charge-disabled"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/12-final-source-dragon-charge-zero.json",
+      "evidenceSha256": "c3ccbfa55ebdb7783a9a34e4dc4e395eefc9fb2796004bf692a87997a1038357",
+      "rawReportPath": "lab-results/dragon-final-zero/report.json",
+      "rawReportSha256": "28862ba7a2689dee3f68fc6ea473d9422eaecb45a56a703f1a717e09ba5f1043",
+      "phase": "final-source",
+      "suiteId": "dragon-charge-zero"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/13-final-source-dragon-final-vs-initial-values.json",
+      "evidenceSha256": "abdce5d26a5ace875d5622dd798a4a5de8e9b09786ffe3e6347d363f86a93903",
+      "rawReportPath": "lab-results/dragon-final-vs-initial/report.json",
+      "rawReportSha256": "3d352b2202eb37f91b2a1b6965fac60ee611c8075d813d81e70297e42a8ed812",
+      "phase": "final-source",
+      "suiteId": "dragon-final-vs-initial-values"
+    },
+    {
+      "evidenceFile": "dragon-balance-summary-runs/14-final-source-dragon-broad.json",
+      "evidenceSha256": "1eeb9613a79045b5a3848aec8ee470e1fc0ded3051344ece6474bc24ac855873",
+      "rawReportPath": "lab-results/dragon-final-broad/report.json",
+      "rawReportSha256": "4aee9207f2f0f1da200ed7564be698d769ce250b07f04e6b228fe49767798143",
+      "phase": "final-source",
+      "suiteId": "dragon-broad"
+    }
+  ],
+  "candidateComparisons": [
+    {
+      "from": "charge-disabled",
+      "to": "charge14",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 52,
+      "scoreRateChange": 0.085938,
+      "approximate95Interval": [
+        0.043066,
+        0.128809
+      ],
+      "meanTurnsChange": 0.601563,
+      "meanDirectDamageChange": 229.744141,
+      "meanHealingChange": 2.587891,
+      "meanMpSpentChange": 16.210938
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge14",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 22,
+      "scoreRateChange": 0.035156,
+      "approximate95Interval": [
+        0.014622,
+        0.055691
+      ],
+      "meanTurnsChange": 0.537109,
+      "meanDirectDamageChange": 137.59375,
+      "meanHealingChange": 0.019531,
+      "meanMpSpentChange": 13.074219
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge14",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge14",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge14",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 30,
+      "scoreRateChange": 0.058594,
+      "approximate95Interval": [
+        0.038059,
+        0.079128
+      ],
+      "meanTurnsChange": 0.552734,
+      "meanDirectDamageChange": 181.037109,
+      "meanHealingChange": 3.125,
+      "meanMpSpentChange": 12.269531
+    },
+    {
+      "from": "charge14",
+      "to": "charge14-hp220",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 16,
+      "scoreRateChange": 0.013672,
+      "approximate95Interval": [
+        -0.004349,
+        0.031693
+      ],
+      "meanTurnsChange": 0.146484,
+      "meanDirectDamageChange": 9.621094,
+      "meanHealingChange": -1.708984,
+      "meanMpSpentChange": 1.105469
+    },
+    {
+      "from": "charge14",
+      "to": "charge14-hp220",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 10,
+      "scoreRateChange": 0.007813,
+      "approximate95Interval": [
+        -0.002839,
+        0.018464
+      ],
+      "meanTurnsChange": 0.089844,
+      "meanDirectDamageChange": 8.441406,
+      "meanHealingChange": 1.384766,
+      "meanMpSpentChange": 2.359375
+    },
+    {
+      "from": "charge14",
+      "to": "charge14-hp220",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 5,
+      "scoreRateChange": 0.001953,
+      "approximate95Interval": [
+        -0.004748,
+        0.008655
+      ],
+      "meanTurnsChange": 0.244141,
+      "meanDirectDamageChange": 14.625,
+      "meanHealingChange": -1.923828,
+      "meanMpSpentChange": 4.59375
+    },
+    {
+      "from": "charge14",
+      "to": "charge14-hp220",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge14",
+      "to": "charge14-hp220",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 16,
+      "scoreRateChange": 0.003906,
+      "approximate95Interval": [
+        -0.01159,
+        0.019403
+      ],
+      "meanTurnsChange": 0.09375,
+      "meanDirectDamageChange": 49.117188,
+      "meanHealingChange": -1.123047,
+      "meanMpSpentChange": 5.402344
+    },
+    {
+      "from": "charge14-hp220",
+      "to": "companion-power",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 154,
+      "scoreRateChange": 0.149414,
+      "approximate95Interval": [
+        0.092336,
+        0.206492
+      ],
+      "meanTurnsChange": -0.033203,
+      "meanDirectDamageChange": 40.824219,
+      "meanHealingChange": 3.222656,
+      "meanMpSpentChange": -0.296875
+    },
+    {
+      "from": "charge14-hp220",
+      "to": "companion-power",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 8,
+      "scoreRateChange": 0.015625,
+      "approximate95Interval": [
+        0.003326,
+        0.027924
+      ],
+      "meanTurnsChange": 0.091797,
+      "meanDirectDamageChange": 15.416016,
+      "meanHealingChange": 1.005859,
+      "meanMpSpentChange": 1.332031
+    },
+    {
+      "from": "charge14-hp220",
+      "to": "companion-power",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge14-hp220",
+      "to": "companion-power",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0.189453,
+      "meanDirectDamageChange": 83.75,
+      "meanHealingChange": 11.3125,
+      "meanMpSpentChange": 3.335938
+    },
+    {
+      "from": "charge14-hp220",
+      "to": "companion-power",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 77,
+      "scoreRateChange": 0.072266,
+      "approximate95Interval": [
+        0.029977,
+        0.114554
+      ],
+      "meanTurnsChange": 0.080078,
+      "meanDirectDamageChange": 32.314453,
+      "meanHealingChange": 4.052734,
+      "meanMpSpentChange": -1.558594
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 149,
+      "scoreRateChange": 0.248047,
+      "approximate95Interval": [
+        0.198016,
+        0.298078
+      ],
+      "meanTurnsChange": -0.306641,
+      "meanDirectDamageChange": 27.556641,
+      "meanHealingChange": 0.341797,
+      "meanMpSpentChange": -2.570312
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 45,
+      "scoreRateChange": 0.072266,
+      "approximate95Interval": [
+        0.05235,
+        0.092181
+      ],
+      "meanTurnsChange": -0.009766,
+      "meanDirectDamageChange": 40.996094,
+      "meanHealingChange": 0.46875,
+      "meanMpSpentChange": -0.839844
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 122,
+      "scoreRateChange": 0.195313,
+      "approximate95Interval": [
+        0.14149,
+        0.249135
+      ],
+      "meanTurnsChange": -0.246094,
+      "meanDirectDamageChange": 33.755859,
+      "meanHealingChange": -0.927734,
+      "meanMpSpentChange": -2.425781
+    },
+    {
+      "from": "companion-charge18",
+      "to": "companion-disabled",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 267,
+      "scoreRateChange": -0.508789,
+      "approximate95Interval": [
+        -0.551504,
+        -0.466074
+      ],
+      "meanTurnsChange": -0.160156,
+      "meanDirectDamageChange": -243.490234,
+      "meanHealingChange": -3.613281,
+      "meanMpSpentChange": -8.597656
+    },
+    {
+      "from": "companion-charge18",
+      "to": "companion-disabled",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 71,
+      "scoreRateChange": -0.130859,
+      "approximate95Interval": [
+        -0.153107,
+        -0.108612
+      ],
+      "meanTurnsChange": -0.53125,
+      "meanDirectDamageChange": -179.03125,
+      "meanHealingChange": 0.078125,
+      "meanMpSpentChange": -8.1875
+    },
+    {
+      "from": "companion-charge18",
+      "to": "companion-disabled",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-charge18",
+      "to": "companion-disabled",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-charge18",
+      "to": "companion-disabled",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 171,
+      "scoreRateChange": -0.326172,
+      "approximate95Interval": [
+        -0.381651,
+        -0.270693
+      ],
+      "meanTurnsChange": -0.117187,
+      "meanDirectDamageChange": -234.822266,
+      "meanHealingChange": -4.052734,
+      "meanMpSpentChange": -10.671875
+    },
+    {
+      "from": "identity",
+      "to": "companion-power",
+      "team": "puredragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 364,
+      "scoreRateChange": 0.317383,
+      "approximate95Interval": [
+        0.283404,
+        0.351361
+      ],
+      "meanTurnsChange": -0.071289,
+      "meanDirectDamageChange": 140.374023,
+      "meanHealingChange": -1.098633,
+      "meanMpSpentChange": -1.490234
+    },
+    {
+      "from": "identity",
+      "to": "companion-power",
+      "team": "threedragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 172,
+      "scoreRateChange": 0.126953,
+      "approximate95Interval": [
+        0.104435,
+        0.149471
+      ],
+      "meanTurnsChange": 0.265625,
+      "meanDirectDamageChange": 107.356445,
+      "meanHealingChange": 6.702148,
+      "meanMpSpentChange": 5.71875
+    },
+    {
+      "from": "identity",
+      "to": "companion-power",
+      "team": "twodragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 70,
+      "scoreRateChange": -0.021484,
+      "approximate95Interval": [
+        -0.036507,
+        -0.006462
+      ],
+      "meanTurnsChange": 0.086914,
+      "meanDirectDamageChange": 5.464844,
+      "meanHealingChange": -2.750977,
+      "meanMpSpentChange": 2.802734
+    },
+    {
+      "from": "identity",
+      "to": "companion-power",
+      "team": "core-replaced",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 5,
+      "scoreRateChange": -0.000977,
+      "approximate95Interval": [
+        -0.004365,
+        0.002412
+      ],
+      "meanTurnsChange": 0.171875,
+      "meanDirectDamageChange": 83.455078,
+      "meanHealingChange": 6.717773,
+      "meanMpSpentChange": 4.150391
+    },
+    {
+      "from": "identity",
+      "to": "companion-power",
+      "team": "core-nonleader",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 286,
+      "scoreRateChange": 0.236816,
+      "approximate95Interval": [
+        0.213147,
+        0.260486
+      ],
+      "meanTurnsChange": 0.061523,
+      "meanDirectDamageChange": 152.037109,
+      "meanHealingChange": 1.806641,
+      "meanMpSpentChange": 0.923828
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "puredragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 229,
+      "scoreRateChange": 0.200684,
+      "approximate95Interval": [
+        0.167613,
+        0.233754
+      ],
+      "meanTurnsChange": -0.40332,
+      "meanDirectDamageChange": 19.007813,
+      "meanHealingChange": -1.708984,
+      "meanMpSpentChange": -4.318359
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "threedragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 83,
+      "scoreRateChange": 0.071289,
+      "approximate95Interval": [
+        0.053837,
+        0.088741
+      ],
+      "meanTurnsChange": -0.083008,
+      "meanDirectDamageChange": 34.230469,
+      "meanHealingChange": 1.948242,
+      "meanMpSpentChange": -0.707031
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "twodragon",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "core-replaced",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "companion-power",
+      "to": "companion-charge18",
+      "team": "core-nonleader",
+      "pairs": 1024,
+      "seedClusters": 16,
+      "changedOutcomes": 227,
+      "scoreRateChange": 0.200195,
+      "approximate95Interval": [
+        0.172524,
+        0.227867
+      ],
+      "meanTurnsChange": -0.258789,
+      "meanDirectDamageChange": 29.589844,
+      "meanHealingChange": -0.634766,
+      "meanMpSpentChange": -3.128906
+    },
+    {
+      "from": "identity",
+      "to": "charge-disabled",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 267,
+      "scoreRateChange": -0.508789,
+      "approximate95Interval": [
+        -0.551504,
+        -0.466074
+      ],
+      "meanTurnsChange": -0.160156,
+      "meanDirectDamageChange": -243.490234,
+      "meanHealingChange": -3.613281,
+      "meanMpSpentChange": -8.597656
+    },
+    {
+      "from": "identity",
+      "to": "charge-disabled",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 71,
+      "scoreRateChange": -0.130859,
+      "approximate95Interval": [
+        -0.153107,
+        -0.108612
+      ],
+      "meanTurnsChange": -0.53125,
+      "meanDirectDamageChange": -179.03125,
+      "meanHealingChange": 0.078125,
+      "meanMpSpentChange": -8.1875
+    },
+    {
+      "from": "identity",
+      "to": "charge-disabled",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "identity",
+      "to": "charge-disabled",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "identity",
+      "to": "charge-disabled",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 171,
+      "scoreRateChange": -0.326172,
+      "approximate95Interval": [
+        -0.381651,
+        -0.270693
+      ],
+      "meanTurnsChange": -0.117187,
+      "meanDirectDamageChange": -234.822266,
+      "meanHealingChange": -4.052734,
+      "meanMpSpentChange": -10.671875
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge-zero",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge-zero",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge-zero",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge-zero",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-disabled",
+      "to": "charge-zero",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    {
+      "from": "charge-zero",
+      "to": "initial-values",
+      "team": "puredragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 4,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        -0.011001,
+        0.011001
+      ],
+      "meanTurnsChange": 0.033203,
+      "meanDirectDamageChange": 38.583984,
+      "meanHealingChange": 1.367188,
+      "meanMpSpentChange": 7.855469
+    },
+    {
+      "from": "charge-zero",
+      "to": "initial-values",
+      "team": "threedragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 4,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        -0.009527,
+        0.009527
+      ],
+      "meanTurnsChange": -0.099609,
+      "meanDirectDamageChange": 26.816406,
+      "meanHealingChange": -7.703125,
+      "meanMpSpentChange": 2.210938
+    },
+    {
+      "from": "charge-zero",
+      "to": "initial-values",
+      "team": "twodragon",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 5,
+      "scoreRateChange": -0.001953,
+      "approximate95Interval": [
+        -0.008655,
+        0.004748
+      ],
+      "meanTurnsChange": -0.244141,
+      "meanDirectDamageChange": -14.625,
+      "meanHealingChange": 1.923828,
+      "meanMpSpentChange": -4.59375
+    },
+    {
+      "from": "charge-zero",
+      "to": "initial-values",
+      "team": "core-replaced",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": -0.189453,
+      "meanDirectDamageChange": -83.75,
+      "meanHealingChange": -11.3125,
+      "meanMpSpentChange": -3.335937
+    },
+    {
+      "from": "charge-zero",
+      "to": "initial-values",
+      "team": "core-nonleader",
+      "pairs": 512,
+      "seedClusters": 32,
+      "changedOutcomes": 2,
+      "scoreRateChange": -0.003906,
+      "approximate95Interval": [
+        -0.011562,
+        0.00375
+      ],
+      "meanTurnsChange": -0.060547,
+      "meanDirectDamageChange": 23.84375,
+      "meanHealingChange": 2.294922,
+      "meanMpSpentChange": 8.5
+    }
+  ],
+  "verification": {
+    "path": "lab-results/dragon-final-verification.json",
+    "sha256": "1ba13547b41953bb74e9490cb1c204fc72449b7e00a5cd7e3954680106c1e18b",
+    "restorationComparedMatches": 3392,
+    "restorationDifferences": 0,
+    "zeroDisabledComparedMatches": 3392,
+    "zeroDisabledOutcomeDifferences": 0,
+    "meaning": "Restoration equality excludes traceHash: explicit overrides and source differ, so this is identical outcome/metric evidence, not an old-source replay."
+  },
+  "timingSensitivity": {
+    "path": "lab-results/dragon-initial-timing-probe.json",
+    "sha256": "6985dd7f4559d9c81dbbbdf96d0cf7a99730dad87f528e08604fb3ac1132bf0f",
+    "note": "Non-shipping optimistic queued-charge sensitivity. Same policy on both sides, separate from equal-policy production-autoOrders lab. Predicts paid allied attacks before the anchor; ignores enemy interruption, mitigation in scoring and future target changes. Resolution still uses production guard/ward/RNG. Not a human win-rate model.",
+    "source": {
+      "src/engine.ts": "4e5eda5ef96ff883c94b0ed10d599bd93ef77bde0f1280573a37d4230ce54dce",
+      "src/families.ts": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+      "scripts/balance-lab/core.mjs": "a6e293bc31bd25dc9b3525983018b100ae33dda370115a6bcb4cf74b56bf69f0",
+      "scripts/balance-lab/probe-dragon-timing.mjs": "eb77fc2e32a88645a48de8e3835c16ac5f23e9deaeefcdfccd42b90d5a820f78",
+      "configs/balance-lab/dragon-charge14.json": "53f7b59e8f33676b697755d3045df9b0d78efdb7172fb99adbcafd138e01073c",
+      "configs/balance-lab/dragon-initial-values.json": "c3a4a71634518eeee4fef4e0d5cfab79449ef83b756f47f58df865521f3ba047"
+    },
+    "seeds": [
+      2674696771,
+      1034165236,
+      3688600997,
+      2048069462,
+      407537927,
+      3061973688,
+      1421442153,
+      4075877914,
+      2435346379,
+      794814844,
+      3449250605,
+      1808719070,
+      168187535,
+      2822623296,
+      1182091761,
+      3836527522,
+      2195995987,
+      555464452,
+      3209900213,
+      1569368678,
+      4223804439,
+      2583272904,
+      942741369,
+      3597177130,
+      1956645595,
+      316114060,
+      2970549821,
+      1330018286,
+      3984454047,
+      2343922512,
+      703390977,
+      3357826738
+    ],
+    "results": [
+      {
+        "name": "initial7",
+        "predict": false,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 7
+          },
+          "monsters": {
+            "15": {
+              "hp": 190,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 270,
+            "casts": 52
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 64
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 64
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 2,
+            "draws": 0,
+            "score": 2,
+            "games": 64,
+            "turns": 378,
+            "casts": 64
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 354,
+            "casts": 56
+          },
+          {
+            "opponent": "strip",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 290,
+            "casts": 64
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 58
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 304,
+            "casts": 50
+          }
+        ]
+      },
+      {
+        "name": "initial7",
+        "predict": true,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 7
+          },
+          "monsters": {
+            "15": {
+              "hp": 190,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 258,
+            "casts": 120
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 128
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 128
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 374,
+            "casts": 128
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 346,
+            "casts": 118
+          },
+          {
+            "opponent": "strip",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 272,
+            "casts": 128
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 122
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 288,
+            "casts": 117
+          }
+        ]
+      },
+      {
+        "name": "point14",
+        "predict": false,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 14
+          },
+          "monsters": {
+            "15": {
+              "hp": 190,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 2,
+            "draws": 0,
+            "score": 2,
+            "games": 64,
+            "turns": 272,
+            "casts": 52
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 205,
+            "casts": 64
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 64
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 28,
+            "draws": 0,
+            "score": 28,
+            "games": 64,
+            "turns": 447,
+            "casts": 64
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 8,
+            "draws": 0,
+            "score": 8,
+            "games": 64,
+            "turns": 410,
+            "casts": 56
+          },
+          {
+            "opponent": "strip",
+            "wins": 14,
+            "draws": 0,
+            "score": 14,
+            "games": 64,
+            "turns": 300,
+            "casts": 64
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 58
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 318,
+            "casts": 50
+          }
+        ]
+      },
+      {
+        "name": "point14",
+        "predict": true,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 14
+          },
+          "monsters": {
+            "15": {
+              "hp": 190,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 19,
+            "draws": 0,
+            "score": 19,
+            "games": 64,
+            "turns": 281,
+            "casts": 118
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 217,
+            "casts": 128
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 210,
+            "casts": 128
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 26,
+            "draws": 0,
+            "score": 26,
+            "games": 64,
+            "turns": 442,
+            "casts": 128
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 446,
+            "casts": 118
+          },
+          {
+            "opponent": "strip",
+            "wins": 8,
+            "draws": 0,
+            "score": 8,
+            "games": 64,
+            "turns": 292,
+            "casts": 128
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 128
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 339,
+            "casts": 117
+          }
+        ]
+      },
+      {
+        "name": "point14-hp220",
+        "predict": false,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 14
+          },
+          "monsters": {
+            "15": {
+              "hp": 220,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 2,
+            "draws": 0,
+            "score": 2,
+            "games": 64,
+            "turns": 280,
+            "casts": 60
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 208,
+            "casts": 64
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 2,
+            "score": 1,
+            "games": 64,
+            "turns": 224,
+            "casts": 64
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 31,
+            "draws": 0,
+            "score": 31,
+            "games": 64,
+            "turns": 458,
+            "casts": 64
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 10,
+            "draws": 0,
+            "score": 10,
+            "games": 64,
+            "turns": 422,
+            "casts": 56
+          },
+          {
+            "opponent": "strip",
+            "wins": 14,
+            "draws": 0,
+            "score": 14,
+            "games": 64,
+            "turns": 290,
+            "casts": 64
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 49
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 1,
+            "draws": 0,
+            "score": 1,
+            "games": 64,
+            "turns": 337,
+            "casts": 50
+          }
+        ]
+      },
+      {
+        "name": "point14-hp220",
+        "predict": true,
+        "overrides": {
+          "dragonCharge": {
+            "perPoint": 14
+          },
+          "monsters": {
+            "15": {
+              "hp": 220,
+              "mp": 62,
+              "atk": 31,
+              "speed": 44,
+              "cost": 5,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "渇天の息",
+                  "power": 10,
+                  "priority": -2,
+                  "mpCost": 28,
+                  "kind": "hit",
+                  "all": true,
+                  "fixedDamage": true,
+                  "dragonChargeFinisher": true
+                },
+                {
+                  "name": "雨裂きの牙",
+                  "power": 52,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "蜷局の備え",
+                  "power": 0,
+                  "priority": 1,
+                  "mpCost": 0,
+                  "kind": "guard"
+                }
+              ]
+            },
+            "16": {
+              "hp": 150,
+              "mp": 40,
+              "atk": 38,
+              "speed": 62,
+              "cost": 2,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "石割りの牙",
+                  "power": 47,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "hit",
+                  "all": false
+                },
+                {
+                  "name": "鱗のかばい",
+                  "power": 0,
+                  "priority": 3,
+                  "mpCost": 10,
+                  "kind": "protect"
+                }
+              ]
+            },
+            "17": {
+              "hp": 156,
+              "mp": 50,
+              "atk": 40,
+              "speed": 71,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "双頭の連突",
+                  "power": 12,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "randomHits": 2
+                },
+                {
+                  "name": "封鱗裂き",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 14,
+                  "kind": "hit",
+                  "all": false,
+                  "breaksGuard": true
+                }
+              ]
+            },
+            "18": {
+              "hp": 165,
+              "mp": 56,
+              "atk": 33,
+              "speed": 67,
+              "cost": 3,
+              "family": "dragon",
+              "skills": [
+                {
+                  "name": "翠雲の息",
+                  "power": 57,
+                  "priority": 0,
+                  "mpCost": 12,
+                  "kind": "hit",
+                  "all": false,
+                  "fixedDamage": true
+                },
+                {
+                  "name": "雲の湧き水",
+                  "power": 50,
+                  "priority": 0,
+                  "mpCost": 16,
+                  "kind": "heal"
+                },
+                {
+                  "name": "雲払い",
+                  "power": 25,
+                  "priority": 0,
+                  "mpCost": 10,
+                  "kind": "cleanse"
+                }
+              ]
+            }
+          },
+          "leaders": {
+            "15": {
+              "name": "竜脈の結束",
+              "stat": "hp",
+              "percent": 10,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +10%"
+            },
+            "16": {
+              "name": "地這いの陣",
+              "stat": "hp",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 最大HP +8%"
+            },
+            "17": {
+              "name": "双頭の呼応",
+              "stat": "atk",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 攻撃力 +8%"
+            },
+            "18": {
+              "name": "翠雲の導き",
+              "stat": "speed",
+              "percent": 8,
+              "family": "dragon",
+              "description": "味方の竜系だけ 素早さ +8%"
+            }
+          }
+        },
+        "rows": [
+          {
+            "opponent": "fullbeast",
+            "wins": 21,
+            "draws": 0,
+            "score": 21,
+            "games": 64,
+            "turns": 292,
+            "casts": 122
+          },
+          {
+            "opponent": "fullnature",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 228,
+            "casts": 128
+          },
+          {
+            "opponent": "priority",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 230,
+            "casts": 128
+          },
+          {
+            "opponent": "poison-cleanse",
+            "wins": 26,
+            "draws": 0,
+            "score": 26,
+            "games": 64,
+            "turns": 452,
+            "casts": 128
+          },
+          {
+            "opponent": "guard-heal",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 456,
+            "casts": 118
+          },
+          {
+            "opponent": "strip",
+            "wins": 10,
+            "draws": 0,
+            "score": 10,
+            "games": 64,
+            "turns": 306,
+            "casts": 128
+          },
+          {
+            "opponent": "area",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 192,
+            "casts": 128
+          },
+          {
+            "opponent": "mp-pressure",
+            "wins": 0,
+            "draws": 0,
+            "score": 0,
+            "games": 64,
+            "turns": 356,
+            "casts": 119
+          }
+        ]
+      }
+    ]
+  },
+  "reportFormat": "split-json-lossless"
+}

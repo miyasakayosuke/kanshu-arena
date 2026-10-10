@@ -39,12 +39,13 @@ describe('Fenrir family UI and battle loop', () => {
     expect(document.querySelector<HTMLImageElement>('.teamUnit img')?.src).toBe(FENRIR_PORTRAIT_URL);
     await click(label('編成'));
     expect(document.querySelector('.familyRecipients')?.textContent).toBe('対象 3/5体：フェンリル・妖狐・バステト');
-    await click(button('詳しく見る'));
+    await click(label('1枠・フェンリルを入れ替える'));
+    await click(label('現在のフェンリルの詳細'));
     const profile = document.querySelector('.profileModal')!;
     expect(profile.querySelector<HTMLImageElement>('img')?.src).toBe(FENRIR_ART_URL);
     expect(profile.textContent).toContain('対象指定なし');
     expect(profile.textContent).toContain('守り中の初撃は半減');
-    expect(profile.textContent).toContain('防御力・賢さは現在の戦闘では未導入');
+    expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
     expect(profile.textContent).toContain('MP60で連牙は4回まで');
     await click(label('詳細を閉じる'));
     expect(JSON.parse(localStorage.getItem('kanshu-workshop-v1')!).team).toEqual(team);
@@ -60,7 +61,7 @@ describe('Fenrir family UI and battle loop', () => {
     for (const name of ['妖狐','バステト','セルキー','アヌビス','フェンリル','ラタトスク']) expect(text).toContain(name);
     for (const name of ['ガルーダ','ナーガ','烏天狗','ドリュアス']) expect(text).not.toContain(name);
     await click(label('絞り込みをリセット'));
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(engine.monsters.length);
   });
 
   it('commits a random barrage without target selection and spends MP only at its cast cue', async () => {

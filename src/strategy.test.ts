@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { cost, leaderFor, MAX_TURNS, monsters, start } from './engine';
 import {
-  initialTeam, isValidTeam, loadTeamSlots, monsterLore, monsterRole, opponentTeams,
+  fixedDamageHint, initialTeam, isValidTeam, recommendedTeams, loadTeamSlots, monsterLore, monsterRole, opponentTeams,
   resultSummary, rules, saveTeamSlots, skillLore, type RuleId, type TeamSlot,
 } from './strategy';
 
@@ -21,7 +21,7 @@ describe('team rules and opponents', () => {
 
   it.each<RuleId>(['standard', 'light'])('provides distinct legal %s opponents', rule => {
     const teams = opponentTeams(rule);
-    expect(teams).toHaveLength(rule === 'standard' ? 6 : 5);
+    expect(teams).toHaveLength(rule === 'standard' ? 7 : 5);
     expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(teams.length);
     for (const team of teams) {
       expect(isValidTeam(team, rules[rule].budget)).toBe(true);
@@ -33,7 +33,7 @@ describe('team rules and opponents', () => {
   });
 
   it('preserves standard opponents and protects them from preview mutations', () => {
-    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10]];
+    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18]];
     expect(opponentTeams('standard')).toEqual(expected);
     const teams = opponentTeams('standard');
     teams[0][0] = 11;
@@ -46,7 +46,7 @@ describe('team rules and opponents', () => {
     const light = opponentTeams('light');
     expect(standard.slice(0, 4)).toEqual([[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]]);
     expect(light.slice(0, 4)).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10]]);
-    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10]]);
+    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18]]);
     expect(light.slice(4)).toEqual([[14, 3, 6, 9, 10]]);
     const beast = standard[4];
     const nature = standard[5];
@@ -57,6 +57,17 @@ describe('team rules and opponents', () => {
     expect(isValidTeam(beast, rules.standard.budget)).toBe(true);
     expect(isValidTeam(beast, rules.light.budget)).toBe(false);
     expect(isValidTeam(nature, rules.light.budget)).toBe(true);
+  });
+
+  it('appends the pure dragon team only to standard and gives legal reference examples', () => {
+    const dragon = [15, 5, 16, 17, 18];
+    expect(opponentTeams('standard').at(-1)).toEqual(dragon);
+    expect(opponentTeams('light')).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10], [14, 3, 6, 9, 10]]);
+    expect(cost(dragon)).toBe(17);
+    expect(isValidTeam(dragon, 17)).toBe(true);
+    expect(isValidTeam(dragon, 15)).toBe(false);
+    for (const example of recommendedTeams) expect(isValidTeam([...example.team])).toBe(true);
+    expect(cost([...recommendedTeams[3].team])).toBe(15);
   });
 
   it('validates exact size, unique roster IDs, integer IDs, and the selected budget', () => {
@@ -88,6 +99,17 @@ describe('local team slots', () => {
     expect(storage.getItem).toHaveBeenCalledWith(key);
     expect(loadTeamSlots(readStorage([light]))).toEqual([light, null, null]);
     expect(loadTeamSlots(readStorage([null, standard, null, light]))).toEqual([null, standard, null]);
+  });
+
+  it('loads old IDs without migration and round-trips all new dragon IDs', () => {
+    const old = { team: [5, 1, 4, 8, 6], rule: 'standard' } as const;
+    const dragon = { team: [15, 5, 16, 17, 18], rule: 'standard' } as const;
+    const saved = [old, dragon, null];
+    let serialized = JSON.stringify(saved);
+    const storage = { getItem: () => serialized, setItem: (_key: string, value: string) => { serialized = value; } };
+    expect(loadTeamSlots(storage)).toEqual(saved);
+    expect(saveTeamSlots(storage, saved)).toBe(true);
+    expect(loadTeamSlots(storage)).toEqual(saved);
   });
 
   it('rejects unknown rules, incomplete teams, and saved teams over their own rule budget', () => {
@@ -279,5 +301,17 @@ describe('result summaries', () => {
     state.enemies[0].hp = 1;
     expect(resultSummary(state).allyHpPercent).toBe(0.7);
     expect(resultSummary(state).enemyHpPercent).toBe(0.4);
+  });
+});
+
+describe('fixed-basis skill copy', () => {
+  it('uses engine values and distinguishes legacy breaths', () => {
+    const state = start([15, 16, 18, 2, 6], [1]);
+    state.allies[0].dragonCharge = 3;
+    const finisher = monsters[15].skills.find(skill => skill.dragonChargeFinisher)!;
+    expect(fixedDamageHint(finisher)).toContain('10＋竜気×18');
+    expect(fixedDamageHint(finisher, state.allies[0])).toContain('固定基礎64（現在の竜気3）');
+    expect(fixedDamageHint(monsters[18].skills[0]!)).toBe('1体あたり固定基礎68');
+    expect(fixedDamageHint(monsters[5].skills[1]!)).toBe('');
   });
 });

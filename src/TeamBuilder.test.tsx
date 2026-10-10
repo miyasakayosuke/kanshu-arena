@@ -241,7 +241,7 @@ describe('slot-first team workshop', () => {
     expect(slotButton(0).getAttribute('aria-pressed')).toBe('true');
     expect(updates).toEqual([]);
     await click(byLabel('絞り込みをリセット'));
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(monsters.length);
   });
 
   it('filters by replacement eligibility rather than requiring an empty team slot', async () => {
@@ -249,7 +249,7 @@ describe('slot-first team workshop', () => {
     await click(slotButton(0));
     await disclose('.filterDisclosure');
     await chooseSelect('コストで絞り込み', 'fit');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(9);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(12);
     expect([...document.querySelectorAll<HTMLButtonElement>('.candidateSelect')].every(button => !button.disabled)).toBe(true);
     await click(candidateButton(7));
     await click(confirmButton());
@@ -261,7 +261,7 @@ describe('slot-first team workshop', () => {
     await mount();
     await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
     expect(document.querySelector('#candidate-heading')!.textContent).toBe('モンスター図鑑');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(monsters.length);
     expect(document.querySelector('.candidateSelect')).toBeNull();
     await click(byLabel('アヌビスの詳細'));
     await click(byText('詳細を閉じる'));
@@ -303,13 +303,13 @@ describe('family team building', () => {
     await click(byLabel('絞り込みをリセット'));
     await chooseSelect('系統で絞り込み', 'unassigned');
     expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent))
-      .toEqual(['トロル', 'バンシー', 'ケツァルコアトル', 'イフリート']);
+      .toEqual(['トロル', 'バンシー', 'イフリート']);
     expect(updates).toEqual([]);
   });
 
   it('separates nature leader, nature opening, and beast opening recipients on a mixed team', async () => {
     await mount({ startingTeam: [14, 12, 13, 6, 10] });
-    expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体系統未設定 0体');
+    expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体竜系 0体系統未設定 0体');
     const leader = document.querySelector('.partyCard .leaderBanner')!;
     expect(leader.querySelector('.familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
     expect(leader.querySelector('.familyExcluded')!.textContent).toBe('対象外 2体：フェンリル・ラタトスク');
@@ -372,5 +372,68 @@ describe('family team building', () => {
     await click(byLabel('編成2に保存'));
     expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[1]).toEqual({ team: [14, 13, 2, 6, 10], rule: 'light' });
     expect(document.querySelector('.partyCard .leaderBanner .familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
+  });
+});
+
+describe('dragon workshop conditions', () => {
+  it.each([
+    { team: [15, 5, 16, 17, 18], active: true, count: 5 },
+    { team: [15, 16, 18, 2, 6], active: true, count: 3 },
+    { team: [15, 16, 13, 2, 6], active: false, count: 2 },
+    { team: [5, 16, 18, 2, 6], active: false, count: 3 },
+  ])('explains starting eligibility for $team', async ({ team, active, count }) => {
+    await mount({ startingTeam: team });
+    const plan = document.querySelector('.partyCard .dragonChargePlan')!;
+    expect(plan.getAttribute('data-active')).toBe(String(active));
+    expect(plan.textContent).toContain(`竜系 ${count}体 / 必要3体`);
+    expect(plan.textContent).toContain('連撃も1');
+    expect(plan.textContent).toContain('本人が倒れると消失');
+    expect(plan.textContent).toContain(team.includes(15) ? 'ヴリトラ：編成中' : 'ヴリトラ：未編成');
+    if (active) expect(plan.textContent).toContain('味方が倒れても開始時の条件は変わりません');
+  });
+
+  it('previews losing the third dragon or core without applying either change before confirmation', async () => {
+    await mount({ startingTeam: [15, 16, 18, 2, 6] });
+    await click(slotButton(2)); await click(candidateButton(13));
+    expect(document.querySelector('.candidateImpact .dragonChargePlan')?.getAttribute('data-active')).toBe('false');
+    expect(document.querySelector('.candidateImpact .dragonChargePlan')?.textContent).toContain('竜系 2体');
+    expect(document.querySelector('.partyCard .dragonChargePlan')?.getAttribute('data-active')).toBe('true');
+    await click(byText('キャンセル'));
+    expect(latestTeam).toEqual([15, 16, 18, 2, 6]);
+    await click(slotButton(0)); await click(candidateButton(5));
+    expect(document.querySelector('.candidateImpact .dragonChargePlan')?.textContent).toContain('ヴリトラ：未編成');
+    expect(document.querySelector('.candidateImpact .dragonChargePlan')?.getAttribute('data-active')).toBe('false');
+    await click(confirmButton());
+    expect(latestTeam).toEqual([5, 16, 18, 2, 6]);
+    expect(document.querySelector('.partyCard .dragonChargePlan')?.getAttribute('data-active')).toBe('false');
+  });
+
+  it('filters implemented families, includes legacy Quetzalcoatl among five dragons, and omits future families', async () => {
+    await mount(); await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
+    await disclose('.filterDisclosure');
+    expect([...document.querySelectorAll<HTMLSelectElement>('[aria-label="系統で絞り込み"] option')].map(option => option.value)).toEqual(['all', 'beast', 'nature', 'dragon', 'unassigned']);
+    await chooseSelect('系統で絞り込み', 'dragon');
+    expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent)).toEqual(['ケツァルコアトル', 'ヴリトラ', 'リンドヴルム', 'アンフィスバエナ', 'ジラント']);
+    await chooseSelect('コストで絞り込み', '5');
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);
+    expect(document.querySelector('.candidateCard')?.textContent).toContain('ヴリトラ');
+    await click(byLabel('ヴリトラの詳細')); expect(onFocus).toHaveBeenLastCalledWith(15);
+    expect(updates).toEqual([]);
+  });
+
+  it('keeps the pure cost17 team visible but blocks lightweight saves, and documents a cost15 mixed example', async () => {
+    await mount({ startingTeam: [15, 5, 16, 17, 18] });
+    expect(byLabel('編成1に保存').disabled).toBe(false);
+    await disclose('.recommendedTeams');
+    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(4);
+    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜系の蓄積COST 17');
+    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜3体の混成COST 15');
+    expect(updates).toEqual([]);
+    await disclose('.ruleDisclosure');
+    await click([...document.querySelectorAll<HTMLButtonElement>('.ruleTabs button')].find(button => button.textContent?.includes('軽量戦'))!);
+    expect(byLabel('編成1に保存').disabled).toBe(true);
+    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
+    expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
+    expect(latestTeam).toEqual([15, 5, 16, 17, 18]);
   });
 });

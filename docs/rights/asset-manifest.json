@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-10",
-  "release": "0.11.0 pre-alpha candidate",
-  "auditBaseCommit": "d11cdcf8286a486423ec5fdd1420f0e32212a370",
+  "release": "0.12.0 pre-alpha candidate",
+  "auditBaseCommit": "ff52abef77a2a719fd39e0b21a7a83ba7e534f28",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -50,6 +50,35 @@
       }
     },
     {
+      "id": "dragon-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/dragonArt.ts"
+      ],
+      "provenance": "v0.12制作のヴリトラ/リンドヴルム/アンフィスバエナ/ジラント。SVGパス・図形・グラデーションを本作向けに直接構成。顔と全身は同じ独自パスを共有。",
+      "reviewLimit": "制作担当の申告、ソース監査、実際のラスタ描画の比較による。神話名やAI支援だけで第三者表現との類似性・権利帰属を確定しない。専門家による法的評価は未実施。",
+      "creator": "本作開発でのAI支援コード制作。",
+      "createdFor": "v0.12",
+      "sha256": {
+        "src/dragonArt.ts": "3f67ba964b985f85e7aaa13f5542b3d61af15bc0cdd4911764bbee348276fe6f"
+      },
+      "references": [
+        "docs/dragon-art-provenance.md",
+        "docs/all-families-reference.md",
+        "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_32",
+        "https://www.klagenfurt.at/stadtinfo/geschichte-persoenlichkeiten/sagen",
+        "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0137%3Abook%3D8&force=y",
+        "https://kzn.ru/o-kazani/simvolika-kazani/"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; reference imagery/translated prose not imported",
+      "visualReview": "制作担当と統合担当が280×210全身、140px顔、116–127px戦場、48px顔の実描画を確認。巻く藍色蛇、二脚の緑竜、両端の双頭蛇、雫を持つ翼竜の輪郭を区別。ジラントはカザン紋章の冠/黒赤金の組合せを使わない。",
+      "creationStatement": {
+        "recordedAt": "2026-10-10",
+        "statement": "制作担当は、本作向けにSVGの形状と新しい動作コードを独立に記述し、外部イラスト・フォント・音声・モデル・アニメーション試料・抽出素材・他者コードのコピーを使っていないと直接申告。図像生成モデルは用いず、コードを直接記述して実描画で確認した。",
+        "evidenceLimit": "docs/dragon-art-provenance.mdの直接申告とソース/ラスタ監査。法的な権利帰属や独立した全類似性検査ではない。"
+      }
+    },
+    {
       "id": "system-emoji",
       "kind": "device-rendered-unicode",
       "files": [
@@ -57,7 +86,7 @@
         "src/MonsterArt.tsx",
         "src/BattleStage.tsx"
       ],
-      "provenance": "キャラのicon値を文字としてDOM/Canvasで描画。既存12体は主に絵文字、3体はSVGで表示しicon値はフォールバックにも残る。",
+      "provenance": "キャラのicon値を文字としてDOM/Canvasで描画。既存12体は主に絵文字、7体はSVGで表示しicon値はフォールバックにも残る。新規4体も端末のUnicode字形だけをフォールバックに利用。",
       "reviewLimit": "字形の作者を本作開発者としない。端末依存の描画であり、フォントや絵文字画像の再配布許諾を得たことを意味しない。",
       "rosterIcons": [
         "🦊",
@@ -74,7 +103,11 @@
         "🐺",
         "🐺",
         "🐿️",
-        "🐢"
+        "🐢",
+        "🐉",
+        "🦎",
+        "🐍",
+        "🐲"
       ],
       "distribution": "Unicode characters; no emoji image/font file bundled"
     },
@@ -99,9 +132,12 @@
         "src/style.css",
         "src/teamBuilder.css",
         "src/strategy.ts",
-        "src/engine.ts"
+        "src/engine.ts",
+        "src/MonsterDetails.tsx",
+        "src/families.ts",
+        "src/MonsterArt.tsx"
       ],
-      "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md等に記録。",
+      "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
       "distribution": "Original project code/text; owner has not selected a project-wide reuse license"
     }

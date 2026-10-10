@@ -2,8 +2,10 @@
 import { createHash } from 'node:crypto';
 import {
   advanceWithEvents, autoOrders, battleSkill, leaderAppliesTo, leaderFor,
+  DRAGON_CHARGE_CAP, DRAGON_CORE_ID, dragonChargeEligible,
   MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, NATURE_WARD_PERCENT, OPENING_RALLY_TURNS, OPENING_WARD_TURNS, RALLY_PERCENT, start,
 } from '../../src/engine.ts';
+import { FAMILY_IDS } from '../../src/families.ts';
 
 export const SCHEMA_VERSION = 1;
 export const POLICY_ID = 'production-autoOrders-both-sides-v1';
@@ -38,20 +40,22 @@ const array = (value, min, max, path) => {
 const monsterExists = (id, path) => {
   if (!Number.isInteger(id) || !monsters.some(monster => monster.id === id)) fail(`${path}: unknown monster ${id}`);
 };
-const FAMILIES = ['beast', 'nature'];
+const FAMILIES = FAMILY_IDS;
 const validateSkill = (skill, path) => {
-  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit', 'familyBonusHit'], path);
+  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit', 'familyBonusHit', 'fixedDamage', 'dragonChargeFinisher'], path);
   text(skill.name, `${path}.name`);
   if (['通常攻撃', 'ぼうぎょ'].includes(skill.name)) fail(`${path}.name: reserved universal-command name`);
   number(skill.power, 0, 10000, `${path}.power`);
   integer(skill.priority, -10, 10, `${path}.priority`);
   integer(skill.mpCost, 0, 10000, `${path}.mpCost`);
   if (!['hit', 'heal', 'guard', 'poison', 'protect', 'cleanse'].includes(skill.kind)) fail(`${path}.kind: unsupported effect`);
-  for (const field of ['all', 'breaksGuard', 'breaksGuardAfterHit']) if (own(skill, field)) boolean(skill[field], `${path}.${field}`);
+  for (const field of ['all', 'breaksGuard', 'breaksGuardAfterHit', 'fixedDamage', 'dragonChargeFinisher']) if (own(skill, field)) boolean(skill[field], `${path}.${field}`);
   if (own(skill, 'randomHits')) integer(skill.randomHits, 1, 20, `${path}.randomHits`);
   if (skill.randomHits && (skill.kind !== 'hit' || skill.all)) fail(`${path}: randomHits requires single/random hit kind, not all`);
   if (own(skill, 'familyBonusHit') && (!FAMILIES.includes(skill.familyBonusHit) || skill.kind !== 'hit' || !skill.randomHits)) fail(`${path}.familyBonusHit: requires a known family and random hit kind`);
   if ((skill.breaksGuard || skill.breaksGuardAfterHit) && skill.kind !== 'hit') fail(`${path}: guard breaking requires hit kind`);
+  if (skill.fixedDamage && skill.kind !== 'hit') fail(`${path}.fixedDamage: requires hit kind`);
+  if (skill.dragonChargeFinisher && (skill.kind !== 'hit' || !skill.fixedDamage || !skill.all || skill.randomHits || skill.mpCost <= 0 || skill.priority >= 0)) fail(`${path}.dragonChargeFinisher: requires paid, fixed-damage, all-target anchor hit`);
   if (skill.all && !['hit', 'poison'].includes(skill.kind)) fail(`${path}: ally-wide support is not implemented`);
 };
 const validateLeader = (trait, path) => {
@@ -67,7 +71,7 @@ const validateLeader = (trait, path) => {
   }
 };
 export function validateOverrides(overrides = {}) {
-  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard'], 'overrides');
+  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard', 'dragonCharge'], 'overrides');
   if (own(overrides, 'monsters')) {
     object(overrides.monsters, 'overrides.monsters');
     for (const [id, patch] of Object.entries(overrides.monsters)) {
@@ -76,7 +80,7 @@ export function validateOverrides(overrides = {}) {
       const path = `overrides.monsters.${id}`;
       keys(patch, ['hp', 'mp', 'atk', 'speed', 'cost', 'family', 'skills'], path);
       for (const field of ['hp', 'mp', 'atk', 'speed', 'cost']) if (own(patch, field)) integer(patch[field], ['hp', 'cost'].includes(field) ? 1 : 0, field === 'cost' ? 17 : 10000, `${path}.${field}`);
-      if (own(patch, 'family') && patch.family !== null && !FAMILIES.includes(patch.family)) fail(`${path}.family: expected beast, nature or null`);
+      if (own(patch, 'family') && patch.family !== null && !FAMILIES.includes(patch.family)) fail(`${path}.family: expected a shared FAMILY_IDS value or null`);
       if (own(patch, 'skills')) { array(patch.skills, 0, MAX_SPECIAL_SKILLS, `${path}.skills`); patch.skills.forEach((skill, i) => validateSkill(skill, `${path}.skills[${i}]`)); }
     }
   }
@@ -93,6 +97,11 @@ export function validateOverrides(overrides = {}) {
     if (own(support, 'enabled')) boolean(support.enabled, `overrides.${field}.enabled`);
     if (own(support, 'percent')) number(support.percent, 0, 100, `overrides.${field}.percent`);
     if (own(support, 'turns')) integer(support.turns, 0, MAX_TURNS, `overrides.${field}.turns`);
+  }
+  if (own(overrides, 'dragonCharge')) {
+    keys(overrides.dragonCharge, ['enabled', 'perPoint'], 'overrides.dragonCharge');
+    if (own(overrides.dragonCharge, 'enabled')) boolean(overrides.dragonCharge.enabled, 'overrides.dragonCharge.enabled');
+    if (own(overrides.dragonCharge, 'perPoint')) integer(overrides.dragonCharge.perPoint, 0, 100, 'overrides.dragonCharge.perPoint');
   }
   return overrides;
 }
@@ -194,6 +203,8 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
     const hasRally = rally.enabled !== false && ids.includes(12);
     const ward = overrides.openingWard ?? {};
     const hasWard = ward.enabled !== false && ids.includes(14);
+    const charge = overrides.dragonCharge ?? {};
+    const hasCharge = charge.enabled !== false && dragonChargeEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
     state[side] = ids.map((id, i) => {
       const source = roster.find(monster => monster.id === id);
       const monster = clone(source);
@@ -204,7 +215,8 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
       if (monster.hp < 1) fail(`candidate leader produces invalid HP for monster ${id}`);
       return { key: (side === 'allies' ? 'a' : 'e') + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0,
         ...(hasRally && source.family === 'beast' ? { rally: rally.turns ?? OPENING_RALLY_TURNS, ...(rally.percent !== undefined ? { rallyPercent: rally.percent } : {}) } : {}),
-        ...(hasWard && source.family === 'nature' ? { ward: ward.turns ?? OPENING_WARD_TURNS, ...(ward.percent !== undefined ? { wardPercent: ward.percent } : {}) } : {}) };
+        ...(hasWard && source.family === 'nature' ? { ward: ward.turns ?? OPENING_WARD_TURNS, ...(ward.percent !== undefined ? { wardPercent: ward.percent } : {}) } : {}),
+        ...(hasCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0, ...(charge.perPoint !== undefined ? { dragonChargePerPoint: charge.perPoint } : {}) } : {}) };
     });
   }
   // Trial logs must not claim the stock leader or family-support values. Authoritative event traces follow.
@@ -219,16 +231,25 @@ const unitSnapshot = state => [...state.allies, ...state.enemies].map(unit => ({
   key: unit.key, hp: unit.hp, mp: unit.mp, poison: unit.poison, guard: unit.guard,
   rally: unit.rally ?? 0, rallyPercent: unit.rallyPercent ?? RALLY_PERCENT,
   ward: unit.ward ?? 0, wardPercent: unit.wardPercent ?? NATURE_WARD_PERCENT,
+  ...(unit.dragonCharge !== undefined ? { dragonCharge: unit.dragonCharge } : {}),
+  ...(unit.dragonChargePerPoint !== undefined ? { dragonChargePerPoint: unit.dragonChargePerPoint } : {}),
 }));
 const supportResourcesValid = unit => ['rally', 'ward'].every(field =>
   Number.isInteger(unit[field] ?? 0) && (unit[field] ?? 0) >= 0 && (unit[field] ?? 0) <= MAX_TURNS
 ) && [[unit.rallyPercent ?? RALLY_PERCENT], [unit.wardPercent ?? NATURE_WARD_PERCENT]].every(([percent]) =>
   Number.isFinite(percent) && percent >= 0 && percent <= 100
 );
+const dragonResourcesValid = (unit, initial) => {
+  const enabled = initial.dragonCharge !== undefined;
+  return (unit.dragonCharge !== undefined) === enabled
+    && (!enabled || (unit.monster.id === DRAGON_CORE_ID && Number.isInteger(unit.dragonCharge) && unit.dragonCharge >= 0 && unit.dragonCharge <= DRAGON_CHARGE_CAP && (unit.hp > 0 || unit.dragonCharge === 0)))
+    && unit.dragonChargePerPoint === initial.dragonChargePerPoint;
+};
 const freshMetric = unit => ({
   key: unit.key, monsterId: unit.monster.id, casts: 0, specialCasts: 0, paidCasts: 0, directDamage: 0, healing: 0,
   guardApplications: 0, effectiveCleanses: 0, poisonApplications: 0, dispelApplications: 0, mpSpent: 0,
   aliveAtTurnStartTurns: 0, noAffordableSpecialTurns: 0, zeroMpTurns: 0, deathTurn: null, diedBeforeAnyCast: false,
+  dragonChargeGenerated: 0, dragonChargeSpent: 0, dragonFinishers: 0, chargedDragonFinishers: 0, dragonFinisherDamage: 0, dragonChargeDispelled: 0, dragonChargeLostOnDefeat: 0, peakDragonCharge: unit.dragonCharge ?? 0,
   finalHp: unit.hp, finalMp: unit.mp,
 });
 
@@ -237,6 +258,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
   let state = createBattle(teamA, teamB, seed, overrides);
   const trace = { initialState: clone(state), turns: [] };
   const metrics = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, freshMetric(unit)]));
+  const initialUnits = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
   let firstCastSide = null;
   const poisonDamageTaken = { allies: 0, enemies: 0 };
   try {
@@ -257,22 +279,32 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       if (JSON.stringify(state) !== JSON.stringify(before)) fail('resolver mutated input state');
       if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
-        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit)) fail(`resource invariant failed for ${unit.key}`);
+        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key))) fail(`resource invariant failed for ${unit.key}`);
       }
       const current = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
+      const lastCast = new Map();
       for (const event of resolved.events) {
         const actor = metrics.get(event.actor);
         const target = metrics.get(event.target);
         if (event.kind === 'cast' && actor) {
           if (firstCastSide === null) firstCastSide = event.actor.startsWith('a') ? 'allies' : 'enemies';
           actor.casts++;
+          lastCast.set(event.actor, event);
+          if (event.dragonChargeSpent !== undefined) {
+            integer(event.dragonChargeSpent, 0, DRAGON_CHARGE_CAP, 'cast.dragonChargeSpent');
+            actor.dragonFinishers++; actor.dragonChargeSpent += event.dragonChargeSpent;
+            if (event.dragonChargeSpent > 0) actor.chargedDragonFinishers++;
+          }
           const order = record.orders.find(order => order.key === event.actor);
           const unit = current.get(event.actor);
           if (order.skill >= 0) actor.specialCasts++;
           if (battleSkill(unit.monster, order.skill).mpCost > 0) actor.paidCasts++;
         }
         if (event.kind === 'damage') {
-          if (actor) actor.directDamage += event.amount ?? 0;
+          if (actor) {
+            actor.directDamage += event.amount ?? 0;
+            if (lastCast.get(event.actor)?.dragonChargeSpent !== undefined) actor.dragonFinisherDamage += event.amount ?? 0;
+          }
           else if (event.effect === 'poison') poisonDamageTaken[event.target.startsWith('a') ? 'allies' : 'enemies'] += event.amount ?? 0;
         }
         if (event.kind === 'heal' && actor) actor.healing += event.amount ?? 0;
@@ -280,13 +312,24 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
         if (event.kind === 'guard' && actor) actor.guardApplications++;
         if (event.kind === 'cleanse' && actor && current.get(event.target)?.poison > 0) actor.effectiveCleanses++;
         if (event.kind === 'poison' && actor) actor.poisonApplications++;
-        if (event.kind === 'break' && actor) actor.dispelApplications++;
+        if (event.kind === 'break' && actor) {
+          actor.dispelApplications++;
+          if (event.dragonCharge === 0) actor.dragonChargeDispelled += current.get(event.target)?.dragonCharge ?? 0;
+        }
+        if (event.kind === 'charge' && event.effect === 'dragon-charge-gain' && actor) actor.dragonChargeGenerated++;
+        if (event.dragonCharge !== undefined) {
+          integer(event.dragonCharge, 0, DRAGON_CHARGE_CAP, 'event.dragonCharge');
+          if (!initialUnits.get(event.target)?.dragonCharge && initialUnits.get(event.target)?.dragonCharge !== 0) fail(`event enables disabled dragon charge for ${event.target}`);
+          if (target) target.peakDragonCharge = Math.max(target.peakDragonCharge, event.dragonCharge);
+          if (event.kind === 'defeat' && target) target.dragonChargeLostOnDefeat += current.get(event.target)?.dragonCharge ?? 0;
+        }
         if (event.kind === 'defeat' && target) { target.deathTurn = state.turn; target.diedBeforeAnyCast = target.casts === 0; }
         if (event.target && current.has(event.target)) {
           const affected = current.get(event.target);
-          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward']) if (event[field] !== undefined) affected[field] = event[field];
+          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward', 'dragonCharge']) if (event[field] !== undefined) affected[field] = event[field];
         }
       }
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).dragonCharge !== unit.dragonCharge) fail(`charge event/state mismatch for ${unit.key}`);
       state = resolved.state;
       delete trace.activeAttempt;
     }
@@ -299,6 +342,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
     const total = field => group.reduce((sum, unit) => sum + unit[field], 0);
     const damage = total('directDamage');
     sides[side] = {
+      dragonChargeGenerated: total('dragonChargeGenerated'), dragonChargeSpent: total('dragonChargeSpent'), dragonFinishers: total('dragonFinishers'), chargedDragonFinishers: total('chargedDragonFinishers'), dragonFinisherDamage: total('dragonFinisherDamage'), dragonChargeDispelled: total('dragonChargeDispelled'), dragonChargeLostOnDefeat: total('dragonChargeLostOnDefeat'), peakDragonCharge: Math.max(...group.map(unit => unit.peakDragonCharge)),
       directDamage: damage, healing: total('healing'), mpSpent: total('mpSpent'), paidCasts: total('paidCasts'), specialCasts: total('specialCasts'), casts: total('casts'),
       guardApplications: total('guardApplications'), effectiveCleanses: total('effectiveCleanses'), poisonApplications: total('poisonApplications'), dispelApplications: total('dispelApplications'),
       noAffordableSpecialTurns: total('noAffordableSpecialTurns'), zeroMpTurns: total('zeroMpTurns'), aliveAtTurnStartTurns: total('aliveAtTurnStartTurns'),
@@ -329,7 +373,15 @@ export const METRIC_DEFINITIONS = {
   meanGuardApplications: 'Guard/protect application events by team A per game. Reapplying guard counts; passive opening ward grants are excluded. This is not prevented-damage attribution.',
   meanEffectiveCleanses: 'Team A cleanse events whose target was poisoned immediately before the event, per game.',
   meanPoisonApplications: 'Poison application events by team A per game, including duration refreshes. Future poison damage is not attributed.',
-  meanDispelApplications: 'Guard/rally/ward break events caused by team A per game. One event removing multiple statuses counts once. This does not measure damage prevented or the value of each removed status.',
+  meanDispelApplications: 'Guard/rally/ward/dragon-charge break events caused by team A per game. One event removing multiple statuses counts once. This does not measure damage prevented or the value of each removed status.',
+  meanDragonChargeGenerated: 'Actual +1 charge-gain events from team A paid dragon hit casts per game; capped attempts do not emit gains. This resource is separate from MP.',
+  meanDragonChargeSpent: 'Sum of charge captured by team A finisher cast events per game, before reset. MP cost is recorded separately.',
+  meanDragonFinishers: 'Team A executed charge-finisher casts per game, including zero-charge casts.',
+  meanChargedDragonFinishers: 'Team A executed finisher casts that spent positive charge per game.',
+  meanDragonFinisherDamage: 'HP-clipped direct damage from team A charge-finisher casts per game.',
+  meanDragonChargeDispelled: 'Opponent charge removed by team A break events per game, counted immediately before reset.',
+  meanDragonChargeLostOnDefeat: 'Team A charge remaining immediately before a defeat reset per game.',
+  meanPeakDragonCharge: 'Mean highest charge observed on team A in a match, including event-time peaks.',
   meanPoisonDamageTaken: 'HP-clipped poison tick damage taken by team A per game, without caster attribution.',
   meanRemainingHpFraction: 'Mean of five team-A remaining HP/max-HP ratios at the end of a match, averaged across matches.',
   meanNoAffordableSpecialTurns: 'Sum of living unit-turns where a unit has positive-cost learned skills but cannot afford any. Does not imply the useful/desired skill was unavailable; basics remain legal.',
@@ -340,6 +392,8 @@ export const METRIC_DEFINITIONS = {
 };
 export const LIMITATIONS = [
   'These are current-engine CPU-policy measurements, not human enjoyment, DQMSL reproduction, PvP balance, or optimal-play proof.',
+  'autoOrders scores dragon finishers using current charge only. It does not predict charge from allies already ordered to act later in the same turn; low finisher usage may be a policy limitation.',
+  'Large-roster sampling uses exact legal suffix counts and a seeded coprime rank walk, not a proven uniform random sample. Fixed exclusions, correlated ranks, shuffled leader order and curated opponent rotation limit coverage.',
   'Identical autoOrders policy is used on both sides. Shipping CPU variation remains unchanged outside the lab.',
   'Paired seeds use common initial random streams, not identical per-action draws after skill/target choices diverge.',
   'Mirrors diagnose physical side effects; team-A normalized mirror score after swaps is 0.5 by construction, so read physicalAllyScoreRate.',
@@ -370,33 +424,99 @@ export function makeDefaultConfig() {
     candidate: { id: 'identity', label: '変更なし・再現性の対照', overrides: {} }, complaints: [], sampling: { count: 4, seed: 20261009 },
   };
 }
+/** Small rosters retain the historical enumerate/shuffle stream exactly. Larger rosters
+ * count legal suffixes with dynamic programming, then walk distinct legal ranks.
+ * The latter is bounded by roster length and cost budget, never C(n,5) storage.
+ * A seeded coprime stride is deterministic coverage, not a claim of uniform sampling. */
+export function sampleLegalMemberSets({ roster, candidateRoster = roster, excluded = [], count, costLimit, seed }) {
+  integer(count, 0, 100, 'sampling.count'); integer(seed, 0, 0xffffffff, 'sampling.seed');
+  integer(costLimit, 1, 17, 'sampling.costLimit');
+  const ids = roster.map(monster => monster.id);
+  if (new Set(ids).size !== ids.length) fail('sampling: duplicate roster ID');
+  const candidate = new Map(candidateRoster.map(monster => [monster.id, monster]));
+  if (candidate.size !== candidateRoster.length || candidate.size !== ids.length || ids.some(id => !candidate.has(id))) fail('sampling: candidate roster IDs differ');
+  for (const monster of [...roster, ...candidateRoster]) { integer(monster.id, 0, Number.MAX_SAFE_INTEGER, 'sampling.monster.id'); integer(monster.cost, 1, 17, 'sampling.monster.cost'); }
+  const keyFor = members => [...members].sort((a, b) => a - b).join(',');
+  const used = new Set();
+  for (const members of excluded) {
+    array(members, 5, 5, 'sampling.excluded');
+    if (new Set(members).size !== 5 || members.some(id => !candidate.has(id))) fail('sampling.excluded: duplicate or unknown monster');
+    used.add(keyFor(members));
+  }
+  const legal = members => members.reduce((sum, id) => sum + roster.find(monster => monster.id === id).cost, 0) <= costLimit
+    && members.reduce((sum, id) => sum + candidate.get(id).cost, 0) <= costLimit;
+  let randomSeed = seed;
+  const draw = limit => { randomSeed = rngStep(randomSeed); return Math.floor(randomSeed / 0x100000000 * limit); };
+  let members;
+  let legalSets;
+  let algorithm;
+  // 19 current monsters require only 11,628 five-member combinations.
+  if (ids.length <= 20) {
+    algorithm = 'historical-enumerate-shuffle-v1';
+    const combinations = [];
+    const visit = (prefix, from) => {
+      if (prefix.length === 5) { if (!used.has(keyFor(prefix)) && legal(prefix)) combinations.push(prefix); return; }
+      for (let i = from; i <= ids.length - (5 - prefix.length); i++) visit([...prefix, ids[i]], i + 1);
+    };
+    visit([], 0); legalSets = combinations.length;
+    if (count > legalSets) fail(`sampling: only ${legalSets} unused legal member sets exist, requested ${count}`);
+    for (let i = combinations.length - 1; i > 0; i--) { const j = draw(i + 1); [combinations[i], combinations[j]] = [combinations[j], combinations[i]]; }
+    members = combinations.slice(0, count);
+  } else {
+    algorithm = 'legal-suffix-dp-coprime-rank-walk-v1';
+    const costs = roster.map(monster => [monster.cost, candidate.get(monster.id).cost]);
+    const memo = new Map();
+    const ways = (from, slots, a, b) => {
+      if (!slots) return 1;
+      if (ids.length - from < slots || a < slots || b < slots) return 0;
+      const key = `${from}/${slots}/${a}/${b}`;
+      if (memo.has(key)) return memo.get(key);
+      const [ca, cb] = costs[from];
+      const n = ways(from + 1, slots, a, b) + (ca <= a && cb <= b ? ways(from + 1, slots - 1, a - ca, b - cb) : 0);
+      if (!Number.isSafeInteger(n)) fail('sampling: legal pool exceeds exact safe integer counting');
+      memo.set(key, n); return n;
+    };
+    const total = ways(0, 5, costLimit, costLimit);
+    legalSets = total - [...used].filter(key => legal(key.split(',').map(Number))).length;
+    if (count > legalSets) fail(`sampling: only ${legalSets} unused legal member sets exist, requested ${count}`);
+    const unrank = rank => {
+      const result = []; let from = 0; let a = costLimit; let b = costLimit;
+      while (result.length < 5) {
+        const [ca, cb] = costs[from];
+        const take = ca <= a && cb <= b ? ways(from + 1, 4 - result.length, a - ca, b - cb) : 0;
+        if (rank < take) { result.push(ids[from]); a -= ca; b -= cb; } else rank -= take;
+        from++;
+      }
+      return result;
+    };
+    members = [];
+    if (count) {
+      const gcd = (a, b) => { while (b) [a, b] = [b, a % b]; return a; };
+      let rank = draw(total); let stride = 1 + draw(Math.max(1, total - 1));
+      // Searching 1024 candidates is bounded; stride 1 is always a safe fallback.
+      for (let attempts = 0; gcd(stride, total) !== 1; attempts++) stride = attempts >= 1023 ? 1 : stride % total + 1;
+      // Distinct ranks mean at most count + excluded.size visits are necessary.
+      for (let visits = 0; members.length < count && visits < count + used.size; visits++) {
+        const set = unrank(rank); if (!used.has(keyFor(set))) members.push(set);
+        rank = (rank + stride) % total;
+      }
+      if (members.length !== count) fail('sampling: rank traversal failed to deliver the requested legal sets');
+    }
+  }
+  const shuffledMembers = members.map(set => {
+    const shuffled = [...set];
+    for (let j = shuffled.length - 1; j > 0; j--) { const k = draw(j + 1); [shuffled[j], shuffled[k]] = [shuffled[k], shuffled[j]]; }
+    return shuffled;
+  });
+  return { members: shuffledMembers, algorithm, unusedLegalMemberSets: legalSets };
+}
 function sampleTeams(config) {
   const count = config.sampling?.count ?? 0;
   if (!count) return [];
-  const candidate = patchedRoster(config.candidate.overrides);
-  const combinations = [];
-  const ids = monsters.map(monster => monster.id);
-  const used = new Set(config.teams.map(team => [...team.ids].sort((a, b) => a - b).join(',')));
-  const visit = (prefix, from) => {
-    if (prefix.length === 5) {
-      if (used.has(prefix.join(','))) return;
-      const cost = roster => prefix.reduce((sum, id) => sum + roster.find(monster => monster.id === id).cost, 0);
-      if (cost(monsters) <= config.costLimit && cost(candidate) <= config.costLimit) combinations.push(prefix);
-      return;
-    }
-    for (let i = from; i <= ids.length - (5 - prefix.length); i++) visit([...prefix, ids[i]], i + 1);
-  };
-  visit([], 0);
-  if (count > combinations.length) fail(`sampling: only ${combinations.length} unused legal member sets exist, requested ${count}`);
-  let seed = config.sampling.seed;
-  const draw = limit => { seed = rngStep(seed); return Math.floor(seed / 0x100000000 * limit); };
-  for (let i = combinations.length - 1; i > 0; i--) { const j = draw(i + 1); [combinations[i], combinations[j]] = [combinations[j], combinations[i]]; }
-  return combinations.slice(0, count).map((members, i) => {
-    const shuffled = [...members];
-    for (let j = shuffled.length - 1; j > 0; j--) { const k = draw(j + 1); [shuffled[j], shuffled[k]] = [shuffled[k], shuffled[j]]; }
-    return { id: `sample-${i + 1}`, role: 'Seeded legal member-set sample; leader and slot order shuffled', ids: shuffled };
-  });
+  const sample = sampleLegalMemberSets({ roster: monsters, candidateRoster: patchedRoster(config.candidate.overrides), excluded: config.teams.map(team => team.ids), count, costLimit: config.costLimit, seed: config.sampling.seed });
+  return sample.members.map((ids, i) => ({ id: `sample-${i + 1}`, role: `Seeded legal member-set sample (${sample.algorithm}); leader and slot order shuffled`, ids }));
 }
+
 export function buildSchedule(input) {
   const config = validateConfig(input);
   const sampled = sampleTeams(config);
@@ -436,7 +556,7 @@ export function summarize(matches, keyUnitId) {
     firstCastSideScoreRate: meanOf(matches.filter(match => match.result.firstCastSide).map(match => match.result.firstCastSide === 'allies' ? physicalScore(match.result) : 1 - physicalScore(match.result))),
     zeroCastDeathRate: round(metrics.reduce((sum, metric) => sum + metric.zeroCastDeaths, 0) / (5 * matches.length)),
   };
-  for (const [output, field] of Object.entries({ meanDirectDamage: 'directDamage', meanHealing: 'healing', meanMpSpent: 'mpSpent', meanPaidCasts: 'paidCasts', meanSpecialCasts: 'specialCasts', meanCasts: 'casts', meanGuardApplications: 'guardApplications', meanEffectiveCleanses: 'effectiveCleanses', meanPoisonApplications: 'poisonApplications', meanDispelApplications: 'dispelApplications', meanNoAffordableSpecialTurns: 'noAffordableSpecialTurns', meanZeroMpTurns: 'zeroMpTurns', meanDamageConcentration: 'damageConcentration', meanPoisonDamageTaken: 'poisonDamageTaken', meanRemainingHpFraction: 'remainingHpFraction' })) result[output] = meanOf(metrics.map(metric => metric[field]));
+  for (const [output, field] of Object.entries({ meanDirectDamage: 'directDamage', meanHealing: 'healing', meanMpSpent: 'mpSpent', meanPaidCasts: 'paidCasts', meanSpecialCasts: 'specialCasts', meanCasts: 'casts', meanGuardApplications: 'guardApplications', meanEffectiveCleanses: 'effectiveCleanses', meanPoisonApplications: 'poisonApplications', meanDispelApplications: 'dispelApplications', meanNoAffordableSpecialTurns: 'noAffordableSpecialTurns', meanZeroMpTurns: 'zeroMpTurns', meanDamageConcentration: 'damageConcentration', meanPoisonDamageTaken: 'poisonDamageTaken', meanRemainingHpFraction: 'remainingHpFraction', meanDragonChargeGenerated: 'dragonChargeGenerated', meanDragonChargeSpent: 'dragonChargeSpent', meanDragonFinishers: 'dragonFinishers', meanChargedDragonFinishers: 'chargedDragonFinishers', meanDragonFinisherDamage: 'dragonFinisherDamage', meanDragonChargeDispelled: 'dragonChargeDispelled', meanDragonChargeLostOnDefeat: 'dragonChargeLostOnDefeat', meanPeakDragonCharge: 'peakDragonCharge' })) result[output] = meanOf(metrics.map(metric => metric[field]));
   if (keyUnitId !== undefined) {
     const rows = matches.map(match => ({ match, unit: match.result.units.find(unit => unit.monsterId === keyUnitId && unit.key.startsWith(focalSide(match) === 'allies' ? 'a' : 'e')) })).filter(row => row.unit);
     const surviving = rows.filter(row => row.unit.finalHp > 0);
@@ -485,7 +605,7 @@ export function runSuite(input, onProgress) {
   }
   if (JSON.stringify(monsters) !== rosterBefore) fail('lab mutated production roster');
   const summarizePair = (rows, keyUnitId) => ({ baseline: summarize(rows.filter(row => row.variant === 'baseline'), keyUnitId), candidate: summarize(rows.filter(row => row.variant === 'candidate'), keyUnitId), pairedDelta: pairedDelta(rows) });
-  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { policy: POLICY_ID, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: true, sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
+  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { sampling: { smallRosterThreshold: 20, algorithm: monsters.length <= 20 ? 'historical-enumerate-shuffle-v1' : 'legal-suffix-dp-coprime-rank-walk-v1', uniformityClaim: false }, policy: POLICY_ID, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: true, sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
     scheduleCounts: { teams: schedule.teams.length, curatedTeams: schedule.config.teams.length, sampledTeams: schedule.teams.length - schedule.config.teams.length, matchupScenarios: schedule.scenarios.filter(scenario => scenario.kind === 'matchup').length, mirrorScenarios: schedule.teams.length, seeds: schedule.config.seeds.length, variants: 2, orientations: 2, matches: matches.length },
     teams: schedule.teams,
     summary: summarizePair(matches.filter(match => match.kind === 'matchup')),

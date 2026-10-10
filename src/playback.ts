@@ -26,6 +26,7 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
       guard: event.guard ?? (event.kind === 'guard' ? true : event.kind === 'break' || event.kind === 'defeat' ? false : current.guard),
       ...(event.rally !== undefined ? { rally: event.rally } : current.rally !== undefined && event.kind === 'defeat' ? { rally: 0 } : {}),
       ...(event.ward !== undefined ? { ward: event.ward } : current.ward !== undefined && event.kind === 'defeat' ? { ward: 0 } : {}),
+      ...(event.dragonCharge !== undefined ? { dragonCharge: event.dragonCharge } : current.dragonCharge !== undefined && event.kind === 'defeat' ? { dragonCharge: 0 } : {}),
       poison: event.poison ?? (event.kind === 'poison' ? 3 : event.kind === 'cleanse' || event.kind === 'defeat' ? 0 : current.poison),
     };
   }, unit);
@@ -34,22 +35,25 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
 
 // Area hits land together. MP changes at cast start; expiry never masquerades as an attack.
 export function buildTimeline(events: BattleEvent[]): BattleTimeline {
-  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[] }[] = [];
+  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[] }[] = [];
   const before: BattleEvent[] = [];
   const after: BattleEvent[] = [];
   for (const event of events) {
     if (event.kind === 'phase') continue;
     if (event.kind === 'expire') {
       (event.phase === 'turn-start' ? before : after).push(event);
-    } else if (event.kind === 'cast') groups.push({ cast: event, impacts: [], updates: [] });
-    else if (event.kind === 'resource') {
+    } else if (event.kind === 'cast') groups.push({ cast: event, impacts: [], updates: [], endUpdates: [] });
+    else if (event.kind === 'charge' && event.effect === 'dragon-charge-gain') {
+      if (groups.at(-1)?.cast) groups.at(-1)!.endUpdates.push(event);
+      else before.push(event);
+    } else if (event.kind === 'resource' || event.kind === 'charge') {
       if (groups.at(-1)?.cast) groups.at(-1)!.updates.push(event);
       else before.push(event);
     } else if (event.effect === 'poison' && !event.actor) {
-      if (groups.at(-1)?.cast !== null) groups.push({ cast: null, impacts: [], updates: [] });
+      if (groups.at(-1)?.cast !== null) groups.push({ cast: null, impacts: [], updates: [], endUpdates: [] });
       groups.at(-1)!.impacts.push(event);
     } else {
-      if (!groups.length) groups.push({ cast: null, impacts: [], updates: [] });
+      if (!groups.length) groups.push({ cast: null, impacts: [], updates: [], endUpdates: [] });
       groups.at(-1)!.impacts.push(event);
     }
   }
@@ -76,9 +80,11 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
         const impacts = group.impacts.filter(event => (event.hitIndex ?? 0) === index);
         if (impacts.length) cues.push({ at: time + CAST_IMPACT_MS + index * MULTIHIT_INTERVAL_MS, cast, impacts });
       }
+      if (group.endUpdates.length) cues.push({ at: time + CAST_IMPACT_MS + (hits - 1) * MULTIHIT_INTERVAL_MS, cast: null, impacts: [], updates: group.endUpdates });
       time += barrageDuration(hits);
     } else {
       if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts });
+      if (group.endUpdates.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast: null, impacts: [], updates: group.endUpdates });
       time += cast ? ACTION_DURATION_MS : 950;
     }
   }
