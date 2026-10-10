@@ -1,0 +1,1428 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "family-wave-final-roster-probe",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913,
+    2435346378,
+    794814843,
+    3449250604,
+    1808719069,
+    168187534,
+    2822623295,
+    1182091760,
+    3836527521
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "nature",
+      "role": "COST15・旧全自然の毒3枠。候補では烏天狗が未設定となり自然4枠",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "nature-troll",
+      "role": "COST15・毒2枠。候補ではトロルが自然となり全5枠自然",
+      "ids": [
+        14,
+        3,
+        1,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "fenrir-priority-cleanse",
+      "role": "COST17・フェンリル＋妖狐/アヌビス先制＋バステト浄化",
+      "ids": [
+        12,
+        0,
+        11,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "fenrir-speed-cleanse",
+      "role": "COST17・フェンリル＋高速3枠＋バステト浄化",
+      "ids": [
+        12,
+        0,
+        11,
+        2,
+        6
+      ]
+    },
+    {
+      "id": "speed-focus",
+      "role": "COST15・妖狐先頭・先制4枠＋新獣",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        13
+      ]
+    },
+    {
+      "id": "triple-area",
+      "role": "COST16・全体直接攻撃4枠＋毒",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        9
+      ]
+    },
+    {
+      "id": "double-cleanse",
+      "role": "COST16・浄化2枠＋全体攻撃＋毒",
+      "ids": [
+        2,
+        7,
+        0,
+        6,
+        9
+      ]
+    },
+    {
+      "id": "nature-no-core",
+      "role": "COST15・玄武なし・自然3枠/毒3枠・回復と浄化",
+      "ids": [
+        3,
+        6,
+        9,
+        7,
+        4
+      ]
+    },
+    {
+      "id": "guard-heal",
+      "role": "COST14・HPリーダー・守護・回復・浄化2枠",
+      "ids": [
+        1,
+        2,
+        7,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "generated-1",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        10,
+        13,
+        12,
+        9,
+        4
+      ]
+    },
+    {
+      "id": "generated-2",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        8,
+        12,
+        2,
+        9,
+        5
+      ]
+    },
+    {
+      "id": "generated-3",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        1,
+        4,
+        10,
+        12,
+        5
+      ]
+    },
+    {
+      "id": "generated-4",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        14,
+        4,
+        12,
+        10,
+        1
+      ]
+    },
+    {
+      "id": "generated-5",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        6,
+        9,
+        14,
+        3,
+        8
+      ]
+    },
+    {
+      "id": "generated-6",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        7,
+        12,
+        2,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "generated-7",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        9,
+        7,
+        14,
+        10,
+        13
+      ]
+    },
+    {
+      "id": "generated-8",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        6,
+        12,
+        13,
+        4,
+        14
+      ]
+    },
+    {
+      "id": "generated-9",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        5,
+        10,
+        2,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "generated-10",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        11,
+        5,
+        13,
+        2,
+        9
+      ]
+    },
+    {
+      "id": "generated-11",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        13,
+        3,
+        12,
+        2,
+        0
+      ]
+    },
+    {
+      "id": "generated-12",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        7,
+        1,
+        0,
+        12,
+        6
+      ]
+    },
+    {
+      "id": "generated-13",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        2,
+        5,
+        13,
+        9,
+        0
+      ]
+    },
+    {
+      "id": "generated-14",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        8,
+        10,
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "generated-15",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        4,
+        11,
+        12,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "generated-16",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        5,
+        2,
+        6,
+        12,
+        8
+      ]
+    },
+    {
+      "id": "generated-17",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        11,
+        1,
+        3,
+        8,
+        6
+      ]
+    },
+    {
+      "id": "generated-18",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        10,
+        6,
+        1,
+        11,
+        5
+      ]
+    },
+    {
+      "id": "generated-19",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        9,
+        3,
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "generated-20",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        10,
+        13,
+        11,
+        7,
+        4
+      ]
+    },
+    {
+      "id": "generated-21",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        4,
+        0,
+        3,
+        6,
+        2
+      ]
+    },
+    {
+      "id": "generated-22",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        11,
+        5,
+        9,
+        0,
+        6
+      ]
+    },
+    {
+      "id": "generated-23",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        7,
+        14,
+        4,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "generated-24",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        8,
+        6,
+        3,
+        12,
+        11
+      ]
+    },
+    {
+      "id": "generated-25",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        1,
+        7,
+        9,
+        6,
+        3
+      ]
+    },
+    {
+      "id": "generated-26",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        7,
+        8,
+        4,
+        3,
+        9
+      ]
+    },
+    {
+      "id": "generated-27",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        10,
+        11,
+        8,
+        5,
+        7
+      ]
+    },
+    {
+      "id": "generated-28",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+      "ids": [
+        0,
+        4,
+        6,
+        13,
+        14
+      ]
+    },
+    {
+      "id": "generated-29",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        9,
+        13,
+        10,
+        11,
+        5
+      ]
+    },
+    {
+      "id": "generated-30",
+      "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+      "ids": [
+        4,
+        11,
+        13,
+        3,
+        9
+      ]
+    },
+    {
+      "id": "all-beast",
+      "role": "COST17・全5枠獣系・フェンリル＋ラタトスク条件連撃",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ]
+    },
+    {
+      "id": "mixed-beast",
+      "role": "COST15・既存の獣3自然2編成・フェンリル変更なし",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "role": "COST15・先制・高速度・毒",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "poison-cleanse",
+      "role": "COST15・毒・回復・浄化・開幕加護なし",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "guard-breakers",
+      "role": "COST14・着弾前解除2体＋回復・低コスト枠",
+      "ids": [
+        8,
+        11,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "beast-no-core",
+      "role": "COST17・全5枠獣系・フェンリルをセルキーへ置換＋アヌビス先頭。能力・リーダーも変わる対照",
+      "ids": [
+        11,
+        0,
+        2,
+        7,
+        13
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "nature-vs-fenrir-priority-cleanse",
+      "a": "nature",
+      "b": "fenrir-priority-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-fenrir-speed-cleanse",
+      "a": "nature",
+      "b": "fenrir-speed-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-speed-focus",
+      "a": "nature",
+      "b": "speed-focus",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-triple-area",
+      "a": "nature",
+      "b": "triple-area",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-double-cleanse",
+      "a": "nature",
+      "b": "double-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-nature-no-core",
+      "a": "nature",
+      "b": "nature-no-core",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-guard-heal",
+      "a": "nature",
+      "b": "guard-heal",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-1",
+      "a": "nature",
+      "b": "generated-1",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-2",
+      "a": "nature",
+      "b": "generated-2",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-3",
+      "a": "nature",
+      "b": "generated-3",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-4",
+      "a": "nature",
+      "b": "generated-4",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-5",
+      "a": "nature",
+      "b": "generated-5",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-6",
+      "a": "nature",
+      "b": "generated-6",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-7",
+      "a": "nature",
+      "b": "generated-7",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-8",
+      "a": "nature",
+      "b": "generated-8",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-9",
+      "a": "nature",
+      "b": "generated-9",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-10",
+      "a": "nature",
+      "b": "generated-10",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-11",
+      "a": "nature",
+      "b": "generated-11",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-12",
+      "a": "nature",
+      "b": "generated-12",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-13",
+      "a": "nature",
+      "b": "generated-13",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-14",
+      "a": "nature",
+      "b": "generated-14",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-15",
+      "a": "nature",
+      "b": "generated-15",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-16",
+      "a": "nature",
+      "b": "generated-16",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-17",
+      "a": "nature",
+      "b": "generated-17",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-18",
+      "a": "nature",
+      "b": "generated-18",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-19",
+      "a": "nature",
+      "b": "generated-19",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-20",
+      "a": "nature",
+      "b": "generated-20",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-21",
+      "a": "nature",
+      "b": "generated-21",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-22",
+      "a": "nature",
+      "b": "generated-22",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-23",
+      "a": "nature",
+      "b": "generated-23",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-24",
+      "a": "nature",
+      "b": "generated-24",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-25",
+      "a": "nature",
+      "b": "generated-25",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-26",
+      "a": "nature",
+      "b": "generated-26",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-27",
+      "a": "nature",
+      "b": "generated-27",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-28",
+      "a": "nature",
+      "b": "generated-28",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-29",
+      "a": "nature",
+      "b": "generated-29",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-generated-30",
+      "a": "nature",
+      "b": "generated-30",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-fenrir-priority-cleanse",
+      "a": "nature-troll",
+      "b": "fenrir-priority-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-fenrir-speed-cleanse",
+      "a": "nature-troll",
+      "b": "fenrir-speed-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-speed-focus",
+      "a": "nature-troll",
+      "b": "speed-focus",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-triple-area",
+      "a": "nature-troll",
+      "b": "triple-area",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-double-cleanse",
+      "a": "nature-troll",
+      "b": "double-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-nature-no-core",
+      "a": "nature-troll",
+      "b": "nature-no-core",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-guard-heal",
+      "a": "nature-troll",
+      "b": "guard-heal",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-1",
+      "a": "nature-troll",
+      "b": "generated-1",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-2",
+      "a": "nature-troll",
+      "b": "generated-2",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-3",
+      "a": "nature-troll",
+      "b": "generated-3",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-4",
+      "a": "nature-troll",
+      "b": "generated-4",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-5",
+      "a": "nature-troll",
+      "b": "generated-5",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-6",
+      "a": "nature-troll",
+      "b": "generated-6",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-7",
+      "a": "nature-troll",
+      "b": "generated-7",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-8",
+      "a": "nature-troll",
+      "b": "generated-8",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-9",
+      "a": "nature-troll",
+      "b": "generated-9",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-10",
+      "a": "nature-troll",
+      "b": "generated-10",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-11",
+      "a": "nature-troll",
+      "b": "generated-11",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-12",
+      "a": "nature-troll",
+      "b": "generated-12",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-13",
+      "a": "nature-troll",
+      "b": "generated-13",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-14",
+      "a": "nature-troll",
+      "b": "generated-14",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-15",
+      "a": "nature-troll",
+      "b": "generated-15",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-16",
+      "a": "nature-troll",
+      "b": "generated-16",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-17",
+      "a": "nature-troll",
+      "b": "generated-17",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-18",
+      "a": "nature-troll",
+      "b": "generated-18",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-19",
+      "a": "nature-troll",
+      "b": "generated-19",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-20",
+      "a": "nature-troll",
+      "b": "generated-20",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-21",
+      "a": "nature-troll",
+      "b": "generated-21",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-22",
+      "a": "nature-troll",
+      "b": "generated-22",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-23",
+      "a": "nature-troll",
+      "b": "generated-23",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-24",
+      "a": "nature-troll",
+      "b": "generated-24",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-25",
+      "a": "nature-troll",
+      "b": "generated-25",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-26",
+      "a": "nature-troll",
+      "b": "generated-26",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-27",
+      "a": "nature-troll",
+      "b": "generated-27",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-28",
+      "a": "nature-troll",
+      "b": "generated-28",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-29",
+      "a": "nature-troll",
+      "b": "generated-29",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-troll-vs-generated-30",
+      "a": "nature-troll",
+      "b": "generated-30",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "nature-vs-nature-troll",
+      "a": "nature",
+      "b": "nature-troll",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-mixed-beast",
+      "a": "all-beast",
+      "b": "mixed-beast",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-priority",
+      "a": "all-beast",
+      "b": "priority",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-poison-cleanse",
+      "a": "all-beast",
+      "b": "poison-cleanse",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-guard-breakers",
+      "a": "all-beast",
+      "b": "guard-breakers",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-beast-no-core",
+      "a": "all-beast",
+      "b": "beast-no-core",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    },
+    {
+      "id": "all-beast-vs-nature-troll",
+      "a": "all-beast",
+      "b": "nature-troll",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "nature-coverage-hypothesis"
+      ]
+    }
+  ],
+  "candidate": {
+    "id": "final-roster-probe",
+    "label": "履歴用プローブ（基準版は実行時の現行値）：採用前の複合候補：自然9→1・玄武ATK30/全体32・ラタトスク連撃10",
+    "overrides": {
+      "monsters": {
+        "1": {
+          "family": "nature"
+        },
+        "9": {
+          "family": null
+        },
+        "13": {
+          "skills": [
+            {
+              "name": "木の実の連弾",
+              "power": 10,
+              "priority": 0,
+              "mpCost": 10,
+              "kind": "hit",
+              "all": false,
+              "randomHits": 3,
+              "familyBonusHit": "beast"
+            },
+            {
+              "name": "枝渡りの一突き",
+              "power": 36,
+              "priority": 2,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false
+            }
+          ]
+        },
+        "14": {
+          "atk": 30,
+          "skills": [
+            {
+              "name": "海山の轟き",
+              "power": 32,
+              "priority": -2,
+              "mpCost": 22,
+              "kind": "hit",
+              "all": true
+            },
+            {
+              "name": "悠久の雫",
+              "power": 70,
+              "priority": 0,
+              "mpCost": 20,
+              "kind": "heal"
+            },
+            {
+              "name": "甲羅の結界",
+              "power": 0,
+              "priority": 3,
+              "mpCost": 10,
+              "kind": "protect"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sampling": {
+    "count": 0,
+    "seed": 20261010
+  },
+  "complaints": [
+    {
+      "id": "nature-coverage-hypothesis",
+      "status": "hypothesis",
+      "source": null,
+      "complaint": "最初の固定対戦群で自然系の勝敗が飽和したため対戦編成の範囲を広げる。人間からの苦情ではない。",
+      "hypothesis": "明示した複合候補を同じ広い対戦群で確認する。自然受け手を烏天狗からトロルへ変更、玄武ATK30/全体威力32、ラタトスク連撃威力10。両軍に適用。個別効果は先行アブレーションと区別し、この複合差を単一原因へ帰属しない。",
+      "scenarioIds": [
+        "nature-vs-fenrir-priority-cleanse",
+        "nature-vs-fenrir-speed-cleanse",
+        "nature-vs-speed-focus",
+        "nature-vs-triple-area",
+        "nature-vs-double-cleanse",
+        "nature-vs-nature-no-core",
+        "nature-vs-guard-heal",
+        "nature-vs-generated-1",
+        "nature-vs-generated-2",
+        "nature-vs-generated-3",
+        "nature-vs-generated-4",
+        "nature-vs-generated-5",
+        "nature-vs-generated-6",
+        "nature-vs-generated-7",
+        "nature-vs-generated-8",
+        "nature-vs-generated-9",
+        "nature-vs-generated-10",
+        "nature-vs-generated-11",
+        "nature-vs-generated-12",
+        "nature-vs-generated-13",
+        "nature-vs-generated-14",
+        "nature-vs-generated-15",
+        "nature-vs-generated-16",
+        "nature-vs-generated-17",
+        "nature-vs-generated-18",
+        "nature-vs-generated-19",
+        "nature-vs-generated-20",
+        "nature-vs-generated-21",
+        "nature-vs-generated-22",
+        "nature-vs-generated-23",
+        "nature-vs-generated-24",
+        "nature-vs-generated-25",
+        "nature-vs-generated-26",
+        "nature-vs-generated-27",
+        "nature-vs-generated-28",
+        "nature-vs-generated-29",
+        "nature-vs-generated-30",
+        "nature-troll-vs-fenrir-priority-cleanse",
+        "nature-troll-vs-fenrir-speed-cleanse",
+        "nature-troll-vs-speed-focus",
+        "nature-troll-vs-triple-area",
+        "nature-troll-vs-double-cleanse",
+        "nature-troll-vs-nature-no-core",
+        "nature-troll-vs-guard-heal",
+        "nature-troll-vs-generated-1",
+        "nature-troll-vs-generated-2",
+        "nature-troll-vs-generated-3",
+        "nature-troll-vs-generated-4",
+        "nature-troll-vs-generated-5",
+        "nature-troll-vs-generated-6",
+        "nature-troll-vs-generated-7",
+        "nature-troll-vs-generated-8",
+        "nature-troll-vs-generated-9",
+        "nature-troll-vs-generated-10",
+        "nature-troll-vs-generated-11",
+        "nature-troll-vs-generated-12",
+        "nature-troll-vs-generated-13",
+        "nature-troll-vs-generated-14",
+        "nature-troll-vs-generated-15",
+        "nature-troll-vs-generated-16",
+        "nature-troll-vs-generated-17",
+        "nature-troll-vs-generated-18",
+        "nature-troll-vs-generated-19",
+        "nature-troll-vs-generated-20",
+        "nature-troll-vs-generated-21",
+        "nature-troll-vs-generated-22",
+        "nature-troll-vs-generated-23",
+        "nature-troll-vs-generated-24",
+        "nature-troll-vs-generated-25",
+        "nature-troll-vs-generated-26",
+        "nature-troll-vs-generated-27",
+        "nature-troll-vs-generated-28",
+        "nature-troll-vs-generated-29",
+        "nature-troll-vs-generated-30",
+        "nature-vs-nature-troll",
+        "all-beast-vs-mixed-beast",
+        "all-beast-vs-priority",
+        "all-beast-vs-poison-cleanse",
+        "all-beast-vs-guard-breakers",
+        "all-beast-vs-beast-no-core",
+        "all-beast-vs-nature-troll"
+      ],
+      "metrics": [
+        {
+          "name": "scoreRate",
+          "direction": "observe",
+          "rationale": "対面と相手の玄武有無を区別する。"
+        },
+        {
+          "name": "meanTurns",
+          "direction": "observe",
+          "rationale": "短期決着を確認する。"
+        }
+      ],
+      "limitations": [
+        "16シード・各向き・同一自動方策。最善手や人間の公平感は測らない。",
+        "COST17以内の合法編成を抽出し、COSTは揃えていない。",
+        "烏天狗→トロルは毒の数だけでなく、速度・耐久・技・系統受け手も変わる。",
+        "生成チームに玄武が含まれる場合は両軍に核がある対面として区別する。"
+      ]
+    }
+  ]
+}

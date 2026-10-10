@@ -1,13 +1,15 @@
 {
   "name": "kanshu-arena",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc && vite build",
+    "build": "node scripts/check-rights.mjs && tsc && vite build && node scripts/check-rights.mjs --dist",
     "test": "vitest run",
     "lab": "node scripts/balance-lab/cli.mjs",
-    "lab:smoke": "node scripts/balance-lab/cli.mjs run --config configs/balance-lab/smoke.json --out lab-results/smoke --overwrite"
+    "lab:smoke": "node scripts/balance-lab/cli.mjs run --config configs/balance-lab/smoke.json --out lab-results/smoke --overwrite",
+    "rights:check": "node scripts/check-rights.mjs",
+    "rights:test": "node --test scripts/check-rights-selftest.mjs"
   },
   "dependencies": {
     "react": "^19.1.1",

@@ -29,6 +29,15 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMocks(); vi.useRealTimers(); });
 describe('complete playtest flow', () => {
+  it('links the home credits in a new tab without losing the current game', async () => {
+    await mount();
+    const link = document.querySelector<HTMLAnchorElement>('.homeCredits a')!;
+    expect(link.textContent).toContain('クレジット・権利情報');
+    expect(link.getAttribute('href')).toBe(`${import.meta.env.BASE_URL}credits.html`);
+    expect(link.target).toBe('_blank');
+    expect(link.rel).toBe('noopener noreferrer');
+    expect(window.location.hash).toBe('#home');
+  });
   it('rejects a corrupted save and allows a valid party to enter battle', async () => {
     localStorage.setItem('kanshu-team', '[99,99,99,99,99]');
     await mount();
@@ -107,7 +116,7 @@ describe('complete playtest flow', () => {
   it('filters candidates and atomically replaces a member without an incomplete party', async () => {
     await mount(); await openTeam(); await click(label('1枠・妖狐を入れ替える'));
     await click(button('アンカー'));
-    expect(document.querySelectorAll('.rosterItem')).toHaveLength(3);
+    expect(document.querySelectorAll('.rosterItem')).toHaveLength(4);
     await click(label('トロルを候補に選ぶ'));
     expect(JSON.parse(localStorage.getItem('kanshu-team')!)).toEqual([0,2,3,4,6]);
     await click(button('トロルに入れ替える'));

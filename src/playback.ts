@@ -13,7 +13,7 @@ export function effectType(name: string, kind?: string) {
   if (kind === 'heal' || kind === 'cleanse') return 'water';
   if (kind === 'guard' || kind === 'protect') return 'guard';
   if (kind === 'poison') return 'shadow';
-  return /炎|火|灼熱|狐火/.test(name) ? 'fire' : /毒|影|冥府|悲鳴/.test(name) ? 'shadow' : /水|雫/.test(name) ? 'water' : /風|翼|疾風|旋風|嵐/.test(name) ? 'wind' : 'slash';
+  return /炎|火|灼熱|狐火/.test(name) ? 'fire' : /毒|影|冥府|悲鳴/.test(name) ? 'shadow' : /水|雫|海山/.test(name) ? 'water' : /風|翼|疾風|旋風|嵐/.test(name) ? 'wind' : 'slash';
 }
 
 /** One reducer serves natural playback, cast-time MP, and quiet expiry cues. */
@@ -25,6 +25,7 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
       mp: event.mp ?? current.mp,
       guard: event.guard ?? (event.kind === 'guard' ? true : event.kind === 'break' || event.kind === 'defeat' ? false : current.guard),
       ...(event.rally !== undefined ? { rally: event.rally } : current.rally !== undefined && event.kind === 'defeat' ? { rally: 0 } : {}),
+      ...(event.ward !== undefined ? { ward: event.ward } : current.ward !== undefined && event.kind === 'defeat' ? { ward: 0 } : {}),
       poison: event.poison ?? (event.kind === 'poison' ? 3 : event.kind === 'cleanse' || event.kind === 'defeat' ? 0 : current.poison),
     };
   }, unit);

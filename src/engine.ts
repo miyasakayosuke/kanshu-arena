@@ -1,6 +1,6 @@
-export type Skill={name:string;power:number;priority:number;mpCost:number;kind:'hit'|'heal'|'guard'|'poison'|'protect'|'cleanse';all?:boolean;breaksGuard?:boolean;randomHits?:number;breaksGuardAfterHit?:boolean};
+export type Skill={name:string;power:number;priority:number;mpCost:number;kind:'hit'|'heal'|'guard'|'poison'|'protect'|'cleanse';all?:boolean;breaksGuard?:boolean;randomHits?:number;breaksGuardAfterHit?:boolean;familyBonusHit?:Family};
 export type SpecialSkills = readonly [] | readonly [Skill] | readonly [Skill, Skill] | readonly [Skill, Skill, Skill] | readonly [Skill, Skill, Skill, Skill];
-export type Family = 'beast';
+export type Family = 'beast' | 'nature';
 export type Monster={id:number;name:string;icon:string;cost:number;hp:number;mp:number;atk:number;speed:number;family?:Family;skills:SpecialSkills};
 export const BASIC_ATTACK = -1;
 export const DEFEND = -2;
@@ -35,14 +35,18 @@ const roster: [number, string, string, number, number, number, number, SpecialSk
 [9,'烏天狗','🐦',3,166,41,79,[hit('風切り',51),hit('疾風斬り',36,2),poison]],
 [10,'ナーガ','🐍',2,185,33,39,[hit('蛇牙',48),poison,guard,{ ...protect, name: '蛇鱗の庇護' }]],
 [11,'アヌビス','🐺',4,172,54,76,[hit('冥府の刃',68),hit('影斬り',40,2),hit('終焉の一撃',105,-2),guardBreaker('冥府の断罪')]],
-[12,'フェンリル','🐺',4,150,54,93,[{ ...hit('破縛の連牙',0,0,false,13), randomHits:5, breaksGuardAfterHit:true },hit('月下の一咬',55)]]
+[12,'フェンリル','🐺',4,150,54,93,[{ ...hit('破縛の連牙',0,0,false,13), randomHits:5, breaksGuardAfterHit:true },hit('月下の一咬',55)]],
+[13,'ラタトスク','🐿️',2,130,39,87,[{ ...hit('木の実の連弾',10,0,false,10), randomHits:3, familyBonusHit:'beast' },hit('枝渡りの一突き',36,2)]],
+[14,'玄武','🐢',5,240,25,24,[hit('海山の轟き',20,-2,true,22),{ ...heal, name:'悠久の雫', power:70, mpCost:20 },{ ...protect, name:'甲羅の結界' }]]
 ];
 // Original resource budgets: three heavy casts or several economical actions.
-const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50, 60];
+const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50, 60, 44, 64];
 // Game-only mammalian motifs. Unassigned creatures are not forced into a mythological taxonomy.
-const beastIds = new Set([0, 2, 7, 11, 12]);
-export const familyLabel = (monster: Monster): string => monster.family === 'beast' ? '獣系' : '系統未設定';
-export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, ...(beastIds.has(id) ? { family: 'beast' as const } : {}), skills }));
+const beastIds = new Set([0, 2, 7, 11, 12, 13]);
+// This is a gameplay family, not a claim of shared mythological origin.
+const natureIds = new Set([3, 6, 9, 10, 14]);
+export const familyLabel = (monster: Monster): string => monster.family === 'beast' ? '獣系' : monster.family === 'nature' ? '自然系' : '系統未設定';
+export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, ...(beastIds.has(id) ? { family: 'beast' as const } : natureIds.has(id) ? { family: 'nature' as const } : {}), skills }));
 export type LeaderTrait = { name: string; stat: 'hp' | 'atk' | 'speed'; percent: number; description: string; family?: Family; secondary?: { stat: 'atk' | 'speed'; percent: number } };
 const leaderTraits: readonly [string, LeaderTrait['stat']][] = [
   ['暁の追い風', 'speed'], ['岩山の誓い', 'hp'], ['守り猫の祈り', 'hp'], ['森羅の息吹', 'hp'],
@@ -53,6 +57,8 @@ const leaderTraits: readonly [string, LeaderTrait['stat']][] = [
 /** One trait from the first slot only. Family restrictions apply to each recipient. */
 export function leaderFor(id: number): LeaderTrait {
   if (id === 12) return { name: '解き放つ群れ', stat: 'speed', percent: 12, secondary: { stat: 'atk', percent: 8 }, family: 'beast', description: '味方の獣系だけ 素早さ +12%・攻撃力 +8%' };
+  if (id === 13) return { name: '枝道の伝令', stat: 'speed', percent: 8, description: '味方全員の素早さ +8%' };
+  if (id === 14) return { name: '北辰の大地', stat: 'hp', percent: 15, family: 'nature', description: '味方の自然系だけ 最大HP +15%' };
   const trait = leaderTraits[id];
   if (!trait) throw new Error(`Unknown monster id: ${id}`);
   const [name, stat] = trait;
@@ -73,7 +79,7 @@ export function skillOrderLabel(skill: Skill): string {
   return skill.priority >= 3 ? '最速' : skill.priority >= 2 ? '先制' : skill.priority > 0 ? '防御順' : skill.priority < 0 ? 'アンカー' : '通常順';
 }
 
-export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number; /** Isolated simulation override; gameplay uses RALLY_PERCENT. */ rallyPercent?: number };
+export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number; /** Isolated simulation override; gameplay uses RALLY_PERCENT. */ rallyPercent?: number; ward?: number; /** Isolated simulation override; gameplay uses NATURE_WARD_PERCENT. */ wardPercent?: number };
 export type State = {
   turn: number;
   seed: number;
@@ -96,7 +102,7 @@ export type BattleEvent = {
   hitTargets?: string[];
   hits?: number;
   hitIndex?: number;
-  removed?: ('guard' | 'rally')[];
+  removed?: ('guard' | 'rally' | 'ward')[];
   targets?: string[];
   skill?: string;
   amount?: number;
@@ -105,6 +111,7 @@ export type BattleEvent = {
   poison?: number;
   guard?: boolean;
   rally?: number;
+  ward?: number;
   phase?: BattlePhase;
   effect?: string;
 };
@@ -130,6 +137,12 @@ export const cost = (team: number[]) => team.reduce((total, id) => total + (mons
 
 export const RALLY_PERCENT = 5;
 export const OPENING_RALLY_TURNS = 2;
+export const NATURE_WARD_PERCENT = 10;
+export const OPENING_WARD_TURNS = 2;
+/** Guard and nature ward do not stack; poison is handled separately. */
+export const directDamageScale = (unit: Unit) => Math.min(unit.guard ? 0.5 : 1, unit.ward ? 1 - (unit.wardPercent ?? NATURE_WARD_PERCENT) / 100 : 1);
+/** Eligibility is the original party, including its defeated members. No skill or support recursion. */
+export const barrageHits = (skill: Skill, friends: Unit[]) => (skill.randomHits ?? 1) + (skill.familyBonusHit && friends.length === 5 && friends.every(friend => friend.monster.family === skill.familyBonusHit) ? 1 : 0);
 /** HP/MP stay fixed; the dispellable opening aura is separate from the persistent leader. */
 export const attackFor = (unit: Unit) => Math.round(unit.monster.atk * (1 + (unit.rally ? (unit.rallyPercent ?? RALLY_PERCENT) / 100 : 0)));
 // The first-turn order is established before the opening aura; turn two can gain speed.
@@ -139,6 +152,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
   const units = (ids: number[], prefix: string): Unit[] => {
     const leader = options.leaders && ids.length ? leaderFor(ids[0]) : undefined;
     const rally = options.familySupport !== false && ids.includes(12);
+    const ward = options.familySupport !== false && ids.includes(14);
     return ids.map((id, i) => {
       const source = monsters[id];
       if (!source) throw new Error(`Unknown monster id: ${id}`);
@@ -147,7 +161,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
         ...source, [leader.stat]: Math.round(source[leader.stat] * (1 + leader.percent / 100)),
         ...(leader.secondary ? { [leader.secondary.stat]: Math.round(source[leader.secondary.stat] * (1 + leader.secondary.percent / 100)) } : {}),
       } : source;
-      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0, ...(rally && source.family === 'beast' ? { rally: OPENING_RALLY_TURNS } : {}) };
+      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0, ...(rally && source.family === 'beast' ? { rally: OPENING_RALLY_TURNS } : {}), ...(ward && source.family === 'nature' ? { ward: OPENING_WARD_TURNS } : {}) };
     });
   };
   return {
@@ -162,6 +176,8 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     ] : []), ...(options.familySupport !== false ? [
       ...(team.includes(12) ? ['味方「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。'] : []),
       ...(enemy.includes(12) ? ['敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。'] : []),
+      ...(team.includes(14) ? [`味方「森羅の甲羅」：自然系だけ自然障壁を2ターン付与。直接ダメージ${NATURE_WARD_PERCENT}%軽減・守りと重複なし・解除可能。毒は軽減しません。`] : []),
+      ...(enemy.includes(14) ? [`敵「森羅の甲羅」：自然系だけ自然障壁を2ターン付与。直接ダメージ${NATURE_WARD_PERCENT}%軽減・守りと重複なし・解除可能。毒は軽減しません。`] : []),
     ] : [])],
     winner: null,
   };
@@ -186,7 +202,7 @@ export function canUseSkill(unit: Unit, skill: Skill): boolean {
 /** Poison is measured in remaining end-of-turn ticks, not actor turns. */
 export function effectStatus(unit: Unit): string {
   if (unit.hp <= 0) return '戦闘不能';
-  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : '', unit.rally ? `群気:残${unit.rally}T` : ''].filter(Boolean).join('・');
+  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : '', unit.rally ? `群気:残${unit.rally}T` : '', unit.ward ? `自然障壁:残${unit.ward}T` : ''].filter(Boolean).join('・');
 }
 
 /** Choose orders without changing state or consuming the battle's random seed. */
@@ -227,8 +243,10 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
       if (skill.kind !== 'hit' && skill.kind !== 'poison') return -1;
       const targets = skill.all || skill.randomHits ? opponents : target ? [target] : [];
       return targets.reduce((total, opponent) => {
-        const mitigation = opponent.guard && skill.priority < 1 && !skill.breaksGuard ? (skill.breaksGuardAfterHit ? 0.75 : 0.5) : 1;
-        const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation * (skill.randomHits ? skill.randomHits / Math.max(1, opponents.length) : 1));
+        const guardMitigation = opponent.guard && skill.priority < 1 && !skill.breaksGuard ? (skill.breaksGuardAfterHit ? 0.75 : 0.5) : 1;
+        const wardMitigation = !opponent.ward || skill.breaksGuard ? 1 : 1 - (opponent.wardPercent ?? NATURE_WARD_PERCENT) / 100 * (skill.breaksGuardAfterHit ? 0.5 : 1);
+        const mitigation = Math.min(guardMitigation, wardMitigation);
+        const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation * (skill.randomHits ? barrageHits(skill, state[side]) / Math.max(1, opponents.length) : 1));
         const poisonDamage = skill.kind === 'poison' && opponent.poison === 0
           ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * 2) : 0;
         return total + damage + poisonDamage;
@@ -309,7 +327,8 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     if (target.hp === 0) {
       target.guard = false; target.poison = 0;
       if (target.rally !== undefined) target.rally = 0;
-      emit({ kind: 'defeat', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, hp: 0, guard: false, poison: 0, ...(target.rally !== undefined ? { rally: 0 } : {}), effect });
+      if (target.ward !== undefined) target.ward = 0;
+      emit({ kind: 'defeat', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, hp: 0, guard: false, poison: 0, ...(target.rally !== undefined ? { rally: 0 } : {}), ...(target.ward !== undefined ? { ward: 0 } : {}), effect });
     }
     return amount;
   };
@@ -333,7 +352,7 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     phase('action', unit.key);
     battle.log.push(`${unit.monster.name}の「${skill.name}」！${skill.mpCost ? `（MP −${skill.mpCost}）` : ''}`);
     const castEventIndex = events.length;
-    emit({ kind: 'cast', actor: unit.key, scope: skill.randomHits ? 'random' : skill.all ? 'all' : 'single', targets: targets.map(target => target.key), ...(!skill.all && !skill.randomHits ? { target: targets[0].key } : {}), ...(skill.randomHits ? { hits: skill.randomHits, hitTargets: [] } : {}), skill: skill.name, effect: skill.kind });
+    emit({ kind: 'cast', actor: unit.key, scope: skill.randomHits ? 'random' : skill.all ? 'all' : 'single', targets: targets.map(target => target.key), ...(!skill.all && !skill.randomHits ? { target: targets[0].key } : {}), ...(skill.randomHits ? { hits: barrageHits(skill, friends), hitTargets: [] } : {}), skill: skill.name, effect: skill.kind });
     // Spending is absolute and emitted at the cast, before any hit or healing animation.
     if (skill.mpCost) {
       unit.mp -= skill.mpCost;
@@ -359,7 +378,7 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
       battle.log.push(`${target.monster.name} HP +${amount}`);
     } else {
       const hitTargets: string[] = [];
-      const hitCount = skill.randomHits ?? targets.length;
+      const hitCount = skill.randomHits ? barrageHits(skill, friends) : targets.length;
       for (let hitIndex = 0; hitIndex < hitCount; hitIndex++) {
         const alive = living(opponents);
         if (!alive.length) break;
@@ -370,19 +389,22 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
         hitTargets.push(target.key);
         const wasGuarded = target.guard;
         const hadRally = !!target.rally;
-        if (skill.kind === 'hit' && skill.breaksGuard && target.guard) {
+        const hadWard = !!target.ward;
+        if (skill.kind === 'hit' && skill.breaksGuard && (target.guard || target.ward)) {
           target.guard = false;
-          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false });
-          battle.log.push(`${target.monster.name}の防御を解除！`);
+          if (hadWard) target.ward = 0;
+          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadWard ? { ward: 0, removed: [...(wasGuarded ? ['guard' as const] : []), 'ward' as const] } : {}) });
+          battle.log.push(`${target.monster.name}の${[wasGuarded ? '防御' : '', hadWard ? '自然障壁' : ''].filter(Boolean).join('・')}を解除！`);
         }
         seed = random(seed);
-        const amount = damage(target, baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * (target.guard ? 0.5 : 1), unit.key, undefined, skill.randomHits ? hitIndex : undefined);
-        battle.log.push(`${target.monster.name}に ${amount} ダメージ${wasGuarded && !skill.breaksGuard ? '（防御で半減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
-        if (skill.breaksGuardAfterHit && (wasGuarded || hadRally) && target.hp > 0) {
+        const amount = damage(target, baseDamage(unit, skill) * (0.9 + (seed % 21) / 100) * directDamageScale(target), unit.key, undefined, skill.randomHits ? hitIndex : undefined);
+        battle.log.push(`${target.monster.name}に ${amount} ダメージ${wasGuarded && !skill.breaksGuard ? '（防御で半減）' : hadWard && !skill.breaksGuard ? '（自然障壁で軽減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
+        if (skill.breaksGuardAfterHit && (wasGuarded || hadRally || hadWard) && target.hp > 0) {
           target.guard = false;
           if (hadRally) target.rally = 0;
-          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadRally ? { rally: 0 } : {}), removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadRally ? ['rally' as const] : [])], hitIndex, effect: hadRally ? 'rally' : 'guard' });
-          battle.log.push(`${target.monster.name}の${[wasGuarded ? '守り' : '', hadRally ? '群気' : ''].filter(Boolean).join('・')}を命中後に解除！`);
+          if (hadWard) target.ward = 0;
+          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadRally ? { rally: 0 } : {}), ...(hadWard ? { ward: 0 } : {}), removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadRally ? ['rally' as const] : []), ...(hadWard ? ['ward' as const] : [])], hitIndex, effect: hadWard ? 'ward' : hadRally ? 'rally' : 'guard' });
+          battle.log.push(`${target.monster.name}の${[wasGuarded ? '守り' : '', hadRally ? '群気' : '', hadWard ? '自然障壁' : ''].filter(Boolean).join('・')}を命中後に解除！`);
         }
         if (skill.kind === 'poison' && target.hp > 0) {
           target.poison = 3;
@@ -406,6 +428,10 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     battle.log.push(`${unit.monster.name}は毒で${amount}ダメージ${unit.hp > 0 ? unit.poison ? `（残り${unit.poison}回）` : '（毒が切れた）' : '・撃破！'}`);
   }
   for (const unit of [...battle.allies, ...battle.enemies]) {
+    if (unit.ward) {
+      unit.ward--;
+      emit({ kind: 'expire', target: unit.key, effect: 'ward', ward: unit.ward });
+    }
     if (unit.rally) {
       unit.rally--;
       emit({ kind: 'expire', target: unit.key, effect: 'rally', rally: unit.rally });

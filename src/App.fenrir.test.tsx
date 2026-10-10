@@ -56,11 +56,11 @@ describe('Fenrir family UI and battle loop', () => {
     const select = document.querySelector<HTMLSelectElement>('[aria-label="系統で絞り込み"]')!;
     await act(async () => {select.value='beast'; select.dispatchEvent(new Event('change',{bubbles:true}));});
     const text = document.querySelector('.candidateList')!.textContent!;
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(5);
-    for (const name of ['妖狐','バステト','セルキー','アヌビス','フェンリル']) expect(text).toContain(name);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(6);
+    for (const name of ['妖狐','バステト','セルキー','アヌビス','フェンリル','ラタトスク']) expect(text).toContain(name);
     for (const name of ['ガルーダ','ナーガ','烏天狗','ドリュアス']) expect(text).not.toContain(name);
     await click(label('絞り込みをリセット'));
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(13);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
   });
 
   it('commits a random barrage without target selection and spends MP only at its cast cue', async () => {

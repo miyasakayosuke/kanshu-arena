@@ -18,6 +18,7 @@ export default function HomeScreen(props: PartyProps & { onArena: () => void; on
     <section className="homeHero"><div className="homeSigil" aria-hidden="true">✦</div><span className="eyebrow">BUILD · BATTLE · LEARN</span><h2>次の一手を、試そう。</h2><p>5体を組む。対戦で確かめる。また組み直す。</p></section>
     <PartySummary {...props} compact />
     <div className="homeDestinations"><button className="arenaGate" onClick={props.onArena}><span className="gateIcon" aria-hidden="true">⚔</span><span><strong>闘技場へ</strong><small>{props.practice ? '同じ相手への再挑戦を準備中' : '受付でルールを確認して対戦'}</small></span><b aria-hidden="true">›</b></button><button className="workshopLink" onClick={props.onTeam}><span><strong>編成へ</strong><small>5枠の入れ替え / リーダー / 保存</small></span><b aria-hidden="true">›</b></button></div>
+    <footer className="homeCredits"><a href={`${import.meta.env.BASE_URL}credits.html`} target="_blank" rel="noopener noreferrer">クレジット・権利情報<span className="srOnly">（新しいタブ）</span></a></footer>
   </main>;
 }
 export function ArenaLobby(props: PartyProps & { round: number; practice: boolean; notice: string; onRule: (rule: RuleId) => void; onTeam: () => void; onLeavePractice: () => void }) {

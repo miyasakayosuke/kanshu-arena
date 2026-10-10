@@ -1,0 +1,2698 @@
+{
+  "schemaVersion": 1,
+  "recordedOn": "2026-10-10",
+  "shippingValues": {
+    "natureIds": [
+      3,
+      6,
+      9,
+      10,
+      14
+    ],
+    "genbu": {
+      "id": 14,
+      "hp": 240,
+      "mp": 64,
+      "atk": 25,
+      "speed": 24,
+      "cost": 5,
+      "areaPower": 20
+    },
+    "openingWard": {
+      "percent": 10,
+      "turns": 2
+    },
+    "ratatoskr": {
+      "id": 13,
+      "signaturePower": 10,
+      "mpCost": 10,
+      "hits": 3,
+      "allBeastHits": 4
+    }
+  },
+  "historicalNumericVerification": {
+    "initialEngineSha256": "f8ab245c80a17173ec8fa3f796caaf99d637d0ce949d2fde0ce57c87c7a065e3",
+    "finalEngineSha256": "95fb6892b3255d6a693695055ae298feff2df36584dd457b86a52437ea3ba7f2",
+    "restoredInitialMatches": 6208,
+    "finalMatchesMatchingPriorCandidate": 6208,
+    "scope": "All numeric match results, including per-unit and per-side metrics, match exactly. Trace hashes intentionally differ because initial logs and explicit override representation differ."
+  },
+  "limitations": [
+    "These are current-engine CPU-policy measurements, not human enjoyment, DQMSL reproduction, PvP balance, or optimal-play proof.",
+    "Identical autoOrders policy is used on both sides. Shipping CPU variation remains unchanged outside the lab.",
+    "Paired seeds use common initial random streams, not identical per-action draws after skill/target choices diverge.",
+    "Mirrors diagnose physical side effects; team-A normalized mirror score after swaps is 0.5 by construction, so read physicalAllyScoreRate.",
+    "Support, initiative, MP opportunity and damage concentration metrics are proxies. Poison ticks cannot be credited to an original caster in the current engine.",
+    "All candidate patches apply roster-wide to both sides. No automatic changes are made to shipping balance.",
+    "Sampled teams and curated scenarios cover a bounded slice, not the Cartesian product. Report coverage and test additional hypotheses before conclusions.",
+    "A paired-seed 95% interval is an approximate normal interval over seed-level mean differences for this fixed scenario suite, not a population-wide balance guarantee.",
+    "Candidate selection reused these seeds and scenarios; no held-out confirmation or multiple-comparison adjustment.",
+    "The broad fixed sample is not all legal teams or player usage. Scores are conditioned on the automated policy and include unequal team costs."
+  ],
+  "runs": [
+    {
+      "name": "final-ward-disabled",
+      "configPath": "configs/balance-lab/family-wave.json",
+      "source": {
+        "gameVersion": "0.11.0",
+        "gitCommit": "d11cdcf8286a486423ec5fdd1420f0e32212a370",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "95fb6892b3255d6a693695055ae298feff2df36584dd457b86a52437ea3ba7f2",
+        "labSha256": "57721dd5f3afe5866158d34973c2ed00fd6ba9f6a06d1d55bb3651791f2bb670",
+        "configSha256": "58abe8132db7f5be855db9e961de0722a9f1ef83b8874d5cbb3184eebbe4e9e1"
+      },
+      "scheduleCounts": {
+        "teams": 10,
+        "curatedTeams": 10,
+        "sampledTeams": 0,
+        "matchupScenarios": 25,
+        "mirrorScenarios": 10,
+        "seeds": 32,
+        "variants": 2,
+        "orientations": 2,
+        "matches": 4480
+      },
+      "variantMeaning": {
+        "baseline": "Final production defaults",
+        "candidate": "開幕自然障壁の対照：現行10%・2T→無効（他の値は現行）"
+      },
+      "summary": {
+        "baseline": {
+          "games": 1600,
+          "wins": 1381,
+          "losses": 213,
+          "draws": 6,
+          "winRate": 0.863125,
+          "scoreRate": 0.865,
+          "drawRate": 0.00375,
+          "meanTurns": 3.87,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.504375,
+          "physicalAllyScoreBias": 0.004375,
+          "firstCastSideScoreRate": 0.583125,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 840.59,
+          "meanHealing": 110.975625,
+          "meanMpSpent": 184.79375,
+          "meanPaidCasts": 12.12125,
+          "meanSpecialCasts": 12.12125,
+          "meanCasts": 13.659375,
+          "meanGuardApplications": 1.41875,
+          "meanEffectiveCleanses": 0.655,
+          "meanPoisonApplications": 16.155625,
+          "meanDispelApplications": 0.37625,
+          "meanNoAffordableSpecialTurns": 1.49125,
+          "meanZeroMpTurns": 0.26625,
+          "meanDamageConcentration": 0.364493,
+          "meanPoisonDamageTaken": 113.013125,
+          "meanRemainingHpFraction": 0.220368
+        },
+        "candidate": {
+          "games": 1600,
+          "wins": 1277,
+          "losses": 310,
+          "draws": 13,
+          "winRate": 0.798125,
+          "scoreRate": 0.802188,
+          "drawRate": 0.008125,
+          "meanTurns": 4.16375,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.502188,
+          "physicalAllyScoreBias": 0.002188,
+          "firstCastSideScoreRate": 0.617813,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 837.2775,
+          "meanHealing": 115.35,
+          "meanMpSpent": 184.905,
+          "meanPaidCasts": 12.268125,
+          "meanSpecialCasts": 12.268125,
+          "meanCasts": 13.945625,
+          "meanGuardApplications": 1.684375,
+          "meanEffectiveCleanses": 0.655,
+          "meanPoisonApplications": 16.039375,
+          "meanDispelApplications": 0.37625,
+          "meanNoAffordableSpecialTurns": 1.653125,
+          "meanZeroMpTurns": 0.239375,
+          "meanDamageConcentration": 0.369879,
+          "meanPoisonDamageTaken": 113.7025,
+          "meanRemainingHpFraction": 0.184753
+        },
+        "pairedDelta": {
+          "pairs": 1600,
+          "seedClusters": 32,
+          "changedOutcomes": 135,
+          "scoreRateChange": -0.062813,
+          "approximate95Interval": [
+            -0.076678,
+            -0.048947
+          ],
+          "meanTurnsChange": 0.29375,
+          "meanDirectDamageChange": -3.3125,
+          "meanHealingChange": 4.374375,
+          "meanMpSpentChange": 0.11125
+        }
+      },
+      "mirrorControls": {
+        "baseline": {
+          "games": 640,
+          "wins": 304,
+          "losses": 304,
+          "draws": 32,
+          "winRate": 0.475,
+          "scoreRate": 0.5,
+          "drawRate": 0.05,
+          "meanTurns": 5.578125,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.475,
+          "physicalAllyScoreBias": -0.025,
+          "firstCastSideScoreRate": 0.528125,
+          "zeroCastDeathRate": 0.0025,
+          "meanDirectDamage": 836.282813,
+          "meanHealing": 118.860938,
+          "meanMpSpent": 183.83125,
+          "meanPaidCasts": 12.784375,
+          "meanSpecialCasts": 12.784375,
+          "meanCasts": 16.65,
+          "meanGuardApplications": 2.082813,
+          "meanEffectiveCleanses": 1.185938,
+          "meanPoisonApplications": 12.904688,
+          "meanDispelApplications": 0.803125,
+          "meanNoAffordableSpecialTurns": 3.614063,
+          "meanZeroMpTurns": 0.15625,
+          "meanDamageConcentration": 0.367214,
+          "meanPoisonDamageTaken": 103.729688,
+          "meanRemainingHpFraction": 0.059205
+        },
+        "candidate": {
+          "games": 640,
+          "wins": 302,
+          "losses": 302,
+          "draws": 36,
+          "winRate": 0.471875,
+          "scoreRate": 0.5,
+          "drawRate": 0.05625,
+          "meanTurns": 5.4375,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.4875,
+          "physicalAllyScoreBias": -0.0125,
+          "firstCastSideScoreRate": 0.51875,
+          "zeroCastDeathRate": 0.0025,
+          "meanDirectDamage": 839.484375,
+          "meanHealing": 116.634375,
+          "meanMpSpent": 181.16875,
+          "meanPaidCasts": 12.535938,
+          "meanSpecialCasts": 12.535938,
+          "meanCasts": 16.014063,
+          "meanGuardApplications": 1.8625,
+          "meanEffectiveCleanses": 1.185938,
+          "meanPoisonApplications": 12.6625,
+          "meanDispelApplications": 0.803125,
+          "meanNoAffordableSpecialTurns": 3.18125,
+          "meanZeroMpTurns": 0.164063,
+          "meanDamageConcentration": 0.367103,
+          "meanPoisonDamageTaken": 96.910938,
+          "meanRemainingHpFraction": 0.060481
+        },
+        "pairedDelta": {
+          "pairs": 640,
+          "seedClusters": 32,
+          "changedOutcomes": 52,
+          "scoreRateChange": 0,
+          "approximate95Interval": [
+            0,
+            0
+          ],
+          "meanTurnsChange": -0.140625,
+          "meanDirectDamageChange": 3.201563,
+          "meanHealingChange": -2.226562,
+          "meanMpSpentChange": -2.6625
+        }
+      },
+      "teams": [
+        {
+          "id": "all-beast",
+          "role": "COST17・全5枠獣系・フェンリル＋ラタトスク条件連撃",
+          "ids": [
+            12,
+            0,
+            2,
+            11,
+            13
+          ]
+        },
+        {
+          "id": "nature",
+          "role": "COST15・全5枠自然系・自然核リーダーHPと開幕加護",
+          "ids": [
+            14,
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "mixed-beast",
+          "role": "COST15・既存の獣3自然2編成・フェンリル変更なし",
+          "ids": [
+            12,
+            0,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "priority",
+          "role": "COST15・先制・高速度・毒",
+          "ids": [
+            0,
+            6,
+            9,
+            11,
+            10
+          ]
+        },
+        {
+          "id": "poison-cleanse",
+          "role": "COST15・毒・回復・浄化・開幕加護なし",
+          "ids": [
+            4,
+            3,
+            7,
+            2,
+            10
+          ]
+        },
+        {
+          "id": "guard-breakers",
+          "role": "COST14・着弾前解除2体＋回復・低コスト枠",
+          "ids": [
+            8,
+            11,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "beast-no-core",
+          "role": "COST17・全5枠獣系・フェンリルをセルキーへ置換＋アヌビス先頭。能力・リーダーも変わる対照",
+          "ids": [
+            11,
+            0,
+            2,
+            7,
+            13
+          ]
+        },
+        {
+          "id": "mixed-replacement",
+          "role": "COST15・既存混成の同コストアヌビス置換・リーダーも変わる対照",
+          "ids": [
+            11,
+            0,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "nature-nonleader",
+          "role": "COST15・自然核は2枠目・同5体で先頭のみ変更。開幕加護は維持",
+          "ids": [
+            3,
+            14,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "nature-no-core",
+          "role": "COST15・自然核なし・2枠置換。自然非リーダー編成と同先頭・同コストだが構成差あり",
+          "ids": [
+            3,
+            6,
+            9,
+            7,
+            4
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "nature-vs-all-beast",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "all-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 60,
+            "losses": 4,
+            "draws": 0,
+            "scoreRate": 0.9375,
+            "meanTurns": 2.75,
+            "meanRemainingHpFraction": 0.239752,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 58,
+            "losses": 6,
+            "draws": 0,
+            "scoreRate": 0.90625,
+            "meanTurns": 2.890625,
+            "meanRemainingHpFraction": 0.213984,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 2,
+            "scoreRateChange": -0.03125,
+            "approximate95Interval": [
+              -0.0925,
+              0.03
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-mixed-beast",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "mixed-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 59,
+            "losses": 5,
+            "draws": 0,
+            "scoreRate": 0.921875,
+            "meanTurns": 3.578125,
+            "meanRemainingHpFraction": 0.12808,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 54,
+            "losses": 10,
+            "draws": 0,
+            "scoreRate": 0.84375,
+            "meanTurns": 3.625,
+            "meanRemainingHpFraction": 0.099388,
+            "physicalAllyScoreRate": 0.46875
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 5,
+            "scoreRateChange": -0.078125,
+            "approximate95Interval": [
+              -0.155718,
+              -0.000532
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-priority",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "priority",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.5,
+            "meanRemainingHpFraction": 0.147816,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 28,
+            "losses": 36,
+            "draws": 0,
+            "scoreRate": 0.4375,
+            "meanTurns": 4.28125,
+            "meanRemainingHpFraction": 0.04063,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 36,
+            "scoreRateChange": -0.5625,
+            "approximate95Interval": [
+              -0.737133,
+              -0.387867
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-guard-breakers",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "guard-breakers",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.421875,
+            "meanRemainingHpFraction": 0.332352,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 61,
+            "losses": 3,
+            "draws": 0,
+            "scoreRate": 0.953125,
+            "meanTurns": 4.25,
+            "meanRemainingHpFraction": 0.207066,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 3,
+            "scoreRateChange": -0.046875,
+            "approximate95Interval": [
+              -0.098179,
+              0.004429
+            ]
+          }
+        },
+        {
+          "id": "mirror-all-beast",
+          "kind": "mirror",
+          "a": "all-beast",
+          "b": "all-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 32,
+            "losses": 32,
+            "draws": 0,
+            "scoreRate": 0.5,
+            "meanTurns": 3.9375,
+            "meanRemainingHpFraction": 0.117057,
+            "physicalAllyScoreRate": 0.40625
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 32,
+            "losses": 32,
+            "draws": 0,
+            "scoreRate": 0.5,
+            "meanTurns": 3.9375,
+            "meanRemainingHpFraction": 0.117057,
+            "physicalAllyScoreRate": 0.40625
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "mirror-nature",
+          "kind": "mirror",
+          "a": "nature",
+          "b": "nature",
+          "baseline": {
+            "games": 64,
+            "wins": 32,
+            "losses": 32,
+            "draws": 0,
+            "scoreRate": 0.5,
+            "meanTurns": 6.4375,
+            "meanRemainingHpFraction": 0.031329,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 30,
+            "losses": 30,
+            "draws": 4,
+            "scoreRate": 0.5,
+            "meanTurns": 5.59375,
+            "meanRemainingHpFraction": 0.02452,
+            "physicalAllyScoreRate": 0.59375
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 26,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "scenarioCoverage": "Selected audit scenarios only; regenerate the full report from configPath for all matches and per-unit metrics."
+    },
+    {
+      "name": "final-broad",
+      "configPath": "configs/balance-lab/family-wave-broad.json",
+      "source": {
+        "gameVersion": "0.11.0",
+        "gitCommit": "d11cdcf8286a486423ec5fdd1420f0e32212a370",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "95fb6892b3255d6a693695055ae298feff2df36584dd457b86a52437ea3ba7f2",
+        "labSha256": "57721dd5f3afe5866158d34973c2ed00fd6ba9f6a06d1d55bb3651791f2bb670",
+        "configSha256": "f16c16636d9cf391e3a573f8b32fefc2809431aeb66f7f398ec38f1444609272"
+      },
+      "scheduleCounts": {
+        "teams": 39,
+        "curatedTeams": 39,
+        "sampledTeams": 0,
+        "matchupScenarios": 75,
+        "mirrorScenarios": 39,
+        "seeds": 16,
+        "variants": 2,
+        "orientations": 2,
+        "matches": 7296
+      },
+      "variantMeaning": {
+        "baseline": "Final production defaults",
+        "candidate": "変更なし・対象編成と広い合法対戦群の対照"
+      },
+      "summary": {
+        "baseline": {
+          "games": 2400,
+          "wins": 1724,
+          "losses": 660,
+          "draws": 16,
+          "winRate": 0.718333,
+          "scoreRate": 0.721667,
+          "drawRate": 0.006667,
+          "meanTurns": 4.608333,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.49875,
+          "physicalAllyScoreBias": -0.00125,
+          "firstCastSideScoreRate": 0.51125,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 849.435417,
+          "meanHealing": 125.39625,
+          "meanMpSpent": 206.796667,
+          "meanPaidCasts": 13.125,
+          "meanSpecialCasts": 13.125,
+          "meanCasts": 15.817917,
+          "meanGuardApplications": 2.77625,
+          "meanEffectiveCleanses": 0,
+          "meanPoisonApplications": 20.472917,
+          "meanDispelApplications": 0,
+          "meanNoAffordableSpecialTurns": 2.947083,
+          "meanZeroMpTurns": 0.2375,
+          "meanDamageConcentration": 0.34192,
+          "meanPoisonDamageTaken": 160.230833,
+          "meanRemainingHpFraction": 0.140599
+        },
+        "candidate": {
+          "games": 2400,
+          "wins": 1724,
+          "losses": 660,
+          "draws": 16,
+          "winRate": 0.718333,
+          "scoreRate": 0.721667,
+          "drawRate": 0.006667,
+          "meanTurns": 4.608333,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.49875,
+          "physicalAllyScoreBias": -0.00125,
+          "firstCastSideScoreRate": 0.51125,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 849.435417,
+          "meanHealing": 125.39625,
+          "meanMpSpent": 206.796667,
+          "meanPaidCasts": 13.125,
+          "meanSpecialCasts": 13.125,
+          "meanCasts": 15.817917,
+          "meanGuardApplications": 2.77625,
+          "meanEffectiveCleanses": 0,
+          "meanPoisonApplications": 20.472917,
+          "meanDispelApplications": 0,
+          "meanNoAffordableSpecialTurns": 2.947083,
+          "meanZeroMpTurns": 0.2375,
+          "meanDamageConcentration": 0.34192,
+          "meanPoisonDamageTaken": 160.230833,
+          "meanRemainingHpFraction": 0.140599
+        },
+        "pairedDelta": {
+          "pairs": 2400,
+          "seedClusters": 16,
+          "changedOutcomes": 0,
+          "scoreRateChange": 0,
+          "approximate95Interval": [
+            0,
+            0
+          ],
+          "meanTurnsChange": 0,
+          "meanDirectDamageChange": 0,
+          "meanHealingChange": 0,
+          "meanMpSpentChange": 0
+        }
+      },
+      "mirrorControls": {
+        "baseline": {
+          "games": 1248,
+          "wins": 603,
+          "losses": 603,
+          "draws": 42,
+          "winRate": 0.483173,
+          "scoreRate": 0.5,
+          "drawRate": 0.033654,
+          "meanTurns": 5.024038,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.515224,
+          "physicalAllyScoreBias": 0.015224,
+          "firstCastSideScoreRate": 0.499199,
+          "zeroCastDeathRate": 0.003365,
+          "meanDirectDamage": 863.139423,
+          "meanHealing": 104.125,
+          "meanMpSpent": 175.266827,
+          "meanPaidCasts": 11.776442,
+          "meanSpecialCasts": 11.776442,
+          "meanCasts": 14.770032,
+          "meanGuardApplications": 1.215545,
+          "meanEffectiveCleanses": 1.276442,
+          "meanPoisonApplications": 11.8125,
+          "meanDispelApplications": 0.766827,
+          "meanNoAffordableSpecialTurns": 2.86859,
+          "meanZeroMpTurns": 0.268429,
+          "meanDamageConcentration": 0.359389,
+          "meanPoisonDamageTaken": 100.202724,
+          "meanRemainingHpFraction": 0.055825
+        },
+        "candidate": {
+          "games": 1248,
+          "wins": 603,
+          "losses": 603,
+          "draws": 42,
+          "winRate": 0.483173,
+          "scoreRate": 0.5,
+          "drawRate": 0.033654,
+          "meanTurns": 5.024038,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.515224,
+          "physicalAllyScoreBias": 0.015224,
+          "firstCastSideScoreRate": 0.499199,
+          "zeroCastDeathRate": 0.003365,
+          "meanDirectDamage": 863.139423,
+          "meanHealing": 104.125,
+          "meanMpSpent": 175.266827,
+          "meanPaidCasts": 11.776442,
+          "meanSpecialCasts": 11.776442,
+          "meanCasts": 14.770032,
+          "meanGuardApplications": 1.215545,
+          "meanEffectiveCleanses": 1.276442,
+          "meanPoisonApplications": 11.8125,
+          "meanDispelApplications": 0.766827,
+          "meanNoAffordableSpecialTurns": 2.86859,
+          "meanZeroMpTurns": 0.268429,
+          "meanDamageConcentration": 0.359389,
+          "meanPoisonDamageTaken": 100.202724,
+          "meanRemainingHpFraction": 0.055825
+        },
+        "pairedDelta": {
+          "pairs": 1248,
+          "seedClusters": 16,
+          "changedOutcomes": 0,
+          "scoreRateChange": 0,
+          "approximate95Interval": [
+            0,
+            0
+          ],
+          "meanTurnsChange": 0,
+          "meanDirectDamageChange": 0,
+          "meanHealingChange": 0,
+          "meanMpSpentChange": 0
+        }
+      },
+      "teams": [
+        {
+          "id": "nature",
+          "role": "COST15・全自然・毒3枠",
+          "ids": [
+            14,
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "nature-troll",
+          "role": "COST15・烏天狗→トロル・自然4枠＋未設定1枠・毒2枠",
+          "ids": [
+            14,
+            3,
+            1,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "fenrir-priority-cleanse",
+          "role": "COST17・フェンリル＋妖狐/アヌビス先制＋バステト浄化",
+          "ids": [
+            12,
+            0,
+            11,
+            2,
+            10
+          ]
+        },
+        {
+          "id": "fenrir-speed-cleanse",
+          "role": "COST17・フェンリル＋高速3枠＋バステト浄化",
+          "ids": [
+            12,
+            0,
+            11,
+            2,
+            6
+          ]
+        },
+        {
+          "id": "speed-focus",
+          "role": "COST15・妖狐先頭・先制4枠＋新獣",
+          "ids": [
+            0,
+            6,
+            9,
+            11,
+            13
+          ]
+        },
+        {
+          "id": "triple-area",
+          "role": "COST16・全体直接攻撃4枠＋毒",
+          "ids": [
+            5,
+            8,
+            0,
+            6,
+            9
+          ]
+        },
+        {
+          "id": "double-cleanse",
+          "role": "COST16・浄化2枠＋全体攻撃＋毒",
+          "ids": [
+            2,
+            7,
+            0,
+            6,
+            9
+          ]
+        },
+        {
+          "id": "nature-no-core",
+          "role": "COST15・玄武なし・自然3枠/毒3枠・回復と浄化",
+          "ids": [
+            3,
+            6,
+            9,
+            7,
+            4
+          ]
+        },
+        {
+          "id": "guard-heal",
+          "role": "COST14・HPリーダー・守護・回復・浄化2枠",
+          "ids": [
+            1,
+            2,
+            7,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "generated-1",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            10,
+            13,
+            12,
+            9,
+            4
+          ]
+        },
+        {
+          "id": "generated-2",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            8,
+            12,
+            2,
+            9,
+            5
+          ]
+        },
+        {
+          "id": "generated-3",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            1,
+            4,
+            10,
+            12,
+            5
+          ]
+        },
+        {
+          "id": "generated-4",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            14,
+            4,
+            12,
+            10,
+            1
+          ]
+        },
+        {
+          "id": "generated-5",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            6,
+            9,
+            14,
+            3,
+            8
+          ]
+        },
+        {
+          "id": "generated-6",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            7,
+            12,
+            2,
+            8,
+            10
+          ]
+        },
+        {
+          "id": "generated-7",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            9,
+            7,
+            14,
+            10,
+            13
+          ]
+        },
+        {
+          "id": "generated-8",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            6,
+            12,
+            13,
+            4,
+            14
+          ]
+        },
+        {
+          "id": "generated-9",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            5,
+            10,
+            2,
+            4,
+            3
+          ]
+        },
+        {
+          "id": "generated-10",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            11,
+            5,
+            13,
+            2,
+            9
+          ]
+        },
+        {
+          "id": "generated-11",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            13,
+            3,
+            12,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "generated-12",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            7,
+            1,
+            0,
+            12,
+            6
+          ]
+        },
+        {
+          "id": "generated-13",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            2,
+            5,
+            13,
+            9,
+            0
+          ]
+        },
+        {
+          "id": "generated-14",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            8,
+            10,
+            4,
+            2,
+            1
+          ]
+        },
+        {
+          "id": "generated-15",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            4,
+            11,
+            12,
+            8,
+            10
+          ]
+        },
+        {
+          "id": "generated-16",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            5,
+            2,
+            6,
+            12,
+            8
+          ]
+        },
+        {
+          "id": "generated-17",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            11,
+            1,
+            3,
+            8,
+            6
+          ]
+        },
+        {
+          "id": "generated-18",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            10,
+            6,
+            1,
+            11,
+            5
+          ]
+        },
+        {
+          "id": "generated-19",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            9,
+            3,
+            7,
+            2,
+            1
+          ]
+        },
+        {
+          "id": "generated-20",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            10,
+            13,
+            11,
+            7,
+            4
+          ]
+        },
+        {
+          "id": "generated-21",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            4,
+            0,
+            3,
+            6,
+            2
+          ]
+        },
+        {
+          "id": "generated-22",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            11,
+            5,
+            9,
+            0,
+            6
+          ]
+        },
+        {
+          "id": "generated-23",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            7,
+            14,
+            4,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "generated-24",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            8,
+            6,
+            3,
+            12,
+            11
+          ]
+        },
+        {
+          "id": "generated-25",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            1,
+            7,
+            9,
+            6,
+            3
+          ]
+        },
+        {
+          "id": "generated-26",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            7,
+            8,
+            4,
+            3,
+            9
+          ]
+        },
+        {
+          "id": "generated-27",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            10,
+            11,
+            8,
+            5,
+            7
+          ]
+        },
+        {
+          "id": "generated-28",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武あり",
+          "ids": [
+            0,
+            4,
+            6,
+            13,
+            14
+          ]
+        },
+        {
+          "id": "generated-29",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            9,
+            13,
+            10,
+            11,
+            5
+          ]
+        },
+        {
+          "id": "generated-30",
+          "role": "固定シード抽出の合法5枠・先頭と枠順も抽出：玄武なし",
+          "ids": [
+            4,
+            11,
+            13,
+            3,
+            9
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "nature-vs-fenrir-priority-cleanse",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "fenrir-priority-cleanse",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.40625,
+            "meanRemainingHpFraction": 0.191643,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.40625,
+            "meanRemainingHpFraction": 0.191643,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-fenrir-speed-cleanse",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "fenrir-speed-cleanse",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.0625,
+            "meanRemainingHpFraction": 0.309977,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.0625,
+            "meanRemainingHpFraction": 0.309977,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-speed-focus",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "speed-focus",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.3125,
+            "meanRemainingHpFraction": 0.171477,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.3125,
+            "meanRemainingHpFraction": 0.171477,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-triple-area",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "triple-area",
+          "baseline": {
+            "games": 32,
+            "wins": 24,
+            "losses": 5,
+            "draws": 3,
+            "scoreRate": 0.796875,
+            "meanTurns": 3,
+            "meanRemainingHpFraction": 0.041981,
+            "physicalAllyScoreRate": 0.546875
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 24,
+            "losses": 5,
+            "draws": 3,
+            "scoreRate": 0.796875,
+            "meanTurns": 3,
+            "meanRemainingHpFraction": 0.041981,
+            "physicalAllyScoreRate": 0.546875
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-double-cleanse",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "double-cleanse",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.78125,
+            "meanRemainingHpFraction": 0.210341,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.78125,
+            "meanRemainingHpFraction": 0.210341,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-nature-no-core",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "nature-no-core",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.21875,
+            "meanRemainingHpFraction": 0.158072,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.21875,
+            "meanRemainingHpFraction": 0.158072,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-guard-heal",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "guard-heal",
+          "baseline": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.59375,
+            "meanRemainingHpFraction": 0.504382,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 32,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.59375,
+            "meanRemainingHpFraction": 0.504382,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-generated-1",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "generated-1",
+          "baseline": {
+            "games": 32,
+            "wins": 4,
+            "losses": 23,
+            "draws": 5,
+            "scoreRate": 0.203125,
+            "meanTurns": 3.125,
+            "meanRemainingHpFraction": 0.012842,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 4,
+            "losses": 23,
+            "draws": 5,
+            "scoreRate": 0.203125,
+            "meanTurns": 3.125,
+            "meanRemainingHpFraction": 0.012842,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-generated-2",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "generated-2",
+          "baseline": {
+            "games": 32,
+            "wins": 7,
+            "losses": 23,
+            "draws": 2,
+            "scoreRate": 0.25,
+            "meanTurns": 3.25,
+            "meanRemainingHpFraction": 0.013166,
+            "physicalAllyScoreRate": 0.40625
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 7,
+            "losses": 23,
+            "draws": 2,
+            "scoreRate": 0.25,
+            "meanTurns": 3.25,
+            "meanRemainingHpFraction": 0.013166,
+            "physicalAllyScoreRate": 0.40625
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-generated-3",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "generated-3",
+          "baseline": {
+            "games": 32,
+            "wins": 10,
+            "losses": 22,
+            "draws": 0,
+            "scoreRate": 0.3125,
+            "meanTurns": 4.0625,
+            "meanRemainingHpFraction": 0.010502,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 10,
+            "losses": 22,
+            "draws": 0,
+            "scoreRate": 0.3125,
+            "meanTurns": 4.0625,
+            "meanRemainingHpFraction": 0.010502,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-generated-15",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "generated-15",
+          "baseline": {
+            "games": 32,
+            "wins": 14,
+            "losses": 18,
+            "draws": 0,
+            "scoreRate": 0.4375,
+            "meanTurns": 3.375,
+            "meanRemainingHpFraction": 0.038236,
+            "physicalAllyScoreRate": 0.5625
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 14,
+            "losses": 18,
+            "draws": 0,
+            "scoreRate": 0.4375,
+            "meanTurns": 3.375,
+            "meanRemainingHpFraction": 0.038236,
+            "physicalAllyScoreRate": 0.5625
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-generated-24",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "generated-24",
+          "baseline": {
+            "games": 32,
+            "wins": 11,
+            "losses": 21,
+            "draws": 0,
+            "scoreRate": 0.34375,
+            "meanTurns": 3.875,
+            "meanRemainingHpFraction": 0.014981,
+            "physicalAllyScoreRate": 0.46875
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 11,
+            "losses": 21,
+            "draws": 0,
+            "scoreRate": 0.34375,
+            "meanTurns": 3.875,
+            "meanRemainingHpFraction": 0.014981,
+            "physicalAllyScoreRate": 0.46875
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-nature-troll",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "nature-troll",
+          "baseline": {
+            "games": 32,
+            "wins": 22,
+            "losses": 10,
+            "draws": 0,
+            "scoreRate": 0.6875,
+            "meanTurns": 6.71875,
+            "meanRemainingHpFraction": 0.100198,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 32,
+            "wins": 22,
+            "losses": 10,
+            "draws": 0,
+            "scoreRate": 0.6875,
+            "meanTurns": 6.71875,
+            "meanRemainingHpFraction": 0.100198,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 32,
+            "seedClusters": 16,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "scenarioCoverage": "Selected audit scenarios only; regenerate the full report from configPath for all matches and per-unit metrics."
+    },
+    {
+      "name": "final-vs-initial",
+      "configPath": "configs/balance-lab/family-wave-final-vs-initial.json",
+      "source": {
+        "gameVersion": "0.11.0",
+        "gitCommit": "d11cdcf8286a486423ec5fdd1420f0e32212a370",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "95fb6892b3255d6a693695055ae298feff2df36584dd457b86a52437ea3ba7f2",
+        "labSha256": "57721dd5f3afe5866158d34973c2ed00fd6ba9f6a06d1d55bb3651791f2bb670",
+        "configSha256": "bc5ba041c6788d53f91ffeb4a481f3465ef1191e5e51b8a49ef08df7b0e21c6c"
+      },
+      "scheduleCounts": {
+        "teams": 18,
+        "curatedTeams": 18,
+        "sampledTeams": 0,
+        "matchupScenarios": 79,
+        "mirrorScenarios": 18,
+        "seeds": 32,
+        "variants": 2,
+        "orientations": 2,
+        "matches": 12416
+      },
+      "variantMeaning": {
+        "baseline": "Final production defaults",
+        "candidate": "再現可能な数値比較：最終版→初期案（玄武45/全体46・障壁20%・ラタトスク0）"
+      },
+      "summary": {
+        "baseline": {
+          "games": 5056,
+          "wins": 3047,
+          "losses": 1951,
+          "draws": 58,
+          "winRate": 0.60265,
+          "scoreRate": 0.608386,
+          "drawRate": 0.011472,
+          "meanTurns": 4.105222,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.502373,
+          "physicalAllyScoreBias": 0.002373,
+          "firstCastSideScoreRate": 0.490902,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 797.035008,
+          "meanHealing": 126.759691,
+          "meanMpSpent": 186.865309,
+          "meanPaidCasts": 12.379549,
+          "meanSpecialCasts": 12.379549,
+          "meanCasts": 13.732199,
+          "meanGuardApplications": 2.157239,
+          "meanEffectiveCleanses": 0.54371,
+          "meanPoisonApplications": 19.253956,
+          "meanDispelApplications": 0.123418,
+          "meanNoAffordableSpecialTurns": 1.359771,
+          "meanZeroMpTurns": 0.10443,
+          "meanDamageConcentration": 0.360118,
+          "meanPoisonDamageTaken": 120.348892,
+          "meanRemainingHpFraction": 0.149493
+        },
+        "candidate": {
+          "games": 5056,
+          "wins": 3389,
+          "losses": 1617,
+          "draws": 50,
+          "winRate": 0.670293,
+          "scoreRate": 0.675237,
+          "drawRate": 0.009889,
+          "meanTurns": 3.814082,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.503165,
+          "physicalAllyScoreBias": 0.003165,
+          "firstCastSideScoreRate": 0.495253,
+          "zeroCastDeathRate": 0,
+          "meanDirectDamage": 801.642009,
+          "meanHealing": 117.27591,
+          "meanMpSpent": 183.508109,
+          "meanPaidCasts": 12.053402,
+          "meanSpecialCasts": 12.053402,
+          "meanCasts": 13.273734,
+          "meanGuardApplications": 1.843552,
+          "meanEffectiveCleanses": 0.544502,
+          "meanPoisonApplications": 18.427215,
+          "meanDispelApplications": 0.120055,
+          "meanNoAffordableSpecialTurns": 1.211432,
+          "meanZeroMpTurns": 0.092959,
+          "meanDamageConcentration": 0.340951,
+          "meanPoisonDamageTaken": 119.219739,
+          "meanRemainingHpFraction": 0.204608
+        },
+        "pairedDelta": {
+          "pairs": 5056,
+          "seedClusters": 32,
+          "changedOutcomes": 505,
+          "scoreRateChange": 0.066851,
+          "approximate95Interval": [
+            0.058255,
+            0.075448
+          ],
+          "meanTurnsChange": -0.291139,
+          "meanDirectDamageChange": 4.607002,
+          "meanHealingChange": -9.483782,
+          "meanMpSpentChange": -3.357199
+        }
+      },
+      "mirrorControls": {
+        "baseline": {
+          "games": 1152,
+          "wins": 554,
+          "losses": 554,
+          "draws": 44,
+          "winRate": 0.480903,
+          "scoreRate": 0.5,
+          "drawRate": 0.038194,
+          "meanTurns": 5.255208,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.491319,
+          "physicalAllyScoreBias": -0.008681,
+          "firstCastSideScoreRate": 0.508681,
+          "zeroCastDeathRate": 0.001563,
+          "meanDirectDamage": 848.916667,
+          "meanHealing": 117.826389,
+          "meanMpSpent": 180.161458,
+          "meanPaidCasts": 12.300347,
+          "meanSpecialCasts": 12.300347,
+          "meanCasts": 15.722222,
+          "meanGuardApplications": 1.939236,
+          "meanEffectiveCleanses": 0.991319,
+          "meanPoisonApplications": 16.042535,
+          "meanDispelApplications": 0.617188,
+          "meanNoAffordableSpecialTurns": 3.179688,
+          "meanZeroMpTurns": 0.175347,
+          "meanDamageConcentration": 0.364326,
+          "meanPoisonDamageTaken": 113.539931,
+          "meanRemainingHpFraction": 0.053884
+        },
+        "candidate": {
+          "games": 1152,
+          "wins": 554,
+          "losses": 554,
+          "draws": 44,
+          "winRate": 0.480903,
+          "scoreRate": 0.5,
+          "drawRate": 0.038194,
+          "meanTurns": 5.262153,
+          "turnLimitGames": 0,
+          "physicalAllyScoreRate": 0.473958,
+          "physicalAllyScoreBias": -0.026042,
+          "firstCastSideScoreRate": 0.512153,
+          "zeroCastDeathRate": 0.000694,
+          "meanDirectDamage": 848.299479,
+          "meanHealing": 118.243056,
+          "meanMpSpent": 180.909722,
+          "meanPaidCasts": 12.361979,
+          "meanSpecialCasts": 12.361979,
+          "meanCasts": 15.831597,
+          "meanGuardApplications": 1.959201,
+          "meanEffectiveCleanses": 0.991319,
+          "meanPoisonApplications": 16.00434,
+          "meanDispelApplications": 0.617188,
+          "meanNoAffordableSpecialTurns": 3.177951,
+          "meanZeroMpTurns": 0.176215,
+          "meanDamageConcentration": 0.363395,
+          "meanPoisonDamageTaken": 113.994792,
+          "meanRemainingHpFraction": 0.054264
+        },
+        "pairedDelta": {
+          "pairs": 1152,
+          "seedClusters": 32,
+          "changedOutcomes": 80,
+          "scoreRateChange": 0,
+          "approximate95Interval": [
+            0,
+            0
+          ],
+          "meanTurnsChange": 0.006944,
+          "meanDirectDamageChange": -0.617187,
+          "meanHealingChange": 0.416667,
+          "meanMpSpentChange": 0.748264
+        }
+      },
+      "teams": [
+        {
+          "id": "all-beast",
+          "role": "COST17・全5枠獣系・フェンリル＋ラタトスク条件連撃",
+          "ids": [
+            12,
+            0,
+            2,
+            11,
+            13
+          ]
+        },
+        {
+          "id": "nature",
+          "role": "COST15・玄武リーダー・他4枠固定",
+          "ids": [
+            14,
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "mixed-beast",
+          "role": "COST15・既存の獣3自然2編成・フェンリル変更なし",
+          "ids": [
+            12,
+            0,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "priority",
+          "role": "COST15・先制・高速度・毒",
+          "ids": [
+            0,
+            6,
+            9,
+            11,
+            10
+          ]
+        },
+        {
+          "id": "poison-cleanse",
+          "role": "COST15・毒・回復・浄化・開幕加護なし",
+          "ids": [
+            4,
+            3,
+            7,
+            2,
+            10
+          ]
+        },
+        {
+          "id": "guard-breakers",
+          "role": "COST14・着弾前解除2体＋回復・低コスト枠",
+          "ids": [
+            8,
+            11,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "beast-no-core",
+          "role": "COST17・全5枠獣系・フェンリルをセルキーへ置換＋アヌビス先頭。能力・リーダーも変わる対照",
+          "ids": [
+            11,
+            0,
+            2,
+            7,
+            13
+          ]
+        },
+        {
+          "id": "mixed-replacement",
+          "role": "COST15・既存混成の同コストアヌビス置換・リーダーも変わる対照",
+          "ids": [
+            11,
+            0,
+            2,
+            6,
+            10
+          ]
+        },
+        {
+          "id": "nature-nonleader",
+          "role": "COST15・ドリュアスリーダー・玄武2枠目",
+          "ids": [
+            3,
+            14,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "nature-no-core",
+          "role": "COST15・自然核なし・2枠置換。自然非リーダー編成と同先頭・同コストだが構成差あり",
+          "ids": [
+            3,
+            6,
+            9,
+            7,
+            4
+          ]
+        },
+        {
+          "id": "exact-troll",
+          "role": "COST13・玄武→トロル1枠置換・他4枠固定・リーダーも変わる",
+          "ids": [
+            1,
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "exact-selkie",
+          "role": "COST14・玄武→セルキー1枠置換・他4枠固定・リーダーも変わる",
+          "ids": [
+            7,
+            3,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "same-leader-troll",
+          "role": "COST13・ドリュアス先頭固定・玄武2枠目→トロルのみ",
+          "ids": [
+            3,
+            1,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "same-leader-selkie",
+          "role": "COST14・ドリュアス先頭固定・玄武2枠目→セルキーのみ",
+          "ids": [
+            3,
+            7,
+            6,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "strong-mixed-one",
+          "role": "COST17・広い検証群の自然対面75%だった解除/群気/毒/全体",
+          "ids": [
+            8,
+            12,
+            2,
+            9,
+            5
+          ]
+        },
+        {
+          "id": "strong-mixed-two",
+          "role": "COST17・広い検証群の自然対面75%だった解除/群気/毒/先制",
+          "ids": [
+            8,
+            6,
+            3,
+            12,
+            11
+          ]
+        },
+        {
+          "id": "four-poison-fox",
+          "role": "COST15・妖狐速度リーダー・毒4枠",
+          "ids": [
+            0,
+            3,
+            4,
+            9,
+            10
+          ]
+        },
+        {
+          "id": "four-poison-garuda",
+          "role": "COST13・ガルーダ速度リーダー・毒4枠",
+          "ids": [
+            6,
+            3,
+            4,
+            9,
+            10
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "nature-vs-all-beast",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "all-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 60,
+            "losses": 4,
+            "draws": 0,
+            "scoreRate": 0.9375,
+            "meanTurns": 2.75,
+            "meanRemainingHpFraction": 0.239752,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.15625,
+            "meanRemainingHpFraction": 0.404738,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 4,
+            "scoreRateChange": 0.0625,
+            "approximate95Interval": [
+              -0.022712,
+              0.147712
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-mixed-beast",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "mixed-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 59,
+            "losses": 5,
+            "draws": 0,
+            "scoreRate": 0.921875,
+            "meanTurns": 3.578125,
+            "meanRemainingHpFraction": 0.12808,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.21875,
+            "meanRemainingHpFraction": 0.25651,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 5,
+            "scoreRateChange": 0.078125,
+            "approximate95Interval": [
+              0.000532,
+              0.155718
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-priority",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "priority",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.5,
+            "meanRemainingHpFraction": 0.147816,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.90625,
+            "meanRemainingHpFraction": 0.324812,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-poison-cleanse",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "poison-cleanse",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.28125,
+            "meanRemainingHpFraction": 0.352532,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.859375,
+            "meanRemainingHpFraction": 0.445088,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-guard-breakers",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "guard-breakers",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.421875,
+            "meanRemainingHpFraction": 0.332352,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 2.09375,
+            "meanRemainingHpFraction": 0.399383,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-mixed-beast",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "mixed-beast",
+          "baseline": {
+            "games": 64,
+            "wins": 10,
+            "losses": 54,
+            "draws": 0,
+            "scoreRate": 0.15625,
+            "meanTurns": 3.1875,
+            "meanRemainingHpFraction": 0.017791,
+            "physicalAllyScoreRate": 0.53125
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 5,
+            "losses": 59,
+            "draws": 0,
+            "scoreRate": 0.078125,
+            "meanTurns": 3.140625,
+            "meanRemainingHpFraction": 0.005795,
+            "physicalAllyScoreRate": 0.515625
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 7,
+            "scoreRateChange": -0.078125,
+            "approximate95Interval": [
+              -0.155718,
+              -0.000532
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-priority",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "priority",
+          "baseline": {
+            "games": 64,
+            "wins": 28,
+            "losses": 36,
+            "draws": 0,
+            "scoreRate": 0.4375,
+            "meanTurns": 3.125,
+            "meanRemainingHpFraction": 0.043678,
+            "physicalAllyScoreRate": 0.46875
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 18,
+            "losses": 46,
+            "draws": 0,
+            "scoreRate": 0.28125,
+            "meanTurns": 2.984375,
+            "meanRemainingHpFraction": 0.027625,
+            "physicalAllyScoreRate": 0.53125
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 16,
+            "scoreRateChange": -0.15625,
+            "approximate95Interval": [
+              -0.276255,
+              -0.036245
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-poison-cleanse",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "poison-cleanse",
+          "baseline": {
+            "games": 64,
+            "wins": 58,
+            "losses": 2,
+            "draws": 4,
+            "scoreRate": 0.9375,
+            "meanTurns": 4.65625,
+            "meanRemainingHpFraction": 0.176798,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 56,
+            "losses": 8,
+            "draws": 0,
+            "scoreRate": 0.875,
+            "meanTurns": 5.34375,
+            "meanRemainingHpFraction": 0.151618,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 10,
+            "scoreRateChange": -0.0625,
+            "approximate95Interval": [
+              -0.176824,
+              0.051824
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-guard-breakers",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "guard-breakers",
+          "baseline": {
+            "games": 64,
+            "wins": 34,
+            "losses": 30,
+            "draws": 0,
+            "scoreRate": 0.53125,
+            "meanTurns": 3.84375,
+            "meanRemainingHpFraction": 0.088477,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 28,
+            "losses": 36,
+            "draws": 0,
+            "scoreRate": 0.4375,
+            "meanTurns": 3.96875,
+            "meanRemainingHpFraction": 0.05732,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 18,
+            "scoreRateChange": -0.09375,
+            "approximate95Interval": [
+              -0.2775,
+              0.09
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-beast-no-core",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "beast-no-core",
+          "baseline": {
+            "games": 64,
+            "wins": 52,
+            "losses": 12,
+            "draws": 0,
+            "scoreRate": 0.8125,
+            "meanTurns": 5.078125,
+            "meanRemainingHpFraction": 0.204509,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 46,
+            "losses": 18,
+            "draws": 0,
+            "scoreRate": 0.71875,
+            "meanTurns": 5.015625,
+            "meanRemainingHpFraction": 0.209372,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 14,
+            "scoreRateChange": -0.09375,
+            "approximate95Interval": [
+              -0.255054,
+              0.067554
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-strong-mixed-one",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "strong-mixed-one",
+          "baseline": {
+            "games": 64,
+            "wins": 13,
+            "losses": 49,
+            "draws": 2,
+            "scoreRate": 0.21875,
+            "meanTurns": 3.34375,
+            "meanRemainingHpFraction": 0.014587,
+            "physicalAllyScoreRate": 0.453125
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 48,
+            "losses": 15,
+            "draws": 1,
+            "scoreRate": 0.757813,
+            "meanTurns": 3.21875,
+            "meanRemainingHpFraction": 0.081576,
+            "physicalAllyScoreRate": 0.492188
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 36,
+            "scoreRateChange": 0.539063,
+            "approximate95Interval": [
+              0.386457,
+              0.691668
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-strong-mixed-two",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "strong-mixed-two",
+          "baseline": {
+            "games": 64,
+            "wins": 13,
+            "losses": 51,
+            "draws": 0,
+            "scoreRate": 0.203125,
+            "meanTurns": 4.09375,
+            "meanRemainingHpFraction": 0.009405,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 46,
+            "losses": 18,
+            "draws": 0,
+            "scoreRate": 0.71875,
+            "meanTurns": 4.046875,
+            "meanRemainingHpFraction": 0.111854,
+            "physicalAllyScoreRate": 0.53125
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 33,
+            "scoreRateChange": 0.515625,
+            "approximate95Interval": [
+              0.35404,
+              0.67721
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-exact-troll",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "exact-troll",
+          "baseline": {
+            "games": 64,
+            "wins": 59,
+            "losses": 5,
+            "draws": 0,
+            "scoreRate": 0.921875,
+            "meanTurns": 5.125,
+            "meanRemainingHpFraction": 0.139572,
+            "physicalAllyScoreRate": 0.484375
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.109375,
+            "meanRemainingHpFraction": 0.29767,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 5,
+            "scoreRateChange": 0.078125,
+            "approximate95Interval": [
+              0.000532,
+              0.155718
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-exact-selkie",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "exact-selkie",
+          "baseline": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.34375,
+            "meanRemainingHpFraction": 0.257686,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 4.03125,
+            "meanRemainingHpFraction": 0.358977,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 0,
+            "scoreRateChange": 0,
+            "approximate95Interval": [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-four-poison-fox",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "four-poison-fox",
+          "baseline": {
+            "games": 64,
+            "wins": 18,
+            "losses": 46,
+            "draws": 0,
+            "scoreRate": 0.28125,
+            "meanTurns": 5.34375,
+            "meanRemainingHpFraction": 0.020167,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.71875,
+            "meanRemainingHpFraction": 0.268229,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 46,
+            "scoreRateChange": 0.71875,
+            "approximate95Interval": [
+              0.560476,
+              0.877024
+            ]
+          }
+        },
+        {
+          "id": "nature-vs-four-poison-garuda",
+          "kind": "matchup",
+          "a": "nature",
+          "b": "four-poison-garuda",
+          "baseline": {
+            "games": 64,
+            "wins": 34,
+            "losses": 30,
+            "draws": 0,
+            "scoreRate": 0.53125,
+            "meanTurns": 4.71875,
+            "meanRemainingHpFraction": 0.045682,
+            "physicalAllyScoreRate": 0.5
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 64,
+            "losses": 0,
+            "draws": 0,
+            "scoreRate": 1,
+            "meanTurns": 3.375,
+            "meanRemainingHpFraction": 0.249447,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 30,
+            "scoreRateChange": 0.46875,
+            "approximate95Interval": [
+              0.293081,
+              0.644419
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-four-poison-fox",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "four-poison-fox",
+          "baseline": {
+            "games": 64,
+            "wins": 5,
+            "losses": 59,
+            "draws": 0,
+            "scoreRate": 0.078125,
+            "meanTurns": 3.03125,
+            "meanRemainingHpFraction": 0.004137,
+            "physicalAllyScoreRate": 0.515625
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 0,
+            "losses": 64,
+            "draws": 0,
+            "scoreRate": 0,
+            "meanTurns": 2.75,
+            "meanRemainingHpFraction": 0,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 5,
+            "scoreRateChange": -0.078125,
+            "approximate95Interval": [
+              -0.167327,
+              0.011077
+            ]
+          }
+        },
+        {
+          "id": "all-beast-vs-four-poison-garuda",
+          "kind": "matchup",
+          "a": "all-beast",
+          "b": "four-poison-garuda",
+          "baseline": {
+            "games": 64,
+            "wins": 18,
+            "losses": 44,
+            "draws": 2,
+            "scoreRate": 0.296875,
+            "meanTurns": 3.375,
+            "meanRemainingHpFraction": 0.013514,
+            "physicalAllyScoreRate": 0.53125
+          },
+          "candidate": {
+            "games": 64,
+            "wins": 2,
+            "losses": 62,
+            "draws": 0,
+            "scoreRate": 0.03125,
+            "meanTurns": 3.0625,
+            "meanRemainingHpFraction": 0.002402,
+            "physicalAllyScoreRate": 0.5
+          },
+          "pairedDelta": {
+            "pairs": 64,
+            "seedClusters": 32,
+            "changedOutcomes": 20,
+            "scoreRateChange": -0.265625,
+            "approximate95Interval": [
+              -0.391895,
+              -0.139355
+            ]
+          }
+        }
+      ],
+      "scenarioCoverage": "Selected audit scenarios only; regenerate the full report from configPath for all matches and per-unit metrics."
+    }
+  ],
+  "broadNonCoreAggregates": [
+    {
+      "team": "nature",
+      "opponents": 31,
+      "games": 992,
+      "wins": 844,
+      "losses": 138,
+      "draws": 10,
+      "scoreRate": 0.8558467741935484
+    },
+    {
+      "team": "nature-troll",
+      "opponents": 31,
+      "games": 992,
+      "wins": 558,
+      "losses": 432,
+      "draws": 2,
+      "scoreRate": 0.563508064516129
+    }
+  ]
+}

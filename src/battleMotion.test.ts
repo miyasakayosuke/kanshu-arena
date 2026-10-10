@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {actionAge, ANTICIPATION_MS, HIT_HOLD_MS, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleHitMotion, sampleNumberMotion} from './battleMotion';
-import {ACTION_DURATION_MS, CAST_IMPACT_MS} from './playback';
+import {actionAge, ANTICIPATION_MS, HIT_HOLD_MS, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion} from './battleMotion';
+import {ACTION_DURATION_MS, barrageDuration, CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
 
 describe('action choreography', () => {
   it('distinguishes physical attacks, spells, whole fields and support without changing combat', () => {
@@ -67,5 +67,38 @@ describe('original Fenrir choreography', () => {
     const {sampleFenrirMotion}=await import('./battleMotion');
     expect(sampleFenrirMotion(1500,1).phase).toBe('rest');
     for(const time of [0,340,799,800,1000,1520,1800,2220]) expect(sampleFenrirMotion(time,5,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+  });
+});
+
+describe('family signature choreography', () => {
+  it.each([3, 4])('hops lightly before %i discrete seed throws, then settles after the last hit', hits => {
+    expect(sampleRatatoskrMotion(220, hits)).toMatchObject({travel:-5, lift:-3});
+    expect(sampleRatatoskrMotion(410, hits).lift).toBeGreaterThan(27);
+    expect(sampleRatatoskrMotion(799, hits).travel).toBe(15);
+    for (let index = 0; index < hits; index++) expect(sampleRatatoskrMotion(CAST_IMPACT_MS + index * MULTIHIT_INTERVAL_MS, hits).phase).toBe('impact');
+    expect(sampleRatatoskrMotion(barrageDuration(hits), hits)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+  });
+
+  it('does not strand an interrupted seed barrage in its attack pose', () => {
+    expect(sampleRatatoskrMotion(ACTION_DURATION_MS, 1).phase).toBe('rest');
+    expect(sampleRatatoskrMotion(actionAge(2400), 3).phase).toBe('release');
+  });
+
+  it('plants Genbu slowly without a jump or lunge, waiting for the actual area hit', () => {
+    const early = sampleGenbuMotion(220);
+    const set = sampleGenbuMotion(CAST_IMPACT_MS - 1);
+    expect(early.scaleY).toBeGreaterThan(set.scaleY);
+    expect(set).toMatchObject({travel:0, lift:-5, tilt:0, scaleX:1.04});
+    expect(set.scaleY).toBeCloseTo(.93);
+    expect(sampleGenbuMotion(actionAge(2600)).phase).toBe('release');
+    expect(sampleGenbuMotion(actionAge(2600, 0)).phase).toBe('impact');
+    expect(sampleGenbuMotion(ACTION_DURATION_MS)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+  });
+
+  it('removes every body and camera movement for reduced-motion family attacks', () => {
+    for (const time of [0, 220, 410, 799, 800, 980, 1160, 1340, 1500, 2220]) {
+      expect(sampleGenbuMotion(time, true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+      for (const hits of [1, 3, 4]) expect(sampleRatatoskrMotion(time, hits, true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+    }
   });
 });

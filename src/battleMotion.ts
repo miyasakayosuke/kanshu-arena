@@ -80,3 +80,41 @@ export function sampleFenrirMotion(age: number, hits = 5, reduced = false) {
     titleAlpha: Math.min(1, Math.max(0, age / 90), Math.max(0, (barrageDuration(hits) - 60 - age) / 180)),
   };
 }
+
+/** A nimble branch-hop, then one small throwing kick per authoritative seed hit. */
+export function sampleRatatoskrMotion(age: number, hits = 3, reduced = false) {
+  const lastHit = CAST_IMPACT_MS + Math.max(0, hits - 1) * MULTIHIT_INTERVAL_MS;
+  const effectiveAge = age < CAST_IMPACT_MS ? age : age < lastHit ? CAST_IMPACT_MS : CAST_IMPACT_MS + age - lastHit;
+  const base = sampleActionMotion('spell', effectiveAge, reduced);
+  const ready = smooth(age / 220);
+  const hop = smooth((age - 220) / 380);
+  const airborne = hop === 1 ? 0 : Math.sin(hop * Math.PI);
+  const returnHome = age >= lastHit ? 1 - out((age - lastHit - HIT_HOLD_MS) / RECOVERY_MS) : 1;
+  const pulse = age >= CAST_IMPACT_MS && age < lastHit ? Math.sin((age - CAST_IMPACT_MS) / MULTIHIT_INTERVAL_MS * Math.PI) : 0;
+  return {
+    ...base,
+    travel: reduced ? 0 : (-5 * ready * (1 - hop) + 15 * hop - Math.abs(pulse) * 3) * returnHome,
+    lift: reduced ? 0 : (-3 * ready * (1 - hop) + 30 * airborne + Math.abs(pulse) * 3) * returnHome,
+    tilt: reduced || !returnHome ? 0 : (-.12 * airborne + .045 * pulse) * returnHome,
+    scaleX: reduced ? 1 : 1 + (.035 * ready * (1 - hop) - .04 * airborne) * returnHome,
+    scaleY: reduced ? 1 : 1 + (-.07 * ready * (1 - hop) + .06 * airborne) * returnHome,
+    camera: reduced ? 0 : .004 * ready * returnHome,
+    titleAlpha: Math.min(1, Math.max(0, age / 90), Math.max(0, (barrageDuration(hits) - 60 - age) / 180)),
+  };
+}
+
+/** A heavy shell-set stays planted; the field effect carries the released force. */
+export function sampleGenbuMotion(age: number, reduced = false) {
+  const base = sampleActionMotion('area', age, reduced);
+  const charge = smooth(age / (CAST_IMPACT_MS - 70));
+  const returnHome = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - HIT_HOLD_MS) / RECOVERY_MS);
+  return {
+    ...base,
+    travel: 0,
+    lift: reduced || !returnHome ? 0 : -5 * charge * returnHome,
+    tilt: 0,
+    scaleX: reduced ? 1 : 1 + .04 * charge * returnHome,
+    scaleY: reduced ? 1 : 1 - .07 * charge * returnHome,
+    camera: reduced ? 0 : .007 * charge * returnHome,
+  };
+}

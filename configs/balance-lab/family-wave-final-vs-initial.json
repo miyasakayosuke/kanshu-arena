@@ -1,0 +1,1129 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "family-wave-final-vs-initial",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913,
+    2435346378,
+    794814843,
+    3449250604,
+    1808719069,
+    168187534,
+    2822623295,
+    1182091760,
+    3836527521,
+    2195995986,
+    555464451,
+    3209900212,
+    1569368677,
+    4223804438,
+    2583272903,
+    942741368,
+    3597177129,
+    1956645594,
+    316114059,
+    2970549820,
+    1330018285,
+    3984454046,
+    2343922511,
+    703390976,
+    3357826737
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "all-beast",
+      "role": "COST17・全5枠獣系・フェンリル＋ラタトスク条件連撃",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ]
+    },
+    {
+      "id": "nature",
+      "role": "COST15・玄武リーダー・他4枠固定",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "mixed-beast",
+      "role": "COST15・既存の獣3自然2編成・フェンリル変更なし",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "role": "COST15・先制・高速度・毒",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "poison-cleanse",
+      "role": "COST15・毒・回復・浄化・開幕加護なし",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "guard-breakers",
+      "role": "COST14・着弾前解除2体＋回復・低コスト枠",
+      "ids": [
+        8,
+        11,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "beast-no-core",
+      "role": "COST17・全5枠獣系・フェンリルをセルキーへ置換＋アヌビス先頭。能力・リーダーも変わる対照",
+      "ids": [
+        11,
+        0,
+        2,
+        7,
+        13
+      ]
+    },
+    {
+      "id": "mixed-replacement",
+      "role": "COST15・既存混成の同コストアヌビス置換・リーダーも変わる対照",
+      "ids": [
+        11,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "nature-nonleader",
+      "role": "COST15・ドリュアスリーダー・玄武2枠目",
+      "ids": [
+        3,
+        14,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "nature-no-core",
+      "role": "COST15・自然核なし・2枠置換。自然非リーダー編成と同先頭・同コストだが構成差あり",
+      "ids": [
+        3,
+        6,
+        9,
+        7,
+        4
+      ]
+    },
+    {
+      "id": "exact-troll",
+      "role": "COST13・玄武→トロル1枠置換・他4枠固定・リーダーも変わる",
+      "ids": [
+        1,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "exact-selkie",
+      "role": "COST14・玄武→セルキー1枠置換・他4枠固定・リーダーも変わる",
+      "ids": [
+        7,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "same-leader-troll",
+      "role": "COST13・ドリュアス先頭固定・玄武2枠目→トロルのみ",
+      "ids": [
+        3,
+        1,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "same-leader-selkie",
+      "role": "COST14・ドリュアス先頭固定・玄武2枠目→セルキーのみ",
+      "ids": [
+        3,
+        7,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "strong-mixed-one",
+      "role": "COST17・広い検証群の自然対面75%だった解除/群気/毒/全体",
+      "ids": [
+        8,
+        12,
+        2,
+        9,
+        5
+      ]
+    },
+    {
+      "id": "strong-mixed-two",
+      "role": "COST17・広い検証群の自然対面75%だった解除/群気/毒/先制",
+      "ids": [
+        8,
+        6,
+        3,
+        12,
+        11
+      ]
+    },
+    {
+      "id": "four-poison-fox",
+      "role": "COST15・妖狐速度リーダー・毒4枠",
+      "ids": [
+        0,
+        3,
+        4,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "four-poison-garuda",
+      "role": "COST13・ガルーダ速度リーダー・毒4枠",
+      "ids": [
+        6,
+        3,
+        4,
+        9,
+        10
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "nature-vs-all-beast",
+      "a": "nature",
+      "b": "all-beast",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-mixed-beast",
+      "a": "nature",
+      "b": "mixed-beast",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-priority",
+      "a": "nature",
+      "b": "priority",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-poison-cleanse",
+      "a": "nature",
+      "b": "poison-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-guard-breakers",
+      "a": "nature",
+      "b": "guard-breakers",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-beast-no-core",
+      "a": "nature",
+      "b": "beast-no-core",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-mixed-replacement",
+      "a": "nature",
+      "b": "mixed-replacement",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-nature-nonleader",
+      "a": "nature",
+      "b": "nature-nonleader",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-nature-no-core",
+      "a": "nature",
+      "b": "nature-no-core",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "all-beast-vs-mixed-beast",
+      "a": "all-beast",
+      "b": "mixed-beast",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-priority",
+      "a": "all-beast",
+      "b": "priority",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-poison-cleanse",
+      "a": "all-beast",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-guard-breakers",
+      "a": "all-beast",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-beast-no-core",
+      "a": "all-beast",
+      "b": "beast-no-core",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-priority",
+      "a": "mixed-beast",
+      "b": "priority",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-poison-cleanse",
+      "a": "mixed-beast",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-guard-breakers",
+      "a": "mixed-beast",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-mixed-replacement",
+      "a": "mixed-beast",
+      "b": "mixed-replacement",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "nature-nonleader-vs-priority",
+      "a": "nature-nonleader",
+      "b": "priority",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-poison-cleanse",
+      "a": "nature-nonleader",
+      "b": "poison-cleanse",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-guard-breakers",
+      "a": "nature-nonleader",
+      "b": "guard-breakers",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-nature-no-core",
+      "a": "nature-nonleader",
+      "b": "nature-no-core",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-no-core-vs-priority",
+      "a": "nature-no-core",
+      "b": "priority",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 3
+    },
+    {
+      "id": "nature-no-core-vs-poison-cleanse",
+      "a": "nature-no-core",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 3
+    },
+    {
+      "id": "nature-no-core-vs-guard-breakers",
+      "a": "nature-no-core",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "final-versus-initial"
+      ],
+      "keyUnitId": 3
+    },
+    {
+      "id": "nature-vs-strong-mixed-one",
+      "a": "nature",
+      "b": "strong-mixed-one",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-strong-mixed-two",
+      "a": "nature",
+      "b": "strong-mixed-two",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-all-beast",
+      "a": "nature-nonleader",
+      "b": "all-beast",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-mixed-beast",
+      "a": "nature-nonleader",
+      "b": "mixed-beast",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-strong-mixed-one",
+      "a": "nature-nonleader",
+      "b": "strong-mixed-one",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-strong-mixed-two",
+      "a": "nature-nonleader",
+      "b": "strong-mixed-two",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-all-beast",
+      "a": "exact-troll",
+      "b": "all-beast",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-mixed-beast",
+      "a": "exact-troll",
+      "b": "mixed-beast",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-priority",
+      "a": "exact-troll",
+      "b": "priority",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-poison-cleanse",
+      "a": "exact-troll",
+      "b": "poison-cleanse",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-guard-breakers",
+      "a": "exact-troll",
+      "b": "guard-breakers",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-strong-mixed-one",
+      "a": "exact-troll",
+      "b": "strong-mixed-one",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-strong-mixed-two",
+      "a": "exact-troll",
+      "b": "strong-mixed-two",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-all-beast",
+      "a": "exact-selkie",
+      "b": "all-beast",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-mixed-beast",
+      "a": "exact-selkie",
+      "b": "mixed-beast",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-priority",
+      "a": "exact-selkie",
+      "b": "priority",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-poison-cleanse",
+      "a": "exact-selkie",
+      "b": "poison-cleanse",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-guard-breakers",
+      "a": "exact-selkie",
+      "b": "guard-breakers",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-strong-mixed-one",
+      "a": "exact-selkie",
+      "b": "strong-mixed-one",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-strong-mixed-two",
+      "a": "exact-selkie",
+      "b": "strong-mixed-two",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-all-beast",
+      "a": "same-leader-troll",
+      "b": "all-beast",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-mixed-beast",
+      "a": "same-leader-troll",
+      "b": "mixed-beast",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-priority",
+      "a": "same-leader-troll",
+      "b": "priority",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-poison-cleanse",
+      "a": "same-leader-troll",
+      "b": "poison-cleanse",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-guard-breakers",
+      "a": "same-leader-troll",
+      "b": "guard-breakers",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-strong-mixed-one",
+      "a": "same-leader-troll",
+      "b": "strong-mixed-one",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-strong-mixed-two",
+      "a": "same-leader-troll",
+      "b": "strong-mixed-two",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-all-beast",
+      "a": "same-leader-selkie",
+      "b": "all-beast",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-mixed-beast",
+      "a": "same-leader-selkie",
+      "b": "mixed-beast",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-priority",
+      "a": "same-leader-selkie",
+      "b": "priority",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-poison-cleanse",
+      "a": "same-leader-selkie",
+      "b": "poison-cleanse",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-guard-breakers",
+      "a": "same-leader-selkie",
+      "b": "guard-breakers",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-strong-mixed-one",
+      "a": "same-leader-selkie",
+      "b": "strong-mixed-one",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-strong-mixed-two",
+      "a": "same-leader-selkie",
+      "b": "strong-mixed-two",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-exact-troll",
+      "a": "nature",
+      "b": "exact-troll",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-exact-selkie",
+      "a": "nature",
+      "b": "exact-selkie",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-same-leader-troll",
+      "a": "nature",
+      "b": "same-leader-troll",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-same-leader-selkie",
+      "a": "nature",
+      "b": "same-leader-selkie",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-same-leader-troll",
+      "a": "nature-nonleader",
+      "b": "same-leader-troll",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-same-leader-selkie",
+      "a": "nature-nonleader",
+      "b": "same-leader-selkie",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-four-poison-fox",
+      "a": "nature",
+      "b": "four-poison-fox",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-vs-four-poison-garuda",
+      "a": "nature",
+      "b": "four-poison-garuda",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-four-poison-fox",
+      "a": "nature-nonleader",
+      "b": "four-poison-fox",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-four-poison-garuda",
+      "a": "nature-nonleader",
+      "b": "four-poison-garuda",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-four-poison-fox",
+      "a": "exact-troll",
+      "b": "four-poison-fox",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-four-poison-garuda",
+      "a": "exact-troll",
+      "b": "four-poison-garuda",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-four-poison-fox",
+      "a": "exact-selkie",
+      "b": "four-poison-fox",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-four-poison-garuda",
+      "a": "exact-selkie",
+      "b": "four-poison-garuda",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-four-poison-fox",
+      "a": "same-leader-troll",
+      "b": "four-poison-fox",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-four-poison-garuda",
+      "a": "same-leader-troll",
+      "b": "four-poison-garuda",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-four-poison-fox",
+      "a": "same-leader-selkie",
+      "b": "four-poison-fox",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-four-poison-garuda",
+      "a": "same-leader-selkie",
+      "b": "four-poison-garuda",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "all-beast-vs-four-poison-fox",
+      "a": "all-beast",
+      "b": "four-poison-fox",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    },
+    {
+      "id": "all-beast-vs-four-poison-garuda",
+      "a": "all-beast",
+      "b": "four-poison-garuda",
+      "keyUnitId": 13,
+      "complaintIds": [
+        "final-versus-initial"
+      ]
+    }
+  ],
+  "candidate": {
+    "id": "initial-numeric-proposal",
+    "label": "再現可能な数値比較：最終版→初期案（玄武45/全体46・障壁20%・ラタトスク0）",
+    "overrides": {
+      "openingWard": {
+        "percent": 20
+      },
+      "monsters": {
+        "13": {
+          "skills": [
+            {
+              "name": "木の実の連弾",
+              "power": 0,
+              "priority": 0,
+              "mpCost": 10,
+              "kind": "hit",
+              "all": false,
+              "randomHits": 3,
+              "familyBonusHit": "beast"
+            },
+            {
+              "name": "枝渡りの一突き",
+              "power": 36,
+              "priority": 2,
+              "mpCost": 12,
+              "kind": "hit",
+              "all": false
+            }
+          ]
+        },
+        "14": {
+          "atk": 45,
+          "skills": [
+            {
+              "name": "海山の轟き",
+              "power": 46,
+              "priority": -2,
+              "mpCost": 22,
+              "kind": "hit",
+              "all": true
+            },
+            {
+              "name": "悠久の雫",
+              "power": 70,
+              "priority": 0,
+              "mpCost": 20,
+              "kind": "heal"
+            },
+            {
+              "name": "甲羅の結界",
+              "power": 0,
+              "priority": 3,
+              "mpCost": 10,
+              "kind": "protect"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sampling": {
+    "count": 0,
+    "seed": 20261009
+  },
+  "complaints": [
+    {
+      "id": "final-versus-initial",
+      "status": "hypothesis",
+      "source": null,
+      "complaint": "最終ソース上で初期案の数値を明示的に復元し、過去の未コミットソースを基準版と取り違えずに比較する。",
+      "hypothesis": "baselineは最終の本番値、candidateは玄武ATK45・全体威力46・障壁20%2T・ラタトスク連撃威力0を復元する。系統・HP/MP/素早さ/COST・その他の技・フェンリルは同じ。",
+      "scenarioIds": [
+        "nature-vs-all-beast",
+        "nature-vs-mixed-beast",
+        "nature-vs-priority",
+        "nature-vs-poison-cleanse",
+        "nature-vs-guard-breakers",
+        "nature-vs-beast-no-core",
+        "nature-vs-mixed-replacement",
+        "nature-vs-nature-nonleader",
+        "nature-vs-nature-no-core",
+        "all-beast-vs-mixed-beast",
+        "all-beast-vs-priority",
+        "all-beast-vs-poison-cleanse",
+        "all-beast-vs-guard-breakers",
+        "all-beast-vs-beast-no-core",
+        "mixed-beast-vs-priority",
+        "mixed-beast-vs-poison-cleanse",
+        "mixed-beast-vs-guard-breakers",
+        "mixed-beast-vs-mixed-replacement",
+        "nature-nonleader-vs-priority",
+        "nature-nonleader-vs-poison-cleanse",
+        "nature-nonleader-vs-guard-breakers",
+        "nature-nonleader-vs-nature-no-core",
+        "nature-no-core-vs-priority",
+        "nature-no-core-vs-poison-cleanse",
+        "nature-no-core-vs-guard-breakers",
+        "nature-vs-strong-mixed-one",
+        "nature-vs-strong-mixed-two",
+        "nature-nonleader-vs-all-beast",
+        "nature-nonleader-vs-mixed-beast",
+        "nature-nonleader-vs-strong-mixed-one",
+        "nature-nonleader-vs-strong-mixed-two",
+        "exact-troll-vs-all-beast",
+        "exact-troll-vs-mixed-beast",
+        "exact-troll-vs-priority",
+        "exact-troll-vs-poison-cleanse",
+        "exact-troll-vs-guard-breakers",
+        "exact-troll-vs-strong-mixed-one",
+        "exact-troll-vs-strong-mixed-two",
+        "exact-selkie-vs-all-beast",
+        "exact-selkie-vs-mixed-beast",
+        "exact-selkie-vs-priority",
+        "exact-selkie-vs-poison-cleanse",
+        "exact-selkie-vs-guard-breakers",
+        "exact-selkie-vs-strong-mixed-one",
+        "exact-selkie-vs-strong-mixed-two",
+        "same-leader-troll-vs-all-beast",
+        "same-leader-troll-vs-mixed-beast",
+        "same-leader-troll-vs-priority",
+        "same-leader-troll-vs-poison-cleanse",
+        "same-leader-troll-vs-guard-breakers",
+        "same-leader-troll-vs-strong-mixed-one",
+        "same-leader-troll-vs-strong-mixed-two",
+        "same-leader-selkie-vs-all-beast",
+        "same-leader-selkie-vs-mixed-beast",
+        "same-leader-selkie-vs-priority",
+        "same-leader-selkie-vs-poison-cleanse",
+        "same-leader-selkie-vs-guard-breakers",
+        "same-leader-selkie-vs-strong-mixed-one",
+        "same-leader-selkie-vs-strong-mixed-two",
+        "nature-vs-exact-troll",
+        "nature-vs-exact-selkie",
+        "nature-vs-same-leader-troll",
+        "nature-vs-same-leader-selkie",
+        "nature-nonleader-vs-same-leader-troll",
+        "nature-nonleader-vs-same-leader-selkie",
+        "nature-vs-four-poison-fox",
+        "nature-vs-four-poison-garuda",
+        "nature-nonleader-vs-four-poison-fox",
+        "nature-nonleader-vs-four-poison-garuda",
+        "exact-troll-vs-four-poison-fox",
+        "exact-troll-vs-four-poison-garuda",
+        "exact-selkie-vs-four-poison-fox",
+        "exact-selkie-vs-four-poison-garuda",
+        "same-leader-troll-vs-four-poison-fox",
+        "same-leader-troll-vs-four-poison-garuda",
+        "same-leader-selkie-vs-four-poison-fox",
+        "same-leader-selkie-vs-four-poison-garuda",
+        "all-beast-vs-four-poison-fox",
+        "all-beast-vs-four-poison-garuda"
+      ],
+      "metrics": [
+        {
+          "name": "scoreRate",
+          "direction": "observe",
+          "rationale": "旧数値に戻した場合との差を対面別に確認する。"
+        },
+        {
+          "name": "meanTurns",
+          "direction": "observe",
+          "rationale": "短期決着と耐久の違いを確認する。"
+        },
+        {
+          "name": "meanRemainingHpFraction",
+          "direction": "observe",
+          "rationale": "勝敗が飽和しても残りHPを確認する。"
+        }
+      ],
+      "limitations": [
+        "初期案の戦闘数値を最終ソースの隔離候補へ復元する。過去ログの文章や過去トレースハッシュそのものの再現を主張しない。",
+        "複数の数値を同時に戻す比較で、個別原因は先行した単独アブレーションと区別する。",
+        "32固定シード・両方向・同一自動方策。候補探索と同じシードであり、人間の公平性や母集団への保証ではない。",
+        "COST17全獣とCOST15自然・COST13/14の正確な1枠置換を含み、コスト差を維持する。"
+      ]
+    }
+  ]
+}

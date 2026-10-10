@@ -4,6 +4,8 @@ import {createRoot, type Root} from 'react-dom/client';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import BattleStage from './BattleStage';
 import * as areaEffects from './areaEffects';
+import * as battleMotion from './battleMotion';
+import {GENBU_ART_URL, RATATOSKR_ART_URL} from './familyArt';
 import {start, type BattleEvent} from './engine';
 
 let root: Root;
@@ -454,5 +456,119 @@ describe('original wolf enemy asset and random-hit presentation', () => {
     expect(labels()).toContain('群気解除');expect(labels()).not.toContain('群気・守り解除');
     await render({...base,castEvent:null,impacts:[]});frame(910);
     expect(labels()).not.toContain('群気解除');
+  });
+});
+
+describe('new family art and enemy-only signature effects', () => {
+  it('loads both original sprites without drawing an ally or changing the wolf dimensions', async () => {
+    vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
+    const state = start([13,14,0,2,6], [12,13,14,0,2]);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
+    expect(sprites).toHaveLength(3);
+    const images = context.drawImage.mock.calls as unknown as [HTMLImageElement, number, number, number, number][];
+    expect(images.some(([image]) => image.src === RATATOSKR_ART_URL)).toBe(true);
+    expect(images.some(([image]) => image.src === GENBU_ART_URL)).toBe(true);
+    expect(images.map(([,x,y,w,h]) => [x,y,w,h])).toEqual([[-55,-47,110,82.5],[-49.5,-38.75,99,74.25],[-60.5,-55.25,121,90.75]]);
+    expect(glyphs.map(glyph => glyph.text)).toEqual(state.enemies.slice(3).map(unit => unit.monster.icon));
+    expect(teamTransforms()).toHaveLength(0);
+  });
+
+  it.each([3,4])('uses the squirrel hop and exact %i-shot count instead of Fenrir choreography', async hits => {
+    vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
+    const squirrel = vi.spyOn(battleMotion, 'sampleRatatoskrMotion');
+    const wolf = vi.spyOn(battleMotion, 'sampleFenrirMotion');
+    const state = start([0,2,3,4,6], [13,0,2,6,10]);
+    const event: BattleEvent = {kind:'cast',actor:'e0',scope:'random',skill:'木の実の連弾',effect:'hit',hits,targets:['a0'],hitTargets:Array(hits).fill('a0')};
+    const props = {allies:state.allies,enemies:state.enemies,effect:{text:'木の実の連弾',type:'wind',tick:1},castEvent:event,impact:event};
+    await render(props); frame(100); frame(510);
+    expect(squirrel).toHaveBeenLastCalledWith(410,hits,false);
+    expect(wolf).not.toHaveBeenCalled();
+    expect(sprites[0][1]).not.toBe(0);
+    expect(teamTransforms()).toHaveLength(0);
+    for (let index=0; index<hits; index++) {
+      const damage: BattleEvent = {kind:'damage',actor:'e0',target:'a0',hitIndex:index,amount:15,hp:135-index*15};
+      await render({...props,impact:damage,impacts:[damage]}); frame(900+index*180);
+      expect(labels()).toContain(`ランダム${hits}回 · ${index+1}/${hits}撃`);
+      expect(labels()).not.toContain('15');
+    }
+    frame(900+(hits-1)*180+700);
+    expect(labels()).not.toContain('木の実の連弾');
+  });
+
+  it.each([3,4])('draws one small acorn per shot in the authoritative %i-target sequence', async hits => {
+    const hitTargets = ['e0','e1','e0','e2'].slice(0,hits);
+    const event: BattleEvent = {kind:'cast',actor:'a0',scope:'random',skill:'木の実の連弾',effect:'hit',hits,targets:[...new Set(hitTargets)],hitTargets};
+    const props = {...base,effect:{text:'木の実の連弾',type:'wind',tick:1},castEvent:event,impact:event};
+    const ctx = context as unknown as CanvasRenderingContext2D;
+    await render(props); frame(100);
+    for (let index=0; index<hits; index++) {
+      vi.mocked(ctx.ellipse).mockClear(); vi.mocked(ctx.translate).mockClear();
+      frame(800+index*180);
+      expect(vi.mocked(ctx.ellipse).mock.calls.filter(args=>args[2]===4.5&&args[3]===6)).toHaveLength(1);
+      const targetIndex = Number(hitTargets[index].slice(1));
+      const shake = index ? battleMotion.sampleHitMotion(80).shake : 0;
+      const targetX = 360 + ((84+targetIndex*138)-360)*1.004 + shake;
+      const targetY = 246 + ((232-Math.abs(targetIndex-2)*8)-246)*1.004 + shake*.4;
+      const progress = 70/170;
+      const x = 354+(targetX-354)*progress;
+      const y = 521+(targetY-521)*progress-Math.sin(progress*Math.PI)*20;
+      expect(vi.mocked(ctx.translate).mock.calls.some(([tx,ty])=>Math.abs(tx-x)<.001&&Math.abs(ty-y)<.001)).toBe(true);
+      const damage: BattleEvent = {kind:'damage',actor:'a0',target:hitTargets[index],hitIndex:index,amount:15,hp:135-index*15};
+      await render({...props,impact:damage,impacts:[damage]}); frame(900+index*180);
+    }
+    vi.mocked(ctx.ellipse).mockClear(); frame(900+(hits-1)*180+200);
+    expect(vi.mocked(ctx.ellipse).mock.calls.filter(args=>args[2]===4.5&&args[3]===6)).toHaveLength(0);
+  });
+
+  it('keeps Genbu planted and its water/stone rise behind the actual delayed area impact', async () => {
+    vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
+    const shell = vi.spyOn(battleMotion, 'sampleGenbuMotion');
+    const state = start([0,2,3,4,6], [14,0,2,6,10]);
+    const event: BattleEvent = {kind:'cast',actor:'e0',scope:'all',skill:'海山の轟き',effect:'hit',targets:state.allies.map(unit=>unit.key)};
+    const props = {allies:state.allies,enemies:state.enemies,effect:{text:'海山の轟き',type:'water',tick:1},castEvent:event,impact:event};
+    await render(props); frame(100); frame(2400);
+    expect(shell).toHaveBeenLastCalledWith(799,false);
+    expect(sprites[0][1]).toBe(0);
+    expect(labels()).toContain('味方全体 · 5体');
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    const ring = () => vi.mocked((context as unknown as CanvasRenderingContext2D).ellipse).mock.calls.filter(args=>args[2]===304);
+    expect(ring().at(-1)?.[1]).toBe(504); // The water ring has not risen early.
+    const damage: BattleEvent = {kind:'damage',actor:'e0',target:'a0',amount:30,hp:120};
+    await render({...props,impact:damage,impacts:[damage]}); frame(2500); frame(2640);
+    expect(ring().at(-1)?.[1]).toBe(436);
+    expect(teamTransforms()).toHaveLength(0);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null,castEvent:null,impacts:[]}); frame(2650);
+    expect(labels()).not.toContain('海山の轟き');
+  });
+
+  it.each(['木の実の連弾','海山の轟き'])('keeps %s body and camera stationary for reduced motion', async skill => {
+    vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const isSeed = skill==='木の実の連弾';
+    const state = start([0,2,3,4,6], [isSeed?13:14,0,2,6,10]);
+    const event: BattleEvent = {kind:'cast',actor:'e0',scope:isSeed?'random':'all',skill,effect:'hit',targets:['a0'],...(isSeed?{hits:3,hitTargets:['a0','a0','a0']}:{})};
+    const props = {allies:state.allies,enemies:state.enemies,effect:{text:skill,type:'water',tick:1},castEvent:event,impact:event};
+    await render(props); frame(100); const startTransform = sprites[0]; frame(799);
+    expect(sprites[0]).toEqual(startTransform);
+    const damage: BattleEvent = {kind:'damage',actor:'e0',target:'a0',amount:15,hp:135,...(isSeed?{hitIndex:0}:{})};
+    await render({...props,impact:damage,impacts:[damage]}); frame(900); frame(1030);
+    expect(sprites[0]).toEqual(startTransform);
+    expect(labels()).toContain(skill);
+  });
+
+  it('shows a jade ward only while active and uses the truthful nature-ward break label', async () => {
+    const fills: unknown[] = [];
+    const fill = vi.mocked((context as unknown as CanvasRenderingContext2D).fill);
+    fill.mockImplementation(()=>{fills.push((context as unknown as CanvasRenderingContext2D).fillStyle);});
+    const enemies = base.enemies.map((unit,index)=>index===0?{...unit,ward:2}:unit);
+    await render({...base,enemies}); frame(100);
+    expect(fills.filter(fill=>fill==='#73d0ad24')).toHaveLength(2);
+    fills.length=0;
+    const broken: BattleEvent = {kind:'break',actor:'a0',target:'e0',ward:0,removed:['ward']};
+    await render({...base,impact:broken,impacts:[broken]}); frame(900);
+    expect(fills).not.toContain('#73d0ad24');
+    expect(labels()).toContain('自然障壁解除');
+    expect(labels()).not.toContain('守り解除');
+    fill.mockReset();
   });
 });

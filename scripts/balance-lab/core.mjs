@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import {
   advanceWithEvents, autoOrders, battleSkill, leaderAppliesTo, leaderFor,
-  MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, OPENING_RALLY_TURNS, RALLY_PERCENT, start,
+  MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, NATURE_WARD_PERCENT, OPENING_RALLY_TURNS, OPENING_WARD_TURNS, RALLY_PERCENT, start,
 } from '../../src/engine.ts';
 
 export const SCHEMA_VERSION = 1;
@@ -38,8 +38,9 @@ const array = (value, min, max, path) => {
 const monsterExists = (id, path) => {
   if (!Number.isInteger(id) || !monsters.some(monster => monster.id === id)) fail(`${path}: unknown monster ${id}`);
 };
+const FAMILIES = ['beast', 'nature'];
 const validateSkill = (skill, path) => {
-  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit'], path);
+  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit', 'familyBonusHit'], path);
   text(skill.name, `${path}.name`);
   if (['通常攻撃', 'ぼうぎょ'].includes(skill.name)) fail(`${path}.name: reserved universal-command name`);
   number(skill.power, 0, 10000, `${path}.power`);
@@ -49,6 +50,7 @@ const validateSkill = (skill, path) => {
   for (const field of ['all', 'breaksGuard', 'breaksGuardAfterHit']) if (own(skill, field)) boolean(skill[field], `${path}.${field}`);
   if (own(skill, 'randomHits')) integer(skill.randomHits, 1, 20, `${path}.randomHits`);
   if (skill.randomHits && (skill.kind !== 'hit' || skill.all)) fail(`${path}: randomHits requires single/random hit kind, not all`);
+  if (own(skill, 'familyBonusHit') && (!FAMILIES.includes(skill.familyBonusHit) || skill.kind !== 'hit' || !skill.randomHits)) fail(`${path}.familyBonusHit: requires a known family and random hit kind`);
   if ((skill.breaksGuard || skill.breaksGuardAfterHit) && skill.kind !== 'hit') fail(`${path}: guard breaking requires hit kind`);
   if (skill.all && !['hit', 'poison'].includes(skill.kind)) fail(`${path}: ally-wide support is not implemented`);
 };
@@ -57,7 +59,7 @@ const validateLeader = (trait, path) => {
   text(trait.name, `${path}.name`); text(trait.description, `${path}.description`);
   if (!['hp', 'atk', 'speed'].includes(trait.stat)) fail(`${path}.stat: unsupported leader stat`);
   number(trait.percent, -90, 300, `${path}.percent`);
-  if (own(trait, 'family') && trait.family !== 'beast') fail(`${path}.family: unsupported family`);
+  if (own(trait, 'family') && !FAMILIES.includes(trait.family)) fail(`${path}.family: unsupported family`);
   if (own(trait, 'secondary')) {
     keys(trait.secondary, ['stat', 'percent'], `${path}.secondary`);
     if (!['atk', 'speed'].includes(trait.secondary.stat) || trait.secondary.stat === trait.stat) fail(`${path}.secondary.stat: must be a different atk/speed stat`);
@@ -65,7 +67,7 @@ const validateLeader = (trait, path) => {
   }
 };
 export function validateOverrides(overrides = {}) {
-  keys(overrides, ['monsters', 'leaders', 'openingRally'], 'overrides');
+  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard'], 'overrides');
   if (own(overrides, 'monsters')) {
     object(overrides.monsters, 'overrides.monsters');
     for (const [id, patch] of Object.entries(overrides.monsters)) {
@@ -74,7 +76,7 @@ export function validateOverrides(overrides = {}) {
       const path = `overrides.monsters.${id}`;
       keys(patch, ['hp', 'mp', 'atk', 'speed', 'cost', 'family', 'skills'], path);
       for (const field of ['hp', 'mp', 'atk', 'speed', 'cost']) if (own(patch, field)) integer(patch[field], ['hp', 'cost'].includes(field) ? 1 : 0, field === 'cost' ? 17 : 10000, `${path}.${field}`);
-      if (own(patch, 'family') && patch.family !== null && patch.family !== 'beast') fail(`${path}.family: expected beast or null`);
+      if (own(patch, 'family') && patch.family !== null && !FAMILIES.includes(patch.family)) fail(`${path}.family: expected beast, nature or null`);
       if (own(patch, 'skills')) { array(patch.skills, 0, MAX_SPECIAL_SKILLS, `${path}.skills`); patch.skills.forEach((skill, i) => validateSkill(skill, `${path}.skills[${i}]`)); }
     }
   }
@@ -85,12 +87,12 @@ export function validateOverrides(overrides = {}) {
       monsterExists(Number(id), `overrides.leaders.${id}`); validateLeader(trait, `overrides.leaders.${id}`);
     }
   }
-  if (own(overrides, 'openingRally')) {
-    const rally = overrides.openingRally;
-    keys(rally, ['enabled', 'percent', 'turns'], 'overrides.openingRally');
-    if (own(rally, 'enabled')) boolean(rally.enabled, 'overrides.openingRally.enabled');
-    if (own(rally, 'percent')) number(rally.percent, 0, 100, 'overrides.openingRally.percent');
-    if (own(rally, 'turns')) integer(rally.turns, 0, MAX_TURNS, 'overrides.openingRally.turns');
+  for (const field of ['openingRally', 'openingWard']) if (own(overrides, field)) {
+    const support = overrides[field];
+    keys(support, ['enabled', 'percent', 'turns'], `overrides.${field}`);
+    if (own(support, 'enabled')) boolean(support.enabled, `overrides.${field}.enabled`);
+    if (own(support, 'percent')) number(support.percent, 0, 100, `overrides.${field}.percent`);
+    if (own(support, 'turns')) integer(support.turns, 0, MAX_TURNS, `overrides.${field}.turns`);
   }
   return overrides;
 }
@@ -190,6 +192,8 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
     const trait = clone(overrides.leaders?.[ids[0]] ?? leaderFor(ids[0]));
     const rally = overrides.openingRally ?? {};
     const hasRally = rally.enabled !== false && ids.includes(12);
+    const ward = overrides.openingWard ?? {};
+    const hasWard = ward.enabled !== false && ids.includes(14);
     state[side] = ids.map((id, i) => {
       const source = roster.find(monster => monster.id === id);
       const monster = clone(source);
@@ -199,18 +203,28 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
       }
       if (monster.hp < 1) fail(`candidate leader produces invalid HP for monster ${id}`);
       return { key: (side === 'allies' ? 'a' : 'e') + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0,
-        ...(hasRally && source.family === 'beast' ? { rally: rally.turns ?? OPENING_RALLY_TURNS, ...(rally.percent !== undefined ? { rallyPercent: rally.percent } : {}) } : {}) };
+        ...(hasRally && source.family === 'beast' ? { rally: rally.turns ?? OPENING_RALLY_TURNS, ...(rally.percent !== undefined ? { rallyPercent: rally.percent } : {}) } : {}),
+        ...(hasWard && source.family === 'nature' ? { ward: ward.turns ?? OPENING_WARD_TURNS, ...(ward.percent !== undefined ? { wardPercent: ward.percent } : {}) } : {}) };
     });
   }
-  // Trial logs must not claim the stock leader/rally values. Authoritative event traces follow.
-  state.log = ['Balance lab trial: isolated roster/leader/opening-rally overrides.', `Overrides: ${JSON.stringify(overrides)}`];
+  // Trial logs must not claim the stock leader or family-support values. Authoritative event traces follow.
+  state.log = ['Balance lab trial: isolated roster/leader/opening-support overrides.', `Overrides: ${JSON.stringify(overrides)}`];
   return state;
 }
 
 export class MatchFailure extends Error {
   constructor(message, request, trace) { super(message); this.name = 'MatchFailure'; this.request = request; this.trace = trace; }
 }
-const unitSnapshot = state => [...state.allies, ...state.enemies].map(unit => ({ key: unit.key, hp: unit.hp, mp: unit.mp, poison: unit.poison, guard: unit.guard, rally: unit.rally ?? 0 }));
+const unitSnapshot = state => [...state.allies, ...state.enemies].map(unit => ({
+  key: unit.key, hp: unit.hp, mp: unit.mp, poison: unit.poison, guard: unit.guard,
+  rally: unit.rally ?? 0, rallyPercent: unit.rallyPercent ?? RALLY_PERCENT,
+  ward: unit.ward ?? 0, wardPercent: unit.wardPercent ?? NATURE_WARD_PERCENT,
+}));
+const supportResourcesValid = unit => ['rally', 'ward'].every(field =>
+  Number.isInteger(unit[field] ?? 0) && (unit[field] ?? 0) >= 0 && (unit[field] ?? 0) <= MAX_TURNS
+) && [[unit.rallyPercent ?? RALLY_PERCENT], [unit.wardPercent ?? NATURE_WARD_PERCENT]].every(([percent]) =>
+  Number.isFinite(percent) && percent >= 0 && percent <= 100
+);
 const freshMetric = unit => ({
   key: unit.key, monsterId: unit.monster.id, casts: 0, specialCasts: 0, paidCasts: 0, directDamage: 0, healing: 0,
   guardApplications: 0, effectiveCleanses: 0, poisonApplications: 0, dispelApplications: 0, mpSpent: 0,
@@ -243,7 +257,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       if (JSON.stringify(state) !== JSON.stringify(before)) fail('resolver mutated input state');
       if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
-        if (![unit.hp, unit.mp, unit.poison, unit.rally ?? 0].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || (unit.rally ?? 0) < 0) fail(`resource invariant failed for ${unit.key}`);
+        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit)) fail(`resource invariant failed for ${unit.key}`);
       }
       const current = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
       for (const event of resolved.events) {
@@ -270,7 +284,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
         if (event.kind === 'defeat' && target) { target.deathTurn = state.turn; target.diedBeforeAnyCast = target.casts === 0; }
         if (event.target && current.has(event.target)) {
           const affected = current.get(event.target);
-          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally']) if (event[field] !== undefined) affected[field] = event[field];
+          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward']) if (event[field] !== undefined) affected[field] = event[field];
         }
       }
       state = resolved.state;
@@ -312,10 +326,10 @@ export const METRIC_DEFINITIONS = {
   meanPaidCasts: 'Number of actually executed positive-MP-cost casts by team A per game.',
   meanSpecialCasts: 'Executed learned-skill casts by team A per game, including any zero-cost learned guard; universal basic/defend commands excluded.',
   meanCasts: 'All actually executed casts by team A per game, including basic and guard.',
-  meanGuardApplications: 'Guard/protect application events by team A per game. Reapplying guard counts; this is not prevented-damage attribution.',
+  meanGuardApplications: 'Guard/protect application events by team A per game. Reapplying guard counts; passive opening ward grants are excluded. This is not prevented-damage attribution.',
   meanEffectiveCleanses: 'Team A cleanse events whose target was poisoned immediately before the event, per game.',
   meanPoisonApplications: 'Poison application events by team A per game, including duration refreshes. Future poison damage is not attributed.',
-  meanDispelApplications: 'Guard/rally break events caused by team A per game. An event removing both statuses counts once.',
+  meanDispelApplications: 'Guard/rally/ward break events caused by team A per game. One event removing multiple statuses counts once. This does not measure damage prevented or the value of each removed status.',
   meanPoisonDamageTaken: 'HP-clipped poison tick damage taken by team A per game, without caster attribution.',
   meanRemainingHpFraction: 'Mean of five team-A remaining HP/max-HP ratios at the end of a match, averaged across matches.',
   meanNoAffordableSpecialTurns: 'Sum of living unit-turns where a unit has positive-cost learned skills but cannot afford any. Does not imply the useful/desired skill was unavailable; basics remain legal.',

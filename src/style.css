@@ -84,3 +84,8 @@
 
 .profileHeading h2 .profileEpithet{display:block;font-size:12px;color:#bccfbe;line-height:1.5;margin-bottom:3px;letter-spacing:1px}
 @media(max-height:550px) and (max-width:499px){.battleMode:not(.resultMode) .battle{overflow-y:auto;overscroll-behavior:contain}}
+
+/* Static family aura: the party portrait never moves. */
+.commander.natureWarded .commanderIcon{border-radius:50%;outline:1px solid #6ce8bd99;box-shadow:0 0 9px #4fbd9e55}.commander.natureWarded .commanderStatus{color:#a1e8ce}
+
+.homeCredits{grid-column:1 / -1;margin:10px 0 0;text-align:center}.homeCredits a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;color:#a5bcb0;font-size:11px;text-underline-offset:3px}.homeCredits a:focus-visible{outline:2px solid #edda9e;outline-offset:2px;border-radius:4px}

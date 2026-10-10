@@ -9,7 +9,7 @@ import { isValidTeam, loadTeamSlots, opponentTeams, rules, saveTeamSlots } from 
 
 const guarding: Skill = { name: '試験防御', power: 0, priority: 1, mpCost: 0, kind: 'guard' };
 const fenrir = monsters[12];
-const beastIds = [0, 2, 7, 11, 12];
+const beastIds = [0, 2, 7, 11, 12, 13];
 const dummy = (key: string, overrides: Partial<Monster> = {}): Unit => {
   const monster: Monster = { id: -1, name: '試験標的', icon: '🎯', cost: 0, hp: 1000, mp: 0, atk: 0, speed: 1, skills: [], ...overrides };
   return { key, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0 };
@@ -48,7 +48,7 @@ describe('Fenrir roster and old-save compatibility', () => {
     expect(loadTeamSlots(storage)).toEqual(slots);
     expect(cost([12, 0, 2, 6, 10])).toBe(15);
     expect(isValidTeam([12, 0, 2, 6, 10], rules.light.budget)).toBe(true);
-    expect(isValidTeam(beastIds)).toBe(false); // A pure five-beast team costs 19.
+    expect(isValidTeam([0, 2, 7, 11, 12])).toBe(false); // The original five-beast combination still costs 19.
   });
 });
 

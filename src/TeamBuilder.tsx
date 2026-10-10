@@ -1,6 +1,6 @@
 import MonsterArt from './MonsterArt';
 import { useEffect, useRef, useState } from 'react';
-import { monsters, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
+import { monsters, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
 import { rules, monsterRole, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
 import './teamBuilder.css';
 
@@ -23,6 +23,46 @@ const roleOptions = [
   ['random', 'ランダム連撃'], ['area', '全体'], ['poison', '毒'], ['protect', '味方を守る'],
   ['cleanse', '毒解除'], ['break', '防御解除'], ['guard', '防御'],
 ];
+
+const familyOptions = [
+  ['beast', '獣系'], ['nature', '自然系'], ['unassigned', '系統未設定'],
+] as const;
+
+function FamilyRecipients({ team, applies }: { team: number[]; applies: (monster: Monster) => boolean }) {
+  const eligible = team.filter(id => applies(monsters[id]));
+  const excluded = team.filter(id => !applies(monsters[id]));
+  return <>
+    <small className="familyRecipients">対象 {eligible.length}/{team.length}体：{eligible.map(id => monsters[id].name).join('・') || 'なし'}</small>
+    <small className="familyExcluded">対象外 {excluded.length}体：{excluded.map(id => monsters[id].name).join('・') || 'なし'}</small>
+  </>;
+}
+
+function OpeningSupport({ team }: { team: number[] }) {
+  const supports = [
+    { id: 12, family: 'beast', name: '群れの遠吠え', effect: '獣系に群気 · 攻撃+5%を2ターン。素早さ+5%は2ターン目の行動順から。' },
+    { id: 14, family: 'nature', name: '森羅の甲羅', effect: `自然系に自然障壁 · 直接ダメージ${NATURE_WARD_PERCENT}%軽減を2ターン。防御・守護と重ならず、毒は軽減しない。` },
+  ].filter(support => team.includes(support.id));
+  if (!supports.length) return null;
+  return <div className="openingSupports" aria-label="開幕の系統サポート">
+    {supports.map(support => <div className="openingSupport" key={support.id} data-support-id={support.id}>
+      <strong>開幕 · {support.name}</strong>
+      <small>{support.effect}</small>
+      <FamilyRecipients team={team} applies={monster => monster.family === support.family} />
+    </div>)}
+    <small className="supportTiming">先頭以外でも編成中なら開幕に一度発動。途中で解除されても再付与しません。</small>
+  </div>;
+}
+
+function BeastBarrageBonus({ team }: { team: number[] }) {
+  if (!team.includes(13)) return null;
+  const beasts = team.filter(id => monsters[id].family === 'beast').length;
+  const active = team.length === 5 && beasts === 5;
+  return <div className="beastBarrageBonus" data-active={active} aria-label="ラタトスクの連弾条件">
+    <strong>木の実の連弾 · 獣系 {beasts}/5体</strong>
+    <small>{active ? '追加1発あり · ランダム4回' : '追加1発なし · ランダム3回'}</small>
+    <small>開戦時の5体すべてが獣系なら+1回。戦闘不能になっても条件は変わりません。</small>
+  </div>;
+}
 
 function MemberSummary({ monster, label }: { monster?: Monster; label: string }) {
   return <div className="memberComparison">
@@ -96,13 +136,15 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
   }, [candidateId]);
   const candidateReason = candidate ? unavailableReason(candidate.id) : '';
   const projectedCost = candidate ? cost(replacement(candidate.id)) : total;
+  const projectedTeam = candidate ? replacement(candidate.id) : team;
+  const projectedLeader = projectedTeam.length ? leaderFor(projectedTeam[0]) : null;
   const visible = monsters.filter(m => {
     const trait = leaderFor(m.id);
     const query = filter.trim().toLocaleLowerCase();
     return (!query || `${m.name} ${familyLabel(m)} ${trait.name} ${trait.description} ${m.skills.map(s => s.name).join(' ')}`.toLocaleLowerCase().includes(query))
       && (role === 'all' || m.skills.some(s => role === 'fast' ? s.priority >= 2 : role === 'anchor' ? s.priority < 0 : role === 'area' ? s.all : role === 'random' ? !!s.randomHits : role === 'break' ? (s.breaksGuard || s.breaksGuardAfterHit) : s.kind === role))
       && (leaderFilter === 'all' || trait.stat === leaderFilter || trait.secondary?.stat === leaderFilter)
-      && (familyFilter === 'all' || m.family === familyFilter)
+      && (familyFilter === 'all' || (m.family ?? 'unassigned') === familyFilter)
       && (costFilter === 'all' || (costFilter === 'fit' ? !unavailableReason(m.id) : m.cost === Number(costFilter)));
   }).sort((a, b) => sort === 'speed' ? b.speed - a.speed : sort === 'hp' ? b.hp - a.hp : sort === 'atk' ? b.atk - a.atk : sort === 'cost' ? a.cost - b.cost : a.id - b.id);
 
@@ -200,12 +242,19 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           </button>;
         })}
       </div>
-      {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small>{leader.family && <small className="familyRecipients">対象 {team.filter(id => leaderAppliesTo(leader, monsters[id])).length}/{team.length}体：{team.filter(id => leaderAppliesTo(leader, monsters[id])).map(id => monsters[id].name).join('・')}</small>}</div>}
+      <div className="familyComposition" aria-label="系統の内訳">{familyOptions.map(([value, label]) => <span key={value}>{label} <b>{team.filter(id => (monsters[id].family ?? 'unassigned') === value).length}</b>体</span>)}</div>
+      {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small><FamilyRecipients team={team} applies={monster => leaderAppliesTo(leader, monster)} /></div>}
+      <OpeningSupport team={team} />
+      <BeastBarrageBonus team={team} />
       <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
     <aside className="newBeast"><div><span className="eyebrow">NEW · BEAST</span><strong>破縛の魔狼 フェンリル</strong><small>獣系を支え、五連の牙で守りを裂く。</small></div><button className="secondary" onClick={() => onFocus(12)}>詳しく見る</button></aside>
+    <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
+      <button className="familyArrival" onClick={() => onFocus(13)} aria-label="ラタトスクの詳細"><span aria-hidden="true"><MonsterArt monster={monsters[13]} portrait /></span><span><small>獣系 · COST 2</small><strong>ラタトスク</strong><em>5体の獣系で連弾がもう1発</em></span><b aria-hidden="true">›</b></button>
+      <button className="familyArrival natureArrival" onClick={() => onFocus(14)} aria-label="玄武の詳細"><span aria-hidden="true"><MonsterArt monster={monsters[14]} portrait /></span><span><small>自然系 · COST 5</small><strong>玄武</strong><em>自然障壁で開幕を支える守り手</em></span><b aria-hidden="true">›</b></button>
+    </aside>
     <p className="saveNotice teamNotice" role="status">{notice}</p>
 
     {(editing || browsing) && <section className="candidatePanel" id="team-candidates" aria-labelledby="candidate-heading">
@@ -232,7 +281,9 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
         </div>
         {candidate && <div className="candidateImpact" role="status">
           <p>合計COST <strong>{total} → {projectedCost}/{budget}</strong><span className={projectedCost > budget ? 'overBudget' : ''}>残り {budget - projectedCost}</span></p>
-          {selectedSlot === 0 && <small>新リーダー効果：{leaderFor(candidate.id).description}</small>}
+          {projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
+          <OpeningSupport team={projectedTeam} />
+          <BeastBarrageBonus team={projectedTeam} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}
@@ -251,8 +302,8 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
         <div className="filterChips" aria-label="特技で絞り込み">{roleOptions.map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => setRole(value)}>{label}</button>)}</div>
         <div className="advancedFilters">
           <select aria-label="リーダー効果で絞り込み" value={leaderFilter} onChange={e => setLeaderFilter(e.target.value)}><option value="all">全リーダー効果</option><option value="hp">HPアップ</option><option value="atk">攻撃アップ</option><option value="speed">素早さアップ</option></select>
-          <select aria-label="系統で絞り込み" value={familyFilter} onChange={e => setFamilyFilter(e.target.value)}><option value="all">全系統</option><option value="beast">獣系</option></select>
-          <select aria-label="コストで絞り込み" value={costFilter} onChange={e => setCostFilter(e.target.value)}><option value="all">全コスト</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option>{editing && <option value="fit">この枠に編成可能</option>}</select>
+          <select aria-label="系統で絞り込み" value={familyFilter} onChange={e => setFamilyFilter(e.target.value)}><option value="all">全系統</option>{familyOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
+          <select aria-label="コストで絞り込み" value={costFilter} onChange={e => setCostFilter(e.target.value)}><option value="all">全コスト</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option>{editing && <option value="fit">この枠に編成可能</option>}</select>
         </div>
       </details>
       <button className="detailButton resetFilters" aria-label="絞り込みをリセット" onClick={resetFilters}>検索・絞り込みをリセット</button>

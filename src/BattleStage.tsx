@@ -2,8 +2,9 @@ import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
 import {FENRIR_ART_URL} from './fenrirArt';
+import {GENBU_ART_URL, RATATOSKR_ART_URL} from './familyArt';
 import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
-import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleHitMotion, sampleNumberMotion} from './battleMotion';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
   onSelectTarget?: (key: string) => void;
 };
 type Point = {x: number; y: number};
-type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison';
+type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
 type Health = {value: number; trail: number; target: number; changed: number};
@@ -35,6 +36,7 @@ const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
   shadow: {light: '#f0dbff', core: '#bc8bdc', dark: '#734985'},
   guard: {light: '#fff6c9', core: '#e5c264', dark: '#b69139'},
   poison: {light: '#e6f5c1', core: '#a5c76c', dark: '#75814b'},
+  seed: {light: '#fff0bc', core: '#c38d4d', dark: '#638156'},
 };
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const ease = (value: number) => 1 - (1 - clamp(value)) ** 3;
@@ -50,6 +52,8 @@ function locate(key: string | undefined, props: Props): Point | undefined {
   return enemy >= 0 ? position(enemy, props.enemies.length) : undefined;
 }
 function visual(effect: Effect, event: BattleEvent): Visual {
+  if (event.skill === '木の実の連弾') return 'seed';
+  if (event.skill === '海山の轟き') return 'water';
   if (event.kind === 'heal' || event.effect === 'heal') return 'water';
   if (event.kind === 'guard' || event.effect === 'guard') return 'guard';
   if (event.kind === 'poison' || event.effect === 'poison') return 'poison';
@@ -73,7 +77,7 @@ function glow(ctx: CanvasRenderingContext2D, x: number, y: number, size: number,
   gradient.addColorStop(1, 'transparent');
   ellipse(ctx, x, y, size, size, gradient);
 }
-function shield(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, alpha: number) {
+function shield(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, alpha: number, nature = false) {
   ctx.save();
   ctx.globalAlpha *= alpha;
   ctx.beginPath();
@@ -84,12 +88,16 @@ function shield(ctx: CanvasRenderingContext2D, x: number, y: number, size: numbe
     index ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
   }
   ctx.closePath();
-  ctx.fillStyle = '#ffe5a538';
+  ctx.fillStyle = nature ? '#73d0ad24' : '#ffe5a538';
   ctx.fill();
-  ctx.strokeStyle = '#c6a34f';
+  ctx.strokeStyle = nature ? '#4eaa91' : '#c6a34f';
   ctx.lineWidth = 2;
   ctx.stroke();
-  line(ctx, [{x: x - size * .3, y}, {x, y: y + size * .26}, {x: x + size * .35, y: y - size * .3}], '#fff9de', 3);
+  if (nature) {
+    // A quiet leaf-vein mark keeps opening ward distinct from the gold guard.
+    line(ctx, [{x: x - size * .27, y: y + size * .31}, {x: x + size * .22, y: y - size * .36}], '#bef2d9', size > 10 ? 2 : 1.2);
+    line(ctx, [{x: x - size * .26, y: y - size * .1}, {x, y: y - size * .01}, {x: x + size * .27, y: y + size * .01}], '#bef2d9', size > 10 ? 1.5 : 1);
+  } else line(ctx, [{x: x - size * .3, y}, {x, y: y + size * .26}, {x: x + size * .35, y: y - size * .3}], '#fff9de', 3);
   ctx.restore();
 }
 function arena(ctx: CanvasRenderingContext2D, time: number) {
@@ -207,6 +215,85 @@ function drawCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduce
   }
   ctx.restore();
 }
+
+/** Three/four discrete acorns follow the replay's exact hit order, never an area. */
+function drawSeedBarrage(ctx: CanvasRenderingContext2D, cast: Cast, targets: Point[], age: number, reduced: boolean) {
+  const hits = Math.max(1, cast.event.hitTargets?.length ?? cast.event.hits ?? 3);
+  const end = CAST_IMPACT_MS + (hits - 1) * MULTIHIT_INTERVAL_MS;
+  if (age > end + 160) return;
+  ctx.save();
+  if (reduced) {
+    // No projectiles in reduced motion; the actual impact keeps its seed accent.
+    ctx.globalAlpha = .5 * (1 - clamp((age - end) / 160));
+    for (let index = 0; index < hits; index++) ellipse(ctx, cast.from.x - 12 + index * 8, cast.from.y + 27, 2.5, 3.5, palettes.seed.core);
+  } else {
+    for (let index = 0; index < hits; index++) {
+      const progress = (age - (CAST_IMPACT_MS - 170 + index * MULTIHIT_INTERVAL_MS)) / 170;
+      if (progress < 0 || progress > 1 || (cast.lastHitIndex ?? -1) >= index) continue;
+      const target = targets[index] ?? cast.to;
+      const from = {x: cast.from.x - 6, y: cast.from.y - 9};
+      const arc = Math.sin(progress * Math.PI) * 20;
+      const x = mix(from.x, target.x, progress);
+      const y = mix(from.y, target.y, progress) - arc;
+      for (let trail = 3; trail > 0; trail--) {
+        const p = Math.max(0, progress - trail * .045);
+        ctx.globalAlpha = .55 - trail * .12;
+        ellipse(ctx, mix(from.x, target.x, p), mix(from.y, target.y, p) - Math.sin(p * Math.PI) * 20, 2, 2, '#b9d59a');
+      }
+      ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(x, y); ctx.rotate(progress * 3 + index);
+      ellipse(ctx, 0, 1, 4.5, 6, '#bb8247');
+      ctx.strokeStyle = '#755332'; ctx.lineWidth = 1.2; ctx.stroke();
+      ellipse(ctx, 0, -3, 5.3, 2.5, '#73925c');
+      line(ctx, [{x: 0, y: -5}, {x: 1, y: -8}], '#665138', 1.5);
+      ctx.restore();
+    }
+  }
+  ctx.restore();
+}
+
+/** The grounded preparation only rises after the authoritative all-target cue. */
+function drawGenbuField(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const sinceImpact = Math.max(0, age - CAST_IMPACT_MS);
+  if (cast.impacted && sinceImpact >= 600) return;
+  const y = cast.incoming ? 475 : 231;
+  const sy = cast.incoming ? Math.max(.65, scaleY) : scaleY;
+  const charge = clamp(age / CAST_IMPACT_MS);
+  const fade = cast.impacted ? 1 - clamp(sinceImpact / 600) : 1;
+  const rise = cast.impacted && !reduced ? ease(sinceImpact / 140) * 68 : 0;
+  const ring = (x: number, py: number, rx: number, ry: number, color: string, width: number) => {
+    ellipse(ctx, x, py, rx, ry); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+  };
+  ctx.save();
+  ctx.translate(0, y); ctx.scale(1, sy); ctx.translate(0, -y);
+  ctx.globalAlpha = (cast.impacted ? .78 : .2 + charge * .2) * fade;
+  ring(360, y + 29, 315, 46, '#68bda9', 2);
+  ring(360, y + 29 - rise, 304, 40, '#acf0d1', cast.impacted ? 5 : 1.5);
+  // Stone uprights rise as one ring around the formation, never as aimed missiles.
+  if (cast.impacted) {
+    for (let index = 0; index < 14; index++) {
+      const angle = index / 14 * TAU;
+      const x = 360 + Math.cos(angle) * 307;
+      const base = y + 29 + Math.sin(angle) * 43;
+      const height = reduced ? 17 : rise * (.55 + (index % 3) * .14);
+      ctx.beginPath();
+      ctx.moveTo(x - 9, base); ctx.lineTo(x - 7, base - height + 4);
+      ctx.lineTo(x + 2, base - height - 5); ctx.lineTo(x + 9, base - height + 2); ctx.lineTo(x + 12, base); ctx.closePath();
+      ctx.fillStyle = index % 2 ? '#71988d' : '#426f6a'; ctx.fill();
+      line(ctx, [{x: x - 3, y: base - height + 5}, {x: x + 2, y: base - height + 12}, {x: x - 1, y: base - 3}], '#a0e5c5', 1.5);
+      if (!reduced) {
+        ring(x, base - rise * .66, 10, 3, '#d7f8e5', 1.8);
+        line(ctx, [{x: x - 13, y: base - 4}, {x: x - 10, y: base - rise * .7}], '#76d1c2', 2);
+      }
+    }
+    ring(360, y + 23 - rise * .6, 322, 47, '#62c6ba', 3);
+  }
+  for (const point of cast.targets) {
+    const py = y + (point.y - y) / sy;
+    ring(point.x, py + 28, 33, 9, '#c0f0d6', cast.impacted ? 3 : 1.4);
+  }
+  ctx.restore();
+}
 function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number) {
   const {event, type, at} = impact;
   const palette = palettes[type];
@@ -244,7 +331,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
     line(ctx, [{x:x-17,y:y-31},{x:x+2,y:y-9},{x:x-8,y:y+8},{x:x+19,y:y+30}], '#b6ffec', 3);
     ctx.globalAlpha = fade; ctx.fillStyle = '#566f62'; ctx.font = '700 12px system-ui'; ctx.textAlign = 'center';
-    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : '守り').join('・') : '守り'}解除`, x, y + 48);
+    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : '守り').join('・') : '守り'}解除`, x, y + 48);
   } else if (event.kind === 'heal') {
     glow(ctx, x, y + 12, 57, '#84d9aa5c');
     for (let index = 0; index < 3; index++) {
@@ -272,7 +359,16 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
   } else {
     ctx.globalAlpha = burst * .85 * fade;
     glow(ctx, x, y, 55 + burst * 15, `${palette.core}6b`);
-    if (type === 'slash') {
+    if (type === 'seed') {
+      // A light seed burst, deliberately smaller than a sword strike or spell.
+      for (let index = 0; index < 5; index++) {
+        const angle = index / 5 * TAU;
+        const distance = 8 + progress * 23 * movement;
+        ellipse(ctx, x + Math.cos(angle) * distance, y + Math.sin(angle) * distance * .7, 2.5, 4, index % 2 ? '#b88a50' : '#a0b878');
+      }
+      ellipse(ctx, x, y, 13 + progress * 17 * movement, 10 + progress * 8 * movement);
+      ctx.strokeStyle = '#e8dfaa'; ctx.lineWidth = 1.5; ctx.stroke();
+    } else if (type === 'slash') {
       for (let index = 0; index < 2; index++) {
         ctx.save();
         ctx.translate(x + index * 10, y - index * 4);
@@ -375,8 +471,10 @@ export default function BattleStage(props: Props) {
     if (!element) return;
     const ctx = element.getContext('2d');
     if (!ctx) return;
-    const fenrirImage = new Image();
-    fenrirImage.src = FENRIR_ART_URL;
+    const characterImages = new Map<number, HTMLImageElement>();
+    for (const [id, source] of [[12, FENRIR_ART_URL], [13, RATATOSKR_ART_URL], [14, GENBU_ART_URL]] as const) {
+      const image = new Image(); image.src = source; characterImages.set(id, image);
+    }
     let handle = 0;
     let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
@@ -452,13 +550,18 @@ export default function BattleStage(props: Props) {
       const elapsed = cast ? (now - cast.started) * cast.rate : 2000;
       let age = cast ? actionAge(elapsed, cast.impactedAt === undefined ? undefined : (now - cast.impactedAt) * cast.rate) : 2000;
       const barrage = cast?.event.scope === 'random';
+      const seedBarrage = barrage && cast?.event.skill === '木の実の連弾';
+      const genbuField = cast?.event.scope === 'all' && cast.event.skill === '海山の轟き';
       const hitCount = cast?.event.hitTargets?.length ?? cast?.event.hits ?? 5;
       if (barrage && cast?.lastHitIndex !== undefined) {
         age = cast.lastHitIndex >= hitCount - 1 && cast.lastHitAt !== undefined
           ? CAST_IMPACT_MS + (hitCount - 1) * MULTIHIT_INTERVAL_MS + (now - cast.lastHitAt) * cast.rate
           : Math.min(age, CAST_IMPACT_MS + (cast.lastHitIndex + 1) * MULTIHIT_INTERVAL_MS - 1);
       }
-      const motion = barrage ? sampleFenrirMotion(age, hitCount, reduced) : sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
+      const motion = seedBarrage ? sampleRatatoskrMotion(age, hitCount, reduced)
+        : barrage ? sampleFenrirMotion(age, hitCount, reduced)
+        : genbuField ? sampleGenbuMotion(age, reduced)
+        : sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       ctx.clearRect(0, 0, WIDTH, HEIGHT);
       arena(ctx, reduced ? 0 : now / 1000);
@@ -480,7 +583,7 @@ export default function BattleStage(props: Props) {
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && unit.monster.id !== 14 && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
@@ -521,6 +624,7 @@ export default function BattleStage(props: Props) {
         ctx.scale(1, scaleY);
         ctx.translate(-x, -y);
         if (unit.guard && alive) shield(ctx, x, y, 35, .38);
+        if ((unit.ward ?? 0) > 0 && alive) shield(ctx, x, y, unit.guard ? 42 : 38, .34, true);
         if (attacker) {
           glow(ctx, x, y, 40, `${palettes[type].core}59`);
           ellipse(ctx, point.x, point.y + 33, 36, 11);
@@ -538,8 +642,12 @@ export default function BattleStage(props: Props) {
         ctx.shadowOffsetY = 4;
         // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
         ctx.fillStyle = '#ffffff';
-        if (unit.monster.id === 12 && fenrirImage.complete && fenrirImage.naturalWidth > 0) {
-          ctx.drawImage(fenrirImage, -55, -47, 110, 82.5);
+        const characterImage = characterImages.get(unit.monster.id);
+        if (characterImage?.complete && characterImage.naturalWidth > 0) {
+          // Small squirrel / broad tortoise stay distinct beside the unchanged wolf.
+          const width = unit.monster.id === 13 ? 99 : unit.monster.id === 14 ? 121 : 110;
+          const height = width * .75;
+          ctx.drawImage(characterImage, -width / 2, 35.5 - height, width, height);
         } else ctx.fillText(unit.monster.icon, 0, 0);
         ctx.restore();
         ctx.restore();
@@ -572,16 +680,26 @@ export default function BattleStage(props: Props) {
         if (unit.guard && alive) {
           shield(ctx, point.x - 41, barY + 3, 5, 1);
         }
+        if ((unit.ward ?? 0) > 0 && alive) shield(ctx, point.x - (unit.guard ? 54 : 41), barY + 3, 5, 1, true);
         ctx.restore();
       });
       ctx.save();
       ctx.translate(center.x + shake, center.y + shake * .4);
       ctx.scale(zoom, zoom);
       ctx.translate(-center.x, -center.y);
-      if (cast?.event.scope === 'all') drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
+      if (cast?.event.scope === 'all') {
+        if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
+        else drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
+      }
       drawEnemies();
       ctx.restore();
       if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) drawCast(ctx, {...cast, from: frameEffectPoint(cast.from), to: frameEffectPoint(cast.to)}, age, reduced);
+      if (cast && seedBarrage) {
+        const sequence = (cast.event.hitTargets ?? []).map(key => frameEffectPoint(locate(key, data) ?? {x: WIDTH / 2, y: HEIGHT + 70}));
+        const enemyOrigin = locate(cast.event.actor, data);
+        const from = enemyOrigin ? {x: cast.from.x, y: cast.from.y + motion.travel - motion.lift} : cast.from;
+        drawSeedBarrage(ctx, {...cast, from: frameEffectPoint(from), to: frameEffectPoint(cast.to)}, sequence, age, reduced);
+      }
       for (const impact of impacts) drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, (now - impact.started) * impact.rate, reduced, scaleY);
       // The title stays still while the action is framed underneath it.
       if (cast && motion.titleAlpha > 0) {

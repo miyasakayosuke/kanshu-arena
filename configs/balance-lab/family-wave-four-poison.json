@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "family-wave-four-poison",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913,
+    2435346378,
+    794814843,
+    3449250604,
+    1808719069,
+    168187534,
+    2822623295,
+    1182091760,
+    3836527521,
+    2195995986,
+    555464451,
+    3209900212,
+    1569368677,
+    4223804438,
+    2583272903,
+    942741368,
+    3597177129,
+    1956645594,
+    316114059,
+    2970549820,
+    1330018285,
+    3984454046,
+    2343922511,
+    703390976,
+    3357826737
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "nature",
+      "role": "COST15・玄武リーダー・他4枠固定",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "nature-nonleader",
+      "role": "COST15・ドリュアスリーダー・玄武2枠目",
+      "ids": [
+        3,
+        14,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "exact-troll",
+      "role": "COST13・玄武→トロル1枠置換・他4枠固定・リーダーも変わる",
+      "ids": [
+        1,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "exact-selkie",
+      "role": "COST14・玄武→セルキー1枠置換・他4枠固定・リーダーも変わる",
+      "ids": [
+        7,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "same-leader-troll",
+      "role": "COST13・ドリュアス先頭固定・玄武2枠目→トロルのみ",
+      "ids": [
+        3,
+        1,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "same-leader-selkie",
+      "role": "COST14・ドリュアス先頭固定・玄武2枠目→セルキーのみ",
+      "ids": [
+        3,
+        7,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "four-poison-fox",
+      "role": "COST15・妖狐速度リーダー・毒4枠",
+      "ids": [
+        0,
+        3,
+        4,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "four-poison-garuda",
+      "role": "COST13・ガルーダ速度リーダー・毒4枠",
+      "ids": [
+        6,
+        3,
+        4,
+        9,
+        10
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "nature-vs-four-poison-fox",
+      "a": "nature",
+      "b": "four-poison-fox",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "nature-vs-four-poison-garuda",
+      "a": "nature",
+      "b": "four-poison-garuda",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-four-poison-fox",
+      "a": "nature-nonleader",
+      "b": "four-poison-fox",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "nature-nonleader-vs-four-poison-garuda",
+      "a": "nature-nonleader",
+      "b": "four-poison-garuda",
+      "keyUnitId": 14,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-four-poison-fox",
+      "a": "exact-troll",
+      "b": "four-poison-fox",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "exact-troll-vs-four-poison-garuda",
+      "a": "exact-troll",
+      "b": "four-poison-garuda",
+      "keyUnitId": 1,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-four-poison-fox",
+      "a": "exact-selkie",
+      "b": "four-poison-fox",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "exact-selkie-vs-four-poison-garuda",
+      "a": "exact-selkie",
+      "b": "four-poison-garuda",
+      "keyUnitId": 7,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-four-poison-fox",
+      "a": "same-leader-troll",
+      "b": "four-poison-fox",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "same-leader-troll-vs-four-poison-garuda",
+      "a": "same-leader-troll",
+      "b": "four-poison-garuda",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-four-poison-fox",
+      "a": "same-leader-selkie",
+      "b": "four-poison-fox",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    },
+    {
+      "id": "same-leader-selkie-vs-four-poison-garuda",
+      "a": "same-leader-selkie",
+      "b": "four-poison-garuda",
+      "keyUnitId": 3,
+      "complaintIds": [
+        "exact-core-replacement"
+      ]
+    }
+  ],
+  "candidate": {
+    "id": "no-aoe-no-ward",
+    "label": "履歴用プローブ（基準版は実行時の現行値）：玄武の全体技＋自然障壁を除く明示的2変数診断",
+    "overrides": {
+      "openingWard": {
+        "enabled": false
+      },
+      "monsters": {
+        "14": {
+          "skills": [
+            {
+              "name": "悠久の雫",
+              "power": 70,
+              "priority": 0,
+              "mpCost": 20,
+              "kind": "heal"
+            },
+            {
+              "name": "甲羅の結界",
+              "power": 0,
+              "priority": 3,
+              "mpCost": 10,
+              "kind": "protect"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sampling": {
+    "count": 0,
+    "seed": 20261009
+  },
+  "complaints": [
+    {
+      "id": "exact-core-replacement",
+      "status": "hypothesis",
+      "source": null,
+      "complaint": "以前の核なし対照は2枠変わっていたため、玄武だけの置換で既存4枠への増分を確認する。",
+      "hypothesis": "元の4枠を保つ玄武/トロル/セルキー編成を、既存の高速・毒4枠編成へ当てて既存環境の対策を確認する。両軍同一自動方策。",
+      "scenarioIds": [
+        "nature-vs-four-poison-fox",
+        "nature-vs-four-poison-garuda",
+        "nature-nonleader-vs-four-poison-fox",
+        "nature-nonleader-vs-four-poison-garuda",
+        "exact-troll-vs-four-poison-fox",
+        "exact-troll-vs-four-poison-garuda",
+        "exact-selkie-vs-four-poison-fox",
+        "exact-selkie-vs-four-poison-garuda",
+        "same-leader-troll-vs-four-poison-fox",
+        "same-leader-troll-vs-four-poison-garuda",
+        "same-leader-selkie-vs-four-poison-fox",
+        "same-leader-selkie-vs-four-poison-garuda"
+      ],
+      "metrics": [
+        {
+          "name": "scoreRate",
+          "direction": "observe",
+          "rationale": "玄武の有無・先頭・対面を区別する。"
+        },
+        {
+          "name": "meanTurns",
+          "direction": "observe",
+          "rationale": "短期決着の変化を確認する。"
+        },
+        {
+          "name": "meanRemainingHpFraction",
+          "direction": "observe",
+          "rationale": "勝敗の飽和と生存資源を区別する。"
+        }
+      ],
+      "limitations": [
+        "同じ4枠を保持するがコストは玄武5/トロル3/セルキー4で異なる。",
+        "同一先頭対照でも本体能力・特技・開幕支援はまとめて変わる。単一の因果効果ではない。",
+        "32シード・両向き・同一自動方策。人間の最善手や公平性は示さない。"
+      ]
+    }
+  ]
+}

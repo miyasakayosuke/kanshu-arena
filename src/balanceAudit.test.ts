@@ -40,9 +40,9 @@ function legalTeamIncluding(id: number, budget: number): number[] {
   return team;
 }
 
-describe('all thirteen roles remain selectable under the two real 5v5 rules', () => {
+describe('all fifteen roles remain selectable under the two real 5v5 rules', () => {
   it.each<RuleId>(['standard', 'light'])('gives each distinct role a legal five-member %s team', rule => {
-    expect(monsters).toHaveLength(13);
+    expect(monsters).toHaveLength(15);
     const names = new Set<string>();
     for (const monster of monsters) {
       const team = legalTeamIncluding(monster.id, rules[rule].budget);
@@ -51,7 +51,7 @@ describe('all thirteen roles remain selectable under the two real 5v5 rules', ()
       expect(cost(team)).toBeLessThanOrEqual(rules[rule].budget);
       names.add(monsterRole(monster.id).name);
     }
-    expect(names.size).toBe(13);
+    expect(names.size).toBe(15);
   });
 
   it('makes COST17 vs COST15 a real tradeoff while keeping the same roster', () => {
@@ -89,7 +89,7 @@ describe('initiative, bulk, and front-loaded damage have distinct jobs', () => {
     expect(heavy.state.winner).toBe('lose');
     expect(casts(quick.events)[0]).toMatchObject({ actor: 'a0', skill: '先制の翼' });
     expect(heavy.state.allies[0].mp).toBe(monsters[6].mp); // defeated before paying
-    expect(monsters[6].hp).toBe(Math.min(...monsters.map(monster => monster.hp)));
+    expect(monsters[6].hp).toBe(Math.min(...monsters.slice(0, 13).map(monster => monster.hp)));
   });
 
   it.each([1, 10])('lets guardian %s save a slower attacker before enemy preemption, at an action and MP cost', guardian => {

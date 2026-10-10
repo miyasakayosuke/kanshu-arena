@@ -241,7 +241,7 @@ describe('slot-first team workshop', () => {
     expect(slotButton(0).getAttribute('aria-pressed')).toBe('true');
     expect(updates).toEqual([]);
     await click(byLabel('絞り込みをリセット'));
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(13);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
   });
 
   it('filters by replacement eligibility rather than requiring an empty team slot', async () => {
@@ -249,7 +249,7 @@ describe('slot-first team workshop', () => {
     await click(slotButton(0));
     await disclose('.filterDisclosure');
     await chooseSelect('コストで絞り込み', 'fit');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(8);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(9);
     expect([...document.querySelectorAll<HTMLButtonElement>('.candidateSelect')].every(button => !button.disabled)).toBe(true);
     await click(candidateButton(7));
     await click(confirmButton());
@@ -261,7 +261,7 @@ describe('slot-first team workshop', () => {
     await mount();
     await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
     expect(document.querySelector('#candidate-heading')!.textContent).toBe('モンスター図鑑');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(13);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(15);
     expect(document.querySelector('.candidateSelect')).toBeNull();
     await click(byLabel('アヌビスの詳細'));
     await click(byText('詳細を閉じる'));
@@ -282,5 +282,95 @@ describe('slot-first team workshop', () => {
     expect(document.querySelector('.candidatePanel')).toBeNull();
     expect(document.querySelector('.teamNotice')!.textContent).toContain('同じ相手・同じシードの再戦を解除');
     expect(document.querySelector('.ruleTabs [aria-pressed=true]')!.textContent).toContain('軽量戦');
+  });
+});
+
+describe('family team building', () => {
+  it('filters the five nature members, COST5, and unassigned members independently', async () => {
+    await mount();
+    await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
+    await disclose('.filterDisclosure');
+    await chooseSelect('系統で絞り込み', 'nature');
+    const natureNames = [...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent);
+    expect(natureNames).toEqual(['ドリュアス', 'ガルーダ', '烏天狗', 'ナーガ', '玄武']);
+    await chooseSelect('コストで絞り込み', '5');
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);
+    expect(document.querySelector('.candidateCard')!.textContent).toContain('玄武');
+    await click(byLabel('玄武の詳細'));
+    await click(byText('詳細を閉じる'));
+    expect(document.querySelector<HTMLSelectElement>('[aria-label="系統で絞り込み"]')!.value).toBe('nature');
+    expect(document.querySelector<HTMLSelectElement>('[aria-label="コストで絞り込み"]')!.value).toBe('5');
+    await click(byLabel('絞り込みをリセット'));
+    await chooseSelect('系統で絞り込み', 'unassigned');
+    expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent))
+      .toEqual(['トロル', 'バンシー', 'ケツァルコアトル', 'イフリート']);
+    expect(updates).toEqual([]);
+  });
+
+  it('separates nature leader, nature opening, and beast opening recipients on a mixed team', async () => {
+    await mount({ startingTeam: [14, 12, 13, 6, 10] });
+    expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体系統未設定 0体');
+    const leader = document.querySelector('.partyCard .leaderBanner')!;
+    expect(leader.querySelector('.familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
+    expect(leader.querySelector('.familyExcluded')!.textContent).toBe('対象外 2体：フェンリル・ラタトスク');
+    const beast = document.querySelector('.partyCard [data-support-id="12"]')!;
+    const nature = document.querySelector('.partyCard [data-support-id="14"]')!;
+    expect(beast.querySelector('.familyRecipients')!.textContent).toBe('対象 2/5体：フェンリル・ラタトスク');
+    expect(beast.querySelector('.familyExcluded')!.textContent).toBe('対象外 3体：玄武・ガルーダ・ナーガ');
+    expect(nature.querySelector('.familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.textContent).toContain('追加1発なし');
+    await click(slotButton(0));
+    await click(candidateButton(2));
+    const preview = document.querySelector('.candidateImpact')!;
+    expect(preview.querySelector('.projectedLeader .familyRecipients')!.textContent).toBe('対象 5/5体：バステト・フェンリル・ラタトスク・ガルーダ・ナーガ');
+    expect(preview.querySelector('[data-support-id="14"]')).toBeNull();
+    expect(preview.querySelector('[data-support-id="12"] .familyRecipients')!.textContent).toBe('対象 3/5体：バステト・フェンリル・ラタトスク');
+    expect(document.querySelector('.partyCard [data-support-id="14"]')).toBeTruthy();
+    expect(updates).toEqual([]);
+    await click(byText('キャンセル'));
+    expect(latestTeam).toEqual([14, 12, 13, 6, 10]);
+  });
+
+  it('previews losing the full-beast extra hit without changing the actual five until confirmation', async () => {
+    const beasts = [12, 0, 2, 11, 13];
+    await mount({ startingTeam: beasts });
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.textContent).toContain('獣系 5/5体追加1発あり · ランダム4回');
+    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')!.textContent).toBe('対象外 0体：なし');
+    await click(slotButton(3));
+    await click(candidateButton(6));
+    expect(document.querySelector('.candidateImpact .beastBarrageBonus')!.textContent).toContain('獣系 4/5体追加1発なし · ランダム3回');
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.getAttribute('data-active')).toBe('true');
+    await click(confirmButton());
+    expect(latestTeam).toEqual([12, 0, 2, 6, 13]);
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.getAttribute('data-active')).toBe('false');
+    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')!.textContent).toBe('対象外 1体：ガルーダ');
+  });
+
+  it('does not enable the beast bonus for four beasts in an incomplete party', async () => {
+    await mount({ startingTeam: [13, 0, 2, 12] });
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.textContent).toContain('獣系 4/5体追加1発なし');
+    await click(slotButton(4));
+    await click(candidateButton(11));
+    expect(document.querySelector('.candidateImpact .beastBarrageBonus')!.textContent).toContain('追加1発あり');
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.textContent).toContain('追加1発なし');
+    await click(confirmButton());
+    expect(latestTeam).toEqual([13, 0, 2, 12, 11]);
+    expect(document.querySelector('.partyCard .beastBarrageBonus')!.getAttribute('data-active')).toBe('true');
+  });
+
+  it('keeps the new cost5 candidate readable when over budget, then saves and reloads both new IDs', async () => {
+    await mount({ startingRule: 'light', startingSlots: [{ team: [14, 13, 2, 6, 10], rule: 'light' }, null, null] });
+    await click(slotButton(0));
+    expect(candidateButton(14).disabled).toBe(true);
+    expect(document.getElementById('candidate-reason-14')!.textContent).toBe('COST 1超過');
+    await click(byLabel('玄武の詳細'));
+    expect(onFocus).toHaveBeenLastCalledWith(14);
+    await click(byText('詳細を閉じる'));
+    await click(byLabel('編成1を呼び出す'));
+    expect(latestTeam).toEqual([14, 13, 2, 6, 10]);
+    expect(document.querySelector('.candidatePanel')).toBeNull();
+    await click(byLabel('編成2に保存'));
+    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[1]).toEqual({ team: [14, 13, 2, 6, 10], rule: 'light' });
+    expect(document.querySelector('.partyCard .leaderBanner .familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
   });
 });

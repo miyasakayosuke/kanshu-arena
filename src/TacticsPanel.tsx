@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import { autoOrders, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
+import { autoOrders, NATURE_WARD_PERCENT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
 import { rules, monsterRole, type RuleId } from './strategy';
 
 type Props = { battle: State; orders: Record<string, Order>; playing: boolean; rule: RuleId; onClose: () => void };
@@ -35,13 +35,13 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
         <p className="intelRole">{monsterRole(unit.monster.id).name} · {monsterRole(unit.monster.id).tradeoff}</p>
         <div className="intelSkills">{unit.monster.skills.map(skill => <p key={skill.name}>
           <strong>{skill.name}<span className={`skillMp ${unit.hp > 0 && !canUseSkill(unit, skill) ? 'insufficient' : ''}`}>MP {skill.mpCost}{unit.hp > 0 && !canUseSkill(unit, skill) ? ' · MP不足' : ''}</span></strong>
-          <small>{skillOrderLabel(skill)} · {skill.kind === 'protect' ? '味方を守る' : skill.kind === 'cleanse' ? '毒解除＋回復' : skill.randomHits ? `ランダム${skill.randomHits}回・命中後に守り/群気解除` : skill.breaksGuard ? '防御解除' : skill.kind === 'heal' ? '回復' : skill.kind === 'guard' ? '防御' : skill.kind === 'poison' ? '全体＋毒' : skill.all ? '全体攻撃' : '単体攻撃'}</small>
+          <small>{skillOrderLabel(skill)} · {skill.kind === 'protect' ? '味方を守る' : skill.kind === 'cleanse' ? '毒解除＋回復' : skill.randomHits ? `ランダム${barrageHits(skill, battle.enemies)}回${skill.breaksGuardAfterHit ? '・命中後に守り/群気/自然障壁解除' : skill.familyBonusHit ? '・獣5体なら追撃' : ''}` : skill.breaksGuard ? '防御解除' : skill.kind === 'heal' ? '回復' : skill.kind === 'guard' ? '防御' : skill.kind === 'poison' ? '全体＋毒' : skill.all ? '全体攻撃' : '単体攻撃'}</small>
         </p>)}</div>
       </details>)}</div>
       <h3>MPと効果のタイミング</h3>
       <p className="counterGuide">MPは特技の発動時に消費。指示の選択・取消では消費しません。戦闘中の自然回復はなく、再戦を含む対戦開始時に全回復します。MPが足りないときは「たたかう」「ぼうぎょ」が使えます。</p>
       <p className="counterGuide">「守り:今T」はこのターンの終了まで有効。「毒:残N回」は残りのダメージ回数です。毒は付与したターンを含むターン終了時に3回発動し、最後のダメージ後に消えます。毒解除はその後の毒ダメージを止めます。</p>
-      <h3>読み合いのヒント</h3>
+      <p className="counterGuide">「自然障壁:残NT」は直接ダメージを{NATURE_WARD_PERCENT}%軽減し、ターン終了に残りが1減ります。守りと重ねても半減まで。玄武が倒れても残り期間は続き、毒は防げません。防御解除は命中前、フェンリルの連牙は命中後に自然障壁を消します。</p><h3>読み合いのヒント</h3>
       <p className="counterGuide">フェンリルの連牙は敵を毎回抽選。守りは命中後に解除するため、最初の一撃は半減。先制技で先に倒す・回復で粘る・防御で初撃をしのぐ選択があります。</p>
       <p className="counterGuide">速い攻撃には「味方を守る」。守りを固める相手には「防御解除」。毒を受けたら「毒解除＋回復」。守護と防御の直接ダメージ軽減は重なりません。毒の継続ダメージは軽減できません。どれも1回の行動を使います。</p>
     </section>

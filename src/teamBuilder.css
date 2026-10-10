@@ -92,3 +92,28 @@
 .advancedFilters:has([aria-label="系統で絞り込み"]){grid-template-columns:repeat(3,minmax(0,1fr))}
 
 .newBeast{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:14px 0;padding:12px;background:linear-gradient(110deg,#23433d,#1a3038);border:1px solid #7fb8a54f;border-radius:10px}.newBeast strong,.newBeast small{display:block}.newBeast strong{font-size:12px;color:#d6e6cd;margin:4px 0}.newBeast small{font-size:10px;color:#a5bdb1}.newBeast .secondary{white-space:nowrap;padding:9px;font-size:10px}
+
+/* Family scope stays readable without relying on color or tiny slot badges. */
+.teamBuilder .familyComposition{display:flex;flex-wrap:wrap;gap:6px 12px;margin:11px 1px 5px;font-size:10px;color:#bdd1be}
+.teamBuilder .familyComposition b{color:#e3d5a8;font-variant-numeric:tabular-nums}
+.teamBuilder .familyRecipients,.teamBuilder .familyExcluded{display:block;line-height:1.7;overflow-wrap:anywhere}
+.teamBuilder .familyExcluded{color:#acb6b3!important}
+.teamBuilder .openingSupports{margin:9px 0;display:grid;gap:8px}
+.teamBuilder .openingSupport,.teamBuilder .beastBarrageBonus{display:grid;gap:4px;padding:10px;border:1px solid #86b99d44;border-radius:7px;background:#2b4d4226;text-align:left}
+.teamBuilder .openingSupport strong,.teamBuilder .beastBarrageBonus strong{font-size:10px;color:#d0e0bd}
+.teamBuilder .openingSupport small,.teamBuilder .beastBarrageBonus small,.teamBuilder .supportTiming{font-size:10px;line-height:1.7;color:#b8c8b2}
+.teamBuilder .supportTiming{padding:0 2px;color:#a7baaa}
+.teamBuilder .beastBarrageBonus{margin:9px 0;border-color:#bdaa7344;background:#bdaa7311}
+.teamBuilder .beastBarrageBonus[data-active=true]{border-color:#bdaa7388;background:#bdaa7322}
+.teamBuilder .projectedLeader{margin:6px 0;padding-bottom:6px;border-bottom:1px solid #86b99d33}
+.teamBuilder .newFamilyMembers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px}
+.teamBuilder .familyArrival{display:flex;align-items:center;gap:7px;min-width:0;padding:11px 8px;text-align:left;border:1px solid #8fba8966;border-radius:9px;background:linear-gradient(110deg,#314337,#1d3339);color:#d6e6cd}
+.teamBuilder .familyArrival>span:first-child{font-size:27px;flex-shrink:0}
+.teamBuilder .familyArrival>span:nth-child(2){min-width:0}
+.teamBuilder .familyArrival strong,.teamBuilder .familyArrival small,.teamBuilder .familyArrival em{display:block;line-height:1.6;overflow-wrap:anywhere}
+.teamBuilder .familyArrival strong{font-size:12px;margin:2px 0}
+.teamBuilder .familyArrival small{font-size:9px;color:#b9cba7}
+.teamBuilder .familyArrival em{font-size:9px;font-style:normal;color:#a7beb0}
+.teamBuilder .familyArrival>b{margin-left:auto;font-size:21px;font-weight:400;color:#cdbc8e}
+.teamBuilder .natureArrival{border-color:#69afa366;background:linear-gradient(110deg,#234642,#1b303a)}
+@media(max-width:390px){.teamBuilder .newFamilyMembers{grid-template-columns:1fr}.teamBuilder .advancedFilters:has([aria-label="系統で絞り込み"]){grid-template-columns:1fr}.teamBuilder .familyArrival{padding:9px 11px}}

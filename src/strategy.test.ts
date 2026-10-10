@@ -19,10 +19,10 @@ describe('team rules and opponents', () => {
     expect(isValidTeam(initialTeam, rules.light.budget)).toBe(true);
   });
 
-  it.each<RuleId>(['standard', 'light'])('provides four distinct legal %s opponents', rule => {
+  it.each<RuleId>(['standard', 'light'])('provides distinct legal %s opponents', rule => {
     const teams = opponentTeams(rule);
-    expect(teams).toHaveLength(4);
-    expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(4);
+    expect(teams).toHaveLength(rule === 'standard' ? 6 : 5);
+    expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(teams.length);
     for (const team of teams) {
       expect(isValidTeam(team, rules[rule].budget)).toBe(true);
       expect(cost(team)).toBeLessThanOrEqual(rules[rule].budget);
@@ -33,12 +33,30 @@ describe('team rules and opponents', () => {
   });
 
   it('preserves standard opponents and protects them from preview mutations', () => {
-    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]];
+    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10]];
     expect(opponentTeams('standard')).toEqual(expected);
     const teams = opponentTeams('standard');
     teams[0][0] = 11;
     teams.pop();
     expect(opponentTeams('standard')).toEqual(expected);
+  });
+
+  it('appends legal full-family encounters without changing the original preset order', () => {
+    const standard = opponentTeams('standard');
+    const light = opponentTeams('light');
+    expect(standard.slice(0, 4)).toEqual([[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]]);
+    expect(light.slice(0, 4)).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10]]);
+    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10]]);
+    expect(light.slice(4)).toEqual([[14, 3, 6, 9, 10]]);
+    const beast = standard[4];
+    const nature = standard[5];
+    expect(beast.every(id => monsters[id].family === 'beast')).toBe(true);
+    expect(nature.every(id => monsters[id].family === 'nature')).toBe(true);
+    expect(cost(beast)).toBe(17);
+    expect(cost(nature)).toBe(15);
+    expect(isValidTeam(beast, rules.standard.budget)).toBe(true);
+    expect(isValidTeam(beast, rules.light.budget)).toBe(false);
+    expect(isValidTeam(nature, rules.light.budget)).toBe(true);
   });
 
   it('validates exact size, unique roster IDs, integer IDs, and the selected budget', () => {
@@ -177,9 +195,9 @@ describe('truthful character roles and tradeoffs', () => {
     expect(monsterRole(naga.id).tradeoff).toContain('同時に使えない');
     expect(garuda.cost).toBe(2);
     expect(garuda.speed).toBe(Math.max(...monsters.map(monster => monster.speed)));
-    expect(garuda.hp).toBe(Math.min(...monsters.map(monster => monster.hp)));
+    expect(garuda.hp).toBeLessThan(monsters[0].hp);
     expect(monsterRole(garuda.id).strength).toContain('撃破');
-    expect(monsterRole(garuda.id).tradeoff).toContain('HPは最も低く');
+    expect(monsterRole(garuda.id).tradeoff).toContain('HPは低く');
     expect(monsters[0].atk).toBeGreaterThan(garuda.atk);
     expect(monsters[0].skills[0]!.power).toBeGreaterThan(garuda.skills[0]!.power);
     expect(monsters[1].hp).toBe(Math.max(...monsters.map(monster => monster.hp)));

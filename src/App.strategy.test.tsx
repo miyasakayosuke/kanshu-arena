@@ -55,10 +55,10 @@ describe('strategy workshop and fair rules',()=>{
     await click(button('標準戦'));expect(button('この編成で対戦する').disabled).toBe(false);
   });
   it('combines role, leader and cost filters and can reset them',async()=>{
-    await mount();await click(button('モンスター図鑑を開く'));await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(2);
+    await mount();await click(button('モンスター図鑑を開く'));await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(3);
     await select('コストで絞り込み','2');await select('リーダー効果で絞り込み','hp');
     expect(document.querySelectorAll('.rosterItem')).toHaveLength(1);expect(document.querySelector('.rosterItem')?.textContent).toContain('ナーガ');
-    await click(label('絞り込みをリセット'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(13);
+    await click(label('絞り込みをリセット'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(15);
     await click(button('毒解除'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(2);
   });
   it('does not reveal an enemy party before starting, and lightweight opponents obey the selected budget',async()=>{

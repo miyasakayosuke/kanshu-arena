@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-10",
+  "release": "0.11.0 pre-alpha candidate",
+  "auditBaseCommit": "d11cdcf8286a486423ec5fdd1420f0e32212a370",
+  "status": "ongoing-review-not-legal-clearance",
+  "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
+  "assets": [
+    {
+      "id": "fenrir-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/fenrirArt.ts"
+      ],
+      "provenance": "本作向けに制作されたSVGとするソースコメントとdocs/fenrir-reference.mdの制作説明。初出commit cd7e4a2。フル画像・顔アイコンで同じパスを共有。",
+      "reviewLimit": "コメントと履歴は制作申告であり、独立した権利帰属・類似性の証明ではない。個別の比較レビューは継続中。",
+      "creator": "本作開発でのAI支援コード制作。人の創作寄与と権利帰属の法的評価は未実施。",
+      "createdFor": "v0.10",
+      "sha256": {
+        "src/fenrirArt.ts": "0f49ba57820a0c9a772d72edc5ba6cca853a042c91afb39e66dd0b3fbf1ca412"
+      },
+      "references": [
+        "docs/fenrir-reference.md"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; original-content license not selected"
+    },
+    {
+      "id": "family-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/familyArt.ts"
+      ],
+      "provenance": "v0.11制作のラタトスク/玄武のSVG。パス・図形・グラデーションのみ。図鑑/戦場が同じパスを共有。",
+      "reviewLimit": "制作担当の申告とソース監査による。神話モチーフであることやAI支援だけで第三者表現との類似性を否定しない。",
+      "creator": "本作開発でのAI支援コード制作。人の創作寄与と権利帰属の法的評価は未実施。",
+      "createdFor": "v0.11",
+      "sha256": {
+        "src/familyArt.ts": "8a66b2c9bc1b247cf638416b9e356207ae16d527c7849d3af0efe4c24b1fd885"
+      },
+      "references": [
+        "docs/family-wave-reference.md",
+        "https://sacred-texts.com/neu/pre/pre04.htm",
+        "https://www.nabunken.go.jp/shijin/about/kitora-atlas/mural/post.html"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; source imagery/translated prose not imported",
+      "creationStatement": {
+        "recordedAt": "2026-10-10",
+        "statement": "制作担当から、本作向けにSVGパス・新規の物語・技説明を作成し、これらの追加に外部の画像・フォント・音声・モデル・サンプル・他者のコードのコピーを使っていないとの申告を確認。",
+        "evidenceLimit": "制作担当の直接申告。独立した類似性確認や法的評価とは別。"
+      }
+    },
+    {
+      "id": "system-emoji",
+      "kind": "device-rendered-unicode",
+      "files": [
+        "src/engine.ts",
+        "src/MonsterArt.tsx",
+        "src/BattleStage.tsx"
+      ],
+      "provenance": "キャラのicon値を文字としてDOM/Canvasで描画。既存12体は主に絵文字、3体はSVGで表示しicon値はフォールバックにも残る。",
+      "reviewLimit": "字形の作者を本作開発者としない。端末依存の描画であり、フォントや絵文字画像の再配布許諾を得たことを意味しない。",
+      "rosterIcons": [
+        "🦊",
+        "🪨",
+        "🐈",
+        "🌳",
+        "👻",
+        "🐉",
+        "🦅",
+        "🦭",
+        "🔥",
+        "🐦",
+        "🐍",
+        "🐺",
+        "🐺",
+        "🐿️",
+        "🐢"
+      ],
+      "distribution": "Unicode characters; no emoji image/font file bundled"
+    },
+    {
+      "id": "device-fonts",
+      "kind": "device-rendered-fonts",
+      "files": [
+        "src/style.css",
+        "src/BattleStage.tsx"
+      ],
+      "provenance": "CSS/Canvasがsystem-ui, -apple-system, sans-serif, Noto Sans JP, Apple Color Emoji, Segoe UI Emoji, Noto Color Emojiをローカルの候補名として指定。@font-faceやフォントダウンロードなし。",
+      "reviewLimit": "フォントごとの権利と端末へのインストール条件は別。今後の同梱、抽出、ストア用素材への利用は再確認。",
+      "distribution": "Font-family references only; font files not redistributed"
+    },
+    {
+      "id": "effects-ui-text",
+      "kind": "project-code-text-and-effects",
+      "files": [
+        "src/BattleStage.tsx",
+        "src/areaEffects.ts",
+        "src/battleMotion.ts",
+        "src/style.css",
+        "src/teamBuilder.css",
+        "src/strategy.ts",
+        "src/engine.ts"
+      ],
+      "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md等に記録。",
+      "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
+      "distribution": "Original project code/text; owner has not selected a project-wide reuse license"
+    }
+  ],
+  "software": [
+    {
+      "license": "MIT",
+      "reviewLimit": "パッケージ原文と配信コードの監査に基づく表示。依存変更や別配信形態は再確認する。",
+      "id": "react",
+      "displayName": "react 19.3.0",
+      "packagePath": "node_modules/react",
+      "packageVersion": "19.3.0",
+      "licenseFile": "node_modules/react/LICENSE",
+      "licenseSha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+      "upstream": "https://github.com/react/react",
+      "distribution": "Browser runtime JavaScript",
+      "provenance": "package-lock.jsonの固定版とインストール済みLICENSE原文。React系のJSが配信バンドルに含まれる。"
+    },
+    {
+      "license": "MIT",
+      "reviewLimit": "パッケージ原文と配信コードの監査に基づく表示。依存変更や別配信形態は再確認する。",
+      "id": "react-dom",
+      "displayName": "react-dom 19.3.0",
+      "packagePath": "node_modules/react-dom",
+      "packageVersion": "19.3.0",
+      "licenseFile": "node_modules/react-dom/LICENSE",
+      "licenseSha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+      "upstream": "https://github.com/react/react",
+      "distribution": "Browser runtime JavaScript",
+      "provenance": "package-lock.jsonの固定版とインストール済みLICENSE原文。React系のJSが配信バンドルに含まれる。"
+    },
+    {
+      "license": "MIT",
+      "reviewLimit": "パッケージ原文と配信コードの監査に基づく表示。依存変更や別配信形態は再確認する。",
+      "id": "scheduler",
+      "displayName": "scheduler 0.28.0",
+      "packagePath": "node_modules/scheduler",
+      "packageVersion": "0.28.0",
+      "licenseFile": "node_modules/scheduler/LICENSE",
+      "licenseSha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+      "upstream": "https://github.com/react/react",
+      "distribution": "Browser runtime JavaScript",
+      "provenance": "package-lock.jsonの固定版とインストール済みLICENSE原文。React系のJSが配信バンドルに含まれる。"
+    },
+    {
+      "license": "MIT",
+      "reviewLimit": "パッケージ原文と配信コードの監査に基づく表示。依存変更や別配信形態は再確認する。",
+      "id": "vite-modulepreload-helper",
+      "displayName": "Vite 6.4.4: modulepreload helper",
+      "packagePath": "node_modules/vite",
+      "packageVersion": "6.4.4",
+      "licenseFile": "node_modules/vite/LICENSE.md",
+      "licenseSection": "vite-core",
+      "licenseSha256": "e824161e0aab3814aca1883bd7058e67034d25fce254e6629495e78d3f8a53c3",
+      "upstream": "https://github.com/vitejs/vite",
+      "distribution": "Small generated modulepreload helper in browser JavaScript; not the whole Vite toolchain",
+      "provenance": "配信JS先頭とViteのmodulepreload補助コードを照合。LICENSE.md冒頭のVite core licenseを保持。"
+    },
+    {
+      "license": "MIT",
+      "reviewLimit": "パッケージ原文と配信コードの監査に基づく表示。依存変更や別配信形態は再確認する。",
+      "id": "rollup-commonjs-helper",
+      "displayName": "Rollup CommonJS helper bundled with Vite 6.4.4",
+      "packagePath": "node_modules/vite",
+      "packageVersion": "6.4.4",
+      "licenseFile": "node_modules/vite/LICENSE.md",
+      "licenseSection": "rollup-commonjs-helper",
+      "licenseSha256": "6c996869b8b80d89cf92e4ad974c72c9599c26cc8b94f3bfcbc8cc757396ea36",
+      "upstream": "https://github.com/rollup/plugins/tree/master/packages/commonjs",
+      "distribution": "Generated getDefaultExportFromCjs interoperability helper in browser JavaScript",
+      "provenance": "Vite内HELPERSと配信JSのgetDefaultExportFromCjsを照合。Vite LICENSE.mdのRollupJS Plugin Contributors全文を保持。独立したpluginの解決版は記録から確定していない。"
+    }
+  ],
+  "otherDependencies": {
+    "inventory": "package-lock.json",
+    "distribution": "Development/test/build tools are not themselves included in the browser release, except the explicitly listed generated helpers. Reassess bundled output after tool changes. Preserve full upstream licenses/NOTICE if redistributing tools or node_modules.",
+    "reviewLimit": "Not an SBOM or a proof that all build-generated code is identified."
+  },
+  "absentAtReview": [
+    "No downloaded game image, raster asset, music, voice, effect-audio, or font file found in tracked source/runtime artifact.",
+    "No DQMSL archive, screenshot, or external image embedded in the reviewed browser build."
+  ],
+  "openReview": "docs/rights/review-ledger.md"
+}

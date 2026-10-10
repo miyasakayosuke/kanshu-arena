@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "family-wave-genbu-atk30",
+  "seeds": [
+    2674696770,
+    1034165235,
+    3688600996,
+    2048069461,
+    407537926,
+    3061973687,
+    1421442152,
+    4075877913,
+    2435346378,
+    794814843,
+    3449250604,
+    1808719069,
+    168187534,
+    2822623295,
+    1182091760,
+    3836527521,
+    2195995986,
+    555464451,
+    3209900212,
+    1569368677,
+    4223804438,
+    2583272903,
+    942741368,
+    3597177129,
+    1956645594,
+    316114059,
+    2970549820,
+    1330018285,
+    3984454046,
+    2343922511,
+    703390976,
+    3357826737
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "all-beast",
+      "role": "COST17・全5枠獣系・フェンリル＋ラタトスク条件連撃",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ]
+    },
+    {
+      "id": "nature",
+      "role": "COST15・全5枠自然系・自然核リーダーHPと開幕加護",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "mixed-beast",
+      "role": "COST15・既存の獣3自然2編成・フェンリル変更なし",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "priority",
+      "role": "COST15・先制・高速度・毒",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ]
+    },
+    {
+      "id": "poison-cleanse",
+      "role": "COST15・毒・回復・浄化・開幕加護なし",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ]
+    },
+    {
+      "id": "guard-breakers",
+      "role": "COST14・着弾前解除2体＋回復・低コスト枠",
+      "ids": [
+        8,
+        11,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "beast-no-core",
+      "role": "COST17・全5枠獣系・フェンリルをセルキーへ置換＋アヌビス先頭。能力・リーダーも変わる対照",
+      "ids": [
+        11,
+        0,
+        2,
+        7,
+        13
+      ]
+    },
+    {
+      "id": "mixed-replacement",
+      "role": "COST15・既存混成の同コストアヌビス置換・リーダーも変わる対照",
+      "ids": [
+        11,
+        0,
+        2,
+        6,
+        10
+      ]
+    },
+    {
+      "id": "nature-nonleader",
+      "role": "COST15・自然核は2枠目・同5体で先頭のみ変更。開幕加護は維持",
+      "ids": [
+        3,
+        14,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "nature-no-core",
+      "role": "COST15・自然核なし・2枠置換。自然非リーダー編成と同先頭・同コストだが構成差あり",
+      "ids": [
+        3,
+        6,
+        9,
+        7,
+        4
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "nature-vs-all-beast",
+      "a": "nature",
+      "b": "all-beast",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-mixed-beast",
+      "a": "nature",
+      "b": "mixed-beast",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-priority",
+      "a": "nature",
+      "b": "priority",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-poison-cleanse",
+      "a": "nature",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-guard-breakers",
+      "a": "nature",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-beast-no-core",
+      "a": "nature",
+      "b": "beast-no-core",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-mixed-replacement",
+      "a": "nature",
+      "b": "mixed-replacement",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-nature-nonleader",
+      "a": "nature",
+      "b": "nature-nonleader",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-vs-nature-no-core",
+      "a": "nature",
+      "b": "nature-no-core",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "all-beast-vs-mixed-beast",
+      "a": "all-beast",
+      "b": "mixed-beast",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-priority",
+      "a": "all-beast",
+      "b": "priority",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-poison-cleanse",
+      "a": "all-beast",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-guard-breakers",
+      "a": "all-beast",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "all-beast-vs-beast-no-core",
+      "a": "all-beast",
+      "b": "beast-no-core",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-priority",
+      "a": "mixed-beast",
+      "b": "priority",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-poison-cleanse",
+      "a": "mixed-beast",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-guard-breakers",
+      "a": "mixed-beast",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "mixed-beast-vs-mixed-replacement",
+      "a": "mixed-beast",
+      "b": "mixed-replacement",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 12
+    },
+    {
+      "id": "nature-nonleader-vs-priority",
+      "a": "nature-nonleader",
+      "b": "priority",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-nonleader-vs-poison-cleanse",
+      "a": "nature-nonleader",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-nonleader-vs-guard-breakers",
+      "a": "nature-nonleader",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-nonleader-vs-nature-no-core",
+      "a": "nature-nonleader",
+      "b": "nature-no-core",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 14
+    },
+    {
+      "id": "nature-no-core-vs-priority",
+      "a": "nature-no-core",
+      "b": "priority",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 3
+    },
+    {
+      "id": "nature-no-core-vs-poison-cleanse",
+      "a": "nature-no-core",
+      "b": "poison-cleanse",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 3
+    },
+    {
+      "id": "nature-no-core-vs-guard-breakers",
+      "a": "nature-no-core",
+      "b": "guard-breakers",
+      "complaintIds": [
+        "core-efficiency-hypothesis"
+      ],
+      "keyUnitId": 3
+    }
+  ],
+  "candidate": {
+    "id": "genbu-atk30",
+    "label": "履歴用プローブ（基準版は実行時の現行値）：未採用の診断：玄武ATK45→30のみ",
+    "overrides": {
+      "monsters": {
+        "14": {
+          "atk": 30
+        }
+      }
+    }
+  },
+  "complaints": [
+    {
+      "id": "core-efficiency-hypothesis",
+      "status": "hypothesis",
+      "source": null,
+      "complaint": "固定自動方策では自然編成の勝敗が飽和するため、新規の核と既存の毒主体編成を切り分けたい。プレイヤーの苦情ではない。",
+      "hypothesis": "玄武ATK45→30のみ。その他の個体・リーダー・開幕支援と固定32シードは維持。",
+      "scenarioIds": [
+        "nature-vs-all-beast",
+        "nature-vs-mixed-beast",
+        "nature-vs-priority",
+        "nature-vs-poison-cleanse",
+        "nature-vs-guard-breakers",
+        "nature-vs-beast-no-core",
+        "nature-vs-mixed-replacement",
+        "nature-vs-nature-nonleader",
+        "nature-vs-nature-no-core",
+        "all-beast-vs-mixed-beast",
+        "all-beast-vs-priority",
+        "all-beast-vs-poison-cleanse",
+        "all-beast-vs-guard-breakers",
+        "all-beast-vs-beast-no-core",
+        "mixed-beast-vs-priority",
+        "mixed-beast-vs-poison-cleanse",
+        "mixed-beast-vs-guard-breakers",
+        "mixed-beast-vs-mixed-replacement",
+        "nature-nonleader-vs-priority",
+        "nature-nonleader-vs-poison-cleanse",
+        "nature-nonleader-vs-guard-breakers",
+        "nature-nonleader-vs-nature-no-core",
+        "nature-no-core-vs-priority",
+        "nature-no-core-vs-poison-cleanse",
+        "nature-no-core-vs-guard-breakers"
+      ],
+      "metrics": [
+        {
+          "name": "scoreRate",
+          "direction": "observe",
+          "rationale": "対面別の結果を比較する。"
+        },
+        {
+          "name": "meanDirectDamage",
+          "direction": "observe",
+          "rationale": "勝敗が飽和しても直接ダメージへの寄与を確認する。"
+        },
+        {
+          "name": "meanHealing",
+          "direction": "observe",
+          "rationale": "回復を選ぶ局面があるか、個体指標と合わせて確認する。"
+        },
+        {
+          "name": "meanTurns",
+          "direction": "observe",
+          "rationale": "短期決着が変わるか確認する。"
+        }
+      ],
+      "limitations": [
+        "32シード・固定10編成・自動方策の局所的証拠。人間の楽しさ、公平感、最善手は示さない。",
+        "COST17の全獣編成とCOST15の自然編成、COST14の解除編成を含む。合法であることは同コストを意味しない。",
+        "核の置換対照では個体・技・場合によりリーダーや系統人数も変わる。開幕加護のみの因果比較は同じ編成のbaseline/candidate。",
+        "候補の変更は両軍に適用。自然核が双方にいる対面では両方の加護が変わる。",
+        "開始シードを揃えても行動や撃破が変わると乱数消費位置は一致しない。"
+      ]
+    }
+  ],
+  "sampling": {
+    "count": 0,
+    "seed": 20261009
+  }
+}
