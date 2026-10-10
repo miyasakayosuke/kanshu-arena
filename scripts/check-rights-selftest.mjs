@@ -97,3 +97,8 @@ test('the source must expose a credits route as well as the public page', () => 
   removeLink('src');
   assert.throws(() => checkRights({ root }), /Game UI must provide a credits link/);
 });
+
+test('HTML must contain the same complete notice text as the text file', () => {
+  const root = fixture(); change(root, 'public/credits.html', value => value.replace('Permission is hereby granted', 'Permission text omitted'));
+  assert.throws(() => checkRights({ root }), /Embedded HTML notices are missing\/stale/);
+});

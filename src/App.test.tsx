@@ -33,6 +33,8 @@ describe('complete playtest flow', () => {
     await mount();
     const link = document.querySelector<HTMLAnchorElement>('.homeCredits a')!;
     expect(link.textContent).toContain('クレジット・権利情報');
+    // Global footer styles are fixed behind the main nav; credits must stay in normal flow.
+    expect(link.parentElement?.tagName).toBe('DIV');
     expect(link.getAttribute('href')).toBe(`${import.meta.env.BASE_URL}credits.html`);
     expect(link.target).toBe('_blank');
     expect(link.rel).toBe('noopener noreferrer');

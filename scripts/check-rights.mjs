@@ -5,6 +5,10 @@ import { fileURLToPath } from 'node:url';
 
 const defaultRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = 'docs/rights/asset-manifest.json';
+const noticeStart = '<!-- BEGIN THIRD-PARTY NOTICES -->';
+const noticeEnd = '<!-- END THIRD-PARTY NOTICES -->';
+const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+const embeddedNotices = text => `${noticeStart}\n<pre id="software-notices">${escapeHtml(text)}</pre>\n${noticeEnd}`;
 const mediaExtensions = /\.(?:svg|png|jpe?g|gif|webp|avif|ico|bmp|mp3|wav|ogg|m4a|mp4|webm|woff2?|ttf|otf|eot)$/i;
 const read = (root, path) => readFileSync(join(root, path), 'utf8');
 const json = (root, path) => JSON.parse(read(root, path));
@@ -97,6 +101,7 @@ export function checkRights({ root = defaultRoot, dist = false } = {}) {
   assert(read(root, 'public/THIRD_PARTY_NOTICES.txt') === notices, 'Public third-party notices are missing/stale. Review, then run node scripts/check-rights.mjs --write-notices.');
   const credits = read(root, 'public/credits.html');
   assert(credits.includes('href="./THIRD_PARTY_NOTICES.txt"'), 'Credits must link to the complete notices.');
+  assert(credits.includes(embeddedNotices(notices)), 'Embedded HTML notices are missing/stale. Run node scripts/check-rights.mjs --write-notices after review.');
   assert(sourceFiles.some(path => read(root, path).includes('credits.html')), 'Game UI must provide a credits link.');
   if (dist) {
     for (const path of ['THIRD_PARTY_NOTICES.txt', 'credits.html']) {
@@ -114,8 +119,14 @@ export function checkRights({ root = defaultRoot, dist = false } = {}) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     if (process.argv.includes('--write-notices')) {
-      writeFileSync(join(defaultRoot, 'public/THIRD_PARTY_NOTICES.txt'), expectedNotices(defaultRoot));
-      console.log('Wrote reviewed third-party notice text. Run rights:check and build next.');
+      const notices = expectedNotices(defaultRoot);
+      const credits = read(defaultRoot, 'public/credits.html');
+      assert(credits.split(noticeStart).length === 2 && credits.split(noticeEnd).length === 2, 'Credits needs one pair of third-party notice markers.');
+      const start = credits.indexOf(noticeStart), end = credits.indexOf(noticeEnd) + noticeEnd.length;
+      assert(end > start, 'Credits notice markers are out of order.');
+      writeFileSync(join(defaultRoot, 'public/THIRD_PARTY_NOTICES.txt'), notices);
+      writeFileSync(join(defaultRoot, 'public/credits.html'), credits.slice(0, start) + embeddedNotices(notices) + credits.slice(end));
+      console.log('Wrote reviewed third-party notices as text and embedded HTML. Run rights:check and build next.');
     } else {
       console.log('Rights inventory checks passed:', checkRights({ dist: process.argv.includes('--dist') }));
       console.log('This checks recorded files/notices, not copyright, trademark, patent, or legal clearance.');
