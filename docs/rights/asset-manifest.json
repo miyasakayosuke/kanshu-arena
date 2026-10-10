@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-10",
-  "release": "0.12.0 pre-alpha candidate",
-  "auditBaseCommit": "ff52abef77a2a719fd39e0b21a7a83ba7e534f28",
+  "release": "0.13.0 pre-alpha candidate",
+  "auditBaseCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -79,6 +79,31 @@
       }
     },
     {
+      "id": "material-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/materialArt.ts"
+      ],
+      "provenance": "v0.13のタロス/唐傘おばけ/ぬりかべ/巡る三脚鼎/青銅の牡牛。SVGパス・図形・グラデーションと各専用動作を本作向けに直接記述。画像資料・外部コードを取り込んでいないとの制作申告を記録。",
+      "reviewLimit": "制作申告、ソース監査、実描画の確認による。神話・民俗モチーフやAI支援は権利の包括的な保証ではなく、類似性・商標・権利帰属の専門家確認は未実施。",
+      "creator": "本作開発でのAI支援コード制作。",
+      "createdFor": "v0.13",
+      "sha256": {
+        "src/materialArt.ts": "4d7b55fd429d72a4d427d7a1db1a14ea68fa12aba47c93791e56cf7713ac9462"
+      },
+      "references": [
+        "docs/material-art-provenance.md",
+        "docs/material-family-reference.md"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; no external source illustration, translated prose, animation sample, audio, or font imported",
+      "visualReview": "制作担当と統合担当が280×210全身、140pxポートレート、112–127px戦場、48pxポートレートの20点を実描画して確認。三段の空洞胴、縫った藍色の傘、顔のない段壁、3輪の浅い鼎、4脚の装甲牛を区別。現代作品全体との網羅比較ではない。",
+      "creationStatement": {
+        "recordedAt": "2026-10-10",
+        "statement": "制作担当はSVG形状・動作・エフェクトを本作向けに直接記述し、外部の画像・ロゴ・スプライト・フォント・音声・モデル・トレース・動作サンプル・抽出素材・他者コードのコピーを使わず、画像生成ツールも使っていないと直接申告。",
+        "evidenceLimit": "docs/material-art-provenance.mdの直接申告とソース/ラスタ確認。法的評価とは別。"
+      }
+    },
+    {
       "id": "system-emoji",
       "kind": "device-rendered-unicode",
       "files": [
@@ -86,7 +111,7 @@
         "src/MonsterArt.tsx",
         "src/BattleStage.tsx"
       ],
-      "provenance": "キャラのicon値を文字としてDOM/Canvasで描画。既存12体は主に絵文字、7体はSVGで表示しicon値はフォールバックにも残る。新規4体も端末のUnicode字形だけをフォールバックに利用。",
+      "provenance": "キャラのicon値を端末の文字としてDOM/Canvasで描画。既存12体は主に絵文字、12体は本作用SVGで表示しicon値はフォールバックや保存枠にも残る。フォントや字形画像は同梱しない。",
       "reviewLimit": "字形の作者を本作開発者としない。端末依存の描画であり、フォントや絵文字画像の再配布許諾を得たことを意味しない。",
       "rosterIcons": [
         "🦊",
@@ -107,7 +132,12 @@
         "🐉",
         "🦎",
         "🐍",
-        "🐲"
+        "🐲",
+        "⚙️",
+        "☂️",
+        "🧱",
+        "♨️",
+        "🐂"
       ],
       "distribution": "Unicode characters; no emoji image/font file bundled"
     },
@@ -137,7 +167,7 @@
         "src/families.ts",
         "src/MonsterArt.tsx"
       ],
-      "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。",
+      "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
       "distribution": "Original project code/text; owner has not selected a project-wide reuse license"
     }

@@ -3,7 +3,7 @@ import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
 import {CHARACTER_ART} from './MonsterArt';
 import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
-import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion} from './battleMotion';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion, sampleTalosMotion, sampleUmbrellaMotion, sampleWallMotion, sampleTripodMotion, sampleBronzeBullMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
   onSelectTarget?: (key: string) => void;
 };
 type Point = {x: number; y: number};
-type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin';
+type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
 type Health = {value: number; trail: number; target: number; changed: number};
@@ -38,6 +38,12 @@ const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
   seed: {light: '#fff0bc', core: '#c38d4d', dark: '#638156'},
   storm: {light: '#ece3ff', core: '#858ac9', dark: '#39416e'},
   twin: {light: '#eef0e6', core: '#a694c0', dark: '#655076'},
+  bronze: {light:'#f4db93',core:'#b38951',dark:'#315b4b'},
+  paper: {light:'#f2dfb5',core:'#789caf',dark:'#344e70'},
+  masonry: {light:'#e8dccc',core:'#a3aaa0',dark:'#4b6862'},
+  steam: {light:'#e4f2d8',core:'#9dcabd',dark:'#a45f48'},
+  bull: {light:'#f2e3b7',core:'#c3a05f',dark:'#3c6151'},
+  repair: {light:'#f3dfaa',core:'#80b497',dark:'#8a6946'},
 };
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const ease = (value: number) => 1 - (1 - clamp(value)) ** 3;
@@ -52,7 +58,10 @@ function locate(key: string | undefined, props: Props): Point | undefined {
   const enemy = props.enemies.findIndex(unit => unit.key === key);
   return enemy >= 0 ? position(enemy, props.enemies.length) : undefined;
 }
-function visual(effect: Effect, event: BattleEvent): Visual {
+const materialVisuals: Visual[] = ['bronze','paper','masonry','steam','bull','repair'];
+function visual(effect: Effect, event: BattleEvent, actorId?: number): Visual {
+  if (event.effect === 'material-repair' || event.passive === 'material-repair') return 'repair';
+  if (actorId !== undefined && actorId >= 19 && actorId <= 23 && event.kind !== 'poison' && event.effect !== 'poison') return materialVisuals[actorId-19];
   if (event.skill === '渇天の息') return 'storm';
   if (event.skill === '双頭の連突') return 'twin';
   if (['翠雲の息', '雲の湧き水', '雲払い'].includes(event.skill ?? '')) return 'water';
@@ -380,6 +389,86 @@ function drawDragonCharge(ctx: CanvasRenderingContext2D, width: number, charge: 
   }
 }
 
+/** Each material has a different authored geometry; no downloaded motion traces. */
+function drawMaterialMark(ctx: CanvasRenderingContext2D, type: Visual, x: number, y: number, size = 1, healing = false) {
+  const p = palettes[type];
+  ctx.save(); ctx.translate(x,y); ctx.scale(size,size);
+  if (type === 'bronze' || type === 'repair') {
+    // Open bronze segments meet green rivets. Repair never uses a damage explosion.
+    for (let index=0;index<3;index++) {
+      const angle=index*TAU/3;
+      ctx.beginPath(); ctx.ellipse(0,type==='repair'?0:24,22+index*5,type==='repair'?24+index*3:7+index*2,0,angle+.14,angle+1.65);
+      ctx.strokeStyle=index%2?p.core:p.dark;ctx.lineWidth=type==='repair'?3:2.5;ctx.stroke();
+      const px=Math.cos(angle)*28,py=Math.sin(angle)*28;
+      if(type==='repair') {ellipse(ctx,px,py,3,3,p.light);line(ctx,[{x:px-4,y:py+4},{x:px+4,y:py-4}],p.core,2);}
+    }
+    if(type==='bronze') line(ctx,[{x:-15,y:18},{x:-4,y:10},{x:3,y:19},{x:16,y:12}],p.light,3);
+  } else if (type === 'paper') {
+    // Five sewn paper folds open as a fan; its falling stitches stay small.
+    for(let i=0;i<5;i++) {
+      const dx=(i-2)*12,top=-23+Math.abs(i-2)*7;
+      line(ctx,[{x:0,y:12},{x:dx,y:top},{x:dx+7,y:top+5}],i%2?p.light:p.core,2);
+      line(ctx,[{x:dx-1,y:21},{x:dx+2,y:29}],p.core,2);
+    }
+  } else if (type === 'masonry') {
+    // Three staggered corners and ledges retain the faceless screen silhouette.
+    for(let i=0;i<3;i++) {
+      const dx=(i-1)*18,top=-24+Math.abs(i-1)*11;
+      line(ctx,[{x:dx-8,y:24},{x:dx-8,y:top},{x:dx+6,y:top+3},{x:dx+9,y:21}],i===1?p.dark:p.core,4);
+      line(ctx,[{x:dx-6,y:top+7},{x:dx+5,y:top+10}],p.light,2);
+    }
+  } else if(type === 'steam') {
+    // A bowl rim, three wheel dots, and thin steam; no circular magic glyph.
+    ellipse(ctx,0,15,28,8);ctx.strokeStyle=p.dark;ctx.lineWidth=2.5;ctx.stroke();
+    for(let i=0;i<3;i++) {const dx=(i-1)*15;
+      line(ctx,[{x:dx,y:5},{x:dx+4,y:-5},{x:dx-3,y:-15},{x:dx,y:-24}],i===1?p.light:p.core,2.5);
+      ellipse(ctx,dx,29,3,4,p.core);
+    }
+    if(healing) line(ctx,[{x:-16,y:16},{x:0,y:20},{x:16,y:16}],p.light,2);
+  } else if(type === 'bull') {
+    // Two heavy horn-shaped hooks and short hoof tracks, never a sword slash.
+    for(const side of [-1,1]) {
+      line(ctx,[{x:side*5,y:14},{x:side*12,y:-4},{x:side*25,y:-13},{x:side*32,y:-25}],p.light,5);
+      line(ctx,[{x:side*12,y:25},{x:side*18,y:32},{x:side*26,y:32}],p.dark,3);
+    }
+  }
+  ctx.restore();
+}
+
+/** The actual damage/heal event releases each mark; a slow frame cannot pre-fire it. */
+function drawMaterialCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const since = Math.max(0,age-CAST_IMPACT_MS);
+  if(cast.impacted && since >= 550) return;
+  const fade=cast.impacted?1-clamp((since-100)/450):1;
+  const preparation=clamp(age/CAST_IMPACT_MS);
+  const origin={x:cast.from.x,y:Math.min(cast.from.y,HEIGHT-13)};
+  const all=cast.event.scope==='all';
+  const targets=cast.targets.length?cast.targets:[{x:cast.to.x,y:Math.min(cast.to.y,HEIGHT-22)}];
+  ctx.save();
+  ctx.globalAlpha=(cast.impacted ? .74 : .22+preparation*.28)*fade;
+  // Local scale correction keeps the mark proportionate on narrow screens.
+  const mark=(point:Point,size:number) => {ctx.save();ctx.translate(point.x,point.y);ctx.scale(1,scaleY);drawMaterialMark(ctx,cast.type,0,0,size,cast.type==='repair'||cast.event.effect==='heal');ctx.restore();};
+  if(!cast.impacted) {
+    mark(origin,cast.type==='repair' ? .62 : reduced ? .6 : .48+.18*preparation);
+    if(cast.type==='bull'&&!reduced) {
+      const lineY=origin.y+30*scaleY;
+      line(ctx,[{x:origin.x-27,y:lineY},{x:origin.x-9,y:lineY},{x:origin.x+3,y:lineY-4}],palettes.bull.dark,2);
+    }
+  } else {
+    const spread=reduced?1:.7+.3*ease(since/140);
+    for(const target of targets) mark(target,spread);
+    // Talos's all-target hammer releases a low ground pulse after the hit only.
+    if(all&&cast.type==='bronze') {
+      const ground=cast.incoming?HEIGHT-3:264;
+      for(let i=0;i<2;i++) {
+        ellipse(ctx,360,ground-i*7*scaleY,290+(reduced?0:ease(since/250)*i*32),(22+i*9)*scaleY);
+        ctx.strokeStyle=i?'#e1c493':'#8d7952';ctx.lineWidth=i?2:3;ctx.stroke();
+      }
+    }
+  }
+  ctx.restore();
+}
+
 function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number) {
   const {event, type, at} = impact;
   const palette = palettes[type];
@@ -402,6 +491,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
       ellipse(ctx, x + Math.cos(angle) * distance, y + Math.sin(angle) * distance * .6 - progress * 20 * movement, 2, 2, '#fff7d2');
     }
   } else if (event.kind === 'guard') {
+    if(materialVisuals.includes(type)) drawMaterialMark(ctx,type,x,y);
     shield(ctx, x, y, 38 + ease(progress) * 10 * movement, .9);
   } else if (event.kind === 'break') {
     // This is the actual post-hit strip event, never a decorative promise at cast.
@@ -417,7 +507,10 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
     line(ctx, [{x:x-17,y:y-31},{x:x+2,y:y-9},{x:x-8,y:y+8},{x:x+19,y:y+30}], '#b6ffec', 3);
     ctx.globalAlpha = fade; ctx.fillStyle = '#566f62'; ctx.font = '700 12px system-ui'; ctx.textAlign = 'center';
-    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : '守り').join('・') : '守り'}解除`, x, y + 48);
+    ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : value === 'repairReady' ? '修復待ち' : '守り').join('・') : '守り'}解除`, x, y + 48);
+  } else if (materialVisuals.includes(type)) {
+    drawMaterialMark(ctx, type, x, y, reduced ? 1 : 1 + ease(progress) * .35, event.kind === 'heal');
+
   } else if (event.kind === 'heal') {
     glow(ctx, x, y + 12, 57, '#84d9aa5c');
     for (let index = 0; index < 3; index++) {
@@ -619,13 +712,13 @@ export default function BattleStage(props: Props) {
         const fallback = ['guard', 'protect', 'heal', 'cleanse'].includes(event.effect ?? '') ? from : {x: WIDTH / 2, y: HEIGHT + 70};
         const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data); return at ? [at] : [];});
         const incoming = (event.targets ?? []).some(key => data.allies.some(unit => unit.key === key));
-        cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
+        cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
       }
       if (data.impact !== lastImpact || data.impacts !== lastImpacts) {
         lastImpact = data.impact;
         lastImpacts = data.impacts;
         if (data.impact?.kind !== 'cast') for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
-          if (['charge', 'resource', 'expire', 'phase'].includes(event.kind)) continue;
+          if (['charge', 'resource', 'expire', 'phase', 'passive'].includes(event.kind)) continue;
           if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'cleanse', 'break'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
           if (cast && event.actor === cast.event.actor && event.hitIndex !== undefined && (cast.lastHitIndex === undefined || event.hitIndex > cast.lastHitIndex)) {cast.lastHitIndex = event.hitIndex; cast.lastHitAt = now;}
           if (seenImpacts.has(event)) continue;
@@ -634,7 +727,7 @@ export default function BattleStage(props: Props) {
           if (at) {
             const sameCast = cast && event.actor && cast.event.actor === event.actor;
             const type = event.kind === 'heal' || event.kind === 'guard' || event.kind === 'poison' || event.effect === 'poison'
-              ? visual(data.effect, event) : sameCast ? cast!.type : 'slash';
+              ? visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id) : sameCast ? cast!.type : visual(null,event,[...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id);
             impacts.push({event, type, started: now, rate, at});
           }
         }
@@ -656,7 +749,13 @@ export default function BattleStage(props: Props) {
           ? CAST_IMPACT_MS + (hitCount - 1) * MULTIHIT_INTERVAL_MS + (now - cast.lastHitAt) * cast.rate
           : Math.min(age, CAST_IMPACT_MS + (cast.lastHitIndex + 1) * MULTIHIT_INTERVAL_MS - 1);
       }
-      const motion = vritraStorm ? sampleVritraMotion(age, cast?.event.dragonChargeSpent, reduced)
+      const supporting = ['guard','protect','heal','cleanse'].includes(cast?.event.effect ?? '') || cast?.event.passive === 'material-repair';
+      const motion = actorId === 19 ? sampleTalosMotion(age,supporting,reduced)
+        : actorId === 20 ? sampleUmbrellaMotion(age,reduced)
+        : actorId === 21 ? sampleWallMotion(age,supporting,reduced)
+        : actorId === 22 ? sampleTripodMotion(age,supporting,reduced)
+        : actorId === 23 ? sampleBronzeBullMotion(age,reduced)
+        : vritraStorm ? sampleVritraMotion(age, cast?.event.dragonChargeSpent, reduced)
         : twinStrike ? sampleAmphisbaenaMotion(age, hitCount, reduced)
         : actorId === 16 ? sampleLindwurmMotion(age, ['guard', 'protect'].includes(cast?.event.effect ?? ''), reduced)
         : actorId === 18 ? sampleZilantMotion(age, reduced)
@@ -685,7 +784,7 @@ export default function BattleStage(props: Props) {
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && ![14, 15, 16].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && ![14, 15, 16, 19, 21, 22, 23].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
@@ -750,6 +849,13 @@ export default function BattleStage(props: Props) {
           const width = CHARACTER_ART[unit.monster.id].spriteWidth;
           const height = width * .75;
           ctx.drawImage(characterImage, -width / 2, 35.5 - height, width, height);
+          if (unit.monster.id === 19 && unit.repairReady === true && alive) {
+            // Readiness is authoritative and finite; no inference from HP or turn.
+            for(const [nx,ny] of [[122,100],[140,103],[158,100]]) {
+              const scale=width/280;
+              ellipse(ctx,-width/2+nx*scale,35.5-height+ny*scale,2.5*scale,3.8*scale,'#b9ecc2');
+            }
+          }
           if (unit.monster.id === 15 && unit.dragonCharge !== undefined && alive) {
             const heldForBreath = attacker && vritraStorm;
             drawDragonCharge(ctx, width, heldForBreath ? age < CAST_IMPACT_MS ? cast?.event.dragonChargeSpent ?? 0 : 0 : unit.dragonCharge);
@@ -794,13 +900,18 @@ export default function BattleStage(props: Props) {
       ctx.scale(zoom, zoom);
       ctx.translate(-center.x, -center.y);
       if (cast?.event.scope === 'all') {
-        if (vritraStorm) drawVritraStorm(ctx, cast, age, reduced, scaleY);
+        if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,cast,age,reduced,scaleY);
+        else if (vritraStorm) drawVritraStorm(ctx, cast, age, reduced, scaleY);
         else if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
         else drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
       }
       drawEnemies();
       ctx.restore();
-      if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) drawCast(ctx, {...cast, from: frameEffectPoint(cast.from), to: frameEffectPoint(cast.to)}, age, reduced);
+      if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) {
+        const framed = {...cast,from:frameEffectPoint(cast.from),to:frameEffectPoint(cast.to),targets:cast.targets.map(frameEffectPoint)};
+        if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,framed,age,reduced,scaleY);
+        else drawCast(ctx,framed,age,reduced);
+      }
       if (cast && seedBarrage) {
         const sequence = (cast.event.hitTargets ?? []).map(key => frameEffectPoint(locate(key, data) ?? {x: WIDTH / 2, y: HEIGHT + 70}));
         const enemyOrigin = locate(cast.event.actor, data);
@@ -852,7 +963,7 @@ export default function BattleStage(props: Props) {
           ctx.translate(0, 67); ctx.scale(1, scaleY); ctx.translate(0, -67);
           ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center';
           ctx.fillStyle = palettes[cast.type].dark;
-          ctx.fillText(cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
+          ctx.fillText(cast.event.passive === 'material-repair' ? `生存物質 · ${cast.event.targets?.length ?? 0}体修復` : cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
           ctx.restore();
         }
       }
@@ -868,7 +979,7 @@ export default function BattleStage(props: Props) {
   }, []);
   const selectable = props.enemies.map((unit, index) => ({unit, point: position(index, props.enemies.length)})).filter(({unit}) => unit.hp > 0 && props.targetKeys?.includes(unit.key));
   const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal'));
-  const announcement = feedback.length > 1 ? `${feedback.length}体に同時着弾。${feedback.map(event => `${[...props.allies, ...props.enemies].find(unit => unit.key === event.target)?.monster.name ?? ''} ${event.kind === 'heal' ? '回復' : 'ダメージ'} ${event.amount}`).join('、')}` : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
+  const announcement = feedback.length > 1 ? `${feedback.length}体に${feedback.every(event=>event.kind==='heal') ? '同時回復' : '同時着弾'}。${feedback.map(event => `${[...props.allies, ...props.enemies].find(unit => unit.key === event.target)?.monster.name ?? ''} ${event.kind === 'heal' ? '回復' : 'ダメージ'} ${event.amount}`).join('、')}` : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
     : props.impact?.amount !== undefined ? `${[...props.allies, ...props.enemies].find(unit => unit.key === props.impact?.target)?.monster.name ?? ''} ${props.impact.kind === 'heal' ? '回復' : 'ダメージ'} ${props.impact.amount}` : '';
   return <div className="battleStage" style={{position: 'relative', width: '100%', height: '100%', minHeight: 0}}>
     <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}

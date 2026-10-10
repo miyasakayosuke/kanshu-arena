@@ -1,0 +1,680 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "material-light-recommendation",
+  "seeds": [
+    2697045971,
+    1056514436,
+    3710950197,
+    2070418662,
+    429887127,
+    3084322888,
+    1443791353,
+    4098227114,
+    2457695579,
+    817164044,
+    3471599805,
+    1831068270,
+    190536735,
+    2844972496,
+    1204440961,
+    3858876722
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "ui-light",
+      "ids": [
+        19,
+        20,
+        21,
+        6,
+        2
+      ],
+      "role": "Actual UI recommendation: Talos/Karakasa/Nurikabe/Garuda/Bastet; C15"
+    },
+    {
+      "id": "naga-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        2,
+        10
+      ],
+      "role": "Same-budget shield with Bastet/Naga from coherent diagnostic; C15"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "role": "Owns before-hit strip skills; CPU selection must be measured; COST14"
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "role": "Legacy area and anchor control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        9
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        21
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        8,
+        11,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        8,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        2,
+        6,
+        11,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        2,
+        3,
+        9,
+        22
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        6,
+        9,
+        11,
+        18
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        17
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        8,
+        9,
+        10,
+        12
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        21
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        1,
+        4,
+        17,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        4,
+        5,
+        8,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        4,
+        5,
+        9,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        9,
+        16,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "ui-light-vs-fullbeast",
+      "a": "ui-light",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-fullnature",
+      "a": "ui-light",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-priority",
+      "a": "ui-light",
+      "b": "priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-poison-cleanse",
+      "a": "ui-light",
+      "b": "poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-guard-heal",
+      "a": "ui-light",
+      "b": "guard-heal",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-strip",
+      "a": "ui-light",
+      "b": "strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-area",
+      "a": "ui-light",
+      "b": "area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-mp-pressure",
+      "a": "ui-light",
+      "b": "mp-pressure",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-puredragon",
+      "a": "ui-light",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-healers",
+      "a": "ui-light",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-poison-cleanse",
+      "a": "ui-light",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-strip",
+      "a": "ui-light",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-area",
+      "a": "ui-light",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-priority",
+      "a": "ui-light",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-beast-duration",
+      "a": "ui-light",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-healers",
+      "a": "ui-light",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-poison-cleanse",
+      "a": "ui-light",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-strip",
+      "a": "ui-light",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-area",
+      "a": "ui-light",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-priority",
+      "a": "ui-light",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-nature-duration",
+      "a": "ui-light",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-healers",
+      "a": "ui-light",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-poison-cleanse",
+      "a": "ui-light",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-strip",
+      "a": "ui-light",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-area",
+      "a": "ui-light",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-priority",
+      "a": "ui-light",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "ui-light-vs-coherent-dragon-duration",
+      "a": "ui-light",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-fullbeast",
+      "a": "naga-shield",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-fullnature",
+      "a": "naga-shield",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-priority",
+      "a": "naga-shield",
+      "b": "priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-poison-cleanse",
+      "a": "naga-shield",
+      "b": "poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-guard-heal",
+      "a": "naga-shield",
+      "b": "guard-heal",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-strip",
+      "a": "naga-shield",
+      "b": "strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-area",
+      "a": "naga-shield",
+      "b": "area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-mp-pressure",
+      "a": "naga-shield",
+      "b": "mp-pressure",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-puredragon",
+      "a": "naga-shield",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-healers",
+      "a": "naga-shield",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-poison-cleanse",
+      "a": "naga-shield",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-strip",
+      "a": "naga-shield",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-area",
+      "a": "naga-shield",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-priority",
+      "a": "naga-shield",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-beast-duration",
+      "a": "naga-shield",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-healers",
+      "a": "naga-shield",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-poison-cleanse",
+      "a": "naga-shield",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-strip",
+      "a": "naga-shield",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-area",
+      "a": "naga-shield",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-priority",
+      "a": "naga-shield",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-nature-duration",
+      "a": "naga-shield",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-healers",
+      "a": "naga-shield",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-poison-cleanse",
+      "a": "naga-shield",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-strip",
+      "a": "naga-shield",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-area",
+      "a": "naga-shield",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-priority",
+      "a": "naga-shield",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "naga-shield-vs-coherent-dragon-duration",
+      "a": "naga-shield",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    }
+  ],
+  "candidate": {
+    "id": "identity",
+    "label": "Final14% UI recommendation paired with same-budget Naga shield",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 42610210
+  }
+}

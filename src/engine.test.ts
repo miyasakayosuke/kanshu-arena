@@ -48,7 +48,7 @@ function expectHpReplay(before: State, after: State, events: BattleEvent[]) {
 
 describe('battle setup and determinism', () => {
   it('preserves original team costs while extending the stable roster IDs', () => {
-    expect(monsters).toHaveLength(19);
+    expect(monsters).toHaveLength(24);
     expect(cost(team)).toBe(15);
     expect(cost(team)).toBeLessThanOrEqual(17);
     expect(cost([])).toBe(0);

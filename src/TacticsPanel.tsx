@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import { autoOrders, NATURE_WARD_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
+import { autoOrders, NATURE_WARD_PERCENT, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
 import { rules, monsterRole, fixedDamageHint, type RuleId } from './strategy';
 
 type Props = { battle: State; orders: Record<string, Order>; playing: boolean; rule: RuleId; onClose: () => void };
@@ -27,6 +27,11 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
         if (!core && !friends.some(unit => unit.monster.family === 'dragon')) return null;
         return <p className="counterGuide dragonTactics" key={label}><strong>{label}の竜気：</strong>{!core ? '中核なし' : core.hp <= 0 ? '中核が戦闘不能・蓄積停止' : core.dragonCharge === undefined ? '条件未成立・蓄積なし' : `有効 · ${core.dragonCharge}/${DRAGON_CHARGE_CAP}`}。開戦時にヴリトラ＋竜系3体以上で有効になります。</p>;
       })}
+      {[{ label: '味方', friends: battle.allies }, { label: '敵', friends: battle.enemies }].map(({ label, friends }) => {
+        const core = friends.find(unit => unit.monster.id === MATERIAL_CORE_ID);
+        if (!core && !friends.some(unit => unit.monster.family === 'material')) return null;
+        return <p className="counterGuide materialTactics" key={label}><strong>{label}の炉心の修復：</strong>{!core ? '中核なし' : core.hp <= 0 ? '中核が戦闘不能・発動なし' : core.repairReady === undefined ? '条件未成立' : core.repairReady ? '修復待ち・1T末の毒後' : '発動済み、または解除済み'}。対象は生存する物質系のみ。開戦時にタロスを含む物質系3体以上が必要です。</p>;
+      })}
       <h3>味方の行動順の目安</h3>
       <p className="hint">守護 → 先制 → 防御 → 通常 → アンカー。同じ区分は素早さ順。同速は抽選。</p>
       <p className="hint">敵の行動は未公開。この間に割り込みます。未入力は現時点のおまかせ案です。</p>
@@ -40,7 +45,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
         <p className="intelRole">{monsterRole(unit.monster.id).name} · {monsterRole(unit.monster.id).tradeoff}</p>
         <div className="intelSkills">{unit.monster.skills.map(skill => <p key={skill.name}>
           <strong>{skill.name}<span className={`skillMp ${unit.hp > 0 && !canUseSkill(unit, skill) ? 'insufficient' : ''}`}>MP {skill.mpCost}{unit.hp > 0 && !canUseSkill(unit, skill) ? ' · MP不足' : ''}</span></strong>
-          <small>{skillOrderLabel(skill)} · {skill.kind === 'protect' ? '味方を守る' : skill.kind === 'cleanse' ? '毒解除＋回復' : skill.randomHits ? `ランダム${barrageHits(skill, battle.enemies)}回${skill.breaksGuardAfterHit ? '・命中後に守り/群気/自然障壁/竜気解除' : skill.familyBonusHit ? '・獣5体なら追撃' : ''}` : skill.breaksGuard ? '命中前に守り/自然障壁/竜気解除' : skill.kind === 'heal' ? '回復' : skill.kind === 'guard' ? '防御' : skill.kind === 'poison' ? '全体＋毒' : skill.fixedDamage ? `${skill.all ? '全体' : '単体'}・${fixedDamageHint(skill, unit)}${skill.dragonChargeFinisher ? '・発動時に全消費' : ''}` : skill.all ? '全体攻撃' : '単体攻撃'}</small>
+          <small>{skillOrderLabel(skill)} · {skill.kind === 'protect' ? '味方を守る' : skill.kind === 'cleanse' ? '毒解除＋回復' : skill.randomHits ? `ランダム${barrageHits(skill, battle.enemies)}回${skill.breaksGuardAfterHit ? '・命中後に守り/群気/自然障壁/竜気/修復待ち解除' : skill.familyBonusHit ? '・獣5体なら追撃' : ''}` : skill.breaksGuard ? '命中前に守り/自然障壁/竜気/修復待ち解除' : skill.kind === 'heal' ? '回復' : skill.kind === 'guard' ? '防御' : skill.kind === 'poison' ? '全体＋毒' : skill.fixedDamage ? `${skill.all ? '全体' : '単体'}・${fixedDamageHint(skill, unit)}${skill.dragonChargeFinisher ? '・発動時に全消費' : ''}` : skill.all ? '全体攻撃' : '単体攻撃'}</small>
         </p>)}</div>
       </details>)}</div>
       <h3>MPと効果のタイミング</h3>
@@ -50,6 +55,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
       <p className="counterGuide">竜気は中核だけが持つ0〜{DRAGON_CHARGE_CAP}の資源。味方の竜系がMPを払う攻撃特技を使い終えるたび+1で、連撃も1回分です。通常攻撃・支援・毒・渇天の息では増えません。開始時の人数条件は仲間が倒れても維持されます。渇天の息は発動時に全消費し、固定基礎に1点あたり{DRAGON_CHARGE_PER_POINT}を加えます。先に動いた味方が溜めた分も使えます。</p>
       <p className="counterGuide">竜気を消すには、通常の防御解除を命中前に当てるか、フェンリルの連牙を命中させます（命中後に解除）。解除後は再蓄積できます。中核を倒せば竜気も消え、以後は溜まりません。アンカーの息に合わせて守護・防御を使う対策もあります。</p>
       <p className="counterGuide">固定基礎の息は攻撃力・群気・全体半減に依存しません。乱数±10%と守り・自然障壁は適用されます。ケツァルコアトルの嵐の息吹は従来どおり攻撃力を使い、全体半減も適用されます。防御力・賢さ・属性相性は未導入です。</p>
+      <p className="counterGuide">炉心の修復は1ターン目終了時、両軍の毒ダメージ後に一度だけ。タロスが生存し修復待ちなら、生存する物質系を各最大HPの{MATERIAL_REPAIR_PERCENT}%回復します。MP・行動を使わず、戦闘不能の仲間は戻りません。通常の防御解除は命中前、フェンリルは命中後に修復待ちを消します。中核を倒す、毒で回復前に倒す、解除を当てる対策があります。</p>
       <h3>読み合いのヒント</h3>
       <p className="counterGuide">フェンリルの連牙は敵を毎回抽選。守りは命中後に解除するため、最初の一撃は半減。先制技で先に倒す・回復で粘る・防御で初撃をしのぐ選択があります。</p>
       <p className="counterGuide">速い攻撃には「味方を守る」。守りを固める相手には「防御解除」。毒を受けたら「毒解除＋回復」。守護と防御の直接ダメージ軽減は重なりません。毒の継続ダメージは軽減できません。どれも1回の行動を使います。</p>

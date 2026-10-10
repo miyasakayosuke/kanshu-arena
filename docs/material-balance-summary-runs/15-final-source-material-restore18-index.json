@@ -1,0 +1,258 @@
+{
+  "rawReportPath": "lab-results/material-final-restore18/report.json",
+  "rawReportSha256": "af17fbabb49e1ff547ee1d001293bf3e28f0ba8f372124c7a7c04b47e46a3871",
+  "phase": "final-source",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "9c04c182f58fded5c7c01af7cdc824914c78de15eb6bd72906cd4e4e71f2a9bd"
+  },
+  "suiteId": "material-restore18",
+  "candidate": {
+    "id": "restore18",
+    "label": "Restore initial18% repair with all unchanged roster values",
+    "overrides": {
+      "materialRepair": {
+        "percent": 18
+      }
+    }
+  },
+  "scheduleCounts": {
+    "teams": 14,
+    "curatedTeams": 14,
+    "sampledTeams": 0,
+    "matchupScenarios": 45,
+    "mirrorScenarios": 14,
+    "seeds": 32,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 7552
+  },
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522,
+    2195995987,
+    555464452,
+    3209900213,
+    1569368678,
+    4223804439,
+    2583272904,
+    942741369,
+    3597177130,
+    1956645595,
+    316114060,
+    2970549821,
+    1330018286,
+    3984454047,
+    2343922512,
+    703390977,
+    3357826738
+  ],
+  "teams": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "threematerial",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "cost": 16
+    },
+    {
+      "id": "twomaterial",
+      "ids": [
+        19,
+        20,
+        3,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "core-replaced",
+      "ids": [
+        14,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        20,
+        19,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "cost": 14
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17
+    }
+  ],
+  "identityChangedOutcomes": 128,
+  "mirrors": {
+    "baselinePhysicalAllyScore": 0.518973,
+    "candidatePhysicalAllyScore": 0.514509
+  },
+  "focalTeams": [
+    {
+      "id": "purematerial",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-purematerial.json",
+      "sha256": "b30221b003288612894ecfcef3d88a93c345400d9982eb2c23efd7d55cb1d971"
+    },
+    {
+      "id": "threematerial",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-threematerial.json",
+      "sha256": "f5e29e9d1f5beb214abdb10d865754e97a339c680d7fe3f70124762d8f13d918"
+    },
+    {
+      "id": "twomaterial",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-twomaterial.json",
+      "sha256": "fc37770868b946e719d269c07b469342cb79576969a143a98df77f59ba3ac36e"
+    },
+    {
+      "id": "core-replaced",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-core-replaced.json",
+      "sha256": "5ac60e2a01acea83c305a763ea6cfdcd83939719528b8d2b39559fde6cb35133"
+    },
+    {
+      "id": "core-nonleader",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-core-nonleader.json",
+      "sha256": "adf5af573761cca984f4938b7c91edefcc01a94e9efd5785e4236779a64b68dd"
+    }
+  ]
+}

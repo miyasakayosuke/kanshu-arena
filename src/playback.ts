@@ -1,6 +1,14 @@
 import type { BattleEvent, State, Unit } from './engine';
 
-export type BattleCue = { at: number; cast: BattleEvent | null; impacts: BattleEvent[]; updates?: BattleEvent[] };
+export type BattleCue = {
+  at: number;
+  /** A passive's cast is a presentation-only adapter, never written to engine history. */
+  cast: BattleEvent | null;
+  impacts: BattleEvent[];
+  updates?: BattleEvent[];
+  /** Exclude from command/cast counts and label separately from poison. */
+  passive?: 'material-repair';
+};
 export type BattleTimeline = { cues: BattleCue[]; duration: number };
 
 /** Shared by the event timeline and visuals so windup ends at the HP change. */
@@ -27,6 +35,7 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
       ...(event.rally !== undefined ? { rally: event.rally } : current.rally !== undefined && event.kind === 'defeat' ? { rally: 0 } : {}),
       ...(event.ward !== undefined ? { ward: event.ward } : current.ward !== undefined && event.kind === 'defeat' ? { ward: 0 } : {}),
       ...(event.dragonCharge !== undefined ? { dragonCharge: event.dragonCharge } : current.dragonCharge !== undefined && event.kind === 'defeat' ? { dragonCharge: 0 } : {}),
+      ...(event.repairReady !== undefined ? { repairReady: event.repairReady } : current.repairReady !== undefined && event.kind === 'defeat' ? { repairReady: false } : {}),
       poison: event.poison ?? (event.kind === 'poison' ? 3 : event.kind === 'cleanse' || event.kind === 'defeat' ? 0 : current.poison),
     };
   }, unit);
@@ -35,13 +44,17 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
 
 // Area hits land together. MP changes at cast start; expiry never masquerades as an attack.
 export function buildTimeline(events: BattleEvent[]): BattleTimeline {
-  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[] }[] = [];
+  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[]; passive?: 'material-repair' }[] = [];
   const before: BattleEvent[] = [];
   const after: BattleEvent[] = [];
   for (const event of events) {
     if (event.kind === 'phase') continue;
     if (event.kind === 'expire') {
       (event.phase === 'turn-start' ? before : after).push(event);
+    } else if (event.kind === 'passive' && event.effect === 'material-repair') {
+      // Give repair its own visual boundary after poison, without inventing a learned
+      // skill/order in the authoritative stream. Absolute readiness changes at start.
+      groups.push({ cast: { kind: 'cast', actor: event.actor, skill: event.skill, scope: 'all', targets: [...(event.targets ?? [])], effect: 'heal', passive: 'material-repair' }, impacts: [], updates: [event], endUpdates: [], passive: 'material-repair' });
     } else if (event.kind === 'cast') groups.push({ cast: event, impacts: [], updates: [], endUpdates: [] });
     else if (event.kind === 'charge' && event.effect === 'dragon-charge-gain') {
       if (groups.at(-1)?.cast) groups.at(-1)!.endUpdates.push(event);
@@ -73,7 +86,8 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
       if (scope === 'all' || scope === 'random') delete cast.target;
       else cast.target = group.cast.target ?? targets[0];
     }
-    cues.push({ at: time, cast, impacts: [], ...(group.updates.length ? { updates: group.updates } : {}) });
+    const passive = group.passive ? { passive: group.passive } : {};
+    cues.push({ at: time, cast, impacts: [], ...(group.updates.length ? { updates: group.updates } : {}), ...passive });
     if (cast?.scope === 'random') {
       const hits = Math.max(1, cast.hitTargets?.length ?? cast.hits ?? 1);
       for (let index = 0; index < hits; index++) {
@@ -83,7 +97,7 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
       if (group.endUpdates.length) cues.push({ at: time + CAST_IMPACT_MS + (hits - 1) * MULTIHIT_INTERVAL_MS, cast: null, impacts: [], updates: group.endUpdates });
       time += barrageDuration(hits);
     } else {
-      if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts });
+      if (group.impacts.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast, impacts: group.impacts, ...passive });
       if (group.endUpdates.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast: null, impacts: [], updates: group.endUpdates });
       time += cast ? ACTION_DURATION_MS : 950;
     }

@@ -1,0 +1,464 @@
+{
+  "frozenAt": "2026-10-10T07:31:11.227Z",
+  "status": "post-hoc-diagnostic-frozen-before-own-results",
+  "seedBase": 42610210,
+  "method": "Enumerate every exactC17 five-member set with chosen leader and >=3samefamily, exclude only material core19, seeded pool shuffle, select first distinct qualifying row in five skill-ownership strata; duration maximizes totalMP among remaining. Not uniform, role ownership is not execution. Three prior pure-family anchors separate.",
+  "pools": [
+    {
+      "family": "beast",
+      "core": 12,
+      "exactC17EligibleMemberSets": 385
+    },
+    {
+      "family": "nature",
+      "core": 14,
+      "exactC17EligibleMemberSets": 287
+    },
+    {
+      "family": "dragon",
+      "core": 15,
+      "exactC17EligibleMemberSets": 274
+    }
+  ],
+  "targets": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Pure material; C17"
+    },
+    {
+      "id": "mixed-bull",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "role": "Three materials bull + Bastet/Naga; C16"
+    },
+    {
+      "id": "mixed-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        2,
+        10
+      ],
+      "role": "Same old support pair, shield replaces bull; C15"
+    },
+    {
+      "id": "mixed-healer",
+      "ids": [
+        19,
+        20,
+        22,
+        2,
+        10
+      ],
+      "role": "Same old support pair, Trivet replaces bull; C15"
+    },
+    {
+      "id": "c17-bull",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Three materials bull + Selkie/Naga; exactC17"
+    },
+    {
+      "id": "c17-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        7,
+        3
+      ],
+      "role": "Three materials shield + Selkie/Dryas heal-poison; exactC17"
+    },
+    {
+      "id": "c17-healer",
+      "ids": [
+        19,
+        20,
+        22,
+        7,
+        3
+      ],
+      "role": "Three materials Trivet + Selkie/Dryas, three learned healers; exactC17"
+    }
+  ],
+  "opponents": [
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        9
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 2,
+        "poisoners": 2,
+        "cleansers": 2,
+        "noncoreStrippers": 0,
+        "areaUsers": 2,
+        "priorityUsers": 2,
+        "totalMp": 312
+      }
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        21
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 2,
+        "poisoners": 1,
+        "cleansers": 2,
+        "noncoreStrippers": 0,
+        "areaUsers": 1,
+        "priorityUsers": 1,
+        "totalMp": 304
+      }
+    },
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        8,
+        11,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 0,
+        "poisoners": 0,
+        "cleansers": 0,
+        "noncoreStrippers": 2,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 256
+      }
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        8,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 0,
+        "poisoners": 0,
+        "cleansers": 0,
+        "noncoreStrippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 2,
+        "totalMp": 260
+      }
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        2,
+        6,
+        11,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 1,
+        "noncoreStrippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 274
+      }
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 4,
+        "poisoners": 1,
+        "cleansers": 2,
+        "noncoreStrippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 334
+      }
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        2,
+        3,
+        9,
+        22
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 4,
+        "poisoners": 2,
+        "cleansers": 1,
+        "noncoreStrippers": 1,
+        "areaUsers": 3,
+        "priorityUsers": 1,
+        "totalMp": 318
+      }
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        6,
+        9,
+        11,
+        18
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 2,
+        "poisoners": 1,
+        "cleansers": 1,
+        "noncoreStrippers": 1,
+        "areaUsers": 3,
+        "priorityUsers": 3,
+        "totalMp": 264
+      }
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        17
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 0,
+        "noncoreStrippers": 1,
+        "areaUsers": 4,
+        "priorityUsers": 3,
+        "totalMp": 262
+      }
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        8,
+        9,
+        10,
+        12
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 2,
+        "cleansers": 0,
+        "noncoreStrippers": 2,
+        "areaUsers": 4,
+        "priorityUsers": 1,
+        "totalMp": 284
+      }
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 0,
+        "noncoreStrippers": 2,
+        "areaUsers": 4,
+        "priorityUsers": 3,
+        "totalMp": 260
+      }
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 4,
+        "poisoners": 2,
+        "cleansers": 2,
+        "noncoreStrippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 0,
+        "totalMp": 328
+      }
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        21
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 2,
+        "poisoners": 0,
+        "cleansers": 2,
+        "noncoreStrippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 284
+      }
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        1,
+        4,
+        17,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 1,
+        "noncoreStrippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 268
+      }
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        4,
+        5,
+        8,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 0,
+        "poisoners": 1,
+        "cleansers": 0,
+        "noncoreStrippers": 1,
+        "areaUsers": 4,
+        "priorityUsers": 1,
+        "totalMp": 264
+      }
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        4,
+        5,
+        9,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 0,
+        "poisoners": 2,
+        "cleansers": 0,
+        "noncoreStrippers": 0,
+        "areaUsers": 4,
+        "priorityUsers": 2,
+        "totalMp": 264
+      }
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        9,
+        16,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 1,
+        "noncoreStrippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 2,
+        "totalMp": 264
+      }
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)",
+      "features": {
+        "healers": 3,
+        "poisoners": 0,
+        "cleansers": 2,
+        "noncoreStrippers": 2,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 306
+      }
+    }
+  ]
+}

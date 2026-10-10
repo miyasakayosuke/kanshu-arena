@@ -249,7 +249,7 @@ describe('slot-first team workshop', () => {
     await click(slotButton(0));
     await disclose('.filterDisclosure');
     await chooseSelect('コストで絞り込み', 'fit');
-    expect(document.querySelectorAll('.candidateCard')).toHaveLength(12);
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(16);
     expect([...document.querySelectorAll<HTMLButtonElement>('.candidateSelect')].every(button => !button.disabled)).toBe(true);
     await click(candidateButton(7));
     await click(confirmButton());
@@ -309,7 +309,7 @@ describe('family team building', () => {
 
   it('separates nature leader, nature opening, and beast opening recipients on a mixed team', async () => {
     await mount({ startingTeam: [14, 12, 13, 6, 10] });
-    expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体竜系 0体系統未設定 0体');
+    expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体竜系 0体物質系 0体系統未設定 0体');
     const leader = document.querySelector('.partyCard .leaderBanner')!;
     expect(leader.querySelector('.familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
     expect(leader.querySelector('.familyExcluded')!.textContent).toBe('対象外 2体：フェンリル・ラタトスク');
@@ -411,7 +411,7 @@ describe('dragon workshop conditions', () => {
   it('filters implemented families, includes legacy Quetzalcoatl among five dragons, and omits future families', async () => {
     await mount(); await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
     await disclose('.filterDisclosure');
-    expect([...document.querySelectorAll<HTMLSelectElement>('[aria-label="系統で絞り込み"] option')].map(option => option.value)).toEqual(['all', 'beast', 'nature', 'dragon', 'unassigned']);
+    expect([...document.querySelectorAll<HTMLSelectElement>('[aria-label="系統で絞り込み"] option')].map(option => option.value)).toEqual(['all', 'beast', 'nature', 'dragon', 'material', 'unassigned']);
     await chooseSelect('系統で絞り込み', 'dragon');
     expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent)).toEqual(['ケツァルコアトル', 'ヴリトラ', 'リンドヴルム', 'アンフィスバエナ', 'ジラント']);
     await chooseSelect('コストで絞り込み', '5');
@@ -425,7 +425,7 @@ describe('dragon workshop conditions', () => {
     await mount({ startingTeam: [15, 5, 16, 17, 18] });
     expect(byLabel('編成1に保存').disabled).toBe(false);
     await disclose('.recommendedTeams');
-    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(4);
+    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(6);
     expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜系の蓄積COST 17');
     expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜3体の混成COST 15');
     expect(updates).toEqual([]);
@@ -435,5 +435,111 @@ describe('dragon workshop conditions', () => {
     expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
     expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
     expect(latestTeam).toEqual([15, 5, 16, 17, 18]);
+  });
+});
+
+describe('material workshop conditions', () => {
+  it.each([
+    { team: [19, 20, 21, 22, 23], active: true, count: 5 },
+    { team: [19, 20, 21, 6, 2], active: true, count: 3 },
+    { team: [2, 19, 20, 21, 6], active: true, count: 3 },
+    { team: [19, 20, 13, 6, 2], active: false, count: 2 },
+    { team: [20, 21, 22, 6, 2], active: false, count: 3 },
+  ])('distinguishes the fixed starting condition, core, and recipients for $team', async ({ team, active, count }) => {
+    await mount({ startingTeam: team });
+    const plan = document.querySelector('.partyCard .materialRepairPlan')!;
+    expect(plan.getAttribute('data-active')).toBe(String(active));
+    expect(plan.textContent).toContain(`物質系 ${count}体 / 必要3体`);
+    expect(plan.textContent).toContain(team.includes(19) ? 'タロス：編成中' : 'タロス：未編成');
+    for (const phrase of ['先頭以外でも有効', '開始時の人数条件は変わりません', '両軍の毒ダメージ後', '各最大HPの14%', 'MP・行動を使わず', '戦闘不能の仲間は戻りません', '防御解除で修復待ちを消す', '再付与はありません']) expect(plan.textContent).toContain(phrase);
+    const recipients = team.filter(id => monsters[id].family === 'material').map(id => monsters[id].name);
+    const excluded = team.filter(id => monsters[id].family !== 'material').map(id => monsters[id].name);
+    expect(plan.querySelector('.familyRecipients')?.textContent).toBe(`対象 ${count}/5体：${recipients.join('・')}`);
+    expect(plan.querySelector('.familyExcluded')?.textContent).toBe(`対象外 ${excluded.length}体：${excluded.join('・') || 'なし'}`);
+    expect(updates).toEqual([]);
+  });
+
+  it('previews loss of the third material or core and recipient changes without changing the saved party', async () => {
+    const mixed = [19, 20, 21, 6, 2];
+    await mount({ startingTeam: mixed });
+    expect(document.querySelector('.partyCard .leaderBanner .familyRecipients')?.textContent).toBe('対象 3/5体：タロス・唐傘おばけ・ぬりかべ');
+    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')?.textContent).toBe('対象外 2体：ガルーダ・バステト');
+    await click(slotButton(2)); await click(candidateButton(13));
+    const projected = document.querySelector('.candidateImpact .materialRepairPlan')!;
+    expect(projected.getAttribute('data-active')).toBe('false');
+    expect(projected.textContent).toContain('物質系 2体');
+    expect(projected.querySelector('.familyRecipients')?.textContent).toBe('対象 2/5体：タロス・唐傘おばけ');
+    expect(projected.querySelector('.familyExcluded')?.textContent).toBe('対象外 3体：ラタトスク・ガルーダ・バステト');
+    expect(document.querySelector('.partyCard .materialRepairPlan')?.getAttribute('data-active')).toBe('true');
+    expect(updates).toEqual([]);
+    await click(byText('キャンセル'));
+    expect(latestTeam).toEqual(mixed);
+    await click(slotButton(0)); await click(candidateButton(22));
+    expect(document.querySelector('.candidateImpact .materialRepairPlan')?.textContent).toContain('タロス：未編成');
+    expect(document.querySelector('.candidateImpact .materialRepairPlan')?.getAttribute('data-active')).toBe('false');
+    expect(updates).toEqual([]);
+    await click(confirmButton());
+    expect(latestTeam).toEqual([22, 20, 21, 6, 2]);
+    expect(document.querySelector('.partyCard .materialRepairPlan')?.getAttribute('data-active')).toBe('false');
+  });
+
+  it('features Talos with four collapsed companions, while all prior dragons remain inspectable in the bestiary', async () => {
+    await mount();
+    expect(document.querySelector('.newMaterial')?.textContent).toContain('タロス');
+    expect(document.querySelector<HTMLDetailsElement>('.arrivalDisclosure')?.open).toBe(false);
+    expect([...document.querySelectorAll('.materialArrival')].map(node => node.getAttribute('aria-label'))).toEqual([20, 21, 22, 23].map(id => `${monsters[id].name}の詳細`));
+    await click(byLabel('タロスの詳細')); expect(onFocus).toHaveBeenLastCalledWith(19);
+    await click(byText('詳細を閉じる')); await disclose('.arrivalDisclosure');
+    for (const id of [20, 21, 22, 23]) {
+      await click(byLabel(`${monsters[id].name}の詳細`)); expect(onFocus).toHaveBeenLastCalledWith(id);
+      await click(byText('詳細を閉じる'));
+    }
+    await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!); await disclose('.filterDisclosure');
+    await chooseSelect('系統で絞り込み', 'dragon');
+    for (const id of [5, 15, 16, 17, 18]) {
+      await click(byLabel(`${monsters[id].name}の詳細`)); expect(onFocus).toHaveBeenLastCalledWith(id);
+      await click(byText('詳細を閉じる'));
+    }
+    expect(updates).toEqual([]);
+  });
+
+  it('filters all five material IDs and COST5 without moving a party member or losing filter state on profile close', async () => {
+    await mount(); await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!); await disclose('.filterDisclosure');
+    await chooseSelect('系統で絞り込み', 'material');
+    expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(node => node.textContent)).toEqual([19, 20, 21, 22, 23].map(id => monsters[id].name));
+    await chooseSelect('コストで絞り込み', '5');
+    expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);
+    expect(document.querySelector('.candidateCard')?.textContent).toContain('タロス');
+    await click(document.querySelector<HTMLButtonElement>('.candidateCard button[aria-label="タロスの詳細"]')!);
+    expect(onFocus).toHaveBeenLastCalledWith(19); await click(byText('詳細を閉じる'));
+    expect(document.querySelector<HTMLSelectElement>('[aria-label="系統で絞り込み"]')?.value).toBe('material');
+    expect(document.querySelector<HTMLSelectElement>('[aria-label="コストで絞り込み"]')?.value).toBe('5');
+    expect(updates).toEqual([]);
+  });
+
+  it('keeps COST17 visible but blocks light saves, then saves and restores a qualified COST15 mixed example', async () => {
+    const pure = [19, 20, 21, 22, 23], mixed = [19, 20, 21, 6, 2];
+    await mount({ startingTeam: pure, startingSlots: [null, { team: mixed, rule: 'light' }, null] });
+    await disclose('.recommendedTeams');
+    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(6);
+    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('物質系の反攻COST 17');
+    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('物質3体の混成COST 16');
+    expect(byLabel('編成1に保存').disabled).toBe(false);
+    await click(byLabel('編成1に保存'));
+    await disclose('.ruleDisclosure');
+    await click([...document.querySelectorAll<HTMLButtonElement>('.ruleTabs button')].find(node => node.textContent?.includes('軽量戦'))!);
+    expect(byLabel('編成3に保存').disabled).toBe(true);
+    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
+    expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
+    expect(latestTeam).toEqual(pure);
+    await click(byLabel('編成2を呼び出す'));
+    expect(latestTeam).toEqual(mixed);
+    expect(document.querySelector('.partyCard .materialRepairPlan')?.getAttribute('data-active')).toBe('true');
+    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 15/15');
+    await click(byLabel('編成3に保存'));
+    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)).toEqual([{ team: pure, rule: 'standard' }, { team: mixed, rule: 'light' }, { team: mixed, rule: 'light' }]);
+    await click(byLabel('編成1を呼び出す'));
+    expect(latestTeam).toEqual(pure);
+    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/17');
   });
 });

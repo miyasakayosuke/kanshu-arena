@@ -247,3 +247,15 @@ candidate は**両軍に適用するルール・名簿の候補版**です。対
 - 既存 `autoOrders` は現在の竜気だけで解放を評価します。先に指示した味方が同ターン内に増やす竜気は予測しません。結果はこの方策下の測定であり、手動最適行動の測定ではありません。
 - 20体以下の名簿では従来の列挙/シャッフルを保持。21体以上では残り枠/両版COST予算の動的計画で合法集合数を数え、シード付きの互いに素な順位歩幅で必要な集合だけ取り出します。37体で全5体集合を格納しません。合法集合不足は明示エラーとし、数を黙って減らしません。これは一様無作為抽出を保証せず、順位相関・リーダー配置・固定対面の選び方による偏りが残ります。
 - `dragon-*.json` は竜の固定対策、同COST中核置換、3竜/2竜、非中核リーダー、凍結した生成非中核編成の感度比較です。探索候補を本番採用値と混同しないでください。詳細・実行源・最終採否は [竜の検証記録](./dragon-balance-audit.md) を参照します。
+
+## 物質の一度きり修復を分離する（v0.13）
+
+- `overrides.materialRepair` は `enabled?: boolean` と `percent?: integer`（0～100）のみ。`{"materialRepair":{"enabled":false}}` は待機自体を無効にし、`{"materialRepair":{"percent":0}}` は待機・解除・一度きりの発動を残してHP回復だけを0にします。既存のスキル・MP予算や通常CPUは変えません。
+- 空の上書きや無関係な能力パッチでも資格を失いません。パッチ後の開始5枠を両側別々に調べ、中核ID19を含む物質3体以上で中核だけ `repairReady:true` を持ちます。無効/対象外は未定義、発動・解除・KO後は `false`。`repairPercent` は明示的な試験値を持つ場合だけ存在します。試験が共有名簿を変更することはありません。
+- 集計は本番の `kind:passive, effect:material-repair` と各対象への `heal` が根拠です。再生UIの表現用castを学習技・通常cast・手番・MP支出に数えません。全ての毒の後、初回ターン末、生存中核から生存する同側物質へ一度だけ回復する契約を検査します。
+- `meanRepairEligible` / `meanRepairTriggers` / `meanRepairFailedBeforeTrigger` は開始時有効・実発動・発動できなかった中核の1試合平均です。`meanRepairHealing` は実回復、`meanRepairRecipients` は生存対象数（全快で0回復も含む）、`meanRepairPotentialHealing` は生存対象の最大HP×率の切捨ての合計、`meanRepairUnusedHealing` は減少HP不足により使わなかった分。死亡個体の仮想回復や蘇生価値を加えません。
+- `meanRepairCancellations` は自軍の待機が解除または撃破で消えた数、`meanRepairDefeatedBeforeTrigger` はそのうち待機中の撃破、`meanRepairDispelled` は自軍が敵の待機を解除した数です。解除後のKOを二重計上しません。中核が実際に1ターン目に倒れた数は `keyUnit.turnOneDeaths` も確認します。既に解除された中核の後の死亡と、待機中撃破を区別できます。
+- `meanRepairTriggerTurn` は発動があったときだけの平均で、正常なら1、発動0回なら `null`。`meanRepairMpSpent` は修復特性自体のMPで、常に0です。通常の有料castによるMP消費は既存の `meanMpSpent` に保持します。個体指標は `repair…`、軍指標はその合計を参照してください。
+- 通常/失敗スナップショットには `repairReady` / `repairPercent` が存在する場合だけ残ります。絶対値falseを省略せず、現在イベントマップと終了状態を照合します。資格の捏造、再待機、宛先不足、回復量・タイミングの破損、修復をcastにするイベント、修復に伴うMP支出は失敗証跡になります。CLI再生はsource/config/traceのハッシュも照合します。
+- `material-identity` / `material-broad` は凍結した元の固定・生成対面、`material-repair-disabled` / `material-repair-zero` は機構分離、`material-repair12*` / `material-repair14*` は感度です。`material-coherent-repair14` は初期結果を見た後に別途凍結した、系統中核＋同系統3体以上のCOST17相手と混成仲間違いの診断です。後付け診断を最初から計画した検証や全編成の代表標本と扱いません。
+- 各設定のbaselineは実行時の本番ソースです。採用後に同じ感度ファイルを実行すると、未指定値やbaselineは変わり得ます。保存済み設定・出典ハッシュ・採用値と、[物質の検証記録](./material-balance-audit.md) を併せて読んでください。元のソースと異なる再生を当時の実験再現とは呼びません。

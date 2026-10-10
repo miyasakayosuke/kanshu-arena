@@ -1,6 +1,6 @@
 import MonsterArt from './MonsterArt';
 import { useEffect, useRef, useState } from 'react';
-import { monsters, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
+import { monsters, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
 import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
 import { activeFamilyOptions } from './families';
 import './teamBuilder.css';
@@ -74,6 +74,21 @@ function DragonChargePlan({ team }: { team: number[] }) {
     <small>{active ? `開戦時に中核へ竜気0/${DRAGON_CHARGE_CAP}。味方が倒れても開始時の条件は変わりません。` : '中核を含む竜系3体以上で開戦すると有効。全員を竜系にする必要はありません。'}</small>
     <small>味方の竜系がMPを払う攻撃特技を1回使い終えると+1。連撃も1、通常攻撃・支援・毒・渇天の息では増えません。</small>
     <small>蓄積は中核だけが保持。防御解除で消え、本人が倒れると消失し以後は溜まりません。息の前に集中攻撃・解除・守護で対策できます。</small>
+  </div>;
+}
+
+function MaterialRepairPlan({ team }: { team: number[] }) {
+  const members = team.filter(id => monsters[id].family === 'material');
+  const hasCore = team.includes(MATERIAL_CORE_ID);
+  if (!members.length && !hasCore) return null;
+  const active = materialRepairEligible(team.map(id => ({ monster: monsters[id] })));
+  return <div className="materialRepairPlan" data-active={active} aria-label="炉心の修復の編成条件">
+    <strong>炉心の修復 · {active ? '条件成立' : '条件未成立'}</strong>
+    <small>中核 {monsters[MATERIAL_CORE_ID].name}：{hasCore ? '編成中' : '未編成'} · 物質系 {members.length}体 / 必要3体</small>
+    <small>タロスを含む物質系3体以上で開戦すると、一度だけ修復待ち。先頭以外でも有効で、開始時の人数条件は変わりません。</small>
+    <small>1ターン目終了時、両軍の毒ダメージ後に発動。タロスが生存し修復待ちなら、生き残った物質系のHPを各最大HPの{MATERIAL_REPAIR_PERCENT}%回復します。MP・行動を使わず、戦闘不能の仲間は戻りません。</small>
+    <FamilyRecipients team={team} applies={monster => monster.family === 'material'} />
+    <small>防御解除で修復待ちを消すか、毒を含む集中攻撃でタロスを先に倒すと不発。再付与はありません。</small>
   </div>;
 }
 
@@ -260,15 +275,16 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <OpeningSupport team={team} />
       <BeastBarrageBonus team={team} />
       <DragonChargePlan team={team} />
+      <MaterialRepairPlan team={team} />
       <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
-    <aside className="newDragon"><div><span className="eyebrow">NEW · DRAGON</span><strong>竜気を束ねる ヴリトラ</strong><small>仲間が溜め、遅い息で解き放つ。守るか、攻めるか。</small></div><button className="secondary" aria-label="ヴリトラの詳細" onClick={() => onFocus(DRAGON_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newMaterial"><div><span className="eyebrow">NEW · MATERIAL</span><strong>一度の修復を守る タロス</strong><small>初撃を耐え、炉心をつなぐ。毒と解除をどうしのぐ？</small></div><button className="secondary" aria-label="タロスの詳細" onClick={() => onFocus(MATERIAL_CORE_ID)}>詳しく見る</button></aside>
     <details className="builderDisclosure arrivalDisclosure">
-      <summary>新しい竜の仲間<span>守護・連撃・回復の3体</span></summary>
+      <summary>新しい物質の仲間<span>清め・壁・給湯・重突の4体</span></summary>
       <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
-        {([16, 17, 18] as const).map(id => <button key={id} className="familyArrival dragonArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
+        {([20, 21, 22, 23] as const).map(id => <button key={id} className="familyArrival materialArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
       </aside>
       <p className="hint">これまでの仲間も、下のモンスター図鑑から全員の詳細を開けます。</p>
     </details>
@@ -307,6 +323,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           <OpeningSupport team={projectedTeam} />
           <BeastBarrageBonus team={projectedTeam} />
           <DragonChargePlan team={projectedTeam} />
+          <MaterialRepairPlan team={projectedTeam} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}

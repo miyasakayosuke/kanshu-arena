@@ -1,0 +1,211 @@
+{
+  "status": "final-source-verified",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "ac70787a46f89d0ac216fbc6853db89c41bcee16e8392d6505d5b638e72a8e96"
+  },
+  "checks": [
+    {
+      "priorPath": "lab-results/material-stage1-identity/report.json",
+      "nextPath": "lab-results/material-final-restore18/report.json",
+      "priorVariant": "baseline",
+      "nextVariant": "candidate",
+      "comparedMatches": 3776,
+      "mismatches": 0,
+      "projection": "Every recorded result field except traceHash. Explicit overrides change initial logs/optional tuning fields, so trace equality is not claimed."
+    },
+    {
+      "priorPath": "lab-results/material-stage1-repair14/report.json",
+      "nextPath": "lab-results/material-final-identity/report.json",
+      "priorVariant": "candidate",
+      "nextVariant": "baseline",
+      "comparedMatches": 2496,
+      "mismatches": 0,
+      "projection": "Every recorded result field except traceHash. Explicit overrides change initial logs/optional tuning fields, so trace equality is not claimed."
+    },
+    {
+      "priorPath": "lab-results/material-stage1-repair14-broad/report.json",
+      "nextPath": "lab-results/material-final-broad/report.json",
+      "priorVariant": "candidate",
+      "nextVariant": "baseline",
+      "comparedMatches": 4320,
+      "mismatches": 0,
+      "projection": "Every recorded result field except traceHash. Explicit overrides change initial logs/optional tuning fields, so trace equality is not claimed."
+    },
+    {
+      "priorPath": "lab-results/material-stage1-coherent-repair14/report.json",
+      "nextPath": "lab-results/material-final-coherent-identity/report.json",
+      "priorVariant": "candidate",
+      "nextVariant": "baseline",
+      "comparedMatches": 5600,
+      "mismatches": 0,
+      "projection": "Every recorded result field except traceHash. Explicit overrides change initial logs/optional tuning fields, so trace equality is not claimed."
+    }
+  ],
+  "replays": [
+    {
+      "report": "lab-results/material-final-identity/report.json",
+      "matchId": "purematerial-vs-fullbeast__s3688600997__a-left__candidate",
+      "path": "lab-results/material-final-replays/identity-a-left-trigger.json",
+      "traceHash": "8a03f4700d3fc2dcb93a21d2a3f07d617bbc5f3d584a7bc7060408e48228b0d0",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-identity/report.json",
+      "matchId": "purematerial-vs-fullbeast__s3688600997__a-right__candidate",
+      "path": "lab-results/material-final-replays/identity-a-right-trigger.json",
+      "traceHash": "29a7160aa660b3aa87525f16222732f67e05011149506c57ec7cefe1f7abf620",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-identity/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-left__candidate",
+      "path": "lab-results/material-final-replays/identity-a-left-cancel.json",
+      "traceHash": "f283234f768da0cf2ccdb3336cda41d563a4682f954ea127eb9b5e07e3472776",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-identity/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-right__candidate",
+      "path": "lab-results/material-final-replays/identity-a-right-cancel.json",
+      "traceHash": "fec24cce346fb954b6bfed6777480d5a23019f38a2c934a6dc08db8ccc1b44c1",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-repair-disabled/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-left__candidate",
+      "path": "lab-results/material-final-replays/repair-disabled-a-left-any.json",
+      "traceHash": "ff130218d575b2259ab5c30788dab2240b65a042797fccab077806558647f07f",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-repair-disabled/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-right__candidate",
+      "path": "lab-results/material-final-replays/repair-disabled-a-right-any.json",
+      "traceHash": "a062365ab4bc6acb2add1d3e69b7bb3d787936109e53d9c36a84ac62d76b7a5f",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-repair-zero/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-left__candidate",
+      "path": "lab-results/material-final-replays/repair-zero-a-left-any.json",
+      "traceHash": "668ac68de40594ce5862f3cf3297f4fb57154e26706f3250e2aea394df990223",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-repair-zero/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-right__candidate",
+      "path": "lab-results/material-final-replays/repair-zero-a-right-any.json",
+      "traceHash": "8a9f97dc25ba9ac830c6953fde0ed1231c26ff2a6919df9191fe327f01229f15",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-coherent-identity/report.json",
+      "matchId": "c17-bull-vs-coherent-beast-healers__s2697045971__a-left__candidate",
+      "path": "lab-results/material-final-replays/coherent-identity-a-left-c17-bull.json",
+      "traceHash": "70b368891dbf72c41ff70425d7cb13fab8f539ca8b06b987b868df07620b39c2",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-coherent-identity/report.json",
+      "matchId": "c17-bull-vs-coherent-beast-healers__s2697045971__a-right__candidate",
+      "path": "lab-results/material-final-replays/coherent-identity-a-right-c17-bull.json",
+      "traceHash": "67ea137edd277747622d3809cb50d7218d8bb2bd5d14426b0cab2fce3a4f2166",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-restore18/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-left__candidate",
+      "path": "lab-results/material-final-replays/restore18-a-left-any.json",
+      "traceHash": "0c67a3f12f9c2d2bd90d6cb57406e97e28dae2df7857f8ec969bec4cd7380420",
+      "verified": true
+    },
+    {
+      "report": "lab-results/material-final-restore18/report.json",
+      "matchId": "purematerial-vs-fullbeast__s2674696771__a-right__candidate",
+      "path": "lab-results/material-final-replays/restore18-a-right-any.json",
+      "traceHash": "c28da7fa84f09681d2506ee5f1171def53a24e072e49531fa2d69624af89d434",
+      "verified": true
+    }
+  ],
+  "engineChangeOnlyRepair18To14": true,
+  "zeroIsolation": {
+    "matches": 1856,
+    "gameplayMismatches": 0,
+    "unitFields": [
+      "finalHp",
+      "finalMp",
+      "casts",
+      "specialCasts",
+      "paidCasts",
+      "directDamage",
+      "healing",
+      "mpSpent",
+      "deathTurn"
+    ],
+    "resultFields": [
+      "winner",
+      "turns"
+    ],
+    "dispelCountDifferences": 72,
+    "note": "Zero retains valid readiness/passive/strip events; event traces intentionally differ."
+  },
+  "runTotals": [
+    {
+      "name": "identity",
+      "matches": 7552,
+      "identityChangedOutcomes": 0,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "87861e00fa9a4124d784eff60920dea405ed60e26e689cc652c5d6f4f49cab7b"
+    },
+    {
+      "name": "broad",
+      "matches": 12992,
+      "identityChangedOutcomes": 0,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "b2666012283176e7541d1458a353cefc04f155397b1d0ca2d3d7caf19f2f8268"
+    },
+    {
+      "name": "repair-disabled",
+      "matches": 3712,
+      "identityChangedOutcomes": 203,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "26954e54ea5ac4e407bb28391b18f6f9924a75a1f022b20a88986554182badde"
+    },
+    {
+      "name": "repair-zero",
+      "matches": 3712,
+      "identityChangedOutcomes": 203,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "9920288e16e153b67cb20ed40e13562140461115c6b64f3b39ac474cb4c59bc0"
+    },
+    {
+      "name": "coherent-identity",
+      "matches": 11200,
+      "identityChangedOutcomes": 0,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "37a9b3b1df9153183709b0ed3f0b3b4efdda478660d06f1b7d8be75697b02e64"
+    },
+    {
+      "name": "restore18",
+      "matches": 7552,
+      "identityChangedOutcomes": 128,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "af17fbabb49e1ff547ee1d001293bf3e28f0ba8f372124c7a7c04b47e46a3871"
+    },
+    {
+      "name": "light-recommendation",
+      "matches": 5312,
+      "identityChangedOutcomes": 0,
+      "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+      "reportSha256": "fea99831b02b19bf3865979b5587dbe409a68fb5b57e15431417aaebd089d0c5"
+    }
+  ],
+  "finalSourceMatches": 52032
+}

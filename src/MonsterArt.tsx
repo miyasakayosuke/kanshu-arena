@@ -1,4 +1,5 @@
 import { DRAGON_ART } from './dragonArt';
+import { MATERIAL_ART } from './materialArt';
 import type { Monster } from './engine';
 import { FENRIR_ART_URL, FENRIR_PORTRAIT_URL } from './fenrirArt';
 import { GENBU_ART_URL, GENBU_PORTRAIT_URL, RATATOSKR_ART_URL, RATATOSKR_PORTRAIT_URL } from './familyArt';
@@ -9,6 +10,7 @@ export const CHARACTER_ART: Readonly<Record<number, CharacterArt>> = {
   13: {artUrl: RATATOSKR_ART_URL, portraitUrl: RATATOSKR_PORTRAIT_URL, spriteWidth: 99},
   14: {artUrl: GENBU_ART_URL, portraitUrl: GENBU_PORTRAIT_URL, spriteWidth: 121},
   ...DRAGON_ART,
+  ...MATERIAL_ART,
 };
 
 /** Character artwork is static in the party dock; battlefield motion is enemy-only. */

@@ -1,0 +1,226 @@
+{
+  "rawReportPath": "lab-results/material-stage1-repair12/report.json",
+  "rawReportSha256": "b980e56efef13322f9ab366ae6e5dbfc72897a28e340c166edd84f1bbaf1bf1f",
+  "phase": "exploratory",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "54d7690e57eb38fb5eb6fd85de54925798c9ab4155e7ceec9cfa619b61e721b1",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "c00bda40c30c6f65d18434a9c2b47abcce94c9b0dbe8b8139793dd6718fd6a5e"
+  },
+  "suiteId": "material-repair12",
+  "candidate": {
+    "id": "repair12",
+    "label": "Isolated 12% material repair; frozen initial roster",
+    "overrides": {
+      "materialRepair": {
+        "percent": 12
+      }
+    }
+  },
+  "scheduleCounts": {
+    "teams": 12,
+    "curatedTeams": 12,
+    "sampledTeams": 0,
+    "matchupScenarios": 27,
+    "mirrorScenarios": 12,
+    "seeds": 32,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 4992
+  },
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522,
+    2195995987,
+    555464452,
+    3209900213,
+    1569368678,
+    4223804439,
+    2583272904,
+    942741369,
+    3597177130,
+    1956645595,
+    316114060,
+    2970549821,
+    1330018286,
+    3984454047,
+    2343922512,
+    703390977,
+    3357826738
+  ],
+  "teams": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "threematerial",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "cost": 16
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        20,
+        19,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "cost": 14
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17
+    }
+  ],
+  "identityChangedOutcomes": 167,
+  "mirrors": {
+    "baselinePhysicalAllyScore": 0.514323,
+    "candidatePhysicalAllyScore": 0.522135
+  },
+  "focalTeams": [
+    {
+      "id": "purematerial",
+      "evidenceFile": "material-balance-summary-runs/05-exploratory-material-repair12-purematerial.json",
+      "sha256": "8d823a7f441ef2416a857e4825da1f7d4d45415ed90585c4bde47fd7499199ec"
+    },
+    {
+      "id": "threematerial",
+      "evidenceFile": "material-balance-summary-runs/05-exploratory-material-repair12-threematerial.json",
+      "sha256": "4891e2b48ff37619d0a69fa1ddaaeb6ba69c924549f4b6a6a066286c509c227a"
+    },
+    {
+      "id": "core-nonleader",
+      "evidenceFile": "material-balance-summary-runs/05-exploratory-material-repair12-core-nonleader.json",
+      "sha256": "c8ec92a1fed8a395e08cfc10fafae395e450e589873c21dd4eaf5c42f1204c96"
+    }
+  ]
+}

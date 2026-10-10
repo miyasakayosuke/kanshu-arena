@@ -1,0 +1,1231 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "material-coherent-repair14",
+  "seeds": [
+    2697045971,
+    1056514436,
+    3710950197,
+    2070418662,
+    429887127,
+    3084322888,
+    1443791353,
+    4098227114,
+    2457695579,
+    817164044,
+    3471599805,
+    1831068270,
+    190536735,
+    2844972496,
+    1204440961,
+    3858876722
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Pure material; C17"
+    },
+    {
+      "id": "mixed-bull",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "role": "Three materials bull + Bastet/Naga; C16"
+    },
+    {
+      "id": "mixed-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        2,
+        10
+      ],
+      "role": "Same old support pair, shield replaces bull; C15"
+    },
+    {
+      "id": "mixed-healer",
+      "ids": [
+        19,
+        20,
+        22,
+        2,
+        10
+      ],
+      "role": "Same old support pair, Trivet replaces bull; C15"
+    },
+    {
+      "id": "c17-bull",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Three materials bull + Selkie/Naga; exactC17"
+    },
+    {
+      "id": "c17-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        7,
+        3
+      ],
+      "role": "Three materials shield + Selkie/Dryas heal-poison; exactC17"
+    },
+    {
+      "id": "c17-healer",
+      "ids": [
+        19,
+        20,
+        22,
+        7,
+        3
+      ],
+      "role": "Three materials Trivet + Selkie/Dryas, three learned healers; exactC17"
+    },
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        9
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        21
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        8,
+        11,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        8,
+        13,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        2,
+        6,
+        11,
+        23
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "Post-hoc frozen beast core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        2,
+        3,
+        9,
+        22
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        6,
+        9,
+        11,
+        18
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        17
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        8,
+        9,
+        10,
+        12
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "Post-hoc frozen nature core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        21
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; healers ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        1,
+        4,
+        17,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; poison-cleanse ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        4,
+        5,
+        8,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; strip ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        4,
+        5,
+        9,
+        16
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; area ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        9,
+        16,
+        18
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; priority ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "Post-hoc frozen dragon core leader + at least3 family, exactC17; duration ownership stratum (actual execution measured)"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Original pure beast anchor C17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Original triple poison nature anchor C15; separate from exactC17 sample"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Original pure dragon anchor C17"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "purematerial-vs-coherent-beast-healers",
+      "a": "purematerial",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-beast-poison-cleanse",
+      "a": "purematerial",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-beast-strip",
+      "a": "purematerial",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-beast-area",
+      "a": "purematerial",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-beast-priority",
+      "a": "purematerial",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-beast-duration",
+      "a": "purematerial",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-healers",
+      "a": "purematerial",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-poison-cleanse",
+      "a": "purematerial",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-strip",
+      "a": "purematerial",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-area",
+      "a": "purematerial",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-priority",
+      "a": "purematerial",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-nature-duration",
+      "a": "purematerial",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-healers",
+      "a": "purematerial",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-poison-cleanse",
+      "a": "purematerial",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-strip",
+      "a": "purematerial",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-area",
+      "a": "purematerial",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-priority",
+      "a": "purematerial",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-coherent-dragon-duration",
+      "a": "purematerial",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-fullbeast",
+      "a": "purematerial",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-fullnature",
+      "a": "purematerial",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "purematerial-vs-puredragon",
+      "a": "purematerial",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-healers",
+      "a": "mixed-bull",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-poison-cleanse",
+      "a": "mixed-bull",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-strip",
+      "a": "mixed-bull",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-area",
+      "a": "mixed-bull",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-priority",
+      "a": "mixed-bull",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-beast-duration",
+      "a": "mixed-bull",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-healers",
+      "a": "mixed-bull",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-poison-cleanse",
+      "a": "mixed-bull",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-strip",
+      "a": "mixed-bull",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-area",
+      "a": "mixed-bull",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-priority",
+      "a": "mixed-bull",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-nature-duration",
+      "a": "mixed-bull",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-healers",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-poison-cleanse",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-strip",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-area",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-priority",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-coherent-dragon-duration",
+      "a": "mixed-bull",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-fullbeast",
+      "a": "mixed-bull",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-fullnature",
+      "a": "mixed-bull",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-bull-vs-puredragon",
+      "a": "mixed-bull",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-healers",
+      "a": "mixed-shield",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-poison-cleanse",
+      "a": "mixed-shield",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-strip",
+      "a": "mixed-shield",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-area",
+      "a": "mixed-shield",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-priority",
+      "a": "mixed-shield",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-beast-duration",
+      "a": "mixed-shield",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-healers",
+      "a": "mixed-shield",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-poison-cleanse",
+      "a": "mixed-shield",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-strip",
+      "a": "mixed-shield",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-area",
+      "a": "mixed-shield",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-priority",
+      "a": "mixed-shield",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-nature-duration",
+      "a": "mixed-shield",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-healers",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-poison-cleanse",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-strip",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-area",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-priority",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-coherent-dragon-duration",
+      "a": "mixed-shield",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-fullbeast",
+      "a": "mixed-shield",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-fullnature",
+      "a": "mixed-shield",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-shield-vs-puredragon",
+      "a": "mixed-shield",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-healers",
+      "a": "mixed-healer",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-poison-cleanse",
+      "a": "mixed-healer",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-strip",
+      "a": "mixed-healer",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-area",
+      "a": "mixed-healer",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-priority",
+      "a": "mixed-healer",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-beast-duration",
+      "a": "mixed-healer",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-healers",
+      "a": "mixed-healer",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-poison-cleanse",
+      "a": "mixed-healer",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-strip",
+      "a": "mixed-healer",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-area",
+      "a": "mixed-healer",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-priority",
+      "a": "mixed-healer",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-nature-duration",
+      "a": "mixed-healer",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-healers",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-poison-cleanse",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-strip",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-area",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-priority",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-coherent-dragon-duration",
+      "a": "mixed-healer",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-fullbeast",
+      "a": "mixed-healer",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-fullnature",
+      "a": "mixed-healer",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "mixed-healer-vs-puredragon",
+      "a": "mixed-healer",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-healers",
+      "a": "c17-bull",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-poison-cleanse",
+      "a": "c17-bull",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-strip",
+      "a": "c17-bull",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-area",
+      "a": "c17-bull",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-priority",
+      "a": "c17-bull",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-beast-duration",
+      "a": "c17-bull",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-healers",
+      "a": "c17-bull",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-poison-cleanse",
+      "a": "c17-bull",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-strip",
+      "a": "c17-bull",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-area",
+      "a": "c17-bull",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-priority",
+      "a": "c17-bull",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-nature-duration",
+      "a": "c17-bull",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-healers",
+      "a": "c17-bull",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-poison-cleanse",
+      "a": "c17-bull",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-strip",
+      "a": "c17-bull",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-area",
+      "a": "c17-bull",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-priority",
+      "a": "c17-bull",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-coherent-dragon-duration",
+      "a": "c17-bull",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-fullbeast",
+      "a": "c17-bull",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-fullnature",
+      "a": "c17-bull",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-bull-vs-puredragon",
+      "a": "c17-bull",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-healers",
+      "a": "c17-shield",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-poison-cleanse",
+      "a": "c17-shield",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-strip",
+      "a": "c17-shield",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-area",
+      "a": "c17-shield",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-priority",
+      "a": "c17-shield",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-beast-duration",
+      "a": "c17-shield",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-healers",
+      "a": "c17-shield",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-poison-cleanse",
+      "a": "c17-shield",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-strip",
+      "a": "c17-shield",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-area",
+      "a": "c17-shield",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-priority",
+      "a": "c17-shield",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-nature-duration",
+      "a": "c17-shield",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-healers",
+      "a": "c17-shield",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-poison-cleanse",
+      "a": "c17-shield",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-strip",
+      "a": "c17-shield",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-area",
+      "a": "c17-shield",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-priority",
+      "a": "c17-shield",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-coherent-dragon-duration",
+      "a": "c17-shield",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-fullbeast",
+      "a": "c17-shield",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-fullnature",
+      "a": "c17-shield",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-shield-vs-puredragon",
+      "a": "c17-shield",
+      "b": "puredragon",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-healers",
+      "a": "c17-healer",
+      "b": "coherent-beast-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-poison-cleanse",
+      "a": "c17-healer",
+      "b": "coherent-beast-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-strip",
+      "a": "c17-healer",
+      "b": "coherent-beast-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-area",
+      "a": "c17-healer",
+      "b": "coherent-beast-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-priority",
+      "a": "c17-healer",
+      "b": "coherent-beast-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-beast-duration",
+      "a": "c17-healer",
+      "b": "coherent-beast-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-healers",
+      "a": "c17-healer",
+      "b": "coherent-nature-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-poison-cleanse",
+      "a": "c17-healer",
+      "b": "coherent-nature-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-strip",
+      "a": "c17-healer",
+      "b": "coherent-nature-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-area",
+      "a": "c17-healer",
+      "b": "coherent-nature-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-priority",
+      "a": "c17-healer",
+      "b": "coherent-nature-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-nature-duration",
+      "a": "c17-healer",
+      "b": "coherent-nature-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-healers",
+      "a": "c17-healer",
+      "b": "coherent-dragon-healers",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-poison-cleanse",
+      "a": "c17-healer",
+      "b": "coherent-dragon-poison-cleanse",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-strip",
+      "a": "c17-healer",
+      "b": "coherent-dragon-strip",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-area",
+      "a": "c17-healer",
+      "b": "coherent-dragon-area",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-priority",
+      "a": "c17-healer",
+      "b": "coherent-dragon-priority",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-coherent-dragon-duration",
+      "a": "c17-healer",
+      "b": "coherent-dragon-duration",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-fullbeast",
+      "a": "c17-healer",
+      "b": "fullbeast",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-fullnature",
+      "a": "c17-healer",
+      "b": "fullnature",
+      "keyUnitId": 19
+    },
+    {
+      "id": "c17-healer-vs-puredragon",
+      "a": "c17-healer",
+      "b": "puredragon",
+      "keyUnitId": 19
+    }
+  ],
+  "candidate": {
+    "id": "repair14",
+    "label": "Post-hoc exactC17 coherent diagnostics,18%baselinevs14%",
+    "overrides": {
+      "materialRepair": {
+        "percent": 14
+      }
+    }
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 42610210
+  }
+}

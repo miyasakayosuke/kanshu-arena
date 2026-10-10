@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted14-percent-with-final-source-validation",
+  "note": "Fixed same-autoOrders policy, swaps and mirrors. Draws score half. No human/optimal-play or universal-balance claim. Original fullnature [14,3,6,9,10] and fullbeast [12,0,2,11,13] retained. Generated teams exclude only material core19 and may include other cores; frozen before outcomes.",
+  "format": "lossless-split-json-each-file-under-70000-bytes",
+  "reports": [
+    {
+      "suiteId": "material-identity",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/01-exploratory-material-identity-index.json",
+      "sha256": "0f3116e5036892a8d65992cafa456821b6e0364b1e94ac4918ade7d3bf3edeeb"
+    },
+    {
+      "suiteId": "material-broad",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/02-exploratory-material-broad-index.json",
+      "sha256": "7636d4bd5cc9ed33ac48a40d96a812160286f8224496a56df9790647d3666896"
+    },
+    {
+      "suiteId": "material-repair-disabled",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/03-exploratory-material-repair-disabled-index.json",
+      "sha256": "3bcbf8c2a6059de6130dfb88ac6178472e4935ac3c0d047714b37f26e84b3421"
+    },
+    {
+      "suiteId": "material-repair-zero",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/04-exploratory-material-repair-zero-index.json",
+      "sha256": "d55e8a6b76647d83ae71ddf0cc13d62f8505199adf6b006d52f4170769fd13b8"
+    },
+    {
+      "suiteId": "material-repair12",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/05-exploratory-material-repair12-index.json",
+      "sha256": "ee01e2ea36967b7210b05e2f5bd4432588c1078d127c3ce9612b18253ef5e9eb"
+    },
+    {
+      "suiteId": "material-repair12-broad",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/06-exploratory-material-repair12-broad-index.json",
+      "sha256": "2a4658e491fd3b39c7d2bab7397e3c18c58965267aabcf5c95b8ed5aea2a9d52"
+    },
+    {
+      "suiteId": "material-repair14",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/07-exploratory-material-repair14-index.json",
+      "sha256": "39cee94a5ad27e0475447fba7e773c6e281a72d3ac9b3d7fee99d2660444d9f9"
+    },
+    {
+      "suiteId": "material-repair14-broad",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/08-exploratory-material-repair14-broad-index.json",
+      "sha256": "a9208c804e505d6d8038b394ebb031850cfc643a4dcd23839fb16839157be5a3"
+    },
+    {
+      "suiteId": "material-coherent-repair14",
+      "phase": "exploratory",
+      "evidenceFile": "material-balance-summary-runs/09-exploratory-material-coherent-repair14-index.json",
+      "sha256": "244cea4a5103a282abad02f7b7cf9bf5066ae2fcfb998602dcf83d77526f6640"
+    },
+    {
+      "suiteId": "material-identity",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/10-final-source-material-identity-index.json",
+      "sha256": "ef02204f26be31d7a275c624aaeb0b188b27402ebe9ec5c90fb0871af4ff6af9"
+    },
+    {
+      "suiteId": "material-broad",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/11-final-source-material-broad-index.json",
+      "sha256": "579c10608ce1ead4ccfcdb1e89a507f5e81d53b6531b6f59d27c0104d39fdce7"
+    },
+    {
+      "suiteId": "material-repair-disabled",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/12-final-source-material-repair-disabled-index.json",
+      "sha256": "ee6225fa6f1dd96f2b9ae76488b755618ecfb7c93446222e10c34d39da78ee86"
+    },
+    {
+      "suiteId": "material-repair-zero",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/13-final-source-material-repair-zero-index.json",
+      "sha256": "d4cb2cf0aec66ccd44b45b9eaa022e7f6ac1ef4dfb8e8a5f361c2813e98a3910"
+    },
+    {
+      "suiteId": "material-coherent-identity",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/14-final-source-material-coherent-identity-index.json",
+      "sha256": "c5542cc025f3cf81d4bc4481fbc2d7db765ededdf1f2f98b3e9fc18f258f4569"
+    },
+    {
+      "suiteId": "material-restore18",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/15-final-source-material-restore18-index.json",
+      "sha256": "1bc11e3b3ec0fe85f02c2edc6b0e293ae4435971a85a73ee38fbda903aef9f82"
+    },
+    {
+      "suiteId": "material-light-recommendation",
+      "phase": "final-source",
+      "evidenceFile": "material-balance-summary-runs/16-final-source-material-light-recommendation-index.json",
+      "sha256": "540b9508243eb9257b331e3fdde3f3d0bca7c00474db192c12500446f39d58af"
+    }
+  ],
+  "verification": {
+    "evidenceFile": "material-balance-verification.json",
+    "sha256": "8e246f3fc23ea5622aca46e3695fe9a20de71a54b8a391de6505352e6c2f9503"
+  },
+  "postHocFreeze": {
+    "evidenceFile": "material-coherent-freeze.json",
+    "sha256": "ffae44419620707c9a382da04749355a680016b982e81709b579ba82e99c6e5b"
+  }
+}

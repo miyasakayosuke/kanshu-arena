@@ -1,0 +1,210 @@
+{
+  "rawReportPath": "lab-results/material-final-repair-disabled/report.json",
+  "rawReportSha256": "26954e54ea5ac4e407bb28391b18f6f9924a75a1f022b20a88986554182badde",
+  "phase": "final-source",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "1b5652c8db2d9f33c55559475a527e2180a3ea4cc61ef610fe85c76e0dd56b54"
+  },
+  "suiteId": "material-repair-disabled",
+  "candidate": {
+    "id": "repair-disabled",
+    "label": "Material frozen repair-disabled",
+    "overrides": {
+      "materialRepair": {
+        "enabled": false
+      }
+    }
+  },
+  "scheduleCounts": {
+    "teams": 11,
+    "curatedTeams": 11,
+    "sampledTeams": 0,
+    "matchupScenarios": 18,
+    "mirrorScenarios": 11,
+    "seeds": 32,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 3712
+  },
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522,
+    2195995987,
+    555464452,
+    3209900213,
+    1569368678,
+    4223804439,
+    2583272904,
+    942741369,
+    3597177130,
+    1956645595,
+    316114060,
+    2970549821,
+    1330018286,
+    3984454047,
+    2343922512,
+    703390977,
+    3357826738
+  ],
+  "teams": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "threematerial",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "cost": 16
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "cost": 14
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17
+    }
+  ],
+  "identityChangedOutcomes": 203,
+  "mirrors": {
+    "baselinePhysicalAllyScore": 0.515625,
+    "candidatePhysicalAllyScore": 0.504261
+  },
+  "focalTeams": [
+    {
+      "id": "purematerial",
+      "evidenceFile": "material-balance-summary-runs/12-final-source-material-repair-disabled-purematerial.json",
+      "sha256": "a590bf1ad69cc292466a76312f0f71d8459dcc753a55ccf8a3e7fb373bdcd1d8"
+    },
+    {
+      "id": "threematerial",
+      "evidenceFile": "material-balance-summary-runs/12-final-source-material-repair-disabled-threematerial.json",
+      "sha256": "ae7c4aca49634ecebc4cf0f31ca34fad04d455cc2c2b578cf9658be2e779a8f1"
+    }
+  ]
+}

@@ -104,9 +104,9 @@ describe('family monster profiles', () => {
 
   it('keeps pre-hit breakers distinct from Fenrir post-hit removal', async () => {
     await mount(8);
-    expect(document.querySelector('.profileModal')!.textContent).toContain('命中前に防御・守護・自然障壁・竜気を解除して攻撃');
+    expect(document.querySelector('.profileModal')!.textContent).toContain('命中前に防御・守護・自然障壁・竜気・修復待ちを解除して攻撃');
     await act(async () => root.render(<MonsterDetails id={12} onClose={() => root.render(null)} />));
-    expect(document.querySelector('.profileModal')!.textContent).toContain('各命中の後に守り（防御・守護）・群気・自然障壁・竜気を解除');
+    expect(document.querySelector('.profileModal')!.textContent).toContain('各命中の後に守り（防御・守護）・群気・自然障壁・竜気・修復待ちを解除');
     expect(document.querySelector('.profileModal')!.textContent).toContain('自然障壁だけなら10%軽減');
   });
 });
@@ -140,5 +140,37 @@ describe('dragon profiles', () => {
     expect(text).toContain('補正後攻撃力の38%');
     expect(text).toContain('全体攻撃は半分');
     expect(document.querySelector('.fixedBasisExplanation')).toBeNull();
+  });
+});
+
+describe('material profiles', () => {
+  it('explains Talos qualification, poison-first timing, living-only repair and exact cancellation', async () => {
+    await mount(19);
+    const profile = document.querySelector('.profileModal')!;
+    expect(profile.querySelector('.familyTag')?.textContent).toBe('物質系');
+    expect(profile.querySelector('.leaderBanner')?.textContent).toContain('味方の物質系だけ 最大HP +10%');
+    for (const phrase of ['タロスを含む物質系3体以上', '先頭以外でも', '開始時の条件は変わりません', '1ターン目の終了時', '両軍の毒ダメージを受けた後', '一度だけ', '本人が生存', '生存する味方の物質系', '各最大HPの14%', '小数点以下は切り捨て、最大HPまで', 'MPも行動も使わず', '蘇生ではありません', '防御解除は命中前', 'フェンリルの連牙は命中後', '再付与や2ターン目の再発動はありません']) expect(profile.textContent).toContain(phrase);
+    expect(profile.querySelectorAll('.skill')).toHaveLength(3);
+    expect([...profile.querySelectorAll('.skill strong')].map(node => node.textContent)).toEqual(['炉心の槌', '環銅の衝撃', '鋳輪の備え']);
+    expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
+    expect(document.activeElement).toBe(closeButton());
+    await tab(true); expect(document.activeElement).toBe(returnButton());
+  });
+
+  it.each([20, 21, 22, 23])('gives material companion %s distinct lore and real abilities without adding the passive as a command', async id => {
+    await mount(id);
+    const profile = document.querySelector('.profileModal')!;
+    expect(profile.querySelector('.familyTag')?.textContent).toBe('物質系');
+    expect(profile.textContent).toContain('タロスを含む物質系3体以上');
+    expect(profile.textContent).not.toContain('まだ物語の記されていない');
+    expect(profile.textContent).not.toContain('未知の役割');
+    expect(profile.querySelector('.materialExplanation')).toBeNull();
+    expect(profile.querySelectorAll('.skill').length).toBeGreaterThanOrEqual(2);
+    expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
+    expect([...profile.querySelectorAll('.skill strong')].map(node => node.textContent)).not.toContain('炉心の修復');
+    if (id === 20) expect(profile.textContent).toContain('味方1体の毒解除＋回復');
+    if (id === 21) expect(profile.textContent).toContain('味方1体を守る');
+    if (id === 22) expect(profile.textContent).toContain('命中前に防御・守護・自然障壁・竜気・修復待ちを解除');
+    if (id === 23) expect(profile.textContent).toContain('MP 22 · アンカー');
   });
 });

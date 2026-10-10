@@ -151,3 +151,32 @@ describe('original dragon choreography', () => {
     }
   });
 });
+
+describe('original material choreography', () => {
+  it('holds Talos lifted until the actual hit, then drops weight without a pounce', async () => {
+    const {sampleTalosMotion} = await import('./battleMotion');
+    expect(sampleTalosMotion(actionAge(3500))).toMatchObject({phase:'release',travel:0,lift:7});
+    expect(sampleTalosMotion(895)).toMatchObject({travel:10,lift:-6});
+    expect(sampleTalosMotion(895,true)).toMatchObject({travel:0,lift:0,tilt:0,camera:0});
+  });
+  it('gives the umbrella, wall, tripod and bull different physical signatures', async () => {
+    const {sampleUmbrellaMotion,sampleWallMotion,sampleTripodMotion,sampleBronzeBullMotion} = await import('./battleMotion');
+    expect(sampleUmbrellaMotion(799).lift).toBe(14);
+    expect(sampleUmbrellaMotion(799).tilt).toBeGreaterThan(0);
+    expect(sampleWallMotion(actionAge(3500))).toMatchObject({travel:0,lift:-4,tilt:0});
+    expect(sampleWallMotion(920).travel).toBe(14);
+    expect(sampleWallMotion(920,true).travel).toBe(0);
+    expect(sampleTripodMotion(799)).toMatchObject({travel:20,lift:0,scaleX:1,scaleY:1});
+    expect(sampleTripodMotion(799,true).travel).toBe(7);
+    expect(sampleBronzeBullMotion(410).travel).toBe(-9);
+    expect(sampleBronzeBullMotion(800)).toMatchObject({travel:52,lift:-3});
+  });
+  it('settles all five, and removes body and camera movement in reduced motion', async () => {
+    const m=await import('./battleMotion');
+    const samplers=[(t:number,r=false)=>m.sampleTalosMotion(t,false,r),m.sampleUmbrellaMotion,(t:number,r=false)=>m.sampleWallMotion(t,false,r),(t:number,r=false)=>m.sampleTripodMotion(t,false,r),m.sampleBronzeBullMotion];
+    for(const sample of samplers) {
+      expect(sample(ACTION_DURATION_MS)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+      for(const age of [0,340,799,800,895,1100,1500]) expect(sample(age,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+    }
+  });
+});

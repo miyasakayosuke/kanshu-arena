@@ -195,3 +195,82 @@ export function sampleZilantMotion(age: number, reduced = false) {
     camera: 0,
   };
 }
+
+/** A ring-built bronze guardian lifts its weight, then seats it at the real hit. */
+export function sampleTalosMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const ready = smooth(age / 690);
+  const impact = smooth((age - CAST_IMPACT_MS) / 95);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 140) / 410);
+  return {...base,
+    travel: reduced || supporting || !settle ? 0 : 10 * impact * settle,
+    lift: reduced || !settle ? 0 : (supporting ? 0 : 7 * ready - 13 * impact) * settle,
+    tilt: reduced || supporting || !settle ? 0 : (.065 * ready - .11 * impact) * settle,
+    scaleX: reduced ? 1 : 1 + .025 * impact * settle,
+    scaleY: reduced ? 1 : 1 - .045 * impact * settle,
+    camera: reduced || supporting || !settle ? 0 : .006 * impact * settle,
+  };
+}
+
+/** Paper tilts open once and drifts back; never continuously spins or pounces. */
+export function sampleUmbrellaMotion(age: number, reduced = false) {
+  const base = sampleActionMotion('support', age, reduced);
+  const opening = smooth(age / 410);
+  const spread = smooth((age - 570) / 230);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - HIT_HOLD_MS) / RECOVERY_MS);
+  return {...base,
+    travel: 0,
+    lift: reduced || !settle ? 0 : 14 * opening * settle,
+    tilt: reduced || !settle ? 0 : (-.13 * opening + .21 * spread) * settle,
+    scaleX: reduced ? 1 : 1 + .075 * spread * settle,
+    scaleY: reduced ? 1 : 1 - .03 * spread * settle,
+    camera: 0,
+  };
+}
+
+/** A stepped barrier plants down; an attack nudges forward only at impact. */
+export function sampleWallMotion(age: number, protecting = false, reduced = false) {
+  const base = sampleActionMotion(protecting ? 'support' : 'strike', age, reduced);
+  const seat = smooth(age / 730);
+  const push = smooth((age - CAST_IMPACT_MS) / 120);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 130) / 420);
+  return {...base,
+    travel: reduced || protecting || !settle ? 0 : 14 * push * settle,
+    lift: reduced || !settle ? 0 : -4 * seat * settle,
+    tilt: 0,
+    scaleX: reduced ? 1 : 1 + .045 * seat * settle,
+    scaleY: reduced ? 1 : 1 - .025 * seat * settle,
+    camera: 0,
+  };
+}
+
+/** A shallow three-wheeled vessel rolls a short arc and tips its rim once. */
+export function sampleTripodMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const roll = smooth((age - 210) / 490);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - HIT_HOLD_MS) / RECOVERY_MS);
+  return {...base,
+    travel: reduced || !settle ? 0 : (supporting ? 7 : 20) * roll * settle,
+    lift: 0,
+    tilt: reduced || !settle ? 0 : -.055 * roll * settle,
+    scaleX: 1,
+    scaleY: 1,
+    camera: 0,
+  };
+}
+
+/** Four planted hooves brace, then drive forward in a low horn-first thrust. */
+export function sampleBronzeBullMotion(age: number, reduced = false) {
+  const base = sampleActionMotion('strike', age, reduced);
+  const ready = smooth(age / 410);
+  const drive = smooth((age - 650) / 150);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 120) / 430);
+  return {...base,
+    travel: reduced || !settle ? 0 : (-9 * ready * (1 - drive) + 52 * drive) * settle,
+    lift: reduced || !settle ? 0 : -3 * ready * settle,
+    tilt: reduced || !settle ? 0 : -.065 * drive * settle,
+    scaleX: reduced ? 1 : 1 + (.04 * ready - .015 * drive) * settle,
+    scaleY: reduced ? 1 : 1 - .055 * ready * settle,
+    camera: reduced || !settle ? 0 : .005 * drive * settle,
+  };
+}

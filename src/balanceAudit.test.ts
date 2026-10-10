@@ -42,7 +42,7 @@ function legalTeamIncluding(id: number, budget: number): number[] {
 
 describe('all roster roles remain selectable under the two real 5v5 rules', () => {
   it.each<RuleId>(['standard', 'light'])('gives each distinct role a legal five-member %s team', rule => {
-    expect(monsters).toHaveLength(19);
+    expect(monsters).toHaveLength(24);
     const names = new Set<string>();
     for (const monster of monsters) {
       const team = legalTeamIncluding(monster.id, rules[rule].budget);
@@ -260,7 +260,7 @@ describe('guard breakers unlock later hits rather than replacing initiative', ()
   it('distinguishes COST3 イフリート coverage from COST4 アヌビス initiative and heavier attacks', () => {
     expect(monsters[8].cost).toBe(3);
     expect(monsters[11].cost).toBe(4);
-    expect(monsters[11].atk).toBe(Math.max(...monsters.map(monster => monster.atk)));
+    expect(monsters[11].atk).toBe(Math.max(...monsters.slice(0, 19).map(monster => monster.atk)));
     expect(monsters[11].speed).toBeGreaterThan(monsters[8].speed);
     expect(monsters[8].hp).toBeGreaterThan(monsters[11].hp);
     expect(monsters[8].skills.some(skill => skill.all)).toBe(true);

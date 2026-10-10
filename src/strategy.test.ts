@@ -21,7 +21,7 @@ describe('team rules and opponents', () => {
 
   it.each<RuleId>(['standard', 'light'])('provides distinct legal %s opponents', rule => {
     const teams = opponentTeams(rule);
-    expect(teams).toHaveLength(rule === 'standard' ? 7 : 5);
+    expect(teams).toHaveLength(rule === 'standard' ? 8 : 5);
     expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(teams.length);
     for (const team of teams) {
       expect(isValidTeam(team, rules[rule].budget)).toBe(true);
@@ -33,7 +33,7 @@ describe('team rules and opponents', () => {
   });
 
   it('preserves standard opponents and protects them from preview mutations', () => {
-    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18]];
+    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23]];
     expect(opponentTeams('standard')).toEqual(expected);
     const teams = opponentTeams('standard');
     teams[0][0] = 11;
@@ -46,7 +46,7 @@ describe('team rules and opponents', () => {
     const light = opponentTeams('light');
     expect(standard.slice(0, 4)).toEqual([[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]]);
     expect(light.slice(0, 4)).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10]]);
-    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18]]);
+    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23]]);
     expect(light.slice(4)).toEqual([[14, 3, 6, 9, 10]]);
     const beast = standard[4];
     const nature = standard[5];
@@ -61,13 +61,23 @@ describe('team rules and opponents', () => {
 
   it('appends the pure dragon team only to standard and gives legal reference examples', () => {
     const dragon = [15, 5, 16, 17, 18];
-    expect(opponentTeams('standard').at(-1)).toEqual(dragon);
+    expect(opponentTeams('standard')[6]).toEqual(dragon);
     expect(opponentTeams('light')).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10], [14, 3, 6, 9, 10]]);
     expect(cost(dragon)).toBe(17);
     expect(isValidTeam(dragon, 17)).toBe(true);
     expect(isValidTeam(dragon, 15)).toBe(false);
     for (const example of recommendedTeams) expect(isValidTeam([...example.team])).toBe(true);
     expect(cost([...recommendedTeams[3].team])).toBe(15);
+  });
+
+  it('appends the pure material encounter only to standard and keeps pure and mixed examples rule-accurate', () => {
+    const pure = [19, 20, 21, 22, 23], mixed = [19, 20, 23, 2, 10];
+    expect(opponentTeams('standard')[7]).toEqual(pure);
+    expect(opponentTeams('light').some(team => team.includes(19))).toBe(false);
+    expect(cost(pure)).toBe(17); expect(cost(mixed)).toBe(16);
+    expect(isValidTeam(pure, 17)).toBe(true); expect(isValidTeam(pure, 15)).toBe(false);
+    expect(isValidTeam(mixed, 17)).toBe(true); expect(isValidTeam(mixed, 15)).toBe(false);
+    expect(recommendedTeams.slice(4).map(example => [...example.team])).toEqual([pure, mixed]);
   });
 
   it('validates exact size, unique roster IDs, integer IDs, and the selected budget', () => {
@@ -101,10 +111,11 @@ describe('local team slots', () => {
     expect(loadTeamSlots(readStorage([null, standard, null, light]))).toEqual([null, standard, null]);
   });
 
-  it('loads old IDs without migration and round-trips all new dragon IDs', () => {
+  it('loads old IDs without migration and round-trips dragon and material IDs', () => {
     const old = { team: [5, 1, 4, 8, 6], rule: 'standard' } as const;
     const dragon = { team: [15, 5, 16, 17, 18], rule: 'standard' } as const;
-    const saved = [old, dragon, null];
+    const material = { team: [19, 20, 21, 22, 23], rule: 'standard' } as const;
+    const saved = [old, dragon, material];
     let serialized = JSON.stringify(saved);
     const storage = { getItem: () => serialized, setItem: (_key: string, value: string) => { serialized = value; } };
     expect(loadTeamSlots(storage)).toEqual(saved);
@@ -248,7 +259,9 @@ describe('truthful character roles and tradeoffs', () => {
     expect(monsterRole(4).strength).toContain('攻撃リーダー');
     expect(monsterRole(9).strength).toContain('素早さリーダー');
     const anubis = monsters[11];
-    expect(anubis.atk).toBe(Math.max(...monsters.map(monster => monster.atk)));
+    expect(anubis.atk).toBe(Math.max(...monsters.filter(monster => monster.id < 19).map(monster => monster.atk)));
+    expect(monsterRole(anubis.id).strength).not.toContain('最高の攻撃力');
+    expect(monsters[23].atk).toBeGreaterThan(anubis.atk);
     expect(anubis.skills.find(skill => skill.breaksGuard)?.priority).toBe(0);
     expect(monsterRole(anubis.id).tradeoff).toContain('防御解除は先制技ではない');
   });

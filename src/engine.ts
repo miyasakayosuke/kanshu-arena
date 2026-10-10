@@ -43,17 +43,23 @@ const roster: [number, string, string, number, number, number, number, SpecialSk
 [15,'ヴリトラ','🐉',5,220,31,44,[{ ...hit('渇天の息',10,-2,true,28), fixedDamage:true, dragonChargeFinisher:true },hit('雨裂きの牙',52),{ ...guard, name:'蜷局の備え' }]],
 [16,'リンドヴルム','🦎',2,150,38,62,[hit('石割りの牙',47),{ ...protect, name:'鱗のかばい' }]],
 [17,'アンフィスバエナ','🐍',3,156,40,71,[{ ...hit('双頭の連突',20,0,false,12), randomHits:2 },{ ...guardBreaker('封鱗裂き'), power:50 }]],
-[18,'ジラント','🐲',3,165,33,67,[{ ...hit('翠雲の息',68,0,false,12), fixedDamage:true },{ ...heal, name:'雲の湧き水', power:50, mpCost:16 },{ ...cleanse, name:'雲払い', power:25, mpCost:10 }]]
+[18,'ジラント','🐲',3,165,33,67,[{ ...hit('翠雲の息',68,0,false,12), fixedDamage:true },{ ...heal, name:'雲の湧き水', power:50, mpCost:16 },{ ...cleanse, name:'雲払い', power:25, mpCost:10 }]],
+[19,'タロス','⚙️',5,235,42,36,[hit('炉心の槌',70,0,false,12),hit('環銅の衝撃',36,-2,true,22),{ ...guard, name:'鋳輪の備え' }]],
+[20,'唐傘おばけ','☂️',2,145,29,86,[hit('雨縫い',50,0,false,8),{ ...cleanse, name:'傘下の清め', power:30, mpCost:10 }]],
+[21,'ぬりかべ','🧱',3,250,36,17,[hit('石段押し',70,-1,false,16),{ ...protect, name:'折壁の守り' },{ ...guard, name:'石組みの構え' }]],
+[22,'巡る三脚鼎','♨️',3,190,28,48,[{ ...heal, name:'湯の巡り', power:62, mpCost:18 },{ ...guardBreaker('封留め崩し'), power:45, mpCost:12 },hit('三輪の一押し',44,0,false,8)]],
+[23,'青銅の牡牛','🐂',4,215,58,42,[hit('銅角の突き',75,0,false,12),hit('鋳火の突貫',115,-2,false,22)]]
 ];
 // Original resource budgets: three heavy casts or several economical actions.
-const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50, 60, 44, 64, 62, 40, 50, 56];
+const mpBudgets = [54, 44, 72, 64, 56, 54, 42, 72, 52, 52, 56, 50, 60, 44, 64, 62, 40, 50, 56, 64, 54, 44, 66, 50];
 // Game-only mammalian motifs. Unassigned creatures are not forced into a mythological taxonomy.
 const beastIds = new Set([0, 2, 7, 11, 12, 13]);
 // This is a gameplay family, not a claim of shared mythological origin.
 const natureIds = new Set([3, 6, 9, 10, 14]);
 const dragonIds = new Set([5, 15, 16, 17, 18]);
+const materialIds = new Set([19, 20, 21, 22, 23]);
 export const familyLabel = (monster: Monster): string => monster.family ? FAMILY_DEFINITIONS[monster.family].label : '系統未設定';
-export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, ...(beastIds.has(id) ? { family: 'beast' as const } : natureIds.has(id) ? { family: 'nature' as const } : dragonIds.has(id) ? { family: 'dragon' as const } : {}), skills }));
+export const monsters: Monster[] = roster.map(([id, name, icon, cost, hp, atk, speed, skills]) => ({ id, name, icon, cost, hp, mp: mpBudgets[id], atk, speed, ...(beastIds.has(id) ? { family: 'beast' as const } : natureIds.has(id) ? { family: 'nature' as const } : dragonIds.has(id) ? { family: 'dragon' as const } : materialIds.has(id) ? { family: 'material' as const } : {}), skills }));
 export type LeaderTrait = { name: string; stat: 'hp' | 'atk' | 'speed'; percent: number; description: string; family?: Family; secondary?: { stat: 'atk' | 'speed'; percent: number } };
 const leaderTraits: readonly [string, LeaderTrait['stat']][] = [
   ['暁の追い風', 'speed'], ['岩山の誓い', 'hp'], ['守り猫の祈り', 'hp'], ['森羅の息吹', 'hp'],
@@ -70,6 +76,11 @@ export function leaderFor(id: number): LeaderTrait {
   if (id === 16) return { name: '地這いの陣', stat: 'hp', percent: 8, family: 'dragon', description: '味方の竜系だけ 最大HP +8%' };
   if (id === 17) return { name: '双頭の呼応', stat: 'atk', percent: 8, family: 'dragon', description: '味方の竜系だけ 攻撃力 +8%' };
   if (id === 18) return { name: '翠雲の導き', stat: 'speed', percent: 8, family: 'dragon', description: '味方の竜系だけ 素早さ +8%' };
+  if (id === 19) return { name: '鋳輪の結束', stat: 'hp', percent: 10, family: 'material', description: '味方の物質系だけ 最大HP +10%' };
+  if (id === 20) return { name: '雨道の先導', stat: 'speed', percent: 8, family: 'material', description: '味方の物質系だけ 素早さ +8%' };
+  if (id === 21) return { name: '重なる石段', stat: 'hp', percent: 8, family: 'material', description: '味方の物質系だけ 最大HP +8%' };
+  if (id === 22) return { name: '湯輪の集い', stat: 'hp', percent: 8, family: 'material', description: '味方の物質系だけ 最大HP +8%' };
+  if (id === 23) return { name: '銅蹄の号令', stat: 'atk', percent: 8, family: 'material', description: '味方の物質系だけ 攻撃力 +8%' };
   const trait = leaderTraits[id];
   if (!trait) throw new Error(`Unknown monster id: ${id}`);
   const [name, stat] = trait;
@@ -90,7 +101,7 @@ export function skillOrderLabel(skill: Skill): string {
   return skill.priority >= 3 ? '最速' : skill.priority >= 2 ? '先制' : skill.priority > 0 ? '防御順' : skill.priority < 0 ? 'アンカー' : '通常順';
 }
 
-export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number; /** Isolated simulation override; gameplay uses RALLY_PERCENT. */ rallyPercent?: number; ward?: number; /** Isolated simulation override; gameplay uses NATURE_WARD_PERCENT. */ wardPercent?: number; /** Present, including zero, only on an enabled dragon core. */ dragonCharge?: number; /** Isolated simulation override; gameplay uses DRAGON_CHARGE_PER_POINT. */ dragonChargePerPoint?: number };
+export type Unit = { key: string; monster: Monster; hp: number; mp: number; guard: boolean; poison: number; rally?: number; /** Isolated simulation override; gameplay uses RALLY_PERCENT. */ rallyPercent?: number; ward?: number; /** Isolated simulation override; gameplay uses NATURE_WARD_PERCENT. */ wardPercent?: number; /** Present, including zero, only on an enabled dragon core. */ dragonCharge?: number; /** Isolated simulation override; gameplay uses DRAGON_CHARGE_PER_POINT. */ dragonChargePerPoint?: number; /** Undefined when ineligible; false after repair, dispel, or defeat. */ repairReady?: boolean; /** Isolated simulation override; gameplay uses MATERIAL_REPAIR_PERCENT. */ repairPercent?: number };
 export type State = {
   turn: number;
   seed: number;
@@ -104,7 +115,7 @@ export type State = {
 export type Order = { key: string; skill: number; target?: string };
 export type BattlePhase = 'turn-start' | 'before-action' | 'action' | 'action-end' | 'turn-end';
 export type BattleEvent = {
-  kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'cleanse' | 'break' | 'defeat' | 'resource' | 'expire' | 'phase' | 'charge';
+  kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'cleanse' | 'break' | 'defeat' | 'resource' | 'expire' | 'phase' | 'charge' | 'passive';
   actor?: string;
   target?: string;
   /** Cast intent and living targets at cast time, independent of survivor count. */
@@ -113,7 +124,7 @@ export type BattleEvent = {
   hitTargets?: string[];
   hits?: number;
   hitIndex?: number;
-  removed?: ('guard' | 'rally' | 'ward' | 'dragonCharge')[];
+  removed?: ('guard' | 'rally' | 'ward' | 'dragonCharge' | 'repairReady')[];
   targets?: string[];
   skill?: string;
   amount?: number;
@@ -124,6 +135,9 @@ export type BattleEvent = {
   rally?: number;
   ward?: number;
   dragonCharge?: number;
+  repairReady?: boolean;
+  /** Only presentation-created casts carry this marker; authoritative passives are never casts. */
+  passive?: 'material-repair';
   /** Charge captured before the finisher spends it; presentation never reconstructs it. */
   dragonChargeSpent?: number;
   phase?: BattlePhase;
@@ -156,6 +170,13 @@ export const OPENING_WARD_TURNS = 2;
 export const DRAGON_CORE_ID = 15;
 export const DRAGON_CHARGE_CAP = 5;
 export const DRAGON_CHARGE_PER_POINT = 18;
+export const MATERIAL_CORE_ID = 19;
+export const MATERIAL_REPAIR_PERCENT = 14;
+/** A finite family repair definition, independent of learned skills and action orders. */
+export const MATERIAL_REPAIR = { coreId: MATERIAL_CORE_ID, family: 'material' as const, minimumMembers: 3, turn: 1, percent: MATERIAL_REPAIR_PERCENT, name: '炉心の修復' };
+const repairEligible = (friends: readonly { monster: Monster }[], repair: typeof MATERIAL_REPAIR) => friends.some(friend => friend.monster.id === repair.coreId) && friends.filter(friend => friend.monster.family === repair.family).length >= repair.minimumMembers;
+/** Starting membership, including defeated members. Never recalculated from living count. */
+export const materialRepairEligible = (friends: readonly { monster: Monster }[]) => repairEligible(friends, MATERIAL_REPAIR);
 /** Starting membership, never living count. Used by isolated lab starts too. */
 export const dragonChargeEligible = (friends: readonly { monster: Monster }[]) => friends.some(friend => friend.monster.id === DRAGON_CORE_ID) && friends.filter(friend => friend.monster.family === 'dragon').length >= 3;
 /** Guard and nature ward do not stack; poison is handled separately. */
@@ -173,6 +194,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     const rally = options.familySupport !== false && ids.includes(12);
     const ward = options.familySupport !== false && ids.includes(14);
     const dragonCharge = options.familySupport !== false && ids.includes(DRAGON_CORE_ID) && ids.filter(id => monsters[id]?.family === 'dragon').length >= 3;
+    const repair = options.familySupport !== false && materialRepairEligible(ids.map(id => ({ monster: monsters[id] })).filter(friend => friend.monster));
     return ids.map((id, i) => {
       const source = monsters[id];
       if (!source) throw new Error(`Unknown monster id: ${id}`);
@@ -181,7 +203,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
         ...source, [leader.stat]: Math.round(source[leader.stat] * (1 + leader.percent / 100)),
         ...(leader.secondary ? { [leader.secondary.stat]: Math.round(source[leader.secondary.stat] * (1 + leader.secondary.percent / 100)) } : {}),
       } : source;
-      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0, ...(rally && source.family === 'beast' ? { rally: OPENING_RALLY_TURNS } : {}), ...(ward && source.family === 'nature' ? { ward: OPENING_WARD_TURNS } : {}), ...(dragonCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0 } : {}) };
+      return { key: prefix + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0, ...(rally && source.family === 'beast' ? { rally: OPENING_RALLY_TURNS } : {}), ...(ward && source.family === 'nature' ? { ward: OPENING_WARD_TURNS } : {}), ...(dragonCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0 } : {}), ...(repair && id === MATERIAL_CORE_ID ? { repairReady: true } : {}) };
     });
   };
   return {
@@ -200,6 +222,9 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
       ...(enemy.includes(14) ? [`敵「森羅の甲羅」：自然系だけ自然障壁を2ターン付与。直接ダメージ${NATURE_WARD_PERCENT}%軽減・守りと重複なし・解除可能。毒は軽減しません。`] : []),
       ...([[team, '味方'], [enemy, '敵']] as const).flatMap(([ids, side]) => ids.includes(DRAGON_CORE_ID) && ids.filter(id => monsters[id]?.family === 'dragon').length >= 3
         ? [`${side}「竜気」：開戦時にヴリトラを含む竜系3体以上で有効。生存中のヴリトラは、同じ側の竜系のMP消費攻撃（毒・通常攻撃を除く）後に1蓄積。連撃も1回、上限${DRAGON_CHARGE_CAP}。渇天の息で全消費し、同技では蓄積しません。解除可能。`]
+        : []),
+      ...([[team, '味方'], [enemy, '敵']] as const).flatMap(([ids, side]) => materialRepairEligible(ids.map(id => ({ monster: monsters[id] })))
+        ? [`${side}「${MATERIAL_REPAIR.name}」：開戦時にタロスを含む物質系3体以上で修復待機。1ターン目終了時、全ての毒の後にタロスが生存していれば、生存中の味方物質系を各最大HPの${MATERIAL_REPAIR_PERCENT}%だけ一度回復（端数切り捨て・減少HPが上限）。全快でも消費。待機は解除可能。蘇生・MP回復・能力強化はありません。`]
         : []),
     ] : [])],
     winner: null,
@@ -226,7 +251,7 @@ export function canUseSkill(unit: Unit, skill: Skill): boolean {
 /** Poison is measured in remaining end-of-turn ticks, not actor turns. */
 export function effectStatus(unit: Unit): string {
   if (unit.hp <= 0) return '戦闘不能';
-  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : '', unit.rally ? `群気:残${unit.rally}T` : '', unit.ward ? `自然障壁:残${unit.ward}T` : '', unit.dragonCharge !== undefined ? `竜気:${unit.dragonCharge}/${DRAGON_CHARGE_CAP}` : ''].filter(Boolean).join('・');
+  return [unit.guard ? '守り:今T' : '', unit.poison > 0 ? `毒:残${unit.poison}回` : '', unit.rally ? `群気:残${unit.rally}T` : '', unit.ward ? `自然障壁:残${unit.ward}T` : '', unit.dragonCharge !== undefined ? `竜気:${unit.dragonCharge}/${DRAGON_CHARGE_CAP}` : '', unit.repairReady !== undefined ? unit.repairReady ? '修復:待機' : '修復:終了' : ''].filter(Boolean).join('・');
 }
 
 /** Choose orders without changing state or consuming the battle's random seed. */
@@ -305,6 +330,7 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
   for (const unit of [...battle.allies, ...battle.enemies]) {
     if (unit.guard) { unit.guard = false; emit({ kind: 'expire', target: unit.key, effect: 'guard', guard: false }); }
     if (unit.hp <= 0 && unit.poison) { unit.poison = 0; emit({ kind: 'expire', target: unit.key, effect: 'poison', poison: 0 }); }
+    if (unit.hp <= 0 && unit.repairReady) { unit.repairReady = false; emit({ kind: 'expire', target: unit.key, effect: 'repairReady', repairReady: false }); }
   }
   const alliedAutomatic = autoOrders(battle);
   const enemyAutomatic = autoOrders(battle, 'enemies');
@@ -353,7 +379,8 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
       if (target.rally !== undefined) target.rally = 0;
       if (target.ward !== undefined) target.ward = 0;
       if (target.dragonCharge !== undefined) target.dragonCharge = 0;
-      emit({ kind: 'defeat', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, hp: 0, guard: false, poison: 0, ...(target.rally !== undefined ? { rally: 0 } : {}), ...(target.ward !== undefined ? { ward: 0 } : {}), ...(target.dragonCharge !== undefined ? { dragonCharge: 0 } : {}), effect });
+      if (target.repairReady !== undefined) target.repairReady = false;
+      emit({ kind: 'defeat', actor, ...(hitIndex !== undefined ? { hitIndex } : {}), target: target.key, hp: 0, guard: false, poison: 0, ...(target.rally !== undefined ? { rally: 0 } : {}), ...(target.ward !== undefined ? { ward: 0 } : {}), ...(target.dragonCharge !== undefined ? { dragonCharge: 0 } : {}), ...(target.repairReady !== undefined ? { repairReady: false } : {}), effect });
     }
     return amount;
   };
@@ -422,23 +449,26 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
         const hadRally = !!target.rally;
         const hadWard = !!target.ward;
         const hadDragonCharge = !!target.dragonCharge;
-        if (skill.kind === 'hit' && skill.breaksGuard && (target.guard || target.ward || target.dragonCharge)) {
+        const hadRepair = !!target.repairReady;
+        if (skill.kind === 'hit' && skill.breaksGuard && (target.guard || target.ward || target.dragonCharge || target.repairReady)) {
           target.guard = false;
           if (hadWard) target.ward = 0;
           if (hadDragonCharge) target.dragonCharge = 0;
-          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadWard ? { ward: 0 } : {}), ...(hadDragonCharge ? { dragonCharge: 0 } : {}), ...(hadWard || hadDragonCharge ? { removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadWard ? ['ward' as const] : []), ...(hadDragonCharge ? ['dragonCharge' as const] : [])] } : {}) });
-          battle.log.push(`${target.monster.name}の${[wasGuarded ? '防御' : '', hadWard ? '自然障壁' : '', hadDragonCharge ? '竜気' : ''].filter(Boolean).join('・')}を解除！`);
+          if (hadRepair) target.repairReady = false;
+          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadWard ? { ward: 0 } : {}), ...(hadDragonCharge ? { dragonCharge: 0 } : {}), ...(hadRepair ? { repairReady: false } : {}), ...(hadWard || hadDragonCharge || hadRepair ? { removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadWard ? ['ward' as const] : []), ...(hadDragonCharge ? ['dragonCharge' as const] : []), ...(hadRepair ? ['repairReady' as const] : [])] } : {}) });
+          battle.log.push(`${target.monster.name}の${[wasGuarded ? '防御' : '', hadWard ? '自然障壁' : '', hadDragonCharge ? '竜気' : '', hadRepair ? '修復待機' : ''].filter(Boolean).join('・')}を解除！`);
         }
         seed = random(seed);
         const amount = damage(target, castDamage * (0.9 + (seed % 21) / 100) * directDamageScale(target), unit.key, undefined, skill.randomHits ? hitIndex : undefined);
         battle.log.push(`${target.monster.name}に ${amount} ダメージ${wasGuarded && !skill.breaksGuard ? '（防御で半減）' : hadWard && !skill.breaksGuard ? '（自然障壁で軽減）' : ''}${target.hp === 0 ? '・撃破！' : ''}`);
-        if (skill.breaksGuardAfterHit && (wasGuarded || hadRally || hadWard || hadDragonCharge) && target.hp > 0) {
+        if (skill.breaksGuardAfterHit && (wasGuarded || hadRally || hadWard || hadDragonCharge || hadRepair) && target.hp > 0) {
           target.guard = false;
           if (hadRally) target.rally = 0;
           if (hadWard) target.ward = 0;
           if (hadDragonCharge) target.dragonCharge = 0;
-          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadRally ? { rally: 0 } : {}), ...(hadWard ? { ward: 0 } : {}), ...(hadDragonCharge ? { dragonCharge: 0 } : {}), removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadRally ? ['rally' as const] : []), ...(hadWard ? ['ward' as const] : []), ...(hadDragonCharge ? ['dragonCharge' as const] : [])], hitIndex, effect: hadWard ? 'ward' : hadRally ? 'rally' : hadDragonCharge ? 'dragonCharge' : 'guard' });
-          battle.log.push(`${target.monster.name}の${[wasGuarded ? '守り' : '', hadRally ? '群気' : '', hadWard ? '自然障壁' : '', hadDragonCharge ? '竜気' : ''].filter(Boolean).join('・')}を命中後に解除！`);
+          if (hadRepair) target.repairReady = false;
+          emit({ kind: 'break', actor: unit.key, target: target.key, guard: false, ...(hadRally ? { rally: 0 } : {}), ...(hadWard ? { ward: 0 } : {}), ...(hadDragonCharge ? { dragonCharge: 0 } : {}), ...(hadRepair ? { repairReady: false } : {}), removed: [...(wasGuarded ? ['guard' as const] : []), ...(hadRally ? ['rally' as const] : []), ...(hadWard ? ['ward' as const] : []), ...(hadDragonCharge ? ['dragonCharge' as const] : []), ...(hadRepair ? ['repairReady' as const] : [])], hitIndex, effect: hadWard ? 'ward' : hadRally ? 'rally' : hadDragonCharge ? 'dragonCharge' : hadRepair ? 'repairReady' : 'guard' });
+          battle.log.push(`${target.monster.name}の${[wasGuarded ? '守り' : '', hadRally ? '群気' : '', hadWard ? '自然障壁' : '', hadDragonCharge ? '竜気' : '', hadRepair ? '修復待機' : ''].filter(Boolean).join('・')}を命中後に解除！`);
         }
         if (skill.kind === 'poison' && target.hp > 0) {
           target.poison = 3;
@@ -467,6 +497,26 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     unit.poison--;
     const amount = damage(unit, unit.monster.hp * 0.06, undefined, 'poison');
     battle.log.push(`${unit.monster.name}は毒で${amount}ダメージ${unit.hp > 0 ? unit.poison ? `（残り${unit.poison}回）` : '（毒が切れた）' : '・撃破！'}`);
+  }
+  // All poison on BOTH sides resolves before either side's finite repair. No skill,
+  // cast, MP debit, random draw, revival, cleanse, or charge generation occurs here.
+  const repair = MATERIAL_REPAIR;
+  if (battle.turn === repair.turn) for (const friends of [battle.allies, battle.enemies]) {
+    for (const core of friends) {
+      if (core.monster.id !== repair.coreId || core.hp <= 0 || !core.repairReady) continue;
+      core.repairReady = false;
+      const recipients = friends.filter(friend => friend.hp > 0 && friend.monster.family === repair.family);
+      emit({ kind: 'passive', actor: core.key, target: core.key, targets: recipients.map(friend => friend.key), scope: 'all', skill: repair.name, effect: 'material-repair', repairReady: false });
+      battle.log.push(`${core.monster.name}の「${repair.name}」！ 修復待機を消費（生存する物質系だけ・一度きり）`);
+      const requestedPercent = core.repairPercent ?? repair.percent;
+      const percent = Number.isFinite(requestedPercent) ? Math.max(0, requestedPercent) : repair.percent;
+      for (const target of recipients) {
+        const amount = Math.max(0, Math.min(Math.floor(target.monster.hp * percent / 100), target.monster.hp - target.hp));
+        target.hp += amount;
+        emit({ kind: 'heal', actor: core.key, target: target.key, amount, hp: target.hp, effect: 'material-repair' });
+        battle.log.push(`${target.monster.name} 修復 HP +${amount}`);
+      }
+    }
   }
   for (const unit of [...battle.allies, ...battle.enemies]) {
     if (unit.ward) {

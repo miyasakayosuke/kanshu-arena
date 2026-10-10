@@ -1,0 +1,474 @@
+{
+  "rawReportPath": "lab-results/material-stage1-repair12-broad/report.json",
+  "rawReportSha256": "779170f21524d7fbfc1c5958b31e262fda686113f7f3c31079be010d9b3a2cc2",
+  "phase": "exploratory",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "54d7690e57eb38fb5eb6fd85de54925798c9ab4155e7ceec9cfa619b61e721b1",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "2d6defa19d35873d340dd08031979ab8c0933873ee443485594856f2104de537"
+  },
+  "suiteId": "material-repair12-broad",
+  "candidate": {
+    "id": "repair12",
+    "label": "Isolated 12% material repair; frozen initial roster",
+    "overrides": {
+      "materialRepair": {
+        "percent": 12
+      }
+    }
+  },
+  "scheduleCounts": {
+    "teams": 36,
+    "curatedTeams": 36,
+    "sampledTeams": 0,
+    "matchupScenarios": 99,
+    "mirrorScenarios": 36,
+    "seeds": 16,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 8640
+  },
+  "seeds": [
+    2674696771,
+    1034165236,
+    3688600997,
+    2048069462,
+    407537927,
+    3061973688,
+    1421442153,
+    4075877914,
+    2435346379,
+    794814844,
+    3449250605,
+    1808719070,
+    168187535,
+    2822623296,
+    1182091761,
+    3836527522
+  ],
+  "teams": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "threematerial",
+      "ids": [
+        19,
+        20,
+        23,
+        2,
+        10
+      ],
+      "cost": 16
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        20,
+        19,
+        21,
+        22,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "cost": 14
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-1",
+      "ids": [
+        2,
+        4,
+        17,
+        15,
+        21
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-2",
+      "ids": [
+        7,
+        3,
+        13,
+        14,
+        21
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-3",
+      "ids": [
+        8,
+        5,
+        10,
+        22,
+        18
+      ],
+      "cost": 15
+    },
+    {
+      "id": "generated-4",
+      "ids": [
+        23,
+        12,
+        21,
+        13,
+        9
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-5",
+      "ids": [
+        5,
+        20,
+        11,
+        13,
+        0
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-6",
+      "ids": [
+        9,
+        1,
+        20,
+        5,
+        13
+      ],
+      "cost": 14
+    },
+    {
+      "id": "generated-7",
+      "ids": [
+        2,
+        16,
+        9,
+        18,
+        6
+      ],
+      "cost": 13
+    },
+    {
+      "id": "generated-8",
+      "ids": [
+        22,
+        10,
+        18,
+        14,
+        3
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-9",
+      "ids": [
+        23,
+        22,
+        21,
+        20,
+        5
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-10",
+      "ids": [
+        23,
+        11,
+        20,
+        13,
+        18
+      ],
+      "cost": 15
+    },
+    {
+      "id": "generated-11",
+      "ids": [
+        20,
+        0,
+        7,
+        22,
+        21
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-12",
+      "ids": [
+        7,
+        1,
+        10,
+        8,
+        22
+      ],
+      "cost": 15
+    },
+    {
+      "id": "generated-13",
+      "ids": [
+        8,
+        2,
+        17,
+        21,
+        11
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-14",
+      "ids": [
+        18,
+        23,
+        5,
+        10,
+        4
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-15",
+      "ids": [
+        6,
+        10,
+        20,
+        9,
+        14
+      ],
+      "cost": 14
+    },
+    {
+      "id": "generated-16",
+      "ids": [
+        1,
+        13,
+        12,
+        0,
+        4
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-17",
+      "ids": [
+        0,
+        17,
+        15,
+        18,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-18",
+      "ids": [
+        9,
+        22,
+        17,
+        13,
+        1
+      ],
+      "cost": 14
+    },
+    {
+      "id": "generated-19",
+      "ids": [
+        2,
+        23,
+        12,
+        20,
+        17
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-20",
+      "ids": [
+        13,
+        9,
+        7,
+        4,
+        20
+      ],
+      "cost": 14
+    },
+    {
+      "id": "generated-21",
+      "ids": [
+        21,
+        6,
+        15,
+        14,
+        16
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-22",
+      "ids": [
+        0,
+        8,
+        4,
+        2,
+        9
+      ],
+      "cost": 16
+    },
+    {
+      "id": "generated-23",
+      "ids": [
+        14,
+        8,
+        1,
+        2,
+        22
+      ],
+      "cost": 17
+    },
+    {
+      "id": "generated-24",
+      "ids": [
+        4,
+        2,
+        17,
+        18,
+        3
+      ],
+      "cost": 15
+    }
+  ],
+  "identityChangedOutcomes": 240,
+  "mirrors": {
+    "baselinePhysicalAllyScore": 0.501736,
+    "candidatePhysicalAllyScore": 0.505208
+  },
+  "focalTeams": [
+    {
+      "id": "purematerial",
+      "evidenceFile": "material-balance-summary-runs/06-exploratory-material-repair12-broad-purematerial.json",
+      "sha256": "d4dd4593001b0ca2b4b10bb7985c7c2f263437b2e9f682f5a7766f9cd1d80089"
+    },
+    {
+      "id": "threematerial",
+      "evidenceFile": "material-balance-summary-runs/06-exploratory-material-repair12-broad-threematerial.json",
+      "sha256": "675b841f447d23d428571167a0d348dcf14addce5fb81db8769643e89f3a5a52"
+    },
+    {
+      "id": "core-nonleader",
+      "evidenceFile": "material-balance-summary-runs/06-exploratory-material-repair12-broad-core-nonleader.json",
+      "sha256": "54989a3850bc7c68b6bcb23a8094877f41bd620c29e1b6d6b1fb83a435ed1fc3"
+    }
+  ]
+}

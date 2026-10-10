@@ -688,3 +688,83 @@ describe('dragon art and authoritative storm choreography', () => {
     expect(labels()).toContain('竜気解除');expect(labels()).not.toContain('守り解除');
   });
 });
+
+describe('material figures, repair and grounded effects',()=>{
+  it('loads all five full bodies and keeps every allied portrait out of the canvas',async()=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const {MATERIAL_ART}=await import('./materialArt');
+    const state=start([19,20,21,22,23],[19,20,21,22,23]);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
+    expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);
+    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    expect(images.map(([img])=>img.src)).toEqual(Object.values(MATERIAL_ART).map(art=>art.artUrl));
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([112,116,124,115,127].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+    expect(teamTransforms()).toHaveLength(0);
+  });
+  it.each([1,2,4])('holds the hammer at %ix until the actual area hit, then releases only one shared ground field',async rate=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const talos=vi.spyOn(battleMotion,'sampleTalosMotion');
+    const state=start([19,20,21,22,23],[0,2,3,4,6]);
+    const event:BattleEvent={kind:'cast',actor:'a0',scope:'all',targets:state.enemies.map(u=>u.key),skill:'環銅の衝撃',effect:'hit'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},impact:event,castEvent:event,playbackRate:rate};
+    await render(props);frame(100);frame(2400);
+    expect(talos).toHaveBeenLastCalledWith(799,false,false);
+    const rings=()=>vi.mocked((context as unknown as CanvasRenderingContext2D).ellipse).mock.calls.filter(args=>args[2]===290);
+    expect(rings()).toHaveLength(0);expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    const hits:BattleEvent[]=state.enemies.map((u,i)=>({kind:'damage',actor:'a0',target:u.key,amount:25+i,hp:u.hp-25-i}));
+    await render({...props,impact:hits[0],impacts:hits});frame(2500);frame(2500+100/rate);
+    expect(talos).toHaveBeenLastCalledWith(900,false,false);
+    expect(rings().length).toBeGreaterThan(0);expect(labels()).toEqual(expect.arrayContaining(['25','26','27','28','29']));
+    frame(2500+750/rate);expect(labels()).not.toContain('環銅の衝撃');
+  });
+  it.each([[19,'炉心の槌','sampleTalosMotion'],[20,'雨縫い','sampleUmbrellaMotion'],[21,'石段押し','sampleWallMotion'],[22,'三輪の一押し','sampleTripodMotion'],[23,'銅角の突き','sampleBronzeBullMotion']] as const)('routes %i to its own motion with still reduced-motion body and camera',async(id,skill,sampler)=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const own=vi.spyOn(battleMotion,sampler);const wolf=vi.spyOn(battleMotion,'sampleFenrirMotion');
+    const state=start([0,2,3,4,6],[id,0,2,6,10]);
+    const event:BattleEvent={kind:'cast',actor:'e0',target:'a0',targets:['a0'],scope:'single',skill,effect:'hit'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:skill,type:'slash',tick:1},impact:event,castEvent:event};
+    await render(props);frame(100);const before=sprites[0];frame(750);
+    expect(own).toHaveBeenCalled();expect(wolf).not.toHaveBeenCalled();expect(sprites[0]).toEqual(before);
+    const hit:BattleEvent={kind:'damage',actor:'e0',target:'a0',amount:25,hp:100};
+    await render({...props,impact:hit,impacts:[hit]});frame(900);frame(1050);
+    expect(sprites[0]).toEqual(before);expect(labels()).toContain(skill);expect(teamTransforms()).toHaveLength(0);
+  });
+  it('shows only live pending core repair lights, removing them on consumption or dispel',async()=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const fills:unknown[]=[];const ctx=context as unknown as CanvasRenderingContext2D;
+    vi.mocked(ctx.fill).mockImplementation(()=>{fills.push(ctx.fillStyle);});
+    const state=start([0,2,3,4,6],[19,20,21,22,23]);
+    const props={allies:state.allies,enemies:state.enemies,effect:null,impact:null};
+    await render(props);frame(100);expect(fills.filter(x=>x==='#b9ecc2')).toHaveLength(3);
+    fills.length=0;await render({...props,enemies:state.enemies.map(u=>({...u,repairReady:false}))});frame(200);
+    expect(fills).not.toContain('#b9ecc2');
+    fills.length=0;await render({...props,enemies:state.enemies.map((u,i)=>i===0?{...u,hp:0}:u)});frame(300);
+    expect(fills).not.toContain('#b9ecc2');vi.mocked(ctx.fill).mockReset();
+  });
+  it('uses the passive cue and exact heals, without inventing a cast from the bookkeeping event',async()=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const state=start([0,2,3,4,6],[19,20,21,22,23]);
+    const passive:BattleEvent={kind:'passive',effect:'material-repair',skill:'炉心の修復',actor:'e0',target:'e0',targets:['e0','e2'],repairReady:false};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'炉心の修復',type:'water',tick:1}};
+    await render({...props,impact:passive,impacts:[passive]});frame(100);expect(labels()).not.toContain('炉心の修復');
+    const cue:BattleEvent={kind:'cast',passive:'material-repair',effect:'heal',skill:'炉心の修復',actor:'e0',targets:['e0','e2'],scope:'all'};
+    await render({...props,impact:cue,castEvent:cue});frame(200);frame(500);
+    expect(labels()).toContain('炉心の修復');expect(labels()).toContain('生存物質 · 2体修復');
+    expect(labels()).not.toContain('敵全体 · 2体');expect(context.strokeText).not.toHaveBeenCalled();
+    const heals:BattleEvent[]=[{kind:'heal',effect:'material-repair',actor:'e0',target:'e0',amount:21,hp:180},{kind:'heal',effect:'material-repair',actor:'e0',target:'e2',amount:8,hp:220}];
+    await render({...props,castEvent:cue,impact:heals[0],impacts:heals});frame(1000);
+    expect(labels()).toEqual(expect.arrayContaining(['+21','+8']));expect(labels()).not.toContain('+0');
+    expect(document.querySelector('[aria-live]')?.textContent).toContain('2体に同時回復');
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    await render({...base,castEvent:null,impacts:[]});frame(1050);
+    expect(labels()).not.toContain('炉心の修復');expect(labels()).not.toContain('+21');
+  });
+  it('labels only actual repair-readiness dispel and ignores quiet consumption',async()=>{
+    const expire:BattleEvent={kind:'expire',target:'e0',repairReady:false};
+    await render({...base,impact:expire,impacts:[expire]});frame(100);expect(labels()).not.toContain('修復待ち解除');
+    const broken:BattleEvent={kind:'break',actor:'a0',target:'e0',repairReady:false,removed:['repairReady']};
+    await render({...base,impact:broken,impacts:[broken]});frame(200);
+    expect(labels()).toContain('修復待ち解除');expect(labels()).not.toContain('守り解除');
+  });
+});

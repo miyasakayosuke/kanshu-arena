@@ -1,0 +1,388 @@
+{
+  "rawReportPath": "lab-results/material-final-light-recommendation/report.json",
+  "rawReportSha256": "fea99831b02b19bf3865979b5587dbe409a68fb5b57e15431417aaebd089d0c5",
+  "phase": "final-source",
+  "source": {
+    "gameVersion": "0.13.0",
+    "gitCommit": "d37e58886922d5f175d70adae2895ba75e2fe52e",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "8cca20879d7492f237b4403d0f5e2a037ee6f9a6a864732da05b85c2a85c7cb7",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "17df00b5c4730e3ef1b9e9175af6c4035388c84f35f98f997bc0c1e6316b4012",
+    "configSha256": "2d7b0c908b0c5ecbd16b73d9a7ea2b8db457e427a324c571e1b3175c40d28f6d"
+  },
+  "suiteId": "material-light-recommendation",
+  "candidate": {
+    "id": "identity",
+    "label": "Final14% UI recommendation paired with same-budget Naga shield",
+    "overrides": {}
+  },
+  "scheduleCounts": {
+    "teams": 29,
+    "curatedTeams": 29,
+    "sampledTeams": 0,
+    "matchupScenarios": 54,
+    "mirrorScenarios": 29,
+    "seeds": 16,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 5312
+  },
+  "seeds": [
+    2697045971,
+    1056514436,
+    3710950197,
+    2070418662,
+    429887127,
+    3084322888,
+    1443791353,
+    4098227114,
+    2457695579,
+    817164044,
+    3471599805,
+    1831068270,
+    190536735,
+    2844972496,
+    1204440961,
+    3858876722
+  ],
+  "teams": [
+    {
+      "id": "ui-light",
+      "ids": [
+        19,
+        20,
+        21,
+        6,
+        2
+      ],
+      "cost": 15
+    },
+    {
+      "id": "naga-shield",
+      "ids": [
+        19,
+        20,
+        21,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "cost": 14
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "cost": 14
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "cost": 15
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        9
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        4,
+        7,
+        21
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        8,
+        11,
+        13,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        8,
+        13,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        2,
+        6,
+        11,
+        23
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        2,
+        3,
+        9,
+        22
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        6,
+        9,
+        11,
+        18
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        17
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        8,
+        9,
+        10,
+        12
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        21
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        1,
+        4,
+        17,
+        18
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        4,
+        5,
+        8,
+        16
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        4,
+        5,
+        9,
+        16
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        9,
+        16,
+        18
+      ],
+      "cost": 17
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "cost": 17
+    }
+  ],
+  "identityChangedOutcomes": 0,
+  "mirrors": {
+    "baselinePhysicalAllyScore": 0.521552,
+    "candidatePhysicalAllyScore": 0.521552
+  },
+  "focalTeams": [
+    {
+      "id": "ui-light",
+      "evidenceFile": "material-balance-summary-runs/16-final-source-material-light-recommendation-ui-light.json",
+      "sha256": "b995a986421408b9f82474a3c03b73b55c4ec1e9310700d65af2adf3c4a4d555"
+    },
+    {
+      "id": "naga-shield",
+      "evidenceFile": "material-balance-summary-runs/16-final-source-material-light-recommendation-naga-shield.json",
+      "sha256": "c7ae5fbed53d2b54476a4a1c8db07f4798d041a8364cf90fd8e985cd283dc762"
+    }
+  ]
+}

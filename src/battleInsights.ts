@@ -12,7 +12,7 @@ export type BattleEvidence = {
 
 export type BattleFact = {
   id: string;
-  kind: 'poison' | 'missed-heal' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
+  kind: 'repair' | 'poison' | 'missed-heal' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
   text: string;
   evidence: BattleEvidence[];
 };
@@ -46,6 +46,7 @@ export function battleUnitLabel(state: State, key?: string): string {
  */
 export function resultFacts(state: State): BattleFact[] {
   const history = state.history ?? [];
+  const repair = { allies: 0, enemies: 0, triggers: 0, evidence: [] as BattleEvidence[] };
   const poison = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const healing = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const direct = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
@@ -78,6 +79,7 @@ export function resultFacts(state: State): BattleFact[] {
     };
     for (const [index, event] of turn.events.entries()) {
       const evidence = reference(turn, index);
+      if (event.kind === 'passive' && event.effect === 'material-repair') { repair.triggers++; repair.evidence.push(evidence); }
       if (event.kind === 'phase' && (event.phase === 'before-action' || event.phase === 'action-end' || event.phase === 'turn-end')) finishAction();
       if (event.kind === 'cast') {
         finishAction();
@@ -93,6 +95,7 @@ export function resultFacts(state: State): BattleFact[] {
       const amount = positiveAmount(event);
       if (!side || amount === 0) continue;
       if (event.kind === 'heal') {
+        if (event.effect === 'material-repair') { repair[side] += amount; repair.evidence.push(evidence); }
         healing[side] += amount;
         healing.evidence.push(evidence);
       }
@@ -120,6 +123,10 @@ export function resultFacts(state: State): BattleFact[] {
   }
 
   const facts: BattleFact[] = [];
+  if (repair.evidence.length) facts.push({
+    id: 'material-repair', kind: 'repair',
+    text: `初回ターン末の修復：味方 ${repair.allies}／敵 ${repair.enemies} HP回復（${repair.triggers}回発動・生存する物質系だけ）。`, evidence: repair.evidence,
+  });
   if (missedHeal) facts.push(missedHeal);
   if (poison.evidence.length) facts.push({
     id: 'poison-total', kind: 'poison',
@@ -150,15 +157,16 @@ export function battleEventLine(state: State, event: BattleEvent): string {
   switch (event.kind) {
     case 'cast': return `${actor}「${event.skill ?? '行動'}」を発動${event.scope === 'random' ? `（ランダム${event.hits}回）` : ''} → ${(event.targets ?? (event.target ? [event.target] : [])).map(key => battleUnitLabel(state, key)).join('、') || '対象なし'}`;
     case 'damage': return `${event.effect === 'poison' ? '毒の継続ダメージ' : `${actor}の直接攻撃${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目）` : ''}`} → ${target} HP −${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
-    case 'heal': return `${actor} → ${target} HP ＋${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
+    case 'heal': return `${event.effect === 'material-repair' ? `${actor}の一度きりの修復` : actor} → ${target} HP ＋${event.amount ?? 0}（残り ${event.hp ?? '?'}）`;
     case 'defeat': return `${target}が戦闘不能${event.effect === 'poison' ? '（毒）' : event.actor ? `（${actor}の攻撃）` : ''}`;
     case 'guard': return `${actor} → ${target}に守り（このターンの直接ダメージ半減）`;
     case 'poison': return `${actor} → ${target}に毒（残り ${event.poison ?? 3}回）`;
     case 'cleanse': return `${actor} → ${target}を浄化（毒は0）`;
-    case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
+    case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : value === 'repairReady' ? '修復待機' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
     case 'charge': return `${actor} → ${target}の竜気${event.effect === 'dragon-charge-spend' ? 'を消費' : 'を蓄積'}（${event.dragonCharge ?? 0}/${DRAGON_CHARGE_CAP}）`;
+    case 'passive': return `${actor}の「${event.skill ?? '修復'}」がターン末に発動（修復待機を消費・生存者のみ・MP消費なし） → ${(event.targets ?? []).map(key => battleUnitLabel(state, key)).join('、') || '対象なし'}`;
     case 'resource': return `${actor} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
-    case 'expire': return event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
+    case 'expire': return event.effect === 'repairReady' ? `${target}の修復待機が終了` : event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
     case 'phase': return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;
   }
 }

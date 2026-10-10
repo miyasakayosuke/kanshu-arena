@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import {
   advanceWithEvents, autoOrders, battleSkill, leaderAppliesTo, leaderFor,
   DRAGON_CHARGE_CAP, DRAGON_CORE_ID, dragonChargeEligible,
+  MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible,
   MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, NATURE_WARD_PERCENT, OPENING_RALLY_TURNS, OPENING_WARD_TURNS, RALLY_PERCENT, start,
 } from '../../src/engine.ts';
 import { FAMILY_IDS } from '../../src/families.ts';
@@ -71,7 +72,7 @@ const validateLeader = (trait, path) => {
   }
 };
 export function validateOverrides(overrides = {}) {
-  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard', 'dragonCharge'], 'overrides');
+  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard', 'dragonCharge', 'materialRepair'], 'overrides');
   if (own(overrides, 'monsters')) {
     object(overrides.monsters, 'overrides.monsters');
     for (const [id, patch] of Object.entries(overrides.monsters)) {
@@ -102,6 +103,11 @@ export function validateOverrides(overrides = {}) {
     keys(overrides.dragonCharge, ['enabled', 'perPoint'], 'overrides.dragonCharge');
     if (own(overrides.dragonCharge, 'enabled')) boolean(overrides.dragonCharge.enabled, 'overrides.dragonCharge.enabled');
     if (own(overrides.dragonCharge, 'perPoint')) integer(overrides.dragonCharge.perPoint, 0, 100, 'overrides.dragonCharge.perPoint');
+  }
+  if (own(overrides, 'materialRepair')) {
+    keys(overrides.materialRepair, ['enabled', 'percent'], 'overrides.materialRepair');
+    if (own(overrides.materialRepair, 'enabled')) boolean(overrides.materialRepair.enabled, 'overrides.materialRepair.enabled');
+    if (own(overrides.materialRepair, 'percent')) integer(overrides.materialRepair.percent, 0, 100, 'overrides.materialRepair.percent');
   }
   return overrides;
 }
@@ -205,6 +211,8 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
     const hasWard = ward.enabled !== false && ids.includes(14);
     const charge = overrides.dragonCharge ?? {};
     const hasCharge = charge.enabled !== false && dragonChargeEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
+    const repair = overrides.materialRepair ?? {};
+    const hasRepair = repair.enabled !== false && materialRepairEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
     state[side] = ids.map((id, i) => {
       const source = roster.find(monster => monster.id === id);
       const monster = clone(source);
@@ -216,7 +224,8 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
       return { key: (side === 'allies' ? 'a' : 'e') + i, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0,
         ...(hasRally && source.family === 'beast' ? { rally: rally.turns ?? OPENING_RALLY_TURNS, ...(rally.percent !== undefined ? { rallyPercent: rally.percent } : {}) } : {}),
         ...(hasWard && source.family === 'nature' ? { ward: ward.turns ?? OPENING_WARD_TURNS, ...(ward.percent !== undefined ? { wardPercent: ward.percent } : {}) } : {}),
-        ...(hasCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0, ...(charge.perPoint !== undefined ? { dragonChargePerPoint: charge.perPoint } : {}) } : {}) };
+        ...(hasCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0, ...(charge.perPoint !== undefined ? { dragonChargePerPoint: charge.perPoint } : {}) } : {}),
+        ...(hasRepair && id === MATERIAL_CORE_ID ? { repairReady: true, ...(repair.percent !== undefined ? { repairPercent: repair.percent } : {}) } : {}) };
     });
   }
   // Trial logs must not claim the stock leader or family-support values. Authoritative event traces follow.
@@ -233,6 +242,8 @@ const unitSnapshot = state => [...state.allies, ...state.enemies].map(unit => ({
   ward: unit.ward ?? 0, wardPercent: unit.wardPercent ?? NATURE_WARD_PERCENT,
   ...(unit.dragonCharge !== undefined ? { dragonCharge: unit.dragonCharge } : {}),
   ...(unit.dragonChargePerPoint !== undefined ? { dragonChargePerPoint: unit.dragonChargePerPoint } : {}),
+  ...(unit.repairReady !== undefined ? { repairReady: unit.repairReady } : {}),
+  ...(unit.repairPercent !== undefined ? { repairPercent: unit.repairPercent } : {}),
 }));
 const supportResourcesValid = unit => ['rally', 'ward'].every(field =>
   Number.isInteger(unit[field] ?? 0) && (unit[field] ?? 0) >= 0 && (unit[field] ?? 0) <= MAX_TURNS
@@ -245,11 +256,20 @@ const dragonResourcesValid = (unit, initial) => {
     && (!enabled || (unit.monster.id === DRAGON_CORE_ID && Number.isInteger(unit.dragonCharge) && unit.dragonCharge >= 0 && unit.dragonCharge <= DRAGON_CHARGE_CAP && (unit.hp > 0 || unit.dragonCharge === 0)))
     && unit.dragonChargePerPoint === initial.dragonChargePerPoint;
 };
+const materialResourcesValid = (unit, initial, prior) => {
+  const enabled = initial.repairReady !== undefined;
+  return (unit.repairReady !== undefined) === enabled
+    && (!enabled || (unit.monster.id === MATERIAL_CORE_ID && typeof unit.repairReady === 'boolean' && !unit.repairReady))
+    && (prior.repairReady !== false || unit.repairReady === false)
+    && unit.repairPercent === initial.repairPercent;
+};
 const freshMetric = unit => ({
   key: unit.key, monsterId: unit.monster.id, casts: 0, specialCasts: 0, paidCasts: 0, directDamage: 0, healing: 0,
   guardApplications: 0, effectiveCleanses: 0, poisonApplications: 0, dispelApplications: 0, mpSpent: 0,
   aliveAtTurnStartTurns: 0, noAffordableSpecialTurns: 0, zeroMpTurns: 0, deathTurn: null, diedBeforeAnyCast: false,
   dragonChargeGenerated: 0, dragonChargeSpent: 0, dragonFinishers: 0, chargedDragonFinishers: 0, dragonFinisherDamage: 0, dragonChargeDispelled: 0, dragonChargeLostOnDefeat: 0, peakDragonCharge: unit.dragonCharge ?? 0,
+  repairEligible: unit.repairReady === true ? 1 : 0, repairTriggers: 0, repairHealing: 0, repairReceived: 0, repairRecipients: 0, repairPotentialHealing: 0, repairUnusedHealing: 0,
+  repairCancellations: 0, repairFailedBeforeTrigger: 0, repairDispelled: 0, repairDefeatedBeforeTrigger: 0, repairTriggerTurn: null, repairMpSpent: 0,
   finalHp: unit.hp, finalMp: unit.mp,
 });
 
@@ -279,13 +299,43 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       if (JSON.stringify(state) !== JSON.stringify(before)) fail('resolver mutated input state');
       if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
-        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key))) fail(`resource invariant failed for ${unit.key}`);
+        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key)) || !materialResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key))) fail(`resource invariant failed for ${unit.key}`);
       }
       const current = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
       const lastCast = new Map();
+      const pendingRepair = new Map();
+      let repairPhase = false;
       for (const event of resolved.events) {
         const actor = metrics.get(event.actor);
         const target = metrics.get(event.target);
+        if (event.kind === 'resource' && event.effect === 'material-repair') fail('material repair cannot spend MP');
+        if (event.effect === 'material-repair' && !['passive', 'heal'].includes(event.kind)) fail('material repair must use passive/heal events, never casts');
+        if (repairPhase && ['cast', 'resource', 'damage'].includes(event.kind)) fail('action, MP debit or poison occurred after material repair');
+        if (event.kind === 'passive' && event.effect === 'material-repair') {
+          const core = current.get(event.actor);
+          if (!actor || core?.monster.id !== MATERIAL_CORE_ID || core.hp <= 0 || core.repairReady !== true || event.target !== event.actor || event.repairReady !== false || event.scope !== 'all' || event.phase !== 'turn-end' || state.turn !== 1 || actor.repairTriggers) fail('invalid material repair trigger');
+          const recipients = [...current.values()].filter(unit => unit.key[0] === event.actor[0] && unit.hp > 0 && unit.monster.family === 'material');
+          if (JSON.stringify(event.targets) !== JSON.stringify(recipients.map(unit => unit.key))) fail('material repair recipients differ from living same-side material units');
+          repairPhase = true;
+          actor.repairTriggers++; actor.repairTriggerTurn = state.turn; actor.repairRecipients += recipients.length;
+          pendingRepair.set(event.actor, new Map(recipients.map(unit => [unit.key, Math.min(Math.floor(unit.monster.hp * (core.repairPercent ?? MATERIAL_REPAIR_PERCENT) / 100), unit.monster.hp - unit.hp)])));
+          actor.repairPotentialHealing += recipients.reduce((sum, unit) => sum + Math.floor(unit.monster.hp * (core.repairPercent ?? MATERIAL_REPAIR_PERCENT) / 100), 0);
+        }
+        if (event.kind === 'heal' && event.effect === 'material-repair') {
+          const pending = pendingRepair.get(event.actor);
+          if (event.phase !== 'turn-end' || !actor || !pending?.has(event.target) || event.amount !== pending.get(event.target) || event.hp !== current.get(event.target).hp + event.amount) fail('material repair healing/recipient invariant failed');
+          actor.repairHealing += event.amount; target.repairReceived += event.amount; pending.delete(event.target);
+        }
+        if (event.repairReady !== undefined) {
+          boolean(event.repairReady, 'event.repairReady');
+          if (initialUnits.get(event.target)?.repairReady === undefined || event.repairReady !== false) fail(`event enables disabled or consumed material repair for ${event.target}`);
+          if (current.get(event.target)?.repairReady === true && !(event.kind === 'passive' && event.effect === 'material-repair')) {
+            if (!['break', 'defeat'].includes(event.kind)) fail('unexpected material repair cancellation');
+            target.repairCancellations++;
+            if (event.kind === 'defeat') target.repairDefeatedBeforeTrigger++;
+            if (event.kind === 'break' && actor) actor.repairDispelled++;
+          }
+        }
         if (event.kind === 'cast' && actor) {
           if (firstCastSide === null) firstCastSide = event.actor.startsWith('a') ? 'allies' : 'enemies';
           actor.casts++;
@@ -326,16 +376,18 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
         if (event.kind === 'defeat' && target) { target.deathTurn = state.turn; target.diedBeforeAnyCast = target.casts === 0; }
         if (event.target && current.has(event.target)) {
           const affected = current.get(event.target);
-          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward', 'dragonCharge']) if (event[field] !== undefined) affected[field] = event[field];
+          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward', 'dragonCharge', 'repairReady']) if (event[field] !== undefined) affected[field] = event[field];
         }
       }
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).dragonCharge !== unit.dragonCharge) fail(`charge event/state mismatch for ${unit.key}`);
+      for (const pending of pendingRepair.values()) if (pending.size) fail('material repair missing recipient heal events');
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).repairReady !== unit.repairReady) fail(`repair event/state mismatch for ${unit.key}`);
       state = resolved.state;
       delete trace.activeAttempt;
     }
     if (!state.winner) fail(`no terminal result within ${MAX_TURNS} turns`);
   } catch (error) { throw new MatchFailure(error.message, request, { ...trace, lastState: clone(state) }); }
-  const units = [...state.allies, ...state.enemies].map(unit => ({ ...metrics.get(unit.key), finalHp: unit.hp, finalMp: unit.mp }));
+  const units = [...state.allies, ...state.enemies].map(unit => ({ ...metrics.get(unit.key), repairFailedBeforeTrigger: metrics.get(unit.key).repairEligible && !metrics.get(unit.key).repairTriggers ? 1 : 0, repairUnusedHealing: metrics.get(unit.key).repairPotentialHealing - metrics.get(unit.key).repairHealing, finalHp: unit.hp, finalMp: unit.mp }));
   const sides = {};
   for (const side of ['allies', 'enemies']) {
     const group = units.filter(unit => unit.key.startsWith(side === 'allies' ? 'a' : 'e'));
@@ -343,6 +395,8 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
     const damage = total('directDamage');
     sides[side] = {
       dragonChargeGenerated: total('dragonChargeGenerated'), dragonChargeSpent: total('dragonChargeSpent'), dragonFinishers: total('dragonFinishers'), chargedDragonFinishers: total('chargedDragonFinishers'), dragonFinisherDamage: total('dragonFinisherDamage'), dragonChargeDispelled: total('dragonChargeDispelled'), dragonChargeLostOnDefeat: total('dragonChargeLostOnDefeat'), peakDragonCharge: Math.max(...group.map(unit => unit.peakDragonCharge)),
+      ...Object.fromEntries(['repairEligible', 'repairTriggers', 'repairHealing', 'repairReceived', 'repairRecipients', 'repairPotentialHealing', 'repairUnusedHealing', 'repairCancellations', 'repairFailedBeforeTrigger', 'repairDispelled', 'repairDefeatedBeforeTrigger', 'repairMpSpent'].map(field => [field, total(field)])),
+      repairTriggerTurnSum: total('repairTriggerTurn'),
       directDamage: damage, healing: total('healing'), mpSpent: total('mpSpent'), paidCasts: total('paidCasts'), specialCasts: total('specialCasts'), casts: total('casts'),
       guardApplications: total('guardApplications'), effectiveCleanses: total('effectiveCleanses'), poisonApplications: total('poisonApplications'), dispelApplications: total('dispelApplications'),
       noAffordableSpecialTurns: total('noAffordableSpecialTurns'), zeroMpTurns: total('zeroMpTurns'), aliveAtTurnStartTurns: total('aliveAtTurnStartTurns'),
@@ -373,7 +427,20 @@ export const METRIC_DEFINITIONS = {
   meanGuardApplications: 'Guard/protect application events by team A per game. Reapplying guard counts; passive opening ward grants are excluded. This is not prevented-damage attribution.',
   meanEffectiveCleanses: 'Team A cleanse events whose target was poisoned immediately before the event, per game.',
   meanPoisonApplications: 'Poison application events by team A per game, including duration refreshes. Future poison damage is not attributed.',
-  meanDispelApplications: 'Guard/rally/ward/dragon-charge break events caused by team A per game. One event removing multiple statuses counts once. This does not measure damage prevented or the value of each removed status.',
+  meanDispelApplications: 'Guard/rally/ward/dragon-charge/repair-readiness break events caused by team A per game. One event removing multiple statuses counts once. This does not measure damage prevented or the value of each removed status.',
+  meanRepairEligible: 'Initially enabled material cores on team A per game; disabled and below-threshold cores excluded.',
+  meanRepairTriggers: 'Authoritative once-only material repair passive events per game, never counted as casts.',
+  meanRepairHealing: 'Actual HP restored by team A material repair per game, clipped to missing HP.',
+  meanRepairReceived: 'Actual repair HP received by team A recipients per game.',
+  meanRepairRecipients: 'Living material targets listed at the repair trigger per game, including full-HP zero-heal recipients.',
+  meanRepairPotentialHealing: 'Sum of floor(maxHP * repair percent) for living recipients at actual triggers, before missing-HP clipping.',
+  meanRepairUnusedHealing: 'Potential healing minus actual healing at triggers, due to insufficient missing HP. Does not value dead recipients.',
+  meanRepairCancellations: 'Team A ready cores cancelled by an actual break or defeat before triggering per game; not double-counted after prior cancellation.',
+  meanRepairFailedBeforeTrigger: 'Initially ready team A cores with no repair trigger in the match per game.',
+  meanRepairDispelled: 'Enemy readiness cancelled by team A break events per game, measured before absolute false update.',
+  meanRepairDefeatedBeforeTrigger: 'Team A ready cores defeated before trigger per game; already-dispelled cores are excluded.',
+  meanRepairMpSpent: 'MP spent by the material repair passive itself; invariant zero, separate from paid cast MP.',
+  meanRepairTriggerTurn: 'Mean turn conditional on a material repair trigger; null when none. Expected exactly turn 1.',
   meanDragonChargeGenerated: 'Actual +1 charge-gain events from team A paid dragon hit casts per game; capped attempts do not emit gains. This resource is separate from MP.',
   meanDragonChargeSpent: 'Sum of charge captured by team A finisher cast events per game, before reset. MP cost is recorded separately.',
   meanDragonFinishers: 'Team A executed charge-finisher casts per game, including zero-charge casts.',
@@ -557,6 +624,9 @@ export function summarize(matches, keyUnitId) {
     zeroCastDeathRate: round(metrics.reduce((sum, metric) => sum + metric.zeroCastDeaths, 0) / (5 * matches.length)),
   };
   for (const [output, field] of Object.entries({ meanDirectDamage: 'directDamage', meanHealing: 'healing', meanMpSpent: 'mpSpent', meanPaidCasts: 'paidCasts', meanSpecialCasts: 'specialCasts', meanCasts: 'casts', meanGuardApplications: 'guardApplications', meanEffectiveCleanses: 'effectiveCleanses', meanPoisonApplications: 'poisonApplications', meanDispelApplications: 'dispelApplications', meanNoAffordableSpecialTurns: 'noAffordableSpecialTurns', meanZeroMpTurns: 'zeroMpTurns', meanDamageConcentration: 'damageConcentration', meanPoisonDamageTaken: 'poisonDamageTaken', meanRemainingHpFraction: 'remainingHpFraction', meanDragonChargeGenerated: 'dragonChargeGenerated', meanDragonChargeSpent: 'dragonChargeSpent', meanDragonFinishers: 'dragonFinishers', meanChargedDragonFinishers: 'chargedDragonFinishers', meanDragonFinisherDamage: 'dragonFinisherDamage', meanDragonChargeDispelled: 'dragonChargeDispelled', meanDragonChargeLostOnDefeat: 'dragonChargeLostOnDefeat', meanPeakDragonCharge: 'peakDragonCharge' })) result[output] = meanOf(metrics.map(metric => metric[field]));
+  for (const field of ['repairEligible', 'repairTriggers', 'repairHealing', 'repairReceived', 'repairRecipients', 'repairPotentialHealing', 'repairUnusedHealing', 'repairCancellations', 'repairFailedBeforeTrigger', 'repairDispelled', 'repairDefeatedBeforeTrigger', 'repairMpSpent']) result[`mean${field[0].toUpperCase()}${field.slice(1)}`] = meanOf(metrics.map(metric => metric[field]));
+  const repairTriggers = metrics.reduce((sum, metric) => sum + metric.repairTriggers, 0);
+  result.meanRepairTriggerTurn = repairTriggers ? round(metrics.reduce((sum, metric) => sum + metric.repairTriggerTurnSum, 0) / repairTriggers) : null;
   if (keyUnitId !== undefined) {
     const rows = matches.map(match => ({ match, unit: match.result.units.find(unit => unit.monsterId === keyUnitId && unit.key.startsWith(focalSide(match) === 'allies' ? 'a' : 'e')) })).filter(row => row.unit);
     const surviving = rows.filter(row => row.unit.finalHp > 0);
