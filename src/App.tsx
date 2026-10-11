@@ -2,7 +2,7 @@ import MonsterArt from './MonsterArt';
 import React, { useEffect, useRef, useState } from 'react';
 import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, autoOrders, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
-import BattleStage from './BattleStage';
+import BattleStage, {type CompactCastCaption} from './BattleStage';
 import {NUMBER_DURATION_MS} from './battleMotion';
 import TeamBuilder from './TeamBuilder';
 import TacticsPanel from './TacticsPanel';
@@ -52,6 +52,7 @@ export default function App() {
   const [effect, setEffect] = useState<{ text: string; type: string; tick: number } | null>(null);
   const [impact, setImpact] = useState<BattleEvent | null>(null);
   const [visualCast, setVisualCast] = useState<BattleEvent | null>(null);
+  const [compactCastCaption, setCompactCastCaption] = useState<CompactCastCaption | null>(null);
   const [impacts, setImpacts] = useState<BattleEvent[]>([]);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -225,15 +226,16 @@ export default function App() {
   const incomingArea = playing && visualCast?.scope === 'all' && (visualCast.targets ?? []).some(key => battle?.allies.some(unit => unit.key === key));
   const areaLanded = incomingArea && impacts.some(event => (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss' || event.kind === 'cleanse' || event.kind === 'guard' || event.kind === 'poison') && event.actor === visualCast?.actor);
   const scopeLabel = ['responseCleanse', 'responseGuard'].includes(visualCast?.effect ?? '') ? `生存する${incomingArea ? '味方' : '敵側の仲間'}全員 ${visualCast?.targets?.length ?? 0}体` : visualCast?.effect === 'restoreMp' ? `生存する粘体系 ${visualCast.targets?.length ?? 0}体` : visualCast?.passive === 'material-repair' ? `生存する物質系 ${visualCast.targets?.length ?? 0}体` : visualCast?.scope === 'random' ? `ランダム${visualCast.hits}回` : visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
+  const visibleCastCaption = playing && compactCastCaption?.event === visualCast ? compactCastCaption : null;
   return <div className={`app ${page === 'battle' ? `battleMode ${battle?.winner ? 'resultMode' : ''}` : `screen-${page}`}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.18.2</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.18.3</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
     {page === 'home' && <HomeScreen practice={practice} team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
     {page === 'arena' && <ArenaLobby notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
     {page === 'team' && <TeamBuilder slots={slots} setSlots={setSlots} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
-    {page === 'battle' && battle && <main className="battle">
+    {page === 'battle' && battle && <main className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
       <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
-      {!battle.winner && <BattleStage allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
-      <div className="battleMessage" aria-live="polite">{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</div>
+      {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
+      <div className="battleMessage" aria-live="polite"><span className={visibleCastCaption ? 'castCaptionAnnouncement' : undefined}>{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</span>{visibleCastCaption && <span className="battleCastCaption" aria-hidden="true">{visibleCastCaption.lines.map((line, index) => <span key={index}>{line}</span>)}<span>{replayProgress}</span></span>}</div>
       {battle.winner ? <BattleResult battle={battle} onRematch={() => begin(true)} onRebuild={rebuild} onNext={() => navigate('arena')} onLog={() => setShowLog(true)} /> : <section className="commandDock" aria-label="行動指示">
         <div className={`commanderRow ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--hit-duration': `${300 / speed}ms`, '--number-duration': `${NUMBER_DURATION_MS / speed}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
           {incomingArea && <span key={`${effect?.tick}-${areaLanded}`} className="partySweep" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}

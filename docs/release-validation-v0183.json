@@ -1,0 +1,47 @@
+{
+  "release": "0.18.3",
+  "utc": "2026-10-11T03:24:00Z",
+  "baseCommit": "f655b9ff4ee661abe5f96501a9dd44ec3f09f746",
+  "baseTree": "ef5db8100fe19e9678407eb55ed5dd30f3702e5d",
+  "checks": {
+    "vitest": {
+      "files": 88,
+      "tests": 2067,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "tests": 14,
+      "passed": true
+    },
+    "typescript": true,
+    "viteBuild": true,
+    "rightsSourceDist": true,
+    "labSmoke": {
+      "matches": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedChange": 0,
+      "passed": true
+    }
+  },
+  "logHashes": {
+    "tests": "d3c911cc97a4fd3aa1244a0dbc2c90edfc597b1bc1988c74efd3b9e36318f672",
+    "rights": "08eb0cdbe60803dc37b5e3eab73ece671c3891f55b7182087f5508fbdad364a9",
+    "build": "237e322b8f62095925a870e99a5ca8684a072826dbbdb41f5634360651b4cd40",
+    "smoke": "f67d2aad06ac7fb1342aa160b7965d1d3bccb7608148e70cd1b6666fb82f3801"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/MonsterArt.tsx": "0c5f550842a0b0eebe8b738f860e388498805a79fa110a9416af2223feb329a9",
+    "public/credits.html": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "limitations": [
+    "Mocked Canvas geometry tests do not establish final rendered appearance. Exact candidate CI/Pages/live QA pending at creation.",
+    "Existing bundle-size advisory remains.",
+    "Human balance and legal clearance are not established by these checks."
+  ]
+}

@@ -5,6 +5,8 @@ import {CHARACTER_ART} from './MonsterArt';
 import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
 import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion, sampleTalosMotion, sampleUmbrellaMotion, sampleWallMotion, sampleTripodMotion, sampleBronzeBullMotion, sampleHollowSpringMotion, sampleRibbonDropMotion, sampleFoldWardMotion, sampleBubbleBranchMotion, sampleKneadedFistMotion, sampleDraugrMotion, sampleHeadlessDriverMotion, sampleJiangshiMotion, sampleVetalaMotion, sampleMammonMotion, sampleKoboldMotion, sampleEmpusaMotion, sampleJanusMotion} from './battleMotion';
 
+export type CompactCastCaption = {event: BattleEvent; lines: string[]};
+
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
   allies: Unit[];
@@ -18,6 +20,8 @@ type Props = {
   targetKeys?: string[];
   selectedTarget?: string;
   onSelectTarget?: (key: string) => void;
+  /** Use the existing DOM caption when a readable label stack cannot fit above enemies. */
+  onCompactCastCaption?: (caption: CompactCastCaption | null) => void;
 };
 type Point = {x: number; y: number};
 type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair' | 'liquid' | 'ribbon' | 'fold' | 'bubble' | 'knead' | 'supply' | 'ledger' | 'tool' | 'mantle' | 'mp-loss' | 'burial' | 'reins' | 'sleeves' | 'stitch' | 'cashout' | 'threshold' | 'portal' | 'lattice';
@@ -905,9 +909,21 @@ export default function BattleStage(props: Props) {
     media.addEventListener('change', onMotionChange);
     let ratio = Math.min(window.devicePixelRatio || 1, 2);
     let scaleY = 1;
+    let compactLabels = false;
+    let lastCaption: CompactCastCaption | null = null;
+    const publishCaption = (caption: CompactCastCaption | null) => {
+      if (lastCaption?.event === caption?.event && lastCaption?.lines.join('\n') === caption?.lines.join('\n')) return;
+      lastCaption = caption;
+      latest.current.onCompactCastCaption?.(caption);
+    };
     const updateAspect = () => {
       const bounds = element.getBoundingClientRect();
-      if (bounds.width && bounds.height) scaleY = (bounds.width / WIDTH) / (bounds.height / HEIGHT);
+      if (bounds.width && bounds.height) {
+        scaleY = (bounds.width / WIDTH) / (bounds.height / HEIGHT);
+        // A shallow arena has no safe header space above width-scaled bodies.
+        // Use aspect ratio, not orientation: a tall, narrow landscape arena fits.
+        compactLabels = scaleY > 1.15;
+      }
     };
     const resize = () => {
       ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -1174,59 +1190,67 @@ export default function BattleStage(props: Props) {
       }
       if (cast && twinStrike) drawTwinStrikes(ctx, cast, age, reduced, frameEffectPoint);
       for (const impact of impacts) drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, (now - impact.started) * impact.rate, reduced, scaleY);
-      // The title stays still while the action is framed underneath it.
+      // The label stack shares one transform so its line spacing cannot collapse.
+      // Compact stages put the exact same labels in the existing DOM caption.
+      let caption: CompactCastCaption | null = null;
       if (cast && motion.titleAlpha > 0) {
-        ctx.save();
-        ctx.translate(0, 38);
-        ctx.scale(1, scaleY);
-        ctx.translate(0, -38);
-        ctx.globalAlpha = motion.titleAlpha;
-        ctx.font = '700 19px system-ui, sans-serif';
-        const width = Math.min(430, Math.max(210, ctx.measureText(cast.name).width + 88));
-        ctx.beginPath();
-        ctx.roundRect((WIDTH - width) / 2, 17, width, 42, 21);
-        ctx.fillStyle = '#fffbeced';
-        ctx.fill();
-        ctx.strokeStyle = '#bea665a6';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        const accentX = (WIDTH - width) / 2 + 25;
-        ctx.translate(accentX, 38);
-        ctx.rotate(Math.PI / 4);
-        ctx.fillStyle = palettes[cast.type].dark;
-        ctx.fillRect(-3.5, -3.5, 7, 7);
-        ctx.rotate(-Math.PI / 4);
-        ctx.translate(-accentX, -38);
-        ctx.fillStyle = '#53604f';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(cast.name, WIDTH / 2 + 8, 38);
         const actor = [...data.allies, ...data.enemies].find(unit => unit.key === cast!.event.actor);
-        ctx.font = '700 12px system-ui, sans-serif';
-        ctx.fillStyle = '#53604f';
-        ctx.fillText(`${actor?.key.startsWith('e') ? '敵' : '味方'} · ${actor?.monster.name ?? ''}`, WIDTH / 2, 80);
-        ctx.restore();
-        if (vritraStorm && caster?.monster.id === 15 && caster.dragonCharge !== undefined && cast.event.dragonChargeSpent !== undefined) {
-          ctx.save(); ctx.translate(0,101); ctx.scale(1,scaleY); ctx.translate(0,-101);
-          ctx.font = '700 12px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#65516b';
-          ctx.fillText(`竜気 ${cast.event.dragonChargeSpent} 消費 · ${cast.impacted ? '嵐を放出' : '息を圧縮'}`, WIDTH / 2, 101);
-          ctx.restore();
-        }
-        if (cast.event.scope === 'all' || cast.event.scope === 'random') {
+        const actorLabel = `${actor?.key.startsWith('e') ? '敵' : '味方'} · ${actor?.monster.name ?? ''}`;
+        const scopeLabel = cast.event.scope === 'all' || cast.event.scope === 'random'
+          ? ['responseCleanse','responseGuard'].includes(cast.event.effect ?? '') ? `生存する${cast.incoming ? '味方' : '敵側の仲間'} · ${cast.event.targets?.length ?? 0}体へ${cast.type === 'portal' ? '現在毒解除' : '今T守護'}` : cast.event.effect === 'restoreMp' ? `生存粘体 · ${cast.event.targets?.length ?? 0}体へMP補給` : cast.event.passive === 'material-repair' ? `生存物質 · ${cast.event.targets?.length ?? 0}体修復` : cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体` : '';
+        const dragonLabel = vritraStorm && caster?.monster.id === 15 && caster.dragonCharge !== undefined && cast.event.dragonChargeSpent !== undefined
+          ? `竜気 ${cast.event.dragonChargeSpent} 消費 · ${cast.impacted ? '嵐を放出' : '息を圧縮'}` : '';
+        if (compactLabels && data.onCompactCastCaption) {
+          caption = {event: cast.event, lines: [cast.name, actorLabel, scopeLabel, dragonLabel].filter(Boolean)};
+        } else {
           ctx.save();
-          ctx.translate(0, 67); ctx.scale(1, scaleY); ctx.translate(0, -67);
-          ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center';
+          ctx.translate(0, 38);
+          ctx.scale(1, scaleY);
+          ctx.translate(0, -38);
+          ctx.globalAlpha = motion.titleAlpha;
+          ctx.font = '700 19px system-ui, sans-serif';
+          const width = Math.min(430, Math.max(210, ctx.measureText(cast.name).width + 88));
+          ctx.beginPath();
+          ctx.roundRect((WIDTH - width) / 2, 17, width, 42, 21);
+          ctx.fillStyle = '#fffbeced';
+          ctx.fill();
+          ctx.strokeStyle = '#bea665a6';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          const accentX = (WIDTH - width) / 2 + 25;
+          ctx.translate(accentX, 38);
+          ctx.rotate(Math.PI / 4);
           ctx.fillStyle = palettes[cast.type].dark;
-          ctx.fillText(['responseCleanse','responseGuard'].includes(cast.event.effect ?? '') ? `生存する${cast.incoming ? '味方' : '敵側の仲間'} · ${cast.event.targets?.length ?? 0}体へ${cast.type === 'portal' ? '現在毒解除' : '今T守護'}` : cast.event.effect === 'restoreMp' ? `生存粘体 · ${cast.event.targets?.length ?? 0}体へMP補給` : cast.event.passive === 'material-repair' ? `生存物質 · ${cast.event.targets?.length ?? 0}体修復` : cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
+          ctx.fillRect(-3.5, -3.5, 7, 7);
+          ctx.rotate(-Math.PI / 4);
+          ctx.translate(-accentX, -38);
+          ctx.fillStyle = '#53604f';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(cast.name, WIDTH / 2 + 8, 38);
+          ctx.font = '700 12px system-ui, sans-serif';
+          ctx.fillText(actorLabel, WIDTH / 2, scopeLabel ? 89 : 80);
+          if (scopeLabel) {
+            ctx.font = '700 13px system-ui, sans-serif';
+            ctx.fillStyle = palettes[cast.type].dark;
+            ctx.fillText(scopeLabel, WIDTH / 2, 70);
+          }
+          if (dragonLabel) {
+            ctx.font = '700 12px system-ui';
+            ctx.fillStyle = '#65516b';
+            ctx.fillText(dragonLabel, WIDTH / 2, 108);
+          }
           ctx.restore();
         }
       }
+      publishCaption(caption);
       handle = requestAnimationFrame(draw);
     };
     handle = requestAnimationFrame(draw);
     return () => {
       cancelAnimationFrame(handle);
       observer.disconnect();
+      publishCaption(null);
       media.removeEventListener('change', onMotionChange);
       window.removeEventListener('resize', resize);
     };

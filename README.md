@@ -1,4 +1,10 @@
-# 環獣のアリーナ v0.18.2 All Families Playtest
+# 環獣のアリーナ v0.18.3 All Families Playtest
+
+## v0.18.3 小さい戦場での技名表示
+
+高さの少ない戦場では、技名・使用者・対象・連撃進行・竜気消費を折り返せる字幕へ移し、文字の重なりを解消します。十分な高さがある戦場では従来のCanvas表示を使います。能力・AI・保存形式・画像・動きの時間は変更しません。
+
+v0.18.2（[commit f655b9f](https://github.com/miyasakayosuke/kanshu-arena/commit/f655b9ff4ee661abe5f96501a9dd44ec3f09f746)）で37体・通常7系統と超常混成を公開済みです。[公開CI](https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38106678152)と実ブラウザーで旧保存・編成・対戦・再戦・HTMLライセンスを確認しました。以下の過去版の「未公開」「未確認」は作成当時の記録です。対戦の相性差と権利調査の残件は継続しています。今回の検証は[追補記録](docs/rights/releases/2026-10-11-v0.18.3.md)を参照してください。
 
 ## v0.18.2 表示修正
 

@@ -119,3 +119,12 @@
 .skillButtons .skillMp,.skillButtons small {overflow-wrap:anywhere;white-space:normal}
 @media(max-height:670px){.commandDock{max-height:65dvh;overflow-y:auto;overscroll-behavior:contain}.battle{grid-template-rows:38px minmax(80px,1fr) 27px auto}}
 @media(max-height:480px) and (min-width:500px){.commandDock{max-height:calc(100dvh - 64px);align-self:stretch}.battle{grid-template-rows:38px minmax(80px,1fr) 27px}}
+
+/* Readable cast labels use the existing caption when the canvas is shallow.
+   Intrinsic rows and scrolling keep the command dock reachable on small screens. */
+.battle.hasCompactCastCaption{grid-template-rows:38px minmax(80px,1fr) auto auto;overflow-y:auto;overscroll-behavior:contain}
+.hasCompactCastCaption .battleMessage{position:relative;white-space:normal;overflow:visible;min-height:27px;padding:5px 2px}
+.battleCastCaption{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:3px 12px;font-size:12px;line-height:1.5;overflow-wrap:anywhere;min-width:0}
+.battleCastCaption>span:first-child{font-weight:700;color:#ede2ba}
+.castCaptionAnnouncement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-height:480px) and (min-width:500px){.battle.hasCompactCastCaption{grid-template-rows:38px minmax(80px,1fr) auto}}

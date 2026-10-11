@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-10",
-  "release": "0.18.2 pre-alpha candidate",
-  "auditBaseCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+  "reviewedAt": "2026-10-11",
+  "release": "0.18.3 playtest candidate",
+  "auditBaseCommit": "f655b9ff4ee661abe5f96501a9dd44ec3f09f746",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -301,6 +301,17 @@
           ],
           "provenance": "AI-assisted code written directly for this project: recognize the existing poison status event as allied area landing, and classify the exact existing skill name 翠雲の息 as water to match its existing Canvas route. No external code, media, text, fonts, dependencies, or animation samples added.",
           "reviewLimit": "DOM/state regression tests and mocked Canvas calls establish event/class routing only. No rendered-browser or visual-similarity review was performed for this patch. Existing provenance statements, unresolved review questions, and licensing status remain unchanged."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "Isolated compact-cast-label candidate based on v0.18.2 source tree ef5db8100fe19e9678407eb55ed5dd30f3702e5d; not independently published.",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/App.tsx",
+            "src/style.css"
+          ],
+          "provenance": "AI-assisted presentation code written directly for this project. Existing cast label strings share one Canvas transform at ordinary sizes and move to the existing wrapping DOM caption on shallow stages. No new character text, art, effects, motion, fonts, dependencies, or external code/media added.",
+          "reviewLimit": "Geometry/event and DOM semantics tests cover label spacing, complete information, authoritative hit progress, resize, skip, and live-region reuse. Browser appearance must be reported separately; neither automated checks nor this change clear existing rights/similarity questions."
         }
       ]
     }

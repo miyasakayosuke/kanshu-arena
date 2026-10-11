@@ -2,7 +2,7 @@
 import React, {act} from 'react';
 import {createRoot, type Root} from 'react-dom/client';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import BattleStage from './BattleStage';
+import BattleStage, {type CompactCastCaption} from './BattleStage';
 import * as areaEffects from './areaEffects';
 import * as battleMotion from './battleMotion';
 import {GENBU_ART_URL, RATATOSKR_ART_URL} from './familyArt';
@@ -16,6 +16,7 @@ let observerDisconnect: ReturnType<typeof vi.fn>;
 type Matrix = [number, number, number, number, number, number];
 let sprites: Matrix[];
 let glyphs: {text: string; matrix: Matrix; font: string}[];
+let textDraws: {text: string; matrix: Matrix; font: string; x: number; y: number}[];
 const context = {
   ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
   fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(),
@@ -34,7 +35,7 @@ function frame(time: number) {
   const [id, callback] = frames.entries().next().value!;
   frames.delete(id);
   context.fillText.mockClear();
-  glyphs = []; sprites = [];
+  glyphs = []; sprites = []; textDraws = [];
   callback(time);
 }
 function labels() {return context.fillText.mock.calls.map(call => call[0]);}
@@ -66,7 +67,8 @@ beforeEach(() => {
   vi.mocked(ctx.scale).mockImplementation((x, y) => multiply([x, 0, 0, y, 0, 0]));
   vi.mocked(ctx.rotate).mockImplementation(angle => multiply([Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), 0, 0]));
   context.drawImage.mockImplementation(() => {sprites.push([...matrix]);});
-  context.fillText.mockImplementation((text: string) => {
+  context.fillText.mockImplementation((text: string, x: number, y: number) => {
+    textDraws.push({text, matrix: [...matrix], font: ctx.font, x, y});
     if (ctx.font.includes('Apple Color Emoji')) glyphs.push({text, matrix: [...matrix], font: ctx.font});
   });
   vi.stubGlobal('ResizeObserver', class {
@@ -980,5 +982,93 @@ describe('status-effect routing regression evidence', () => {
     expect(fills).toContain('#e5ffff');
     expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
     fill.mockReset();
+  });
+});
+
+// Mocked Canvas transform geometry and event routing, not a rendered-browser claim.
+describe('responsive cast label layout', () => {
+  const fixtures = [
+    {id: 36, skill: '合流の扉', effect: 'responseGuard', scope: 'all', detail: '生存する敵側の仲間 · 5体へ今T守護'},
+    {id: 36, skill: '境目の清め', effect: 'responseCleanse', scope: 'all', detail: '生存する敵側の仲間 · 5体へ現在毒解除'},
+    {id: 24, skill: '蓄え分け', effect: 'restoreMp', scope: 'all', detail: '生存粘体 · 5体へMP補給'},
+    {id: 19, skill: '炉心の修復', effect: 'heal', scope: 'all', detail: '生存物質 · 5体修復', passive: 'material-repair'},
+    {id: 12, skill: '破縛の連牙', effect: 'hit', scope: 'random', hits: 5, detail: 'ランダム5回 · 構え'},
+    {id: 15, skill: '渇天の息', effect: 'hit', scope: 'all', detail: '敵全体 · 5体', dragonChargeSpent: 3},
+  ] as const;
+  const sizes = [
+    {width: 720, height: 460, compact: false},
+    {width: 618, height: 400, compact: false},
+    {width: 437.2, height: 157.2, compact: true},
+    {width: 618.4, height: 157.2, compact: true},
+    {width: 342, height: 80, compact: true},
+    {width: 307, height: 220, compact: false},
+    {width: 283.4, height: 266.4, compact: false},
+  ];
+  it.each(fixtures.flatMap(fixture => sizes.map(size => ({...fixture, ...size}))))(
+    '$skill at $width×$height retains every label without collapsing their spacing', async fixture => {
+      const {width, height, compact, id, skill, effect, scope, detail} = fixture;
+      vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width, height, left: 0, top: 0} as DOMRect);
+      const state = start([id, 0, 2, 3, 6], [id, 0, 2, 3, 6]);
+      state.allies[0].dragonCharge = 0;
+      const event: BattleEvent = {kind: 'cast', actor: id === 15 ? 'a0' : 'e0', skill, effect, scope, targets: state.enemies.map(unit => unit.key),
+        ...('hits' in fixture ? {hits: fixture.hits, hitTargets: Array(fixture.hits).fill('e0')} : {}),
+        ...('passive' in fixture ? {passive: fixture.passive} : {}),
+        ...('dragonChargeSpent' in fixture ? {dragonChargeSpent: fixture.dragonChargeSpent} : {}),
+      };
+      const caption = vi.fn<(value: CompactCastCaption | null) => void>();
+      const props = {allies: state.allies, enemies: state.enemies, effect: {text: skill, type: 'slash', tick: 1}, castEvent: event, impact: event, onCompactCastCaption: caption};
+      await render(props); frame(100); frame(700);
+      const actor = `${id === 15 ? '味方' : '敵'} · ${state.allies[0].monster.name}`;
+      const expected = [skill, actor, detail, ...(id === 15 ? ['竜気 3 消費 · 息を圧縮'] : [])];
+      if (compact) {
+        expect(caption.mock.calls.at(-1)?.[0]).toEqual({event, lines: expected});
+        expected.forEach(text => expect(labels()).not.toContain(text));
+        const count = caption.mock.calls.length;
+        frame(710); expect(caption).toHaveBeenCalledTimes(count); // No per-frame React updates.
+      } else {
+        expect(caption).not.toHaveBeenCalled();
+        expected.forEach(text => expect(labels()).toContain(text));
+        const bounds = (text: string) => {
+          const draw = textDraws.find(draw => draw.text === text)!;
+          const [, , , d, , f] = draw.matrix;
+          const ratio = height / document.querySelector('canvas')!.height;
+          const center = (draw.y * d + f) * ratio;
+          const half = Number(draw.font.match(/([\d.]+)px/)![1]) * d * ratio / 2;
+          return {top: center - half, bottom: center + half};
+        };
+        expect(bounds(skill).top).toBeGreaterThan(0);
+        expect(bounds(detail).top - bounds(skill).bottom).toBeGreaterThan(8 * width / 720);
+        expect(bounds(actor).top - bounds(detail).bottom).toBeGreaterThan(4 * width / 720);
+        if (id === 15) expect(bounds(expected[3]).top - bounds(actor).bottom).toBeGreaterThan(4 * width / 720);
+        expect(Math.max(...expected.map(text => bounds(text).bottom))).toBeLessThan(height * .3);
+      }
+    },
+  );
+
+  it('updates hit progress and dragon release only from impact, and clears on resize or skip', async () => {
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 437.2, height: 157.2} as DOMRect);
+    const state = start([12, 15, 17, 18, 6], [19, 0, 2, 3, 6]); state.allies[1].dragonCharge = 0;
+    const event: BattleEvent = {kind: 'cast', actor: 'a0', targets: ['e0'], hitTargets: ['e0', 'e0'], hits: 2, scope: 'random', effect: 'hit', skill: '破縛の連牙'};
+    const caption = vi.fn<(value: CompactCastCaption | null) => void>();
+    const props = {allies: state.allies, enemies: state.enemies, effect: {text: event.skill!, type: 'slash', tick: 1}, castEvent: event, impact: event, onCompactCastCaption: caption};
+    await render(props); frame(100); frame(9000);
+    expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('ランダム2回 · 構え');
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 20, hp: 100, hitIndex: 0};
+    await render({...props, impact: hit, impacts: [hit]}); frame(9010);
+    expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('ランダム2回 · 1/2撃');
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 720, height: 460} as DOMRect);
+    resize(); frame(9020); expect(caption.mock.calls.at(-1)?.[0]).toBeNull(); expect(labels()).toContain(event.skill);
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 437.2, height: 157.2} as DOMRect);
+    resize();
+    const storm: BattleEvent = {kind: 'cast', actor: 'a1', targets: ['e0'], scope: 'all', effect: 'hit', skill: '渇天の息', dragonChargeSpent: 3};
+    await render({...props, castEvent: storm, impact: storm}); frame(9100); frame(9800);
+    expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('竜気 3 消費 · 息を圧縮');
+    await render({...props, castEvent: storm, impact: {...hit, actor: 'a1'}}); frame(9900);
+    expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('竜気 3 消費 · 嵐を放出');
+    await render({...props, castEvent: null, impact: null, effect: null}); frame(9910);
+    expect(caption.mock.calls.at(-1)?.[0]).toBeNull();
+    await render(props); frame(10000); frame(10600);
+    expect(caption.mock.calls.at(-1)?.[0]?.event).toBe(event);
+    expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('ランダム2回 · 構え');
   });
 });

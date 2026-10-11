@@ -1,0 +1,30 @@
+{
+  "release": "0.18.2",
+  "commit": "f655b9ff4ee661abe5f96501a9dd44ec3f09f746",
+  "ci": {
+    "run": 38106678152,
+    "url": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38106678152",
+    "conclusion": "success",
+    "headSha": "f655b9ff4ee661abe5f96501a9dd44ec3f09f746"
+  },
+  "browser": "Actual cloud Chrome, normal UI only; no injected state or browser network APIs",
+  "verification": [
+    "Old version0.13 three saved parties remain unchanged: dragonC17, materialC17, legacyC15. Loading legacy and dragon preserves membership/order/cost.",
+    "Leader preview displays HP/SPD recipient differences; cancel preserves order and confirm moves selected member to first.",
+    "37 catalog entries and all7 pure-family recommended teams legal; natureC15 and othersC17. Four-family Janus condition and five-family no-extra effect are displayed.",
+    "Pure slime initialMP bonus, once-only +8 living-family MP supply, spent allowance, result32MP given, and retry fullHP/MP/allowance reset observed. Twelve-turn victory is one fixture, not balance evidence.",
+    "Pure demon Mammon pressure twice depleted enemyMP5 under guard, spent own16MP per cast, no self restoration.",
+    "Pure undead Banshee status-only poison precedes Draugr cashout; target remaining3 poison consumed to0, +66 base and70 actual guarded damage logged.",
+    "Janus mixed guard consumes24MP and shared allowance, protects five living allies; result/retry verified. Actual cleanse branch not observed.",
+    "Live water skill 翠雲の息 has skill-water DOM class. Exact water animation frame not captured.",
+    "Portrait457x605 and narrow326x432 have no horizontal page overflow; tactics and leader-preview modal reachable and wrapping. Short landscape596x381 has separate two-column battle controls with scrolling skills and reachable start. Landscape Janus labels visibly separated.",
+    "Wide944x605 Janus cast reproduces overlap at Canvas618.4x157.2. Fix is not yet deployed.",
+    "Credits HTML expands all five full license texts, wraps, links back home. Rawtxt endpoint previously blocked and not retried."
+  ],
+  "limitations": [
+    "The tested battles used the same initial CPU encounter; this is functional QA, not human matchup balance.",
+    "Incoming status-only poison impact was unit-tested, but live attempt got an enemy guard instead; exact transition not observed.",
+    "Not every skill animation has been visually captured.",
+    "Rights review remains ongoing; inventory/test success is not legal clearance."
+  ]
+}
