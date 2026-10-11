@@ -12,7 +12,7 @@ export type BattleEvidence = {
 
 export type BattleFact = {
   id: string;
-  kind: 'response' | 'poison-cashout' | 'resource-loss' | 'fallback' | 'supply' | 'repair' | 'poison' | 'missed-heal' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
+  kind: 'response' | 'poison-cashout' | 'resource-loss' | 'fallback' | 'supply' | 'repair' | 'poison' | 'lost-action' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
   text: string;
   evidence: BattleEvidence[];
 };
@@ -41,11 +41,115 @@ export function battleUnitLabel(state: State, key?: string): string {
   return `${sideLabel(side)}${index + 1} ${state[side][index].monster.name}`;
 }
 
+type RecordedAction = { orderIndex: number; beforeIndex: number; actionIndex?: number; castIndex?: number; endIndex: number };
+type RecordedTurn = { turn: BattleTurnRecord; actions: RecordedAction[] };
+
+/** Reject partial/injected shapes before using absence of a cast as evidence. */
+function readableTurn(turn: BattleTurnRecord): boolean {
+  return !!turn && Number.isInteger(turn.turn) && turn.turn > 0
+    && Array.isArray(turn.orders) && turn.orders.every(order => !!order && typeof order.key === 'string')
+    && Array.isArray(turn.events) && turn.events.every(event => !!event && typeof event.kind === 'string');
+}
+
+/** The resolver records exactly one bounded queue slot per accepted order.
+ * A missing prefix, phase, command or cast cannot establish an earlier action count.
+ * Presentation-created passive casts are deliberately not authoritative evidence.
+ */
+function completeRecordedTurns(state: State, history: BattleTurnRecord[]): RecordedTurn[] | undefined {
+  if (!history.length || history.length !== state.history?.length || history.at(-1)!.turn !== state.turn - 1) return;
+  const turns: RecordedTurn[] = [];
+  for (const [turnIndex, turn] of history.entries()) {
+    if (turn.turn !== turnIndex + 1) return;
+    const orders = new Map<string, number>();
+    for (const [index, order] of turn.orders.entries()) {
+      if (orders.has(order.key) || !['allies', 'enemies'].includes(order.side) || sideFor(state, order.key) !== order.side || typeof order.accepted !== 'boolean'
+        || !Number.isInteger(order.skill) || !['explicit', 'automatic'].includes(order.source)
+        || (order.accepted && (typeof order.skillName !== 'string' || !order.skillName.trim() || order.rejection !== undefined))) return;
+      orders.set(order.key, index);
+    }
+    const actions: RecordedAction[] = [];
+    const seen = new Set<string>();
+    let pending: Omit<RecordedAction, 'endIndex'> | undefined;
+    let phase: BattleEvent['phase'];
+    let ended = false;
+    for (const [index, event] of turn.events.entries()) {
+      if (event.kind !== 'phase') {
+        if (!phase || event.phase !== phase) return;
+        if (event.kind === 'cast') {
+          if (!pending || phase !== 'action' || event.actor !== turn.orders[pending.orderIndex].key
+            || pending.castIndex !== undefined || !event.skill || event.passive) return;
+          pending.castIndex = index;
+        }
+        continue;
+      }
+      if (ended) return;
+      if (event.phase === 'turn-start') {
+        if (index !== 0 || event.actor) return;
+      } else if (event.phase === 'before-action') {
+        const orderIndex = event.actor === undefined ? undefined : orders.get(event.actor);
+        if (pending || !phase || orderIndex === undefined || seen.has(event.actor!) || !turn.orders[orderIndex].accepted) return;
+        seen.add(event.actor!);
+        pending = { orderIndex, beforeIndex: index };
+      } else if (event.phase === 'action') {
+        if (!pending || phase !== 'before-action' || event.actor !== turn.orders[pending.orderIndex].key) return;
+        pending.actionIndex = index;
+      } else if (event.phase === 'action-end') {
+        if (!pending || event.actor !== turn.orders[pending.orderIndex].key
+          || (pending.actionIndex === undefined) !== (pending.castIndex === undefined)) return;
+        actions.push({ ...pending, endIndex: index });
+        pending = undefined;
+      } else if (event.phase === 'turn-end') {
+        if (!phase || pending || event.actor || seen.size !== turn.orders.filter(order => order.accepted).length) return;
+        ended = true;
+      } else return;
+      phase = event.phase;
+    }
+    if (!ended || pending) return;
+    turns.push({ turn, actions });
+  }
+  return turns;
+}
+
+function lostQueuedAction(state: State, history: BattleTurnRecord[]): BattleFact | undefined {
+  const turns = completeRecordedTurns(state, history);
+  if (!turns) return;
+  // Earliest recorded turn, then original accepted-order index: stable even for mirrors.
+  for (const [turnIndex, { turn, actions }] of turns.entries()) {
+    for (const [orderIndex, order] of turn.orders.entries()) {
+      if (!order.accepted || order.side !== 'allies') continue;
+      const action = actions.find(item => item.orderIndex === orderIndex)!;
+      if (action.castIndex !== undefined || turn.events.some(event => event.kind === 'cast' && event.actor === order.key)) continue;
+      const defeatIndex = turn.events.findIndex((event, index) => index < action.beforeIndex && event.kind === 'defeat' && event.target === order.key);
+      if (defeatIndex < 0) continue;
+      const earlier: BattleEvidence[] = [];
+      let earlierCount = 0;
+      let completeEarlier = true;
+      for (const prior of turns.slice(0, turnIndex)) {
+        const priorOrderIndex = prior.turn.orders.findIndex(item => item.key === order.key);
+        const priorAction = prior.actions.find(item => item.orderIndex === priorOrderIndex);
+        if (priorOrderIndex < 0 || prior.turn.events.some(event => event.kind === 'defeat' && event.target === order.key)
+          || (prior.turn.orders[priorOrderIndex].accepted && priorAction?.castIndex === undefined)) { completeEarlier = false; break; }
+        if (priorAction?.castIndex !== undefined) {
+          earlierCount++;
+          earlier.push(reference(prior.turn, priorAction.beforeIndex, priorOrderIndex), reference(prior.turn, priorAction.castIndex), reference(prior.turn, priorAction.endIndex));
+        }
+      }
+      if (!completeEarlier) continue;
+      return {
+        id: `lost-action-${turn.turn}-${order.key}`, kind: 'lost-action',
+        text: `TURN ${turn.turn}：${battleUnitLabel(state, order.key)}は「${order.skillName}」の発動前に戦闘不能。それまでの発動記録：${earlierCount}回。`,
+        evidence: [...earlier, reference(turn, defeatIndex, orderIndex), reference(turn, action.beforeIndex), reference(turn, action.endIndex)],
+      };
+    }
+  }
+}
+
 /** At most three observations, never claims about why the battle was won or lost.
  * Missing historical data is not reconstructed from final HP, roster roles, or text logs.
  */
 export function resultFacts(state: State): BattleFact[] {
-  const history = state.history ?? [];
+  const history = Array.isArray(state.history) ? state.history.filter(readableTurn) : [];
+  const lostAction = lostQueuedAction(state, history);
   const response = { allies: 0, enemies: 0, cleanse: 0, guard: 0, evidence: [] as BattleEvidence[] };
   const repair = { allies: 0, enemies: 0, triggers: 0, evidence: [] as BattleEvidence[] };
   const supply = { allies: 0, enemies: 0, uses: 0, evidence: [] as BattleEvidence[] };
@@ -56,26 +160,9 @@ export function resultFacts(state: State): BattleFact[] {
   const healing = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const direct = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const protection = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
-  let missedHeal: BattleFact | undefined;
   let largest: { amount: number; actor: string; skill: string; turn: number; targets: Set<string>; evidence: BattleEvidence[] } | undefined;
 
   for (const turn of history) {
-    // A missed heal requires a legal scheduled command, a defeat BEFORE that
-    // actor's action, and the complete action boundary without a cast.
-    for (const [orderIndex, order] of turn.orders.entries()) {
-      if (missedHeal || !order.accepted || !order.skillName || !sideFor(state, order.key)
-        || !['heal', 'cleanse'].includes(order.skillKind ?? '') || !(order.skillPower! > 0)) continue;
-      const beforeIndex = turn.events.findIndex(event => event.kind === 'phase' && event.phase === 'before-action' && event.actor === order.key);
-      const endIndex = turn.events.findIndex((event, index) => index > beforeIndex && event.kind === 'phase' && event.phase === 'action-end' && event.actor === order.key);
-      const defeatIndex = turn.events.findIndex((event, index) => index < beforeIndex && event.kind === 'defeat' && event.target === order.key);
-      if (beforeIndex < 0 || endIndex < 0 || defeatIndex < 0 || turn.events.some(event => event.kind === 'cast' && event.actor === order.key)) continue;
-      missedHeal = {
-        id: `missed-heal-${turn.turn}-${order.key}`, kind: 'missed-heal',
-        text: `TURN ${turn.turn}：${battleUnitLabel(state, order.key)}は「${order.skillName}」の発動前に戦闘不能。`,
-        evidence: [reference(turn, defeatIndex, orderIndex), reference(turn, beforeIndex), reference(turn, endIndex)],
-      };
-    }
-
     const guards = new Map<string, BattleEvidence[]>();
     let action: typeof largest;
     const finishAction = () => {
@@ -163,7 +250,8 @@ export function resultFacts(state: State): BattleFact[] {
     finishAction();
   }
 
-  const facts: BattleFact[] = [];
+  // Reserve one of the existing three slots; keep aggregate ordering otherwise.
+  const facts: BattleFact[] = lostAction ? [lostAction] : [];
   if (response.evidence.length) facts.push({
     id: 'extraordinary-response', kind: 'response',
     text: `共通の応答を消費：味方 ${response.allies}回／敵 ${response.enemies}回（毒除去 ${response.cleanse}回・今ターンの守り ${response.guard}回。二つ合わせて本人1回まで）。`, evidence: response.evidence,
@@ -188,7 +276,6 @@ export function resultFacts(state: State): BattleFact[] {
     id: 'material-repair', kind: 'repair',
     text: `初回ターン末の修復：味方 ${repair.allies}／敵 ${repair.enemies} HP回復（${repair.triggers}回発動・生存する物質系だけ）。`, evidence: repair.evidence,
   });
-  if (missedHeal) facts.push(missedHeal);
   if (poison.evidence.length) facts.push({
     id: 'poison-total', kind: 'poison',
     text: `毒で失ったHP：味方 ${poison.allies}／敵 ${poison.enemies}（${poison.evidence.length}回の毒ダメージ）。`, evidence: poison.evidence,

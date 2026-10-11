@@ -1,0 +1,111 @@
+{
+  "release": "0.18.5",
+  "commit": "3724cd36134ed4982f7ca62318fc74573744fff5",
+  "tree": "a516a3f300c2a4475740dbaf756df79b89e77d92",
+  "url": "https://miyasakayosuke.github.io/kanshu-arena/#home",
+  "ci": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38110631459",
+  "priorFailedGate": {
+    "version": "0.18.4",
+    "viewport": [
+      326,
+      432
+    ],
+    "stageHeight": 11.4286,
+    "canvasHeight": 140,
+    "vitalsHeight": 62.7679,
+    "battleClientHeight": 386,
+    "battleScrollHeight": 386
+  },
+  "verified": [
+    {
+      "check": "exact-commit-ci-pages",
+      "passed": true,
+      "run": 38110631459
+    },
+    {
+      "check": "live-banner",
+      "version": "0.18.5",
+      "oldPartyPreserved": [
+        36,
+        12,
+        20,
+        4,
+        26
+      ]
+    },
+    {
+      "check": "short-portrait",
+      "viewport": [
+        326,
+        432
+      ],
+      "stageHeight": 202.7143,
+      "canvasHeight": 140,
+      "vitalsHeight": 61.5714,
+      "battleClientHeight": 386,
+      "battleScrollHeight": 577,
+      "stickyTopY": 46,
+      "scrollTopAfterTurnButton": 190.8571,
+      "dockOverflow": "visible",
+      "actualScreenshot": "All five enemy bodies, bars and normal-flow HP/MP labels visible; commands reachable after scrolling."
+    },
+    {
+      "check": "field-target",
+      "skill": "敷居の一打",
+      "selected": "ナーガ",
+      "log": "ヤヌス MP -10; ナーガ 35 damage (guard half)"
+    },
+    {
+      "check": "guard-skip",
+      "caption": "合流の扉 / 味方 · ヤヌス / 生存する味方 · 5体へ今T守護 / 1/9",
+      "captionRemovedAfterSkip": true,
+      "janusAfter": "HP120/216 MP24/58 応答残0回"
+    },
+    {
+      "check": "result-retry",
+      "turns": 6,
+      "result": "VICTORY",
+      "retryJanus": "HP216/216 MP58/58 応答残1回",
+      "staleCaption": false
+    },
+    {
+      "check": "ordinary-portrait",
+      "viewport": [
+        457,
+        605
+      ],
+      "canvasHeight": 157.2,
+      "stageHeight": 158.8,
+      "sceneDisplay": "contents",
+      "vitalsPosition": "absolute",
+      "screenshotReadable": true
+    },
+    {
+      "check": "landscape",
+      "viewport": [
+        596,
+        381
+      ],
+      "canvas": [
+        283.4,
+        266.4
+      ],
+      "columns": "285px 285px",
+      "sceneDisplay": "contents",
+      "screenshotReadable": true
+    },
+    {
+      "check": "credits",
+      "route": "home link -> new credits tab -> expanded complete five notices -> back home0.18.5",
+      "horizontalOverflow": false,
+      "permissionAndWarrantyBlocks": 5
+    }
+  ],
+  "limitations": [
+    "Raw text notices endpoint previously browser-blocked; not retried. Full five notices were read in live HTML credits.",
+    "A first skip click was attempted after playback had already ended; later immediate skip succeeded. This is not counted as a failed app control.",
+    "Measurements cover cloud Chrome at the stated viewports, not every physical device or human readability/balance study.",
+    "Existing battle/AI/art/motion/save data unchanged; rights checks are not legal clearance."
+  ],
+  "verifiedUtc": "2026-10-11T04:13:37Z"
+}

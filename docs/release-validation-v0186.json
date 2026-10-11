@@ -1,0 +1,56 @@
+{
+  "release": "0.18.6",
+  "recordedUtc": "2026-10-11T04:26:00Z",
+  "baseCommit": "3724cd36134ed4982f7ca62318fc74573744fff5",
+  "baseTree": "a516a3f300c2a4475740dbaf756df79b89e77d92",
+  "checks": {
+    "vitest": {
+      "files": 92,
+      "tests": 2147,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "tests": 14,
+      "passed": true
+    },
+    "rightsSourceDist": true,
+    "typescript": true,
+    "viteBuild": true,
+    "labSmoke": {
+      "matches": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedChange": 0,
+      "passed": true
+    }
+  },
+  "logHashes": {
+    "tests": "a1f48cb334fc0c9761e98098ec34ab6aaa78cc36eb214d1e8d06c4b798592d5b",
+    "rights": "a2d8c242ff2cdc202c196eb025ad35e3c9c7896eebc758593652e4f0de552948",
+    "build": "e9343e49fcb22e96366e0a6de71ccd600ec2bc3b664937312d3a0553159fff1a",
+    "smoke": "b24f5a1d5bd70d8ee9bd2507c1140d565b6a53e438c44f2aa7caddbebb3c4d42"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/MonsterArt.tsx": "0c5f550842a0b0eebe8b738f860e388498805a79fa110a9416af2223feb329a9",
+    "src/style.css": "a0d9110c3aa5ce4652c196813e2936acb6624bd120f5164ace2c3240e1931eac",
+    "public/credits.html": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "limitations": [
+    "Exact CI/Pages and rendered v0.18.6 QA pending at record creation. Tests do not establish human comprehension.",
+    "Source history validation intentionally omits incomplete records and some earlier accepted-but-unexecuted support cases. The row is a conservative observation, not a complete cause-of-loss analysis.",
+    "The full suite passed in83.79s. Existing bundle-size advisory remains. Rights checks and simulations are not legal clearance or human fairness evidence."
+  ],
+  "finalDocumentationChecks": {
+    "rightsSelftest": 14,
+    "sourceDistAndBuildPassed": true,
+    "rightsLogSHA256": "a30b51833d8df8242cc544de5aaf1e49c89b08d4c14349f592e961d71238df0f",
+    "buildLogSHA256": "bb230581a97c1a6f7fbfc7bcbb8dc10fed565f509a074ddfa4c9d489e119557a",
+    "changedAfterFullTests": "Only three reviewed rights documents plus release/validation documentation; runtime source and dependency lock unchanged."
+  }
+}

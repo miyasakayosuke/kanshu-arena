@@ -73,7 +73,7 @@
 | --- | --- | --- |
 | マモン / Mammon | [トロント大学図書館の『失楽園』第1巻](https://rpo.library.utoronto.ca/content/paradise-lost-book-i)、678行以降と注記。富を表す語の擬人化を、ミルトンが堕ちた霊として扱う。最初から固有の角ある神だった、と一般化しない | 貯えを数える異形の会計役という人格、細長い外套と空いた輪の胸飾り、片側に偏った大きな袋、MPを削る技と全ての台詞。ヤギ顔・巨大な翼・額の星・原作タイタニスの配色を組み合わせない |
 | コボルト / Kobold | [グリム『ドイツ伝説集』第1巻・第71話、1816年](https://de.wikisource.org/wiki/Der_Kobold_(Br%C3%BCder_Grimm))。家仕事を助け、扱い方により災いも起こす小さな家の霊。校訂済み原文を読む資料 | ずんぐりした布の作業着、木の留め具を外す道具、単体解除の仕事。犬人・爬虫類の姿を普遍的な伝承としない。現代RPGの具体的デザインを参照しない |
-| エンプーサ / Empusa | [ケンタッキー大学のSuda On Line、epsilon 1049](https://cs.uky.edu/~raphael/sol/sol-cgi-bin/search.cgi?db=REAL&enlogin=guest&field=adlerhw_gr&login=cafra&searchstr=epsilon%2C1049)と[アリストパネス『蛙』の大学公開テキスト](https://web.viu.ca/johnstoi/aristophanes/frogs.htm)。姿の変わる怪異、金属の片脚が文献にある。脚の説明や同一視には異伝がある | 一脚を強調した斜めの姿、もう片側を暗い布で隠す形、影の面を切り替える演出、攻撃と清め。本作に変身・魅了・吸血を実装したとは表示しない。清める能力は伝承の事実ではない |
+| エンプーサ / Empusa | [ケンタッキー大学のSuda On Line、epsilon 1049](https://cs.uky.edu/~raphael/sol/sol-cgi-bin/search.cgi?db=REAL&enlogin=guest&field=adlerhw_gr&login=cafra&searchstr=epsilon%2C1049)と[アリストパネス『蛙』、Ian Johnston訳の大学公開テキスト](https://web.viu.ca/johnstoi/aristophanes/frogs.htm)。姿の変わる怪異、金属の片脚が文献にある。脚の説明や同一視には異伝がある | 一脚を強調した斜めの姿、もう片側を暗い布で隠す形、影の面を切り替える演出、攻撃と清め。本作に変身・魅了・吸血を実装したとは表示しない。清める能力は伝承の事実ではない |
 
 大学の現代訳や注釈、書籍の挿絵をゲームへ転載しない。姿の案は文章上の方向であり、完成アートの類似性確認を済ませたという意味ではない。特定の現代作品の同名キャラクターに似ていないか、実際の絵と動きができてから権利記録に残す。
 

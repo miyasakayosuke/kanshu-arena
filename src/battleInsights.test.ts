@@ -65,8 +65,8 @@ describe('evidence-only battle result facts', () => {
   it('proves an explicitly planned heal was prevented by defeat before the action', () => {
     const initial = battle([unit('a0', [heal], { name: 'バステト', hp: 20, speed: 1 })], [unit('e0', [{ ...hit, power: 1000, priority: 2 }], { name: 'バステト' })]);
     const state = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a0' }]).state;
-    const fact = resultFacts(state).find(fact => fact.kind === 'missed-heal')!;
-    expect(fact.text).toBe('TURN 1：味方1 バステトは「回復」の発動前に戦闘不能。');
+    const fact = resultFacts(state).find(fact => fact.kind === 'lost-action')!;
+    expect(fact.text).toBe('TURN 1：味方1 バステトは「回復」の発動前に戦闘不能。それまでの発動記録：0回。');
     expect(state.allies[0].mp).toBe(initial.allies[0].mp);
     const lines = battleFactEvidenceLines(state, fact).join('\n');
     expect(lines).toContain('指示：「回復」');
@@ -81,14 +81,14 @@ describe('evidence-only battle result facts', () => {
     initial.allies[0].hp = 20;
     const state = advanceWithEvents(initial, []).state;
     expect(state.history![0].orders[0]).toMatchObject({ skillKind: 'heal', source: 'automatic', accepted: true });
-    expect(resultFacts(state).some(fact => fact.kind === 'missed-heal')).toBe(true);
+    expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(true);
   });
 
-  it.each(['attack', 'invalid-target', 'insufficient-mp', 'already-cast', 'zero-heal'] as const)('does not claim a missed heal for %s', condition => {
-    const initial = battle([unit('a0', [condition === 'zero-heal' ? idle : heal], { hp: 20, speed: condition === 'already-cast' ? 200 : 1 })], [unit('e0', [{ ...hit, power: 1000 }])]);
+  it.each(['invalid-target', 'insufficient-mp', 'already-cast'] as const)('does not claim a missed heal for %s', condition => {
+    const initial = battle([unit('a0', [heal], { hp: 20, speed: condition === 'already-cast' ? 200 : 1 })], [unit('e0', [{ ...hit, power: 1000 }])]);
     if (condition === 'insufficient-mp') initial.allies[0].mp = 0;
-    const state = advanceWithEvents(initial, [{ key: 'a0', skill: condition === 'attack' ? BASIC_ATTACK : 0, target: condition === 'invalid-target' ? 'e0' : condition === 'attack' ? 'e0' : 'a0' }]).state;
-    expect(resultFacts(state).some(fact => fact.kind === 'missed-heal')).toBe(false);
+    const state = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: condition === 'invalid-target' ? 'e0' : 'a0' }]).state;
+    expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(false);
   });
 
   it('does not confuse poison defeat at turn-end with defeat before a scheduled heal', () => {
@@ -96,7 +96,7 @@ describe('evidence-only battle result facts', () => {
     initial.allies[0].hp = 1; initial.allies[0].poison = 1;
     const state = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a0' }]).state;
     expect(state.allies[0].hp).toBe(0);
-    expect(resultFacts(state).some(fact => fact.kind === 'missed-heal')).toBe(false);
+    expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(false);
   });
 
   it('counts guarded direct hits and excludes poison ticks, guard break, and unused guard casts', () => {
