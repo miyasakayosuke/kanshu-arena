@@ -3,6 +3,9 @@ import {Window} from 'happy-dom';
 import {describe, expect, it} from 'vitest';
 
 // These are CSS cascade/structure contracts, not browser layout measurements.
+// Live Chrome exposed auto-track shrink even while these contracts passed.
+// max-content must survive the cascade; scrollHeight and clipping still require
+// post-deployment browser measurements, which happy-dom cannot establish.
 // happy-dom requires whitespace after @media, although browsers accept both.
 const css = readFileSync(new URL('./style.css', import.meta.url), 'utf8').replaceAll('@media(', '@media (');
 function styles(width: number, height: number, {compact = false, result = false} = {}) {
@@ -16,9 +19,9 @@ function styles(width: number, height: number, {compact = false, result = false}
 }
 
 describe('short portrait battle CSS contract', () => {
-  it.each([false, true])('reserves a readable field and one scroller, compact caption=%s', compact => {
+  it.each([false, true])('keeps max-content tracks in the short-portrait cascade, compact caption=%s', compact => {
     const style = styles(326, 432, {compact});
-    expect(style('.battle').gridTemplateRows).toBe('38px auto auto auto');
+    expect(style('.battle').gridTemplateRows).toBe('38px max-content max-content max-content');
     expect(style('.battle').alignContent).toBe('start');
     expect(style('.battle').overflowY).toBe('auto');
     expect(style('.battleTop').position).toBe('sticky');

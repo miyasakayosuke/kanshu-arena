@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
-  "release": "0.18.4 playtest candidate",
-  "auditBaseCommit": "0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe",
+  "release": "0.18.5 playtest candidate",
+  "auditBaseCommit": "3079b89de184d852e0f1b661ae67e9f2500d7c1e",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -333,6 +333,15 @@
           ],
           "provenance": "AI-assisted presentation code and the brief disclosure label 未編成の中核・条件を見る written directly for this project. Five visibility-only early-return guards moved from family helpers to the grouping layer so a removed core remains prominent in a replacement preview, even with zero family members. All eligibility calculations, recipient text, counts, numeric rules and existing explanatory text are preserved exactly. Current or removed cores remain visible; only relevant cores absent from both current and projected parties are disclosed. No external code, artwork, media, explanatory prose, fonts, dependencies, or animation samples imported.",
           "reviewLimit": "Twenty-five focused regression cases plus existing TeamBuilder and leader tests verify semantic native details/summary structure, focus/toggles, present/absent core thresholds, removed cores down to zero members, candidate/save/leader state and dynamic grouping. CSS contracts permit narrow-screen wrapping without truncation. Actual browser Enter/Space activation and mobile pixel layout require deployed QA; these checks do not establish legal clearance or resolve earlier rights/similarity questions. Earlier full-suite logs cover the first candidate tree dc4c55660c6ce9da151e0349406c866f1d04d7cc, not this final preview-preservation adjustment."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "Isolated short-portrait grid-sizing follow-up to v0.18.4 tree cba0fd7e83d6fd53feba906c72cea19d68d75577; not independently published.",
+          "files": [
+            "src/style.css"
+          ],
+          "provenance": "AI-assisted CSS directly authored for this project: use max-content parent grid rows in the existing short-portrait breakpoint so intrinsic stage, caption and command heights are not shrunk into the fixed viewport. No external code, media, text, fonts, dependencies, art, motion samples, or gameplay changes.",
+          "reviewLimit": "The prior cascade tests missed actual Chrome auto-track shrink. Updated tests protect the intrinsic-row declaration only; clipping and scrollHeight proof require post-deployment browser measurements. Details: docs/rights/releases/2026-10-11-short-grid-sizing-candidate.md. Existing rights/similarity questions remain open."
         }
       ]
     }

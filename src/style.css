@@ -138,7 +138,9 @@
    can grow without covering enemies. One scroll region reaches every command;
    the existing exit/clock/menu row stays visible while it scrolls. */
 @media (max-height:550px) and (max-width:499px){
-  .battleMode:not(.resultMode) .battle{grid-template-rows:38px auto auto auto;align-content:start;overflow-y:auto;overscroll-behavior:contain;scroll-padding-top:42px}
+  /* Auto tracks can shrink the overflow-hidden stage below its children.
+     Intrinsic tracks make excess content scroll instead of clipping the field. */
+  .battleMode:not(.resultMode) .battle{grid-template-rows:38px max-content max-content max-content;align-content:start;overflow-y:auto;overscroll-behavior:contain;scroll-padding-top:42px}
   .battleMode:not(.resultMode) .battleTop{position:sticky;top:0;z-index:8;background:#0d1926}
   .battleMode:not(.resultMode) .battleStage{display:grid;grid-template-rows:auto auto;height:auto;align-content:start}
   .battleMode:not(.resultMode) .battleScene{display:block;position:relative;min-width:0;min-height:140px;height:clamp(140px,40vw,200px)}
