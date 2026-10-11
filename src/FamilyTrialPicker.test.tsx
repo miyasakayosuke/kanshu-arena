@@ -238,4 +238,17 @@ describe('family trial picker', () => {
     expect(css).toContain('white-space: normal');
     expect(css).not.toContain('text-overflow');
   });
+  it('keeps full-size picker portraits above the later generic portrait rule', async () => {
+    const style = document.createElement('style');
+    // The shared stylesheet is imported after the picker, as in App.
+    style.textContent = css + '\n' + readFileSync('src/style.css', 'utf8');
+    document.head.appendChild(style);
+    try {
+      await mount();
+      const image = dialog().querySelector<HTMLImageElement>('.familyTrialPortrait .monsterArt.portraitArt')!;
+      expect(getComputedStyle(image).width).toBe('100%');
+      expect(getComputedStyle(image).height).toBe('100%');
+    } finally { style.remove(); }
+  });
+
 });

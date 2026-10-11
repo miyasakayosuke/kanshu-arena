@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
-  "release": "v0.19.0",
-  "auditBaseCommit": "3c4fa1157180d2d3f9e15e270fccf9aa3f326083",
+  "release": "v0.19.1",
+  "auditBaseCommit": "6387a940d5e70a97f272726e0f4baa3a4962a5f4",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -370,6 +370,15 @@
           ],
           "provenance": "AI-assisted UI, encounter-selection code, tests and short Japanese copy written directly for this game. Existing recommendations, family definitions and MonsterArt portraits are reused without alteration. No external code, descriptions, art, animation samples, audio, fonts or dependencies imported. Choosing a preset changes only active team/rule and ends held practice; three saved slots remain unchanged. New ordinary encounters draw a legal pure-family opponent with a fresh seed; retry/rebuild retain the prior enemy and seed. Battle engine, AI, stats, skills and save schema unchanged.",
           "reviewLimit": "Seeded data and lifecycle tests cover eligibility, repeatability, rule limits and saved-slot preservation; live layout/keyboard/flow must be verified separately. Opponent exposure and difficulty change. This is not a fairness, human-comprehension or rights-clearance conclusion. Existing failed balance protocols and unresolved professional review remain recorded."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "v0.19.1 picker portrait sizing follow-up to public v0.19.0 tree 2060c7257f2d0f21d03dd32b9c8026eb69236056.",
+          "files": [
+            "src/familyTrialPicker.css"
+          ],
+          "provenance": "One original CSS selector receives the existing portraitArt class to outrank the later generic 1.15em portrait size. Existing original SVG portraits and all gameplay code remain unchanged; no external asset/code/text/dependency imported.",
+          "reviewLimit": "Live v0.19.0 measured 18.4px images inside 54×60px holders. A combined stylesheet cascade test and later live measurements verify the fix; no legal-clearance or gameplay-balance claim."
         }
       ]
     }

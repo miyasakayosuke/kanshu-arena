@@ -91,7 +91,7 @@
   background: #0d1f2a;
   border: 1px solid #9dac793b;
 }
-.familyTrialPortrait .monsterArt { display: block; width: 100%; height: 100%; object-fit: contain; }
+.familyTrialPortrait .monsterArt.portraitArt { display: block; width: 100%; height: 100%; object-fit: contain; }
 .familyTrialFamily { margin: 0 0 3px; color: #c1d4b4; font-size: 11px; line-height: 1.5; }
 .familyTrialIdentity h4 { margin: 0; font-size: 15px; line-height: 1.5; color: #f2e6bd; }
 .familyTrialCost { margin: 4px 0 0; font-size: 11px; color: #f0d998; line-height: 1.5; }

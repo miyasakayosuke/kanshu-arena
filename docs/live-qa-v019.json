@@ -1,0 +1,54 @@
+{
+  "release": "0.19.0",
+  "commit": "6387a940d5e70a97f272726e0f4baa3a4962a5f4",
+  "ci": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38113607859",
+  "ciConclusion": "success",
+  "browser": "Cloud Chrome",
+  "recordedUtc": "2026-10-11T05:12:35Z",
+  "verified": [
+    "Live version banner and existing active-party persistence",
+    "Seven pure family choices plus separately labelled Janus mixed choice",
+    "Close focus, Tab/Shift+Tab wrap, Escape restores opener and preserves team",
+    "Beast one-click application reaches reception with correct leader, legal COST17 and heading focus; does not start battle",
+    "Real random beast mirror, visible existing action effects, victory in 3 turns with 57.6% ally HP",
+    "Immediate retry restored all HP/MP, retained enemy and reproduced the same 3-turn result and observations",
+    "Rebuild practice survives picker cancellation; choosing dragon ends it and next start drew pure slime",
+    "Light nature selection retains COST15; actual opponent is pure nature; demon button explicitly switches to standard COST17",
+    "Reload preserves selected active team",
+    "All three pre-existing saved slots loaded exact original IDs after multiple preset selections; no slot-save control used",
+    "Short portrait 326×432: page width326, dialog width309.714/height416, inner scroll clientWidth=scrollWidth300, height362/scrollHeight2629; close and bottom cancel each44px and reachable; mixed last card text wraps"
+  ],
+  "savedSlots": [
+    [
+      15,
+      5,
+      16,
+      17,
+      18
+    ],
+    [
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      0,
+      2,
+      3,
+      4,
+      6
+    ]
+  ],
+  "knownIssue": {
+    "type": "presentation",
+    "description": "Picker images measured18.4×18.4 inside54×60 holders. Later generic .monsterArt.portraitArt wins equal-specificity cascade. Addressed by v0.19.1 candidate selector specificity increase.",
+    "gameplayBlocker": false
+  },
+  "limits": [
+    "A few live draws are not statistical distribution evidence; 7,000-seed and lifecycle tests cover the pool.",
+    "The same result in live retry complements automated exact-seed tests; no browser-internal game state was read.",
+    "COST15 has one pure-family candidate. Human fairness and professional rights review remain open."
+  ]
+}
