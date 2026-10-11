@@ -41,12 +41,17 @@ it('uses the existing caption, retains the original live announcement, and clear
   await act(async () => root.render(<App />));
   await click(document.querySelector('button[aria-label="闘技場"]')!);
   await click(button('この編成で対戦する'));
+  expect(document.querySelectorAll('.commandClock')).toHaveLength(1);
+  expect(document.querySelector('.commandClock')?.textContent).toContain('30');
   await click(button('この指示でターン開始'));
   const timeline = buildTimeline(resolve.mock.results[0].value.events);
   const cue = timeline.cues.find(cue => cue.cast?.effect === 'responseGuard' && !cue.impacts.length)!;
   expect(cue).toBeTruthy();
   await tick(cue.at);
   const message = document.querySelector('.battleMessage')!;
+  expect(document.querySelectorAll('canvas')).toHaveLength(1);
+  expect(message.previousElementSibling?.tagName).toBe('CANVAS'); // BattleStage is the Canvas stub above.
+  expect(message.nextElementSibling?.classList.contains('commandDock')).toBe(true);
   expect(document.querySelector('main')?.classList.contains('hasCompactCastCaption')).toBe(true);
   expect(message.querySelector('.battleCastCaption')?.textContent).toContain('合流の扉味方 · ヤヌス生存する味方 · 5体へ今T守護');
   expect(message.querySelector('.battleCastCaption')?.getAttribute('aria-hidden')).toBe('true');
@@ -55,6 +60,8 @@ it('uses the existing caption, retains the original live announcement, and clear
   expect(message.querySelectorAll('[aria-live]')).toHaveLength(0);
   expect(message.querySelector('.battleCastCaption')?.textContent).toContain('/');
   await click(button('演出をスキップ'));
+  expect(document.querySelectorAll('.commandClock')).toHaveLength(1);
+  expect(document.querySelector('.commandClock')?.textContent).toContain('30');
   expect(document.querySelector('.battleCastCaption')).toBeNull();
   expect(document.querySelector('main')?.classList.contains('hasCompactCastCaption')).toBe(false);
   await click(button('この指示でターン開始'));

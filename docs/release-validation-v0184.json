@@ -1,0 +1,48 @@
+{
+  "release": "0.18.4",
+  "recordedUtc": "2026-10-11T03:52:00Z",
+  "baseCommit": "0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe",
+  "baseTree": "4736f1f8f2e7da7051d08688093efe9351fbeb0f",
+  "checks": {
+    "vitest": {
+      "files": 90,
+      "tests": 2109,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "tests": 14,
+      "passed": true
+    },
+    "rightsSourceDist": true,
+    "typescript": true,
+    "viteBuild": true,
+    "labSmoke": {
+      "matches": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedChange": 0,
+      "passed": true
+    }
+  },
+  "logHashes": {
+    "tests": "405043e361b471795035f953139ffcd9a9823a9f5331e8635c2c415d17d967fb",
+    "rights": "fa3e87253479f068fba626af9a5c1b4ff4d0f1cc8c78982312d47094ecb9b666",
+    "build": "07ed7d6f102bca156b8a082e9727e6678612e8eca6dc579ffcd54b2732f739f3",
+    "smoke": "cc1dcc1edf21c841bf70018eb0aa8881e215a61486aa377964a8060396ab2f26"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/MonsterArt.tsx": "0c5f550842a0b0eebe8b738f860e388498805a79fa110a9416af2223feb329a9",
+    "public/credits.html": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "limitations": [
+    "Exact CI/Pages and rendered candidate QA pending at creation. CSS/DOM/Canvas mocks do not establish pixels.",
+    "An earlier concurrent isolated builder run had one unchanged5s Fenrir test timeout; standalone and retry passed. The combined final suite reported here passed in89.06s.",
+    "Existing bundle-size advisory remains. Rights checks and simulations are not legal clearance or human fairness evidence."
+  ]
+}

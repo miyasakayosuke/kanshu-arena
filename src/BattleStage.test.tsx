@@ -6,7 +6,7 @@ import BattleStage, {type CompactCastCaption} from './BattleStage';
 import * as areaEffects from './areaEffects';
 import * as battleMotion from './battleMotion';
 import {GENBU_ART_URL, RATATOSKR_ART_URL} from './familyArt';
-import {start, type BattleEvent} from './engine';
+import {effectStatus, start, type BattleEvent} from './engine';
 
 let root: Root;
 let nextFrame: number;
@@ -89,6 +89,51 @@ afterEach(async () => {
 });
 
 describe('battle presentation', () => {
+  it.each([
+    [307.14, 140], [437.2, 157.2], [283.4, 266.4],
+  ])('keeps target geometry with the Canvas at %s×%s while vitals grow below it', async (width, height) => {
+    const bounds = {width, height, left: 9, top: 80} as DOMRect;
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue(bounds);
+    const enemies = base.enemies.map((unit, index) => index === 0 ? {
+      ...unit, guard: true, poison: 3, rally: 2, ward: 2, dragonCharge: 5,
+      repairReady: true, supplyReady: true, responseReady: true,
+    } : index === 4 ? {...unit, hp: 0} : unit);
+    const select = vi.fn();
+    const interval = vi.spyOn(window, 'setInterval');
+    await render({...base, enemies, targetKeys: enemies.map(unit => unit.key), selectedTarget: 'e2', onSelectTarget: select});
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
+    frame(100);
+    const scene = document.querySelector('.battleScene')!;
+    const canvas = document.querySelector('canvas')!;
+    const vitals = document.querySelector('.enemyVitals')!;
+    expect(document.querySelectorAll('canvas')).toHaveLength(1);
+    expect(canvas.parentElement).toBe(scene);
+    expect(scene.contains(document.querySelector('.battleTargets'))).toBe(true);
+    expect(scene.contains(vitals)).toBe(false);
+    expect(vitals.previousElementSibling).toBe(scene);
+    expect(vitals.querySelector('em')?.textContent).toBe(effectStatus(enemies[0]));
+    expect(vitals.querySelectorAll('.enemyVital')).toHaveLength(5);
+    expect(vitals.querySelector('.fallen em')?.textContent).toBe('戦闘不能');
+    const target = scene.querySelector<HTMLButtonElement>('[data-target="e2"]')!;
+    expect(target.style.top).toBe(`${232 / 460 * 100}%`);
+    expect(target.style.left).toBe('50%');
+    expect(target.style.minHeight).toBe('44px');
+    expect(target.getAttribute('aria-pressed')).toBe('true');
+    expect(scene.querySelectorAll('.battleTarget')).toHaveLength(4);
+    await act(async () => target.click());
+    expect(select).toHaveBeenLastCalledWith('e2');
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: bounds.left + width / 2, clientY: bounds.top + height * 232 / 460, bubbles: true}));
+    expect(select).toHaveBeenCalledTimes(2);
+    expect(select).toHaveBeenLastCalledWith('e2');
+    expect(teamTransforms()).toHaveLength(0);
+    expect(glyphs.map(glyph => glyph.text)).toEqual(enemies.map(unit => unit.monster.icon));
+    await render({...base, enemies, targetKeys: enemies.map(unit => unit.key), selectedTarget: 'e0', onSelectTarget: select});
+    resize();
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(2); // One live frame chain after selection/resize.
+    expect(cancelAnimationFrame).not.toHaveBeenCalled();
+    expect(interval).not.toHaveBeenCalled(); // This wrapper does not own a command clock.
+  });
+
   it.each([720, 360])('draws only enemies at width %i while they idle', async width => {
     vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width, height: 460, left: 0, top: 0} as DOMRect);
     await render({...base, targetKeys: ['a0'], selectedTarget: 'a0'});
@@ -1001,6 +1046,7 @@ describe('responsive cast label layout', () => {
     {width: 437.2, height: 157.2, compact: true},
     {width: 618.4, height: 157.2, compact: true},
     {width: 342, height: 80, compact: true},
+    {width: 307.14, height: 140, compact: true},
     {width: 307, height: 220, compact: false},
     {width: 283.4, height: 266.4, compact: false},
   ];

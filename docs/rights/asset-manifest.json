@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
-  "release": "0.18.3 playtest candidate",
-  "auditBaseCommit": "f655b9ff4ee661abe5f96501a9dd44ec3f09f746",
+  "release": "0.18.4 playtest candidate",
+  "auditBaseCommit": "0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -312,6 +312,27 @@
           ],
           "provenance": "AI-assisted presentation code written directly for this project. Existing cast label strings share one Canvas transform at ordinary sizes and move to the existing wrapping DOM caption on shallow stages. No new character text, art, effects, motion, fonts, dependencies, or external code/media added.",
           "reviewLimit": "Geometry/event and DOM semantics tests cover label spacing, complete information, authoritative hit progress, resize, skip, and live-region reuse. Browser appearance must be reported separately; neither automated checks nor this change clear existing rights/similarity questions."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "Isolated short-portrait battle-layout candidate based on v0.18.3 staged source tree 4736f1f8f2e7da7051d08688093efe9351fbeb0f; not independently published.",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/style.css"
+          ],
+          "provenance": "AI-assisted presentation code written directly for this project. The existing Canvas and target buttons share a containing wrapper; only short portrait screens reserve a readable field, flow the existing enemy vitals below it, and scroll commands below the sticky existing clock/exit row. No external code, text, images, media, fonts, dependencies, character art, or animation samples added. Engine, AI, values, save schema, and motion timing are unchanged.",
+          "reviewLimit": "CSS cascade, DOM/target, and mocked Canvas regression checks establish the structure and event behavior; they are not rendered-browser layout measurements. Actual deployed viewport QA and existing rights/similarity questions remain separate. Evidence: docs/rights/releases/2026-10-11-short-portrait-layout-candidate.md."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "Isolated inactive-family-help candidate based on v0.18.3 tree 4736f1f8f2e7da7051d08688093efe9351fbeb0f / public commit 0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe; not independently published.",
+          "files": [
+            "src/TeamBuilder.tsx",
+            "src/familyPlanDisclosure.css",
+            "src/TeamBuilder.familyPlanDisclosure.test.tsx"
+          ],
+          "provenance": "AI-assisted presentation code and the brief disclosure label 未編成の中核・条件を見る written directly for this project. Five visibility-only early-return guards moved from family helpers to the grouping layer so a removed core remains prominent in a replacement preview, even with zero family members. All eligibility calculations, recipient text, counts, numeric rules and existing explanatory text are preserved exactly. Current or removed cores remain visible; only relevant cores absent from both current and projected parties are disclosed. No external code, artwork, media, explanatory prose, fonts, dependencies, or animation samples imported.",
+          "reviewLimit": "Twenty-five focused regression cases plus existing TeamBuilder and leader tests verify semantic native details/summary structure, focus/toggles, present/absent core thresholds, removed cores down to zero members, candidate/save/leader state and dynamic grouping. CSS contracts permit narrow-screen wrapping without truncation. Actual browser Enter/Space activation and mobile pixel layout require deployed QA; these checks do not establish legal clearance or resolve earlier rights/similarity questions. Earlier full-suite logs cover the first candidate tree dc4c55660c6ce9da151e0349406c866f1d04d7cc, not this final preview-preservation adjustment."
         }
       ]
     }

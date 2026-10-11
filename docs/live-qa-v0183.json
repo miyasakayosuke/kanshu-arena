@@ -1,0 +1,29 @@
+{
+  "release": "0.18.3",
+  "commit": "0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe",
+  "tree": "4736f1f8f2e7da7051d08688093efe9351fbeb0f",
+  "ci": {
+    "id": 38108378339,
+    "url": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38108378339",
+    "conclusion": "success",
+    "headSha": "0769bc0c9b3a0b73339f0756c56bbad6ee5e36fe"
+  },
+  "browser": "Actual cloud Chrome, normal UI interactions and read-only rendered DOM; no state injection",
+  "completed": [
+    "Home displays0.18.3 and previous current party survives reload. Existing saved slots unchanged.",
+    "Janus title/actor/target/progress no longer overlap at944x605 Canvas618.4x157.2 and457x605 Canvas437.2x157.2.",
+    "At326x432, Janus caption wraps into two rows with distinct bounding boxes and no page horizontal overflow. Skip button reachable through the existing scrollable command dock; skip removes caption immediately.",
+    "Landscape596x381 Canvas283.4x266.4 keeps ordinary Canvas labels, separated title/scope/actor, and two-column battle commands.",
+    "Dragon live caption shows 渇天の息 / 味方・ヴリトラ / 敵全体4体 / 竜気2消費・息を圧縮 /8 of8, without overlap. Prior turn4 charge consumed and28MP spent.",
+    "Fenrir live caption transitions from ランダム5回・構え to1/5撃 at actual first impact, with the visual hit and damage number.",
+    "Result and same-party retry work: Janus HP216/216 MP58/58 and shared response1 restored, no stale caption.",
+    "Home credits link opens a new tab. Expanded HTML contains all5 package names and five full permission/warranty sections; back-home route returns0.18.3. Rawtxt endpoint not retried.",
+    "Assistant test party restored to saved dragonC17; saved slots not overwritten."
+  ],
+  "limitations": [
+    "At extreme326x432 zoomed viewport, enemy labels remain tightly packed in the existing80px-minimum Canvas; caption wraps and controls are scrollable.",
+    "Not every skill animation was visually captured.",
+    "Rawtxt endpoint was previously browser-blocked and not retried.",
+    "Human balance and legal clearance are not established."
+  ]
+}

@@ -5,6 +5,7 @@ import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamily
 import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
 import { activeFamilyOptions } from './families';
 import './teamBuilder.css';
+import './familyPlanDisclosure.css';
 
 type Props = {
   slots: (TeamSlot | null)[];
@@ -67,7 +68,6 @@ function BeastBarrageBonus({ team }: { team: number[] }) {
 function DragonChargePlan({ team }: { team: number[] }) {
   const dragons = team.filter(id => monsters[id].family === 'dragon');
   const hasCore = team.includes(DRAGON_CORE_ID);
-  if (!dragons.length && !hasCore) return null;
   const active = dragonChargeEligible(team.map(id => ({ monster: monsters[id] })));
   return <div className="dragonChargePlan" data-active={active} aria-label="竜気の編成条件">
     <strong>竜気 · {active ? '条件成立' : '条件未成立'}</strong>
@@ -81,7 +81,6 @@ function DragonChargePlan({ team }: { team: number[] }) {
 function MaterialRepairPlan({ team }: { team: number[] }) {
   const members = team.filter(id => monsters[id].family === 'material');
   const hasCore = team.includes(MATERIAL_CORE_ID);
-  if (!members.length && !hasCore) return null;
   const active = materialRepairEligible(team.map(id => ({ monster: monsters[id] })));
   return <div className="materialRepairPlan" data-active={active} aria-label="炉心の修復の編成条件">
     <strong>炉心の修復 · {active ? '条件成立' : '条件未成立'}</strong>
@@ -96,7 +95,6 @@ function MaterialRepairPlan({ team }: { team: number[] }) {
 function SlimeSupplyPlan({ team }: { team: number[] }) {
   const members = team.filter(id => monsters[id].family === 'slime');
   const hasCore = team.includes(SLIME_CORE_ID);
-  if (!members.length && !hasCore) return null;
   const active = slimeSupplyEligible(team.map(id => ({ monster: monsters[id] })));
   return <div className="slimeSupplyPlan" data-active={active} aria-label="蓄え分けの編成条件">
     <strong>蓄え分け · {active ? '条件成立' : '条件未成立'}</strong>
@@ -111,7 +109,6 @@ function SlimeSupplyPlan({ team }: { team: number[] }) {
 function DemonPressurePlan({ team }: { team: number[] }) {
   const members = team.filter(id => monsters[id].family === 'demon');
   const hasCore = team.includes(DEMON_CORE_ID);
-  if (!members.length && !hasCore) return null;
   const active = demonPressureEligible(team.map(id => ({ monster: monsters[id] })));
   return <div className="demonPressurePlan" data-active={active} aria-label="空勘の爪の編成条件">
     <strong>空勘の爪 · {active ? 'MP削り強化あり' : 'MP削り強化なし'}</strong>
@@ -125,7 +122,6 @@ function DemonPressurePlan({ team }: { team: number[] }) {
 function UndeadCashoutPlan({ team }: { team: number[] }) {
   const members = team.filter(id => monsters[id].family === 'undead');
   const hasCore = team.includes(UNDEAD_CORE_ID);
-  if (!members.length) return null;
   const active = undeadCashoutEligible(team.map(id => ({ monster: monsters[id] })));
   return <div className="undeadCashoutPlan" data-active={active} aria-label="毒交換の編成条件">
     <strong>塚底の取り立て · {active ? '毒交換強化あり' : '毒交換強化なし'}</strong>
@@ -150,6 +146,34 @@ function ExtraordinaryResponsePlan({ team }: { team: number[] }) {
     <FamilyRecipients team={team} applies={() => hasCore && active} />
     <small>発動時は生存者だけが対象。HP回復・蘇生・毒予防・MP補給はなく、毒の再付与や守り解除が通ります。</small>
   </div>;
+}
+
+const familyPlans = [
+  { coreId: DRAGON_CORE_ID, Plan: DragonChargePlan },
+  { coreId: MATERIAL_CORE_ID, Plan: MaterialRepairPlan },
+  { coreId: SLIME_CORE_ID, Plan: SlimeSupplyPlan },
+  { coreId: DEMON_CORE_ID, Plan: DemonPressurePlan },
+  { coreId: UNDEAD_CORE_ID, Plan: UndeadCashoutPlan },
+  { coreId: EXTRAORDINARY_CORE_ID, Plan: ExtraordinaryResponsePlan },
+];
+
+function FamilyPlans({ team, comparisonTeam = [] }: { team: number[]; comparisonTeam?: number[] }) {
+  // Present cores and cores removed by a preview stay visible, even below the
+  // threshold or with no remaining family members. Only cores absent from both
+  // teams are disclosed. Eligibility and counts use the projected team alone.
+  const prominent = familyPlans.filter(({ coreId }) => team.includes(coreId) || comparisonTeam.includes(coreId));
+  const absent = familyPlans.filter(({ coreId }) => !team.includes(coreId) && !comparisonTeam.includes(coreId)
+    && (coreId === EXTRAORDINARY_CORE_ID || team.some(id => monsters[id].family === monsters[coreId].family)));
+  return <>
+    {prominent.map(({ coreId, Plan }) => <Plan key={coreId} team={team} />)}
+    {absent.length > 0 && <details className="familyPlanDisclosure">
+      <summary>
+        未編成の中核・条件を見る（{absent.length}件）
+        <span>{absent.map(({ coreId }) => monsters[coreId].name).join('・')}</span>
+      </summary>
+      {absent.map(({ coreId, Plan }) => <Plan key={coreId} team={team} />)}
+    </details>}
+  </>;
 }
 
 function MemberSummary({ monster, label }: { monster?: Monster; label: string }) {
@@ -347,12 +371,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small><FamilyRecipients team={team} applies={monster => leaderAppliesTo(leader, monster)} /></div>}
       <OpeningSupport team={team} />
       <BeastBarrageBonus team={team} />
-      <DragonChargePlan team={team} />
-      <MaterialRepairPlan team={team} />
-      <SlimeSupplyPlan team={team} />
-      <DemonPressurePlan team={team} />
-      <UndeadCashoutPlan team={team} />
-      <ExtraordinaryResponsePlan team={team} />
+      <FamilyPlans team={team} />
       <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
@@ -406,12 +425,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           {projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
           <OpeningSupport team={projectedTeam} />
           <BeastBarrageBonus team={projectedTeam} />
-          <DragonChargePlan team={projectedTeam} />
-          <MaterialRepairPlan team={projectedTeam} />
-          <SlimeSupplyPlan team={projectedTeam} />
-          <DemonPressurePlan team={projectedTeam} />
-          <UndeadCashoutPlan team={projectedTeam} />
-          <ExtraordinaryResponsePlan team={projectedTeam} />
+          <FamilyPlans team={projectedTeam} comparisonTeam={team} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}

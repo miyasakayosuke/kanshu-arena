@@ -1,0 +1,34 @@
+/* Native disclosure keeps absent-core help reachable without extending the
+   default party summary. Existing family-panel text and colors are retained. */
+.teamBuilder .familyPlanDisclosure {
+  min-width: 0;
+  margin: 10px 0;
+  padding: 0 10px;
+  border: 1px solid #91aea044;
+  border-radius: 7px;
+  background: #203a3533;
+}
+.teamBuilder .familyPlanDisclosure > summary {
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #d7dfc4;
+  font-size: 11px;
+  line-height: 1.7;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.teamBuilder .familyPlanDisclosure > summary > span {
+  display: block;
+  margin-top: 3px;
+  color: #b8cbb9;
+  font-size: 10px;
+}
+.teamBuilder .familyPlanDisclosure > summary:focus-visible {
+  outline: 2px solid #a7f3d0;
+  outline-offset: 3px;
+}
+.teamBuilder .familyPlanDisclosure > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
