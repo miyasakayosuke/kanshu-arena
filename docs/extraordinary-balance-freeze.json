@@ -1,0 +1,1434 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen-before-own-outcomes",
+  "authoritativeDate": "2026-10-10 UTC",
+  "executorRecordedAt": "2026-10-10T09:42:36.040Z",
+  "source": {
+    "engineSha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "preExtensionArchive": "docs/extraordinary-balance-source/extraordinary-pre-extension-index.json",
+    "generatorSha256": "9107b9fe1e26baa3d7af1db682c9887b8aa9179ab5e64b3fb1f003ae918d1ad9",
+    "priorInputs": [
+      {
+        "path": "configs/balance-lab/slime-final-identity.json",
+        "sha256": "3ee4fbf4bae581a1f8a9f0085087385e55cf31a0eda7e604865e8689707b59f8"
+      },
+      {
+        "path": "configs/balance-lab/demon-initial.json",
+        "sha256": "c4576594e64662e0d4f1a5b3e1e9d87dd4d48b91efefa00fd5ce034c6473deb2"
+      },
+      {
+        "path": "configs/balance-lab/undead-initial.json",
+        "sha256": "c626322caad41d0cb5daaa539a55689a9b2b0ea0de017166dad1c17c1cbcfb2f"
+      }
+    ]
+  },
+  "validationAtFreeze": "Base configs passed full validation without turns. Sole new override extraordinaryResponse is boolean-enabled only; full final Lab validation required before runs. No extraordinary match outcomes read by generator.",
+  "totalScheduledMatches": 20056,
+  "response": {
+    "coreId": 36,
+    "minimumFamilies": 4,
+    "maxUses": 1,
+    "mpCost": 24,
+    "name": "門口の応答"
+  },
+  "policy": "Same production autoOrders both physical sides; side swaps/fixed seeds/mirrors; enabled is isolated stock control, off removes initial shared allowance only; no hidden opponent orders.",
+  "counting": "All baseline/candidate identity duplication and mirrors counted, not independent samples. Separate exact-C17 and lower-budget strata. No redraw, numerical tuning, excluded losses or target50%.",
+  "anchors": {
+    "exactC17": [
+      {
+        "id": "fullbeast",
+        "ids": [
+          12,
+          0,
+          2,
+          11,
+          13
+        ],
+        "role": "Prior full beast unchanged; COST17"
+      },
+      {
+        "id": "puredragon",
+        "ids": [
+          15,
+          5,
+          16,
+          17,
+          18
+        ],
+        "role": "Adopted full dragon unchanged; COST17"
+      },
+      {
+        "id": "purematerial",
+        "ids": [
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "role": "Adopted material14 pure C17"
+      },
+      {
+        "id": "pureslime",
+        "ids": [
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "role": "Pure C17 unchanged total"
+      },
+      {
+        "id": "puredemon",
+        "ids": [
+          29,
+          1,
+          8,
+          30,
+          31
+        ],
+        "role": "Initial pure five demon C17"
+      },
+      {
+        "id": "pureundead",
+        "ids": [
+          32,
+          4,
+          33,
+          34,
+          35
+        ],
+        "role": "Initial pure five undead; exact C17; Banshee supplies poison"
+      },
+      {
+        "id": "nature-brute-dryas",
+        "ids": [
+          14,
+          3,
+          6,
+          10,
+          28
+        ],
+        "role": "Known dominant legal C17 nature+brute; retain adverse outcome"
+      },
+      {
+        "id": "nature-brute-tengu",
+        "ids": [
+          14,
+          6,
+          9,
+          10,
+          28
+        ],
+        "role": "Known dominant legal C17 nature+brute alternative"
+      },
+      {
+        "id": "strong-poison",
+        "ids": [
+          24,
+          6,
+          9,
+          27,
+          28
+        ],
+        "role": "Earlier strongest C17 poison mix, unchanged total"
+      },
+      {
+        "id": "strong-area",
+        "ids": [
+          24,
+          4,
+          25,
+          27,
+          28
+        ],
+        "role": "Earlier strongest C17 area/poison mix, unchanged total"
+      },
+      {
+        "id": "material-strong",
+        "ids": [
+          19,
+          20,
+          23,
+          7,
+          10
+        ],
+        "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+      }
+    ],
+    "lowerBudget": [
+      {
+        "id": "fullnature",
+        "ids": [
+          14,
+          3,
+          6,
+          9,
+          10
+        ],
+        "role": "Prior full nature unchanged, original triple poison; COST15"
+      },
+      {
+        "id": "guard-heal",
+        "ids": [
+          1,
+          2,
+          7,
+          10,
+          6
+        ],
+        "role": "Guard, heal and MP-duration pressure; COST14"
+      },
+      {
+        "id": "poison-cleanse",
+        "ids": [
+          4,
+          3,
+          7,
+          2,
+          10
+        ],
+        "role": "Poison, healing and cleanse control; COST15"
+      },
+      {
+        "id": "priority",
+        "ids": [
+          0,
+          6,
+          9,
+          11,
+          10
+        ],
+        "role": "Fast priority and poison control; COST15"
+      },
+      {
+        "id": "mp-pressure",
+        "ids": [
+          1,
+          7,
+          2,
+          3,
+          10
+        ],
+        "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+      }
+    ]
+  },
+  "targets": [
+    {
+      "id": "janus-c17",
+      "ids": [
+        36,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 four-family initial; Janus/Fenrir/Bastet/Kobold/Hidamamori"
+    },
+    {
+      "id": "janus-c16",
+      "ids": [
+        36,
+        12,
+        2,
+        10,
+        35
+      ],
+      "role": "C16 four-family initial; compare lower budget separately"
+    },
+    {
+      "id": "janus-poison-c15",
+      "ids": [
+        36,
+        4,
+        3,
+        10,
+        30
+      ],
+      "role": "Adverse C15 four-family Banshee/Dryas/slow-Naga triple-poison shell; retain every unfavorable result"
+    },
+    {
+      "id": "janus-ward-c16",
+      "ids": [
+        36,
+        14,
+        10,
+        20,
+        35
+      ],
+      "role": "C16 four-family nature-ward shell; no three-member nature core bonus needed for existing ward"
+    }
+  ],
+  "coherent": [
+    {
+      "id": "coherent-beast-support",
+      "ids": [
+        12,
+        2,
+        13,
+        27,
+        29
+      ],
+      "role": "Exact C17 old36 core-led >=3 beast, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-beast-poison",
+      "ids": [
+        12,
+        2,
+        8,
+        9,
+        11
+      ],
+      "role": "Exact C17 old36 core-led >=3 beast, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-nature-support",
+      "ids": [
+        14,
+        3,
+        6,
+        29,
+        35
+      ],
+      "role": "Exact C17 old36 core-led >=3 nature, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-nature-poison",
+      "ids": [
+        14,
+        3,
+        10,
+        28,
+        30
+      ],
+      "role": "Exact C17 old36 core-led >=3 nature, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-dragon-support",
+      "ids": [
+        15,
+        12,
+        17,
+        18,
+        35
+      ],
+      "role": "Exact C17 old36 core-led >=3 dragon, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-dragon-poison",
+      "ids": [
+        15,
+        2,
+        5,
+        9,
+        16
+      ],
+      "role": "Exact C17 old36 core-led >=3 dragon, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-material-support",
+      "ids": [
+        19,
+        13,
+        15,
+        20,
+        22
+      ],
+      "role": "Exact C17 old36 core-led >=3 material, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-material-poison",
+      "ids": [
+        19,
+        10,
+        22,
+        23,
+        27
+      ],
+      "role": "Exact C17 old36 core-led >=3 material, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-slime-support",
+      "ids": [
+        24,
+        9,
+        27,
+        28,
+        35
+      ],
+      "role": "Exact C17 old36 core-led >=3 slime, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-slime-poison",
+      "ids": [
+        24,
+        4,
+        21,
+        25,
+        28
+      ],
+      "role": "Exact C17 old36 core-led >=3 slime, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-demon-support",
+      "ids": [
+        29,
+        7,
+        13,
+        30,
+        31
+      ],
+      "role": "Exact C17 old36 core-led >=3 demon, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-demon-poison",
+      "ids": [
+        29,
+        3,
+        8,
+        20,
+        31
+      ],
+      "role": "Exact C17 old36 core-led >=3 demon, seeded poison skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-undead-support",
+      "ids": [
+        32,
+        2,
+        4,
+        23,
+        35
+      ],
+      "role": "Exact C17 old36 core-led >=3 undead, seeded support skill-ownership stratum; ownership is not execution"
+    },
+    {
+      "id": "coherent-undead-poison",
+      "ids": [
+        32,
+        4,
+        12,
+        16,
+        34
+      ],
+      "role": "Exact C17 old36 core-led >=3 undead, seeded poison skill-ownership stratum; ownership is not execution"
+    }
+  ],
+  "pools": [
+    {
+      "family": "beast",
+      "core": 12,
+      "legalSets": 1018,
+      "sha256": "0aeeb04c3a2be73c616dfb884824e22febedba83d0501cc8707edff664842e8a"
+    },
+    {
+      "family": "nature",
+      "core": 14,
+      "legalSets": 744,
+      "sha256": "6c001bfaca673e31e7863c909f512c351fcb1838a159870d5e9e2241efaefe17"
+    },
+    {
+      "family": "dragon",
+      "core": 15,
+      "legalSets": 660,
+      "sha256": "36acacf140270db89c2949bf50ce7ca1b5006973d60a59d26c39cc2720f472bc"
+    },
+    {
+      "family": "material",
+      "core": 19,
+      "legalSets": 660,
+      "sha256": "7e5f4f783911604e57310441e7bbb75fa06b61124e7d013778a1d28866523873"
+    },
+    {
+      "family": "slime",
+      "core": 24,
+      "legalSets": 589,
+      "sha256": "7117d41f724bf736683abd269180c922e05e8ca6f5e18cae5a82bc155032066a"
+    },
+    {
+      "family": "demon",
+      "core": 29,
+      "legalSets": 660,
+      "sha256": "f4fc41f4a6cdaff4d0c2ebae28546141ae5a01fd144463a2f34802e91caf98ab"
+    },
+    {
+      "family": "undead",
+      "core": 32,
+      "legalSets": 660,
+      "sha256": "a230a46274db2ebfbe00d46f55ec60d52f06b133a16349c60ffd3e4166483d0e"
+    }
+  ],
+  "substitutions": [
+    {
+      "id": "janus-c17",
+      "ids": [
+        36,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 four-family initial; Janus/Fenrir/Bastet/Kobold/Hidamamori"
+    },
+    {
+      "id": "janus-nonleader",
+      "ids": [
+        12,
+        36,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact same C17 members with Fenrir leader; eligibility unchanged but leader effect confounded"
+    },
+    {
+      "id": "janus-three-c17",
+      "ids": [
+        36,
+        12,
+        2,
+        10,
+        9
+      ],
+      "role": "Exact C17 three families; no response; different member kits confound threshold balance"
+    },
+    {
+      "id": "janus-five-c17",
+      "ids": [
+        36,
+        12,
+        4,
+        20,
+        26
+      ],
+      "role": "Exact C17 five assigned families; no stronger allowance than four; member kits differ"
+    },
+    {
+      "id": "replace36-with14",
+      "ids": [
+        14,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster14; skills/stats/leader/family confounded; no innate superiority claim"
+    },
+    {
+      "id": "replace36-with15",
+      "ids": [
+        15,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster15; skills/stats/leader/family confounded; no innate superiority claim"
+    },
+    {
+      "id": "replace36-with19",
+      "ids": [
+        19,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster19; skills/stats/leader/family confounded; no innate superiority claim"
+    },
+    {
+      "id": "replace36-with28",
+      "ids": [
+        28,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster28; skills/stats/leader/family confounded; no innate superiority claim"
+    },
+    {
+      "id": "replace36-with29",
+      "ids": [
+        29,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster29; skills/stats/leader/family confounded; no innate superiority claim"
+    },
+    {
+      "id": "replace36-with32",
+      "ids": [
+        32,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "Exact C17 replace Janus36 with C5 monster32; skills/stats/leader/family confounded; no innate superiority claim"
+    }
+  ],
+  "sampling": {
+    "seed": 342610310,
+    "oldRosterMaximumId": 35,
+    "algorithm": "enumerate-exact-C17-core-led-three-family-then-seeded-Fisher-Yates-distinct-first-support-or-poison-v1",
+    "uniformityClaim": false
+  },
+  "finiteBudget": "Janus starts58MP and one shared24MP response; remaining34MP buys at most3 normal10MP strikes. Four distinct tags including self in5slots makes another three-member family impossible. Janus is not slime and cannot receive natural slime MP. Synthetic regressions are not legal balance evidence.",
+  "metrics": "Both actual choices, selection/withholding/no-effect/KO/fallback, cast-time MP, cleared current ticks and nominal future potential, later reapplication, actual guard interactions and exact same-impact guarded-vs-unguarded HP difference with original roll/floor/clipping/other ward state. No fake healing or nominal-count-as-effectiveness claims.",
+  "limitations": [
+    "Small fixed panels are diagnostic, not metagame equilibrium.",
+    "Member/leader replacements are confounded. Threshold-only mechanics use separate fixtures, not causal lineup claims.",
+    "Nominal cleared poison potential is not prevented future HP; later death/healing/cleanse/reapplication matter.",
+    "Local prevented direct HP is conditional same-impact arithmetic, not whole-battle causal value.",
+    "Low poison damage may reflect a forced cleanse action and forgone healing; do not label every low-damage cleanse waste."
+  ],
+  "configs": [
+    {
+      "path": "configs/balance-lab/extraordinary-initial.json",
+      "fileSha256": "9348e3f0c8bfee4eb359c5251afb7e545ce0942ed159f3e7ac1171eb48466d1e",
+      "canonicalSha256": "7ce085736b71d3658f3fa2055acf9cc28542df66b23d1fc81d263d4f22101d46",
+      "matches": 5376,
+      "matchupScenarios": 64,
+      "mirrorScenarios": 20,
+      "seedCount": 16,
+      "focalIds": [
+        "janus-c17",
+        "janus-c16",
+        "janus-poison-c15",
+        "janus-ward-c16"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "pureundead",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "families": 4
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-area",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "families": 1
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14,
+          "families": 3
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15,
+          "families": 3
+        },
+        {
+          "id": "priority",
+          "cost": 15,
+          "families": 2
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15,
+          "families": 3
+        }
+      ],
+      "candidate": {
+        "id": "initial",
+        "label": "Frozen extraordinary initial; production autoOrders both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/extraordinary-enabled.json",
+      "fileSha256": "1d57a1b68148bf340b76aee9d392ba725ceba20b6a1c542b8db9ebd18579a813",
+      "canonicalSha256": "c67cd8eec00c47f40ecdfdf7eded980dc975cd0e32f8a5005b5a8a3ade699fa1",
+      "matches": 2688,
+      "matchupScenarios": 64,
+      "mirrorScenarios": 20,
+      "seedCount": 8,
+      "focalIds": [
+        "janus-c17",
+        "janus-c16",
+        "janus-poison-c15",
+        "janus-ward-c16"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "pureundead",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "families": 4
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-area",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "families": 1
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14,
+          "families": 3
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15,
+          "families": 3
+        },
+        {
+          "id": "priority",
+          "cost": 15,
+          "families": 2
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15,
+          "families": 3
+        }
+      ],
+      "candidate": {
+        "id": "enabled",
+        "label": "Frozen extraordinary enabled; production autoOrders both sides",
+        "overrides": {
+          "extraordinaryResponse": {
+            "enabled": true
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/extraordinary-off.json",
+      "fileSha256": "d574a479de576682ae70f53f9ca156136dcb8ad9fba6af98a71046472c810d70",
+      "canonicalSha256": "be3711822124f7b7ff01e443d4af28162970266ae75a23af73fe988ab96a13e5",
+      "matches": 2688,
+      "matchupScenarios": 64,
+      "mirrorScenarios": 20,
+      "seedCount": 8,
+      "focalIds": [
+        "janus-c17",
+        "janus-c16",
+        "janus-poison-c15",
+        "janus-ward-c16"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "pureundead",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "families": 4
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "families": 4
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-area",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "families": 1
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14,
+          "families": 3
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15,
+          "families": 3
+        },
+        {
+          "id": "priority",
+          "cost": 15,
+          "families": 2
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15,
+          "families": 3
+        }
+      ],
+      "candidate": {
+        "id": "off",
+        "label": "Frozen extraordinary off; production autoOrders both sides",
+        "overrides": {
+          "extraordinaryResponse": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/extraordinary-broad.json",
+      "fileSha256": "1b6e245f82f13f841fe83d947bc31aad7bb2784789ade5aad29ebcd4771ab1c3",
+      "canonicalSha256": "87ac355b41134e6a141e34909835c9030fe2cb0f6954b2231b8c8b792ca9af93",
+      "matches": 2464,
+      "matchupScenarios": 50,
+      "mirrorScenarios": 27,
+      "seedCount": 8,
+      "focalIds": [
+        "janus-c17",
+        "janus-five-c17"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "pureundead",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "coherent-beast-support",
+        "coherent-beast-poison",
+        "coherent-nature-support",
+        "coherent-nature-poison",
+        "coherent-dragon-support",
+        "coherent-dragon-poison",
+        "coherent-material-support",
+        "coherent-material-poison",
+        "coherent-slime-support",
+        "coherent-slime-poison",
+        "coherent-demon-support",
+        "coherent-demon-poison",
+        "coherent-undead-support",
+        "coherent-undead-poison"
+      ],
+      "teams": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-five-c17",
+          "cost": 17,
+          "families": 5
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-area",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-beast-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-beast-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-nature-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-nature-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-dragon-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-dragon-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-material-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-material-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-slime-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-slime-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-demon-support",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "coherent-demon-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-undead-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-undead-poison",
+          "cost": 17,
+          "families": 3
+        }
+      ],
+      "candidate": {
+        "id": "broad",
+        "label": "Frozen extraordinary broad; production autoOrders both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/extraordinary-substitutions.json",
+      "fileSha256": "d54bd1cb04dca49ccf7f1977a8791872c53ac0e60734986f94fc1d994977dff3",
+      "canonicalSha256": "abaac16d9493bbfeaf74f3837133ece2a4c6a11d05ebf5bbcb51c8e8dbc78fc3",
+      "matches": 6840,
+      "matchupScenarios": 250,
+      "mirrorScenarios": 35,
+      "seedCount": 6,
+      "focalIds": [
+        "janus-c17",
+        "janus-nonleader",
+        "janus-three-c17",
+        "janus-five-c17",
+        "replace36-with14",
+        "replace36-with15",
+        "replace36-with19",
+        "replace36-with28",
+        "replace36-with29",
+        "replace36-with32"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "pureundead",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "coherent-beast-support",
+        "coherent-beast-poison",
+        "coherent-nature-support",
+        "coherent-nature-poison",
+        "coherent-dragon-support",
+        "coherent-dragon-poison",
+        "coherent-material-support",
+        "coherent-material-poison",
+        "coherent-slime-support",
+        "coherent-slime-poison",
+        "coherent-demon-support",
+        "coherent-demon-poison",
+        "coherent-undead-support",
+        "coherent-undead-poison"
+      ],
+      "teams": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-nonleader",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "janus-three-c17",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "janus-five-c17",
+          "cost": 17,
+          "families": 5
+        },
+        {
+          "id": "replace36-with14",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "replace36-with15",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "replace36-with19",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "replace36-with28",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "replace36-with29",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "replace36-with32",
+          "cost": 17,
+          "families": 4
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "families": 1
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "strong-area",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-beast-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-beast-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-nature-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-nature-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-dragon-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-dragon-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-material-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-material-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-slime-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-slime-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-demon-support",
+          "cost": 17,
+          "families": 2
+        },
+        {
+          "id": "coherent-demon-poison",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-undead-support",
+          "cost": 17,
+          "families": 3
+        },
+        {
+          "id": "coherent-undead-poison",
+          "cost": 17,
+          "families": 3
+        }
+      ],
+      "candidate": {
+        "id": "substitutions",
+        "label": "Frozen extraordinary substitutions; production autoOrders both sides",
+        "overrides": {}
+      }
+    }
+  ]
+}

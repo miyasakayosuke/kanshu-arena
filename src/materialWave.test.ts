@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
+import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
 import { advanceWithEvents, autoOrders, BASIC_ATTACK, cost, DEFEND, effectStatus, leaderFor, MATERIAL_CORE_ID, MATERIAL_REPAIR, MATERIAL_REPAIR_PERCENT, materialRepairEligible, monsters, start, type BattleEvent, type Order, type State } from './engine';
 import { battleEventLine, battleFactEvidenceLines, resultFacts } from './battleInsights';
 import { isValidTeam, loadTeamSlots, saveTeamSlots } from './strategy';
@@ -13,7 +14,7 @@ const fixture = () => start(materials, [1], 42);
 
 describe('material roster and opening qualification', () => {
   it('adds five stable material IDs with a legal cost17 pure team and at most four learned skills', () => {
-    expect(monsters.slice(19).map(monster => monster.id)).toEqual(materials);
+    expect(monsters.slice(19, 24).map(monster => monster.id)).toEqual(materials);
     expect(materials.map(id => monsters[id].family)).toEqual(Array(5).fill('material'));
     expect(cost(materials)).toBe(17); expect(isValidTeam(materials)).toBe(true); expect(isValidTeam(materials, 15)).toBe(false);
     expect(monsters.every(monster => monster.skills.length <= 4)).toBe(true);
@@ -240,14 +241,20 @@ describe('repair evidence and deterministic regressions', () => {
       expect([...result.allies, ...result.enemies].every(unit => unit.hp >= 0 && unit.hp <= unit.monster.hp && unit.mp >= 0)).toBe(true);
     }
   });
-  it('preserves frozen v0.12 dragon events, orders, RNG, winners and units across24 complete battles', () => {
+  it('under explicit legacy poison controls, preserves frozen v0.12 dragon events, orders, RNG, winners and units across24 complete battles', () => {
     // Captured before material edits from the frozen d8e717a399b84b749c21aba86380cbdd57cb53a6 tree.
     const dragon = [15, 5, 16, 17, 18], opponents = [dragon, [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [1, 5, 8, 10, 6]], results = [];
     for (const enemy of opponents) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(dragon, enemy, seed, { leaders: true });
+      let state = start(dragon, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
       while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
-      results.push({ enemy, seed, samePolicy, events: state.history!.map(turn => turn.events), orders: state.history!.map(turn => turn.orders), seedAfter: state.seed, winner: state.winner, allies: state.allies, enemies: state.enemies });
+      const historical = withoutPoisonControlMetadata(state);
+      results.push({ enemy, seed, samePolicy, events: state.history!.map(turn => turn.events), orders: state.history!.map(turn => turn.orders), seedAfter: state.seed, winner: state.winner, allies: historical.allies, enemies: historical.enemies });
     }
-    expect(createHash('sha256').update(JSON.stringify(results)).digest('hex')).toBe('9eccb3a1a77101c1108a48d4fc8c3c81940c04ec3c5c83bef93b44cebbee5fba');
+    expect(createHash('sha256').update(JSON.stringify(results, oldFamilyMetadata)).digest('hex')).toBe('9eccb3a1a77101c1108a48d4fc8c3c81940c04ec3c5c83bef93b44cebbee5fba');
   });
 });
+
+// v0.15 deliberately classifies these existing units; their combat and all other fields stay exact.
+const oldFamilyMetadata = (_key: string, item: unknown) => {
+ if (_key === 'monster' && item && typeof item === 'object' && 'id' in item && (item.id === 1 || item.id === 8)) {const copy={...item} as Record<string, unknown>;delete copy.family;return copy;}return item;
+};

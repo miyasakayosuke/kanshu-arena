@@ -1,0 +1,167 @@
+{
+  "source": {
+    "gameVersion": "0.14.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+    "configSha256": "32d9a6a057585372a5199abfb542dcdc0fbeab37f7c4ea422eac710dbacf19dc"
+  },
+  "report": "lab-results/slime-stage1-identity/report.json",
+  "variant": "baseline",
+  "method": "Every focal pure/provisional matchup is rerun with trace, its saved trace hash checked, then funding eligibility reconstructed at turn start. No choice changes. Higher-priority support is distinguished from never reaching the exact funding threshold.",
+  "teams": [
+    {
+      "id": "pureslime",
+      "games": 832,
+      "verifiedTraceHashes": 832,
+      "orderedTraceHashesSha256": "e658d00c54ac347916d9a53327eb69c1819c9b75d919f8731b09be881025c7ea",
+      "matchReasons": {
+        "never-funded-threshold-defeated": 334,
+        "funding-threshold-preempted-defeated": 146,
+        "selected-but-defeated-before-cast": 167,
+        "consumed": 185
+      },
+      "turnCounts": {
+        "readyLiving": 2393,
+        "fundingThreshold": 626,
+        "selected": 352,
+        "preemptedProtect": 274,
+        "preemptedHeal": 0,
+        "preemptedOther": 0,
+        "selectedButDefeatedBeforeCast": 167,
+        "selectedButBattleEndedBeforeCast": 0
+      },
+      "examples": {
+        "never-funded-threshold-defeated": [
+          {
+            "matchId": "f1-o1__s2717045971__a-left__baseline",
+            "traceHash": "0a21035a0992b8ba0e54cc898bb9398df35038635148a9feb8b08475ffa3bda5"
+          },
+          {
+            "matchId": "f1-o1__s2717045971__a-right__baseline",
+            "traceHash": "3c701785d4289895e5b1f8cf229b84b024da9b367de7b7a7e6e943590194b68a"
+          }
+        ],
+        "funding-threshold-preempted-defeated": [
+          {
+            "matchId": "f1-o1__s3730950197__a-left__baseline",
+            "traceHash": "b2a4775afb30f2a5ddae5f605bbfbc5879d983784c3b7e86bb8939598d2702fb"
+          },
+          {
+            "matchId": "f1-o1__s3730950197__a-right__baseline",
+            "traceHash": "9e35de6af3ee1c294e6e21ae5504d20d60f3694d48364e8fa65f750d5b4c25ed"
+          }
+        ],
+        "selected-but-defeated-before-cast": [
+          {
+            "matchId": "f1-o1__s4118227114__a-left__baseline",
+            "traceHash": "386cb28b6a29cd478d6ed46ae2df1a99b96c5681a6d26b85639618038663f339"
+          },
+          {
+            "matchId": "f1-o1__s4118227114__a-right__baseline",
+            "traceHash": "86631470dfee3d6d89e5c89caef553d1c76fe1c508f3b8dc01714e75f802be51"
+          }
+        ],
+        "consumed": [
+          {
+            "matchId": "f1-o1__s210536735__a-left__baseline",
+            "traceHash": "63a003adfcff69504faf57b4983c4824a8aa0bdb58843edc6d18586612cb8f3d"
+          },
+          {
+            "matchId": "f1-o1__s210536735__a-right__baseline",
+            "traceHash": "b3c829b24902a351126ac0c9957ad2f9939510669b080146721c11c549d66edc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provisional",
+      "games": 832,
+      "verifiedTraceHashes": 832,
+      "orderedTraceHashesSha256": "60e195f9feb0104bd7ba5ada55b88575b33c824e0850279fae1e065eba7cb6cb",
+      "matchReasons": {
+        "funding-threshold-preempted-defeated": 95,
+        "selected-but-battle-ended": 5,
+        "consumed": 310,
+        "never-funded-threshold-defeated": 361,
+        "selected-but-defeated-before-cast": 55,
+        "funding-threshold-preempted-survived": 6
+      },
+      "turnCounts": {
+        "readyLiving": 2407,
+        "fundingThreshold": 629,
+        "selected": 370,
+        "preemptedProtect": 259,
+        "preemptedHeal": 0,
+        "preemptedOther": 0,
+        "selectedButDefeatedBeforeCast": 55,
+        "selectedButBattleEndedBeforeCast": 5
+      },
+      "examples": {
+        "funding-threshold-preempted-defeated": [
+          {
+            "matchId": "f2-o1__s2717045971__a-left__baseline",
+            "traceHash": "de2abaeebfbbf9d8ec6c008bb1169a792fc29e1cb7126d60fafdea17cf530411"
+          },
+          {
+            "matchId": "f2-o1__s2717045971__a-right__baseline",
+            "traceHash": "60a92426f65e70e81df4ced0e108e41f751ae97087324ce0ea5116f514b78253"
+          }
+        ],
+        "selected-but-battle-ended": [
+          {
+            "matchId": "f2-o1__s3730950197__a-left__baseline",
+            "traceHash": "fb6501edf1eaf591f868b702c8adfcbe4e53a11ed73f59b3ed30dff93cad802f"
+          },
+          {
+            "matchId": "f2-o1__s3730950197__a-right__baseline",
+            "traceHash": "adba27e380a48159044255df6874dd93b66419d4b56fe9aecf5971727ee01f62"
+          }
+        ],
+        "consumed": [
+          {
+            "matchId": "f2-o1__s2090418662__a-left__baseline",
+            "traceHash": "9e8657cc3d04a33bd0146f5b6406ffd8647fd4614e9446f9abd25a92a2253447"
+          },
+          {
+            "matchId": "f2-o1__s2090418662__a-right__baseline",
+            "traceHash": "af9bab20bfb20fdb6443b6c09cc18aae951f51411865feb43f05677cdc83f6c1"
+          }
+        ],
+        "never-funded-threshold-defeated": [
+          {
+            "matchId": "f2-o1__s449887127__a-left__baseline",
+            "traceHash": "c321c14904961ceaad65488126ea9f2819e37f66d9217d344711bdfcc187ad30"
+          },
+          {
+            "matchId": "f2-o1__s449887127__a-right__baseline",
+            "traceHash": "0e07ba47c8771db6a1397e77adc7a59b6e15448173acc3dc6a7df410eb53273c"
+          }
+        ],
+        "selected-but-defeated-before-cast": [
+          {
+            "matchId": "f2-o1__s3878876722__a-left__baseline",
+            "traceHash": "c557a1a12f8845a1639eacf6ff01070df8a413e2a7541701bf32e2322dcea3bc"
+          },
+          {
+            "matchId": "f2-o1__s3878876722__a-right__baseline",
+            "traceHash": "2f92164db70a5cdceeec68e968a4e6c6f92e5397d1e5402f05ba2cfc481b13cd"
+          }
+        ],
+        "funding-threshold-preempted-survived": [
+          {
+            "matchId": "f2-o1__s3012899021__a-left__baseline",
+            "traceHash": "d6b8efcc9294b9f75e527c12def8e30e693d786efce0a2c5ecbacb8151616470"
+          },
+          {
+            "matchId": "f2-o1__s3012899021__a-right__baseline",
+            "traceHash": "15a95190e00de70af8370cd6f7f0b51f5967a33ab885eeb7c3e92557a7823762"
+          }
+        ]
+      }
+    }
+  ]
+}

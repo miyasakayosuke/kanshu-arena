@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 1,
+  "status": "exploratory-selected-confirmation-frozen-before-new-pure-counter-outcomes",
+  "date": "2026-10-10 UTC",
+  "selectionDisclosure": "The two targets are unchanged recommended pure teams from the original24-team freeze. They were selected for confirmation after inspecting the zero-impact reserve matrix: pure demon90.625/96.875% and pure material81.25/81.25% versus the two shells,32 games per cell. This selection is exploratory, not blinded or random. Original mixed-counter gate failures remain failures.",
+  "source": {
+    "src/engine.ts": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "scripts/balance-lab/core.mjs": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b",
+    "scripts/balance-lab/cli.mjs": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+  },
+  "targets": [
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Five material allies share leader HP and finite end-turn repair; direct attacks, protection and cleanse.",
+      "cost": 17,
+      "families": [
+        "material",
+        "material",
+        "material",
+        "material",
+        "material"
+      ],
+      "starting": [
+        {
+          "id": 19,
+          "hp": 259,
+          "mp": 64,
+          "speed": 36,
+          "repairReady": true,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 20,
+          "hp": 160,
+          "mp": 54,
+          "speed": 86,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 21,
+          "hp": 275,
+          "mp": 44,
+          "speed": 17,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 22,
+          "hp": 209,
+          "mp": 66,
+          "speed": 48,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 23,
+          "hp": 237,
+          "mp": 50,
+          "speed": 42,
+          "repairReady": null,
+          "mpDamageBonus": null
+        }
+      ]
+    },
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "Five demons share leader HP/speed; burst/anchor attacks, guard and cleanse, with bounded MP pressure.",
+      "cost": 17,
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "demon",
+        "demon"
+      ],
+      "starting": [
+        {
+          "id": 29,
+          "hp": 231,
+          "mp": 64,
+          "speed": 61,
+          "repairReady": null,
+          "mpDamageBonus": 4
+        },
+        {
+          "id": 1,
+          "hp": 275,
+          "mp": 44,
+          "speed": 24,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 8,
+          "hp": 206,
+          "mp": 52,
+          "speed": 44,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 30,
+          "hp": 152,
+          "mp": 44,
+          "speed": 86,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 31,
+          "hp": 196,
+          "mp": 54,
+          "speed": 69,
+          "repairReady": null,
+          "mpDamageBonus": null
+        }
+      ]
+    }
+  ],
+  "shells": [
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "cost": 17,
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "starting": [
+        {
+          "id": 14,
+          "hp": 276,
+          "mp": 64,
+          "speed": 24,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 3,
+          "hp": 207,
+          "mp": 64,
+          "speed": 67,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 6,
+          "hp": 159,
+          "mp": 42,
+          "speed": 96,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 10,
+          "hp": 213,
+          "mp": 56,
+          "speed": 39,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 28,
+          "hp": 220,
+          "mp": 52,
+          "speed": 61,
+          "repairReady": null,
+          "mpDamageBonus": null
+        }
+      ]
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "cost": 17,
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "starting": [
+        {
+          "id": 14,
+          "hp": 276,
+          "mp": 64,
+          "speed": 24,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 6,
+          "hp": 159,
+          "mp": 42,
+          "speed": 96,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 9,
+          "hp": 191,
+          "mp": 52,
+          "speed": 79,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 10,
+          "hp": 213,
+          "mp": 56,
+          "speed": 39,
+          "repairReady": null,
+          "mpDamageBonus": null
+        },
+        {
+          "id": 28,
+          "hp": 220,
+          "mp": 52,
+          "speed": 61,
+          "repairReady": null,
+          "mpDamageBonus": null
+        }
+      ]
+    }
+  ],
+  "seeds": [
+    1206474499,
+    1475755619,
+    2151565911,
+    2410264501,
+    1570989677,
+    2077714689,
+    3622230595,
+    761919225,
+    175747532,
+    3609712605,
+    2095171706,
+    3483060412,
+    2692748550,
+    1059607046,
+    68480332,
+    2065033040,
+    509009171,
+    514356836,
+    61958540,
+    577289608,
+    1179544125,
+    99689489,
+    3106647767,
+    1058127133,
+    3802970796,
+    408833281,
+    149277578,
+    1919738058,
+    1505716802,
+    651760114,
+    1811176959,
+    427694104,
+    974619159,
+    705242848,
+    3377735741,
+    1686465743,
+    1064635184,
+    1271587240,
+    58206567,
+    286029,
+    2136419348,
+    2406267194,
+    3836851506,
+    3492122733,
+    1833419989,
+    1204642844,
+    3817965815,
+    701007604,
+    925935662,
+    2458742783,
+    3035628849,
+    1136920289,
+    2158834944,
+    2017585827,
+    2889272145,
+    521339528,
+    724974133,
+    2514960376,
+    861465929,
+    3098009836,
+    1448479098,
+    1233034188,
+    628958859,
+    166121315,
+    3435771547,
+    1545740384,
+    2129408987,
+    3920731752,
+    62400222,
+    72422942,
+    1327483017,
+    4096594559,
+    3465079349,
+    2616482256,
+    3441475760,
+    2258368451,
+    1813485849,
+    1631236889,
+    1251834899,
+    1833328125,
+    1005902680,
+    318069549,
+    3199419602,
+    2764973331,
+    3228189852,
+    1220943065,
+    1653047483,
+    2495817376,
+    1151860569,
+    2437418011,
+    2673029990,
+    1840648555,
+    2044185327,
+    3650922699,
+    1121945259,
+    1346182783,
+    506482128,
+    3987403467,
+    119831775,
+    2161371545,
+    3452340953,
+    1524678589,
+    4052392597,
+    1860419912,
+    1131845914,
+    4031870068,
+    1890883055,
+    3107700345,
+    1797607817,
+    1410236883,
+    2768067056,
+    2489218165,
+    1569855341,
+    1261716962,
+    3844418597,
+    267764474,
+    49838420,
+    4101721265,
+    404466560,
+    3482674399,
+    1531390539,
+    3564773069,
+    2045428111,
+    3670769087,
+    3249101830,
+    1204739115,
+    3024252334,
+    719435490
+  ],
+  "seedDerivation": "First4 bytes big-endian SHA256 of kanshu-arena/pure-counter-confirmation/2026-10-10/N, N from0, excluding all existing config seeds and all separately frozen leader/Janus follow-up seeds.",
+  "arms": {
+    "poisonImpactScale": [
+      1,
+      0.5,
+      0
+    ],
+    "reservePoison": [
+      false,
+      true
+    ],
+    "bothPhysicalOrientations": true,
+    "physicalMirrors": true,
+    "explicitProductionAutoOrdersBothSides": true
+  },
+  "criteria": {
+    "requireBothNamedPureCountersAgainstBothShellsInBothPolicies": true,
+    "scoreAtLeast": 0.6,
+    "approximateSeedClustered95LowerAbove": 0.5,
+    "eachPhysicalOrientationAbove": 0.5,
+    "extraSeedsOrCounterSubstitution": false,
+    "originalFullMatrixGatesAndDistributionStillReviewed": true,
+    "preferHalfIfBothCandidateScalesSatisfyNewConfirmationAndBroaderChecks": true
+  },
+  "unchanged": [
+    "Every character stat,skill,cost,family tag and roster order.",
+    "Engine/core/CLI bytes and existing production defaults.",
+    "All original fixed-mixed-counter outcomes, failed gate status and separate leader-study results."
+  ],
+  "interpretation": [
+    "No retroactive pass for the first protocol. This is fresh confirmation of exploratory counter discovery.",
+    "Review all24 row distributions, meaningful counters for weaker families, actual adjudication and resource/action costs rather than one favorable matchup.",
+    "A positive result supports a bounded playtest improvement and a discoverable existing-family counter, not universal balance or human optimality.",
+    "No extra counter or seed search if the prelisted confirmation fails."
+  ]
+}

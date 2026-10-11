@@ -1,0 +1,61 @@
+{
+  "status": "verified",
+  "productionEngineTouched": false,
+  "checks": [
+    {
+      "label": "before",
+      "archive": "docs/undead-balance-source/undead-before-lab.json",
+      "archiveSha256": "5be101ac565d1c961a5993dfa2819d53a3449f19b89517f2c5f13a44f673402c",
+      "files": {
+        "src/engine.ts": "d1781edb2edd2d9a2a14ee79958f65a92abfaadf7f2978b36cb3919e1f5ef096",
+        "src/families.ts": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "scripts/balance-lab/core.mjs": "d47302bbdb6f56644bc26198573eb8e8bf9a89b421198aaaad07160b777dc71d",
+        "scripts/balance-lab/cli.mjs": "b18f7a684e901a984bc6e2061e9dcb2d7c0831bdec01a57eb88bfcbf5b6fb86a"
+      }
+    },
+    {
+      "label": "study",
+      "archive": "docs/undead-balance-source/undead-study-v1-index.json",
+      "archiveSha256": "e94f0db70c619dc74b44f26a9e9aa4adb3a1c2f0ad089988f2b4767eb768c22d",
+      "files": {
+        "src/engine.ts": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "src/families.ts": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "scripts/balance-lab/core.mjs": "6c0af18bf3ce4b3332a1dfe242edd844737a8d3a5ecf80e4a57a66ff0c14fa7d",
+        "scripts/balance-lab/cli.mjs": "280601d09da58b6c2cf282f0569093531aa225e934e8243af3b456b83d0feed2"
+      }
+    },
+    {
+      "label": "current",
+      "archive": "docs/undead-balance-source/undead-current-v2-index.json",
+      "archiveSha256": "8ddad9ba3a7598a56e21dc71826717c02831210c73a097c121c01e86c1fab07a",
+      "files": {
+        "src/engine.ts": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "src/families.ts": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "scripts/balance-lab/core.mjs": "51c873fd4cbe1e3ef6983cbf3e689e509027d8c44fbe8c05a9a187f0a7b2e15e",
+        "scripts/balance-lab/cli.mjs": "280601d09da58b6c2cf282f0569093531aa225e934e8243af3b456b83d0feed2"
+      }
+    },
+    {
+      "label": "demon-final",
+      "archive": "docs/demon-balance-source/demon-final-lab.json",
+      "archiveSha256": "cb8d6b32316d30b40f7a7a2dcdc4a4f72c79239cee2e0d687de8a26c428084b8",
+      "files": {
+        "src/engine.ts": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "src/families.ts": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "scripts/balance-lab/core.mjs": "d47302bbdb6f56644bc26198573eb8e8bf9a89b421198aaaad07160b777dc71d",
+        "scripts/balance-lab/cli.mjs": "b18f7a684e901a984bc6e2061e9dcb2d7c0831bdec01a57eb88bfcbf5b6fb86a"
+      }
+    }
+  ],
+  "studyReplay": {
+    "matchId": "f1-o1__s2887046071__a-right__baseline",
+    "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025"
+  },
+  "historicalDemonReplay": {
+    "suite": "demon-full-off",
+    "matchId": "f1-o1__s2787045971__a-left__candidate",
+    "traceHash": "c0b376079de8d3eae736b861390948453a66bf48a61b0d92d6efba32618e7b7c"
+  },
+  "engineRepair": "Before study, parent restored explicit DEMON_CORE_ID exclusion in default-CPU variety predicate. Initial pre-Lab source is preserved; study/current source uses3522c3dd. Both-side explicit Lab policy was unchanged.",
+  "sourceRootTemporary": "/tmp/undead-source-verify-NyemlC"
+}

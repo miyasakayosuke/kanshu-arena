@@ -1,0 +1,324 @@
+{
+  "kind": "forced-fallback",
+  "matchId": "f1-o1__s2160418662__a-right__baseline",
+  "orientation": "a-right",
+  "teamA": "puredemon",
+  "teamB": "fullbeast",
+  "winner": "lose",
+  "source": {
+    "gameVersion": "0.15.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+    "configSha256": "4c7d17790d82dd050efe9ee87020f9ac70265a5767acb8bbd91bed632e34ab5e"
+  },
+  "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+  "interpretation": "Earlier actual enemy MP loss makes a previously accepted paid order unaffordable. The target still executes exactly one free basic in its original queue slot; no paid debit occurs for the abandoned skill.",
+  "excerpt": {
+    "triggerLoss": {
+      "kind": "resource-loss",
+      "actor": "e0",
+      "target": "a3",
+      "skill": "空勘の爪",
+      "amount": 10,
+      "mp": 10,
+      "effect": "mp-damage",
+      "phase": "action"
+    },
+    "turn": 3,
+    "seedBefore": 3436640767,
+    "seedAfter": 3407841594,
+    "unitsBefore": [
+      {
+        "key": "a0",
+        "hp": 0,
+        "mp": 47,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a1",
+        "hp": 0,
+        "mp": 18,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a2",
+        "hp": 28,
+        "mp": 52,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a3",
+        "hp": 145,
+        "mp": 20,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a4",
+        "hp": 0,
+        "mp": 34,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e0",
+        "hp": 133,
+        "mp": 40,
+        "guard": false,
+        "ward": 0,
+        "mpDamageBonus": 4
+      },
+      {
+        "key": "e1",
+        "hp": 208,
+        "mp": 14,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e2",
+        "hp": 130,
+        "mp": 14,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e3",
+        "hp": 0,
+        "mp": 32,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e4",
+        "hp": 0,
+        "mp": 26,
+        "guard": false,
+        "ward": 0
+      }
+    ],
+    "acceptedOrders": [
+      {
+        "key": "a2",
+        "skill": 1,
+        "target": "a2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "生命の雫",
+        "skillKind": "heal",
+        "skillPower": 65,
+        "accepted": true
+      },
+      {
+        "key": "a3",
+        "skill": 2,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "終焉の一撃",
+        "skillKind": "hit",
+        "skillPower": 105,
+        "accepted": true
+      },
+      {
+        "key": "e0",
+        "skill": 0,
+        "target": "a3",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "空勘の爪",
+        "skillKind": "hit",
+        "skillPower": 50,
+        "accepted": true
+      },
+      {
+        "key": "e1",
+        "skill": -1,
+        "target": "a2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 32.86,
+        "accepted": true
+      },
+      {
+        "key": "e2",
+        "skill": -1,
+        "target": "a2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 32.24,
+        "accepted": true
+      }
+    ],
+    "events": [
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e0",
+        "scope": "single",
+        "targets": [
+          "a3"
+        ],
+        "target": "a3",
+        "skill": "空勘の爪",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e0",
+        "target": "e0",
+        "mp": 24,
+        "amount": 16,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e0",
+        "target": "a3",
+        "amount": 66,
+        "hp": 79,
+        "phase": "action"
+      },
+      {
+        "kind": "resource-loss",
+        "actor": "e0",
+        "target": "a3",
+        "skill": "空勘の爪",
+        "amount": 10,
+        "mp": 10,
+        "effect": "mp-damage",
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e2",
+        "scope": "single",
+        "targets": [
+          "a2"
+        ],
+        "target": "a2",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e2",
+        "target": "a2",
+        "amount": 52,
+        "hp": 41,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action"
+      },
+      {
+        "kind": "fallback",
+        "actor": "a3",
+        "target": "e2",
+        "skill": "終焉の一撃",
+        "fromSkill": 2,
+        "toSkill": -1,
+        "reason": "enemy-mp-loss",
+        "queuePriority": -2,
+        "requiredMP": 20,
+        "availableMP": 10,
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a3",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a3",
+        "target": "e2",
+        "amount": 53,
+        "hp": 77,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action-end"
+      }
+    ],
+    "allOriginalQueueSlots": [
+      "a2",
+      "e0",
+      "e2",
+      "e1",
+      "a3"
+    ],
+    "focusEvent": {
+      "kind": "fallback",
+      "actor": "a3",
+      "target": "e2",
+      "skill": "終焉の一撃",
+      "fromSkill": 2,
+      "toSkill": -1,
+      "reason": "enemy-mp-loss",
+      "queuePriority": -2,
+      "requiredMP": 20,
+      "availableMP": 10,
+      "phase": "action"
+    }
+  }
+}

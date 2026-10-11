@@ -1,0 +1,110 @@
+{
+  "executorRecordedAt": "2026-10-10T08:41:53.456Z",
+  "timestampCaution": "Executor clock approximately9h ahead; configs frozen before fresh-seed outcomes.",
+  "status": "Adopted bounded playtest candidate; no fairness claim",
+  "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+  "budgetSourceByteIdentical": true,
+  "priorExactSourceMatches": 67888,
+  "sourceChoice": "Parent chose E60, coreC4/bruteC5, supply8. No further tuning to force50%.",
+  "holdout": "Eight new seeds from112610210. Retained35opponents and newly sampled24coherent opponents reported separately; four maximum-MP member sets overlap between pools, so pool totals are not independent populations.",
+  "requiredNextWave": "At the all-family milestone, produce a same-budget matrix and an intentional system-balance wave addressing nature/poison dominance. Nature+Aoe97–99% is a known imbalance, not final quality.",
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-final-identity.json",
+      "fileSha256": "3ee4fbf4bae581a1f8a9f0085087385e55cf31a0eda7e604865e8689707b59f8",
+      "canonicalSha256": "ec663eb5b65c4c4163f6f39164802e03ca0067769f5abb4602ae5f612766e494",
+      "matches": 6880,
+      "candidate": {
+        "id": "identity",
+        "label": "Final E60 C4/C5 playtest identity; fresh fixed seed holdout",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-newpool.json",
+      "fileSha256": "e7c282e7e13462d6b69a4d76af8da13f5247e58caa51523ae0aca5285812023e",
+      "canonicalSha256": "cb856e02a5a8079f8759703b858c08ff3deed61840aa04f1deed45240c38aeaf",
+      "matches": 4768,
+      "candidate": {
+        "id": "newpool",
+        "label": "Final E60 C4/C5 playtest newpool; fresh fixed seed holdout",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-enabled.json",
+      "fileSha256": "927b0eef23d471f3ac9fefa842b5c3eef662d6b26c158dcb78f45ad5a0d3fb89",
+      "canonicalSha256": "a15225ade84ba3af155ed9ef1e543bc1ee20e08a7b46e340c865814849797a8a",
+      "matches": 3616,
+      "candidate": {
+        "id": "supply-enabled",
+        "label": "Final E60 C4/C5 playtest supply-enabled; fresh fixed seed holdout",
+        "overrides": {
+          "slimeSupply": {
+            "enabled": true
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-disabled.json",
+      "fileSha256": "c2f5045827623aae32bf56242777502dc989368477de1a137125425ee03ec7e6",
+      "canonicalSha256": "75939d6a217ddffd32f6788f3528c3cb768544a7fbd685b6a6021e2073fb6e22",
+      "matches": 3616,
+      "candidate": {
+        "id": "supply-disabled",
+        "label": "Final E60 C4/C5 playtest supply-disabled; fresh fixed seed holdout",
+        "overrides": {
+          "slimeSupply": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-zero.json",
+      "fileSha256": "98b7c82e12d42740e1c6f747d92c3cfca92c41f83220fb6e1bab6af4b44703c3",
+      "canonicalSha256": "b1620b57b9e506a6c3924d6109e3727ae8c4913fb629eeab9501c2c3471937de",
+      "matches": 3616,
+      "candidate": {
+        "id": "supply-zero",
+        "label": "Final E60 C4/C5 playtest supply-zero; fresh fixed seed holdout",
+        "overrides": {
+          "slimeSupply": {
+            "amount": 0
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply8.json",
+      "fileSha256": "b6a42187c206826f26a7344b73dcc50dba37dc0b2dee29ab6ad75c6c484d0539",
+      "canonicalSha256": "f644f620440beedea73c3521e60ba5dcab94ab9e4bd2d0d6ba32ef25117f0d81",
+      "matches": 3616,
+      "candidate": {
+        "id": "supply8",
+        "label": "Final E60 C4/C5 playtest supply8; fresh fixed seed holdout",
+        "overrides": {
+          "slimeSupply": {
+            "amount": 8
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply12.json",
+      "fileSha256": "ee0d1494f1aca44597eb61060200766988e0300d1ff0496604d66ecb82e1bb06",
+      "canonicalSha256": "f3cd4097a794a3865cc42bed246763bf9112bff1dcd4049cbaf62d19693f6665",
+      "matches": 3616,
+      "candidate": {
+        "id": "supply12",
+        "label": "Final E60 C4/C5 playtest supply12; fresh fixed seed holdout",
+        "overrides": {
+          "slimeSupply": {
+            "amount": 12
+          }
+        }
+      }
+    }
+  ]
+}

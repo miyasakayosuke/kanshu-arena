@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00034.json",
+    "bytes": 57343,
+    "sha256": "5b3235c4fc0db1bb966222d661ffe702c813427822d42c66952ed793c59ab88b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00035.json",
+    "bytes": 52371,
+    "sha256": "e5f88945429cf6127b90165c6d1ab25fcd82e0506ee2f73187cd61778e33c85f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00036.json",
+    "bytes": 52383,
+    "sha256": "3565b86a017fbcef171bbc0063b316143754cd8b59b1dfa651ffa26d98504e32",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00037.json",
+    "bytes": 54175,
+    "sha256": "b7060127a4b9249cde7ea3a7b836af455a9ef7df1111565094b3b7c9a72c1cf0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00038.json",
+    "bytes": 53103,
+    "sha256": "a585f5d5113296a278e7c45ef1b1336c222709c2424649e1e4f5360ea136ba1a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00039.json",
+    "bytes": 58483,
+    "sha256": "85216258c62dde1043d264c9c525e61af915992986aba62a92f586601f8d6c4a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00040.json",
+    "bytes": 58827,
+    "sha256": "7472f2add5cd54d52da4c60626fe00d2fe159c9425c9a8f62f979118e1b3aa69",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00041.json",
+    "bytes": 54315,
+    "sha256": "a6b26f339a96148a2fcb0f25c0fcf4db887eac9b703e097c72512ad65dd41e5c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00042.json",
+    "bytes": 54251,
+    "sha256": "5ee166e2176f2bd64f9ca889ee4059c5b49e2d559ab5445b04c069d2f8b8e048",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00043.json",
+    "bytes": 54827,
+    "sha256": "d63b2fb4a7a35eeb6c6be103c42c9706cc8cd8db8389c7e426fbef09fbc46fbf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00044.json",
+    "bytes": 56199,
+    "sha256": "1256de50a9b6324a33c2b35aa8eb8c0fba70ce38f79bac3065b6b57b10143c0a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00045.json",
+    "bytes": 60031,
+    "sha256": "379954ae7cadd93203ef68b7e4361ff66924db564108b773ad50a6f0d3081d71",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00046.json",
+    "bytes": 59039,
+    "sha256": "2265c1988a9598e27740d0dd203bb80fa52da6ffbb1a8cf87762b36eac5a9604",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00047.json",
+    "bytes": 51287,
+    "sha256": "ac10ec2ef580d0bfd8e5a80d8fcd2ae7c38b3d5e2b82eb54a6b8ee5d625c29aa",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00048.json",
+    "bytes": 50923,
+    "sha256": "39896e688cee4ff9c3401813b1c9952ca8f1fa943d870fa23d78ac5fdfc89d86",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00049.json",
+    "bytes": 52607,
+    "sha256": "849947e109da50c9d9572371b85c72f19ee031860082dbf3dfe412a4092dee7f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00050.json",
+    "bytes": 52427,
+    "sha256": "3ff4720498df066e57dfe83c14f6c769546a8e97abe599030fa40bd39fe924af",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00051.json",
+    "bytes": 61179,
+    "sha256": "a275cfb3c1120661be837c96778df84d2601f38b80b3438616f551b82418010f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00052.json",
+    "bytes": 60271,
+    "sha256": "da52e7ee95aba40850279ff8c145bb79c811e8b01801c238b1e210e02ef3e2ac",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00053.json",
+    "bytes": 54715,
+    "sha256": "c6fc7baa8c01bfa8aa36cff08f6a29e75c54b44d008764c7fd40e4bc5700f67b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00054.json",
+    "bytes": 55355,
+    "sha256": "a36f4e23ca9a5116af321e0beb72c96f08e7804a497278ed85f3f3e00da48307",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00055.json",
+    "bytes": 53743,
+    "sha256": "1c3835ac6e4b4eac533390cb864cef7f260ab0f2f6ac0ed1b178f22a6ef7e4f3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00056.json",
+    "bytes": 54267,
+    "sha256": "ef7491ddc3fa49b0545b0115ef69543ce80570d0bf06a63992fe5b5877046df3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00057.json",
+    "bytes": 56287,
+    "sha256": "eaaa097c79cdff03231e0be516aab6f0e946c73c076f0743c22fcc0824db0154",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00058.json",
+    "bytes": 55627,
+    "sha256": "2dc1ad9bb2cc200fc688acbe6b957bcb34fa613c060c015863d004dbfd1fe8e4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00059.json",
+    "bytes": 54903,
+    "sha256": "bcb13e8b57704072ff388e478a56dceaba42b4f4d9362a1cdbac98702a517f09",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00060.json",
+    "bytes": 55267,
+    "sha256": "3150c4db7ef83ee6e7a28a558d58b536981f2984709bdc2a71d84f8b2588e5ba",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00061.json",
+    "bytes": 56463,
+    "sha256": "f8482f19a71cf985dd84f13c994df7647ac60acaa53e65e450ecbc55405f24bd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00062.json",
+    "bytes": 56811,
+    "sha256": "92e57b56085dd94f2d11355d652502a5ebdd363a7ea7514821ad8fdc89be8569",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00063.json",
+    "bytes": 54975,
+    "sha256": "82ea21d1b6611ebeef76d3d9746d3a08e6ef7b39cde887a28a32324143c29efd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00064.json",
+    "bytes": 54587,
+    "sha256": "11e4384427f1f907e27ee4d871d61906c2d60edd4c85be4935d05c46d49b1683",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00065.json",
+    "bytes": 59711,
+    "sha256": "686a3f045119fbfcca7672b549ba31b53d011347e79501c4a2c7bcea3508664d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00066.json",
+    "bytes": 59731,
+    "sha256": "a5ae49fabb324ef827aac7679415b760e42b5d851168197711ea595765353bf6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00067.json",
+    "bytes": 58795,
+    "sha256": "bdc19e8da21ed714314e341e97d27e7869d76017d350c824bac82dae1c6b999c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00068.json",
+    "bytes": 58195,
+    "sha256": "5203628e9ef50524d7210af07a073a9a1c9099cb92ace50e9f8bfbb277163a27",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00069.json",
+    "bytes": 60711,
+    "sha256": "1e4b621ee1484920af64603e94cdb356612786cbbb8a7ed623a2a075fc3404dd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00070.json",
+    "bytes": 60495,
+    "sha256": "30aa33eb7c96de3bd107ea1c4186108ef16da3a8be4900d36fb2abce5c90d19d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00071.json",
+    "bytes": 58711,
+    "sha256": "4e2e74047310100cf91bf5eb98085e62961e627db7df80ad9a66d9aca70ebb84",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00072.json",
+    "bytes": 58219,
+    "sha256": "d8cd5d2c69a1137b2e9aa1ab0e211b4c11e600c30eeebb1659186d569130516e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00073.json",
+    "bytes": 57255,
+    "sha256": "54658c6dfdf579b198fa614e1e105806714ac7358ada0ea5915d668cc6803bc1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00074.json",
+    "bytes": 57111,
+    "sha256": "6298cb4b28879b64e3e821d91fe6718d28ecfaf34d875876f7ea5e34fd752e80",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00075.json",
+    "bytes": 59071,
+    "sha256": "49f0e607b146dc3aca472be9315753b6d6fda147c7aae699f0356a611c70b8f1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00076.json",
+    "bytes": 57955,
+    "sha256": "2d0c49bcde63d470b5e8bf6d6cae491082aae74365ced6f264f063f78e23f27b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00077.json",
+    "bytes": 58971,
+    "sha256": "c1d01362370d7070ef476f095575c6912dc02fbf6ae776e602427faf730e6d78",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00078.json",
+    "bytes": 58699,
+    "sha256": "34b8473d5f5243f8dfd5a631a6baf62bb1ef5bc2866674dafe6918b57cdccb0d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00079.json",
+    "bytes": 58355,
+    "sha256": "ce68c4a15ca3be543dfaf6020360c2aa73a410cdc83fb55aab71ccd9dabb3b81",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00080.json",
+    "bytes": 59239,
+    "sha256": "84a368df4eda39056fc9c78cb53f86d682490a0943c46a51d7799dfb42d1851b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00081.json",
+    "bytes": 54547,
+    "sha256": "2adb1b91e88f8b96b346b74aa2ce52ac05af82f11e631f7eeb46e6e33163cd21",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00082.json",
+    "bytes": 54299,
+    "sha256": "7514c69a322df689c7b491ccdae8d58450d0900375140180418c01d5678a19a1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00083.json",
+    "bytes": 55575,
+    "sha256": "879b8b121e660604911e1adb36199a4d79a13f6a463ee74e1db4f5a203291275",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00084.json",
+    "bytes": 54251,
+    "sha256": "ef4afeaff263bcfce9fd0a5fb9121615d7122e4701fa5c29ef4ada18961cc000",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00085.json",
+    "bytes": 57399,
+    "sha256": "fe02157ae4b81c909f6188fa02fc5db7c8bb0a1f9abe44fb5e6aef826c6f2e6c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00086.json",
+    "bytes": 56659,
+    "sha256": "e2233d7e2f6c67c6a0150482314f6eb8abd9560c8cd438620cd3155736e5e282",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00087.json",
+    "bytes": 57611,
+    "sha256": "d7fef727ea1ed20ff0217d7747d5faf5e00bb6144a1fd0f99c8e924c43bff020",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00088.json",
+    "bytes": 58063,
+    "sha256": "c268f14971f9014eb34a1833796fdc94bc951def75fd3c3f4627151d97a04e95",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00089.json",
+    "bytes": 60067,
+    "sha256": "4ed634cf75a67d609c9f9d09d2ccd9c2eaf115c21cf0760aad9e032f9534a008",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00090.json",
+    "bytes": 58903,
+    "sha256": "606453799707667a99f74599af239b485c7bc6cd045c86ebf4d9b877c209f3aa",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00091.json",
+    "bytes": 59963,
+    "sha256": "cae52fc6b1ec697e206c69d76cd3bc0108a13f94ba029423c165c03a95c127bd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00092.json",
+    "bytes": 59015,
+    "sha256": "4e8bfa338e8173cf6e2428dbe1806f42f9948d03249b438a314625a37ad5a09b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00093.json",
+    "bytes": 59383,
+    "sha256": "ff88d906ca603aee952fc781008764fac5be5f9b0d1348e72d7c2ee544674686",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00094.json",
+    "bytes": 58731,
+    "sha256": "63242773348b169e0b0ff16cb50c66fa1248d6a9c4391df76a46f17a100e91d8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00095.json",
+    "bytes": 55027,
+    "sha256": "85dfad036c668100eb66c480126a18213f813aafe0220bd05fa7a1435918faa5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00096.json",
+    "bytes": 55579,
+    "sha256": "a4bbd72f57be382ee943ecedce19e6c2d6b1c7a6985d73fbecc1d60d0f6e03da",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00097.json",
+    "bytes": 44387,
+    "sha256": "dd224e028182b8c5ee6afdb18dd3806dab609b6ee5da707dfe26eefa50fb038f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00098.json",
+    "bytes": 45367,
+    "sha256": "ba8c3f519b381f895362f99f6376cb483aeddc8e1258cab6c14ef3a7043de4ad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00099.json",
+    "bytes": 50951,
+    "sha256": "6a08b036178e2f8e11312e7a77c3b039b760ea923036687373c05da34d047deb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00100.json",
+    "bytes": 50467,
+    "sha256": "55864efd67f5300a6d0bb5357e4d9f40adb6ebcf1a15be85986a9b0f828ff7f4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00101.json",
+    "bytes": 44523,
+    "sha256": "b2c9e15364f74eb64a298d5d7ff7952ee9f28377ddefc1fa161f0612e34b4a05",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00102.json",
+    "bytes": 44779,
+    "sha256": "70b4529c02a544f338a3a88bf985c70c6adfff937ad53e0575a6623e11e58c7c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00103.json",
+    "bytes": 51503,
+    "sha256": "8f3e0caeb52e55c4f9b7627a23ea002111462858137451a1f4759e074011352c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00104.json",
+    "bytes": 52191,
+    "sha256": "69ebd63d75259f616c27c859c97667db996963e779fe0e4a6ef988cbd99e11c6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00105.json",
+    "bytes": 50299,
+    "sha256": "e5f0eb65a8416d4fe470d5a2e4345d9246420a8e2ffc12f1059af13ef7a4b894",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00106.json",
+    "bytes": 49819,
+    "sha256": "8660fdecabffddb02194feb98484fe3612e5e46b89243ee81cbb631da3ee71ac",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00107.json",
+    "bytes": 46507,
+    "sha256": "a110d0e5cff1d3a4a54139b400ea680353b3b4269a1d857de22b27c2ea900229",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00108.json",
+    "bytes": 46907,
+    "sha256": "a72068ae47b092092733622b04258b6aafa69178fbb1b62da7ace7cf4847e7a9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00109.json",
+    "bytes": 49655,
+    "sha256": "472a5397f314d2024712dd426d9c5e005bd8077ae3bdd1fca8a8296505830465",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00110.json",
+    "bytes": 50839,
+    "sha256": "b24bc01586d0b0d5175c888b8274ab3e5e959b0695ea4e49dcb0a3b9da1e2281",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00111.json",
+    "bytes": 47615,
+    "sha256": "b00fc5de5bf09d9caa55aeedef33c0e7f7375d85f574ce48f75011f825eec65c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00112.json",
+    "bytes": 47663,
+    "sha256": "782973f9eb12649b61292fc7c939a0776b369e329cf5c8021eb41f96e67c3347",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00113.json",
+    "bytes": 49711,
+    "sha256": "6d3dad1e908c2db61b593e185c168d52b84586071e14a6a5ccc31ddaaa447fbb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00114.json",
+    "bytes": 51123,
+    "sha256": "8804261e6f3e5676f1db830fdb9ee0c5f0a6a8c06b2dc54f6e535d0c35f4bb86",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00115.json",
+    "bytes": 52023,
+    "sha256": "dc23fc1002b81c08fa14595f6bb47fca564ba9eecd34df9dc4c336217a7d98ff",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00116.json",
+    "bytes": 51331,
+    "sha256": "4dee77830ab47ebf45a33a4847d52a9d4e6c1e455f99a3c4f312ab4d98ac4626",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00117.json",
+    "bytes": 52359,
+    "sha256": "08e9bd6ebea0aa09135c18d27b92df9333fe03c28a8103bf6a8a637d7f1871e3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00118.json",
+    "bytes": 51823,
+    "sha256": "7d408dfaf0f59f3def704cc640a84945ae83e6133c7281214c40dfa2049d10dd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00119.json",
+    "bytes": 44675,
+    "sha256": "25fa27247fe6945ed095ec00cefcc0a7d03ce26c8fd21938dd0f6d7199521086",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00120.json",
+    "bytes": 49883,
+    "sha256": "1d22bd490bc4edace3ca034b7dcf0dbecb89e70366ebb8fbb5336e57b19129ee",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00121.json",
+    "bytes": 52259,
+    "sha256": "96aa8a869cc0ff2b1d8617c7706aa58a83f27ef635af60313303f8bb226c7be3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00122.json",
+    "bytes": 51915,
+    "sha256": "91b73795256f9afc2ef439c0a0ad7cd713c76eb5068e33452fed2b70fbb8de6e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00123.json",
+    "bytes": 50047,
+    "sha256": "5ab98b16eac3619bd032695a78806bc6a064396db5c6981d99ed21c4da9274a9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00124.json",
+    "bytes": 52103,
+    "sha256": "f7cc144f40afce38713b31c0b9d02e83311cffdd131f5cb006254af3c64bc30a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00125.json",
+    "bytes": 52043,
+    "sha256": "4a18583f9a4d9e7356f8b87f198024270a26320571dabb303f0f84d312d4e595",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00126.json",
+    "bytes": 50987,
+    "sha256": "ffc5c5a76377fe41d05bc64b2dd6085714f622002b50d990881a1c92e70e6b17",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00127.json",
+    "bytes": 52443,
+    "sha256": "a5a26a889c5c7c3707f315e4edeada5a976e20f676a48a8786c6328eab1b4eb6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00128.json",
+    "bytes": 54419,
+    "sha256": "ffb6bd241d6c2cb4e558f406b5f95af80b94d11480eb763ea56ac6300aa9d805",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00129.json",
+    "bytes": 48111,
+    "sha256": "718301a7222c66eb11fb9c67237220559e484f74d86e6dc7d3a31b8d4b2e9271",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00130.json",
+    "bytes": 48147,
+    "sha256": "f2044a801b46ad678c265940fa92eeb7c2d43ad53cead4de587cc43f46271a57",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00131.json",
+    "bytes": 39939,
+    "sha256": "3fbeaa81caebbf9b01993af86c57f1e4e6ee611a29964035bb0e50969e39d8d6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00132.json",
+    "bytes": 40043,
+    "sha256": "5ea24ff03656b736facc3c335cc780ef5de4968786b60a677ab5055a5f76f901",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00133.json",
+    "bytes": 48167,
+    "sha256": "aae0cf33f439b13b27ed4523d1126cd7beb857bc7802e5f67f6f7084d3e56e9f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00134.json",
+    "bytes": 47171,
+    "sha256": "b6e67be52ae58f2e4cd5366854c50751ea96726df443b9fd0c074a24163a3b88",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00135.json",
+    "bytes": 49195,
+    "sha256": "396adcc6d6877cebd7a72bb847b78b9304befcb60970e1eebfc9a9e7481d171c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00136.json",
+    "bytes": 48887,
+    "sha256": "dcc166b9b9841b5b5f98487640c5ec4b2192e620cf6f44f7f3748f5641fd2ef0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00137.json",
+    "bytes": 51067,
+    "sha256": "3a8037d5fd4de12fab7845de1c6b0db93d20e3aa8c6a6133e70b0f194164a80d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00138.json",
+    "bytes": 52115,
+    "sha256": "923cd7609d939cb99339df61d38fc98a99c9f1739839dbaf642f52eff332d068",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00139.json",
+    "bytes": 55151,
+    "sha256": "e698c14f27b0e5c1ffad908de98e23a41592704e77ed34611ab991a4c11d2339",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00140.json",
+    "bytes": 56043,
+    "sha256": "694303f3ab418cb7e40e910224d030caebf6d6583d805b5c0238825a0e0ecd06",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00141.json",
+    "bytes": 52175,
+    "sha256": "fb149d9ed4879b9f4f763bf60406b5d8ec7611b15c2148e11e37937152453563",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00142.json",
+    "bytes": 51831,
+    "sha256": "5e40b4802606a8bcf78ef2ebbb98bf28497b16e41fc9105e9e6f81efd775688d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00143.json",
+    "bytes": 47387,
+    "sha256": "23a7e80b74fede975755210a475a55996821bc9177a3c53325d0e7d8bf0ed8a1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00144.json",
+    "bytes": 46311,
+    "sha256": "e52746647b09bbecdf98c741027dbc1697819675bcaa2475a0897403692162f3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00145.json",
+    "bytes": 51591,
+    "sha256": "33d181042021c0a79bb856619b0cbc3b782106548133d36d24878a48cddee977",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-00146.json",
+    "bytes": 50343,
+    "sha256": "2c5fe211f88374957a054be50a0d5ffd7542c621a712026dd77207a6b703c090",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-1-manifest-00001.json",
+    "bytes": 11329,
+    "sha256": "ff1a5bbdfbb2981b0de79ffa774059db4e99b4d1b3cdd4803cc1e2e9c7766fa3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00001.json",
+    "bytes": 50599,
+    "sha256": "a63d3e5e9ab0a1c552fe7be35163ffeebc2371e3218c01962e6a54e4ff1e58c3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00002.json",
+    "bytes": 49131,
+    "sha256": "5dd29eeacd67b017c50f4ba2f75a38452fc6837bbf8b816d22fe72d425c78be8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00003.json",
+    "bytes": 63875,
+    "sha256": "4a7ba2713d43214267a94d81ce20d31b4ef710a8c7e84a0af14674b56702dd07",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00004.json",
+    "bytes": 64131,
+    "sha256": "704e827382bc02359b46413b8fbeeb8a2a9799b040931b2bdc7cb2e298a2769d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00005.json",
+    "bytes": 55727,
+    "sha256": "7bddce7ca8ad346004de6ac5d4e531b78064ed93a4d4200b74f6460b7b29eeb1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00006.json",
+    "bytes": 55743,
+    "sha256": "1b79f6333215181c0522153572dc7a43c690dfe56ad5079d056bea0a9e3bb473",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00007.json",
+    "bytes": 54151,
+    "sha256": "25eb3aed8bdf18e287535c9c22c7a901ba63296da1240ebcc5e74f4a5cb55389",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00008.json",
+    "bytes": 54663,
+    "sha256": "7651a26a5fc3439e89767cbf3a8ffca72c368509acb7e16ccb792ecafc2341eb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00009.json",
+    "bytes": 54811,
+    "sha256": "f7f3cd34576a27d83112503e07d31d57c3830fccf13dc6e270d812e8e8109eb6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00010.json",
+    "bytes": 55451,
+    "sha256": "a4c54448565260d2ce3ffa62635ac3201fd5ad7d5bcc6d7c271503e15471ef0a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00011.json",
+    "bytes": 51555,
+    "sha256": "917d4a52c23e9f8a06a271d32156b3940d9863448f9c9df075b0d605d4a55237",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00012.json",
+    "bytes": 49859,
+    "sha256": "8da90ac73b8fdc7664a075fc4e6d9bf72a2bb0afef84f645f9c46ff26332939f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00013.json",
+    "bytes": 60619,
+    "sha256": "aeaa6cacaa5029051021c92fd7463aaf209d6dd56efad92cd7cc21514559a7a5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00014.json",
+    "bytes": 61395,
+    "sha256": "78d5a9cb84aad6ead6eba0a8212d886ac7a18e59e698f84bbb8f1c083c17cb3a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00015.json",
+    "bytes": 47595,
+    "sha256": "2502615780082907d52c417597edfb69c7989c340a6684b7d5762ff5041b0d54",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00016.json",
+    "bytes": 47651,
+    "sha256": "929b7b6b38153fb8d6b781a3ecdec619819d6c7673da871e2c45ac241e0f850a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00017.json",
+    "bytes": 62987,
+    "sha256": "f255e9bfeb7bdf6f84520f4d1a49117bcdbae03cf1aa6cf6693bdc2858532a56",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00018.json",
+    "bytes": 63123,
+    "sha256": "e4699e210b5c3805589ebc1aab1c4072f9be574b30f60d9364cd679363796c27",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00019.json",
+    "bytes": 61947,
+    "sha256": "ae8f440ad247007124e385bace68bb81ea2d3deb12253593ea37c5b1bfb24029",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00020.json",
+    "bytes": 61623,
+    "sha256": "8c6fd4f2be0e4fa965079089253ef5d1cddca76ec1a185ea97d2f776192bb4b3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00021.json",
+    "bytes": 62091,
+    "sha256": "aa02b80961e22b9f61abe7ecaee3f76f47bfc78745167cb8feb5322f803ab3fe",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00022.json",
+    "bytes": 61927,
+    "sha256": "168145af383c5025029023087247b40a8fd6d60183b0975c59a1b5262ba2bb70",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00023.json",
+    "bytes": 59147,
+    "sha256": "6b58ce09e448468bd628f86b3cd901942d2ff963368209213af4b958e92404e6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00024.json",
+    "bytes": 59123,
+    "sha256": "b021f50736395db7d5703f7803f1f9fa0bfc7e4942db090dd2a98576286ba8d7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00025.json",
+    "bytes": 56935,
+    "sha256": "2b7938c34e1beba5ad1759bc09a021ade048c122bcb507f59aea870b2a4638d7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00026.json",
+    "bytes": 58243,
+    "sha256": "eaf98257bdb951626105ee68af501eba7d8dbea8d103994ce7d8a54547707956",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00027.json",
+    "bytes": 61959,
+    "sha256": "a34cdcdc7cd6247fa559390d9a63a79af1deed9b437c9749040153ae1be8ad0e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00028.json",
+    "bytes": 62019,
+    "sha256": "1983817e2e57994dc9ef58b889eef8c1e2b8dbe1ffb2d40f2159b2818de99ff4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00029.json",
+    "bytes": 63979,
+    "sha256": "81778190c798dda90658ed582860ec3c0b7ef38a6c99ab4c33a530faafcbd346",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00030.json",
+    "bytes": 64943,
+    "sha256": "bcda5a8f608d360b87a29083162e27d2a63c4655a49b4d1a3304d45d295edaee",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00031.json",
+    "bytes": 60647,
+    "sha256": "ad51991869ce13dc860856dec79a8ce8003d6af540b66e6b5b94362a1c527cd7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00032.json",
+    "bytes": 61563,
+    "sha256": "61b6feae927c5c23d06739b49814ff51737fd2c1a4c6eb6de71f8e067f6bed9b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00033.json",
+    "bytes": 59547,
+    "sha256": "1fd6f6622ecd6827710681e6124a19d21bf2c39728f8c8ce54126f6e485b1021",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00034.json",
+    "bytes": 58899,
+    "sha256": "f49118b3c920fe92c942ce1b3520fdfc333c88928500a2101c75f103ebefa43e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00035.json",
+    "bytes": 52367,
+    "sha256": "7ba41ae84c1554b7ad6149cbed98bd0113807d7a1f997bb3db0dbb90ecc56ea5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00036.json",
+    "bytes": 52383,
+    "sha256": "8c4c5608cdc02dcf7b9dabcebd8e20134532db8bfc956852c50be557b4d12623",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00037.json",
+    "bytes": 54171,
+    "sha256": "3b3b792ae82ee8c27d18ca99ddda13e14197ae6ff64f9cb5cd23f971711accad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00038.json",
+    "bytes": 53103,
+    "sha256": "eee59a3ca5e3eb16caff1707006f616131ea863080049a5e1f77546e3ddfeec1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00039.json",
+    "bytes": 60215,
+    "sha256": "2be3df3ab0b53a9c05ba74576287aa92ef095e6e7837e6733fe7b74903174e88",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00040.json",
+    "bytes": 60119,
+    "sha256": "d6e42b423183247ecf5ac9c3f9a12147446d26b892d29041e320258437ddab47",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00041.json",
+    "bytes": 54319,
+    "sha256": "181e55d947ac2fba0395cbb97119dd16bca63f620187eebc62121db09e96a696",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00042.json",
+    "bytes": 54251,
+    "sha256": "074774cf68ac8f6045e6aa5b74548466edb4a68b3362bbdcc1b09828ddc04e3b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00043.json",
+    "bytes": 57275,
+    "sha256": "83f6841d1194ef98b35cbaa2627193d482285c11326616771525673ea117780f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00044.json",
+    "bytes": 57323,
+    "sha256": "be4768c5c5bcca1aed9479909c60495338c3f95935da5a74374f6a75997ffdf7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00045.json",
+    "bytes": 63615,
+    "sha256": "bc25f4dc11fb17b5a4792e1f0b1b171b1306746e06cac2e821827a8fbb946430",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-janus-i-half-00046.json",
+    "bytes": 63151,
+    "sha256": "e82a386ec6069b78aa8083a36c777e71a7f8b60cf51982dcf2adc8c3d671dc8d",
+    "disposition": "omitted-locally-preserved"
+  }
+]

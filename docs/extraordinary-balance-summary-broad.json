@@ -1,0 +1,53 @@
+{
+  "suite": "extraordinary-broad",
+  "source": {
+    "gameVersion": "0.17.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "b9f9094dab621ba4f9f8bcccaa9bb3bba6449fdb184ac736893f53784a5a1e4e",
+    "configSha256": "87ac355b41134e6a141e34909835c9030fe2cb0f6954b2231b8c8b792ca9af93"
+  },
+  "reportSha256": "f2b4b4e85515918406b3a4d82f88d64213b7bc9d4bdedc49a821449ba6a1941c",
+  "scheduleCounts": {
+    "teams": 27,
+    "curatedTeams": 27,
+    "sampledTeams": 0,
+    "matchupScenarios": 50,
+    "mirrorScenarios": 27,
+    "seeds": 8,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 2464
+  },
+  "mirrors": {
+    "baseline": {
+      "games": 432,
+      "physicalAllyScoreRate": 0.502315
+    },
+    "candidate": {
+      "games": 432,
+      "physicalAllyScoreRate": 0.502315
+    }
+  },
+  "targets": [
+    {
+      "id": "janus-c17",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-broad-janus-c17.json",
+      "sha256": "b61c9621b04250f7d23d1971f25c27df6e1061d9fd75f444e78f6aa6473f3fa1",
+      "bytes": 9741
+    },
+    {
+      "id": "janus-five-c17",
+      "cost": 17,
+      "families": 5,
+      "file": "docs/extraordinary-balance-summary-broad-janus-five-c17.json",
+      "sha256": "dfcd5340b5e0100befe7921169cf79ebc1e61daa978104efc7d98556ad83728b",
+      "bytes": 9813
+    }
+  ]
+}

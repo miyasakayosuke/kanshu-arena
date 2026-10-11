@@ -1,0 +1,673 @@
+{
+  "format": "compact-public-evidence-v1",
+  "status": "stable-snapshot",
+  "baselinePublicCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+  "studySource": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "releaseSource": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "adoption": {
+    "path": "docs/release-adoption-v0181.json",
+    "bytes": 12767,
+    "sha256": "9051107b3cf4d3d15380680aa4ac432e509b28e398e188d7a013169a8df51189"
+  },
+  "studies": [
+    {
+      "id": "original",
+      "freeze": "docs/all-family-balance-config-freeze.json",
+      "root": "docs/all-family-balance-packed",
+      "results": "docs/all-family-balance-initial64.json",
+      "status": "complete-recorded-not-rerun",
+      "authorizedScheduledMatches": 132096,
+      "recordedCompleteMatches": 132096,
+      "suites": [
+        {
+          "id": "all-family-matrix-independent-1",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-independent-1-index.json"
+        },
+        {
+          "id": "all-family-counter-independent-1",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-independent-1-index.json"
+        },
+        {
+          "id": "all-family-reserve-independent-1-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-independent-1-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-matrix-independent-half",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-independent-half-index.json"
+        },
+        {
+          "id": "all-family-counter-independent-half",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-independent-half-index.json"
+        },
+        {
+          "id": "all-family-reserve-independent-half-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-independent-half-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-matrix-independent-0",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-independent-0-index.json"
+        },
+        {
+          "id": "all-family-counter-independent-0",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-independent-0-index.json"
+        },
+        {
+          "id": "all-family-reserve-independent-0-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-independent-0-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-matrix-reserve-1",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-reserve-1-index.json"
+        },
+        {
+          "id": "all-family-counter-reserve-1",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-reserve-1-index.json"
+        },
+        {
+          "id": "all-family-reserve-reserve-1-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-reserve-1-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-matrix-reserve-half",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-reserve-half-index.json"
+        },
+        {
+          "id": "all-family-counter-reserve-half",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-reserve-half-index.json"
+        },
+        {
+          "id": "all-family-reserve-reserve-half-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-reserve-half-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-matrix-reserve-0",
+          "status": "complete",
+          "scheduledMatches": 19200,
+          "executedMatches": 19200,
+          "indexPath": "docs/all-family-balance-packed/all-family-matrix-reserve-0-index.json"
+        },
+        {
+          "id": "all-family-counter-reserve-0",
+          "status": "complete",
+          "scheduledMatches": 2816,
+          "executedMatches": 2816,
+          "indexPath": "docs/all-family-balance-packed/all-family-counter-reserve-0-index.json"
+        },
+        {
+          "id": "all-family-reserve-reserve-0-dryas",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        },
+        {
+          "id": "all-family-reserve-reserve-0-tengu",
+          "status": "not-authorized-not-run",
+          "scheduledMatches": 1792,
+          "executedMatches": 0
+        }
+      ]
+    },
+    {
+      "id": "pure",
+      "freeze": "docs/all-family-pure-confirmation-config-freeze.json",
+      "root": "docs/all-family-pure-confirmation-packed",
+      "results": "docs/all-family-pure-confirmation-results.json",
+      "status": "complete-recorded-not-rerun",
+      "authorizedScheduledMatches": 24576,
+      "recordedCompleteMatches": 24576,
+      "suites": [
+        {
+          "id": "all-family-pure-independent-1",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-independent-1-index.json"
+        },
+        {
+          "id": "all-family-pure-independent-half",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-independent-half-index.json"
+        },
+        {
+          "id": "all-family-pure-independent-0",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-independent-0-index.json"
+        },
+        {
+          "id": "all-family-pure-reserve-1",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-reserve-1-index.json"
+        },
+        {
+          "id": "all-family-pure-reserve-half",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-reserve-half-index.json"
+        },
+        {
+          "id": "all-family-pure-reserve-0",
+          "status": "complete",
+          "scheduledMatches": 4096,
+          "executedMatches": 4096,
+          "indexPath": "docs/all-family-pure-confirmation-packed/all-family-pure-reserve-0-index.json"
+        }
+      ]
+    },
+    {
+      "id": "leader",
+      "freeze": "docs/all-family-leader-followup-config-freeze.json",
+      "root": "docs/all-family-leader-followup-packed",
+      "results": "docs/all-family-leader-followup-results.json",
+      "status": "complete-recorded-not-rerun",
+      "authorizedScheduledMatches": 71040,
+      "recordedCompleteMatches": 71040,
+      "suites": [
+        {
+          "id": "all-family-leader-counter-independent-1",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-1-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-independent-1",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-1-index.json"
+        },
+        {
+          "id": "all-family-leader-counter-independent-half",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-half-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-independent-half",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-half-index.json"
+        },
+        {
+          "id": "all-family-leader-counter-independent-0",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-0-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-independent-0",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-0-index.json"
+        },
+        {
+          "id": "all-family-leader-counter-reserve-1",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-1-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-reserve-1",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-1-index.json"
+        },
+        {
+          "id": "all-family-leader-counter-reserve-half",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-half-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-reserve-half",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-half-index.json"
+        },
+        {
+          "id": "all-family-leader-counter-reserve-0",
+          "status": "complete",
+          "scheduledMatches": 7168,
+          "executedMatches": 7168,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-0-index.json"
+        },
+        {
+          "id": "all-family-leader-janus-reserve-0",
+          "status": "complete",
+          "scheduledMatches": 4672,
+          "executedMatches": 4672,
+          "indexPath": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-0-index.json"
+        }
+      ]
+    }
+  ],
+  "deferredActivePaths": [],
+  "inventoryPages": [
+    {
+      "path": "evidence-public/inventory-0001.json",
+      "bytes": 32678,
+      "sha256": "712e62bd82a3e777d66c40486a6df987a68b2b43f65f4ea51a6ef349204a74e7"
+    },
+    {
+      "path": "evidence-public/inventory-0002.json",
+      "bytes": 35036,
+      "sha256": "4f0d26eafee03eb8a8b8f039aef24b1205976ebb8c9a825dce2d7d467baf3ad8"
+    },
+    {
+      "path": "evidence-public/inventory-0003.json",
+      "bytes": 36090,
+      "sha256": "54a853ded4e4038643eb102059b60145f8ff5b6bd0931c1da1b2f19dd3710aae"
+    },
+    {
+      "path": "evidence-public/inventory-0004.json",
+      "bytes": 35833,
+      "sha256": "904644c6bd95c5fd859ff7210ac9a004824e2b3bf148185ef75616722dda6dd0"
+    },
+    {
+      "path": "evidence-public/inventory-0005.json",
+      "bytes": 36090,
+      "sha256": "97c2da74e31b368c77baccf4687db17413bd6b798a643844f59dabbb8e6e7ea9"
+    },
+    {
+      "path": "evidence-public/inventory-0006.json",
+      "bytes": 35843,
+      "sha256": "0db7e82f7bda41f31c36ea95d5b87baa6f2d6f87b93a1b5ef78dc1feb42850b2"
+    },
+    {
+      "path": "evidence-public/inventory-0007.json",
+      "bytes": 35843,
+      "sha256": "251048d33a292778dd2df2616766082f1af02784ab1dcb6f50ea1e3b5e3471bc"
+    },
+    {
+      "path": "evidence-public/inventory-0008.json",
+      "bytes": 35843,
+      "sha256": "ca474157407028f99a6e3cc36b1b08b9fb28356e91dbebcbf187b0a656f0f82a"
+    },
+    {
+      "path": "evidence-public/inventory-0009.json",
+      "bytes": 35834,
+      "sha256": "2cd4f57166417048cda9e9cb595705fc9e36e4eeecccb4804243c2fe5a0338b6"
+    },
+    {
+      "path": "evidence-public/inventory-0010.json",
+      "bytes": 35843,
+      "sha256": "a1c90d2f0e2cc0c56a1401e60b5aede09160e7e92a5a732ae887fc557991bda3"
+    },
+    {
+      "path": "evidence-public/inventory-0011.json",
+      "bytes": 35843,
+      "sha256": "8a63adf612c2fd654558e4b1a9bf923fd9b46722cecf280c1f30e0718a8eccc4"
+    },
+    {
+      "path": "evidence-public/inventory-0012.json",
+      "bytes": 35843,
+      "sha256": "3b9a862224a9459ca6ead7044f515886bfbb393527954e7e5984385286f22f3e"
+    },
+    {
+      "path": "evidence-public/inventory-0013.json",
+      "bytes": 36158,
+      "sha256": "93f2b94089cb0757b209d54be03083ba462e83de77ff0c3bf17aadf814ce51ce"
+    },
+    {
+      "path": "evidence-public/inventory-0014.json",
+      "bytes": 36323,
+      "sha256": "c067d0a9e8ca920d6ba84441ea96aa39e4464e02ed0f1ca3780920039a55d5a9"
+    },
+    {
+      "path": "evidence-public/inventory-0015.json",
+      "bytes": 36323,
+      "sha256": "1686fe740bac0dae09cc014ac793d09e34e10e4712924a06ce042602ddb8a528"
+    },
+    {
+      "path": "evidence-public/inventory-0016.json",
+      "bytes": 36323,
+      "sha256": "6b8e7e0525049ed402bba8b0d3f5faab0e809d4f6d2d7e9b1870930747283831"
+    },
+    {
+      "path": "evidence-public/inventory-0017.json",
+      "bytes": 35945,
+      "sha256": "2b062b3d53a5688cf8385a15634cd7391cdd5e1e076def9283e25092745e23a5"
+    },
+    {
+      "path": "evidence-public/inventory-0018.json",
+      "bytes": 35843,
+      "sha256": "c5b065fcefdfccd66831b4ddc9dfd4033449a3a1337e7b504017bccb4fec1857"
+    },
+    {
+      "path": "evidence-public/inventory-0019.json",
+      "bytes": 35843,
+      "sha256": "8a202dd57275fb217b41f44c186e209cfad5c769770d55d2e6285008ac10d28a"
+    },
+    {
+      "path": "evidence-public/inventory-0020.json",
+      "bytes": 35843,
+      "sha256": "c745cf97e24e2aa255faef1e396ff90b1324d043e42ea039eac0d25d1c3c02c9"
+    },
+    {
+      "path": "evidence-public/inventory-0021.json",
+      "bytes": 35834,
+      "sha256": "ab4c45466a92b11610558972c2230bd895276286a6b763768f3563034f30b1b9"
+    },
+    {
+      "path": "evidence-public/inventory-0022.json",
+      "bytes": 35843,
+      "sha256": "72f162e422e2143df259517ad7316f2887e1a79277439c8e55ff121fe74258b7"
+    },
+    {
+      "path": "evidence-public/inventory-0023.json",
+      "bytes": 35843,
+      "sha256": "407827da4c8078368c6638321a83f9b2f13c7687c38620cb400e49346b25e387"
+    },
+    {
+      "path": "evidence-public/inventory-0024.json",
+      "bytes": 35918,
+      "sha256": "59bb95bacb1c51467fecfd4494813980af5e4d687d3bc27631ad0c1838333a30"
+    },
+    {
+      "path": "evidence-public/inventory-0025.json",
+      "bytes": 36323,
+      "sha256": "0f3901fc8d0d54410c66b52e5052daf71123f6431f9677cb783120829ce77714"
+    },
+    {
+      "path": "evidence-public/inventory-0026.json",
+      "bytes": 36323,
+      "sha256": "584a64d1eb5668bc4fa38c8bf666e2f33399c36cc9626de567b2a3861dc0a499"
+    },
+    {
+      "path": "evidence-public/inventory-0027.json",
+      "bytes": 36323,
+      "sha256": "43276f12a5d38e77867465c17c529aa7705e9c240845c2f1cde4b8702cb5c9ed"
+    },
+    {
+      "path": "evidence-public/inventory-0028.json",
+      "bytes": 36226,
+      "sha256": "26c399d8dfb01b4587a4bf01534fd741f4db372a95e5425abf0ede3bde5fe624"
+    },
+    {
+      "path": "evidence-public/inventory-0029.json",
+      "bytes": 37082,
+      "sha256": "64a6c79b2d8f894f46696b1fc6872306643cc669eb94fd0192152ac9d0ff8ecb"
+    },
+    {
+      "path": "evidence-public/inventory-0030.json",
+      "bytes": 38074,
+      "sha256": "cf54e790e47b89b5a293fc2020d12fb92b02468457c8adc38adf84c5ea460884"
+    },
+    {
+      "path": "evidence-public/inventory-0031.json",
+      "bytes": 38083,
+      "sha256": "74aa4008b19327f04bb527c0258f681da1bcb459cb733597cd12453f297a2b57"
+    },
+    {
+      "path": "evidence-public/inventory-0032.json",
+      "bytes": 38434,
+      "sha256": "2125202096324f5368dc2f049fd0110c2d2ff7cf3cc85712e9b5028fa9152564"
+    },
+    {
+      "path": "evidence-public/inventory-0033.json",
+      "bytes": 38389,
+      "sha256": "de10dec7cdd4508c78a47ce4628395a767acc2dea976be636d2c9cca2c992ef4"
+    },
+    {
+      "path": "evidence-public/inventory-0034.json",
+      "bytes": 38083,
+      "sha256": "99f667f687868579c9708a2bb69cf8eea0f365ef113967202e921e561a149038"
+    },
+    {
+      "path": "evidence-public/inventory-0035.json",
+      "bytes": 38074,
+      "sha256": "56e3a9feeec81e5c3e4f26ab746130661f05f0ee4d3e62e85c45d310a4b96406"
+    },
+    {
+      "path": "evidence-public/inventory-0036.json",
+      "bytes": 38329,
+      "sha256": "2b3e6bbb24c1ed7ef3c22d2a531240f00048f14a70ffb16755ea17906476a599"
+    },
+    {
+      "path": "evidence-public/inventory-0037.json",
+      "bytes": 38454,
+      "sha256": "a19c899fc368303519e514ec724c237ef601313b7213e864e883428b5609ea6d"
+    },
+    {
+      "path": "evidence-public/inventory-0038.json",
+      "bytes": 37754,
+      "sha256": "7e5bb1ef7f238754274fe4c34d943249bc816d1c3b5734104a0c05bf0da4479a"
+    },
+    {
+      "path": "evidence-public/inventory-0039.json",
+      "bytes": 37892,
+      "sha256": "97d47d7d0a73d0ae1f0f300a2280bf91d4c242abb9e7cb3e544057a50bc27333"
+    },
+    {
+      "path": "evidence-public/inventory-0040.json",
+      "bytes": 38057,
+      "sha256": "e52168a0ea0179bfa63b2c56cbb96378fc29175902604d454aca9fb70c2d7510"
+    },
+    {
+      "path": "evidence-public/inventory-0041.json",
+      "bytes": 37754,
+      "sha256": "b083cc4fadab20edf0df03ed0564739e7de22bbb31193b867155a3ec5419cf6f"
+    },
+    {
+      "path": "evidence-public/inventory-0042.json",
+      "bytes": 38009,
+      "sha256": "349022ad07fac84e4a18ee94b87148b652093c5d13b78521b2ffa05a53ce37f5"
+    },
+    {
+      "path": "evidence-public/inventory-0043.json",
+      "bytes": 38234,
+      "sha256": "fc5eda32b293034740738d0e784a08f369cba49514d79aa9b794d9bf7a171fc7"
+    },
+    {
+      "path": "evidence-public/inventory-0044.json",
+      "bytes": 39194,
+      "sha256": "a06e481dce34132a05b7863bb1810e092ce666e9cfaf7e6ade28b76de26e1033"
+    },
+    {
+      "path": "evidence-public/inventory-0045.json",
+      "bytes": 39548,
+      "sha256": "01649884feea725ad46a795c95d0372ff49875375dc61a9eb30571549dc52889"
+    },
+    {
+      "path": "evidence-public/inventory-0046.json",
+      "bytes": 39194,
+      "sha256": "de6899c5d08eeb60ff139b98265aff75390ddefcaaa803ee4b6334094d8f3c2b"
+    },
+    {
+      "path": "evidence-public/inventory-0047.json",
+      "bytes": 39419,
+      "sha256": "352159a95884277b9647a4934eb7500b822bce514387e751843e6ed22b555926"
+    },
+    {
+      "path": "evidence-public/inventory-0048.json",
+      "bytes": 36310,
+      "sha256": "dd13f9a32a7c944712b23b2a70b75d56cdd5c121821a98213bf8b05d9181d695"
+    },
+    {
+      "path": "evidence-public/inventory-0049.json",
+      "bytes": 36149,
+      "sha256": "359d250c69e9811d072d300202d9f75c8a78a3e00d300ec12fa7d9ecd1b7f689"
+    },
+    {
+      "path": "evidence-public/inventory-0050.json",
+      "bytes": 36764,
+      "sha256": "fe41a01b035f7219d45497209bd42c33893c9874ba427b70bdee199b619a9cfd"
+    },
+    {
+      "path": "evidence-public/inventory-0051.json",
+      "bytes": 38287,
+      "sha256": "0db93f2cd9acfeb630dcd3a7bc925daf739e58f1fc402da93b1418285d7f99c5"
+    },
+    {
+      "path": "evidence-public/inventory-0052.json",
+      "bytes": 37200,
+      "sha256": "b1ce42dc7b7a6266a0d76b3691c4f68f0510a9b8d5d1b349ab6bf6a42d8d12a3"
+    },
+    {
+      "path": "evidence-public/inventory-0053.json",
+      "bytes": 32632,
+      "sha256": "27858b713ca278a5c14d8a76fcc22483c2479325c8e522107832425e35d58606"
+    },
+    {
+      "path": "evidence-public/inventory-0054.json",
+      "bytes": 36185,
+      "sha256": "defb71a0e01bc9b7cc468ac04b0dea60c10c38e40e8a0f05297709b9c0b546c4"
+    },
+    {
+      "path": "evidence-public/inventory-0055.json",
+      "bytes": 36819,
+      "sha256": "8d7feb6dfebbf0596f515089fd4e2c338e5cfb3c3f612861e86a8aca4885a979"
+    },
+    {
+      "path": "evidence-public/inventory-0056.json",
+      "bytes": 33058,
+      "sha256": "16904e53e1cb19312386131ccb8657e35acec07f10a04f960212585def081895"
+    },
+    {
+      "path": "evidence-public/inventory-0057.json",
+      "bytes": 18791,
+      "sha256": "7d20eda3a5b5680e18c1817af8a2dcd67be78423adfcf6f4d1ded087325c400d"
+    }
+  ],
+  "shipped": {
+    "files": 1009,
+    "bytes": 23841245
+  },
+  "omittedLocallyPreserved": {
+    "files": 8055,
+    "bytes": 486013055
+  },
+  "limits": "Omitted byte hashes are identity records, not shipped evidence or independent verification. All original files remain local. Aggregate release checks, study completion and publication are separate.",
+  "fixture": "evidence-public/dryas-replay-fixture.json"
+}

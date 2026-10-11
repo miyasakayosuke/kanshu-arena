@@ -1,0 +1,35 @@
+{
+  "format": "bounded-source-index-v1",
+  "label": "extraordinary-study-v1",
+  "authoritativeDate": "2026-10-10 UTC",
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "file": "extraordinary-study-v1-1.json",
+      "sha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+      "archiveSha256": "6fedc3a7bc06d9026e8c39e86f04d4961f3c9af49c2dd96f7b47c360ac447cdc",
+      "archiveBytes": 28549
+    },
+    {
+      "path": "src/families.ts",
+      "file": "extraordinary-study-v1-2.json",
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+      "archiveSha256": "a8d94ae9f6be28f0e4e1323c29fd52dc287b7434b063347d3bc96a5767f05111",
+      "archiveBytes": 1478
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "file": "extraordinary-study-v1-3.json",
+      "sha256": "410e2efb9233590586c4ae4983672289d6dcfa8c18f4408b784cb865536c6b99",
+      "archiveSha256": "8b6735b23fe938975ce6ed6c0691233fbd8512e6fd3fe1b446841da7fa577e28",
+      "archiveBytes": 34325
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "file": "extraordinary-study-v1-4.json",
+      "sha256": "e2300a9097d18ad75f45f1c5e54e192a19f03e62f8f5c98d07e16fe62d357711",
+      "archiveSha256": "abd8a93eb33ccf9e1c65c5c7d6a6d14b86daa44419f775b83083bcb3d0686f84",
+      "archiveBytes": 8827
+    }
+  ]
+}

@@ -17,7 +17,7 @@ type Matrix = [number, number, number, number, number, number];
 let sprites: Matrix[];
 let glyphs: {text: string; matrix: Matrix; font: string}[];
 const context = {
-  ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
+  ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
   fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(),
   createLinearGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   createRadialGradient: vi.fn(() => ({addColorStop: vi.fn()})),
@@ -766,5 +766,219 @@ describe('material figures, repair and grounded effects',()=>{
     const broken:BattleEvent={kind:'break',actor:'a0',target:'e0',repairReady:false,removed:['repairReady']};
     await render({...base,impact:broken,impacts:[broken]});frame(200);
     expect(labels()).toContain('修復待ち解除');expect(labels()).not.toContain('守り解除');
+  });
+});
+
+describe('slime figures and selected MP supply',()=>{
+  it('loads all five static full bodies only for enemies at their registered widths',async()=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const {SLIME_ART}=await import('./slimeArt');
+    const state=start([24,25,26,27,28],[24,25,26,27,28]);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
+    expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);
+    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    expect(images.map(([img])=>img.src)).toEqual(Object.values(SLIME_ART).map(art=>art.artUrl));
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([119,126,119,114,127].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+    expect(teamTransforms()).toHaveLength(0);
+  });
+  it.each([[24,'押し流し','sampleHollowSpringMotion'],[25,'糸しぶき','sampleRibbonDropMotion'],[26,'ひだ押し','sampleFoldWardMotion'],[27,'泡つぶて','sampleBubbleBranchMotion'],[28,'ねり打ち','sampleKneadedFistMotion']] as const)('routes %i to its original fluid sampler, with no reduced-motion body movement',async(id,skill,sampler)=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+    const own=vi.spyOn(battleMotion,sampler);const wolf=vi.spyOn(battleMotion,'sampleFenrirMotion');const dragon=vi.spyOn(battleMotion,'sampleVritraMotion');const talos=vi.spyOn(battleMotion,'sampleTalosMotion');
+    const state=start([0,2,3,4,6],[id,0,2,6,10]);
+    const event:BattleEvent={kind:'cast',actor:'e0',target:'a0',targets:['a0'],scope:'single',skill,effect:'hit'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:skill,type:'water',tick:1},castEvent:event,impact:event};
+    await render(props);frame(100);const before=sprites[0];frame(2400);
+    expect(own).toHaveBeenLastCalledWith(799,false,true);expect(sprites[0]).toEqual(before);
+    expect(wolf).not.toHaveBeenCalled();expect(dragon).not.toHaveBeenCalled();expect(talos).not.toHaveBeenCalled();
+    const hit:BattleEvent={kind:'damage',actor:'e0',target:'a0',amount:38,hp:100};
+    await render({...props,impact:hit,impacts:[hit]});frame(2500);frame(2610);
+    expect(own).toHaveBeenLastCalledWith(910,false,true);expect(sprites[0]).toEqual(before);
+    expect(labels()).toContain(skill);expect(teamTransforms()).toHaveLength(0);
+  });
+  it.each([1,2,4])('at %ix waits for MP gains, labels exact capped amounts, and never paints HP heals or damage',async rate=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const own=vi.spyOn(battleMotion,'sampleHollowSpringMotion');
+    const state=start([0,2,3,4,6],[24,25,26,27,28]);
+    const event:BattleEvent={kind:'cast',actor:'e0',targets:['e0','e1','e2','e3','e4'],scope:'all',skill:'蓄え分け',effect:'restoreMp'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'蓄え分け',type:'mp',tick:1},castEvent:event,impact:event,playbackRate:rate};
+    await render(props);frame(100);frame(2400);
+    expect(own).toHaveBeenLastCalledWith(799,true,false);
+    expect(labels()).toContain('生存粘体 · 5体へMP補給');
+    expect(labels()).not.toContain('敵全体 · 5体');expect(labels()).not.toContain('生存物質 · 5体修復');
+    expect(context.strokeText).not.toHaveBeenCalled();expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    const spend:BattleEvent={kind:'supply',effect:'slime-supply-spend',actor:'e0',target:'e0',supplyReady:false};
+    await render({...props,impact:spend,impacts:[spend]});frame(2500);
+    expect(own).toHaveBeenLastCalledWith(799,true,false);expect(context.strokeText).not.toHaveBeenCalled();
+    const gains:BattleEvent[]=state.enemies.map((u,i)=>({kind:'resource-gain',effect:'slime-supply',actor:'e0',target:u.key,amount:[8,3,0,7,1][i],mp:u.monster.mp}));
+    await render({...props,enemies:state.enemies.map(u=>({...u,supplyReady:false})),impact:gains[0],impacts:gains});frame(2600);frame(2600+135/rate);
+    expect(own).toHaveBeenLastCalledWith(935,true,false);
+    expect(labels()).toEqual(expect.arrayContaining(['MP +8','MP +3','MP +0','MP +7','MP +1']));
+    expect(labels()).not.toContain('+8');expect(labels()).not.toContain('8');
+    expect(document.querySelector('[aria-live]')?.textContent).toContain('5体に同時MP補給');
+    expect(document.querySelector('[aria-live]')?.textContent).not.toMatch(/回復|ダメージ/);
+    expect(context.drawImage).toHaveBeenCalled();expect(teamTransforms()).toHaveLength(0);
+    frame(2600+1100/rate);expect(labels()).not.toContain('蓄え分け');expect(labels()).not.toContain('MP +8');
+  });
+  it('shows one live allowance light, retains it across dispels, and never reconstructs it after spending or KO',async()=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const fills:unknown[]=[];const ctx=context as unknown as CanvasRenderingContext2D;
+    vi.mocked(ctx.fill).mockImplementation(()=>{fills.push(ctx.fillStyle);});
+    const state=start([0,2,3,4,6],[24,25,26,27,28]);
+    const props={allies:state.allies,enemies:state.enemies,effect:null,impact:null};
+    await render(props);frame(100);expect(fills.filter(x=>x==='#ffe6a7')).toHaveLength(1);
+    fills.length=0;
+    const broken:BattleEvent={kind:'break',actor:'a0',target:'e0',removed:['guard']};
+    await render({...props,impact:broken,impacts:[broken]});frame(200);
+    expect(fills.filter(x=>x==='#ffe6a7')).toHaveLength(1);expect(labels()).not.toContain('補給待ち解除');
+    for(const core of [{supplyReady:false},{supplyReady:undefined},{supplyReady:true,hp:0}]) {
+      fills.length=0;await render({...props,enemies:state.enemies.map((u,i)=>i===0?{...u,...core}:u)});frame(300);
+      expect(fills).not.toContain('#ffe6a7');
+    }
+    vi.mocked(ctx.fill).mockReset();
+  });
+  it('keeps allied MP feedback off the battlefield but announces the resource explicitly',async()=>{
+    const state=start([24,25,26,27,28],[0,2,3,4,6]);
+    const cast:BattleEvent={kind:'cast',actor:'a0',targets:['a0','a2'],scope:'all',effect:'restoreMp',skill:'蓄え分け'};
+    const gain:BattleEvent={kind:'resource-gain',effect:'slime-supply',actor:'a0',target:'a2',amount:4,mp:51};
+    await render({allies:state.allies,enemies:state.enemies,effect:{text:'蓄え分け',type:'mp',tick:1},castEvent:cast,impact:gain,impacts:[gain]});frame(100);
+    expect(labels()).not.toContain('MP +4');expect(labels()).not.toContain('+4');expect(teamTransforms()).toHaveLength(0);
+    expect(document.querySelector('[aria-live]')?.textContent).toContain('ひだまもり MP +4');
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+  });
+  it('releases a narrow water jet only after the actual hit, never a breath fan',async()=>{
+    const state=start([24,25,26,27,28],[0,2,3,4,6]);
+    const event:BattleEvent={kind:'cast',actor:'a0',target:'e0',targets:['e0'],scope:'single',effect:'hit',skill:'押し流し'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'押し流し',type:'water',tick:1},castEvent:event,impact:event};
+    const strokes:unknown[]=[];const ctx=context as unknown as CanvasRenderingContext2D;
+    vi.mocked(ctx.stroke).mockImplementation(()=>{strokes.push(ctx.strokeStyle);});
+    await render(props);frame(100);frame(2400);expect(strokes).not.toContain('#b9cfc5');
+    const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',amount:108,hp:42};
+    await render({...props,impact:hit,impacts:[hit]});frame(2500);frame(2620);
+    expect(strokes).toContain('#b9cfc5');expect(labels()).toContain('108');expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    vi.mocked(ctx.stroke).mockReset();
+  });
+  it('clears MP casts and numbers on skip, without replaying old gain objects',async()=>{
+    const state=start([0,2,3,4,6],[24,25,26,27,28]);
+    const event:BattleEvent={kind:'cast',actor:'e0',targets:['e0'],scope:'all',effect:'restoreMp',skill:'蓄え分け'};
+    const gain:BattleEvent={kind:'resource-gain',effect:'slime-supply',actor:'e0',target:'e0',amount:8,mp:40};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'蓄え分け',type:'mp',tick:1},castEvent:event,impact:gain,impacts:[gain]};
+    await render(props);frame(100);expect(labels()).toContain('MP +8');
+    await render({...props,effect:null,castEvent:null,impact:null,impacts:[]});frame(200);
+    expect(labels()).not.toContain('MP +8');expect(labels()).not.toContain('蓄え分け');
+    await render({...props,castEvent:null,effect:null});frame(300);
+    expect(labels()).not.toContain('MP +8');expect(labels()).not.toContain('蓄え分け');
+  });
+});
+
+describe('demon MP impact presentation',()=>{
+  it('shows actual HP and MP losses at separate positions and names the one recipient',async()=>{
+    const state=start([29,1,8,30,31],[24,25,26,27,28]);
+    const cast:BattleEvent={kind:'cast',actor:'a0',target:'e0',targets:['e0'],scope:'single',effect:'hit',skill:'空勘の爪'};
+    const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',amount:61,hp:124};
+    const loss:BattleEvent={kind:'resource-loss',actor:'a0',target:'e0',amount:10,mp:60,effect:'mp-damage'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'空勘の爪',type:'slash',tick:1},castEvent:cast,impact:cast};
+    await render(props);frame(100);expect(labels()).not.toContain('MP −10');
+    await render({...props,impact:hit,impacts:[hit,loss]});frame(900);
+    expect(labels()).toContain('61');expect(labels()).toContain('MP −10');expect(labels()).not.toContain('MP +10');
+    const ys=context.fillText.mock.calls.filter(c=>c[0]==='61'||c[0]==='MP −10').map(c=>c[2]);expect(new Set(ys).size).toBe(2);
+    expect(document.querySelector('[aria-live]')?.textContent).toContain('1体に');expect(document.querySelector('[aria-live]')?.textContent).toContain('うつろ泉 MP −10');
+  });
+  it('does not render allied resource numbers or bodies on the enemy-only field',async()=>{
+    const state=start([0,2,3,4,6],[29,1,8,30,31]);
+    const event:BattleEvent={kind:'resource-loss',actor:'e0',target:'a0',amount:3,mp:20,effect:'mp-damage'};
+    await render({allies:state.allies,enemies:state.enemies,effect:{text:'空勘の爪',type:'slash',tick:1},impact:event,impacts:[event]});frame(100);
+    expect(labels()).not.toContain('MP −3');expect(teamTransforms()).toHaveLength(0);expect(document.querySelector('[aria-live]')?.textContent).toContain('妖狐 MP −3');
+  });
+  it.each([29,30,31])('uses an original authored enemy motion for ID %i',async id=>{
+    const state=start([0,2,3,4,6],[id,...[29,1,8,30,31].filter(v=>v!==id).slice(0,4)]);
+    const names={29:'sampleMammonMotion',30:'sampleKoboldMotion',31:'sampleEmpusaMotion'} as const;
+    const spy=vi.spyOn(battleMotion,names[id as 29|30|31]);
+    const event:BattleEvent={kind:'cast',actor:'e0',target:'a0',targets:['a0'],scope:'single',effect:'hit',skill:state.enemies[0].monster.skills[0]!.name};
+    await render({allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},impact:event,castEvent:event});frame(100);frame(500);
+    expect(spy).toHaveBeenCalled();expect(teamTransforms()).toHaveLength(0);
+  });
+});
+
+describe('undead art and authoritative poison exchange effects',()=>{
+ it('registers only new original full bodies, preserves Banshee fallback and leaves allies offscreen',async()=>{
+  vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});const {UNDEAD_ART}=await import('./undeadArt');const state=start([32,4,33,34,35],[32,4,33,34,35]);
+  await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
+  const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+  expect(images.map(([img])=>img.src)).toEqual(Object.values(UNDEAD_ART).map(art=>art.artUrl));expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([120,116,116,112].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+  expect(glyphs.map(g=>g.text)).toEqual(['👻']);expect(teamTransforms()).toHaveLength(0);
+ });
+ it.each([[32,'塚底の取り立て','sampleDraugrMotion'],[33,'手綱ほどき','sampleHeadlessDriverMotion'],[34,'袖の囲い','sampleJiangshiMotion'],[35,'影の縫い直し','sampleVetalaMotion']] as const)('routes ID%i to independent body motion, with still reduced-motion geometry',async(id,skill,sampler)=>{
+  vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
+  const own=vi.spyOn(battleMotion,sampler),wolf=vi.spyOn(battleMotion,'sampleFenrirMotion');const state=start([0,2,3,4,6],[id,0,2,6,10]);
+  const event:BattleEvent={kind:'cast',actor:'e0',target:id>=34?'e0':'a0',targets:[id>=34?'e0':'a0'],scope:'single',effect:id===34?'protect':id===35?'heal':'hit',skill};
+  const props={allies:state.allies,enemies:state.enemies,effect:{text:skill,type:'slash',tick:1},castEvent:event,impact:event};
+  await render(props);frame(100);const before=[...sprites[0]];frame(700);expect(sprites[0]).toEqual(before);expect(own).toHaveBeenCalled();expect(wolf).not.toHaveBeenCalled();
+  const hit:BattleEvent={kind:id===34?'guard':id===35?'heal':'damage',actor:'e0',target:event.target,amount:20,hp:100};await render({...props,impact:hit,impacts:[hit]});frame(900);frame(1050);expect(sprites[0]).toEqual(before);expect(teamTransforms()).toHaveLength(0);
+ });
+ it.each([1,2])('shows no early poison count at %sx, then collapses only actual remaining ticks with the HP number',async rate=>{
+  const state=start([32,4,33,34,35],[32,4,33,34,35]);state.enemies[0].poison=3;
+  const event:BattleEvent={kind:'cast',actor:'a0',target:'e0',targets:['e0'],scope:'single',effect:'hit',skill:'塚底の取り立て'};
+  const consume:BattleEvent={kind:'poison-cashout',effect:'poison-cashout',actor:'a0',target:'e0',skill:event.skill,poison:0,poisonTicksConsumed:3,poisonCashoutPerTick:22,poisonCashoutAdded:66};
+  const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',skill:event.skill,amount:126,hp:100};
+  const props={allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},castEvent:event,impact:event,playbackRate:rate};
+  await render(props);frame(100);frame(5000);expect(labels()).not.toContain('毒3回消費 · 基礎+66');expect(labels()).not.toContain('126');expect(document.querySelector('.enemyVital')?.textContent).toContain('毒:残3回');
+  await render({...props,enemies:state.enemies.map((u,i)=>i?u:{...u,poison:0,hp:100}),impact:hit,impacts:[consume,hit]});frame(5010);
+  expect(labels()).toContain('毒3回消費 · 基礎+66');expect(labels()).toContain('126');expect(labels()).not.toContain('+66');expect(document.querySelector('.enemyVital')?.textContent).not.toContain('毒:');expect(document.querySelector('[aria-live]')?.textContent).toContain('毒3回を消費、追加基礎66');
+  await render({...props,effect:null,castEvent:null,impact:null,impacts:[]});frame(5100);expect(labels()).not.toContain('毒3回消費 · 基礎+66');
+  await render({...props,effect:null,castEvent:null,impact:hit,impacts:[consume,hit]});frame(5200);expect(labels()).not.toContain('毒3回消費 · 基礎+66');expect(labels()).not.toContain('126');
+ });
+ it.each([{ticks:0,lethal:false},{ticks:3,lethal:true}])('retains exact zero/lethal cue: $ticks/$lethal',async({ticks,lethal})=>{
+  const state=start([32,4,33,34,35],[32,4,33,34,35]);if(lethal)state.enemies[0].hp=0;
+  const event:BattleEvent={kind:'cast',actor:'a0',target:'e0',targets:['e0'],scope:'single',effect:'hit',skill:'塚底の取り立て'};
+  const consume:BattleEvent={kind:'poison-cashout',effect:'poison-cashout',actor:'a0',target:'e0',poison:0,poisonTicksConsumed:ticks,poisonCashoutPerTick:22,poisonCashoutAdded:ticks*22};
+  const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',amount:lethal?9:64,hp:lethal?0:160};
+  const impacts:BattleEvent[]=[consume,hit,...(lethal?[{kind:'defeat' as const,target:'e0'}]:[])];
+  await render({allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},castEvent:event,impact:hit,impacts});frame(100);
+  expect(labels()).toContain(`毒${ticks}回消費 · 基礎+${ticks*22}`);expect(labels()).toContain(event.skill!);expect(teamTransforms()).toHaveLength(0);
+ });
+});
+
+describe('Janus enemy-only threshold presentation',()=>{
+ beforeEach(()=>{vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});});
+ it('registers the exact original full image at 116px and uses its own sampler only',async()=>{
+  const {EXTRAORDINARY_ART}=await import('./extraordinaryArt'),own=vi.spyOn(battleMotion,'sampleJanusMotion'),wolf=vi.spyOn(battleMotion,'sampleFenrirMotion');const state=start([36,12,2,30,26],[36,12,2,30,26]),event:BattleEvent={kind:'cast',actor:'e0',scope:'all',targets:state.enemies.map(u=>u.key),effect:'responseGuard',skill:'合流の扉'};
+  await render({allies:state.allies,enemies:state.enemies,effect:{text:'合流の扉',type:'lattice',tick:1},castEvent:event,impact:event});frame(100);frame(799);expect(context.drawImage.mock.calls.some(call=>(call[0] as HTMLImageElement).src===EXTRAORDINARY_ART[36].artUrl&&call[3]===116)).toBe(true);expect(own).toHaveBeenCalled();expect(wolf).not.toHaveBeenCalled();expect(teamTransforms()).toHaveLength(0);expect(labels()).toContain('生存する敵側の仲間 · 5体へ今T守護');
+ });
+ it.each(['responseCleanse','responseGuard'] as const)('keeps %s decoration pending until real impact and never displays HP numbers',async effect=>{
+  const state=start([36,12,2,30,26],[36,12,2,30,26]);state.enemies[0].poison=3;state.enemies[4].hp=0;const targets=state.enemies.filter(u=>u.hp>0).map(u=>u.key),event:BattleEvent={kind:'cast',actor:'e0',scope:'all',targets,effect,skill:effect==='responseCleanse'?'境目の清め':'合流の扉'},props={allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:effect==='responseCleanse'?'portal':'lattice',tick:1},castEvent:event,impact:event};
+  await render(props);frame(100);frame(9000);expect(labels()).not.toContain('現在の毒を解除');expect(labels()).not.toContain('守り:今T');expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();const impacts:BattleEvent[]=targets.map(target=>({kind:effect==='responseCleanse'?'cleanse':'guard',actor:'e0',target,effect:effect==='responseCleanse'?'extraordinary-response-cleanse':'extraordinary-response-guard',...(effect==='responseCleanse'?{poison:0}:{guard:true})}));await render({...props,impact:impacts[0],impacts});frame(9010);expect(labels().filter(v=>v===(effect==='responseCleanse'?'現在の毒を解除':'守り:今T'))).toHaveLength(4);expect(labels()).not.toContain('+0');expect(labels()).not.toContain('0');expect(document.querySelector('[aria-live]')?.textContent).toContain(effect==='responseCleanse'?'HP回復なし':'守り:今T');await render({...props,effect:null,castEvent:null,impact:null,impacts:[]});frame(9020);expect(labels()).not.toContain('現在の毒を解除');await render({...props,effect:null,castEvent:null,impact:impacts[0],impacts});frame(9030);expect(labels()).not.toContain('現在の毒を解除');expect(labels()).not.toContain('守り:今T');
+ });
+ it('keeps enemy body and camera stationary in reduced motion for both responses',async()=>{
+  vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);const state=start([36,12,2,30,26],[36,12,2,30,26]),event:BattleEvent={kind:'cast',actor:'e0',effect:'responseCleanse',scope:'all',targets:['e0'],skill:'境目の清め'},props={allies:state.allies,enemies:state.enemies,effect:{text:'境目の清め',type:'portal',tick:1},castEvent:event,impact:event};await render(props);frame(100);const before=[...sprites[0]];frame(799);expect(sprites[0]).toEqual(before);const hit:BattleEvent={kind:'cleanse',actor:'e0',target:'e0',poison:0,effect:'extraordinary-response-cleanse'};await render({...props,impact:hit,impacts:[hit]});frame(900);frame(1050);expect(sprites[0]).toEqual(before);expect(teamTransforms()).toHaveLength(0);
+ });
+});
+
+// Mocked Canvas calls establish routing and event gating, not rendered appearance.
+describe('status-effect routing regression evidence', () => {
+  it.each([false, true])('releases incoming poison only on its status event (reduced=%s)', async reduced => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches: reduced, addEventListener: vi.fn(), removeEventListener: vi.fn()} as unknown as MediaQueryList);
+    const event: BattleEvent = {kind: 'cast', actor: 'e3', skill: '毒霧', effect: 'poison', scope: 'all', targets: ['a0']};
+    const props = {...base, effect: {text: '毒霧', type: 'shadow', tick: 1}, castEvent: event, impact: event};
+    await render(props); frame(100); frame(9000);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)?.[1]).toMatchObject({type: 'poison', incoming: true, impacted: false, age: 799, reduced});
+    const status: BattleEvent = {kind: 'poison', actor: 'e3', target: 'a0', poison: 3};
+    await render({...props, impact: status, impacts: [status]}); frame(9010);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)?.[1]).toMatchObject({type: 'poison', incoming: true, impacted: true, age: 800, reduced});
+  });
+
+  it('already renders 翠雲の息 with the water palette even with the legacy slash label', async () => {
+    const fills: unknown[] = [];
+    const ctx = context as unknown as CanvasRenderingContext2D;
+    const fill = vi.mocked(ctx.fill);
+    fill.mockImplementation(() => { fills.push(ctx.fillStyle); });
+    const state = start([18, 0, 2, 3, 6], [1, 5, 8, 10, 6]);
+    const event: BattleEvent = {kind: 'cast', actor: 'a0', target: 'e0', targets: ['e0'], scope: 'single', skill: '翠雲の息', effect: 'hit'};
+    await render({allies: state.allies, enemies: state.enemies, effect: {text: '翠雲の息', type: 'slash', tick: 1}, castEvent: event, impact: event});
+    frame(100); fills.length = 0; frame(700);
+    expect(fills).toContain('#70d2e1');
+    expect(fills).toContain('#e5ffff');
+    expect(areaEffects.drawAreaEffect).not.toHaveBeenCalled();
+    fill.mockReset();
   });
 });

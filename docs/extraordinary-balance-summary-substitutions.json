@@ -1,0 +1,117 @@
+{
+  "suite": "extraordinary-substitutions",
+  "source": {
+    "gameVersion": "0.17.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "b9f9094dab621ba4f9f8bcccaa9bb3bba6449fdb184ac736893f53784a5a1e4e",
+    "configSha256": "abaac16d9493bbfeaf74f3837133ece2a4c6a11d05ebf5bbcb51c8e8dbc78fc3"
+  },
+  "reportSha256": "daef1ccdaa1a75ebc1ad62a0a021c703b3ceda02579cc44b4236a1467698e19a",
+  "scheduleCounts": {
+    "teams": 35,
+    "curatedTeams": 35,
+    "sampledTeams": 0,
+    "matchupScenarios": 250,
+    "mirrorScenarios": 35,
+    "seeds": 6,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 6840
+  },
+  "mirrors": {
+    "baseline": {
+      "games": 420,
+      "physicalAllyScoreRate": 0.471429
+    },
+    "candidate": {
+      "games": 420,
+      "physicalAllyScoreRate": 0.471429
+    }
+  },
+  "targets": [
+    {
+      "id": "janus-c17",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-janus-c17.json",
+      "sha256": "728907f2cc7df10707e1b0a44aa5a0cf4cfc91afe2f27ad26567b4246b533945",
+      "bytes": 10014
+    },
+    {
+      "id": "janus-nonleader",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-janus-nonleader.json",
+      "sha256": "23d6eae14f90a53d39b7b9cb21ed99275d5051cd529d519edc38f3229b988894",
+      "bytes": 9999
+    },
+    {
+      "id": "janus-three-c17",
+      "cost": 17,
+      "families": 3,
+      "file": "docs/extraordinary-balance-summary-substitutions-janus-three-c17.json",
+      "sha256": "485d325c2c2bab86d9e7e739f61ce105d4ad20226d0a0b8f9374134350158a96",
+      "bytes": 9597
+    },
+    {
+      "id": "janus-five-c17",
+      "cost": 17,
+      "families": 5,
+      "file": "docs/extraordinary-balance-summary-substitutions-janus-five-c17.json",
+      "sha256": "c8cbc284056e871b021e6a5384b27cb692e979ded8feb4942bbcfeb5ba9458bb",
+      "bytes": 10016
+    },
+    {
+      "id": "replace36-with14",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with14.json",
+      "sha256": "a7adb576b6a03e653927c0dba8559d3ea65c4aa807be961f727937163a45a677",
+      "bytes": 9144
+    },
+    {
+      "id": "replace36-with15",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with15.json",
+      "sha256": "2cf006e2bdcf5ff8e4f2ee53d196692aab539d4266136d57f759b1f479aa4c7b",
+      "bytes": 9202
+    },
+    {
+      "id": "replace36-with19",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with19.json",
+      "sha256": "1ea0cf2ea8cc027964fa72da76f155121ccf0a5f67592cd55caa9848babbc57b",
+      "bytes": 9198
+    },
+    {
+      "id": "replace36-with28",
+      "cost": 17,
+      "families": 3,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with28.json",
+      "sha256": "8f2c694322215a54dd1461151ea7d8c48f684b6279eb5761255d4c2d64938765",
+      "bytes": 9280
+    },
+    {
+      "id": "replace36-with29",
+      "cost": 17,
+      "families": 3,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with29.json",
+      "sha256": "9db715b32d034ad7be6f015775b1973cfd58e3a7e76c421f4d2cfaa2399ad8b0",
+      "bytes": 9210
+    },
+    {
+      "id": "replace36-with32",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-substitutions-replace36-with32.json",
+      "sha256": "a8dc1dbdb76015b079ddf9865d4f026c118e36cfbf6047a97d9c19a304490591",
+      "bytes": 9112
+    }
+  ]
+}

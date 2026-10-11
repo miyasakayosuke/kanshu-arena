@@ -1,0 +1,1180 @@
+{
+  "status": "verified-exact-recorded-source",
+  "reports": [
+    {
+      "path": "lab-results/slime-budget-cheap-core/report.json",
+      "rawSha256": "de008daec966598854f1c0cf66dc54919deb65059416983e77e75597c47ff528",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "a19a00cb62d7e0d26a92b78913c770354746c8c9b159bc6e027f4cf5cb17d300"
+      },
+      "matches": 12720,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-budget-nature-brute/report.json",
+      "rawSha256": "bd7fe5c5cf90467e1c3c78c7b8dd2d38f96ad8f877e5ce8538a8e54cb7a50dc7",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "915b68a7aa69c95688220cc0d388dce8e726e3dbe2aa713035eaf00ccfe09808"
+      },
+      "matches": 16368,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-budget-nature-controls/report.json",
+      "rawSha256": "06dac98e319dd03cf721c92df3f42e3625f8eaa91ac61886230a78e167112a45",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "3e7b8bc5206b283498959cb6a20c46c273010923fbe993dfd20952eda4cd18f2"
+      },
+      "matches": 15504,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-budget-previous-newpool/report.json",
+      "rawSha256": "c04f40adacee50a184e78849edc377546b4dc63340c001bd2e2cd9ec9ce72494",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "5f052ab695ab52ec647d261f7f67b76d61ad83fa797cbde91f1ca4f9b1eaa839"
+      },
+      "matches": 9536,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-budget-previous/report.json",
+      "rawSha256": "22d12928528ad87139f24fd418b3e296b384217607507d92317a0c9c4adcfeb5",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "74c5c4e5e52f3f9013e1affdd10df0d0380ce40a1c3d7b890da8f8e457228ef0"
+      },
+      "matches": 13760,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-durable-mixed-a/report.json",
+      "rawSha256": "7b1c1445676bd4d2248fd4194e716858a803c9ce4fb7248bf611c9b90882c281",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "7ad240b4dafa876e9835e694d9d5f0709a5e80ab0feceaae623c6a9fe9a8207b"
+      },
+      "matches": 12720,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable-mixed-b/report.json",
+      "rawSha256": "1653a48df61c6f23941bea838ee96ee3cde231d660fe68858f58189717d0c7d7",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "326e48e0f382d80450be47d63e97150f8e1ce4a0f1852533afd0e5bda17fdba8"
+      },
+      "matches": 10896,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable-oldcores/report.json",
+      "rawSha256": "224c70bf914a2c1eedc5c777cf54cfb27c6ac85c8115d559c87b03721709bb07",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "3d2e3cbec407c55ab50ef19f47e1b73e0dce905ae882ba7d0716b101087600a7"
+      },
+      "matches": 16960,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable16/report.json",
+      "rawSha256": "2fb3a71ed10c0ee8614288987990a391ed15a61f5a406c6c74e0c2e85c394564",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "59ffde20df9d38ca0da531bbc766fbd06d30a00e64349b5bda393d65fcc2b041"
+      },
+      "matches": 9664,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable60-oldcores/report.json",
+      "rawSha256": "70d71942bcd59ff4b03b9d4b468f988cf1c1bd607124678bf814c112eb2358e5",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "2978b95b100dfc25c88610e8e6212537b5d950cce5a4a72cb662cdbaef5fc608"
+      },
+      "matches": 16960,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable60-strong/report.json",
+      "rawSha256": "bcc1b3c2ed5083ce150addc4be33b539f2774614ef279fbde464add77134269a",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "73ad4f6a211944594efb669665ddec1edc19e80e86aab41dbe6c83b3eca7aea8"
+      },
+      "matches": 5424,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable60/report.json",
+      "rawSha256": "183b96d7cee02197a61d93c61416e917cd46e49bb77c96ac13c6567d05c9b440",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "84d7474fe5965b5382a4196668efb40537266069d5e53789f882f73e8949a1f9"
+      },
+      "matches": 9664,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-durable8/report.json",
+      "rawSha256": "374b8a49f73ed16c3673b9198edb0c1e95e27ac9db87bb948e9038bdfbb4ca60",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "ae5086ae97a287dd430088bcb636b075424da151cf0663097181b2182fef785b"
+      },
+      "matches": 9664,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-final-identity/report.json",
+      "rawSha256": "78f495e373fd401ee14ae78b34426ea7f6431db0c4d3be269cb7593bdb421f01",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "ec663eb5b65c4c4163f6f39164802e03ca0067769f5abb4602ae5f612766e494"
+      },
+      "matches": 6880,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-newpool/report.json",
+      "rawSha256": "8b36e0035b76b63f18ff05f7d2f06ced14faeaca6b3c18d7531ef998add637d1",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "cb856e02a5a8079f8759703b858c08ff3deed61840aa04f1deed45240c38aeaf"
+      },
+      "matches": 4768,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-supply-disabled/report.json",
+      "rawSha256": "78074079d79f5af1ceb878fff91365e0d4613ef8f258a4df76c611fa004c94e0",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "75939d6a217ddffd32f6788f3528c3cb768544a7fbd685b6a6021e2073fb6e22"
+      },
+      "matches": 3616,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-supply-enabled/report.json",
+      "rawSha256": "0365f9f3b19f897f8f39f5b8427431bc5ad2654bc51010e5b6f20305d9f3c132",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "a15225ade84ba3af155ed9ef1e543bc1ee20e08a7b46e340c865814849797a8a"
+      },
+      "matches": 3616,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-supply-zero/report.json",
+      "rawSha256": "cc8b237f6811555ffd31765670a22dafc2d5edb29d619e3f4dfd2951da7ef108",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "b1620b57b9e506a6c3924d6109e3727ae8c4913fb629eeab9501c2c3471937de"
+      },
+      "matches": 3616,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-supply12/report.json",
+      "rawSha256": "5ace5eb77cefb406bba0c911a9a4b1552b667c449d95fa148dafb86480046747",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "f3cd4097a794a3865cc42bed246763bf9112bff1dcd4049cbaf62d19693f6665"
+      },
+      "matches": 3616,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-final-supply8/report.json",
+      "rawSha256": "f59b4cbfc3b5403dc8f6a1bd80b3cc5026f9489e09cb5f17c80f033d8f5d4bae",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "f644f620440beedea73c3521e60ba5dcab94ab9e4bd2d0d6ba32ef25117f0d81"
+      },
+      "matches": 3616,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "path": "lab-results/slime-nature-old-controls/report.json",
+      "rawSha256": "b9835681410454527f9699b6f9910686bec9483c49b5f61ba0ebea45af77b2a3",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "fac4344c3a5cf6fdb8cd6418566d04ebe2c05aa338e8684894131642e3d4feec"
+      },
+      "matches": 19392,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-sensitivity-attack/report.json",
+      "rawSha256": "3b0aac51db7565366b34f9860edd9a86ff28272cf4c856d5de91bba0777f4058",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "77a7d7e3a44f456274d308bf8587cdb592403e539f0304b9f511817f9602c827"
+      },
+      "matches": 7232,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-sensitivity-hp-attack/report.json",
+      "rawSha256": "e43c591568c99ecf83a664756028577d5055df62cbd8af065d5cf68b15b2b758",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "e35aa9bad37ac269395dbf2054d612f06cedcb74bd90f09f8e489233082842a6"
+      },
+      "matches": 7232,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-sensitivity-hp-supply12/report.json",
+      "rawSha256": "c7d6718aea04077ab1996e857681af8545c04513c6d2828892bcc7d6b6e5191d",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "86c18b4309ee1875f98c160a04a25b12f2dc937160c0b44c28167d6cc83f18f5"
+      },
+      "matches": 7232,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-sensitivity-hp/report.json",
+      "rawSha256": "447061c9923ba0e8ad9e2c92893fb3eede89c8f7c1e5d660032c29164e820515",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "4f1ff527bc5f6198c70fc0076dbc99180994bbb3f6b652a487e59837f3dbbde3"
+      },
+      "matches": 7232,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-broad/report.json",
+      "rawSha256": "85002cb891c12c572534084c30a380fcce96ca5ee67de43d24514cf7da01ffef",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "e825eaecdae77456a2bc4c4b60abe0f8038764c9a1849663975d4d0ab98a3a4c"
+      },
+      "matches": 10304,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-identity/report.json",
+      "rawSha256": "44efc01c15348879b7c76813b722cbd47fd74cd0d11a43e4abe2a4aea3995603",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "32d9a6a057585372a5199abfb542dcdc0fbeab37f7c4ea422eac710dbacf19dc"
+      },
+      "matches": 10624,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-mixed-a/report.json",
+      "rawSha256": "f274ceaed3c4cae7ffd4f2cfe5eecc15e2998d1e8a92329e1dcc92dd4ac94fe0",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "d0e1c3f7fdce741778440c28d4acf84fd200cc874943ac488e2120486faa231e"
+      },
+      "matches": 12720,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-mixed-b/report.json",
+      "rawSha256": "0c09081b0355cd32fb364e455fd3df90a4744ae77e80e44b00b1ba4ee4ac3ba1",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "ac74936331ceb5a5a634b40998f788bad6d872ad03a66f8c27bcdce3e3412175"
+      },
+      "matches": 10896,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-supply-disabled/report.json",
+      "rawSha256": "3ce090ff181bca45496961856e38666b1f5822a8a51125f1301e8193af01bacf",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "936e741ec50d5ce801002900b6a2424306b6697e9a1949ddecc88e3253992172"
+      },
+      "matches": 5248,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-supply-enabled/report.json",
+      "rawSha256": "c1bd7d02ac3d28a7803453c2eed2a0326ed16b33039fc6a1a1e1c68c3a5a01d4",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "9029338a2d16b1388845fba8b5b55dddf7f698434a463e5504ab3313e364a713"
+      },
+      "matches": 5248,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-supply-zero/report.json",
+      "rawSha256": "dc4d7281d727670977ff0b1a048432d278d2b220e5b0573a890ee3ed1307d0b6",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "269a0ce4fe245ad4842b90352ff23fbed8907a39994138e4ddd62a5158569975"
+      },
+      "matches": 5248,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-supply12/report.json",
+      "rawSha256": "b3f7b168551064fdcb13581de304f703b6e717abdf091d05ea79d9e6ad041fe9",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "61437cc5bfd8f07a4ad6c7dc40e099b2465c5369a4b037ce7ab4184f4eb498b0"
+      },
+      "matches": 5248,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": null,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "path": "lab-results/slime-stage1-supply8/report.json",
+      "rawSha256": "6753588311df5ccbb37e7d65a5cbb7f52fc09181a8fa8ffc09afbe85f700ca0e",
+      "source": {
+        "gameVersion": "0.14.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+        "configSha256": "d9de35966d487232cce488297c2b4494fe6494447cbcd19ff2ade3baee962a57"
+      },
+      "matches": 5248,
+      "illegalLedgers": 0,
+      "identityMetricMismatches": 0,
+      "engineRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    }
+  ],
+  "replays": [
+    {
+      "report": "lab-results/slime-budget-cheap-core/report.json",
+      "matchId": "f1-o1__s1096514436__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-cheap-core-a-left.json",
+      "traceHash": "f46453d107e7e04d31894019c34bde05655e16da062781a04541304ea9fec4e5",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-cheap-core/report.json",
+      "matchId": "f1-o1__s1096514436__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-cheap-core-a-right.json",
+      "traceHash": "7b56b5379fec23310267825eb23262eeb9279f202bc9c63f715ba02ea2bf1a45",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-nature-brute/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-nature-brute-a-left.json",
+      "traceHash": "d4a7c3ca5ac84e8dad097212a3219f281b4180c72087db1ce2b1153e9e911061",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-nature-brute/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-nature-brute-a-right.json",
+      "traceHash": "37249317628933c4d4c954b7b42f0edc03ae24571bdab924b597e194a8d8a507",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-nature-controls/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-nature-controls-a-left.json",
+      "traceHash": "6781e2fddb15a7bb6e6a03b4e1b01726d253a4ab5a9eba23005ce5b679a9b4e5",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-nature-controls/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-nature-controls-a-right.json",
+      "traceHash": "61305ed60afea5e58afa6c1dcf73727d76b97e8e327175a753728e64aa062c21",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-previous-newpool/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-previous-newpool-a-left.json",
+      "traceHash": "e184016d09acbd6178ec13039e02829c3d0ca770564a7abbe6246823545ce8bc",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-previous-newpool/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-previous-newpool-a-right.json",
+      "traceHash": "37628d7253be1196c500607b393648c0e71ed05cfcfb5ac20c5e9b3c5a7a681f",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-previous/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-previous-a-left.json",
+      "traceHash": "ac9f0729e7409c34593c79d7156f65229c455ed6b7ba3d2798b8684a62875425",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-budget-previous/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-budget-previous-a-right.json",
+      "traceHash": "3984f752164ba5f53fa6fe98404eac4e5ee2826fb07c4203717c4ae0e59e3476",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-durable-mixed-a/report.json",
+      "matchId": "f1-o1__s1106514436__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-mixed-a-a-left.json",
+      "traceHash": "f240b422854e2feab980dcc42a8bb4d01f51a9748cceb1b7e74c6ba933ad0019",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable-mixed-a/report.json",
+      "matchId": "f1-o1__s1106514436__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-mixed-a-a-right.json",
+      "traceHash": "faceb78450b7c13723a47762160d852281dd2e8845058d44ab3714e5720ea076",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable-mixed-b/report.json",
+      "matchId": "f1-o1__s1106514436__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-mixed-b-a-left.json",
+      "traceHash": "73ea9d5ae6999e077e3c404104a5b562eee8c45edb7f02615d7f0f3341ebc0de",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable-mixed-b/report.json",
+      "matchId": "f1-o1__s1106514436__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-mixed-b-a-right.json",
+      "traceHash": "a4a6f6250a52f586e365a7447139d76ab4e47d3cf2913b81746e6aee65963d7a",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable-oldcores/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-oldcores-a-left.json",
+      "traceHash": "abdb51ee62cb485da3858f876c8c4e75b3616efce69de7695a03716bf2bf0c88",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable-oldcores/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable-oldcores-a-right.json",
+      "traceHash": "4f5dc6435d34b9a40b690bf1afd444c9c60a259124b5211b650f1bc47a7edc33",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable16/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable16-a-left.json",
+      "traceHash": "89934ba364882e51c2fa7cf371a53886d3507cfbe5759764e06bb02df1334d73",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable16/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable16-a-right.json",
+      "traceHash": "a3e9276b87aec2377b89233cc769e9dd4f391db83c541228d3bb632e2e270441",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60-oldcores/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-oldcores-a-left.json",
+      "traceHash": "9bb655cfbb6e57e90061c0585c9c7cc30a6500049e48693da98a2b2716cc451c",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60-oldcores/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-oldcores-a-right.json",
+      "traceHash": "a3172406d79643e12dc3945f0675ca3ed9be08400a97260d962b8818e2242491",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60-strong/report.json",
+      "matchId": "f1-o1__s1106514436__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-strong-a-left.json",
+      "traceHash": "a31efd89fd3d9ed23baccd03f8450e0871f8de80d0cfbb092a9c037c29c294c8",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60-strong/report.json",
+      "matchId": "f1-o1__s1106514436__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-strong-a-right.json",
+      "traceHash": "5aba1d114ddb9b1cbb1c65bee7b5794aff74570f1b3475b2d65e241b374ad8aa",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-a-left.json",
+      "traceHash": "af47c5cdb17f2a998fbb32645377b0b2f7fedf9930b26dd9835efe569f23592f",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable60/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable60-a-right.json",
+      "traceHash": "271996882c1500f03651190a438383f55db9194bf724143533c1f5e2a460ebfe",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable8/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable8-a-left.json",
+      "traceHash": "4b416193e563385522304ee5ea3688559ddd49d5544e41ba4a353d9f26853daf",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-durable8/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-durable8-a-right.json",
+      "traceHash": "ca3360e32fdbb686057e10c7dbca08df09e71f49eb5856242ce1182197b59b9a",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-final-identity/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-identity-a-left.json",
+      "traceHash": "3fc9baf166cfaadeced18e875520d9b33b9c40a9bc78ddfe2f6fb45ef1ff6dda",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-identity/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-identity-a-right.json",
+      "traceHash": "8d29c8147f7594dddde9a963dd3c667aed731c7cfb59aac7fc77bf41a72dd345",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-newpool/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-newpool-a-left.json",
+      "traceHash": "b05f50cd92349d0b9bfababf622ff29b09e40ae50acbca08eb734025141fb309",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-newpool/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-newpool-a-right.json",
+      "traceHash": "269add9bb3f083ee29109863f8a5897a215ce8c3cc59f94531f60d5267367f3d",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-disabled/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-disabled-a-left.json",
+      "traceHash": "c2bb0b117c1f44e9b725cdab6f28a530c82a895f1761ac2d955baa03b76253aa",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-disabled/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-disabled-a-right.json",
+      "traceHash": "50d0be1dd5fa4e6436474353d4c01f5bae201d076e838eaef3ef60b37170489e",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-enabled/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-enabled-a-left.json",
+      "traceHash": "3cb9950b9e832dc289a5f4aa88607d49bf7d926edd849aa35ae183c353a582e3",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-enabled/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-enabled-a-right.json",
+      "traceHash": "b0b7edbb32a29a82689cbfe01e4b1add50de0aaed15ea22b083c4b912a20dc26",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-zero/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-zero-a-left.json",
+      "traceHash": "dc5c5b1187882b09a53e7ac9ef3358593e63cd07e47dfbbcfc45fd90e70764ba",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply-zero/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply-zero-a-right.json",
+      "traceHash": "7d95413914aa444394454e77b3f5055bc805378a6cfa0b29a03570f5ab05c195",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply12/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply12-a-left.json",
+      "traceHash": "66ec13313fd4a63825a6b1b44e125bced43c7171da2bd2211dfe0c0eb65b6dbc",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply12/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply12-a-right.json",
+      "traceHash": "028465b634c79c650316962c193a91b861282ed949c301e28c5b846a7720c320",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply8/report.json",
+      "matchId": "f1-o1__s2767045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply8-a-left.json",
+      "traceHash": "99c2f447fd0f0d5f665f9d3268f649533f377070b3fbf7b7487f640148a41f6f",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-final-supply8/report.json",
+      "matchId": "f1-o1__s2767045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-final-supply8-a-right.json",
+      "traceHash": "ce89ebbfd9088c540a07ced206d56ec15cf00f85c926fcbebc37f7671499a9f7",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave"
+    },
+    {
+      "report": "lab-results/slime-nature-old-controls/report.json",
+      "matchId": "f1-o1__s2737045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-nature-old-controls-a-left.json",
+      "traceHash": "581d837e7198b6d2bde8691c6ea2c1e3d5da31bcd83bfa47635cb8d1d0fe8fcc",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-nature-old-controls/report.json",
+      "matchId": "f1-o1__s2737045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-nature-old-controls-a-right.json",
+      "traceHash": "d37ff9abba245e87fc97ea0270a66fbaf5953cbbe91d364977a78557a0d9b8d1",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-attack/report.json",
+      "matchId": "f1-o1__s3750950197__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-attack-a-left.json",
+      "traceHash": "2a2a0a13aa551bdd64d07157e2100ca94b23cfcf22ac8d60d15667c2c7e23a25",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-attack/report.json",
+      "matchId": "f1-o1__s3750950197__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-attack-a-right.json",
+      "traceHash": "4b8973d48fb2cc8a78bb90564cb2a38cb4dd070e0a63b787bb1f3ca3f1886e4e",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp-attack/report.json",
+      "matchId": "f1-o1__s3750950197__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-attack-a-left.json",
+      "traceHash": "eddf32deaee30ec12d7bb3df0c84873c891186366a5b706e4eba70770a00b57a",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp-attack/report.json",
+      "matchId": "f1-o1__s3750950197__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-attack-a-right.json",
+      "traceHash": "093c835ea9f7b4b0ba7c786f60319ff59ef68d9ff9eb5f94c3bdca080ede6e17",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp-supply12/report.json",
+      "matchId": "f1-o1__s2110418662__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-supply12-a-left.json",
+      "traceHash": "d71f34a66763d898b6c2d746cbdea75a834379b8cc349e8347166434f3dbc22e",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp-supply12/report.json",
+      "matchId": "f1-o1__s2110418662__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-supply12-a-right.json",
+      "traceHash": "1fd3e26005596b72157617e8bf57e57674a96fc3c70c5f9c991de58b4780f403",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp/report.json",
+      "matchId": "f1-o1__s2110418662__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-a-left.json",
+      "traceHash": "05a8229aa751a7d9b846006e958b3ca6b3d3f18fdd707167dfc0c647a5d39c16",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-sensitivity-hp/report.json",
+      "matchId": "f1-o1__s2110418662__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-sensitivity-hp-a-right.json",
+      "traceHash": "3ab52148ad84d7451af0892f548b56b15c78275b9a5798e50e9209ecafd17c83",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-broad/report.json",
+      "matchId": "f1-o3__s857164044__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-broad-a-left.json",
+      "traceHash": "74c41999e7508f42eed51ac444e3bfcee1f693f3dc37368b38e0bb56f07e078b",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-broad/report.json",
+      "matchId": "f1-o3__s857164044__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-broad-a-right.json",
+      "traceHash": "6ac2b8e709d51de5c5cfef9b78ecd2b745562aa8a47a060db49dcc1ace0472bb",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-identity/report.json",
+      "matchId": "f1-o1__s210536735__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-identity-a-left.json",
+      "traceHash": "63a003adfcff69504faf57b4983c4824a8aa0bdb58843edc6d18586612cb8f3d",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-identity/report.json",
+      "matchId": "f1-o1__s210536735__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-identity-a-right.json",
+      "traceHash": "b3c829b24902a351126ac0c9957ad2f9939510669b080146721c11c549d66edc",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-mixed-a/report.json",
+      "matchId": "f1-o1__s2120418662__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-mixed-a-a-left.json",
+      "traceHash": "68729b82beef9a9710db3b3f14d8b371cfd1b2d555550484fe8b2ed5639e08aa",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-mixed-a/report.json",
+      "matchId": "f1-o1__s2120418662__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-mixed-a-a-right.json",
+      "traceHash": "c9ecd78021a0d3bc7a24cd233a66479b5c8ba2d8fb5a4b7b7b67e62b193f86ed",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-mixed-b/report.json",
+      "matchId": "f1-o1__s479887127__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-mixed-b-a-left.json",
+      "traceHash": "5f9c36506eb6aa4402fe9972c392aa542ac071dca6f95c37b9a27a05edf88e7d",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-mixed-b/report.json",
+      "matchId": "f1-o1__s479887127__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-mixed-b-a-right.json",
+      "traceHash": "656b5fa4c2283cde14d043c6eccee4a661fefc532cada58e01e7fed9d34edc41",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-disabled/report.json",
+      "matchId": "f1-o1__s2717045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-disabled-a-left.json",
+      "traceHash": "49fb855d9217fc1c15525e05252172ab3dc72e0460b20e6e78c8c7678f66fd14",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-disabled/report.json",
+      "matchId": "f1-o1__s2717045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-disabled-a-right.json",
+      "traceHash": "aa4894a614a51c54a1ea65d70190d5a7862f9e01dcd12fd7ecddfc4807137498",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-enabled/report.json",
+      "matchId": "f1-o1__s210536735__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-enabled-a-left.json",
+      "traceHash": "783c36e71ebd9bd863316346e78d7ac11f321e759e0374983cfd97a381a4f166",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-enabled/report.json",
+      "matchId": "f1-o1__s210536735__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-enabled-a-right.json",
+      "traceHash": "510dc4a5b52d5cf91787550c82cdc09c4f1c35631a5e367f6e7d44ccdf20956b",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-zero/report.json",
+      "matchId": "f1-o1__s2717045971__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-zero-a-left.json",
+      "traceHash": "b932acc5def7d342f39d95b9731b83db718a21d5f54148074e94b4daca79fcb1",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply-zero/report.json",
+      "matchId": "f1-o1__s2717045971__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply-zero-a-right.json",
+      "traceHash": "6687f30c4c9b9fbf6d482f121afef1d8b3d41f6fb6d33373d01fb9ce55ca51b7",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply12/report.json",
+      "matchId": "f1-o1__s210536735__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply12-a-left.json",
+      "traceHash": "65fd56e06e3404fffa84a2c698f6e9a1407b41cdff6ac8c343bba33fa32cce7c",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply12/report.json",
+      "matchId": "f1-o1__s210536735__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply12-a-right.json",
+      "traceHash": "7fa4f04bb01d810650443212d77352e79e050069071a633ae2d025ef4e8e67d0",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply8/report.json",
+      "matchId": "f1-o1__s210536735__a-left__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply8-a-left.json",
+      "traceHash": "8772bcc9243704f174d1d2bab3c1a70d34b8e8ca364c39d58d72af71101eb9e4",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    },
+    {
+      "report": "lab-results/slime-stage1-supply8/report.json",
+      "matchId": "f1-o1__s210536735__a-right__candidate",
+      "path": "lab-results/slime-verified-replays/slime-stage1-supply8-a-right.json",
+      "traceHash": "2f2781252ca6a155175c84434cb4b475a3f476d6d4c90c29f0b850ed2ef5f43f",
+      "verified": true,
+      "sourceRoot": "/workspace/shared/kanshu-arena-slime-wave/lab-results/slime-initial-source"
+    }
+  ],
+  "checks": [
+    {
+      "phase": "slime-final-",
+      "check": "zero-versus-disabled production-policy gameplay equality",
+      "matches": 1808,
+      "mismatches": 0,
+      "note": "Allowance state/events and eligibility metrics intentionally differ; zero amount is never selected by production AI. Compares winner/turns and every unit monsterId/finalHP/finalMP/cast/paid/special/damage/healing/MPspent/deathTurn."
+    },
+    {
+      "phase": "slime-stage1-",
+      "check": "zero-versus-disabled production-policy gameplay equality",
+      "matches": 2624,
+      "mismatches": 0,
+      "note": "Allowance state/events and eligibility metrics intentionally differ; zero amount is never selected by production AI. Compares winner/turns and every unit monsterId/finalHP/finalMP/cast/paid/special/damage/healing/MPspent/deathTurn."
+    }
+  ],
+  "totalMatches": 308672
+}

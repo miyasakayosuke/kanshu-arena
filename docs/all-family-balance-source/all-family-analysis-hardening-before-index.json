@@ -1,0 +1,86 @@
+{
+  "format": "bounded-exact-source-v1",
+  "label": "all-family-analysis-hardening-before",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "bytes": 76085,
+      "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+    },
+    {
+      "path": "src/families.ts",
+      "bytes": 1760,
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "bytes": 112068,
+      "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "bytes": 20710,
+      "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-all-family.mjs",
+      "bytes": 17497,
+      "sha256": "072f0e49ec053b7e3fdf33b608e323da0363a850704896bac90c880fd47db067"
+    },
+    {
+      "path": "scripts/balance-lab/verify-all-family.mjs",
+      "bytes": 5553,
+      "sha256": "11873b383631dfd8051c33dfc7dcb185a05c39ea7cce661911bce36611a3bed8"
+    }
+  ],
+  "chunks": [
+    {
+      "file": "all-family-analysis-hardening-before-00001.json",
+      "bytes": 44426,
+      "sha256": "59df7a6702bf66163ddad26d5f401a662d9bd9fa96a6234a1322248bbc529424",
+      "records": 1,
+      "first": "src/engine.ts",
+      "last": "src/engine.ts"
+    },
+    {
+      "file": "all-family-analysis-hardening-before-00002.json",
+      "bytes": 60594,
+      "sha256": "52e5b18842e029949dffe1d4dadcbac3ea3b470adb085ca5db558a1d2811db7f",
+      "records": 2,
+      "first": "src/families.ts",
+      "last": "scripts/balance-lab/core.mjs"
+    },
+    {
+      "file": "all-family-analysis-hardening-before-00003.json",
+      "bytes": 29649,
+      "sha256": "7ec5180ce6e75058e19f44e3876e1050becd0d2a77454bba58190accf4711351",
+      "records": 3,
+      "first": "scripts/balance-lab/cli.mjs",
+      "last": "scripts/balance-lab/verify-all-family.mjs"
+    }
+  ]
+}

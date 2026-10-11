@@ -1,0 +1,385 @@
+{
+  "status": "complete-with-known-imbalances",
+  "source": {
+    "gameVersion": "0.15.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+    "configSha256": "bea2fd2daf71f6a548431d06a86f0b9e94f65003d1cf3d0e4e513246f8d62d6f"
+  },
+  "suites": [
+    {
+      "id": "demon-initial",
+      "matches": 2624,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.288462,
+          "candidate": 0.288462,
+          "games": 416,
+          "baselineMpLoss": 10.209135,
+          "candidateMpLoss": 10.209135,
+          "opponentFallbackRate": 0.3629807692307692
+        },
+        {
+          "id": "mixeddemon",
+          "baseline": 0.423077,
+          "candidate": 0.423077,
+          "games": 416,
+          "baselineMpLoss": 12.199519,
+          "candidateMpLoss": 12.199519,
+          "opponentFallbackRate": 0.42788461538461536
+        }
+      ]
+    },
+    {
+      "id": "demon-enabled",
+      "matches": 1312,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.307692,
+          "candidate": 0.307692,
+          "games": 208,
+          "baselineMpLoss": 10.480769,
+          "candidateMpLoss": 10.480769,
+          "opponentFallbackRate": 0.3605769230769231
+        },
+        {
+          "id": "mixeddemon",
+          "baseline": 0.4375,
+          "candidate": 0.4375,
+          "games": 208,
+          "baselineMpLoss": 12.596154,
+          "candidateMpLoss": 12.596154,
+          "opponentFallbackRate": 0.41346153846153844
+        }
+      ]
+    },
+    {
+      "id": "demon-full-off",
+      "matches": 1312,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.307692,
+          "candidate": 0.341346,
+          "games": 208,
+          "baselineMpLoss": 10.480769,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0.3605769230769231
+        },
+        {
+          "id": "mixeddemon",
+          "baseline": 0.4375,
+          "candidate": 0.504808,
+          "games": 208,
+          "baselineMpLoss": 12.596154,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0.41346153846153844
+        }
+      ]
+    },
+    {
+      "id": "demon-bonus-off",
+      "matches": 1312,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.307692,
+          "candidate": 0.326923,
+          "games": 208,
+          "baselineMpLoss": 10.480769,
+          "candidateMpLoss": 2.052885,
+          "opponentFallbackRate": 0.3605769230769231
+        },
+        {
+          "id": "mixeddemon",
+          "baseline": 0.4375,
+          "candidate": 0.5,
+          "games": 208,
+          "baselineMpLoss": 12.596154,
+          "candidateMpLoss": 1.961538,
+          "opponentFallbackRate": 0.41346153846153844
+        }
+      ]
+    },
+    {
+      "id": "demon-zero-base",
+      "matches": 1312,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.307692,
+          "candidate": 0.341346,
+          "games": 208,
+          "baselineMpLoss": 10.480769,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0.3605769230769231
+        },
+        {
+          "id": "mixeddemon",
+          "baseline": 0.4375,
+          "candidate": 0.504808,
+          "games": 208,
+          "baselineMpLoss": 12.596154,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0.41346153846153844
+        }
+      ]
+    },
+    {
+      "id": "demon-broad",
+      "matches": 4000,
+      "targets": [
+        {
+          "id": "puredemon",
+          "baseline": 0.439024,
+          "candidate": 0.439024,
+          "games": 656,
+          "baselineMpLoss": 9.455793,
+          "candidateMpLoss": 9.455793,
+          "opponentFallbackRate": 0.34603658536585363
+        },
+        {
+          "id": "c17-mixed",
+          "baseline": 0.559451,
+          "candidate": 0.559451,
+          "games": 656,
+          "baselineMpLoss": 10.842988,
+          "candidateMpLoss": 10.842988,
+          "opponentFallbackRate": 0.4634146341463415
+        }
+      ]
+    },
+    {
+      "id": "demon-substitutions",
+      "matches": 5016,
+      "targets": [
+        {
+          "id": "core-nonleader",
+          "baseline": 0.426829,
+          "candidate": 0.426829,
+          "games": 492,
+          "baselineMpLoss": 10.648374,
+          "candidateMpLoss": 10.648374,
+          "opponentFallbackRate": 0.3699186991869919
+        },
+        {
+          "id": "breaker-substitute",
+          "baseline": 0.493902,
+          "candidate": 0.493902,
+          "games": 492,
+          "baselineMpLoss": 9.823171,
+          "candidateMpLoss": 9.823171,
+          "opponentFallbackRate": 0.34146341463414637
+        },
+        {
+          "id": "bonus-threshold-lost",
+          "baseline": 0.573171,
+          "candidate": 0.573171,
+          "games": 492,
+          "baselineMpLoss": 1.70935,
+          "candidateMpLoss": 1.70935,
+          "opponentFallbackRate": 0.046747967479674794
+        },
+        {
+          "id": "core-replaced",
+          "baseline": 0.702236,
+          "candidate": 0.702236,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-oldcore-contribution",
+      "matches": 4008,
+      "targets": [
+        {
+          "id": "nature-newcore",
+          "baseline": 0.731707,
+          "candidate": 0.731707,
+          "games": 492,
+          "baselineMpLoss": 1.213415,
+          "candidateMpLoss": 1.213415,
+          "opponentFallbackRate": 0.034552845528455285
+        },
+        {
+          "id": "nature-newbreaker",
+          "baseline": 0.934959,
+          "candidate": 0.934959,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        },
+        {
+          "id": "material-newcleanser",
+          "baseline": 0.76626,
+          "candidate": 0.76626,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-paired-controls",
+      "matches": 6024,
+      "targets": [
+        {
+          "id": "control-nature-dryas",
+          "baseline": 0.956301,
+          "candidate": 0.956301,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        },
+        {
+          "id": "control-nature-tengu",
+          "baseline": 0.960366,
+          "candidate": 0.960366,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        },
+        {
+          "id": "control-material",
+          "baseline": 0.711382,
+          "candidate": 0.711382,
+          "games": 492,
+          "baselineMpLoss": 0,
+          "candidateMpLoss": 0,
+          "opponentFallbackRate": 0
+        },
+        {
+          "id": "control-puredemon",
+          "baseline": 0.461382,
+          "candidate": 0.461382,
+          "games": 492,
+          "baselineMpLoss": 9.894309,
+          "candidateMpLoss": 9.894309,
+          "opponentFallbackRate": 0.34146341463414637
+        },
+        {
+          "id": "control-c17-mixed",
+          "baseline": 0.514228,
+          "candidate": 0.514228,
+          "games": 492,
+          "baselineMpLoss": 10.715447,
+          "candidateMpLoss": 10.715447,
+          "opponentFallbackRate": 0.43089430894308944
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "suite": "demon-substitutions",
+      "target": "core-nonleader",
+      "reference": "control-puredemon",
+      "pairs": 492,
+      "referenceScore": 0.4613821138211382,
+      "targetScore": 0.4268292682926829,
+      "scoreChange": -0.034552845528455285,
+      "approximate95Interval": [
+        -0.0770502199870982,
+        0.007944528930187628
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-substitutions",
+      "target": "breaker-substitute",
+      "reference": "control-puredemon",
+      "pairs": 492,
+      "referenceScore": 0.4613821138211382,
+      "targetScore": 0.49390243902439024,
+      "scoreChange": 0.03252032520325203,
+      "approximate95Interval": [
+        0.013332093191517971,
+        0.05170855721498609
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-substitutions",
+      "target": "bonus-threshold-lost",
+      "reference": "control-c17-mixed",
+      "pairs": 492,
+      "referenceScore": 0.5142276422764228,
+      "targetScore": 0.573170731707317,
+      "scoreChange": 0.05894308943089432,
+      "approximate95Interval": [
+        0.02119203061569922,
+        0.0966941482460894
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-substitutions",
+      "target": "core-replaced",
+      "reference": "control-puredemon",
+      "pairs": 492,
+      "referenceScore": 0.4613821138211382,
+      "targetScore": 0.7022357723577236,
+      "scoreChange": 0.24085365853658536,
+      "approximate95Interval": [
+        0.18619506390515447,
+        0.2955122531680162
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-oldcore-contribution",
+      "target": "nature-newcore",
+      "reference": "control-nature-dryas",
+      "pairs": 492,
+      "referenceScore": 0.9563008130081301,
+      "targetScore": 0.7317073170731707,
+      "scoreChange": -0.22459349593495934,
+      "approximate95Interval": [
+        -0.24817844701350142,
+        -0.20100854485641725
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-oldcore-contribution",
+      "target": "nature-newbreaker",
+      "reference": "control-nature-tengu",
+      "pairs": 492,
+      "referenceScore": 0.9603658536585366,
+      "targetScore": 0.9349593495934959,
+      "scoreChange": -0.02540650406504065,
+      "approximate95Interval": [
+        -0.05166596817516009,
+        0.0008529600450787912
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    },
+    {
+      "suite": "demon-oldcore-contribution",
+      "target": "material-newcleanser",
+      "reference": "control-material",
+      "pairs": 492,
+      "referenceScore": 0.7113821138211383,
+      "targetScore": 0.766260162601626,
+      "scoreChange": 0.0548780487804878,
+      "approximate95Interval": [
+        0.012680483176168926,
+        0.09707561438480666
+      ],
+      "note": "Same seeds/opponents/orientations; changing a unit changes stats, skills, family condition or leader, not isolated causal MP value."
+    }
+  ]
+}

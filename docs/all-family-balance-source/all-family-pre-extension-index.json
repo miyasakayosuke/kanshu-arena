@@ -1,0 +1,76 @@
+{
+  "format": "bounded-exact-source-v1",
+  "label": "all-family-pre-extension",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "410e2efb9233590586c4ae4983672289d6dcfa8c18f4408b784cb865536c6b99"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "e2300a9097d18ad75f45f1c5e54e192a19f03e62f8f5c98d07e16fe62d357711"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "b9f9094dab621ba4f9f8bcccaa9bb3bba6449fdb184ac736893f53784a5a1e4e"
+  },
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "bytes": 76085,
+      "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+    },
+    {
+      "path": "src/families.ts",
+      "bytes": 1760,
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "bytes": 101333,
+      "sha256": "410e2efb9233590586c4ae4983672289d6dcfa8c18f4408b784cb865536c6b99"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "bytes": 19361,
+      "sha256": "e2300a9097d18ad75f45f1c5e54e192a19f03e62f8f5c98d07e16fe62d357711"
+    }
+  ],
+  "chunks": [
+    {
+      "file": "all-family-pre-extension-00001.json",
+      "bytes": 45978,
+      "sha256": "d5b7196967dab0f10d973244c75658cd5d309a2c126224df8fc7963e2a38490c",
+      "records": 2,
+      "first": "src/engine.ts",
+      "last": "src/families.ts"
+    },
+    {
+      "file": "all-family-pre-extension-00002.json",
+      "bytes": 53534,
+      "sha256": "d1b56ce6ce14fe650b3bd800066a495dcc0b3208ff19437dce012e6854dca717",
+      "records": 1,
+      "first": "scripts/balance-lab/core.mjs",
+      "last": "scripts/balance-lab/core.mjs"
+    },
+    {
+      "file": "all-family-pre-extension-00003.json",
+      "bytes": 13993,
+      "sha256": "4f3d1d0c78ce0abf28a32177e0b760aa147a3e58765e2c7182a0d9a692e269bf",
+      "records": 1,
+      "first": "scripts/balance-lab/cli.mjs",
+      "last": "scripts/balance-lab/cli.mjs"
+    }
+  ]
+}

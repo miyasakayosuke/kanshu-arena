@@ -1,0 +1,114 @@
+{
+  "format": "bounded-exact-source-v1",
+  "label": "all-family-analysis-hardening-v3",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "bytes": 76085,
+      "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+    },
+    {
+      "path": "src/families.ts",
+      "bytes": 1760,
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "bytes": 112068,
+      "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "bytes": 20710,
+      "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-all-family.mjs",
+      "bytes": 18160,
+      "sha256": "55c62163a32bffbf046489d5593b475a31ce560bb094e5143915733208936fef"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-evidence-contract.mjs",
+      "bytes": 6097,
+      "sha256": "328471eaf26e4bce43fc8fe24cc1b849158ea620c3a7d8e0e5c6ef133396004b"
+    },
+    {
+      "path": "src/balanceLabAllFamilyEvidence.test.ts",
+      "bytes": 6827,
+      "sha256": "2ae8355803ace515793cbeaecc203acb21c91d8a9cce3193c82a4169b856cf06"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-statistics.mjs",
+      "bytes": 532,
+      "sha256": "ca7937748fdafed86f3a0999af17a9fd81259585a0e70d3042fc14380c700cb1"
+    },
+    {
+      "path": "docs/all-family-balance-analysis-revision.json",
+      "bytes": 2997,
+      "sha256": "453369cb1c9f5a89e14edd278df430289389dba7af3dd865d114218f4ea8335f"
+    },
+    {
+      "path": "scripts/balance-lab/replay-all-family-packed.mjs",
+      "bytes": 2003,
+      "sha256": "960717f7306046c1ba0daf252a3df85480d9b395e499bcc3bbbca51b091eed76"
+    }
+  ],
+  "chunks": [
+    {
+      "file": "all-family-analysis-hardening-v3-00001.json",
+      "bytes": 45978,
+      "sha256": "d5b7196967dab0f10d973244c75658cd5d309a2c126224df8fc7963e2a38490c",
+      "records": 2,
+      "first": "src/engine.ts",
+      "last": "src/families.ts"
+    },
+    {
+      "file": "all-family-analysis-hardening-v3-00002.json",
+      "bytes": 59002,
+      "sha256": "4044dc7052de8553a7debab254deaec4f63bbd1ee137700f898c5f5e50e0cd7a",
+      "records": 1,
+      "first": "scripts/balance-lab/core.mjs",
+      "last": "scripts/balance-lab/core.mjs"
+    },
+    {
+      "file": "all-family-analysis-hardening-v3-00003.json",
+      "bytes": 26721,
+      "sha256": "5163b403dd92f75c3671d0a2759920b5b6a1cd77ef3e8013d0f38a4f6cc89872",
+      "records": 2,
+      "first": "scripts/balance-lab/cli.mjs",
+      "last": "scripts/balance-lab/analyze-all-family.mjs"
+    },
+    {
+      "file": "all-family-analysis-hardening-v3-00004.json",
+      "bytes": 13637,
+      "sha256": "77fe165da25fbc1f6fa3238641ea09a6f72a726164ada26206abc25fb585cc41",
+      "records": 5,
+      "first": "scripts/balance-lab/all-family-evidence-contract.mjs",
+      "last": "scripts/balance-lab/replay-all-family-packed.mjs"
+    }
+  ]
+}

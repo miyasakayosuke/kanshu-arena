@@ -1,0 +1,34 @@
+{
+  "executorRecordedAt": "2026-10-10T08:23:09.974Z",
+  "timestampCaution": "Executor clock approximately9h ahead.",
+  "phase": "Outcome-informed narrow dominance diagnostic, frozen before own60results; all11original mixed outcomes remain retained.",
+  "reason": "E produced82.43/83.11% in these two original frozen mixes. Check that the 60reduction does not hide this strength behind only the provisional/C17fist comparison.",
+  "targets": [
+    {
+      "id": "coherent-slime-poison-cleanse",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; poison-cleanse skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; area skill-ownership stratum"
+    }
+  ],
+  "path": "configs/balance-lab/slime-durable60-strong.json",
+  "fileSha256": "e1283a6c80bfc5164c780b0c4f0b8258c36243c6da8ed561d44c7dc2e44ba742",
+  "canonicalSha256": "73ad4f6a211944594efb669665ddec1edc19e80e86aab41dbe6c83b3eca7aea8",
+  "matches": 5424
+}

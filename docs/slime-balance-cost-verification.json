@@ -1,0 +1,18 @@
+{
+  "check": "Cost-only combat equality on all retained same-composition pure/provisional/fist matchups",
+  "pairs": 3360,
+  "mismatches": 0,
+  "projection": "Every reported result field except traceHash; traces contain roster cost snapshots and therefore intentionally differ.",
+  "reports": [
+    {
+      "path": "lab-results/slime-durable60/report.json",
+      "sha256": "183b96d7cee02197a61d93c61416e917cd46e49bb77c96ac13c6567d05c9b440"
+    },
+    {
+      "path": "lab-results/slime-budget-previous/report.json",
+      "sha256": "22d12928528ad87139f24fd418b3e296b384217607507d92317a0c9c4adcfeb5"
+    }
+  ],
+  "exclusionLedger": "docs/slime-balance-budget-freeze.json",
+  "note": "Two prior opponent compositions now cost18 and are explicitly excluded from current legal comparisons, never deleted from previous-budget evidence."
+}

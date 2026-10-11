@@ -3,7 +3,7 @@ import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
 import {CHARACTER_ART} from './MonsterArt';
 import {CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
-import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion, sampleTalosMotion, sampleUmbrellaMotion, sampleWallMotion, sampleTripodMotion, sampleBronzeBullMotion} from './battleMotion';
+import {actionAge, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleFenrirMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion, sampleVritraMotion, sampleAmphisbaenaMotion, sampleLindwurmMotion, sampleZilantMotion, sampleTalosMotion, sampleUmbrellaMotion, sampleWallMotion, sampleTripodMotion, sampleBronzeBullMotion, sampleHollowSpringMotion, sampleRibbonDropMotion, sampleFoldWardMotion, sampleBubbleBranchMotion, sampleKneadedFistMotion, sampleDraugrMotion, sampleHeadlessDriverMotion, sampleJiangshiMotion, sampleVetalaMotion, sampleMammonMotion, sampleKoboldMotion, sampleEmpusaMotion, sampleJanusMotion} from './battleMotion';
 
 type Effect = {text: string; type: string; tick: number} | null;
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
   onSelectTarget?: (key: string) => void;
 };
 type Point = {x: number; y: number};
-type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair';
+type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair' | 'liquid' | 'ribbon' | 'fold' | 'bubble' | 'knead' | 'supply' | 'ledger' | 'tool' | 'mantle' | 'mp-loss' | 'burial' | 'reins' | 'sleeves' | 'stitch' | 'cashout' | 'threshold' | 'portal' | 'lattice';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
 type Health = {value: number; trail: number; target: number; changed: number};
@@ -28,6 +28,14 @@ const WIDTH = 720;
 const HEIGHT = 460;
 const TAU = Math.PI * 2;
 const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
+  threshold: {light:'#f8ebc9',core:'#b9a37c',dark:'#536b6e'},
+  portal: {light:'#f2f3d6',core:'#87b7b2',dark:'#416971'},
+  lattice: {light:'#f9e9bf',core:'#c6b28c',dark:'#4c7d7c'},
+  burial: {light:'#f1e2bd',core:'#b9a170',dark:'#675843'},
+  reins: {light:'#f7e4af',core:'#bd8c9e',dark:'#684559'},
+  sleeves: {light:'#def5d9',core:'#8ec5b4',dark:'#496967'},
+  stitch: {light:'#e9e0f1',core:'#b2a0c6',dark:'#77617f'},
+  cashout: {light:'#edf2bc',core:'#a1ad66',dark:'#686747'},
   slash: {light: '#fffbe6', core: '#e8b951', dark: '#bc7c29'},
   fire: {light: '#fff0a9', core: '#ff963e', dark: '#e75538'},
   wind: {light: '#edfff2', core: '#6cd5b2', dark: '#268c79'},
@@ -44,6 +52,16 @@ const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
   steam: {light:'#e4f2d8',core:'#9dcabd',dark:'#a45f48'},
   bull: {light:'#f2e3b7',core:'#c3a05f',dark:'#3c6151'},
   repair: {light:'#f3dfaa',core:'#80b497',dark:'#8a6946'},
+  liquid: {light:'#fff1ce',core:'#b6a6bb',dark:'#776881'},
+  ribbon: {light:'#ffe2b5',core:'#da9678',dark:'#825a61'},
+  fold: {light:'#e4dfb1',core:'#a9b588',dark:'#567c72'},
+  bubble: {light:'#fff0d5',core:'#e7c7ba',dark:'#906e84'},
+  knead: {light:'#f9dcb0',core:'#c0917e',dark:'#795568'},
+  ledger: {light:'#eee8bc',core:'#74b9aa',dark:'#365b61'},
+  tool: {light:'#eee1ac',core:'#c39b61',dark:'#586668'},
+  mantle: {light:'#e7d1e5',core:'#a08ab4',dark:'#61436c'},
+  'mp-loss': {light:'#e6d6ff',core:'#b69bd4',dark:'#644983'},
+  supply: {light:'#fff0b6',core:'#c2a4c8',dark:'#775489'},
 };
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const ease = (value: number) => 1 - (1 - clamp(value)) ** 3;
@@ -58,8 +76,20 @@ function locate(key: string | undefined, props: Props): Point | undefined {
   const enemy = props.enemies.findIndex(unit => unit.key === key);
   return enemy >= 0 ? position(enemy, props.enemies.length) : undefined;
 }
+const undeadVisuals: Visual[] = ['burial','reins','sleeves','stitch','cashout'];
 const materialVisuals: Visual[] = ['bronze','paper','masonry','steam','bull','repair'];
+const demonVisuals: Visual[] = ['ledger','tool','mantle','mp-loss'];
+const slimeVisuals: Visual[] = ['liquid','ribbon','fold','bubble','knead','supply'];
 function visual(effect: Effect, event: BattleEvent, actorId?: number): Visual {
+  if (event.effect === 'responseCleanse' || event.effect === 'extraordinary-response-cleanse') return 'portal';
+  if (event.effect === 'responseGuard' || event.effect === 'extraordinary-response-guard') return 'lattice';
+  if (actorId === 36 && event.kind !== 'poison' && event.effect !== 'poison') return 'threshold';
+  if (event.kind === 'poison-cashout' || event.skill === '塚底の取り立て') return 'cashout';
+  if (actorId !== undefined && actorId >= 32 && actorId <= 35 && event.kind !== 'poison' && event.effect !== 'poison') return undeadVisuals[actorId - 32];
+  if (event.kind === 'resource-loss') return 'mp-loss';
+  if (actorId !== undefined && actorId >= 29 && actorId <= 31 && event.kind !== 'poison' && event.effect !== 'poison') return demonVisuals[actorId - 29];
+  if (event.kind === 'resource-gain' || event.effect === 'restoreMp' || event.effect === 'slime-supply') return 'supply';
+  if (actorId !== undefined && actorId >= 24 && actorId <= 28 && event.kind !== 'poison' && event.effect !== 'poison') return slimeVisuals[actorId-24];
   if (event.effect === 'material-repair' || event.passive === 'material-repair') return 'repair';
   if (actorId !== undefined && actorId >= 19 && actorId <= 23 && event.kind !== 'poison' && event.effect !== 'poison') return materialVisuals[actorId-19];
   if (event.skill === '渇天の息') return 'storm';
@@ -469,6 +499,180 @@ function drawMaterialCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number
   ctx.restore();
 }
 
+/** Authored fluid signatures: open arch, linear ribbon, pleats, branches, six lobes. */
+/** Independently drawn ledger gaps, bent-tool turns and a one-sided mantle arc. */
+/** Authored burial crease, offset reins, unequal sleeves, and inverted stitches. */
+function drawUndeadMark(ctx: CanvasRenderingContext2D, type: Visual, x: number, y: number, size = 1) {
+  const p = palettes[type];
+  ctx.save();ctx.translate(x,y);ctx.scale(size,size);
+  if (type === 'burial' || type === 'cashout') {
+    line(ctx,[{x:-25,y:10},{x:-13,y:22},{x:18,y:22},{x:27,y:10}],p.dark,5);
+    line(ctx,[{x:-14,y:12},{x:0,y:1},{x:14,y:12}],p.light,3);
+  } else if (type === 'reins') {
+    ctx.beginPath();ctx.moveTo(-29,17);ctx.bezierCurveTo(14,12,-12,-26,29,-17);ctx.strokeStyle=p.core;ctx.lineWidth=3;ctx.stroke();
+    line(ctx,[{x:-24,y:23},{x:2,y:12},{x:29,y:-8}],p.light,2);
+  } else if (type === 'sleeves') {
+    line(ctx,[{x:-11,y:-27},{x:-29,y:-19},{x:-29,y:20},{x:-9,y:26}],p.core,6);
+    line(ctx,[{x:11,y:-16},{x:25,y:-12},{x:25,y:15},{x:9,y:21}],p.light,5);
+  } else {
+    line(ctx,[{x:-25,y:-11},{x:-12,y:6},{x:0,y:-2},{x:13,y:14},{x:26,y:1}],p.core,2);
+    for (const i of [-1,0,1]) line(ctx,[{x:i*15-4,y:13},{x:i*15+4,y:-9}],p.light,3);
+  }
+  ctx.restore();
+}
+function drawUndeadCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const since = age - CAST_IMPACT_MS;
+  if (cast.impacted && since >= 550) return;
+  const prepare = clamp(age / CAST_IMPACT_MS), fade = cast.impacted ? 1-clamp(since/550) : 1;
+  // Preparation uses only the body motif: no poison fragments or consumed count.
+  const supporting = ['guard','protect','heal','cleanse'].includes(cast.event.effect ?? '');
+  const at = cast.impacted ? cast.to : supporting ? cast.from : {x:mix(cast.from.x,cast.to.x,.65*prepare),y:mix(cast.from.y,cast.to.y,.65*prepare)};
+  ctx.save();ctx.globalAlpha=(cast.impacted ? .6 : .2 + .3 * prepare)*fade;
+  ctx.translate(at.x,at.y);ctx.scale(1,scaleY);drawUndeadMark(ctx,cast.type,0,0,reduced?1:.65+.35*prepare);ctx.restore();
+}
+
+/** New geometry: flowing lines cross an open threshold; two short hinged lattice
+ * panels open outward for guard. Preparation never labels an effect as applied. */
+function drawExtraordinaryMark(ctx: CanvasRenderingContext2D, type: Visual, x: number, y: number, open: number, applied: boolean) {
+  const p = palettes[type];
+  ctx.save();ctx.translate(x,y);
+  ctx.beginPath();ctx.moveTo(-22,28);ctx.lineTo(-22,-9);ctx.quadraticCurveTo(-22,-37,0,-37);ctx.quadraticCurveTo(22,-37,22,-9);ctx.lineTo(22,28);
+  ctx.strokeStyle=p.core;ctx.lineWidth=3;ctx.stroke();
+  line(ctx,[{x:-28,y:29},{x:28,y:29}],p.dark,3);
+  // Deliberate palms, not a second creature or portrait animation.
+  for(const side of [-1,1]) line(ctx,[{x:side*25,y:9},{x:side*(33+open*4),y:4-open*8},{x:side*(40+open*6),y:5-open*11}],p.light,2.5);
+  if (applied && type === 'portal') {
+    for(let i=0;i<3;i++) {
+      const yy=-17+i*15;
+      ctx.beginPath();ctx.moveTo(-37+open*8,yy+5);ctx.bezierCurveTo(-14,yy-9,8,yy+9,31+open*10,yy-4);
+      ctx.strokeStyle=i===1?p.light:p.core;ctx.lineWidth=i===1?3:2;ctx.stroke();
+    }
+  } else if (applied && type === 'lattice') {
+    for(const side of [-1,1]) {
+      const reach=12+open*15;
+      for(let i=0;i<3;i++) line(ctx,[{x:side*(3+i*5),y:-21+i*2},{x:side*(reach+i*5),y:17+i*2}],p.core,2);
+      for(let i=0;i<3;i++) line(ctx,[{x:side*(3+i*5),y:-21+i*16},{x:side*(13+reach*.5+i*3),y:-17+i*16}],p.light,2);
+    }
+  }
+  ctx.restore();
+}
+function drawExtraordinaryCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const since=Math.max(0,age-CAST_IMPACT_MS), ready=clamp(age/CAST_IMPACT_MS);
+  const fade=cast.impacted?1-clamp((since-130)/430):1;
+  if(fade<=0)return;
+  const origin={x:cast.from.x,y:Math.min(cast.from.y,HEIGHT-22)};
+  const points=cast.targets.length?cast.targets:cast.incoming?(cast.event.targets??[]).map((_,i,a)=>({x:WIDTH*(i+1)/(a.length+1),y:HEIGHT-12})):[{x:cast.to.x,y:Math.min(cast.to.y,HEIGHT-22)}];
+  ctx.save();ctx.globalAlpha=(cast.impacted ? .78 : .22 + .22 * ready)*fade;
+  for(const at of cast.impacted?points:[origin]) {
+    ctx.save();ctx.translate(at.x,at.y);ctx.scale(1,scaleY);
+    drawExtraordinaryMark(ctx,cast.type,0,0,reduced?1:cast.impacted?ease(since/180):ready*.3,cast.impacted);ctx.restore();
+  }
+  ctx.restore();
+}
+
+function drawDemonMark(ctx: CanvasRenderingContext2D, type: Visual, x: number, y: number, scale = 1) {
+  const palette = palettes[type];
+  ctx.save(); ctx.translate(x,y); ctx.scale(scale,scale);
+  if (type === 'ledger' || type === 'mp-loss') {
+    for (let i=0;i<3;i++) {
+      const yy = (i-1)*13;
+      line(ctx,[{x:-22,y:yy-4},{x:-7,y:yy-4}],palette.core,3);
+      line(ctx,[{x:7,y:yy+4},{x:22,y:yy+4}],palette.dark,3);
+      ellipse(ctx, i%2 ? -3 : 3, yy, 2, 2, palette.light);
+    }
+  } else if (type === 'tool') {
+    line(ctx,[{x:-25,y:18},{x:0,y:-7},{x:4,y:-24},{x:15,y:-17},{x:21,y:-22}],palette.dark,5);
+    line(ctx,[{x:-21,y:20},{x:4,y:-5}],palette.light,2);
+  } else {
+    ctx.beginPath(); ctx.moveTo(-29,22); ctx.quadraticCurveTo(21,14,20,-29); ctx.quadraticCurveTo(4,-3,-29,22);
+    ctx.fillStyle=palette.core;ctx.fill();
+    line(ctx,[{x:-18,y:25},{x:8,y:17},{x:21,y:3}],palette.light,2);
+  }
+  ctx.restore();
+}
+function drawDemonCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const progress=clamp(age/CAST_IMPACT_MS), supporting=['guard','protect','heal','cleanse'].includes(cast.event.effect ?? '');
+  const at = supporting ? cast.from : {x:mix(cast.from.x,cast.to.x,progress),y:mix(cast.from.y,cast.to.y,progress)};
+  ctx.save();ctx.globalAlpha=age>CAST_IMPACT_MS ? Math.max(0,1-(age-CAST_IMPACT_MS)/380) : .3+.6*progress;
+  ctx.translate(at.x,at.y);ctx.scale(1,scaleY);
+  drawDemonMark(ctx,cast.type,0,0,reduced?1:.55+.45*progress);ctx.restore();
+}
+
+function drawSlimeMark(ctx: CanvasRenderingContext2D, type: Visual, x: number, y: number, size = 1) {
+  const p = palettes[type];
+  ctx.save(); ctx.translate(x,y); ctx.scale(size,size);
+  if(type === 'supply') {
+    // Finite reserve capsules, never a healing cross, aura, or damage explosion.
+    for(const side of [-1,1]) {
+      ctx.beginPath(); ctx.moveTo(side*8,-12); ctx.quadraticCurveTo(side*24,-21,side*22,-3);
+      ctx.quadraticCurveTo(side*18,12,side*8,5); ctx.strokeStyle=p.core;ctx.lineWidth=3;ctx.stroke();
+      line(ctx,[{x:side*9,y:17},{x:side*20,y:17}],p.light,3);
+    }
+  } else if(type === 'liquid') {
+    ctx.beginPath(); ctx.moveTo(-23,21); ctx.quadraticCurveTo(-36,-27,-4,-29);
+    ctx.quadraticCurveTo(23,-32,25,-7); ctx.strokeStyle=p.core;ctx.lineWidth=5;ctx.stroke();
+    line(ctx,[{x:-23,y:21},{x:-2,y:25},{x:22,y:18}],p.light,4);
+  } else if(type === 'ribbon') {
+    ctx.beginPath();ctx.moveTo(-37,19);ctx.quadraticCurveTo(-16,26,-12,-2);
+    ctx.quadraticCurveTo(-8,-27,11,-7);ctx.quadraticCurveTo(26,13,37,-9);
+    ctx.strokeStyle=p.core;ctx.lineWidth=5;ctx.stroke();
+    line(ctx,[{x:23,y:21},{x:34,y:16}],p.light,3);
+  } else if(type === 'fold') {
+    for(let i=0;i<4;i++) {
+      const dx=-25+i*16;
+      line(ctx,[{x:dx,y:22},{x:dx-4,y:-20},{x:dx+7,y:-25},{x:dx+12,y:19}],i%2?p.core:p.light,3);
+    }
+  } else if(type === 'bubble') {
+    const tips=[{x:-24,y:-7},{x:-9,y:-28},{x:13,y:-23},{x:27,y:-2}];
+    for(const tip of tips) {
+      line(ctx,[{x:0,y:24},{x:tip.x*.32,y:2},tip],p.core,3);
+      ellipse(ctx,tip.x,tip.y,5,5,p.light);ctx.strokeStyle=p.dark;ctx.lineWidth=1.4;ctx.stroke();
+    }
+  } else if(type === 'knead') {
+    for(let i=0;i<6;i++) {
+      const a=i*TAU/6;
+      ellipse(ctx,Math.cos(a)*25,Math.sin(a)*17,9,6,p.core);
+      line(ctx,[{x:Math.cos(a)*8,y:Math.sin(a)*6},{x:Math.cos(a)*17,y:Math.sin(a)*12}],p.light,2);
+    }
+  }
+  ctx.restore();
+}
+
+/** No release is drawn until a matching authoritative impact reaches the stage. */
+function drawSlimeCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
+  const since=Math.max(0,age-CAST_IMPACT_MS);
+  if(cast.impacted&&since>=550)return;
+  const fade=cast.impacted?1-clamp((since-110)/440):1;
+  const preparation=clamp(age/CAST_IMPACT_MS);
+  const origin={x:cast.from.x,y:Math.min(cast.from.y,HEIGHT-16)};
+  const targets=cast.targets.length?cast.targets:[{x:cast.to.x,y:Math.min(cast.to.y,HEIGHT-22)}];
+  ctx.save();ctx.globalAlpha=(cast.impacted ? .82 : .22 + preparation * .22)*fade;
+  const mark=(p:Point,size:number)=>{ctx.save();ctx.translate(p.x,p.y);ctx.scale(1,scaleY);drawSlimeMark(ctx,cast.type,0,0,size);ctx.restore();};
+  if(!cast.impacted) mark(origin,reduced ? .62 : .48 + .16 * preparation);
+  else {
+    const expansion=reduced?1:.76+.24*ease(since/160);
+    for(const target of targets) mark(target,expansion);
+    // A narrow water jet is one aimed stream; never an all-field breath fan.
+    if(cast.type==='liquid'&&cast.event.skill==='押し流し'&&!reduced) {
+      const target=targets[0];
+      const end={x:mix(origin.x,target.x,ease(since/120)),y:mix(origin.y,target.y,ease(since/120))};
+      line(ctx,[origin,end],'#b9cfc5',7);
+      line(ctx,[origin,end],'#fff1ce',2);
+    }
+    if(cast.type==='ribbon'&&!reduced&&cast.event.effect==='hit') {
+      const target=targets[0];
+      ctx.beginPath();ctx.moveTo(origin.x,origin.y);
+      ctx.quadraticCurveTo((origin.x+target.x)/2+20,(origin.y+target.y)/2-25,target.x,target.y);
+      ctx.strokeStyle=palettes.ribbon.core;ctx.lineWidth=3;ctx.stroke();
+    }
+    if(cast.type==='knead'&&cast.event.scope==='all') {
+      // Each authoritative target receives the same six-lobed pressure mark.
+      line(ctx,[{x:40,y:cast.incoming?HEIGHT-5:269},{x:680,y:cast.incoming?HEIGHT-5:269}],palettes.knead.core,2);
+    }
+  }
+  ctx.restore();
+}
+
 function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number) {
   const {event, type, at} = impact;
   const palette = palettes[type];
@@ -490,8 +694,13 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
       const distance = 18 + progress * 42 * movement;
       ellipse(ctx, x + Math.cos(angle) * distance, y + Math.sin(angle) * distance * .6 - progress * 20 * movement, 2, 2, '#fff7d2');
     }
+  } else if (event.effect === 'extraordinary-response-cleanse' || event.effect === 'extraordinary-response-guard') {
+    drawExtraordinaryMark(ctx, type, x, y, reduced ? 1 : ease(age / 180), true);
+    ctx.fillStyle=palette.dark;ctx.font='700 12px system-ui';ctx.textAlign='center';
+    ctx.fillText(event.kind === 'cleanse' ? '現在の毒を解除' : '守り:今T',x,y+47);
   } else if (event.kind === 'guard') {
     if(materialVisuals.includes(type)) drawMaterialMark(ctx,type,x,y);
+    if(slimeVisuals.includes(type)) drawSlimeMark(ctx,type,x,y);
     shield(ctx, x, y, 38 + ease(progress) * 10 * movement, .9);
   } else if (event.kind === 'break') {
     // This is the actual post-hit strip event, never a decorative promise at cast.
@@ -508,6 +717,25 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     line(ctx, [{x:x-17,y:y-31},{x:x+2,y:y-9},{x:x-8,y:y+8},{x:x+19,y:y+30}], '#b6ffec', 3);
     ctx.globalAlpha = fade; ctx.fillStyle = '#566f62'; ctx.font = '700 12px system-ui'; ctx.textAlign = 'center';
     ctx.fillText(`${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : value === 'repairReady' ? '修復待ち' : '守り').join('・') : '守り'}解除`, x, y + 48);
+  } else if (event.kind === 'poison-cashout') {
+    // Only this authoritative impact may collapse actual poison remnants, including a lethal hit.
+    const ticks = Math.max(0,Math.min(3,event.poisonTicksConsumed ?? 0));
+    const collapse = reduced ? 1 : ease(age / 230);
+    for (let i=0;i<ticks;i++) {
+      const angle = -Math.PI / 2 + i * TAU / 3;
+      const radius = 35 * (1-collapse) + 6;
+      const px = x + Math.cos(angle)*radius, py = y + Math.sin(angle)*radius;
+      line(ctx,[{x:px-4,y:py-7},{x:px+5,y:py},{x:px-2,y:py+5}],palette.core,4);
+    }
+    drawUndeadMark(ctx,'burial',x,y,1 + .12*collapse);
+    ctx.font='700 12px system-ui';ctx.fillStyle=palette.dark;ctx.textAlign='center';
+    ctx.fillText(`毒${ticks}回消費 · 基礎+${event.poisonCashoutAdded ?? 0}`,x,y+47);
+  } else if (undeadVisuals.includes(type)) {
+    drawUndeadMark(ctx,type,x,y,reduced?1:1+ease(progress)*.12);
+  } else if (demonVisuals.includes(type)) {
+    drawDemonMark(ctx,type,x,y,reduced?1:1+ease(progress)*.18);
+  } else if (slimeVisuals.includes(type)) {
+    drawSlimeMark(ctx,type,x,y,reduced?1:1+ease(progress)*.2);
   } else if (materialVisuals.includes(type)) {
     drawMaterialMark(ctx, type, x, y, reduced ? 1 : 1 + ease(progress) * .35, event.kind === 'heal');
 
@@ -626,20 +854,20 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
   }
   // Numbers belong to the actual impact, never to a cast or an unrelated heal.
-  if (event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal')) {
+  if (event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss')) {
     const number = sampleNumberMotion(age, reduced);
     ctx.globalAlpha = number.alpha;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = `800 ${31 * number.scale}px system-ui, sans-serif`;
-    const label = event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
+    const label = event.kind === 'resource-loss' ? `MP −${event.amount}` : event.kind === 'resource-gain' ? `MP +${event.amount}` : event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
     const px = x + (event.hitIndex === undefined ? 0 : (event.hitIndex % 3 - 1) * 21);
-    const py = y - 44 - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
+    const py = y - (event.kind === 'resource-loss' ? 10 : 44) - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
     ctx.lineJoin = 'round';
     ctx.lineWidth = 5;
     ctx.strokeStyle = '#fffbed';
     ctx.strokeText(label, px, py);
-    ctx.fillStyle = event.kind === 'heal' ? '#238467' : type === 'poison' ? '#777644' : '#9c5435';
+    ctx.fillStyle = event.kind === 'resource-loss' ? '#644983' : event.kind === 'resource-gain' ? '#775489' : event.kind === 'heal' ? '#238467' : type === 'poison' ? '#777644' : '#9c5435';
     ctx.fillText(label, px, py);
   }
   ctx.restore();
@@ -709,7 +937,7 @@ export default function BattleStage(props: Props) {
         const event = activeCast;
         // Party members act from below the frame; no ally occupies the arena.
         const from = locate(event.actor, data) ?? {x: WIDTH / 2, y: HEIGHT + 70};
-        const fallback = ['guard', 'protect', 'heal', 'cleanse'].includes(event.effect ?? '') ? from : {x: WIDTH / 2, y: HEIGHT + 70};
+        const fallback = ['guard', 'protect', 'heal', 'cleanse', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(event.effect ?? '') ? from : {x: WIDTH / 2, y: HEIGHT + 70};
         const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data); return at ? [at] : [];});
         const incoming = (event.targets ?? []).some(key => data.allies.some(unit => unit.key === key));
         cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
@@ -718,15 +946,15 @@ export default function BattleStage(props: Props) {
         lastImpact = data.impact;
         lastImpacts = data.impacts;
         if (data.impact?.kind !== 'cast') for (const event of data.impacts?.length ? data.impacts : data.impact ? [data.impact] : []) {
-          if (['charge', 'resource', 'expire', 'phase', 'passive'].includes(event.kind)) continue;
-          if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'cleanse', 'break'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
+          if (['charge', 'resource', 'expire', 'phase', 'passive', 'supply', 'response', 'fallback'].includes(event.kind)) continue;
+          if (cast && !cast.impacted && event.actor === cast.event.actor && ['damage', 'heal', 'guard', 'poison', 'poison-cashout', 'cleanse', 'break', 'resource-gain', 'resource-loss'].includes(event.kind)) {cast.impacted = true; cast.impactedAt = now;}
           if (cast && event.actor === cast.event.actor && event.hitIndex !== undefined && (cast.lastHitIndex === undefined || event.hitIndex > cast.lastHitIndex)) {cast.lastHitIndex = event.hitIndex; cast.lastHitAt = now;}
           if (seenImpacts.has(event)) continue;
           seenImpacts.add(event);
           const at = locate(event.target, data);
           if (at) {
             const sameCast = cast && event.actor && cast.event.actor === event.actor;
-            const type = event.kind === 'heal' || event.kind === 'guard' || event.kind === 'poison' || event.effect === 'poison'
+            const type = event.kind === 'resource-gain' || event.kind === 'resource-loss' || event.kind === 'heal' || event.kind === 'guard' || event.kind === 'poison' || event.effect === 'poison'
               ? visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id) : sameCast ? cast!.type : visual(null,event,[...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id);
             impacts.push({event, type, started: now, rate, at});
           }
@@ -749,8 +977,21 @@ export default function BattleStage(props: Props) {
           ? CAST_IMPACT_MS + (hitCount - 1) * MULTIHIT_INTERVAL_MS + (now - cast.lastHitAt) * cast.rate
           : Math.min(age, CAST_IMPACT_MS + (cast.lastHitIndex + 1) * MULTIHIT_INTERVAL_MS - 1);
       }
-      const supporting = ['guard','protect','heal','cleanse'].includes(cast?.event.effect ?? '') || cast?.event.passive === 'material-repair';
-      const motion = actorId === 19 ? sampleTalosMotion(age,supporting,reduced)
+      const supporting = ['guard','protect','heal','cleanse','restoreMp','responseCleanse','responseGuard'].includes(cast?.event.effect ?? '') || cast?.event.passive === 'material-repair';
+      const motion = actorId === 36 ? sampleJanusMotion(age,supporting,reduced)
+        : actorId === 32 ? sampleDraugrMotion(age,supporting,reduced)
+        : actorId === 33 ? sampleHeadlessDriverMotion(age,supporting,reduced)
+        : actorId === 34 ? sampleJiangshiMotion(age,supporting,reduced)
+        : actorId === 35 ? sampleVetalaMotion(age,supporting,reduced)
+        : actorId === 29 ? sampleMammonMotion(age,supporting,reduced)
+        : actorId === 30 ? sampleKoboldMotion(age,supporting,reduced)
+        : actorId === 31 ? sampleEmpusaMotion(age,supporting,reduced)
+        : actorId === 24 ? sampleHollowSpringMotion(age,supporting,reduced)
+        : actorId === 25 ? sampleRibbonDropMotion(age,supporting,reduced)
+        : actorId === 26 ? sampleFoldWardMotion(age,supporting,reduced)
+        : actorId === 27 ? sampleBubbleBranchMotion(age,supporting,reduced)
+        : actorId === 28 ? sampleKneadedFistMotion(age,supporting,reduced)
+        : actorId === 19 ? sampleTalosMotion(age,supporting,reduced)
         : actorId === 20 ? sampleUmbrellaMotion(age,reduced)
         : actorId === 21 ? sampleWallMotion(age,supporting,reduced)
         : actorId === 22 ? sampleTripodMotion(age,supporting,reduced)
@@ -784,7 +1025,7 @@ export default function BattleStage(props: Props) {
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && ![14, 15, 16, 19, 21, 22, 23].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && ![14, 15, 16, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
@@ -849,6 +1090,11 @@ export default function BattleStage(props: Props) {
           const width = CHARACTER_ART[unit.monster.id].spriteWidth;
           const height = width * .75;
           ctx.drawImage(characterImage, -width / 2, 35.5 - height, width, height);
+          if (unit.monster.id === 24 && unit.supplyReady === true && alive) {
+            // One non-dispellable command allowance, from state only; never inferred.
+            const scale=width/280;
+            ellipse(ctx,-width/2+64*scale,35.5-height+129*scale,3.5*scale,5.5*scale,'#ffe6a7');
+          }
           if (unit.monster.id === 19 && unit.repairReady === true && alive) {
             // Readiness is authoritative and finite; no inference from HP or turn.
             for(const [nx,ny] of [[122,100],[140,103],[158,100]]) {
@@ -900,7 +1146,11 @@ export default function BattleStage(props: Props) {
       ctx.scale(zoom, zoom);
       ctx.translate(-center.x, -center.y);
       if (cast?.event.scope === 'all') {
-        if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,cast,age,reduced,scaleY);
+        if (['threshold','portal','lattice'].includes(cast.type)) drawExtraordinaryCast(ctx,cast,age,reduced,scaleY);
+        else if (undeadVisuals.includes(cast.type)) drawUndeadCast(ctx,cast,age,reduced,scaleY);
+        else if (demonVisuals.includes(cast.type)) drawDemonCast(ctx,cast,age,reduced,scaleY);
+        else if (slimeVisuals.includes(cast.type)) drawSlimeCast(ctx,cast,age,reduced,scaleY);
+        else if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,cast,age,reduced,scaleY);
         else if (vritraStorm) drawVritraStorm(ctx, cast, age, reduced, scaleY);
         else if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
         else drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
@@ -909,7 +1159,11 @@ export default function BattleStage(props: Props) {
       ctx.restore();
       if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) {
         const framed = {...cast,from:frameEffectPoint(cast.from),to:frameEffectPoint(cast.to),targets:cast.targets.map(frameEffectPoint)};
-        if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,framed,age,reduced,scaleY);
+        if (['threshold','portal','lattice'].includes(cast.type)) drawExtraordinaryCast(ctx,framed,age,reduced,scaleY);
+        else if (undeadVisuals.includes(cast.type)) drawUndeadCast(ctx,framed,age,reduced,scaleY);
+        else if (demonVisuals.includes(cast.type)) drawDemonCast(ctx,framed,age,reduced,scaleY);
+        else if (slimeVisuals.includes(cast.type)) drawSlimeCast(ctx,framed,age,reduced,scaleY);
+        else if (materialVisuals.includes(cast.type)) drawMaterialCast(ctx,framed,age,reduced,scaleY);
         else drawCast(ctx,framed,age,reduced);
       }
       if (cast && seedBarrage) {
@@ -963,7 +1217,7 @@ export default function BattleStage(props: Props) {
           ctx.translate(0, 67); ctx.scale(1, scaleY); ctx.translate(0, -67);
           ctx.font = '700 13px system-ui, sans-serif'; ctx.textAlign = 'center';
           ctx.fillStyle = palettes[cast.type].dark;
-          ctx.fillText(cast.event.passive === 'material-repair' ? `生存物質 · ${cast.event.targets?.length ?? 0}体修復` : cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
+          ctx.fillText(['responseCleanse','responseGuard'].includes(cast.event.effect ?? '') ? `生存する${cast.incoming ? '味方' : '敵側の仲間'} · ${cast.event.targets?.length ?? 0}体へ${cast.type === 'portal' ? '現在毒解除' : '今T守護'}` : cast.event.effect === 'restoreMp' ? `生存粘体 · ${cast.event.targets?.length ?? 0}体へMP補給` : cast.event.passive === 'material-repair' ? `生存物質 · ${cast.event.targets?.length ?? 0}体修復` : cast.event.scope === 'random' ? `ランダム${cast.event.hits}回 · ${cast.lastHitIndex === undefined ? '構え' : `${cast.lastHitIndex + 1}/${cast.event.hits}撃`}` : `${cast.incoming ? '味方' : '敵'}全体 · ${cast.event.targets?.length ?? cast.targets.length}体`, WIDTH / 2, 67);
           ctx.restore();
         }
       }
@@ -978,9 +1232,15 @@ export default function BattleStage(props: Props) {
     };
   }, []);
   const selectable = props.enemies.map((unit, index) => ({unit, point: position(index, props.enemies.length)})).filter(({unit}) => unit.hp > 0 && props.targetKeys?.includes(unit.key));
-  const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal'));
-  const announcement = feedback.length > 1 ? `${feedback.length}体に${feedback.every(event=>event.kind==='heal') ? '同時回復' : '同時着弾'}。${feedback.map(event => `${[...props.allies, ...props.enemies].find(unit => unit.key === event.target)?.monster.name ?? ''} ${event.kind === 'heal' ? '回復' : 'ダメージ'} ${event.amount}`).join('、')}` : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
-    : props.impact?.amount !== undefined ? `${[...props.allies, ...props.enemies].find(unit => unit.key === props.impact?.target)?.monster.name ?? ''} ${props.impact.kind === 'heal' ? '回復' : 'ダメージ'} ${props.impact.amount}` : '';
+  const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
+  const recipientName=(event:BattleEvent)=>[...props.allies,...props.enemies].find(unit=>unit.key===event.target)?.monster.name??'';
+  const feedbackLabel=(event:BattleEvent)=>`${recipientName(event)} ${event.kind==='resource-loss'?`MP −${event.amount}`:event.kind==='resource-gain'?`MP +${event.amount}`:`${event.kind==='heal'?'回復':'ダメージ'} ${event.amount}`}`;
+  const cashoutAnnouncement = (props.impacts ?? []).filter(event => event.kind === 'poison-cashout').map(event => `${recipientName(event)}の毒${event.poisonTicksConsumed}回を消費、追加基礎${event.poisonCashoutAdded}。`).join('');
+  const responseAnnouncement=(props.impacts ?? []).filter(event=>event.effect==='extraordinary-response-cleanse'||event.effect==='extraordinary-response-guard').map(event=>`${recipientName(event)}：${event.kind==='cleanse'?'現在の毒を解除（HP回復なし）':'守り:今T'}。`).join('');
+  const announcement = responseAnnouncement + cashoutAnnouncement + (feedback.length > 1
+    ? `${new Set(feedback.map(event=>event.target)).size}体に${feedback.every(event=>event.kind==='resource-gain')?'同時MP補給':feedback.every(event=>event.kind==='heal')?'同時回復':'同時着弾'}。${feedback.map(feedbackLabel).join('、')}`
+    : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${['responseCleanse','responseGuard'].includes(props.impact.effect ?? '')?`生存する同陣営 ${props.impact.targets?.length ?? 0}体へ${props.impact.effect === 'responseCleanse' ? '現在毒解除' : '今T守護'}`:props.impact.effect==='restoreMp'?`生存粘体 ${props.impact.targets?.length??0}体へMP補給`:props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
+    : props.impact?.amount !== undefined && ['damage','heal','resource-gain', 'resource-loss'].includes(props.impact.kind) ? feedbackLabel(props.impact) : '');
   return <div className="battleStage" style={{position: 'relative', width: '100%', height: '100%', minHeight: 0}}>
     <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}
       role="img" aria-label="敵だけが表示される戦闘フィールド。敵の下のバーは残りHP、下部に各敵のHP・MP・状態を表示しています。味方は画面下のアイコンで確認できます。"

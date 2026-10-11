@@ -127,3 +127,52 @@
 
 /* Material core: finite end-of-turn repair, distinct from opening support. */
 .teamBuilder .materialRepairPlan{display:grid;gap:4px;margin:9px 0;padding:10px;border:1px dashed #b69c6888;border-radius:7px;background:#56492733;text-align:left}.teamBuilder .materialRepairPlan[data-active=true]{border-style:solid;border-color:#d6b47399;background:#57451e44}.teamBuilder .materialRepairPlan strong{font-size:11px;color:#e8d3a0}.teamBuilder .materialRepairPlan small{font-size:10px;line-height:1.75;color:#d1c5ad}.teamBuilder .newMaterial{border-color:#bca16a77;background:linear-gradient(115deg,#4e452d,#283a38)}
+
+.teamBuilder .slimeSupplyPlan{display:grid;gap:4px;margin:9px 0;padding:10px;border:1px dashed #a19dcc88;border-radius:7px;background:#39395433;text-align:left}.teamBuilder .slimeSupplyPlan[data-active=true]{border-style:solid;border-color:#a4cfea99;background:#35415a44}.teamBuilder .slimeSupplyPlan strong{font-size:11px;color:#d8dcff}.teamBuilder .slimeSupplyPlan small{font-size:10px;line-height:1.75;color:#c6c8df}.teamBuilder .newSlime{border-color:#b4a6d077;background:linear-gradient(115deg,#4a3d59,#283e48)}
+
+.teamBuilder .demonPressurePlan{display:grid;gap:4px;margin:9px 0;padding:10px;border:1px dashed #8bc1b588;border-radius:7px;background:#274c4b33;text-align:left}.teamBuilder .demonPressurePlan[data-active=true]{border-style:solid;border-color:#8edcc899}.teamBuilder .demonPressurePlan strong{font-size:11px;color:#d2ecdd}.teamBuilder .demonPressurePlan small{font-size:10px;line-height:1.75;color:#c7d9d3}.teamBuilder .newDemon{border-color:#97cab777;background:linear-gradient(115deg,#2b5656,#473c51)}
+
+.undeadCashoutPlan {display:grid;gap:7px;padding:13px 15px;border:1px solid #afa8805c;border-radius:10px;background:#aca68010;margin-top:12px;line-height:1.55}
+.undeadCashoutPlan strong {color:#d1d2af}.undeadCashoutPlan small {color:#a9b2a0}.undeadCashoutPlan[data-active="true"] {border-color:#c3bd8588}
+.newUndead {border-color:#99966a66;background:linear-gradient(110deg,#47482c24,#302d4424)}
+.undeadArrival > span:first-child {background:#afa9801c}
+
+.extraordinaryResponsePlan {display:grid;gap:7px;padding:13px 15px;border:1px solid #87aaa55c;border-radius:10px;background:#8fb6ad10;margin-top:12px;line-height:1.55}
+.extraordinaryResponsePlan strong {color:#e0d4b3}.extraordinaryResponsePlan small {color:#adcbc3}.extraordinaryResponsePlan[data-active="true"] {border-color:#a6c1b999}
+.newExtraordinary {border-color:#9fbcb888;background:linear-gradient(110deg,#3d514b,#213541)}
+.teamBuilder .familyComposition>span {white-space:nowrap;max-width:100%}
+
+/* Leader-only numbers come from battle start. Compact totals stay visible;
+   native disclosure keeps per-member values accessible on narrow screens. */
+.teamBuilder .leaderComparison{min-width:0;margin:10px 0;padding:11px;border:1px solid #a5b28277;border-radius:8px;background:#293d37}
+.teamBuilder .leaderComparison h4{margin:0;color:#efdfb6;font-size:12px;line-height:1.6}
+.teamBuilder .leaderComparison p{margin:5px 0;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
+.teamBuilder .leaderComparisonPath{color:#efdfb6;font-weight:600}
+.teamBuilder .leaderComparisonSummary{color:#d5e0d0}
+.teamBuilder .leaderTotalDeltas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:9px 0}
+.teamBuilder .leaderTotalDeltas>div{min-width:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 8px;padding:7px;border:1px solid #a7bda544;border-radius:5px}
+.teamBuilder .leaderTotalDeltas dt{font-size:10px;overflow-wrap:anywhere}
+.teamBuilder .leaderTotalDeltas dd{margin:0;color:#f1e4c2;font-weight:600;font-variant-numeric:tabular-nums}
+.teamBuilder .leaderMemberDisclosure>summary{min-height:44px;padding:11px 0;cursor:pointer;color:#e5dfc4;font-size:11px;line-height:1.7;overflow-wrap:anywhere}
+.teamBuilder .leaderMemberDisclosure>summary:focus-visible,.teamBuilder .leaderMoveConfirm:focus-visible{outline:2px solid #a7f3d0;outline-offset:3px}
+.teamBuilder .leaderMemberList{display:grid;gap:8px;list-style:none;margin:7px 0;padding:0}
+.teamBuilder .leaderMemberList>li{min-width:0;padding:9px;border:1px solid #9db29b44;border-radius:6px;background:#18302d}
+.teamBuilder .leaderMemberList h5{display:flex;flex-wrap:wrap;gap:3px 10px;margin:0;font-size:12px;line-height:1.7;overflow-wrap:anywhere;color:#e4e8d8}
+.teamBuilder .leaderMemberList h5>span{font-size:10px;font-weight:400;color:#c1d1bc}
+.teamBuilder .leaderMemberList .leaderMemberRecipient{font-size:10px;color:#c1d1bc}
+.teamBuilder .leaderMemberStats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 0}
+.teamBuilder .leaderMemberStats>div{min-width:0}
+.teamBuilder .leaderMemberStats dt{font-size:10px;color:#c1d1bc}
+.teamBuilder .leaderMemberStats dd{margin:2px 0 0;font-size:12px;line-height:1.6;font-variant-numeric:tabular-nums;color:#ecedde;overflow-wrap:anywhere}
+.teamBuilder .leaderMemberStats dd>span{display:inline-block;font-size:10px;color:#d8dfce}
+.teamBuilder .leaderComparison .leaderComparisonNote{font-size:10px;color:#c1d1bc;margin-top:8px}
+.teamBuilder .leaderMoveConfirm{min-height:44px;width:100%;padding:9px;font-size:12px;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:390px){
+  .teamBuilder .leaderComparison{padding:9px}
+  .teamBuilder .leaderTotalDeltas>div{display:block}
+  .teamBuilder .leaderTotalDeltas dd{margin-top:3px}
+  .teamBuilder .leaderMemberStats{grid-template-columns:1fr}
+  .teamBuilder .leaderMemberStats>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:3px 8px}
+}
+.extraordinaryResponsePlan small,.extraordinaryResponsePlan strong {min-width:0;overflow-wrap:anywhere}
+@media(max-width:380px){.teamBuilder .advancedFilters{grid-template-columns:1fr 1fr}.teamBuilder .advancedFilters select:last-child{grid-column:1 / -1}.extraordinaryResponsePlan{padding:10px}.extraordinaryResponsePlan small{font-size:10px}}

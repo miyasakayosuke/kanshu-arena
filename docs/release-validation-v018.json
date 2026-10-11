@@ -1,0 +1,68 @@
+{
+  "release": "0.18.0-local-candidate",
+  "verifiedAt": "2026-10-10T11:43:00Z",
+  "publicCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+  "published": false,
+  "checks": {
+    "npmTest": {
+      "files": 84,
+      "passed": 1901,
+      "failed": 0,
+      "command": "npm test"
+    },
+    "rightsSelftests": 14,
+    "sourceAndDistRightsGate": true,
+    "typescriptViteBuild": true,
+    "labSmoke": {
+      "executions": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedDelta": 0
+    },
+    "candidateFullStateParity": 1014,
+    "unchangedHistoricalBattleCases": 2568,
+    "unchangedHistoricalDigestLiterals": 17,
+    "rosterCount": 37,
+    "ordinaryPureFamilies": 7,
+    "mixedCoreFamilies": 1
+  },
+  "limits": [
+    "Actual public CI/Pages and browser QA not performed",
+    "Human fairness and fun not established",
+    "Ordinary-CPU 180-game mean pacing increased from 5.18 to 6.69 turns; old short-match target not met by candidate",
+    "Original mixed-counter and leader-swap gates remain failed",
+    "Omitted raw ledgers remain local; compact hashes alone do not verify them"
+  ],
+  "source": [
+    {
+      "path": "src/engine.ts",
+      "sha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+      "bytes": 76127
+    },
+    {
+      "path": "src/families.ts",
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+      "bytes": 1760
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b",
+      "bytes": 112068
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5",
+      "bytes": 20710
+    },
+    {
+      "path": "public/credits.html",
+      "sha256": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+      "bytes": 10523
+    },
+    {
+      "path": "public/THIRD_PARTY_NOTICES.txt",
+      "sha256": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c",
+      "bytes": 6791
+    }
+  ]
+}

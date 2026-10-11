@@ -1,0 +1,697 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen-before-system-candidate-outcomes",
+  "authoritativeDate": "2026-10-10 UTC",
+  "source": {
+    "engineSha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+    "familiesSha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+  },
+  "priorEvidence": "Prior slime/demon/undead diagnostic results informed the already identified stress anchors. No new poison-scale experiment has run. This is evidence-informed design, not a random population sample.",
+  "teams": [
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "cost": 17,
+      "role": "推薦純獣・先手と5獣連撃",
+      "families": [
+        "beast",
+        "beast",
+        "beast",
+        "beast",
+        "beast"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "cost": 15,
+      "role": "推薦純自然・C15、毒3体と開幕障壁",
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "nature"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "cost": 17,
+      "role": "推薦純竜・攻撃蓄積と後攻解放",
+      "families": [
+        "dragon",
+        "dragon",
+        "dragon",
+        "dragon",
+        "dragon"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "cost": 17,
+      "role": "推薦純物質・有限修復と重撃",
+      "families": [
+        "material",
+        "material",
+        "material",
+        "material",
+        "material"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "cost": 17,
+      "role": "推薦純粘体・有限MP補給",
+      "families": [
+        "slime",
+        "slime",
+        "slime",
+        "slime",
+        "slime"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "cost": 17,
+      "role": "推薦純悪魔・MP圧力と解除",
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "demon",
+        "demon"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "pureundead",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        35
+      ],
+      "cost": 17,
+      "role": "推薦純不死・毒残回数の交換",
+      "families": [
+        "undead",
+        "undead",
+        "undead",
+        "undead",
+        "undead"
+      ],
+      "distinctFamilies": 1,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "janus-mixed",
+      "ids": [
+        36,
+        12,
+        2,
+        30,
+        26
+      ],
+      "cost": 17,
+      "role": "推薦超常混成・広域応答と速攻/解除。固定対策候補1",
+      "families": [
+        "extraordinary",
+        "beast",
+        "beast",
+        "demon",
+        "slime"
+      ],
+      "distinctFamilies": 4,
+      "extraordinaryEligible": true
+    },
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "cost": 17,
+      "role": "既知の支配的な合法C17自然+粘体",
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "cost": 17,
+      "role": "既知の支配的な別型C17自然+粘体",
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "old-triple-poison",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "cost": 15,
+      "role": "旧毒3体・C15・単体清めと回復",
+      "families": [
+        "undead",
+        "nature",
+        "beast",
+        "beast",
+        "nature"
+      ],
+      "distinctFamilies": 3,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "cost": 17,
+      "role": "有限修復、二つの清め、重撃。固定対策候補2",
+      "families": [
+        "material",
+        "material",
+        "material",
+        "beast",
+        "nature"
+      ],
+      "distinctFamilies": 3,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "slime-strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "cost": 17,
+      "role": "既知のC17全体攻撃混成",
+      "families": [
+        "slime",
+        "undead",
+        "slime",
+        "slime",
+        "slime"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "slime-strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "cost": 17,
+      "role": "既知のC17毒混成",
+      "families": [
+        "slime",
+        "nature",
+        "nature",
+        "slime",
+        "slime"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "undead-reapply",
+      "ids": [
+        32,
+        4,
+        33,
+        3,
+        10
+      ],
+      "cost": 17,
+      "role": "不死3体の毒交換後に遅いナーガが再付与するC17",
+      "families": [
+        "undead",
+        "undead",
+        "undead",
+        "nature",
+        "nature"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "janus-poison",
+      "ids": [
+        36,
+        4,
+        3,
+        10,
+        30
+      ],
+      "cost": 15,
+      "role": "超常/不死/自然/悪魔4種類、毒3体C15",
+      "families": [
+        "extraordinary",
+        "undead",
+        "nature",
+        "nature",
+        "demon"
+      ],
+      "distinctFamilies": 4,
+      "extraordinaryEligible": true
+    },
+    {
+      "id": "janus-ward",
+      "ids": [
+        36,
+        14,
+        10,
+        20,
+        35
+      ],
+      "cost": 16,
+      "role": "4種類C16、自然障壁と共通応答",
+      "families": [
+        "extraordinary",
+        "nature",
+        "nature",
+        "material",
+        "undead"
+      ],
+      "distinctFamilies": 4,
+      "extraordinaryEligible": true
+    },
+    {
+      "id": "demon-dual-cleanse",
+      "ids": [
+        29,
+        8,
+        30,
+        7,
+        2
+      ],
+      "cost": 17,
+      "role": "MP圧力と二つの清め。固定対策候補3",
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "beast",
+        "beast"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "dragon-cleanse-mixed",
+      "ids": [
+        15,
+        16,
+        18,
+        7,
+        2
+      ],
+      "cost": 17,
+      "role": "竜3体と二つの汎用手当て、C17",
+      "families": [
+        "dragon",
+        "dragon",
+        "dragon",
+        "beast",
+        "beast"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "material-break-mixed",
+      "ids": [
+        19,
+        20,
+        22,
+        11,
+        3
+      ],
+      "cost": 17,
+      "role": "物質3体、解除と単体重撃、毒/回復C17",
+      "families": [
+        "material",
+        "material",
+        "material",
+        "beast",
+        "nature"
+      ],
+      "distinctFamilies": 3,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "slime-break-mixed",
+      "ids": [
+        24,
+        25,
+        27,
+        11,
+        7
+      ],
+      "cost": 17,
+      "role": "粘体3体、補給と解除/回復C17",
+      "families": [
+        "slime",
+        "slime",
+        "slime",
+        "beast",
+        "beast"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "demon-poison-mixed",
+      "ids": [
+        29,
+        30,
+        31,
+        2,
+        3
+      ],
+      "cost": 17,
+      "role": "悪魔3体、毒/回復を添えるC17",
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "beast",
+        "nature"
+      ],
+      "distinctFamilies": 3,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "undead-burst-mixed",
+      "ids": [
+        32,
+        4,
+        35,
+        12,
+        3
+      ],
+      "cost": 17,
+      "role": "不死3体、獣の連撃と毒/回復C17",
+      "families": [
+        "undead",
+        "undead",
+        "undead",
+        "beast",
+        "nature"
+      ],
+      "distinctFamilies": 3,
+      "extraordinaryEligible": false
+    },
+    {
+      "id": "beast-heavy-mixed",
+      "ids": [
+        12,
+        13,
+        2,
+        23,
+        7
+      ],
+      "cost": 17,
+      "role": "獣4体と重撃C17。5獣の連弾追加は不成立",
+      "families": [
+        "beast",
+        "beast",
+        "beast",
+        "material",
+        "beast"
+      ],
+      "distinctFamilies": 2,
+      "extraordinaryEligible": false
+    }
+  ],
+  "matrixSeeds": [
+    1062672840,
+    3717108601,
+    2076577066,
+    436045531,
+    3090481292,
+    1449949757,
+    4104385518,
+    2463853983,
+    823322448,
+    3477758209,
+    1837226674,
+    196695139,
+    2851130900,
+    1210599365,
+    3865035126,
+    2224503591
+  ],
+  "counterSeeds": [
+    1582265289,
+    4236701050,
+    2596169515,
+    955637980,
+    3610073741,
+    1969542206,
+    329010671,
+    2983446432,
+    1342914897,
+    3997350658,
+    2356819123,
+    716287588,
+    3370723349,
+    1730191814,
+    89660279,
+    2744096040,
+    1103564505,
+    3758000266,
+    2117468731,
+    476937196,
+    3131372957,
+    1490841422,
+    4145277183,
+    2504745648,
+    864214113,
+    3518649874,
+    1878118339,
+    237586804,
+    2892022565,
+    1251491030,
+    3905926791,
+    2265395256,
+    624863721,
+    3279299482,
+    1638767947,
+    4293203708,
+    2652672173,
+    1012140638,
+    3666576399,
+    2026044864,
+    385513329,
+    3039949090,
+    1399417555,
+    4053853316,
+    2413321781,
+    772790246,
+    3427226007,
+    1786694472,
+    146162937,
+    2800598698,
+    1160067163,
+    3814502924,
+    2173971389,
+    533439854,
+    3187875615,
+    1547344080,
+    4201779841,
+    2561248306,
+    920716771,
+    3575152532,
+    1934620997,
+    294089462,
+    2948525223,
+    1307993688
+  ],
+  "reserveCounterSeeds": [
+    489830858,
+    3144266619,
+    1503735084,
+    4158170845,
+    2517639310,
+    877107775,
+    3531543536,
+    1891012001,
+    250480466,
+    2904916227,
+    1264384692,
+    3918820453,
+    2278288918,
+    637757383,
+    3292193144,
+    1651661609,
+    11130074,
+    2665565835,
+    1025034300,
+    3679470061,
+    2038938526,
+    398406991,
+    3052842752,
+    1412311217,
+    4066746978,
+    2426215443,
+    785683908,
+    3440119669,
+    1799588134,
+    159056599,
+    2813492360,
+    1172960825,
+    3827396586,
+    2186865051,
+    546333516,
+    3200769277,
+    1560237742,
+    4214673503,
+    2574141968,
+    933610433,
+    3588046194,
+    1947514659,
+    306983124,
+    2961418885,
+    1320887350,
+    3975323111,
+    2334791576,
+    694260041,
+    3348695802,
+    1708164267,
+    67632732,
+    2722068493,
+    1081536958,
+    3735972719,
+    2095441184,
+    454909649,
+    3109345410,
+    1468813875,
+    4123249636,
+    2482718101,
+    842186566,
+    3496622327,
+    1856090792,
+    215559257
+  ],
+  "policy": "Explicit production autoOrders for both physical sides; no legacy random enemy branch. Any later new poison-reservation/scoring algorithm requires a separate policy arm at all three scales.",
+  "scales": [
+    1,
+    0.5,
+    0
+  ],
+  "preferIfAllGatesPass": [
+    0.5,
+    0
+  ],
+  "knownShells": [
+    "nature-brute-dryas",
+    "nature-brute-tengu"
+  ],
+  "counterplans": [
+    "janus-mixed",
+    "material-strong",
+    "demon-dual-cleanse"
+  ],
+  "gates": {
+    "knownShellScoreBelow": 0.9,
+    "knownShellExactC17OpponentScoreImprovementAtLeast": 0.1,
+    "counterPlansRequiredPerShell": 2,
+    "counterScoreAtLeast": 0.6,
+    "counterSeedClustered95LowerBoundAbove": 0.5,
+    "counterOrientationScoreAbove": 0.5,
+    "newDominanceScoreAtLeast": 0.9,
+    "maxAdjudicationRateIncrease": 0.05,
+    "individualAdjudicationFlagAtLeast": 0.25
+  },
+  "limits": "Screening judgments, not target50%, human fairness or exhaustive legal-team guarantees. Mirrors excluded from independent matchup-score evidence. COST<=17 and exactC17 partitions reported separately. Hold adoption for unresolved new dominance or adjudication regression; retain all failures."
+}

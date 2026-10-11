@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": 1,
+  "status": "adaptive-followup-frozen-before-new-leader-outcomes",
+  "date": "2026-10-10 UTC",
+  "parentProtocol": "The original independent-policy candidates failed the predeclared fixed-counter gate. This follow-up does not reclassify that protocol as passed.",
+  "rationale": "A recorded failed-counter turn2 has brute28 at54HP taking its second159HP area hit before tied-speed61 Mammon kills it. Existing Kobold leadership gives Mammon63 but removes54 team HP; roster slots and RNG/planning also change. Test that existing legal tradeoff rather than tune stats or drain amounts.",
+  "sources": {
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "firstMatrixSha256": "72362ed3de3128ea7e547020084829c66fccda41b6d569000e575aa82dc7a540",
+    "firstConfigFreezeSha256": "b56a6b4fd918099eb2560581b85cc6963f4694fbd5a610582b73380cb1aa951f"
+  },
+  "mechanics": {
+    "poisonImpactScales": [
+      1,
+      0.5,
+      0
+    ],
+    "reservePoison": false,
+    "statsCostsSkillsUnchanged": true,
+    "policy": "Explicit production autoOrders on both physical sides; source and independent-arm policy unchanged."
+  },
+  "counters": [
+    {
+      "id": "janus-original",
+      "ids": [
+        36,
+        12,
+        2,
+        30,
+        26
+      ],
+      "cost": 17,
+      "families": [
+        "extraordinary",
+        "beast",
+        "beast",
+        "demon",
+        "slime"
+      ],
+      "leader": {
+        "name": "門口の結び",
+        "stat": "hp",
+        "percent": 8,
+        "description": "味方全員の最大HP +8%"
+      },
+      "startingUnits": [
+        {
+          "id": 36,
+          "hp": 216,
+          "mp": 58,
+          "speed": 57,
+          "mpDamageBonus": null,
+          "responseReady": true
+        },
+        {
+          "id": 12,
+          "hp": 162,
+          "mp": 60,
+          "speed": 93,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 2,
+          "hp": 184,
+          "mp": 72,
+          "speed": 57,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 30,
+          "hp": 149,
+          "mp": 44,
+          "speed": 82,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 26,
+          "hp": 270,
+          "mp": 46,
+          "speed": 36,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    },
+    {
+      "id": "material-original",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "cost": 17,
+      "families": [
+        "material",
+        "material",
+        "material",
+        "beast",
+        "nature"
+      ],
+      "leader": {
+        "name": "鋳輪の結束",
+        "stat": "hp",
+        "percent": 10,
+        "family": "material",
+        "description": "味方の物質系だけ 最大HP +10%"
+      },
+      "startingUnits": [
+        {
+          "id": 19,
+          "hp": 259,
+          "mp": 64,
+          "speed": 36,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 20,
+          "hp": 160,
+          "mp": 54,
+          "speed": 86,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 23,
+          "hp": 237,
+          "mp": 50,
+          "speed": 42,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 7,
+          "hp": 190,
+          "mp": 72,
+          "speed": 61,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 10,
+          "hp": 185,
+          "mp": 56,
+          "speed": 39,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    },
+    {
+      "id": "demon-original",
+      "ids": [
+        29,
+        8,
+        30,
+        7,
+        2
+      ],
+      "cost": 17,
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "beast",
+        "beast"
+      ],
+      "leader": {
+        "name": "帳場の結束",
+        "stat": "hp",
+        "percent": 10,
+        "secondary": {
+          "stat": "speed",
+          "percent": 5
+        },
+        "family": "demon",
+        "description": "味方の悪魔系だけ 最大HP +10%・素早さ +5%"
+      },
+      "startingUnits": [
+        {
+          "id": 29,
+          "hp": 231,
+          "mp": 64,
+          "speed": 61,
+          "mpDamageBonus": 4,
+          "responseReady": null
+        },
+        {
+          "id": 8,
+          "hp": 206,
+          "mp": 52,
+          "speed": 44,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 30,
+          "hp": 152,
+          "mp": 44,
+          "speed": 86,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 7,
+          "hp": 190,
+          "mp": 72,
+          "speed": 61,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 2,
+          "hp": 170,
+          "mp": 72,
+          "speed": 57,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    },
+    {
+      "id": "demon-kobold-leader",
+      "ids": [
+        30,
+        8,
+        29,
+        7,
+        2
+      ],
+      "cost": 17,
+      "families": [
+        "demon",
+        "demon",
+        "demon",
+        "beast",
+        "beast"
+      ],
+      "leader": {
+        "name": "戸口の先導",
+        "stat": "speed",
+        "percent": 8,
+        "family": "demon",
+        "description": "味方の悪魔系だけ 素早さ +8%"
+      },
+      "startingUnits": [
+        {
+          "id": 30,
+          "hp": 138,
+          "mp": 44,
+          "speed": 89,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 8,
+          "hp": 187,
+          "mp": 52,
+          "speed": 45,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 29,
+          "hp": 210,
+          "mp": 64,
+          "speed": 63,
+          "mpDamageBonus": 4,
+          "responseReady": null
+        },
+        {
+          "id": 7,
+          "hp": 190,
+          "mp": 72,
+          "speed": 61,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 2,
+          "hp": 170,
+          "mp": 72,
+          "speed": 57,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    }
+  ],
+  "shells": [
+    {
+      "id": "nature-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "cost": 17,
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "leader": {
+        "name": "北辰の大地",
+        "stat": "hp",
+        "percent": 15,
+        "family": "nature",
+        "description": "味方の自然系だけ 最大HP +15%"
+      },
+      "startingUnits": [
+        {
+          "id": 14,
+          "hp": 276,
+          "mp": 64,
+          "speed": 24,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 3,
+          "hp": 207,
+          "mp": 64,
+          "speed": 67,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 6,
+          "hp": 159,
+          "mp": 42,
+          "speed": 96,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 10,
+          "hp": 213,
+          "mp": 56,
+          "speed": 39,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 28,
+          "hp": 220,
+          "mp": 52,
+          "speed": 61,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    },
+    {
+      "id": "nature-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "cost": 17,
+      "families": [
+        "nature",
+        "nature",
+        "nature",
+        "nature",
+        "slime"
+      ],
+      "leader": {
+        "name": "北辰の大地",
+        "stat": "hp",
+        "percent": 15,
+        "family": "nature",
+        "description": "味方の自然系だけ 最大HP +15%"
+      },
+      "startingUnits": [
+        {
+          "id": 14,
+          "hp": 276,
+          "mp": 64,
+          "speed": 24,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 6,
+          "hp": 159,
+          "mp": 42,
+          "speed": 96,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 9,
+          "hp": 191,
+          "mp": 52,
+          "speed": 79,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 10,
+          "hp": 213,
+          "mp": 56,
+          "speed": 39,
+          "mpDamageBonus": null,
+          "responseReady": null
+        },
+        {
+          "id": 28,
+          "hp": 220,
+          "mp": 52,
+          "speed": 61,
+          "mpDamageBonus": null,
+          "responseReady": null
+        }
+      ]
+    }
+  ],
+  "counterSeeds": [
+    1097278138,
+    2968356097,
+    3803645545,
+    1590970757,
+    2765555200,
+    2636246603,
+    2227624084,
+    2154301073,
+    3281507450,
+    553550148,
+    3314118136,
+    2884932612,
+    1598123658,
+    335322949,
+    4156264924,
+    552808043,
+    3141683179,
+    3967482967,
+    4083331210,
+    3688072274,
+    3458170321,
+    3602884518,
+    49852273,
+    455248083,
+    4149866104,
+    3561281230,
+    4099679972,
+    3731843957,
+    2031009173,
+    3319516468,
+    370774466,
+    3173899035,
+    20550696,
+    440412676,
+    3890628544,
+    3280275938,
+    2330513902,
+    3286242127,
+    3175169598,
+    2135276206,
+    3632949549,
+    3549380263,
+    1564149979,
+    4144981672,
+    2292123606,
+    4250701950,
+    4130902508,
+    557028493,
+    1383483013,
+    1454082306,
+    1248887409,
+    3597096841,
+    1743488115,
+    4288858623,
+    2031276682,
+    1582661059,
+    904769313,
+    183507283,
+    2587491269,
+    2166820688,
+    1699954200,
+    1829463154,
+    3007334396,
+    1017159114,
+    3409112953,
+    2174024478,
+    908088667,
+    2416278015,
+    3032460730,
+    1092842807,
+    143197080,
+    2435189114,
+    272837284,
+    778892067,
+    3397082649,
+    1758444510,
+    426702383,
+    2755695212,
+    585245583,
+    2868932789,
+    3731315181,
+    2905521710,
+    2638360270,
+    1160925890,
+    514527735,
+    673741325,
+    977984549,
+    1445442893,
+    1430284489,
+    542450732,
+    1926814515,
+    4056124668,
+    1648526736,
+    1625236091,
+    3074268679,
+    2457995833,
+    4083768574,
+    2690744668,
+    3323065828,
+    2981399082,
+    2440851338,
+    2145251506,
+    546230177,
+    2031642554,
+    372857000,
+    1963751454,
+    1493685931,
+    1717246998,
+    2024547134,
+    719507523,
+    3028120340,
+    3020934136,
+    4276667312,
+    3593388503,
+    1126630967,
+    1753150568,
+    4268897820,
+    2396477412,
+    3832897357,
+    4290900344,
+    1018618153,
+    3323432406,
+    307122412,
+    1206598029,
+    329893839,
+    3502062714,
+    1578120141,
+    3665945110
+  ],
+  "counterCriterion": {
+    "requiredCounters": [
+      "material-original",
+      "demon-kobold-leader"
+    ],
+    "forEachShell": true,
+    "scoreAtLeast": 0.6,
+    "approximateSeedClustered95LowerAbove": 0.5,
+    "bothPhysicalOrientationScoresAbove": 0.5,
+    "adaptiveExtension": false,
+    "keepOriginalThreeCounterResults": true,
+    "baselineAndHalfStillReported": true
+  },
+  "janusRecommendation": {
+    "status": "separate diagnostic, not a counter-gate replacement",
+    "targets": [
+      {
+        "id": "janus-original",
+        "ids": [
+          36,
+          12,
+          2,
+          30,
+          26
+        ],
+        "cost": 17,
+        "families": [
+          "extraordinary",
+          "beast",
+          "beast",
+          "demon",
+          "slime"
+        ],
+        "leader": {
+          "name": "門口の結び",
+          "stat": "hp",
+          "percent": 8,
+          "description": "味方全員の最大HP +8%"
+        },
+        "startingUnits": [
+          {
+            "id": 36,
+            "hp": 216,
+            "mp": 58,
+            "speed": 57,
+            "mpDamageBonus": null,
+            "responseReady": true
+          },
+          {
+            "id": 12,
+            "hp": 162,
+            "mp": 60,
+            "speed": 93,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 2,
+            "hp": 184,
+            "mp": 72,
+            "speed": 57,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 30,
+            "hp": 149,
+            "mp": 44,
+            "speed": 82,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 26,
+            "hp": 270,
+            "mp": 46,
+            "speed": 36,
+            "mpDamageBonus": null,
+            "responseReady": null
+          }
+        ]
+      },
+      {
+        "id": "janus-five-tags",
+        "ids": [
+          36,
+          12,
+          4,
+          20,
+          26
+        ],
+        "cost": 17,
+        "families": [
+          "extraordinary",
+          "beast",
+          "undead",
+          "material",
+          "slime"
+        ],
+        "leader": {
+          "name": "門口の結び",
+          "stat": "hp",
+          "percent": 8,
+          "description": "味方全員の最大HP +8%"
+        },
+        "startingUnits": [
+          {
+            "id": 36,
+            "hp": 216,
+            "mp": 58,
+            "speed": 57,
+            "mpDamageBonus": null,
+            "responseReady": true
+          },
+          {
+            "id": 12,
+            "hp": 162,
+            "mp": 60,
+            "speed": 93,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 4,
+            "hp": 167,
+            "mp": 56,
+            "speed": 75,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 20,
+            "hp": 157,
+            "mp": 54,
+            "speed": 86,
+            "mpDamageBonus": null,
+            "responseReady": null
+          },
+          {
+            "id": 26,
+            "hp": 270,
+            "mp": 46,
+            "speed": 36,
+            "mpDamageBonus": null,
+            "responseReady": null
+          }
+        ]
+      }
+    ],
+    "opponents": [
+      {
+        "id": "fullbeast",
+        "ids": [
+          12,
+          0,
+          2,
+          11,
+          13
+        ],
+        "cost": 17
+      },
+      {
+        "id": "fullnature",
+        "ids": [
+          14,
+          3,
+          6,
+          9,
+          10
+        ],
+        "cost": 15
+      },
+      {
+        "id": "puredragon",
+        "ids": [
+          15,
+          5,
+          16,
+          17,
+          18
+        ],
+        "cost": 17
+      },
+      {
+        "id": "purematerial",
+        "ids": [
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "cost": 17
+      },
+      {
+        "id": "pureslime",
+        "ids": [
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "cost": 17
+      },
+      {
+        "id": "puredemon",
+        "ids": [
+          29,
+          1,
+          8,
+          30,
+          31
+        ],
+        "cost": 17
+      },
+      {
+        "id": "pureundead",
+        "ids": [
+          32,
+          4,
+          33,
+          34,
+          35
+        ],
+        "cost": 17
+      },
+      {
+        "id": "janus-mixed",
+        "ids": [
+          36,
+          12,
+          2,
+          30,
+          26
+        ],
+        "cost": 17
+      },
+      {
+        "id": "nature-brute-dryas",
+        "ids": [
+          14,
+          3,
+          6,
+          10,
+          28
+        ],
+        "cost": 17
+      },
+      {
+        "id": "nature-brute-tengu",
+        "ids": [
+          14,
+          6,
+          9,
+          10,
+          28
+        ],
+        "cost": 17
+      },
+      {
+        "id": "old-triple-poison",
+        "ids": [
+          4,
+          3,
+          7,
+          2,
+          10
+        ],
+        "cost": 15
+      },
+      {
+        "id": "material-strong",
+        "ids": [
+          19,
+          20,
+          23,
+          7,
+          10
+        ],
+        "cost": 17
+      },
+      {
+        "id": "slime-strong-area",
+        "ids": [
+          24,
+          4,
+          25,
+          27,
+          28
+        ],
+        "cost": 17
+      },
+      {
+        "id": "slime-strong-poison",
+        "ids": [
+          24,
+          6,
+          9,
+          27,
+          28
+        ],
+        "cost": 17
+      },
+      {
+        "id": "undead-reapply",
+        "ids": [
+          32,
+          4,
+          33,
+          3,
+          10
+        ],
+        "cost": 17
+      },
+      {
+        "id": "janus-poison",
+        "ids": [
+          36,
+          4,
+          3,
+          10,
+          30
+        ],
+        "cost": 15
+      },
+      {
+        "id": "janus-ward",
+        "ids": [
+          36,
+          14,
+          10,
+          20,
+          35
+        ],
+        "cost": 16
+      },
+      {
+        "id": "demon-dual-cleanse",
+        "ids": [
+          29,
+          8,
+          30,
+          7,
+          2
+        ],
+        "cost": 17
+      },
+      {
+        "id": "dragon-cleanse-mixed",
+        "ids": [
+          15,
+          16,
+          18,
+          7,
+          2
+        ],
+        "cost": 17
+      },
+      {
+        "id": "material-break-mixed",
+        "ids": [
+          19,
+          20,
+          22,
+          11,
+          3
+        ],
+        "cost": 17
+      },
+      {
+        "id": "slime-break-mixed",
+        "ids": [
+          24,
+          25,
+          27,
+          11,
+          7
+        ],
+        "cost": 17
+      },
+      {
+        "id": "demon-poison-mixed",
+        "ids": [
+          29,
+          30,
+          31,
+          2,
+          3
+        ],
+        "cost": 17
+      },
+      {
+        "id": "undead-burst-mixed",
+        "ids": [
+          32,
+          4,
+          35,
+          12,
+          3
+        ],
+        "cost": 17
+      },
+      {
+        "id": "beast-heavy-mixed",
+        "ids": [
+          12,
+          13,
+          2,
+          23,
+          7
+        ],
+        "cost": 17
+      }
+    ],
+    "seeds": [
+      4272180690,
+      1044807403,
+      474749037,
+      1698543810,
+      1227193681,
+      2681470196,
+      37634617,
+      2344125059,
+      2787297665,
+      2108582621,
+      872507734,
+      1051860108,
+      513526151,
+      2586952855,
+      3622937694,
+      823545125
+    ],
+    "qualification": "Four and five tags grant the same allowance. Report all opponent cells, exactC17 subsets, response use/off-context and action opportunity costs. No roster/stat tuning and no target50-percent fitting; parent reviews recommendation separately."
+  },
+  "limits": [
+    "Selected after the first counter failure; fresh seeds reduce reuse but do not undo adaptive choice or establish human balance.",
+    "A legal faster leader is not guaranteed counterplay: lower HP, enemy guard/priority, focus fire and different orders can defeat it.",
+    "No claim that a fixed-policy advantage proves optimal human play. Explain the visible speed/HP tradeoff and targeting to ordinary players.",
+    "Preserve both original failed and new study results. No new leader alternatives or weakened thresholds after outcomes."
+  ]
+}

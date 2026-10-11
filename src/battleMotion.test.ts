@@ -1,3 +1,4 @@
+import * as demonMotions from "./battleMotion";
 import {describe, expect, it} from 'vitest';
 import {actionAge, ANTICIPATION_MS, HIT_HOLD_MS, motionKind, NUMBER_DURATION_MS, sampleActionMotion, sampleGenbuMotion, sampleHitMotion, sampleNumberMotion, sampleRatatoskrMotion} from './battleMotion';
 import {ACTION_DURATION_MS, barrageDuration, CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS} from './playback';
@@ -179,4 +180,78 @@ describe('original material choreography', () => {
       for(const age of [0,340,799,800,895,1100,1500]) expect(sample(age,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
     }
   });
+});
+
+describe('original slime choreography',()=>{
+  it('treats the selected MP supply as support before area classification',()=>{
+    expect(motionKind({kind:'cast',skill:'蓄え分け',effect:'restoreMp',scope:'all'})).toBe('support');
+  });
+  it('holds each distinct fluid preparation until the actual 800 ms source impact',async()=>{
+    const m=await import('./battleMotion');
+    const delayed=actionAge(9000);
+    expect(delayed).toBe(799);
+    expect(m.sampleHollowSpringMotion(delayed)).toMatchObject({phase:'release',travel:0,lift:4,scaleX:.955,scaleY:1.025});
+    expect(m.sampleRibbonDropMotion(delayed)).toMatchObject({phase:'release',travel:-8,scaleX:.85,scaleY:1.12});
+    expect(m.sampleFoldWardMotion(delayed)).toMatchObject({phase:'release',travel:0,scaleX:.89,scaleY:1.05});
+    expect(m.sampleBubbleBranchMotion(delayed)).toMatchObject({phase:'release',travel:0,lift:2,scaleX:1.025});
+    expect(m.sampleBubbleBranchMotion(delayed).scaleY).toBeCloseTo(.93);
+    expect(m.sampleKneadedFistMotion(delayed)).toMatchObject({phase:'release',travel:-3,lift:-6,scaleX:1.1,scaleY:.87});
+    expect(m.sampleHollowSpringMotion(935).lift).toBe(12);
+    expect(m.sampleRibbonDropMotion(880).travel).toBe(43);
+    expect(m.sampleFoldWardMotion(960).scaleX).toBe(1.15);
+    expect(m.sampleBubbleBranchMotion(910).lift).toBe(7);
+    expect(m.sampleKneadedFistMotion(900).travel).toBe(31);
+  });
+  it('uses no pounce or camera kick for supply, healing, guard or protection',async()=>{
+    const m=await import('./battleMotion');
+    const samplers=[m.sampleHollowSpringMotion,m.sampleRibbonDropMotion,m.sampleFoldWardMotion,m.sampleBubbleBranchMotion,m.sampleKneadedFistMotion];
+    for(const sample of samplers) for(const time of [0,340,799,800,900,1000,1500]) expect(sample(time,true)).toMatchObject({travel:0,camera:0});
+  });
+  it('settles every fluid and removes every body and camera transform in reduced motion',async()=>{
+    const m=await import('./battleMotion');
+    const samplers=[m.sampleHollowSpringMotion,m.sampleRibbonDropMotion,m.sampleFoldWardMotion,m.sampleBubbleBranchMotion,m.sampleKneadedFistMotion];
+    for(const sample of samplers) {
+      expect(sample(ACTION_DURATION_MS)).toMatchObject({phase:'rest',travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0,titleAlpha:0});
+      for(const time of [0,340,799,800,900,1000,1500]) for(const support of [true,false]) expect(sample(time,support,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+    }
+  });
+});
+
+describe('original demon movement',()=>{
+  it.each(['sampleMammonMotion','sampleKoboldMotion','sampleEmpusaMotion'] as const)('%s settles and respects reduced motion',name=>{
+    const fn=demonMotions[name];
+    const reduced=fn(850,false,true);expect([reduced.travel,reduced.lift,reduced.tilt,reduced.camera]).toEqual([0,0,0,0]);expect([reduced.scaleX,reduced.scaleY]).toEqual([1,1]);
+    const end=fn(2500);expect([end.travel,end.lift,end.tilt,end.camera]).toEqual([0,0,0,0]);expect([end.scaleX,end.scaleY]).toEqual([1,1]);
+    expect(fn(850,true).camera).toBe(0);
+  });
+});
+
+describe('independent undead movement',()=>{
+  it('holds the decisive push until observed impact and gives each body a distinct signature',async()=>{
+    const m=await import('./battleMotion');const delayed=actionAge(9000);
+    expect(m.sampleDraugrMotion(delayed)).toMatchObject({travel:0,lift:-5});expect(m.sampleDraugrMotion(925).travel).toBe(18);
+    expect(m.sampleHeadlessDriverMotion(delayed)).toMatchObject({travel:-7,lift:0,tilt:.075});expect(m.sampleHeadlessDriverMotion(905).travel).toBe(14);
+    expect(m.sampleJiangshiMotion(delayed)).toMatchObject({travel:0,lift:17});expect(m.sampleJiangshiMotion(delayed,true)).toMatchObject({travel:0,lift:0,scaleX:1.095});
+    expect(m.sampleVetalaMotion(delayed)).toMatchObject({travel:0,lift:4,tilt:-.09});
+  });
+  it('settles and removes every body/camera transform in reduced motion without support kicks',async()=>{
+    const m=await import('./battleMotion');const samplers=[m.sampleDraugrMotion,m.sampleHeadlessDriverMotion,m.sampleJiangshiMotion,m.sampleVetalaMotion];
+    for(const sample of samplers){
+      const end=sample(ACTION_DURATION_MS);for(const prop of ['travel','lift','tilt','camera'] as const)expect(end[prop]).toBeCloseTo(0);expect(end.scaleX).toBe(1);expect(end.scaleY).toBe(1);expect(end.titleAlpha).toBe(0);
+      for(const time of [0,340,799,800,925,1100,1500])for(const support of [false,true])expect(sample(time,support,true)).toMatchObject({travel:0,lift:0,tilt:0,scaleX:1,scaleY:1,camera:0});
+      expect(sample(925,true).camera).toBe(0);
+    }
+  });
+});
+
+describe('original Janus threshold motion',()=>{
+ it('classifies both allied group responses as support, without camera movement',()=>{
+  for(const effect of ['responseCleanse','responseGuard'])expect(motionKind({kind:'cast',effect,scope:'all'})).toBe('support');
+ });
+ it('tilts and presents palms before the observed impact, opens deliberately, then settles',()=>{
+  const fn=demonMotions.sampleJanusMotion,waiting=fn(actionAge(9000),true);expect(waiting).toMatchObject({travel:0,lift:2,tilt:.045,palms:.3,camera:0});expect(fn(950,true)).toMatchObject({travel:0,lift:0,palms:1,camera:0});expect(fn(950,false).travel).toBe(15);const end=fn(ACTION_DURATION_MS,true);for(const prop of ['travel','lift','tilt','camera','palms'] as const)expect(end[prop]).toBeCloseTo(0);expect(end).toMatchObject({scaleX:1,scaleY:1,titleAlpha:0});
+ });
+ it('removes body, palms, and camera transforms in reduced motion for every phase and skill',()=>{
+  for(const age of [0,340,799,800,950,1100,1500])for(const supporting of [false,true])expect(demonMotions.sampleJanusMotion(age,supporting,true)).toMatchObject({travel:0,lift:0,tilt:0,camera:0,palms:0,scaleX:1,scaleY:1});
+ });
 });

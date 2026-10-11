@@ -1,0 +1,177 @@
+{
+  "sourceStudy": "extraordinary-substitutions",
+  "pairedBy": "Same opponent, six frozen seeds, physical orientation;300 pairs per replacement.",
+  "comparisons": [
+    {
+      "control": "janus-c17",
+      "target": "janus-nonleader",
+      "controlScore": 0.11,
+      "targetScore": 0.103333,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 24,
+      "scoreRateChange": -0.006667,
+      "approximate95Interval": [
+        -0.044084,
+        0.030751
+      ],
+      "meanTurnsChange": -0.5,
+      "meanDirectDamageChange": -32.736667,
+      "meanHealingChange": -13.02,
+      "meanMpSpentChange": -13.19,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "janus-three-c17",
+      "controlScore": 0.11,
+      "targetScore": 0.5,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 128,
+      "scoreRateChange": 0.39,
+      "approximate95Interval": [
+        0.328642,
+        0.451358
+      ],
+      "meanTurnsChange": -0.883333,
+      "meanDirectDamageChange": 115.596667,
+      "meanHealingChange": -4.146667,
+      "meanMpSpentChange": 7.203333,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "janus-five-c17",
+      "controlScore": 0.11,
+      "targetScore": 0.6,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 152,
+      "scoreRateChange": 0.49,
+      "approximate95Interval": [
+        0.429483,
+        0.550517
+      ],
+      "meanTurnsChange": -1.056667,
+      "meanDirectDamageChange": 136.65,
+      "meanHealingChange": -86.296667,
+      "meanMpSpentChange": -4.34,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with14",
+      "controlScore": 0.11,
+      "targetScore": 0.003333,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 32,
+      "scoreRateChange": -0.106667,
+      "approximate95Interval": [
+        -0.139723,
+        -0.07361
+      ],
+      "meanTurnsChange": -0.676667,
+      "meanDirectDamageChange": -147.03,
+      "meanHealingChange": 3.18,
+      "meanMpSpentChange": -12.996667,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with15",
+      "controlScore": 0.11,
+      "targetScore": 0.07,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 24,
+      "scoreRateChange": -0.04,
+      "approximate95Interval": [
+        -0.077871,
+        -0.002129
+      ],
+      "meanTurnsChange": -0.81,
+      "meanDirectDamageChange": -78.493333,
+      "meanHealingChange": -35.366667,
+      "meanMpSpentChange": -26.64,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with19",
+      "controlScore": 0.11,
+      "targetScore": 0.063333,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 32,
+      "scoreRateChange": -0.046667,
+      "approximate95Interval": [
+        -0.081238,
+        -0.012096
+      ],
+      "meanTurnsChange": -0.96,
+      "meanDirectDamageChange": -7.323333,
+      "meanHealingChange": -34.106667,
+      "meanMpSpentChange": -10.46,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with28",
+      "controlScore": 0.11,
+      "targetScore": 0.26,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 69,
+      "scoreRateChange": 0.15,
+      "approximate95Interval": [
+        0.05573,
+        0.24427
+      ],
+      "meanTurnsChange": -0.82,
+      "meanDirectDamageChange": 155.48,
+      "meanHealingChange": -18.383333,
+      "meanMpSpentChange": -8.91,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with29",
+      "controlScore": 0.11,
+      "targetScore": 0.066667,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 37,
+      "scoreRateChange": -0.043333,
+      "approximate95Interval": [
+        -0.104412,
+        0.017745
+      ],
+      "meanTurnsChange": -0.403333,
+      "meanDirectDamageChange": -22.866667,
+      "meanHealingChange": -27.45,
+      "meanMpSpentChange": -13.1,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    },
+    {
+      "control": "janus-c17",
+      "target": "replace36-with32",
+      "controlScore": 0.11,
+      "targetScore": 0.06,
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 23,
+      "scoreRateChange": -0.05,
+      "approximate95Interval": [
+        -0.10427,
+        0.00427
+      ],
+      "meanTurnsChange": -0.916667,
+      "meanDirectDamageChange": -20.34,
+      "meanHealingChange": -28.976667,
+      "meanMpSpentChange": -24.373333,
+      "limits": "Whole member kits/leader/family composition and resulting decisions/RNG differ. Paired fixed-panel association, not innate unit or isolated threshold causality."
+    }
+  ]
+}

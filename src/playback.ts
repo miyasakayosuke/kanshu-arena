@@ -18,9 +18,11 @@ export const MULTIHIT_INTERVAL_MS = 180;
 export const barrageDuration = (hits: number) => ACTION_DURATION_MS + Math.max(0, hits - 1) * MULTIHIT_INTERVAL_MS;
 
 export function effectType(name: string, kind?: string) {
-  if (kind === 'heal' || kind === 'cleanse') return 'water';
-  if (kind === 'guard' || kind === 'protect') return 'guard';
+  if (kind === 'restoreMp') return 'water';
+  if (kind === 'heal' || kind === 'cleanse' || kind === 'responseCleanse') return 'water';
+  if (kind === 'guard' || kind === 'protect' || kind === 'responseGuard') return 'guard';
   if (kind === 'poison') return 'shadow';
+  if (name === '翠雲の息') return 'water';
   return /炎|火|灼熱|狐火/.test(name) ? 'fire' : /毒|影|冥府|悲鳴/.test(name) ? 'shadow' : /水|雫|海山/.test(name) ? 'water' : /風|翼|疾風|旋風|嵐/.test(name) ? 'wind' : 'slash';
 }
 
@@ -36,30 +38,39 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
       ...(event.ward !== undefined ? { ward: event.ward } : current.ward !== undefined && event.kind === 'defeat' ? { ward: 0 } : {}),
       ...(event.dragonCharge !== undefined ? { dragonCharge: event.dragonCharge } : current.dragonCharge !== undefined && event.kind === 'defeat' ? { dragonCharge: 0 } : {}),
       ...(event.repairReady !== undefined ? { repairReady: event.repairReady } : current.repairReady !== undefined && event.kind === 'defeat' ? { repairReady: false } : {}),
+      ...(event.supplyReady !== undefined ? { supplyReady: event.supplyReady } : current.supplyReady !== undefined && event.kind === 'defeat' ? { supplyReady: false } : {}),
+      ...(event.responseReady !== undefined ? { responseReady: event.responseReady } : current.responseReady !== undefined && event.kind === 'defeat' ? { responseReady: false } : {}),
       poison: event.poison ?? (event.kind === 'poison' ? 3 : event.kind === 'cleanse' || event.kind === 'defeat' ? 0 : current.poison),
     };
   }, unit);
   return { ...state, allies: state.allies.map(update), enemies: state.enemies.map(update) };
 }
 
-// Area hits land together. MP changes at cast start; expiry never masquerades as an attack.
+// Area hits land together. Paid MP debits happen at cast start; resource loss/gain
+// happens at impact. Poison cashout is an ordered poison-reset impact immediately
+// before its direct HP hit, including lethal hits; it is never a friendly cleanse.
+// A fallback reuses its cast boundary without another action.
 export function buildTimeline(events: BattleEvent[]): BattleTimeline {
   const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[]; passive?: 'material-repair' }[] = [];
   const before: BattleEvent[] = [];
+  const pendingFallback: BattleEvent[] = [];
   const after: BattleEvent[] = [];
   for (const event of events) {
     if (event.kind === 'phase') continue;
-    if (event.kind === 'expire') {
+    if (event.kind === 'fallback') {
+      // A fallback belongs to its following replacement cast, never the prior hit.
+      pendingFallback.push(event);
+    } else if (event.kind === 'expire') {
       (event.phase === 'turn-start' ? before : after).push(event);
     } else if (event.kind === 'passive' && event.effect === 'material-repair') {
       // Give repair its own visual boundary after poison, without inventing a learned
       // skill/order in the authoritative stream. Absolute readiness changes at start.
       groups.push({ cast: { kind: 'cast', actor: event.actor, skill: event.skill, scope: 'all', targets: [...(event.targets ?? [])], effect: 'heal', passive: 'material-repair' }, impacts: [], updates: [event], endUpdates: [], passive: 'material-repair' });
-    } else if (event.kind === 'cast') groups.push({ cast: event, impacts: [], updates: [], endUpdates: [] });
+    } else if (event.kind === 'cast') groups.push({ cast: event, impacts: [], updates: pendingFallback.splice(0), endUpdates: [] });
     else if (event.kind === 'charge' && event.effect === 'dragon-charge-gain') {
       if (groups.at(-1)?.cast) groups.at(-1)!.endUpdates.push(event);
       else before.push(event);
-    } else if (event.kind === 'resource' || event.kind === 'charge') {
+    } else if (event.kind === 'resource' || event.kind === 'charge' || event.kind === 'supply' || event.kind === 'response') {
       if (groups.at(-1)?.cast) groups.at(-1)!.updates.push(event);
       else before.push(event);
     } else if (event.effect === 'poison' && !event.actor) {

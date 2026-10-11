@@ -1,0 +1,537 @@
+{
+  "kind": "future-poison-sacrifice",
+  "suite": "undead-initial",
+  "matchId": "f1-o4__s3661599905__a-left__baseline",
+  "orientation": "a-left",
+  "teamA": "pureundead",
+  "teamB": "pureslime",
+  "winner": "win",
+  "source": {
+    "gameVersion": "0.16.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "configSha256": "f01a1d2489c0937b24e34e453a44b88964c5ebaacd115f74945cb8d3ad52d028"
+  },
+  "traceHash": "3810f5e07601de0ff1b94b4e4c5afce1b037f07d37a974f5351976d94016def0",
+  "request": {
+    "teamA": [
+      32,
+      4,
+      33,
+      34,
+      35
+    ],
+    "teamB": [
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "seed": 3661599905,
+    "overrides": {}
+  },
+  "interpretation": "The target survives and the consumed nominal future poison exceeds this hit’s actual extra HP damage. Future survival and cleanse are uncertain; nominal poison is an opportunity-cost bound, not guaranteed damage.",
+  "impact": {
+    "turn": 3,
+    "index": 31,
+    "actor": "a0",
+    "target": "e2",
+    "sourceMpAfterDebit": 16,
+    "targetBefore": {
+      "hp": 94,
+      "mp": 33,
+      "poison": 2,
+      "guard": true,
+      "ward": 0,
+      "maxHp": 250
+    },
+    "consumed": 2,
+    "perTick": 22,
+    "addedBasis": 44,
+    "nominalFuturePoison": 30,
+    "targetActionStarted": true,
+    "laterReapplication": false,
+    "roll": 0.96,
+    "scale": 0.5,
+    "actualDamage": 51,
+    "withoutAdditionSameRoll": 30,
+    "actualAdded": 21,
+    "targetAfterHp": 43,
+    "lethal": false,
+    "decisiveLocalKill": false
+  },
+  "turn": {
+    "turn": 3,
+    "seedBefore": 323543633,
+    "seedAfter": 1201114137,
+    "orders": [
+      {
+        "key": "a0",
+        "skill": 0,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "塚底の取り立て",
+        "skillKind": "hit",
+        "skillPower": 48,
+        "accepted": true
+      },
+      {
+        "key": "a2",
+        "skill": -1,
+        "target": "e4",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 31,
+        "accepted": true
+      },
+      {
+        "key": "a3",
+        "skill": 0,
+        "target": "a3",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "袖の囲い",
+        "skillKind": "protect",
+        "skillPower": 0,
+        "accepted": true
+      },
+      {
+        "key": "e0",
+        "skill": 2,
+        "target": "e0",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "水面のかばい",
+        "skillKind": "protect",
+        "skillPower": 0,
+        "accepted": true
+      },
+      {
+        "key": "e2",
+        "skill": 0,
+        "target": "e2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "膜のかばい",
+        "skillKind": "protect",
+        "skillPower": 0,
+        "accepted": true
+      },
+      {
+        "key": "e4",
+        "skill": 0,
+        "target": "a3",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "ねり打ち",
+        "skillKind": "hit",
+        "skillPower": 76,
+        "accepted": true
+      }
+    ],
+    "events": [
+      {
+        "kind": "phase",
+        "phase": "turn-start"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e0",
+        "scope": "single",
+        "targets": [
+          "e0"
+        ],
+        "target": "e0",
+        "skill": "水面のかばい",
+        "effect": "protect",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e0",
+        "target": "e0",
+        "mp": 36,
+        "amount": 10,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "guard",
+        "actor": "e0",
+        "target": "e0",
+        "guard": true,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e2",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "膜のかばい",
+        "effect": "protect",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e2",
+        "target": "e2",
+        "mp": 33,
+        "amount": 10,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "guard",
+        "actor": "e2",
+        "target": "e2",
+        "guard": true,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a3",
+        "scope": "single",
+        "targets": [
+          "a3"
+        ],
+        "target": "a3",
+        "skill": "袖の囲い",
+        "effect": "protect",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "a3",
+        "target": "a3",
+        "mp": 16,
+        "amount": 10,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "guard",
+        "actor": "a3",
+        "target": "a3",
+        "guard": true,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a2",
+        "scope": "single",
+        "targets": [
+          "e4"
+        ],
+        "target": "e4",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a2",
+        "target": "e4",
+        "amount": 22,
+        "hp": 0,
+        "phase": "action"
+      },
+      {
+        "kind": "defeat",
+        "actor": "a2",
+        "target": "e4",
+        "hp": 0,
+        "guard": false,
+        "poison": 0,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e4",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e4",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a0",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "塚底の取り立て",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "a0",
+        "target": "a0",
+        "mp": 16,
+        "amount": 18,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "poison-cashout",
+        "actor": "a0",
+        "target": "e2",
+        "skill": "塚底の取り立て",
+        "poison": 0,
+        "poisonTicksConsumed": 2,
+        "poisonCashoutPerTick": 22,
+        "poisonCashoutAdded": 44,
+        "effect": "poison-cashout",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a0",
+        "target": "e2",
+        "amount": 51,
+        "hp": 43,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "phase": "turn-end"
+      },
+      {
+        "kind": "damage",
+        "target": "e0",
+        "amount": 14,
+        "hp": 67,
+        "poison": 1,
+        "effect": "poison",
+        "phase": "turn-end"
+      },
+      {
+        "kind": "expire",
+        "target": "a3",
+        "effect": "guard",
+        "guard": false,
+        "phase": "turn-end"
+      },
+      {
+        "kind": "expire",
+        "target": "e0",
+        "effect": "guard",
+        "guard": false,
+        "phase": "turn-end"
+      },
+      {
+        "kind": "expire",
+        "target": "e2",
+        "effect": "guard",
+        "guard": false,
+        "phase": "turn-end"
+      }
+    ],
+    "unitsAfter": [
+      {
+        "key": "a0",
+        "hp": 120,
+        "mp": 16,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10,
+        "poisonCashoutBonus": 8
+      },
+      {
+        "key": "a1",
+        "hp": 0,
+        "mp": 24,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a2",
+        "hp": 116,
+        "mp": 24,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a3",
+        "hp": 76,
+        "mp": 16,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a4",
+        "hp": 0,
+        "mp": 43,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e0",
+        "hp": 67,
+        "mp": 36,
+        "poison": 1,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10,
+        "supplyReady": true
+      },
+      {
+        "key": "e1",
+        "hp": 0,
+        "mp": 37,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e2",
+        "hp": 43,
+        "mp": 33,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e3",
+        "hp": 0,
+        "mp": 58,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e4",
+        "hp": 0,
+        "mp": 17,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      }
+    ],
+    "eventsSha256": "48ace912f41a754f1856dd9a7a081224f77303f180f09ebec7cdeff9311e39d7"
+  },
+  "reconstructCommand": "node scripts/balance-lab/reconstruct-undead-source.mjs docs/undead-balance-source/undead-study-v1-index.json /tmp/undead-study-source",
+  "replayCommand": "node scripts/balance-lab/replay-undead-packed.mjs undead-initial f1-o4__s3661599905__a-left__baseline /tmp/future-poison-sacrifice.json /tmp/undead-study-source"
+}

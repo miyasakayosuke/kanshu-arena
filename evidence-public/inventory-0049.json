@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/demon-balance-packed/demon-initial-015.json",
+    "bytes": 29488,
+    "sha256": "531727b9d169ab93e36bb76710fac1b3ae0c9ffa7dc1a6745e5a96132d113ae5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-016.json",
+    "bytes": 30732,
+    "sha256": "28fb44be8254eddb32c6a7bc88875f5ed90284a6a376f495f373a36c9e4ecf6a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-017.json",
+    "bytes": 31240,
+    "sha256": "328ca593acc61fdb17bca89d7849664591c4f7a93797275a8b41ca0f617f5c4d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-018.json",
+    "bytes": 28984,
+    "sha256": "89e2ab462ec0c4c638e90d11b85a619e5c533faf1997aa9d2f1033d3efdf1d9e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-019.json",
+    "bytes": 30940,
+    "sha256": "ed7755ef8c3fdd90bac2a0c06b09c144c01838a37a3accdc7aade0ffa86f1371",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-020.json",
+    "bytes": 28912,
+    "sha256": "2535129f328b297cd508d38178271e07506dcf39f5f7db1517cd77dfc5ab9400",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-021.json",
+    "bytes": 18192,
+    "sha256": "d094c4cf3ff227cba7d5c0505221edb7d2c920668a4e0ea305cb2a0fd3056a61",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-initial-index.json",
+    "bytes": 6468,
+    "sha256": "f51e84f6803829b63135242b1453a8dba4e2b681e4b12baedfb3504ea47cbee1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-001.json",
+    "bytes": 34984,
+    "sha256": "808d603d3e2be67bc7648fb1e747326c901beb9931e437b039d0265bf7bf2190",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-002.json",
+    "bytes": 33092,
+    "sha256": "2b5074f3ea004e552476fb95b1142b4db1f59769f768007b8241b4ba1a7c39ab",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-003.json",
+    "bytes": 37772,
+    "sha256": "55e25d0af2df3ba9059c32f93f2cc117da6e344553e5398c26c17c00acfb5709",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-004.json",
+    "bytes": 37680,
+    "sha256": "67fd8b9258aa07d8fdfac7176757b324ab32ce41f1b8c32d1676afa452fa21d1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-005.json",
+    "bytes": 37428,
+    "sha256": "89fc04d3927b54c38d3346a72af24fee1648462adda106232d6c741371ef5921",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-006.json",
+    "bytes": 37724,
+    "sha256": "610777ce23f5a1839432900c2f954e1e7942d8fb2b4c898810a8b1a5931f32b9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-007.json",
+    "bytes": 37660,
+    "sha256": "2142201c3635f11a437d562660b8d0cb3c3eafcd777bb9781c69ccc002b49dec",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-008.json",
+    "bytes": 36932,
+    "sha256": "e6d98ffb558c2ffdbac92e84bee4e34118580f5cd598a59cfcbe414b06b02121",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-009.json",
+    "bytes": 37252,
+    "sha256": "1c963e28c31d16a46d27cc3efaf8f997827900320a8ada50637cb4e41bf85f6c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-010.json",
+    "bytes": 36504,
+    "sha256": "2053aac1682fae95b6db54f950a6a6eb897a62a4d89d9b1135f7f8155338202e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-011.json",
+    "bytes": 37144,
+    "sha256": "6059ccf38a3f08fdfbff09b8248475c0611f4ebfb17b16cd94dcc6fb15c2ca12",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-012.json",
+    "bytes": 34512,
+    "sha256": "e0e7eddc9c2f5d7d384d80e03cd688a489f26421a20519ed7b0ccd581d9bf268",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-013.json",
+    "bytes": 35152,
+    "sha256": "2134e85a147d30eef54d06615940b52c36e78c84acdd02421e853d429f9a86cb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-014.json",
+    "bytes": 34896,
+    "sha256": "d57c348280d90121e3bfd4ece6e4c28e5313852c376bcad01830407aa7049ad9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-015.json",
+    "bytes": 35840,
+    "sha256": "3b5099ec77e133ccf0a553cc1b4e8a919adfb410163d55dd83a54f43e3aa6596",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-016.json",
+    "bytes": 35232,
+    "sha256": "cafb673c1c13df2c8f9fd4e8078ddee2156337b6adc25844ad2c550b0c7fb957",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-017.json",
+    "bytes": 35036,
+    "sha256": "3202d4a5fe8ec0abbc786b1dca3a4cd894c0486ba9c980512e2e67a23e099056",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-018.json",
+    "bytes": 38808,
+    "sha256": "3f96af229ec9caaac4960d346d85a61d7e8e079d56a7ea9beef798be7524339f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-019.json",
+    "bytes": 37916,
+    "sha256": "743bfc6abbf7a085fb741d6f97f213b3180fadba734accd0ec7491939752268d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-020.json",
+    "bytes": 37788,
+    "sha256": "ace25cfc05b8e578822d8ae13b6f75d075470c97974ac40d4005689c8917c6ba",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-021.json",
+    "bytes": 38516,
+    "sha256": "df1051ce85b24a6ac40da390188517b11390a11435e9e14311cb8e69d6a824dc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-022.json",
+    "bytes": 38320,
+    "sha256": "ba6a0fd5e2e8039cc096b8e561e536b2bdd4e7d5a59d2eea15fc6c2050959ee9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-023.json",
+    "bytes": 39516,
+    "sha256": "dac5c59c38a5ef7479135d1b0b6d32c2e6eda4472a395ce5c46d74f987d043f1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-024.json",
+    "bytes": 37692,
+    "sha256": "658207a3a56d205359759aeca26c3774f7da347b9f6bb8448cc931d57900f73c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-025.json",
+    "bytes": 33232,
+    "sha256": "bfaa127abbb2f0eefefc5fb835b701317c6f074faede80a9a48a0f619db1200b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-026.json",
+    "bytes": 31596,
+    "sha256": "0ccde9e9bef7331faff7e02081ee979055b3bb6c6ab9d20120dd3a3754f7280a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-027.json",
+    "bytes": 30392,
+    "sha256": "9c05cf151ef3376f775e8e6db25810ff1199bcc67519a95434bc9839d9918724",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-028.json",
+    "bytes": 29848,
+    "sha256": "43b64f293d2c9d7d603385c5233c772b519e2ddde54609a223058e07dfb1107f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-029.json",
+    "bytes": 29520,
+    "sha256": "d46422ee832638c4eae03f168ff05d30860adef0a14ec4e8889ef63c160724be",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-030.json",
+    "bytes": 30212,
+    "sha256": "2f0d8f20ad64e50801de6ce757fc147eb8b905ccd35e7d0690d8641a43b8a4aa",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-031.json",
+    "bytes": 32400,
+    "sha256": "402e63a5396a23490792db52439f2db01ba2d6dcd9e2a534dce84283ed84f1e3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-032.json",
+    "bytes": 30672,
+    "sha256": "b946ac75fb026f778c17277a59479f9a501428be7e677e4303dfae7e6ae83440",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-033.json",
+    "bytes": 23128,
+    "sha256": "8d89f0f44f84cb538548d15ff03b7ffc8d93be5634595f96b2b34ba80acad650",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-oldcore-contribution-index.json",
+    "bytes": 11176,
+    "sha256": "10ae0d5793fa7f72a9e68568154074735afde0e7417051421b51df720fd726d2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-001.json",
+    "bytes": 40572,
+    "sha256": "b7321e421f5a49747fd46d6a1a66d8b74f6e4ec53f020a2bc74aea1206248f90",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-002.json",
+    "bytes": 38596,
+    "sha256": "8bbdb76762ee265c22477a0c3d29c151d7f038d862a80f275a479d266eb0651b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-003.json",
+    "bytes": 35004,
+    "sha256": "4c495df44038173195820da435de8999f1569bb4ca7a409e3d01d2b364eb5067",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-004.json",
+    "bytes": 36364,
+    "sha256": "0ec74b072bad9dc2aa6de81f263ff0da343935caa515d17de6fe13b46c1f3cb4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-005.json",
+    "bytes": 35788,
+    "sha256": "8d79dfd6ec07f4f6831d193b83ebe6bccff774ff33208d4f3ae0774076f8bcb5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-006.json",
+    "bytes": 36612,
+    "sha256": "e77549eaa579ca1012c3ce680a112aeff0d7b9b021ee3d3f96fe11cd45a8397b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-007.json",
+    "bytes": 36832,
+    "sha256": "481a76f1284bb6cc4ef37cbb08d80efed364db32d34fe1332290c88d4e8c06f0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-008.json",
+    "bytes": 35872,
+    "sha256": "d06a0d573569cb22ca8e089f62b7fcc8934939719562ddf8b8eb111c146ea128",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-009.json",
+    "bytes": 36064,
+    "sha256": "617c114156cdbdcf2a5d0754a86fd79d94acd466897cc2ea23144c4dff2a6188",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-010.json",
+    "bytes": 35164,
+    "sha256": "48fc8f347da07785fe36342ec4c5373a3152973f41a06d452ee8fb99b475e08b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-011.json",
+    "bytes": 34432,
+    "sha256": "86b2cf336afc2e0396e12b3042382ff068588a0e86e53d9fa2ea6b7859188984",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-012.json",
+    "bytes": 34760,
+    "sha256": "8c8800fd96ffcec931472a56441b89bf67d176f7a0bd91d023fd2c9a6c0ad4e1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-013.json",
+    "bytes": 35316,
+    "sha256": "a5f675fbf938d778f1a8592cd921abf077de3be3ac80ec15a5164556cfa4b584",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-014.json",
+    "bytes": 34456,
+    "sha256": "6a31c7ee0bc9242b2a95616c86e8fd0bf7b3afd8df189daaa6ed3b9daf532e1b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-015.json",
+    "bytes": 35712,
+    "sha256": "2bc03ef4a9b1c0326f57a3d2b4352436b7d6f0196af6d338d7f939e348ac84d4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-016.json",
+    "bytes": 35816,
+    "sha256": "a1f852a0e3be9515404949090026d47e2f6e311b2e9f88027cf4f6e52afd9dcf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-017.json",
+    "bytes": 34368,
+    "sha256": "2c7ce59d6ed0ab65c155aeb80360c79f95b067942aa840c2e6b16e53b0f13599",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-018.json",
+    "bytes": 38344,
+    "sha256": "dc39bfd9d70977fb74b354d1fe3ae0ec994cc4201c04b9c937b9c190b132cc5f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-019.json",
+    "bytes": 38368,
+    "sha256": "5177112219c29046458b798c93f2c0c08dd66e6175c62312180757d84a04cf35",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-020.json",
+    "bytes": 35996,
+    "sha256": "ea5a2d281e3f59cd6fc1d7adfc28ef3c447c1316cbae95db91e37ef2057383bf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-021.json",
+    "bytes": 38164,
+    "sha256": "dde9fa364bb7348e092de5bb3c0b730b2cf81f5ce5d7e0867784d7bf4c1f9817",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-022.json",
+    "bytes": 37456,
+    "sha256": "12afef0321cd8a51054f7644ec6364c7aa6be0459d5dc4199c80a831e262e474",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-023.json",
+    "bytes": 39432,
+    "sha256": "518efadcccef90bfba40f8d6821c7c0fde46c6528d4412765dd694688653b983",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-024.json",
+    "bytes": 38520,
+    "sha256": "af6d814eed331841456fc8cc1d2ab77071b656d42b3c45e2775564e7fae1dc2b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-025.json",
+    "bytes": 37380,
+    "sha256": "407905bc6bc2a5ca248ec9bca735b4a83891a231f07ff91a907888533fc3b57e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-026.json",
+    "bytes": 40012,
+    "sha256": "97196abf25aa43dfa53ba1104c38c8511252a80fb477a3b56478c2d224fbb7b9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-027.json",
+    "bytes": 39404,
+    "sha256": "ede379eb78488b4a531fc61d5064ef327cec43d2b58e6ab4e89066eb4a2bcc5e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-028.json",
+    "bytes": 38396,
+    "sha256": "4332399cbb8cfc93f9968c63abd3f504e2cdfe99ff1fec1d74245d0b08889f07",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-029.json",
+    "bytes": 40236,
+    "sha256": "030713020f63291c0a2436f7442a4b27044fa41dc9cc59754a691013988b988e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-030.json",
+    "bytes": 39820,
+    "sha256": "00c68a932319f5007f59af752a334a70c686baf03436bf7959224229ebece174",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-031.json",
+    "bytes": 38628,
+    "sha256": "1e82abe1cdcc3cb13a84bcdc3676ec14c0f91bea1458a6c26aabb0e664afface",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-032.json",
+    "bytes": 38548,
+    "sha256": "88addd8a32838e5a480fd9a65fb671e46cce429e14820accc51a44e64163c320",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-033.json",
+    "bytes": 38644,
+    "sha256": "56a5bc94fa72a4e091e7184091faa5924b82d698847c421ffc370a52fa75da4c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-034.json",
+    "bytes": 41816,
+    "sha256": "3d47b75ad8eccdc8cec9a10db634a8e063d3dd55734ba6fb2005fb1379ff4fbe",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-035.json",
+    "bytes": 39980,
+    "sha256": "54078de8240ebd8cd82283a8de0da57609334b1cf613ce3b1cffe55676a148b4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-036.json",
+    "bytes": 38864,
+    "sha256": "4ff5aee6d8655fac9044df60f1bb28c5b50b9352bbd699247d8ba0aed7245468",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-037.json",
+    "bytes": 39048,
+    "sha256": "a0d7bee675fa590caa18b82960bd445436fb52725f7c9f7ed373baae0df8b8f1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-038.json",
+    "bytes": 40592,
+    "sha256": "70efc293ee820c5b387c93a84d9c717434f01f657910ecaa565d93f901117e76",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-039.json",
+    "bytes": 39116,
+    "sha256": "97a8a3fa631e37a9bb98572d39c1801c3b847f5dd64aea91d012d8e333b81384",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-040.json",
+    "bytes": 38008,
+    "sha256": "ae2b8a774fd7c5f9bd9c9514388ba75b2b785c7cc4c55c3abaeb1c7ca843051b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-041.json",
+    "bytes": 31384,
+    "sha256": "9f442e6f672b3761759c7b55df48b9163bc3d8851849705515ca02aeaf055eae",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-042.json",
+    "bytes": 31628,
+    "sha256": "699d3c6c2d88adbf6b474e0a218a74af7921928c50f3db11d86156f479055612",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-043.json",
+    "bytes": 30360,
+    "sha256": "2337857fa8311d5bbc197c03a07dfd80dd49ecfa603ac3e6c1b5b141fbf32d42",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-044.json",
+    "bytes": 29888,
+    "sha256": "57757f4862f8cb94592efbd72707f48dc1f4bb2806d847edd70d3e6d9bedd226",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-045.json",
+    "bytes": 29760,
+    "sha256": "40839b6fcf8925df22e08851b49741d7827b98b08e178f95d1b64032301a8f0b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-046.json",
+    "bytes": 30196,
+    "sha256": "ef30a320da6bc6c76e4e1345e28d1ca052ec69f6369775a20ced2328b518f7f4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-047.json",
+    "bytes": 32424,
+    "sha256": "05dfc8257c77e4801a59e6cb90ad35878a1764aeb6de48f48965b56f84608d96",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-048.json",
+    "bytes": 30672,
+    "sha256": "27096185aaaeac210f2658011d6074b1770fec5193dfc8ea05332a359cd485ad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-049.json",
+    "bytes": 22168,
+    "sha256": "e38753f7bb84f4cedb404342b76e59bcace7f860b959d61163812ec6e54343b4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-paired-controls-index.json",
+    "bytes": 15448,
+    "sha256": "6d438e4828d569f562cba11ac001504d9fc2daa83fdf4150dba45c46ed3756b6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-001.json",
+    "bytes": 42860,
+    "sha256": "043959dd4928920528c3f13304435572478db7edc77b43f12ae10b219e20cfc8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-002.json",
+    "bytes": 34188,
+    "sha256": "d10063dea1a7d1161b68a338d9ed995174257636104661372e886a5aded91376",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-003.json",
+    "bytes": 38624,
+    "sha256": "85bf6cfa232f06b1590a71706c2ae4dbf80c242cd71ab10820175184893fb01b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-004.json",
+    "bytes": 39652,
+    "sha256": "3ed9f490ec3835e1e21eed65c003a23eaad82672adc6d176947b9776a96befb3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-005.json",
+    "bytes": 37688,
+    "sha256": "e085ffc9623723d3f6e4aa0b95825a25a06e6638ba2cf5668f2816a6ddcf36f7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-006.json",
+    "bytes": 37704,
+    "sha256": "f09fe364ec5886e4fc382a5a1dd3f68ee04694525e14e04c3a1a8bad5ce3b923",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-007.json",
+    "bytes": 38880,
+    "sha256": "775b1dfb27f2382d56bef79903f31d6f306a984786f829d95b40be9d34fb374a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-008.json",
+    "bytes": 39744,
+    "sha256": "8743521a422df3a737a8526833e21b83d1b35e91db10f54737417b47515e8bad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-009.json",
+    "bytes": 37520,
+    "sha256": "13be9745516a8c4be00e1f14d54b3d041f297c5dff0a09362d5d52bb85b28efd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-010.json",
+    "bytes": 37748,
+    "sha256": "277516deb5a8ffb8924bb0a307660cb830c53cf1e11cb7be78b2edc5c610e26a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-011.json",
+    "bytes": 39360,
+    "sha256": "df257a269e1d1f528a096f8f4f8af3f38c2e7d9e7c96d56fad213a757659a0fa",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-012.json",
+    "bytes": 37616,
+    "sha256": "6795f296e55b90868958f7e679b3a0a8cb4492b4347b39c871f603e58e1e813d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-013.json",
+    "bytes": 39592,
+    "sha256": "c63fe223c1590975f685f7fbd315c25fa398402b9ac7b9f0da3aba9793c74e01",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-014.json",
+    "bytes": 38728,
+    "sha256": "bcbaaaeb8a6584975885984ad85d62f8adaa7bfa0668ec163fb55aba09549a80",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-015.json",
+    "bytes": 39708,
+    "sha256": "d4b76341d0973c84fe1f30b6c35d88f6ad79d2a28a160bd128f95456ada1c8ff",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-016.json",
+    "bytes": 38212,
+    "sha256": "ede7460a6630f377bd2805b6a17316f49c23a5ac6fc1440899f21c24c1346f71",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-017.json",
+    "bytes": 38356,
+    "sha256": "ac3fd55376b5a75607337829b3340a7b6e97ccedd509e562220aa404bd4941f2",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-018.json",
+    "bytes": 39456,
+    "sha256": "5f7207cb1100e0e076e5da309aa8ae09a44adff48b574e0e54cf888677ba8d0a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-019.json",
+    "bytes": 40292,
+    "sha256": "af8caec59bf6860088877a8e0b6c5cbd8057fd6fc1744484995220c383a60e0d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-020.json",
+    "bytes": 37108,
+    "sha256": "17f14b52440a7217cd5efbf902b26353fa181eeb4be19639d65324287c884227",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-021.json",
+    "bytes": 38228,
+    "sha256": "9297cf29381f5d420e99107fcb3abe8956de384f87b05b6b3dfcb986cf040dd5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-022.json",
+    "bytes": 38804,
+    "sha256": "aefae2403d0da714f3692b13bd2a024108e727f838ea88bc64fbea6fa7983111",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-023.json",
+    "bytes": 39644,
+    "sha256": "c9c4647658ae5c6c4f943a4ba3a3cc957bd181a7b3c1ee15005fcc982d0ee37f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-024.json",
+    "bytes": 37568,
+    "sha256": "1d46fe02c05c69e87ed8fa3f05c6c95879dbaf56937e0b41eb7c04cb8bc1c190",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-025.json",
+    "bytes": 36952,
+    "sha256": "f58bc0d6fde641edc33371c3b9b8dbefaf509bd445d7c0a17d972b7443d3db36",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-026.json",
+    "bytes": 37180,
+    "sha256": "fecf1056b7700d6b6b2b9ac928ee574d9f912e0741880fc1d10d064a432980de",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-027.json",
+    "bytes": 38036,
+    "sha256": "3fcd041ea908e25cf40ffa48e004c2857e5e48e7619b9db3524f23d4159720c4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-028.json",
+    "bytes": 36208,
+    "sha256": "a41a1595a39e55b4c881c710f35dae97a33d6d85cbaef2429b6563e761d5fd0e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-029.json",
+    "bytes": 36788,
+    "sha256": "bee88119abd47b42568babf8ab7ab7ce877aa06db794601614083947ce8bf615",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-030.json",
+    "bytes": 36616,
+    "sha256": "ba3a94fb9d0125259a6f41e97ed6a8741f95c39f95aecb72ae2292d162ef2a4e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-031.json",
+    "bytes": 39396,
+    "sha256": "b2f8f46ac3f7a312e7d072180d4c05bc1234585ced3192129922c3fe2b3f9ebd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-032.json",
+    "bytes": 35980,
+    "sha256": "ec45c2a5904a45ba522a179777f4c079367648ac80e612416b5a478dce75b267",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-033.json",
+    "bytes": 32848,
+    "sha256": "4c96fe66cdd0201b9f03c0d0d3a3e2f0e9fdeefae410cbd4500a405e060d9346",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-034.json",
+    "bytes": 31396,
+    "sha256": "354ecbedec8b19ec5cf708720b170fc9cfe1a56470d4ffe80aa06138ae994698",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-035.json",
+    "bytes": 30384,
+    "sha256": "766c19a83dd3c662c633ca38f77127a9e12a0092c89239cedcf7aa0a5344e079",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-036.json",
+    "bytes": 29848,
+    "sha256": "56d3165b83d4ed05fdd281099956534c15715e5342762b6fc36469d87d0b79d0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-037.json",
+    "bytes": 30028,
+    "sha256": "7694d0b0828f206ef3a59d514ae8d5f5b67bd46e67e7c3119bb76184b5d12b0f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-038.json",
+    "bytes": 30452,
+    "sha256": "7f9c9224acdc7a80c2ec126e83dd8cf4249c9d7c3961601eeadc6afef5d508a1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-039.json",
+    "bytes": 32088,
+    "sha256": "bf37d840b070fdbdadef0a36a52fee82b5ee33dc2b8c981b62b992ef8e65f183",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-040.json",
+    "bytes": 30340,
+    "sha256": "861b3f4889439a2fb3d7dfd53a3c5d553fa8ac514b764fe8b0594024e04b6743",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-041.json",
+    "bytes": 22480,
+    "sha256": "46e509401e8befe7929ab9444ee7729e758f60fcca3b97fe98b8c5f7a9b78c2c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-substitutions-index.json",
+    "bytes": 12857,
+    "sha256": "652ab02d9cf1e3eaf6767bea900fe8567e4a42064868f8e5b870ae0bc3fa50c3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-001.json",
+    "bytes": 64540,
+    "sha256": "5f11a193ea95ab2bcaf68383c0282af743da9b0fd45806305e304fe8b7a6d8fd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-002.json",
+    "bytes": 47004,
+    "sha256": "4d29624e6fd8ccd99448e1c9d9f5774a7f06b0e95c264f1264ff2524143eae54",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-003.json",
+    "bytes": 49028,
+    "sha256": "ffc52661be18f89bf5452c16373c6109c3eb2dfdd01d4a98332add72d1e552cc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-004.json",
+    "bytes": 46800,
+    "sha256": "2229ceba0ada38b377b2fd64f8f7ba1d1ca4a09821f516061a40b18730b930b1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-005.json",
+    "bytes": 50992,
+    "sha256": "e24893ff758e8d68d5754c9ddb273606ba6a6099fc089c3ebac3c5f76a6f06f9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-006.json",
+    "bytes": 51024,
+    "sha256": "a7fd2800d4509d4ae4f7df3e30216f27f99702f1a944a6f5df59a0720a3c1fa6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-007.json",
+    "bytes": 44332,
+    "sha256": "181c86bd55c9c343b5ae5ae2431a06e1ad2828b1c76d68c4e9af6bbcd00f4782",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-008.json",
+    "bytes": 32768,
+    "sha256": "e276f3e5c9c895b29d550eb2d58505d9dc682dacfffeb8223441c1e6a73fe2a7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-009.json",
+    "bytes": 32628,
+    "sha256": "0bf86f496539b8575c0bd4dc7936ec701f9ccb3a562947b964f63970d55a5ea9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-010.json",
+    "bytes": 32524,
+    "sha256": "7b2634b89464f13a2c87715d517df80d655b190dafeb6ef1da0e5991d94a324f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-011.json",
+    "bytes": 12216,
+    "sha256": "16a47503b4d44ab6a5521ee085e943de8c833826c214abd034575c4fbbae5b01",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/demon-balance-packed/demon-zero-base-index.json",
+    "bytes": 3744,
+    "sha256": "ef09386d8114436b0322e4b175c5685f91f38ecc31d077e06e99f508ea46e894",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-source/demon-before-lab.json",
+    "bytes": 56552,
+    "sha256": "ac876ab0e16ce753020902b3d10e4095e9f1d44c69ae3f5698ca51a1a94bc92b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-source/demon-final-lab.json",
+    "bytes": 60119,
+    "sha256": "cb8d6b32316d30b40f7a7a2dcdc4a4f72c79239cee2e0d687de8a26c428084b8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-source/demon-initial-v1.json",
+    "bytes": 60028,
+    "sha256": "610d0c9e855841d8368f8ea9f0e53f4923ad3684af1bc56ee36ea8609d2f007e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-source/slime-final.json",
+    "bytes": 53947,
+    "sha256": "fdd90f5bfb87cf20367da610ed4359ce5304bc281feaa6939773000e0bb21ac3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-summary.json",
+    "bytes": 11501,
+    "sha256": "5c795e4bb03f70ccd8660a0ef0872b47c4facbdd2cafb2b5855bafa0f637e1e9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-validation.json",
+    "bytes": 1653,
+    "sha256": "e92d9061637fd37dbd4f847d580265dcfea17cb37428eec0487c2dfa4a7d1311",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-balance-verification.json",
+    "bytes": 26585,
+    "sha256": "2c201f868b5b45dc1896bbed6d6c3673c78d12595302e62077fcf51b95c5caae",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-bonus-off-summary.json",
+    "bytes": 59602,
+    "sha256": "a224b87766d85bdfa39148afadb3857af33db0e9d27fd389294ffc0d951e5c64",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-broad-c17-mixed-summary.json",
+    "bytes": 56175,
+    "sha256": "b01aed9b678759752f20e446efedbfa47eecad4e6002cc431d1840ee4c2618f1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-broad-puredemon-summary.json",
+    "bytes": 56025,
+    "sha256": "45a6fac6f70ad7a4569b74ca6593e5ae890c75b5f15c5130c171688a912334e7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-broad-summary.json",
+    "bytes": 7913,
+    "sha256": "c83ebae3d8d57555669bbb2ceafc2e85399a869fb4e820041622acfed6803373",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-enabled-summary.json",
+    "bytes": 59555,
+    "sha256": "58d5c415a707668ccb84115382c0fbf57e65542caf7f839c8af8b610b5e6957c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-family-reference.md",
+    "bytes": 24525,
+    "sha256": "00f26884e55dc6c2532cb5e54aab778b5140257ce4adf3fdd157ab11f0cfd75b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/demon-full-off-summary.json",
+    "bytes": 58868,
+    "sha256": "1072ff96b76f85a0966a0e0e66281a0eda6c05c9eaae8ca51e719352ab171274",
+    "disposition": "shipped"
+  }
+]

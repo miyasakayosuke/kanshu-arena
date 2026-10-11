@@ -1,0 +1,104 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/shared/kanshu-arena-all-family-balance
+
+ ✓ src/balanceLabAllFamilyLeaderFollowup.test.ts (13 tests) 187ms
+ ✓ src/balanceLabAllFamilyEvidence.test.ts (32 tests) 26ms
+ ✓ src/balanceLabAllFamilyPureConfirmation.test.ts (4 tests) 89ms
+
+ Test Files  3 passed (3)
+      Tests  49 passed (49)
+   Start at  19:57:04
+   Duration  1.86s (transform 324ms, setup 0ms, collect 524ms, tests 303ms, environment 1ms, prepare 323ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+TypeScript after follow-up preflight: exit0. No battle outcomes before both derived freezes.
+
+=== Final complete serial Lab sweep after both follow-ups. ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/shared/kanshu-arena-all-family-balance
+
+ ✓ src/balanceLabMaterialCli.test.ts (3 tests) 5136ms
+   ✓ material CLI replay and failure evidence in isolated source copies > writes material metrics and replays optional default/tuned snapshots in both orientations  1277ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=false)  1933ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=true)  1923ms
+ ✓ src/balanceLabCli.test.ts (17 tests) 4558ms
+   ✓ balance lab real CLI integration > clears a stale failure after a successful explicit overwrite and preserves unrelated files  567ms
+   ✓ balance lab real CLI integration > removes previous success evidence when an explicit overwrite produces a captured failure  545ms
+ ✓ src/balanceLabSlimeCli.test.ts (3 tests) 5161ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > writes metrics and replays supply on both sides; rejects config/source changes  1316ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=false  1899ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=true  1943ms
+ ✓ src/balanceLabExtraordinaryCli.test.ts (3 tests) 4644ms
+   ✓ extraordinary source/config/CLI exact replay > replays response on both physical sides and rejects source/config/trace changes  1454ms
+   ✓ extraordinary source/config/CLI exact replay > keeps and reproduces exact response-bearing failure right=false  1600ms
+   ✓ extraordinary source/config/CLI exact replay > keeps and reproduces exact response-bearing failure right=true  1587ms
+ ✓ src/balanceLabUndeadCli.test.ts (3 tests) 5254ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > writes metrics and replays cashout on both sides; rejects config/source changes  1336ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > preserves/reproduces cashout-bearing failures and rejects corrupted snapshots, right=false  1944ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > preserves/reproduces cashout-bearing failures and rejects corrupted snapshots, right=true  1971ms
+ ✓ src/balanceLabAllFamilyCli.test.ts (3 tests) 5626ms
+   ✓ systemic CLI source/config replay and complete failure snapshots > replays both physical sides with explicit reservation=false  2423ms
+   ✓ systemic CLI source/config replay and complete failure snapshots > replays both physical sides with explicit reservation=true  2579ms
+   ✓ systemic CLI source/config replay and complete failure snapshots > retains explicit zero/false in a partial failure and reproduces the failure exactly  620ms
+ ✓ src/balanceLabDragonCli.test.ts (2 tests) 1240ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=false)  623ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=true)  616ms
+ ✓ src/balanceLab.test.ts (82 tests) 1992ms
+   ✓ paired baseline/candidate suite controls > is byte-for-byte deterministic and does not mutate a frozen configuration or production roster  503ms
+ ✓ src/balanceLabMaterial.test.ts (44 tests) 1356ms
+   ✓ material same-policy accounting and replay evidence > preserves absent tuning and consumed readiness in snapshots and tuned replay on either physical side  577ms
+   ✓ material same-policy accounting and replay evidence > reproduces identity candidates and reports disabled support as absent throughout the trace  346ms
+ ✓ src/balanceLabSlime.test.ts (40 tests) 1238ms
+   ✓ slime authoritative accounting and deterministic replay > preserves optional readiness/amount snapshots and verifies identity/tuned replay on both physical sides  808ms
+ ✓ src/balanceLabUndead.test.ts (62 tests) 1145ms
+   ✓ undead actual impact and resource accounting > retains loss/overkill/reapplication and replay hashes under the stock same-AI policy  740ms
+ ✓ src/balanceLabExtraordinary.test.ts (38 tests) 639ms
+   ✓ extraordinary isolated typed Lab contract > never borrows natural slime MP and retains exact enabled control and disabled shared policy  476ms
+ ✓ src/balanceLabDemon.test.ts (72 tests) 1715ms
+   ✓ demon Lab loss ledger, actual casts and replay > preserves absent-versus-zero bonus in snapshots and reproduces tuned/identity reports  1070ms
+ ✓ src/balanceLabDragon.test.ts (34 tests) 1127ms
+   ✓ dragon lab strict config and isolated state > validates every bundled dragon configuration and preserves original old-family membership  338ms
+   ✓ dragon same-policy evidence > preserves charge and explicit perPoint in traces/replays on both physical sides  386ms
+ ✓ src/balanceLabFamilyWave.test.ts (36 tests) 717ms
+ ✓ src/balanceLabAllFamily.test.ts (9 tests) 485ms
+   ✓ all-family fixed inputs and isolated controls > derives every scale in both arms, never redraws seeds and stays within the legacy workload cap  326ms
+ ✓ src/balanceLabDemonFailure.test.ts (51 tests) 304ms
+ ✓ src/balanceLabUndeadTiming.test.ts (4 tests) 237ms
+ ✓ src/balanceLabUndeadFailure.test.ts (44 tests) 277ms
+ ✓ src/balanceLabExtraordinaryFailure.test.ts (38 tests) 287ms
+ ✓ src/balanceLabMaterialFailure.test.ts (34 tests) 233ms
+ ✓ src/balanceLabExtraordinarySynthetic.test.ts (9 tests) 139ms
+ ✓ src/balanceLabDragonFailure.test.ts (12 tests) 76ms
+ ✓ src/balanceLabSlimeFailure.test.ts (33 tests) 201ms
+ ✓ src/balanceLabAllFamilyLeaderFollowup.test.ts (13 tests) 168ms
+ ✓ src/balanceLabAllFamilyFailure.test.ts (7 tests) 73ms
+ ✓ src/balanceLabAllFamilyPureConfirmation.test.ts (4 tests) 53ms
+ ✓ src/balanceLabFailure.test.ts (4 tests) 50ms
+ ✓ src/balanceLabWardFailure.test.ts (10 tests) 62ms
+ ✓ src/balanceLabAllFamilyEvidence.test.ts (32 tests) 13ms
+
+ Test Files  30 passed (30)
+      Tests  746 passed (746)
+   Start at  20:26:48
+   Duration  53.22s (transform 677ms, setup 0ms, collect 1.79s, tests 44.21s, environment 5ms, prepare 2.19s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+=== Final TypeScript. ===
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

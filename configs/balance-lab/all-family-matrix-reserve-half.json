@@ -1,0 +1,1680 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "all-family-matrix-reserve-half",
+  "seeds": [
+    1062672840,
+    3717108601,
+    2076577066,
+    436045531,
+    3090481292,
+    1449949757,
+    4104385518,
+    2463853983,
+    823322448,
+    3477758209,
+    1837226674,
+    196695139,
+    2851130900,
+    1210599365,
+    3865035126,
+    2224503591
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "推薦純獣・先手と5獣連撃"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "推薦純自然・C15、毒3体と開幕障壁"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "推薦純竜・攻撃蓄積と後攻解放"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "推薦純物質・有限修復と重撃"
+    },
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "推薦純粘体・有限MP補給"
+    },
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "推薦純悪魔・MP圧力と解除"
+    },
+    {
+      "id": "pureundead",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "推薦純不死・毒残回数の交換"
+    },
+    {
+      "id": "janus-mixed",
+      "ids": [
+        36,
+        12,
+        2,
+        30,
+        26
+      ],
+      "role": "推薦超常混成・広域応答と速攻/解除。固定対策候補1"
+    },
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "既知の支配的な合法C17自然+粘体"
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "既知の支配的な別型C17自然+粘体"
+    },
+    {
+      "id": "old-triple-poison",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "旧毒3体・C15・単体清めと回復"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "有限修復、二つの清め、重撃。固定対策候補2"
+    },
+    {
+      "id": "slime-strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "既知のC17全体攻撃混成"
+    },
+    {
+      "id": "slime-strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "既知のC17毒混成"
+    },
+    {
+      "id": "undead-reapply",
+      "ids": [
+        32,
+        4,
+        33,
+        3,
+        10
+      ],
+      "role": "不死3体の毒交換後に遅いナーガが再付与するC17"
+    },
+    {
+      "id": "janus-poison",
+      "ids": [
+        36,
+        4,
+        3,
+        10,
+        30
+      ],
+      "role": "超常/不死/自然/悪魔4種類、毒3体C15"
+    },
+    {
+      "id": "janus-ward",
+      "ids": [
+        36,
+        14,
+        10,
+        20,
+        35
+      ],
+      "role": "4種類C16、自然障壁と共通応答"
+    },
+    {
+      "id": "demon-dual-cleanse",
+      "ids": [
+        29,
+        8,
+        30,
+        7,
+        2
+      ],
+      "role": "MP圧力と二つの清め。固定対策候補3"
+    },
+    {
+      "id": "dragon-cleanse-mixed",
+      "ids": [
+        15,
+        16,
+        18,
+        7,
+        2
+      ],
+      "role": "竜3体と二つの汎用手当て、C17"
+    },
+    {
+      "id": "material-break-mixed",
+      "ids": [
+        19,
+        20,
+        22,
+        11,
+        3
+      ],
+      "role": "物質3体、解除と単体重撃、毒/回復C17"
+    },
+    {
+      "id": "slime-break-mixed",
+      "ids": [
+        24,
+        25,
+        27,
+        11,
+        7
+      ],
+      "role": "粘体3体、補給と解除/回復C17"
+    },
+    {
+      "id": "demon-poison-mixed",
+      "ids": [
+        29,
+        30,
+        31,
+        2,
+        3
+      ],
+      "role": "悪魔3体、毒/回復を添えるC17"
+    },
+    {
+      "id": "undead-burst-mixed",
+      "ids": [
+        32,
+        4,
+        35,
+        12,
+        3
+      ],
+      "role": "不死3体、獣の連撃と毒/回復C17"
+    },
+    {
+      "id": "beast-heavy-mixed",
+      "ids": [
+        12,
+        13,
+        2,
+        23,
+        7
+      ],
+      "role": "獣4体と重撃C17。5獣の連弾追加は不成立"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "pair-1-2",
+      "a": "fullbeast",
+      "b": "fullnature"
+    },
+    {
+      "id": "pair-1-3",
+      "a": "fullbeast",
+      "b": "puredragon"
+    },
+    {
+      "id": "pair-1-4",
+      "a": "fullbeast",
+      "b": "purematerial"
+    },
+    {
+      "id": "pair-1-5",
+      "a": "fullbeast",
+      "b": "pureslime"
+    },
+    {
+      "id": "pair-1-6",
+      "a": "fullbeast",
+      "b": "puredemon"
+    },
+    {
+      "id": "pair-1-7",
+      "a": "fullbeast",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-1-8",
+      "a": "fullbeast",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-1-9",
+      "a": "fullbeast",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-1-10",
+      "a": "fullbeast",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-1-11",
+      "a": "fullbeast",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-1-12",
+      "a": "fullbeast",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-1-13",
+      "a": "fullbeast",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-1-14",
+      "a": "fullbeast",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-1-15",
+      "a": "fullbeast",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-1-16",
+      "a": "fullbeast",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-1-17",
+      "a": "fullbeast",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-1-18",
+      "a": "fullbeast",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-1-19",
+      "a": "fullbeast",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-1-20",
+      "a": "fullbeast",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-1-21",
+      "a": "fullbeast",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-1-22",
+      "a": "fullbeast",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-1-23",
+      "a": "fullbeast",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-1-24",
+      "a": "fullbeast",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-2-3",
+      "a": "fullnature",
+      "b": "puredragon"
+    },
+    {
+      "id": "pair-2-4",
+      "a": "fullnature",
+      "b": "purematerial"
+    },
+    {
+      "id": "pair-2-5",
+      "a": "fullnature",
+      "b": "pureslime"
+    },
+    {
+      "id": "pair-2-6",
+      "a": "fullnature",
+      "b": "puredemon"
+    },
+    {
+      "id": "pair-2-7",
+      "a": "fullnature",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-2-8",
+      "a": "fullnature",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-2-9",
+      "a": "fullnature",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-2-10",
+      "a": "fullnature",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-2-11",
+      "a": "fullnature",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-2-12",
+      "a": "fullnature",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-2-13",
+      "a": "fullnature",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-2-14",
+      "a": "fullnature",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-2-15",
+      "a": "fullnature",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-2-16",
+      "a": "fullnature",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-2-17",
+      "a": "fullnature",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-2-18",
+      "a": "fullnature",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-2-19",
+      "a": "fullnature",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-2-20",
+      "a": "fullnature",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-2-21",
+      "a": "fullnature",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-2-22",
+      "a": "fullnature",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-2-23",
+      "a": "fullnature",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-2-24",
+      "a": "fullnature",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-3-4",
+      "a": "puredragon",
+      "b": "purematerial"
+    },
+    {
+      "id": "pair-3-5",
+      "a": "puredragon",
+      "b": "pureslime"
+    },
+    {
+      "id": "pair-3-6",
+      "a": "puredragon",
+      "b": "puredemon"
+    },
+    {
+      "id": "pair-3-7",
+      "a": "puredragon",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-3-8",
+      "a": "puredragon",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-3-9",
+      "a": "puredragon",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-3-10",
+      "a": "puredragon",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-3-11",
+      "a": "puredragon",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-3-12",
+      "a": "puredragon",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-3-13",
+      "a": "puredragon",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-3-14",
+      "a": "puredragon",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-3-15",
+      "a": "puredragon",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-3-16",
+      "a": "puredragon",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-3-17",
+      "a": "puredragon",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-3-18",
+      "a": "puredragon",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-3-19",
+      "a": "puredragon",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-3-20",
+      "a": "puredragon",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-3-21",
+      "a": "puredragon",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-3-22",
+      "a": "puredragon",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-3-23",
+      "a": "puredragon",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-3-24",
+      "a": "puredragon",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-4-5",
+      "a": "purematerial",
+      "b": "pureslime"
+    },
+    {
+      "id": "pair-4-6",
+      "a": "purematerial",
+      "b": "puredemon"
+    },
+    {
+      "id": "pair-4-7",
+      "a": "purematerial",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-4-8",
+      "a": "purematerial",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-4-9",
+      "a": "purematerial",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-4-10",
+      "a": "purematerial",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-4-11",
+      "a": "purematerial",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-4-12",
+      "a": "purematerial",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-4-13",
+      "a": "purematerial",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-4-14",
+      "a": "purematerial",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-4-15",
+      "a": "purematerial",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-4-16",
+      "a": "purematerial",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-4-17",
+      "a": "purematerial",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-4-18",
+      "a": "purematerial",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-4-19",
+      "a": "purematerial",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-4-20",
+      "a": "purematerial",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-4-21",
+      "a": "purematerial",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-4-22",
+      "a": "purematerial",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-4-23",
+      "a": "purematerial",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-4-24",
+      "a": "purematerial",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-5-6",
+      "a": "pureslime",
+      "b": "puredemon"
+    },
+    {
+      "id": "pair-5-7",
+      "a": "pureslime",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-5-8",
+      "a": "pureslime",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-5-9",
+      "a": "pureslime",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-5-10",
+      "a": "pureslime",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-5-11",
+      "a": "pureslime",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-5-12",
+      "a": "pureslime",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-5-13",
+      "a": "pureslime",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-5-14",
+      "a": "pureslime",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-5-15",
+      "a": "pureslime",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-5-16",
+      "a": "pureslime",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-5-17",
+      "a": "pureslime",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-5-18",
+      "a": "pureslime",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-5-19",
+      "a": "pureslime",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-5-20",
+      "a": "pureslime",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-5-21",
+      "a": "pureslime",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-5-22",
+      "a": "pureslime",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-5-23",
+      "a": "pureslime",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-5-24",
+      "a": "pureslime",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-6-7",
+      "a": "puredemon",
+      "b": "pureundead"
+    },
+    {
+      "id": "pair-6-8",
+      "a": "puredemon",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-6-9",
+      "a": "puredemon",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-6-10",
+      "a": "puredemon",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-6-11",
+      "a": "puredemon",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-6-12",
+      "a": "puredemon",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-6-13",
+      "a": "puredemon",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-6-14",
+      "a": "puredemon",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-6-15",
+      "a": "puredemon",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-6-16",
+      "a": "puredemon",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-6-17",
+      "a": "puredemon",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-6-18",
+      "a": "puredemon",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-6-19",
+      "a": "puredemon",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-6-20",
+      "a": "puredemon",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-6-21",
+      "a": "puredemon",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-6-22",
+      "a": "puredemon",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-6-23",
+      "a": "puredemon",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-6-24",
+      "a": "puredemon",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-7-8",
+      "a": "pureundead",
+      "b": "janus-mixed"
+    },
+    {
+      "id": "pair-7-9",
+      "a": "pureundead",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-7-10",
+      "a": "pureundead",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-7-11",
+      "a": "pureundead",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-7-12",
+      "a": "pureundead",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-7-13",
+      "a": "pureundead",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-7-14",
+      "a": "pureundead",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-7-15",
+      "a": "pureundead",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-7-16",
+      "a": "pureundead",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-7-17",
+      "a": "pureundead",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-7-18",
+      "a": "pureundead",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-7-19",
+      "a": "pureundead",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-7-20",
+      "a": "pureundead",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-7-21",
+      "a": "pureundead",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-7-22",
+      "a": "pureundead",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-7-23",
+      "a": "pureundead",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-7-24",
+      "a": "pureundead",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-8-9",
+      "a": "janus-mixed",
+      "b": "nature-brute-dryas"
+    },
+    {
+      "id": "pair-8-10",
+      "a": "janus-mixed",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-8-11",
+      "a": "janus-mixed",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-8-12",
+      "a": "janus-mixed",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-8-13",
+      "a": "janus-mixed",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-8-14",
+      "a": "janus-mixed",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-8-15",
+      "a": "janus-mixed",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-8-16",
+      "a": "janus-mixed",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-8-17",
+      "a": "janus-mixed",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-8-18",
+      "a": "janus-mixed",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-8-19",
+      "a": "janus-mixed",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-8-20",
+      "a": "janus-mixed",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-8-21",
+      "a": "janus-mixed",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-8-22",
+      "a": "janus-mixed",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-8-23",
+      "a": "janus-mixed",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-8-24",
+      "a": "janus-mixed",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-9-10",
+      "a": "nature-brute-dryas",
+      "b": "nature-brute-tengu"
+    },
+    {
+      "id": "pair-9-11",
+      "a": "nature-brute-dryas",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-9-12",
+      "a": "nature-brute-dryas",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-9-13",
+      "a": "nature-brute-dryas",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-9-14",
+      "a": "nature-brute-dryas",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-9-15",
+      "a": "nature-brute-dryas",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-9-16",
+      "a": "nature-brute-dryas",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-9-17",
+      "a": "nature-brute-dryas",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-9-18",
+      "a": "nature-brute-dryas",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-9-19",
+      "a": "nature-brute-dryas",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-9-20",
+      "a": "nature-brute-dryas",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-9-21",
+      "a": "nature-brute-dryas",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-9-22",
+      "a": "nature-brute-dryas",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-9-23",
+      "a": "nature-brute-dryas",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-9-24",
+      "a": "nature-brute-dryas",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-10-11",
+      "a": "nature-brute-tengu",
+      "b": "old-triple-poison"
+    },
+    {
+      "id": "pair-10-12",
+      "a": "nature-brute-tengu",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-10-13",
+      "a": "nature-brute-tengu",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-10-14",
+      "a": "nature-brute-tengu",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-10-15",
+      "a": "nature-brute-tengu",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-10-16",
+      "a": "nature-brute-tengu",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-10-17",
+      "a": "nature-brute-tengu",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-10-18",
+      "a": "nature-brute-tengu",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-10-19",
+      "a": "nature-brute-tengu",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-10-20",
+      "a": "nature-brute-tengu",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-10-21",
+      "a": "nature-brute-tengu",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-10-22",
+      "a": "nature-brute-tengu",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-10-23",
+      "a": "nature-brute-tengu",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-10-24",
+      "a": "nature-brute-tengu",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-11-12",
+      "a": "old-triple-poison",
+      "b": "material-strong"
+    },
+    {
+      "id": "pair-11-13",
+      "a": "old-triple-poison",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-11-14",
+      "a": "old-triple-poison",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-11-15",
+      "a": "old-triple-poison",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-11-16",
+      "a": "old-triple-poison",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-11-17",
+      "a": "old-triple-poison",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-11-18",
+      "a": "old-triple-poison",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-11-19",
+      "a": "old-triple-poison",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-11-20",
+      "a": "old-triple-poison",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-11-21",
+      "a": "old-triple-poison",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-11-22",
+      "a": "old-triple-poison",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-11-23",
+      "a": "old-triple-poison",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-11-24",
+      "a": "old-triple-poison",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-12-13",
+      "a": "material-strong",
+      "b": "slime-strong-area"
+    },
+    {
+      "id": "pair-12-14",
+      "a": "material-strong",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-12-15",
+      "a": "material-strong",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-12-16",
+      "a": "material-strong",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-12-17",
+      "a": "material-strong",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-12-18",
+      "a": "material-strong",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-12-19",
+      "a": "material-strong",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-12-20",
+      "a": "material-strong",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-12-21",
+      "a": "material-strong",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-12-22",
+      "a": "material-strong",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-12-23",
+      "a": "material-strong",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-12-24",
+      "a": "material-strong",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-13-14",
+      "a": "slime-strong-area",
+      "b": "slime-strong-poison"
+    },
+    {
+      "id": "pair-13-15",
+      "a": "slime-strong-area",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-13-16",
+      "a": "slime-strong-area",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-13-17",
+      "a": "slime-strong-area",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-13-18",
+      "a": "slime-strong-area",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-13-19",
+      "a": "slime-strong-area",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-13-20",
+      "a": "slime-strong-area",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-13-21",
+      "a": "slime-strong-area",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-13-22",
+      "a": "slime-strong-area",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-13-23",
+      "a": "slime-strong-area",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-13-24",
+      "a": "slime-strong-area",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-14-15",
+      "a": "slime-strong-poison",
+      "b": "undead-reapply"
+    },
+    {
+      "id": "pair-14-16",
+      "a": "slime-strong-poison",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-14-17",
+      "a": "slime-strong-poison",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-14-18",
+      "a": "slime-strong-poison",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-14-19",
+      "a": "slime-strong-poison",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-14-20",
+      "a": "slime-strong-poison",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-14-21",
+      "a": "slime-strong-poison",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-14-22",
+      "a": "slime-strong-poison",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-14-23",
+      "a": "slime-strong-poison",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-14-24",
+      "a": "slime-strong-poison",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-15-16",
+      "a": "undead-reapply",
+      "b": "janus-poison"
+    },
+    {
+      "id": "pair-15-17",
+      "a": "undead-reapply",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-15-18",
+      "a": "undead-reapply",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-15-19",
+      "a": "undead-reapply",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-15-20",
+      "a": "undead-reapply",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-15-21",
+      "a": "undead-reapply",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-15-22",
+      "a": "undead-reapply",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-15-23",
+      "a": "undead-reapply",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-15-24",
+      "a": "undead-reapply",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-16-17",
+      "a": "janus-poison",
+      "b": "janus-ward"
+    },
+    {
+      "id": "pair-16-18",
+      "a": "janus-poison",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-16-19",
+      "a": "janus-poison",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-16-20",
+      "a": "janus-poison",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-16-21",
+      "a": "janus-poison",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-16-22",
+      "a": "janus-poison",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-16-23",
+      "a": "janus-poison",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-16-24",
+      "a": "janus-poison",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-17-18",
+      "a": "janus-ward",
+      "b": "demon-dual-cleanse"
+    },
+    {
+      "id": "pair-17-19",
+      "a": "janus-ward",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-17-20",
+      "a": "janus-ward",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-17-21",
+      "a": "janus-ward",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-17-22",
+      "a": "janus-ward",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-17-23",
+      "a": "janus-ward",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-17-24",
+      "a": "janus-ward",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-18-19",
+      "a": "demon-dual-cleanse",
+      "b": "dragon-cleanse-mixed"
+    },
+    {
+      "id": "pair-18-20",
+      "a": "demon-dual-cleanse",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-18-21",
+      "a": "demon-dual-cleanse",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-18-22",
+      "a": "demon-dual-cleanse",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-18-23",
+      "a": "demon-dual-cleanse",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-18-24",
+      "a": "demon-dual-cleanse",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-19-20",
+      "a": "dragon-cleanse-mixed",
+      "b": "material-break-mixed"
+    },
+    {
+      "id": "pair-19-21",
+      "a": "dragon-cleanse-mixed",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-19-22",
+      "a": "dragon-cleanse-mixed",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-19-23",
+      "a": "dragon-cleanse-mixed",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-19-24",
+      "a": "dragon-cleanse-mixed",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-20-21",
+      "a": "material-break-mixed",
+      "b": "slime-break-mixed"
+    },
+    {
+      "id": "pair-20-22",
+      "a": "material-break-mixed",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-20-23",
+      "a": "material-break-mixed",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-20-24",
+      "a": "material-break-mixed",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-21-22",
+      "a": "slime-break-mixed",
+      "b": "demon-poison-mixed"
+    },
+    {
+      "id": "pair-21-23",
+      "a": "slime-break-mixed",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-21-24",
+      "a": "slime-break-mixed",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-22-23",
+      "a": "demon-poison-mixed",
+      "b": "undead-burst-mixed"
+    },
+    {
+      "id": "pair-22-24",
+      "a": "demon-poison-mixed",
+      "b": "beast-heavy-mixed"
+    },
+    {
+      "id": "pair-23-24",
+      "a": "undead-burst-mixed",
+      "b": "beast-heavy-mixed"
+    }
+  ],
+  "candidate": {
+    "id": "reserve-half",
+    "label": "Frozen poison impact 0.5; reserve production policy; applied to both physical sides",
+    "overrides": {
+      "poisonImpactScale": 0.5,
+      "reservePoison": true
+    }
+  },
+  "complaints": []
+}

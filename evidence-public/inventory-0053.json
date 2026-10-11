@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-twomaterial.json",
+    "bytes": 54117,
+    "sha256": "de42478d708ce7f8dc21fd2e34eae242c714a04869d0bb891c645b536e9712de",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/12-final-source-material-repair-disabled-index.json",
+    "bytes": 3838,
+    "sha256": "ee6225fa6f1dd96f2b9ae76488b755618ecfb7c93446222e10c34d39da78ee86",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/12-final-source-material-repair-disabled-purematerial.json",
+    "bytes": 15974,
+    "sha256": "a590bf1ad69cc292466a76312f0f71d8459dcc753a55ccf8a3e7fb373bdcd1d8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/12-final-source-material-repair-disabled-threematerial.json",
+    "bytes": 15995,
+    "sha256": "ae7c4aca49634ecebc4cf0f31ca34fad04d455cc2c2b578cf9658be2e779a8f1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/13-final-source-material-repair-zero-index.json",
+    "bytes": 3810,
+    "sha256": "d4cb2cf0aec66ccd44b45b9eaa022e7f6ac1ef4dfb8e8a5f361c2813e98a3910",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/13-final-source-material-repair-zero-purematerial.json",
+    "bytes": 16007,
+    "sha256": "ded0b5c7cc727b5c34d450980956f294295aaa654b3fb6c0b45992991c309538",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/13-final-source-material-repair-zero-threematerial.json",
+    "bytes": 16027,
+    "sha256": "3eb5c89311c9fc9520fb5c604a2168a587c98ba72ea117f16c14eae114959b73",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-c17-bull.json",
+    "bytes": 29061,
+    "sha256": "d3f01571d6ee5f47ee33ecbede0734c69c7bdb516de9ec659f9848ccdce97ad0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-c17-healer.json",
+    "bytes": 29185,
+    "sha256": "03a9c7e734c210572443acc52e3b16726468a5c6c32a5772841f24f03b5d1859",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-c17-shield.json",
+    "bytes": 29033,
+    "sha256": "08db3b6a4c2f2ae07713dfe6bb9fa2240730ae5b97056bdad9c9880118f82922",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-index.json",
+    "bytes": 7298,
+    "sha256": "c5542cc025f3cf81d4bc4481fbc2d7db765ededdf1f2f98b3e9fc18f258f4569",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-mixed-bull.json",
+    "bytes": 29039,
+    "sha256": "dab8d6dee135667fdadf6b30501164ba0aa10e3537a8f88e7cf4f24f577d34f3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-mixed-healer.json",
+    "bytes": 29001,
+    "sha256": "4c023f315489ea028586fd0a30e67740508d6d3f27425492d8f7584592052ff4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-mixed-shield.json",
+    "bytes": 29041,
+    "sha256": "932c91d66b81a1d8f27e606573134b6ba75f94f31444bd81106fce3b51c94daa",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/14-final-source-material-coherent-identity-purematerial.json",
+    "bytes": 29203,
+    "sha256": "0d6a750ee2bafc1e6e02965caee8b6d443837886bf6e0adf984a3e6353264ed5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-core-nonleader.json",
+    "bytes": 16170,
+    "sha256": "adf5af573761cca984f4938b7c91edefcc01a94e9efd5785e4236779a64b68dd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-core-replaced.json",
+    "bytes": 15800,
+    "sha256": "5ac60e2a01acea83c305a763ea6cfdcd83939719528b8d2b39559fde6cb35133",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-index.json",
+    "bytes": 4955,
+    "sha256": "1bc11e3b3ec0fe85f02c2edc6b0e293ae4435971a85a73ee38fbda903aef9f82",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-purematerial.json",
+    "bytes": 16090,
+    "sha256": "b30221b003288612894ecfcef3d88a93c345400d9982eb2c23efd7d55cb1d971",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-threematerial.json",
+    "bytes": 16095,
+    "sha256": "f5e29e9d1f5beb214abdb10d865754e97a339c680d7fe3f70124762d8f13d918",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/15-final-source-material-restore18-twomaterial.json",
+    "bytes": 15842,
+    "sha256": "fc37770868b946e719d269c07b469342cb79576969a143a98df77f59ba3ac36e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/16-final-source-material-light-recommendation-index.json",
+    "bytes": 6243,
+    "sha256": "540b9508243eb9257b331e3fdde3f3d0bca7c00474db192c12500446f39d58af",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/16-final-source-material-light-recommendation-naga-shield.json",
+    "bytes": 35400,
+    "sha256": "c7ae5fbed53d2b54476a4a1c8db07f4798d041a8364cf90fd8e985cd283dc762",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/16-final-source-material-light-recommendation-ui-light.json",
+    "bytes": 35223,
+    "sha256": "b995a986421408b9f82474a3c03b73b55c4ec1e9310700d65af2adf3c4a4d555",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary.json",
+    "bytes": 5130,
+    "sha256": "313fe53746814f5fa11d06fdfb6888f89e65c77357eaf9c5b06f6e30fd135d5b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-verification.json",
+    "bytes": 9179,
+    "sha256": "8e246f3fc23ea5622aca46e3695fe9a20de71a54b8a391de6505352e6c2f9503",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-coherent-freeze.json",
+    "bytes": 10637,
+    "sha256": "ffae44419620707c9a382da04749355a680016b982e81709b579ba82e99c6e5b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-family-reference.md",
+    "bytes": 25573,
+    "sha256": "edec1e7cbe682c8e7b09f30e2ce29ab13ca152f86d2c835aaef02a2506be4726",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/playtest-adoption-v018.md",
+    "bytes": 7451,
+    "sha256": "ba195db89ade72fb712aee4db582940249bc3e23491930111c0c52c34d882809",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/playtest-guide.md",
+    "bytes": 4424,
+    "sha256": "a2fa5641cabb688d261dec8dda8ec28825a251d9e5b79f2948b852cd8feab29d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/poison-adoption-parity-freeze.json",
+    "bytes": 1533,
+    "sha256": "6ac20076f03ec4cd9aa5f98c281bdd4f0b0327d3288a651cec93e48b72d9b1fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/release-adoption-v018.json",
+    "bytes": 10146,
+    "sha256": "6847e572c446195b7024e5ed457c07ea8646663acce73958d16ff811943617a5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/release-adoption-v0181.json",
+    "bytes": 12767,
+    "sha256": "9051107b3cf4d3d15380680aa4ac432e509b28e398e188d7a013169a8df51189",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/release-validation-v018.json",
+    "bytes": 2091,
+    "sha256": "dc79193a40fb04ac5272ff8733ac3441ba958c1a80461c7f7e2f4dd67fc8c5a2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/release-validation-v0181.json",
+    "bytes": 3547,
+    "sha256": "e4905d07ee418575d13ea20f8aa563cb478ea513120edd9f45b2b442c23bfcd1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/asset-manifest.json",
+    "bytes": 25470,
+    "sha256": "a9e33b2fd0c0800b05187a274a38b7a7a99e9da80d8388f420f4a252c3ece204",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/release-checklist.md",
+    "bytes": 6067,
+    "sha256": "a82b3edd3a4e5f17ef0aaf06562221f107a2b4f2dfbef687ca00c2d470860dc5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-poison-description.md",
+    "bytes": 2204,
+    "sha256": "a3b15325477c8dab54de96ddcc5f2f756c4c960e2ec0529e55a9c08a6de1fb84",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.11.md",
+    "bytes": 5823,
+    "sha256": "2826fb4d4d57458c42c08ed3d246f851200eff9a443ef60e87f63a5b024bfe3d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.12.md",
+    "bytes": 4652,
+    "sha256": "bc272f942d3527a9856cd58930c92529d8217da4ed50db52ba3c93de36f767b9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.13.md",
+    "bytes": 5199,
+    "sha256": "54e5e82d6ac8f136f012d0fdac21d07d369b344c9e84cd767212a9a4ff5179be",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.14.md",
+    "bytes": 3644,
+    "sha256": "1ffa9e7b128160df400457303b647f06b2338c0cf3ed9504d66ab782b47e4276",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.15.md",
+    "bytes": 2645,
+    "sha256": "be8cb9a76c7d62568e5c0edffe52628d34cc0b706c41c70a905d26d91221d22f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.16.md",
+    "bytes": 8198,
+    "sha256": "148aa6393123de1f3b4d0a335360a5b01bb805ed42522006c1177b976d0d9d25",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.17.md",
+    "bytes": 9885,
+    "sha256": "8c9ad2195239d5ccbb8ad2c1b5852a2212720c96f03f09f1cc4f5866417dc6aa",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.18.1.md",
+    "bytes": 2733,
+    "sha256": "2ef0b3517eb124dae770e2c8e531726d619bf6d62e71bdc470c1a7bb18887016",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/releases/2026-10-10-v0.18.md",
+    "bytes": 6516,
+    "sha256": "3840179ffef7c7fb2d2e720e66d2b3e5e11bf93c489ecc8c4f70cc0dbede6132",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/rights/review-ledger.md",
+    "bytes": 5881,
+    "sha256": "e0b83be4687a21e978b7bf621720bff56569ea7e123624a130c11abd054589e9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-art-provenance.md",
+    "bytes": 11871,
+    "sha256": "8b102cefbb440ed1fccd41c3b72a7d059ff2ee216982a61515d2c2c5d527b90a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "bytes": 30260,
+    "sha256": "fd8bf793d7bf5c3b58909ca5021a98c0a5a2be85d746e9b62508955989614edc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-budget-freeze.json",
+    "bytes": 36073,
+    "sha256": "492a68cad41e8c3ef4e25526706775c01a18a1a6505306c4ad20661c0640f82d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-cost-verification.json",
+    "bytes": 835,
+    "sha256": "0b4f93ea9214907f00950a4a354d4c6340953f96b6a9558cd6d381de5e6d8716",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-durable8.json",
+    "bytes": 7978,
+    "sha256": "32248cd267b3c69fc7d8015a0a368f89a6753927bafdaec07ebdd7d68ae85bbd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-final-identity.json",
+    "bytes": 7481,
+    "sha256": "1d86455e3d9ce55909d6a3cfcc8addb445059dbf3f25c937ee05d731395b0cdb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-identity.json",
+    "bytes": 6561,
+    "sha256": "3da2853f0c47d12dd998f574dd2e31563eb60d02f7f10dc9e81c5065ec90cbeb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-sensitivity-attack.json",
+    "bytes": 7991,
+    "sha256": "a5e843191f94e6a18dadaa9f63048016807d14a9407554ed1043a94f991a6177",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-sensitivity-hp-attack.json",
+    "bytes": 7814,
+    "sha256": "794ff14d22e766feeef478696b6347b49c456721c095b7e638d5c3adb2874008",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-sensitivity-hp-supply12.json",
+    "bytes": 7546,
+    "sha256": "42c842c80ba05770f86c20177ad7bf22b1b24123673f956213583da9a82d5a48",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-decisions/slime-sensitivity-hp.json",
+    "bytes": 7536,
+    "sha256": "96853f6837c976747600b094d13d7dde90208ba01350ef719f6f2cb1747cfb08",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-durable-freeze.json",
+    "bytes": 9405,
+    "sha256": "0448f9fc0a7aaec80d473c214b9aa850cb41fac79c5b9b36d32f58dfdab6e0cf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-durable-mixed-freeze.json",
+    "bytes": 1550,
+    "sha256": "e8996d0a1e49cf3c6e648f64ea5256edbc1b84bbddcdc232b5df5fcd7116a915",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-durable60-freeze.json",
+    "bytes": 3893,
+    "sha256": "2e509b92e92c402d0559e68c2ccfe87562afec15bd7e6b826f853742a5c2417c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-durable60-strong-freeze.json",
+    "bytes": 1196,
+    "sha256": "2ba3aef262cfb001c43bb53bf5cbf1f9e62b192104d600cd2e5b451a5ed067ef",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-final-freeze.json",
+    "bytes": 4431,
+    "sha256": "6c8967e157e456f077f793882842319b181b6bb14b3000bd4d8d31447d1c0392",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-freeze.json",
+    "bytes": 27902,
+    "sha256": "7e5bae0504f9ea906edae752f2e1352186a76ee85dbde1c82a1ae6f944e0d9a6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-nature-controls-freeze.json",
+    "bytes": 2388,
+    "sha256": "599efaa174046f1a7d4a08526d8c7ba7e6ca6d4d65255681c3f38c5bb82e4d69",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-001.json",
+    "bytes": 64948,
+    "sha256": "fc536c7da9b95f32c05d56ff718109f00d1e3896babc0b769bbf7738245a0ef4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-002.json",
+    "bytes": 64949,
+    "sha256": "c32d6d0d4e7e181295729c43e1ec537bb4ee834389532ef3f08d34ca3feb26ea",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-003.json",
+    "bytes": 64897,
+    "sha256": "77b8d0b1e98c22dbdc008a0d9918550ff7e63f8ca769dc490a7d9351337e6279",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-004.json",
+    "bytes": 64936,
+    "sha256": "dc6c4e6a4a3915a277b7a5cb45411c8868926d9c6a8425c539587591c7e86cb0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-005.json",
+    "bytes": 64930,
+    "sha256": "2af9a2e606eeeb0ecfcff9aee7ee7cb121b909f7f503fc66f59e952b317c1912",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/catalog-006.json",
+    "bytes": 1025,
+    "sha256": "8cd328f6c2565b5228013e3089ac7f21c94b46394a3c2a80a6e75073bc8cb490",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-001.json",
+    "bytes": 64752,
+    "sha256": "bd46ebc7fc374de877778e4066d296ed39bf22e842911f62e42d42c9a5a4a79d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-002.json",
+    "bytes": 64495,
+    "sha256": "82f49d79c5e98f5e014941042c21bf16bd2a92cfb83b39d05d9a86bca9f33a6a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-003.json",
+    "bytes": 64704,
+    "sha256": "e283f1d83fcac819c84cbaf11f40740bea91111570d540ffe0453dcac39902de",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-004.json",
+    "bytes": 64693,
+    "sha256": "68f9ceb11696fd5a5746bcdcfb10be60610a8eb9868cba2542724076b53c8a07",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-005.json",
+    "bytes": 64678,
+    "sha256": "aa74c74c5c1282dda828cea7521b4efb471483073ccedb5326812cb55bfc714b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-006.json",
+    "bytes": 64971,
+    "sha256": "4621ebc23b90767f003c34513ff7d143abab21c683af2c7a799b7e1eea5b0079",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-007.json",
+    "bytes": 64950,
+    "sha256": "b0fee3b6ddd8a5756402bf0392c991252b5847f085cda1fb45b6baa40458f34d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-008.json",
+    "bytes": 64867,
+    "sha256": "a0e32d47c6266aae73843764f5de7e87928257e6e180067f149ae413393c0a31",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-009.json",
+    "bytes": 64724,
+    "sha256": "298a96855f920f1c6aac09fecd00042eed1c38c813f6cf0d61ee242314acbae6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-010.json",
+    "bytes": 64989,
+    "sha256": "40a1944cd346b0970ebde3a17e818a1fb185f900c2d03739f3be5d5e3fc8c2c1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-011.json",
+    "bytes": 64880,
+    "sha256": "9bacda7a9a3f0237cb12aedf72f81c2aab6c898052989ec1f3b37527c8023f78",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-012.json",
+    "bytes": 64967,
+    "sha256": "3c0c5be8241c8e3bd95a23853829ed3a0eaf4f689f1a9a6d78509d49cef729ed",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-013.json",
+    "bytes": 64505,
+    "sha256": "ee5ded6593796170c79fba09929acd11836072b06e86d26449df8e827f334abe",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-014.json",
+    "bytes": 64827,
+    "sha256": "969226924557ddd157473702568db472915be31fb23d440fd2a89862f60b5d7e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-015.json",
+    "bytes": 64762,
+    "sha256": "61bd8143850354b3374f94520b02385fd3543fa2265bdcf1ccbaeb98e33f1070",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-016.json",
+    "bytes": 64665,
+    "sha256": "fd75483741c5bff9a5c30eada4084e4176251c50aa5090e90e8e069de1db3814",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-017.json",
+    "bytes": 64960,
+    "sha256": "584e1c7398cfae01c4b04421bc412e4cabb047ffdc594583742850c85b472291",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-018.json",
+    "bytes": 64840,
+    "sha256": "d9e5caa372e61db28ca617b86a3189b7758daade49bac50a8d977e102d9cd86b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-019.json",
+    "bytes": 64676,
+    "sha256": "8cca52796ec69a0ab402797768e19306dccea7e034b3eb22d3d81a9850957b28",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-020.json",
+    "bytes": 64722,
+    "sha256": "5a344355f0dfdca5e2f21507b57b70a588ead660d0bfaeccbbe004d40d5c4d28",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-021.json",
+    "bytes": 64702,
+    "sha256": "071d6039dbc13ef661aac83a48534e921496b1fc43644f73c052859ffd938853",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-022.json",
+    "bytes": 64924,
+    "sha256": "83e57e0f831f91ac18647b09a321bfc52cb0560e06f1170971a3104a0db402dd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-023.json",
+    "bytes": 64730,
+    "sha256": "9cb90565f5d4e26db910f2cf07bbbce21fcecd19b81cd9ff3f9989a651cb37b1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-024.json",
+    "bytes": 64964,
+    "sha256": "edcbcd8f580231a5d091c119b300688c226d73732e48f07cac1c8e30d70e8393",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-025.json",
+    "bytes": 64369,
+    "sha256": "305462fc94934a8e6c369b275022d83bc482e507abaf021db7795eb7b49913df",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-026.json",
+    "bytes": 60250,
+    "sha256": "6c0747b36ab204e9f6bb0d5b90528a0633d18399c3f618195480b3317a889c08",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-027.json",
+    "bytes": 64119,
+    "sha256": "29270e7792804856375e8dbdd72d765a82a7a98d9f0463017d9d404fd17cd7e0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-028.json",
+    "bytes": 63901,
+    "sha256": "9de180b3412378469422ce7babc2d3533fdf0d60c4c76f62ce70edbe22bec075",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-029.json",
+    "bytes": 64924,
+    "sha256": "d5d38f236f8680da54b6049a8e9695c60e547f3f3dc63a7442b35f92b2006bf9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-030.json",
+    "bytes": 64199,
+    "sha256": "dcd010d1afe141a3093c9510af73fd54dd16438c16af9c745d60b1b384c9f2c6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-031.json",
+    "bytes": 63569,
+    "sha256": "ac4cb474aea10decca44087109023c05caf13a2e04fad0b083fbe60083a17152",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-032.json",
+    "bytes": 63092,
+    "sha256": "5690fce7986293d0b8b3d03db9a364692acca50cd9298be035b61a924be6cb13",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-033.json",
+    "bytes": 64209,
+    "sha256": "1d6525367ecae850b2dfa87a8b9ea665cfb8da4336a5795fdcd25eb0dff38a97",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-034.json",
+    "bytes": 63479,
+    "sha256": "e1691107fcdfd629b0b468f220addd6a8647087a387b5cdb24f14611d2b1c0c1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-035.json",
+    "bytes": 64244,
+    "sha256": "aa97c4b2456ebd03cb264ba12fb8625daaa3338f10739ef51ea407c235e4d302",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-036.json",
+    "bytes": 63694,
+    "sha256": "e56f8b81a8ce9dfe6148b34f1f41b17285bf4243a5082920a463c7d4ac2f68d5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-037.json",
+    "bytes": 63978,
+    "sha256": "fc65ca61c4c796f3c2a71a735d8e6058c0fa89c5fdd0216a6ffef3c784c09def",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-038.json",
+    "bytes": 61654,
+    "sha256": "9f770e217ffa3bed68609b1a51536262081f96c8c1d58fee8a0336157bd4fa08",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-039.json",
+    "bytes": 62748,
+    "sha256": "4a40b8c6ab59696a7bf439650fd4754af346a6bb00adc91b0e187963ac1ff385",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-040.json",
+    "bytes": 64006,
+    "sha256": "355ac4699c7c1663e97b0fe7df763ccf2fd3ec66a3fc1c604c9dd90628858470",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-041.json",
+    "bytes": 61284,
+    "sha256": "8f06d5fb40cadc8f00e16a3d33897be4854f2ec34fbb6de9899014b6adc3a74a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-042.json",
+    "bytes": 63219,
+    "sha256": "3641da482b8049692993432367ed68f02a57fcb9f768d91a73b6fcb50c2776db",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-043.json",
+    "bytes": 64440,
+    "sha256": "125df1444690ce04418d24956ee854aafff1628eeb56122203733a0a64c7f8e4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-044.json",
+    "bytes": 63310,
+    "sha256": "4463b0a6af2a6f3fa3ae376200c15c6e0580c4f87176f20f76fa2e618a45bd35",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-045.json",
+    "bytes": 63789,
+    "sha256": "c1284ce445eff160da2d3f135ba83f012d3d00043acf2850c8531e39095d91c8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-046.json",
+    "bytes": 62432,
+    "sha256": "0b78eca77472d328d4268ae125ad36e9d7f34c5a9e065f6c7499026f2b4b926c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-047.json",
+    "bytes": 63878,
+    "sha256": "a15e02b9eae50d76c5c12a02bb0f70fbcfb425369bf8a1aacddcb9fe61c7e919",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-048.json",
+    "bytes": 64875,
+    "sha256": "eee999ce7f58e108616b3c80e6be4095ec45042c5111cc0badb99952452a740d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-049.json",
+    "bytes": 64486,
+    "sha256": "49a833c8c129ff90cc5f84db4017d67424a35914d87220847edb4a0d1460505a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-050.json",
+    "bytes": 63420,
+    "sha256": "0a0341857848e30a86091a7ba2429342ed44cc66bb95d8ef000bf06664cda56e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-051.json",
+    "bytes": 61495,
+    "sha256": "a71468818a6e11dbab121c62b4187facbb4fb23f2c56866a7a84b1b811bd3ccb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-052.json",
+    "bytes": 64321,
+    "sha256": "0f4eaa548b4fcb154eea453c85901a657572c8b53f9ce12278465ed852da20ed",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-053.json",
+    "bytes": 64206,
+    "sha256": "ffe68dc89e3bad6e846c0dc7d73842fde6054faef4ca0025428c77fea54c0ca8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-054.json",
+    "bytes": 64955,
+    "sha256": "a4070338a52e24e734c8631cf754082452aa9f1e571d24d1da291c63aff5355d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-055.json",
+    "bytes": 64999,
+    "sha256": "76649b0190322b06b0c111df8af86f16c6842f4483541dbec271ea26d08e0b02",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-056.json",
+    "bytes": 64605,
+    "sha256": "7ae275e8c8740340682b73f44c968baf063b4065405c990afdc85e9b1a6248c0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-057.json",
+    "bytes": 63114,
+    "sha256": "de55ddcf50e88b062b6c2b273634228430f1383d040bdd7e3fd5a97b64a2d010",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/chunk-058.json",
+    "bytes": 7286,
+    "sha256": "c36db5b0a5d6252336ab1361934acbce724ded486945a723b1bac742504a3386",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-packed/manifest.json",
+    "bytes": 7982,
+    "sha256": "8529c446c48e60512a983c118bd70799da90d87d53b96d901399bf7faf4a92cf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-sensitivity-freeze.json",
+    "bytes": 4692,
+    "sha256": "dc425d7855c2320b5faa14f964c30255d95ff84886f88dad97a156e116dac62b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-smoke.txt",
+    "bytes": 701,
+    "sha256": "0e115f57695cc9912bc41cd3e67152b05438d5686b1ee684c9def6e8278118cb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-source-reconstruction.json",
+    "bytes": 2492,
+    "sha256": "a6618fb0f3f7629950cee372b51b7260d6a96c5acc0e37b700aaec28206d4b21",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-summary.json",
+    "bytes": 9728,
+    "sha256": "b87d406febfec14fbfb1d61793af70aabdf608f47637b3812243dc7827b6323a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-tests.txt",
+    "bytes": 6034,
+    "sha256": "e7554331c4b260760cd7063cba35088e4fc821d563a636b91dd6d1dbffd1b9fc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-validation.json",
+    "bytes": 20990,
+    "sha256": "07d1d0199cbd272258b88e241d29c47aba2a2960af981738ecc2f82292f8ec12",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-balance-verification.json",
+    "bytes": 60126,
+    "sha256": "15dd2538ec0da7b14162ecb7d2526110ed4b64e1c9b227569bfd5fc2f070a19a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/slime-family-reference.md",
+    "bytes": 33446,
+    "sha256": "d4efe1c3a1a3a9f19b676cb5409df77ab567e6bc6188d1c4422a81c553765f0e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-art-provenance.md",
+    "bytes": 12924,
+    "sha256": "96dca4475cbcd9a1f513bcf811aa03da890b5eb91ca46e611e08dba15780cdca",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-audit.md",
+    "bytes": 18534,
+    "sha256": "45127334739edf5f84491216609c1b28acd630f3a9a25386a6b4a3a3e672ae94",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-1.json",
+    "bytes": 17172,
+    "sha256": "bec8221453474d7a1acd2772ef0a6e8ecd20d50d2537059f600c1adb8796cbf3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-2.json",
+    "bytes": 17093,
+    "sha256": "cfac0a8cc158a361f1cf4a32eb609cd603d52a345d51981d6ce4ec24a89901c7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-3.json",
+    "bytes": 17458,
+    "sha256": "15dde41bedccc015ff3d06e547334b050e2c56c7dc811231823084781cea956d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-4.json",
+    "bytes": 10953,
+    "sha256": "2f8032c3baf70710ebe4dcab50585545e85b0495bc88e639204ad4f5e7b1ca24",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-5.json",
+    "bytes": 11780,
+    "sha256": "d71931cc0c658dc5710ad69f1978f9bf6e8ce7616e68526bc4f2f397c858ec80",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-6.json",
+    "bytes": 13876,
+    "sha256": "2a5e095947100d77de23dcf195b1d548a38f97312259ba0bce0ddee65a9377fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-decision-examples.json",
+    "bytes": 6848,
+    "sha256": "02afd1afd9d408633abdab1495daa04d1cf03143a3ec71a89fece8bc33d5c85f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-freeze.json",
+    "bytes": 44647,
+    "sha256": "98098ad6134615e0d5f9ac65d2210405b3d5ff0ebdd59509d97b434ff544959c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/index.json",
+    "bytes": 1782,
+    "sha256": "3c2309ebd823539e7789bd9f3a98fa0d08a33546dca3b28569160104755677a7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-bonus-off.json",
+    "bytes": 18751,
+    "sha256": "0d8e15912d5c2807a377b050fee350025289290c5fbcfa59b50c641d97c96755",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-broad.json",
+    "bytes": 33185,
+    "sha256": "30e1ffbc2baa3bed5de82779971c1f54f903ae22a1e75d3c6e055787de0919c2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-enabled.json",
+    "bytes": 18749,
+    "sha256": "073b493fc1b7a5492d872824294402d517b625536e572842602d12c60d95550e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-full-off.json",
+    "bytes": 18704,
+    "sha256": "0d00d203f7ba79a1b14728f5df4f5afcc7519bf4847232dd0f7da743accc1f99",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-initial.json",
+    "bytes": 18749,
+    "sha256": "b17dc38fc592bedd687a283c13b5c544f61c8d07b6f7e658d5ec96122fb9fa28",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-lower-budget.json",
+    "bytes": 9026,
+    "sha256": "7e1c56d31546512bdc9a4070e323cb68a88d00cdf348f42fa4f6cd8dafa05af3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-oldcore-contribution.json",
+    "bytes": 41962,
+    "sha256": "f5add1c4d75125af82acd59b813450839fe85398f4f2865408fa7f287f7a576c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-initial-resources/undead-substitutions.json",
+    "bytes": 39519,
+    "sha256": "9a8f1d033bbdf5efb2fce2fbecf97ed25586f5d3643ec08526d1de8a9bb44acf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-001.json",
+    "bytes": 40586,
+    "sha256": "64483bc980b0b309ee0dd4f78a8b4bdd6faa766c56afdb37b8c5d34074ae637c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-002.json",
+    "bytes": 32759,
+    "sha256": "b21b497469fce5d2be837d90beeb00aff59e223b75e680c4c8673aba0e16994a",
+    "disposition": "omitted-locally-preserved"
+  }
+]

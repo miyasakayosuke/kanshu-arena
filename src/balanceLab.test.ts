@@ -133,7 +133,7 @@ describe('balance lab configuration boundary', () => {
     { monsters: { 12: { skills: [{ ...skill, randomHits: 0 }] } } },
     { monsters: { 12: { skills: [{ ...skill, typo: true }] } } },
     { leaders: { 99: leaderFor(12) } },
-    { leaders: { 12: { ...leaderFor(12), stat: 'mp' } } },
+    { leaders: { 12: { ...leaderFor(12), stat: 'unknown-stat' } } },
     { leaders: { 12: { ...leaderFor(12), percent: Number.NaN } } },
     { openingRally: { enabled: 'yes' } },
     { openingRally: { enabled: true, percent: -1 } },

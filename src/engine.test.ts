@@ -48,7 +48,7 @@ function expectHpReplay(before: State, after: State, events: BattleEvent[]) {
 
 describe('battle setup and determinism', () => {
   it('preserves original team costs while extending the stable roster IDs', () => {
-    expect(monsters).toHaveLength(24);
+    expect(monsters).toHaveLength(37);
     expect(cost(team)).toBe(15);
     expect(cost(team)).toBeLessThanOrEqual(17);
     expect(cost([])).toBe(0);
@@ -314,7 +314,8 @@ describe('cast visual scope and target snapshots', () => {
     const cast = result.events.find(event => event.kind === 'cast' && event.actor === 'a0')!;
     expect(cast).toMatchObject({ scope: 'all', targets: ['e0', 'e2'] });
     expect(cast).not.toHaveProperty('target');
-    expect(result.events.filter(event => event.kind === 'damage' && event.actor === 'a0').map(event => event.target)).toEqual(cast.targets);
+    expect(result.events.filter(event => event.kind === (skill.kind === 'poison' ? 'poison' : 'damage') && event.actor === 'a0').map(event => event.target)).toEqual(cast.targets);
+    if (skill.kind === 'poison') expect(result.events.some(event => event.kind === 'damage' && event.actor === 'a0')).toBe(false);
     expect(result.state.enemies[1].hp).toBe(0);
     expectHpReplay(initial, result.state, result.events);
   });
@@ -449,14 +450,15 @@ describe('poison', () => {
   });
 
   it('refreshes poison duration without stacking multiple ticks', () => {
-    const first = advance(battle([unit('a0', [poison])], [unit('e0')]), []);
-    const result = advanceWithEvents(first, []);
+    const manualPoison = [{ key: 'a0', skill: 0 }];
+    const first = advance(battle([unit('a0', [poison])], [unit('e0')]), manualPoison);
+    const result = advanceWithEvents(first, manualPoison);
     expect(result.state.enemies[0].poison).toBe(2);
     expect(result.events.filter(event => event.kind === 'damage' && event.effect === 'poison')).toHaveLength(1);
   });
 
-  it('does not apply poison to a unit killed by the initial hit', () => {
-    const initial = battle([unit('a0', [{ ...poison, power: 500 }])], [unit('e0')]);
+  it('does not apply explicit legacy direct-hit poison to a unit killed by its initial hit', () => {
+    const initial = battle([{ ...unit('a0', [{ ...poison, power: 500 }]), poisonImpactScale: 1 }], [unit('e0')]);
     const result = advanceWithEvents(initial, []);
     expect(result.events.some(event => event.kind === 'poison')).toBe(false);
     expect(result.state.enemies[0].poison).toBe(0);
@@ -512,11 +514,11 @@ describe('automatic orders and complete battles', () => {
     expect(autoOrders(initial)[0].skill).toBe(1);
   });
 
-  it.each(['auto', 'manual-fox', 'manual-basic'])('keeps the starter’s first battle playable (%s opening)', opening => {
+  it.each(['auto', 'manual-fox', 'manual-first-special'])('keeps the starter’s first battle playable (%s opening)', opening => {
     let state = start(team, enemy, 20261008);
     let orders = autoOrders(state);
     if (opening === 'manual-fox') orders = orders.map(order => order.key === 'a0' ? { key: 'a0', skill: 0, target: 'e0' } : order);
-    if (opening === 'manual-basic') orders = state.allies.map(value => ({ key: value.key, skill: 0, target: 'e0' }));
+    if (opening === 'manual-first-special') orders = state.allies.map(value => ({ key: value.key, skill: 0, target: 'e0' }));
     state = advance(state, orders);
     expect(state.winner).toBeNull();
     expect(state.allies.filter(value => value.hp > 0)).toHaveLength(5);
@@ -526,20 +528,21 @@ describe('automatic orders and complete battles', () => {
       rounds++;
     }
     expect(state.winner).toBe('win');
-    expect(rounds).toBeGreaterThanOrEqual(3);
-    expect(rounds).toBeLessThanOrEqual(6);
+    // Intentional state-only poison slows these two openings; do not describe
+    // this as preserving the historical six-turn pace. Winner/survival remain.
+    expect(rounds).toBe(opening === 'manual-first-special' ? 6 : 8);
   });
 
   // MP limits shift this fixed 180-game sweep: 148 finish in 3–6 turns, 158 in 3–7.
   // Retain the 85% short-battle target and require every matchup below MAX_TURNS.
-  it('keeps MP-limited representative battles mostly within three to seven turns without healing stalemates', () => {
+  it('preserves the historical 85% three-to-seven-turn pacing target under explicit legacy 1/false', () => {
     const rosters = [team, enemy, [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [1, 2, 7, 8, 10], [0, 4, 6, 9, 11]];
     let total = 0;
     let withinWindow = 0;
     for (const allies of rosters) for (const enemies of rosters) {
       if (allies === enemies) continue;
       for (const seed of [0, 1, 42, 2026, 20261008, 0xffffffff]) {
-        let state = start(allies, enemies, seed);
+        let state = start(allies, enemies, seed, { poisonImpactScale: 1, reservePoison: false });
         let rounds = 0;
         while (!state.winner && rounds < MAX_TURNS) {
           state = advance(state, autoOrders(state));
@@ -554,6 +557,25 @@ describe('automatic orders and complete battles', () => {
     }
     expect(total).toBe(180);
     expect(withinWindow / total).toBeGreaterThanOrEqual(0.85);
+  });
+
+  it('records the new-default pacing tradeoff on the unchanged ordinary-CPU panel without redefining the old target', () => {
+    const rosters = [team, enemy, [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [1, 2, 7, 8, 10], [0, 4, 6, 9, 11]];
+    const histogram: Record<number, number> = {};
+    let total = 0, roundsSum = 0, shortGames = 0;
+    for (const allies of rosters) for (const enemies of rosters) {
+      if (allies === enemies) continue;
+      for (const seed of [0,1,42,2026,20261008,0xffffffff]) {
+        let state = start(allies, enemies, seed), rounds = 0;
+        while (!state.winner && rounds < MAX_TURNS) { state = advance(state, autoOrders(state)); rounds++; }
+        expect(state.winner).not.toBeNull();
+        expect(rounds).toBeLessThan(MAX_TURNS);
+        histogram[rounds] = (histogram[rounds] ?? 0) + 1;
+        total++; roundsSum += rounds; if (rounds >= 3 && rounds <= 7) shortGames++;
+      }
+    }
+    expect({total,roundsSum,shortGames}).toEqual({total:180,roundsSum:1204,shortGames:132});
+    expect(histogram).toEqual({3:10,4:20,5:42,6:38,7:22,8:12,9:10,10:6,11:11,12:2,13:1,14:1,15:2,16:1,19:2});
   });
 
   it('stops a no-damage battle at the turn limit', () => {
@@ -695,7 +717,7 @@ describe('bounded counter-skill contracts', () => {
     for (const id of [1, 10]) expect(battleSkill(monsters[id], 3)).toMatchObject({ kind: 'protect', priority: 3 });
     for (const id of [2, 7]) expect(battleSkill(monsters[id], 3)).toMatchObject({ kind: 'cleanse', power: 35, priority: 0 });
     for (const id of [8, 11]) expect(battleSkill(monsters[id], 3)).toMatchObject({ kind: 'hit', power: 58, priority: 0, breaksGuard: true });
-    expect(monsters.filter(monster => monster.skills.length === 4)).toHaveLength(6);
+    expect(monsters.slice(0, 12).filter(monster => monster.skills.length === 4)).toHaveLength(6);
   });
 
   it('classifies ally targets and labels the actual five action priorities', () => {

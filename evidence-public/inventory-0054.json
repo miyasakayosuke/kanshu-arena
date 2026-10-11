@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-003.json",
+    "bytes": 44167,
+    "sha256": "397b2a8d8fea3e11a655da598234f411664157dfb4c51bbd41801983eafb8f0d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-004.json",
+    "bytes": 43015,
+    "sha256": "d2e511c7c2dc8270e43e1a20b9689ca8e4e75f3e9ddd9d56181d6288f969ad28",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-005.json",
+    "bytes": 44303,
+    "sha256": "44d00006c2d4ddd0ef50ddfa95d8ba3d2c72b0860832af026d1449c3e921c94a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-006.json",
+    "bytes": 44359,
+    "sha256": "e0df6a08ce5465dfe8cdf7f4aa63b2110ebf61c273dda5ec3085ac44f42d1912",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-007.json",
+    "bytes": 46495,
+    "sha256": "7c554a1f39238458383f9794f78f71d60345587fc864d2a911ec3dbf7c13510d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-008.json",
+    "bytes": 48719,
+    "sha256": "16cec105375c0f12b05ee8c6d34af322c790c37fde1209298657afeaa1c49626",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-009.json",
+    "bytes": 42943,
+    "sha256": "a8b145fb1e386b3c988433ed594ef2a42e2681d9da606cdf8c003129085c3300",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-010.json",
+    "bytes": 46703,
+    "sha256": "248e01ece9f8aa62b5a28d1ea15dad6adbd115f3c046a27a1d3765f8376101b7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-011.json",
+    "bytes": 47447,
+    "sha256": "026c063abd5cd0f4d45638f94355806dd477e5133cb3202aba48c421461e5ab2",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-012.json",
+    "bytes": 46419,
+    "sha256": "39270f681e134dcd1dc796addce43fd53e60a20b46798bd265d3833d673c21cf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-013.json",
+    "bytes": 37743,
+    "sha256": "ea33fd2e0e4daa08792c5f6d873b0f5c21c85f050e42cd7171dac36eeba3dbf3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-014.json",
+    "bytes": 36279,
+    "sha256": "3eaaa8990379210faad4205807196e0ab51d93f81b828b5b4101058136c382eb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-015.json",
+    "bytes": 33855,
+    "sha256": "7f6020a279a15ebb367b625100c01f10b6a70f694b5c5bfba58590c1e9e14960",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-016.json",
+    "bytes": 34831,
+    "sha256": "aa3f2d31bd9f3e76bf90808db52d2d7c351eeb1e5188cb7811f2bedfbf32cdb9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-017.json",
+    "bytes": 33627,
+    "sha256": "220101866e7c9ec38d98457cc6a2dfa5f845f71da8fb7f0226f076c9d55cb2b9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-018.json",
+    "bytes": 12254,
+    "sha256": "36a58c9afc7e696156ba4f6f66d69c7c4eb2b554b97379b3f3c468897834047e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-bonus-off-index.json",
+    "bytes": 5830,
+    "sha256": "da57855ee79715842825cb978a73b7bb8dd5a05b72aa67a659c32f2e3ca3b5e5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-001.json",
+    "bytes": 63151,
+    "sha256": "e43f0d7939f9a187968d49cdd00275e5df0e85ddf124a7e7aef66302c2165944",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-002.json",
+    "bytes": 36559,
+    "sha256": "7865d8d3c3c7487d1f50a20babd3b5a7f820614385cc75f4d12fcba1ac2506ec",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-003.json",
+    "bytes": 34795,
+    "sha256": "2b3166bdb21eb6941fee7f56488e84a0da8af32024c97d513fd19677ada888f2",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-004.json",
+    "bytes": 37331,
+    "sha256": "3f44208c8bc4e3afa8705dbd5a163214538065173ea2092fdce53ff995ca648e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-005.json",
+    "bytes": 35767,
+    "sha256": "5b26bf8c2b7415d6536783e5cfef36e10544fc3b3ecc93c56e7cf456c352f883",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-006.json",
+    "bytes": 34523,
+    "sha256": "c99b33b1450e3888784faf63425128096a2ed8c519ef32cb57cf249cb67a57e3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-007.json",
+    "bytes": 36823,
+    "sha256": "c7dcc8edcabdeeed427aa843eada43d25681747db52de79c254831f12cd52a06",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-008.json",
+    "bytes": 37491,
+    "sha256": "82fe07ced4ed9cc1243c8a662e39c55385a8d6259bb204314672fb929663eb02",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-009.json",
+    "bytes": 37543,
+    "sha256": "ecebfb013c7d1f84e93a7a6c352fc70edb3a99215381735374935dd8ab733dcd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-010.json",
+    "bytes": 35919,
+    "sha256": "d590ca2fd55eafd98cedc62f259aa558344c8341a142c1d39c48706867f19ec8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-011.json",
+    "bytes": 36083,
+    "sha256": "82a8713a586000911a86e137a1abe7cf6ef71a80d727e18733423552ed7e451c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-012.json",
+    "bytes": 35839,
+    "sha256": "9c00e7d396d016a0eac700f55f00b91cd6ce4c52d49af1d454c6b764d9efc278",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-013.json",
+    "bytes": 36151,
+    "sha256": "100bd17b984ddaa937e6f5e34ec17d49aa94ceab272854e6710983d81fe88380",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-014.json",
+    "bytes": 35603,
+    "sha256": "a24916dfa29a2e33e4dfa9c43b5363b1119f6b2d833e2a7ec7e3d452754e8a4b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-015.json",
+    "bytes": 36691,
+    "sha256": "a81f69c88a2322ecd37c507685778d56572efb84809517c770a35d4e9b1b8c1f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-016.json",
+    "bytes": 37083,
+    "sha256": "309182c91568eb150b3ed32b5d8d40fc128adbde7b3c5730602a7bb073f5fa32",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-017.json",
+    "bytes": 36151,
+    "sha256": "17454e8067e3d3c2d656d9587ed62ffc37a4070372aa5d676a092fb669239fc4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-018.json",
+    "bytes": 36451,
+    "sha256": "c0430f8c9b4bb808fabbabb1146f055cb0b1de396c64fb0c84dac36289d0f6d5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-019.json",
+    "bytes": 35751,
+    "sha256": "762a15a6ee60eda6ef1add54e55402dcf57c4635bf920407eac2e6c861165ba0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-020.json",
+    "bytes": 34427,
+    "sha256": "5e4ee9f6ebb5dd2883bf5e15e02a0b0bbf38f4cd3ad69a4e9063833a80a121a9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-021.json",
+    "bytes": 30247,
+    "sha256": "8810c4b5f89b626afca8a0177aaee17bba0821c0d32e995720e45454ea7b8d8e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-022.json",
+    "bytes": 31835,
+    "sha256": "e70b75997453020405feeaedcb014176a5b1bb7c7c803e75a297073d01ad9f9b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-023.json",
+    "bytes": 29231,
+    "sha256": "3a62977263c2b8d236db1bcb1ee35243d4e841012eade160e3bf9bb4751bdf05",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-024.json",
+    "bytes": 30347,
+    "sha256": "1d5ad8e146f184ff6d4d0594125705642ec4314073a7b5e233d403f503af51f1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-025.json",
+    "bytes": 29571,
+    "sha256": "8f4d727e35d9e5b93fdf38330794c0b8223fa07ce51418e944ff680bc7d1796c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-026.json",
+    "bytes": 29055,
+    "sha256": "5fbbc41097ef83236b709ca3d5e73513c78ebe6bfba6860e0489e493271d89c7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-027.json",
+    "bytes": 31315,
+    "sha256": "4f50ea97bec38d56f94ca0613ee50483455391a92ce039b66371c02961f6b3ed",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-028.json",
+    "bytes": 31431,
+    "sha256": "e9c35b88376ec014a96309110c99f0938dcb00a09d2cb2f5a1414d6f5d71eb18",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-029.json",
+    "bytes": 30391,
+    "sha256": "71759de67a476d8b9a91f2aa71c7a7c0cc42739842cd2ef89a0e8b61fce0fc29",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-030.json",
+    "bytes": 27107,
+    "sha256": "77ae373f5750c4f2c00b2a54902d84fa34daad79383790febf0b7e05ee62d4bb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-broad-index.json",
+    "bytes": 9105,
+    "sha256": "07afe3354c68934f996d4b2b25662dc39962d2fce934f679061f9359970ccd7c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-001.json",
+    "bytes": 59199,
+    "sha256": "daa9a17ab1e1b2f43b442bf8f81b8e82d6dd2fa15c4ceec3036cca5f14eee4c5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-002.json",
+    "bytes": 39219,
+    "sha256": "a3b1fe9411e31462b10bd45c44914959bf2c24adaaae460d4a0bb523b9d5e88f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-003.json",
+    "bytes": 38039,
+    "sha256": "ca6b5393e431f623a59f8e3822d8e67176354a827aa33f68eaf8bfe67e6069be",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-004.json",
+    "bytes": 39035,
+    "sha256": "fd5fcdf012ffc82c04bd8a0628dcc42ee323336f31a2fd4278099541820b76c7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-005.json",
+    "bytes": 39327,
+    "sha256": "c90e632fcd488a47afcdbac7b45ae115b83617533e004203d061e67964a60ccd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-006.json",
+    "bytes": 38631,
+    "sha256": "9a14951dcfdbe93584f9a17f7d419e8e3071e21bfeb8e5a9cd01e8df205569fb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-007.json",
+    "bytes": 39811,
+    "sha256": "7e8aa586f163f72249d950b5012a5203a852d18bb289f658ad8a04e39b79c8c1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-008.json",
+    "bytes": 38543,
+    "sha256": "3a3854aceb00a6b71b53ec63c1189bb5a395b613becd4355a9d6f2c15b81c1e8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-009.json",
+    "bytes": 41151,
+    "sha256": "eba65d3e312243478c81f2121a9ccd76f38f70471f3bebc3066f912d68d12d25",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-010.json",
+    "bytes": 40247,
+    "sha256": "ef5c6a2ebca84050aaf2fd84f7f760641c714eee2ecbe0392afcb40c015cd9ea",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-011.json",
+    "bytes": 38419,
+    "sha256": "3280b84d84ece23624f6a8b4a391fad21265bfd0bf8cf452ca9eca1e770790c3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-012.json",
+    "bytes": 34935,
+    "sha256": "f917c28ddf1ed966dea34ffeeb5b09cf1afb17c007588679f7273e7b3d7c9e62",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-013.json",
+    "bytes": 36279,
+    "sha256": "59e34cfa8257b88667fb9ffbede025d158ad0b6c49b56c565961ab9b93ce7f85",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-014.json",
+    "bytes": 33879,
+    "sha256": "a64eee8601421d7b4a81bb03050214bf3ccfa2bea650ce0c1c2e93416513350b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-015.json",
+    "bytes": 34807,
+    "sha256": "4b088ba635a83ac59827ee341eddc8173e57e1ec69800ad6ca953c9ad62a2d83",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-016.json",
+    "bytes": 33627,
+    "sha256": "2e1989e5cc11a08b4246c105101fae56c1539b8b3102d2c42e9b249b5eebf393",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-017.json",
+    "bytes": 12250,
+    "sha256": "caec31a8a0a9a7d6fdb7cf32c5d96c485f96be68032af3f483b9207a5b4be095",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-enabled-index.json",
+    "bytes": 5446,
+    "sha256": "4f21b2f855c94c82aa61f847a5783836ea04b14cd274a3df5d654f754a834cfd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-001.json",
+    "bytes": 38266,
+    "sha256": "9d92e8d13dddee1ca5832b0382d0c5b64cd02d9d4726f44a8c88b832c15de4c9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-002.json",
+    "bytes": 32859,
+    "sha256": "d24c315e206180e966d0e9229b4b7f3a82f20fa575befc4d75a36f5e982826fd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-003.json",
+    "bytes": 44075,
+    "sha256": "4467a15877c58ee088ea890d0ae2d2b76e9a937c2c0d8f6ff131455b27fe50ee",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-004.json",
+    "bytes": 42755,
+    "sha256": "738fff9a9e756db89dd1562acb55c8c9af57dedb4ce67fabf87e16511365aaa5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-005.json",
+    "bytes": 44323,
+    "sha256": "3a8ca57721deea59e336569b4188a0c10a23f92d61058abff7f36afd5f27e01c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-006.json",
+    "bytes": 44747,
+    "sha256": "fa239b4f5fa7f5b5079b5ad51633fb1c7520d7ff3128cb8d8eff69af36e6b722",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-007.json",
+    "bytes": 47567,
+    "sha256": "1999a931702f3b39fe218aed856890673cf44063682558e339ca72bb7ebd6482",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-008.json",
+    "bytes": 47603,
+    "sha256": "6f8ebfc98eaa6322b280b2d79f1f15e55787d95146fde0aa016602fbb66b0b33",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-009.json",
+    "bytes": 42351,
+    "sha256": "0bdd225aa3fba7afcd765054b5b52e34950ada075e4bb5b1e21c0f9afc31991e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-010.json",
+    "bytes": 47819,
+    "sha256": "f8d527bb58bd1331639c28f5eb264d119c3060ca1c90201d68b2b0587c98157c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-011.json",
+    "bytes": 47939,
+    "sha256": "e57be750aa57d0ee85f9b5b9085b40a3f655d4df6c63bf231f488f20da6c234b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-012.json",
+    "bytes": 45703,
+    "sha256": "1f4b7d9b891aadf9eb1a4bb95c3676d47e7c8c4f6b26817866dca3e99df48813",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-013.json",
+    "bytes": 37403,
+    "sha256": "5ec305fd28ad95345dbc8f71b697a5f55cfdc1674c37273981ddd43f2f4004b3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-014.json",
+    "bytes": 36271,
+    "sha256": "57936d1cccebbab139c241ddb82bade1f1e3a17ab62266e4644b277c20c9482d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-015.json",
+    "bytes": 33863,
+    "sha256": "2ae8857f518a1371c8433cc058b31a06f72528610ac256203355469636a57a4e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-016.json",
+    "bytes": 34803,
+    "sha256": "328ef5e4cb875bd19eee8141c9661a8b0c499ecbbe5448d5f10ada97a2dd88e4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-017.json",
+    "bytes": 33631,
+    "sha256": "eeb5647038157fc68c003a975039946ea8dfb5323e62cb52bf33972158513240",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-018.json",
+    "bytes": 12254,
+    "sha256": "b9b52b07736f99cf94873fbb7882813336e1ef24deed64e14cdb4f48075762e9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-full-off-index.json",
+    "bytes": 5775,
+    "sha256": "595bc67327b0b8b114d110b2d7d59eee910e69c70879f396a5b967c904a94de0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-001.json",
+    "bytes": 57431,
+    "sha256": "8f519746201c89c329935441c6d2495d3736e075a6c67a0ebfc5aae0f97a847a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-002.json",
+    "bytes": 36179,
+    "sha256": "0503e193d5d5792e38b9d7da6eb2d6ac7f72c564475471c515e154d318324b34",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-003.json",
+    "bytes": 36779,
+    "sha256": "c4e2d820d77bd82675edc8e074ee0c3e70d174d89daa55a27900ac09616ff58f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-004.json",
+    "bytes": 35151,
+    "sha256": "af7a8d098da13308b50d5336c32bf198a4fa808efee855b95c59c8526679d8b5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-005.json",
+    "bytes": 34047,
+    "sha256": "439f877bd6539203033109ab40bdeedd0563f8e37de203e03b2a4a1672c2257e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-006.json",
+    "bytes": 36667,
+    "sha256": "060451d859459cede67716c93920a78d245ec9d078efc31e8dc5c34fad9fafb8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-007.json",
+    "bytes": 36731,
+    "sha256": "3cc9ec7c4464e0f010d3af694f8ad75a7d6a528ac8e7610aa52a41418c2d54e5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-008.json",
+    "bytes": 33843,
+    "sha256": "aacc9b21ea330c0cbca06e1ea4a343b607408f01d69dcc436901ade06de8ceaf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-009.json",
+    "bytes": 37295,
+    "sha256": "66432ebf73d3035f9be0328bdb4329c4f4c90a4e83d019a1bf0548dee0b15a8b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-010.json",
+    "bytes": 35199,
+    "sha256": "061cacfdabdc49e1c15b9d3491a4794928e7ff8c58fde96cf44302d623ac32a1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-011.json",
+    "bytes": 35519,
+    "sha256": "814e24bf5d77424858c0e0cb3efee2b435edfd138b9669343dd01cb6075bb666",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-012.json",
+    "bytes": 35675,
+    "sha256": "37fddfb382737477cac5a22d503275b77c441c78b698dd160d4768fe8cf53abb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-013.json",
+    "bytes": 36907,
+    "sha256": "a25c61052c50a88b9a0cf7fc8c1fccb9f860f7557ff9daf6cdcc0849be58e86c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-014.json",
+    "bytes": 37203,
+    "sha256": "7bc59f2e2dc219f6a48262ed8704ed2122019942a543321a0692866cc5e9f421",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-015.json",
+    "bytes": 35671,
+    "sha256": "3dbb3867c9a85fe0b87eeabfb01fd08f3a71185a4b43f86ef95ba6151b58baa9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-016.json",
+    "bytes": 34399,
+    "sha256": "46cb914786391c5127319209f499848358504736aec6798d5dde874bfce40a0f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-017.json",
+    "bytes": 39303,
+    "sha256": "dc7facfa572152e7e79484f60e987d57a4209e6328b04a64191f3205bae87959",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-018.json",
+    "bytes": 38363,
+    "sha256": "c4f6bbf2e4b9489100df522e5692fd259f7f69d49c8f96a5051e3bb615384af9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-019.json",
+    "bytes": 37527,
+    "sha256": "79964202d0a8ea4581bd8c0051f4b2f35ae5bc6e40125458f5ea44bf26a4dfbc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-020.json",
+    "bytes": 36383,
+    "sha256": "8ccbcf5146618dae0bb94806de57c5c076918f1c0465881c5bcf0b47c60164ec",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-021.json",
+    "bytes": 38535,
+    "sha256": "b1391135ffe42e3a775b7b4b540ddcbe658a6775ff800b61238068eba142058b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-022.json",
+    "bytes": 29671,
+    "sha256": "6a0fcda7c55493ec6ca0ad8668d13de6651c532b6e1453c0a3e095c49009a1b5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-023.json",
+    "bytes": 29439,
+    "sha256": "0ff04713c22ecb3e762d61ae3b115c06e0703f12248b7926021df9225e9913d5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-024.json",
+    "bytes": 31003,
+    "sha256": "3659331cd3b2327b8b3341711fb701a798d5d814b0928f78f93e66c0308d909d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-025.json",
+    "bytes": 32099,
+    "sha256": "3e6c0c45b694f3cd81a4e6848ac1a76d3ed7a5b68b18bc0397e0212973e55aad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-026.json",
+    "bytes": 29999,
+    "sha256": "ec882b4be7a3aded61f02580ed445e7787a9b61210ac01c933c145805480c7ad",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-027.json",
+    "bytes": 27983,
+    "sha256": "8142e2e977461002e8a435d79e33d2d6011a4eafc7667e2cc47d5602c131f00e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-028.json",
+    "bytes": 30283,
+    "sha256": "7474b0e63c02d68cb574d66ba1cedb9e6558ba91d5ee7879a43c0c3a78b53278",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-029.json",
+    "bytes": 30119,
+    "sha256": "d35582bacb21d9d66a7b40dd6e726c8bd13431f0c78ca93f633797cd255da89d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-030.json",
+    "bytes": 29175,
+    "sha256": "17b645bebb27ae54d30069395a9be7c72abb4a84060095a74f300128d3ffc98e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-031.json",
+    "bytes": 29683,
+    "sha256": "2a8bfe2fd242686f1d009d3058e7be0db4f5eb9b8c85eed2f23a6e7e92264d2e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-032.json",
+    "bytes": 27831,
+    "sha256": "8389097d58c6d2dcca5bd869a119cd3a15a5e4a9567f253789a05a090ea0c004",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-033.json",
+    "bytes": 15435,
+    "sha256": "7b765e66ae7a8238addb9c3762e2bbdd17209b29e9d06ed2bf26215a1422c7fd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-initial-index.json",
+    "bytes": 10025,
+    "sha256": "fc263dc2326b82d124be8c9b55a17fab5f0177f060952ddad619389544ca7075",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-001.json",
+    "bytes": 52107,
+    "sha256": "4c65bde5a0e7fa23712d7e3208526d16b5a89dfdd532ffc37ff297944d640203",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-002.json",
+    "bytes": 37527,
+    "sha256": "216fd9415c355ff5cae04909f0c962fccb6e7eda4a15787a4a6dd79a75b12119",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-003.json",
+    "bytes": 37539,
+    "sha256": "94d737b6e0f9abdc67f9de9c6fd459021b459d9426c03e530e39c66ccea86e6e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-004.json",
+    "bytes": 37431,
+    "sha256": "ffe8cc4209363d132f6f3e7984aadb75715dedcb0ea24b289755450b4353ccd5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-005.json",
+    "bytes": 34951,
+    "sha256": "e26dd553ffdb20a5ac90ce9a1dc2e3f2cbc9673719bf31b43f2d93cc2654a492",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-006.json",
+    "bytes": 31991,
+    "sha256": "3935fa755e8f8b771fdacd69f92ee60bee1c44f09ce434eb6ebe9db21e645d96",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-007.json",
+    "bytes": 28899,
+    "sha256": "c71d24631670b9280090beeada848b853bd60f70300e6c2218fb5b61866f5a32",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-008.json",
+    "bytes": 28179,
+    "sha256": "67f19a67cbd7db4162d1bdd3f5f9a94b61a289359245a0db3b672aa160eff2d8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-009.json",
+    "bytes": 2145,
+    "sha256": "4b0b930093e433660da2539758050bba423fa66d7c6bddfa61fdbbfc857e21af",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-lower-budget-index.json",
+    "bytes": 3295,
+    "sha256": "36ab6a3ca8684e7cfe3d86f6b894e280a2cbdfeb41ace9daa4c9bdee970e493e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-001.json",
+    "bytes": 51839,
+    "sha256": "fb9538a452539ba69e75d483db46a2434bd7171ef6eef612eb552a7c121eeeeb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-002.json",
+    "bytes": 36042,
+    "sha256": "4b7ddb53b8bdef453b3c1fba77303de1199bb4713912cb4ccc001207560b4e5c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-003.json",
+    "bytes": 40651,
+    "sha256": "3fdb3b984526257c59b7420f1f8fdb947334b9fba1318c59925204c5a6f67668",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-004.json",
+    "bytes": 35259,
+    "sha256": "bd4625505e82aca5c88252a1458d68187aa0077c24025ca99915340b5bda2cce",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-005.json",
+    "bytes": 35671,
+    "sha256": "c402a95f13afdfcf510276ebdb23cba551cb5d6406926e38aa08f6dc3afef20f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-006.json",
+    "bytes": 35523,
+    "sha256": "11934408a0427c6a17a8a9df1941fc9e6c65101b8c58d66fa370fa303f3808c7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-007.json",
+    "bytes": 34955,
+    "sha256": "da4599a371dc1f6db305f3929392e0385591dd86f6b0fb945034c3529f0951e7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-008.json",
+    "bytes": 33735,
+    "sha256": "fe7cda1ee2bc9b0d5d11742cd8fa54a85f6d37b3fd931dcfe22a14279ace6b01",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-009.json",
+    "bytes": 35783,
+    "sha256": "b60ed868feb9ad32e7ec82b9268e8e46d7e6adee02c990d4a69844c549f71f4e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-010.json",
+    "bytes": 37039,
+    "sha256": "ef4282eaba0f84fae28c9433dcd8e1c190d849746f97bdeb9db8dfaa1e5e65f0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-011.json",
+    "bytes": 38359,
+    "sha256": "be2006e1840f6bc086c348b001c830a481acf93e526e3f455456bbbff1625512",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-012.json",
+    "bytes": 36731,
+    "sha256": "33d5e74f25cd2d3dbaf9d7b4d2a10290a80e570a00830b586a830e6392faec2c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-013.json",
+    "bytes": 36187,
+    "sha256": "16016c57809f234c5795bccf4c40e58162bdd64dc710ee618d69d1848e4e4988",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-014.json",
+    "bytes": 37027,
+    "sha256": "19ba29a33b7f96c0165f419bbf1cf260f09b06a1d4b120e85d9e5cb5f0aec954",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-015.json",
+    "bytes": 36271,
+    "sha256": "ae82ba901461bf4b5293bb2fa653dda10efe2477c942394d9d087aa265c6f52c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-016.json",
+    "bytes": 37167,
+    "sha256": "f88366d74d1976808ddae8603fb84cb31903a649c13ef9036f5e3469f7a0259b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-017.json",
+    "bytes": 37035,
+    "sha256": "856e0ed96e84440af9462b51148f993b684a6d1c1f535be6d41edd4c06a4aa99",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-018.json",
+    "bytes": 36499,
+    "sha256": "883f33cd75806507269897e994ece7bc92fad300727ca110a494386f89548690",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-019.json",
+    "bytes": 33335,
+    "sha256": "a84bf35db450becddffbff1845423f048d9a95fea8a7e4289ab379acf6c1d143",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-020.json",
+    "bytes": 33967,
+    "sha256": "879d6d74cabc0e5b8d28bd8ad035cdea4462dcf39e3d5a1f76ec1f392a23c175",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-021.json",
+    "bytes": 34283,
+    "sha256": "9429507bc7869e4cf5ec40d9df870e6f65b6c987067833077edfc399d9c26dfc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-022.json",
+    "bytes": 33679,
+    "sha256": "44e62bde9553307c2df2384adc059eab0a219cb22429de8d19057f6b12382dcc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-023.json",
+    "bytes": 34011,
+    "sha256": "07904c404bbe25caf569719acfd62071d9e1b62154375605af6547796cb111f2",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-024.json",
+    "bytes": 35687,
+    "sha256": "333bc8cca3b273d54fbd16ea587d5514930f439472df21238fede6d53cf68ee0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-025.json",
+    "bytes": 37379,
+    "sha256": "04465c8a9a6dc058541b7ca8a015cac5d13eeb1558b93623d551581675c0e39f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-026.json",
+    "bytes": 37183,
+    "sha256": "fffdc721f3b732e5b344e7206b4a986fdb5916d64c12d3ada5c40bb75980fd9f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-027.json",
+    "bytes": 36547,
+    "sha256": "c1db087a9c6dd2aab3e980808994fa599125d050d0b5a9746d19259022eed00e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-028.json",
+    "bytes": 36683,
+    "sha256": "6699286c0a9fc8bcefac18174f76dfae80371641895f8e6cc1eaf28ba06b6e56",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-029.json",
+    "bytes": 35747,
+    "sha256": "348e2945a545496bcd4eb19a23975634d85bf150f29b01f560180e7ca5f213ac",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-030.json",
+    "bytes": 36075,
+    "sha256": "e714ab9c8920bef42ccb91f6e94f31a106fa2f521d3275deb8b11173fa7af4f8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/undead-balance-packed/undead-oldcore-contribution-031.json",
+    "bytes": 37719,
+    "sha256": "cce4eb8e3b807b97858ec8e6b126810e2edbbd2f94dd236307045e5ec36f8fa1",
+    "disposition": "omitted-locally-preserved"
+  }
+]

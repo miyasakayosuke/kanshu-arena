@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "status": "all-authorized-study-schedules-and-verification-terminal",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "productionDefaultsInStudy": {
+    "poisonImpactScale": 1,
+    "reservePoison": false
+  },
+  "protocols": [
+    {
+      "name": "original",
+      "manifest": "docs/all-family-balance-config-freeze.json",
+      "manifestSha256": "b56a6b4fd918099eb2560581b85cc6963f4694fbd5a610582b73380cb1aa951f",
+      "suites": 12,
+      "executed": 132096,
+      "unitLedgers": 1320960,
+      "packedRoot": "docs/all-family-balance-packed",
+      "files": 4244,
+      "bytes": 237875338,
+      "maxBytes": 64991
+    },
+    {
+      "name": "pure",
+      "manifest": "docs/all-family-pure-confirmation-config-freeze.json",
+      "manifestSha256": "92d34747311456f2f6d8d061828d26791e356f2745c59e227fd1d510699fdf86",
+      "suites": 6,
+      "executed": 24576,
+      "unitLedgers": 245760,
+      "packedRoot": "docs/all-family-pure-confirmation-packed",
+      "files": 780,
+      "bytes": 42266384,
+      "maxBytes": 63667
+    },
+    {
+      "name": "leaderJanus",
+      "manifest": "docs/all-family-leader-followup-config-freeze.json",
+      "manifestSha256": "b2f6f8d62166e4a2bfe9c5ad194a2e069f0a5e5ffa44597a050087570281f517",
+      "suites": 12,
+      "executed": 71040,
+      "unitLedgers": 710400,
+      "packedRoot": "docs/all-family-leader-followup-packed",
+      "files": 2244,
+      "bytes": 121988188,
+      "maxBytes": 64943
+    }
+  ],
+  "totalScheduledExecutions": 227712,
+  "totalUnitLedgers": 2277120,
+  "packed": {
+    "files": 7268,
+    "bytes": 402129910,
+    "maxFileBytes": 64991
+  },
+  "exactPredeclaredReplays": 300,
+  "supplementalOwnerReplays": {
+    "earlyControlSpotCheck": 1,
+    "selectedDryasPairedTraces": 4,
+    "extractedExactSourceReplay": 1,
+    "independentObservationsAdded": 0
+  },
+  "stockIdentityComparisons": 18976,
+  "repeatedBaselineComparisons": 97296,
+  "originalNonpoisonComparisons": 10368,
+  "tests": {
+    "finalLabFiles": 30,
+    "finalLabTests": 746,
+    "allPassed": true,
+    "typescriptPassed": true,
+    "ownWorktreeSmokeExecutions": 736,
+    "smokeIdentityDelta": 0
+  },
+  "findings": {
+    "originalMixedProtocol": "FAILED in both policies; no reserved extension authorized.",
+    "pureConfirmation": "Zero passes both-policy fixed pure counters; half fails reservation. Adaptive selection disclosed.",
+    "leaderConfirmation": "FAILED both-policy gate; zero/reservation new leader is adverse.",
+    "janusRecommendation": "Five-tag target58.29% common23 /51.97% strictC17 at zero/reservation; paired improvements33.15 /33.22 points. Absolute strictC17 interval48.69–55.25%; no claim of above50% population performance.",
+    "adoption": "Parent-owned decision. No production/default/publication change in the study worktree."
+  },
+  "sourceArchivesVerified": 7,
+  "importantReports": [
+    "docs/all-family-balance-audit.md",
+    "docs/all-family-balance-initial64.md",
+    "docs/all-family-balance-recommended-distribution.md",
+    "docs/all-family-balance-pair-polarity.md",
+    "docs/all-family-balance-dryas-diagnosis.md",
+    "docs/all-family-pure-confirmation-results.md",
+    "docs/all-family-pure-confirmation-interpretation.md",
+    "docs/all-family-leader-followup-results.md",
+    "docs/all-family-leader-followup-interpretation.md"
+  ]
+}

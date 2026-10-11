@@ -1,0 +1,73 @@
+{
+  "status": "frozen-before-own-outcomes",
+  "executorRecordedAt": "2026-10-10T09:04:44.656Z",
+  "timestampCaution": "Executor about9h ahead; see freeze ordering",
+  "reason": "Exact same-seed, same-opponent comparators were missing as focal rows from the initial frozen substitution study; adds controls only, no redesigned target/seed/outcome exclusions.",
+  "knownPriorOutcomes": "Initial13anchor results already known. No broad/substitution/contribution outcomes had been read.",
+  "path": "configs/balance-lab/demon-paired-controls.json",
+  "fileSha256": "428913f3b75e5826ed65af7895dd2782f14eed9c52b54c789498d3ed2d127f03",
+  "canonicalSha256": "69f83454d422b01c777240b3b0342451d9b37b3ab2b32cfb7714a3a4b9bf8cfd",
+  "source": {
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4"
+  },
+  "targets": [
+    {
+      "id": "control-nature-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "Exact old nature+brute control for new core29 substitution"
+    },
+    {
+      "id": "control-nature-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "Exact old nature+brute control for cheap breaker30 replacing6"
+    },
+    {
+      "id": "control-material",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Exact old strong material control for Empusa31 replacing7"
+    },
+    {
+      "id": "control-puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "Same-seed pure control for leader/core/cheap-breaker substitutions"
+    },
+    {
+      "id": "control-c17-mixed",
+      "ids": [
+        29,
+        8,
+        30,
+        7,
+        10
+      ],
+      "role": "Same-seed eligible mixed control for losing bonus via cheap25 replacement"
+    }
+  ],
+  "matches": 6024
+}

@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "status": "complete-bounded-playtest-evidence-known-nature-imbalance",
+  "source": {
+    "gameVersion": "0.14.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+    "configSha256": "28aab51e8d03b139cc83038fd522849b18fc82ad7e63d52659df84a7756b8f7f"
+  },
+  "counts": {
+    "scheduledGames": 308672,
+    "historicalEngineGames": 211056,
+    "finalEngineGames": 97616,
+    "freshFinalEngineGames": 29728,
+    "reports": 34,
+    "representativeCliReplays": 68,
+    "exactDecisionTraceReplays": 14624,
+    "costOnlyMetricEqualityPairs": 3360,
+    "smokeGames": 736,
+    "note": "Scheduled totals include repeated baseline controls and mirrors. Decision/CLI replay counts are re-executions, not additional independent balance games. Smoke is separate."
+  },
+  "bySource": {
+    "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24": {
+      "reports": 22,
+      "games": 211056,
+      "ledger": {
+        "unitAppearances": 2110560,
+        "mpSpent": 76248396,
+        "mpGenerated": 771976,
+        "initialMp": 120678144,
+        "finalMp": 45201724,
+        "supplyCasts": 46036,
+        "supplyPotential": 772312,
+        "supplyWasted": 336,
+        "illegalLedgers": 0,
+        "repeatSupply": 0,
+        "overMaximum": 0
+      }
+    },
+    "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc": {
+      "reports": 12,
+      "games": 97616,
+      "ledger": {
+        "unitAppearances": 976160,
+        "mpSpent": 37023476,
+        "mpGenerated": 611648,
+        "initialMp": 55924336,
+        "finalMp": 19512508,
+        "supplyCasts": 30539,
+        "supplyPotential": 611740,
+        "supplyWasted": 92,
+        "illegalLedgers": 0,
+        "repeatSupply": 0,
+        "overMaximum": 0
+      }
+    }
+  },
+  "tests": {
+    "command": "npm test -- --maxWorkers=1 src/balanceLab*.test.ts src/slimeWave.test.ts",
+    "passed": 391,
+    "files": 15,
+    "failed": 0,
+    "terminalExitCode": 0,
+    "log": "docs/slime-balance-tests.txt",
+    "sha256": "e7554331c4b260760cd7063cba35088e4fc821d563a636b91dd6d1dbffd1b9fc",
+    "historicalCompleteBattleParity": 216
+  },
+  "smoke": {
+    "command": "npm run lab:smoke",
+    "terminalExitCode": 0,
+    "matches": 736,
+    "rawSha256": "a36d794a68d0d9c88a9d15ec9aff96536637ebf279bfbd2d23976206c4d81b67",
+    "source": {
+      "gameVersion": "0.14.0",
+      "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+      "workingTreeDirty": true,
+      "nodeVersion": "v24.19.0",
+      "engineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+      "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+      "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+      "configSha256": "28aab51e8d03b139cc83038fd522849b18fc82ad7e63d52659df84a7756b8f7f"
+    },
+    "pairedDelta": {
+      "pairs": 208,
+      "seedClusters": 8,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    },
+    "log": "docs/slime-balance-smoke.txt",
+    "logSha256": "0e115f57695cc9912bc41cd3e67152b05438d5686b1ee684c9def6e8278118cb"
+  },
+  "verification": {
+    "path": "docs/slime-balance-verification.json",
+    "sha256": "15dd2538ec0da7b14162ecb7d2526110ed4b64e1c9b227569bfd5fc2f070a19a",
+    "illegalLedgers": 0,
+    "repeatSupply": 0,
+    "overMaximum": 0,
+    "defaultIdentityMismatches": 0,
+    "disabledVersusZero": [
+      {
+        "phase": "slime-final-",
+        "check": "zero-versus-disabled production-policy gameplay equality",
+        "matches": 1808,
+        "mismatches": 0,
+        "note": "Allowance state/events and eligibility metrics intentionally differ; zero amount is never selected by production AI. Compares winner/turns and every unit monsterId/finalHP/finalMP/cast/paid/special/damage/healing/MPspent/deathTurn."
+      },
+      {
+        "phase": "slime-stage1-",
+        "check": "zero-versus-disabled production-policy gameplay equality",
+        "matches": 2624,
+        "mismatches": 0,
+        "note": "Allowance state/events and eligibility metrics intentionally differ; zero amount is never selected by production AI. Compares winner/turns and every unit monsterId/finalHP/finalMP/cast/paid/special/damage/healing/MPspent/deathTurn."
+      }
+    ]
+  },
+  "packing": {
+    "manifest": "docs/slime-balance-packed/manifest.json",
+    "sha256": "8529c446c48e60512a983c118bd70799da90d87d53b96d901399bf7faf4a92cf",
+    "records": 1305,
+    "verifiedByteEquivalentPrettyJson": true,
+    "dataChunks": 58,
+    "catalogs": 6,
+    "originalBytes": 16113221,
+    "packedBytes": 3987117,
+    "largestChunkBytes": 64999,
+    "preserves": "All scheduled teams/seeds/configs/source hashes/aggregate metrics/per-opponent cohorts and unsuccessful balance candidates. Raw events remain reproducible ignored outputs; the compact archive is not every raw event."
+  },
+  "preservedInterruptedAttempts": [
+    {
+      "kind": "Targeted test under concurrent simulation load",
+      "passed": 387,
+      "failed": 4,
+      "reason": "Four existing CLI tests exceeded their unchanged five-second timeout; no assertion failure. Clean single-worker rerun passed all391.",
+      "rawLogSha256": "03e5d1d9e4f5abcc8f5eff613fb33c476b24358f9ac29f2e37846516c11c86a5"
+    },
+    {
+      "kind": "Test process authorization interruption",
+      "reason": "Polling was rejected for missing task authorization; the same poll was retried once after exact user authorization was provided, then returned Unknown process ID. Authorized clean test restart passed."
+    },
+    {
+      "kind": "First final smoke attempt",
+      "reason": "Automatic approval review was cancelled, then the one identical poll returned Unknown process ID. No success was claimed. Parent/root authorized one same-command, same-worktree restart, which completed with exit0."
+    }
+  ],
+  "qualityLimits": [
+    "Production autoOrders policy only; no human fairness or optimal-play claim.",
+    "Fresh pure score36.61% on retained35 and45.57% on new24; four opponent member sets overlap between these pools.",
+    "Legal nature+brute scores96.68% and98.70% remain known imbalance. Old matched nature shells were already dominant and new brute added strength.",
+    "The all-family milestone requires a same-budget matrix and an intentional system-balance pass on nature/poison.",
+    "Supply is reached in real games but is not a universal score boost; final disable/zero improve the provisional team."
+  ],
+  "ownership": {
+    "changedExisting": [
+      "scripts/balance-lab/core.mjs",
+      "scripts/balance-lab/cli.mjs",
+      "src/balanceLab.test.ts"
+    ],
+    "newSource": [
+      "scripts/balance-lab/analyze-slime-decisions.mjs",
+      "scripts/balance-lab/freeze-slime-budget.mjs",
+      "scripts/balance-lab/freeze-slime-configs.mjs",
+      "scripts/balance-lab/freeze-slime-durable-mixed.mjs",
+      "scripts/balance-lab/freeze-slime-durable.mjs",
+      "scripts/balance-lab/freeze-slime-durable60-strong.mjs",
+      "scripts/balance-lab/freeze-slime-durable60.mjs",
+      "scripts/balance-lab/freeze-slime-final.mjs",
+      "scripts/balance-lab/freeze-slime-nature-controls.mjs",
+      "scripts/balance-lab/freeze-slime-sensitivity.mjs",
+      "scripts/balance-lab/pack-slime-evidence.mjs",
+      "scripts/balance-lab/read-slime-packed.mjs",
+      "scripts/balance-lab/reconstruct-slime-source.mjs",
+      "scripts/balance-lab/resolve-slime-source.mjs",
+      "scripts/balance-lab/summarize-slime.mjs",
+      "scripts/balance-lab/verify-slime-cost.mjs",
+      "scripts/balance-lab/verify-slime.mjs",
+      "scripts/balance-lab/write-slime-audit.mjs",
+      "src/balanceLabSlime.test.ts",
+      "src/balanceLabSlimeCli.test.ts",
+      "src/balanceLabSlimeFailure.test.ts"
+    ],
+    "configs": [
+      "configs/balance-lab/slime-broad.json",
+      "configs/balance-lab/slime-budget-cheap-core.json",
+      "configs/balance-lab/slime-budget-nature-brute.json",
+      "configs/balance-lab/slime-budget-nature-controls.json",
+      "configs/balance-lab/slime-budget-previous-newpool.json",
+      "configs/balance-lab/slime-budget-previous.json",
+      "configs/balance-lab/slime-durable-mixed-a.json",
+      "configs/balance-lab/slime-durable-mixed-b.json",
+      "configs/balance-lab/slime-durable-oldcores.json",
+      "configs/balance-lab/slime-durable16.json",
+      "configs/balance-lab/slime-durable60-oldcores.json",
+      "configs/balance-lab/slime-durable60-strong.json",
+      "configs/balance-lab/slime-durable60.json",
+      "configs/balance-lab/slime-durable8.json",
+      "configs/balance-lab/slime-final-identity.json",
+      "configs/balance-lab/slime-final-newpool.json",
+      "configs/balance-lab/slime-final-supply-disabled.json",
+      "configs/balance-lab/slime-final-supply-enabled.json",
+      "configs/balance-lab/slime-final-supply-zero.json",
+      "configs/balance-lab/slime-final-supply12.json",
+      "configs/balance-lab/slime-final-supply8.json",
+      "configs/balance-lab/slime-identity.json",
+      "configs/balance-lab/slime-mixed-a.json",
+      "configs/balance-lab/slime-mixed-b.json",
+      "configs/balance-lab/slime-nature-old-controls.json",
+      "configs/balance-lab/slime-sensitivity-attack.json",
+      "configs/balance-lab/slime-sensitivity-hp-attack.json",
+      "configs/balance-lab/slime-sensitivity-hp-supply12.json",
+      "configs/balance-lab/slime-sensitivity-hp.json",
+      "configs/balance-lab/slime-supply-disabled.json",
+      "configs/balance-lab/slime-supply-enabled.json",
+      "configs/balance-lab/slime-supply-zero.json",
+      "configs/balance-lab/slime-supply12.json",
+      "configs/balance-lab/slime-supply8.json"
+    ],
+    "docs": "docs/slime-balance* only; no engine/UI/art/rights/package/publication edits by this worker"
+  },
+  "sourceFiles": [
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "sha256": "5f6301ef40e864ad310453482705b1e566c6a73dfc8a819beeaa0dea33a72d89"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "sha256": "57857e2290009e4df03b061b29c96c587ba9f0f98f3c59bba3fc52e9d6eb99a3"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-slime-decisions.mjs",
+      "sha256": "1bb49f14d9005e3dbf2a920d1b0947dd6e829016b41279bae7bce3137e8c19fb"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-budget.mjs",
+      "sha256": "9714867421dc27ced4fcbec3da4e9d30767edcfd3ce9be82cd63bbd29c301d08"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-configs.mjs",
+      "sha256": "0ddea6770ef560edc092c1c645f38cb621d6cbab26d2d9afbf2bc1fdec9c6897"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-durable-mixed.mjs",
+      "sha256": "394dfe8dfe60c648e127d6c9e7bdc61c954a6d54a6508ef022160e9063c49e43"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-durable.mjs",
+      "sha256": "68a36a87ad8d29e611519f401baf694828702f641c68fe0cb8931c42186b9731"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-durable60-strong.mjs",
+      "sha256": "d226413a5e1c752d30ba42fcb0b9f9d757b0f5212d97dce15ba29d5488cf3409"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-durable60.mjs",
+      "sha256": "b3de14e843e440ee843e8c6ba494708bf12257e3b0f652fd8c34c10ffbd45ed7"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-final.mjs",
+      "sha256": "48c49f047ef4464d406c7172f2d18a891a69bfcb237341a8c2e275043e9eb259"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-nature-controls.mjs",
+      "sha256": "c44e0cbb08b98daab57957bdd1073864606610167bb4b502076cd098ce721616"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-slime-sensitivity.mjs",
+      "sha256": "730b2ce014a45ba6342968b4dc99c2c742b44004460b95693a85c08ca0aacc0c"
+    },
+    {
+      "path": "scripts/balance-lab/pack-slime-evidence.mjs",
+      "sha256": "9a3a36b0379c494cd50062a4002b3ddfd25da6e132d13c6ac16380bc322f11c6"
+    },
+    {
+      "path": "scripts/balance-lab/read-slime-packed.mjs",
+      "sha256": "c90949a5f4433bf00a7303647801aef2d0550d93e68474583bf8662f4f870645"
+    },
+    {
+      "path": "scripts/balance-lab/reconstruct-slime-source.mjs",
+      "sha256": "d8130dc9c03f01a3a5add9ba0e9417d8645f04fc648f662fb41eaf56b9b63d9d"
+    },
+    {
+      "path": "scripts/balance-lab/resolve-slime-source.mjs",
+      "sha256": "663540bc97d524e29dc8bde62e967bc1fdd8e6303a48e7d9ce1bec4b01b954b6"
+    },
+    {
+      "path": "scripts/balance-lab/summarize-slime.mjs",
+      "sha256": "8ea531656556e8243e02e3fc3cf77a4a7dd1283a6c379fdf152c61db78377cba"
+    },
+    {
+      "path": "scripts/balance-lab/verify-slime-cost.mjs",
+      "sha256": "26a59f225e8a405c485a96fd3c96a7983db4965a91d83f7193f7da677d28ddc2"
+    },
+    {
+      "path": "scripts/balance-lab/verify-slime.mjs",
+      "sha256": "dc727c119a685f8d5eef0d21579be1e7582733c76410ae7563e8d423ee8e8742"
+    },
+    {
+      "path": "scripts/balance-lab/write-slime-audit.mjs",
+      "sha256": "de196634afbcc8ee14416f03eb2d12b8e9abd3b14832dbcc15aaabfb6b477d6d"
+    },
+    {
+      "path": "src/balanceLab.test.ts",
+      "sha256": "07f1950c1c4b1f00a768f0f8a8ce31800c2cb2d56145c86a2cb9618f9eaca5f4"
+    },
+    {
+      "path": "src/balanceLabSlime.test.ts",
+      "sha256": "dba6ea1ab5cbdb6a4dc594a99f958ec9bd88f0ac583d51cd1639ba399bc96689"
+    },
+    {
+      "path": "src/balanceLabSlimeCli.test.ts",
+      "sha256": "9f7f7fc439cb78d545d02dd717889d9d5ad3a084f24ba48473ae9ce23a329b6a"
+    },
+    {
+      "path": "src/balanceLabSlimeFailure.test.ts",
+      "sha256": "4ee378d5ee80439ed3fa1a08758d87d5fe51519e33ef7ca06cce42b182ff810a"
+    }
+  ],
+  "configFiles": [
+    {
+      "path": "configs/balance-lab/slime-broad.json",
+      "sha256": "cc689b2c25277752ed8ed083b048183ae745e28c73307746de7bb6751e958a0f"
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-cheap-core.json",
+      "sha256": "316480cb0d0956bac6ca4e5f2b67eccc55810e8f86f86f57edd1c28d1ceb2d57"
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-nature-brute.json",
+      "sha256": "51318d1dc0d8874ec1739b3035ba7136197bf0e78bae93ebddb1e11c7306b557"
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-nature-controls.json",
+      "sha256": "be8f2f87888f3176d77c27c8a5cf81d5ce5134afc543fc50d9a49888021d0812"
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-previous-newpool.json",
+      "sha256": "c25238ec877c7fab916c8b57792b4d089538ed9d05cbee5a64dbb32e6a16ea9c"
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-previous.json",
+      "sha256": "6144e3990f4b41caae71cbb5423986be513a7d276cb5f0257bd52d88413cd5cb"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable-mixed-a.json",
+      "sha256": "5b0d5125585828c8f061e6ece8a2baf901496f9d844a8bab6569f91731840722"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable-mixed-b.json",
+      "sha256": "c8190e8cdf6b3554e0ab3d568b5d539349ca8a64d27345deadbdd7457fd920ca"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable-oldcores.json",
+      "sha256": "a969d8402237cbac5a14f7197adf54b468d71e007c8490f97154521cc287b360"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable16.json",
+      "sha256": "a993fffa32ab9b119fa7c2f00d3f252b2ef924fc6b82746c1ec684d59147c701"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable60-oldcores.json",
+      "sha256": "2ede441513243aa53dcb38a7d9fb4658044c65d6bd9362f925cfa88b9f6082ce"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable60-strong.json",
+      "sha256": "e1283a6c80bfc5164c780b0c4f0b8258c36243c6da8ed561d44c7dc2e44ba742"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable60.json",
+      "sha256": "a14b60218c271dc73d0293c5ab444e506f4943af493f94ef5e7ca29cae3ad6a1"
+    },
+    {
+      "path": "configs/balance-lab/slime-durable8.json",
+      "sha256": "8052f4e110abfcef1ef2f4e813cee858d3545454d79ba2d84f8a997ff121e2ba"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-identity.json",
+      "sha256": "3ee4fbf4bae581a1f8a9f0085087385e55cf31a0eda7e604865e8689707b59f8"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-newpool.json",
+      "sha256": "e7c282e7e13462d6b69a4d76af8da13f5247e58caa51523ae0aca5285812023e"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-disabled.json",
+      "sha256": "c2f5045827623aae32bf56242777502dc989368477de1a137125425ee03ec7e6"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-enabled.json",
+      "sha256": "927b0eef23d471f3ac9fefa842b5c3eef662d6b26c158dcb78f45ad5a0d3fb89"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply-zero.json",
+      "sha256": "98b7c82e12d42740e1c6f747d92c3cfca92c41f83220fb6e1bab6af4b44703c3"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply12.json",
+      "sha256": "ee0d1494f1aca44597eb61060200766988e0300d1ff0496604d66ecb82e1bb06"
+    },
+    {
+      "path": "configs/balance-lab/slime-final-supply8.json",
+      "sha256": "b6a42187c206826f26a7344b73dcc50dba37dc0b2dee29ab6ad75c6c484d0539"
+    },
+    {
+      "path": "configs/balance-lab/slime-identity.json",
+      "sha256": "bedd01b34efda29871298170c47386b5a49850ce7c1e04bb78e5a5bd0c110d52"
+    },
+    {
+      "path": "configs/balance-lab/slime-mixed-a.json",
+      "sha256": "fac62c0e32991f23885db33a4b7c6878f1b6221172ae3d092a7069f6173ee81c"
+    },
+    {
+      "path": "configs/balance-lab/slime-mixed-b.json",
+      "sha256": "028fc737cff05262be22c4c09c512cf85146ed7af7773cf8ec8b10064c4aaf7e"
+    },
+    {
+      "path": "configs/balance-lab/slime-nature-old-controls.json",
+      "sha256": "61025a8a7dd2ec23d6b0ea7fad49fc7c27825bc26ee52cb694bf19524c18aafa"
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-attack.json",
+      "sha256": "3f306bad8b2ab93043a7f81fbbbd614dc0782b95b214e1dfa44a4f682411ceac"
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp-attack.json",
+      "sha256": "711219624735d5d6f16d745bb1c3fa2123cf474032a29aff4f04fb7ec40b71ef"
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp-supply12.json",
+      "sha256": "6ecf2df15e917b8aa25d1da0d5b933765de4fc0712cf3373817eaaa6287e4501"
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp.json",
+      "sha256": "48b39ca6a704728532e1a3c746ef6e57df7d03fc1f37cb4d14b874739a1bd611"
+    },
+    {
+      "path": "configs/balance-lab/slime-supply-disabled.json",
+      "sha256": "25a3a60d99b4d35118d5de14ae1f008ac85df10bf81add0f36c1ef5c615e6477"
+    },
+    {
+      "path": "configs/balance-lab/slime-supply-enabled.json",
+      "sha256": "7fea8c1647b44538375dc8f3d0ef598b90b6e654244fe90064eacd3d953df9ff"
+    },
+    {
+      "path": "configs/balance-lab/slime-supply-zero.json",
+      "sha256": "9f2f328bb9e628eeae20ca63d2ea6fb693e4af108b1ddefe46c46e96cd1e088d"
+    },
+    {
+      "path": "configs/balance-lab/slime-supply12.json",
+      "sha256": "5b2771a06be53874d8a3660d1c45f0d7b02c8bdae3e585d6a171317d4d84920b"
+    },
+    {
+      "path": "configs/balance-lab/slime-supply8.json",
+      "sha256": "cdd6b8da1a0d12894719ddb7987e7407da3823611f186edb5a1b5d2e14292dd4"
+    }
+  ],
+  "freezeManifests": [
+    {
+      "path": "docs/slime-balance-budget-freeze.json",
+      "sha256": "492a68cad41e8c3ef4e25526706775c01a18a1a6505306c4ad20661c0640f82d"
+    },
+    {
+      "path": "docs/slime-balance-durable-freeze.json",
+      "sha256": "0448f9fc0a7aaec80d473c214b9aa850cb41fac79c5b9b36d32f58dfdab6e0cf"
+    },
+    {
+      "path": "docs/slime-balance-durable-mixed-freeze.json",
+      "sha256": "e8996d0a1e49cf3c6e648f64ea5256edbc1b84bbddcdc232b5df5fcd7116a915"
+    },
+    {
+      "path": "docs/slime-balance-durable60-freeze.json",
+      "sha256": "2e509b92e92c402d0559e68c2ccfe87562afec15bd7e6b826f853742a5c2417c"
+    },
+    {
+      "path": "docs/slime-balance-durable60-strong-freeze.json",
+      "sha256": "2ba3aef262cfb001c43bb53bf5cbf1f9e62b192104d600cd2e5b451a5ed067ef"
+    },
+    {
+      "path": "docs/slime-balance-final-freeze.json",
+      "sha256": "6c8967e157e456f077f793882842319b181b6bb14b3000bd4d8d31447d1c0392"
+    },
+    {
+      "path": "docs/slime-balance-freeze.json",
+      "sha256": "7e5bae0504f9ea906edae752f2e1352186a76ee85dbde1c82a1ae6f944e0d9a6"
+    },
+    {
+      "path": "docs/slime-balance-nature-controls-freeze.json",
+      "sha256": "599efaa174046f1a7d4a08526d8c7ba7e6ca6d4d65255681c3f38c5bb82e4d69"
+    },
+    {
+      "path": "docs/slime-balance-sensitivity-freeze.json",
+      "sha256": "dc425d7855c2320b5faa14f964c30255d95ff84886f88dad97a156e116dac62b"
+    }
+  ],
+  "audit": {
+    "path": "docs/slime-balance-audit.md",
+    "sha256": "fd8bf793d7bf5c3b58909ca5021a98c0a5a2be85d746e9b62508955989614edc"
+  }
+}

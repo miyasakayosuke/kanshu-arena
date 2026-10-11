@@ -1,0 +1,15 @@
+# Interpreting the separate pure-family confirmation
+
+The fresh confirmation passes at zero initial poison impact under both automatic policies. Half impact passes only under independent policy and fails under reservation. The original fixed mixed-counter protocol remains failed; this is fresh confirmation of two unchanged pure rosters selected after exploratory matrix inspection.
+
+At zero/reservation, pure material scores 67.97% against Dryas and 71.09% against Tengu, with approximate seed-clustered 95% lower bounds 59.85% and 63.21%. Pure demon scores 94.14% and 99.22%, with lower bounds 90.77% and 98.14%. Every cell has 128 fresh seeds and both orientations; each orientation is above 50%. Independent/zero also passes all four cells. The material result demonstrates an alternative role beyond the especially favorable demon matchup.
+
+This numerical counter screen does not choose an automatic policy or authorize adoption. The original whole-matrix distribution makes zero plus old independent AUTO unsuitable as an all-family recommendation on this evidence: pure nature C15 is only 8.56% overall and 3.28% versus C17. Reservation changes those to 44.16% and 36.56%, while retaining the known first-selected-poison-caster death risk. Half keeps pure nature weak under both policies. These are cross-budget C15 comparisons, not C17 spend.
+
+Original Janus C17 remains weak, at 20.89% versus C17 under zero/reservation. The separately frozen original-versus-five-tag recommendation study must remain distinct from the failed mixed counter gate. The completed fresh comparison favors the five-tag target at 58.29% common-opponent and 51.97% strict-C17 score under zero/reservation; see the separate leader/Janus interpretation. The parent’s manual/player-discoverability and adoption decisions remain separate. Pure material and demon are also strong generally; their fresh counter wins do not establish a universally fair or optimal environment.
+
+The 24,576 executions are complete and all rows are source/config/schedule/hash bound. Sixty fixed sample replays, 2,048 stock-identity comparisons and 10,752 repeated baselines passed. Every actual HP/MP, cleanse, repair, guard and action ledger is retained, including unsuccessful conditions. No extra seed extension or counter replacement is permitted.
+
+Label-only clarification: the reader-facing result table now says “Repair triggers / healing” for `repairTriggers` and effective repair healing. These are automatic end-turn activations, not paid casts or actions. The frozen analyzer and all numeric/raw values remain unchanged. Exact before/after report hashes and the unchanged analyzer hash are recorded in `all-family-pure-confirmation-report-label-revision.json`; no battle was rerun.
+
+See `all-family-pure-confirmation-results.md` and `.json` for all conditions, `all-family-balance-recommended-distribution.md` for all eight original roles across all six original matrix conditions, and `all-family-balance-audit.md` for the original failed protocol and exact provenance. No publication or production-default change is authorized by these reports.

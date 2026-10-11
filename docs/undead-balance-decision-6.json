@@ -1,0 +1,647 @@
+{
+  "kind": "slow-poison-reapplication",
+  "suite": "undead-broad",
+  "matchId": "f2-o3__s2907046071__a-right__baseline",
+  "orientation": "a-right",
+  "teamA": "c17-poison-undead",
+  "teamB": "purematerial",
+  "winner": "lose",
+  "source": {
+    "gameVersion": "0.16.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "configSha256": "efcd3a3a2e84b684dc6eb386b0611b2f8da34a44a84b74367b3b969375a3b19d"
+  },
+  "traceHash": "95ce3dbeda382aeb5b2dc578582ae2164107c643d9eb45558b905c1b4615101f",
+  "request": {
+    "teamA": [
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "teamB": [
+      32,
+      4,
+      33,
+      3,
+      10
+    ],
+    "seed": 2907046071,
+    "overrides": {}
+  },
+  "interpretation": "A later paid poison action restores three ticks after consumption. This adverse slow-Naga interaction remains visible rather than being excluded.",
+  "impact": {
+    "turn": 3,
+    "index": 17,
+    "actor": "e0",
+    "target": "a3",
+    "sourceMpAfterDebit": 16,
+    "targetBefore": {
+      "hp": 173,
+      "mp": 36,
+      "poison": 2,
+      "guard": false,
+      "ward": 0,
+      "maxHp": 209
+    },
+    "consumed": 2,
+    "perTick": 22,
+    "addedBasis": 44,
+    "nominalFuturePoison": 24,
+    "targetActionStarted": false,
+    "laterReapplication": true,
+    "roll": 1.09,
+    "scale": 1,
+    "actualDamage": 117,
+    "withoutAdditionSameRoll": 69,
+    "actualAdded": 48,
+    "targetAfterHp": 56,
+    "lethal": false,
+    "decisiveLocalKill": false,
+    "reapplicationActor": "e4"
+  },
+  "turn": {
+    "turn": 3,
+    "seedBefore": 3968416689,
+    "seedAfter": 1036171754,
+    "orders": [
+      {
+        "key": "a2",
+        "skill": -1,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 22.32,
+        "accepted": true
+      },
+      {
+        "key": "a3",
+        "skill": -1,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 17.36,
+        "accepted": true
+      },
+      {
+        "key": "a4",
+        "skill": -1,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 35.96,
+        "accepted": true
+      },
+      {
+        "key": "e0",
+        "skill": 0,
+        "target": "a3",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "塚底の取り立て",
+        "skillKind": "hit",
+        "skillPower": 48,
+        "accepted": true
+      },
+      {
+        "key": "e2",
+        "skill": 1,
+        "target": "a4",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "轍の一打",
+        "skillKind": "hit",
+        "skillPower": 70,
+        "accepted": true
+      },
+      {
+        "key": "e3",
+        "skill": 1,
+        "target": "e2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "生命の雫",
+        "skillKind": "heal",
+        "skillPower": 65,
+        "accepted": true
+      },
+      {
+        "key": "e4",
+        "skill": 1,
+        "target": "a4",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "毒霧",
+        "skillKind": "poison",
+        "skillPower": 12,
+        "accepted": true
+      }
+    ],
+    "events": [
+      {
+        "kind": "phase",
+        "phase": "turn-start"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e2",
+        "scope": "single",
+        "targets": [
+          "a4"
+        ],
+        "target": "a4",
+        "skill": "轍の一打",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e2",
+        "target": "e2",
+        "mp": 12,
+        "amount": 12,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e2",
+        "target": "a4",
+        "amount": 90,
+        "hp": 53,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e2",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e3",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "生命の雫",
+        "effect": "heal",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e3",
+        "target": "e3",
+        "mp": 12,
+        "amount": 18,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "heal",
+        "actor": "e3",
+        "target": "e2",
+        "amount": 65,
+        "hp": 67,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e0",
+        "scope": "single",
+        "targets": [
+          "a3"
+        ],
+        "target": "a3",
+        "skill": "塚底の取り立て",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e0",
+        "target": "e0",
+        "mp": 16,
+        "amount": 18,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "poison-cashout",
+        "actor": "e0",
+        "target": "a3",
+        "skill": "塚底の取り立て",
+        "poison": 0,
+        "poisonTicksConsumed": 2,
+        "poisonCashoutPerTick": 22,
+        "poisonCashoutAdded": 44,
+        "effect": "poison-cashout",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e0",
+        "target": "a3",
+        "amount": 117,
+        "hp": 56,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e0",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a3",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a3",
+        "target": "e2",
+        "amount": 30,
+        "hp": 37,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a3",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a4",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a4",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a4",
+        "scope": "single",
+        "targets": [
+          "e2"
+        ],
+        "target": "e2",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a4",
+        "target": "e2",
+        "amount": 37,
+        "hp": 0,
+        "phase": "action"
+      },
+      {
+        "kind": "defeat",
+        "actor": "a4",
+        "target": "e2",
+        "hp": 0,
+        "guard": false,
+        "poison": 0,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a4",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "e4",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e4",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e4",
+        "scope": "all",
+        "targets": [
+          "a2",
+          "a3",
+          "a4"
+        ],
+        "skill": "毒霧",
+        "effect": "poison",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e4",
+        "target": "e4",
+        "mp": 8,
+        "amount": 16,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e4",
+        "target": "a2",
+        "amount": 26,
+        "hp": 158,
+        "phase": "action"
+      },
+      {
+        "kind": "poison",
+        "actor": "e4",
+        "target": "a2",
+        "poison": 3,
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e4",
+        "target": "a3",
+        "amount": 22,
+        "hp": 34,
+        "phase": "action"
+      },
+      {
+        "kind": "poison",
+        "actor": "e4",
+        "target": "a3",
+        "poison": 3,
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e4",
+        "target": "a4",
+        "amount": 22,
+        "hp": 31,
+        "phase": "action"
+      },
+      {
+        "kind": "poison",
+        "actor": "e4",
+        "target": "a4",
+        "poison": 3,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e4",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a2",
+        "scope": "single",
+        "targets": [
+          "e3"
+        ],
+        "target": "e3",
+        "skill": "通常攻撃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a2",
+        "target": "e3",
+        "amount": 33,
+        "hp": 123,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a2",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "phase": "turn-end"
+      },
+      {
+        "kind": "damage",
+        "target": "a2",
+        "amount": 16,
+        "hp": 142,
+        "poison": 2,
+        "effect": "poison",
+        "phase": "turn-end"
+      },
+      {
+        "kind": "damage",
+        "target": "a3",
+        "amount": 12,
+        "hp": 22,
+        "poison": 2,
+        "effect": "poison",
+        "phase": "turn-end"
+      },
+      {
+        "kind": "damage",
+        "target": "a4",
+        "amount": 14,
+        "hp": 17,
+        "poison": 2,
+        "effect": "poison",
+        "phase": "turn-end"
+      }
+    ],
+    "unitsAfter": [
+      {
+        "key": "a0",
+        "hp": 0,
+        "mp": 42,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10,
+        "repairReady": false
+      },
+      {
+        "key": "a1",
+        "hp": 0,
+        "mp": 46,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a2",
+        "hp": 142,
+        "mp": 28,
+        "poison": 2,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a3",
+        "hp": 22,
+        "mp": 36,
+        "poison": 2,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "a4",
+        "hp": 17,
+        "mp": 28,
+        "poison": 2,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e0",
+        "hp": 203,
+        "mp": 16,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10,
+        "poisonCashoutBonus": 8
+      },
+      {
+        "key": "e1",
+        "hp": 0,
+        "mp": 40,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e2",
+        "hp": 0,
+        "mp": 12,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e3",
+        "hp": 123,
+        "mp": 12,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      },
+      {
+        "key": "e4",
+        "hp": 158,
+        "mp": 8,
+        "poison": 0,
+        "guard": false,
+        "rally": 0,
+        "rallyPercent": 5,
+        "ward": 0,
+        "wardPercent": 10
+      }
+    ],
+    "eventsSha256": "4f79ad691ca4ac1bd021c844199d5d9a03b243e8b09a4a6a7b844a9fd5eaf173"
+  },
+  "reconstructCommand": "node scripts/balance-lab/reconstruct-undead-source.mjs docs/undead-balance-source/undead-study-v1-index.json /tmp/undead-study-source",
+  "replayCommand": "node scripts/balance-lab/replay-undead-packed.mjs undead-broad f2-o3__s2907046071__a-right__baseline /tmp/slow-poison-reapplication.json /tmp/undead-study-source"
+}

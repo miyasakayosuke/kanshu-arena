@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "status": "exploratory-selected-fresh-confirmation-frozen-before-outcomes",
+  "base": {
+    "path": "docs/all-family-pure-confirmation-freeze.json",
+    "sha256": "29548b3085cb1ea74b69be421bb64d65f7b182d96d30e0a11764d686aefb0328"
+  },
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "originalEvidence": [
+    {
+      "path": "docs/all-family-balance-config-freeze.json",
+      "sha256": "b56a6b4fd918099eb2560581b85cc6963f4694fbd5a610582b73380cb1aa951f"
+    },
+    {
+      "path": "docs/all-family-balance-initial64.json",
+      "sha256": "60cd2b33d8e9fe4342b6d4eb614cafc164496969ea2d540aac203b1853777938"
+    },
+    {
+      "path": "docs/all-family-balance-verification.json",
+      "sha256": "84e278b72641f39fd08433e8e637fe1fc7eb21c0ab0f4c20a5dbaaebfc0dc2d9"
+    },
+    {
+      "path": "docs/all-family-leader-followup-freeze.json",
+      "sha256": "70f2448a3c54334663e4d70c1503b0dfe574f91c4771c4e9456be36ee2bdf9c1"
+    },
+    {
+      "path": "docs/all-family-leader-followup-robustness.json",
+      "sha256": "7e29323d85e1f29be841a3430f45ff2656c24a44c35f6104a1289ea4d7249322"
+    }
+  ],
+  "tooling": [
+    {
+      "path": "scripts/balance-lab/all-family-pure-confirmation.mjs",
+      "sha256": "a4ca47840d008e634ccdfa2a2cb6f3ad8c6702bd4d135954d731405ce15fca00"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-all-family-pure-confirmation.mjs",
+      "sha256": "f57ce8f0e00cc27594627ec1c2591d8282c336afdb26bfc8eb9043d47e6a0dc7"
+    },
+    {
+      "path": "scripts/balance-lab/run-all-family-leader-followup.mjs",
+      "sha256": "81df8b6363713654a0299850f80d3c34984a4c03b741e5c9ff6337983d7aee45"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-all-family-pure-confirmation.mjs",
+      "sha256": "5a142a54823c44d2c4ea5c7b33ae2953cec81b3caa99290a637236975f2f6014"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-leader-followup.mjs",
+      "sha256": "540ec14c7612edcd302dd5203330ba30017dbcc5c870893492780f2bd70a4522"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-support.mjs",
+      "sha256": "0ed0cd9cdee26dd937aa81a0c3a9371848c6cfa55fd7d3d05c722ec407e2a321"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-evidence-contract.mjs",
+      "sha256": "328471eaf26e4bce43fc8fe24cc1b849158ea620c3a7d8e0e5c6ef133396004b"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-statistics.mjs",
+      "sha256": "ca7937748fdafed86f3a0999af17a9fd81259585a0e70d3042fc14380c700cb1"
+    },
+    {
+      "path": "src/balanceLabAllFamilyPureConfirmation.test.ts",
+      "sha256": "ffce252be1ebde33c20675746fad94752d3bc76d9c53319aabfedf762da06d95"
+    }
+  ],
+  "executedMatches": 24576,
+  "counting": {
+    "candidateNonmirrorGames": 6144,
+    "uniquePhysicalCandidateMirrors": 3072,
+    "note": "Every fixed suite executes baseline/candidate, both orientations, four matchup cells and four mirrors. Repeated defaults, identity candidates and swapped mirrors are controls, not extra independent observations."
+  },
+  "replaySampling": "Per suite positions0,1,floor(n/4),+1,floor(n/2),+1,floor(3n/4),+1,n-2,n-1;60 exact replays.",
+  "configs": [
+    {
+      "id": "all-family-pure-independent-1",
+      "phase": "pure",
+      "arm": "independent",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-independent-1.json",
+      "fileSha256": "7d683cd18ffd1b340c222baaefd15dab1921f3a1836029e805018e89e7070289",
+      "canonicalSha256": "6d299889d7fe5be58d10c29f047b7a4f9b3a3cbabeb71937523bdd7c74596109",
+      "matches": 4096,
+      "scheduleSha256": "1fd6d9f46b42646ec01bd90b6d8af03e78f04f2689d9826fc0f370bd1359ecec"
+    },
+    {
+      "id": "all-family-pure-independent-half",
+      "phase": "pure",
+      "arm": "independent",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-independent-half.json",
+      "fileSha256": "9633a59eb6b68f1aa1de9c3a84b0a76f2faa669398f91861ec7cd23fcead9b24",
+      "canonicalSha256": "67d3d7249b943a2e0d8b5d78fe888c23d7a14d390594679d2d37b412d0ab0c2b",
+      "matches": 4096,
+      "scheduleSha256": "0c404f7b6f1510828b25da2e6d34c2cac81ce7687f9868a962c195ce362ba8c7"
+    },
+    {
+      "id": "all-family-pure-independent-0",
+      "phase": "pure",
+      "arm": "independent",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-independent-0.json",
+      "fileSha256": "a6e0c9de312c1301a1459d2d2a78b8313d8ddc83922641d02c984121882792fd",
+      "canonicalSha256": "1a42decb6422bac077776ef2c3ea2dcf708e6f89ed5a74214fc72e6c3aac9937",
+      "matches": 4096,
+      "scheduleSha256": "59cef8498830d02a96d5a383a5840fdabd23d6e230621320a06a92f745448c18"
+    },
+    {
+      "id": "all-family-pure-reserve-1",
+      "phase": "pure",
+      "arm": "reserve",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-reserve-1.json",
+      "fileSha256": "be258183f3bfa91b91a1d2d16c7f457302d4ee5ee4fa3edd9e11cdb7230eaa48",
+      "canonicalSha256": "97a4eca16e704f9b23a333ae89de4354387404bf5303a3b7cd949149234b1cc6",
+      "matches": 4096,
+      "scheduleSha256": "71218b09623c0ecb979ff28fce22d748067ffd0a35f4b51aaa30c5b8c33f167c"
+    },
+    {
+      "id": "all-family-pure-reserve-half",
+      "phase": "pure",
+      "arm": "reserve",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-reserve-half.json",
+      "fileSha256": "f39cad22597a435b0747eb73fce6c2505d3243bf47fb95791dad4ef4a21695b8",
+      "canonicalSha256": "4fe022efac249a2ce8a09b2137d983d565f4ed452f1197098afb61654a1a3792",
+      "matches": 4096,
+      "scheduleSha256": "3e41d4017273c9762c3501adae88dd34c3354eb0f58aa0f335d6e4c61c6a7ecb"
+    },
+    {
+      "id": "all-family-pure-reserve-0",
+      "phase": "pure",
+      "arm": "reserve",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-pure-reserve-0.json",
+      "fileSha256": "d5895b3c65ae3230752b86a7e7b1d3ff66e5b76a47feb88c06ed5d85cae1e3e3",
+      "canonicalSha256": "3f8c3583d4226925a337ca183899f3141376b3f121cdcdcbb94c43c675c153ad",
+      "matches": 4096,
+      "scheduleSha256": "1bc647022837f259f70e2676c13b1a612bd5efe3e8935042d5af34521287c33d"
+    }
+  ],
+  "selectionDisclosure": "The two targets are unchanged recommended pure teams from the original24-team freeze. They were selected for confirmation after inspecting the zero-impact reserve matrix: pure demon90.625/96.875% and pure material81.25/81.25% versus the two shells,32 games per cell. This selection is exploratory, not blinded or random. Original mixed-counter gate failures remain failures.",
+  "criteria": {
+    "requireBothNamedPureCountersAgainstBothShellsInBothPolicies": true,
+    "scoreAtLeast": 0.6,
+    "approximateSeedClustered95LowerAbove": 0.5,
+    "eachPhysicalOrientationAbove": 0.5,
+    "extraSeedsOrCounterSubstitution": false,
+    "originalFullMatrixGatesAndDistributionStillReviewed": true,
+    "preferHalfIfBothCandidateScalesSatisfyNewConfirmationAndBroaderChecks": true
+  }
+}

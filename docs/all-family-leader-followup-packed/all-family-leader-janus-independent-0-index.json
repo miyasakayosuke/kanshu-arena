@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "suite": "all-family-leader-janus-independent-0",
+  "status": "complete",
+  "phase": "janus",
+  "arm": "independent",
+  "scale": 0,
+  "shell": null,
+  "configPath": "configs/balance-lab/all-family-leader-janus-independent-0.json",
+  "configFileSha256": "54c2325a8064658d9755c1264df28b60e4c7294f1208dd7bf4f86ab24e7fa8dc",
+  "configSha256": "6c375f58739c7e8444d30025573c20ef3982950d464a3cd3e618f61758c2f143",
+  "derivedFreezeSha256": "b2f6f8d62166e4a2bfe9c5ad194a2e069f0a5e5ffa44597a050087570281f517",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "scheduleSha256": "1a9b1bcb51ee3a4acb600f8281844f1c5920032a0843767bb2e58e187256b775",
+  "scheduledMatches": 4672,
+  "executedMatches": 4672,
+  "chunkManifest": [
+    {
+      "file": "lf-janus-i-0-manifest-00001.json",
+      "bytes": 11377,
+      "sha256": "6762b7824b12eb52532287931ae5c100ea9c27e94c1d10a6c0602fc81d13fc29",
+      "records": 146,
+      "first": "chunk-1",
+      "last": "chunk-146"
+    }
+  ]
+}

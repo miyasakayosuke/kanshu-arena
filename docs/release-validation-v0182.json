@@ -1,0 +1,55 @@
+{
+  "release": "0.18.2-local-candidate",
+  "recordedAt": "2026-10-11",
+  "baseTree": "33b4c6ec54c8d3818d41ff99b23396c6f12ed65e",
+  "isolatedUiPatchTree": "2f29c2fa8ffaaa74a2c746f76f920128f3f5cfad",
+  "isolatedPatchSha256": "0f2dede2da9cd543ebb42adf34a6ccd4a41702df081f9ed199b86b9db6df2c99",
+  "finalIntegrationChecks": {
+    "npmTest": {
+      "files": 87,
+      "passed": 2023,
+      "failed": 0
+    },
+    "rightsSelfTests": 14,
+    "rightsSourceAndDist": true,
+    "typescriptViteBuild": true,
+    "smoke": {
+      "executions": 736,
+      "scoreRateBefore": 45.19,
+      "scoreRateAfter": 45.19,
+      "changedOutcomes": 0,
+      "scope": "Isolated UI patch before version-only integration; exact engine/families/AI/Lab source preserved. Exact published CI reruns smoke."
+    }
+  },
+  "liveBrowser": "not yet verified",
+  "published": false,
+  "logs": [
+    {
+      "file": "v0182-tests.log",
+      "sha256": "7bcbc7d5d5e1d35b8e9e627cda9e88b3dd99a2686f79e7a8be29b182246f4702"
+    },
+    {
+      "file": "v0182-rights.log",
+      "sha256": "b4ac3524dfe19b6ccd8fe06a424bf8cca4bb27e7cfb6349fb88a3d6a6d736136"
+    },
+    {
+      "file": "v0182-build.log",
+      "sha256": "8a0da190d2af132462458ef20e534049d302221c4031aeaace7899e649a59468"
+    }
+  ],
+  "unchangedSource": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/BattleStage.tsx": "9f3d53c31416b143c57eeebccd448f04f37f1922d4df0e6848799583490bd9bb",
+    "src/style.css": "df44d4a822eebd87d8ea170ec342cf508371ab2a9d5dc056b91df8966b6b2d3b",
+    "public/credits.html": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "limitations": [
+    "Known historical failed balance gates preserved",
+    "No human fairness claim",
+    "Live CI, Pages and actual browser QA pending at record creation",
+    "Inventory checks are not legal clearance"
+  ]
+}

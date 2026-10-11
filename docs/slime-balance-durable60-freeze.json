@@ -1,0 +1,145 @@
+{
+  "executorRecordedAt": "2026-10-10T08:18:55.480Z",
+  "timestampCaution": "Executor clock approximately9h ahead; own60outcomes not observed before freeze.",
+  "phase": "Parent-requested single-factor64to60 AoE diagnostic after E/8 results",
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-durable60.json",
+      "fileSha256": "a14b60218c271dc73d0293c5ab444e506f4943af493f94ef5e7ca29cae3ad6a1",
+      "canonicalSha256": "84d7474fe5965b5382a4196668efb40537266069d5e53789f882f73e8949a1f9",
+      "matches": 9664,
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 235,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 160
+          },
+          "26": {
+            "hp": 250
+          },
+          "27": {
+            "hp": 195
+          },
+          "28": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "ねり打ち",
+                "power": 76,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "散る重泡",
+                "power": 60,
+                "priority": 0,
+                "mpCost": 20,
+                "kind": "hit",
+                "all": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/slime-durable60-oldcores.json",
+      "fileSha256": "2ede441513243aa53dcb38a7d9fb4658044c65d6bd9362f925cfa88b9f6082ce",
+      "canonicalSha256": "2978b95b100dfc25c88610e8e6212537b5d950cce5a4a72cb662cdbaef5fc608",
+      "matches": 16960,
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 235,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 160
+          },
+          "26": {
+            "hp": 250
+          },
+          "27": {
+            "hp": 195
+          },
+          "28": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "ねり打ち",
+                "power": 76,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "散る重泡",
+                "power": 60,
+                "priority": 0,
+                "mpCost": 20,
+                "kind": "hit",
+                "all": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

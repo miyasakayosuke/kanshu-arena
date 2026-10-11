@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "demon-initial",
+  "seeds": [
+    2787045971,
+    1146514436,
+    3800950197,
+    2160418662,
+    519887127,
+    3174322888,
+    1533791353,
+    4188227114,
+    2547695579,
+    907164044,
+    3561599805,
+    1921068270,
+    280536735,
+    2934972496,
+    1294440961,
+    3948876722
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "Initial pure five demon C17"
+    },
+    {
+      "id": "mixeddemon",
+      "ids": [
+        29,
+        8,
+        30,
+        2,
+        10
+      ],
+      "role": "Initial C15 mixed demon+heal/cleanse; compare budget honestly"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Adopted material14 pure C17"
+    },
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure C17 unchanged total"
+    },
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute; retain adverse outcome"
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute alternative"
+    },
+    {
+      "id": "strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 poison mix, unchanged total"
+    },
+    {
+      "id": "strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 area/poison mix, unchanged total"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "puredemon",
+      "b": "fullbeast",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o2",
+      "a": "puredemon",
+      "b": "fullnature",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o3",
+      "a": "puredemon",
+      "b": "puredragon",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o4",
+      "a": "puredemon",
+      "b": "purematerial",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o5",
+      "a": "puredemon",
+      "b": "pureslime",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o6",
+      "a": "puredemon",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o7",
+      "a": "puredemon",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o8",
+      "a": "puredemon",
+      "b": "strong-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o9",
+      "a": "puredemon",
+      "b": "strong-area",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o10",
+      "a": "puredemon",
+      "b": "guard-heal",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o11",
+      "a": "puredemon",
+      "b": "poison-cleanse",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o12",
+      "a": "puredemon",
+      "b": "priority",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o13",
+      "a": "puredemon",
+      "b": "material-strong",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o1",
+      "a": "mixeddemon",
+      "b": "fullbeast",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o2",
+      "a": "mixeddemon",
+      "b": "fullnature",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o3",
+      "a": "mixeddemon",
+      "b": "puredragon",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o4",
+      "a": "mixeddemon",
+      "b": "purematerial",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o5",
+      "a": "mixeddemon",
+      "b": "pureslime",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o6",
+      "a": "mixeddemon",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o7",
+      "a": "mixeddemon",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o8",
+      "a": "mixeddemon",
+      "b": "strong-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o9",
+      "a": "mixeddemon",
+      "b": "strong-area",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o10",
+      "a": "mixeddemon",
+      "b": "guard-heal",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o11",
+      "a": "mixeddemon",
+      "b": "poison-cleanse",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o12",
+      "a": "mixeddemon",
+      "b": "priority",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o13",
+      "a": "mixeddemon",
+      "b": "material-strong",
+      "keyUnitId": 29
+    }
+  ],
+  "candidate": {
+    "id": "initial",
+    "label": "Frozen bounded demon initial; identical production autoOrders",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 132610210
+  }
+}

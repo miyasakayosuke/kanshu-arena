@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "undead-bonus-off",
+  "seeds": [
+    2887046071,
+    1246514536,
+    3900950297,
+    2260418762,
+    619887227,
+    3274322988,
+    1633791453,
+    4288227214
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "pureundead",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "Initial pure five undead; exact C17; Banshee supplies poison"
+    },
+    {
+      "id": "mixedundead",
+      "ids": [
+        32,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Initial C15 eligible mixed undead; original triple-poison Banshee/Dryas/slow-Naga adversarial shell retained"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Adopted material14 pure C17"
+    },
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure C17 unchanged total"
+    },
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "Initial pure five demon C17"
+    },
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute; retain adverse outcome"
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute alternative"
+    },
+    {
+      "id": "strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 poison mix, unchanged total"
+    },
+    {
+      "id": "strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 area/poison mix, unchanged total"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "pureundead",
+      "b": "fullbeast",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o2",
+      "a": "pureundead",
+      "b": "puredragon",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o3",
+      "a": "pureundead",
+      "b": "purematerial",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o4",
+      "a": "pureundead",
+      "b": "pureslime",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o5",
+      "a": "pureundead",
+      "b": "puredemon",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o6",
+      "a": "pureundead",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o7",
+      "a": "pureundead",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o8",
+      "a": "pureundead",
+      "b": "strong-poison",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o9",
+      "a": "pureundead",
+      "b": "strong-area",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o10",
+      "a": "pureundead",
+      "b": "material-strong",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o11",
+      "a": "pureundead",
+      "b": "fullnature",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o12",
+      "a": "pureundead",
+      "b": "guard-heal",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o13",
+      "a": "pureundead",
+      "b": "poison-cleanse",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o14",
+      "a": "pureundead",
+      "b": "priority",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o15",
+      "a": "pureundead",
+      "b": "mp-pressure",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o1",
+      "a": "mixedundead",
+      "b": "fullbeast",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o2",
+      "a": "mixedundead",
+      "b": "puredragon",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o3",
+      "a": "mixedundead",
+      "b": "purematerial",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o4",
+      "a": "mixedundead",
+      "b": "pureslime",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o5",
+      "a": "mixedundead",
+      "b": "puredemon",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o6",
+      "a": "mixedundead",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o7",
+      "a": "mixedundead",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o8",
+      "a": "mixedundead",
+      "b": "strong-poison",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o9",
+      "a": "mixedundead",
+      "b": "strong-area",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o10",
+      "a": "mixedundead",
+      "b": "material-strong",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o11",
+      "a": "mixedundead",
+      "b": "fullnature",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o12",
+      "a": "mixedundead",
+      "b": "guard-heal",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o13",
+      "a": "mixedundead",
+      "b": "poison-cleanse",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o14",
+      "a": "mixedundead",
+      "b": "priority",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o15",
+      "a": "mixedundead",
+      "b": "mp-pressure",
+      "keyUnitId": 32
+    }
+  ],
+  "candidate": {
+    "id": "bonus-off",
+    "label": "Frozen bounded undead bonus-off; production autoOrders on both sides",
+    "overrides": {
+      "undeadCashout": {
+        "enabled": true,
+        "base": 14,
+        "bonus": 0
+      }
+    }
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 232610310
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-bounded-playtest-known-nature-imbalance",
+  "policy": "production autoOrders on both sides",
+  "limitations": [
+    "No human fairness, optimal-play or population balance claim.",
+    "All frozen failures and weak team results are retained.",
+    "Role ownership is not execution; opponent actual action totals are reported.",
+    "Raw per-match outputs stay in lab-results; compact evidence stores hashes, sources, schedules, aggregates and replay verification. Reproduce with frozen config/current recorded source."
+  ],
+  "format": "lossless-JSON-records-shared-subtrees-and-key-shapes-v1",
+  "manifest": {
+    "path": "docs/slime-balance-packed/manifest.json",
+    "sha256": "8529c446c48e60512a983c118bd70799da90d87d53b96d901399bf7faf4a92cf"
+  },
+  "verification": {
+    "reconstructedRecords": 1305,
+    "byteEquivalentPrettyJson": true,
+    "removedOnlySupersededGeneratedFragments": true
+  },
+  "reports": [
+    {
+      "suite": "slime-supply-disabled",
+      "recordId": "slime-stage1-supply-disabled-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "53dba35923aee0323a0e093ae68773c43547dfc58a1f5319baa632cbc22a902a"
+    },
+    {
+      "suite": "slime-supply-zero",
+      "recordId": "slime-stage1-supply-zero-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "859e0367fe951c6352d1edc37742bf70820953d36b0f344948188afc83057eb8"
+    },
+    {
+      "suite": "slime-broad",
+      "recordId": "slime-stage1-broad-index.json",
+      "path": "docs/slime-balance-packed/chunk-054.json",
+      "canonicalSha256": "83d11ca844ea7002350bd9e30ff8abbff395269531b934d16a9c69f9a736a0d5"
+    },
+    {
+      "suite": "slime-mixed-a",
+      "recordId": "slime-stage1-mixed-a-index.json",
+      "path": "docs/slime-balance-packed/chunk-056.json",
+      "canonicalSha256": "50d2afe90e2ab9b6d4d95025af6abc93dc18bea7f55754a9106dc7d9ae9d7018"
+    },
+    {
+      "suite": "slime-supply8",
+      "recordId": "slime-stage1-supply8-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "83cc0d1a62ab8a52f5825ffd2ad822ad002dcf703650600e4658fa428a73857f"
+    },
+    {
+      "suite": "slime-supply-enabled",
+      "recordId": "slime-stage1-supply-enabled-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "162cc6e5181b5e323484ded9fdab16c6c33e74b8bb69bc30678fb6fbb23d298b"
+    },
+    {
+      "suite": "slime-supply12",
+      "recordId": "slime-stage1-supply12-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "5e2743442246a53586af6fee8aaa668a27f9b523d39e4b69c7b0f703053e08cd"
+    },
+    {
+      "suite": "slime-sensitivity-hp-supply12",
+      "recordId": "slime-sensitivity-hp-supply12-index.json",
+      "path": "docs/slime-balance-packed/chunk-053.json",
+      "canonicalSha256": "d13a855bedab690cc606e2ffeb74f1a0b18fe27df420e0e1a8d3822c972f9a5f"
+    },
+    {
+      "suite": "slime-mixed-b",
+      "recordId": "slime-stage1-mixed-b-index.json",
+      "path": "docs/slime-balance-packed/chunk-057.json",
+      "canonicalSha256": "a7b3b4b755f468b6baa3799f913bc9b0d1bbdd2fe900c73d2542bb8eebb9f128"
+    },
+    {
+      "suite": "slime-sensitivity-attack",
+      "recordId": "slime-sensitivity-attack-index.json",
+      "path": "docs/slime-balance-packed/chunk-051.json",
+      "canonicalSha256": "6bb21dbe6cebb822a175a8519db1dcbd98d22c1da4d031861733360ff70c1c4b"
+    },
+    {
+      "suite": "slime-identity",
+      "recordId": "slime-stage1-identity-index.json",
+      "path": "docs/slime-balance-packed/chunk-055.json",
+      "canonicalSha256": "57b148855850e2ac8557136bd8ab23b3b4946139ec14d1f7a21e6e4da2b6e69d"
+    },
+    {
+      "suite": "slime-sensitivity-hp",
+      "recordId": "slime-sensitivity-hp-index.json",
+      "path": "docs/slime-balance-packed/chunk-053.json",
+      "canonicalSha256": "c249f95ad0f5417af87af822f0c8bfdb4b9e96fa1ca40a07080fea4312e6f0ee"
+    },
+    {
+      "suite": "slime-sensitivity-hp-attack",
+      "recordId": "slime-sensitivity-hp-attack-index.json",
+      "path": "docs/slime-balance-packed/chunk-052.json",
+      "canonicalSha256": "ff47aa5dec346fdaac2cd7c5e2bfffd09d9557fa4a7f7b1493549e5880e97feb"
+    },
+    {
+      "suite": "slime-durable8",
+      "recordId": "slime-durable8-index.json",
+      "path": "docs/slime-balance-packed/chunk-044.json",
+      "canonicalSha256": "4f6c48a09a62ec6070388b69038c7dd10d835bc14cce383414aeb5ca113d0f79"
+    },
+    {
+      "suite": "slime-durable16",
+      "recordId": "slime-durable16-index.json",
+      "path": "docs/slime-balance-packed/chunk-038.json",
+      "canonicalSha256": "1c04700634938b7d5a0cd50952e466530839be1790cae49a8acdd4e3f540faf1"
+    },
+    {
+      "suite": "slime-durable-oldcores",
+      "recordId": "slime-durable-oldcores-index.json",
+      "path": "docs/slime-balance-packed/chunk-036.json",
+      "canonicalSha256": "be5c81dca6927772c9e198a7b9f13483b3b2f7d28deb24874d1a630fd03b250b"
+    },
+    {
+      "suite": "slime-durable-mixed-a",
+      "recordId": "slime-durable-mixed-a-index.json",
+      "path": "docs/slime-balance-packed/chunk-032.json",
+      "canonicalSha256": "1929a529da7e8459225f658652f2fa2d64b51dc581e485d023b6d6b961fa213f"
+    },
+    {
+      "suite": "slime-durable-mixed-b",
+      "recordId": "slime-durable-mixed-b-index.json",
+      "path": "docs/slime-balance-packed/chunk-035.json",
+      "canonicalSha256": "327452b8ebd2be0bf86503adce968222d2df11e3deecc778cffec42d85fbf77d"
+    },
+    {
+      "suite": "slime-durable60",
+      "recordId": "slime-durable60-index.json",
+      "path": "docs/slime-balance-packed/chunk-039.json",
+      "canonicalSha256": "58e937310666ea400684a3fdb52d0a455bcfa734f750f9101f0d95ddab0198a7"
+    },
+    {
+      "suite": "slime-durable60-oldcores",
+      "recordId": "slime-durable60-oldcores-index.json",
+      "path": "docs/slime-balance-packed/chunk-040.json",
+      "canonicalSha256": "5136c8894cfdfadcb93c8b549b4244894bf0162fe8d8f9c4bc8f52d29203f8ed"
+    },
+    {
+      "suite": "slime-nature-old-controls",
+      "recordId": "slime-nature-old-controls-index.json",
+      "path": "docs/slime-balance-packed/chunk-048.json",
+      "canonicalSha256": "01e17397f84787b001659a1094a4c33bcdd8deb5d02c425472a0996e5ae19ebb"
+    },
+    {
+      "suite": "slime-durable60-strong",
+      "recordId": "slime-durable60-strong-index.json",
+      "path": "docs/slime-balance-packed/chunk-043.json",
+      "canonicalSha256": "72e0581110f2aa0d8513587d15878478bba90220279f94c7530fd1f212d5b329"
+    },
+    {
+      "suite": "slime-budget-nature-controls",
+      "recordId": "slime-budget-nature-controls-index.json",
+      "path": "docs/slime-balance-packed/chunk-028.json",
+      "canonicalSha256": "a4e593736bd4f780b34ea8ba91d4f466c82cd201a9aab6e1847dced6a09f7fd0"
+    },
+    {
+      "suite": "slime-budget-previous",
+      "recordId": "slime-budget-previous-index.json",
+      "path": "docs/slime-balance-packed/chunk-029.json",
+      "canonicalSha256": "f36ff0a4e6c056d85a66b50b1e2ab0ac49a1670b0c5258bb198a18ccf7ef7cf4"
+    },
+    {
+      "suite": "slime-budget-cheap-core",
+      "recordId": "slime-budget-cheap-core-index.json",
+      "path": "docs/slime-balance-packed/chunk-026.json",
+      "canonicalSha256": "15d79956a9b72ed9301175fcb101d910764033259635913721a22c54720992c4"
+    },
+    {
+      "suite": "slime-budget-nature-brute",
+      "recordId": "slime-budget-nature-brute-index.json",
+      "path": "docs/slime-balance-packed/chunk-027.json",
+      "canonicalSha256": "d4f705b042bda16690f3bea28d4519bc83178124054e40d12a230f7cd3b42d8b"
+    },
+    {
+      "suite": "slime-budget-previous-newpool",
+      "recordId": "slime-budget-previous-newpool-index.json",
+      "path": "docs/slime-balance-packed/chunk-029.json",
+      "canonicalSha256": "cff98e2cdbd853940392023f94d0ce3b904ebcdf03b9bde191d1b395729c82af"
+    },
+    {
+      "suite": "slime-final-identity",
+      "recordId": "slime-final-identity-index.json",
+      "path": "docs/slime-balance-packed/chunk-045.json",
+      "canonicalSha256": "d2dcf2caf944fa83dad8216c2e88be8c13e1d08cc1da2f8228b45795952741a8"
+    },
+    {
+      "suite": "slime-final-supply-enabled",
+      "recordId": "slime-final-supply-enabled-index.json",
+      "path": "docs/slime-balance-packed/chunk-046.json",
+      "canonicalSha256": "d9640d59dd63157a0619d251cd95292108f5a05f2e7e17be722f8df77a5ed181"
+    },
+    {
+      "suite": "slime-final-newpool",
+      "recordId": "slime-final-newpool-index.json",
+      "path": "docs/slime-balance-packed/chunk-045.json",
+      "canonicalSha256": "3bbe6d7012156109e67fe98632576962ccc9473e7f0ae64169cc7e7270442731"
+    },
+    {
+      "suite": "slime-final-supply-disabled",
+      "recordId": "slime-final-supply-disabled-index.json",
+      "path": "docs/slime-balance-packed/chunk-046.json",
+      "canonicalSha256": "c1f838a5b3049f07dbb727360b9849e8c8c943552d0c07879defa4bb5dcd5cb6"
+    },
+    {
+      "suite": "slime-final-supply-zero",
+      "recordId": "slime-final-supply-zero-index.json",
+      "path": "docs/slime-balance-packed/chunk-046.json",
+      "canonicalSha256": "bed017b1f61d7be73a21e5792b0f8f95cc00e8787d54b552264d2419ad2cae2e"
+    },
+    {
+      "suite": "slime-final-supply8",
+      "recordId": "slime-final-supply8-index.json",
+      "path": "docs/slime-balance-packed/chunk-048.json",
+      "canonicalSha256": "4c9210b791da02f7c8eaae6a273a787bed2c888a20dc50baf245a248e249a086"
+    },
+    {
+      "suite": "slime-final-supply12",
+      "recordId": "slime-final-supply12-index.json",
+      "path": "docs/slime-balance-packed/chunk-047.json",
+      "canonicalSha256": "ed9efd17861ed7e03df7121ac66dae0082d823273f8baa51533268618215ec13"
+    }
+  ]
+}

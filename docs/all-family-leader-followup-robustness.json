@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "status": "additional-falsification-frozen-before-any-new-leader-outcomes",
+  "date": "2026-10-10 UTC",
+  "baseFreezeSha256": "70f2448a3c54334663e4d70c1503b0dfe574f91c4771c4e9456be36ee2bdf9c1",
+  "baseFreezeUnchanged": true,
+  "reason": "The completed original reserve-policy counter results show zero-impact material score41.41% againstDryas, versus64.84% in the independent arm. A default-only successful leader result could depend on redundant enemy poison actions. Test the unchanged stronger policy too; do not treat the original failed protocol as passed.",
+  "changes": {
+    "counterReservePoisonArms": [
+      false,
+      true
+    ],
+    "sameCounterTeamsShellsAnd128Seeds": true,
+    "sameAllThreePoisonScales": true,
+    "sameThresholdsAndNoExtension": true,
+    "adoptionReviewRequiresNamedMaterialAndNewDemonCountersAgainstEachShellInBothArms": true,
+    "janusRecommendationReservePoisonArms": [
+      false,
+      true
+    ],
+    "sameJanusTargets24CellsCommon23ComparisonAnd16Seeds": true
+  },
+  "unchanged": [
+    "No stat, skill, cost, roster, family tag, mechanics or production-default change.",
+    "Original failed counters and original protocol remain visible.",
+    "This is an added robustness test; it does not promise a pass or prove human balance.",
+    "Use all prelisted seeds once; no further leaders or seed extension after outcomes."
+  ]
+}

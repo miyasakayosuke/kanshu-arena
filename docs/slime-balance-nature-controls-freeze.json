@@ -1,0 +1,90 @@
+{
+  "executorRecordedAt": "2026-10-10T08:19:34.774Z",
+  "timestampCaution": "Executor clock approximately9h ahead; freeze-before-own-outcomes.",
+  "phase": "Post-E dominance countercheck explicitly requested by parent",
+  "reason": "[14,3,9,10,28] scored96.49%original and99.75%E; distinguish old triple-poison shell from unique new-brute value. Every old C4 substitution retained, plus original C15pure. No global mechanics changed.",
+  "comparison": "Use nature-with-fist from slime-durable-oldcores at the same16seeds,37opponents,physical swaps and source. Candidate E affects only opponent slime companions for these old-only focal controls.",
+  "path": "configs/balance-lab/slime-nature-old-controls.json",
+  "fileSha256": "61025a8a7dd2ec23d6b0ea7fad49fc7c27825bc26ee52cb694bf19524c18aafa",
+  "canonicalSha256": "fac4344c3a5cf6fdb8cd6418566d04ebe2c05aa338e8684894131642e3d4feec",
+  "targets": [
+    {
+      "id": "nature-old-c4-0",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        0
+      ],
+      "role": "Exact old C4 substitution 0 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-c4-5",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        5
+      ],
+      "role": "Exact old C4 substitution 5 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-c4-7",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        7
+      ],
+      "role": "Exact old C4 substitution 7 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-c4-11",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        11
+      ],
+      "role": "Exact old C4 substitution 11 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-c4-12",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        12
+      ],
+      "role": "Exact old C4 substitution 12 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-c4-23",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        23
+      ],
+      "role": "Exact old C4 substitution 23 for28 in triple-poison nature shell; C17"
+    },
+    {
+      "id": "nature-old-pure",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Exact prior pure nature triple-poison/fast area anchor; C15"
+    }
+  ],
+  "matches": 19392
+}

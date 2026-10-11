@@ -1,0 +1,69 @@
+{
+  "suite": "extraordinary-off",
+  "source": {
+    "gameVersion": "0.17.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "b9f9094dab621ba4f9f8bcccaa9bb3bba6449fdb184ac736893f53784a5a1e4e",
+    "configSha256": "be3711822124f7b7ff01e443d4af28162970266ae75a23af73fe988ab96a13e5"
+  },
+  "reportSha256": "6d4237f5d53d27b9375cf50248387ac20d38584acb8e29aca377c0963b2c0867",
+  "scheduleCounts": {
+    "teams": 20,
+    "curatedTeams": 20,
+    "sampledTeams": 0,
+    "matchupScenarios": 64,
+    "mirrorScenarios": 20,
+    "seeds": 8,
+    "variants": 2,
+    "orientations": 2,
+    "matches": 2688
+  },
+  "mirrors": {
+    "baseline": {
+      "games": 320,
+      "physicalAllyScoreRate": 0.5625
+    },
+    "candidate": {
+      "games": 320,
+      "physicalAllyScoreRate": 0.559375
+    }
+  },
+  "targets": [
+    {
+      "id": "janus-c17",
+      "cost": 17,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-off-janus-c17.json",
+      "sha256": "d27ba43ecd16299ee93e13cce14f4bdd26b94629915b5ae0dbb4eabd9c716070",
+      "bytes": 11414
+    },
+    {
+      "id": "janus-c16",
+      "cost": 16,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-off-janus-c16.json",
+      "sha256": "c7dddbb30b4ca68fbd6f413ee931ef80c43ee364f3a1b7fb096ac2edb38e9e94",
+      "bytes": 11494
+    },
+    {
+      "id": "janus-poison-c15",
+      "cost": 15,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-off-janus-poison-c15.json",
+      "sha256": "6575560bfdc947c51e1cb2da1b451883e1c26ba2bea8fbdcb7818e62eb2ab0b0",
+      "bytes": 11500
+    },
+    {
+      "id": "janus-ward-c16",
+      "cost": 16,
+      "families": 4,
+      "file": "docs/extraordinary-balance-summary-off-janus-ward-c16.json",
+      "sha256": "96299d3b157ed383e675596dd234d9043558826d46a0cd95380cc2816b5f41d6",
+      "bytes": 11427
+    }
+  ]
+}

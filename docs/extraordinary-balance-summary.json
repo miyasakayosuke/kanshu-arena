@@ -1,0 +1,245 @@
+{
+  "substitutionComparisons": "docs/extraordinary-balance-substitution-comparisons.json",
+  "status": "completed-frozen-study",
+  "totalScheduledMatches": 20056,
+  "method": "All20,056 scheduled outcomes retained. Same policy, fixed seeds, mirrors and orientations. Identity/baseline duplication is not independent evidence. Exact-C17 opponents and lower-budget anchors separated; target costs explicitly retained.",
+  "suites": [
+    {
+      "suite": "extraordinary-initial",
+      "file": "docs/extraordinary-balance-summary-initial.json",
+      "sha256": "2abee0e833aed0b37b98f3ac9a0b88d4752d1f617b6055a6cfcb068e002c7371",
+      "bytes": 2129,
+      "matches": 5376,
+      "targets": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "exactC17Score": 0.051136,
+          "allScore": 0.035156,
+          "candidateAllScore": 0.035156,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "exactC17Score": 0.267045,
+          "allScore": 0.279297,
+          "candidateAllScore": 0.279297,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "exactC17Score": 0.460227,
+          "allScore": 0.474609,
+          "candidateAllScore": 0.474609,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "exactC17Score": 0.051136,
+          "allScore": 0.035156,
+          "candidateAllScore": 0.035156,
+          "pairedChange": 0
+        }
+      ]
+    },
+    {
+      "suite": "extraordinary-enabled",
+      "file": "docs/extraordinary-balance-summary-enabled.json",
+      "sha256": "0f687abc6893eaa15971953d71f4722fbdfb70dfb50256860b20bdca1bb885f8",
+      "bytes": 2124,
+      "matches": 2688,
+      "targets": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "exactC17Score": 0.056818,
+          "allScore": 0.039063,
+          "candidateAllScore": 0.039063,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "exactC17Score": 0.232955,
+          "allScore": 0.261719,
+          "candidateAllScore": 0.261719,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "exactC17Score": 0.5,
+          "allScore": 0.5,
+          "candidateAllScore": 0.5,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "exactC17Score": 0.090909,
+          "allScore": 0.0625,
+          "candidateAllScore": 0.0625,
+          "pairedChange": 0
+        }
+      ]
+    },
+    {
+      "suite": "extraordinary-off",
+      "file": "docs/extraordinary-balance-summary-off.json",
+      "sha256": "58c19b49b3397c0d88829b099a96b66c372c3c67083b6451d9313a52e02c4e24",
+      "bytes": 2106,
+      "matches": 2688,
+      "targets": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "exactC17Score": 0.056818,
+          "allScore": 0.039063,
+          "candidateAllScore": 0.015625,
+          "pairedChange": -0.023437
+        },
+        {
+          "id": "janus-c16",
+          "cost": 16,
+          "exactC17Score": 0.232955,
+          "allScore": 0.261719,
+          "candidateAllScore": 0.246094,
+          "pairedChange": -0.015625
+        },
+        {
+          "id": "janus-poison-c15",
+          "cost": 15,
+          "exactC17Score": 0.5,
+          "allScore": 0.5,
+          "candidateAllScore": 0.410156,
+          "pairedChange": -0.089844
+        },
+        {
+          "id": "janus-ward-c16",
+          "cost": 16,
+          "exactC17Score": 0.090909,
+          "allScore": 0.0625,
+          "candidateAllScore": 0.023438,
+          "pairedChange": -0.039062
+        }
+      ]
+    },
+    {
+      "suite": "extraordinary-broad",
+      "file": "docs/extraordinary-balance-summary-broad.json",
+      "sha256": "5cfa4dc66e6172cac6dcbaba499f6f7348e27c30b4e211ce43344db76968cb5e",
+      "bytes": 1592,
+      "matches": 2464,
+      "targets": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "exactC17Score": 0.12,
+          "allScore": 0.12,
+          "candidateAllScore": 0.12,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-five-c17",
+          "cost": 17,
+          "exactC17Score": 0.5975,
+          "allScore": 0.5975,
+          "candidateAllScore": 0.5975,
+          "pairedChange": 0
+        }
+      ]
+    },
+    {
+      "suite": "extraordinary-substitutions",
+      "file": "docs/extraordinary-balance-summary-substitutions.json",
+      "sha256": "3a443a8c5d2ce61f1fa66f9250b4e3e4f42698ef067249e66183659fb9d7dbf8",
+      "bytes": 3823,
+      "matches": 6840,
+      "targets": [
+        {
+          "id": "janus-c17",
+          "cost": 17,
+          "exactC17Score": 0.11,
+          "allScore": 0.11,
+          "candidateAllScore": 0.11,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-nonleader",
+          "cost": 17,
+          "exactC17Score": 0.103333,
+          "allScore": 0.103333,
+          "candidateAllScore": 0.103333,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-three-c17",
+          "cost": 17,
+          "exactC17Score": 0.5,
+          "allScore": 0.5,
+          "candidateAllScore": 0.5,
+          "pairedChange": 0
+        },
+        {
+          "id": "janus-five-c17",
+          "cost": 17,
+          "exactC17Score": 0.6,
+          "allScore": 0.6,
+          "candidateAllScore": 0.6,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with14",
+          "cost": 17,
+          "exactC17Score": 0.003333,
+          "allScore": 0.003333,
+          "candidateAllScore": 0.003333,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with15",
+          "cost": 17,
+          "exactC17Score": 0.07,
+          "allScore": 0.07,
+          "candidateAllScore": 0.07,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with19",
+          "cost": 17,
+          "exactC17Score": 0.063333,
+          "allScore": 0.063333,
+          "candidateAllScore": 0.063333,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with28",
+          "cost": 17,
+          "exactC17Score": 0.26,
+          "allScore": 0.26,
+          "candidateAllScore": 0.26,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with29",
+          "cost": 17,
+          "exactC17Score": 0.066667,
+          "allScore": 0.066667,
+          "candidateAllScore": 0.066667,
+          "pairedChange": 0
+        },
+        {
+          "id": "replace36-with32",
+          "cost": 17,
+          "exactC17Score": 0.06,
+          "allScore": 0.06,
+          "candidateAllScore": 0.06,
+          "pairedChange": 0
+        }
+      ]
+    }
+  ]
+}

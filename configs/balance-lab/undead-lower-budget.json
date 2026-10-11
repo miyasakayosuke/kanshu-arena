@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "undead-lower-budget",
+  "seeds": [
+    2907046071,
+    1266514536,
+    3920950297,
+    2280418762,
+    639887227,
+    3294322988,
+    1653791453,
+    13259918
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "mixedundead",
+      "ids": [
+        32,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Initial C15 eligible mixed undead; original triple-poison Banshee/Dryas/slow-Naga adversarial shell retained"
+    },
+    {
+      "id": "c15-threshold-lost",
+      "ids": [
+        32,
+        4,
+        20,
+        3,
+        10
+      ],
+      "role": "Exact C15 initial mixed control replaces35 with20; two undead lose bonus; triple poison/slow Naga retained"
+    },
+    {
+      "id": "c15-core-replaced",
+      "ids": [
+        28,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Exact C15 initial mixed control replaces32 with old core28; triple poison/slow Naga retained; unit/leader effects confounded"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "mixedundead",
+      "b": "fullnature",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o2",
+      "a": "mixedundead",
+      "b": "guard-heal",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o3",
+      "a": "mixedundead",
+      "b": "poison-cleanse",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o4",
+      "a": "mixedundead",
+      "b": "priority",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f1-o5",
+      "a": "mixedundead",
+      "b": "mp-pressure",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o1",
+      "a": "c15-threshold-lost",
+      "b": "fullnature",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o2",
+      "a": "c15-threshold-lost",
+      "b": "guard-heal",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o3",
+      "a": "c15-threshold-lost",
+      "b": "poison-cleanse",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o4",
+      "a": "c15-threshold-lost",
+      "b": "priority",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f2-o5",
+      "a": "c15-threshold-lost",
+      "b": "mp-pressure",
+      "keyUnitId": 32
+    },
+    {
+      "id": "f3-o1",
+      "a": "c15-core-replaced",
+      "b": "fullnature",
+      "keyUnitId": 28
+    },
+    {
+      "id": "f3-o2",
+      "a": "c15-core-replaced",
+      "b": "guard-heal",
+      "keyUnitId": 28
+    },
+    {
+      "id": "f3-o3",
+      "a": "c15-core-replaced",
+      "b": "poison-cleanse",
+      "keyUnitId": 28
+    },
+    {
+      "id": "f3-o4",
+      "a": "c15-core-replaced",
+      "b": "priority",
+      "keyUnitId": 28
+    },
+    {
+      "id": "f3-o5",
+      "a": "c15-core-replaced",
+      "b": "mp-pressure",
+      "keyUnitId": 28
+    }
+  ],
+  "candidate": {
+    "id": "lower-budget",
+    "label": "Frozen bounded undead lower-budget; production autoOrders on both sides",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 252610310
+  }
+}

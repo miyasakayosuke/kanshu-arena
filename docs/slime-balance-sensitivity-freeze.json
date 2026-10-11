@@ -1,0 +1,152 @@
+{
+  "phase": "post-baseline frozen before sensitivity outcomes",
+  "reason": "Parent requested four bounded diagnostics after original pure8/832 wins and provisional162/832 against13 frozen curated opponents. Original source and failed balance evidence remain.",
+  "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+  "scope": "Pure and provisional only; same13curated plus24coherent C17 opponents; exact original broad seeds, swaps, mirrors, production AI. HP-only; HP+core128; HP+amount12; originalHP+core128. Other stats, MP, skills and old roster unchanged.",
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp.json",
+      "fileSha256": "48b39ca6a704728532e1a3c746ef6e57df7d03fc1f37cb4d14b874739a1bd611",
+      "canonicalSha256": "4f1ff527bc5f6198c70fc0076dbc99180994bbb3f6b652a487e59837f3dbbde3",
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 220
+          },
+          "25": {
+            "hp": 150
+          },
+          "26": {
+            "hp": 235
+          },
+          "27": {
+            "hp": 182
+          },
+          "28": {
+            "hp": 205
+          }
+        }
+      },
+      "matches": 7232
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp-attack.json",
+      "fileSha256": "711219624735d5d6f16d745bb1c3fa2123cf474032a29aff4f04fb7ec40b71ef",
+      "canonicalSha256": "e35aa9bad37ac269395dbf2054d612f06cedcb74bd90f09f8e489233082842a6",
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 150
+          },
+          "26": {
+            "hp": 235
+          },
+          "27": {
+            "hp": 182
+          },
+          "28": {
+            "hp": 205
+          }
+        }
+      },
+      "matches": 7232
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-hp-supply12.json",
+      "fileSha256": "6ecf2df15e917b8aa25d1da0d5b933765de4fc0712cf3373817eaaa6287e4501",
+      "canonicalSha256": "86c18b4309ee1875f98c160a04a25b12f2dc937160c0b44c28167d6cc83f18f5",
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 220
+          },
+          "25": {
+            "hp": 150
+          },
+          "26": {
+            "hp": 235
+          },
+          "27": {
+            "hp": 182
+          },
+          "28": {
+            "hp": 205
+          }
+        },
+        "slimeSupply": {
+          "amount": 12
+        }
+      },
+      "matches": 7232
+    },
+    {
+      "path": "configs/balance-lab/slime-sensitivity-attack.json",
+      "fileSha256": "3f306bad8b2ab93043a7f81fbbbd614dc0782b95b214e1dfa44a4f682411ceac",
+      "canonicalSha256": "77a7d7e3a44f456274d308bf8587cdb592403e539f0304b9f511817f9602c827",
+      "overrides": {
+        "monsters": {
+          "24": {
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          }
+        }
+      },
+      "matches": 7232
+    }
+  ],
+  "executorRecordedAt": "2026-10-10T08:06:22.041Z",
+  "timestampCaution": "Executor wall clock was approximately nine hours ahead of the authoritative conversation clock. Preserve the raw executor timestamp; ordering is enforced by freeze-before-run workflow and refusal to redraw. Both freeze files existed before authoritative UTC 2026-10-10T08:10:11Z."
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "selection": "First matching preserved match in frozen schedule for each condition and orientation, chosen after outcomes solely to illustrate observed behavior. Not a representative or independent sample.",
+  "examples": [
+    {
+      "file": "demon-balance-decision-1.json",
+      "kind": "zero-loss",
+      "orientation": "a-left",
+      "bytes": 5976
+    },
+    {
+      "file": "demon-balance-decision-2.json",
+      "kind": "forced-fallback",
+      "orientation": "a-left",
+      "bytes": 7062
+    },
+    {
+      "file": "demon-balance-decision-3.json",
+      "kind": "zero-loss",
+      "orientation": "a-right",
+      "bytes": 5980
+    },
+    {
+      "file": "demon-balance-decision-4.json",
+      "kind": "forced-fallback",
+      "orientation": "a-right",
+      "bytes": 7066
+    },
+    {
+      "file": "demon-balance-decision-5.json",
+      "kind": "paired-adverse-pressure",
+      "orientation": "a-left",
+      "bytes": 19231
+    },
+    {
+      "file": "demon-balance-decision-6.json",
+      "kind": "paired-adverse-pressure",
+      "orientation": "a-right",
+      "bytes": 19245
+    }
+  ]
+}

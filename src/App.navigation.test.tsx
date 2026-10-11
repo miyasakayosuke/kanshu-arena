@@ -98,6 +98,7 @@ describe('separate home, workshop, and arena screens', () => {
 
   it('keeps workshop edits and uses its footer to open the lobby rather than start a battle', async () => {
     const start = vi.spyOn(engine, 'start');
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
     await mount();
     await navigate('編成');
     expect(window.location.hash).toBe('#team');
@@ -108,7 +109,9 @@ describe('separate home, workshop, and arena screens', () => {
     await click(document.querySelector<HTMLButtonElement>('footer button')!);
     expect(window.location.hash).toBe('#arena');
     expect(team()).toEqual(edited);
-    expect(start).not.toHaveBeenCalled();
+    // Read-only leader snapshots use an empty enemy list; no real encounter or turn may start.
+    expect(start.mock.calls.filter(([, enemy]) => enemy.length > 0)).toHaveLength(0);
+    expect(advance).not.toHaveBeenCalled();
     await click(button('軽量戦'));
     await navigate('ホーム');
     expect(team()).toEqual(edited);
@@ -136,6 +139,7 @@ describe('separate home, workshop, and arena screens', () => {
 
   it('restores a partial draft, its leader order, and the selected rule after remount', async () => {
     const start = vi.spyOn(engine, 'start');
+    const advance = vi.spyOn(engine, 'advanceWithEvents');
     localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team: [2,3,4,6], rule: 'light' }));
     await mount(); await navigate('編成');
     await click(label('2枠・ドリュアスを入れ替える')); await click(label('ドリュアスをリーダーにする'));
@@ -154,7 +158,9 @@ describe('separate home, workshop, and arena screens', () => {
     await navigate('闘技場');
     expect(button('この編成で対戦する').disabled).toBe(true);
     expect(document.querySelector('.ruleTabs [aria-pressed="true"]')?.textContent).toContain('軽量戦');
-    expect(start).not.toHaveBeenCalled();
+    // Read-only leader snapshots use an empty enemy list; no real encounter or turn may start.
+    expect(start.mock.calls.filter(([, enemy]) => enemy.length > 0)).toHaveLength(0);
+    expect(advance).not.toHaveBeenCalled();
   });
 
   it('preserves all three session-only saved teams across screen and battle navigation', async () => {

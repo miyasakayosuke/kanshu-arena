@@ -1,0 +1,40 @@
+{
+  "archives": [
+    {
+      "path": "docs/all-family-balance-source/all-family-analysis-hardening-before-index.json",
+      "sha256": "85059cbf2c0aa1b4fad8580fbd2b705302f5ca757fd340220b11b82027085d41",
+      "files": 6,
+      "chunks": 3
+    },
+    {
+      "path": "docs/all-family-balance-source/all-family-analysis-hardening-v2-index.json",
+      "sha256": "8f40a7014f46b462b7a17b8b314382df0d158b903dc78871d2f5c39979470fe8",
+      "files": 9,
+      "chunks": 4
+    },
+    {
+      "path": "docs/all-family-balance-source/all-family-analysis-hardening-v3-index.json",
+      "sha256": "81130d93924d694af6c3e57a1982d93524fd53867a8f81d61460b6573c364734",
+      "files": 10,
+      "chunks": 4
+    },
+    {
+      "path": "docs/all-family-balance-source/all-family-frozen-system-index.json",
+      "sha256": "12ed5cdee87d4e28f7e0faaf6fa9b72596ccbb51454f62bb25dea4bc58ddb5ba",
+      "files": 17,
+      "chunks": 5
+    },
+    {
+      "path": "docs/all-family-balance-source/all-family-pre-extension-index.json",
+      "sha256": "3214f07ad10d589e46747ce3386b59b615d4b6c9bb87234ac4defcacbc2a2c7e",
+      "files": 4,
+      "chunks": 3
+    }
+  ],
+  "allExact": true,
+  "reconstructedSourceReplay": {
+    "suite": "all-family-matrix-independent-1",
+    "matchId": "pair-1-2__s1062672840__a-left__candidate",
+    "passed": true
+  }
+}

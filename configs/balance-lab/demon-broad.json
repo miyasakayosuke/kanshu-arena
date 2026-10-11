@@ -1,0 +1,994 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "demon-broad",
+  "seeds": [
+    2817045971,
+    1176514436,
+    3830950197,
+    2190418662,
+    549887127,
+    3204322888,
+    1563791353,
+    4218227114
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "puredemon",
+      "ids": [
+        29,
+        1,
+        8,
+        30,
+        31
+      ],
+      "role": "Initial pure five demon C17"
+    },
+    {
+      "id": "c17-mixed",
+      "ids": [
+        29,
+        8,
+        30,
+        7,
+        10
+      ],
+      "role": "C17 eligible demon + protection/cleanse"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Adopted material14 pure C17"
+    },
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure C17 unchanged total"
+    },
+    {
+      "id": "nature-brute-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute; retain adverse outcome"
+    },
+    {
+      "id": "nature-brute-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "Known dominant legal C17 nature+brute alternative"
+    },
+    {
+      "id": "strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 poison mix, unchanged total"
+    },
+    {
+      "id": "strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 area/poison mix, unchanged total"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+    },
+    {
+      "id": "coherent-beast-support",
+      "ids": [
+        12,
+        0,
+        4,
+        7,
+        20
+      ],
+      "role": "Exact C17 old-roster core+>=3 beast; frozen support ownership stratum"
+    },
+    {
+      "id": "coherent-beast-poison",
+      "ids": [
+        12,
+        2,
+        3,
+        8,
+        11
+      ],
+      "role": "Exact C17 old-roster core+>=3 beast; frozen poison ownership stratum"
+    },
+    {
+      "id": "coherent-beast-breaker",
+      "ids": [
+        12,
+        7,
+        11,
+        20,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 beast; frozen breaker ownership stratum"
+    },
+    {
+      "id": "coherent-beast-cheap",
+      "ids": [
+        12,
+        11,
+        13,
+        24,
+        26
+      ],
+      "role": "Exact C17 old-roster core+>=3 beast; frozen cheap ownership stratum"
+    },
+    {
+      "id": "coherent-nature-support",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        22
+      ],
+      "role": "Exact C17 old-roster core+>=3 nature; frozen support ownership stratum"
+    },
+    {
+      "id": "coherent-nature-poison",
+      "ids": [
+        14,
+        2,
+        3,
+        10,
+        12
+      ],
+      "role": "Exact C17 old-roster core+>=3 nature; frozen poison ownership stratum"
+    },
+    {
+      "id": "coherent-nature-breaker",
+      "ids": [
+        14,
+        3,
+        5,
+        10,
+        22
+      ],
+      "role": "Exact C17 old-roster core+>=3 nature; frozen breaker ownership stratum"
+    },
+    {
+      "id": "coherent-nature-cheap",
+      "ids": [
+        14,
+        0,
+        6,
+        9,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 nature; frozen cheap ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-support",
+      "ids": [
+        15,
+        16,
+        18,
+        22,
+        24
+      ],
+      "role": "Exact C17 old-roster core+>=3 dragon; frozen support ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-poison",
+      "ids": [
+        15,
+        5,
+        9,
+        17,
+        20
+      ],
+      "role": "Exact C17 old-roster core+>=3 dragon; frozen poison ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-breaker",
+      "ids": [
+        15,
+        5,
+        8,
+        13,
+        18
+      ],
+      "role": "Exact C17 old-roster core+>=3 dragon; frozen breaker ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-cheap",
+      "ids": [
+        15,
+        5,
+        18,
+        20,
+        22
+      ],
+      "role": "Exact C17 old-roster core+>=3 dragon; frozen cheap ownership stratum"
+    },
+    {
+      "id": "coherent-material-support",
+      "ids": [
+        19,
+        3,
+        7,
+        20,
+        22
+      ],
+      "role": "Exact C17 old-roster core+>=3 material; frozen support ownership stratum"
+    },
+    {
+      "id": "coherent-material-poison",
+      "ids": [
+        19,
+        9,
+        12,
+        20,
+        21
+      ],
+      "role": "Exact C17 old-roster core+>=3 material; frozen poison ownership stratum"
+    },
+    {
+      "id": "coherent-material-breaker",
+      "ids": [
+        19,
+        7,
+        16,
+        21,
+        22
+      ],
+      "role": "Exact C17 old-roster core+>=3 material; frozen breaker ownership stratum"
+    },
+    {
+      "id": "coherent-material-cheap",
+      "ids": [
+        19,
+        18,
+        21,
+        23,
+        25
+      ],
+      "role": "Exact C17 old-roster core+>=3 material; frozen cheap ownership stratum"
+    },
+    {
+      "id": "coherent-slime-support",
+      "ids": [
+        24,
+        4,
+        7,
+        26,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 slime; frozen support ownership stratum"
+    },
+    {
+      "id": "coherent-slime-poison",
+      "ids": [
+        24,
+        10,
+        14,
+        26,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 slime; frozen poison ownership stratum"
+    },
+    {
+      "id": "coherent-slime-breaker",
+      "ids": [
+        24,
+        13,
+        19,
+        26,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 slime; frozen breaker ownership stratum"
+    },
+    {
+      "id": "coherent-slime-cheap",
+      "ids": [
+        24,
+        6,
+        19,
+        26,
+        27
+      ],
+      "role": "Exact C17 old-roster core+>=3 slime; frozen cheap ownership stratum"
+    },
+    {
+      "id": "mixed-c17-1",
+      "ids": [
+        5,
+        23,
+        3,
+        24,
+        10
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-2",
+      "ids": [
+        15,
+        26,
+        0,
+        9,
+        10
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-3",
+      "ids": [
+        5,
+        18,
+        14,
+        13,
+        8
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-4",
+      "ids": [
+        12,
+        3,
+        23,
+        25,
+        11
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-5",
+      "ids": [
+        19,
+        8,
+        25,
+        2,
+        7
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-6",
+      "ids": [
+        5,
+        7,
+        3,
+        21,
+        2
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-7",
+      "ids": [
+        5,
+        22,
+        0,
+        2,
+        4
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    },
+    {
+      "id": "mixed-c17-8",
+      "ids": [
+        11,
+        22,
+        18,
+        26,
+        24
+      ],
+      "role": "Exact C17 old-roster seeded rank-walk member set; supplementary, not uniform or optimized"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "puredemon",
+      "b": "fullbeast",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o2",
+      "a": "puredemon",
+      "b": "fullnature",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o3",
+      "a": "puredemon",
+      "b": "puredragon",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o4",
+      "a": "puredemon",
+      "b": "purematerial",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o5",
+      "a": "puredemon",
+      "b": "pureslime",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o6",
+      "a": "puredemon",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o7",
+      "a": "puredemon",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o8",
+      "a": "puredemon",
+      "b": "strong-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o9",
+      "a": "puredemon",
+      "b": "strong-area",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o10",
+      "a": "puredemon",
+      "b": "guard-heal",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o11",
+      "a": "puredemon",
+      "b": "poison-cleanse",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o12",
+      "a": "puredemon",
+      "b": "priority",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o13",
+      "a": "puredemon",
+      "b": "material-strong",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o14",
+      "a": "puredemon",
+      "b": "coherent-beast-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o15",
+      "a": "puredemon",
+      "b": "coherent-beast-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o16",
+      "a": "puredemon",
+      "b": "coherent-beast-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o17",
+      "a": "puredemon",
+      "b": "coherent-beast-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o18",
+      "a": "puredemon",
+      "b": "coherent-nature-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o19",
+      "a": "puredemon",
+      "b": "coherent-nature-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o20",
+      "a": "puredemon",
+      "b": "coherent-nature-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o21",
+      "a": "puredemon",
+      "b": "coherent-nature-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o22",
+      "a": "puredemon",
+      "b": "coherent-dragon-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o23",
+      "a": "puredemon",
+      "b": "coherent-dragon-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o24",
+      "a": "puredemon",
+      "b": "coherent-dragon-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o25",
+      "a": "puredemon",
+      "b": "coherent-dragon-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o26",
+      "a": "puredemon",
+      "b": "coherent-material-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o27",
+      "a": "puredemon",
+      "b": "coherent-material-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o28",
+      "a": "puredemon",
+      "b": "coherent-material-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o29",
+      "a": "puredemon",
+      "b": "coherent-material-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o30",
+      "a": "puredemon",
+      "b": "coherent-slime-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o31",
+      "a": "puredemon",
+      "b": "coherent-slime-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o32",
+      "a": "puredemon",
+      "b": "coherent-slime-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o33",
+      "a": "puredemon",
+      "b": "coherent-slime-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o34",
+      "a": "puredemon",
+      "b": "mixed-c17-1",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o35",
+      "a": "puredemon",
+      "b": "mixed-c17-2",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o36",
+      "a": "puredemon",
+      "b": "mixed-c17-3",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o37",
+      "a": "puredemon",
+      "b": "mixed-c17-4",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o38",
+      "a": "puredemon",
+      "b": "mixed-c17-5",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o39",
+      "a": "puredemon",
+      "b": "mixed-c17-6",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o40",
+      "a": "puredemon",
+      "b": "mixed-c17-7",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f1-o41",
+      "a": "puredemon",
+      "b": "mixed-c17-8",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o1",
+      "a": "c17-mixed",
+      "b": "fullbeast",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o2",
+      "a": "c17-mixed",
+      "b": "fullnature",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o3",
+      "a": "c17-mixed",
+      "b": "puredragon",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o4",
+      "a": "c17-mixed",
+      "b": "purematerial",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o5",
+      "a": "c17-mixed",
+      "b": "pureslime",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o6",
+      "a": "c17-mixed",
+      "b": "nature-brute-dryas",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o7",
+      "a": "c17-mixed",
+      "b": "nature-brute-tengu",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o8",
+      "a": "c17-mixed",
+      "b": "strong-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o9",
+      "a": "c17-mixed",
+      "b": "strong-area",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o10",
+      "a": "c17-mixed",
+      "b": "guard-heal",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o11",
+      "a": "c17-mixed",
+      "b": "poison-cleanse",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o12",
+      "a": "c17-mixed",
+      "b": "priority",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o13",
+      "a": "c17-mixed",
+      "b": "material-strong",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o14",
+      "a": "c17-mixed",
+      "b": "coherent-beast-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o15",
+      "a": "c17-mixed",
+      "b": "coherent-beast-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o16",
+      "a": "c17-mixed",
+      "b": "coherent-beast-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o17",
+      "a": "c17-mixed",
+      "b": "coherent-beast-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o18",
+      "a": "c17-mixed",
+      "b": "coherent-nature-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o19",
+      "a": "c17-mixed",
+      "b": "coherent-nature-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o20",
+      "a": "c17-mixed",
+      "b": "coherent-nature-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o21",
+      "a": "c17-mixed",
+      "b": "coherent-nature-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o22",
+      "a": "c17-mixed",
+      "b": "coherent-dragon-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o23",
+      "a": "c17-mixed",
+      "b": "coherent-dragon-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o24",
+      "a": "c17-mixed",
+      "b": "coherent-dragon-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o25",
+      "a": "c17-mixed",
+      "b": "coherent-dragon-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o26",
+      "a": "c17-mixed",
+      "b": "coherent-material-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o27",
+      "a": "c17-mixed",
+      "b": "coherent-material-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o28",
+      "a": "c17-mixed",
+      "b": "coherent-material-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o29",
+      "a": "c17-mixed",
+      "b": "coherent-material-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o30",
+      "a": "c17-mixed",
+      "b": "coherent-slime-support",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o31",
+      "a": "c17-mixed",
+      "b": "coherent-slime-poison",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o32",
+      "a": "c17-mixed",
+      "b": "coherent-slime-breaker",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o33",
+      "a": "c17-mixed",
+      "b": "coherent-slime-cheap",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o34",
+      "a": "c17-mixed",
+      "b": "mixed-c17-1",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o35",
+      "a": "c17-mixed",
+      "b": "mixed-c17-2",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o36",
+      "a": "c17-mixed",
+      "b": "mixed-c17-3",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o37",
+      "a": "c17-mixed",
+      "b": "mixed-c17-4",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o38",
+      "a": "c17-mixed",
+      "b": "mixed-c17-5",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o39",
+      "a": "c17-mixed",
+      "b": "mixed-c17-6",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o40",
+      "a": "c17-mixed",
+      "b": "mixed-c17-7",
+      "keyUnitId": 29
+    },
+    {
+      "id": "f2-o41",
+      "a": "c17-mixed",
+      "b": "mixed-c17-8",
+      "keyUnitId": 29
+    }
+  ],
+  "candidate": {
+    "id": "broad",
+    "label": "Frozen bounded demon broad; identical production autoOrders",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 162610210
+  }
+}

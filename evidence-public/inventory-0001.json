@@ -1,0 +1,962 @@
+[
+  {
+    "path": ".github/workflows/deploy.yml",
+    "bytes": 952,
+    "sha256": "6102e7484a0a8c9eaae346cba96488a249d7d67d9a454435c7b00bb1363b3bce",
+    "disposition": "shipped"
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 141,
+    "sha256": "685de90c185ee590e58db4b8f49c9b625c8d9661319cce2c52e07f0993416b45",
+    "disposition": "shipped"
+  },
+  {
+    "path": "AGENTS.md",
+    "bytes": 1531,
+    "sha256": "e267e164ba133e4bcdf30aca8c6081e9d0b9a98114f46586fad5d98b1c1484ef",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-independent-0.json",
+    "bytes": 3004,
+    "sha256": "4cb0a32fa6bdbf3d631a36e3c20e7bd89807949af99da2de7cc7fbbae433e439",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-independent-1.json",
+    "bytes": 3004,
+    "sha256": "736f6d880c5723109d2f77e657ac276fb8181e8a239fc536cec88d0a12c7eabd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-independent-half.json",
+    "bytes": 3014,
+    "sha256": "d5f5761e267eea570f40a7dba28a8908d1e92ed0e9c44fc183e16228608124c9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-reserve-0.json",
+    "bytes": 2991,
+    "sha256": "fcc4731c31a6f54324572a0b00a5c3ff9f9681a5ad77cdcc00ea7ecabf79500a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-reserve-1.json",
+    "bytes": 2991,
+    "sha256": "99ff8ca61e8c47b6e1dd575f81e9faa9a677830328bc9a2746ab07e9d9b770f8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-counter-reserve-half.json",
+    "bytes": 3001,
+    "sha256": "63a68bc1b6973d987b71dc15f0ab117136f59b7714d6a1c24babbd5b19e29216",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-independent-0.json",
+    "bytes": 4298,
+    "sha256": "47f02995af52c5e69d0636d337d943de5e3384cea896f1630c278504bcf95ec5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-independent-1.json",
+    "bytes": 4298,
+    "sha256": "d80e9a554c1dfbcbb2cd4ae55a3b450449e8c9807ac2ad22e0ac5aa0e7ef62a2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-independent-half.json",
+    "bytes": 4308,
+    "sha256": "dad2669e1b60f80746b645f2278508109b2f2fcc1b4b18d19a6a22db087cf03d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-reserve-0.json",
+    "bytes": 4288,
+    "sha256": "36cb00030eabef2263f099a049b41605de94f9871e4e869c03769306d79794e5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-reserve-1.json",
+    "bytes": 4288,
+    "sha256": "e45a72fc4a2b72ebd15c4296c3c9b9b3e2784e610d2db3e1689034d099996edb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-counter-reserve-half.json",
+    "bytes": 4298,
+    "sha256": "8a55a528305717f0546d1ff65f1cd1e3c9e883ef40e8b8ad06ab34ed4409647c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-independent-0.json",
+    "bytes": 9802,
+    "sha256": "54c2325a8064658d9755c1264df28b60e4c7294f1208dd7bf4f86ab24e7fa8dc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-independent-1.json",
+    "bytes": 9802,
+    "sha256": "e61fac23d00a09245dbcfe914c607d62af969cfb744ec9552be5ef7f352a67e4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-independent-half.json",
+    "bytes": 9812,
+    "sha256": "ddac9d9b5982a6a7f3244aece323a2d4f048903a5744f5792dbdd0e22d72a2ca",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-reserve-0.json",
+    "bytes": 9792,
+    "sha256": "7726c2d709c590f8d4303820fbe67214b06f0377ed2519a1a78b98510bc18893",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-reserve-1.json",
+    "bytes": 9792,
+    "sha256": "dfb361ac24cac50001141f3b06b0cfe44f1b5ff9d6d009ef676833937d3dac5b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-leader-janus-reserve-half.json",
+    "bytes": 9802,
+    "sha256": "ba5e3e0401bdc75f8fb420e0f01e315a5549aff690d0ff408dbdc778961f2933",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-independent-0.json",
+    "bytes": 31660,
+    "sha256": "24b842f5ebe70bf0e5f92ed8f83916ce242d72a749bc20bf2ffb873416574266",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-independent-1.json",
+    "bytes": 31660,
+    "sha256": "36f93002f50a286d602fc5f091c5c8c71d92a72308da9d7953bc37140d733fc8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-independent-half.json",
+    "bytes": 31670,
+    "sha256": "fb87c69ae82af05b7f745b3c2624245b547a2f0598c38c3f2bde9e01608318c6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-reserve-0.json",
+    "bytes": 31647,
+    "sha256": "6b0553b242c7de923c95ab11f41d3501b8cbdec5996cff9474fd713e587cfbbe",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-reserve-1.json",
+    "bytes": 31647,
+    "sha256": "b6d7225a4c297884f5d05099833df57d25f799eee751f305951f28e4b5b57993",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-matrix-reserve-half.json",
+    "bytes": 31657,
+    "sha256": "db0b5d4605b8af6c11044f392e48211a32dbcd5b466fc46376de3cb9f4945fc8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-independent-0.json",
+    "bytes": 3606,
+    "sha256": "a6e0c9de312c1301a1459d2d2a78b8313d8ddc83922641d02c984121882792fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-independent-1.json",
+    "bytes": 3606,
+    "sha256": "7d683cd18ffd1b340c222baaefd15dab1921f3a1836029e805018e89e7070289",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-independent-half.json",
+    "bytes": 3616,
+    "sha256": "9633a59eb6b68f1aa1de9c3a84b0a76f2faa669398f91861ec7cd23fcead9b24",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-reserve-0.json",
+    "bytes": 3596,
+    "sha256": "d5895b3c65ae3230752b86a7e7b1d3ff66e5b76a47feb88c06ed5d85cae1e3e3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-reserve-1.json",
+    "bytes": 3596,
+    "sha256": "be258183f3bfa91b91a1d2d16c7f457302d4ee5ee4fa3edd9e11cdb7230eaa48",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-pure-reserve-half.json",
+    "bytes": 3606,
+    "sha256": "f39cad22597a435b0747eb73fce6c2505d3243bf47fb95791dad4ef4a21695b8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-0-dryas.json",
+    "bytes": 2514,
+    "sha256": "55fec9edc4104580df4bd33ac472eafaf5e81a9d3a776e871641cfefed2d82fb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-0-tengu.json",
+    "bytes": 2514,
+    "sha256": "5a7bca740ed9cb8c777a7d1461bc80a1ed30c5262e18e27d2fbcbde25ad73c8e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-1-dryas.json",
+    "bytes": 2514,
+    "sha256": "4850533c63fdfeaaee0f3296569c2e4fee09ac8d4a8edf18440c82808aaae651",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-1-tengu.json",
+    "bytes": 2514,
+    "sha256": "d7a657d440528de0e39fce98a513562eabe31ed395044f1f672bff55f94b020a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-half-dryas.json",
+    "bytes": 2524,
+    "sha256": "4957e226a36e7ce32d66cc6ee4ab5bd20f3e404600ace94f4159f5acc1b5706f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-independent-half-tengu.json",
+    "bytes": 2524,
+    "sha256": "2cddc9ee9d3e7d5c46cbe02647edc39176952639a3a1c6a48668bc1112f7c4c8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-0-dryas.json",
+    "bytes": 2501,
+    "sha256": "cb081c511e4d2fb4b8b163ba787521c83fa4c79c4e84c23f07468c7ad56e1f46",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-0-tengu.json",
+    "bytes": 2501,
+    "sha256": "d9744463a9a8a6cddba6bbfee9fdceb908337941df90ecbbdd92ac9d981933be",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-1-dryas.json",
+    "bytes": 2501,
+    "sha256": "1d70da65f516f4942a705580070bcd76ee38efe518cd13371357dac66f9242d0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-1-tengu.json",
+    "bytes": 2501,
+    "sha256": "2325956f804dce6070c0608f4e6295590092d15742347f6bfdd6417eee6162fa",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-half-dryas.json",
+    "bytes": 2511,
+    "sha256": "9a1b4963df3e3aa20d4d1caec53beb48f781de81bc797bcf70ed605da43413e6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/all-family-reserve-reserve-half-tengu.json",
+    "bytes": 2511,
+    "sha256": "6b3d0c7a156d65e7c9a0a59736a20b858e2f062f214ef80844020142eda5e085",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-bonus-off.json",
+    "bytes": 6123,
+    "sha256": "aa522b18d3b30e6d3ca4a09d7c3158f53dcfcea80e66f5cd8245852871fd6b11",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-broad.json",
+    "bytes": 18655,
+    "sha256": "743dcd5026ffc855a711b1623296773c80ba47c495720953623a82424a48022f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-enabled.json",
+    "bytes": 6122,
+    "sha256": "8d579361a0855c3e297ad83bde86c0290230763a0898bb3371ae7b817439a9b3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-full-off.json",
+    "bytes": 6126,
+    "sha256": "c6bfc66952fe0f0049db3e809892cac68e3f7fe5703c4c93244599bd11d24eb2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-initial.json",
+    "bytes": 6186,
+    "sha256": "c4576594e64662e0d4f1a5b3e1e9d87dd4d48b91efefa00fd5ce034c6473deb2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-oldcore-contribution.json",
+    "bytes": 24546,
+    "sha256": "a11519e5b13032b1efeff8bd97ac157de30524e77a210cb9153f9501b20d9c5e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-paired-controls.json",
+    "bytes": 35025,
+    "sha256": "428913f3b75e5826ed65af7895dd2782f14eed9c52b54c789498d3ed2d127f03",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-substitutions.json",
+    "bytes": 29578,
+    "sha256": "92bd1fec86cfd7e0b83b1ed6882abd58b83b6f21f47721f87b4739264d7fe8cd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/demon-zero-base.json",
+    "bytes": 6122,
+    "sha256": "5bc5430b68f564380eb955fabb11f47e40a7df9edd8c6fec9c3e1efe59667f43",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-broad.json",
+    "bytes": 29471,
+    "sha256": "53e9d0b5c5654d8e9490d2769fac7b40be11ebcdae65e12359e9c13e167efdfb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-charge-disabled.json",
+    "bytes": 8362,
+    "sha256": "69ce24dc49a8b5a4be2d6a258bc41fa76554c087d7474a416047a3bbf290a8e4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-charge-zero.json",
+    "bytes": 8347,
+    "sha256": "f0597a59f8dc4fc03505941cc4718e21a8786350c1e3b41114daf75e39823408",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-charge10.json",
+    "bytes": 8339,
+    "sha256": "2bc9499ff6629ca0878442cf8c01afb43c53e820d1651c11a52d09f4e73ea5a5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-charge14-hp220.json",
+    "bytes": 8448,
+    "sha256": "6e465958d3764ead4ce433f593cc83f2b18ab0e445b9f27397c28d71096f1ccd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-charge14.json",
+    "bytes": 8339,
+    "sha256": "53f7b59e8f33676b697755d3045df9b0d78efdb7172fb99adbcafd138e01073c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-companion-broad.json",
+    "bytes": 30851,
+    "sha256": "b06ca62cea4a923c7b9e3a3bec334f557b967011d9a6e6c4083ad494cf5e0b56",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-companion-charge18.json",
+    "bytes": 9678,
+    "sha256": "7235e886d7760cf83b77cc0ada1e03d4d7e0093d354acf4a41ddfcacf8bfc2ab",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-companion-disabled.json",
+    "bytes": 9704,
+    "sha256": "f5ff0fb1a6b2770eb8099b93412845d78549bc1ce67c4fb3b7debd066fbeae4d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-companion-power.json",
+    "bytes": 9693,
+    "sha256": "2267fc6313bede8b6e3c81c8e0f0193771a8eb1b020a33620eedf5b7622ffe74",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-companion18-broad.json",
+    "bytes": 30835,
+    "sha256": "8118c3a28535c873ad209b3e85d9d2089e6d04862ec96c1875ae2a2e44c63bc8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-identity.json",
+    "bytes": 8279,
+    "sha256": "9fb4f9111e9bb66f452530d9324cc81d25c89fc2d6156510612c1f30bb3edaa7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/dragon-initial-values.json",
+    "bytes": 12239,
+    "sha256": "c3a4a71634518eeee4fef4e0d5cfab79449ef83b756f47f58df865521f3ba047",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/extraordinary-broad.json",
+    "bytes": 12294,
+    "sha256": "1b6e245f82f13f841fe83d947bc31aad7bb2784789ade5aad29ebcd4771ab1c3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/extraordinary-enabled.json",
+    "bytes": 11464,
+    "sha256": "1d57a1b68148bf340b76aee9d392ba725ceba20b6a1c542b8db9ebd18579a813",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/extraordinary-initial.json",
+    "bytes": 11521,
+    "sha256": "9348e3f0c8bfee4eb359c5251afb7e545ce0942ed159f3e7ac1171eb48466d1e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/extraordinary-off.json",
+    "bytes": 11453,
+    "sha256": "d574a479de576682ae70f53f9ca156136dcb8ad9fba6af98a71046472c810d70",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/extraordinary-substitutions.json",
+    "bytes": 38361,
+    "sha256": "d54bd1cb04dca49ccf7f1977a8791872c53ac0e60734986f94fc1d994977dff3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-broad.json",
+    "bytes": 27568,
+    "sha256": "efb4241e7d28d596cfa88284afbcfccfe43da8ed7bb905b3dcd24ecc460e77f1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-exact-replacements.json",
+    "bytes": 17209,
+    "sha256": "4c02b61b42a0f367b28f6d1ef8a8eef55d53004a0b40e4dbee2506740f9c2eb1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-final-roster-probe.json",
+    "bytes": 31884,
+    "sha256": "19847e0d0563572335205709d20aa045cbdae33afcb82b1b854756bdcc2e23f5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-final-vs-initial.json",
+    "bytes": 26799,
+    "sha256": "950567e9224f6403977b853d9dc01559e193c65d0fb2b5ef9e4cdceee930d319",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-four-poison.json",
+    "bytes": 7488,
+    "sha256": "4cdc65acfee465de8618789b5f84cd4bdaa315406c1b84eded9a30a57221ef24",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-aoe32.json",
+    "bytes": 11598,
+    "sha256": "412ad9d458de777a61b1fcb14a4985db0a74df7abe6775ca1d7d930194d795d2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-atk30.json",
+    "bytes": 10986,
+    "sha256": "2f580aabe5e1b74c3b58309fd8d19ca5168f987dd6fe5344a5bfff5d4ee36917",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-heal55.json",
+    "bytes": 11614,
+    "sha256": "561154f31aa680d41ee04c333cacc2b243f44cc4b26a2ae6d04b378d040b8836",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-low-attack-area.json",
+    "bytes": 11689,
+    "sha256": "c708efdf6a852579f2b2d49b4b3bce579afe0b650f66ae611bdaf493e76b8abf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-no-aoe-no-ward.json",
+    "bytes": 10850,
+    "sha256": "8de0de411eb24fd82abc31d6cb2d11a03a5e3f84a29a2df6f65c349f46a63fd9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-no-aoe.json",
+    "bytes": 10626,
+    "sha256": "3ef93815eba11c92f897121583377149a92cce393461c4e4b6a2333c73f00c94",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-single-hit.json",
+    "bytes": 10925,
+    "sha256": "2ead4abf8fd683e64b0715c0804f5b7454bdba13e6eaab5a7c7ba6a28eb26e09",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-genbu-without-protect.json",
+    "bytes": 11437,
+    "sha256": "7738bd968538b7ec81b7d377baf9c3dbc92d7ac709878e5833d9d6844ad8ebe6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-interior-candidate.json",
+    "bytes": 26660,
+    "sha256": "de9b0f9148c7efe30ce1fbdc793222b0353ea81276393f70f63bf50913ac07c1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-ratatoskr-power10.json",
+    "bytes": 15143,
+    "sha256": "eaca3caf042db7cb53a19ba9b032ade130e7e01ec9765e0849f158b8b2d12a00",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-ratatoskr-power5.json",
+    "bytes": 11567,
+    "sha256": "aaed78ea1438d0d92f5c47b7c371dd763f96edb12e29c5ce3a71df54115e14b7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave-ward15.json",
+    "bytes": 10292,
+    "sha256": "a67a11e02b0299427320000efe18e374831c8f9a492cb8a052026a037049c894",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/family-wave.json",
+    "bytes": 10274,
+    "sha256": "b25273de99cad8b36d4603aae8fd393f6b366e2e6e22198c2bdbd9a184a9548a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/fenrir-mp-example.json",
+    "bytes": 4637,
+    "sha256": "93de9bdac83a0f5fcae69b337e1d799c086afd6738d40720efad0aa64afa9932",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-broad.json",
+    "bytes": 30458,
+    "sha256": "932debad3d38d74d964151dd2a3e0c9ac04a3d4c0dbe6e677fbc30bf9b7f83ef",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-coherent-identity.json",
+    "bytes": 29155,
+    "sha256": "b5760b288fc206bbfdcb8f11aca0eeffde2cf9ff97594c1202fd86ee0dd778b5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-coherent-repair14.json",
+    "bytes": 29225,
+    "sha256": "62ac0846ec3653806b01b711f7701e2348b2c60e7bb672745d0126e362def179",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-identity.json",
+    "bytes": 9268,
+    "sha256": "61f9486dde21a55fa14b29ff9c42023e555817c823ca51adc0cf032d977e5062",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-light-recommendation.json",
+    "bytes": 15123,
+    "sha256": "7b106c59d866a6897e3071e0a6d5548b61b005c2f8929f1e884ff0fde22cf5ff",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair-disabled.json",
+    "bytes": 5240,
+    "sha256": "73003cedf57ea70a52159d5578988c654f77772fc541f931cb4a795ed6380642",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair-zero.json",
+    "bytes": 5224,
+    "sha256": "d5e7c4046d350a0ea4d36e86778745e2b759ada53dc2d23a718ce05940860dee",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair12-broad.json",
+    "bytes": 21479,
+    "sha256": "cf74863dd88a11bb6e6661451c60da3173091b2b0aa5b20294976ee92567ddfe",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair12.json",
+    "bytes": 6622,
+    "sha256": "8b173abe14a1b3d3a1c601c3deb4e0e3f07c3f9817f251ed13c9dbf45d0267d9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair14-broad.json",
+    "bytes": 21479,
+    "sha256": "5eb5bdcde8ca1020f5d345e650457150938bb05b794c4626c4e565fa84f60c13",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-repair14.json",
+    "bytes": 6622,
+    "sha256": "8dd379fd7e24d200b33b69c83c76068cdf784e802833f7d55ea60c9df2b3ac45",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/material-restore18.json",
+    "bytes": 9365,
+    "sha256": "c3d2d86416c62eff6d8510de89413680e2705524fca183515e7bfcd61934d42e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-broad.json",
+    "bytes": 25096,
+    "sha256": "cc689b2c25277752ed8ed083b048183ae745e28c73307746de7bb6751e958a0f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-budget-cheap-core.json",
+    "bytes": 36731,
+    "sha256": "316480cb0d0956bac6ca4e5f2b67eccc55810e8f86f86f57edd1c28d1ceb2d57",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-budget-nature-brute.json",
+    "bytes": 46668,
+    "sha256": "51318d1dc0d8874ec1739b3035ba7136197bf0e78bae93ebddb1e11c7306b557",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-budget-nature-controls.json",
+    "bytes": 42866,
+    "sha256": "be8f2f87888f3176d77c27c8a5cf81d5ce5134afc543fc50d9a49888021d0812",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-budget-previous-newpool.json",
+    "bytes": 20910,
+    "sha256": "c25238ec877c7fab916c8b57792b4d089538ed9d05cbee5a64dbb32e6a16ea9c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-budget-previous.json",
+    "bytes": 29647,
+    "sha256": "6144e3990f4b41caae71cbb5423986be513a7d276cb5f0257bd52d88413cd5cb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable-mixed-a.json",
+    "bytes": 37670,
+    "sha256": "5b0d5125585828c8f061e6ece8a2baf901496f9d844a8bab6569f91731840722",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable-mixed-b.json",
+    "bytes": 35335,
+    "sha256": "c8190e8cdf6b3554e0ab3d568b5d539349ca8a64d27345deadbdd7457fd920ca",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable-oldcores.json",
+    "bytes": 39175,
+    "sha256": "a969d8402237cbac5a14f7197adf54b468d71e007c8490f97154521cc287b360",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable16.json",
+    "bytes": 23757,
+    "sha256": "a993fffa32ab9b119fa7c2f00d3f252b2ef924fc6b82746c1ec684d59147c701",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable60-oldcores.json",
+    "bytes": 39205,
+    "sha256": "2ede441513243aa53dcb38a7d9fb4658044c65d6bd9362f925cfa88b9f6082ce",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable60-strong.json",
+    "bytes": 20439,
+    "sha256": "e1283a6c80bfc5164c780b0c4f0b8258c36243c6da8ed561d44c7dc2e44ba742",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable60.json",
+    "bytes": 23737,
+    "sha256": "a14b60218c271dc73d0293c5ab444e506f4943af493f94ef5e7ca29cae3ad6a1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-durable8.json",
+    "bytes": 23701,
+    "sha256": "8052f4e110abfcef1ef2f4e813cee858d3545454d79ba2d84f8a997ff121e2ba",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-identity.json",
+    "bytes": 29515,
+    "sha256": "3ee4fbf4bae581a1f8a9f0085087385e55cf31a0eda7e604865e8689707b59f8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-newpool.json",
+    "bytes": 20767,
+    "sha256": "e7c282e7e13462d6b69a4d76af8da13f5247e58caa51523ae0aca5285812023e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-supply-disabled.json",
+    "bytes": 16946,
+    "sha256": "c2f5045827623aae32bf56242777502dc989368477de1a137125425ee03ec7e6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-supply-enabled.json",
+    "bytes": 16942,
+    "sha256": "927b0eef23d471f3ac9fefa842b5c3eef662d6b26c158dcb78f45ad5a0d3fb89",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-supply-zero.json",
+    "bytes": 16929,
+    "sha256": "98b7c82e12d42740e1c6f747d92c3cfca92c41f83220fb6e1bab6af4b44703c3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-supply12.json",
+    "bytes": 16921,
+    "sha256": "ee0d1494f1aca44597eb61060200766988e0300d1ff0496604d66ecb82e1bb06",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-final-supply8.json",
+    "bytes": 16917,
+    "sha256": "b6a42187c206826f26a7344b73dcc50dba37dc0b2dee29ab6ad75c6c484d0539",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-identity.json",
+    "bytes": 11222,
+    "sha256": "bedd01b34efda29871298170c47386b5a49850ce7c1e04bb78e5a5bd0c110d52",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-mixed-a.json",
+    "bytes": 36255,
+    "sha256": "fac62c0e32991f23885db33a4b7c6878f1b6221172ae3d092a7069f6173ee81c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-mixed-b.json",
+    "bytes": 33920,
+    "sha256": "028fc737cff05262be22c4c09c512cf85146ed7af7773cf8ec8b10064c4aaf7e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-nature-old-controls.json",
+    "bytes": 43274,
+    "sha256": "61025a8a7dd2ec23d6b0ea7fad49fc7c27825bc26ee52cb694bf19524c18aafa",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-sensitivity-attack.json",
+    "bytes": 18647,
+    "sha256": "3f306bad8b2ab93043a7f81fbbbd614dc0782b95b214e1dfa44a4f682411ceac",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-sensitivity-hp-attack.json",
+    "bytes": 18865,
+    "sha256": "711219624735d5d6f16d745bb1c3fa2123cf474032a29aff4f04fb7ec40b71ef",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-sensitivity-hp-supply12.json",
+    "bytes": 18249,
+    "sha256": "6ecf2df15e917b8aa25d1da0d5b933765de4fc0712cf3373817eaaa6287e4501",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-sensitivity-hp.json",
+    "bytes": 18169,
+    "sha256": "48b39ca6a704728532e1a3c746ef6e57df7d03fc1f37cb4d14b874739a1bd611",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-supply-disabled.json",
+    "bytes": 6485,
+    "sha256": "25a3a60d99b4d35118d5de14ae1f008ac85df10bf81add0f36c1ef5c615e6477",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-supply-enabled.json",
+    "bytes": 6481,
+    "sha256": "7fea8c1647b44538375dc8f3d0ef598b90b6e654244fe90064eacd3d953df9ff",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-supply-zero.json",
+    "bytes": 6468,
+    "sha256": "9f2f328bb9e628eeae20ca63d2ea6fb693e4af108b1ddefe46c46e96cd1e088d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-supply12.json",
+    "bytes": 6460,
+    "sha256": "5b2771a06be53874d8a3660d1c45f0d7b02c8bdae3e585d6a171317d4d84920b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/slime-supply8.json",
+    "bytes": 6456,
+    "sha256": "cdd6b8da1a0d12894719ddb7987e7407da3823611f186edb5a1b5d2e14292dd4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/smoke.json",
+    "bytes": 2749,
+    "sha256": "dc7dd59b99a1793db24cb9d947f9417faeaf64fb4bfd6213a337cb6bac0841fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-bonus-off.json",
+    "bytes": 7083,
+    "sha256": "d61ae64f5fb56e7c5ce083167999784f8988b5781bc7ed6c4213484f4646a6b0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-broad.json",
+    "bytes": 14366,
+    "sha256": "7c917ec96039839ef548ceda37394a2a645df7a2eabfb88496416cde0b7043e6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-enabled.json",
+    "bytes": 7077,
+    "sha256": "51fdff417b6f890ceb5c6bb431d7dfcae7caf929d76650e6f6c0ca254a3aedc8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-full-off.json",
+    "bytes": 7081,
+    "sha256": "6c71dbdb01f484c32121fbcd5908aa6692f41cba8c613d710fa23362dcab3af4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-initial.json",
+    "bytes": 7102,
+    "sha256": "c626322caad41d0cb5daaa539a55689a9b2b0ea0de017166dad1c17c1cbcfb2f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-lower-budget.json",
+    "bytes": 3876,
+    "sha256": "c17bfeae8b87e45bb4543376415bb16161c03dd9737c874d93f2a4a35e6b80e0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-oldcore-contribution.json",
+    "bytes": 44670,
+    "sha256": "db23e7358a003b2360f23f1c9cce5b1fd092caa34431c480a9e96e9deede1c71",
+    "disposition": "shipped"
+  },
+  {
+    "path": "configs/balance-lab/undead-substitutions.json",
+    "bytes": 36536,
+    "sha256": "1adbb1d7048c6d9ef925d60b681179554b5c9b95557e05d8633db2765a33120b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-families-live-qa-plan.md",
+    "bytes": 5786,
+    "sha256": "8df8e0d2b6aca2a2f6372f77c5fb044f832094d58ba67e21bf12d4e16a4d4e45",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-families-reference.md",
+    "bytes": 28390,
+    "sha256": "97394ac710f6955cebd2d0e70eedd7553a001c9e7ea1dfad62db9892ba8140c9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-families-roadmap.md",
+    "bytes": 7660,
+    "sha256": "eed52ab5c3975701b4da66833d430af813ec367673446b074ccc9ad44f0070e1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis-revision.json",
+    "bytes": 2997,
+    "sha256": "453369cb1c9f5a89e14edd278df430289389dba7af3dd865d114218f4ea8335f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00001.json",
+    "bytes": 64302,
+    "sha256": "e81a0aba27f80fe8fc0a12f122159c9d2b54e27d1cff11b2018cef4cca25f10f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00002.json",
+    "bytes": 43006,
+    "sha256": "0a8c287ecb84f7c146d1152b8f8fb7a1264f1386cff91634186ba70ae8569f15",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00003.json",
+    "bytes": 11062,
+    "sha256": "1325227fa55bc59cb3addb91343d89529dcd7a0c3338cca241590a5443d18bc8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00004.json",
+    "bytes": 20954,
+    "sha256": "f05cd9ed1dfe8ea9069087041cfe8d7f1db2801ab4b92a6acbcc4dff6ae5f990",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00005.json",
+    "bytes": 44898,
+    "sha256": "7c429de8d075baecc9dc144d19d1909c6954d23e5e02e2711b80b7c1ff694f99",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00006.json",
+    "bytes": 14414,
+    "sha256": "b0c35cf13221f295d3cd086d1eb1d28549945649a1b5ac23234184ca2688a09e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00007.json",
+    "bytes": 59562,
+    "sha256": "bb00226930cd13cbdc1c5af08559c593b75659bad9db9677e74bd11bed211a88",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00008.json",
+    "bytes": 64434,
+    "sha256": "d2a979bfca4e492904978ea2de279e10cb222e6b920d3f2ca4d7b3f7374ecc63",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00009.json",
+    "bytes": 12234,
+    "sha256": "4d280281967fec7cb4068c2b2b0d1711b35f61c808ab61c87a8625c8eb29fd40",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-analysis/initial64-00010.json",
+    "bytes": 44942,
+    "sha256": "94c577eb29401db59b73d7a71940dd54883b4a5d039ec67d652da67a33537088",
+    "disposition": "shipped"
+  }
+]

@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/all-family-balance-source/all-family-pre-extension-00002.json",
+    "bytes": 53534,
+    "sha256": "d1b56ce6ce14fe650b3bd800066a495dcc0b3208ff19437dce012e6854dca717",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pre-extension-00003.json",
+    "bytes": 13993,
+    "sha256": "4f3d1d0c78ce0abf28a32177e0b760aa147a3e58765e2c7182a0d9a692e269bf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pre-extension-index.json",
+    "bytes": 2467,
+    "sha256": "3214f07ad10d589e46747ce3386b59b615d4b6c9bb87234ac4defcacbc2a2c7e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-00001.json",
+    "bytes": 45978,
+    "sha256": "d5b7196967dab0f10d973244c75658cd5d309a2c126224df8fc7963e2a38490c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-00002.json",
+    "bytes": 59002,
+    "sha256": "4044dc7052de8553a7debab254deaec4f63bbd1ee137700f898c5f5e50e0cd7a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-00003.json",
+    "bytes": 16717,
+    "sha256": "8807d1baa4cc5a299effab58692cec2654526b7de5b0f279a6df1271564fc7d3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-00004.json",
+    "bytes": 22569,
+    "sha256": "823d094c76e4311a438de63cb8e5687c3468539c9ecc68b7c949b76a2a1f0c13",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-00005.json",
+    "bytes": 22597,
+    "sha256": "53f848f21efd5119d934a16fef423f95bfbc446f40ca2e02c52f9656c190306e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-source/all-family-pure-confirmation-frozen-index.json",
+    "bytes": 6388,
+    "sha256": "bff22eee8e1e0f57cdee90956686a3b87ccf389f1128631dc281bb6e8d4545ce",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-tests.txt",
+    "bytes": 27172,
+    "sha256": "279bd8e08da01f192205af246757f4bd04fed118e873655e77ee36f4b48fc090",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-balance-verification.json",
+    "bytes": 37410,
+    "sha256": "84e278b72641f39fd08433e8e637fe1fc7eb21c0ab0f4c20a5dbaaebfc0dc2d9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-followup-seed-verification.json",
+    "bytes": 22783,
+    "sha256": "79abea3ae808701215c6569a0a01524bdfb20b33c72a4d8441a375c3cc43952a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-followup-source-verification.json",
+    "bytes": 1636,
+    "sha256": "69dafa594a87137d42a5916bf4bedff5ea14c4c3f004f79fd6f2ff9badae380d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-followup-tests.txt",
+    "bytes": 8016,
+    "sha256": "dd180ffdeca841cd8d5375cae4811a04ee82358e94ded4db04c4a6734fa7c3d0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00001.json",
+    "bytes": 57314,
+    "sha256": "7a00fb0ee253f7a1b51654bdb7c61a0a5f7d8735e325282990a7a5072e4725cc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00002.json",
+    "bytes": 45694,
+    "sha256": "83a260174f794ac08610d1916ba018974c71b244e1ce6636a1cba0fd0dcf390f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00003.json",
+    "bytes": 47202,
+    "sha256": "6720e636b69ccbfcf374835c9b40942d000e7963daa47d3c83df34d22d4079ac",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00004.json",
+    "bytes": 27002,
+    "sha256": "ac4ebc68ad053412b6e8683eef6ba72753f9f39f02800ca7784a278771d1acbf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00005.json",
+    "bytes": 28970,
+    "sha256": "e97829ffbe732ef3ff24e6073d278f860708fd8a6bcea14a1b477d6f1ea54349",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00006.json",
+    "bytes": 47802,
+    "sha256": "63d78855e5076620e91fdaca7291add7229ff06e2686b1b57d2cabec7d3f2655",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00007.json",
+    "bytes": 33714,
+    "sha256": "c49231858ab2fb487776487e069e1349c788320af41aa91af8eea169733816f9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00008.json",
+    "bytes": 57178,
+    "sha256": "a1bd792833b3ea14dcbb8c58340f2dc80fbedec1ddd6507afae898b256cb7886",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00009.json",
+    "bytes": 47618,
+    "sha256": "1b86e23dc6e691924a79d7b7bb19f77da75187166643ed5f5a1fdcd5c87d3dce",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00010.json",
+    "bytes": 50122,
+    "sha256": "50154af916717d22542a28a84731b88ed881fc9285b75603f0eb0971401e2d7e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00011.json",
+    "bytes": 57730,
+    "sha256": "2c2fabba00144730805ffbadf73ce019e4cedb90931c96a902cf8ac7c84245c4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00012.json",
+    "bytes": 63859,
+    "sha256": "c652731ff87d38d5f540d41a415d7eee1c662b9bd910ef292d58c878c56c9d4e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00013.json",
+    "bytes": 18634,
+    "sha256": "fc27a26032356a457518a4fbf62417642ce8565f27a7cf5e25c3b433c11b9d28",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00014.json",
+    "bytes": 45942,
+    "sha256": "b81dfd973bdaa3ac142a4fbd4393b253a9d1fe12b8b73918dffc300695599cee",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00015.json",
+    "bytes": 53890,
+    "sha256": "2a1f0b3f301fc939980fce2d0e5d2df99ee8d34ba8f6b876fb59714042e88af5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00016.json",
+    "bytes": 47510,
+    "sha256": "7180b6c762abdeffd43022e6a4ff078efbb192f9e900aac2ba80477043a8a241",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00017.json",
+    "bytes": 49358,
+    "sha256": "97cdaf7178d42e21ed2308206ce52abef16b010171ea27046b710cc769502194",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00018.json",
+    "bytes": 55386,
+    "sha256": "a9072a334b2b421aa0eca2e05dd427763b228281b811ad8a6e190233964c538b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00019.json",
+    "bytes": 36462,
+    "sha256": "caf192aa4a99502b52b4c397cde94068b67166a1ef03002e52056db631cd59f6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00020.json",
+    "bytes": 35530,
+    "sha256": "e78e6f2bdd7d3e0b6daf10c6dd442225e848ecb8e12b84fcaecdec62f30148ae",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00021.json",
+    "bytes": 57154,
+    "sha256": "7688d43cba915213443a9a2643eed6b9bb8cea5f99a52bfef151ddf968fd6cf9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00022.json",
+    "bytes": 45566,
+    "sha256": "74d3852bf0f4f828b52c2c146d51963b738e23998127371c205eb96b2e9c88ad",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00023.json",
+    "bytes": 47078,
+    "sha256": "751fde72e509fe167f4113fbb06118dd8e430690307ad893a7c259ecc7fa9c93",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00024.json",
+    "bytes": 26938,
+    "sha256": "6c10402e80e2a948e8d720f214c78abed6ebe3bffcdde5727efa14848e0d5de4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00025.json",
+    "bytes": 28942,
+    "sha256": "e070d043b54aca8dee6d470ef36fd34d31502eccb9cae31c6127ed0f9a3b8198",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00026.json",
+    "bytes": 47766,
+    "sha256": "889a3f5e3660d000c2e20a3c52f22a0d3cdb7ea68303c55a5adb6579bb715f67",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00027.json",
+    "bytes": 33594,
+    "sha256": "98eae3da52f055ca1401213cc216df81952a974db1e3975224c509a5f7e82284",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00028.json",
+    "bytes": 55966,
+    "sha256": "cc5ecbc1eeb33caaff7cba06c7165a6c8a297597bf17878c806584e21a30268e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00029.json",
+    "bytes": 47242,
+    "sha256": "2298956f1d0ae164701f1e5983fe40fa09b4be9d7881d81d722e9a1932413bd7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00030.json",
+    "bytes": 50106,
+    "sha256": "66e8b4c26af708ecefce82f0ae9a3bd885ecb1ce13125dacb7e6aef790d36add",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00031.json",
+    "bytes": 57486,
+    "sha256": "a0804ae31a839f3d3f04950177835162d122b111758ead5c3f7e5099dce78d45",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00032.json",
+    "bytes": 63443,
+    "sha256": "1d8b43aa30a422f2f0a7da36ecc96109bf64cb9120a694628f257b913d5b90ce",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00033.json",
+    "bytes": 18906,
+    "sha256": "8955101dfeb67e93389035371846047c24dad0f11a0a119457e3f7a514d57508",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00034.json",
+    "bytes": 45598,
+    "sha256": "0c025a07bdc7c30625193de3388264965b28d841d815894dbe28bb983611edf9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00035.json",
+    "bytes": 53686,
+    "sha256": "35d256990f42963f8daa6d700196d5e9e43bb77ea894ec076f7295f853652596",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00036.json",
+    "bytes": 47570,
+    "sha256": "a22c6f67f098d5df1ba6df876301bf46bfee735fccc65850d9e6701d94ab93d7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00037.json",
+    "bytes": 49790,
+    "sha256": "811a062d9933522a4e08c8e83a2bbce0646aa9d4f770ee4acf808cd06c5f65df",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00038.json",
+    "bytes": 55046,
+    "sha256": "09d1d32c249f124459f06c5bada377b6c33a0a877cfb2769f022fd07653967dc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00039.json",
+    "bytes": 36382,
+    "sha256": "3354a227e696452b36bd797c35eaa18a21cba7d91414868f99c79a3990667e96",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-details-00040.json",
+    "bytes": 35218,
+    "sha256": "7b483500936b1dc45cfd5db71a9da74006439d0515a02b5aea3d4ce013b39096",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-analysis/leader-manifest-00001.json",
+    "bytes": 3805,
+    "sha256": "4620c78f83c6d621461c739ee85055896110ee4552846cd3954836ea23006a7e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-config-freeze.json",
+    "bytes": 11046,
+    "sha256": "b2f6f8d62166e4a2bfe9c5ad194a2e069f0a5e5ffa44597a050087570281f517",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-freeze.json",
+    "bytes": 19821,
+    "sha256": "70f2448a3c54334663e4d70c1503b0dfe574f91c4771c4e9456be36ee2bdf9c1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-interpretation.md",
+    "bytes": 4691,
+    "sha256": "5086c737747a768864013a97093c440e3b475b6b2db78d40f60203f37272464d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-0-index.json",
+    "bytes": 1848,
+    "sha256": "a8592b73e9626031bdeea16fec1ff94a0b6c7da36b36d192bc242f4af48d9bc9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-1-index.json",
+    "bytes": 1848,
+    "sha256": "67c235be135a036e8b40a7731e89483fb49133e44fe868b8d72cfc7c08ed1763",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-independent-half-index.json",
+    "bytes": 1859,
+    "sha256": "88f9861d0f1a2c12bd42767295259214845b8c86b02e824077fa66c87101c43b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-0-index.json",
+    "bytes": 1836,
+    "sha256": "314f3d62a110bb689f47b6a27c57d53bb7391f8e772be4faf419bf077deff415",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-1-index.json",
+    "bytes": 1836,
+    "sha256": "b2bead2ddf45675049417adc36536681aead104a00ef03b07d182ba0710e6dd0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-counter-reserve-half-index.json",
+    "bytes": 1847,
+    "sha256": "9d5f31b8cd85291e342f1eb98519252842c8f1e8a61404e807514b4d91115c88",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-0-index.json",
+    "bytes": 1840,
+    "sha256": "0e50c3e35e105f7be93deeda6cde67146d15410278add79f3453ff559d9765d8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-1-index.json",
+    "bytes": 1840,
+    "sha256": "e29acda2d5a66df964b5546d8cbedb5f8e8584cf5f1aa6e4b251c8cbaf786a15",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-independent-half-index.json",
+    "bytes": 1851,
+    "sha256": "8bdc7392f002163890ef627fb8c89489a7a0f6aaef886221afdc7a8737bc29d3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-0-index.json",
+    "bytes": 1828,
+    "sha256": "ca9e2f818dba9899d0eca1fbcfcb2bb2db18bb763fc1151b2972a4a4de1ff3cc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-1-index.json",
+    "bytes": 1828,
+    "sha256": "4ac81609d0229220cfa58b3260c282024583e31d3722973cc5f4443a5b0c7812",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/all-family-leader-janus-reserve-half-index.json",
+    "bytes": 1839,
+    "sha256": "40eb3699990d2493c86e94754cea4e87350cf1948ad489877185dedbb058deb2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00001.json",
+    "bytes": 63035,
+    "sha256": "35a772c19fdbe2af39fc754983064e101fe80e89f0dd9bf0ca5ed97ab6cdbdf6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00002.json",
+    "bytes": 63371,
+    "sha256": "9be669d930d66bd1488a2e192f7118fc52a52e9be7877630646aedd514672e91",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00003.json",
+    "bytes": 62839,
+    "sha256": "61c2bd3244840b61125dd4e8a59b883d5e0b5b2c10e89b1401a78e9f8495ae82",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00004.json",
+    "bytes": 63331,
+    "sha256": "11464f49bc2493ebf7e08aa092e74e9ab204aa685be04a563dcf2cab2bfd4d81",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00005.json",
+    "bytes": 63719,
+    "sha256": "e3b9aa0c95e872d04536e6be73e872e6c7f265aaf7f2edae534820ff1b16a323",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00006.json",
+    "bytes": 63119,
+    "sha256": "987d69d9c2ce7370b1969231a11a081175669f512969faea2011b07cce7a58b6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00007.json",
+    "bytes": 63731,
+    "sha256": "429ed9cc2f71c419f7f30d8f1eca8ac320e459d82aec017519977ff500ecd579",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00008.json",
+    "bytes": 63103,
+    "sha256": "f8ffb143c642d462e7aa1e709ee631ea061e99fb5d478dbee2f1d637f937b3f9",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00009.json",
+    "bytes": 63787,
+    "sha256": "5b82d4857e7d0e6ae67c6061ad4b4c3d1e6e62670a0c20dad9017ff11d1fb622",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00010.json",
+    "bytes": 63647,
+    "sha256": "c10a1a26507e09423de4baadcf78f7264ef326f2bc94c25b06dff74d3436fcd5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00011.json",
+    "bytes": 63295,
+    "sha256": "c1d0f18f879a4dcce6723095887b870a7058770d549c652569c1018704f9cf1f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00012.json",
+    "bytes": 63443,
+    "sha256": "e0e72eaa0cf0b49a007f20de1bdfceaf82845d2ec50479412e27ad678532cb45",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00013.json",
+    "bytes": 63207,
+    "sha256": "f8b6dfa4b628ef96adf9b198584c093aaff4dd6e344675877efd87f257898354",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00014.json",
+    "bytes": 63623,
+    "sha256": "0abc6d84b84297a0c6704b576ef6e8235c606a20ae9430b6f9a3940be3ba2b2b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00015.json",
+    "bytes": 62983,
+    "sha256": "c1a0ed259db1985782aafbc3571688c8ffdfa3819eae774019c02dacf6bebb21",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00016.json",
+    "bytes": 63019,
+    "sha256": "71275562311ac10fe7afcd41c54b842edfbcad55baf9ad9ca733d98170d398bf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00017.json",
+    "bytes": 62327,
+    "sha256": "5a9bd76a49b9fc4b4f4c2267ea44147bd0de6ef7af6ad9b172577e45ac7dbc35",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00018.json",
+    "bytes": 62147,
+    "sha256": "78178fa6eebbebbb83c2ef14f8ea31fbe9490059fde853d5f9e20c8fe8d0e824",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00019.json",
+    "bytes": 62907,
+    "sha256": "290738597375b8fd85b72e75c8515d148a278dce47cee0bbe8dc58ee3657d429",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00020.json",
+    "bytes": 62427,
+    "sha256": "15df57c01331935bf138ba95a046fe91f1580e9504120c17db1cd14184d967f2",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00021.json",
+    "bytes": 62611,
+    "sha256": "be62cd044a002cf88001b904fc1a3ac3d5c1e15a15ac9ac14053177b06c34b90",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00022.json",
+    "bytes": 62103,
+    "sha256": "d6a64607ed0a90229dbf1096ee9bf8ebc1e626c7099ea863f8d42c04aa121e1d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00023.json",
+    "bytes": 62431,
+    "sha256": "0db4462cd83636949d0b83a72c9e5be7b872651360d001e2856b13984bab836f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00024.json",
+    "bytes": 62179,
+    "sha256": "5c32419f181624c60727edac3d54ae2990264fa50482bd4eb7a3a78d5cff5986",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00025.json",
+    "bytes": 62247,
+    "sha256": "49f26c34a80b2515e7ea95d9abd0bda2a6a73afe2dfcf095c1d86e12dfb94f62",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00026.json",
+    "bytes": 62139,
+    "sha256": "d76abafa0b767f7dd5a6167806048398ee95e3ffecac71da4ba0944258a0003a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00027.json",
+    "bytes": 61879,
+    "sha256": "9fd76156f3b53a14cf3d1e500af3c50b9571bbc9810473e56ed7fe5782494548",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00028.json",
+    "bytes": 62775,
+    "sha256": "bc4bf258cfe010d45d64708f481d2eba2df34fca2d35335e6958ba9271ca77a4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00029.json",
+    "bytes": 62047,
+    "sha256": "ccd6602dbb9a2fd0a48e2c7ce5501fe6be5bfef5a2cf3100e2acc0e6887cc88b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00030.json",
+    "bytes": 62587,
+    "sha256": "9b4abdb3775c40d4367c7bcee6bd44d3d35b600abf34ee6fadc9f43e1358bf39",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00031.json",
+    "bytes": 62291,
+    "sha256": "760b00e1fbde7fe263f52bcff2ab3cdc3f36dbe4b1dfe89bc877624857ac3083",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00032.json",
+    "bytes": 62479,
+    "sha256": "19a01af84c7427d35eeb8a05c7071e3a98b6477423e99f9f93d1f68c238cfd98",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00033.json",
+    "bytes": 60779,
+    "sha256": "25b2a911318dfffdf5564d154ae2f49264eb844137ec84b0ef4844b754fa0e2e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00034.json",
+    "bytes": 59903,
+    "sha256": "1cd0f7533e55c2550aff540ac51cc940a2d3f3af293435c7c97e7d835d02eb01",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00035.json",
+    "bytes": 61951,
+    "sha256": "2ccdd4c06fe0e107eb4fc20d9322eb564a3ed9245dce88e9e1a5391f0de851a4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00036.json",
+    "bytes": 59895,
+    "sha256": "22dd018aeae0af313c08bcfc54d0bcfc5f27e44072b47fbd09de6bdcbf8f5169",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00037.json",
+    "bytes": 59515,
+    "sha256": "55f7b61b034b7703b9dfb95be06fec90b7640eb14587e1fd888e469df72047b1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00038.json",
+    "bytes": 60171,
+    "sha256": "2b7185865bfd296979d907fa23ef66624681313657f54493c02f6289308d38e0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00039.json",
+    "bytes": 60415,
+    "sha256": "e37af6d751be18e4494229c8fcc287642bd5dbd72bc544689b6e49e551acbc47",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00040.json",
+    "bytes": 60307,
+    "sha256": "12e27265b2e4626a86ed83e2aded710685c60da2d9c49a9f273ff6eb138a4cf8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00041.json",
+    "bytes": 60347,
+    "sha256": "e129a714ee5790dcfe01aadf0d1894f747c831b8351cc55135a26e9b18e8cb56",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00042.json",
+    "bytes": 60891,
+    "sha256": "384aaae0119f5efccb32a57062ce4001b57d98dafaacb0dc9fe1cc2087dfccbb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00043.json",
+    "bytes": 59955,
+    "sha256": "04de92ada40358395ad1d1061cc62e116c9910f1a0c3cfaeeaa7412b4212e66f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00044.json",
+    "bytes": 60175,
+    "sha256": "4728af78c6ef6c9a2393dc61b1dfcdbb4b50389ebd3ad641f2581f82d330095f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00045.json",
+    "bytes": 59927,
+    "sha256": "010e5e90ab2e890bf9ba2e09f82aecc3aa3af40542dc33c1e91c7f919e96e856",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00046.json",
+    "bytes": 59735,
+    "sha256": "237f764dce1eafde9493ae49d3f87b408f7b130cec1774d670f93032cccca106",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00047.json",
+    "bytes": 60711,
+    "sha256": "435cc913155133a040985ce3302c481cacea33d4177fcdb616ffd9bdc92810b0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00048.json",
+    "bytes": 60875,
+    "sha256": "97f83dd818ec5b955f05ff959a2781ba713733b115412e569c52ed1a73a79e76",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00049.json",
+    "bytes": 60875,
+    "sha256": "2697a0668f594d5415810e3991899373e76cc5a4276776e6a9d78806b1c1aa97",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00050.json",
+    "bytes": 60987,
+    "sha256": "d2750c13376498bd3d124bc9b5994cafc7600ee7fbd1512ac6d6a958d03ec11c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00051.json",
+    "bytes": 62399,
+    "sha256": "9bc23855d9da791f7480f32bd06ec7a01d05f8b6d689151784bc5ec41b74f56e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00052.json",
+    "bytes": 60283,
+    "sha256": "212b97418c8cf98e7a875bd40a2945f74c0e59e26a9f85f5d9dda254487f95f6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00053.json",
+    "bytes": 61259,
+    "sha256": "4121abdb5a848d1b39b57b64d35aa813476a40b0d236e4075e6564d80ee22cdf",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00054.json",
+    "bytes": 61899,
+    "sha256": "8983c3e33e2d80609bbe261a7b45ea1857d768410a9c8f572900d6e5fc0ec842",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00055.json",
+    "bytes": 61643,
+    "sha256": "9665e169e19e7a678bcf2cfa37089a54e02bddfb04c177fb3d7c5946697e960d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00056.json",
+    "bytes": 61511,
+    "sha256": "b49b274c33bd47fb4bb3706d0b65bd2d97b4601e969f12124d7a25ac7d73ac1b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00057.json",
+    "bytes": 61455,
+    "sha256": "2eff9e7d34ed19bae49682a14b3eb6a5605a13b54f8cdccc7dfecf28c24fab7d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00058.json",
+    "bytes": 61479,
+    "sha256": "52cf76c31a299baf78481045ffb09aeb0fa48bde0909c8a286059faae45a768f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00059.json",
+    "bytes": 61347,
+    "sha256": "881dd4e6d40bcd3332af9c29d259504c53e03cbde48526e3757d09422141835b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00060.json",
+    "bytes": 61367,
+    "sha256": "ae4693223a7c10d9bdbd1c82a00acc64d1caf6358d1bd915bb91d3f5a8824e3b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00061.json",
+    "bytes": 61043,
+    "sha256": "3ce0fd2d03480cc7c32e3fce0e47645be452c3f43d2ca3bb7b953edba69bdc05",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00062.json",
+    "bytes": 61183,
+    "sha256": "23d77aa61fd7706b8f3056374cb6c70387942f18253b3ff280cf22b874226479",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00063.json",
+    "bytes": 61471,
+    "sha256": "6f25ef250d5a3fcd3f15952530a255417d369fee50a322939684e37f89d0940b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00064.json",
+    "bytes": 61255,
+    "sha256": "22f600c7e7e740fca8bc704bf0b5c46391036e742defcf8f6a9af23f8dbc1be3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00065.json",
+    "bytes": 62467,
+    "sha256": "aff07838b5c44c22c3d125a26f2ea3a662ac144e1db7b71ca0c174788776783a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00066.json",
+    "bytes": 62811,
+    "sha256": "5038216cbf7ba94dde8db5b4deca59737426e89747469f377ae327ec2ad99f9c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00067.json",
+    "bytes": 61979,
+    "sha256": "71cc06db9650670cacd5256f1780d5c5b881d60b8fbfee9bec8b7637d70f7ae4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00068.json",
+    "bytes": 63191,
+    "sha256": "53c79ad97f5b1c188cf349cd2d29c5b986cae60e48e87ecc646a7476b52e031b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00069.json",
+    "bytes": 62947,
+    "sha256": "b4fd725c8091f146b63c123c8c22a5601c3d9eb6223e8fe48400221e97f6ade4",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00070.json",
+    "bytes": 62923,
+    "sha256": "7e603f59beba0b772b1e2032e40827fe3cbdaaed8074d2fea3325ee191243f62",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00071.json",
+    "bytes": 62723,
+    "sha256": "29010ce1c2db0ff6094a44e59daf41da3bc925dc6239f4c8c5c8cd892467c2bc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00072.json",
+    "bytes": 62395,
+    "sha256": "2c20d831c35944401e4b7fe69841dc106c8dd7c663f74750a513b0336c43da29",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00073.json",
+    "bytes": 62615,
+    "sha256": "b4c7e3a4147323699d0ed2254387dcacf39151fc6cbbcd477477ebb366e2b1d8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00074.json",
+    "bytes": 63139,
+    "sha256": "4fe1d66580c4c4ad237cab35d667c5e4904874b290489319dddfb8befc640a8d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00075.json",
+    "bytes": 62479,
+    "sha256": "5e4aad91b460c611235013ac7f24c364bd34e523309dfcc3eff92a7140821e65",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00076.json",
+    "bytes": 62839,
+    "sha256": "dd0add91f60d36c977d589e018673d58f10aad355bd7feaaec7a6031ae0944a5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00077.json",
+    "bytes": 62567,
+    "sha256": "23efe68ec43030d2cecbd5b842bae60147d1c4091ae40f237d4ed017de337af1",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00078.json",
+    "bytes": 62939,
+    "sha256": "147617799fc23362ce341f7feb9d373ee6c8c702fbccc875834beb74e550640c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00079.json",
+    "bytes": 62355,
+    "sha256": "714391147b98318d6ac9b0c73c0d6ed27a9e0baab37206fb2b630b359519f4f7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00080.json",
+    "bytes": 62219,
+    "sha256": "cc3b20ef93f636ced26222d6135efd645c9abe40cccf35eab36af68c36fee4b8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00081.json",
+    "bytes": 61835,
+    "sha256": "60c16cbc8e8ec32739e26fee19edccef1f86a94feb0cdea13ceb5fde6441de10",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00082.json",
+    "bytes": 61487,
+    "sha256": "146ea09503e096b7f4002c2e57dfebf727ded8b9118fe235784f42353869b53f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00083.json",
+    "bytes": 62023,
+    "sha256": "9ffed6035f201c4478d24231442b012a73478a12c1cf4e0ae82ed6e9467804bb",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00084.json",
+    "bytes": 61495,
+    "sha256": "e4890a975f258903228178cc4c582f47df09fcc46d6aea8ffaf240b00aabe250",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00085.json",
+    "bytes": 61943,
+    "sha256": "8dbe147943beed094e2035b35124df2aeaf9a01f7c78fc6f5430735d8df9aa68",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00086.json",
+    "bytes": 61491,
+    "sha256": "4d408d9e18f6c5287880d6896928dae32fe34593e5afd7b05bf3fdded3600e12",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00087.json",
+    "bytes": 62095,
+    "sha256": "4759b2bb0558cc5dfd627f0ae8ce443fa7048c6fa3fb01c79e6a803e0a282c8d",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00088.json",
+    "bytes": 61851,
+    "sha256": "71b2404c896e90ec0174ff34d7195a04a17d7b3cc0bb01e0b9ee33ad85dd4002",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00089.json",
+    "bytes": 61579,
+    "sha256": "30ec01929220f0b0adbfff69278e6698e620fcf16a23c49239329f7ccc69236a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/all-family-leader-followup-packed/lf-counter-i-0-00090.json",
+    "bytes": 61531,
+    "sha256": "3415bde395014cf7eb425eed8a6da6968c61cc1a967aba56610ea5cffcd95716",
+    "disposition": "omitted-locally-preserved"
+  }
+]

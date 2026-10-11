@@ -21,7 +21,7 @@ describe('team rules and opponents', () => {
 
   it.each<RuleId>(['standard', 'light'])('provides distinct legal %s opponents', rule => {
     const teams = opponentTeams(rule);
-    expect(teams).toHaveLength(rule === 'standard' ? 8 : 5);
+    expect(teams).toHaveLength(rule === 'standard' ? 12 : 5);
     expect(new Set(teams.map(team => [...team].sort((a, b) => a - b).join(','))).size).toBe(teams.length);
     for (const team of teams) {
       expect(isValidTeam(team, rules[rule].budget)).toBe(true);
@@ -33,7 +33,7 @@ describe('team rules and opponents', () => {
   });
 
   it('preserves standard opponents and protects them from preview mutations', () => {
-    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23]];
+    const expected = [[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23], [24, 25, 26, 27, 28], [29, 1, 8, 30, 31], [32, 4, 33, 34, 35], [36, 12, 2, 30, 26]];
     expect(opponentTeams('standard')).toEqual(expected);
     const teams = opponentTeams('standard');
     teams[0][0] = 11;
@@ -46,7 +46,7 @@ describe('team rules and opponents', () => {
     const light = opponentTeams('light');
     expect(standard.slice(0, 4)).toEqual([[1, 5, 8, 10, 6], [11, 9, 4, 7, 10], [0, 3, 1, 6, 2], [12, 0, 2, 6, 10]]);
     expect(light.slice(0, 4)).toEqual([[1, 5, 8, 10, 2], [11, 9, 4, 3, 10], [0, 7, 2, 6, 10], [12, 0, 2, 6, 10]]);
-    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23]]);
+    expect(standard.slice(4)).toEqual([[12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [15, 5, 16, 17, 18], [19, 20, 21, 22, 23], [24, 25, 26, 27, 28], [29, 1, 8, 30, 31], [32, 4, 33, 34, 35], [36, 12, 2, 30, 26]]);
     expect(light.slice(4)).toEqual([[14, 3, 6, 9, 10]]);
     const beast = standard[4];
     const nature = standard[5];
@@ -77,7 +77,7 @@ describe('team rules and opponents', () => {
     expect(cost(pure)).toBe(17); expect(cost(mixed)).toBe(16);
     expect(isValidTeam(pure, 17)).toBe(true); expect(isValidTeam(pure, 15)).toBe(false);
     expect(isValidTeam(mixed, 17)).toBe(true); expect(isValidTeam(mixed, 15)).toBe(false);
-    expect(recommendedTeams.slice(4).map(example => [...example.team])).toEqual([pure, mixed]);
+    expect(recommendedTeams.slice(4, 6).map(example => [...example.team])).toEqual([pure, mixed]);
   });
 
   it('validates exact size, unique roster IDs, integer IDs, and the selected budget', () => {
@@ -327,4 +327,27 @@ describe('fixed-basis skill copy', () => {
     expect(fixedDamageHint(monsters[18].skills[0]!)).toBe('1体あたり固定基礎68');
     expect(fixedDamageHint(monsters[5].skills[1]!)).toBe('');
   });
+});
+
+describe('undead examples and current poison tradeoffs',()=>{
+ it('appends exactly the legal pure C17 CPU encounter and clearly marks offleader mixed C15',()=>{
+  expect(opponentTeams('standard')[10]).toEqual([32,4,33,34,35]);expect(opponentTeams('standard').slice(0,10)).toEqual([[1,5,8,10,6],[11,9,4,7,10],[0,3,1,6,2],[12,0,2,6,10],[12,0,2,11,13],[14,3,6,9,10],[15,5,16,17,18],[19,20,21,22,23],[24,25,26,27,28],[29,1,8,30,31]]);
+  const examples=recommendedTeams.slice(10,12);expect(examples.map(e=>e.team)).toEqual([[32,4,33,34,35],[2,32,4,35,10]]);expect(examples.map(e=>cost([...e.team]))).toEqual([17,15]);expect(examples[1].name).toContain('混成');expect(examples[1].note).toContain('先頭以外でも条件成立');expect(examples[1].note).toContain('対象外');
+  expect(opponentTeams('light')).toEqual([[1,5,8,10,2],[11,9,4,3,10],[0,7,2,6,10],[12,0,2,6,10],[14,3,6,9,10]]);
+ });
+ it('derives bounded previews from actual target/max HP without consuming any state',async()=>{
+  const {poisonCashoutHint}=await import('./strategy');const state=start([2,32,4,35,10],[32,4,33,34,35]),core=state.allies[1],skill=core.monster.skills[0]!,target=state.enemies[0];target.poison=3;const before=structuredClone(state);
+  expect(poisonCashoutHint(core,skill)).toContain('×22');expect(poisonCashoutHint(core,skill,target)).toContain('基礎+66');expect(poisonCashoutHint(core,skill,target)).toContain(`最大${Math.floor(target.monster.hp*.06)*3}の経過ダメージ`);expect(state).toEqual(before);
+  target.poison=1;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+22');target.poison=0;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+0');target.poison=3;target.hp=0;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+0');
+  const unqualified=start([32,4,0,2,10],[1]);expect(poisonCashoutHint(unqualified.allies[0],skill)).toContain('×14');expect(poisonCashoutHint(core,core.monster.skills[1]!)).toBe('');
+ });
+ it('round-trips pure, mixed and unchanged old saves without a migration',()=>{
+  const slots:TeamSlot[]=[{team:[32,4,33,34,35],rule:'standard'},{team:[2,32,4,35,10],rule:'light'},{team:[0,2,3,4,6],rule:'standard'}];let saved='';expect(saveTeamSlots({setItem:(_key,value)=>{saved=value;}},slots)).toBe(true);expect(loadTeamSlots({getItem:()=>saved})).toEqual(slots);
+ });
+});
+
+describe('extraordinary mixed recommendations',()=>{
+ it('appends the C17 encounter after all eleven old encounters and leaves the light pool unchanged',()=>{
+  const old=[[1,5,8,10,6],[11,9,4,7,10],[0,3,1,6,2],[12,0,2,6,10],[12,0,2,11,13],[14,3,6,9,10],[15,5,16,17,18],[19,20,21,22,23],[24,25,26,27,28],[29,1,8,30,31],[32,4,33,34,35]];expect(opponentTeams('standard').slice(0,11)).toEqual(old);expect(opponentTeams('standard')[11]).toEqual([36,12,2,30,26]);expect(recommendedTeams.slice(12).map(e=>[...e.team])).toEqual([[36,12,4,20,26],[36,12,2,10,35]]);expect(recommendedTeams.slice(12).map(e=>cost([...e.team]))).toEqual([17,16]);expect(opponentTeams('light')).toEqual([[1,5,8,10,2],[11,9,4,3,10],[0,7,2,6,10],[12,0,2,6,10],[14,3,6,9,10]]);
+ });
 });

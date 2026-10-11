@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "path": "docs/all-family-pure-confirmation-results.md",
+  "beforeSha256": "554c6034cdf497d65ba8993243d68f88c2e93be33669d8a29036bea0dbbe7dcb",
+  "afterSha256": "0d3a9ad13beb7fc83de9bcf2a6321d699d15a9e87aa0d4aba5ceaa993494ff8c",
+  "oldLabel": "Repair casts / healing",
+  "newLabel": "Repair triggers / healing",
+  "reason": "repairTriggers measures automatic end-turn activations, not paid casts or actions.",
+  "frozenAnalyzerPath": "scripts/balance-lab/analyze-all-family-pure-confirmation.mjs",
+  "frozenAnalyzerSha256": "5a142a54823c44d2c4ea5c7b33ae2953cec81b3caa99290a637236975f2f6014",
+  "numericResultsChanged": false,
+  "battlesRerun": false
+}

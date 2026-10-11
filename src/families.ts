@@ -9,8 +9,8 @@ export const FAMILY_DEFINITIONS: Record<Family, FamilyDefinition> = {
   material: { label: '物質系', teamStyle: 'pure', concept: '重い構えから反攻する' },
   slime: { label: '粘体系', teamStyle: 'pure', concept: '柔軟な防御と資源管理で粘る' },
   demon: { label: '悪魔系', teamStyle: 'pure', concept: '敵の資源と強化を崩して攻める' },
-  undead: { label: '不死系', teamStyle: 'pure', concept: '倒されても一度だけ立て直す' },
-  extraordinary: { label: '超常系', teamStyle: 'mixed', concept: '異なる系統を束ねる自由編成の核' },
+  undead: { label: '不死系', teamStyle: 'pure', concept: '残り毒を一撃へ交換する' },
+  extraordinary: { label: '超常系', teamStyle: 'mixed', concept: '四系統の混成で一度の応答を選ぶ' },
 };
 
 /** Only implemented roster families appear in selection UI; planned slots are not playable claims. */

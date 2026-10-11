@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only analysis evidence binding and complete reserved-seed enforcement; no engine, core, CLI, config, schedule, seed, team or gate change. Nullable unit timing averages now use actual observations, with explicit conditional counts; resource means and all gates are unchanged.",
+  "authorizedBy": "Parent instructed both P2 analysis safeguards after independent read-only review,2026-10-10UTC.",
+  "frozenAnalyzerSha256": "072f0e49ec053b7e3fdf33b608e323da0363a850704896bac90c880fd47db067",
+  "currentAnalyzerSha256": "55c62163a32bffbf046489d5593b475a31ce560bb094e5143915733208936fef",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "preFixArchive": "docs/all-family-balance-source/all-family-analysis-hardening-before-index.json",
+  "files": [
+    {
+      "path": "scripts/balance-lab/analyze-all-family.mjs",
+      "sha256": "55c62163a32bffbf046489d5593b475a31ce560bb094e5143915733208936fef"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-evidence-contract.mjs",
+      "sha256": "328471eaf26e4bce43fc8fe24cc1b849158ea620c3a7d8e0e5c6ef133396004b"
+    },
+    {
+      "path": "src/balanceLabAllFamilyEvidence.test.ts",
+      "sha256": "2ae8355803ace515793cbeaecc203acb21c91d8a9cce3193c82a4169b856cf06"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-statistics.mjs",
+      "sha256": "ca7937748fdafed86f3a0999af17a9fd81259585a0e70d3042fc14380c700cb1"
+    }
+  ],
+  "checks": [
+    "Require exact complete authorized reserve set; reject missing/incomplete and unauthorized indexes.",
+    "Require128 distinct paired seeds only for triggered counters,64 for untriggered counters.",
+    "Bind every suite and row to frozen source/config/schedule/counts before aggregation.",
+    "Preserve initial64 separately; attach current analyzer and amendment hashes to reports.",
+    "Unit death/supply/repair timing averages divide by actual observed events, with null for zero observations."
+  ],
+  "previousRevisionSha256": "b0c013a63df816f168a53306e2aa1f77d179e4e72521713ae3fc45dad9189fcf",
+  "previousArchive": "docs/all-family-balance-source/all-family-analysis-hardening-v2-index.json"
+}

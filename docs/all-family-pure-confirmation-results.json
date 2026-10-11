@@ -1,0 +1,1001 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "base": {
+    "path": "docs/all-family-pure-confirmation-freeze.json",
+    "sha256": "29548b3085cb1ea74b69be421bb64d65f7b182d96d30e0a11764d686aefb0328"
+  },
+  "derivedFreezeSha256": "92d34747311456f2f6d8d061828d26791e356f2745c59e227fd1d510699fdf86",
+  "analysisSourceSha256": "5a142a54823c44d2c4ea5c7b33ae2953cec81b3caa99290a637236975f2f6014",
+  "selectionDisclosure": "The two targets are unchanged recommended pure teams from the original24-team freeze. They were selected for confirmation after inspecting the zero-impact reserve matrix: pure demon90.625/96.875% and pure material81.25/81.25% versus the two shells,32 games per cell. This selection is exploratory, not blinded or random. Original mixed-counter gate failures remain failures.",
+  "originalProtocol": "FAILED; fixed mixed-counter failures remain unchanged.",
+  "executed": 24576,
+  "verification": {
+    "allRowsBound": true,
+    "exactReplays": 60,
+    "stockIdentityComparisons": 2048,
+    "repeatedBaselineComparisons": 10752,
+    "replays": [
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "4f295700b4dde0fac40805e79561bdc7e4b6dccc264bd7d591d0a963a5849470",
+        "resultSha256": "8e8af6d6f4849c8cbc6bbd1a1973d5a4d6314956e846d2fe7b2e9e653ec7687b"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "d9a6df02a3c059e6fe23deac17f7d58d2636c69750e0b7b15d50a8a3e1c9dd3b",
+        "resultSha256": "1dca7f8e2a3eb77f5c71bec68d8e872040a87aada2b7a2b0b79758bceab5631e"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "72d3d57815c0e6dbd5e6be8a92a5933c60d15a2e34ea2ad9df64d2d58436d8e5",
+        "resultSha256": "1a162fa60d2c2902b584ed44904ef73878686c57b87242ea7cc6a2022382b3b6"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "fbf622be62f121ca1efbdc69b8192b43ae0e155268a82c8ab895975aeded9df3",
+        "resultSha256": "87fac19a1237b389190107cdfc99dc9a6e41ced6f0de4931211ded3d34605d32"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-independent-1",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "215fb5b864a4f988a8119f181dfa238fe60e7bcf5905a8284b3faf229bc3aabd",
+        "resultSha256": "78765ea5e26eebb5dd131e10e4cbdf6c7a023ccde6bf0f65ee0362b3ece2c9b9"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "7c27630f72e0500538e1a40ea4a7a0895c2923848d0cc03e20d31711768f85bb",
+        "resultSha256": "d476cf680e0247c72abd52d74b614a97456a0be35b3f4eea0706451a81f87d5b"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "d51a1e797c53ff49c4a6ef8ddcab0dc6e54aab60615929e7773533bab0fd0ba1",
+        "resultSha256": "f4439f384ffbbc3466bcb1d60c60b2d533d764d76c79599b4c563e4423c9a1af"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "133d175f41bb06fb27766b55338d24ed691f2fc7ec277b6826dd11e8518b615d",
+        "resultSha256": "5b3314b097910f696d36478d16243b48ab8cc112d4e2eea350209ac85ca6a184"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "ce429c0a7f8b504632148b465b404c70041e827f10df2512b52b5d2b76e19052",
+        "resultSha256": "0c5ab5880a2cb9e35afcf61839c74cc24482c75cffdaef9d354fc65b2fc28464"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-independent-half",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "a3d54708e7f46a958627ebe23f96c543780358cf5bb21d56e44e322390eeac22",
+        "resultSha256": "47f397d4f5ff2d2697a4a9676b804c5dc4c25520645d3905858737894044d1e5"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "92415c770386620cc3f8ce9519c74bbd6b1a479182203160fe02f952ee1bcd6c",
+        "resultSha256": "3ab5a3dc1133201b42fb1c78555272e128ef55dc80cf2c13ca56821e99158efa"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "fb418708669f7ebd74bb470fa01ec9350b66df878e176d865e33cefbd9bc2f93",
+        "resultSha256": "a9c7b608a281bbff72d8969675641b31eeb4ed0d52e0584dc45e675a101c430f"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "d92428ae1b0e68c78209d94f718a778888c22104d6f6f75f0cf82314f0176ac6",
+        "resultSha256": "ce8d8cf164c711c487919e8ab08dbde3a21b8c2331bda0927ce6ff47788d8bd4"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "f5ef57b1e20b341981fe15713bd10d3b86a134bb44c144ec778f10190f17f7c3",
+        "resultSha256": "561f6049a8d1139a5ba637ebf7f30d97ec115076f7c111690fe4df26b5b18a69"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-independent-0",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "1da8390ff98c523ed75c71fbd91d750b738ba4af1dbc2eef83b38bcd13b725d5",
+        "resultSha256": "c401c7e44995015738b61f8d70047f3ae5994965f04c2356b9f005a5e48e86d4"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "f05b5a336b43b2043b1771bc9b4016e3908b940e45537559a03a8ca4d92698b8",
+        "resultSha256": "40291d666a67b20d33b7dfa46e275a5fe6d16a879f543789bfe4c6b6f1198ef1"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "4fc2219b61df1d0e229d06348f10ec7468af5fa19f019ba48cb7dbaf22942a85",
+        "resultSha256": "64cc0fb7683f11b485e4fe20eed75e4362feda1431a7b94f9d0988024857ecd8"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "6cf0f87d96b6b6a8102bafc13141fe4e98aef8c589fe0c4613b2dae4a981d566",
+        "resultSha256": "3e2aa6bbd092b5a61c1a0a8d13915accc9afde4229a97b74cb8443bf2b041a64"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "ba2d8df72c01100e213193f6224a0e26ba8cda9e8822b59448e2400dc539971d",
+        "resultSha256": "e6a18a7937f3f945a065d4df2b7758635633dc4a91136b3fe3bb2a5d225b73a4"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-reserve-1",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "c438eb9fba5b77224a28cabe831af9d09bd485d56d63dd6696961e5136c5ad63",
+        "resultSha256": "3a9fe92bd2c7f3d1314d8c192d8df2ff8fc440e96078bdc5c87da17f054d15da"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "9078a90303ea14afe6407082f9fec06a41f45766a42b12258c21b94bb6ef9c48",
+        "resultSha256": "7cd98ca77038b3f420e08afffde7e3c4595d1e061c6977eed4747bf9cb5f16c0"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "1525389080b39db92c7ab713980e6cc9f0e9e1bddbb6b6b0bc62c329148f0a62",
+        "resultSha256": "58af6e32eac7a673e061636f90769d03d4339ce729399ed2d8120772e913301f"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "a3a6d82420a1c04bf9e88a90ca3feb21b0e89b8195ee2e459d22f7b1a0ee4ab2",
+        "resultSha256": "40e093b92088ad6ae37d8572497fb6336074a6207f48009ccfbb17af4f37fe60"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "fce0ae41a12fa64dd2041e2b1aa8d6b6336d12d26da0bfd6ed42bdee1202839d",
+        "resultSha256": "f84f5b13c3a65b2cea8b835a5093fcd37ae51066fc5f253dee52921aa38a0d56"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-reserve-half",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "5b5562777daa96572c0c0e46fc11a4d4c625c5ec71c573bbfba70d0634e3e702",
+        "resultSha256": "ad31dc0e02f04948e17b20b35e497e01cbb0cb435f0d2bb54a84f4457576e551"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "pure-1-1__s1206474499__a-left__baseline",
+        "traceHash": "330843da798aea2e2c6ec15f7cdec729c2802c28a8b7fa7df3dee8e9bbbaaf8e",
+        "resultSha256": "5b5768e286c97b0590a657ca1bee1bd004962a52d75380cfa518974c07ef8b73"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "pure-1-1__s1206474499__a-left__candidate",
+        "traceHash": "409366cd587376328f4a54ff7b74f1a26695d370c2e46126f175d8af8e17e6eb",
+        "resultSha256": "03951d45cfe8656b0b93de58811101b5d0cbcd5e988187af682b8d009c0b155a"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "pure-2-1__s1206474499__a-left__baseline",
+        "traceHash": "a71cba1fe4e68fd08e2ac18020f7f9f7d17131c0135c7793e2c67587c12da752",
+        "resultSha256": "5caa2ea610f0714fb936a3ebe04ea021646deb0e53f86a0a29b969c016740cce"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "pure-2-1__s1206474499__a-left__candidate",
+        "traceHash": "7b3d63431a615fd5b57850d3c7e93cb6566c19e520a45290c32be8df5983c22d",
+        "resultSha256": "1dd6af8dbfc390bdcc65cdace61d73c418ab1d116f79bd4a3b68af6641c2289b"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-purematerial__s1206474499__a-left__baseline",
+        "traceHash": "1b0e740427be3da9fdbd8fc43a5b9b6bd46ee7eaa4d7af96d9602ef9e6ac2e53",
+        "resultSha256": "1a2a5117f09e1dd77e6422f5be017400ffd75e4cb090b8baf4f479a988670983"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-purematerial__s1206474499__a-left__candidate",
+        "traceHash": "a42619f9adc875d50772ba1566040278194718a7db25ad1f5390ac6150411b24",
+        "resultSha256": "2aacfff17c9dc4581d72940333cdd6dd12e5c72f1c0d4617fcf7e9cc7a9acce3"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__baseline",
+        "traceHash": "410c2bfddfdb2e26ae82655e8ea5643679f19de7893c12f37360f921c3743f62",
+        "resultSha256": "e902a139a174e72e1a994a2c602e5d78a4d991b3056d82f3e4cd86b38a8fcf64"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-nature-brute-dryas__s1206474499__a-left__candidate",
+        "traceHash": "a0d90f4b09ec4249beba374069ce1f550d4dd56ac6039a74d58e6e9a59c210a4",
+        "resultSha256": "29edc772176dafcb2512dd743bbeea05e32d9d9ffc8d6a8ca7b45cb6b5d00a5c"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__baseline",
+        "traceHash": "bd5028f41a8d7833a5216b80c37cb73bf7dc517a44b7297d092e55460b1e0ebb",
+        "resultSha256": "daa1d0c52f03e392156263fb9f54e33a6f114c461db34325e340874af02f0660"
+      },
+      {
+        "suite": "all-family-pure-reserve-0",
+        "id": "mirror-nature-brute-tengu__s719435490__a-right__candidate",
+        "traceHash": "66da7be7359c5d9d359095568125e4dda5a71e18256f24b053889bc52e1149d2",
+        "resultSha256": "48ed2e4a66a116badc99d842a26e9f309d830bafd8be097915b75344c2c7a796"
+      }
+    ]
+  },
+  "gates": {
+    "independent/1": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 5.6171875,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.02734375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.007571506478698489,
+            0.04711599352130151
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.046875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.0078125
+            }
+          },
+          "meanTurns": 4.26953125,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 4.546875,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 3.73828125,
+          "adjudicationRate": 0,
+          "passes": false
+        }
+      },
+      "bothPureCountersPass": false,
+      "originalNoncounterMatrixGates": false,
+      "passes": false
+    },
+    "independent/0.5": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.6171875,
+          "seedClusters": 128,
+          "approximate95": [
+            0.532648749050181,
+            0.701726250949819
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.6171875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.6171875
+            }
+          },
+          "meanTurns": 7.515625,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.8515625,
+          "seedClusters": 128,
+          "approximate95": [
+            0.7990255522893275,
+            0.9040994477106725
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.859375
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.84375
+            }
+          },
+          "meanTurns": 5.30859375,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.6953125,
+          "seedClusters": 128,
+          "approximate95": [
+            0.6152606177170867,
+            0.7753643822829133
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.6953125
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.6953125
+            }
+          },
+          "meanTurns": 6.9921875,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.7734375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.7192399903894812,
+            0.8276350096105188
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.8125
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.734375
+            }
+          },
+          "meanTurns": 5.140625,
+          "adjudicationRate": 0,
+          "passes": true
+        }
+      },
+      "bothPureCountersPass": true,
+      "originalNoncounterMatrixGates": true,
+      "passes": true
+    },
+    "independent/0": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.921875,
+          "seedClusters": 128,
+          "approximate95": [
+            0.8751999013113156,
+            0.9685500986886844
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.921875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.921875
+            }
+          },
+          "meanTurns": 7.0546875,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.99609375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.9884375,
+            1
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.9921875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 1
+            }
+          },
+          "meanTurns": 5.01171875,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.9375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.8954002169568124,
+            0.9795997830431876
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.9375
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.9375
+            }
+          },
+          "meanTurns": 6.625,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.9921875,
+          "seedClusters": 128,
+          "approximate95": [
+            0.9814026398974719,
+            1
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.9921875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.9921875
+            }
+          },
+          "meanTurns": 4.9296875,
+          "adjudicationRate": 0,
+          "passes": true
+        }
+      },
+      "bothPureCountersPass": true,
+      "originalNoncounterMatrixGates": true,
+      "passes": true
+    },
+    "reserve/1": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 5.6171875,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.02734375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.007571506478698489,
+            0.04711599352130151
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.046875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.0078125
+            }
+          },
+          "meanTurns": 4.26953125,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 4.546875,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0,
+          "seedClusters": 128,
+          "approximate95": [
+            0,
+            0
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0
+            }
+          },
+          "meanTurns": 3.73828125,
+          "adjudicationRate": 0,
+          "passes": false
+        }
+      },
+      "bothPureCountersPass": false,
+      "originalNoncounterMatrixGates": false,
+      "passes": false
+    },
+    "reserve/0.5": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.5078125,
+          "seedClusters": 128,
+          "approximate95": [
+            0.42086217807407694,
+            0.594762821925923
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.5078125
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.5078125
+            }
+          },
+          "meanTurns": 8.015625,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.40625,
+          "seedClusters": 128,
+          "approximate95": [
+            0.3343509326498127,
+            0.4781490673501873
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.40625
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.40625
+            }
+          },
+          "meanTurns": 5.8984375,
+          "adjudicationRate": 0,
+          "passes": false
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.734375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.6575597184774169,
+            0.8111902815225831
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.734375
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.734375
+            }
+          },
+          "meanTurns": 7.0859375,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.41015625,
+          "seedClusters": 128,
+          "approximate95": [
+            0.3368868266682874,
+            0.4834256733317126
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.40625
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.4140625
+            }
+          },
+          "meanTurns": 5.3046875,
+          "adjudicationRate": 0,
+          "passes": false
+        }
+      },
+      "bothPureCountersPass": false,
+      "originalNoncounterMatrixGates": true,
+      "passes": false
+    },
+    "reserve/0": {
+      "cells": {
+        "purematerial/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.6796875,
+          "seedClusters": 128,
+          "approximate95": [
+            0.5985361412297012,
+            0.7608388587702988
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.6796875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.6796875
+            }
+          },
+          "meanTurns": 9.0546875,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-dryas": {
+          "games": 256,
+          "scoreRate": 0.94140625,
+          "seedClusters": 128,
+          "approximate95": [
+            0.9076894421063849,
+            0.9751230578936151
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.9453125
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.9375
+            }
+          },
+          "meanTurns": 5.50390625,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "purematerial/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.7109375,
+          "seedClusters": 128,
+          "approximate95": [
+            0.6320940173733003,
+            0.7897809826266997
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.7109375
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.7109375
+            }
+          },
+          "meanTurns": 8.171875,
+          "adjudicationRate": 0,
+          "passes": true
+        },
+        "puredemon/nature-brute-tengu": {
+          "games": 256,
+          "scoreRate": 0.9921875,
+          "seedClusters": 128,
+          "approximate95": [
+            0.9814026398974719,
+            1
+          ],
+          "orientations": {
+            "a-left": {
+              "games": 128,
+              "scoreRate": 0.9921875
+            },
+            "a-right": {
+              "games": 128,
+              "scoreRate": 0.9921875
+            }
+          },
+          "meanTurns": 4.97265625,
+          "adjudicationRate": 0,
+          "passes": true
+        }
+      },
+      "bothPureCountersPass": true,
+      "originalNoncounterMatrixGates": true,
+      "passes": true
+    }
+  },
+  "bothPolicies": {
+    "0": true,
+    "0.5": false
+  },
+  "selection": 0,
+  "adoption": "Parent review, full-matrix distribution/resource inspection and discoverable manual/player checks remain required. No production authorization.",
+  "details": {
+    "root": "docs/all-family-pure-confirmation-analysis",
+    "chunkManifest": [
+      {
+        "file": "pure-manifest-00001.json",
+        "bytes": 768,
+        "sha256": "4a6feaedc9021902304ea642b7a00687aff7db1bcd4c0c7348f55cb31a441027",
+        "records": 4,
+        "first": "chunk-1",
+        "last": "chunk-4"
+      }
+    ]
+  },
+  "interpretation": [
+    "No retroactive pass for the first protocol. This is fresh confirmation of exploratory counter discovery.",
+    "Review all24 row distributions, meaningful counters for weaker families, actual adjudication and resource/action costs rather than one favorable matchup.",
+    "A positive result supports a bounded playtest improvement and a discoverable existing-family counter, not universal balance or human optimality.",
+    "No extra counter or seed search if the prelisted confirmation fails."
+  ]
+}

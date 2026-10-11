@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "suite": "all-family-pure-independent-0",
+  "status": "complete",
+  "phase": "pure",
+  "arm": "independent",
+  "scale": 0,
+  "shell": null,
+  "configPath": "configs/balance-lab/all-family-pure-independent-0.json",
+  "configFileSha256": "a6e0c9de312c1301a1459d2d2a78b8313d8ddc83922641d02c984121882792fd",
+  "configSha256": "1a42decb6422bac077776ef2c3ea2dcf708e6f89ed5a74214fc72e6c3aac9937",
+  "derivedFreezeSha256": "92d34747311456f2f6d8d061828d26791e356f2745c59e227fd1d510699fdf86",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "scheduleSha256": "59cef8498830d02a96d5a383a5840fdabd23d6e230621320a06a92f745448c18",
+  "scheduledMatches": 4096,
+  "executedMatches": 4096,
+  "chunkManifest": [
+    {
+      "file": "all-family-pure-i-0-manifest-00001.json",
+      "bytes": 10077,
+      "sha256": "bf0bfb222f712b061bfa91486356667db29bbbda8b4c4c4164aa11cc1caedb80",
+      "records": 128,
+      "first": "chunk-1",
+      "last": "chunk-128"
+    }
+  ]
+}

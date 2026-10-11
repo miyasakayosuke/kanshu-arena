@@ -1,0 +1,1078 @@
+{
+  "status": "complete-with-known-imbalances",
+  "source": {
+    "gameVersion": "0.16.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "configSha256": "f01a1d2489c0937b24e34e453a44b88964c5ebaacd115f74945cb8d3ad52d028"
+  },
+  "scheduledMatches": 24880,
+  "policy": "Same production autoOrders on both physical sides; bounded frozen cohort only, never human fairness.",
+  "suites": [
+    {
+      "id": "undead-initial",
+      "matches": 3008,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "f01a1d2489c0937b24e34e453a44b88964c5ebaacd115f74945cb8d3ad52d028"
+      },
+      "reportSha256": "0463c18d5af21437f9e8ab131a91a99fa841d697f3c1ee72806ef8de5732f24f",
+      "mirrorPhysicalScore": {
+        "baseline": 0.542279,
+        "candidate": 0.542279
+      },
+      "pairedDelta": {
+        "pairs": 960,
+        "seedClusters": 16,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-initial-pureundead.json",
+          "baseline": 0.370833,
+          "candidate": 0.370833,
+          "games": 480,
+          "actualAdded": 38.266667,
+          "consumed": 2.641667,
+          "zero": 0.495833,
+          "casts": 1.46875,
+          "core": {
+            "appearances": 480,
+            "finalMpMean": 20.5,
+            "spentMean": 41.5,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.17446808510638,
+            "cashoutKillTurnMean": 2.3274647887323945,
+            "deadWithMpRate": 0.7541666666666667,
+            "survivalRate": 0.24583333333333332
+          }
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-initial-mixedundead.json",
+          "baseline": 0.463542,
+          "candidate": 0.463542,
+          "games": 480,
+          "actualAdded": 29.083333,
+          "consumed": 3.539583,
+          "zero": 0.147917,
+          "casts": 1.439583,
+          "core": {
+            "appearances": 480,
+            "finalMpMean": 19.525,
+            "spentMean": 42.30833333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.862518089725036,
+            "cashoutKillTurnMean": 2.3841911764705883,
+            "deadWithMpRate": 0.6458333333333334,
+            "survivalRate": 0.3541666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-enabled",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "9b56c78af15dd72e71f3161ff77a106646b4ea573e9738662f0d4db396fcf0bd"
+      },
+      "reportSha256": "e51ebce2545617e043228e3b949c3113286a7368610fba8e8d2ba79ca3d9a79c",
+      "mirrorPhysicalScore": {
+        "baseline": 0.536765,
+        "candidate": 0.536765
+      },
+      "pairedDelta": {
+        "pairs": 480,
+        "seedClusters": 8,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-enabled-pureundead.json",
+          "baseline": 0.370833,
+          "candidate": 0.370833,
+          "games": 240,
+          "actualAdded": 36.2125,
+          "consumed": 2.604167,
+          "zero": 0.533333,
+          "casts": 1.483333,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.591666666666665,
+            "spentMean": 42.40833333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.162921348314605,
+            "cashoutKillTurnMean": 2.3161290322580643,
+            "deadWithMpRate": 0.7416666666666667,
+            "survivalRate": 0.25833333333333336
+          }
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-enabled-mixedundead.json",
+          "baseline": 0.464583,
+          "candidate": 0.464583,
+          "games": 240,
+          "actualAdded": 28.758333,
+          "consumed": 3.5375,
+          "zero": 0.133333,
+          "casts": 1.441667,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.716666666666665,
+            "spentMean": 42.03333333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.69364161849711,
+            "cashoutKillTurnMean": 2.3898916967509027,
+            "deadWithMpRate": 0.6458333333333334,
+            "survivalRate": 0.3541666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-bonus-off",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "978fbf7de7852e3e1fa381b5833ed62a716af22763efc792d304cae841212670"
+      },
+      "reportSha256": "35d4883bf4caee69327a7f5988470391ae613f5ed602a4e9d45fd9746383ee66",
+      "mirrorPhysicalScore": {
+        "baseline": 0.536765,
+        "candidate": 0.529412
+      },
+      "pairedDelta": {
+        "pairs": 480,
+        "seedClusters": 8,
+        "changedOutcomes": 55,
+        "scoreRateChange": 0.008333,
+        "approximate95Interval": [
+          -0.038682,
+          0.055349
+        ],
+        "meanTurnsChange": 0.04375,
+        "meanDirectDamageChange": -11.366667,
+        "meanHealingChange": 0.270833,
+        "meanMpSpentChange": -3.533333
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-bonus-off-pureundead.json",
+          "baseline": 0.370833,
+          "candidate": 0.370833,
+          "games": 240,
+          "actualAdded": 36.2125,
+          "consumed": 2.604167,
+          "zero": 0.533333,
+          "casts": 1.483333,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.591666666666665,
+            "spentMean": 42.40833333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.162921348314605,
+            "cashoutKillTurnMean": 2.3161290322580643,
+            "deadWithMpRate": 0.7416666666666667,
+            "survivalRate": 0.25833333333333336
+          }
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-bonus-off-mixedundead.json",
+          "baseline": 0.464583,
+          "candidate": 0.48125,
+          "games": 240,
+          "actualAdded": 28.758333,
+          "consumed": 3.5375,
+          "zero": 0.133333,
+          "casts": 1.441667,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.716666666666665,
+            "spentMean": 42.03333333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.69364161849711,
+            "cashoutKillTurnMean": 2.3898916967509027,
+            "deadWithMpRate": 0.6458333333333334,
+            "survivalRate": 0.3541666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-full-off",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "4f26b7130a7efe163104263dc57d4b2075b65b972e1c2f82b93e647719134e1a"
+      },
+      "reportSha256": "7f9c6f464c7d04e12f6baf2a6ef2f4609bfd213e780954ce9ac66a25273d6a13",
+      "mirrorPhysicalScore": {
+        "baseline": 0.536765,
+        "candidate": 0.522059
+      },
+      "pairedDelta": {
+        "pairs": 480,
+        "seedClusters": 8,
+        "changedOutcomes": 54,
+        "scoreRateChange": 0.0125,
+        "approximate95Interval": [
+          -0.019429,
+          0.044429
+        ],
+        "meanTurnsChange": -0.070833,
+        "meanDirectDamageChange": -11.033333,
+        "meanHealingChange": 0.541667,
+        "meanMpSpentChange": -8.216667
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-full-off-pureundead.json",
+          "baseline": 0.370833,
+          "candidate": 0.370833,
+          "games": 240,
+          "actualAdded": 36.2125,
+          "consumed": 2.604167,
+          "zero": 0.533333,
+          "casts": 1.483333,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.591666666666665,
+            "spentMean": 42.40833333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.162921348314605,
+            "cashoutKillTurnMean": 2.3161290322580643,
+            "deadWithMpRate": 0.7416666666666667,
+            "survivalRate": 0.25833333333333336
+          }
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-full-off-mixedundead.json",
+          "baseline": 0.464583,
+          "candidate": 0.489583,
+          "games": 240,
+          "actualAdded": 28.758333,
+          "consumed": 3.5375,
+          "zero": 0.133333,
+          "casts": 1.441667,
+          "core": {
+            "appearances": 240,
+            "finalMpMean": 19.716666666666665,
+            "spentMean": 42.03333333333333,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.69364161849711,
+            "cashoutKillTurnMean": 2.3898916967509027,
+            "deadWithMpRate": 0.6458333333333334,
+            "survivalRate": 0.3541666666666667
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-broad",
+      "matches": 2752,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "efcd3a3a2e84b684dc6eb386b0611b2f8da34a44a84b74367b3b969375a3b19d"
+      },
+      "reportSha256": "45f250937a5f0ddb4e7f52ef422d932af0c7f0b14b4eb374d44864e58a7d5fbc",
+      "mirrorPhysicalScore": {
+        "baseline": 0.441667,
+        "candidate": 0.441667
+      },
+      "pairedDelta": {
+        "pairs": 896,
+        "seedClusters": 8,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-broad-pureundead.json",
+          "baseline": 0.591518,
+          "candidate": 0.591518,
+          "games": 448,
+          "actualAdded": 36.323661,
+          "consumed": 2.964286,
+          "zero": 0.404018,
+          "casts": 1.502232,
+          "core": {
+            "appearances": 448,
+            "finalMpMean": 19.022321428571427,
+            "spentMean": 42.97767857142857,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.80534918276374,
+            "cashoutKillTurnMean": 2.325373134328358,
+            "deadWithMpRate": 0.625,
+            "survivalRate": 0.375
+          }
+        },
+        {
+          "id": "c17-poison-undead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-broad-c17-poison-undead.json",
+          "baseline": 0.805804,
+          "candidate": 0.805804,
+          "games": 448,
+          "actualAdded": 34.158482,
+          "consumed": 2.881696,
+          "zero": 0.151786,
+          "casts": 1.491071,
+          "core": {
+            "appearances": 448,
+            "finalMpMean": 17.950892857142858,
+            "spentMean": 44.049107142857146,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.808383233532936,
+            "cashoutKillTurnMean": 2.3606965174129355,
+            "deadWithMpRate": 0.359375,
+            "survivalRate": 0.640625
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-substitutions",
+      "matches": 6240,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "c402ea67169622e2a216d6753676b37c6d680211034c05f90f3d58f01c0c90e1"
+      },
+      "reportSha256": "3908bfdaddca3e2e972589ea92b581aef53bef30d909cebd87cc73b72ca85a4e",
+      "mirrorPhysicalScore": {
+        "baseline": 0.446759,
+        "candidate": 0.446759
+      },
+      "pairedDelta": {
+        "pairs": 2688,
+        "seedClusters": 6,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-pureundead.json",
+          "baseline": 0.598214,
+          "candidate": 0.598214,
+          "games": 336,
+          "actualAdded": 35.208333,
+          "consumed": 2.839286,
+          "zero": 0.425595,
+          "casts": 1.488095,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 18.904761904761905,
+            "spentMean": 43.095238095238095,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.768,
+            "cashoutKillTurnMean": 2.328,
+            "deadWithMpRate": 0.625,
+            "survivalRate": 0.375
+          }
+        },
+        {
+          "id": "c17-poison-undead",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-c17-poison-undead.json",
+          "baseline": 0.8125,
+          "candidate": 0.8125,
+          "games": 336,
+          "actualAdded": 33.827381,
+          "consumed": 2.877976,
+          "zero": 0.151786,
+          "casts": 1.5,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 17.589285714285715,
+            "spentMean": 44.410714285714285,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.62698412698413,
+            "cashoutKillTurnMean": 2.372937293729373,
+            "deadWithMpRate": 0.3601190476190476,
+            "survivalRate": 0.6398809523809523
+          }
+        },
+        {
+          "id": "core-nonleader",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-core-nonleader.json",
+          "baseline": 0.401786,
+          "candidate": 0.401786,
+          "games": 336,
+          "actualAdded": 35.803571,
+          "consumed": 2.654762,
+          "zero": 0.407738,
+          "casts": 1.434524,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 20.970238095238095,
+            "spentMean": 41.029761904761905,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.18672199170125,
+            "cashoutKillTurnMean": 2.31651376146789,
+            "deadWithMpRate": 0.7351190476190477,
+            "survivalRate": 0.2648809523809524
+          }
+        },
+        {
+          "id": "bonus-threshold-lost",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-bonus-threshold-lost.json",
+          "baseline": 0.595238,
+          "candidate": 0.595238,
+          "games": 336,
+          "actualAdded": 15.181548,
+          "consumed": 2.372024,
+          "zero": 0.136905,
+          "casts": 1.130952,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 21.285714285714285,
+            "spentMean": 40.654761904761905,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.126315789473686,
+            "cashoutKillTurnMean": 2.4173553719008263,
+            "deadWithMpRate": 0.5297619047619048,
+            "survivalRate": 0.47023809523809523
+          }
+        },
+        {
+          "id": "core-replaced-slime",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-core-replaced-slime.json",
+          "baseline": 0.580357,
+          "candidate": 0.580357,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "core-replaced-demon",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-core-replaced-demon.json",
+          "baseline": 0.375,
+          "candidate": 0.375,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "healer-replaced",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-healer-replaced.json",
+          "baseline": 0.674107,
+          "candidate": 0.674107,
+          "games": 336,
+          "actualAdded": 38.029762,
+          "consumed": 3.160714,
+          "zero": 0.354167,
+          "casts": 1.535714,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 17.988095238095237,
+            "spentMean": 44.01190476190476,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.56976744186046,
+            "cashoutKillTurnMean": 2.446564885496183,
+            "deadWithMpRate": 0.5744047619047619,
+            "survivalRate": 0.4255952380952381
+          }
+        },
+        {
+          "id": "breaker-replaced",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-substitutions-breaker-replaced.json",
+          "baseline": 0.348214,
+          "candidate": 0.348214,
+          "games": 336,
+          "actualAdded": 36.580357,
+          "consumed": 2.5625,
+          "zero": 0.502976,
+          "casts": 1.452381,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 20.351190476190474,
+            "spentMean": 41.648809523809526,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.01229508196721,
+            "cashoutKillTurnMean": 2.306122448979592,
+            "deadWithMpRate": 0.7172619047619048,
+            "survivalRate": 0.28273809523809523
+          }
+        }
+      ]
+    },
+    {
+      "id": "undead-oldcore-contribution",
+      "matches": 7632,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "bdedf109bf84ace59496c866a5576e381e2565f98bb1103c43eb6a2449f4be2e"
+      },
+      "reportSha256": "a0e66916024af0d1eeab4521cf86925a1c596f379ea088c9f9fc742dcbf1d2b1",
+      "mirrorPhysicalScore": {
+        "baseline": 0.39693,
+        "candidate": 0.39693
+      },
+      "pairedDelta": {
+        "pairs": 3360,
+        "seedClusters": 6,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "control-nature-dryas",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-control-nature-dryas.json",
+          "baseline": 0.907738,
+          "candidate": 0.907738,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "nature-newcore-dryas",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-nature-newcore-dryas.json",
+          "baseline": 0.639881,
+          "candidate": 0.639881,
+          "games": 336,
+          "actualAdded": 9.994048,
+          "consumed": 2.440476,
+          "zero": 0.059524,
+          "casts": 1.059524,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 25.5625,
+            "spentMean": 36.42261904761905,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 47.04213483146067,
+            "cashoutKillTurnMean": 2.2304832713754648,
+            "deadWithMpRate": 0.7053571428571429,
+            "survivalRate": 0.29464285714285715
+          }
+        },
+        {
+          "id": "control-nature-tengu",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-control-nature-tengu.json",
+          "baseline": 0.943452,
+          "candidate": 0.943452,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "nature-newcore-tengu",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-nature-newcore-tengu.json",
+          "baseline": 0.717262,
+          "candidate": 0.717262,
+          "games": 336,
+          "actualAdded": 7.5625,
+          "consumed": 2.985119,
+          "zero": 0.068452,
+          "casts": 1.130952,
+          "core": {
+            "appearances": 336,
+            "finalMpMean": 25.794642857142858,
+            "spentMean": 36.19047619047619,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 45.70789473684211,
+            "cashoutKillTurnMean": 2.2344322344322345,
+            "deadWithMpRate": 0.6398809523809523,
+            "survivalRate": 0.3601190476190476
+          }
+        },
+        {
+          "id": "nature-newhealer",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-nature-newhealer.json",
+          "baseline": 0.794643,
+          "candidate": 0.794643,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "control-material-strong",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-control-material-strong.json",
+          "baseline": 0.642857,
+          "candidate": 0.642857,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "material-newbreaker",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-material-newbreaker.json",
+          "baseline": 0.732143,
+          "candidate": 0.732143,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "control-material-pure",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-control-material-pure.json",
+          "baseline": 0.556548,
+          "candidate": 0.556548,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "material-newshield",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-material-newshield.json",
+          "baseline": 0.5,
+          "candidate": 0.5,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        },
+        {
+          "id": "material-newhealer",
+          "cost": 17,
+          "file": "docs/undead-balance-summary-runs/undead-oldcore-contribution-material-newhealer.json",
+          "baseline": 0.339286,
+          "candidate": 0.339286,
+          "games": 336,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        }
+      ]
+    },
+    {
+      "id": "undead-lower-budget",
+      "matches": 736,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "4ac6e838ea02ad50d2eaf0285094a437a177fa947e2d6ed2052339d430aa3ebd"
+      },
+      "reportSha256": "760966741cecb5e3dc8e6f19779da5a3b2884111bc3df431bc5cd07b72576a5f",
+      "mirrorPhysicalScore": {
+        "baseline": 0.414063,
+        "candidate": 0.414063
+      },
+      "pairedDelta": {
+        "pairs": 240,
+        "seedClusters": 8,
+        "changedOutcomes": 0,
+        "scoreRateChange": 0,
+        "approximate95Interval": [
+          0,
+          0
+        ],
+        "meanTurnsChange": 0,
+        "meanDirectDamageChange": 0,
+        "meanHealingChange": 0,
+        "meanMpSpentChange": 0
+      },
+      "targets": [
+        {
+          "id": "mixedundead",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-lower-budget-mixedundead.json",
+          "baseline": 0.625,
+          "candidate": 0.625,
+          "games": 80,
+          "actualAdded": 29.125,
+          "consumed": 3.4125,
+          "zero": 0.55,
+          "casts": 1.7875,
+          "core": {
+            "appearances": 80,
+            "finalMpMean": 11.2,
+            "spentMean": 50.8,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 43.51048951048951,
+            "cashoutKillTurnMean": 2.536082474226804,
+            "deadWithMpRate": 0.4875,
+            "survivalRate": 0.5125
+          }
+        },
+        {
+          "id": "c15-threshold-lost",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-lower-budget-c15-threshold-lost.json",
+          "baseline": 0.7625,
+          "candidate": 0.7625,
+          "games": 80,
+          "actualAdded": 6,
+          "consumed": 1.8375,
+          "zero": 0.4375,
+          "casts": 1.15,
+          "core": {
+            "appearances": 80,
+            "finalMpMean": 14.05,
+            "spentMean": 47.95,
+            "cashoutCastsMax": 2,
+            "cashoutSourceMpAtCastMean": 44.19565217391305,
+            "cashoutKillTurnMean": 2.8297872340425534,
+            "deadWithMpRate": 0.3,
+            "survivalRate": 0.7
+          }
+        },
+        {
+          "id": "c15-core-replaced",
+          "cost": 15,
+          "file": "docs/undead-balance-summary-runs/undead-lower-budget-c15-core-replaced.json",
+          "baseline": 0.8,
+          "candidate": 0.8,
+          "games": 80,
+          "actualAdded": 0,
+          "consumed": 0,
+          "zero": 0,
+          "casts": 0,
+          "core": null
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variant": "core-nonleader",
+      "pairs": 336,
+      "controlScore": 0.5982142857142857,
+      "variantScore": 0.4017857142857143,
+      "scoreChange": -0.19642857142857142,
+      "approximate95Interval": [
+        -0.2675856746111303,
+        -0.12527146824601254
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variant": "core-replaced-slime",
+      "pairs": 336,
+      "controlScore": 0.5982142857142857,
+      "variantScore": 0.5803571428571429,
+      "scoreChange": -0.017857142857142856,
+      "approximate95Interval": [
+        -0.05285714285714285,
+        0.01714285714285714
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variant": "core-replaced-demon",
+      "pairs": 336,
+      "controlScore": 0.5982142857142857,
+      "variantScore": 0.375,
+      "scoreChange": -0.22321428571428573,
+      "approximate95Interval": [
+        -0.26234547532053204,
+        -0.1840830961080394
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variant": "healer-replaced",
+      "pairs": 336,
+      "controlScore": 0.5982142857142857,
+      "variantScore": 0.6741071428571429,
+      "scoreChange": 0.07589285714285715,
+      "approximate95Interval": [
+        0.008002780548409263,
+        0.14378293373730505
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variant": "breaker-replaced",
+      "pairs": 336,
+      "controlScore": 0.5982142857142857,
+      "variantScore": 0.3482142857142857,
+      "scoreChange": -0.25,
+      "approximate95Interval": [
+        -0.30925931712960136,
+        -0.19074068287039864
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "c17-poison-undead",
+      "variant": "bonus-threshold-lost",
+      "pairs": 336,
+      "controlScore": 0.8125,
+      "variantScore": 0.5952380952380952,
+      "scoreChange": -0.2172619047619048,
+      "approximate95Interval": [
+        -0.270277887676913,
+        -0.16424592184689657
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-nature-dryas",
+      "variant": "nature-newcore-dryas",
+      "pairs": 336,
+      "controlScore": 0.9077380952380952,
+      "variantScore": 0.6398809523809523,
+      "scoreChange": -0.26785714285714285,
+      "approximate95Interval": [
+        -0.30511748817670925,
+        -0.23059679753757645
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-nature-dryas",
+      "variant": "nature-newhealer",
+      "pairs": 336,
+      "controlScore": 0.9077380952380952,
+      "variantScore": 0.7946428571428571,
+      "scoreChange": -0.11309523809523808,
+      "approximate95Interval": [
+        -0.15417781077244244,
+        -0.07201266541803372
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-nature-tengu",
+      "variant": "nature-newcore-tengu",
+      "pairs": 336,
+      "controlScore": 0.9434523809523809,
+      "variantScore": 0.7172619047619048,
+      "scoreChange": -0.22619047619047616,
+      "approximate95Interval": [
+        -0.2542875302076582,
+        -0.19809342217329415
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-material-strong",
+      "variant": "material-newbreaker",
+      "pairs": 336,
+      "controlScore": 0.6428571428571429,
+      "variantScore": 0.7321428571428571,
+      "scoreChange": 0.0892857142857143,
+      "approximate95Interval": [
+        0.04232828675821872,
+        0.1362431418132099
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-material-pure",
+      "variant": "material-newshield",
+      "pairs": 336,
+      "controlScore": 0.5565476190476191,
+      "variantScore": 0.5,
+      "scoreChange": -0.05654761904761905,
+      "approximate95Interval": [
+        -0.10027817028026545,
+        -0.012817067814972653
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-material-pure",
+      "variant": "material-newhealer",
+      "pairs": 336,
+      "controlScore": 0.5565476190476191,
+      "variantScore": 0.3392857142857143,
+      "scoreChange": -0.21726190476190477,
+      "approximate95Interval": [
+        -0.28331007741725617,
+        -0.15121373210655337
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-lower-budget",
+      "control": "mixedundead",
+      "variant": "c15-threshold-lost",
+      "pairs": 80,
+      "controlScore": 0.625,
+      "variantScore": 0.7625,
+      "scoreChange": 0.1375,
+      "approximate95Interval": [
+        0.020734208776714086,
+        0.25426579122328596
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    },
+    {
+      "suite": "undead-lower-budget",
+      "control": "mixedundead",
+      "variant": "c15-core-replaced",
+      "pairs": 80,
+      "controlScore": 0.625,
+      "variantScore": 0.8,
+      "scoreChange": 0.175,
+      "approximate95Interval": [
+        0.09427206183730441,
+        0.25572793816269557
+      ],
+      "note": "Paired seeds/opponents/side assignments; unit, leader, skills and eligibility changes are confounded. Not isolated causal cashout value."
+    }
+  ]
+}

@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "kind": "explicit-release-adoption-v1",
+  "reason": "v0.18.1 local candidate: retains explicit v0.18 poison/AI adoption and adds only a read-only leader-change stat/recipient preview. Engine, roster, skills, art, battle policy and original failed research gates are unchanged from frozen v0.18. Actual CI/browser/publication remain pending.",
+  "decisionRecord": "docs/leader-preview-v0181.md",
+  "validationRecord": "docs/release-validation-v0181.json",
+  "studySource": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "studyArchiveSha256": "12ed5cdee87d4e28f7e0faaf6fa9b72596ccbb51454f62bb25dea4bc58ddb5ba",
+  "releaseSource": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "defaultChanges": {
+    "poisonImpactScale": {
+      "before": 1,
+      "after": 0
+    },
+    "reservePoison": {
+      "before": false,
+      "after": true
+    }
+  },
+  "previousLocalCandidateTree": "fd399cd61a4e068b4f675ea041f0b20494330748",
+  "files": [
+    {
+      "path": "README.md",
+      "beforeSha256": "1258fdff4fc329e82308b5f88d909d0f29ddaa14f11200ac9af1081a2736cb3c",
+      "afterSha256": "1fc9b7550d93b5842633a9be47bb6750e504901fb58cf075a9301aabd6ed786e"
+    },
+    {
+      "path": "docs/all-families-roadmap.md",
+      "beforeSha256": "8126cc6a6b1f0737e00a435a83b3ba24a47893afc0e1669f3d3428e840dfed20",
+      "afterSha256": "eed52ab5c3975701b4da66833d430af813ec367673446b074ccc9ad44f0070e1"
+    },
+    {
+      "path": "docs/leader-preview-v0181.md",
+      "beforeSha256": null,
+      "afterSha256": "47b4446a2e36477dc44bf446e41be9010e100e063b03f4035e66ad81b288d723"
+    },
+    {
+      "path": "docs/playtest-adoption-v018.md",
+      "beforeSha256": null,
+      "afterSha256": "ba195db89ade72fb712aee4db582940249bc3e23491930111c0c52c34d882809"
+    },
+    {
+      "path": "docs/playtest-guide.md",
+      "beforeSha256": null,
+      "afterSha256": "a2fa5641cabb688d261dec8dda8ec28825a251d9e5b79f2948b852cd8feab29d"
+    },
+    {
+      "path": "docs/release-adoption-v018.json",
+      "beforeSha256": null,
+      "afterSha256": "6847e572c446195b7024e5ed457c07ea8646663acce73958d16ff811943617a5"
+    },
+    {
+      "path": "docs/release-validation-v018.json",
+      "beforeSha256": null,
+      "afterSha256": "dc79193a40fb04ac5272ff8733ac3441ba958c1a80461c7f7e2f4dd67fc8c5a2"
+    },
+    {
+      "path": "docs/release-validation-v0181.json",
+      "beforeSha256": null,
+      "afterSha256": "e4905d07ee418575d13ea20f8aa563cb478ea513120edd9f45b2b442c23bfcd1"
+    },
+    {
+      "path": "docs/rights/asset-manifest.json",
+      "beforeSha256": "e3998751700193e4c4499a42e1734eb1f028a99d3720154f1d606054ba47b80c",
+      "afterSha256": "a9e33b2fd0c0800b05187a274a38b7a7a99e9da80d8388f420f4a252c3ece204"
+    },
+    {
+      "path": "docs/rights/releases/2026-10-10-v0.18.1.md",
+      "beforeSha256": null,
+      "afterSha256": "2ef0b3517eb124dae770e2c8e531726d619bf6d62e71bdc470c1a7bb18887016"
+    },
+    {
+      "path": "docs/rights/releases/2026-10-10-v0.18.md",
+      "beforeSha256": null,
+      "afterSha256": "3840179ffef7c7fb2d2e720e66d2b3e5e11bf93c489ecc8c4f70cc0dbede6132"
+    },
+    {
+      "path": "package-lock.json",
+      "beforeSha256": "7b93fe27fe70296a64afe817897d1386b05d3319c7751c93a20caaf980f24a30",
+      "afterSha256": "0865e0ab0a988f203cbfb2d6bfd9ddc64920c41b44f2a756848772fcf302c859"
+    },
+    {
+      "path": "package.json",
+      "beforeSha256": "a12046231297f39d5d156db9fd0d5f41da9692d1368cfbf1ffdcc0a965f45c3a",
+      "afterSha256": "974dedeae5f982cb2a9aea5af3f9fb50575a202a92ab8c0a7853c5e9657c68ca"
+    },
+    {
+      "path": "src/App.dragonWave.test.tsx",
+      "beforeSha256": "1b1388f736a1c93bbe2bbe74324d7f5aca07f34c3aba90505ad71dc494912b93",
+      "afterSha256": "9fab5f56f8f4709652ca1baf45e81b5e51c637ae3ca87dd771cc8bfbd6d16c93"
+    },
+    {
+      "path": "src/App.materialWave.test.tsx",
+      "beforeSha256": "a0789a0f46568c4701e75b474cc14e510327214a431bd59a7b9a4ec5f54e4da4",
+      "afterSha256": "c46542ced1d74900cf8feac70c6f26ce3557e648b88efa01b128f0b5648341a7"
+    },
+    {
+      "path": "src/App.navigation.test.tsx",
+      "beforeSha256": "4eaa60f5636e824e1362f99eb6d8cca826827bdfdaa61304cf882d6165cd0776",
+      "afterSha256": "7aac309f5b4944092bc315089313160a13c520dd252fb03feb85b7e1d5ebceba"
+    },
+    {
+      "path": "src/App.playLoop.test.tsx",
+      "beforeSha256": "eeb43efe3fff4188b58e368b46c97c74397b0aff7ade1bdf53aeada5d767e0cc",
+      "afterSha256": "a1c49d5ccf3baa85801b1c05e22bd3d591f8a7906d0c12055cbc8ea699fed30c"
+    },
+    {
+      "path": "src/App.strategy.test.tsx",
+      "beforeSha256": "b0026da449ec74f3e59d76ea444f109bb09732de454eb32d48a732a3007cd448",
+      "afterSha256": "5016e336589397758f8db3855464864d14a39fe45d5c07c7b5cd495538a2a050"
+    },
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "b73b09dcd823824623697d285de89d0ef6f857767336236e751f84d3a816a772",
+      "afterSha256": "7f247ef0a6baa85498990036ca2ca74b23a7083a9cabe7c6370d9835d633319d"
+    },
+    {
+      "path": "src/LeaderComparison.tsx",
+      "beforeSha256": null,
+      "afterSha256": "504b2692bb2a5b35021c67811a4fa859c4ca85901adb9e88463ae9bc4ff49254"
+    },
+    {
+      "path": "src/TacticsPanel.poisonPolicy.test.tsx",
+      "beforeSha256": null,
+      "afterSha256": "bb0f3994894ef78aa4225aad4ff39497d94e43cd4c587b72569b3956d78ffb58"
+    },
+    {
+      "path": "src/TacticsPanel.tsx",
+      "beforeSha256": "aca91e2676464e371f0cb4385795414746d2b2676f89f50b09fb6f06d43acc5a",
+      "afterSha256": "41d7b5c4db70e87c9ef85abd6c23079a70f0fb2c7b13f952b9e0520b12326793"
+    },
+    {
+      "path": "src/TeamBuilder.leaderComparison.test.tsx",
+      "beforeSha256": null,
+      "afterSha256": "800d3206eff6a7a874b90f7aafcd0ab7ef26ad1ab5ece51f453c9af419780a69"
+    },
+    {
+      "path": "src/TeamBuilder.tsx",
+      "beforeSha256": "57347769cce22a04ba6bf61cea11c997c2380948194f5f9a306ee07433d75b2c",
+      "afterSha256": "cde765dc138ac2ef46bbc30ddad584b20db1b181a0a494bfb05bf2f29f5fd607"
+    },
+    {
+      "path": "src/allFamiliesMilestone.test.ts",
+      "beforeSha256": "b4e59ac50c53f1d1289325fad975a201d32e61d56c1491fecb91cd7c4a49b1dd",
+      "afterSha256": "b3759129624f92325177aef2443330428193f0cf740dff7509fb59817dd3a296"
+    },
+    {
+      "path": "src/balanceAudit.test.ts",
+      "beforeSha256": "c11ec96634c78969e49b59b2b17303add8276e3383f8c89529d35a4f37483ef5",
+      "afterSha256": "35049ab914fb779101ad5e88d15df8f64a1651ed7a86ed7b1932f60aac700b3c"
+    },
+    {
+      "path": "src/balanceLabExtraordinaryFailure.test.ts",
+      "beforeSha256": "1b9983c1a5ae1692e89ac3ec5d02a1f3113954d566ed1f6117aa0d2a0b36592b",
+      "afterSha256": "98c08eca551b87121f951551b5098413b35a189cad67e2f4300ab6d27413b745"
+    },
+    {
+      "path": "src/balanceLabMaterial.test.ts",
+      "beforeSha256": "30334d01c2f61ce5d3d72032b68b59848988e366a639fa4036f9cccd110d845c",
+      "afterSha256": "eafa0c8e86c6f30a6968bb6acc2ee65fecbb74975bc88490097aa7dc2cc8ae77"
+    },
+    {
+      "path": "src/balanceLabUndead.test.ts",
+      "beforeSha256": "a02b027e318a686fe0b9f4388ad76a42db29edd107fa1def925ea004e33fa706",
+      "afterSha256": "6b1369f09de84681ee5d686ad33654bf508ef1540160460454c2d31fa7cb01c2"
+    },
+    {
+      "path": "src/demonWave.test.ts",
+      "beforeSha256": "ce4ee27f2eaf6b7b790e3dc40a9aa794ea9a751b81544c02ed3e23e76dee3384",
+      "afterSha256": "c373f55b1b12fd4a67dd3cdeb7fb21ad6a0b8bf922256ec60add87d1666881e7"
+    },
+    {
+      "path": "src/dragonWave.test.ts",
+      "beforeSha256": "75f08fc89f79203aa87cf8585a7184c30f5b5d93d2e88223f9dae70cc8bceab5",
+      "afterSha256": "dd91254c0994f7af5fe8184d5f45110e7c8fa4a493f31421c2ee74c5206cfb97"
+    },
+    {
+      "path": "src/engine.test.ts",
+      "beforeSha256": "35c0ab56bfdf5d2ac84b33061358b656d335acb6a330167b03c84d16fb162569",
+      "afterSha256": "7121a536c929244e581c3708b8e6acb6370bd7c36a6046e80a24836507bc341a"
+    },
+    {
+      "path": "src/engine.ts",
+      "beforeSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+      "afterSha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc"
+    },
+    {
+      "path": "src/extraordinaryPlayback.test.ts",
+      "beforeSha256": "bc8c38bdf42b27b61d10c6b2f4039e05ee34b456ac9fd42be8f8e9e2118cfab7",
+      "afterSha256": "7f68cf0d0f545d534e780a470d522976c89abca65920ef54e9dfaba46178252c"
+    },
+    {
+      "path": "src/extraordinaryWave.test.ts",
+      "beforeSha256": "9f59f134c0e734e7f3bf81670915846af52a9513d30d18080a64f9181634c914",
+      "afterSha256": "6f0c72eb9c793d1ee53c18a05ac959e0e910cb5cdaeee2dbdf807bf8bbdc1a76"
+    },
+    {
+      "path": "src/leaderComparison.test.ts",
+      "beforeSha256": null,
+      "afterSha256": "55c023b3a3e7e0d421a80a26f5022394030bac6344808332a444f8b987b44ebc"
+    },
+    {
+      "path": "src/leaderComparison.ts",
+      "beforeSha256": null,
+      "afterSha256": "a56f558ac347b139886b2a434cc71b4be85f2b48b87ab15dec7e634cf9ac3deb"
+    },
+    {
+      "path": "src/legacyPoisonTestControls.ts",
+      "beforeSha256": null,
+      "afterSha256": "4428804e6611af832521a21fbe4e6de7d504bb9a3c482dc29127f6b5ff6016b0"
+    },
+    {
+      "path": "src/materialWave.test.ts",
+      "beforeSha256": "7729c31cc14d85c36fc7a491035930b4c56bc90afaa5f60918eaafdffccf42a6",
+      "afterSha256": "e4679d20d2497640e50015b5a39c33031b966e8f8fb564ba02d0cc8c10421b5e"
+    },
+    {
+      "path": "src/poisonAdoption.test.ts",
+      "beforeSha256": null,
+      "afterSha256": "40948970d669cf5706e37201b487081bf0d0cf00196384ca5965299d5b655f8c"
+    },
+    {
+      "path": "src/poisonBalance.test.ts",
+      "beforeSha256": "9ecdfe2cc7f61cd8a6825ffe0ba57b5da1c0a055efdae51c9919fb371d4a5462",
+      "afterSha256": "10c547ca03009add6f0e13e6e3a56f19b105faec3649838d5334a379650a9432"
+    },
+    {
+      "path": "src/poisonBalancePlayback.test.ts",
+      "beforeSha256": "0f4f23f539b9cb8857a269c55cae1a8b8b394f14c15f472df314ac678c54d976",
+      "afterSha256": "77d4c215719cd44108cca145945cc8c048cdc61996fe59d4da1b4ca78ab12296"
+    },
+    {
+      "path": "src/slimeWave.test.ts",
+      "beforeSha256": "e297e78faf89baf29f625d523e81940c5697afde4462296a3bca57e5b5ada611",
+      "afterSha256": "8487195c209da2a2712f56472b66752aaaeaa2f679b457a49e534a620235123c"
+    },
+    {
+      "path": "src/strategy.test.ts",
+      "beforeSha256": "a3fabad2806c7c23fa02bd52bbfd186d2fcbfd668170ce079241c004d545d2fe",
+      "afterSha256": "2618072cbf4a0247a7d248e70a84d9a37bac19908890a267f18f8e60cccfb7d6"
+    },
+    {
+      "path": "src/strategy.ts",
+      "beforeSha256": "ee5b20439f1b94401b36d16c5b720f0d1dcdea0f2ea05ce333d952185a10b9c7",
+      "afterSha256": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524"
+    },
+    {
+      "path": "src/teamBuilder.css",
+      "beforeSha256": "3cd568c96df6326ff8f023f0d5c6b55840264b4ac5e143d1f9ba173bc265a154",
+      "afterSha256": "2b37a8e587d4f4a20af39f62745ef7ef5bfd2059dda133572fce6c6e485b9f2b"
+    },
+    {
+      "path": "src/undeadWave.test.ts",
+      "beforeSha256": "7a61cea54a5e56bb0eb77590649f49191eb29600206bece2fd78b1982b74f555",
+      "afterSha256": "ff15e00a3c169e79e66644de250893add22757dcfac28ac9e6e60c8af2673040"
+    }
+  ]
+}

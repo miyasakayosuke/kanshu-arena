@@ -1,0 +1,62 @@
+{
+  "status": "verified",
+  "unitHpAndMpLedgers": 248800,
+  "entries": [
+    {
+      "suite": "undead-initial",
+      "file": "undead-initial.json",
+      "bytes": 18749,
+      "sha256": "b17dc38fc592bedd687a283c13b5c544f61c8d07b6f7e658d5ec96122fb9fa28",
+      "teams": 17
+    },
+    {
+      "suite": "undead-enabled",
+      "file": "undead-enabled.json",
+      "bytes": 18749,
+      "sha256": "073b493fc1b7a5492d872824294402d517b625536e572842602d12c60d95550e",
+      "teams": 17
+    },
+    {
+      "suite": "undead-bonus-off",
+      "file": "undead-bonus-off.json",
+      "bytes": 18751,
+      "sha256": "0d8e15912d5c2807a377b050fee350025289290c5fbcfa59b50c641d97c96755",
+      "teams": 17
+    },
+    {
+      "suite": "undead-full-off",
+      "file": "undead-full-off.json",
+      "bytes": 18704,
+      "sha256": "0d00d203f7ba79a1b14728f5df4f5afcc7519bf4847232dd0f7da743accc1f99",
+      "teams": 17
+    },
+    {
+      "suite": "undead-broad",
+      "file": "undead-broad.json",
+      "bytes": 33185,
+      "sha256": "30e1ffbc2baa3bed5de82779971c1f54f903ae22a1e75d3c6e055787de0919c2",
+      "teams": 30
+    },
+    {
+      "suite": "undead-substitutions",
+      "file": "undead-substitutions.json",
+      "bytes": 39519,
+      "sha256": "9a8f1d033bbdf5efb2fce2fbecf97ed25586f5d3643ec08526d1de8a9bb44acf",
+      "teams": 36
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "file": "undead-oldcore-contribution.json",
+      "bytes": 41962,
+      "sha256": "f5add1c4d75125af82acd59b813450839fe85398f4f2865408fa7f287f7a576c",
+      "teams": 38
+    },
+    {
+      "suite": "undead-lower-budget",
+      "file": "undead-lower-budget.json",
+      "bytes": 9026,
+      "sha256": "7e1c56d31546512bdc9a4070e323cb68a88d00cdf348f42fa4f6cd8dafa05af3",
+      "teams": 8
+    }
+  ]
+}

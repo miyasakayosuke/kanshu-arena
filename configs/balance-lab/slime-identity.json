@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "slime-identity",
+  "seeds": [
+    2717045971,
+    1076514436,
+    3730950197,
+    2090418662,
+    449887127,
+    3104322888,
+    1463791353,
+    4118227114,
+    2477695579,
+    837164044,
+    3491599805,
+    1851068270,
+    210536735,
+    2864972496,
+    1224440961,
+    3878876722,
+    2238345187,
+    597813652,
+    3252249413,
+    1611717878,
+    4266153639,
+    2625622104,
+    985090569,
+    3639526330,
+    1998994795,
+    358463260,
+    3012899021,
+    1372367486,
+    4026803247,
+    2386271712,
+    745740177,
+    3400175938
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure slime core leader; C17"
+    },
+    {
+      "id": "provisional",
+      "ids": [
+        24,
+        25,
+        28,
+        2,
+        10
+      ],
+      "role": "Unendorsed provisional mixed slime + Bastet/Naga; C16"
+    },
+    {
+      "id": "twoslime",
+      "ids": [
+        24,
+        25,
+        3,
+        2,
+        10
+      ],
+      "role": "Two slime: supply ineligible; C15"
+    },
+    {
+      "id": "core-replaced",
+      "ids": [
+        14,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Exact C5 core replacement; C17; leader/stats/skills also change, not causal supply test"
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        25,
+        24,
+        26,
+        27,
+        28
+      ],
+      "role": "Same five slime members, speed leader, supply retained; C17"
+    },
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "role": "Owns before-hit strip skills; CPU selection must be measured; COST14"
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "role": "Legacy area and anchor control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Adopted material14 pure C17"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+    },
+    {
+      "id": "mixed-duration",
+      "ids": [
+        7,
+        1,
+        10,
+        8,
+        22
+      ],
+      "role": "Prior material generated-12 near-complete counter; C15"
+    },
+    {
+      "id": "mixed-beast",
+      "ids": [
+        1,
+        13,
+        12,
+        0,
+        4
+      ],
+      "role": "Prior material generated-16 counter with beast support; C16"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "pureslime",
+      "b": "fullbeast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o2",
+      "a": "pureslime",
+      "b": "fullnature",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o3",
+      "a": "pureslime",
+      "b": "priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o4",
+      "a": "pureslime",
+      "b": "poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o5",
+      "a": "pureslime",
+      "b": "guard-heal",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o6",
+      "a": "pureslime",
+      "b": "strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o7",
+      "a": "pureslime",
+      "b": "area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o8",
+      "a": "pureslime",
+      "b": "mp-pressure",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o9",
+      "a": "pureslime",
+      "b": "puredragon",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o10",
+      "a": "pureslime",
+      "b": "purematerial",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o11",
+      "a": "pureslime",
+      "b": "material-strong",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o12",
+      "a": "pureslime",
+      "b": "mixed-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o13",
+      "a": "pureslime",
+      "b": "mixed-beast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o1",
+      "a": "provisional",
+      "b": "fullbeast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o2",
+      "a": "provisional",
+      "b": "fullnature",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o3",
+      "a": "provisional",
+      "b": "priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o4",
+      "a": "provisional",
+      "b": "poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o5",
+      "a": "provisional",
+      "b": "guard-heal",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o6",
+      "a": "provisional",
+      "b": "strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o7",
+      "a": "provisional",
+      "b": "area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o8",
+      "a": "provisional",
+      "b": "mp-pressure",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o9",
+      "a": "provisional",
+      "b": "puredragon",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o10",
+      "a": "provisional",
+      "b": "purematerial",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o11",
+      "a": "provisional",
+      "b": "material-strong",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o12",
+      "a": "provisional",
+      "b": "mixed-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o13",
+      "a": "provisional",
+      "b": "mixed-beast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o1",
+      "a": "twoslime",
+      "b": "fullbeast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o2",
+      "a": "twoslime",
+      "b": "fullnature",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o3",
+      "a": "twoslime",
+      "b": "priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o4",
+      "a": "twoslime",
+      "b": "poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o5",
+      "a": "twoslime",
+      "b": "guard-heal",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o6",
+      "a": "twoslime",
+      "b": "strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o7",
+      "a": "twoslime",
+      "b": "area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o8",
+      "a": "twoslime",
+      "b": "mp-pressure",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o9",
+      "a": "twoslime",
+      "b": "puredragon",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o10",
+      "a": "twoslime",
+      "b": "purematerial",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o11",
+      "a": "twoslime",
+      "b": "material-strong",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o12",
+      "a": "twoslime",
+      "b": "mixed-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o13",
+      "a": "twoslime",
+      "b": "mixed-beast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o1",
+      "a": "core-replaced",
+      "b": "fullbeast",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o2",
+      "a": "core-replaced",
+      "b": "fullnature",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o3",
+      "a": "core-replaced",
+      "b": "priority",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o4",
+      "a": "core-replaced",
+      "b": "poison-cleanse",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o5",
+      "a": "core-replaced",
+      "b": "guard-heal",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o6",
+      "a": "core-replaced",
+      "b": "strip",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o7",
+      "a": "core-replaced",
+      "b": "area",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o8",
+      "a": "core-replaced",
+      "b": "mp-pressure",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o9",
+      "a": "core-replaced",
+      "b": "puredragon",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o10",
+      "a": "core-replaced",
+      "b": "purematerial",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o11",
+      "a": "core-replaced",
+      "b": "material-strong",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o12",
+      "a": "core-replaced",
+      "b": "mixed-duration",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f4-o13",
+      "a": "core-replaced",
+      "b": "mixed-beast",
+      "keyUnitId": 14
+    },
+    {
+      "id": "f5-o1",
+      "a": "core-nonleader",
+      "b": "fullbeast",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o2",
+      "a": "core-nonleader",
+      "b": "fullnature",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o3",
+      "a": "core-nonleader",
+      "b": "priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o4",
+      "a": "core-nonleader",
+      "b": "poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o5",
+      "a": "core-nonleader",
+      "b": "guard-heal",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o6",
+      "a": "core-nonleader",
+      "b": "strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o7",
+      "a": "core-nonleader",
+      "b": "area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o8",
+      "a": "core-nonleader",
+      "b": "mp-pressure",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o9",
+      "a": "core-nonleader",
+      "b": "puredragon",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o10",
+      "a": "core-nonleader",
+      "b": "purematerial",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o11",
+      "a": "core-nonleader",
+      "b": "material-strong",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o12",
+      "a": "core-nonleader",
+      "b": "mixed-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o13",
+      "a": "core-nonleader",
+      "b": "mixed-beast",
+      "keyUnitId": 24
+    }
+  ],
+  "candidate": {
+    "id": "identity",
+    "label": "Frozen slime identity; same production policy",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 62610210
+  }
+}

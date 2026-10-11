@@ -1,0 +1,359 @@
+{
+  "id": "janus-c17",
+  "cost": 17,
+  "core": {
+    "appearances": 300,
+    "meanFinalMp": 22.403333333333332,
+    "meanMpSpent": 35.54666666666667,
+    "meanDirectDamage": 142.55333333333334,
+    "meanCasts": 3.1466666666666665,
+    "meanPaidCasts": 2.78,
+    "deadWithPositiveMp": 279,
+    "meanResponseSourceMpAtCast": 26.026666666666667,
+    "meanResponseMpAfterCast": 12.746666666666666
+  },
+  "families": 4,
+  "allListedOpponents": {
+    "baseline": {
+      "games": 300,
+      "wins": 33,
+      "losses": 267,
+      "draws": 0,
+      "scoreRate": 0.11,
+      "meanTurns": 5.706667,
+      "meanPoisonDamageTaken": 61.606667,
+      "meanHealing": 90.096667,
+      "meanMpSpent": 159.473333,
+      "meanFinalMp": 119.736667,
+      "meanResponseEligible": 1,
+      "meanResponseSelections": 0.593333,
+      "meanResponseCleanseCasts": 0.186667,
+      "meanResponseGuardCasts": 0.366667,
+      "meanResponseWithheldTurns": 2.173333,
+      "meanResponseNoEffect": 0,
+      "meanResponseCancelledSelections": 0.04,
+      "meanResponseFallbacks": 0,
+      "meanResponseMpSpent": 13.28,
+      "meanResponseSourceMpAtCast": 26.026667,
+      "meanResponseMpAfterCast": 12.746667,
+      "meanResponseClearRecipients": 0.68,
+      "meanResponseClearedTicks": 1.86,
+      "meanResponseClearNominalPotential": 22.726667,
+      "meanResponseLaterReapplications": 0.38,
+      "meanResponseGuardNewRecipients": 1.503333,
+      "meanResponseGuardAlreadyRecipients": 0,
+      "meanResponseGuardProtectedHits": 3.91,
+      "meanResponseGuardActualPrevented": 58.726667,
+      "meanResponseGuardStrippedRecipients": 0.01,
+      "meanResponseGuardIdleRecipients": 0.03,
+      "meanResponseGuardNoHitCasts": 0,
+      "meanResponseUnused": 0.446667,
+      "meanResponseDeadWithUnused": 0.403333,
+      "meanResponseSurvivedUnused": 0.043333
+    },
+    "candidate": {
+      "games": 300,
+      "wins": 33,
+      "losses": 267,
+      "draws": 0,
+      "scoreRate": 0.11,
+      "meanTurns": 5.706667,
+      "meanPoisonDamageTaken": 61.606667,
+      "meanHealing": 90.096667,
+      "meanMpSpent": 159.473333,
+      "meanFinalMp": 119.736667,
+      "meanResponseEligible": 1,
+      "meanResponseSelections": 0.593333,
+      "meanResponseCleanseCasts": 0.186667,
+      "meanResponseGuardCasts": 0.366667,
+      "meanResponseWithheldTurns": 2.173333,
+      "meanResponseNoEffect": 0,
+      "meanResponseCancelledSelections": 0.04,
+      "meanResponseFallbacks": 0,
+      "meanResponseMpSpent": 13.28,
+      "meanResponseSourceMpAtCast": 26.026667,
+      "meanResponseMpAfterCast": 12.746667,
+      "meanResponseClearRecipients": 0.68,
+      "meanResponseClearedTicks": 1.86,
+      "meanResponseClearNominalPotential": 22.726667,
+      "meanResponseLaterReapplications": 0.38,
+      "meanResponseGuardNewRecipients": 1.503333,
+      "meanResponseGuardAlreadyRecipients": 0,
+      "meanResponseGuardProtectedHits": 3.91,
+      "meanResponseGuardActualPrevented": 58.726667,
+      "meanResponseGuardStrippedRecipients": 0.01,
+      "meanResponseGuardIdleRecipients": 0.03,
+      "meanResponseGuardNoHitCasts": 0,
+      "meanResponseUnused": 0.446667,
+      "meanResponseDeadWithUnused": 0.403333,
+      "meanResponseSurvivedUnused": 0.043333
+    },
+    "pairedDelta": {
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    }
+  },
+  "exactC17Opponents": {
+    "baseline": {
+      "games": 300,
+      "wins": 33,
+      "losses": 267,
+      "draws": 0,
+      "scoreRate": 0.11,
+      "meanTurns": 5.706667,
+      "meanPoisonDamageTaken": 61.606667,
+      "meanHealing": 90.096667,
+      "meanMpSpent": 159.473333,
+      "meanFinalMp": 119.736667,
+      "meanResponseEligible": 1,
+      "meanResponseSelections": 0.593333,
+      "meanResponseCleanseCasts": 0.186667,
+      "meanResponseGuardCasts": 0.366667,
+      "meanResponseWithheldTurns": 2.173333,
+      "meanResponseNoEffect": 0,
+      "meanResponseCancelledSelections": 0.04,
+      "meanResponseFallbacks": 0,
+      "meanResponseMpSpent": 13.28,
+      "meanResponseSourceMpAtCast": 26.026667,
+      "meanResponseMpAfterCast": 12.746667,
+      "meanResponseClearRecipients": 0.68,
+      "meanResponseClearedTicks": 1.86,
+      "meanResponseClearNominalPotential": 22.726667,
+      "meanResponseLaterReapplications": 0.38,
+      "meanResponseGuardNewRecipients": 1.503333,
+      "meanResponseGuardAlreadyRecipients": 0,
+      "meanResponseGuardProtectedHits": 3.91,
+      "meanResponseGuardActualPrevented": 58.726667,
+      "meanResponseGuardStrippedRecipients": 0.01,
+      "meanResponseGuardIdleRecipients": 0.03,
+      "meanResponseGuardNoHitCasts": 0,
+      "meanResponseUnused": 0.446667,
+      "meanResponseDeadWithUnused": 0.403333,
+      "meanResponseSurvivedUnused": 0.043333
+    },
+    "candidate": {
+      "games": 300,
+      "wins": 33,
+      "losses": 267,
+      "draws": 0,
+      "scoreRate": 0.11,
+      "meanTurns": 5.706667,
+      "meanPoisonDamageTaken": 61.606667,
+      "meanHealing": 90.096667,
+      "meanMpSpent": 159.473333,
+      "meanFinalMp": 119.736667,
+      "meanResponseEligible": 1,
+      "meanResponseSelections": 0.593333,
+      "meanResponseCleanseCasts": 0.186667,
+      "meanResponseGuardCasts": 0.366667,
+      "meanResponseWithheldTurns": 2.173333,
+      "meanResponseNoEffect": 0,
+      "meanResponseCancelledSelections": 0.04,
+      "meanResponseFallbacks": 0,
+      "meanResponseMpSpent": 13.28,
+      "meanResponseSourceMpAtCast": 26.026667,
+      "meanResponseMpAfterCast": 12.746667,
+      "meanResponseClearRecipients": 0.68,
+      "meanResponseClearedTicks": 1.86,
+      "meanResponseClearNominalPotential": 22.726667,
+      "meanResponseLaterReapplications": 0.38,
+      "meanResponseGuardNewRecipients": 1.503333,
+      "meanResponseGuardAlreadyRecipients": 0,
+      "meanResponseGuardProtectedHits": 3.91,
+      "meanResponseGuardActualPrevented": 58.726667,
+      "meanResponseGuardStrippedRecipients": 0.01,
+      "meanResponseGuardIdleRecipients": 0.03,
+      "meanResponseGuardNoHitCasts": 0,
+      "meanResponseUnused": 0.446667,
+      "meanResponseDeadWithUnused": 0.403333,
+      "meanResponseSurvivedUnused": 0.043333
+    },
+    "pairedDelta": {
+      "pairs": 300,
+      "seedClusters": 6,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    }
+  },
+  "lowerBudgetOpponents": {
+    "baseline": {
+      "games": 0
+    },
+    "candidate": {
+      "games": 0
+    },
+    "pairedDelta": {
+      "pairs": 0
+    }
+  },
+  "opponentCells": [
+    {
+      "opponent": "fullbeast",
+      "cost": 17,
+      "baselineScore": 0.166667,
+      "candidateScore": 0.166667
+    },
+    {
+      "opponent": "puredragon",
+      "cost": 17,
+      "baselineScore": 0.333333,
+      "candidateScore": 0.333333
+    },
+    {
+      "opponent": "purematerial",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "pureslime",
+      "cost": 17,
+      "baselineScore": 0.166667,
+      "candidateScore": 0.166667
+    },
+    {
+      "opponent": "puredemon",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "pureundead",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "nature-brute-dryas",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "nature-brute-tengu",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "strong-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "strong-area",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "material-strong",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-beast-support",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-beast-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-nature-support",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-nature-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-dragon-support",
+      "cost": 17,
+      "baselineScore": 0.583333,
+      "candidateScore": 0.583333
+    },
+    {
+      "opponent": "coherent-dragon-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-material-support",
+      "cost": 17,
+      "baselineScore": 0.916667,
+      "candidateScore": 0.916667
+    },
+    {
+      "opponent": "coherent-material-poison",
+      "cost": 17,
+      "baselineScore": 0.333333,
+      "candidateScore": 0.333333
+    },
+    {
+      "opponent": "coherent-slime-support",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-slime-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-demon-support",
+      "cost": 17,
+      "baselineScore": 0.25,
+      "candidateScore": 0.25
+    },
+    {
+      "opponent": "coherent-demon-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-undead-support",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    },
+    {
+      "opponent": "coherent-undead-poison",
+      "cost": 17,
+      "baselineScore": 0,
+      "candidateScore": 0
+    }
+  ]
+}

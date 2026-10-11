@@ -1,0 +1,1856 @@
+{
+  "executorRecordedAt": "2026-10-10T08:31:20.051Z",
+  "timestampCaution": "Executor clock approximately9h ahead; all budget configs frozen before own outcomes.",
+  "phase": "Final-budget structural diagnostic, parent requested; production source untouched",
+  "isolatedSource": "lab-results/slime-budget-source",
+  "originalEngineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+  "budgetEngineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+  "oldRosterExact": true,
+  "changes": "E60 combat values, core24C4 and brute28C5 only. All prior now-C18 measurements remain historical evidence, not legal current teams.",
+  "excludedPriorOpponents": [
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        11,
+        13,
+        21,
+        28
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; strip skill-ownership stratum",
+      "oldCost": 17,
+      "newCost": 18
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        2,
+        3,
+        6,
+        28
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "oldCost": 17,
+      "newCost": 18
+    }
+  ],
+  "excludedPriorFocal": [
+    {
+      "id": "beast-with-fist",
+      "ids": [
+        12,
+        0,
+        13,
+        2,
+        28
+      ],
+      "role": "C17 fourbeast + slime brute; Beast core leader; compare global E companion buffs",
+      "newCost": 18
+    },
+    {
+      "id": "nature-with-fist",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        28
+      ],
+      "role": "C17 fournature triple-poison + slime brute; nature core leader",
+      "newCost": 18
+    },
+    {
+      "id": "dragon-with-fist",
+      "ids": [
+        15,
+        16,
+        18,
+        2,
+        28
+      ],
+      "role": "C17 threeragon with heal-cleanse + slime brute; charge eligible",
+      "newCost": 18
+    },
+    {
+      "id": "material-shield-fist",
+      "ids": [
+        19,
+        20,
+        21,
+        2,
+        28
+      ],
+      "role": "C17 threematerial shield/Bastet + slime brute; repair eligible",
+      "newCost": 18
+    },
+    {
+      "id": "material-healer-fist",
+      "ids": [
+        19,
+        20,
+        22,
+        2,
+        28
+      ],
+      "role": "C17 threematerial twohealer + slime brute; repair eligible",
+      "newCost": 18
+    },
+    {
+      "id": "material-bull-swapped",
+      "ids": [
+        19,
+        20,
+        28,
+        7,
+        10
+      ],
+      "role": "Exact C17 prior strongest bull replacement by slime brute; only2material and repairineligible. Not causal damage-only comparison",
+      "newCost": 18
+    }
+  ],
+  "retainedOpponents": [
+    {
+      "id": "fullbeast",
+      "ids": [
+        12,
+        0,
+        2,
+        11,
+        13
+      ],
+      "role": "Prior full beast unchanged; COST17"
+    },
+    {
+      "id": "fullnature",
+      "ids": [
+        14,
+        3,
+        6,
+        9,
+        10
+      ],
+      "role": "Prior full nature unchanged, original triple poison; COST15"
+    },
+    {
+      "id": "priority",
+      "ids": [
+        0,
+        6,
+        9,
+        11,
+        10
+      ],
+      "role": "Fast priority and poison control; COST15"
+    },
+    {
+      "id": "poison-cleanse",
+      "ids": [
+        4,
+        3,
+        7,
+        2,
+        10
+      ],
+      "role": "Poison, healing and cleanse control; COST15"
+    },
+    {
+      "id": "guard-heal",
+      "ids": [
+        1,
+        2,
+        7,
+        10,
+        6
+      ],
+      "role": "Guard, heal and MP-duration pressure; COST14"
+    },
+    {
+      "id": "strip",
+      "ids": [
+        11,
+        8,
+        6,
+        2,
+        10
+      ],
+      "role": "Owns before-hit strip skills; CPU selection must be measured; COST14"
+    },
+    {
+      "id": "area",
+      "ids": [
+        5,
+        8,
+        0,
+        6,
+        10
+      ],
+      "role": "Legacy area and anchor control; COST15"
+    },
+    {
+      "id": "mp-pressure",
+      "ids": [
+        1,
+        7,
+        2,
+        3,
+        10
+      ],
+      "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+    },
+    {
+      "id": "puredragon",
+      "ids": [
+        15,
+        5,
+        16,
+        17,
+        18
+      ],
+      "role": "Adopted full dragon unchanged; COST17"
+    },
+    {
+      "id": "purematerial",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Adopted material14 pure C17"
+    },
+    {
+      "id": "material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+    },
+    {
+      "id": "mixed-duration",
+      "ids": [
+        7,
+        1,
+        10,
+        8,
+        22
+      ],
+      "role": "Prior material generated-12 near-complete counter; C15"
+    },
+    {
+      "id": "mixed-beast",
+      "ids": [
+        1,
+        13,
+        12,
+        0,
+        4
+      ],
+      "role": "Prior material generated-16 counter with beast support; C16"
+    },
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        0,
+        2,
+        3,
+        27
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; healers skill-ownership stratum"
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        7,
+        9,
+        11,
+        16
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; poison-cleanse skill-ownership stratum"
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        9,
+        11,
+        13
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; area skill-ownership stratum"
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        0,
+        7,
+        13,
+        21
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; priority skill-ownership stratum"
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; duration skill-ownership stratum"
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        3,
+        6,
+        13,
+        19
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; healers skill-ownership stratum"
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; strip skill-ownership stratum"
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        9,
+        10,
+        21,
+        23
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; area skill-ownership stratum"
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        0,
+        3,
+        9,
+        16
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; priority skill-ownership stratum"
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; duration skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        11,
+        16,
+        18,
+        22
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; healers skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        2,
+        3,
+        5,
+        16
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; poison-cleanse skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        16,
+        17,
+        22,
+        23
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; strip skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        5,
+        18,
+        21,
+        25
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; area skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        6,
+        17,
+        18
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; priority skill-ownership stratum"
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; duration skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-healers",
+      "ids": [
+        19,
+        6,
+        18,
+        22,
+        23
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; healers skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-poison-cleanse",
+      "ids": [
+        19,
+        9,
+        21,
+        22,
+        27
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; poison-cleanse skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-strip",
+      "ids": [
+        19,
+        9,
+        21,
+        22,
+        26
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; strip skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-area",
+      "ids": [
+        19,
+        9,
+        13,
+        21,
+        23
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; area skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-priority",
+      "ids": [
+        19,
+        0,
+        21,
+        22,
+        25
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; priority skill-ownership stratum"
+    },
+    {
+      "id": "coherent-material-duration",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        22
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; duration skill-ownership stratum"
+    }
+  ],
+  "newCoherent": [
+    {
+      "id": "budget-beast-healers",
+      "ids": [
+        12,
+        2,
+        7,
+        17,
+        27
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        3,
+        9,
+        11
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-beast-strip",
+      "ids": [
+        12,
+        2,
+        4,
+        11,
+        21
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-beast-area",
+      "ids": [
+        12,
+        6,
+        7,
+        13,
+        14
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-beast-priority",
+      "ids": [
+        12,
+        0,
+        2,
+        7,
+        13
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-nature-healers",
+      "ids": [
+        14,
+        3,
+        10,
+        15,
+        25
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-nature-poison-cleanse",
+      "ids": [
+        14,
+        3,
+        6,
+        12,
+        18
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-nature-strip",
+      "ids": [
+        14,
+        3,
+        5,
+        6,
+        22
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-nature-area",
+      "ids": [
+        14,
+        9,
+        10,
+        13,
+        28
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-nature-priority",
+      "ids": [
+        14,
+        3,
+        4,
+        9,
+        26
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-dragon-healers",
+      "ids": [
+        15,
+        17,
+        18,
+        22,
+        26
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-dragon-poison-cleanse",
+      "ids": [
+        15,
+        0,
+        10,
+        17,
+        18
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-dragon-strip",
+      "ids": [
+        15,
+        1,
+        17,
+        18,
+        26
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-dragon-area",
+      "ids": [
+        15,
+        13,
+        14,
+        16,
+        17
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-dragon-priority",
+      "ids": [
+        15,
+        5,
+        6,
+        9,
+        17
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-material-healers",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        21
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-material-poison-cleanse",
+      "ids": [
+        19,
+        1,
+        4,
+        20,
+        23
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-material-strip",
+      "ids": [
+        19,
+        6,
+        21,
+        22,
+        23
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-material-area",
+      "ids": [
+        19,
+        1,
+        5,
+        20,
+        21
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-material-priority",
+      "ids": [
+        19,
+        0,
+        13,
+        21,
+        22
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-material-duration",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        22
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozendurationstratum"
+    }
+  ],
+  "pools": [
+    {
+      "family": "beast",
+      "core": 12,
+      "exactC17MemberSets": 588,
+      "sha256": "1128e6d2f6be61a36ac00d798efeaef9ee3db962171d5dbea85b23fbbccd9317"
+    },
+    {
+      "family": "nature",
+      "core": 14,
+      "exactC17MemberSets": 420,
+      "sha256": "08314a6dc968c08e337c52a15cd4f24c08688dcb04ebe17ec1c918ada702f528"
+    },
+    {
+      "family": "dragon",
+      "core": 15,
+      "exactC17MemberSets": 401,
+      "sha256": "4f95a2b0ce2d486c5322902b91027ac634881fb3b430a1b5baf248a22c34e499"
+    },
+    {
+      "family": "material",
+      "core": 19,
+      "exactC17MemberSets": 401,
+      "sha256": "31462705f458c9bd93d2d3f5de1aa82ede383dfeab1e41425ddf536e6e5467c2"
+    }
+  ],
+  "newCorePool": {
+    "exactNewlyLegalC17NoBruteSets": 168,
+    "sha256": "ec79f0e0cd2ea9270616d69b8a9127e154ae8c421c7d4a8a123095c5cd3b6834",
+    "selected": [
+      {
+        "id": "cheap-core-healers",
+        "ids": [
+          24,
+          7,
+          9,
+          26,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; healersstratum"
+      },
+      {
+        "id": "cheap-core-poison-cleanse",
+        "ids": [
+          24,
+          4,
+          11,
+          26,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; poison-cleansestratum"
+      },
+      {
+        "id": "cheap-core-strip",
+        "ids": [
+          24,
+          1,
+          12,
+          26,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; stripstratum"
+      },
+      {
+        "id": "cheap-core-area",
+        "ids": [
+          24,
+          0,
+          8,
+          26,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; areastratum"
+      },
+      {
+        "id": "cheap-core-priority",
+        "ids": [
+          24,
+          0,
+          11,
+          25,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; prioritystratum"
+      },
+      {
+        "id": "cheap-core-duration",
+        "ids": [
+          24,
+          2,
+          7,
+          26,
+          27
+        ],
+        "role": "Newly legal formerC18 core-no-brute; >=3slime; durationstratum"
+      }
+    ]
+  },
+  "newNatureBrutePool": {
+    "exactLegalC17Sets": 28,
+    "all": [
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          10
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 278
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          18
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 270
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          21
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 258
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          9,
+          10,
+          25
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 2,
+          "mp": 264
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          1,
+          6,
+          10
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 258
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          9,
+          13
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 3,
+          "mp": 254
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          9,
+          10
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 266
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          9,
+          25
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 3,
+          "mp": 250
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          8,
+          10
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 1,
+          "area": 4,
+          "priority": 1,
+          "mp": 266
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          20
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 276
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          26
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 1,
+          "area": 3,
+          "priority": 1,
+          "mp": 260
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          9,
+          16
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 250
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          10,
+          13
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 1,
+          "mp": 280
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          22
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 1,
+          "area": 3,
+          "priority": 1,
+          "mp": 280
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          13
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 266
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          10,
+          25
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 1,
+          "mp": 276
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          17
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 1,
+          "area": 3,
+          "priority": 1,
+          "mp": 264
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          16
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 262
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          9,
+          10,
+          13
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 2,
+          "mp": 268
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          9,
+          10,
+          16
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 1,
+          "mp": 264
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          25
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 262
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          10,
+          20
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 2,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 2,
+          "priority": 0,
+          "mp": 290
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          27
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 274
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          6,
+          9,
+          20
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 1,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 264
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          9,
+          10,
+          20
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 2,
+          "priority": 1,
+          "mp": 278
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          4,
+          6,
+          10
+        ],
+        "features": {
+          "healers": 1,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 3,
+          "priority": 2,
+          "mp": 270
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          3,
+          10,
+          16
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 2,
+          "cleanse": 0,
+          "strip": 0,
+          "area": 2,
+          "priority": 0,
+          "mp": 276
+        }
+      },
+      {
+        "ids": [
+          14,
+          28,
+          2,
+          6,
+          10
+        ],
+        "features": {
+          "healers": 2,
+          "poison": 1,
+          "cleanse": 1,
+          "strip": 0,
+          "area": 3,
+          "priority": 1,
+          "mp": 286
+        }
+      }
+    ],
+    "selected": [
+      {
+        "id": "nature-brute-dryas",
+        "ids": [
+          14,
+          3,
+          6,
+          10,
+          28
+        ],
+        "role": "Newly legal C17 nature+brute, replaces Tengu by Garuda to paycost"
+      },
+      {
+        "id": "nature-brute-tengu",
+        "ids": [
+          14,
+          6,
+          9,
+          10,
+          28
+        ],
+        "role": "Newly legal C17 nature+brute, replaces Dryas by Garuda to paycost"
+      },
+      {
+        "id": "nature-brute-healers",
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          18
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, healersrole"
+      },
+      {
+        "id": "nature-brute-poison-cleanse",
+        "ids": [
+          14,
+          28,
+          3,
+          6,
+          20
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, poison-cleanserole"
+      },
+      {
+        "id": "nature-brute-strip",
+        "ids": [
+          14,
+          28,
+          6,
+          8,
+          10
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, striprole"
+      },
+      {
+        "id": "nature-brute-area",
+        "ids": [
+          14,
+          28,
+          6,
+          10,
+          21
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, arearole"
+      },
+      {
+        "id": "nature-brute-priority",
+        "ids": [
+          14,
+          28,
+          9,
+          10,
+          25
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, priorityrole"
+      },
+      {
+        "id": "nature-brute-duration",
+        "ids": [
+          14,
+          28,
+          3,
+          10,
+          20
+        ],
+        "role": "New-budget nature+brute eligible exactC17 pool, durationrole"
+      }
+    ]
+  },
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-budget-previous.json",
+      "fileSha256": "6144e3990f4b41caae71cbb5423986be513a7d276cb5f0257bd52d88413cd5cb",
+      "canonicalSha256": "74c5c4e5e52f3f9013e1affdd10df0d0380ce40a1c3d7b890da8f8e457228ef0",
+      "matches": 13760,
+      "targets": [
+        {
+          "id": "pureslime",
+          "ids": [
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "provisional",
+          "ids": [
+            24,
+            25,
+            28,
+            2,
+            10
+          ],
+          "cost": 16
+        },
+        {
+          "id": "c17-fist",
+          "ids": [
+            24,
+            25,
+            28,
+            7,
+            10
+          ],
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "ids": [
+            24,
+            6,
+            9,
+            27,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "ids": [
+            24,
+            4,
+            25,
+            27,
+            28
+          ],
+          "cost": 17
+        }
+      ]
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-previous-newpool.json",
+      "fileSha256": "c25238ec877c7fab916c8b57792b4d089538ed9d05cbee5a64dbb32e6a16ea9c",
+      "canonicalSha256": "5f052ab695ab52ec647d261f7f67b76d61ad83fa797cbde91f1ca4f9b1eaa839",
+      "matches": 9536,
+      "targets": [
+        {
+          "id": "pureslime",
+          "ids": [
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "provisional",
+          "ids": [
+            24,
+            25,
+            28,
+            2,
+            10
+          ],
+          "cost": 16
+        },
+        {
+          "id": "c17-fist",
+          "ids": [
+            24,
+            25,
+            28,
+            7,
+            10
+          ],
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "ids": [
+            24,
+            6,
+            9,
+            27,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "ids": [
+            24,
+            4,
+            25,
+            27,
+            28
+          ],
+          "cost": 17
+        }
+      ]
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-nature-controls.json",
+      "fileSha256": "be8f2f87888f3176d77c27c8a5cf81d5ce5134afc543fc50d9a49888021d0812",
+      "canonicalSha256": "3e7b8bc5206b283498959cb6a20c46c273010923fbe993dfd20952eda4cd18f2",
+      "matches": 15504,
+      "targets": [
+        {
+          "id": "nature-with-core",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            24
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-0",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            0
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-5",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            5
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-7",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            7
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-11",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            11
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-12",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            12
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-c4-23",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            23
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-pure",
+          "ids": [
+            14,
+            3,
+            6,
+            9,
+            10
+          ],
+          "cost": 15
+        }
+      ]
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-cheap-core.json",
+      "fileSha256": "316480cb0d0956bac6ca4e5f2b67eccc55810e8f86f86f57edd1c28d1ceb2d57",
+      "canonicalSha256": "a19a00cb62d7e0d26a92b78913c770354746c8c9b159bc6e027f4cf5cb17d300",
+      "matches": 12720,
+      "targets": [
+        {
+          "id": "cheap-core-healers",
+          "ids": [
+            24,
+            7,
+            9,
+            26,
+            27
+          ],
+          "cost": 17
+        },
+        {
+          "id": "cheap-core-poison-cleanse",
+          "ids": [
+            24,
+            4,
+            11,
+            26,
+            27
+          ],
+          "cost": 17
+        },
+        {
+          "id": "cheap-core-strip",
+          "ids": [
+            24,
+            1,
+            12,
+            26,
+            27
+          ],
+          "cost": 17
+        },
+        {
+          "id": "cheap-core-area",
+          "ids": [
+            24,
+            0,
+            8,
+            26,
+            27
+          ],
+          "cost": 17
+        },
+        {
+          "id": "cheap-core-priority",
+          "ids": [
+            24,
+            0,
+            11,
+            25,
+            27
+          ],
+          "cost": 17
+        },
+        {
+          "id": "cheap-core-duration",
+          "ids": [
+            24,
+            2,
+            7,
+            26,
+            27
+          ],
+          "cost": 17
+        }
+      ]
+    },
+    {
+      "path": "configs/balance-lab/slime-budget-nature-brute.json",
+      "fileSha256": "51318d1dc0d8874ec1739b3035ba7136197bf0e78bae93ebddb1e11c7306b557",
+      "canonicalSha256": "915b68a7aa69c95688220cc0d388dce8e726e3dbe2aa713035eaf00ccfe09808",
+      "matches": 16368,
+      "targets": [
+        {
+          "id": "nature-brute-dryas",
+          "ids": [
+            14,
+            3,
+            6,
+            10,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "ids": [
+            14,
+            6,
+            9,
+            10,
+            28
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-healers",
+          "ids": [
+            14,
+            28,
+            6,
+            10,
+            18
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-poison-cleanse",
+          "ids": [
+            14,
+            28,
+            3,
+            6,
+            20
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-strip",
+          "ids": [
+            14,
+            28,
+            6,
+            8,
+            10
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-area",
+          "ids": [
+            14,
+            28,
+            6,
+            10,
+            21
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-priority",
+          "ids": [
+            14,
+            28,
+            9,
+            10,
+            25
+          ],
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-duration",
+          "ids": [
+            14,
+            28,
+            3,
+            10,
+            20
+          ],
+          "cost": 17
+        }
+      ]
+    }
+  ]
+}

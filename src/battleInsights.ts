@@ -1,4 +1,4 @@
-import { DRAGON_CHARGE_CAP, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
+import { DRAGON_CHARGE_CAP, skillUnavailableLabel, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
 
 export type BattleEvidence = {
   turn: number;
@@ -12,7 +12,7 @@ export type BattleEvidence = {
 
 export type BattleFact = {
   id: string;
-  kind: 'repair' | 'poison' | 'missed-heal' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
+  kind: 'response' | 'poison-cashout' | 'resource-loss' | 'fallback' | 'supply' | 'repair' | 'poison' | 'missed-heal' | 'protection' | 'largest-action' | 'healing' | 'damage-total';
   text: string;
   evidence: BattleEvidence[];
 };
@@ -46,7 +46,12 @@ export function battleUnitLabel(state: State, key?: string): string {
  */
 export function resultFacts(state: State): BattleFact[] {
   const history = state.history ?? [];
+  const response = { allies: 0, enemies: 0, cleanse: 0, guard: 0, evidence: [] as BattleEvidence[] };
   const repair = { allies: 0, enemies: 0, triggers: 0, evidence: [] as BattleEvidence[] };
+  const supply = { allies: 0, enemies: 0, uses: 0, evidence: [] as BattleEvidence[] };
+  const resourceLoss = { allies: 0, enemies: 0, zero: 0, evidence: [] as BattleEvidence[] };
+  const fallbacks = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
+  const cashout = { allies: 0, enemies: 0, uses: 0, evidence: [] as BattleEvidence[] };
   const poison = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const healing = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
   const direct = { allies: 0, enemies: 0, evidence: [] as BattleEvidence[] };
@@ -80,6 +85,38 @@ export function resultFacts(state: State): BattleFact[] {
     for (const [index, event] of turn.events.entries()) {
       const evidence = reference(turn, index);
       if (event.kind === 'passive' && event.effect === 'material-repair') { repair.triggers++; repair.evidence.push(evidence); }
+      if (event.kind === 'supply' && event.effect === 'slime-supply-spend') { supply.uses++; supply.evidence.push(evidence); }
+      if (event.kind === 'response' && event.effect === 'extraordinary-response-spend') {
+        const actorSide = sideFor(state, event.actor);
+        if (actorSide) {
+          response[actorSide]++;
+          if (event.responseChoice) response[event.responseChoice]++;
+          response.evidence.push(evidence);
+        }
+      }
+      if (event.kind === 'poison-cashout') {
+        const actorSide = sideFor(state, event.actor);
+        if (actorSide) {
+          cashout[actorSide] += event.poisonTicksConsumed ?? 0;
+          cashout.uses++; cashout.evidence.push(evidence);
+        }
+      }
+      if (event.kind === 'resource-loss') {
+        const victimSide = sideFor(state, event.target);
+        if (victimSide) {
+          resourceLoss[victimSide] += positiveAmount(event);
+          if (event.amount === 0) resourceLoss.zero++;
+          resourceLoss.evidence.push(evidence);
+        }
+      }
+      if (event.kind === 'fallback' && event.reason === 'enemy-mp-loss') {
+        const actorSide = sideFor(state, event.actor);
+        if (actorSide) {
+          fallbacks[actorSide]++;
+          const orderIndex = turn.orders.findIndex(order => order.key === event.actor && order.accepted && order.skill === event.fromSkill);
+          fallbacks.evidence.push(reference(turn, index, orderIndex < 0 ? undefined : orderIndex));
+        }
+      }
       if (event.kind === 'phase' && (event.phase === 'before-action' || event.phase === 'action-end' || event.phase === 'turn-end')) finishAction();
       if (event.kind === 'cast') {
         finishAction();
@@ -94,6 +131,10 @@ export function resultFacts(state: State): BattleFact[] {
       const side = sideFor(state, event.target);
       const amount = positiveAmount(event);
       if (!side || amount === 0) continue;
+      if (event.kind === 'resource-gain' && event.effect === 'slime-supply') {
+        supply[side] += amount;
+        supply.evidence.push(evidence);
+      }
       if (event.kind === 'heal') {
         if (event.effect === 'material-repair') { repair[side] += amount; repair.evidence.push(evidence); }
         healing[side] += amount;
@@ -123,6 +164,26 @@ export function resultFacts(state: State): BattleFact[] {
   }
 
   const facts: BattleFact[] = [];
+  if (response.evidence.length) facts.push({
+    id: 'extraordinary-response', kind: 'response',
+    text: `共通の応答を消費：味方 ${response.allies}回／敵 ${response.enemies}回（毒除去 ${response.cleanse}回・今ターンの守り ${response.guard}回。二つ合わせて本人1回まで）。`, evidence: response.evidence,
+  });
+  if (cashout.evidence.length) facts.push({
+    id: 'poison-cashout', kind: 'poison-cashout',
+    text: `直接攻撃へ交換した毒の残回数：味方 ${cashout.allies}回分／敵 ${cashout.enemies}回分（${cashout.uses}回命中・対象の毒は0へ。回復ではありません）。`, evidence: cashout.evidence,
+  });
+  if (resourceLoss.evidence.length) facts.push({
+    id: 'enemy-mp-loss', kind: 'resource-loss',
+    text: `敵の攻撃で失ったMP：味方 ${resourceLoss.allies}／敵 ${resourceLoss.enemies}（減少0は${resourceLoss.zero}回・技の消費MPは含まない）。`, evidence: resourceLoss.evidence,
+  });
+  if (fallbacks.evidence.length) facts.push({
+    id: 'mp-loss-fallback', kind: 'fallback',
+    text: `敵のMP削りで有料指示から通常攻撃へ変更：味方 ${fallbacks.allies}回／敵 ${fallbacks.enemies}回（元の行動順・追加行動なし）。`, evidence: fallbacks.evidence,
+  });
+  if (supply.evidence.length) facts.push({
+    id: 'slime-supply', kind: 'supply',
+    text: `行動を使った一度の補給：味方 ${supply.allies}／敵 ${supply.enemies} MP増加（${supply.uses}回発動・生存する粘体系だけ）。`, evidence: supply.evidence,
+  });
   if (repair.evidence.length) facts.push({
     id: 'material-repair', kind: 'repair',
     text: `初回ターン末の修復：味方 ${repair.allies}／敵 ${repair.enemies} HP回復（${repair.triggers}回発動・生存する物質系だけ）。`, evidence: repair.evidence,
@@ -161,18 +222,24 @@ export function battleEventLine(state: State, event: BattleEvent): string {
     case 'defeat': return `${target}が戦闘不能${event.effect === 'poison' ? '（毒）' : event.actor ? `（${actor}の攻撃）` : ''}`;
     case 'guard': return `${actor} → ${target}に守り（このターンの直接ダメージ半減）`;
     case 'poison': return `${actor} → ${target}に毒（残り ${event.poison ?? 3}回）`;
+    case 'poison-cashout': return `${actor}の毒交換 → ${target}の毒${event.poisonTicksConsumed ?? 0}回分を消費（残り0回・直接攻撃の基礎に＋${event.poisonCashoutAdded ?? 0}、1回分${event.poisonCashoutPerTick ?? 0}）`;
     case 'cleanse': return `${actor} → ${target}を浄化（毒は0）`;
     case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : value === 'repairReady' ? '修復待機' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
     case 'charge': return `${actor} → ${target}の竜気${event.effect === 'dragon-charge-spend' ? 'を消費' : 'を蓄積'}（${event.dragonCharge ?? 0}/${DRAGON_CHARGE_CAP}）`;
     case 'passive': return `${actor}の「${event.skill ?? '修復'}」がターン末に発動（修復待機を消費・生存者のみ・MP消費なし） → ${(event.targets ?? []).map(key => battleUnitLabel(state, key)).join('、') || '対象なし'}`;
     case 'resource': return `${actor} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
-    case 'expire': return event.effect === 'repairReady' ? `${target}の修復待機が終了` : event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
+    case 'resource-loss': return `${actor}のMP削り → ${target} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
+    case 'fallback': return `${actor}「${event.skill ?? '有料技'}」は敵のMP削りでMP不足（残り ${event.availableMP ?? '?'}／必要 ${event.requiredMP ?? '?'}）。元の行動順で通常攻撃へ変更 → ${target}`;
+    case 'resource-gain': return `${actor}の補給 → ${target} MP ＋${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
+    case 'response': return `${actor}が「${event.skill ?? '応答'}」で共通の応答を消費（残0回・解除不可）`;
+    case 'supply': return `${actor}が補給の使用権を消費（残0回・解除不可）`;
+    case 'expire': return event.effect === 'responseReady' ? `${target}の共通の応答が終了（戦闘不能）` : event.effect === 'supplyReady' ? `${target}の補給の使用権が終了（戦闘不能）` : event.effect === 'repairReady' ? `${target}の修復待機が終了` : event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
     case 'phase': return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;
   }
 }
 
 export function battleOrderLine(state: State, order: BattleOrderRecord): string {
-  const reason = order.rejection === 'invalid-skill' ? '不正な特技' : order.rejection === 'invalid-target' ? '不正な対象' : 'MP不足';
+  const reason = order.rejection === 'invalid-skill' ? '不正な特技' : order.rejection === 'invalid-target' ? '不正な対象' : order.rejection ? skillUnavailableLabel(order.rejection) : 'MP不足';
   return `${battleUnitLabel(state, order.key)}の指示：「${order.skillName ?? `特技 ${order.skill}`}」${order.target ? ` → ${battleUnitLabel(state, order.target)}` : ''}${order.accepted ? '（実行予定）' : `（取り消し：${reason}）`}`;
 }
 

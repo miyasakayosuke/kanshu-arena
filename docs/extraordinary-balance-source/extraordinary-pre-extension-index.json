@@ -1,0 +1,35 @@
+{
+  "format": "bounded-source-index-v1",
+  "label": "extraordinary-pre-extension",
+  "authoritativeDate": "2026-10-10 UTC",
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "file": "extraordinary-pre-extension-1.json",
+      "sha256": "65a9f6fb4cb1fa04d6af0d0258bf0bfd77d82f983951751eccb09e95d2bd265b",
+      "archiveSha256": "6fedc3a7bc06d9026e8c39e86f04d4961f3c9af49c2dd96f7b47c360ac447cdc",
+      "archiveBytes": 28549
+    },
+    {
+      "path": "src/families.ts",
+      "file": "extraordinary-pre-extension-2.json",
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+      "archiveSha256": "a8d94ae9f6be28f0e4e1323c29fd52dc287b7434b063347d3bc96a5767f05111",
+      "archiveBytes": 1478
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "file": "extraordinary-pre-extension-3.json",
+      "sha256": "51c873fd4cbe1e3ef6983cbf3e689e509027d8c44fbe8c05a9a187f0a7b2e15e",
+      "archiveSha256": "e654c943e2afe1da98ea8bc543b7eca062ea46380c6416b8b562e9f7effc9998",
+      "archiveBytes": 30740
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "file": "extraordinary-pre-extension-4.json",
+      "sha256": "280601d09da58b6c2cf282f0569093531aa225e934e8243af3b456b83d0feed2",
+      "archiveSha256": "bec18b2e354d3cf7d4893fef35928a67d508d508d79759e467b79ffd046835d4",
+      "archiveBytes": 8483
+    }
+  ]
+}

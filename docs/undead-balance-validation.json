@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "worktree": "/workspace/shared/kanshu-arena-undead-wave",
+  "authoritativeDate": "2026-10-10 UTC",
+  "tests": {
+    "command": "npx vitest run src/balanceLab*.test.ts src/undeadWave.test.ts src/undeadPlayback.test.ts",
+    "files": 22,
+    "tests": 627,
+    "log": "docs/undead-balance-tests.txt",
+    "sha256": "423a832012b960bcd7b559f3d3a0c55a0ebc620e21e315a380d15e33a22e8d65"
+  },
+  "smoke": {
+    "command": "node scripts/balance-lab/cli.mjs run --config configs/balance-lab/smoke.json --out lab-results/undead-smoke-current",
+    "scheduledGames": 736,
+    "terminalExitCode": 0,
+    "log": "docs/undead-balance-smoke.txt",
+    "sha256": "d404eccedda7ddb8427a2e651f5a6128447284b5ff425e686ebc5a43eb0b0215",
+    "identityChangedOutcomes": 0
+  },
+  "commands": [
+    {
+      "command": "./node_modules/.bin/tsc --noEmit",
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": "node scripts/check-rights.mjs",
+      "exitCode": 0,
+      "output": "Rights inventory checks passed: {\n  softwareNotices: 5,\n  assetGroups: 10,\n  dist: false,\n  legalClearance: false\n}\nThis checks recorded files/notices, not copyright, trademark, patent, or legal clearance.\n"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "output": ""
+    }
+  ],
+  "sourceArchive": "docs/undead-balance-source/undead-current-v2-index.json",
+  "sourceArchiveSha256": "8ddad9ba3a7598a56e21dc71826717c02831210c73a097c121c01e86c1fab07a",
+  "studyScheduledGames": 24880,
+  "packedFiles": 287,
+  "packedMaxBytes": 63151,
+  "packedBytes": 10165998,
+  "verification": "docs/undead-balance-verification.json",
+  "sourceReconstruction": "docs/undead-balance-source-verification.json",
+  "productionEditsByLab": false,
+  "publicationAttempted": false,
+  "initialResourceTemplates": {
+    "index": "docs/undead-balance-initial-resources/index.json",
+    "unitHpAndMpLedgers": 248800,
+    "turnsResolved": 0
+  }
+}

@@ -1,0 +1,1068 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "slime-final-newpool",
+  "seeds": [
+    2767045971,
+    1126514436,
+    3780950197,
+    2140418662,
+    499887127,
+    3154322888,
+    1513791353,
+    4168227114
+  ],
+  "costLimit": 17,
+  "teams": [
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure C17 unchanged total"
+    },
+    {
+      "id": "provisional",
+      "ids": [
+        24,
+        25,
+        28,
+        2,
+        10
+      ],
+      "role": "Core+brute C16 unchanged total"
+    },
+    {
+      "id": "c17-fist",
+      "ids": [
+        24,
+        25,
+        28,
+        7,
+        10
+      ],
+      "role": "Core+brute C17 unchanged total"
+    },
+    {
+      "id": "strong-poison",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 poison mix, unchanged total"
+    },
+    {
+      "id": "strong-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Earlier strongest C17 area/poison mix, unchanged total"
+    },
+    {
+      "id": "budget-beast-healers",
+      "ids": [
+        12,
+        2,
+        7,
+        17,
+        27
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-beast-poison-cleanse",
+      "ids": [
+        12,
+        2,
+        3,
+        9,
+        11
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-beast-strip",
+      "ids": [
+        12,
+        2,
+        4,
+        11,
+        21
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-beast-area",
+      "ids": [
+        12,
+        6,
+        7,
+        13,
+        14
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-beast-priority",
+      "ids": [
+        12,
+        0,
+        2,
+        7,
+        13
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "New-budget exactC17 beast core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-nature-healers",
+      "ids": [
+        14,
+        3,
+        10,
+        15,
+        25
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-nature-poison-cleanse",
+      "ids": [
+        14,
+        3,
+        6,
+        12,
+        18
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-nature-strip",
+      "ids": [
+        14,
+        3,
+        5,
+        6,
+        22
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-nature-area",
+      "ids": [
+        14,
+        9,
+        10,
+        13,
+        28
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-nature-priority",
+      "ids": [
+        14,
+        3,
+        4,
+        9,
+        26
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "New-budget exactC17 nature core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-dragon-healers",
+      "ids": [
+        15,
+        17,
+        18,
+        22,
+        26
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-dragon-poison-cleanse",
+      "ids": [
+        15,
+        0,
+        10,
+        17,
+        18
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-dragon-strip",
+      "ids": [
+        15,
+        1,
+        17,
+        18,
+        26
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-dragon-area",
+      "ids": [
+        15,
+        13,
+        14,
+        16,
+        17
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-dragon-priority",
+      "ids": [
+        15,
+        5,
+        6,
+        9,
+        17
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "New-budget exactC17 dragon core+>=3 family, frozendurationstratum"
+    },
+    {
+      "id": "budget-material-healers",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        21
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenhealersstratum"
+    },
+    {
+      "id": "budget-material-poison-cleanse",
+      "ids": [
+        19,
+        1,
+        4,
+        20,
+        23
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenpoison-cleansestratum"
+    },
+    {
+      "id": "budget-material-strip",
+      "ids": [
+        19,
+        6,
+        21,
+        22,
+        23
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenstripstratum"
+    },
+    {
+      "id": "budget-material-area",
+      "ids": [
+        19,
+        1,
+        5,
+        20,
+        21
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenareastratum"
+    },
+    {
+      "id": "budget-material-priority",
+      "ids": [
+        19,
+        0,
+        13,
+        21,
+        22
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozenprioritystratum"
+    },
+    {
+      "id": "budget-material-duration",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        22
+      ],
+      "role": "New-budget exactC17 material core+>=3 family, frozendurationstratum"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "f1-o1",
+      "a": "pureslime",
+      "b": "budget-beast-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o2",
+      "a": "pureslime",
+      "b": "budget-beast-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o3",
+      "a": "pureslime",
+      "b": "budget-beast-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o4",
+      "a": "pureslime",
+      "b": "budget-beast-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o5",
+      "a": "pureslime",
+      "b": "budget-beast-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o6",
+      "a": "pureslime",
+      "b": "budget-beast-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o7",
+      "a": "pureslime",
+      "b": "budget-nature-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o8",
+      "a": "pureslime",
+      "b": "budget-nature-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o9",
+      "a": "pureslime",
+      "b": "budget-nature-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o10",
+      "a": "pureslime",
+      "b": "budget-nature-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o11",
+      "a": "pureslime",
+      "b": "budget-nature-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o12",
+      "a": "pureslime",
+      "b": "budget-nature-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o13",
+      "a": "pureslime",
+      "b": "budget-dragon-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o14",
+      "a": "pureslime",
+      "b": "budget-dragon-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o15",
+      "a": "pureslime",
+      "b": "budget-dragon-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o16",
+      "a": "pureslime",
+      "b": "budget-dragon-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o17",
+      "a": "pureslime",
+      "b": "budget-dragon-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o18",
+      "a": "pureslime",
+      "b": "budget-dragon-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o19",
+      "a": "pureslime",
+      "b": "budget-material-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o20",
+      "a": "pureslime",
+      "b": "budget-material-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o21",
+      "a": "pureslime",
+      "b": "budget-material-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o22",
+      "a": "pureslime",
+      "b": "budget-material-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o23",
+      "a": "pureslime",
+      "b": "budget-material-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f1-o24",
+      "a": "pureslime",
+      "b": "budget-material-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o1",
+      "a": "provisional",
+      "b": "budget-beast-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o2",
+      "a": "provisional",
+      "b": "budget-beast-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o3",
+      "a": "provisional",
+      "b": "budget-beast-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o4",
+      "a": "provisional",
+      "b": "budget-beast-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o5",
+      "a": "provisional",
+      "b": "budget-beast-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o6",
+      "a": "provisional",
+      "b": "budget-beast-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o7",
+      "a": "provisional",
+      "b": "budget-nature-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o8",
+      "a": "provisional",
+      "b": "budget-nature-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o9",
+      "a": "provisional",
+      "b": "budget-nature-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o10",
+      "a": "provisional",
+      "b": "budget-nature-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o11",
+      "a": "provisional",
+      "b": "budget-nature-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o12",
+      "a": "provisional",
+      "b": "budget-nature-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o13",
+      "a": "provisional",
+      "b": "budget-dragon-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o14",
+      "a": "provisional",
+      "b": "budget-dragon-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o15",
+      "a": "provisional",
+      "b": "budget-dragon-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o16",
+      "a": "provisional",
+      "b": "budget-dragon-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o17",
+      "a": "provisional",
+      "b": "budget-dragon-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o18",
+      "a": "provisional",
+      "b": "budget-dragon-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o19",
+      "a": "provisional",
+      "b": "budget-material-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o20",
+      "a": "provisional",
+      "b": "budget-material-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o21",
+      "a": "provisional",
+      "b": "budget-material-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o22",
+      "a": "provisional",
+      "b": "budget-material-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o23",
+      "a": "provisional",
+      "b": "budget-material-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f2-o24",
+      "a": "provisional",
+      "b": "budget-material-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o1",
+      "a": "c17-fist",
+      "b": "budget-beast-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o2",
+      "a": "c17-fist",
+      "b": "budget-beast-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o3",
+      "a": "c17-fist",
+      "b": "budget-beast-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o4",
+      "a": "c17-fist",
+      "b": "budget-beast-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o5",
+      "a": "c17-fist",
+      "b": "budget-beast-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o6",
+      "a": "c17-fist",
+      "b": "budget-beast-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o7",
+      "a": "c17-fist",
+      "b": "budget-nature-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o8",
+      "a": "c17-fist",
+      "b": "budget-nature-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o9",
+      "a": "c17-fist",
+      "b": "budget-nature-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o10",
+      "a": "c17-fist",
+      "b": "budget-nature-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o11",
+      "a": "c17-fist",
+      "b": "budget-nature-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o12",
+      "a": "c17-fist",
+      "b": "budget-nature-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o13",
+      "a": "c17-fist",
+      "b": "budget-dragon-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o14",
+      "a": "c17-fist",
+      "b": "budget-dragon-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o15",
+      "a": "c17-fist",
+      "b": "budget-dragon-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o16",
+      "a": "c17-fist",
+      "b": "budget-dragon-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o17",
+      "a": "c17-fist",
+      "b": "budget-dragon-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o18",
+      "a": "c17-fist",
+      "b": "budget-dragon-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o19",
+      "a": "c17-fist",
+      "b": "budget-material-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o20",
+      "a": "c17-fist",
+      "b": "budget-material-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o21",
+      "a": "c17-fist",
+      "b": "budget-material-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o22",
+      "a": "c17-fist",
+      "b": "budget-material-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o23",
+      "a": "c17-fist",
+      "b": "budget-material-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f3-o24",
+      "a": "c17-fist",
+      "b": "budget-material-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o1",
+      "a": "strong-poison",
+      "b": "budget-beast-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o2",
+      "a": "strong-poison",
+      "b": "budget-beast-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o3",
+      "a": "strong-poison",
+      "b": "budget-beast-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o4",
+      "a": "strong-poison",
+      "b": "budget-beast-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o5",
+      "a": "strong-poison",
+      "b": "budget-beast-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o6",
+      "a": "strong-poison",
+      "b": "budget-beast-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o7",
+      "a": "strong-poison",
+      "b": "budget-nature-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o8",
+      "a": "strong-poison",
+      "b": "budget-nature-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o9",
+      "a": "strong-poison",
+      "b": "budget-nature-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o10",
+      "a": "strong-poison",
+      "b": "budget-nature-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o11",
+      "a": "strong-poison",
+      "b": "budget-nature-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o12",
+      "a": "strong-poison",
+      "b": "budget-nature-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o13",
+      "a": "strong-poison",
+      "b": "budget-dragon-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o14",
+      "a": "strong-poison",
+      "b": "budget-dragon-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o15",
+      "a": "strong-poison",
+      "b": "budget-dragon-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o16",
+      "a": "strong-poison",
+      "b": "budget-dragon-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o17",
+      "a": "strong-poison",
+      "b": "budget-dragon-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o18",
+      "a": "strong-poison",
+      "b": "budget-dragon-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o19",
+      "a": "strong-poison",
+      "b": "budget-material-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o20",
+      "a": "strong-poison",
+      "b": "budget-material-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o21",
+      "a": "strong-poison",
+      "b": "budget-material-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o22",
+      "a": "strong-poison",
+      "b": "budget-material-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o23",
+      "a": "strong-poison",
+      "b": "budget-material-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f4-o24",
+      "a": "strong-poison",
+      "b": "budget-material-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o1",
+      "a": "strong-area",
+      "b": "budget-beast-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o2",
+      "a": "strong-area",
+      "b": "budget-beast-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o3",
+      "a": "strong-area",
+      "b": "budget-beast-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o4",
+      "a": "strong-area",
+      "b": "budget-beast-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o5",
+      "a": "strong-area",
+      "b": "budget-beast-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o6",
+      "a": "strong-area",
+      "b": "budget-beast-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o7",
+      "a": "strong-area",
+      "b": "budget-nature-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o8",
+      "a": "strong-area",
+      "b": "budget-nature-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o9",
+      "a": "strong-area",
+      "b": "budget-nature-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o10",
+      "a": "strong-area",
+      "b": "budget-nature-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o11",
+      "a": "strong-area",
+      "b": "budget-nature-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o12",
+      "a": "strong-area",
+      "b": "budget-nature-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o13",
+      "a": "strong-area",
+      "b": "budget-dragon-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o14",
+      "a": "strong-area",
+      "b": "budget-dragon-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o15",
+      "a": "strong-area",
+      "b": "budget-dragon-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o16",
+      "a": "strong-area",
+      "b": "budget-dragon-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o17",
+      "a": "strong-area",
+      "b": "budget-dragon-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o18",
+      "a": "strong-area",
+      "b": "budget-dragon-duration",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o19",
+      "a": "strong-area",
+      "b": "budget-material-healers",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o20",
+      "a": "strong-area",
+      "b": "budget-material-poison-cleanse",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o21",
+      "a": "strong-area",
+      "b": "budget-material-strip",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o22",
+      "a": "strong-area",
+      "b": "budget-material-area",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o23",
+      "a": "strong-area",
+      "b": "budget-material-priority",
+      "keyUnitId": 24
+    },
+    {
+      "id": "f5-o24",
+      "a": "strong-area",
+      "b": "budget-material-duration",
+      "keyUnitId": 24
+    }
+  ],
+  "candidate": {
+    "id": "newpool",
+    "label": "Final E60 C4/C5 playtest newpool; fresh fixed seed holdout",
+    "overrides": {}
+  },
+  "complaints": [],
+  "sampling": {
+    "count": 0,
+    "seed": 112610210
+  }
+}

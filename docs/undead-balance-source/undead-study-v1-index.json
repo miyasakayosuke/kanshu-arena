@@ -1,0 +1,35 @@
+{
+  "format": "bounded-source-index-v1",
+  "label": "undead-study-v1",
+  "authoritativeDate": "2026-10-10 UTC",
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "file": "undead-study-v1-1.json",
+      "sha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+      "archiveSha256": "35c9e52861807ec1c5a804444def9f73ba85db3b256b7a34ed44219a4af95610",
+      "archiveBytes": 25429
+    },
+    {
+      "path": "src/families.ts",
+      "file": "undead-study-v1-2.json",
+      "sha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+      "archiveSha256": "ad464f8733e6fd9bbab933c8db60f0a00b68b4614e649cec861fac15311ac31c",
+      "archiveBytes": 1478
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "file": "undead-study-v1-3.json",
+      "sha256": "6c0af18bf3ce4b3332a1dfe242edd844737a8d3a5ecf80e4a57a66ff0c14fa7d",
+      "archiveSha256": "3e51622c883b62999cf72e4e9bc3b932b6b99538c0b1bfe9d2b822c824c8d3c7",
+      "archiveBytes": 30560
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "file": "undead-study-v1-4.json",
+      "sha256": "280601d09da58b6c2cf282f0569093531aa225e934e8243af3b456b83d0feed2",
+      "archiveSha256": "bec18b2e354d3cf7d4893fef35928a67d508d508d79759e467b79ffd046835d4",
+      "archiveBytes": 8483
+    }
+  ]
+}

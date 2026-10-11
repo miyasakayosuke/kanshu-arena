@@ -1,0 +1,2548 @@
+{
+  "schemaVersion": 1,
+  "stage": "initial64",
+  "analysisSource": {
+    "frozenAnalyzerSha256": "072f0e49ec053b7e3fdf33b608e323da0363a850704896bac90c880fd47db067",
+    "currentAnalyzerSha256": "55c62163a32bffbf046489d5593b475a31ce560bb094e5143915733208936fef",
+    "revisionPath": "docs/all-family-balance-analysis-revision.json",
+    "revisionSha256": "453369cb1c9f5a89e14edd278df430289389dba7af3dd865d114218f4ea8335f"
+  },
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "matrixFreezeSha256": "72362ed3de3128ea7e547020084829c66fccda41b6d569000e575aa82dc7a540",
+  "derivedFreezeSha256": "b56a6b4fd918099eb2560581b85cc6963f4694fbd5a610582b73380cb1aa951f",
+  "counts": {
+    "executedMatches": 132096,
+    "suites": [
+      {
+        "id": "all-family-matrix-independent-1",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-independent-1",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      },
+      {
+        "id": "all-family-matrix-independent-half",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-independent-half",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      },
+      {
+        "id": "all-family-matrix-independent-0",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-independent-0",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      },
+      {
+        "id": "all-family-matrix-reserve-1",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-reserve-1",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      },
+      {
+        "id": "all-family-matrix-reserve-half",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-reserve-half",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      },
+      {
+        "id": "all-family-matrix-reserve-0",
+        "status": "complete",
+        "executed": 19200,
+        "scheduled": 19200
+      },
+      {
+        "id": "all-family-counter-reserve-0",
+        "status": "complete",
+        "executed": 2816,
+        "scheduled": 2816
+      }
+    ]
+  },
+  "selection": {
+    "independent": null,
+    "reserve": null
+  },
+  "adoption": "Parent review required; passing a screening gate is not a production adoption authorization.",
+  "gates": {
+    "independent/1": {
+      "arm": "independent",
+      "scale": 1,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.9300271739130435,
+          "scoreC17": 0.9432565789473685,
+          "opponentScoreImprovement": 0,
+          "pairedApproximate95": [
+            0,
+            0
+          ],
+          "pairedGames": 608,
+          "below90Both": false,
+          "improvementPass": false,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.9762228260869565,
+          "scoreC17": 0.9794407894736842,
+          "opponentScoreImprovement": 0,
+          "pairedApproximate95": [
+            0,
+            0
+          ],
+          "pairedGames": 608,
+          "below90Both": false,
+          "improvementPass": false,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [
+        {
+          "team": "fullnature",
+          "cost": 15,
+          "partition": "all",
+          "baseline": 0.9008152173913043,
+          "candidate": 0.9008152173913043
+        },
+        {
+          "team": "nature-brute-dryas",
+          "cost": 17,
+          "partition": "all",
+          "baseline": 0.9300271739130435,
+          "candidate": 0.9300271739130435
+        },
+        {
+          "team": "nature-brute-dryas",
+          "cost": 17,
+          "partition": "c17Opponents",
+          "baseline": 0.9432565789473685,
+          "candidate": 0.9432565789473685
+        },
+        {
+          "team": "nature-brute-tengu",
+          "cost": 17,
+          "partition": "all",
+          "baseline": 0.9762228260869565,
+          "candidate": 0.9762228260869565
+        },
+        {
+          "team": "nature-brute-tengu",
+          "cost": 17,
+          "partition": "c17Opponents",
+          "baseline": 0.9794407894736842,
+          "candidate": 0.9794407894736842
+        }
+      ],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    },
+    "independent/0.5": {
+      "arm": "independent",
+      "scale": 0.5,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.8186141304347826,
+          "scoreC17": 0.8018092105263158,
+          "opponentScoreImprovement": 0.14144736842105265,
+          "pairedApproximate95": [
+            0.10745316368438212,
+            0.17544157315772313
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.03125,
+              "approximate95": [
+                0,
+                0.07421518293274734
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.25,
+              "approximate95": [
+                0.14997916883635357,
+                0.35002083116364646
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.25
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.25
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.5234375,
+              "approximate95": [
+                0.4349676148812961,
+                0.6119073851187039
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.53125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.515625
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.7384510869565217,
+          "scoreC17": 0.7080592105263158,
+          "opponentScoreImprovement": 0.27138157894736836,
+          "pairedApproximate95": [
+            0.22862267565024597,
+            0.31414048224449087
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.03125,
+              "approximate95": [
+                0,
+                0.07421518293274734
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.3671875,
+              "approximate95": [
+                0.2665915651880284,
+                0.4677834348119716
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.40625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.328125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.4765625,
+              "approximate95": [
+                0.3880926148812961,
+                0.5650323851187039
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.484375
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.46875
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    },
+    "independent/0": {
+      "arm": "independent",
+      "scale": 0,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.5801630434782609,
+          "scoreC17": 0.4934210526315789,
+          "opponentScoreImprovement": 0.44983552631578955,
+          "pairedApproximate95": [
+            0.425572082110092,
+            0.47409897052148686
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 1,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.1875,
+              "approximate95": [
+                0.09362138451998535,
+                0.28137861548001464
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.1875
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.1875
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.6484375,
+              "approximate95": [
+                0.5592970613924921,
+                0.7375779386075079
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.59375
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.703125
+                }
+              },
+              "pointOrientationPass": true,
+              "passes": true
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.5546875,
+              "approximate95": [
+                0.456791613463872,
+                0.652583386536128
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.578125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.53125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.5163043478260869,
+          "scoreC17": 0.4144736842105263,
+          "opponentScoreImprovement": 0.5649671052631579,
+          "pairedApproximate95": [
+            0.537973361384915,
+            0.5919608491414007
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 2,
+          "counterGate": true,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.328125,
+              "approximate95": [
+                0.2121806212732444,
+                0.44406937872675556
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.328125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.328125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.765625,
+              "approximate95": [
+                0.6840495300861426,
+                0.8472004699138574
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.6875
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.84375
+                }
+              },
+              "pointOrientationPass": true,
+              "passes": true
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.6640625,
+              "approximate95": [
+                0.576608084790799,
+                0.751516915209201
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.671875
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.65625
+                }
+              },
+              "pointOrientationPass": true,
+              "passes": true
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    },
+    "reserve/1": {
+      "arm": "reserve",
+      "scale": 1,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.9300271739130435,
+          "scoreC17": 0.9432565789473685,
+          "opponentScoreImprovement": 0,
+          "pairedApproximate95": [
+            0,
+            0
+          ],
+          "pairedGames": 608,
+          "below90Both": false,
+          "improvementPass": false,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.9762228260869565,
+          "scoreC17": 0.9794407894736842,
+          "opponentScoreImprovement": 0,
+          "pairedApproximate95": [
+            0,
+            0
+          ],
+          "pairedGames": 608,
+          "below90Both": false,
+          "improvementPass": false,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [
+        {
+          "team": "fullnature",
+          "cost": 15,
+          "partition": "all",
+          "baseline": 0.9008152173913043,
+          "candidate": 0.9008152173913043
+        },
+        {
+          "team": "nature-brute-dryas",
+          "cost": 17,
+          "partition": "all",
+          "baseline": 0.9300271739130435,
+          "candidate": 0.9300271739130435
+        },
+        {
+          "team": "nature-brute-dryas",
+          "cost": 17,
+          "partition": "c17Opponents",
+          "baseline": 0.9432565789473685,
+          "candidate": 0.9432565789473685
+        },
+        {
+          "team": "nature-brute-tengu",
+          "cost": 17,
+          "partition": "all",
+          "baseline": 0.9762228260869565,
+          "candidate": 0.9762228260869565
+        },
+        {
+          "team": "nature-brute-tengu",
+          "cost": 17,
+          "partition": "c17Opponents",
+          "baseline": 0.9794407894736842,
+          "candidate": 0.9794407894736842
+        }
+      ],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    },
+    "reserve/0.5": {
+      "arm": "reserve",
+      "scale": 0.5,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.8057065217391305,
+          "scoreC17": 0.7648026315789473,
+          "opponentScoreImprovement": 0.17845394736842113,
+          "pairedApproximate95": [
+            0.1437762342444052,
+            0.2131316604924369
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.015625,
+              "approximate95": [
+                0,
+                0.03710759146637367
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.015625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.015625
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.0390625,
+              "approximate95": [
+                0,
+                0.08434721370273736
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.046875
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.8328804347826086,
+          "scoreC17": 0.7976973684210527,
+          "opponentScoreImprovement": 0.18174342105263153,
+          "pairedApproximate95": [
+            0.1525072532824462,
+            0.21097958882281698
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0,
+              "approximate95": [
+                0,
+                0
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.0078125,
+              "approximate95": [
+                0,
+                0.023125
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.015625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.046875,
+              "approximate95": [
+                0.004784963405153046,
+                0.08896503659484695
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.0625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.03125
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    },
+    "reserve/0": {
+      "arm": "reserve",
+      "scale": 0,
+      "knownShells": [
+        {
+          "id": "nature-brute-dryas",
+          "scoreAll": 0.5883152173913043,
+          "scoreC17": 0.506578947368421,
+          "opponentScoreImprovement": 0.43667763157894746,
+          "pairedApproximate95": [
+            0.39501221464247227,
+            0.4783430485154224
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 0,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.2734375,
+              "approximate95": [
+                0.16666747967789208,
+                0.3802075203221079
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.28125
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.265625
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.4140625,
+              "approximate95": [
+                0.3175449583265071,
+                0.5105800416734929
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.40625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.421875
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.5546875,
+              "approximate95": [
+                0.4592557667462989,
+                0.6501192332537011
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.5
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.609375
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            }
+          ]
+        },
+        {
+          "id": "nature-brute-tengu",
+          "scoreAll": 0.5774456521739131,
+          "scoreC17": 0.5164473684210527,
+          "opponentScoreImprovement": 0.4629934210526315,
+          "pairedApproximate95": [
+            0.4114564658326423,
+            0.5145303762726209
+          ],
+          "pairedGames": 608,
+          "below90Both": true,
+          "improvementPass": true,
+          "passingCounterplans": 1,
+          "counterGate": false,
+          "counters": [
+            {
+              "id": "janus-mixed",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.2421875,
+              "approximate95": [
+                0.1398310943999541,
+                0.3445439056000459
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.25
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.234375
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "material-strong",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.5546875,
+              "approximate95": [
+                0.46706302256852605,
+                0.642311977431474
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.5625
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.546875
+                }
+              },
+              "pointOrientationPass": false,
+              "passes": false
+            },
+            {
+              "id": "demon-dual-cleanse",
+              "games": 128,
+              "seedClusters": 64,
+              "scoreRate": 0.6796875,
+              "approximate95": [
+                0.5887285248724734,
+                0.7706464751275266
+              ],
+              "physicalOrientations": {
+                "a-left": {
+                  "games": 64,
+                  "scoreRate": 0.75
+                },
+                "a-right": {
+                  "games": 64,
+                  "scoreRate": 0.609375
+                }
+              },
+              "pointOrientationPass": true,
+              "passes": true
+            }
+          ]
+        }
+      ],
+      "newDominance": [],
+      "persistentDominance": [],
+      "adjudication": {
+        "all": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        },
+        "c17": {
+          "baseline": 0,
+          "candidate": 0,
+          "change": 0,
+          "passes": true
+        }
+      },
+      "flaggedPairs": [],
+      "passes": false,
+      "flaggedPairCount": 0,
+      "flaggedPairsCompleteInDetails": true
+    }
+  },
+  "rows": [
+    {
+      "arm": "independent",
+      "scale": 1,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.42934782608695654,
+          "scoreAgainstC17": 0.3815789473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.1875
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.9008152173913043,
+          "scoreAgainstC17": 0.8984375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.311141304347826
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.3532608695652174,
+          "scoreAgainstC17": 0.3503289473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.793478260869565
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.45652173913043476,
+          "scoreAgainstC17": 0.4342105263157895,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.7459239130434785
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.31521739130434784,
+          "scoreAgainstC17": 0.3223684210526316,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.103260869565218
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.4375,
+          "scoreAgainstC17": 0.4621710526315789,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.351902173913044
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.5760869565217391,
+          "scoreAgainstC17": 0.5444078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.894021739130435
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.11141304347826086,
+          "scoreAgainstC17": 0.12664473684210525,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.743206521739131
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.9300271739130435,
+          "scoreAgainstC17": 0.9432565789473685,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 3.7051630434782608
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.9762228260869565,
+          "scoreAgainstC17": 0.9794407894736842,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 3.2282608695652173
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.32472826086956524,
+          "scoreAgainstC17": 0.3234375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.650815217391305
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.673233695652174,
+          "scoreAgainstC17": 0.6743421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.237771739130435
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7785326086956522,
+          "scoreAgainstC17": 0.7828947368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.90625
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.7377717391304348,
+          "scoreAgainstC17": 0.7516447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.673913043478261
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.8091032608695652,
+          "scoreAgainstC17": 0.8133223684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.130434782608695
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.6012228260869565,
+          "scoreAgainstC17": 0.57890625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.134510869565218
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.2269021739130435,
+          "scoreAgainstC17": 0.2609375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.543478260869565
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.09918478260869565,
+          "scoreAgainstC17": 0.11677631578947369,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.023097826086956
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.016304347826086956,
+          "scoreAgainstC17": 0.019736842105263157,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.866847826086956
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.5394021739130435,
+          "scoreAgainstC17": 0.5394736842105263,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.824728260869565
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.30570652173913043,
+          "scoreAgainstC17": 0.33881578947368424,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.789402173913044
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.421195652173913,
+          "scoreAgainstC17": 0.4342105263157895,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.550271739130435
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.673233695652174,
+          "scoreAgainstC17": 0.665296052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.020380434782608
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.3070652173913043,
+          "scoreAgainstC17": 0.3190789473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.002717391304348
+        }
+      ]
+    },
+    {
+      "arm": "independent",
+      "scale": 0.5,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.6182065217391305,
+          "scoreAgainstC17": 0.537828947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.516304347826087
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.24728260869565216,
+          "scoreAgainstC17": 0.1875,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.917119565217392
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.5353260869565217,
+          "scoreAgainstC17": 0.4720394736842105,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.463315217391305
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.7078804347826086,
+          "scoreAgainstC17": 0.649671052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.376358695652174
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.5135869565217391,
+          "scoreAgainstC17": 0.46381578947368424,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.019021739130435
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.7350543478260869,
+          "scoreAgainstC17": 0.6891447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.794836956521739
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.7146739130434783,
+          "scoreAgainstC17": 0.6595394736842105,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.561141304347826
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.20380434782608695,
+          "scoreAgainstC17": 0.15625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.737771739130435
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.8186141304347826,
+          "scoreAgainstC17": 0.8018092105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.3084239130434785
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.7384510869565217,
+          "scoreAgainstC17": 0.7080592105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.006793478260869
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.23097826086956522,
+          "scoreAgainstC17": 0.2140625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.596467391304348
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.6820652173913043,
+          "scoreAgainstC17": 0.6299342105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.707880434782608
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7921195652173914,
+          "scoreAgainstC17": 0.7516447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.612771739130435
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.7269021739130435,
+          "scoreAgainstC17": 0.7055921052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.796195652173913
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.5135869565217391,
+          "scoreAgainstC17": 0.4194078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.679347826086956
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.4578804347826087,
+          "scoreAgainstC17": 0.3828125,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.116847826086956
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.14673913043478262,
+          "scoreAgainstC17": 0.1609375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.842391304347826
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.20923913043478262,
+          "scoreAgainstC17": 0.19572368421052633,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.436141304347826
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.02717391304347826,
+          "scoreAgainstC17": 0.019736842105263157,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.039402173913044
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.48641304347826086,
+          "scoreAgainstC17": 0.4555921052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.033967391304348
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.45516304347826086,
+          "scoreAgainstC17": 0.41776315789473684,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.868206521739131
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.5394021739130435,
+          "scoreAgainstC17": 0.4934210526315789,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.7853260869565215
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.453804347826087,
+          "scoreAgainstC17": 0.3881578947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.360054347826087
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.44565217391304346,
+          "scoreAgainstC17": 0.3848684210526316,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.736413043478261
+        }
+      ]
+    },
+    {
+      "arm": "independent",
+      "scale": 0,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.7472826086956522,
+          "scoreAgainstC17": 0.694078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.774456521739131
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.08559782608695653,
+          "scoreAgainstC17": 0.0328125,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.194293478260869
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.6834239130434783,
+          "scoreAgainstC17": 0.6167763157894737,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.4334239130434785
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.8179347826086957,
+          "scoreAgainstC17": 0.7796052631578947,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.092391304347826
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.6317934782608695,
+          "scoreAgainstC17": 0.5542763157894737,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.114130434782608
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.8328804347826086,
+          "scoreAgainstC17": 0.7976973684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.525815217391305
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.7676630434782609,
+          "scoreAgainstC17": 0.71875,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.532608695652174
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.3953804347826087,
+          "scoreAgainstC17": 0.2713815789473684,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.850543478260869
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.5801630434782609,
+          "scoreAgainstC17": 0.4934210526315789,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.993206521739131
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.5163043478260869,
+          "scoreAgainstC17": 0.4144736842105263,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.755434782608695
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.04755434782608696,
+          "scoreAgainstC17": 0.034375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.061141304347826
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.7038043478260869,
+          "scoreAgainstC17": 0.6414473684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.040760869565218
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7472826086956522,
+          "scoreAgainstC17": 0.694078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.334239130434782
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.782608695652174,
+          "scoreAgainstC17": 0.7368421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.146739130434782
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.3125,
+          "scoreAgainstC17": 0.1924342105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.335597826086956
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.1671195652173913,
+          "scoreAgainstC17": 0.103125,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.747282608695652
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.20516304347826086,
+          "scoreAgainstC17": 0.1109375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.601902173913044
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.328804347826087,
+          "scoreAgainstC17": 0.21875,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.9415760869565215
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.10326086956521739,
+          "scoreAgainstC17": 0.024671052631578948,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.012228260869565
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.53125,
+          "scoreAgainstC17": 0.43256578947368424,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.103260869565218
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.6100543478260869,
+          "scoreAgainstC17": 0.5509868421052632,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 8.088315217391305
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.5584239130434783,
+          "scoreAgainstC17": 0.49835526315789475,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.309782608695652
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.28532608695652173,
+          "scoreAgainstC17": 0.16776315789473684,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.554347826086956
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.5584239130434783,
+          "scoreAgainstC17": 0.5016447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.309782608695652
+        }
+      ]
+    },
+    {
+      "arm": "reserve",
+      "scale": 1,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.42934782608695654,
+          "scoreAgainstC17": 0.3815789473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.1875
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.9008152173913043,
+          "scoreAgainstC17": 0.8984375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.311141304347826
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.3532608695652174,
+          "scoreAgainstC17": 0.3503289473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.793478260869565
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.45652173913043476,
+          "scoreAgainstC17": 0.4342105263157895,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.7459239130434785
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.31521739130434784,
+          "scoreAgainstC17": 0.3223684210526316,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.103260869565218
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.4375,
+          "scoreAgainstC17": 0.4621710526315789,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.351902173913044
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.5760869565217391,
+          "scoreAgainstC17": 0.5444078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.894021739130435
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.11141304347826086,
+          "scoreAgainstC17": 0.12664473684210525,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.743206521739131
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.9300271739130435,
+          "scoreAgainstC17": 0.9432565789473685,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 3.7051630434782608
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.9762228260869565,
+          "scoreAgainstC17": 0.9794407894736842,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 3.2282608695652173
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.32472826086956524,
+          "scoreAgainstC17": 0.3234375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.650815217391305
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.673233695652174,
+          "scoreAgainstC17": 0.6743421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.237771739130435
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7785326086956522,
+          "scoreAgainstC17": 0.7828947368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.90625
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.7377717391304348,
+          "scoreAgainstC17": 0.7516447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.673913043478261
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.8091032608695652,
+          "scoreAgainstC17": 0.8133223684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.130434782608695
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.6012228260869565,
+          "scoreAgainstC17": 0.57890625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.134510869565218
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.2269021739130435,
+          "scoreAgainstC17": 0.2609375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.543478260869565
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.09918478260869565,
+          "scoreAgainstC17": 0.11677631578947369,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.023097826086956
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.016304347826086956,
+          "scoreAgainstC17": 0.019736842105263157,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.866847826086956
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.5394021739130435,
+          "scoreAgainstC17": 0.5394736842105263,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.824728260869565
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.30570652173913043,
+          "scoreAgainstC17": 0.33881578947368424,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.789402173913044
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.421195652173913,
+          "scoreAgainstC17": 0.4342105263157895,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.550271739130435
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.673233695652174,
+          "scoreAgainstC17": 0.665296052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.020380434782608
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.3070652173913043,
+          "scoreAgainstC17": 0.3190789473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.002717391304348
+        }
+      ]
+    },
+    {
+      "arm": "reserve",
+      "scale": 0.5,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.5828804347826086,
+          "scoreAgainstC17": 0.5016447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 4.831521739130435
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.22418478260869565,
+          "scoreAgainstC17": 0.14375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.728260869565218
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.5407608695652174,
+          "scoreAgainstC17": 0.4868421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.569293478260869
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.6752717391304348,
+          "scoreAgainstC17": 0.6167763157894737,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.479619565217392
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.501358695652174,
+          "scoreAgainstC17": 0.4440789473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.050271739130435
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.6725543478260869,
+          "scoreAgainstC17": 0.618421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.895380434782608
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.6698369565217391,
+          "scoreAgainstC17": 0.6101973684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.726902173913044
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.18206521739130435,
+          "scoreAgainstC17": 0.13486842105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.756793478260869
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.8057065217391305,
+          "scoreAgainstC17": 0.7648026315789473,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.770380434782608
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.8328804347826086,
+          "scoreAgainstC17": 0.7976973684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.421195652173913
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.18614130434782608,
+          "scoreAgainstC17": 0.1734375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.944293478260869
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.6426630434782609,
+          "scoreAgainstC17": 0.569078947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.591032608695652
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7676630434782609,
+          "scoreAgainstC17": 0.7220394736842105,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.667119565217392
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.7309782608695652,
+          "scoreAgainstC17": 0.6875,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.993206521739131
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.7866847826086957,
+          "scoreAgainstC17": 0.7417763157894737,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.911684782608695
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.38179347826086957,
+          "scoreAgainstC17": 0.3046875,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.794836956521739
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.14945652173913043,
+          "scoreAgainstC17": 0.1609375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.888586956521739
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.14266304347826086,
+          "scoreAgainstC17": 0.11842105263157894,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.294836956521739
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.02717391304347826,
+          "scoreAgainstC17": 0.019736842105263157,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.994565217391305
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.5516304347826086,
+          "scoreAgainstC17": 0.4753289473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.875
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.4470108695652174,
+          "scoreAgainstC17": 0.3930921052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.822010869565218
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.5163043478260869,
+          "scoreAgainstC17": 0.44901315789473684,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.684782608695652
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.5584239130434783,
+          "scoreAgainstC17": 0.48355263157894735,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.395380434782608
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.42391304347826086,
+          "scoreAgainstC17": 0.3651315789473684,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.942934782608695
+        }
+      ]
+    },
+    {
+      "arm": "reserve",
+      "scale": 0,
+      "rows": [
+        {
+          "id": "fullbeast",
+          "cost": 17,
+          "scoreAll": 0.6603260869565217,
+          "scoreAgainstC17": 0.5986842105263158,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.076086956521739
+        },
+        {
+          "id": "fullnature",
+          "cost": 15,
+          "scoreAll": 0.44157608695652173,
+          "scoreAgainstC17": 0.365625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 8.429347826086957
+        },
+        {
+          "id": "puredragon",
+          "cost": 17,
+          "scoreAll": 0.6182065217391305,
+          "scoreAgainstC17": 0.5592105263157895,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.695652173913044
+        },
+        {
+          "id": "purematerial",
+          "cost": 17,
+          "scoreAll": 0.779891304347826,
+          "scoreAgainstC17": 0.7532894736842105,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.559782608695652
+        },
+        {
+          "id": "pureslime",
+          "cost": 17,
+          "scoreAll": 0.5828804347826086,
+          "scoreAgainstC17": 0.5016447368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.4415760869565215
+        },
+        {
+          "id": "puredemon",
+          "cost": 17,
+          "scoreAll": 0.8029891304347826,
+          "scoreAgainstC17": 0.7730263157894737,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.926630434782608
+        },
+        {
+          "id": "pureundead",
+          "cost": 17,
+          "scoreAll": 0.65625,
+          "scoreAgainstC17": 0.6134868421052632,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.96875
+        },
+        {
+          "id": "janus-mixed",
+          "cost": 17,
+          "scoreAll": 0.26902173913043476,
+          "scoreAgainstC17": 0.20888157894736842,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.331521739130435
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17,
+          "scoreAll": 0.5883152173913043,
+          "scoreAgainstC17": 0.506578947368421,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.298913043478261
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17,
+          "scoreAll": 0.5774456521739131,
+          "scoreAgainstC17": 0.5164473684210527,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.107336956521739
+        },
+        {
+          "id": "old-triple-poison",
+          "cost": 15,
+          "scoreAll": 0.15896739130434784,
+          "scoreAgainstC17": 0.153125,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.309782608695652
+        },
+        {
+          "id": "material-strong",
+          "cost": 17,
+          "scoreAll": 0.5978260869565217,
+          "scoreAgainstC17": 0.5296052631578947,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.398097826086956
+        },
+        {
+          "id": "slime-strong-area",
+          "cost": 17,
+          "scoreAll": 0.7282608695652174,
+          "scoreAgainstC17": 0.6743421052631579,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.849184782608695
+        },
+        {
+          "id": "slime-strong-poison",
+          "cost": 17,
+          "scoreAll": 0.7133152173913043,
+          "scoreAgainstC17": 0.6578947368421053,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.532608695652174
+        },
+        {
+          "id": "undead-reapply",
+          "cost": 17,
+          "scoreAll": 0.7350543478260869,
+          "scoreAgainstC17": 0.6957236842105263,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.395380434782608
+        },
+        {
+          "id": "janus-poison",
+          "cost": 15,
+          "scoreAll": 0.33967391304347827,
+          "scoreAgainstC17": 0.284375,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.172554347826087
+        },
+        {
+          "id": "janus-ward",
+          "cost": 16,
+          "scoreAll": 0.09782608695652174,
+          "scoreAgainstC17": 0.090625,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.135869565217392
+        },
+        {
+          "id": "demon-dual-cleanse",
+          "cost": 17,
+          "scoreAll": 0.19972826086956522,
+          "scoreAgainstC17": 0.19078947368421054,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.8125
+        },
+        {
+          "id": "dragon-cleanse-mixed",
+          "cost": 17,
+          "scoreAll": 0.02717391304347826,
+          "scoreAgainstC17": 0.019736842105263157,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.380434782608695
+        },
+        {
+          "id": "material-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.5040760869565217,
+          "scoreAgainstC17": 0.45394736842105265,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.255434782608695
+        },
+        {
+          "id": "slime-break-mixed",
+          "cost": 17,
+          "scoreAll": 0.5217391304347826,
+          "scoreAgainstC17": 0.4934210526315789,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 8.398097826086957
+        },
+        {
+          "id": "demon-poison-mixed",
+          "cost": 17,
+          "scoreAll": 0.4891304347826087,
+          "scoreAgainstC17": 0.46710526315789475,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 7.241847826086956
+        },
+        {
+          "id": "undead-burst-mixed",
+          "cost": 17,
+          "scoreAll": 0.4361413043478261,
+          "scoreAgainstC17": 0.37335526315789475,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 5.875
+        },
+        {
+          "id": "beast-heavy-mixed",
+          "cost": 17,
+          "scoreAll": 0.4741847826086957,
+          "scoreAgainstC17": 0.4128289473684211,
+          "adjudicationAll": 0,
+          "meanTurnsAll": 6.334239130434782
+        }
+      ]
+    }
+  ],
+  "details": {
+    "root": "docs/all-family-balance-analysis",
+    "chunkManifest": [
+      {
+        "file": "initial64-manifest-00001.json",
+        "bytes": 4097,
+        "sha256": "e332daff61abbb926a57fe950ef34396f17be6fb215ee5ab67ce33c6fb40aff6",
+        "records": 41,
+        "first": "chunk-1",
+        "last": "chunk-41"
+      }
+    ]
+  },
+  "limits": "Screening judgments, not target50%, human fairness or exhaustive legal-team guarantees. Mirrors excluded from independent matchup-score evidence. COST<=17 and exactC17 partitions reported separately. Hold adoption for unresolved new dominance or adjudication regression; retain all failures."
+}

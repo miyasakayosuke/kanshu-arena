@@ -1,0 +1,61 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> kanshu-arena@0.14.0 test
+> vitest run --maxWorkers=1 src/balanceLab.test.ts src/balanceLabCli.test.ts src/balanceLabDragon.test.ts src/balanceLabDragonCli.test.ts src/balanceLabDragonFailure.test.ts src/balanceLabFailure.test.ts src/balanceLabFamilyWave.test.ts src/balanceLabMaterial.test.ts src/balanceLabMaterialCli.test.ts src/balanceLabMaterialFailure.test.ts src/balanceLabSlime.test.ts src/balanceLabSlimeCli.test.ts src/balanceLabSlimeFailure.test.ts src/balanceLabWardFailure.test.ts src/slimeWave.test.ts
+
+
+ RUN  v3.2.7 /workspace/shared/kanshu-arena-slime-wave
+
+ ✓ src/balanceLabMaterialCli.test.ts (3 tests) 6540ms
+   ✓ material CLI replay and failure evidence in isolated source copies > writes material metrics and replays optional default/tuned snapshots in both orientations  1205ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=false)  2337ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=true)  2995ms
+ ✓ src/balanceLabSlimeCli.test.ts (3 tests) 7971ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > writes metrics and replays supply on both sides; rejects config/source changes  1687ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=false  3615ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=true  2668ms
+ ✓ src/balanceLabCli.test.ts (17 tests) 6579ms
+   ✓ balance lab real CLI integration > writes a complete 12-match report and deterministically replays a selected match  304ms
+   ✓ balance lab real CLI integration > clears a stale failure after a successful explicit overwrite and preserves unrelated files  1090ms
+   ✓ balance lab real CLI integration > removes previous success evidence when an explicit overwrite produces a captured failure  919ms
+ ✓ src/balanceLabDragonCli.test.ts (2 tests) 1951ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=false)  907ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=true)  1040ms
+ ✓ src/balanceLabMaterial.test.ts (44 tests) 1502ms
+   ✓ material same-policy accounting and replay evidence > preserves absent tuning and consumed readiness in snapshots and tuned replay on either physical side  567ms
+   ✓ material same-policy accounting and replay evidence > reproduces identity candidates and reports disabled support as absent throughout the trace  356ms
+ ✓ src/balanceLabSlime.test.ts (40 tests) 2716ms
+   ✓ slime Lab schema, isolated eligibility and MP leaders > validates frozen configs for the matching roster budget without redrawing historical teams  353ms
+   ✓ slime authoritative accounting and deterministic replay > preserves optional readiness/amount snapshots and verifies identity/tuned replay on both physical sides  1878ms
+ ✓ src/balanceLab.test.ts (82 tests) 5185ms
+   ✓ paired baseline/candidate suite controls > is byte-for-byte deterministic and does not mutate a frozen configuration or production roster  1108ms
+   ✓ paired baseline/candidate suite controls > runs each curated scenario and seed in both orientations for both variants  527ms
+   ✓ paired baseline/candidate suite controls > adds same-team mirror diagnostics with equal side counts, without asserting per-seed symmetry  526ms
+   ✓ paired baseline/candidate suite controls > aggregates team A after side swaps and excludes mirrors from the main comparison  706ms
+   ✓ paired baseline/candidate suite controls > replays an exact saved match and rejects missing IDs or changed trace evidence  856ms
+   ✓ paired baseline/candidate suite controls > produces identical paired match evidence and zero numeric deltas for an identity candidate  693ms
+ ✓ src/balanceLabDragon.test.ts (34 tests) 2218ms
+   ✓ dragon lab strict config and isolated state > validates every bundled dragon configuration and preserves original old-family membership  1124ms
+   ✓ dragon same-policy evidence > preserves charge and explicit perPoint in traces/replays on both physical sides  319ms
+ ✓ src/slimeWave.test.ts (37 tests) 2133ms
+   ✓ slime evidence, deterministic AI, and frozen historical parity > keeps216 complete frozen material-era battles byte-identical including all states, logs, events, orders, RNG and winners  1533ms
+ ✓ src/balanceLabFamilyWave.test.ts (36 tests) 1756ms
+   ✓ family-wave lab configuration > validates every bundled family-wave probe against the shipping roster  378ms
+   ✓ family-wave traces and paired evidence > preserves ward duration and percentage in deterministic snapshots and replay  590ms
+   ✓ family-wave traces and paired evidence > produces identical paired results for an identity candidate on the two new family teams  485ms
+ ✓ src/balanceLabSlimeFailure.test.ts (33 tests) 325ms
+ ✓ src/balanceLabMaterialFailure.test.ts (34 tests) 240ms
+ ✓ src/balanceLabDragonFailure.test.ts (12 tests) 92ms
+ ✓ src/balanceLabFailure.test.ts (4 tests) 52ms
+ ✓ src/balanceLabWardFailure.test.ts (10 tests) 511ms
+
+ Test Files  15 passed (15)
+      Tests  391 passed (391)
+   Start at  17:49:59
+   Duration  51.55s (transform 741ms, setup 0ms, collect 2.11s, tests 39.77s, environment 4ms, prepare 2.93s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,358 @@
+{
+  "executorRecordedAt": "2026-10-10T08:13:13.148Z",
+  "timestampCaution": "Executor clock is approximately9hours ahead; preserve raw time. Parent requested this phase after A/B pure11.49/14.53% overall results; frozen before own E outcomes.",
+  "phase": "post-diagnostic E; no production edits",
+  "reason": "Parent requested more durable HP235/160/250/195/220, corefixed128, bruteAoE64/MP20, supply8 and isolated16 comparison. No extra passive added.",
+  "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+  "scope": "Same13curated and24coherentC17 opponents, same16seeds as broad/A–D, bothsides andmirrors. Three slimecore targets plus six explicitly preserved oldcore mixes with28. Global patches also affect opponent slimecompanions.",
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-durable8.json",
+      "fileSha256": "8052f4e110abfcef1ef2f4e813cee858d3545454d79ba2d84f8a997ff121e2ba",
+      "canonicalSha256": "ae5086ae97a287dd430088bcb636b075424da151cf0663097181b2182fef785b",
+      "targets": [
+        {
+          "id": "pureslime",
+          "ids": [
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "role": "Pure slime core leader; C17"
+        },
+        {
+          "id": "provisional",
+          "ids": [
+            24,
+            25,
+            28,
+            2,
+            10
+          ],
+          "role": "Unendorsed provisional mixed slime + Bastet/Naga; C16"
+        },
+        {
+          "id": "c17-fist",
+          "ids": [
+            24,
+            25,
+            28,
+            7,
+            10
+          ],
+          "role": "Same C17 fist/Selkie/Naga as initial mixed diagnostic; no favorable selection from own outcomes"
+        }
+      ],
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 235,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 160
+          },
+          "26": {
+            "hp": 250
+          },
+          "27": {
+            "hp": 195
+          },
+          "28": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "ねり打ち",
+                "power": 76,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "散る重泡",
+                "power": 64,
+                "priority": 0,
+                "mpCost": 20,
+                "kind": "hit",
+                "all": true
+              }
+            ]
+          }
+        }
+      },
+      "matches": 9664
+    },
+    {
+      "path": "configs/balance-lab/slime-durable16.json",
+      "fileSha256": "a993fffa32ab9b119fa7c2f00d3f252b2ef924fc6b82746c1ec684d59147c701",
+      "canonicalSha256": "59ffde20df9d38ca0da531bbc766fbd06d30a00e64349b5bda393d65fcc2b041",
+      "targets": [
+        {
+          "id": "pureslime",
+          "ids": [
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "role": "Pure slime core leader; C17"
+        },
+        {
+          "id": "provisional",
+          "ids": [
+            24,
+            25,
+            28,
+            2,
+            10
+          ],
+          "role": "Unendorsed provisional mixed slime + Bastet/Naga; C16"
+        },
+        {
+          "id": "c17-fist",
+          "ids": [
+            24,
+            25,
+            28,
+            7,
+            10
+          ],
+          "role": "Same C17 fist/Selkie/Naga as initial mixed diagnostic; no favorable selection from own outcomes"
+        }
+      ],
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 235,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 160
+          },
+          "26": {
+            "hp": 250
+          },
+          "27": {
+            "hp": 195
+          },
+          "28": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "ねり打ち",
+                "power": 76,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "散る重泡",
+                "power": 64,
+                "priority": 0,
+                "mpCost": 20,
+                "kind": "hit",
+                "all": true
+              }
+            ]
+          }
+        },
+        "slimeSupply": {
+          "amount": 16
+        }
+      },
+      "matches": 9664
+    },
+    {
+      "path": "configs/balance-lab/slime-durable-oldcores.json",
+      "fileSha256": "a969d8402237cbac5a14f7197adf54b468d71e007c8490f97154521cc287b360",
+      "canonicalSha256": "3d2e3cbec407c55ab50ef19f47e1b73e0dce905ae882ba7d0716b101087600a7",
+      "targets": [
+        {
+          "id": "beast-with-fist",
+          "ids": [
+            12,
+            0,
+            13,
+            2,
+            28
+          ],
+          "role": "C17 fourbeast + slime brute; Beast core leader; compare global E companion buffs"
+        },
+        {
+          "id": "nature-with-fist",
+          "ids": [
+            14,
+            3,
+            9,
+            10,
+            28
+          ],
+          "role": "C17 fournature triple-poison + slime brute; nature core leader"
+        },
+        {
+          "id": "dragon-with-fist",
+          "ids": [
+            15,
+            16,
+            18,
+            2,
+            28
+          ],
+          "role": "C17 threeragon with heal-cleanse + slime brute; charge eligible"
+        },
+        {
+          "id": "material-shield-fist",
+          "ids": [
+            19,
+            20,
+            21,
+            2,
+            28
+          ],
+          "role": "C17 threematerial shield/Bastet + slime brute; repair eligible"
+        },
+        {
+          "id": "material-healer-fist",
+          "ids": [
+            19,
+            20,
+            22,
+            2,
+            28
+          ],
+          "role": "C17 threematerial twohealer + slime brute; repair eligible"
+        },
+        {
+          "id": "material-bull-swapped",
+          "ids": [
+            19,
+            20,
+            28,
+            7,
+            10
+          ],
+          "role": "Exact C17 prior strongest bull replacement by slime brute; only2material and repairineligible. Not causal damage-only comparison"
+        }
+      ],
+      "overrides": {
+        "monsters": {
+          "24": {
+            "hp": 235,
+            "skills": [
+              {
+                "name": "蓄え分け",
+                "kind": "restoreMp",
+                "power": 8,
+                "priority": 0,
+                "mpCost": 0,
+                "all": true
+              },
+              {
+                "name": "押し流し",
+                "power": 128,
+                "priority": 0,
+                "mpCost": 24,
+                "kind": "hit",
+                "all": false,
+                "fixedDamage": true
+              },
+              {
+                "name": "水面のかばい",
+                "power": 0,
+                "priority": 3,
+                "mpCost": 10,
+                "kind": "protect"
+              }
+            ]
+          },
+          "25": {
+            "hp": 160
+          },
+          "26": {
+            "hp": 250
+          },
+          "27": {
+            "hp": 195
+          },
+          "28": {
+            "hp": 220,
+            "skills": [
+              {
+                "name": "ねり打ち",
+                "power": 76,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "散る重泡",
+                "power": 64,
+                "priority": 0,
+                "mpCost": 20,
+                "kind": "hit",
+                "all": true
+              }
+            ]
+          }
+        }
+      },
+      "matches": 16960
+    }
+  ]
+}

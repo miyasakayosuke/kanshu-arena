@@ -1,0 +1,659 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen-before-system-candidate-outcomes",
+  "authoritativeDate": "2026-10-10 UTC",
+  "executorRecordedAt": "2026-10-10T10:06:05.724Z",
+  "timestampCaution": "Wall-clock metadata is auxiliary; hashes and freeze-before-execution establish the evidence sequence.",
+  "matrix": {
+    "path": "docs/all-family-matrix-freeze.json",
+    "sha256": "72362ed3de3128ea7e547020084829c66fccda41b6d569000e575aa82dc7a540"
+  },
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "tooling": [
+    {
+      "path": "scripts/balance-lab/all-family-support.mjs",
+      "sha256": "0ed0cd9cdee26dd937aa81a0c3a9371848c6cfa55fd7d3d05c722ec407e2a321"
+    },
+    {
+      "path": "scripts/balance-lab/archive-all-family-source.mjs",
+      "sha256": "424ca8704188b4dea0d1081b27eaf70cd8a3ab7b56d70a0723743390b4a7e63d"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-all-family-configs.mjs",
+      "sha256": "be96327493f20225e0ca27c3642fc9a78ae758112fd83cc5e81bacd212a1d9b6"
+    },
+    {
+      "path": "scripts/balance-lab/run-all-family-suite.mjs",
+      "sha256": "7d27d3723acd7bb47a752c395d9e00b66db7789bed7af9bf08a8cd830b816c24"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-all-family.mjs",
+      "sha256": "072f0e49ec053b7e3fdf33b608e323da0363a850704896bac90c880fd47db067"
+    },
+    {
+      "path": "scripts/balance-lab/verify-all-family.mjs",
+      "sha256": "11873b383631dfd8051c33dfc7dcb185a05c39ea7cce661911bce36611a3bed8"
+    },
+    {
+      "path": "scripts/balance-lab/reconstruct-all-family-source.mjs",
+      "sha256": "07f4c1c5adfb20746a15ac95160d6bf229cad281a70d275731e73c685d2a542b"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-observer-definitions.mjs",
+      "sha256": "6f7ebfde4c5c1636479f869201ac2c7d54c873df67753c0a7c75237c9e7eecce"
+    },
+    {
+      "path": "src/balanceLabAllFamily.test.ts",
+      "sha256": "8a5eb664c18279569ff33f3d73fe6f20a4fdaf77e6d0112f7119091973b09775"
+    },
+    {
+      "path": "src/balanceLabAllFamilyFailure.test.ts",
+      "sha256": "d070e6f5ba66a49d17c99058d5c3509285ae7801cb91cf44a9603d81a71b2cbd"
+    },
+    {
+      "path": "src/balanceLabAllFamilyCli.test.ts",
+      "sha256": "4c65bb21cd5b50e1723672d78d8dfe78dca17628adca1c972348836b1f11fa4e"
+    }
+  ],
+  "requiredExecutedMatches": 132096,
+  "reservedMaximumExecutedMatches": 21504,
+  "counting": {
+    "matrixExecuted": 115200,
+    "matrixCandidateRows": 57600,
+    "matrixUniqueUnorderedNonmirrorGames": 52992,
+    "matrixUniquePhysicalMirrorGames": 2304,
+    "matrixUniquePhysicalCandidateGames": 55296,
+    "counterExecuted": 16896,
+    "counterCandidateNonmirrorGames": 4608,
+    "note": "Every required config executes baseline and candidate, both orientations, and mirrors. Repeated default baselines, identity candidates, and swapped mirror duplicates are controls; never extra independent observations. Logical reversed matrix rows do not add games."
+  },
+  "teamFeatures": [
+    {
+      "id": "fullbeast",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 1,
+      "breakerOwners": 2,
+      "priorityAttackOwners": 3
+    },
+    {
+      "id": "fullnature",
+      "cost": 15,
+      "poisonOwners": 3,
+      "singleCleanseOwners": 0,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 2,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 2
+    },
+    {
+      "id": "puredragon",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 3,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "purematerial",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "pureslime",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "puredemon",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 2,
+      "breakerOwners": 2,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "pureundead",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 1,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "janus-mixed",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 1,
+      "healingOwners": 1,
+      "guardOwners": 3,
+      "breakerOwners": 3,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "nature-brute-dryas",
+      "cost": 17,
+      "poisonOwners": 2,
+      "singleCleanseOwners": 0,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 2,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "nature-brute-tengu",
+      "cost": 17,
+      "poisonOwners": 2,
+      "singleCleanseOwners": 0,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 2,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 2
+    },
+    {
+      "id": "old-triple-poison",
+      "cost": 15,
+      "poisonOwners": 3,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 3,
+      "guardOwners": 3,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "material-strong",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 3,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "slime-strong-area",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 1,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 2
+    },
+    {
+      "id": "slime-strong-poison",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 1,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 2
+    },
+    {
+      "id": "undead-reapply",
+      "cost": 17,
+      "poisonOwners": 3,
+      "singleCleanseOwners": 0,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 1,
+      "guardOwners": 1,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "janus-poison",
+      "cost": 15,
+      "poisonOwners": 3,
+      "singleCleanseOwners": 0,
+      "wholeCleanseOwners": 1,
+      "healingOwners": 1,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "janus-ward",
+      "cost": 16,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 1,
+      "healingOwners": 3,
+      "guardOwners": 3,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "demon-dual-cleanse",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 3,
+      "breakerOwners": 2,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "dragon-cleanse-mixed",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 3,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 3,
+      "guardOwners": 4,
+      "breakerOwners": 0,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "material-break-mixed",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 3,
+      "guardOwners": 1,
+      "breakerOwners": 2,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "slime-break-mixed",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 2
+    },
+    {
+      "id": "demon-poison-mixed",
+      "cost": 17,
+      "poisonOwners": 1,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 3,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 0
+    },
+    {
+      "id": "undead-burst-mixed",
+      "cost": 17,
+      "poisonOwners": 2,
+      "singleCleanseOwners": 1,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 0,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    },
+    {
+      "id": "beast-heavy-mixed",
+      "cost": 17,
+      "poisonOwners": 0,
+      "singleCleanseOwners": 2,
+      "wholeCleanseOwners": 0,
+      "healingOwners": 2,
+      "guardOwners": 2,
+      "breakerOwners": 1,
+      "priorityAttackOwners": 1
+    }
+  ],
+  "policy": "Explicit production autoOrders on both sides. Independent/default and reserve-planned arms each run scale1, scale0.5 and scale0. Compare a candidate against scale1 in the SAME arm, and also show the scale1 policy difference. Repeated suite baselines always use shipping defaults and are verified as controls.",
+  "partitions": [
+    "COST<=17: each row against all other frozen teams",
+    "exactC17: only exactC17 rows against the other exactC17 opponents"
+  ],
+  "reserveRule": {
+    "status": "confirmed-before-outcomes",
+    "rule": "Extend all three fixed counterplans for one arm/scale/shell together only when fewer than two have passed and at least one remaining counter meets point score >=60% and both physical-orientation scores >50%, but its approximate seed-clustered 95% lower bound is <=50%, such that two passes remain possible. Use all64 reserved seeds once, then combine all128 seeds. Never extend clear point/orientation failures, replace teams, or change thresholds."
+  },
+  "selection": "Prefer scale0.5 if all gates pass; consider scale0 only if scale0.5 fails and scale0 passes. An unresolved new >=90% row holds adoption. Both fail means the mechanism-only hypothesis is insufficient and the milestone remains open. Parent reviews before production adoption.",
+  "configs": [
+    {
+      "id": "all-family-matrix-independent-1",
+      "phase": "matrix",
+      "arm": "independent",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-independent-1.json",
+      "fileSha256": "36f93002f50a286d602fc5f091c5c8c71d92a72308da9d7953bc37140d733fc8",
+      "canonicalSha256": "657b47cdc3b379c90e2c872a99c1c769f8303369a1ae3c7fefad4913e5ae24dd",
+      "matches": 19200,
+      "scheduleSha256": "35d9078c9a54fc7dab6fafc10b204129a6f965fdd3257ac9dbc3b52c920d6117"
+    },
+    {
+      "id": "all-family-counter-independent-1",
+      "phase": "counter",
+      "arm": "independent",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-independent-1.json",
+      "fileSha256": "736f6d880c5723109d2f77e657ac276fb8181e8a239fc536cec88d0a12c7eabd",
+      "canonicalSha256": "ba9ecae64ba6190acacee120ca9ace11fb26559a60c90eedd75ad5c1cde39fb8",
+      "matches": 2816,
+      "scheduleSha256": "e093c5310a2374e5127a45a36dda5d56bb4d5510ca109a3c1c49bee4ba859088"
+    },
+    {
+      "id": "all-family-reserve-independent-1-dryas",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 1,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-independent-1-dryas.json",
+      "fileSha256": "4850533c63fdfeaaee0f3296569c2e4fee09ac8d4a8edf18440c82808aaae651",
+      "canonicalSha256": "9052f12557621b5f8e85393e82dd9c044dc4a0da88879ae9906a35e4047cbfc9",
+      "matches": 1792,
+      "scheduleSha256": "75e08fb91867b3d94d697dfb9c14c2ef65247810fe85205b7414d1bd41287bf3"
+    },
+    {
+      "id": "all-family-reserve-independent-1-tengu",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 1,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-independent-1-tengu.json",
+      "fileSha256": "d7a657d440528de0e39fce98a513562eabe31ed395044f1f672bff55f94b020a",
+      "canonicalSha256": "9d7825eef4d541aa6c8c05cb1a10b097374b8ab0d0da7f50e4c12d3bf3788243",
+      "matches": 1792,
+      "scheduleSha256": "eae1436e9d8d8c4e1f85f37daf7715fee4438b6603048f126d4fa02f322fd81e"
+    },
+    {
+      "id": "all-family-matrix-independent-half",
+      "phase": "matrix",
+      "arm": "independent",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-independent-half.json",
+      "fileSha256": "fb87c69ae82af05b7f745b3c2624245b547a2f0598c38c3f2bde9e01608318c6",
+      "canonicalSha256": "8a2b6fa909c6eb9e2e6aa9b45c138050eed2d04fbd45033843617127d85f9a37",
+      "matches": 19200,
+      "scheduleSha256": "c621808674a1430761c179d7274e943a906a31ac9a4cc115bfbd341c8f219335"
+    },
+    {
+      "id": "all-family-counter-independent-half",
+      "phase": "counter",
+      "arm": "independent",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-independent-half.json",
+      "fileSha256": "d5f5761e267eea570f40a7dba28a8908d1e92ed0e9c44fc183e16228608124c9",
+      "canonicalSha256": "a5fb3426b309e210f1a056340ae3a1b7cbb2796bd513a49a8e5c3d59656a6a79",
+      "matches": 2816,
+      "scheduleSha256": "bb736456f2e3014c7f20cb51ccd5f0757cda6e7317e497011e2cf9deeef2e353"
+    },
+    {
+      "id": "all-family-reserve-independent-half-dryas",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 0.5,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-independent-half-dryas.json",
+      "fileSha256": "4957e226a36e7ce32d66cc6ee4ab5bd20f3e404600ace94f4159f5acc1b5706f",
+      "canonicalSha256": "98447b9a1d2288637e23deb83ae9a491e424e1a64a55a9a0ae047a4d6121b285",
+      "matches": 1792,
+      "scheduleSha256": "17a157f754647e3e561be5d656f30736f1eaf94031e732f32386c152288fb0d9"
+    },
+    {
+      "id": "all-family-reserve-independent-half-tengu",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 0.5,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-independent-half-tengu.json",
+      "fileSha256": "2cddc9ee9d3e7d5c46cbe02647edc39176952639a3a1c6a48668bc1112f7c4c8",
+      "canonicalSha256": "9a55ff28694b5532e1e514d4d4c4fe61d1ce4eb9ad95927ab940c28c11973c26",
+      "matches": 1792,
+      "scheduleSha256": "738248f3aacfd0ecd0f104cde48f1476277ba2d14374a0f8d2c572f10db32b6b"
+    },
+    {
+      "id": "all-family-matrix-independent-0",
+      "phase": "matrix",
+      "arm": "independent",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-independent-0.json",
+      "fileSha256": "24b842f5ebe70bf0e5f92ed8f83916ce242d72a749bc20bf2ffb873416574266",
+      "canonicalSha256": "1d3f228c09fa2addb24d5ffa925278ddcf3f62b0788a575e7fca8b8caf3134a4",
+      "matches": 19200,
+      "scheduleSha256": "319d0dd34774b07f976e0bae2b017372a7c182dfa64335ef0619ebeadfd93238"
+    },
+    {
+      "id": "all-family-counter-independent-0",
+      "phase": "counter",
+      "arm": "independent",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-independent-0.json",
+      "fileSha256": "4cb0a32fa6bdbf3d631a36e3c20e7bd89807949af99da2de7cc7fbbae433e439",
+      "canonicalSha256": "d028b4ed56228a3decfa9cfbf98e70135fc1a627b96988b5e3c0f40c830207f4",
+      "matches": 2816,
+      "scheduleSha256": "d819b198bed293f9fd0bee92911d02da168a22ecaf7234b6d4de2f97a620f396"
+    },
+    {
+      "id": "all-family-reserve-independent-0-dryas",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 0,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-independent-0-dryas.json",
+      "fileSha256": "55fec9edc4104580df4bd33ac472eafaf5e81a9d3a776e871641cfefed2d82fb",
+      "canonicalSha256": "363603255c63a785d61510a95a1a131baabd786a30828204e8ec6b687fcc8ba8",
+      "matches": 1792,
+      "scheduleSha256": "b8dd8a66c934ab56079893110226b567d87c5b0f2913c0e5d0c9321c034e9920"
+    },
+    {
+      "id": "all-family-reserve-independent-0-tengu",
+      "phase": "reserve",
+      "arm": "independent",
+      "scale": 0,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-independent-0-tengu.json",
+      "fileSha256": "5a7bca740ed9cb8c777a7d1461bc80a1ed30c5262e18e27d2fbcbde25ad73c8e",
+      "canonicalSha256": "a01bdcb8d97d199334e24e02c27d66152954a463a2839fd025b7120adeca653f",
+      "matches": 1792,
+      "scheduleSha256": "7fe558f15faaed78defe5621dc1358bf834f821e7efd821f79dc9bcacbf16a49"
+    },
+    {
+      "id": "all-family-matrix-reserve-1",
+      "phase": "matrix",
+      "arm": "reserve",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-reserve-1.json",
+      "fileSha256": "b6d7225a4c297884f5d05099833df57d25f799eee751f305951f28e4b5b57993",
+      "canonicalSha256": "734db66d494aa57027ab1eb8b5da93ffe5d057b7d3b24143e30e97d459c04d9b",
+      "matches": 19200,
+      "scheduleSha256": "6e558c622ef6d6d3916a1cc10f8662157ad636e3d1f02cf2636631d29603dc70"
+    },
+    {
+      "id": "all-family-counter-reserve-1",
+      "phase": "counter",
+      "arm": "reserve",
+      "scale": 1,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-reserve-1.json",
+      "fileSha256": "99ff8ca61e8c47b6e1dd575f81e9faa9a677830328bc9a2746ab07e9d9b770f8",
+      "canonicalSha256": "9f1019bce15088decabf2c9561385e21966963872b4a5ff467a35bebe7d63a0b",
+      "matches": 2816,
+      "scheduleSha256": "677ca12929d4c27ee3c09773b64df4bf2cca58fc6361fa16787a40abe2d4edc7"
+    },
+    {
+      "id": "all-family-reserve-reserve-1-dryas",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 1,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-reserve-1-dryas.json",
+      "fileSha256": "1d70da65f516f4942a705580070bcd76ee38efe518cd13371357dac66f9242d0",
+      "canonicalSha256": "919e95faaba894c6acba7fa434dccb89601336efb01797e1041f9bba33a54ddd",
+      "matches": 1792,
+      "scheduleSha256": "0acdbe9deb8da296ae777b143786e206c842a953a73da65714ca50c137aee12d"
+    },
+    {
+      "id": "all-family-reserve-reserve-1-tengu",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 1,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-reserve-1-tengu.json",
+      "fileSha256": "2325956f804dce6070c0608f4e6295590092d15742347f6bfdd6417eee6162fa",
+      "canonicalSha256": "cd7061b470e4eb894ef4aa3609ab0108026c7821e1732c882b69a2c7ca8a7725",
+      "matches": 1792,
+      "scheduleSha256": "481cfdf05a32c008456bd97ae9cc34488d1a71f21737aec73ea5316175aba7bd"
+    },
+    {
+      "id": "all-family-matrix-reserve-half",
+      "phase": "matrix",
+      "arm": "reserve",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-reserve-half.json",
+      "fileSha256": "db0b5d4605b8af6c11044f392e48211a32dbcd5b466fc46376de3cb9f4945fc8",
+      "canonicalSha256": "d7e41536dab554f75f2212651686a8ea7303105e02d8de50b1be187a886d7bd0",
+      "matches": 19200,
+      "scheduleSha256": "06d4924896b7d9003216cd0a6a3f35d16251674023f9ea966d8133d827b16ef1"
+    },
+    {
+      "id": "all-family-counter-reserve-half",
+      "phase": "counter",
+      "arm": "reserve",
+      "scale": 0.5,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-reserve-half.json",
+      "fileSha256": "63a68bc1b6973d987b71dc15f0ab117136f59b7714d6a1c24babbd5b19e29216",
+      "canonicalSha256": "1760781879d7d8cb94d73aff882a1edd4a02bc78264671239f62cf523038c730",
+      "matches": 2816,
+      "scheduleSha256": "ea1afe458bea73b591749e57f0ecd62286d9a63c1e66d618ec759ffb2df9fe75"
+    },
+    {
+      "id": "all-family-reserve-reserve-half-dryas",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 0.5,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-reserve-half-dryas.json",
+      "fileSha256": "9a1b4963df3e3aa20d4d1caec53beb48f781de81bc797bcf70ed605da43413e6",
+      "canonicalSha256": "1293889e346b73a5af3c0e5619137b118786017ac91f6f8b4d2f42ceb98b8542",
+      "matches": 1792,
+      "scheduleSha256": "64ca83bc029fae6308eb4aa9360e51587e838553a482821e4551f6a5a17c0004"
+    },
+    {
+      "id": "all-family-reserve-reserve-half-tengu",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 0.5,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-reserve-half-tengu.json",
+      "fileSha256": "6b3d0c7a156d65e7c9a0a59736a20b858e2f062f214ef80844020142eda5e085",
+      "canonicalSha256": "5bf345d006e938f71cd29e6351b2eebbd4a28bb7dd587d4e92f4fb1bab79561e",
+      "matches": 1792,
+      "scheduleSha256": "666a7553e59ae3447b4b660747aeeaf8cf936cc7200ea368902f49e9940cf003"
+    },
+    {
+      "id": "all-family-matrix-reserve-0",
+      "phase": "matrix",
+      "arm": "reserve",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-matrix-reserve-0.json",
+      "fileSha256": "6b0553b242c7de923c95ab11f41d3501b8cbdec5996cff9474fd713e587cfbbe",
+      "canonicalSha256": "7bd14499ed1d8591104a3141a64a49ce8d72edb413292c1df9d13188066b2b41",
+      "matches": 19200,
+      "scheduleSha256": "ac243314fa755b72e1d7926ce78da5cdfe525ee7e4c4b36ef3b15e2b7a65bfb1"
+    },
+    {
+      "id": "all-family-counter-reserve-0",
+      "phase": "counter",
+      "arm": "reserve",
+      "scale": 0,
+      "shell": null,
+      "path": "configs/balance-lab/all-family-counter-reserve-0.json",
+      "fileSha256": "fcc4731c31a6f54324572a0b00a5c3ff9f9681a5ad77cdcc00ea7ecabf79500a",
+      "canonicalSha256": "c5d7f6c290356a5dfdc6945851e809a4b4888ff0524560cfc7e9f2fe26e8fcc2",
+      "matches": 2816,
+      "scheduleSha256": "f7fc875b415ff3fa5327b62a6e6ef034d888a5f7dfd78dd98db8796257026478"
+    },
+    {
+      "id": "all-family-reserve-reserve-0-dryas",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 0,
+      "shell": "nature-brute-dryas",
+      "path": "configs/balance-lab/all-family-reserve-reserve-0-dryas.json",
+      "fileSha256": "cb081c511e4d2fb4b8b163ba787521c83fa4c79c4e84c23f07468c7ad56e1f46",
+      "canonicalSha256": "1c5de1d7a6a07268629e010bf8a00c37294234e172338748f26b615f8536a9b9",
+      "matches": 1792,
+      "scheduleSha256": "034282a0b5018cf0c5268eb53c096a8b62a98df613cbff35ec355dfae9f6a0f8"
+    },
+    {
+      "id": "all-family-reserve-reserve-0-tengu",
+      "phase": "reserve",
+      "arm": "reserve",
+      "scale": 0,
+      "shell": "nature-brute-tengu",
+      "path": "configs/balance-lab/all-family-reserve-reserve-0-tengu.json",
+      "fileSha256": "d9744463a9a8a6cddba6bbfee9fdceb908337941df90ecbbdd92ac9d981933be",
+      "canonicalSha256": "b18609f0a90f84d92a8a50dd598414944ee265070363291039515326614f8d87",
+      "matches": 1792,
+      "scheduleSha256": "62fa6424071bd48980d2c61d882879a3a1e311af7ea14ba72a8bed7092c5a7c3"
+    }
+  ]
+}

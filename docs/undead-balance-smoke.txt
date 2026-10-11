@@ -1,0 +1,3 @@
+Running 736 matches: identical policy, paired seeds, side swaps and mirrors.
+Saved lab-results/undead-smoke-current/{config.json,report.json,report.md}
+Matchup score: 51.92% → 51.92%; paired change 0.00% points. These are policy/suite-specific measurements.

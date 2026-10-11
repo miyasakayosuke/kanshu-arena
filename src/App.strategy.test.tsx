@@ -4,6 +4,10 @@ import {createRoot,type Root} from 'react-dom/client';
 import {beforeEach,afterEach,describe,it,expect,vi} from 'vitest';
 import App from './App';
 import * as engine from './engine';
+import type { MockInstance } from 'vitest';
+// Leader previews also call start with no opponent; keep these assertions about real encounters.
+const battleStarts = (spy: MockInstance<typeof engine.start>) => spy.mock.calls.flatMap((args, index) =>
+  args[1].length ? [{ args, state: spy.mock.results[index].value as engine.State }] : []);
 let root:Root;
 const button=(text:string)=>[...document.querySelectorAll<HTMLButtonElement>('button')].find(b=>b.textContent?.includes(text))!;
 const label=(text:string)=>document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
@@ -55,18 +59,18 @@ describe('strategy workshop and fair rules',()=>{
     await click(button('標準戦'));expect(button('この編成で対戦する').disabled).toBe(false);
   });
   it('combines role, leader and cost filters and can reset them',async()=>{
-    await mount();await click(button('モンスター図鑑を開く'));await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(5);
+    await mount();await click(button('モンスター図鑑を開く'));await click(button('味方を守る'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(9);
     await select('コストで絞り込み','2');await select('リーダー効果で絞り込み','hp');
     expect(document.querySelectorAll('.rosterItem')).toHaveLength(2);expect(document.querySelector('.candidateList')?.textContent).toContain('ナーガ');expect(document.querySelector('.candidateList')?.textContent).toContain('リンドヴルム');
     await click(label('絞り込みをリセット'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(engine.monsters.length);
-    await click(button('毒解除'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(4);
+    await click(button('毒解除'));expect(document.querySelectorAll('.rosterItem')).toHaveLength(8);
   });
   it('does not reveal an enemy party before starting, and lightweight opponents obey the selected budget',async()=>{
     const start=vi.spyOn(engine,'start');await mount();
     expect(document.querySelector('.enemyIntel')).toBeNull();expect(button('作戦')).toBeUndefined();
     await openArena();expect(document.querySelector('.ruleHint')?.textContent).toContain('相手の編成は対戦開始時に公開');
     await click(button('軽量戦'));await startBattle();
-    expect(engine.cost(start.mock.calls[0][1])).toBeLessThanOrEqual(15);
+    expect(engine.cost(battleStarts(start)[0].args[1])).toBeLessThanOrEqual(15);
     await click(button('作戦'));expect(document.querySelectorAll('.enemyIntel details')).toHaveLength(5);
     expect(document.querySelector('.tacticsModal')?.textContent).toContain('両軍COST上限15');
   });
@@ -98,18 +102,18 @@ describe('counterplay, reading opponents and practice',()=>{
     await act(async()=>vi.advanceTimersByTime(20000));expect(document.querySelector('.tacticsModal')).toBeNull();expect(document.querySelector('.playingPanel')).toBeTruthy();
   });
   it('restarts the exact encounter and supports rebuilding before the same matchup',async()=>{
-    const start=vi.spyOn(engine,'start');await mount();await startBattle();const original=structuredClone(start.mock.calls[0]);
+    const start=vi.spyOn(engine,'start');await mount();await startBattle();const original=structuredClone(battleStarts(start)[0].args);
     await finish();await click(button('同じ編成ですぐ再戦'));
-    expect(start.mock.calls[1]).toEqual(original);expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
-    expect([...document.querySelectorAll('.commanderMp')].map(el=>el.textContent)).toEqual(start.mock.results[1].value.allies.map((unit:engine.Unit)=>`MP ${unit.monster.mp}/${unit.monster.mp}`));
+    expect(battleStarts(start)).toHaveLength(2);expect(battleStarts(start)[1].args).toEqual(original);expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
+    expect([...document.querySelectorAll('.commanderMp')].map(el=>el.textContent)).toEqual(battleStarts(start)[1].state.allies.map((unit:engine.Unit)=>`MP ${unit.monster.mp}/${unit.monster.mp}`));
     await finish();await click(button('編成を見直して再戦'));expect(document.querySelector('.practiceNotice')).toBeTruthy();
     await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));await openArena();await click(button('この編成で同じ相手に再戦'));
-    expect(start.mock.calls[2][0][0]).toBe(2);expect(start.mock.calls[2].slice(1)).toEqual(original.slice(1));
+    expect(battleStarts(start)).toHaveLength(3);expect(battleStarts(start)[2].args[0][0]).toBe(2);expect(battleStarts(start)[2].args.slice(1)).toEqual(original.slice(1));
     expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
   });
   it('cancels controlled practice when the rule is changed',async()=>{
     const start=vi.spyOn(engine,'start');await mount();await startBattle();await finish();await click(button('編成を見直して再戦'));
     await click(button('軽量戦'));expect(document.querySelector('.practiceNotice')).toBeNull();await startBattle();
-    expect(engine.cost(start.mock.calls[1][1])).toBeLessThanOrEqual(15);
+    expect(engine.cost(battleStarts(start)[1].args[1])).toBeLessThanOrEqual(15);
   });
 });

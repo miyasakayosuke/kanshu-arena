@@ -1,0 +1,1144 @@
+{
+  "status": "frozen-before-suite-outcomes",
+  "preOutcomeFreezeError": "Initial generation stopped before any suite ran: combined scenario labels exceeded the strict64-character ID bound. Replaced only scenario IDs with indexed IDs; team/seed selection unchanged. All configs now validate before writes.",
+  "priorProbe": "One pure-slime/nature seed42 contract smoke observed before freeze: loss, no supply. No team/seed was selected from that outcome.",
+  "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+  "selectionSeed": 72610210,
+  "method": "Enumerate every legal exactC17 5-member set with core leader and >=3 same family. Opponent families exclude only core24, permit all other slime companions. Slime pool permits full roster. Seeded shuffle, first unused qualifying row per ownership stratum; duration chooses highest total MP among unused. No observed outcomes used, no redraw. Preserve all selected teams, even weak/duplicate-outcome examples.",
+  "limitations": [
+    "Strata are skill ownership, not proof of actual use or optimal play.",
+    "Pools are exhaustively enumerated; matches sample six sets per family, not every set or every leader permutation.",
+    "Additional rank-sampled legal teams are not uniform or strong; coherent and known-strong comparisons remain separate.",
+    "Prior material strong/counter teams are purposive evidence-informed anchors, not independent random observations."
+  ],
+  "pools": [
+    {
+      "family": "beast",
+      "core": 12,
+      "exactC17LegalMemberSets": 615,
+      "poolSha256": "b7fc29728b41c8b22fff48215918b6dbbc23161a084175d63cb6952276f0cc2c",
+      "stratumCandidateCounts": {
+        "healers": 237,
+        "poison-cleanse": 171,
+        "strip": 393,
+        "area": 238,
+        "priority": 327,
+        "duration": 615
+      }
+    },
+    {
+      "family": "nature",
+      "core": 14,
+      "exactC17LegalMemberSets": 444,
+      "poolSha256": "32a83e5adc8406f057c5fc6f4c11e8113626ebbc59dfc33ff6ecb2d5e49e00a9",
+      "stratumCandidateCounts": {
+        "healers": 327,
+        "poison-cleanse": 168,
+        "strip": 221,
+        "area": 444,
+        "priority": 189,
+        "duration": 444
+      }
+    },
+    {
+      "family": "dragon",
+      "core": 15,
+      "exactC17LegalMemberSets": 422,
+      "poolSha256": "73b55f54798215268443a2ee87c06613e8f8e9a4c86a4849e4d0a07463f369e7",
+      "stratumCandidateCounts": {
+        "healers": 105,
+        "poison-cleanse": 91,
+        "strip": 301,
+        "area": 343,
+        "priority": 34,
+        "duration": 422
+      }
+    },
+    {
+      "family": "material",
+      "core": 19,
+      "exactC17LegalMemberSets": 422,
+      "poolSha256": "85c7a035231cbc2d53c3b0bd1a14a531ce113d0536a7289085c97f0d69781ba0",
+      "stratumCandidateCounts": {
+        "healers": 105,
+        "poison-cleanse": 92,
+        "strip": 301,
+        "area": 283,
+        "priority": 34,
+        "duration": 422
+      }
+    },
+    {
+      "family": "slime",
+      "core": 24,
+      "exactC17LegalMemberSets": 432,
+      "poolSha256": "4546de34560ff905d5a9dc6b94125bad21cce0675a1e79fb484bc2c441ef5978",
+      "stratumCandidateCounts": {
+        "healers": 105,
+        "poison-cleanse": 92,
+        "strip": 306,
+        "area": 160,
+        "priority": 122,
+        "duration": 432
+      }
+    }
+  ],
+  "selected": [
+    {
+      "id": "coherent-beast-healers",
+      "ids": [
+        12,
+        0,
+        2,
+        3,
+        27
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; healers skill-ownership stratum",
+      "features": {
+        "healers": 3,
+        "poisoners": 1,
+        "cleansers": 2,
+        "strippers": 0,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 310
+      }
+    },
+    {
+      "id": "coherent-beast-poison-cleanse",
+      "ids": [
+        12,
+        7,
+        9,
+        11,
+        16
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 274
+      }
+    },
+    {
+      "id": "coherent-beast-strip",
+      "ids": [
+        12,
+        11,
+        13,
+        21,
+        28
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; strip skill-ownership stratum",
+      "features": {
+        "healers": 0,
+        "poisoners": 0,
+        "cleansers": 0,
+        "strippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 250
+      }
+    },
+    {
+      "id": "coherent-beast-area",
+      "ids": [
+        12,
+        0,
+        9,
+        11,
+        13
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; area skill-ownership stratum",
+      "features": {
+        "healers": 0,
+        "poisoners": 1,
+        "cleansers": 0,
+        "strippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 4,
+        "totalMp": 260
+      }
+    },
+    {
+      "id": "coherent-beast-priority",
+      "ids": [
+        12,
+        0,
+        7,
+        13,
+        21
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; priority skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 274
+      }
+    },
+    {
+      "id": "coherent-beast-duration",
+      "ids": [
+        12,
+        2,
+        3,
+        7,
+        22
+      ],
+      "role": "Frozen full legal exactC17 beast core-leader pool, >=3 family; duration skill-ownership stratum",
+      "features": {
+        "healers": 4,
+        "poisoners": 1,
+        "cleansers": 2,
+        "strippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 334
+      }
+    },
+    {
+      "id": "coherent-nature-healers",
+      "ids": [
+        14,
+        3,
+        6,
+        13,
+        19
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; healers skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 1,
+        "cleansers": 0,
+        "strippers": 0,
+        "areaUsers": 4,
+        "priorityUsers": 2,
+        "totalMp": 278
+      }
+    },
+    {
+      "id": "coherent-nature-poison-cleanse",
+      "ids": [
+        14,
+        2,
+        3,
+        6,
+        28
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "features": {
+        "healers": 3,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 4,
+        "priorityUsers": 1,
+        "totalMp": 294
+      }
+    },
+    {
+      "id": "coherent-nature-strip",
+      "ids": [
+        14,
+        6,
+        8,
+        9,
+        11
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; strip skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 0,
+        "strippers": 2,
+        "areaUsers": 4,
+        "priorityUsers": 3,
+        "totalMp": 260
+      }
+    },
+    {
+      "id": "coherent-nature-area",
+      "ids": [
+        14,
+        9,
+        10,
+        21,
+        23
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; area skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 2,
+        "cleansers": 0,
+        "strippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 1,
+        "totalMp": 266
+      }
+    },
+    {
+      "id": "coherent-nature-priority",
+      "ids": [
+        14,
+        0,
+        3,
+        9,
+        16
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; priority skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 2,
+        "cleansers": 0,
+        "strippers": 0,
+        "areaUsers": 4,
+        "priorityUsers": 2,
+        "totalMp": 274
+      }
+    },
+    {
+      "id": "coherent-nature-duration",
+      "ids": [
+        14,
+        2,
+        3,
+        7,
+        10
+      ],
+      "role": "Frozen full legal exactC17 nature core-leader pool, >=3 family; duration skill-ownership stratum",
+      "features": {
+        "healers": 4,
+        "poisoners": 2,
+        "cleansers": 2,
+        "strippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 0,
+        "totalMp": 328
+      }
+    },
+    {
+      "id": "coherent-dragon-healers",
+      "ids": [
+        15,
+        11,
+        16,
+        18,
+        22
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; healers skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 2,
+        "areaUsers": 1,
+        "priorityUsers": 1,
+        "totalMp": 274
+      }
+    },
+    {
+      "id": "coherent-dragon-poison-cleanse",
+      "ids": [
+        15,
+        2,
+        3,
+        5,
+        16
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 0,
+        "totalMp": 292
+      }
+    },
+    {
+      "id": "coherent-dragon-strip",
+      "ids": [
+        15,
+        16,
+        17,
+        22,
+        23
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; strip skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 0,
+        "strippers": 2,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 268
+      }
+    },
+    {
+      "id": "coherent-dragon-area",
+      "ids": [
+        15,
+        5,
+        18,
+        21,
+        25
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; area skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 256
+      }
+    },
+    {
+      "id": "coherent-dragon-priority",
+      "ids": [
+        15,
+        0,
+        6,
+        17,
+        18
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; priority skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 1,
+        "areaUsers": 3,
+        "priorityUsers": 2,
+        "totalMp": 264
+      }
+    },
+    {
+      "id": "coherent-dragon-duration",
+      "ids": [
+        15,
+        2,
+        17,
+        18,
+        22
+      ],
+      "role": "Frozen full legal exactC17 dragon core-leader pool, >=3 family; duration skill-ownership stratum",
+      "features": {
+        "healers": 3,
+        "poisoners": 0,
+        "cleansers": 2,
+        "strippers": 2,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 306
+      }
+    },
+    {
+      "id": "coherent-material-healers",
+      "ids": [
+        19,
+        6,
+        18,
+        22,
+        23
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; healers skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 278
+      }
+    },
+    {
+      "id": "coherent-material-poison-cleanse",
+      "ids": [
+        19,
+        9,
+        21,
+        22,
+        27
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 286
+      }
+    },
+    {
+      "id": "coherent-material-strip",
+      "ids": [
+        19,
+        9,
+        21,
+        22,
+        26
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; strip skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 0,
+        "strippers": 2,
+        "areaUsers": 2,
+        "priorityUsers": 1,
+        "totalMp": 272
+      }
+    },
+    {
+      "id": "coherent-material-area",
+      "ids": [
+        19,
+        9,
+        13,
+        21,
+        23
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; area skill-ownership stratum",
+      "features": {
+        "healers": 0,
+        "poisoners": 1,
+        "cleansers": 0,
+        "strippers": 0,
+        "areaUsers": 2,
+        "priorityUsers": 2,
+        "totalMp": 254
+      }
+    },
+    {
+      "id": "coherent-material-priority",
+      "ids": [
+        19,
+        0,
+        21,
+        22,
+        25
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; priority skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 0,
+        "strippers": 1,
+        "areaUsers": 2,
+        "priorityUsers": 2,
+        "totalMp": 268
+      }
+    },
+    {
+      "id": "coherent-material-duration",
+      "ids": [
+        19,
+        2,
+        7,
+        20,
+        22
+      ],
+      "role": "Frozen full legal exactC17 material core-leader pool, >=3 family; duration skill-ownership stratum",
+      "features": {
+        "healers": 3,
+        "poisoners": 0,
+        "cleansers": 3,
+        "strippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 0,
+        "totalMp": 328
+      }
+    },
+    {
+      "id": "coherent-slime-healers",
+      "ids": [
+        24,
+        7,
+        8,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; healers skill-ownership stratum",
+      "features": {
+        "healers": 2,
+        "poisoners": 0,
+        "cleansers": 2,
+        "strippers": 1,
+        "areaUsers": 1,
+        "priorityUsers": 1,
+        "totalMp": 288
+      }
+    },
+    {
+      "id": "coherent-slime-poison-cleanse",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; poison-cleanse skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 3,
+        "priorityUsers": 2,
+        "totalMp": 270
+      }
+    },
+    {
+      "id": "coherent-slime-strip",
+      "ids": [
+        24,
+        12,
+        22,
+        25,
+        26
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; strip skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 0,
+        "strippers": 3,
+        "areaUsers": 0,
+        "priorityUsers": 1,
+        "totalMp": 276
+      }
+    },
+    {
+      "id": "coherent-slime-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; area skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 1,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 2,
+        "priorityUsers": 2,
+        "totalMp": 272
+      }
+    },
+    {
+      "id": "coherent-slime-priority",
+      "ids": [
+        24,
+        13,
+        19,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; priority skill-ownership stratum",
+      "features": {
+        "healers": 1,
+        "poisoners": 0,
+        "cleansers": 1,
+        "strippers": 0,
+        "areaUsers": 1,
+        "priorityUsers": 2,
+        "totalMp": 272
+      }
+    },
+    {
+      "id": "coherent-slime-duration",
+      "ids": [
+        24,
+        2,
+        7,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; duration skill-ownership stratum",
+      "features": {
+        "healers": 3,
+        "poisoners": 0,
+        "cleansers": 3,
+        "strippers": 0,
+        "areaUsers": 0,
+        "priorityUsers": 1,
+        "totalMp": 308
+      }
+    }
+  ],
+  "supplementarySample": {
+    "algorithm": "legal-suffix-dp-coprime-rank-walk-v1",
+    "pool": 73373,
+    "teams": [
+      {
+        "id": "generated-1",
+        "ids": [
+          21,
+          0,
+          17,
+          1,
+          26
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-2",
+        "ids": [
+          15,
+          13,
+          6,
+          17,
+          2
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-3",
+        "ids": [
+          6,
+          10,
+          9,
+          11,
+          26
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-4",
+        "ids": [
+          10,
+          0,
+          9,
+          14,
+          17
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-5",
+        "ids": [
+          3,
+          13,
+          5,
+          16,
+          26
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-6",
+        "ids": [
+          22,
+          12,
+          10,
+          8,
+          23
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-7",
+        "ids": [
+          19,
+          16,
+          4,
+          1,
+          23
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-8",
+        "ids": [
+          6,
+          4,
+          22,
+          7,
+          14
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-9",
+        "ids": [
+          16,
+          23,
+          21,
+          11,
+          28
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-10",
+        "ids": [
+          18,
+          21,
+          3,
+          4,
+          2
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-11",
+        "ids": [
+          25,
+          5,
+          16,
+          7,
+          26
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-12",
+        "ids": [
+          13,
+          8,
+          0,
+          3,
+          15
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-13",
+        "ids": [
+          19,
+          13,
+          26,
+          9,
+          2
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-14",
+        "ids": [
+          15,
+          6,
+          13,
+          20,
+          19
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-15",
+        "ids": [
+          3,
+          7,
+          2,
+          1,
+          28
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      },
+      {
+        "id": "generated-16",
+        "ids": [
+          9,
+          3,
+          15,
+          8,
+          13
+        ],
+        "role": "Frozen core24-free legal rank sample, random leader; supplementary only, not matched/strong pool"
+      }
+    ]
+  },
+  "targets": [
+    {
+      "id": "pureslime",
+      "ids": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Pure slime core leader; C17"
+    },
+    {
+      "id": "provisional",
+      "ids": [
+        24,
+        25,
+        28,
+        2,
+        10
+      ],
+      "role": "Unendorsed provisional mixed slime + Bastet/Naga; C16"
+    },
+    {
+      "id": "twoslime",
+      "ids": [
+        24,
+        25,
+        3,
+        2,
+        10
+      ],
+      "role": "Two slime: supply ineligible; C15"
+    },
+    {
+      "id": "core-replaced",
+      "ids": [
+        14,
+        25,
+        26,
+        27,
+        28
+      ],
+      "role": "Exact C5 core replacement; C17; leader/stats/skills also change, not causal supply test"
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        25,
+        24,
+        26,
+        27,
+        28
+      ],
+      "role": "Same five slime members, speed leader, supply retained; C17"
+    }
+  ],
+  "mixed": [
+    {
+      "id": "mixed-shield",
+      "ids": [
+        24,
+        25,
+        26,
+        2,
+        10
+      ],
+      "role": "Same Bastet/Naga pair, shield instead of fist; C15"
+    },
+    {
+      "id": "mixed-healer",
+      "ids": [
+        24,
+        25,
+        27,
+        2,
+        10
+      ],
+      "role": "Same Bastet/Naga pair, healer instead of fist; C15"
+    },
+    {
+      "id": "c17-fist",
+      "ids": [
+        24,
+        25,
+        28,
+        7,
+        10
+      ],
+      "role": "Slime fist + Selkie/Naga; C17"
+    },
+    {
+      "id": "c17-shield",
+      "ids": [
+        24,
+        25,
+        26,
+        7,
+        3
+      ],
+      "role": "Slime shield + Selkie/Dryas; C17"
+    },
+    {
+      "id": "c17-healer",
+      "ids": [
+        24,
+        25,
+        27,
+        7,
+        3
+      ],
+      "role": "Slime healer + Selkie/Dryas; C17"
+    },
+    {
+      "id": "coherent-slime-healers",
+      "ids": [
+        24,
+        7,
+        8,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; healers skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-poison-cleanse",
+      "ids": [
+        24,
+        6,
+        9,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; poison-cleanse skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-strip",
+      "ids": [
+        24,
+        12,
+        22,
+        25,
+        26
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; strip skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-area",
+      "ids": [
+        24,
+        4,
+        25,
+        27,
+        28
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; area skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-priority",
+      "ids": [
+        24,
+        13,
+        19,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; priority skill-ownership stratum"
+    },
+    {
+      "id": "coherent-slime-duration",
+      "ids": [
+        24,
+        2,
+        7,
+        25,
+        27
+      ],
+      "role": "Frozen full legal exactC17 slime core-leader pool, >=3 family; duration skill-ownership stratum"
+    }
+  ],
+  "configs": [
+    {
+      "id": "identity",
+      "path": "configs/balance-lab/slime-identity.json",
+      "fileSha256": "bedd01b34efda29871298170c47386b5a49850ce7c1e04bb78e5a5bd0c110d52",
+      "canonicalSha256": "32d9a6a057585372a5199abfb542dcdc0fbeab37f7c4ea422eac710dbacf19dc",
+      "seeds": 32,
+      "targets": 5,
+      "opponents": 13,
+      "matches": 10624
+    },
+    {
+      "id": "supply-enabled",
+      "path": "configs/balance-lab/slime-supply-enabled.json",
+      "fileSha256": "7fea8c1647b44538375dc8f3d0ef598b90b6e654244fe90064eacd3d953df9ff",
+      "canonicalSha256": "9029338a2d16b1388845fba8b5b55dddf7f698434a463e5504ab3313e364a713",
+      "seeds": 32,
+      "targets": 2,
+      "opponents": 13,
+      "matches": 5248
+    },
+    {
+      "id": "supply-disabled",
+      "path": "configs/balance-lab/slime-supply-disabled.json",
+      "fileSha256": "25a3a60d99b4d35118d5de14ae1f008ac85df10bf81add0f36c1ef5c615e6477",
+      "canonicalSha256": "936e741ec50d5ce801002900b6a2424306b6697e9a1949ddecc88e3253992172",
+      "seeds": 32,
+      "targets": 2,
+      "opponents": 13,
+      "matches": 5248
+    },
+    {
+      "id": "supply-zero",
+      "path": "configs/balance-lab/slime-supply-zero.json",
+      "fileSha256": "9f2f328bb9e628eeae20ca63d2ea6fb693e4af108b1ddefe46c46e96cd1e088d",
+      "canonicalSha256": "269a0ce4fe245ad4842b90352ff23fbed8907a39994138e4ddd62a5158569975",
+      "seeds": 32,
+      "targets": 2,
+      "opponents": 13,
+      "matches": 5248
+    },
+    {
+      "id": "supply8",
+      "path": "configs/balance-lab/slime-supply8.json",
+      "fileSha256": "cdd6b8da1a0d12894719ddb7987e7407da3823611f186edb5a1b5d2e14292dd4",
+      "canonicalSha256": "d9de35966d487232cce488297c2b4494fe6494447cbcd19ff2ade3baee962a57",
+      "seeds": 32,
+      "targets": 2,
+      "opponents": 13,
+      "matches": 5248
+    },
+    {
+      "id": "supply12",
+      "path": "configs/balance-lab/slime-supply12.json",
+      "fileSha256": "5b2771a06be53874d8a3660d1c45f0d7b02c8bdae3e585d6a171317d4d84920b",
+      "canonicalSha256": "61437cc5bfd8f07a4ad6c7dc40e099b2465c5369a4b037ce7ab4184f4eb498b0",
+      "seeds": 32,
+      "targets": 2,
+      "opponents": 13,
+      "matches": 5248
+    },
+    {
+      "id": "broad",
+      "path": "configs/balance-lab/slime-broad.json",
+      "fileSha256": "cc689b2c25277752ed8ed083b048183ae745e28c73307746de7bb6751e958a0f",
+      "canonicalSha256": "e825eaecdae77456a2bc4c4b60abe0f8038764c9a1849663975d4d0ab98a3a4c",
+      "seeds": 16,
+      "targets": 2,
+      "opponents": 53,
+      "matches": 10304
+    },
+    {
+      "id": "mixed-a",
+      "path": "configs/balance-lab/slime-mixed-a.json",
+      "fileSha256": "fac62c0e32991f23885db33a4b7c6878f1b6221172ae3d092a7069f6173ee81c",
+      "canonicalSha256": "d0e1c3f7fdce741778440c28d4acf84fd200cc874943ac488e2120486faa231e",
+      "seeds": 12,
+      "targets": 6,
+      "opponents": 37,
+      "matches": 12720
+    },
+    {
+      "id": "mixed-b",
+      "path": "configs/balance-lab/slime-mixed-b.json",
+      "fileSha256": "028fc737cff05262be22c4c09c512cf85146ed7af7773cf8ec8b10064c4aaf7e",
+      "canonicalSha256": "ac74936331ceb5a5a634b40998f788bad6d872ad03a66f8c27bcdce3e3412175",
+      "seeds": 12,
+      "targets": 5,
+      "opponents": 37,
+      "matches": 10896
+    }
+  ],
+  "executorRecordedAt": "2026-10-10T08:01:01.273Z",
+  "timestampCaution": "Executor wall clock was approximately nine hours ahead of the authoritative conversation clock. Preserve the raw executor timestamp; ordering is enforced by freeze-before-run workflow and refusal to redraw. Both freeze files existed before authoritative UTC 2026-10-10T08:10:11Z."
+}

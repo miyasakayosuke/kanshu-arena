@@ -1,0 +1,376 @@
+{
+  "status": "verified",
+  "authoritativeDate": "2026-10-10 UTC",
+  "scheduledMatches": 24880,
+  "unitLedgers": 248800,
+  "packedRecords": 25794,
+  "cliPackedReplays": 32,
+  "currentHardenedReplays": 32,
+  "currentObserverHardening": "Study source v1 retained; current v2 additionally rejects missing/misordered lethal defeat evidence. Selected full traces and every selected unit ledger are identical under both observers.",
+  "sourceImmutableDuringEachRun": true,
+  "smoke": {
+    "matches": 736,
+    "source": {
+      "gameVersion": "0.16.0",
+      "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+      "workingTreeDirty": true,
+      "nodeVersion": "v24.19.0",
+      "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+      "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+      "labSha256": "f4b2dc52a759a50343c02e2ee02844445929943b84f6d6b1a69fd2b15e329315",
+      "configSha256": "28aab51e8d03b139cc83038fd522849b18fc82ad7e63d52659df84a7756b8f7f"
+    },
+    "pairedDelta": {
+      "pairs": 208,
+      "seedClusters": 8,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    }
+  },
+  "runs": [
+    {
+      "suite": "undead-initial",
+      "matches": 3008,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "f01a1d2489c0937b24e34e453a44b88964c5ebaacd115f74945cb8d3ad52d028"
+      },
+      "rawReportSha256": "0463c18d5af21437f9e8ab131a91a99fa841d697f3c1ee72806ef8de5732f24f",
+      "packedIndexSha256": "fc263dc2326b82d124be8c9b55a17fab5f0177f060952ddad619389544ca7075",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2887046071__a-left__baseline",
+          "traceHash": "5d1637fe81cfc5a900875c703ff1a9aa195338fc09fe2cd2fd46ba493e7ce446",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-left__candidate",
+          "traceHash": "5d1637fe81cfc5a900875c703ff1a9aa195338fc09fe2cd2fd46ba493e7ce446",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__baseline",
+          "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__candidate",
+          "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-enabled",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "9b56c78af15dd72e71f3161ff77a106646b4ea573e9738662f0d4db396fcf0bd"
+      },
+      "rawReportSha256": "e51ebce2545617e043228e3b949c3113286a7368610fba8e8d2ba79ca3d9a79c",
+      "packedIndexSha256": "4f21b2f855c94c82aa61f847a5783836ea04b14cd274a3df5d654f754a834cfd",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2887046071__a-left__baseline",
+          "traceHash": "5d1637fe81cfc5a900875c703ff1a9aa195338fc09fe2cd2fd46ba493e7ce446",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-left__candidate",
+          "traceHash": "64bc72c0c41b2f58981e2ea6c8705267180671794043c76582eb32c636dc6703",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__baseline",
+          "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__candidate",
+          "traceHash": "5edfa5a9d79529f07dba99715d745a27fd7df4e7a8896635eae6f00e2dffcf23",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-bonus-off",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "978fbf7de7852e3e1fa381b5833ed62a716af22763efc792d304cae841212670"
+      },
+      "rawReportSha256": "35d4883bf4caee69327a7f5988470391ae613f5ed602a4e9d45fd9746383ee66",
+      "packedIndexSha256": "da57855ee79715842825cb978a73b7bb8dd5a05b72aa67a659c32f2e3ca3b5e5",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2887046071__a-left__baseline",
+          "traceHash": "5d1637fe81cfc5a900875c703ff1a9aa195338fc09fe2cd2fd46ba493e7ce446",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-left__candidate",
+          "traceHash": "14918901590e0aef1d6ec3819a44c6956021d5ec12285b93d49d4f821e009ce2",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__baseline",
+          "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__candidate",
+          "traceHash": "6c9b187fd4ec64a971df8a3081c37f86cd8dc2597684fa3953638510a0389795",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-full-off",
+      "matches": 1504,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "4f26b7130a7efe163104263dc57d4b2075b65b972e1c2f82b93e647719134e1a"
+      },
+      "rawReportSha256": "7f9c6f464c7d04e12f6baf2a6ef2f4609bfd213e780954ce9ac66a25273d6a13",
+      "packedIndexSha256": "595bc67327b0b8b114d110b2d7d59eee910e69c70879f396a5b967c904a94de0",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2887046071__a-left__baseline",
+          "traceHash": "5d1637fe81cfc5a900875c703ff1a9aa195338fc09fe2cd2fd46ba493e7ce446",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-left__candidate",
+          "traceHash": "6773b59e7e5198926b81004257b555f9c986a281d91467f9bb2a221ede7e87a5",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__baseline",
+          "traceHash": "8ca25c34dc3c6785888d04c0892ddca2f8eb678ef4dc24bee73088ea1d36f025",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2887046071__a-right__candidate",
+          "traceHash": "7add797cf20a9c71c3a8953b742c9320474a6fa25d81c0bbb8d823d2a9a3e11d",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-broad",
+      "matches": 2752,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "efcd3a3a2e84b684dc6eb386b0611b2f8da34a44a84b74367b3b969375a3b19d"
+      },
+      "rawReportSha256": "45f250937a5f0ddb4e7f52ef422d932af0c7f0b14b4eb374d44864e58a7d5fbc",
+      "packedIndexSha256": "07afe3354c68934f996d4b2b25662dc39962d2fce934f679061f9359970ccd7c",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2907046071__a-left__baseline",
+          "traceHash": "da520274360a208055d31e5ac6949b0f6086cdcb48dbbc23edc4d9ce2fc36fcd",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-left__candidate",
+          "traceHash": "da520274360a208055d31e5ac6949b0f6086cdcb48dbbc23edc4d9ce2fc36fcd",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__baseline",
+          "traceHash": "0e3861cd7505c6b000186e6599c82194051d8dde5520a6ba83db81b57fdc3d8c",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__candidate",
+          "traceHash": "0e3861cd7505c6b000186e6599c82194051d8dde5520a6ba83db81b57fdc3d8c",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-substitutions",
+      "matches": 6240,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "c402ea67169622e2a216d6753676b37c6d680211034c05f90f3d58f01c0c90e1"
+      },
+      "rawReportSha256": "3908bfdaddca3e2e972589ea92b581aef53bef30d909cebd87cc73b72ca85a4e",
+      "packedIndexSha256": "d75a174f9344cb4b89dcf34a79830fdb172c92a153a91ca99494e6569fae1c14",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2907046071__a-left__baseline",
+          "traceHash": "da520274360a208055d31e5ac6949b0f6086cdcb48dbbc23edc4d9ce2fc36fcd",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-left__candidate",
+          "traceHash": "da520274360a208055d31e5ac6949b0f6086cdcb48dbbc23edc4d9ce2fc36fcd",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__baseline",
+          "traceHash": "0e3861cd7505c6b000186e6599c82194051d8dde5520a6ba83db81b57fdc3d8c",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__candidate",
+          "traceHash": "0e3861cd7505c6b000186e6599c82194051d8dde5520a6ba83db81b57fdc3d8c",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "matches": 7632,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "bdedf109bf84ace59496c866a5576e381e2565f98bb1103c43eb6a2449f4be2e"
+      },
+      "rawReportSha256": "a0e66916024af0d1eeab4521cf86925a1c596f379ea088c9f9fc742dcbf1d2b1",
+      "packedIndexSha256": "ff49e3c80068f48b87f0aca70695f9859e3d5ad447d72e73016aea0b1d0316ef",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2907046071__a-left__baseline",
+          "traceHash": "c8d2c9488b277d622bcc04299da4401719a5444a18c4904b265112408aa0f5de",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-left__candidate",
+          "traceHash": "c8d2c9488b277d622bcc04299da4401719a5444a18c4904b265112408aa0f5de",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__baseline",
+          "traceHash": "4422ad4672087cd28227d5d130b40709f1c34e9e8c910237adc536d328acc44b",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__candidate",
+          "traceHash": "4422ad4672087cd28227d5d130b40709f1c34e9e8c910237adc536d328acc44b",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    },
+    {
+      "suite": "undead-lower-budget",
+      "matches": 736,
+      "source": {
+        "gameVersion": "0.16.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+        "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+        "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+        "configSha256": "4ac6e838ea02ad50d2eaf0285094a437a177fa947e2d6ed2052339d430aa3ebd"
+      },
+      "rawReportSha256": "760966741cecb5e3dc8e6f19779da5a3b2884111bc3df431bc5cd07b72576a5f",
+      "packedIndexSha256": "36ab6a3ca8684e7cfe3d86f6b894e280a2cbdfeb41ace9daa4c9bdee970e493e",
+      "examples": [
+        {
+          "matchId": "f1-o1__s2907046071__a-left__baseline",
+          "traceHash": "d7a124e0c84e3cc5fe0d80107c31cc20f240caa38f746e97d6a27f4ec18bf23e",
+          "orientation": "a-left",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-left__candidate",
+          "traceHash": "d7a124e0c84e3cc5fe0d80107c31cc20f240caa38f746e97d6a27f4ec18bf23e",
+          "orientation": "a-left",
+          "variant": "candidate"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__baseline",
+          "traceHash": "4efc0c63af3866cb8c89df49c0eae8c45dba2cb1f369ce071a664151509b3bbd",
+          "orientation": "a-right",
+          "variant": "baseline"
+        },
+        {
+          "matchId": "f1-o1__s2907046071__a-right__candidate",
+          "traceHash": "4efc0c63af3866cb8c89df49c0eae8c45dba2cb1f369ce071a664151509b3bbd",
+          "orientation": "a-right",
+          "variant": "candidate"
+        }
+      ]
+    }
+  ]
+}

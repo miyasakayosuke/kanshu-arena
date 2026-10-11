@@ -1,0 +1,792 @@
+{
+  "kind": "paired-adverse-pressure",
+  "orientation": "a-left",
+  "teamA": "puredemon",
+  "teamB": "purematerial",
+  "source": {
+    "gameVersion": "0.15.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+    "configSha256": "bc17ed293663ee292877854036e3e993b6403af001146fab6a313694db183306"
+  },
+  "baseline": {
+    "matchId": "f1-o4__s2787045971__a-left__baseline",
+    "winner": "lose",
+    "traceHash": "436a8a87d640e7a339f4ef144a77851f53b7ebd7c087dc1bcc193b0d528abd9a",
+    "decisions": [
+      {
+        "turn": 1,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e0",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "monster": {
+            "id": 29,
+            "name": "マモン",
+            "icon": "🪙",
+            "cost": 5,
+            "hp": 231,
+            "mp": 64,
+            "atk": 35,
+            "speed": 61,
+            "family": "demon",
+            "skills": [
+              {
+                "name": "空勘の爪",
+                "power": 50,
+                "priority": 0,
+                "mpCost": 16,
+                "kind": "hit",
+                "all": false,
+                "mpDamage": 6
+              },
+              {
+                "name": "封銭の打撃",
+                "power": 72,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "帳を閉じる",
+                "power": 0,
+                "priority": 1,
+                "mpCost": 0,
+                "kind": "guard"
+              }
+            ]
+          },
+          "hp": 231,
+          "mp": 64,
+          "guard": false,
+          "poison": 0,
+          "mpDamageBonus": 4
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e0"
+            ],
+            "target": "e0",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 52,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e0",
+            "amount": 86,
+            "hp": 173,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 2,
+        "chosen": {
+          "key": "a0",
+          "skill": 0,
+          "target": "e4",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "空勘の爪",
+          "skillKind": "hit",
+          "skillPower": 50,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 203,
+          "mp": 52,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e4"
+            ],
+            "target": "e4",
+            "skill": "空勘の爪",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 36,
+            "amount": 16,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e4",
+            "amount": 68,
+            "hp": 169,
+            "phase": "action"
+          },
+          {
+            "kind": "resource-loss",
+            "actor": "a0",
+            "target": "e4",
+            "skill": "空勘の爪",
+            "amount": 10,
+            "mp": 18,
+            "effect": "mp-damage",
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 3,
+        "chosen": {
+          "key": "a0",
+          "skill": 0,
+          "target": "e0",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "空勘の爪",
+          "skillKind": "hit",
+          "skillPower": 50,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 177,
+          "mp": 36,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e0"
+            ],
+            "target": "e0",
+            "skill": "空勘の爪",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 20,
+            "amount": 16,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e0",
+            "amount": 59,
+            "hp": 122,
+            "phase": "action"
+          },
+          {
+            "kind": "resource-loss",
+            "actor": "a0",
+            "target": "e0",
+            "skill": "空勘の爪",
+            "amount": 10,
+            "mp": 10,
+            "effect": "mp-damage",
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 4,
+        "chosen": {
+          "key": "a0",
+          "skill": 0,
+          "target": "e3",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "空勘の爪",
+          "skillKind": "hit",
+          "skillPower": 50,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 139,
+          "mp": 20,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e3"
+            ],
+            "target": "e3",
+            "skill": "空勘の爪",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 4,
+            "amount": 16,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e3",
+            "amount": 61,
+            "hp": 148,
+            "phase": "action"
+          },
+          {
+            "kind": "resource-loss",
+            "actor": "a0",
+            "target": "e3",
+            "skill": "空勘の爪",
+            "amount": 10,
+            "mp": 14,
+            "effect": "mp-damage",
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 5,
+        "chosen": {
+          "key": "a0",
+          "skill": -1,
+          "target": "e4",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "通常攻撃",
+          "skillKind": "hit",
+          "skillPower": 21.7,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 15,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e3"
+            ],
+            "target": "e3",
+            "skill": "通常攻撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e3",
+            "amount": 32,
+            "hp": 116,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 6,
+        "coreBefore": {
+          "key": "a0",
+          "hp": 0,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": []
+      },
+      {
+        "turn": 7,
+        "coreBefore": {
+          "key": "a0",
+          "hp": 0,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10,
+          "mpDamageBonus": 4
+        },
+        "events": []
+      }
+    ]
+  },
+  "fullOff": {
+    "matchId": "f1-o4__s2787045971__a-left__candidate",
+    "winner": "win",
+    "traceHash": "c0005c272798d0005bbedb59e18c15724dcc28e250c7f59842b2ee61de8ef57e",
+    "decisions": [
+      {
+        "turn": 1,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e0",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "monster": {
+            "id": 29,
+            "name": "マモン",
+            "icon": "🪙",
+            "cost": 5,
+            "hp": 231,
+            "mp": 64,
+            "atk": 35,
+            "speed": 61,
+            "family": "demon",
+            "skills": [
+              {
+                "name": "空勘の爪",
+                "power": 50,
+                "priority": 0,
+                "mpCost": 16,
+                "kind": "hit",
+                "all": false,
+                "mpDamage": 0
+              },
+              {
+                "name": "封銭の打撃",
+                "power": 72,
+                "priority": 0,
+                "mpCost": 12,
+                "kind": "hit",
+                "all": false
+              },
+              {
+                "name": "帳を閉じる",
+                "power": 0,
+                "priority": 1,
+                "mpCost": 0,
+                "kind": "guard"
+              }
+            ]
+          },
+          "hp": 231,
+          "mp": 64,
+          "guard": false,
+          "poison": 0
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e0"
+            ],
+            "target": "e0",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 52,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e0",
+            "amount": 86,
+            "hp": 173,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 2,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e0",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 203,
+          "mp": 52,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e0"
+            ],
+            "target": "e0",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 40,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e0",
+            "amount": 92,
+            "hp": 89,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 3,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e0",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 177,
+          "mp": 40,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e4"
+            ],
+            "target": "e4",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 28,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e4",
+            "amount": 80,
+            "hp": 157,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 4,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e3",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 177,
+          "mp": 28,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e3"
+            ],
+            "target": "e3",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 16,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e3",
+            "amount": 76,
+            "hp": 4,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 5,
+        "chosen": {
+          "key": "a0",
+          "skill": 1,
+          "target": "e4",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "封銭の打撃",
+          "skillKind": "hit",
+          "skillPower": 72,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 119,
+          "mp": 16,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e4"
+            ],
+            "target": "e4",
+            "skill": "封銭の打撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "resource",
+            "actor": "a0",
+            "target": "a0",
+            "mp": 4,
+            "amount": 12,
+            "effect": "mp",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e4",
+            "amount": 90,
+            "hp": 129,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 6,
+        "chosen": {
+          "key": "a0",
+          "skill": -1,
+          "target": "e4",
+          "side": "allies",
+          "source": "explicit",
+          "skillName": "通常攻撃",
+          "skillKind": "hit",
+          "skillPower": 21.7,
+          "accepted": true
+        },
+        "coreBefore": {
+          "key": "a0",
+          "hp": 57,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": [
+          {
+            "kind": "cast",
+            "actor": "a0",
+            "scope": "single",
+            "targets": [
+              "e4"
+            ],
+            "target": "e4",
+            "skill": "通常攻撃",
+            "effect": "hit",
+            "phase": "action"
+          },
+          {
+            "kind": "damage",
+            "actor": "a0",
+            "target": "e4",
+            "amount": 37,
+            "hp": 47,
+            "phase": "action"
+          }
+        ]
+      },
+      {
+        "turn": 7,
+        "coreBefore": {
+          "key": "a0",
+          "hp": 0,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": []
+      },
+      {
+        "turn": 8,
+        "coreBefore": {
+          "key": "a0",
+          "hp": 0,
+          "mp": 4,
+          "poison": 0,
+          "guard": false,
+          "rally": 0,
+          "rallyPercent": 5,
+          "ward": 0,
+          "wardPercent": 10
+        },
+        "events": []
+      }
+    ]
+  },
+  "interpretation": "Same initial seed/opponent/orientation, pressure-enabled loss versus full-off win. Core29 retains the same candidate-target traversal. The trace illustrates opportunity cost; adaptive targeting, HP rolls and later actions diverge, so it does not identify a single causally decisive cast."
+}

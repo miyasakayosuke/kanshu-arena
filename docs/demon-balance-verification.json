@@ -1,0 +1,695 @@
+{
+  "schemaVersion": 1,
+  "executorRecordedAt": "2026-10-10T09:11:01.441Z",
+  "status": "verified",
+  "unitLedgers": 269200,
+  "cliReplays": 60,
+  "fullOffZeroBaseMatchesIdentical": 656,
+  "initialHardeningRerun": {
+    "matches": 2624,
+    "identicalOutcomesMetricsAndTraceHashes": true,
+    "reason": "Synthetic test found forbidden extra HP field on resource-loss; strict event-field whitelist added. Initial source retained in archive and all initial results rerun unchanged.",
+    "firstSource": {
+      "gameVersion": "0.15.0",
+      "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+      "workingTreeDirty": true,
+      "nodeVersion": "v24.19.0",
+      "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+      "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+      "labSha256": "e443a8c41bcf859dca506914832c90d83571bd751776b2d85e10231c748b1b65",
+      "configSha256": "4c7d17790d82dd050efe9ee87020f9ac70265a5767acb8bbd91bed632e34ab5e"
+    },
+    "verifiedSource": {
+      "gameVersion": "0.15.0",
+      "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+      "workingTreeDirty": true,
+      "nodeVersion": "v24.19.0",
+      "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+      "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+      "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+      "configSha256": "4c7d17790d82dd050efe9ee87020f9ac70265a5767acb8bbd91bed632e34ab5e"
+    }
+  },
+  "smoke": {
+    "matches": 736,
+    "source": {
+      "gameVersion": "0.15.0",
+      "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+      "workingTreeDirty": true,
+      "nodeVersion": "v24.19.0",
+      "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+      "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+      "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+      "configSha256": "28aab51e8d03b139cc83038fd522849b18fc82ad7e63d52659df84a7756b8f7f"
+    },
+    "summary": {
+      "pairs": 208,
+      "seedClusters": 8,
+      "changedOutcomes": 0,
+      "scoreRateChange": 0,
+      "approximate95Interval": [
+        0,
+        0
+      ],
+      "meanTurnsChange": 0,
+      "meanDirectDamageChange": 0,
+      "meanHealingChange": 0,
+      "meanMpSpentChange": 0
+    }
+  },
+  "runs": [
+    {
+      "id": "demon-initial",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "4c7d17790d82dd050efe9ee87020f9ac70265a5767acb8bbd91bed632e34ab5e"
+      },
+      "reportSha256": "7759b68ac99685165ece02f1317d0bcc5625543a08ce564993a4b48dca780fd0",
+      "matches": 2624,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2787045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ca62aef5d2c1d8c49bb4a5d5d87d3ed3f44bf5da531044f139debb63549f6f36",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o3__s1921068270__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "46a8f14ab3de978be319e5006ac614db69449b366aca48ea0ce3ebc51bb4fcb8",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o1__s2787045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "dd25a2162ba9cfb2769ff8fa477f6bacc226347965f4ff3049e24527c18deb8d",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "49d6b25dc0eeba473e7acb3077d9bd712fc00938641b34da4cb5effc278ee025",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-enabled",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "b066058b947bb2aa59f8b5023f4939f573cc0458edfa3c7f5dd14202daac1e73"
+      },
+      "reportSha256": "32ac8ae76537b7dcc3dc5ce674b721631c63e5877b5dd2744134f4d38c6bc721",
+      "matches": 1312,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2787045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ca62aef5d2c1d8c49bb4a5d5d87d3ed3f44bf5da531044f139debb63549f6f36",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "cd05e83fa04f2552e1483dde609daacd48d5cf1eb44f582cac3d4da50b33df6b",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2787045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "dd25a2162ba9cfb2769ff8fa477f6bacc226347965f4ff3049e24527c18deb8d",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "49d6b25dc0eeba473e7acb3077d9bd712fc00938641b34da4cb5effc278ee025",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-full-off",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "bc17ed293663ee292877854036e3e993b6403af001146fab6a313694db183306"
+      },
+      "reportSha256": "065bea74e67cae123a24a839ed561a7ecb2cdbeea4c3ecca88786bee9e73aced",
+      "matches": 1312,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2787045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ca62aef5d2c1d8c49bb4a5d5d87d3ed3f44bf5da531044f139debb63549f6f36",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "cd05e83fa04f2552e1483dde609daacd48d5cf1eb44f582cac3d4da50b33df6b",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2787045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "dd25a2162ba9cfb2769ff8fa477f6bacc226347965f4ff3049e24527c18deb8d",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "49d6b25dc0eeba473e7acb3077d9bd712fc00938641b34da4cb5effc278ee025",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-bonus-off",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "d095bd843e62bcfcabb6ca74a9a5ea9077b489d847fcf40242cf719f537d6640"
+      },
+      "reportSha256": "a0f9b6c18a0164fe7ffa24aa75332d8b86c8734119e12097996af7e9632069fd",
+      "matches": 1312,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2787045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ca62aef5d2c1d8c49bb4a5d5d87d3ed3f44bf5da531044f139debb63549f6f36",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "cd05e83fa04f2552e1483dde609daacd48d5cf1eb44f582cac3d4da50b33df6b",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2787045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "dd25a2162ba9cfb2769ff8fa477f6bacc226347965f4ff3049e24527c18deb8d",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "49d6b25dc0eeba473e7acb3077d9bd712fc00938641b34da4cb5effc278ee025",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-zero-base",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "4217a855792cde25e0398fc8af8978bc6c6ef65e9ec4138bb9b83e8439abc219"
+      },
+      "reportSha256": "522fd34b1b4955913382e7b9365848c5ce2b80e016a6603dfa918a0898d3eff7",
+      "matches": 1312,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2787045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ca62aef5d2c1d8c49bb4a5d5d87d3ed3f44bf5da531044f139debb63549f6f36",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "cd05e83fa04f2552e1483dde609daacd48d5cf1eb44f582cac3d4da50b33df6b",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2787045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "dd25a2162ba9cfb2769ff8fa477f6bacc226347965f4ff3049e24527c18deb8d",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2160418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "fdf49dbd876a1ff935ecaa668a650ca01a3a747e875a008cdb6e1f46c27320e7",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o4__s3800950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "49d6b25dc0eeba473e7acb3077d9bd712fc00938641b34da4cb5effc278ee025",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-broad",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "bea2fd2daf71f6a548431d06a86f0b9e94f65003d1cf3d0e4e513246f8d62d6f"
+      },
+      "reportSha256": "e8539f5e7bd9d71c361e2dbb2d08683a72fefa3e0478f25e582dec15c3c29c3b",
+      "matches": 4000,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2817045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "349b6eac197705cfe0810cd8fbcc76aba61693d5d4f2ede44c7c21182a178269",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s4218227114__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "b505fa2759bc59c461153d647b570b6045967442cbe6a00727acb8e3c0a0a685",
+          "fallbacks": 1,
+          "mpLoss": 20
+        },
+        {
+          "matchId": "f1-o1__s1176514436__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "ba29a4473764448b2572fe98468859398fad947e39c06bcad28bfae955dd6b8b",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o3__s1563791353__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "c4cc21168473f6fb14abb8faa012f9fd0650024c0f2fed6738c720fefd760476",
+          "fallbacks": 0,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o1__s2817045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "bf2cf4038b77245b42fca4e9fbd2f60a2533b7765778badd2c6c700f3f3b15cf",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s4218227114__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "349c06b878819f60ab30e4cdbed7a2fa1e2235e49a4eb4466637aaec360bba97",
+          "fallbacks": 1,
+          "mpLoss": 20
+        },
+        {
+          "matchId": "f1-o1__s1176514436__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "2a28ee4c371ee0ccb42bb537886a9bc961b8948cff1d25062231059f2c8f6fd0",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o3__s2190418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "76cde4c049337f73e5bfcf1c48f38dc004309b8481cfde45cc482076435f3d6f",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-substitutions",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "7204505cb047f18fa69d2004db39ec77d20ad9fa8dbcd8051b24c60fca2ab80d"
+      },
+      "reportSha256": "6e5101476431ae0105a6387129721aa22fb9ad467408f782bf85fc1abb6177a8",
+      "matches": 5016,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "8eded3bc503f3ef2af134944c68a8ffac1405f0223efb79f0d7e307f3f0519a9",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s559887127__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "5e02eafea4e0ae2a2c6f61d3a923662bf2a594842a6df44295ac310b3966faf8",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o24__s2200418662__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "d40fbc7667cfd8643cca04694a49600db5f78a593563dec6b46129a7436b53ba",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "83858921ace87eb502bc0049986a7106a7259496c4968ea9b2abf03adac7cf7e",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s559887127__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "65f41983147d61b6d20eed3b90228a747c310f093112b398a8ec44499ce9aa95",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f1-o24__s2200418662__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "80692ecba0ffd0fd013ce7805e64a3e491cad223b1070cae7da1da5cf5878daa",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-oldcore-contribution",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "75404b22e53b9104b5d9b1ac79a5c051988df10c59633a86760e92a8a4bdd458"
+      },
+      "reportSha256": "049633281483f144e132e1bba4b70b54753e7b37b48d84830498a8dd2a9cfe90",
+      "matches": 4008,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "c2f22986e84b20fb1bf07e86026219ae5240f7a1e6c5f611b25406d31ce9add8",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o4__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "9ea16a60688935639ccf9b9f80de885be312ab15cf1d70e4c40646c0e0424588",
+          "fallbacks": 1,
+          "mpLoss": 6
+        },
+        {
+          "matchId": "f1-o41__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "e4c82cda11402623d4c4e67e77420c672462e9ccb839c0bc81a3e0129f9d3aab",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o5__s3840950197__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "c0cd09668affcf978196c88e1457e0b9d6fe6a48f22d155ce11502fbe5072d13",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "22bc60060672b2c71de42ba8907d0228763da1f01ec65373f60128a191e833a6",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o4__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "179383f1f8ab48ace5c534a3254326401f777e1e1ae0b584ae7b7d72491ee85d",
+          "fallbacks": 1,
+          "mpLoss": 6
+        },
+        {
+          "matchId": "f1-o41__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "4980807157002bd2ebcbd40713a6c79ae2294b67ff262250b9053aa0b231c397",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o5__s3840950197__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "94e292dbd532bab19d016c3f1c1f43a0dee24e84b4262e622fe3e002211b95d9",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    },
+    {
+      "id": "demon-paired-controls",
+      "source": {
+        "gameVersion": "0.15.0",
+        "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+        "workingTreeDirty": true,
+        "nodeVersion": "v24.19.0",
+        "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+        "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+        "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+        "configSha256": "69f83454d422b01c777240b3b0342451d9b37b3ab2b32cfb7714a3a4b9bf8cfd"
+      },
+      "reportSha256": "4679d4fbea40f27482a0fc4a56efac3fc1981b190afec13de83fe5c3f23bc3a4",
+      "matches": 6024,
+      "examples": [
+        {
+          "matchId": "f1-o1__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "b8c78c59ea88625e952546392f55ba28f0028afc1ad2869c339f52fc9c854635",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f4-o1__s559887127__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "a2251bcf0a3ba0a7848db5b781eb57e43946040fd3912a52791dfbac9538dab1",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f4-o1__s1186514436__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "afd3f57111a80827120ed953819ad9be67b4e86545add8836bd671b12335cef1",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f4-o5__s2827045971__a-left__baseline",
+          "orientation": "a-left",
+          "variant": "baseline",
+          "traceHash": "11d34ac10fad1f7bfdb00266eabf65e164860f97fbffc9761e70dadc001ae762",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f1-o1__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "9528a2002a417821aae55992476b0d28e01dd88e419173085f1300363e9af978",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f4-o1__s559887127__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "ff05500f8be0815a98d3ddda4602100f75fa422fc399a111e1b8646f037345e2",
+          "fallbacks": 1,
+          "mpLoss": 10
+        },
+        {
+          "matchId": "f4-o1__s1186514436__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "4566596e78288a1628e8766b5402610a6b270c8613551fe072591ecc82f7c87e",
+          "fallbacks": 0,
+          "mpLoss": 0
+        },
+        {
+          "matchId": "f4-o5__s2827045971__a-right__baseline",
+          "orientation": "a-right",
+          "variant": "baseline",
+          "traceHash": "cf74156a33f09d2afdeb5d279fae65deadb7ab07d5463234ffca2428f16bc5fd",
+          "fallbacks": 0,
+          "mpLoss": 0
+        }
+      ]
+    }
+  ]
+}

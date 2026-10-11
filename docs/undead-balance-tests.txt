@@ -1,0 +1,64 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v3.2.7 /workspace/shared/kanshu-arena-undead-wave
+
+ ✓ src/balanceLabMaterialCli.test.ts (3 tests) 6918ms
+   ✓ material CLI replay and failure evidence in isolated source copies > writes material metrics and replays optional default/tuned snapshots in both orientations  1521ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=false)  2757ms
+   ✓ material CLI replay and failure evidence in isolated source copies > reproduces repair-bearing failure partials and rejects snapshot corruption (material on right=true)  2637ms
+ ✓ src/balanceLabUndeadCli.test.ts (3 tests) 7056ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > writes metrics and replays cashout on both sides; rejects config/source changes  1522ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > preserves/reproduces cashout-bearing failures and rejects corrupted snapshots, right=false  2709ms
+   ✓ undead CLI replay fingerprints and preserved failure evidence > preserves/reproduces cashout-bearing failures and rejects corrupted snapshots, right=true  2823ms
+ ✓ src/balanceLabCli.test.ts (17 tests) 5802ms
+   ✓ balance lab real CLI integration > clears a stale failure after a successful explicit overwrite and preserves unrelated files  784ms
+   ✓ balance lab real CLI integration > removes previous success evidence when an explicit overwrite produces a captured failure  765ms
+ ✓ src/balanceLabSlimeCli.test.ts (3 tests) 6649ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > writes metrics and replays supply on both sides; rejects config/source changes  1674ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=false  2433ms
+   ✓ slime CLI replay fingerprints and preserved failure evidence > preserves/reproduces supply-bearing failures and rejects corrupted snapshots, right=true  2538ms
+ ✓ src/undeadWave.test.ts (29 tests) 1924ms
+   ✓ public-state cashout AI and authoritative evidence > matches all384 independently frozen complete old32 battles, including normal CPU and explicit same-AI  1861ms
+ ✓ src/balanceLabMaterial.test.ts (44 tests) 2027ms
+   ✓ material lab strict overrides and isolated starting eligibility > validates every bundled material configuration and preserves original old-family membership  306ms
+   ✓ material same-policy accounting and replay evidence > preserves absent tuning and consumed readiness in snapshots and tuned replay on either physical side  785ms
+   ✓ material same-policy accounting and replay evidence > reproduces identity candidates and reports disabled support as absent throughout the trace  475ms
+ ✓ src/undeadPlayback.test.ts (8 tests) 5694ms
+   ✓ undead poison-cashout playback and evidence conservation > preserves both sides over complete normalCPU/same-AI battles, every speed and every partial-skip point  5536ms
+ ✓ src/balanceLab.test.ts (82 tests) 2552ms
+   ✓ paired baseline/candidate suite controls > is byte-for-byte deterministic and does not mutate a frozen configuration or production roster  699ms
+   ✓ paired baseline/candidate suite controls > aggregates team A after side swaps and excludes mirrors from the main comparison  383ms
+   ✓ paired baseline/candidate suite controls > replays an exact saved match and rejects missing IDs or changed trace evidence  390ms
+ ✓ src/balanceLabSlime.test.ts (40 tests) 2066ms
+   ✓ slime authoritative accounting and deterministic replay > preserves optional readiness/amount snapshots and verifies identity/tuned replay on both physical sides  1378ms
+ ✓ src/balanceLabDemon.test.ts (72 tests) 1358ms
+   ✓ demon Lab loss ledger, actual casts and replay > preserves absent-versus-zero bonus in snapshots and reproduces tuned/identity reports  825ms
+ ✓ src/balanceLabDragonCli.test.ts (2 tests) 1518ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=false)  796ms
+   ✓ dragon CLI failure reproduction in isolated source copies > reproduces charge-bearing failure partials and rejects corruption (dragon on right=true)  719ms
+ ✓ src/balanceLabDragon.test.ts (34 tests) 1589ms
+   ✓ dragon lab strict config and isolated state > validates every bundled dragon configuration and preserves original old-family membership  431ms
+   ✓ dragon same-policy evidence > preserves charge and explicit perPoint in traces/replays on both physical sides  522ms
+   ✓ dragon same-policy evidence > separates charge generation/spending/finisher damage from MP and reproduces the identity candidate  433ms
+ ✓ src/balanceLabUndead.test.ts (62 tests) 1729ms
+   ✓ undead actual impact and resource accounting > retains loss/overkill/reapplication and replay hashes under the stock same-AI policy  1087ms
+ ✓ src/balanceLabFamilyWave.test.ts (36 tests) 862ms
+ ✓ src/balanceLabDemonFailure.test.ts (51 tests) 587ms
+ ✓ src/balanceLabMaterialFailure.test.ts (34 tests) 266ms
+ ✓ src/balanceLabUndeadFailure.test.ts (44 tests) 575ms
+ ✓ src/balanceLabUndeadTiming.test.ts (4 tests) 216ms
+ ✓ src/balanceLabDragonFailure.test.ts (12 tests) 138ms
+ ✓ src/balanceLabSlimeFailure.test.ts (33 tests) 562ms
+ ✓ src/balanceLabWardFailure.test.ts (10 tests) 124ms
+ ✓ src/balanceLabFailure.test.ts (4 tests) 83ms
+
+ Test Files  22 passed (22)
+      Tests  627 passed (627)
+   Start at  18:31:15
+   Duration  30.44s (transform 791ms, setup 0ms, collect 2.13s, tests 50.29s, environment 6ms, prepare 2.74s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

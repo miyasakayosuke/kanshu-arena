@@ -165,14 +165,24 @@ describe('material same-policy accounting and replay evidence', () => {
   });
 
   it('measures overhealing at the upper bound without inventing recipients for a patched nonmaterial core', () => {
+    // Bound first-turn pressure so this tests the repair cap, not stock poison target selection or defeat.
+    const pressure = { name: 'Fixture bounded material pressure', kind: 'hit', power: 10, fixedDamage: true, all: true, mpCost: 1, priority: 10 };
     const result = runMatch({ teamA: material, teamB: nature, seed: 42, trace: true,
-      overrides: { materialRepair: { percent: 100 }, monsters: { 19: { family: null } } } });
+      overrides: { materialRepair: { percent: 100 }, monsters: { ...Object.fromEntries(nature.map(id => [id, { skills: [pressure] }])), 19: { family: null } } } });
     const core = result.units.find((unit: { key: string }) => unit.key === 'a0');
     expect(core).toMatchObject({ repairEligible: 1, repairTriggers: 1, repairRecipients: 4, repairReceived: 0 });
+    expect(core.repairHealing).toBeGreaterThan(0);
     expect(core.repairUnusedHealing).toBeGreaterThan(0);
     expect(core.repairPotentialHealing).toBe(core.repairHealing + core.repairUnusedHealing);
     const passive = result.trace.turns[0].events.find((event: BattleEvent) => event.kind === 'passive' && event.effect === 'material-repair');
     expect(passive.targets).toEqual(['a1', 'a2', 'a3', 'a4']);
+    const heals: BattleEvent[] = result.trace.turns[0].events.filter((event: BattleEvent) => event.kind === 'heal' && event.effect === 'material-repair');
+    for (const heal of heals) {
+      const recipient = result.trace.initialState.allies.find((unit: { key: string }) => unit.key === heal.target);
+      expect(heal.hp).toBe(recipient.monster.hp);
+      expect(heal.amount).toBeGreaterThan(0);
+      expect(heal.amount).toBeLessThan(recipient.monster.hp);
+    }
   });
 
   it('preserves absent tuning and consumed readiness in snapshots and tuned replay on either physical side', () => {

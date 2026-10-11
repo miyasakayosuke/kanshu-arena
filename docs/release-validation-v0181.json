@@ -1,0 +1,108 @@
+{
+  "release": "0.18.1-local-candidate",
+  "verifiedAt": "2026-10-10T14:14:00Z",
+  "published": false,
+  "baseLocalCandidateTree": "fd399cd61a4e068b4f675ea041f0b20494330748",
+  "checks": {
+    "npmTest": {
+      "files": 86,
+      "passed": 2012,
+      "failed": 0
+    },
+    "rightsSelftests": 14,
+    "typescriptViteBuild": true,
+    "sourceAndDistRightsGate": true,
+    "labSmoke": {
+      "executions": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedDelta": 0
+    },
+    "focusedLeaderTests": 169
+  },
+  "unchangedFromV018": [
+    {
+      "path": "src/engine.ts",
+      "sha256": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc"
+    },
+    {
+      "path": "src/families.ts",
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+    },
+    {
+      "path": "src/MonsterArt.tsx",
+      "sha256": "0c5f550842a0b0eebe8b738f860e388498805a79fa110a9416af2223feb329a9"
+    },
+    {
+      "path": "src/fenrirArt.ts",
+      "sha256": "0f49ba57820a0c9a772d72edc5ba6cca853a042c91afb39e66dd0b3fbf1ca412"
+    },
+    {
+      "path": "src/familyArt.ts",
+      "sha256": "8a66b2c9bc1b247cf638416b9e356207ae16d527c7849d3af0efe4c24b1fd885"
+    },
+    {
+      "path": "src/dragonArt.ts",
+      "sha256": "3f67ba964b985f85e7aaa13f5542b3d61af15bc0cdd4911764bbee348276fe6f"
+    },
+    {
+      "path": "src/materialArt.ts",
+      "sha256": "4d7b55fd429d72a4d427d7a1db1a14ea68fa12aba47c93791e56cf7713ac9462"
+    },
+    {
+      "path": "src/slimeArt.ts",
+      "sha256": "f71e174731a4ce8cc4cc26d5a286cc7d0f751441361bfa0acfd6c8a6b6bd9e26"
+    },
+    {
+      "path": "src/demonArt.ts",
+      "sha256": "b75e87fa248de36e505513199d172a320a20ee3e4d57c234122623e34b59e421"
+    },
+    {
+      "path": "src/undeadArt.ts",
+      "sha256": "d5d1be973278fe2df6a80b2b88a74a738224fa02bf0279c0952de0dde05bec3e"
+    },
+    {
+      "path": "src/extraordinaryArt.ts",
+      "sha256": "49cd7ecdd86cf4c54c694ca594978f697280f800649175787ba7e7da7c2f7f14"
+    },
+    {
+      "path": "src/strategy.ts",
+      "sha256": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524"
+    },
+    {
+      "path": "src/battleMotion.ts",
+      "sha256": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9"
+    },
+    {
+      "path": "src/BattleStage.tsx",
+      "sha256": "9f3d53c31416b143c57eeebccd448f04f37f1922d4df0e6848799583490bd9bb"
+    },
+    {
+      "path": "public/credits.html",
+      "sha256": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581"
+    },
+    {
+      "path": "public/THIRD_PARTY_NOTICES.txt",
+      "sha256": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+    }
+  ],
+  "limits": [
+    "No actual browser validation, exact public CI or Pages deployment",
+    "Same original failed balance gates and pacing limitations as v0.18",
+    "CSS/DOM semantics do not prove narrow-screen pixel layout",
+    "No professional legal clearance"
+  ],
+  "initialAggregateFailure": {
+    "passed": 2010,
+    "failed": 2,
+    "cause": "Existing navigation spies counted read-only empty-opponent preview snapshots as battle starts. Scoped assertions now verify no actual nonempty-opponent battle and no advanceWithEvents; no gameplay or expected battle output relaxed."
+  }
+}

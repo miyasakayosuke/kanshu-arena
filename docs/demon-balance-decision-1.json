@@ -1,0 +1,273 @@
+{
+  "kind": "zero-loss",
+  "matchId": "f1-o1__s2787045971__a-left__baseline",
+  "orientation": "a-left",
+  "teamA": "puredemon",
+  "teamB": "fullbeast",
+  "winner": "win",
+  "source": {
+    "gameVersion": "0.15.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+    "configSha256": "4c7d17790d82dd050efe9ee87020f9ac70265a5767acb8bbd91bed632e34ab5e"
+  },
+  "traceHash": "d5350d5eb910df4d27490ec88a4affcb64a94eb244b8c635c89a6cc8d5fa9103",
+  "interpretation": "The accepted MP attack spends16MP and one action but removes0MP at execution. Public decision-time MP and intervening cast expenditure are retained. This shows wasted resource utility, not a claim that this one choice caused the final loss.",
+  "excerpt": {
+    "triggerLoss": null,
+    "turn": 3,
+    "seedBefore": 350841917,
+    "seedAfter": 524824352,
+    "unitsBefore": [
+      {
+        "key": "a0",
+        "hp": 185,
+        "mp": 40,
+        "guard": false,
+        "ward": 0,
+        "mpDamageBonus": 4
+      },
+      {
+        "key": "a1",
+        "hp": 179,
+        "mp": 24,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a2",
+        "hp": 133,
+        "mp": 16,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a3",
+        "hp": 0,
+        "mp": 32,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "a4",
+        "hp": 0,
+        "mp": 40,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e0",
+        "hp": 0,
+        "mp": 34,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e1",
+        "hp": 0,
+        "mp": 36,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e2",
+        "hp": 35,
+        "mp": 44,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e3",
+        "hp": 88,
+        "mp": 10,
+        "guard": false,
+        "ward": 0
+      },
+      {
+        "key": "e4",
+        "hp": 0,
+        "mp": 34,
+        "guard": false,
+        "ward": 0
+      }
+    ],
+    "acceptedOrders": [
+      {
+        "key": "a0",
+        "skill": 0,
+        "target": "e3",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "空勘の爪",
+        "skillKind": "hit",
+        "skillPower": 50,
+        "accepted": true
+      },
+      {
+        "key": "a1",
+        "skill": -1,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 32.86,
+        "accepted": true
+      },
+      {
+        "key": "a2",
+        "skill": -1,
+        "target": "e2",
+        "side": "allies",
+        "source": "explicit",
+        "skillName": "通常攻撃",
+        "skillKind": "hit",
+        "skillPower": 32.24,
+        "accepted": true
+      },
+      {
+        "key": "e2",
+        "skill": 1,
+        "target": "e2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "生命の雫",
+        "skillKind": "heal",
+        "skillPower": 65,
+        "accepted": true
+      },
+      {
+        "key": "e3",
+        "skill": 0,
+        "target": "a2",
+        "side": "enemies",
+        "source": "explicit",
+        "skillName": "冥府の刃",
+        "skillKind": "hit",
+        "skillPower": 68,
+        "accepted": true
+      }
+    ],
+    "events": [
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "e3",
+        "scope": "single",
+        "targets": [
+          "a2"
+        ],
+        "target": "a2",
+        "skill": "冥府の刃",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "e3",
+        "target": "e3",
+        "mp": 0,
+        "amount": 10,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "e3",
+        "target": "a2",
+        "amount": 86,
+        "hp": 47,
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "e3",
+        "phase": "action-end"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "before-action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "action"
+      },
+      {
+        "kind": "cast",
+        "actor": "a0",
+        "scope": "single",
+        "targets": [
+          "e3"
+        ],
+        "target": "e3",
+        "skill": "空勘の爪",
+        "effect": "hit",
+        "phase": "action"
+      },
+      {
+        "kind": "resource",
+        "actor": "a0",
+        "target": "a0",
+        "mp": 24,
+        "amount": 16,
+        "effect": "mp",
+        "phase": "action"
+      },
+      {
+        "kind": "damage",
+        "actor": "a0",
+        "target": "e3",
+        "amount": 60,
+        "hp": 28,
+        "phase": "action"
+      },
+      {
+        "kind": "resource-loss",
+        "actor": "a0",
+        "target": "e3",
+        "skill": "空勘の爪",
+        "amount": 0,
+        "mp": 0,
+        "effect": "mp-damage",
+        "phase": "action"
+      },
+      {
+        "kind": "phase",
+        "actor": "a0",
+        "phase": "action-end"
+      }
+    ],
+    "allOriginalQueueSlots": [
+      "e3",
+      "e2",
+      "a0",
+      "a2",
+      "a1"
+    ],
+    "focusEvent": {
+      "kind": "resource-loss",
+      "actor": "a0",
+      "target": "e3",
+      "skill": "空勘の爪",
+      "amount": 0,
+      "mp": 0,
+      "effect": "mp-damage",
+      "phase": "action"
+    }
+  }
+}

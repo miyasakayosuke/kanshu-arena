@@ -1,0 +1,157 @@
+{
+  "format": "bounded-exact-source-v1",
+  "label": "all-family-frozen-system",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "files": [
+    {
+      "path": "src/engine.ts",
+      "bytes": 76085,
+      "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+    },
+    {
+      "path": "src/families.ts",
+      "bytes": 1760,
+      "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+    },
+    {
+      "path": "scripts/balance-lab/core.mjs",
+      "bytes": 112068,
+      "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+    },
+    {
+      "path": "scripts/balance-lab/cli.mjs",
+      "bytes": 20710,
+      "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-support.mjs",
+      "bytes": 9271,
+      "sha256": "0ed0cd9cdee26dd937aa81a0c3a9371848c6cfa55fd7d3d05c722ec407e2a321"
+    },
+    {
+      "path": "scripts/balance-lab/archive-all-family-source.mjs",
+      "bytes": 192,
+      "sha256": "424ca8704188b4dea0d1081b27eaf70cd8a3ab7b56d70a0723743390b4a7e63d"
+    },
+    {
+      "path": "scripts/balance-lab/freeze-all-family-configs.mjs",
+      "bytes": 5822,
+      "sha256": "be96327493f20225e0ca27c3642fc9a78ae758112fd83cc5e81bacd212a1d9b6"
+    },
+    {
+      "path": "scripts/balance-lab/run-all-family-suite.mjs",
+      "bytes": 3923,
+      "sha256": "7d27d3723acd7bb47a752c395d9e00b66db7789bed7af9bf08a8cd830b816c24"
+    },
+    {
+      "path": "scripts/balance-lab/analyze-all-family.mjs",
+      "bytes": 17497,
+      "sha256": "072f0e49ec053b7e3fdf33b608e323da0363a850704896bac90c880fd47db067"
+    },
+    {
+      "path": "scripts/balance-lab/verify-all-family.mjs",
+      "bytes": 5553,
+      "sha256": "11873b383631dfd8051c33dfc7dcb185a05c39ea7cce661911bce36611a3bed8"
+    },
+    {
+      "path": "scripts/balance-lab/reconstruct-all-family-source.mjs",
+      "bytes": 1242,
+      "sha256": "07f4c1c5adfb20746a15ac95160d6bf229cad281a70d275731e73c685d2a542b"
+    },
+    {
+      "path": "scripts/balance-lab/all-family-observer-definitions.mjs",
+      "bytes": 4633,
+      "sha256": "6f7ebfde4c5c1636479f869201ac2c7d54c873df67753c0a7c75237c9e7eecce"
+    },
+    {
+      "path": "src/balanceLabAllFamily.test.ts",
+      "bytes": 6284,
+      "sha256": "8a5eb664c18279569ff33f3d73fe6f20a4fdaf77e6d0112f7119091973b09775"
+    },
+    {
+      "path": "src/balanceLabAllFamilyFailure.test.ts",
+      "bytes": 3546,
+      "sha256": "d070e6f5ba66a49d17c99058d5c3509285ae7801cb91cf44a9603d81a71b2cbd"
+    },
+    {
+      "path": "src/balanceLabAllFamilyCli.test.ts",
+      "bytes": 4560,
+      "sha256": "4c65bb21cd5b50e1723672d78d8dfe78dca17628adca1c972348836b1f11fa4e"
+    },
+    {
+      "path": "docs/all-family-matrix-freeze.json",
+      "bytes": 13369,
+      "sha256": "72362ed3de3128ea7e547020084829c66fccda41b6d569000e575aa82dc7a540"
+    },
+    {
+      "path": "docs/all-family-balance-config-freeze.json",
+      "bytes": 24106,
+      "sha256": "b56a6b4fd918099eb2560581b85cc6963f4694fbd5a610582b73380cb1aa951f"
+    }
+  ],
+  "chunks": [
+    {
+      "file": "all-family-frozen-system-00001.json",
+      "bytes": 45978,
+      "sha256": "d5b7196967dab0f10d973244c75658cd5d309a2c126224df8fc7963e2a38490c",
+      "records": 2,
+      "first": "src/engine.ts",
+      "last": "src/families.ts"
+    },
+    {
+      "file": "all-family-frozen-system-00002.json",
+      "bytes": 59002,
+      "sha256": "4044dc7052de8553a7debab254deaec4f63bbd1ee137700f898c5f5e50e0cd7a",
+      "records": 1,
+      "first": "scripts/balance-lab/core.mjs",
+      "last": "scripts/balance-lab/core.mjs"
+    },
+    {
+      "file": "all-family-frozen-system-00003.json",
+      "bytes": 14769,
+      "sha256": "b92ca4a18dc8e2e84e639b60df6ddef36a855069493fba672a6709a43d88ffa6",
+      "records": 1,
+      "first": "scripts/balance-lab/cli.mjs",
+      "last": "scripts/balance-lab/cli.mjs"
+    },
+    {
+      "file": "all-family-frozen-system-00004.json",
+      "bytes": 14665,
+      "sha256": "525b5e39d0ad27fc837596506f208840b6ef45e60561e6801bb55c8f9b53078f",
+      "records": 4,
+      "first": "scripts/balance-lab/all-family-support.mjs",
+      "last": "scripts/balance-lab/run-all-family-suite.mjs"
+    },
+    {
+      "file": "all-family-frozen-system-00005.json",
+      "bytes": 47418,
+      "sha256": "16091b191348d62eecad4de199adbf9d0a41f0d37785e1241c08ebfe5b78eb6f",
+      "records": 9,
+      "first": "scripts/balance-lab/analyze-all-family.mjs",
+      "last": "docs/all-family-balance-config-freeze.json"
+    }
+  ]
+}

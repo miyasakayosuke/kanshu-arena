@@ -1,0 +1,284 @@
+{
+  "source": {
+    "gameVersion": "0.16.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "configSha256": "4ac6e838ea02ad50d2eaf0285094a437a177fa947e2d6ed2052339d430aa3ebd"
+  },
+  "target": {
+    "id": "c15-threshold-lost",
+    "ids": [
+      32,
+      4,
+      20,
+      3,
+      10
+    ],
+    "cost": 15,
+    "role": "Exact C15 initial mixed control replaces35 with20; two undead lose bonus; triple poison/slow Naga retained",
+    "variants": {
+      "baseline": {
+        "summary": {
+          "games": 80,
+          "wins": 61,
+          "draws": 0,
+          "scoreRate": 0.7625,
+          "meanTurns": 5.05,
+          "meanDirectDamage": 958.6125,
+          "meanHealing": 101.5625,
+          "meanMpSpent": 187.375,
+          "meanFinalMp": 104.625,
+          "meanPoisonDamageTaken": 135.3125,
+          "meanCashoutSelections": 1.1625,
+          "meanCashoutCasts": 1.15,
+          "meanCashoutMpSpent": 20.7,
+          "meanCashoutEvents": 1.15,
+          "meanCashoutZeroPoison": 0.4375,
+          "meanCashoutTicksConsumed": 1.8375,
+          "meanCashoutAddedBasis": 25.725,
+          "meanCashoutScaledAddition": 23.7125,
+          "meanCashoutActualAddedDamage": 6,
+          "meanCashoutDirectDamage": 70.8875,
+          "meanCashoutFuturePoisonNominal": 20.3125,
+          "meanCashoutKills": 0.5875,
+          "meanCashoutDecisiveKills": 0.3125,
+          "meanCashoutKillsBeforeTargetAction": 0.0375,
+          "meanCashoutRetargets": 0,
+          "meanCashoutLaterReapplications": 0.35,
+          "meanCashoutSurvivingTargets": 0.5625,
+          "meanCashoutGuardedEvents": 0.15,
+          "meanCashoutWardedEvents": 0
+        },
+        "partitions": {
+          "exactC17Opponents": {
+            "games": 0
+          },
+          "lowerBudgetOpponents": {
+            "games": 80,
+            "wins": 61,
+            "draws": 0,
+            "scoreRate": 0.7625,
+            "meanTurns": 5.05,
+            "meanDirectDamage": 958.6125,
+            "meanHealing": 101.5625,
+            "meanMpSpent": 187.375,
+            "meanFinalMp": 104.625,
+            "meanPoisonDamageTaken": 135.3125,
+            "meanCashoutSelections": 1.1625,
+            "meanCashoutCasts": 1.15,
+            "meanCashoutMpSpent": 20.7,
+            "meanCashoutEvents": 1.15,
+            "meanCashoutZeroPoison": 0.4375,
+            "meanCashoutTicksConsumed": 1.8375,
+            "meanCashoutAddedBasis": 25.725,
+            "meanCashoutScaledAddition": 23.7125,
+            "meanCashoutActualAddedDamage": 6,
+            "meanCashoutDirectDamage": 70.8875,
+            "meanCashoutFuturePoisonNominal": 20.3125,
+            "meanCashoutKills": 0.5875,
+            "meanCashoutDecisiveKills": 0.3125,
+            "meanCashoutKillsBeforeTargetAction": 0.0375,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.35,
+            "meanCashoutSurvivingTargets": 0.5625,
+            "meanCashoutGuardedEvents": 0.15,
+            "meanCashoutWardedEvents": 0
+          },
+          "coherentC17": {
+            "games": 0
+          }
+        },
+        "core": {
+          "appearances": 80,
+          "finalMpMean": 14.05,
+          "spentMean": 47.95,
+          "cashoutCastsMax": 2,
+          "cashoutSourceMpAtCastMean": 44.19565217391305,
+          "cashoutKillTurnMean": 2.8297872340425534,
+          "deadWithMpRate": 0.3,
+          "survivalRate": 0.7
+        },
+        "perOpponent": [
+          {
+            "id": "fullnature",
+            "cost": 15,
+            "games": 16,
+            "score": 0,
+            "cashoutCasts": 0.9375,
+            "consumed": 1.875,
+            "actualAdded": 15.75
+          },
+          {
+            "id": "guard-heal",
+            "cost": 14,
+            "games": 16,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 1.375,
+            "actualAdded": 4.9375
+          },
+          {
+            "id": "poison-cleanse",
+            "cost": 15,
+            "games": 16,
+            "score": 1,
+            "cashoutCasts": 1.4375,
+            "consumed": 1.5,
+            "actualAdded": 1.5
+          },
+          {
+            "id": "priority",
+            "cost": 15,
+            "games": 16,
+            "score": 0.875,
+            "cashoutCasts": 1,
+            "consumed": 2.875,
+            "actualAdded": 2.875
+          },
+          {
+            "id": "mp-pressure",
+            "cost": 15,
+            "games": 16,
+            "score": 0.9375,
+            "cashoutCasts": 0.875,
+            "consumed": 1.5625,
+            "actualAdded": 4.9375
+          }
+        ]
+      },
+      "candidate": {
+        "summary": {
+          "games": 80,
+          "wins": 61,
+          "draws": 0,
+          "scoreRate": 0.7625,
+          "meanTurns": 5.05,
+          "meanDirectDamage": 958.6125,
+          "meanHealing": 101.5625,
+          "meanMpSpent": 187.375,
+          "meanFinalMp": 104.625,
+          "meanPoisonDamageTaken": 135.3125,
+          "meanCashoutSelections": 1.1625,
+          "meanCashoutCasts": 1.15,
+          "meanCashoutMpSpent": 20.7,
+          "meanCashoutEvents": 1.15,
+          "meanCashoutZeroPoison": 0.4375,
+          "meanCashoutTicksConsumed": 1.8375,
+          "meanCashoutAddedBasis": 25.725,
+          "meanCashoutScaledAddition": 23.7125,
+          "meanCashoutActualAddedDamage": 6,
+          "meanCashoutDirectDamage": 70.8875,
+          "meanCashoutFuturePoisonNominal": 20.3125,
+          "meanCashoutKills": 0.5875,
+          "meanCashoutDecisiveKills": 0.3125,
+          "meanCashoutKillsBeforeTargetAction": 0.0375,
+          "meanCashoutRetargets": 0,
+          "meanCashoutLaterReapplications": 0.35,
+          "meanCashoutSurvivingTargets": 0.5625,
+          "meanCashoutGuardedEvents": 0.15,
+          "meanCashoutWardedEvents": 0
+        },
+        "partitions": {
+          "exactC17Opponents": {
+            "games": 0
+          },
+          "lowerBudgetOpponents": {
+            "games": 80,
+            "wins": 61,
+            "draws": 0,
+            "scoreRate": 0.7625,
+            "meanTurns": 5.05,
+            "meanDirectDamage": 958.6125,
+            "meanHealing": 101.5625,
+            "meanMpSpent": 187.375,
+            "meanFinalMp": 104.625,
+            "meanPoisonDamageTaken": 135.3125,
+            "meanCashoutSelections": 1.1625,
+            "meanCashoutCasts": 1.15,
+            "meanCashoutMpSpent": 20.7,
+            "meanCashoutEvents": 1.15,
+            "meanCashoutZeroPoison": 0.4375,
+            "meanCashoutTicksConsumed": 1.8375,
+            "meanCashoutAddedBasis": 25.725,
+            "meanCashoutScaledAddition": 23.7125,
+            "meanCashoutActualAddedDamage": 6,
+            "meanCashoutDirectDamage": 70.8875,
+            "meanCashoutFuturePoisonNominal": 20.3125,
+            "meanCashoutKills": 0.5875,
+            "meanCashoutDecisiveKills": 0.3125,
+            "meanCashoutKillsBeforeTargetAction": 0.0375,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.35,
+            "meanCashoutSurvivingTargets": 0.5625,
+            "meanCashoutGuardedEvents": 0.15,
+            "meanCashoutWardedEvents": 0
+          },
+          "coherentC17": {
+            "games": 0
+          }
+        },
+        "core": {
+          "appearances": 80,
+          "finalMpMean": 14.05,
+          "spentMean": 47.95,
+          "cashoutCastsMax": 2,
+          "cashoutSourceMpAtCastMean": 44.19565217391305,
+          "cashoutKillTurnMean": 2.8297872340425534,
+          "deadWithMpRate": 0.3,
+          "survivalRate": 0.7
+        },
+        "perOpponent": [
+          {
+            "id": "fullnature",
+            "cost": 15,
+            "games": 16,
+            "score": 0,
+            "cashoutCasts": 0.9375,
+            "consumed": 1.875,
+            "actualAdded": 15.75
+          },
+          {
+            "id": "guard-heal",
+            "cost": 14,
+            "games": 16,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 1.375,
+            "actualAdded": 4.9375
+          },
+          {
+            "id": "poison-cleanse",
+            "cost": 15,
+            "games": 16,
+            "score": 1,
+            "cashoutCasts": 1.4375,
+            "consumed": 1.5,
+            "actualAdded": 1.5
+          },
+          {
+            "id": "priority",
+            "cost": 15,
+            "games": 16,
+            "score": 0.875,
+            "cashoutCasts": 1,
+            "consumed": 2.875,
+            "actualAdded": 2.875
+          },
+          {
+            "id": "mp-pressure",
+            "cost": 15,
+            "games": 16,
+            "score": 0.9375,
+            "cashoutCasts": 0.875,
+            "consumed": 1.5625,
+            "actualAdded": 4.9375
+          }
+        ]
+      }
+    }
+  }
+}

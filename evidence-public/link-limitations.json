@@ -1,0 +1,440 @@
+[
+  {
+    "path": "docs/all-family-balance-dryas-diagnosis.md",
+    "line": 60,
+    "text": "Machine-readable resource aggregates, trace hashes and bounded detailed records: `docs/all-family-balance-dryas-diagnosis.json` and `docs/all-family-balance-diagnosis/`. Full replay files are listed in the JSON and can be recreated with `scripts/balance-lab/replay-all-family-packed.mjs`. Selection is recorded in `docs/all-family-balance-dryas-trace-selection.json`. Complete unit ledgers preserve conditional timing denominators; no-death values remain null.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/all-family-balance-method.md",
+    "line": 26,
+    "text": "`all-family-balance-source/` は拡張前と固定後の完全なソースバイトを保持する。`all-family-balance-packed/` は全予定行の順番、勝敗、トレースSHA-256、両側・全ユニットの資源台帳を可逆圧縮で保持する。各チャンクは65,000バイト以下。フルイベントの木は全試合で複製せず、必要な対戦だけ再生成する。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/all-family-balance-method.md",
+    "line": 31,
+    "text": "node scripts/balance-lab/verify-all-family.mjs",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/all-family-balance-method.md",
+    "line": 37,
+    "text": "node scripts/balance-lab/replay-all-family-packed.mjs SUITE_ID MATCH_ID lab-results/one-full-replay.json",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-evidence-packaging.md",
+    "line": 27,
+    "text": "- Full-study analyzers/verifiers and `replay-all-family-packed.mjs` DO read",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-evidence-packaging.md",
+    "line": 65,
+    "text": "`docs/{demon,undead,extraordinary}-balance-packed` and",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-evidence-packaging.md",
+    "line": 108,
+    "text": "`lab-results/all-family-residual-dryas`. Prefer extracting a compact fixture",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-evidence-packaging.md",
+    "line": 197,
+    "text": "omitted per-match chunks and `lab-results` remain provenance identifiers for",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 15,
+    "text": "npm run lab -- run --config configs/balance-lab/smoke.json --out lab-results/smoke",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 18,
+    "text": "npm run lab -- run --config configs/balance-lab/fenrir-mp-example.json --out lab-results/fenrir-mp",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 21,
+    "text": "npm run lab -- run --config configs/balance-lab/family-wave.json --out lab-results/family-wave-ward-disabled",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 24,
+    "text": "npm run lab -- run --config configs/balance-lab/family-wave-ward15.json --out lab-results/family-wave-ward15",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 27,
+    "text": "npm run lab -- run --config configs/balance-lab/family-wave-final-vs-initial.json --out lab-results/family-wave-final-vs-initial",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 30,
+    "text": "npm run lab -- run --config configs/balance-lab/family-wave-broad.json --out lab-results/family-wave-final-broad",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 33,
+    "text": "npm run lab -- run --config configs/balance-lab/fenrir-mp-example.json --out lab-results/fenrir-mp-64 --seeds 64 --sample-teams 16",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 36,
+    "text": "npm run lab -- replay --report lab-results/smoke/report.json --match MATCH_ID --out lab-results/replay.json",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/balance-lab.md",
+    "line": 39,
+    "text": "npm run lab -- replay-failure --failure lab-results/smoke/failure.json --out lab-results/repeated-failure.json",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/demon-balance-audit.md",
+    "line": 124,
+    "text": "- Lossless compact evidence: docs/demon-balance-packed,231 JSON files, largest64540bytes; all are≤65,000bytes. It retains every scheduled match outcome, trace hash and full unit accounting, plus configurations and all scenario/target aggregates. Full event trees remain reproducible rather than duplicated in every archive record.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/demon-balance-audit.md",
+    "line": 125,
+    "text": "- Read a logical record: node scripts/balance-lab/read-demon-packed.mjs demon-initial demon-initial/target/puredemon. Every stored and decompressed byte hash is checked.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/demon-balance-audit.md",
+    "line": 126,
+    "text": "- Run a frozen suite: node scripts/balance-lab/cli.mjs run --config configs/balance-lab/demon-broad.json --out lab-results/new-demon-broad. Replay with that CLI's documented replay command; never bypass hash mismatch.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 41,
+    "text": "原始ログ、対象ごとの勝敗・支援・MP・竜気、出典ハッシュは `dragon-balance-summary.json` および記載のCLI出力を参照。初期ソースのコピーは未追跡の `lab-results/dragon-initial-source/` に保管。`dragon-initial-values.json` は後の最終ソースで初期数値を明示復元する比較用であり、異なるコードを当時の完全再生と呼ばない。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 95,
+    "text": "各設定・reportファイルのハッシュ、各対象のMP/支援/竜気指標、原始レポートの場所は `dragon-balance-summary.json` と同ファイルが指す `dragon-balance-summary-runs/` の14個のJSONに保存。分割前の要約を完全に再構成できることを照合した。`lab-results/dragon-final-*` は大きな再現用出力で配信物に含めない。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 107,
+    "text": "純竜の固定8対策512戦で、初期係数7は通常2勝→予測0勝。係数14は52勝→53勝。係数14＋HP220は通常58勝・2引分（11.52%）→予測57勝（11.13%）。対面分布は変わるが、この程度のタイミング予測だけでは初期案を救わない。既存AIを変更する根拠とはしない。実行ソースのハッシュ付き出力は `lab-results/dragon-initial-timing-probe.json`。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 113,
+    "text": "npm run lab -- run --config configs/balance-lab/dragon-charge-disabled.json --out lab-results/dragon-disabled",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 114,
+    "text": "npm run lab -- run --config configs/balance-lab/dragon-charge14.json --out lab-results/dragon-charge14",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/dragon-balance-audit.md",
+    "line": 115,
+    "text": "npm run lab -- run --config configs/balance-lab/dragon-broad.json --out lab-results/dragon-broad",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/extraordinary-balance-audit.md",
+    "line": 134,
+    "text": "node scripts/balance-lab/replay-extraordinary-packed.mjs extraordinary-initial f2-o13__s1494441061__a-left__baseline /tmp/extraordinary-wasted-guard.json /tmp/extraordinary-study-source",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 125,
+    "text": "初期探索9実行と最終7実行、合計118,464戦の要約を `material-balance-summary.json` と参照する分割ファイルへ保存。各要約は70KB未満、各報告・設定・ソースのハッシュと原始レポートへの場所付き。`material-balance-verification.json` に比較件数・12再生のID/hash・最終実行数、`material-coherent-freeze.json` に後付け編成の凍結証拠を保持する。大きな原始レポート・元ソースコピー・再生ファイルは未追跡の `lab-results/` にあり、配信資産へ含めない。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 133,
+    "text": "npm run lab -- run --config configs/balance-lab/material-identity.json --out lab-results/material-identity",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 134,
+    "text": "npm run lab -- run --config configs/balance-lab/material-broad.json --out lab-results/material-broad",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 135,
+    "text": "npm run lab -- run --config configs/balance-lab/material-repair-disabled.json --out lab-results/material-disabled",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 136,
+    "text": "npm run lab -- run --config configs/balance-lab/material-repair-zero.json --out lab-results/material-zero",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "line": 140,
+    "text": "大きな原始レポートは未追跡の `lab-results/` に保持し、配信資産へ含めない。レビュー用要約は `material-balance-summary.json` とその分割ファイルへ保存する。一つ70KB未満、元レポート・設定・ソースのハッシュ付きとし、勝敗・修復・MP・支援の情報を保持する。",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 192,
+    "text": "- Run: node scripts/balance-lab/cli.mjs run --config configs/balance-lab/slime-final-identity.json --out lab-results/your-new-run. Other final runs use the corresponding frozen config. Historical configs require the reconstructed historical engine and an absolute config path. Never overwrite a prior result to hide an unsuccessful candidate.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 193,
+    "text": "- CLI replay: use the exact source/config hashes and a match ID from the report or compact decision examples. scripts/balance-lab/verify-slime.mjs invokes real CLI replay on both orientations and verifies ledgers/control equality. Historical source can be rebuilt into a new directory using node scripts/balance-lab/reconstruct-slime-source.mjs lab-results/slime-initial-source. The bounded source-reconstruction manifest verifies all bytes against initial/final engine, family and Lab hashes; no production file is changed. Run historical configs with that reconstructed CLI, final/budget configs with the final CLI. Mismatched source is refused.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 194,
+    "text": "- The final lossless aggregate archive uses indexed JSON chunks under65,000bytes in docs/slime-balance-packed. node scripts/balance-lab/read-slime-packed.mjs RECORD_FILENAME reconstructs any logical former fragment and verifies hashes. The packer verifies every reconstructed pretty-JSON byte before replacing only its own superseded generated fragments. Decision evidence remains in docs/slime-balance-decisions. Full local raw reports/replays are ignored run artifacts, not enormous checked-in JSON files. Compact indexes preserve raw hashes, source hashes, all teams/seeds/schedules, all aggregated outcomes and per-opponent results; they are aggregate evidence, not lossless copies of every event.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 202,
+    "text": "- slime-supply-disabled: 5248matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-supply-disabled-index.json); configSHA 936e741ec50d5ce801002900b6a2424306b6697e9a1949ddecc88e3253992172",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 203,
+    "text": "- slime-supply-zero: 5248matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-supply-zero-index.json); configSHA 269a0ce4fe245ad4842b90352ff23fbed8907a39994138e4ddd62a5158569975",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 204,
+    "text": "- slime-broad: 10304matches; evidence slime-balance-packed/chunk-054.json (logical record slime-stage1-broad-index.json); configSHA e825eaecdae77456a2bc4c4b60abe0f8038764c9a1849663975d4d0ab98a3a4c",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 205,
+    "text": "- slime-mixed-a: 12720matches; evidence slime-balance-packed/chunk-056.json (logical record slime-stage1-mixed-a-index.json); configSHA d0e1c3f7fdce741778440c28d4acf84fd200cc874943ac488e2120486faa231e",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 206,
+    "text": "- slime-supply8: 5248matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-supply8-index.json); configSHA d9de35966d487232cce488297c2b4494fe6494447cbcd19ff2ade3baee962a57",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 207,
+    "text": "- slime-supply-enabled: 5248matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-supply-enabled-index.json); configSHA 9029338a2d16b1388845fba8b5b55dddf7f698434a463e5504ab3313e364a713",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 208,
+    "text": "- slime-supply12: 5248matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-supply12-index.json); configSHA 61437cc5bfd8f07a4ad6c7dc40e099b2465c5369a4b037ce7ab4184f4eb498b0",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 209,
+    "text": "- slime-sensitivity-hp-supply12: 7232matches; evidence slime-balance-packed/chunk-053.json (logical record slime-sensitivity-hp-supply12-index.json); configSHA 86c18b4309ee1875f98c160a04a25b12f2dc937160c0b44c28167d6cc83f18f5",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 210,
+    "text": "- slime-mixed-b: 10896matches; evidence slime-balance-packed/chunk-057.json (logical record slime-stage1-mixed-b-index.json); configSHA ac74936331ceb5a5a634b40998f788bad6d872ad03a66f8c27bcdce3e3412175",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 211,
+    "text": "- slime-sensitivity-attack: 7232matches; evidence slime-balance-packed/chunk-051.json (logical record slime-sensitivity-attack-index.json); configSHA 77a7d7e3a44f456274d308bf8587cdb592403e539f0304b9f511817f9602c827",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 212,
+    "text": "- slime-identity: 10624matches; evidence slime-balance-packed/chunk-055.json (logical record slime-stage1-identity-index.json); configSHA 32d9a6a057585372a5199abfb542dcdc0fbeab37f7c4ea422eac710dbacf19dc",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 213,
+    "text": "- slime-sensitivity-hp: 7232matches; evidence slime-balance-packed/chunk-053.json (logical record slime-sensitivity-hp-index.json); configSHA 4f1ff527bc5f6198c70fc0076dbc99180994bbb3f6b652a487e59837f3dbbde3",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 214,
+    "text": "- slime-sensitivity-hp-attack: 7232matches; evidence slime-balance-packed/chunk-052.json (logical record slime-sensitivity-hp-attack-index.json); configSHA e35aa9bad37ac269395dbf2054d612f06cedcb74bd90f09f8e489233082842a6",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 215,
+    "text": "- slime-durable8: 9664matches; evidence slime-balance-packed/chunk-044.json (logical record slime-durable8-index.json); configSHA ae5086ae97a287dd430088bcb636b075424da151cf0663097181b2182fef785b",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 216,
+    "text": "- slime-durable16: 9664matches; evidence slime-balance-packed/chunk-038.json (logical record slime-durable16-index.json); configSHA 59ffde20df9d38ca0da531bbc766fbd06d30a00e64349b5bda393d65fcc2b041",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 217,
+    "text": "- slime-durable-oldcores: 16960matches; evidence slime-balance-packed/chunk-036.json (logical record slime-durable-oldcores-index.json); configSHA 3d2e3cbec407c55ab50ef19f47e1b73e0dce905ae882ba7d0716b101087600a7",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 218,
+    "text": "- slime-durable-mixed-a: 12720matches; evidence slime-balance-packed/chunk-032.json (logical record slime-durable-mixed-a-index.json); configSHA 7ad240b4dafa876e9835e694d9d5f0709a5e80ab0feceaae623c6a9fe9a8207b",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 219,
+    "text": "- slime-durable-mixed-b: 10896matches; evidence slime-balance-packed/chunk-035.json (logical record slime-durable-mixed-b-index.json); configSHA 326e48e0f382d80450be47d63e97150f8e1ce4a0f1852533afd0e5bda17fdba8",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 220,
+    "text": "- slime-durable60: 9664matches; evidence slime-balance-packed/chunk-039.json (logical record slime-durable60-index.json); configSHA 84d7474fe5965b5382a4196668efb40537266069d5e53789f882f73e8949a1f9",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 221,
+    "text": "- slime-durable60-oldcores: 16960matches; evidence slime-balance-packed/chunk-040.json (logical record slime-durable60-oldcores-index.json); configSHA 2978b95b100dfc25c88610e8e6212537b5d950cce5a4a72cb662cdbaef5fc608",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 222,
+    "text": "- slime-nature-old-controls: 19392matches; evidence slime-balance-packed/chunk-048.json (logical record slime-nature-old-controls-index.json); configSHA fac4344c3a5cf6fdb8cd6418566d04ebe2c05aa338e8684894131642e3d4feec",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 223,
+    "text": "- slime-durable60-strong: 5424matches; evidence slime-balance-packed/chunk-043.json (logical record slime-durable60-strong-index.json); configSHA 73ad4f6a211944594efb669665ddec1edc19e80e86aab41dbe6c83b3eca7aea8",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 224,
+    "text": "- slime-budget-nature-controls: 15504matches; evidence slime-balance-packed/chunk-028.json (logical record slime-budget-nature-controls-index.json); configSHA 3e7b8bc5206b283498959cb6a20c46c273010923fbe993dfd20952eda4cd18f2",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 225,
+    "text": "- slime-budget-previous: 13760matches; evidence slime-balance-packed/chunk-029.json (logical record slime-budget-previous-index.json); configSHA 74c5c4e5e52f3f9013e1affdd10df0d0380ce40a1c3d7b890da8f8e457228ef0",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 226,
+    "text": "- slime-budget-cheap-core: 12720matches; evidence slime-balance-packed/chunk-026.json (logical record slime-budget-cheap-core-index.json); configSHA a19a00cb62d7e0d26a92b78913c770354746c8c9b159bc6e027f4cf5cb17d300",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 227,
+    "text": "- slime-budget-nature-brute: 16368matches; evidence slime-balance-packed/chunk-027.json (logical record slime-budget-nature-brute-index.json); configSHA 915b68a7aa69c95688220cc0d388dce8e726e3dbe2aa713035eaf00ccfe09808",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 228,
+    "text": "- slime-budget-previous-newpool: 9536matches; evidence slime-balance-packed/chunk-029.json (logical record slime-budget-previous-newpool-index.json); configSHA 5f052ab695ab52ec647d261f7f67b76d61ad83fa797cbde91f1ca4f9b1eaa839",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 229,
+    "text": "- slime-final-identity: 6880matches; evidence slime-balance-packed/chunk-045.json (logical record slime-final-identity-index.json); configSHA ec663eb5b65c4c4163f6f39164802e03ca0067769f5abb4602ae5f612766e494",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 230,
+    "text": "- slime-final-supply-enabled: 3616matches; evidence slime-balance-packed/chunk-046.json (logical record slime-final-supply-enabled-index.json); configSHA a15225ade84ba3af155ed9ef1e543bc1ee20e08a7b46e340c865814849797a8a",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 231,
+    "text": "- slime-final-newpool: 4768matches; evidence slime-balance-packed/chunk-045.json (logical record slime-final-newpool-index.json); configSHA cb856e02a5a8079f8759703b858c08ff3deed61840aa04f1deed45240c38aeaf",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 232,
+    "text": "- slime-final-supply-disabled: 3616matches; evidence slime-balance-packed/chunk-046.json (logical record slime-final-supply-disabled-index.json); configSHA 75939d6a217ddffd32f6788f3528c3cb768544a7fbd685b6a6021e2073fb6e22",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 233,
+    "text": "- slime-final-supply-zero: 3616matches; evidence slime-balance-packed/chunk-046.json (logical record slime-final-supply-zero-index.json); configSHA b1620b57b9e506a6c3924d6109e3727ae8c4913fb629eeab9501c2c3471937de",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 234,
+    "text": "- slime-final-supply8: 3616matches; evidence slime-balance-packed/chunk-048.json (logical record slime-final-supply8-index.json); configSHA f644f620440beedea73c3521e60ba5dcab94ab9e4bd2d0d6ba32ef25117f0d81",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/slime-balance-audit.md",
+    "line": 235,
+    "text": "- slime-final-supply12: 3616matches; evidence slime-balance-packed/chunk-047.json (logical record slime-final-supply12-index.json); configSHA f3cd4097a794a3865cc42bed246763bf9112bff1dcd4049cbaf62d19693f6665",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/undead-balance-audit.md",
+    "line": 130,
+    "text": "- [Packed outcomes/ledgers](undead-balance-packed/) retain **every scheduled outcome, trace hash and full ten-unit resource ledger**, plus source/config/schedule/summary records. No losing or adverse output was dropped. Each lossless gzip-base64 chunk is at most65,000 bytes and records both exact decompressed-byte and gzip-byte hashes; the index also hashes the complete wrapper bytes and original raw report. The maximum observed evidence chunk is63,151 bytes.",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/undead-balance-audit.md",
+    "line": 141,
+    "text": "node scripts/balance-lab/read-undead-packed.mjs undead-initial",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  },
+  {
+    "path": "docs/undead-balance-audit.md",
+    "line": 142,
+    "text": "node scripts/balance-lab/replay-undead-packed.mjs undead-initial f1-o1__s2887046071__a-right__baseline /tmp/undead-replay.json /tmp/undead-study-source",
+    "reason": "Review local-only evidence reference/full-ledger command; original document was not edited."
+  }
+]

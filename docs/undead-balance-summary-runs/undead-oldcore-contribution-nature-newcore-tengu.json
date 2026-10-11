@@ -1,0 +1,754 @@
+{
+  "source": {
+    "gameVersion": "0.16.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "configSha256": "bdedf109bf84ace59496c866a5576e381e2565f98bb1103c43eb6a2449f4be2e"
+  },
+  "target": {
+    "id": "nature-newcore-tengu",
+    "ids": [
+      14,
+      6,
+      9,
+      10,
+      32
+    ],
+    "cost": 17,
+    "role": "Exact C17 second known nature+brute shell replaces28 with32; one undead, base-only cashout",
+    "variants": {
+      "baseline": {
+        "summary": {
+          "games": 336,
+          "wins": 241,
+          "draws": 0,
+          "scoreRate": 0.717262,
+          "meanTurns": 4.666667,
+          "meanDirectDamage": 925.1875,
+          "meanHealing": 48.21131,
+          "meanMpSpent": 198.684524,
+          "meanFinalMp": 76.056548,
+          "meanPoisonDamageTaken": 76.919643,
+          "meanCashoutSelections": 1.261905,
+          "meanCashoutCasts": 1.130952,
+          "meanCashoutMpSpent": 20.357143,
+          "meanCashoutEvents": 1.130952,
+          "meanCashoutZeroPoison": 0.068452,
+          "meanCashoutTicksConsumed": 2.985119,
+          "meanCashoutAddedBasis": 41.791667,
+          "meanCashoutScaledAddition": 38.220833,
+          "meanCashoutActualAddedDamage": 7.5625,
+          "meanCashoutDirectDamage": 66.386905,
+          "meanCashoutFuturePoisonNominal": 33.5,
+          "meanCashoutKills": 0.8125,
+          "meanCashoutDecisiveKills": 0.202381,
+          "meanCashoutKillsBeforeTargetAction": 0.14881,
+          "meanCashoutRetargets": 0,
+          "meanCashoutLaterReapplications": 0.080357,
+          "meanCashoutSurvivingTargets": 0.318452,
+          "meanCashoutGuardedEvents": 0.1875,
+          "meanCashoutWardedEvents": 0.071429
+        },
+        "partitions": {
+          "exactC17Opponents": {
+            "games": 336,
+            "wins": 241,
+            "draws": 0,
+            "scoreRate": 0.717262,
+            "meanTurns": 4.666667,
+            "meanDirectDamage": 925.1875,
+            "meanHealing": 48.21131,
+            "meanMpSpent": 198.684524,
+            "meanFinalMp": 76.056548,
+            "meanPoisonDamageTaken": 76.919643,
+            "meanCashoutSelections": 1.261905,
+            "meanCashoutCasts": 1.130952,
+            "meanCashoutMpSpent": 20.357143,
+            "meanCashoutEvents": 1.130952,
+            "meanCashoutZeroPoison": 0.068452,
+            "meanCashoutTicksConsumed": 2.985119,
+            "meanCashoutAddedBasis": 41.791667,
+            "meanCashoutScaledAddition": 38.220833,
+            "meanCashoutActualAddedDamage": 7.5625,
+            "meanCashoutDirectDamage": 66.386905,
+            "meanCashoutFuturePoisonNominal": 33.5,
+            "meanCashoutKills": 0.8125,
+            "meanCashoutDecisiveKills": 0.202381,
+            "meanCashoutKillsBeforeTargetAction": 0.14881,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.080357,
+            "meanCashoutSurvivingTargets": 0.318452,
+            "meanCashoutGuardedEvents": 0.1875,
+            "meanCashoutWardedEvents": 0.071429
+          },
+          "lowerBudgetOpponents": {
+            "games": 0
+          },
+          "coherentC17": {
+            "games": 216,
+            "wins": 163,
+            "draws": 0,
+            "scoreRate": 0.75463,
+            "meanTurns": 4.574074,
+            "meanDirectDamage": 926.444444,
+            "meanHealing": 52.657407,
+            "meanMpSpent": 199.203704,
+            "meanFinalMp": 75.407407,
+            "meanPoisonDamageTaken": 78.287037,
+            "meanCashoutSelections": 1.277778,
+            "meanCashoutCasts": 1.115741,
+            "meanCashoutMpSpent": 20.083333,
+            "meanCashoutEvents": 1.115741,
+            "meanCashoutZeroPoison": 0.092593,
+            "meanCashoutTicksConsumed": 2.842593,
+            "meanCashoutAddedBasis": 39.796296,
+            "meanCashoutScaledAddition": 36.199074,
+            "meanCashoutActualAddedDamage": 7.49537,
+            "meanCashoutDirectDamage": 66.291667,
+            "meanCashoutFuturePoisonNominal": 33.023148,
+            "meanCashoutKills": 0.740741,
+            "meanCashoutDecisiveKills": 0.171296,
+            "meanCashoutKillsBeforeTargetAction": 0.166667,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.101852,
+            "meanCashoutSurvivingTargets": 0.375,
+            "meanCashoutGuardedEvents": 0.212963,
+            "meanCashoutWardedEvents": 0
+          }
+        },
+        "core": {
+          "appearances": 336,
+          "finalMpMean": 25.794642857142858,
+          "spentMean": 36.19047619047619,
+          "cashoutCastsMax": 2,
+          "cashoutSourceMpAtCastMean": 45.70789473684211,
+          "cashoutKillTurnMean": 2.2344322344322345,
+          "deadWithMpRate": 0.6398809523809523,
+          "survivalRate": 0.3601190476190476
+        },
+        "perOpponent": [
+          {
+            "id": "fullbeast",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "puredragon",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 1
+          },
+          {
+            "id": "purematerial",
+            "cost": 17,
+            "games": 12,
+            "score": 0.166667,
+            "cashoutCasts": 1.666667,
+            "consumed": 4.833333,
+            "actualAdded": 14.166667
+          },
+          {
+            "id": "pureslime",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 4.5,
+            "actualAdded": 7.666667
+          },
+          {
+            "id": "puredemon",
+            "cost": 17,
+            "games": 12,
+            "score": 0.666667,
+            "cashoutCasts": 0.333333,
+            "consumed": 0.833333,
+            "actualAdded": 6.416667
+          },
+          {
+            "id": "nature-brute-dryas",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 2,
+            "consumed": 5.916667,
+            "actualAdded": 13.333333
+          },
+          {
+            "id": "nature-brute-tengu",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 1.083333,
+            "consumed": 3.25,
+            "actualAdded": 5.666667
+          },
+          {
+            "id": "strong-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.916667,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "strong-area",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 0.166667,
+            "consumed": 0.333333,
+            "actualAdded": 4.333333
+          },
+          {
+            "id": "material-strong",
+            "cost": 17,
+            "games": 12,
+            "score": 0.916667,
+            "cashoutCasts": 2,
+            "consumed": 4.25,
+            "actualAdded": 24.25
+          },
+          {
+            "id": "coherent-beast-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-beast-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.333333,
+            "actualAdded": 1.333333
+          },
+          {
+            "id": "coherent-beast-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-nature-support",
+            "cost": 17,
+            "games": 12,
+            "score": 0.166667,
+            "cashoutCasts": 0.916667,
+            "consumed": 2.5,
+            "actualAdded": 16.75
+          },
+          {
+            "id": "coherent-nature-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 0.25,
+            "consumed": 0.666667,
+            "actualAdded": 4.833333
+          },
+          {
+            "id": "coherent-nature-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.166667,
+            "consumed": 2.833333,
+            "actualAdded": 15.666667
+          },
+          {
+            "id": "coherent-dragon-support",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 1.5,
+            "consumed": 4.333333,
+            "actualAdded": 7.5
+          },
+          {
+            "id": "coherent-dragon-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-dragon-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.333333,
+            "consumed": 1,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-material-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.833333,
+            "consumed": 4.5,
+            "actualAdded": 7.5
+          },
+          {
+            "id": "coherent-material-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.5,
+            "cashoutCasts": 2,
+            "consumed": 5.333333,
+            "actualAdded": 25.166667
+          },
+          {
+            "id": "coherent-material-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 0.5,
+            "cashoutCasts": 2,
+            "consumed": 5.166667,
+            "actualAdded": 20
+          },
+          {
+            "id": "coherent-slime-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.666667,
+            "consumed": 2.5,
+            "actualAdded": 7.333333
+          },
+          {
+            "id": "coherent-slime-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.666667,
+            "consumed": 1.5,
+            "actualAdded": 10.5
+          },
+          {
+            "id": "coherent-slime-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 4.166667,
+            "actualAdded": 3.666667
+          },
+          {
+            "id": "coherent-demon-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 1.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-demon-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.75,
+            "cashoutCasts": 0.5,
+            "consumed": 1.416667,
+            "actualAdded": 2.75
+          },
+          {
+            "id": "coherent-demon-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.083333,
+            "consumed": 2.916667,
+            "actualAdded": 11.916667
+          }
+        ]
+      },
+      "candidate": {
+        "summary": {
+          "games": 336,
+          "wins": 241,
+          "draws": 0,
+          "scoreRate": 0.717262,
+          "meanTurns": 4.666667,
+          "meanDirectDamage": 925.1875,
+          "meanHealing": 48.21131,
+          "meanMpSpent": 198.684524,
+          "meanFinalMp": 76.056548,
+          "meanPoisonDamageTaken": 76.919643,
+          "meanCashoutSelections": 1.261905,
+          "meanCashoutCasts": 1.130952,
+          "meanCashoutMpSpent": 20.357143,
+          "meanCashoutEvents": 1.130952,
+          "meanCashoutZeroPoison": 0.068452,
+          "meanCashoutTicksConsumed": 2.985119,
+          "meanCashoutAddedBasis": 41.791667,
+          "meanCashoutScaledAddition": 38.220833,
+          "meanCashoutActualAddedDamage": 7.5625,
+          "meanCashoutDirectDamage": 66.386905,
+          "meanCashoutFuturePoisonNominal": 33.5,
+          "meanCashoutKills": 0.8125,
+          "meanCashoutDecisiveKills": 0.202381,
+          "meanCashoutKillsBeforeTargetAction": 0.14881,
+          "meanCashoutRetargets": 0,
+          "meanCashoutLaterReapplications": 0.080357,
+          "meanCashoutSurvivingTargets": 0.318452,
+          "meanCashoutGuardedEvents": 0.1875,
+          "meanCashoutWardedEvents": 0.071429
+        },
+        "partitions": {
+          "exactC17Opponents": {
+            "games": 336,
+            "wins": 241,
+            "draws": 0,
+            "scoreRate": 0.717262,
+            "meanTurns": 4.666667,
+            "meanDirectDamage": 925.1875,
+            "meanHealing": 48.21131,
+            "meanMpSpent": 198.684524,
+            "meanFinalMp": 76.056548,
+            "meanPoisonDamageTaken": 76.919643,
+            "meanCashoutSelections": 1.261905,
+            "meanCashoutCasts": 1.130952,
+            "meanCashoutMpSpent": 20.357143,
+            "meanCashoutEvents": 1.130952,
+            "meanCashoutZeroPoison": 0.068452,
+            "meanCashoutTicksConsumed": 2.985119,
+            "meanCashoutAddedBasis": 41.791667,
+            "meanCashoutScaledAddition": 38.220833,
+            "meanCashoutActualAddedDamage": 7.5625,
+            "meanCashoutDirectDamage": 66.386905,
+            "meanCashoutFuturePoisonNominal": 33.5,
+            "meanCashoutKills": 0.8125,
+            "meanCashoutDecisiveKills": 0.202381,
+            "meanCashoutKillsBeforeTargetAction": 0.14881,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.080357,
+            "meanCashoutSurvivingTargets": 0.318452,
+            "meanCashoutGuardedEvents": 0.1875,
+            "meanCashoutWardedEvents": 0.071429
+          },
+          "lowerBudgetOpponents": {
+            "games": 0
+          },
+          "coherentC17": {
+            "games": 216,
+            "wins": 163,
+            "draws": 0,
+            "scoreRate": 0.75463,
+            "meanTurns": 4.574074,
+            "meanDirectDamage": 926.444444,
+            "meanHealing": 52.657407,
+            "meanMpSpent": 199.203704,
+            "meanFinalMp": 75.407407,
+            "meanPoisonDamageTaken": 78.287037,
+            "meanCashoutSelections": 1.277778,
+            "meanCashoutCasts": 1.115741,
+            "meanCashoutMpSpent": 20.083333,
+            "meanCashoutEvents": 1.115741,
+            "meanCashoutZeroPoison": 0.092593,
+            "meanCashoutTicksConsumed": 2.842593,
+            "meanCashoutAddedBasis": 39.796296,
+            "meanCashoutScaledAddition": 36.199074,
+            "meanCashoutActualAddedDamage": 7.49537,
+            "meanCashoutDirectDamage": 66.291667,
+            "meanCashoutFuturePoisonNominal": 33.023148,
+            "meanCashoutKills": 0.740741,
+            "meanCashoutDecisiveKills": 0.171296,
+            "meanCashoutKillsBeforeTargetAction": 0.166667,
+            "meanCashoutRetargets": 0,
+            "meanCashoutLaterReapplications": 0.101852,
+            "meanCashoutSurvivingTargets": 0.375,
+            "meanCashoutGuardedEvents": 0.212963,
+            "meanCashoutWardedEvents": 0
+          }
+        },
+        "core": {
+          "appearances": 336,
+          "finalMpMean": 25.794642857142858,
+          "spentMean": 36.19047619047619,
+          "cashoutCastsMax": 2,
+          "cashoutSourceMpAtCastMean": 45.70789473684211,
+          "cashoutKillTurnMean": 2.2344322344322345,
+          "deadWithMpRate": 0.6398809523809523,
+          "survivalRate": 0.3601190476190476
+        },
+        "perOpponent": [
+          {
+            "id": "fullbeast",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "puredragon",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 1
+          },
+          {
+            "id": "purematerial",
+            "cost": 17,
+            "games": 12,
+            "score": 0.166667,
+            "cashoutCasts": 1.666667,
+            "consumed": 4.833333,
+            "actualAdded": 14.166667
+          },
+          {
+            "id": "pureslime",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 4.5,
+            "actualAdded": 7.666667
+          },
+          {
+            "id": "puredemon",
+            "cost": 17,
+            "games": 12,
+            "score": 0.666667,
+            "cashoutCasts": 0.333333,
+            "consumed": 0.833333,
+            "actualAdded": 6.416667
+          },
+          {
+            "id": "nature-brute-dryas",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 2,
+            "consumed": 5.916667,
+            "actualAdded": 13.333333
+          },
+          {
+            "id": "nature-brute-tengu",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 1.083333,
+            "consumed": 3.25,
+            "actualAdded": 5.666667
+          },
+          {
+            "id": "strong-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.916667,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "strong-area",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 0.166667,
+            "consumed": 0.333333,
+            "actualAdded": 4.333333
+          },
+          {
+            "id": "material-strong",
+            "cost": 17,
+            "games": 12,
+            "score": 0.916667,
+            "cashoutCasts": 2,
+            "consumed": 4.25,
+            "actualAdded": 24.25
+          },
+          {
+            "id": "coherent-beast-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-beast-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.333333,
+            "actualAdded": 1.333333
+          },
+          {
+            "id": "coherent-beast-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.833333,
+            "consumed": 2.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-nature-support",
+            "cost": 17,
+            "games": 12,
+            "score": 0.166667,
+            "cashoutCasts": 0.916667,
+            "consumed": 2.5,
+            "actualAdded": 16.75
+          },
+          {
+            "id": "coherent-nature-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 0.25,
+            "consumed": 0.666667,
+            "actualAdded": 4.833333
+          },
+          {
+            "id": "coherent-nature-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.166667,
+            "consumed": 2.833333,
+            "actualAdded": 15.666667
+          },
+          {
+            "id": "coherent-dragon-support",
+            "cost": 17,
+            "games": 12,
+            "score": 0,
+            "cashoutCasts": 1.5,
+            "consumed": 4.333333,
+            "actualAdded": 7.5
+          },
+          {
+            "id": "coherent-dragon-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.833333,
+            "cashoutCasts": 1,
+            "consumed": 3,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-dragon-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.333333,
+            "consumed": 1,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-material-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.833333,
+            "consumed": 4.5,
+            "actualAdded": 7.5
+          },
+          {
+            "id": "coherent-material-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.5,
+            "cashoutCasts": 2,
+            "consumed": 5.333333,
+            "actualAdded": 25.166667
+          },
+          {
+            "id": "coherent-material-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 0.5,
+            "cashoutCasts": 2,
+            "consumed": 5.166667,
+            "actualAdded": 20
+          },
+          {
+            "id": "coherent-slime-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.666667,
+            "consumed": 2.5,
+            "actualAdded": 7.333333
+          },
+          {
+            "id": "coherent-slime-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 0.666667,
+            "consumed": 1.5,
+            "actualAdded": 10.5
+          },
+          {
+            "id": "coherent-slime-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.5,
+            "consumed": 4.166667,
+            "actualAdded": 3.666667
+          },
+          {
+            "id": "coherent-demon-support",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1,
+            "consumed": 1.5,
+            "actualAdded": 0
+          },
+          {
+            "id": "coherent-demon-poison",
+            "cost": 17,
+            "games": 12,
+            "score": 0.75,
+            "cashoutCasts": 0.5,
+            "consumed": 1.416667,
+            "actualAdded": 2.75
+          },
+          {
+            "id": "coherent-demon-breaker",
+            "cost": 17,
+            "games": 12,
+            "score": 1,
+            "cashoutCasts": 1.083333,
+            "consumed": 2.916667,
+            "actualAdded": 11.916667
+          }
+        ]
+      }
+    }
+  }
+}

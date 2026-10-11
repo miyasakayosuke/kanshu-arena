@@ -1,0 +1,189 @@
+{
+  "source": {
+    "gameVersion": "0.14.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+    "configSha256": "86c18b4309ee1875f98c160a04a25b12f2dc937160c0b44c28167d6cc83f18f5"
+  },
+  "report": "lab-results/slime-sensitivity-hp-supply12/report.json",
+  "variant": "candidate",
+  "method": "Every focal pure/provisional matchup is rerun with trace, its saved trace hash checked, then funding eligibility reconstructed at turn start. No choice changes. Higher-priority support is distinguished from never reaching the exact funding threshold.",
+  "teams": [
+    {
+      "id": "pureslime",
+      "games": 1184,
+      "verifiedTraceHashes": 1184,
+      "orderedTraceHashesSha256": "d80bce4817d55d819b173f7b2a838d5d68700c5167fc6e51d77ea272f3aafac5",
+      "matchReasons": {
+        "never-funded-threshold-defeated": 173,
+        "selected-but-defeated-before-cast": 188,
+        "consumed": 541,
+        "funding-threshold-preempted-defeated": 280,
+        "funding-threshold-preempted-survived": 2
+      },
+      "turnCounts": {
+        "readyLiving": 4293,
+        "fundingThreshold": 1769,
+        "selected": 729,
+        "preemptedProtect": 1040,
+        "preemptedHeal": 0,
+        "preemptedOther": 0,
+        "selectedButDefeatedBeforeCast": 188,
+        "selectedButBattleEndedBeforeCast": 0
+      },
+      "examples": {
+        "never-funded-threshold-defeated": [
+          {
+            "matchId": "f1-o1__s2737045971__a-left__candidate",
+            "traceHash": "942c6b9e3c5cf146020486efcdb59181d2f7c1d26af204af41f07253e018ed14"
+          },
+          {
+            "matchId": "f1-o1__s2737045971__a-right__candidate",
+            "traceHash": "79bdeaaa524b4c236f7ef480d110608e661a73e8ce1acedd7e23094662febf3f"
+          }
+        ],
+        "selected-but-defeated-before-cast": [
+          {
+            "matchId": "f1-o1__s1096514436__a-left__candidate",
+            "traceHash": "0451944080a030419c4e1d45005bd002c2c31f270e55286eb8fa9f8742ddaea1"
+          },
+          {
+            "matchId": "f1-o1__s1096514436__a-right__candidate",
+            "traceHash": "c249b21ac5c9b58a962eccfc5827bd051a26ceff5fc6024e913838857faff738"
+          }
+        ],
+        "consumed": [
+          {
+            "matchId": "f1-o1__s2110418662__a-left__candidate",
+            "traceHash": "d71f34a66763d898b6c2d746cbdea75a834379b8cc349e8347166434f3dbc22e"
+          },
+          {
+            "matchId": "f1-o1__s2110418662__a-right__candidate",
+            "traceHash": "1fd3e26005596b72157617e8bf57e57674a96fc3c70c5f9c991de58b4780f403"
+          }
+        ],
+        "funding-threshold-preempted-defeated": [
+          {
+            "matchId": "f1-o1__s4138227114__a-left__candidate",
+            "traceHash": "71a742462f5b7c067260833bbc989ea617f3b7e75bc360f373ccdd688c9a6a66"
+          },
+          {
+            "matchId": "f1-o1__s4138227114__a-right__candidate",
+            "traceHash": "55258ec42223aecb31305f50fa0a0b185667bd59aec829ab5db977310cc46b26"
+          }
+        ],
+        "funding-threshold-preempted-survived": [
+          {
+            "matchId": "f1-o30__s1096514436__a-left__candidate",
+            "traceHash": "7cae36c7efe9275e9301d05f632b4829bb81fc0a0aa530957eb930e0d3a46296"
+          },
+          {
+            "matchId": "f1-o30__s1096514436__a-right__candidate",
+            "traceHash": "8810404f6ab3dc8680098e330216166be87fa845888a5c7cee627b73b032ff0f"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provisional",
+      "games": 1184,
+      "verifiedTraceHashes": 1184,
+      "orderedTraceHashesSha256": "f1fda93f013da82c4e208d543129fdfce52dc34898de9d8a4ec586237d001b4b",
+      "matchReasons": {
+        "funding-threshold-preempted-defeated": 144,
+        "consumed": 706,
+        "funding-threshold-preempted-survived": 28,
+        "never-funded-threshold-defeated": 180,
+        "selected-but-defeated-before-cast": 106,
+        "selected-but-battle-ended": 17,
+        "never-funded-threshold-survived": 3
+      },
+      "turnCounts": {
+        "readyLiving": 4490,
+        "fundingThreshold": 1983,
+        "selected": 829,
+        "preemptedProtect": 1154,
+        "preemptedHeal": 0,
+        "preemptedOther": 0,
+        "selectedButDefeatedBeforeCast": 106,
+        "selectedButBattleEndedBeforeCast": 17
+      },
+      "examples": {
+        "funding-threshold-preempted-defeated": [
+          {
+            "matchId": "f2-o1__s2737045971__a-left__candidate",
+            "traceHash": "48ba2974d74a916598cb502d32781244acdc5244603ab1463e06b54046a14e5d"
+          },
+          {
+            "matchId": "f2-o1__s2737045971__a-right__candidate",
+            "traceHash": "796fab467a44c30d2d8c775f94a9e37505419e1a3ab4eeaca0d7668012b34f14"
+          }
+        ],
+        "consumed": [
+          {
+            "matchId": "f2-o1__s1096514436__a-left__candidate",
+            "traceHash": "f46fe97bb57f6ae3b9151a0f977f0af23e44b4a9c67ad648b35de0103f58dd93"
+          },
+          {
+            "matchId": "f2-o1__s1096514436__a-right__candidate",
+            "traceHash": "6200c47e1038f5b1ca20bf2c01b4618478f5c9c031add805e12b001fccfa8ddd"
+          }
+        ],
+        "funding-threshold-preempted-survived": [
+          {
+            "matchId": "f2-o1__s1244440961__a-left__candidate",
+            "traceHash": "3882393e218705adea331ae989b83e29ec9f901a6d8300b57ee65f1cf35a1e4e"
+          },
+          {
+            "matchId": "f2-o1__s1244440961__a-right__candidate",
+            "traceHash": "b04382c444472470186020242241bd3321fd827e972f44430c336026e687b1ce"
+          }
+        ],
+        "never-funded-threshold-defeated": [
+          {
+            "matchId": "f2-o1__s3898876722__a-left__candidate",
+            "traceHash": "9185249688cbe304d850db1f45a73ee1830399f033cd6d54260f9e315be8c1ce"
+          },
+          {
+            "matchId": "f2-o1__s3898876722__a-right__candidate",
+            "traceHash": "67f1f12ad267a3133d7db62beba10cb183769cae73b332509cbf9a9dfd9e60a4"
+          }
+        ],
+        "selected-but-defeated-before-cast": [
+          {
+            "matchId": "f2-o3__s2737045971__a-left__candidate",
+            "traceHash": "443154fed0d0154d492c3899ef1c83128a1d09ea9aced9f591be7fb8be0be114"
+          },
+          {
+            "matchId": "f2-o3__s2737045971__a-right__candidate",
+            "traceHash": "6487cb0f12ce2d876952461dcd5b76ef36f88f2fa83e6cfc1239774eb2cb93b8"
+          }
+        ],
+        "selected-but-battle-ended": [
+          {
+            "matchId": "f2-o3__s1096514436__a-left__candidate",
+            "traceHash": "e07d0a4d6b548fb12a6ced5c8e59dbe3e656c67ba1d3d5826f52c83da15d5ea1"
+          },
+          {
+            "matchId": "f2-o3__s1096514436__a-right__candidate",
+            "traceHash": "a3dc0625eda8fe595c3ee5a057f9dbd33dd894c3a7f432b1c818d5169380a5ee"
+          }
+        ],
+        "never-funded-threshold-survived": [
+          {
+            "matchId": "f2-o3__s857164044__a-left__candidate",
+            "traceHash": "959a065f7ba3639d22de02eb19a3a629d9f717a455abaab2e19c7be6cd545d51"
+          },
+          {
+            "matchId": "f2-o3__s857164044__a-right__candidate",
+            "traceHash": "ce2dfa4514784319790c837bd2f43ec93b9c804e110d2a910650dc74cb6b7141"
+          }
+        ]
+      }
+    }
+  ]
+}

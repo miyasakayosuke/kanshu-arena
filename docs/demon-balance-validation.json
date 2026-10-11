@@ -1,0 +1,40 @@
+{
+  "status": "complete",
+  "source": {
+    "gameVersion": "0.15.0",
+    "gitCommit": "bc55e50efff7e20be997aa683be95b2b40e88cf9",
+    "workingTreeDirty": true,
+    "nodeVersion": "v24.19.0",
+    "engineSha256": "569499504424a217da53a88496fbe7f9f74ccd1bbe5574ec97f4decab9754222",
+    "familySha256": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "labSha256": "ff577f9013c449ffb4629d3aa3ffa997b7db9d30af48a1f543f5160ce32e32b4",
+    "configSha256": "bea2fd2daf71f6a548431d06a86f0b9e94f65003d1cf3d0e4e513246f8d62d6f"
+  },
+  "scheduledGames": 26920,
+  "initialHardeningReruns": 2624,
+  "smokeGames": 736,
+  "unitLedgers": 269200,
+  "cliReplays": 60,
+  "historicalCliReplays": 4,
+  "tests": {
+    "passed": 531,
+    "files": 18,
+    "command": "npx vitest run src/balanceLab*.test.ts src/demonWave.test.ts src/demonPlayback.test.ts --maxWorkers=1 --testTimeout=30000",
+    "logSha256": "37da84cc17cba63c2f1655d1608a09ec20dd054adcdc0610b792a3046f269a0c",
+    "initialConcurrentAttempt": {
+      "passed": 529,
+      "timeouts": 2,
+      "logSha256": "c1e2df56a2e58409d845f37b7f2b9bf9c6ea75df0224d1e4231cd60698893918",
+      "cause": "Concurrent simulation load; default5-second timeout. Serial rerun passed unchanged source."
+    }
+  },
+  "evidence": {
+    "files": 231,
+    "maximumFileBytes": 64540,
+    "allUnfavorableOutcomesRetained": true
+  },
+  "productionModifiedByLab": false,
+  "tuning": "none",
+  "knownImbalance": "Nature+brute remains95.63–96.04% in this cohort; historical97–99% remains valid for prior cohort",
+  "pendingReleaseChecks": "Parent owns aggregate release tests, build, rights checks and publication"
+}

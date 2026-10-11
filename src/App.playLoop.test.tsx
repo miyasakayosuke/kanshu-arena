@@ -4,7 +4,11 @@ import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import * as engine from './engine';
+import type { MockInstance } from 'vitest';
 import { resultFacts, battleFactEvidenceLines } from './battleInsights';
+// Leader previews also call start with no opponent; keep these assertions about real encounters.
+const battleStarts = (spy: MockInstance<typeof engine.start>) => spy.mock.calls.flatMap((args, index) =>
+  args[1].length ? [{ args, state: spy.mock.results[index].value as engine.State }] : []);
 
 let root: Root;
 const button = (text: string) => [...document.querySelectorAll<HTMLButtonElement>('button')].find(element => element.textContent?.includes(text))!;
@@ -60,19 +64,20 @@ describe('build, battle, learn, rebuild loop', () => {
 
   it('retains opponent, seed and rule through an atomic roster swap and resets the next battle', async () => {
     const start = vi.spyOn(engine, 'start'); const advance = vi.spyOn(engine, 'advanceWithEvents');
-    await mount(); await begin(); const original = structuredClone(start.mock.calls[0]);
+    await mount(); await begin(); const original = structuredClone(battleStarts(start)[0].args);
     await finish(); await click(button('編成を見直して再戦'));
     await click(label('1枠・妖狐を入れ替える')); await click(label('トロルを候補に選ぶ'));
     await click(button('トロルに入れ替える'));
     expect(document.querySelector('.practiceNotice')).toBeTruthy();
     await openArena(); await click(button('この編成で同じ相手に再戦'));
-    expect(start.mock.calls[1][0]).toEqual([1,2,3,4,6]);
-    expect(start.mock.calls[1].slice(1)).toEqual(original.slice(1));
-    expect(start.mock.results[1].value.history).toEqual([]);
+    expect(battleStarts(start)).toHaveLength(2);
+    expect(battleStarts(start)[1].args[0]).toEqual([1,2,3,4,6]);
+    expect(battleStarts(start)[1].args.slice(1)).toEqual(original.slice(1));
+    expect(battleStarts(start)[1].state.history).toEqual([]);
     expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
     const resolved = advance.mock.calls.length;
     await tick(1000); expect(advance.mock.calls).toHaveLength(resolved);
-    expect([...document.querySelectorAll('.commanderMp')].map(element => element.textContent)).toEqual(start.mock.results[1].value.allies.map((unit: engine.Unit) => `MP ${unit.mp}/${unit.mp}`));
+    expect([...document.querySelectorAll('.commanderMp')].map(element => element.textContent)).toEqual(battleStarts(start)[1].state.allies.map((unit: engine.Unit) => `MP ${unit.mp}/${unit.mp}`));
   });
 
   it('states when changing a rule cancels controlled retry', async () => {

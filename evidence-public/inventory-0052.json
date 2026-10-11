@@ -1,0 +1,962 @@
+[
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-069.json",
+    "bytes": 36907,
+    "sha256": "c81603b974362a523a373e53b9655c866714ee5d58d2728293943f0170289aee",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-070.json",
+    "bytes": 35907,
+    "sha256": "687367f77567f2f07b037d307e01d74f2d2a2d50d8d48bf1909b008d0e9d20d0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-071.json",
+    "bytes": 36531,
+    "sha256": "602b5f419359b0f72511059892609bbc9a98f65541f0a42744047b092b546d65",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-072.json",
+    "bytes": 37111,
+    "sha256": "4e50fc8acd6e4151a09384189a7471697b2bc91c28a4fc5f28b7a38b508b5c8f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-073.json",
+    "bytes": 36651,
+    "sha256": "2008404b0341b4fb6cdb1c57ca336a8f4eacc5e4afa61edc99fcb6e0ef6fe456",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-074.json",
+    "bytes": 37047,
+    "sha256": "05061cd314896292a01b0aab8a0d2163f9116f69e482b3136e9a0733628f0ef6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-075.json",
+    "bytes": 37295,
+    "sha256": "71342f06911cdf4fa9be95aa9749c9c0a72327be61938955ba560b021cc2b86c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-076.json",
+    "bytes": 36547,
+    "sha256": "d62a3354604fdd50fdad0f89d923030ad064617080af03a895b4205af352a66b",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-077.json",
+    "bytes": 36671,
+    "sha256": "ae3e1b7a610b4b91505638e2bf37f0afe5ee4459a4dbb7bb6aaa3cccbbc1d0bc",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-078.json",
+    "bytes": 37263,
+    "sha256": "5c9a46e69ab6c85d90e08151c5a5393e337d6bce71c24f03921f9410acd051a7",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-079.json",
+    "bytes": 35875,
+    "sha256": "0da63502b0ffef1d8fd69fa1ad0e6aaff202d832d890f212a7b4e77b867ee3e6",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-080.json",
+    "bytes": 37315,
+    "sha256": "c48e69c04f10f41af3118736563415d46a7b5ba7abd1ab8a78e6af740596345a",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-081.json",
+    "bytes": 38107,
+    "sha256": "c31f3ae7972ac5f2021454a89334f8d38c10b86471eecd803703b6ca5cf70aec",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-082.json",
+    "bytes": 36435,
+    "sha256": "b7def04b3d789aadc4888b913c6ca57fd8a36df349ef25e1189b5385f44c43e0",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-083.json",
+    "bytes": 36547,
+    "sha256": "06ab31eb896e087571a38497676eedf62c981c3deea4f2433f9076046a2896fd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-084.json",
+    "bytes": 36355,
+    "sha256": "9378a81ae78a26f05eefa4d45479f5e2d8df57e606ef0d8346d04be9a0f6d951",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-085.json",
+    "bytes": 36255,
+    "sha256": "19813c067b7b27dc37c903afd99b8e14beb3f3fa0598027fb3a59e1e3f21cf15",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-086.json",
+    "bytes": 35047,
+    "sha256": "6d0f3d6b7d94be1ec03bbb135d59e464d94f2285c7146897fc0e2334731ea6b8",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-087.json",
+    "bytes": 36059,
+    "sha256": "9a1f24572e1ab7267e0ab18077cd05766df77feaa397b83f306f4455c105af2e",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-088.json",
+    "bytes": 35423,
+    "sha256": "3ae488dea55be9eddd326ee021596b404eae6ec27e63116fee5cb08b4ab217e3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-089.json",
+    "bytes": 36435,
+    "sha256": "227e4dc26d1603448f9e079d7515ec2449e02f2c8ce6ee54168db580a8babd8f",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-090.json",
+    "bytes": 36155,
+    "sha256": "9511d50f46b90644c597a1e874e99df97d71bfbd9826ed97768fa311d8d57334",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-091.json",
+    "bytes": 35987,
+    "sha256": "3b6ccf9c08a83c80c724c1085c94bb55afe7a1a75a7865462ff055b9a3e923a5",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-092.json",
+    "bytes": 35883,
+    "sha256": "48e5dc8f279be489d8cedcd5eeb9d111be9cc344b824f7f8bfc0de963b923887",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-093.json",
+    "bytes": 28447,
+    "sha256": "32023ee0462a77122be26dee9153a251fafa6d81faf2a474a36ed7cbbf164b95",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-094.json",
+    "bytes": 28147,
+    "sha256": "f557b38f4bcb962437003768bdfbe01e31b8ec65936cc6d8dc937122dca6bb26",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-095.json",
+    "bytes": 28455,
+    "sha256": "59dc5a92ab1486adb0500917408d7caaf689b764e49c17dd19d912400bda8679",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-096.json",
+    "bytes": 28415,
+    "sha256": "af981009e94d16ae0458d9514972542cd2bfd14d3f534ed2da73d35c7959c090",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-097.json",
+    "bytes": 29447,
+    "sha256": "77c7840b15a70ea8ef07bdef9e650e8b48aa33baae33594b15b46002c826d973",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-098.json",
+    "bytes": 27903,
+    "sha256": "f7740bed13377387d3d8d0c0422ab4370319defba28c90c036123fa413838f39",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-099.json",
+    "bytes": 27919,
+    "sha256": "08a705f19d0f4e9ebb1756886617dd1c697e25598d83590df10060926bd3a089",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-100.json",
+    "bytes": 27615,
+    "sha256": "1084e04ca65ac424ef53730bd1b172f6f961e92a9d24ecbbacf09309776cef9c",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-101.json",
+    "bytes": 27627,
+    "sha256": "537e1e39509f3db8888bfd95e1b9936eced416abfc3028dea54dea8cac8380b3",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-102.json",
+    "bytes": 27775,
+    "sha256": "1a04226f2acba781e1d7db1d7a7fb7ea34ebfd4fb51ed3443603f5259478ae87",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-103.json",
+    "bytes": 28031,
+    "sha256": "9513c845a7c58470c5f449bc65cc20de88ce5f4da6e18cb8f5a9cd9042b325fa",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-104.json",
+    "bytes": 27759,
+    "sha256": "2485a45d886b82ce8d53c0c995bc21e3f276335e7f2c641e8eb432acbc391e97",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-105.json",
+    "bytes": 13146,
+    "sha256": "3a2c7b80f25fdf21419855ea90f9f50999433af4dd3b060a6d8912f0e5f8d8bd",
+    "disposition": "omitted-locally-preserved"
+  },
+  {
+    "path": "docs/extraordinary-balance-packed/extraordinary-substitutions-index.json",
+    "bytes": 34066,
+    "sha256": "5d6b32a8342331dad7257c5f35ce15967ac4fa8c7704e9e30b353da7be5c70f2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-pre-extension-1.json",
+    "bytes": 28549,
+    "sha256": "6fedc3a7bc06d9026e8c39e86f04d4961f3c9af49c2dd96f7b47c360ac447cdc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-pre-extension-2.json",
+    "bytes": 1478,
+    "sha256": "a8d94ae9f6be28f0e4e1323c29fd52dc287b7434b063347d3bc96a5767f05111",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-pre-extension-3.json",
+    "bytes": 30740,
+    "sha256": "e654c943e2afe1da98ea8bc543b7eca062ea46380c6416b8b562e9f7effc9998",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-pre-extension-4.json",
+    "bytes": 8483,
+    "sha256": "bec18b2e354d3cf7d4893fef35928a67d508d508d79759e467b79ffd046835d4",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-pre-extension-index.json",
+    "bytes": 1367,
+    "sha256": "40983b6689a88d6c69c4c4d46ea81462373f42cb221063d99e8d87024c017743",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-study-v1-1.json",
+    "bytes": 28549,
+    "sha256": "6fedc3a7bc06d9026e8c39e86f04d4961f3c9af49c2dd96f7b47c360ac447cdc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-study-v1-2.json",
+    "bytes": 1478,
+    "sha256": "a8d94ae9f6be28f0e4e1323c29fd52dc287b7434b063347d3bc96a5767f05111",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-study-v1-3.json",
+    "bytes": 34325,
+    "sha256": "8b6735b23fe938975ce6ed6c0691233fbd8512e6fd3fe1b446841da7fa577e28",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-study-v1-4.json",
+    "bytes": 8827,
+    "sha256": "abd8a93eb33ccf9e1c65c5c7d6a6d14b86daa44419f775b83083bcb3d0686f84",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-source/extraordinary-study-v1-index.json",
+    "bytes": 1342,
+    "sha256": "7ff256045362303839ea94d3097f84a9b4d96d5e3c7ce936c4f3071ded771491",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-substitution-comparisons.json",
+    "bytes": 6010,
+    "sha256": "13f5caee10ece5e55e9bcd2235ac50d41887d40c7a638cfba11cb0988ad139e5",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-broad-janus-c17.json",
+    "bytes": 9741,
+    "sha256": "b61c9621b04250f7d23d1971f25c27df6e1061d9fd75f444e78f6aa6473f3fa1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-broad-janus-five-c17.json",
+    "bytes": 9813,
+    "sha256": "dfcd5340b5e0100befe7921169cf79ebc1e61daa978104efc7d98556ad83728b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-broad.json",
+    "bytes": 1592,
+    "sha256": "5cfa4dc66e6172cac6dcbaba499f6f7348e27c30b4e211ce43344db76968cb5e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-enabled-janus-c16.json",
+    "bytes": 11700,
+    "sha256": "1a4753363aa62b645866e0ee6a710f040c64a0966a3667769df4dc7f8ed03c2e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-enabled-janus-c17.json",
+    "bytes": 11612,
+    "sha256": "383b182759688b56d858483adcd2349ae01fcb8a894bd12800f5b617037809d9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-enabled-janus-poison-c15.json",
+    "bytes": 11665,
+    "sha256": "736a181f286242ac10449d6b1b6d300a74a992375237c7abfa196664a592db6d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-enabled-janus-ward-c16.json",
+    "bytes": 11658,
+    "sha256": "1b279b956cc39c718a8dc8e6157cc5e601273d76416a71d58cd3aef1fc437032",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-enabled.json",
+    "bytes": 2124,
+    "sha256": "0f687abc6893eaa15971953d71f4722fbdfb70dfb50256860b20bdca1bb885f8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-initial-janus-c16.json",
+    "bytes": 11822,
+    "sha256": "e08a70d71915a24a2cb4dd6b6f026943b3492143f253606abbc739987fa88ad9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-initial-janus-c17.json",
+    "bytes": 11739,
+    "sha256": "a96c9ef1a0c211b59da21b519cd42310f3ed52c534fec1ea066e8a84a72efc4f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-initial-janus-poison-c15.json",
+    "bytes": 11879,
+    "sha256": "fad3a807aa38b096d172caef05500a6996d496590e749d1c53f5a6baf1a2a767",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-initial-janus-ward-c16.json",
+    "bytes": 11714,
+    "sha256": "f3f58e433a21b34879e2c72e89de979763601fae59f108cf4fd542b077508cc3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-initial.json",
+    "bytes": 2129,
+    "sha256": "2abee0e833aed0b37b98f3ac9a0b88d4752d1f617b6055a6cfcb068e002c7371",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-off-janus-c16.json",
+    "bytes": 11494,
+    "sha256": "c7dddbb30b4ca68fbd6f413ee931ef80c43ee364f3a1b7fb096ac2edb38e9e94",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-off-janus-c17.json",
+    "bytes": 11414,
+    "sha256": "d27ba43ecd16299ee93e13cce14f4bdd26b94629915b5ae0dbb4eabd9c716070",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-off-janus-poison-c15.json",
+    "bytes": 11500,
+    "sha256": "6575560bfdc947c51e1cb2da1b451883e1c26ba2bea8fbdcb7818e62eb2ab0b0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-off-janus-ward-c16.json",
+    "bytes": 11427,
+    "sha256": "96299d3b157ed383e675596dd234d9043558826d46a0cd95380cc2816b5f41d6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-off.json",
+    "bytes": 2106,
+    "sha256": "58c19b49b3397c0d88829b099a96b66c372c3c67083b6451d9313a52e02c4e24",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-janus-c17.json",
+    "bytes": 10014,
+    "sha256": "728907f2cc7df10707e1b0a44aa5a0cf4cfc91afe2f27ad26567b4246b533945",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-janus-five-c17.json",
+    "bytes": 10016,
+    "sha256": "c8cbc284056e871b021e6a5384b27cb692e979ded8feb4942bbcfeb5ba9458bb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-janus-nonleader.json",
+    "bytes": 9999,
+    "sha256": "23d6eae14f90a53d39b7b9cb21ed99275d5051cd529d519edc38f3229b988894",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-janus-three-c17.json",
+    "bytes": 9597,
+    "sha256": "485d325c2c2bab86d9e7e739f61ce105d4ad20226d0a0b8f9374134350158a96",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with14.json",
+    "bytes": 9144,
+    "sha256": "a7adb576b6a03e653927c0dba8559d3ea65c4aa807be961f727937163a45a677",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with15.json",
+    "bytes": 9202,
+    "sha256": "2cf006e2bdcf5ff8e4f2ee53d196692aab539d4266136d57f759b1f479aa4c7b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with19.json",
+    "bytes": 9198,
+    "sha256": "1ea0cf2ea8cc027964fa72da76f155121ccf0a5f67592cd55caa9848babbc57b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with28.json",
+    "bytes": 9280,
+    "sha256": "8f2c694322215a54dd1461151ea7d8c48f684b6279eb5761255d4c2d64938765",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with29.json",
+    "bytes": 9210,
+    "sha256": "9db715b32d034ad7be6f015775b1973cfd58e3a7e76c421f4d2cfaa2399ad8b0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions-replace36-with32.json",
+    "bytes": 9112,
+    "sha256": "a8dc1dbdb76015b079ddf9865d4f026c118e36cfbf6047a97d9c19a304490591",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary-substitutions.json",
+    "bytes": 3823,
+    "sha256": "3a443a8c5d2ce61f1fa66f9250b4e3e4f42698ef067249e66183659fb9d7dbf8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-summary.json",
+    "bytes": 6842,
+    "sha256": "f6e7d1dde903b1833cc1b4f09325da797bc2e6448247277d617a1cc0e8bfbaeb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-validation.json",
+    "bytes": 1280,
+    "sha256": "e1bc3cd01fb4f0bf5b753c7c135e67ca7d532e1d6a6b1725ae4f9b4ffdab25f3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-balance-verification.json",
+    "bytes": 24916,
+    "sha256": "72e02af37e59ea0cb79468177162dca369d47bf5b72d1a862e0028912cfd1723",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/extraordinary-family-reference.md",
+    "bytes": 11229,
+    "sha256": "5da4647f636440ec9cd335a3a2b7280bb1155f1ac1823be5e15624f11646630c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/family-wave-balance-audit.md",
+    "bytes": 14600,
+    "sha256": "e03f3c94a982654414253960d919463329870c232a4dd1775df50a1af11031cf",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/family-wave-balance-summary.json",
+    "bytes": 75962,
+    "sha256": "01ffac50ca38dc673b82cf58bc5c4f156ecef4861e701e369b7d061fbe5424d0",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/family-wave-reference.md",
+    "bytes": 13063,
+    "sha256": "220d6fd0bd17d120d0ac140cc3cbd197e67441c39bd1684b56ce4d2cafb364ab",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/fenrir-balance-audit.json",
+    "bytes": 48283,
+    "sha256": "b11eea247405002d85bda9b7f2b977ca74bdbf3d8c76b4419da2e9b6d6cb6fa7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/fenrir-balance-audit.md",
+    "bytes": 7344,
+    "sha256": "acfc69bc74a1b405865e37187bc83756ee121cbb7bbc4b2d589756eb9c9949de",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/fenrir-reference.md",
+    "bytes": 9625,
+    "sha256": "c6596f86ed957f070eaa48ef7698d60f7981d6d50537b2ea0a2d7d6d017be1b2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/leader-preview-v0181.md",
+    "bytes": 4497,
+    "sha256": "47b4446a2e36477dc44bf446e41be9010e100e063b03f4035e66ad81b288d723",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-art-provenance.md",
+    "bytes": 11609,
+    "sha256": "63b9300d0fc5a7bbb5c1450dad227d0b139e12b32f0a849deb0be994c1b114c3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-audit.md",
+    "bytes": 20241,
+    "sha256": "b02272eb37a7fda35856a8a3704c71e38c3a3b488c93482225c6b0b4ff3b8f98",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-core-nonleader.json",
+    "bytes": 16125,
+    "sha256": "8c91952d474805ea96d5be47eabe7d25d39d2335b23f8cf24cae45290af7ef4b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-core-replaced.json",
+    "bytes": 15800,
+    "sha256": "5ac60e2a01acea83c305a763ea6cfdcd83939719528b8d2b39559fde6cb35133",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-index.json",
+    "bytes": 4845,
+    "sha256": "0f3116e5036892a8d65992cafa456821b6e0364b1e94ac4918ade7d3bf3edeeb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-purematerial.json",
+    "bytes": 16039,
+    "sha256": "cc00047318972126271b125339653b7c69d772e5a6c8d4b0b410c8d24c26f779",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-threematerial.json",
+    "bytes": 16050,
+    "sha256": "6997643b9450d582b6af5fd9dde3ddc79c9d4e00c35aa9f83d9c8d2534c29a14",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/01-exploratory-material-identity-twomaterial.json",
+    "bytes": 15842,
+    "sha256": "fc37770868b946e719d269c07b469342cb79576969a143a98df77f59ba3ac36e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-core-nonleader-costs.json",
+    "bytes": 31870,
+    "sha256": "466fe6f610f87f6898b8a8ab00f6af0362736d25360739e416acff61e24e62fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-core-nonleader.json",
+    "bytes": 54926,
+    "sha256": "470151847778075ae38178f682a99225bff508ff9d6fac6eba6b66ffb4daa402",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-core-replaced-costs.json",
+    "bytes": 31646,
+    "sha256": "8257967c556f4d5d68b9d42896ef50efd71382b242b861d7cc71dd8772d621a1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-core-replaced.json",
+    "bytes": 54116,
+    "sha256": "004dd341544798c5ce9ac6f288f4dc1fb680702ee6579da57f920cfcf4229a2c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-index.json",
+    "bytes": 7893,
+    "sha256": "7636d4bd5cc9ed33ac48a40d96a812160286f8224496a56df9790647d3666896",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-purematerial-costs.json",
+    "bytes": 32082,
+    "sha256": "e3578c148f50b65672a3e6b1528f5e6b9a5b80bbce5b392d0a81b8f2a3a3fd9c",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-purematerial.json",
+    "bytes": 54982,
+    "sha256": "81234ae0526211343b56a3908c978e301e9ca7c3582095e6a9b77b0d9b7cb2bc",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-threematerial-costs.json",
+    "bytes": 32078,
+    "sha256": "658730f3ecb26b17a327527f661a9f040a33a4a1c4aba1ff38d27cb286914bba",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-threematerial.json",
+    "bytes": 54780,
+    "sha256": "450b4afae72da0a3a1a570b092e3983189c437641bdde5b8e37d72abbbd00f92",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-twomaterial-costs.json",
+    "bytes": 31862,
+    "sha256": "ed98c9bcbc1c71060fe4f2dfb74d9d8d6d83a9e5465c2d6b2393ecd21df9a9c7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/02-exploratory-material-broad-twomaterial.json",
+    "bytes": 54116,
+    "sha256": "9b4785a9fdbf2512c47dc2a0dd1c58d302b0d571f32f607bdcd5837272fdf712",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/03-exploratory-material-repair-disabled-index.json",
+    "bytes": 3835,
+    "sha256": "3bcbf8c2a6059de6130dfb88ac6178472e4935ac3c0d047714b37f26e84b3421",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/03-exploratory-material-repair-disabled-purematerial.json",
+    "bytes": 15972,
+    "sha256": "a8361c8a0db0d1a8e4f03ec1241211fc45cb8889c615d958c89cd3393b05713a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/03-exploratory-material-repair-disabled-threematerial.json",
+    "bytes": 16003,
+    "sha256": "f861a35f7f428782dfda4c27240108f3ef5c201e0182c4d1caec18768c29cc8b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/04-exploratory-material-repair-zero-index.json",
+    "bytes": 3807,
+    "sha256": "d55e8a6b76647d83ae71ddf0cc13d62f8505199adf6b006d52f4170769fd13b8",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/04-exploratory-material-repair-zero-purematerial.json",
+    "bytes": 16005,
+    "sha256": "f7bfc9ebec4bf9aaafdf4527df23b5a624c0cfa354753be81babec1ec0f98f43",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/04-exploratory-material-repair-zero-threematerial.json",
+    "bytes": 16035,
+    "sha256": "36dcf12b421a6452ec5fe7871a37c54caccd30d164e893fdc9801fc151c1510e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/05-exploratory-material-repair12-core-nonleader.json",
+    "bytes": 16170,
+    "sha256": "c8ec92a1fed8a395e08cfc10fafae395e450e589873c21dd4eaf5c42f1204c96",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/05-exploratory-material-repair12-index.json",
+    "bytes": 4195,
+    "sha256": "ee01e2ea36967b7210b05e2f5bd4432588c1078d127c3ce9612b18253ef5e9eb",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/05-exploratory-material-repair12-purematerial.json",
+    "bytes": 16106,
+    "sha256": "8d823a7f441ef2416a857e4825da1f7d4d45415ed90585c4bde47fd7499199ec",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/05-exploratory-material-repair12-threematerial.json",
+    "bytes": 16106,
+    "sha256": "4891e2b48ff37619d0a69fa1ddaaeb6ba69c924549f4b6a6a066286c509c227a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-core-nonleader-costs.json",
+    "bytes": 31812,
+    "sha256": "96a3190cea4451800dde7b2f213988e08cc20ca4a92b44403ea9bd5c3164b39d",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-core-nonleader.json",
+    "bytes": 54933,
+    "sha256": "54989a3850bc7c68b6bcb23a8094877f41bd620c29e1b6d6b1fb83a435ed1fc3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-index.json",
+    "bytes": 7298,
+    "sha256": "2a4658e491fd3b39c7d2bab7397e3c18c58965267aabcf5c95b8ed5aea2a9d52",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-purematerial-costs.json",
+    "bytes": 32031,
+    "sha256": "018335f945c0c7f0c584bce0103f976b8e115777bf1b4874d54fb5820c05cc94",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-purematerial.json",
+    "bytes": 55021,
+    "sha256": "d4dd4593001b0ca2b4b10bb7985c7c2f263437b2e9f682f5a7766f9cd1d80089",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-threematerial-costs.json",
+    "bytes": 32054,
+    "sha256": "f2a3a419a1cfa756bfb03877100b96593dc933967bfc52f22c5b1be3ba8033ba",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/06-exploratory-material-repair12-broad-threematerial.json",
+    "bytes": 54820,
+    "sha256": "675b841f447d23d428571167a0d348dcf14addce5fb81db8769643e89f3a5a52",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/07-exploratory-material-repair14-core-nonleader.json",
+    "bytes": 16177,
+    "sha256": "5e449c75167f8b640a96ab1663e92bcc0ffdcfeaeaf6e4a51398b992a2c3bcd1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/07-exploratory-material-repair14-index.json",
+    "bytes": 4195,
+    "sha256": "39cee94a5ad27e0475447fba7e773c6e281a72d3ac9b3d7fee99d2660444d9f9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/07-exploratory-material-repair14-purematerial.json",
+    "bytes": 16097,
+    "sha256": "aaa6a07b9ba5b0bed9dd339cb2ef9bd62920058a5ae99b70c96bac58e8a22047",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/07-exploratory-material-repair14-threematerial.json",
+    "bytes": 16100,
+    "sha256": "30552bf62e0eac070acf631709177f90726b2fc072c4e54b9d8f92e7b0ae4ec9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-core-nonleader-costs.json",
+    "bytes": 31822,
+    "sha256": "81425257c84c4cb95f60d10f4748d34f6463205bf13971de8808293172365b72",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-core-nonleader.json",
+    "bytes": 54967,
+    "sha256": "2067841fb8b301047ed1f6b50b071ea396f5e4e898dc23595f6cc0827a890012",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-index.json",
+    "bytes": 7298,
+    "sha256": "a9208c804e505d6d8038b394ebb031850cfc643a4dcd23839fb16839157be5a3",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-purematerial-costs.json",
+    "bytes": 32021,
+    "sha256": "f720efac6b0757967c201c5f74eb140b7efd419614319cdca88192d2689238fd",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-purematerial.json",
+    "bytes": 55008,
+    "sha256": "f9a05acd41273e9a58dfd2eafb5f2762a125935332b03f4538ee4179943f998e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-threematerial-costs.json",
+    "bytes": 32028,
+    "sha256": "78a3a699bdc2b80986cb8d5e9d1ce94d3ace8ccd9e5f3992680e79ed68ffe57a",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/08-exploratory-material-repair14-broad-threematerial.json",
+    "bytes": 54804,
+    "sha256": "becd90b85eb491df3071fb9dc8b62b35ecceed9c90c23e4833a7a10662a82935",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-c17-bull.json",
+    "bytes": 29131,
+    "sha256": "2cf5e4ae3f0064fd58a7565eb4344e342bf983f846e119a6b5f3d2ef94da4505",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-c17-healer.json",
+    "bytes": 29242,
+    "sha256": "5db66f8c47ffd2593159c8ebbb25acc654a613b67e0f4ac671238b0374373865",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-c17-shield.json",
+    "bytes": 29123,
+    "sha256": "60936e18dc11624fc13787e03ac43323111e9ac809cf19ed538119cc9ccb5321",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-index.json",
+    "bytes": 7363,
+    "sha256": "244cea4a5103a282abad02f7b7cf9bf5066ae2fcfb998602dcf83d77526f6640",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-mixed-bull.json",
+    "bytes": 29083,
+    "sha256": "d9ce87572f111cd826e2f4891073c7effe40090e965cb3662d4f3a84001205d6",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-mixed-healer.json",
+    "bytes": 29104,
+    "sha256": "a822c1c02da447060c2b35c53fb3f74494688a17fc27574aaf846f6174224e96",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-mixed-shield.json",
+    "bytes": 29127,
+    "sha256": "d655841ab02441fa3fdc5da4f879dfd873a5476e9f6999c40890f949ba8808de",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/09-exploratory-material-coherent-repair14-purematerial.json",
+    "bytes": 29256,
+    "sha256": "05cd9fa3d19c3ada08a8160a1606d52bd3b6fb5a117e8eec79ec50c36072948f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-core-nonleader.json",
+    "bytes": 16111,
+    "sha256": "696ea58248c627649c35ee1207ce5bf5d9655cd9fc03491f1cbd4fe96b152754",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-core-replaced.json",
+    "bytes": 15800,
+    "sha256": "5ac60e2a01acea83c305a763ea6cfdcd83939719528b8d2b39559fde6cb35133",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-index.json",
+    "bytes": 4850,
+    "sha256": "ef02204f26be31d7a275c624aaeb0b188b27402ebe9ec5c90fb0871af4ff6af9",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-purematerial.json",
+    "bytes": 16037,
+    "sha256": "e82c8117aeccf4b3c72c365c14e842e1111082989b24a3d9f463e3052a50977b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-threematerial.json",
+    "bytes": 16034,
+    "sha256": "88519b9ab9e899a97cf156c3d6e582668e0707cf03f8a5d4cc6748ef52d1d30b",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/10-final-source-material-identity-twomaterial.json",
+    "bytes": 15842,
+    "sha256": "fc37770868b946e719d269c07b469342cb79576969a143a98df77f59ba3ac36e",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-core-nonleader-costs.json",
+    "bytes": 31774,
+    "sha256": "bf34e3d2f0f73389770dac092cb840d2bcaab2dcd439a3fd493631f1c8f430c2",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-core-nonleader.json",
+    "bytes": 54873,
+    "sha256": "0ddd31a5383349c4c82275c76b364ffc14aedf186b9a43e6b6951f6563400071",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-core-replaced-costs.json",
+    "bytes": 31646,
+    "sha256": "8257967c556f4d5d68b9d42896ef50efd71382b242b861d7cc71dd8772d621a1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-core-replaced.json",
+    "bytes": 54117,
+    "sha256": "8ebf5f9d422cff84a9d87aa735f185e003ec47bbc9c312aa9b4900389c1cb442",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-index.json",
+    "bytes": 7898,
+    "sha256": "579c10608ce1ead4ccfcdb1e89a507f5e81d53b6531b6f59d27c0104d39fdce7",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-purematerial-costs.json",
+    "bytes": 31960,
+    "sha256": "2b2f0d790f0c5ddb8fa504b3ce23a423571807163a5b8167d3eef633ad1ed6b1",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-purematerial.json",
+    "bytes": 54903,
+    "sha256": "cd08b24b312365fb352e499c29113badcba58d9444c3825cb054c0c21a63cf3f",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-threematerial-costs.json",
+    "bytes": 31978,
+    "sha256": "54da56c4ca5f210e3b5d089b18a3f0192ba80f8f50b569b8a7fde1584b642d92",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-threematerial.json",
+    "bytes": 54697,
+    "sha256": "837c5d17f2690974f2e02c65f0c02f7b48df908198b6b6af9faa7df97d64d380",
+    "disposition": "shipped"
+  },
+  {
+    "path": "docs/material-balance-summary-runs/11-final-source-material-broad-twomaterial-costs.json",
+    "bytes": 31862,
+    "sha256": "ed98c9bcbc1c71060fe4f2dfb74d9d8d6d83a9e5465c2d6b2393ecd21df9a9c7",
+    "disposition": "shipped"
+  }
+]

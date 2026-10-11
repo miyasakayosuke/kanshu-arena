@@ -1,0 +1,13 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> kanshu-arena@0.14.0 lab:smoke
+> node scripts/balance-lab/cli.mjs run --config configs/balance-lab/smoke.json --out lab-results/smoke --overwrite
+
+Running 736 matches: identical policy, paired seeds, side swaps and mirrors.
+Saved lab-results/smoke/{config.json,report.json,report.md}
+Matchup score: 36.54% → 36.54%; paired change 0.00% points. These are policy/suite-specific measurements.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

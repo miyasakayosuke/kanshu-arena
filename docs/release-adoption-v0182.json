@@ -1,0 +1,58 @@
+{
+  "baseTree": "33b4c6ec54c8d3818d41ff99b23396c6f12ed65e",
+  "scope": "Two UI routing corrections, regression tests, version 0.18.2 and release documentation; gameplay and protected studies unchanged",
+  "files": [
+    {
+      "path": "README.md",
+      "beforeSha256": "1fc9b7550d93b5842633a9be47bb6750e504901fb58cf075a9301aabd6ed786e",
+      "afterSha256": "3efc046b973644198069cccf8df154e33a641d0c969fe1971c0c548b7f432599"
+    },
+    {
+      "path": "docs/release-validation-v0182.json",
+      "beforeSha256": null,
+      "afterSha256": "46d831131f3b901b8b38183c670d3f63af42d9c1cccc67a91899737643f9e817"
+    },
+    {
+      "path": "docs/rights/asset-manifest.json",
+      "beforeSha256": "a9e33b2fd0c0800b05187a274a38b7a7a99e9da80d8388f420f4a252c3ece204",
+      "afterSha256": "d4395e93312bdb708f6f6bc87c56bab15fe2b95b738c974313458f5adb1399e1"
+    },
+    {
+      "path": "docs/rights/releases/2026-10-11-v0.18.2.md",
+      "beforeSha256": null,
+      "afterSha256": "4470a15ae5891e2d7fcc342df3cc472f01c1fec5322b16fde1713f6f94683db3"
+    },
+    {
+      "path": "package-lock.json",
+      "beforeSha256": "0865e0ab0a988f203cbfb2d6bfd9ddc64920c41b44f2a756848772fcf302c859",
+      "afterSha256": "37454c3c4d90b95b4b6a2736101f7bcf861b66aeb35438e6fa52da4cda7a28e0"
+    },
+    {
+      "path": "package.json",
+      "beforeSha256": "974dedeae5f982cb2a9aea5af3f9fb50575a202a92ab8c0a7853c5e9657c68ca",
+      "afterSha256": "c038cdc6b1dc1938c61290fecb51e6bb681ba83522295781fbe52c4be60b9984"
+    },
+    {
+      "path": "src/App.effectFeedback.test.tsx",
+      "beforeSha256": null,
+      "afterSha256": "1bbc28bd4e4f3bf92b71b6c965e89011c33e2503197ac5d2acb45effe4107f3f"
+    },
+    {
+      "path": "src/App.tsx",
+      "beforeSha256": "7f247ef0a6baa85498990036ca2ca74b23a7083a9cabe7c6370d9835d633319d",
+      "afterSha256": "728d1422b1c0ff3b99fc334e8ebf20182e48191d6e7b6dbc2064a4803a82d7fb"
+    },
+    {
+      "path": "src/BattleStage.test.tsx",
+      "beforeSha256": "ae7f749d88e914753cea86470b9c0719c8585f9dba05c04867a29bd27346562a",
+      "afterSha256": "ec0b358440199540e70a79150809ddc013bf8ef3cb55d78ac8e959e6ab6f74d7"
+    },
+    {
+      "path": "src/playback.ts",
+      "beforeSha256": "81c202c8f94dea80e4622c0bfc98570b3342d01d76894d0ece976e3f3583b496",
+      "afterSha256": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e"
+    }
+  ],
+  "selfExcludedFromFileList": true,
+  "authority": "Owner-authorized game development and publication to the existing repository and Pages site"
+}

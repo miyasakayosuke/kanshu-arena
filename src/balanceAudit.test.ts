@@ -42,7 +42,7 @@ function legalTeamIncluding(id: number, budget: number): number[] {
 
 describe('all roster roles remain selectable under the two real 5v5 rules', () => {
   it.each<RuleId>(['standard', 'light'])('gives each distinct role a legal five-member %s team', rule => {
-    expect(monsters).toHaveLength(24);
+    expect(monsters).toHaveLength(37);
     const names = new Set<string>();
     for (const monster of monsters) {
       const team = legalTeamIncluding(monster.id, rules[rule].budget);
@@ -157,13 +157,16 @@ describe('poison leaders and healing specialists retain different opportunities'
     expect(attackLed.allies[1].monster.speed).toBe(monsters[9].speed);
   });
 
-  it('makes バンシー poison cover five enemies but concede immediate single-target damage', () => {
+  it('makes state-only バンシー poison trade immediate damage for five future poison targets', () => {
     const poisoned = advanceWithEvents(training([4], 5, 170), [{ key: 'a0', skill: 1 }]);
     const concentrated = advanceWithEvents(training([4], 5, 170), [{ key: 'a0', skill: 0, target: 'e0' }]);
     expect(poisoned.events.filter(event => event.kind === 'poison')).toHaveLength(5);
-    expect(damageBy(poisoned.events, 'a0')).toBeGreaterThan(damageBy(concentrated.events, 'a0'));
-    const directOnFirst = poisoned.events.find(event => event.kind === 'damage' && event.actor === 'a0' && event.target === 'e0')!.amount!;
-    expect(directOnFirst).toBeLessThan(damageBy(concentrated.events, 'a0'));
+    expect(damageBy(poisoned.events, 'a0')).toBe(0);
+    expect(damageBy(concentrated.events, 'a0')).toBeGreaterThan(0);
+    const ticks = poisoned.events.filter(event => event.kind === 'damage' && event.effect === 'poison');
+    expect(ticks).toHaveLength(5);
+    expect(ticks.every(event => event.amount === 10)).toBe(true);
+    expect(poisoned.state.enemies.every(unit => unit.hp === 160 && unit.poison === 2)).toBe(true);
     expect(poisoned.state.allies[0].mp).toBeLessThan(concentrated.state.allies[0].mp);
   });
 

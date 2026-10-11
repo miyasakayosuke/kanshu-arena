@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Reconstruct the exact historical experimental source from this final playtest checkout without distributing duplicate engine files. Do not apply this patch to production.",
+  "finalEngineSha256": "c655ababab9f34c112465c2a2fe2d712ce76824fe746ab98f4b4a5f375eedabc",
+  "historicalEngineSha256": "b8342172b842c728ee5dd7abff6b7753dcbff4e05563e518432e3134c0eeff24",
+  "characterOffset": 4772,
+  "replaceFinal": "4,235,28,54,[{ name:'蓄え分け', kind:'restoreMp', power:8, priority:0, mpCost:0, all:true },{ ...hit('押し流し',128,0,false,24), fixedDamage:true },{ ...protect, name:'水面のかばい' }]],\n[25,'ひも雫','💧',2,160,35,88,[hit('糸しぶき',44,0,false,7),hit('はじけ糸',30,2,false,10)]],\n[26,'ひだまもり','💧',3,250,27,36,[{ ...protect, name:'膜のかばい' },hit('ひだ押し',54,0,false,8),{ ...guardBreaker('折りほどき'), power:46, mpCost:12 }]],\n[27,'あわ枝','💧',3,195,24,66,[{ ...heal, name:'泡の手当て', power:60, mpCost:18 },{ ...cleanse, name:'泡さらい', power:28, mpCost:10 },hit('泡つぶて',42,0,false,8)]],\n[28,'ねりこぶし','💧',5,220,51,61,[hit('ねり打ち',76,0,false,12),hit('散る重泡',60",
+  "withHistorical": "5,185,28,54,[{ name:'蓄え分け', kind:'restoreMp', power:8, priority:0, mpCost:0, all:true },{ ...hit('押し流し',108,0,false,24), fixedDamage:true },{ ...protect, name:'水面のかばい' }]],\n[25,'ひも雫','💧',2,132,35,88,[hit('糸しぶき',44,0,false,7),hit('はじけ糸',30,2,false,10)]],\n[26,'ひだまもり','💧',3,205,27,36,[{ ...protect, name:'膜のかばい' },hit('ひだ押し',54,0,false,8),{ ...guardBreaker('折りほどき'), power:46, mpCost:12 }]],\n[27,'あわ枝','💧',3,150,24,66,[{ ...heal, name:'泡の手当て', power:60, mpCost:18 },{ ...cleanse, name:'泡さらい', power:28, mpCost:10 },hit('泡つぶて',42,0,false,8)]],\n[28,'ねりこぶし','💧',4,174,51,61,[hit('ねり打ち',76,0,false,12),hit('散る重泡',44",
+  "unchangedFiles": {
+    "src/families.ts": "cc8ffa4e5503f843c8d4de20c29401a25c6f5f08ce63db41d7e5a4655369c343",
+    "scripts/balance-lab/core.mjs": "5f6301ef40e864ad310453482705b1e566c6a73dfc8a819beeaa0dea33a72d89",
+    "scripts/balance-lab/cli.mjs": "57857e2290009e4df03b061b29c96c587ba9f0f98f3c59bba3fc52e9d6eb99a3"
+  },
+  "labSha256": "404e23301dc0998204f1c134f9b1a7afc54979c48cb61abb8a1e8ea2ff50a98e",
+  "offsetUnit": "UTF-16 code units, matching JavaScript String.slice"
+}

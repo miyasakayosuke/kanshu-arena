@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "suite": "all-family-leader-counter-independent-1",
+  "status": "complete",
+  "phase": "counter",
+  "arm": "independent",
+  "scale": 1,
+  "shell": null,
+  "configPath": "configs/balance-lab/all-family-leader-counter-independent-1.json",
+  "configFileSha256": "d80e9a554c1dfbcbb2cd4ae55a3b450449e8c9807ac2ad22e0ac5aa0e7ef62a2",
+  "configSha256": "1ed209f4aebba3022217cfe2cbeda3ad8df292cba1aa9ad321820d565cd1171b",
+  "derivedFreezeSha256": "b2f6f8d62166e4a2bfe9c5ad194a2e069f0a5e5ffa44597a050087570281f517",
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "scheduleSha256": "642993e15d398ca0f933f188467969bf13903342de5cf2fc4e370f5b89439f39",
+  "scheduledMatches": 7168,
+  "executedMatches": 7168,
+  "chunkManifest": [
+    {
+      "file": "lf-counter-i-1-manifest-00001.json",
+      "bytes": 17305,
+      "sha256": "c28228a6e1c6f79c1f9b87fecb2705fc093c00a0aba3cf67f452570ced2137cb",
+      "records": 224,
+      "first": "chunk-1",
+      "last": "chunk-224"
+    }
+  ]
+}

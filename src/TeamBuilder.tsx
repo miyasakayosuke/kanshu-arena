@@ -1,6 +1,7 @@
 import MonsterArt from './MonsterArt';
+import LeaderComparison from './LeaderComparison';
 import { useEffect, useRef, useState } from 'react';
-import { monsters, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
+import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamilyCount, extraordinaryResponseEligible, UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
 import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
 import { activeFamilyOptions } from './families';
 import './teamBuilder.css';
@@ -22,7 +23,7 @@ type Props = {
 const roleOptions = [
   ['all', 'すべて'], ['fast', '先制'], ['anchor', 'アンカー'], ['heal', '回復'],
   ['random', 'ランダム連撃'], ['area', '全体'], ['poison', '毒'], ['protect', '味方を守る'],
-  ['cleanse', '毒解除'], ['break', '防御解除'], ['guard', '防御'],
+  ['poisonCashout', '毒交換'], ['mpDamage', 'MP削り'], ['restoreMp', 'MP補給'], ['cleanse', '毒解除'], ['break', '防御解除'], ['guard', '防御'],
 ];
 
 const familyOptions = activeFamilyOptions(monsters);
@@ -92,6 +93,65 @@ function MaterialRepairPlan({ team }: { team: number[] }) {
   </div>;
 }
 
+function SlimeSupplyPlan({ team }: { team: number[] }) {
+  const members = team.filter(id => monsters[id].family === 'slime');
+  const hasCore = team.includes(SLIME_CORE_ID);
+  if (!members.length && !hasCore) return null;
+  const active = slimeSupplyEligible(team.map(id => ({ monster: monsters[id] })));
+  return <div className="slimeSupplyPlan" data-active={active} aria-label="蓄え分けの編成条件">
+    <strong>蓄え分け · {active ? '条件成立' : '条件未成立'}</strong>
+    <small>中核 {monsters[SLIME_CORE_ID].name}：{hasCore ? '編成中' : '未編成'} · 粘体系 {members.length}体 / 必要3体</small>
+    <small>うつろ泉を含む粘体系3体以上で開戦すると補給1回。先頭以外でも有効で、開始時の人数条件は変わりません。</small>
+    <small>通常順の行動を1回使い、生存する粘体系へ各MP+{SLIME_SUPPLY.amount}（最大MPまで）。本人も対象。全員満タンなら使えず、HP回復・蘇生はしません。</small>
+    <FamilyRecipients team={team} applies={monster => monster.family === 'slime'} />
+    <small>補給回数は防御解除では消えません。傷ついた仲間を先に倒す、守護を強いて手番を使わせる対策があります。</small>
+  </div>;
+}
+
+function DemonPressurePlan({ team }: { team: number[] }) {
+  const members = team.filter(id => monsters[id].family === 'demon');
+  const hasCore = team.includes(DEMON_CORE_ID);
+  if (!members.length && !hasCore) return null;
+  const active = demonPressureEligible(team.map(id => ({ monster: monsters[id] })));
+  return <div className="demonPressurePlan" data-active={active} aria-label="空勘の爪の編成条件">
+    <strong>空勘の爪 · {active ? 'MP削り強化あり' : 'MP削り強化なし'}</strong>
+    <small>中核 マモン：{hasCore ? '編成中' : '未編成'} · 悪魔系 {members.length}体 / 必要3体</small>
+    <small>マモンを含む悪魔系3体以上で開戦すると、本人の空勘の爪のMP削りが{DEMON_PRESSURE.base}→{DEMON_PRESSURE.base + DEMON_PRESSURE.bonus}。先頭以外でも有効で、開始時の条件は仲間が倒れても変わりません。</small>
+    <small>HPへの命中後、生き残った相手のMPだけを削ります。本人への回復はなく、守り・自然障壁で軽減。強化されるのはマモンだけで、仲間の技にMP削りは追加されません。</small>
+    <small>MPがなくても通常攻撃と防御は可能。本人を先に倒す、残りMPの少ない相手を守る、補給して特技を使う対策があります。</small>
+  </div>;
+}
+
+function UndeadCashoutPlan({ team }: { team: number[] }) {
+  const members = team.filter(id => monsters[id].family === 'undead');
+  const hasCore = team.includes(UNDEAD_CORE_ID);
+  if (!members.length) return null;
+  const active = undeadCashoutEligible(team.map(id => ({ monster: monsters[id] })));
+  return <div className="undeadCashoutPlan" data-active={active} aria-label="毒交換の編成条件">
+    <strong>塚底の取り立て · {active ? '毒交換強化あり' : '毒交換強化なし'}</strong>
+    <small>中核 ドラウグル：{hasCore ? '編成中' : '未編成'} · 不死系 {members.length}体 / 必要3体</small>
+    <small>自身を含む不死系3体以上で開戦すると、毒1回の追加基礎が{UNDEAD_CASHOUT.base}→{UNDEAD_CASHOUT.base + UNDEAD_CASHOUT.bonus}。先頭以外でも有効で、開始時の条件は仲間が倒れても変わりません。</small>
+    <small>使用者：{hasCore ? 'ドラウグルだけ' : 'なし'}。使用対象外：{team.filter(id => id !== UNDEAD_CORE_ID).map(id => monsters[id].name).join('・') || 'なし'}。仲間の技には毒交換を追加しません。</small>
+    <small>MP18と一手で、実際に命中した相手の毒残0〜3回を全消費。今後の毒ダメージを捨て、追加分も守り・自然障壁で軽減されます。HP回復・MP獲得・追加行動はありません。</small>
+    <small>毒役や中核を先に倒す、命中前に清める、守護で受ける、敵MP削りで特技を通常攻撃へ切り替えさせる対策があります。</small>
+  </div>;
+}
+
+function ExtraordinaryResponsePlan({ team }: { team: number[] }) {
+  const friends = team.map(id => ({ monster: monsters[id] }));
+  const count = assignedFamilyCount(friends);
+  const hasCore = team.includes(EXTRAORDINARY_CORE_ID);
+  const active = extraordinaryResponseEligible(friends);
+  return <div className="extraordinaryResponsePlan" data-active={active} aria-label="門口の応答の編成条件">
+    <strong>門口の応答 · {active ? '条件成立' : '条件未成立'}</strong>
+    <small>中核 ヤヌス：{hasCore ? '編成中' : '未編成'} · 所属系統 {count}種類 / 必要{EXTRAORDINARY_RESPONSE.minimumFamilies}種類</small>
+    <small>本人を含む異なる所属タグを数え、重複・未所属は加算しません。先頭以外でも有効。開始時固定で、仲間の戦闘不能では変わりません。5種類でも追加効果はありません。</small>
+    <small>MP24と一手で、生存味方全員の現在の毒解除か今ターンの守護を選択。二つで共通の戦闘中1回です。</small>
+    <FamilyRecipients team={team} applies={() => hasCore && active} />
+    <small>発動時は生存者だけが対象。HP回復・蘇生・毒予防・MP補給はなく、毒の再付与や守り解除が通ります。</small>
+  </div>;
+}
+
 function MemberSummary({ monster, label }: { monster?: Monster; label: string }) {
   return <div className="memberComparison">
     <small className="comparisonLabel">{label}</small>
@@ -124,6 +184,8 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
   const restoreBrowseFocus = useRef(false);
   const editorHeading = useRef<HTMLHeadingElement | null>(null);
   const preview = useRef<HTMLDivElement | null>(null);
+  const commitPending = useRef(false);
+  const teamKey = team.join(',');
   const budget = rules[rule].budget;
   const total = cost(team);
   const leader = team.length ? leaderFor(team[0]) : null;
@@ -131,6 +193,13 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
   const current = currentId === undefined ? undefined : monsters[currentId];
   const candidate = candidateId === null ? undefined : monsters[candidateId];
   const editing = selectedSlot !== null;
+  const movedLeaderTeam = currentId === undefined ? team : [currentId, ...team.filter(id => id !== currentId)];
+
+  // A load or another parent update must never keep a candidate for an older party.
+  useEffect(() => {
+    setSelectedSlot(null);
+    setCandidateId(null);
+  }, [teamKey]);
 
   const replacement = (id: number) => {
     const next = [...team];
@@ -170,13 +239,14 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     const trait = leaderFor(m.id);
     const query = filter.trim().toLocaleLowerCase();
     return (!query || `${m.name} ${familyLabel(m)} ${trait.name} ${trait.description} ${m.skills.map(s => s.name).join(' ')}`.toLocaleLowerCase().includes(query))
-      && (role === 'all' || m.skills.some(s => role === 'fast' ? s.priority >= 2 : role === 'anchor' ? s.priority < 0 : role === 'area' ? s.all : role === 'random' ? !!s.randomHits : role === 'break' ? (s.breaksGuard || s.breaksGuardAfterHit) : s.kind === role))
+      && (role === 'all' || m.skills.some(s => role === 'poisonCashout' ? (s.poisonCashout ?? 0) > 0 : role === 'mpDamage' ? (s.mpDamage ?? 0) > 0 : role === 'cleanse' ? (s.kind === 'cleanse' || s.kind === 'responseCleanse') : role === 'protect' ? (s.kind === 'protect' || s.kind === 'responseGuard') : role === 'fast' ? s.priority >= 2 : role === 'anchor' ? s.priority < 0 : role === 'area' ? s.all : role === 'random' ? !!s.randomHits : role === 'break' ? (s.breaksGuard || s.breaksGuardAfterHit) : s.kind === role))
       && (leaderFilter === 'all' || trait.stat === leaderFilter || trait.secondary?.stat === leaderFilter)
       && (familyFilter === 'all' || (m.family ?? 'unassigned') === familyFilter)
       && (costFilter === 'all' || (costFilter === 'fit' ? !unavailableReason(m.id) : m.cost === Number(costFilter)));
   }).sort((a, b) => sort === 'speed' ? b.speed - a.speed : sort === 'hp' ? b.hp - a.hp : sort === 'atk' ? b.atk - a.atk : sort === 'cost' ? a.cost - b.cost : a.id - b.id);
 
   const pickSlot = (index: number) => {
+    commitPending.current = false;
     setSelectedSlot(index);
     setCandidateId(null);
     setBrowsing(false);
@@ -199,7 +269,8 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     }
   }, [browsing]);
   const confirmReplacement = () => {
-    if (!candidate || selectedSlot === null || unavailableReason(candidate.id)) return;
+    if (commitPending.current || !candidate || selectedSlot === null || unavailableReason(candidate.id)) return;
+    commitPending.current = true;
     const next = replacement(candidate.id);
     // One parent update commits the whole replacement. Preview never removes a member.
     setTeam(next);
@@ -207,8 +278,9 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     closeEditor();
   };
   const makeLeader = () => {
-    if (currentId === undefined || selectedSlot === 0) return;
-    setTeam([currentId, ...team.filter(id => id !== currentId)]);
+    if (commitPending.current || currentId === undefined || selectedSlot === 0) return;
+    commitPending.current = true;
+    setTeam(movedLeaderTeam);
     setNotice(`${monsters[currentId].name}をリーダーにしました`);
     closeEditor();
   };
@@ -223,6 +295,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
   const load = (index: number) => {
     const slot = slots[index];
     if (!slot) return;
+    commitPending.current = true;
     setRule(slot.rule);
     setTeam([...slot.team]);
     setSelectedSlot(null);
@@ -276,15 +349,22 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <BeastBarrageBonus team={team} />
       <DragonChargePlan team={team} />
       <MaterialRepairPlan team={team} />
+      <SlimeSupplyPlan team={team} />
+      <DemonPressurePlan team={team} />
+      <UndeadCashoutPlan team={team} />
+      <ExtraordinaryResponsePlan team={team} />
       <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
-    <aside className="newDragon newMaterial"><div><span className="eyebrow">NEW · MATERIAL</span><strong>一度の修復を守る タロス</strong><small>初撃を耐え、炉心をつなぐ。毒と解除をどうしのぐ？</small></div><button className="secondary" aria-label="タロスの詳細" onClick={() => onFocus(MATERIAL_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newExtraordinary"><div><span className="eyebrow">NEW · EXTRAORDINARY</span><strong>一度の応答を選ぶ ヤヌス</strong><small>四系統を集め、清めるか、守るか。</small></div><button className="secondary" aria-label="ヤヌスの詳細" onClick={() => onFocus(EXTRAORDINARY_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newUndead"><div><span className="eyebrow">NEW · UNDEAD</span><strong>残り毒を一撃へ ドラウグル</strong><small>毒を残して待つか、いま使い切るか。</small></div><button className="secondary" aria-label="ドラウグルの詳細" onClick={() => onFocus(UNDEAD_CORE_ID)}>詳しく見る</button></aside>
+    <details className="builderDisclosure arrivalDisclosure"><summary>新しい不死の仲間<span>解除・守護・手当ての3体</span></summary><aside className="newFamilyMembers" aria-label="新しい不死系メンバー">{([33,34,35] as const).map(id => <button key={id} className="familyArrival undeadArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}</aside></details>
+    <aside className="newDragon newDemon"><div><span className="eyebrow">NEW · DEMON</span><strong>残りMPを読む マモン</strong><small>相手の次の一手を、残された力から読もう。</small></div><button className="secondary" aria-label="マモンの詳細" onClick={() => onFocus(DEMON_CORE_ID)}>詳しく見る</button></aside>
     <details className="builderDisclosure arrivalDisclosure">
-      <summary>新しい物質の仲間<span>清め・壁・給湯・重突の4体</span></summary>
+      <summary>新しい悪魔の仲間<span>解除・毒払いの2体</span></summary>
       <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
-        {([20, 21, 22, 23] as const).map(id => <button key={id} className="familyArrival materialArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
+        {([30, 31] as const).map(id => <button key={id} className="familyArrival demonArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
       </aside>
       <p className="hint">これまでの仲間も、下のモンスター図鑑から全員の詳細を開けます。</p>
     </details>
@@ -314,9 +394,13 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
         </div>}
         <div className="memberActions">
           {current && <button className="detailButton" aria-label={`現在の${current.name}の詳細`} onClick={() => onFocus(current.id)}>現在の詳細</button>}
-          {current && selectedSlot !== 0 && <button className="secondary" aria-label={`${current.name}をリーダーにする`} onClick={makeLeader}>リーダーにする</button>}
           {candidate && <button className="detailButton" aria-label={`比較中の${candidate.name}の詳細`} onClick={() => onFocus(candidate.id)}>候補の詳細</button>}
         </div>
+        {current && selectedSlot !== 0 && <div className="leaderMovePreview">
+          <LeaderComparison beforeTeam={team} afterTeam={movedLeaderTeam} idPrefix="leader-move" />
+          <button className="secondary leaderMoveConfirm" aria-label={`${current.name}をリーダーにする`} aria-describedby="leader-move-summary" onClick={makeLeader}>{current.name}をリーダーにする</button>
+        </div>}
+        {candidate && selectedSlot === 0 && <LeaderComparison beforeTeam={team} afterTeam={projectedTeam} idPrefix="leader-replacement" />}
         {candidate && <div className="candidateImpact" role="status">
           <p>合計COST <strong>{total} → {projectedCost}/{budget}</strong><span className={projectedCost > budget ? 'overBudget' : ''}>残り {budget - projectedCost}</span></p>
           {projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
@@ -324,11 +408,15 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           <BeastBarrageBonus team={projectedTeam} />
           <DragonChargePlan team={projectedTeam} />
           <MaterialRepairPlan team={projectedTeam} />
+          <SlimeSupplyPlan team={projectedTeam} />
+          <DemonPressurePlan team={projectedTeam} />
+          <UndeadCashoutPlan team={projectedTeam} />
+          <ExtraordinaryResponsePlan team={projectedTeam} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}
         </div>}
-        {candidate && <button className="primary confirmReplacement" disabled={!!candidateReason} onClick={confirmReplacement}>
+        {candidate && <button className="primary confirmReplacement" disabled={!!candidateReason} aria-describedby={selectedSlot === 0 ? 'leader-replacement-summary' : undefined} onClick={confirmReplacement}>
           {`${candidate.name}${current ? 'に入れ替える' : 'を編成に加える'}`}
         </button>}
       </div>}
@@ -341,7 +429,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
         <summary>詳しく絞り込む{filterCount > 0 ? `（${filterCount}件）` : ''}</summary>
         <div className="filterChips" aria-label="特技で絞り込み">{roleOptions.map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => setRole(value)}>{label}</button>)}</div>
         <div className="advancedFilters">
-          <select aria-label="リーダー効果で絞り込み" value={leaderFilter} onChange={e => setLeaderFilter(e.target.value)}><option value="all">全リーダー効果</option><option value="hp">HPアップ</option><option value="atk">攻撃アップ</option><option value="speed">素早さアップ</option></select>
+          <select aria-label="リーダー効果で絞り込み" value={leaderFilter} onChange={e => setLeaderFilter(e.target.value)}><option value="all">全リーダー効果</option><option value="hp">HPアップ</option><option value="mp">MPアップ</option><option value="atk">攻撃アップ</option><option value="speed">素早さアップ</option></select>
           <select aria-label="系統で絞り込み" value={familyFilter} onChange={e => setFamilyFilter(e.target.value)}><option value="all">全系統</option>{familyOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
           <select aria-label="コストで絞り込み" value={costFilter} onChange={e => setCostFilter(e.target.value)}><option value="all">全コスト</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option>{editing && <option value="fit">この枠に編成可能</option>}</select>
         </div>
@@ -365,7 +453,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
         })}
       </div>
       {!visible.length && <p className="emptySearch">該当するモンスターがいません。検索や絞り込みを変えてみてください。</p>}
-      <p className="hint">能力値はリーダー補正前。詳細を開いても編成は変わりません。</p>
+      <p className="hint">候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。詳細を開いても編成は変わりません。</p>
     </section>}
 
     <details className="builderDisclosure ruleDisclosure">

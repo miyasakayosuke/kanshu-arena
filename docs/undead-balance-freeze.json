@@ -1,0 +1,1868 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen-before-own-outcomes",
+  "authoritativeDate": "2026-10-10 UTC",
+  "executorRecordedAt": "2026-10-10T09:22:52.931Z",
+  "timestampCaution": "Executor clock approximately 9h ahead of authoritative UTC; source/config hashes and file order establish freeze-before-run.",
+  "source": {
+    "engineSha256": "3522c3dddad392e8947ec85821e039dabf6ce1369778017545e7661d1b8bc84d",
+    "familySha256": "21b008f6c573d132ac7c9cba2bb9c71522156767b3c37ecc4d5745ea063b2c84",
+    "labSha256": "22ab92cc7632db20ebaf2ad79f268aa23463b883f5572b8e0b9939b4bfb71098",
+    "generatorSha256": "fe3c29c60fbd716f324b897bc859f79de2c15120066f8171c7d0ab93991da61f",
+    "priorInputs": [
+      {
+        "path": "configs/balance-lab/slime-final-identity.json",
+        "fileSha256": "3ee4fbf4bae581a1f8a9f0085087385e55cf31a0eda7e604865e8689707b59f8"
+      },
+      {
+        "path": "configs/balance-lab/demon-initial.json",
+        "fileSha256": "c4576594e64662e0d4f1a5b3e1e9d87dd4d48b91efefa00fd5ce034c6473deb2"
+      }
+    ]
+  },
+  "priorUndeadOutcomesSeen": "Study members and seeds were selected before this probe was reported: parent saw one seed42 pure-undead versus pure-nature Lab ledger probe before final freeze (undead loss; one cashout consumed three ticks with zero marginal HP damage due to overkill). No team or seed was selected or changed from that result. This generator never resolves turns or inspects outcomes.",
+  "validationAtFreeze": "All configs passed full Lab validation; no turns resolved.",
+  "totalScheduledMatches": 24880,
+  "counting": "Every config includes one baseline plus one candidate, both physical orientations and one mirror scenario per listed team. Identity and repeated baseline runs count in full; cross-suite reuse is not independent evidence.",
+  "policy": "Production autoOrders on both sides; explicit ablations change effective cashout utility and can alter decisions and RNG streams. No fixed-order causal claim. Full-off retains paid strike HP damage and poison application elsewhere but disables cashout and its poison consumption.",
+  "method": "16 initial seeds versus 15 stable anchors. Explicit stock-enabled, bonus-off and full-off use the same first 8 seeds. Exact C17 broad pool has 10 fixed C17 anchors plus 18 seeded coherent old-roster teams (3 skill-ownership strata for each of 6 families), with every new ID excluded from opponents. Lower-cost anchors and C15 substitutions are reported separately. All controls, comparisons and seeds frozen together before outcomes.",
+  "finiteBudget": "Core32 starts 62 MP, pays 18 MP per cashout-capable strike, and has no natural recovery: at most 3 such casts without external supply. Maximum current poison is 3 ticks, stock base14 plus eligible bonus8 yields at most66 pre-mitigation cashout damage per cast; the poison is consumed once. Five slots cannot contain three undead and three slimes simultaneously, so eligible slime supply and undead bonus cannot coexist. Base-only32 can coexist with three slimes.",
+  "sampling": {
+    "seed": 242610310,
+    "algorithm": "enumerate-exact-C17-core-led-at-least-three-family-then-LCG-Fisher-Yates-and-distinct-first-matching-strata-v1",
+    "uniformityClaim": false,
+    "oldRosterMaximumId": 31,
+    "strata": [
+      "at least two heal/cleanse skill owners",
+      "at least one poison skill owner",
+      "at least one before-hit or after-hit breaker skill owner"
+    ],
+    "ownershipIsNotExecution": true
+  },
+  "anchors": {
+    "exactC17": [
+      {
+        "id": "fullbeast",
+        "ids": [
+          12,
+          0,
+          2,
+          11,
+          13
+        ],
+        "role": "Prior full beast unchanged; COST17"
+      },
+      {
+        "id": "puredragon",
+        "ids": [
+          15,
+          5,
+          16,
+          17,
+          18
+        ],
+        "role": "Adopted full dragon unchanged; COST17"
+      },
+      {
+        "id": "purematerial",
+        "ids": [
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "role": "Adopted material14 pure C17"
+      },
+      {
+        "id": "pureslime",
+        "ids": [
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "role": "Pure C17 unchanged total"
+      },
+      {
+        "id": "puredemon",
+        "ids": [
+          29,
+          1,
+          8,
+          30,
+          31
+        ],
+        "role": "Initial pure five demon C17"
+      },
+      {
+        "id": "nature-brute-dryas",
+        "ids": [
+          14,
+          3,
+          6,
+          10,
+          28
+        ],
+        "role": "Known dominant legal C17 nature+brute; retain adverse outcome"
+      },
+      {
+        "id": "nature-brute-tengu",
+        "ids": [
+          14,
+          6,
+          9,
+          10,
+          28
+        ],
+        "role": "Known dominant legal C17 nature+brute alternative"
+      },
+      {
+        "id": "strong-poison",
+        "ids": [
+          24,
+          6,
+          9,
+          27,
+          28
+        ],
+        "role": "Earlier strongest C17 poison mix, unchanged total"
+      },
+      {
+        "id": "strong-area",
+        "ids": [
+          24,
+          4,
+          25,
+          27,
+          28
+        ],
+        "role": "Earlier strongest C17 area/poison mix, unchanged total"
+      },
+      {
+        "id": "material-strong",
+        "ids": [
+          19,
+          20,
+          23,
+          7,
+          10
+        ],
+        "role": "Prior coherent diagnostic strongest material mixed C17; preserve known strong comparison"
+      }
+    ],
+    "lowerBudget": [
+      {
+        "id": "fullnature",
+        "ids": [
+          14,
+          3,
+          6,
+          9,
+          10
+        ],
+        "role": "Prior full nature unchanged, original triple poison; COST15"
+      },
+      {
+        "id": "guard-heal",
+        "ids": [
+          1,
+          2,
+          7,
+          10,
+          6
+        ],
+        "role": "Guard, heal and MP-duration pressure; COST14"
+      },
+      {
+        "id": "poison-cleanse",
+        "ids": [
+          4,
+          3,
+          7,
+          2,
+          10
+        ],
+        "role": "Poison, healing and cleanse control; COST15"
+      },
+      {
+        "id": "priority",
+        "ids": [
+          0,
+          6,
+          9,
+          11,
+          10
+        ],
+        "role": "Fast priority and poison control; COST15"
+      },
+      {
+        "id": "mp-pressure",
+        "ids": [
+          1,
+          7,
+          2,
+          3,
+          10
+        ],
+        "role": "Healing/protect/poison long-fight control, no MP-drain mechanic; COST15"
+      }
+    ]
+  },
+  "targets": [
+    {
+      "id": "pureundead",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "Initial pure five undead; exact C17; Banshee supplies poison"
+    },
+    {
+      "id": "mixedundead",
+      "ids": [
+        32,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Initial C15 eligible mixed undead; original triple-poison Banshee/Dryas/slow-Naga adversarial shell retained"
+    }
+  ],
+  "c17Poison": {
+    "id": "c17-poison-undead",
+    "ids": [
+      32,
+      4,
+      33,
+      3,
+      10
+    ],
+    "role": "Exact C17 eligible undead with three poison owners and slow Naga; Dullahan33 replaces healer35"
+  },
+  "coherent": [
+    {
+      "id": "coherent-beast-support",
+      "ids": [
+        12,
+        0,
+        2,
+        6,
+        7
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 beast; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-beast-poison",
+      "ids": [
+        12,
+        0,
+        9,
+        11,
+        16
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 beast; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-beast-breaker",
+      "ids": [
+        12,
+        7,
+        8,
+        11,
+        16
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 beast; frozen breaker skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-nature-support",
+      "ids": [
+        14,
+        3,
+        9,
+        10,
+        12
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 nature; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-nature-poison",
+      "ids": [
+        14,
+        9,
+        10,
+        21,
+        23
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 nature; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-nature-breaker",
+      "ids": [
+        14,
+        5,
+        9,
+        10,
+        26
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 nature; frozen breaker skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-dragon-support",
+      "ids": [
+        15,
+        3,
+        5,
+        17,
+        20
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 dragon; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-dragon-poison",
+      "ids": [
+        15,
+        2,
+        4,
+        17,
+        18
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 dragon; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-dragon-breaker",
+      "ids": [
+        15,
+        6,
+        16,
+        17,
+        29
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 dragon; frozen breaker skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-material-support",
+      "ids": [
+        19,
+        7,
+        20,
+        21,
+        26
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 material; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-material-poison",
+      "ids": [
+        19,
+        4,
+        20,
+        21,
+        23
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 material; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-material-breaker",
+      "ids": [
+        19,
+        8,
+        20,
+        22,
+        23
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 material; frozen breaker skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-slime-support",
+      "ids": [
+        24,
+        7,
+        8,
+        26,
+        27
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 slime; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-slime-poison",
+      "ids": [
+        24,
+        4,
+        21,
+        25,
+        28
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 slime; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-slime-breaker",
+      "ids": [
+        24,
+        2,
+        15,
+        25,
+        26
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 slime; frozen breaker skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-demon-support",
+      "ids": [
+        29,
+        1,
+        2,
+        8,
+        18
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 demon; frozen support skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-demon-poison",
+      "ids": [
+        29,
+        1,
+        8,
+        10,
+        11
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 demon; frozen poison skill-ownership stratum, actual execution must be measured"
+    },
+    {
+      "id": "coherent-demon-breaker",
+      "ids": [
+        29,
+        1,
+        11,
+        18,
+        30
+      ],
+      "role": "Exact C17 old roster IDs <=31; core-led >=3 demon; frozen breaker skill-ownership stratum, actual execution must be measured"
+    }
+  ],
+  "pools": [
+    {
+      "family": "beast",
+      "core": 12,
+      "legalSets": 784,
+      "sha256": "1e1804bc09111738ef8c1f4734b29846af2468ec1718323ea4c75c86e24d950b"
+    },
+    {
+      "family": "nature",
+      "core": 14,
+      "legalSets": 577,
+      "sha256": "783241fd2c59aa5a421f6eb0852474972af6ee1cf82616857d0ad31f72fe61c2"
+    },
+    {
+      "family": "dragon",
+      "core": 15,
+      "legalSets": 516,
+      "sha256": "097729461f7fc9cd8184f3eec7cd4c3d1dfd74a53d91d18f1d4095cdaecacbc7"
+    },
+    {
+      "family": "material",
+      "core": 19,
+      "legalSets": 516,
+      "sha256": "49e7d7dd30fda8822399af774ccee0780d0273ad0994ca74c1f8e4057082ca73"
+    },
+    {
+      "family": "slime",
+      "core": 24,
+      "legalSets": 454,
+      "sha256": "a1155049d27403da3f081189205add4ffa98396d43f1c8e5c7dedfe4e4343a47"
+    },
+    {
+      "family": "demon",
+      "core": 29,
+      "legalSets": 516,
+      "sha256": "69e407f66176df3ef76223a10a0047dd6cc2cc4ec3ac293c1ce17838471ae49e"
+    }
+  ],
+  "substitutions": [
+    {
+      "id": "pureundead",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "Initial pure five undead; exact C17; Banshee supplies poison"
+    },
+    {
+      "id": "c17-poison-undead",
+      "ids": [
+        32,
+        4,
+        33,
+        3,
+        10
+      ],
+      "role": "Exact C17 eligible undead with three poison owners and slow Naga; Dullahan33 replaces healer35"
+    },
+    {
+      "id": "core-nonleader",
+      "ids": [
+        4,
+        32,
+        33,
+        34,
+        35
+      ],
+      "role": "Exact same pure members, Banshee leader; fixed opening cashout eligibility retained; leader effect changes"
+    },
+    {
+      "id": "bonus-threshold-lost",
+      "ids": [
+        32,
+        4,
+        7,
+        3,
+        10
+      ],
+      "role": "Exact C17 poison control: Selkie7 replaces Dullahan33, leaving two undead; original triple poison and slow Naga retained; member kit confounded"
+    },
+    {
+      "id": "core-replaced-slime",
+      "ids": [
+        28,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "Exact C17 pure core32 replaced by old slime brute28; no cashout; stats, skills and leader confounded"
+    },
+    {
+      "id": "core-replaced-demon",
+      "ids": [
+        29,
+        4,
+        33,
+        34,
+        35
+      ],
+      "role": "Exact C17 pure core32 replaced by old demon core29 with base-only MP pressure; no cashout; stats, skills and leader confounded"
+    },
+    {
+      "id": "healer-replaced",
+      "ids": [
+        32,
+        4,
+        33,
+        34,
+        20
+      ],
+      "role": "Exact C17 pure healer35 replaced by old cleanser20; four undead keep cashout bonus; unit-kit comparison"
+    },
+    {
+      "id": "breaker-replaced",
+      "ids": [
+        32,
+        4,
+        7,
+        34,
+        35
+      ],
+      "role": "Exact C17 pure breaker33 replaced by old healer/cleanser7; four undead keep cashout bonus; unit-kit comparison"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "control-nature-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        28
+      ],
+      "role": "Exact old nature+brute Dryas control for new core32 and healer35 substitutions"
+    },
+    {
+      "id": "nature-newcore-dryas",
+      "ids": [
+        14,
+        3,
+        6,
+        10,
+        32
+      ],
+      "role": "Exact C17 known nature+brute shell replaces28 with32; one undead, base-only cashout, retained poison and slow Naga"
+    },
+    {
+      "id": "control-nature-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        28
+      ],
+      "role": "Exact old nature+brute Tengu control for new core32 substitution"
+    },
+    {
+      "id": "nature-newcore-tengu",
+      "ids": [
+        14,
+        6,
+        9,
+        10,
+        32
+      ],
+      "role": "Exact C17 second known nature+brute shell replaces28 with32; one undead, base-only cashout"
+    },
+    {
+      "id": "nature-newhealer",
+      "ids": [
+        14,
+        3,
+        35,
+        10,
+        28
+      ],
+      "role": "Exact C17 Dryas nature+brute shell replaces fast Garuda6 with cheap healer35; three nature retain ward"
+    },
+    {
+      "id": "control-material-strong",
+      "ids": [
+        19,
+        20,
+        23,
+        7,
+        10
+      ],
+      "role": "Exact old strong material mixed control for new breaker33 substitution"
+    },
+    {
+      "id": "material-newbreaker",
+      "ids": [
+        19,
+        20,
+        23,
+        33,
+        10
+      ],
+      "role": "Exact C17 strong material shell replaces Selkie7 with undead breaker33; loses a heal/cleanse kit"
+    },
+    {
+      "id": "control-material-pure",
+      "ids": [
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "role": "Exact old pure material control for new shield34 and healer35 substitutions"
+    },
+    {
+      "id": "material-newshield",
+      "ids": [
+        19,
+        20,
+        34,
+        22,
+        23
+      ],
+      "role": "Exact C17 pure material shell replaces shield21 with undead34; four material retain repair"
+    },
+    {
+      "id": "material-newhealer",
+      "ids": [
+        19,
+        35,
+        21,
+        22,
+        23
+      ],
+      "role": "Exact C17 pure material shell replaces cleaner20 with healer35; four material retain repair"
+    }
+  ],
+  "lowerTargets": [
+    {
+      "id": "mixedundead",
+      "ids": [
+        32,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Initial C15 eligible mixed undead; original triple-poison Banshee/Dryas/slow-Naga adversarial shell retained"
+    },
+    {
+      "id": "c15-threshold-lost",
+      "ids": [
+        32,
+        4,
+        20,
+        3,
+        10
+      ],
+      "role": "Exact C15 initial mixed control replaces35 with20; two undead lose bonus; triple poison/slow Naga retained"
+    },
+    {
+      "id": "c15-core-replaced",
+      "ids": [
+        28,
+        4,
+        35,
+        3,
+        10
+      ],
+      "role": "Exact C15 initial mixed control replaces32 with old core28; triple poison/slow Naga retained; unit/leader effects confounded"
+    }
+  ],
+  "pairedComparisons": [
+    {
+      "suite": "undead-substitutions",
+      "control": "pureundead",
+      "variants": [
+        "core-nonleader",
+        "core-replaced-slime",
+        "core-replaced-demon",
+        "healer-replaced",
+        "breaker-replaced"
+      ]
+    },
+    {
+      "suite": "undead-substitutions",
+      "control": "c17-poison-undead",
+      "variants": [
+        "bonus-threshold-lost"
+      ]
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-nature-dryas",
+      "variants": [
+        "nature-newcore-dryas",
+        "nature-newhealer"
+      ]
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-nature-tengu",
+      "variants": [
+        "nature-newcore-tengu"
+      ]
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-material-strong",
+      "variants": [
+        "material-newbreaker"
+      ]
+    },
+    {
+      "suite": "undead-oldcore-contribution",
+      "control": "control-material-pure",
+      "variants": [
+        "material-newshield",
+        "material-newhealer"
+      ]
+    },
+    {
+      "suite": "undead-lower-budget",
+      "control": "mixedundead",
+      "variants": [
+        "c15-threshold-lost",
+        "c15-core-replaced"
+      ]
+    }
+  ],
+  "limitations": [
+    "Small fixed seed panels are diagnostics, not metagame equilibrium estimates.",
+    "Initial and lower-budget results must be reported by cost rather than pooled as equal-budget evidence.",
+    "Same-member nonleader control changes leader bonuses; replacements also change stats, skills and often family membership.",
+    "Known strong nature+28 adverse anchors and original triple-poison/slow-Naga shells remain visible regardless of result.",
+    "No outcome-informed redraw, seed selection, numerical tuning or hidden exclusion is permitted."
+  ],
+  "configs": [
+    {
+      "path": "configs/balance-lab/undead-initial.json",
+      "fileSha256": "c626322caad41d0cb5daaa539a55689a9b2b0ea0de017166dad1c17c1cbcfb2f",
+      "canonicalSha256": "f01a1d2489c0937b24e34e453a44b88964c5ebaacd115f74945cb8d3ad52d028",
+      "matches": 3008,
+      "matchupScenarios": 30,
+      "mirrorScenarios": 17,
+      "seedCount": 16,
+      "focalIds": [
+        "pureundead",
+        "mixedundead"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "fullnature",
+          "cost": 15
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15
+        },
+        {
+          "id": "priority",
+          "cost": 15
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15
+        }
+      ],
+      "candidate": {
+        "id": "initial",
+        "label": "Frozen bounded undead initial; production autoOrders on both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-enabled.json",
+      "fileSha256": "51fdff417b6f890ceb5c6bb431d7dfcae7caf929d76650e6f6c0ca254a3aedc8",
+      "canonicalSha256": "9b56c78af15dd72e71f3161ff77a106646b4ea573e9738662f0d4db396fcf0bd",
+      "matches": 1504,
+      "matchupScenarios": 30,
+      "mirrorScenarios": 17,
+      "seedCount": 8,
+      "focalIds": [
+        "pureundead",
+        "mixedundead"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "fullnature",
+          "cost": 15
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15
+        },
+        {
+          "id": "priority",
+          "cost": 15
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15
+        }
+      ],
+      "candidate": {
+        "id": "enabled",
+        "label": "Frozen bounded undead enabled; production autoOrders on both sides",
+        "overrides": {
+          "undeadCashout": {
+            "enabled": true,
+            "base": 14,
+            "bonus": 8
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-bonus-off.json",
+      "fileSha256": "d61ae64f5fb56e7c5ce083167999784f8988b5781bc7ed6c4213484f4646a6b0",
+      "canonicalSha256": "978fbf7de7852e3e1fa381b5833ed62a716af22763efc792d304cae841212670",
+      "matches": 1504,
+      "matchupScenarios": 30,
+      "mirrorScenarios": 17,
+      "seedCount": 8,
+      "focalIds": [
+        "pureundead",
+        "mixedundead"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "fullnature",
+          "cost": 15
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15
+        },
+        {
+          "id": "priority",
+          "cost": 15
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15
+        }
+      ],
+      "candidate": {
+        "id": "bonus-off",
+        "label": "Frozen bounded undead bonus-off; production autoOrders on both sides",
+        "overrides": {
+          "undeadCashout": {
+            "enabled": true,
+            "base": 14,
+            "bonus": 0
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-full-off.json",
+      "fileSha256": "6c71dbdb01f484c32121fbcd5908aa6692f41cba8c613d710fa23362dcab3af4",
+      "canonicalSha256": "4f26b7130a7efe163104263dc57d4b2075b65b972e1c2f82b93e647719134e1a",
+      "matches": 1504,
+      "matchupScenarios": 30,
+      "mirrorScenarios": 17,
+      "seedCount": 8,
+      "focalIds": [
+        "pureundead",
+        "mixedundead"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "mixedundead",
+          "cost": 15
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "fullnature",
+          "cost": 15
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15
+        },
+        {
+          "id": "priority",
+          "cost": 15
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15
+        }
+      ],
+      "candidate": {
+        "id": "full-off",
+        "label": "Frozen bounded undead full-off; production autoOrders on both sides",
+        "overrides": {
+          "undeadCashout": {
+            "enabled": false,
+            "base": 14,
+            "bonus": 8
+          }
+        }
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-broad.json",
+      "fileSha256": "7c917ec96039839ef548ceda37394a2a645df7a2eabfb88496416cde0b7043e6",
+      "canonicalSha256": "efcd3a3a2e84b684dc6eb386b0611b2f8da34a44a84b74367b3b969375a3b19d",
+      "matches": 2752,
+      "matchupScenarios": 56,
+      "mirrorScenarios": 30,
+      "seedCount": 8,
+      "focalIds": [
+        "pureundead",
+        "c17-poison-undead"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "coherent-beast-support",
+        "coherent-beast-poison",
+        "coherent-beast-breaker",
+        "coherent-nature-support",
+        "coherent-nature-poison",
+        "coherent-nature-breaker",
+        "coherent-dragon-support",
+        "coherent-dragon-poison",
+        "coherent-dragon-breaker",
+        "coherent-material-support",
+        "coherent-material-poison",
+        "coherent-material-breaker",
+        "coherent-slime-support",
+        "coherent-slime-poison",
+        "coherent-slime-breaker",
+        "coherent-demon-support",
+        "coherent-demon-poison",
+        "coherent-demon-breaker"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "c17-poison-undead",
+          "cost": 17
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-breaker",
+          "cost": 17
+        }
+      ],
+      "candidate": {
+        "id": "broad",
+        "label": "Frozen bounded undead broad; production autoOrders on both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-substitutions.json",
+      "fileSha256": "1adbb1d7048c6d9ef925d60b681179554b5c9b95557e05d8633db2765a33120b",
+      "canonicalSha256": "c402ea67169622e2a216d6753676b37c6d680211034c05f90f3d58f01c0c90e1",
+      "matches": 6240,
+      "matchupScenarios": 224,
+      "mirrorScenarios": 36,
+      "seedCount": 6,
+      "focalIds": [
+        "pureundead",
+        "c17-poison-undead",
+        "core-nonleader",
+        "bonus-threshold-lost",
+        "core-replaced-slime",
+        "core-replaced-demon",
+        "healer-replaced",
+        "breaker-replaced"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "coherent-beast-support",
+        "coherent-beast-poison",
+        "coherent-beast-breaker",
+        "coherent-nature-support",
+        "coherent-nature-poison",
+        "coherent-nature-breaker",
+        "coherent-dragon-support",
+        "coherent-dragon-poison",
+        "coherent-dragon-breaker",
+        "coherent-material-support",
+        "coherent-material-poison",
+        "coherent-material-breaker",
+        "coherent-slime-support",
+        "coherent-slime-poison",
+        "coherent-slime-breaker",
+        "coherent-demon-support",
+        "coherent-demon-poison",
+        "coherent-demon-breaker"
+      ],
+      "teams": [
+        {
+          "id": "pureundead",
+          "cost": 17
+        },
+        {
+          "id": "c17-poison-undead",
+          "cost": 17
+        },
+        {
+          "id": "core-nonleader",
+          "cost": 17
+        },
+        {
+          "id": "bonus-threshold-lost",
+          "cost": 17
+        },
+        {
+          "id": "core-replaced-slime",
+          "cost": 17
+        },
+        {
+          "id": "core-replaced-demon",
+          "cost": 17
+        },
+        {
+          "id": "healer-replaced",
+          "cost": 17
+        },
+        {
+          "id": "breaker-replaced",
+          "cost": 17
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-breaker",
+          "cost": 17
+        }
+      ],
+      "candidate": {
+        "id": "substitutions",
+        "label": "Frozen bounded undead substitutions; production autoOrders on both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-oldcore-contribution.json",
+      "fileSha256": "db23e7358a003b2360f23f1c9cce5b1fd092caa34431c480a9e96e9deede1c71",
+      "canonicalSha256": "bdedf109bf84ace59496c866a5576e381e2565f98bb1103c43eb6a2449f4be2e",
+      "matches": 7632,
+      "matchupScenarios": 280,
+      "mirrorScenarios": 38,
+      "seedCount": 6,
+      "focalIds": [
+        "control-nature-dryas",
+        "nature-newcore-dryas",
+        "control-nature-tengu",
+        "nature-newcore-tengu",
+        "nature-newhealer",
+        "control-material-strong",
+        "material-newbreaker",
+        "control-material-pure",
+        "material-newshield",
+        "material-newhealer"
+      ],
+      "opponentIds": [
+        "fullbeast",
+        "puredragon",
+        "purematerial",
+        "pureslime",
+        "puredemon",
+        "nature-brute-dryas",
+        "nature-brute-tengu",
+        "strong-poison",
+        "strong-area",
+        "material-strong",
+        "coherent-beast-support",
+        "coherent-beast-poison",
+        "coherent-beast-breaker",
+        "coherent-nature-support",
+        "coherent-nature-poison",
+        "coherent-nature-breaker",
+        "coherent-dragon-support",
+        "coherent-dragon-poison",
+        "coherent-dragon-breaker",
+        "coherent-material-support",
+        "coherent-material-poison",
+        "coherent-material-breaker",
+        "coherent-slime-support",
+        "coherent-slime-poison",
+        "coherent-slime-breaker",
+        "coherent-demon-support",
+        "coherent-demon-poison",
+        "coherent-demon-breaker"
+      ],
+      "teams": [
+        {
+          "id": "control-nature-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-newcore-dryas",
+          "cost": 17
+        },
+        {
+          "id": "control-nature-tengu",
+          "cost": 17
+        },
+        {
+          "id": "nature-newcore-tengu",
+          "cost": 17
+        },
+        {
+          "id": "nature-newhealer",
+          "cost": 17
+        },
+        {
+          "id": "control-material-strong",
+          "cost": 17
+        },
+        {
+          "id": "material-newbreaker",
+          "cost": 17
+        },
+        {
+          "id": "control-material-pure",
+          "cost": 17
+        },
+        {
+          "id": "material-newshield",
+          "cost": 17
+        },
+        {
+          "id": "material-newhealer",
+          "cost": 17
+        },
+        {
+          "id": "fullbeast",
+          "cost": 17
+        },
+        {
+          "id": "puredragon",
+          "cost": 17
+        },
+        {
+          "id": "purematerial",
+          "cost": 17
+        },
+        {
+          "id": "pureslime",
+          "cost": 17
+        },
+        {
+          "id": "puredemon",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-dryas",
+          "cost": 17
+        },
+        {
+          "id": "nature-brute-tengu",
+          "cost": 17
+        },
+        {
+          "id": "strong-poison",
+          "cost": 17
+        },
+        {
+          "id": "strong-area",
+          "cost": 17
+        },
+        {
+          "id": "material-strong",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-beast-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-nature-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-dragon-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-material-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-slime-breaker",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-support",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-poison",
+          "cost": 17
+        },
+        {
+          "id": "coherent-demon-breaker",
+          "cost": 17
+        }
+      ],
+      "candidate": {
+        "id": "oldcore-contribution",
+        "label": "Frozen bounded undead oldcore-contribution; production autoOrders on both sides",
+        "overrides": {}
+      }
+    },
+    {
+      "path": "configs/balance-lab/undead-lower-budget.json",
+      "fileSha256": "c17bfeae8b87e45bb4543376415bb16161c03dd9737c874d93f2a4a35e6b80e0",
+      "canonicalSha256": "4ac6e838ea02ad50d2eaf0285094a437a177fa947e2d6ed2052339d430aa3ebd",
+      "matches": 736,
+      "matchupScenarios": 15,
+      "mirrorScenarios": 8,
+      "seedCount": 8,
+      "focalIds": [
+        "mixedundead",
+        "c15-threshold-lost",
+        "c15-core-replaced"
+      ],
+      "opponentIds": [
+        "fullnature",
+        "guard-heal",
+        "poison-cleanse",
+        "priority",
+        "mp-pressure"
+      ],
+      "teams": [
+        {
+          "id": "mixedundead",
+          "cost": 15
+        },
+        {
+          "id": "c15-threshold-lost",
+          "cost": 15
+        },
+        {
+          "id": "c15-core-replaced",
+          "cost": 15
+        },
+        {
+          "id": "fullnature",
+          "cost": 15
+        },
+        {
+          "id": "guard-heal",
+          "cost": 14
+        },
+        {
+          "id": "poison-cleanse",
+          "cost": 15
+        },
+        {
+          "id": "priority",
+          "cost": 15
+        },
+        {
+          "id": "mp-pressure",
+          "cost": 15
+        }
+      ],
+      "candidate": {
+        "id": "lower-budget",
+        "label": "Frozen bounded undead lower-budget; production autoOrders on both sides",
+        "overrides": {}
+      }
+    }
+  ]
+}

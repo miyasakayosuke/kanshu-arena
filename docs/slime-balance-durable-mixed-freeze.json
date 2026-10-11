@@ -1,0 +1,48 @@
+{
+  "executorRecordedAt": "2026-10-10T08:14:18.505Z",
+  "timestampCaution": "Executor clock approximately9h ahead; freeze precedes own E mixed results.",
+  "phase": "Post-initial-mixed extension, all11targets retained without selection; E main matches still in progress when frozen.",
+  "priorFinding": "Original strongest sampled slime mixed [24,6,9,27,28] scored38.01%; this motivated checking the complete original mixed cohort under E.",
+  "configs": [
+    {
+      "path": "configs/balance-lab/slime-durable-mixed-a.json",
+      "fileSha256": "5b0d5125585828c8f061e6ece8a2baf901496f9d844a8bab6569f91731840722",
+      "canonicalSha256": "7ad240b4dafa876e9835e694d9d5f0709a5e80ab0feceaae623c6a9fe9a8207b",
+      "seeds": [
+        2747045971,
+        1106514436,
+        3760950197,
+        2120418662,
+        479887127,
+        3134322888,
+        1493791353,
+        4148227114,
+        2507695579,
+        867164044,
+        3521599805,
+        1881068270
+      ],
+      "matches": 12720
+    },
+    {
+      "path": "configs/balance-lab/slime-durable-mixed-b.json",
+      "fileSha256": "c8190e8cdf6b3554e0ab3d568b5d539349ca8a64d27345deadbdd7457fd920ca",
+      "canonicalSha256": "326e48e0f382d80450be47d63e97150f8e1ce4a0f1852533afd0e5bda17fdba8",
+      "seeds": [
+        2747045971,
+        1106514436,
+        3760950197,
+        2120418662,
+        479887127,
+        3134322888,
+        1493791353,
+        4148227114,
+        2507695579,
+        867164044,
+        3521599805,
+        1881068270
+      ],
+      "matches": 10896
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "nodeVersion": "v24.19.0",
+    "files": [
+      {
+        "path": "src/engine.ts",
+        "sha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd"
+      },
+      {
+        "path": "src/families.ts",
+        "sha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516"
+      },
+      {
+        "path": "scripts/balance-lab/core.mjs",
+        "sha256": "ed89e07cb1414337c607b880c311690dc3f024c50e9dc85f652c635df459883b"
+      },
+      {
+        "path": "scripts/balance-lab/cli.mjs",
+        "sha256": "da6fda2e69f0fb6ce5a3fb1272b415399f2b7f5cdc3cbba7f2b06ddee1a61cb5"
+      }
+    ],
+    "engineSha256": "d7b9b0f04fa452f84db22467d5be74b8a11200f82ba7d79d2e0fb777fd7614fd",
+    "familySha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "labSha256": "f586f4c475906ae189f5b72b7250e4629fe802b71e82a432f94f3d7f3ad36415"
+  },
+  "rule": {
+    "status": "confirmed-before-outcomes",
+    "rule": "Extend all three fixed counterplans for one arm/scale/shell together only when fewer than two have passed and at least one remaining counter meets point score >=60% and both physical-orientation scores >50%, but its approximate seed-clustered 95% lower bound is <=50%, such that two passes remain possible. Use all64 reserved seeds once, then combine all128 seeds. Never extend clear point/orientation failures, replace teams, or change thresholds."
+  },
+  "triggers": [],
+  "authorizedSuiteIds": [],
+  "unchangedFailedGatesRemainFailures": true
+}

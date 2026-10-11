@@ -14,7 +14,7 @@ const out = (value: number) => 1 - (1 - clamp(value)) ** 3;
 const smooth = (value: number) => {const p = clamp(value); return p * p * (3 - 2 * p);};
 
 export function motionKind(event: BattleEvent): MotionKind {
-  if (['guard', 'protect', 'heal', 'cleanse'].includes(event.effect ?? '')) return 'support';
+  if (['guard', 'protect', 'heal', 'cleanse', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(event.effect ?? '')) return 'support';
   if (event.scope === 'all') return 'area';
   const type = effectType(event.skill ?? '', event.effect);
   return type === 'slash' || type === 'wind' && /斬|翼|降下/.test(event.skill ?? '') ? 'strike' : 'spell';
@@ -272,5 +272,189 @@ export function sampleBronzeBullMotion(age: number, reduced = false) {
     scaleX: reduced ? 1 : 1 + (.04 * ready - .015 * drive) * settle,
     scaleY: reduced ? 1 : 1 - .055 * ready * settle,
     camera: reduced || !settle ? 0 : .005 * drive * settle,
+  };
+}
+
+/** A side-open arch unfolds upward, releasing liquid without a coil or exhale. */
+export function sampleHollowSpringMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'spell', age, reduced);
+  const gather = smooth(age / 470);
+  const unfurl = smooth((age - CAST_IMPACT_MS) / 135);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 150) / 400);
+  const ready = gather * (1 - unfurl) * settle;
+  const open = unfurl * settle;
+  return {...base,
+    travel: reduced || supporting ? 0 : 8 * open,
+    lift: reduced ? 0 : 4 * ready + 12 * open,
+    tilt: reduced ? 0 : -.055 * ready + .06 * open,
+    scaleX: reduced ? 1 : 1 - .045 * ready + .11 * open,
+    scaleY: reduced ? 1 : 1 + .025 * ready + .07 * open,
+    camera: reduced || supporting ? 0 : .003 * open,
+  };
+}
+
+/** A thin runner contracts along its length, then snaps forward like a ribbon. */
+export function sampleRibbonDropMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const gather = smooth(age / 540);
+  const whip = smooth((age - CAST_IMPACT_MS) / 80);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 90) / 460);
+  const ready = gather * (1 - whip) * settle;
+  const reach = whip * settle;
+  return {...base,
+    travel: reduced || supporting ? 0 : -8 * ready + 43 * reach,
+    lift: reduced ? 0 : 3 * ready + 2 * reach,
+    tilt: reduced || supporting ? 0 : .065 * ready - .08 * reach,
+    scaleX: reduced ? 1 : 1 - .15 * ready + .2 * reach,
+    scaleY: reduced ? 1 : 1 + .12 * ready - .1 * reach,
+    camera: 0,
+  };
+}
+
+/** Soft pleats compress sideways then open into one wide planted membrane. */
+export function sampleFoldWardMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const fold = smooth(age / 620);
+  const open = smooth((age - CAST_IMPACT_MS) / 160);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 170) / 380);
+  const ready = fold * (1 - open) * settle;
+  const spread = open * settle;
+  return {...base,
+    travel: reduced || supporting ? 0 : 9 * spread,
+    lift: reduced || !settle ? 0 : -2 * spread,
+    tilt: 0,
+    scaleX: reduced ? 1 : 1 - .11 * ready + .15 * spread,
+    scaleY: reduced ? 1 : 1 + .05 * ready - .045 * spread,
+    camera: 0,
+  };
+}
+
+/** A branching pulse travels from the trunk into its bubbles, then relaxes. */
+export function sampleBubbleBranchMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'spell', age, reduced);
+  const gather = smooth(age / 550);
+  const pulse = smooth((age - CAST_IMPACT_MS) / 110);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 130) / 420);
+  const ready = gather * (1 - pulse) * settle;
+  const bloom = pulse * settle;
+  return {...base,
+    travel: 0,
+    lift: reduced ? 0 : 2 * ready + 7 * bloom,
+    tilt: reduced ? 0 : .035 * ready - .045 * bloom,
+    scaleX: reduced ? 1 : 1 + .025 * ready + .08 * bloom,
+    scaleY: reduced ? 1 : 1 - .07 * ready + .08 * bloom,
+    camera: 0,
+  };
+}
+
+/** Six lobes knead inward, then drive one short radial pressure thrust. */
+export function sampleKneadedFistMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const knead = smooth(age / 650);
+  const thrust = smooth((age - CAST_IMPACT_MS) / 100);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 110) / 440);
+  const ready = knead * (1 - thrust) * settle;
+  const press = thrust * settle;
+  return {...base,
+    travel: reduced || supporting ? 0 : -3 * ready + 31 * press,
+    lift: reduced || !settle ? 0 : -6 * ready - 2 * press,
+    tilt: 0,
+    scaleX: reduced ? 1 : 1 + .1 * ready - .055 * press,
+    scaleY: reduced ? 1 : 1 - .13 * ready + .105 * press,
+    camera: reduced || supporting ? 0 : .004 * press,
+  };
+}
+
+/** Open palm narrows into a pinching count; the figure never lunges like the wolf. */
+export function sampleMammonMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'spell', age, reduced);
+  const gather = smooth(age / 580), pinch = smooth((age - CAST_IMPACT_MS) / 130);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 150) / 400);
+  if (!settle) return {...base, travel:0, lift:0, tilt:0, scaleX:1, scaleY:1, camera:0};
+  return {...base, travel: 0, lift: reduced ? 0 : 6 * gather * settle,
+    tilt: reduced || supporting ? 0 : -.045 * pinch * settle,
+    scaleX: reduced ? 1 : 1 + (.045 * gather - .075 * pinch) * settle,
+    scaleY: reduced ? 1 : 1 + .025 * pinch * settle, camera: 0};
+}
+/** A short tool-turn followed by a backward wrist release. */
+export function sampleKoboldMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const ready = smooth(age / 480), turn = smooth((age - 620) / 180);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 90) / 370);
+  if (!settle) return {...base, travel:0, lift:0, tilt:0, scaleX:1, scaleY:1, camera:0};
+  return {...base, travel: reduced || supporting ? 0 : 17 * turn * settle,
+    lift: reduced ? 0 : -3 * ready * settle,
+    tilt: reduced || supporting ? 0 : (.08 * ready - .16 * turn) * settle,
+    scaleX: 1, scaleY: reduced ? 1 : 1 - .035 * ready * settle, camera: 0};
+}
+/** A planted bronze-leg pivot carries a mantle sweep, without a spinning loop. */
+export function sampleEmpusaMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const draw = smooth(age / 560), pivot = smooth((age - 650) / 150);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 100) / 450);
+  if (!settle) return {...base, travel:0, lift:0, tilt:0, scaleX:1, scaleY:1, camera:0};
+  return {...base, travel: reduced || supporting ? 0 : 28 * pivot * settle,
+    lift: reduced ? 0 : 5 * Math.sin(pivot * Math.PI) * settle,
+    tilt: reduced ? 0 : (.06 * draw - .12 * pivot) * settle,
+    scaleX: reduced ? 1 : 1 - .055 * draw * (1 - pivot) * settle,
+    scaleY: 1, camera: reduced || supporting ? 0 : .003 * pivot * settle};
+}
+
+/** Broad burial-cloth brace, then one low planted push at the observed hit. */
+export function sampleDraugrMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const brace = smooth(age / 650), push = smooth((age - CAST_IMPACT_MS) / 125);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 135) / 410);
+  return {...base, travel: reduced || supporting ? 0 : 18 * push * settle,
+    lift: reduced ? 0 : -5 * brace * settle,
+    tilt: reduced || supporting ? 0 : -.055 * push * settle,
+    scaleX: reduced ? 1 : 1 + .045 * brace * (1 - push) * settle,
+    scaleY: reduced ? 1 : 1 - .055 * brace * settle,
+    camera: reduced || supporting ? 0 : .003 * push * settle};
+}
+/** A tall driving coat leans back on the reins, then draws one sideways pull. */
+export function sampleHeadlessDriverMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const draw = smooth(age / 610), pull = smooth((age - CAST_IMPACT_MS) / 105);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 120) / 415);
+  return {...base, travel: reduced || supporting ? 0 : (-7 * draw + 21 * pull) * settle,
+    lift: 0, tilt: reduced ? 0 : (.075 * draw - .13 * pull) * settle,
+    scaleX: 1, scaleY: 1, camera: 0};
+}
+/** One barefoot hop for a strike; protective sleeves open while feet stay planted. */
+export function sampleJiangshiMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const rise = smooth(age / 610), land = smooth((age - CAST_IMPACT_MS) / 110);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 130) / 410);
+  return {...base, travel: reduced || supporting ? 0 : 11 * land * settle,
+    lift: reduced || supporting ? 0 : 17 * rise * (1 - land) * settle,
+    tilt: 0, scaleX: reduced ? 1 : 1 + (supporting ? .095 * rise : .06 * land) * settle,
+    scaleY: reduced ? 1 : 1 - (supporting ? .025 * rise : .06 * land) * settle,
+    camera: 0};
+}
+/** An inverted branch-body folds sideways once, then releases a small stitch. */
+export function sampleVetalaMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'spell', age, reduced);
+  const fold = smooth(age / 620), stitch = smooth((age - CAST_IMPACT_MS) / 145);
+  const settle = age < CAST_IMPACT_MS ? 1 : 1 - out((age - CAST_IMPACT_MS - 155) / 380);
+  return {...base, travel: 0, lift: reduced ? 0 : 4 * fold * settle,
+    tilt: reduced ? 0 : (-.09 * fold + .15 * stitch) * settle,
+    scaleX: reduced ? 1 : 1 - .045 * fold * (1 - stitch) * settle,
+    scaleY: 1, camera: 0};
+}
+
+/** One architectural threshold tilts, presents open palms, then returns to its feet.
+ * The palms/portal release waits for actual impact; no heal or camera kick. */
+export function sampleJanusMotion(age: number, supporting = false, reduced = false) {
+  const base = sampleActionMotion(supporting ? 'support' : 'strike', age, reduced);
+  const ready = smooth(age / 380);
+  const open = age < CAST_IMPACT_MS ? 0 : smooth((age - CAST_IMPACT_MS) / 150);
+  const settle = age < CAST_IMPACT_MS + 160 ? 1 : 1 - out((age - CAST_IMPACT_MS - 160) / 370);
+  return {...base,
+    travel: reduced || supporting ? 0 : 15 * open * settle,
+    lift: reduced ? 0 : 2 * ready * (1 - open) * settle,
+    tilt: reduced || !settle ? 0 : (.045 * ready - .065 * open) * settle,
+    scaleX: 1, scaleY: 1, camera: 0,
+    palms: reduced ? 0 : (ready * .3 + open * .7) * settle,
   };
 }

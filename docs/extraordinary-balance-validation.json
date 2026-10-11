@@ -1,0 +1,41 @@
+{
+  "status": "terminally-passed",
+  "authoritativeDate": "2026-10-10 UTC",
+  "checks": [
+    {
+      "name": "all-predecessor-lab-plus-Janus-engine-playback",
+      "command": "npx vitest run src/balanceLab*.test.ts src/extraordinaryWave.test.ts src/extraordinaryPlayback.test.ts",
+      "exitCode": 0,
+      "tests": 718,
+      "files": 26,
+      "logSha256": "74fe860d6649c20c1d9b54925d9b08f3637924baec89a8592d71c94f86c220e5"
+    },
+    {
+      "name": "final-annotation-only-test-recheck",
+      "command": "npx vitest run src/balanceLabExtraordinary.test.ts",
+      "exitCode": 0,
+      "tests": 38,
+      "files": 1,
+      "logSha256": "6b60769d4ecbd69108feb2419b3b209a02af4298881327c38ff1dc1dd52be811"
+    },
+    {
+      "name": "typescript",
+      "command": "npx tsc --noEmit",
+      "exitCode": 0,
+      "tests": null,
+      "files": null,
+      "logSha256": "7d61cb2e2deb776dfec4d6f54693f9edeed0af5c4da52f091c53c995d862fb65"
+    }
+  ],
+  "smoke": {
+    "matches": 736,
+    "status": "terminally-passed",
+    "changedOutcomes": 0
+  },
+  "scheduledStudy": {
+    "matches": 20056,
+    "unitLedgers": 200560,
+    "status": "terminally-verified"
+  },
+  "finalReleaseChecks": "Parent owns complete aggregate, rights checks/build, UI/live QA and publication authorization."
+}

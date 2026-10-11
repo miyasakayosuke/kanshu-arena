@@ -1,9 +1,13 @@
 /** Development-only lab. All turns resolve through the shipping combat engine. */
 import { createHash } from 'node:crypto';
 import {
-  advanceWithEvents, autoOrders, battleSkill, leaderAppliesTo, leaderFor,
+  advanceWithEvents, autoOrders, battleSkill, baseDamage, poisonImpactScaleFor, leaderAppliesTo, leaderFor, BASIC_ATTACK,
+  EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, extraordinaryResponseEligible, isExtraordinaryResponse, skillUnavailableReason,
+  UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, poisonCashoutPerTickFor, poisonTicksFor,
+  DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, mpDamageFor, mpLossFor, directDamageScale, speedFor,
   DRAGON_CHARGE_CAP, DRAGON_CORE_ID, dragonChargeEligible,
   MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible,
+  SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, supplyAmountFor,
   MAX_SPECIAL_SKILLS, MAX_TURNS, monsters, NATURE_WARD_PERCENT, OPENING_RALLY_TURNS, OPENING_WARD_TURNS, RALLY_PERCENT, start,
 } from '../../src/engine.ts';
 import { FAMILY_IDS } from '../../src/families.ts';
@@ -43,13 +47,13 @@ const monsterExists = (id, path) => {
 };
 const FAMILIES = FAMILY_IDS;
 const validateSkill = (skill, path) => {
-  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit', 'familyBonusHit', 'fixedDamage', 'dragonChargeFinisher'], path);
+  keys(skill, ['name', 'power', 'priority', 'mpCost', 'kind', 'all', 'breaksGuard', 'randomHits', 'breaksGuardAfterHit', 'familyBonusHit', 'fixedDamage', 'dragonChargeFinisher', 'mpDamage', 'poisonCashout'], path);
   text(skill.name, `${path}.name`);
   if (['通常攻撃', 'ぼうぎょ'].includes(skill.name)) fail(`${path}.name: reserved universal-command name`);
   number(skill.power, 0, 10000, `${path}.power`);
   integer(skill.priority, -10, 10, `${path}.priority`);
   integer(skill.mpCost, 0, 10000, `${path}.mpCost`);
-  if (!['hit', 'heal', 'guard', 'poison', 'protect', 'cleanse'].includes(skill.kind)) fail(`${path}.kind: unsupported effect`);
+  if (!['hit', 'heal', 'guard', 'poison', 'protect', 'cleanse', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(skill.kind)) fail(`${path}.kind: unsupported effect`);
   for (const field of ['all', 'breaksGuard', 'breaksGuardAfterHit', 'fixedDamage', 'dragonChargeFinisher']) if (own(skill, field)) boolean(skill[field], `${path}.${field}`);
   if (own(skill, 'randomHits')) integer(skill.randomHits, 1, 20, `${path}.randomHits`);
   if (skill.randomHits && (skill.kind !== 'hit' || skill.all)) fail(`${path}: randomHits requires single/random hit kind, not all`);
@@ -57,12 +61,22 @@ const validateSkill = (skill, path) => {
   if ((skill.breaksGuard || skill.breaksGuardAfterHit) && skill.kind !== 'hit') fail(`${path}: guard breaking requires hit kind`);
   if (skill.fixedDamage && skill.kind !== 'hit') fail(`${path}.fixedDamage: requires hit kind`);
   if (skill.dragonChargeFinisher && (skill.kind !== 'hit' || !skill.fixedDamage || !skill.all || skill.randomHits || skill.mpCost <= 0 || skill.priority >= 0)) fail(`${path}.dragonChargeFinisher: requires paid, fixed-damage, all-target anchor hit`);
-  if (skill.all && !['hit', 'poison'].includes(skill.kind)) fail(`${path}: ally-wide support is not implemented`);
+  if (own(skill, 'mpDamage')) {
+    integer(skill.mpDamage, 0, 30, `${path}.mpDamage`);
+    if (skill.kind !== 'hit' || skill.mpCost <= 0 || skill.all || skill.randomHits || skill.fixedDamage || skill.breaksGuard || skill.breaksGuardAfterHit || skill.dragonChargeFinisher) fail(`${path}.mpDamage: requires paid, plain single-target hit`);
+  }
+  if (own(skill, 'poisonCashout')) {
+    integer(skill.poisonCashout, 0, 30, `${path}.poisonCashout`);
+    if (skill.kind !== 'hit' || skill.mpCost <= 0 || skill.all || own(skill, 'randomHits') || skill.fixedDamage || skill.breaksGuard || skill.breaksGuardAfterHit || skill.dragonChargeFinisher || own(skill, 'mpDamage')) fail(`${path}.poisonCashout: requires paid, plain single-target hit without MP damage`);
+  }
+  if (skill.kind === 'restoreMp' && (!skill.all || skill.mpCost !== 0 || skill.power !== SLIME_SUPPLY.amount)) fail(`${path}: restoreMp requires all:true, zero MP cost and stock descriptive power; tune slimeSupply.amount instead`);
+  if (isExtraordinaryResponse(skill) && (!skill.all || skill.power !== 0 || skill.mpCost !== EXTRAORDINARY_RESPONSE.mpCost || skill.priority !== (skill.kind === 'responseGuard' ? 3 : 0) || ['randomHits','familyBonusHit','fixedDamage','dragonChargeFinisher','mpDamage','poisonCashout','breaksGuard','breaksGuardAfterHit'].some(field => own(skill, field)))) fail(`${path}: response requires exact stock all-own zero-power paid choice without attack modifiers`);
+  if (skill.all && !['hit', 'poison', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(skill.kind)) fail(`${path}: ally-wide support is not implemented`);
 };
 const validateLeader = (trait, path) => {
   keys(trait, ['name', 'stat', 'percent', 'description', 'family', 'secondary'], path);
   text(trait.name, `${path}.name`); text(trait.description, `${path}.description`);
-  if (!['hp', 'atk', 'speed'].includes(trait.stat)) fail(`${path}.stat: unsupported leader stat`);
+  if (!['hp', 'mp', 'atk', 'speed'].includes(trait.stat)) fail(`${path}.stat: unsupported leader stat`);
   number(trait.percent, -90, 300, `${path}.percent`);
   if (own(trait, 'family') && !FAMILIES.includes(trait.family)) fail(`${path}.family: unsupported family`);
   if (own(trait, 'secondary')) {
@@ -72,7 +86,9 @@ const validateLeader = (trait, path) => {
   }
 };
 export function validateOverrides(overrides = {}) {
-  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard', 'dragonCharge', 'materialRepair'], 'overrides');
+  keys(overrides, ['monsters', 'leaders', 'openingRally', 'openingWard', 'dragonCharge', 'materialRepair', 'slimeSupply', 'demonPressure', 'undeadCashout', 'extraordinaryResponse', 'poisonImpactScale', 'reservePoison'], 'overrides');
+  if (own(overrides, 'poisonImpactScale')) number(overrides.poisonImpactScale, 0, 1, 'overrides.poisonImpactScale');
+  if (own(overrides, 'reservePoison')) boolean(overrides.reservePoison, 'overrides.reservePoison');
   if (own(overrides, 'monsters')) {
     object(overrides.monsters, 'overrides.monsters');
     for (const [id, patch] of Object.entries(overrides.monsters)) {
@@ -109,11 +125,35 @@ export function validateOverrides(overrides = {}) {
     if (own(overrides.materialRepair, 'enabled')) boolean(overrides.materialRepair.enabled, 'overrides.materialRepair.enabled');
     if (own(overrides.materialRepair, 'percent')) integer(overrides.materialRepair.percent, 0, 100, 'overrides.materialRepair.percent');
   }
+  if (own(overrides, 'slimeSupply')) {
+    keys(overrides.slimeSupply, ['enabled', 'amount'], 'overrides.slimeSupply');
+    if (own(overrides.slimeSupply, 'enabled')) boolean(overrides.slimeSupply.enabled, 'overrides.slimeSupply.enabled');
+    if (own(overrides.slimeSupply, 'amount')) integer(overrides.slimeSupply.amount, 0, 30, 'overrides.slimeSupply.amount');
+  }
+  if (own(overrides, 'demonPressure')) {
+    keys(overrides.demonPressure, ['enabled', 'base', 'bonus'], 'overrides.demonPressure');
+    if (own(overrides.demonPressure, 'enabled')) boolean(overrides.demonPressure.enabled, 'overrides.demonPressure.enabled');
+    for (const field of ['base', 'bonus']) if (own(overrides.demonPressure, field)) integer(overrides.demonPressure[field], 0, 30, `overrides.demonPressure.${field}`);
+  }
+  if (own(overrides, 'undeadCashout')) {
+    keys(overrides.undeadCashout, ['enabled', 'base', 'bonus'], 'overrides.undeadCashout');
+    if (own(overrides.undeadCashout, 'enabled')) boolean(overrides.undeadCashout.enabled, 'overrides.undeadCashout.enabled');
+    for (const field of ['base', 'bonus']) if (own(overrides.undeadCashout, field)) integer(overrides.undeadCashout[field], 0, 30, `overrides.undeadCashout.${field}`);
+  }
+  if (own(overrides, 'extraordinaryResponse')) {
+    keys(overrides.extraordinaryResponse, ['enabled'], 'overrides.extraordinaryResponse');
+    if (own(overrides.extraordinaryResponse, 'enabled')) boolean(overrides.extraordinaryResponse.enabled, 'overrides.extraordinaryResponse.enabled');
+  }
   return overrides;
 }
 const patchedRoster = overrides => monsters.map(monster => {
   const result = { ...clone(monster), ...clone(overrides.monsters?.[monster.id] ?? {}) };
   if (result.family === null) delete result.family;
+  // Disable every configured MP hit, including custom isolated skills, without touching the roster.
+  if (overrides.demonPressure) result.skills = result.skills.map(skill => own(skill, 'mpDamage')
+    ? { ...skill, mpDamage: overrides.demonPressure.enabled === false ? 0 : overrides.demonPressure.base ?? skill.mpDamage } : skill);
+  if (overrides.undeadCashout) result.skills = result.skills.map(skill => own(skill, 'poisonCashout')
+    ? { ...skill, poisonCashout: overrides.undeadCashout.enabled === false ? 0 : overrides.undeadCashout.base ?? skill.poisonCashout } : skill);
   return result;
 });
 const validateTeam = (ids, path, roster, costLimit) => {
@@ -199,7 +239,7 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
   validateOverrides(overrides);
   integer(seed, 0, 0xffffffff, 'seed');
   validateTeam(teamA, 'teamA', monsters, 17); validateTeam(teamB, 'teamB', monsters, 17);
-  const state = clone(start(teamA, teamB, seed, { leaders: true }));
+  const state = clone(start(teamA, teamB, seed, { leaders: true, ...(own(overrides, 'poisonImpactScale') ? { poisonImpactScale: overrides.poisonImpactScale } : {}), ...(own(overrides, 'reservePoison') ? { reservePoison: overrides.reservePoison } : {}) }));
   if (!Object.keys(overrides).length) return state;
   const roster = patchedRoster(overrides);
   validateTeam(teamA, 'teamA (candidate)', roster, 17); validateTeam(teamB, 'teamB (candidate)', roster, 17);
@@ -213,6 +253,13 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
     const hasCharge = charge.enabled !== false && dragonChargeEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
     const repair = overrides.materialRepair ?? {};
     const hasRepair = repair.enabled !== false && materialRepairEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
+    const supply = overrides.slimeSupply ?? {};
+    const hasSupply = supply.enabled !== false && slimeSupplyEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
+    const pressure = overrides.demonPressure ?? {};
+    const hasPressure = pressure.enabled !== false && demonPressureEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
+    const cashout = overrides.undeadCashout ?? {};
+    const hasCashout = cashout.enabled !== false && undeadCashoutEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
+    const hasResponse = overrides.extraordinaryResponse?.enabled !== false && extraordinaryResponseEligible(ids.map(id => ({ monster: roster.find(monster => monster.id === id) })));
     state[side] = ids.map((id, i) => {
       const source = roster.find(monster => monster.id === id);
       const monster = clone(source);
@@ -225,7 +272,12 @@ export function createBattle(teamA, teamB, seed, overrides = {}) {
         ...(hasRally && source.family === 'beast' ? { rally: rally.turns ?? OPENING_RALLY_TURNS, ...(rally.percent !== undefined ? { rallyPercent: rally.percent } : {}) } : {}),
         ...(hasWard && source.family === 'nature' ? { ward: ward.turns ?? OPENING_WARD_TURNS, ...(ward.percent !== undefined ? { wardPercent: ward.percent } : {}) } : {}),
         ...(hasCharge && id === DRAGON_CORE_ID ? { dragonCharge: 0, ...(charge.perPoint !== undefined ? { dragonChargePerPoint: charge.perPoint } : {}) } : {}),
-        ...(hasRepair && id === MATERIAL_CORE_ID ? { repairReady: true, ...(repair.percent !== undefined ? { repairPercent: repair.percent } : {}) } : {}) };
+        ...(hasRepair && id === MATERIAL_CORE_ID ? { repairReady: true, ...(repair.percent !== undefined ? { repairPercent: repair.percent } : {}) } : {}),
+        ...(hasSupply && id === SLIME_CORE_ID ? { supplyReady: true, ...(supply.amount !== undefined ? { supplyAmount: supply.amount } : {}) } : {}),
+        ...(hasPressure && id === DEMON_CORE_ID ? { mpDamageBonus: pressure.bonus ?? DEMON_PRESSURE.bonus } : {}),
+        ...(hasCashout && id === UNDEAD_CORE_ID ? { poisonCashoutBonus: cashout.bonus ?? UNDEAD_CASHOUT.bonus } : {}),
+        ...(hasResponse && id === EXTRAORDINARY_CORE_ID ? { responseReady: true } : {}),
+        ...(own(overrides, 'poisonImpactScale') ? { poisonImpactScale: overrides.poisonImpactScale } : {}) };
     });
   }
   // Trial logs must not claim the stock leader or family-support values. Authoritative event traces follow.
@@ -244,6 +296,12 @@ const unitSnapshot = state => [...state.allies, ...state.enemies].map(unit => ({
   ...(unit.dragonChargePerPoint !== undefined ? { dragonChargePerPoint: unit.dragonChargePerPoint } : {}),
   ...(unit.repairReady !== undefined ? { repairReady: unit.repairReady } : {}),
   ...(unit.repairPercent !== undefined ? { repairPercent: unit.repairPercent } : {}),
+  ...(unit.supplyReady !== undefined ? { supplyReady: unit.supplyReady } : {}),
+  ...(unit.supplyAmount !== undefined ? { supplyAmount: unit.supplyAmount } : {}),
+  ...(unit.mpDamageBonus !== undefined ? { mpDamageBonus: unit.mpDamageBonus } : {}),
+  ...(unit.poisonCashoutBonus !== undefined ? { poisonCashoutBonus: unit.poisonCashoutBonus } : {}),
+  ...(unit.poisonImpactScale !== undefined ? { poisonImpactScale: unit.poisonImpactScale } : {}),
+  ...(unit.responseReady !== undefined ? { responseReady: unit.responseReady } : {}),
 }));
 const supportResourcesValid = unit => ['rally', 'ward'].every(field =>
   Number.isInteger(unit[field] ?? 0) && (unit[field] ?? 0) >= 0 && (unit[field] ?? 0) <= MAX_TURNS
@@ -263,13 +321,77 @@ const materialResourcesValid = (unit, initial, prior) => {
     && (prior.repairReady !== false || unit.repairReady === false)
     && unit.repairPercent === initial.repairPercent;
 };
+const slimeResourcesValid = (unit, initial, prior) => {
+  const enabled = initial.supplyReady !== undefined;
+  return (unit.supplyReady !== undefined) === enabled
+    && (!enabled || (unit.monster.id === SLIME_CORE_ID && typeof unit.supplyReady === 'boolean' && (unit.hp > 0 || !unit.supplyReady)))
+    && (prior.supplyReady !== false || unit.supplyReady === false)
+    && unit.supplyAmount === initial.supplyAmount;
+};
+const responseResourcesValid = (unit, initial, prior) => {
+  const enabled = initial.responseReady !== undefined;
+  return (unit.responseReady !== undefined) === enabled
+    && (!enabled || (unit.monster.id === EXTRAORDINARY_CORE_ID && typeof unit.responseReady === 'boolean' && (unit.hp > 0 || !unit.responseReady)))
+    && (prior.responseReady !== false || unit.responseReady === false);
+};
+/** Definitions frozen with the systemic Lab extension. No resolver implementation. */
+export const POISON_METRICS = [
+  'poisonSelections', 'poisonCasts', 'poisonMpSpent', 'poisonDirectHp',
+  'poisonTickHpTaken', 'poisonTickEventsTaken', 'poisonNewApplications',
+  'poisonRedundantApplications', 'poisonRefreshApplications',
+  'poisonReapplicationsAfterCleanse', 'poisonReapplicationsAfterCashout',
+  'cleanseCasts', 'cleanseMpSpent', 'cleanseEvents', 'cleanseClearedTicks',
+  'cleanseFuturePoisonNominal', 'cleanseEffectiveHealing', 'cleanseOverheal',
+  'cleanseHealingCasts', 'cleanseZeroHealingCasts', 'cleanseResponseAllowanceSpent',
+  'healPotential', 'overheal', 'guardProtectedHits', 'guardActualPrevented', 'deathsBeforeTurnAction',
+];
+export const POISON_DEFINITIONS = {
+  deathsBeforeTurnAction: 'Units defeated before their original accepted queue slot began in the lethal turn; distinct from deaths before any cast over the whole battle.',
+  poisonSelections: 'Accepted planning selections of the poison skill, including those whose actor is later defeated before executing.',
+  poisonCasts: 'Actual executed poison casts; MP debits are separately reconciled.',
+  poisonMpSpent: 'Actual MP expenditure on executed poison casts; stock cost remains16.',
+  poisonDirectHp: 'Actual HP-clipped direct damage from poison casts, excluding later ticks; exactly zero at scale0.',
+  poisonTickHpTaken: 'Actual HP-clipped actorless poison-tick damage received by this unit, after every action, before repair; it ignores guard/ward.',
+  poisonTickEventsTaken: 'Actual poison tick damage events received, including a lethal last tick.',
+  poisonNewApplications: 'Poison applications to a living target whose current poison was0 immediately before the application event; includes separately identified reapplications.',
+  poisonRedundantApplications: 'Applications to an already-poisoned target with exactly3 remaining ticks (3→3); does not imply the direct hit was valueless.',
+  poisonRefreshApplications: 'Applications that refresh remaining1 or2 ticks to3. Together with new and redundant they partition all poison applications.',
+  poisonReapplicationsAfterCleanse: 'First later poison application to a target since an effective cleanse. The latest effective removal determines attribution, across turn boundaries; this is not proof the cleanser acted needlessly.',
+  poisonReapplicationsAfterCashout: 'First later poison application to a target since a cashout consumed positive ticks, across turn boundaries.',
+  cleanseCasts: 'Actual executed single-target or Janus whole-side cleanse casts. Skill ownership or selection is not execution.',
+  cleanseMpSpent: 'Actual MP expenditure on executed cleanse casts, including Janus24MP, separately from MP pressure received.',
+  cleanseEvents: 'Actual target-level cleanse events, including unpoisoned Janus recipients. Effective cleanses and removed ticks are separate.',
+  cleanseClearedTicks: 'Current remaining poison ticks removed by executed cleanse events, not a count of future ticks guaranteed to have occurred.',
+  cleanseFuturePoisonNominal: 'Removed ticks × floor(target maximum HP×6%); potential only, without future deaths, cashouts, refreshes, or other cleanses.',
+  cleanseEffectiveHealing: 'Actual HP restored by the healing component of a single-target cleanse. Janus cleanse restores no HP.',
+  cleanseOverheal: 'The single-target cleanse healing power not converted to restored HP because of the current maximum-HP cap.',
+  cleanseHealingCasts: 'Executed cleanse casts whose healing component restored positive HP. Already-needed healing is not labeled a wasted forced action.',
+  cleanseZeroHealingCasts: 'Executed cleanse casts without positive effective HP healing, including state-only Janus casts; no usefulness claim.',
+  cleanseResponseAllowanceSpent: 'Actual one-time Janus allowances consumed by executed responseCleanse casts; never inferred from ownership.',
+  healPotential: 'Potential healing budgets of actual heal events, including finite repair. Actual healing remains HP-clipped.',
+  overheal: 'Potential heal amount not restored due to the current maximum-HP cap; includes healing components of cleanses and finite repair.',
+  guardProtectedHits: 'Actual direct hit events on guarded targets. Poison ticks and nonexistent scale0 poison impacts are excluded.',
+  guardActualPrevented: 'Target-attributed local same-impact incremental HP damage prevented by removing guard alone while retaining ward, same cast basis, RNG roll, floor and current HP clipping. It is not twice observed clipped damage and not a whole-battle counterfactual.',
+};
+
+export const RESPONSE_METRICS = ['responseEligible','responseSelections','responseCleanseSelections','responseGuardSelections','responseWithheldTurns','responseRejectedSelections','responseNoEffect','responseCancelledSelections','responseFallbacks','responseCasts','responseCleanseCasts','responseGuardCasts','responseMpSpent','responseSourceMpAtCast','responseMpAfterCast','responseRecipients','responseClearRecipients','responseClearedTicks','responseClearNominalPotential','responseLaterReapplications','responseGuardNewRecipients','responseGuardAlreadyRecipients','responseGuardProtectedHits','responseGuardHpDamageObserved','responseGuardActualPrevented','responseGuardStrippedRecipients','responseGuardIdleRecipients','responseGuardNoHitCasts','responseUnused','responseDeadWithUnused','responseSurvivedUnused'];
+export const CASHOUT_METRICS = ['cashoutEligible', 'cashoutSelections', 'cashoutCasts', 'cashoutMpSpent', 'cashoutSourceMpAtCast', 'cashoutEvents', 'cashoutZeroPoison', 'cashoutTicksConsumed', 'cashoutAddedBasis', 'cashoutScaledAddition', 'cashoutActualAddedDamage', 'cashoutDirectDamage', 'cashoutFuturePoisonNominal', 'cashoutKills', 'cashoutDecisiveKills', 'cashoutKillsBeforeTargetAction', 'cashoutKillTurnSum', 'cashoutRetargets', 'cashoutLaterReapplications', 'cashoutSurvivingTargets', 'cashoutGuardedEvents', 'cashoutWardedEvents', 'hpDamageTaken', 'hpHealingReceived', 'finalMp'];
+export const PRESSURE_METRICS = ['pressureSelections', 'pressureHpAttackSelections', 'pressureBasicSelections', 'pressureCasts', 'pressureMpSpent', 'pressureSourceMpAtCast', 'pressureTargetMpBefore', 'pressureTargetMpAfter', 'mpDamageEvents', 'mpDamageZeroEvents', 'mpDamageActual', 'mpDamageReceived', 'mpDamagePotential', 'mpDamageMitigated', 'mpDamageClipped', 'mpDamageKilledTargets', 'fallbackCasts'];
+export const SUPPLY_METRICS = ['supplyEligible', 'supplySelections', 'supplyCasts', 'supplyGenerated', 'supplyReceived', 'supplyRecipients', 'supplyPotential', 'supplyWasted', 'supplyUnused', 'supplyDefeatedBeforeUse', 'supplyMpSpent', 'mpGenerated', 'initialMp', 'maximumMp', 'peakMp'];
 const freshMetric = unit => ({
+  ...Object.fromEntries(POISON_METRICS.map(field => [field, 0])),
+  ...Object.fromEntries([...PRESSURE_METRICS, ...CASHOUT_METRICS, ...RESPONSE_METRICS].map(field => [field, 0])),
+  cashoutEligible: unit.poisonCashoutBonus !== undefined ? 1 : 0,
+  responseEligible: unit.responseReady === true ? 1 : 0,
   key: unit.key, monsterId: unit.monster.id, casts: 0, specialCasts: 0, paidCasts: 0, directDamage: 0, healing: 0,
   guardApplications: 0, effectiveCleanses: 0, poisonApplications: 0, dispelApplications: 0, mpSpent: 0,
   aliveAtTurnStartTurns: 0, noAffordableSpecialTurns: 0, zeroMpTurns: 0, deathTurn: null, diedBeforeAnyCast: false,
   dragonChargeGenerated: 0, dragonChargeSpent: 0, dragonFinishers: 0, chargedDragonFinishers: 0, dragonFinisherDamage: 0, dragonChargeDispelled: 0, dragonChargeLostOnDefeat: 0, peakDragonCharge: unit.dragonCharge ?? 0,
   repairEligible: unit.repairReady === true ? 1 : 0, repairTriggers: 0, repairHealing: 0, repairReceived: 0, repairRecipients: 0, repairPotentialHealing: 0, repairUnusedHealing: 0,
   repairCancellations: 0, repairFailedBeforeTrigger: 0, repairDispelled: 0, repairDefeatedBeforeTrigger: 0, repairTriggerTurn: null, repairMpSpent: 0,
+  supplyEligible: unit.supplyReady === true ? 1 : 0, supplySelections: 0, supplyCasts: 0, supplyGenerated: 0, supplyReceived: 0, supplyRecipients: 0,
+  supplyPotential: 0, supplyWasted: 0, supplyUnused: 0, supplyDefeatedBeforeUse: 0, supplyMpSpent: 0, supplyTurn: null,
+  mpGenerated: 0, initialMp: unit.mp, maximumMp: unit.monster.mp, peakMp: unit.mp,
   finalHp: unit.hp, finalMp: unit.mp,
 });
 
@@ -280,7 +402,9 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
   const metrics = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, freshMetric(unit)]));
   const initialUnits = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
   let firstCastSide = null;
+  const responseClearedTargets = new Map();
   const poisonDamageTaken = { allies: 0, enemies: 0 };
+  const poisonRemovedTargets = new Map(); // Persist removal/reapplication accounting across turns.
   try {
     while (!state.winner && state.turn <= MAX_TURNS) {
       for (const unit of [...state.allies, ...state.enemies]) if (unit.hp > 0) {
@@ -291,23 +415,166 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       }
       const orders = autoOrders(state, 'allies');
       const enemyOrders = autoOrders(state, 'enemies');
+      for (const order of [...orders, ...enemyOrders]) {
+        const unit = [...state.allies, ...state.enemies].find(unit => unit.key === order.key);
+        const selected = battleSkill(unit.monster, order.skill), metric = metrics.get(unit.key);
+        if (selected.kind === 'poison') metric.poisonSelections++;
+        if (own(selected, 'poisonCashout')) metric.cashoutSelections++;
+        if (selected?.kind === 'restoreMp') metric.supplySelections++;
+        if (isExtraordinaryResponse(selected)) { metric.responseSelections++; metric[selected.kind === 'responseCleanse' ? 'responseCleanseSelections' : 'responseGuardSelections']++; }
+        else if (unit.responseReady === true) metric.responseWithheldTurns++;
+        if (unit.monster.id === DEMON_CORE_ID || unit.monster.skills.some(skill => own(skill, 'mpDamage'))) {
+          if (own(selected, 'mpDamage')) metric.pressureSelections++;
+          else if (order.skill === BASIC_ATTACK) metric.pressureBasicSelections++;
+          else if (selected.kind === 'hit') metric.pressureHpAttackSelections++;
+        }
+      }
       const before = clone(state);
       trace.activeAttempt = { turn: state.turn, seedBefore: state.seed, orders: clone(orders), enemyOrders: clone(enemyOrders), unitsBefore: unitSnapshot(state) };
       const resolved = advanceWithEvents(state, orders, { enemyOrders });
       const record = resolved.state.history.at(-1);
       trace.turns.push({ turn: state.turn, seedBefore: state.seed, seedAfter: resolved.state.seed, orders: clone(record.orders), events: clone(resolved.events), unitsAfter: unitSnapshot(resolved.state) });
       if (JSON.stringify(state) !== JSON.stringify(before)) fail('resolver mutated input state');
+      for (const order of record.orders) if (!order.accepted && ['responseCleanse','responseGuard'].includes(order.skillKind)) metrics.get(order.key).responseRejectedSelections++;
       if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
+      const expectedOrders = [...orders, ...enemyOrders];
+      if (record.orders.length !== expectedOrders.length || record.orders.some(order => order.source !== 'explicit' || !expectedOrders.some(expected => expected.key === order.key && expected.skill === order.skill && expected.target === order.target))) fail('accepted orders differ from explicit same-policy choices');
+      let queueSeed = state.seed;
+      const queue = record.orders.map(order => { queueSeed = rngStep(queueSeed); const unit = [...state.allies, ...state.enemies].find(unit => unit.key === order.key); return { key: order.key, skill: battleSkill(unit.monster, order.skill), speed: speedFor(unit, state.turn), tie: queueSeed }; }).sort((a, b) => b.skill.priority - a.skill.priority || b.speed - a.speed || a.tie - b.tie);
+      if (JSON.stringify(resolved.events.filter(event => event.kind === 'phase' && event.phase === 'before-action').map(event => event.actor)) !== JSON.stringify(queue.map(action => action.key))) fail('accepted original action queue was changed');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
-        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || unit.poison < 0 || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key)) || !materialResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key))) fail(`resource invariant failed for ${unit.key}`);
+        if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || !Number.isInteger(unit.mp) || unit.monster.mp !== initialUnits.get(unit.key).monster.mp || !Number.isInteger(unit.poison) || unit.poison < 0 || unit.poison > 3 || unit.poisonCashoutBonus !== initialUnits.get(unit.key).poisonCashoutBonus || (unit.poisonCashoutBonus !== undefined && (unit.monster.id !== UNDEAD_CORE_ID || !Number.isInteger(unit.poisonCashoutBonus) || unit.poisonCashoutBonus < 0 || unit.poisonCashoutBonus > 30)) || unit.mpDamageBonus !== initialUnits.get(unit.key).mpDamageBonus || (unit.mpDamageBonus !== undefined && (unit.monster.id !== DEMON_CORE_ID || !Number.isInteger(unit.mpDamageBonus) || unit.mpDamageBonus < 0 || unit.mpDamageBonus > 30)) || !responseResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key)) || !materialResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !slimeResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key))) fail(`resource invariant failed for ${unit.key}`);
       }
+      if (resolved.state.reservePoison !== trace.initialState.reservePoison) fail('poison reservation policy changed during battle');
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (unit.poisonImpactScale !== initialUnits.get(unit.key).poisonImpactScale) fail('poison impact scale changed during battle');
       const current = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
       const lastCast = new Map();
+      const actualSkills = new Map();
+      const lossesThisTurn = new Set();
+      const fallbackActors = new Set();
+      const castActors = new Set();
+      let pendingMpLoss = null;
+      let pendingCashout = null, pendingDefeat = null, damageSeed = queueSeed;
+      const cashoutActors = new Set(), actionsStarted = new Set(), cashoutTargets = new Map(), castBases = new Map();
+      let activeActor = null;
+      let pendingResponse = null;
+      const responseGuardTargets = new Map();
       const pendingRepair = new Map();
+      const pendingSupply = new Map();
+      const pendingDebit = new Map();
+      const pendingSupplyCast = new Set();
       let repairPhase = false;
       for (const event of resolved.events) {
+        if (pendingResponse) {
+          const p = pendingResponse;
+          if (p.stage === 'debit' && (event.kind !== 'resource' || event.actor !== p.actor || event.target !== p.actor)) fail('response cast missing immediate MP debit');
+          if (p.stage === 'spend' && (event.kind !== 'response' || event.actor !== p.actor)) fail('response debit missing immediate shared spend');
+          if (p.stage === 'impact' && (event.kind !== p.choice || event.actor !== p.actor || event.target !== p.recipients[0])) fail('response missing ordered absolute recipient impact');
+        }
+
+        if (pendingDefeat && (event.kind !== 'defeat' || event.actor !== pendingDefeat.actor || event.target !== pendingDefeat.target)) fail('lethal damage missing immediate matching defeat');
+        if (event.kind === 'defeat') {
+          if (!pendingDefeat || event.hp !== 0 || event.poison !== 0 || event.guard !== false) fail('defeat missing its immediate lethal damage or resource reset');
+          pendingDefeat = null;
+        }
+        if (pendingCashout && event.kind !== 'damage') fail('cashout missing immediate direct hit');
+        if (event.kind === 'phase' && event.phase === 'before-action') actionsStarted.add(event.actor);
+        if (pendingMpLoss && event.kind !== 'resource-loss') fail('MP damage missing immediate loss after surviving HP hit');
+        if (event.kind === 'phase' && event.phase === 'before-action') activeActor = event.actor;
         const actor = metrics.get(event.actor);
         const target = metrics.get(event.target);
+        if (event.effect === 'extraordinary-response-spend' && event.kind !== 'response') fail('response allowance must use response event');
+        if (event.responseChoice !== undefined && event.kind !== 'response') fail('response choice belongs only to shared consumption event');
+        if (actor && ['heal','damage','resource-gain','poison','break'].includes(event.kind) && isExtraordinaryResponse(actualSkills.get(event.actor) ?? {kind:'hit'})) fail('response cannot heal, attack, recover MP, reapply poison or strip');
+        if (event.kind === 'response') {
+          keys(event, ['kind','actor','target','skill','responseReady','responseChoice','effect','phase'], 'response event');
+          const source = current.get(event.actor), skill = actualSkills.get(event.actor);
+          if (!actor || !pendingResponse || pendingResponse.stage !== 'spend' || pendingResponse.actor !== event.actor || source?.monster.id !== EXTRAORDINARY_CORE_ID || source.hp <= 0 || source.responseReady !== true || event.target !== event.actor || event.responseReady !== false || event.responseChoice !== pendingResponse.choice || event.effect !== 'extraordinary-response-spend' || event.phase !== 'action' || event.skill !== skill?.name || pendingDebit.has(event.actor) || actor.responseCasts) fail('invalid response current-state shared consumption');
+          actor.responseCasts++; actor[event.responseChoice === 'cleanse' ? 'responseCleanseCasts' : 'responseGuardCasts']++;
+          if (event.responseChoice === 'cleanse') actor.cleanseResponseAllowanceSpent++;
+          actor.responseMpAfterCast += source.mp; actor.responseRecipients += pendingResponse.recipients.length;
+          pendingResponse.stage = 'impact';
+        }
+        if (event.effect === 'extraordinary-response-cleanse' || event.effect === 'extraordinary-response-guard') {
+          const choice = event.effect.endsWith('cleanse') ? 'cleanse' : 'guard';
+          keys(event, ['kind','actor','target',choice === 'cleanse' ? 'poison' : 'guard','effect','phase'], 'response recipient event');
+          const recipient = current.get(event.target);
+          if (!actor || !target || pendingResponse?.stage !== 'impact' || pendingResponse.actor !== event.actor || pendingResponse.choice !== choice || event.kind !== choice || pendingResponse.recipients[0] !== event.target || event.phase !== 'action' || recipient.hp <= 0 || event.actor[0] !== event.target[0] || (choice === 'cleanse' ? event.poison !== 0 : event.guard !== true)) fail('response absolute recipient invariant failed');
+          if (choice === 'cleanse' && recipient.poison > 0) { actor.responseClearRecipients++; actor.responseClearedTicks += recipient.poison; actor.responseClearNominalPotential += recipient.poison * Math.floor(recipient.monster.hp * 0.06); responseClearedTargets.set(event.target, event.actor); }
+          if (choice === 'guard') { if (recipient.guard) actor.responseGuardAlreadyRecipients++; else { actor.responseGuardNewRecipients++; responseGuardTargets.set(event.target,{actor:event.actor,hits:0}); } }
+          pendingResponse.recipients.shift(); if (!pendingResponse.recipients.length) pendingResponse = null;
+        } else if (pendingResponse?.stage === 'impact' && ['guard','cleanse'].includes(event.kind)) fail('response recipient effect missing');
+        if (event.responseReady !== undefined) {
+          boolean(event.responseReady, 'event.responseReady');
+          if (initialUnits.get(event.target)?.responseReady === undefined || event.responseReady !== false || !['response','defeat','expire'].includes(event.kind) || (event.kind === 'expire' && current.get(event.target)?.hp > 0)) fail('response allowance cannot be enabled, dispelled, or cancelled while living');
+        }
+        if (event.kind === 'phase' && event.phase === 'action-end' && !castActors.has(event.actor)) {
+          const unit = current.get(event.actor), order = record.orders.find(order => order.key === event.actor), skill = unit && battleSkill(unit.monster,order?.skill);
+          if (skill && isExtraordinaryResponse(skill)) { const metric = metrics.get(event.actor); metric.responseCancelledSelections++; const reason = skillUnavailableReason(unit,skill,[...current.values()].filter(u=>u.key[0]===event.actor[0])); if (['response-no-poison','response-all-guarded'].includes(reason)) metric.responseNoEffect++; }
+        }
+        if (event.effect === 'poison-cashout' && event.kind !== 'poison-cashout') fail('cashout cannot heal, recover MP or create another effect');
+        if (event.hp !== undefined && !['damage', 'heal', 'defeat'].includes(event.kind)) fail('HP resource changed outside damage, healing or defeat');
+        if (event.kind === 'poison-cashout') {
+          keys(event, ['kind', 'actor', 'target', 'skill', 'poison', 'poisonTicksConsumed', 'poisonCashoutPerTick', 'poisonCashoutAdded', 'effect', 'phase'], 'cashout event');
+          const source = current.get(event.actor), recipient = current.get(event.target), skill = actualSkills.get(event.actor), cast = lastCast.get(event.actor);
+          const perTick = source && skill ? poisonCashoutPerTickFor(source, skill) : 0;
+          integer(event.poisonTicksConsumed, 0, 3, 'cashout consumed ticks'); integer(event.poisonCashoutPerTick, 0, 30, 'cashout per tick');
+          if (!actor || !target || source.hp <= 0 || recipient.hp <= 0 || event.actor[0] === event.target[0] || !perTick || event.poisonCashoutPerTick !== perTick || event.poisonTicksConsumed !== poisonTicksFor(recipient) || event.poisonCashoutAdded !== perTick * event.poisonTicksConsumed || event.poison !== 0 || event.effect !== 'poison-cashout' || event.phase !== 'action' || event.skill !== skill.name || cast?.target !== event.target || cast.scope !== 'single' || pendingDebit.has(event.actor) || activeActor !== event.actor || cashoutActors.has(event.actor)) fail('cashout current-target, addition, order or single-consumption invariant failed');
+          cashoutActors.add(event.actor); actor.cashoutEvents++; actor.cashoutTicksConsumed += event.poisonTicksConsumed; actor.cashoutAddedBasis += event.poisonCashoutAdded;
+          if (!event.poisonTicksConsumed) actor.cashoutZeroPoison++;
+          else poisonRemovedTargets.set(event.target, { kind: 'cashout', actor: event.actor });
+          actor.cashoutFuturePoisonNominal += event.poisonTicksConsumed * Math.floor(recipient.monster.hp * 0.06);
+          actor.cashoutScaledAddition += event.poisonCashoutAdded * directDamageScale(recipient);
+          if (recipient.guard) actor.cashoutGuardedEvents++; if (recipient.ward) actor.cashoutWardedEvents++;
+          if (record.orders.find(order => order.key === event.actor).target !== event.target) actor.cashoutRetargets++;
+          pendingCashout = { actor: event.actor, target: event.target, added: event.poisonCashoutAdded };
+          cashoutTargets.set(event.target, event.actor);
+        }
+        if (event.effect === 'slime-supply' && event.kind !== 'resource-gain') fail('slime supply must use resource-gain, never healing or debit');
+        if (event.effect === 'slime-supply-spend' && event.kind !== 'supply') fail('slime allowance must use supply events');
+        if (event.kind === 'supply') {
+          const core = current.get(event.actor), cast = lastCast.get(event.actor);
+          if (!actor || core?.monster.id !== SLIME_CORE_ID || core.hp <= 0 || core.supplyReady !== true || event.target !== event.actor || event.supplyReady !== false || event.effect !== 'slime-supply-spend' || event.phase !== 'action' || cast?.effect !== 'restoreMp' || actor.supplyCasts) fail('invalid slime supply consumption');
+          const recipients = [...current.values()].filter(unit => unit.key[0] === event.actor[0] && unit.hp > 0 && unit.monster.family === SLIME_SUPPLY.family);
+          if (cast.scope !== 'all' || JSON.stringify(cast.targets) !== JSON.stringify(recipients.map(unit => unit.key)) || !recipients.some(unit => unit.mp < unit.monster.mp)) fail('slime supply cast targets or full-MP invariant failed');
+          if (!pendingSupplyCast.delete(event.actor)) fail('slime supply consumption without its chosen cast');
+          actor.supplyCasts++; actor.supplyTurn = state.turn; actor.supplyRecipients += recipients.length;
+          actor.supplyPotential += recipients.length * supplyAmountFor(core);
+          pendingSupply.set(event.actor, new Map(recipients.map(unit => [unit.key, Math.min(supplyAmountFor(core), unit.monster.mp - unit.mp)])));
+        }
+        if (event.kind === 'resource-gain') {
+          const pending = pendingSupply.get(event.actor), recipient = current.get(event.target);
+          if (!actor || !target || event.effect !== 'slime-supply' || event.phase !== 'action' || !pending?.has(event.target) || event.amount !== pending.get(event.target) || event.mp !== recipient.mp + event.amount || recipient.hp <= 0 || recipient.monster.family !== SLIME_SUPPLY.family || event.actor[0] !== event.target[0]) fail('slime supply MP credit/recipient invariant failed');
+          actor.supplyGenerated += event.amount; target.supplyReceived += event.amount; target.mpGenerated += event.amount;
+          target.peakMp = Math.max(target.peakMp, event.mp); pending.delete(event.target);
+        }
+        if (event.supplyReady !== undefined) {
+          boolean(event.supplyReady, 'event.supplyReady');
+          if (initialUnits.get(event.target)?.supplyReady === undefined || event.supplyReady !== false) fail('event enables disabled or consumed slime supply');
+          if (!['supply', 'defeat', 'expire'].includes(event.kind) || (event.kind === 'expire' && current.get(event.target)?.hp > 0)) fail('slime supply cannot be dispelled or cancelled while living');
+          if (event.kind === 'defeat' && current.get(event.target)?.supplyReady === true) target.supplyDefeatedBeforeUse++;
+        }
+        if (event.mp !== undefined && !['resource', 'resource-gain', 'resource-loss'].includes(event.kind)) fail('MP changed outside debit, gain or enemy loss events');
+        if (event.effect === 'mp-damage' && event.kind !== 'resource-loss') fail('MP damage requires a resource-loss event');
+        if (event.kind === 'resource-loss') {
+          keys(event, ['kind', 'actor', 'target', 'skill', 'amount', 'mp', 'effect', 'phase'], 'MP damage loss event');
+          const source = current.get(event.actor), recipient = current.get(event.target), skill = actualSkills.get(event.actor);
+          if (!actor || !target || !pendingMpLoss || pendingMpLoss.actor !== event.actor || pendingMpLoss.target !== event.target || event.effect !== 'mp-damage' || event.phase !== 'action' || event.actor === event.target || event.actor[0] === event.target[0] || recipient.hp <= 0 || event.amount !== pendingMpLoss.amount || event.mp !== recipient.mp - event.amount || event.skill !== skill?.name || event.hitIndex !== undefined) fail('MP damage loss/recipient/absolute ledger invariant failed');
+          const potential = mpDamageFor(source, skill), mitigated = Math.floor(potential * directDamageScale(recipient));
+          actor.mpDamageEvents++; if (!event.amount) actor.mpDamageZeroEvents++;
+          actor.mpDamageActual += event.amount; target.mpDamageReceived += event.amount;
+          actor.mpDamagePotential += potential; actor.mpDamageMitigated += potential - mitigated; actor.mpDamageClipped += mitigated - event.amount;
+          actor.pressureTargetMpBefore += recipient.mp; actor.pressureTargetMpAfter += event.mp;
+          if (event.amount > 0) lossesThisTurn.add(event.target);
+          pendingMpLoss = null;
+        }
+        if (event.kind === 'fallback') {
+          keys(event, ['kind', 'actor', 'target', 'skill', 'fromSkill', 'toSkill', 'reason', 'queuePriority', 'requiredMP', 'availableMP', 'phase'], 'MP fallback event');
+          const unit = current.get(event.actor), order = record.orders.find(order => order.key === event.actor), selected = unit && battleSkill(unit.monster, order?.skill);
+          if (!actor || !order?.accepted || unit.hp <= 0 || selected?.mpCost <= 0 || unit.mp >= selected.mpCost || !lossesThisTurn.has(event.actor) || fallbackActors.has(event.actor) || castActors.has(event.actor) || activeActor !== event.actor || event.phase !== 'action' || event.reason !== 'enemy-mp-loss' || event.fromSkill !== order.skill || event.toSkill !== BASIC_ATTACK || event.queuePriority !== selected.priority || event.requiredMP !== selected.mpCost || event.availableMP !== unit.mp || event.skill !== selected.name || current.get(event.target)?.hp <= 0 || event.actor[0] === event.target?.[0]) fail('invalid enemy MP fallback or original queue slot');
+          fallbackActors.add(event.actor); actor.fallbackCasts++;
+          if (isExtraordinaryResponse(selected)) actor.responseFallbacks++;
+        }
         if (event.kind === 'resource' && event.effect === 'material-repair') fail('material repair cannot spend MP');
         if (event.effect === 'material-repair' && !['passive', 'heal'].includes(event.kind)) fail('material repair must use passive/heal events, never casts');
         if (repairPhase && ['cast', 'resource', 'damage'].includes(event.kind)) fail('action, MP debit or poison occurred after material repair');
@@ -338,7 +605,8 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
         }
         if (event.kind === 'cast' && actor) {
           if (firstCastSide === null) firstCastSide = event.actor.startsWith('a') ? 'allies' : 'enemies';
-          actor.casts++;
+          if (castActors.has(event.actor)) fail('multiple casts in one accepted queue slot');
+          castActors.add(event.actor); actor.casts++;
           lastCast.set(event.actor, event);
           if (event.dragonChargeSpent !== undefined) {
             integer(event.dragonChargeSpent, 0, DRAGON_CHARGE_CAP, 'cast.dragonChargeSpent');
@@ -347,21 +615,104 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
           }
           const order = record.orders.find(order => order.key === event.actor);
           const unit = current.get(event.actor);
-          if (order.skill >= 0) actor.specialCasts++;
-          if (battleSkill(unit.monster, order.skill).mpCost > 0) actor.paidCasts++;
+          const actualIndex = fallbackActors.has(event.actor) ? BASIC_ATTACK : order.skill;
+          if (actualIndex >= 0) actor.specialCasts++;
+          const skill = battleSkill(unit.monster, actualIndex);
+          actualSkills.set(event.actor, skill); castBases.set(event.actor, baseDamage(unit, skill));
+          if (skill.kind === 'poison') { actor.poisonCasts++; actor.poisonMpSpent += skill.mpCost; }
+          if (['cleanse', 'responseCleanse'].includes(skill.kind)) { actor.cleanseCasts++; actor.cleanseMpSpent += skill.mpCost; actor.cleanseZeroHealingCasts++; }
+          if (own(skill, 'poisonCashout')) { actor.cashoutCasts++; actor.cashoutMpSpent += skill.mpCost; actor.cashoutSourceMpAtCast += unit.mp; }
+          if (event.skill !== skill.name || event.effect !== skill.kind) fail('cast resource invariant differs from accepted skill or MP fallback');
+          if (own(skill, 'mpDamage')) { actor.pressureCasts++; actor.pressureMpSpent += skill.mpCost; actor.pressureSourceMpAtCast += unit.mp; }
+          if (skill.mpCost > 0) { actor.paidCasts++; pendingDebit.set(event.actor, skill.mpCost); }
+          if ((skill.kind === 'restoreMp') !== (event.effect === 'restoreMp')) fail('slime supply cast effect differs from chosen skill');
+          if (skill.kind === 'restoreMp') pendingSupplyCast.add(event.actor);
+          if (isExtraordinaryResponse(skill)) {
+            keys(event,['kind','actor','scope','targets','skill','effect','phase'],'response cast');
+            const recipients = [...current.values()].filter(u=>u.key[0]===event.actor[0]&&u.hp>0), choice = skill.kind === 'responseCleanse' ? 'cleanse' : 'guard';
+            if (unit.monster.id !== EXTRAORDINARY_CORE_ID || unit.hp <= 0 || unit.responseReady !== true || unit.mp < EXTRAORDINARY_RESPONSE.mpCost || skill.mpCost !== EXTRAORDINARY_RESPONSE.mpCost || skill.power !== 0 || skill.priority !== (choice === 'guard' ? 3 : 0) || !skill.all || event.phase !== 'action' || activeActor !== event.actor || event.scope !== 'all' || event.target !== undefined || JSON.stringify(event.targets) !== JSON.stringify(recipients.map(u=>u.key)) || !recipients.some(u=>choice==='cleanse'?u.poison>0:!u.guard) || actor.responseCasts) fail('response cast eligibility, payment, no-effect or target invariant failed');
+            actor.responseMpSpent += skill.mpCost; actor.responseSourceMpAtCast += unit.mp;
+            pendingResponse = {actor:event.actor,choice,stage:'debit',recipients:recipients.map(u=>u.key)};
+          }
         }
         if (event.kind === 'damage') {
+          if (event.hp === 0) pendingDefeat = { actor: event.actor, target: event.target };
           if (actor) {
+            const source = current.get(event.actor), skill = actualSkills.get(event.actor), recipient = current.get(event.target);
+            if (!skill) fail('direct damage missing accepted cast or fallback');
+            if (skill.randomHits) damageSeed = rngStep(damageSeed);
+            damageSeed = rngStep(damageSeed);
+            const roll = 0.9 + (damageSeed % 21) / 100;
+            if (poisonCashoutPerTickFor(source, skill) > 0 && (!pendingCashout || pendingCashout.actor !== event.actor || pendingCashout.target !== event.target)) fail('cashout direct damage missing its consumption');
+            if (skill.kind === 'poison') {
+              if (poisonImpactScaleFor(source) === 0) fail('zero-scale poison emitted a direct damage event');
+              const expected = Math.min(recipient.hp, Math.max(1, Math.floor(castBases.get(event.actor) * roll * directDamageScale(recipient))));
+              if (event.amount !== expected || event.hp !== recipient.hp - expected) fail('poison full-basis randomized HP-clipped direct damage differs');
+              actor.poisonDirectHp += event.amount;
+            }
+            if (recipient.guard) {
+              const basis = castBases.get(event.actor) + (pendingCashout?.added ?? 0);
+              const guarded = Math.min(recipient.hp, Math.max(1, Math.floor(basis * roll * directDamageScale(recipient))));
+              const without = Math.min(recipient.hp, Math.max(1, Math.floor(basis * roll * directDamageScale({...recipient,guard:false}))));
+              if (event.amount !== guarded || event.hp !== recipient.hp - guarded) fail('guard same-impact damage reconstruction differs');
+              target.guardProtectedHits++; target.guardActualPrevented += without - guarded;
+            }
+            const guardCredit = responseGuardTargets.get(event.target);
+            if (guardCredit && recipient.guard) {
+              const basis = castBases.get(event.actor) + (pendingCashout?.added ?? 0);
+              const guarded = Math.min(recipient.hp, Math.max(1, Math.floor(basis * roll * directDamageScale(recipient))));
+              const without = Math.min(recipient.hp, Math.max(1, Math.floor(basis * roll * directDamageScale({...recipient,guard:false}))));
+              if (event.amount !== guarded || event.hp !== recipient.hp - guarded) fail('response guard same-impact damage reconstruction differs');
+              const owner = metrics.get(guardCredit.actor); guardCredit.hits++; owner.responseGuardProtectedHits++; owner.responseGuardHpDamageObserved += guarded; owner.responseGuardActualPrevented += without - guarded;
+            }
+            if (pendingCashout) {
+              const scale = directDamageScale(recipient), base = castBases.get(event.actor);
+              const without = Math.min(recipient.hp, Math.max(1, Math.floor(base * roll * scale)));
+              const expected = Math.min(recipient.hp, Math.max(1, Math.floor((base + pendingCashout.added) * roll * scale)));
+              if (event.effect !== undefined || event.hitIndex !== undefined || event.amount !== expected || event.hp !== recipient.hp - expected) fail('cashout randomized, mitigated and HP-clipped damage invariant failed');
+              actor.cashoutActualAddedDamage += expected - without; actor.cashoutDirectDamage += expected;
+              if (event.hp === 0) { actor.cashoutKills++; actor.cashoutKillTurnSum += state.turn; if (without < recipient.hp) actor.cashoutDecisiveKills++; if (!actionsStarted.has(event.target)) actor.cashoutKillsBeforeTargetAction++; } else actor.cashoutSurvivingTargets++;
+              pendingCashout = null;
+            }
+            if (skill && mpDamageFor(source, skill) > 0) {
+              if (event.hp > 0) pendingMpLoss = { actor: event.actor, target: event.target, amount: mpLossFor(source, skill, { ...recipient, hp: event.hp }) };
+              else actor.mpDamageKilledTargets++;
+            }
             actor.directDamage += event.amount ?? 0;
             if (lastCast.get(event.actor)?.dragonChargeSpent !== undefined) actor.dragonFinisherDamage += event.amount ?? 0;
           }
-          else if (event.effect === 'poison') poisonDamageTaken[event.target.startsWith('a') ? 'allies' : 'enemies'] += event.amount ?? 0;
+          if (target) { if (!Number.isInteger(event.amount) || event.amount < 0 || event.hp !== current.get(event.target).hp - event.amount) fail('HP resource damage ledger invariant failed'); target.hpDamageTaken += event.amount; }
+          if (!actor && event.effect === 'poison') { poisonDamageTaken[event.target.startsWith('a') ? 'allies' : 'enemies'] += event.amount ?? 0; target.poisonTickHpTaken += event.amount; target.poisonTickEventsTaken++; }
         }
-        if (event.kind === 'heal' && actor) actor.healing += event.amount ?? 0;
-        if (event.kind === 'resource' && actor) actor.mpSpent += event.amount ?? 0;
+        if (event.kind === 'heal' && actor) {
+          actor.healing += event.amount ?? 0;
+          const source = current.get(event.actor), recipient = current.get(event.target), skill = actualSkills.get(event.actor);
+          const potential = event.effect === 'material-repair' ? Math.floor(recipient.monster.hp * (source.repairPercent ?? MATERIAL_REPAIR_PERCENT) / 100) : skill?.power;
+          if (!Number.isFinite(potential) || event.amount !== Math.max(0, Math.min(potential, recipient.monster.hp - recipient.hp))) fail('effective healing/overheal reconstruction differs');
+          actor.healPotential += potential; actor.overheal += potential - event.amount;
+          if (event.effect !== 'material-repair' && skill?.kind === 'cleanse') { actor.cleanseEffectiveHealing += event.amount; actor.cleanseOverheal += potential - event.amount; if (event.amount > 0) { actor.cleanseHealingCasts++; actor.cleanseZeroHealingCasts--; } }
+        }
+        if (event.kind === 'heal' && target) { if (!Number.isInteger(event.amount) || event.amount < 0 || event.hp !== current.get(event.target).hp + event.amount) fail('HP healing ledger invariant failed'); target.hpHealingReceived += event.amount; }
+        if (event.kind === 'resource') {
+          const unit = current.get(event.actor);
+          if (!actor || event.target !== event.actor || event.effect !== 'mp' || pendingDebit.get(event.actor) !== event.amount || !Number.isInteger(event.amount) || event.amount <= 0 || event.mp !== unit.mp - event.amount) fail('MP debit invariant failed');
+          actor.mpSpent += event.amount; pendingDebit.delete(event.actor);
+          if (pendingResponse?.stage === 'debit' && pendingResponse.actor === event.actor) pendingResponse.stage = 'spend';
+        }
         if (event.kind === 'guard' && actor) actor.guardApplications++;
-        if (event.kind === 'cleanse' && actor && current.get(event.target)?.poison > 0) actor.effectiveCleanses++;
-        if (event.kind === 'poison' && actor) actor.poisonApplications++;
+        if (responseGuardTargets.has(event.target) && ((event.guard === false) || (event.kind === 'guard' && event.effect !== 'extraordinary-response-guard'))) { const credit = responseGuardTargets.get(event.target), owner = metrics.get(credit.actor); if (event.kind === 'break') owner.responseGuardStrippedRecipients++; if (!credit.hits) owner.responseGuardIdleRecipients++; responseGuardTargets.delete(event.target); }
+        if (event.kind === 'cleanse' && actor) {
+          const recipient = current.get(event.target); actor.cleanseEvents++;
+          if (recipient.poison > 0) { actor.effectiveCleanses++; actor.cleanseClearedTicks += recipient.poison; actor.cleanseFuturePoisonNominal += recipient.poison * Math.floor(recipient.monster.hp * 0.06); poisonRemovedTargets.set(event.target, {kind:'cleanse',actor:event.actor}); }
+        }
+        if (event.kind === 'poison' && actor) {
+          const source = current.get(event.actor), recipient = current.get(event.target), skill = actualSkills.get(event.actor);
+          if (skill?.kind !== 'poison' || recipient.hp <= 0 || event.poison !== 3) fail('poison application lacks a living target and poison cast');
+          if (poisonImpactScaleFor(source) === 0) damageSeed = rngStep(damageSeed); // The engine still drew this target roll, without a damage event.
+          if (recipient.poison === 0) actor.poisonNewApplications++; else if (recipient.poison === 3) actor.poisonRedundantApplications++; else actor.poisonRefreshApplications++;
+          const removal = poisonRemovedTargets.get(event.target);
+          if (removal) { if (recipient.poison !== 0) fail('poison removal ledger did not clear on first reapplication'); actor[removal.kind === 'cleanse' ? 'poisonReapplicationsAfterCleanse' : 'poisonReapplicationsAfterCashout']++; poisonRemovedTargets.delete(event.target); }
+          const cleared = responseClearedTargets.get(event.target); if (cleared) { metrics.get(cleared).responseLaterReapplications++; responseClearedTargets.delete(event.target); } actor.poisonApplications++; const consumer = cashoutTargets.get(event.target); if (consumer) { metrics.get(consumer).cashoutLaterReapplications++; cashoutTargets.delete(event.target); } }
         if (event.kind === 'break' && actor) {
           actor.dispelApplications++;
           if (event.dragonCharge === 0) actor.dragonChargeDispelled += current.get(event.target)?.dragonCharge ?? 0;
@@ -373,21 +724,38 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
           if (target) target.peakDragonCharge = Math.max(target.peakDragonCharge, event.dragonCharge);
           if (event.kind === 'defeat' && target) target.dragonChargeLostOnDefeat += current.get(event.target)?.dragonCharge ?? 0;
         }
-        if (event.kind === 'defeat' && target) { target.deathTurn = state.turn; target.diedBeforeAnyCast = target.casts === 0; }
+        if (event.kind === 'defeat' && target) { target.deathTurn = state.turn; target.diedBeforeAnyCast = target.casts === 0; if (!actionsStarted.has(event.target)) target.deathsBeforeTurnAction++; poisonRemovedTargets.delete(event.target); }
         if (event.target && current.has(event.target)) {
           const affected = current.get(event.target);
-          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward', 'dragonCharge', 'repairReady']) if (event[field] !== undefined) affected[field] = event[field];
+          for (const field of ['hp', 'mp', 'poison', 'guard', 'rally', 'ward', 'dragonCharge', 'repairReady', 'supplyReady', 'responseReady']) if (event[field] !== undefined) affected[field] = event[field];
         }
       }
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).dragonCharge !== unit.dragonCharge) fail(`charge event/state mismatch for ${unit.key}`);
+      if (pendingResponse) fail('response cast missing spend or recipients');
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).responseReady !== unit.responseReady || current.get(unit.key).guard !== unit.guard) fail(`response/guard event/state mismatch for ${unit.key}`);
+      if (pendingDefeat) fail('lethal damage missing defeat event');
+      if (pendingCashout) fail('cashout missing damage event');
+      if (damageSeed !== resolved.state.seed) fail('direct damage RNG accounting differs');
+      if (pendingMpLoss) fail('MP damage missing loss event');
+      for (const key of fallbackActors) if (!castActors.has(key)) fail('fallback missing one basic cast');
+      if (pendingSupplyCast.size) fail('slime supply cast missing consumption event');
+      if (pendingDebit.size) fail('cast missing MP debit event');
+      for (const pending of pendingSupply.values()) if (pending.size) fail('slime supply missing recipient gain events');
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
+        if (current.get(unit.key).supplyReady !== unit.supplyReady) fail(`supply event/state mismatch for ${unit.key}`);
+        if (current.get(unit.key).mp !== unit.mp || initialUnits.get(unit.key).mp + metrics.get(unit.key).mpGenerated - metrics.get(unit.key).mpSpent - metrics.get(unit.key).mpDamageReceived !== unit.mp) fail(`MP ledger/event/state mismatch for ${unit.key}`);
+      }
       for (const pending of pendingRepair.values()) if (pending.size) fail('material repair missing recipient heal events');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (current.get(unit.key).repairReady !== unit.repairReady) fail(`repair event/state mismatch for ${unit.key}`);
+      for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
+        if (current.get(unit.key).hp !== unit.hp || initialUnits.get(unit.key).hp + metrics.get(unit.key).hpHealingReceived - metrics.get(unit.key).hpDamageTaken !== unit.hp || current.get(unit.key).poison !== unit.poison) fail(`HP/poison ledger/event/state mismatch for ${unit.key}`);
+      }
       state = resolved.state;
       delete trace.activeAttempt;
     }
     if (!state.winner) fail(`no terminal result within ${MAX_TURNS} turns`);
   } catch (error) { throw new MatchFailure(error.message, request, { ...trace, lastState: clone(state) }); }
-  const units = [...state.allies, ...state.enemies].map(unit => ({ ...metrics.get(unit.key), repairFailedBeforeTrigger: metrics.get(unit.key).repairEligible && !metrics.get(unit.key).repairTriggers ? 1 : 0, repairUnusedHealing: metrics.get(unit.key).repairPotentialHealing - metrics.get(unit.key).repairHealing, finalHp: unit.hp, finalMp: unit.mp }));
+  const units = [...state.allies, ...state.enemies].map(unit => ({ ...metrics.get(unit.key), responseUnused: metrics.get(unit.key).responseEligible && !metrics.get(unit.key).responseCasts ? 1 : 0, responseDeadWithUnused: metrics.get(unit.key).responseEligible && !metrics.get(unit.key).responseCasts && unit.hp === 0 ? 1 : 0, responseSurvivedUnused: metrics.get(unit.key).responseEligible && !metrics.get(unit.key).responseCasts && unit.hp > 0 ? 1 : 0, responseGuardNoHitCasts: metrics.get(unit.key).responseGuardCasts && !metrics.get(unit.key).responseGuardProtectedHits ? 1 : 0, supplyUnused: metrics.get(unit.key).supplyEligible && !metrics.get(unit.key).supplyCasts ? 1 : 0, supplyWasted: metrics.get(unit.key).supplyPotential - metrics.get(unit.key).supplyGenerated, repairFailedBeforeTrigger: metrics.get(unit.key).repairEligible && !metrics.get(unit.key).repairTriggers ? 1 : 0, repairUnusedHealing: metrics.get(unit.key).repairPotentialHealing - metrics.get(unit.key).repairHealing, finalHp: unit.hp, finalMp: unit.mp }));
   const sides = {};
   for (const side of ['allies', 'enemies']) {
     const group = units.filter(unit => unit.key.startsWith(side === 'allies' ? 'a' : 'e'));
@@ -397,6 +765,9 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       dragonChargeGenerated: total('dragonChargeGenerated'), dragonChargeSpent: total('dragonChargeSpent'), dragonFinishers: total('dragonFinishers'), chargedDragonFinishers: total('chargedDragonFinishers'), dragonFinisherDamage: total('dragonFinisherDamage'), dragonChargeDispelled: total('dragonChargeDispelled'), dragonChargeLostOnDefeat: total('dragonChargeLostOnDefeat'), peakDragonCharge: Math.max(...group.map(unit => unit.peakDragonCharge)),
       ...Object.fromEntries(['repairEligible', 'repairTriggers', 'repairHealing', 'repairReceived', 'repairRecipients', 'repairPotentialHealing', 'repairUnusedHealing', 'repairCancellations', 'repairFailedBeforeTrigger', 'repairDispelled', 'repairDefeatedBeforeTrigger', 'repairMpSpent'].map(field => [field, total(field)])),
       repairTriggerTurnSum: total('repairTriggerTurn'),
+      ...Object.fromEntries([...PRESSURE_METRICS, ...CASHOUT_METRICS, ...RESPONSE_METRICS, ...POISON_METRICS].map(field => [field, total(field)])),
+      ...Object.fromEntries(SUPPLY_METRICS.map(field => [field, total(field)])),
+      supplyTurnSum: total('supplyTurn'),
       directDamage: damage, healing: total('healing'), mpSpent: total('mpSpent'), paidCasts: total('paidCasts'), specialCasts: total('specialCasts'), casts: total('casts'),
       guardApplications: total('guardApplications'), effectiveCleanses: total('effectiveCleanses'), poisonApplications: total('poisonApplications'), dispelApplications: total('dispelApplications'),
       noAffordableSpecialTurns: total('noAffordableSpecialTurns'), zeroMpTurns: total('zeroMpTurns'), aliveAtTurnStartTurns: total('aliveAtTurnStartTurns'),
@@ -406,12 +777,37 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
     };
   }
   trace.finalState = clone(state);
-  const result = { winner: state.winner, turns: state.turn - 1, turnLimit: state.turn - 1 === MAX_TURNS, firstCastSide, units, sides, traceHash: hash(trace) };
+  const result = { winner: state.winner, turns: state.turn - 1, turnLimit: state.turn - 1 === MAX_TURNS, adjudicated: isAdjudicatedState(state), firstCastSide, units, sides, traceHash: hash(trace) };
   if (includeTrace) result.trace = trace;
   return result;
 }
 
+export const isAdjudicatedState = state => !!state.winner && state.turn - 1 === MAX_TURNS && state.allies.some(unit => unit.hp > 0) && state.enemies.some(unit => unit.hp > 0);
+
 export const METRIC_DEFINITIONS = {
+  ...Object.fromEntries(Object.entries(POISON_DEFINITIONS).map(([field,definition]) => [`mean${field[0].toUpperCase()}${field.slice(1)}`, definition])),
+  adjudications: 'Actual HP-fraction adjudications: both physical sides still have a living unit at the end of turn20. A turn20 elimination is not adjudication.',
+  ...Object.fromEntries(RESPONSE_METRICS.map(field => [`mean${field[0].toUpperCase()}${field.slice(1)}`, `Team A per-game ${field}; shared response allowance and actual events only; see extraordinary audit definitions.`])),
+  meanResponseClearNominalPotential: 'Removed current ticks times floor(recipient maxHP * 6%). Nominal potential only, never prevented future HP: reapplication, cleanse, death and healing change it.',
+  meanResponseGuardActualPrevented: 'Exact local same-impact HP-clipped unguarded minus guarded damage with original cast basis, cashout addition, roll, floor, clipping and current other ward state. Credited only newly response-guarded targets before strip/expiry/another guard. Not whole-battle causal prevention.',
+  meanResponseGuardProtectedHits: 'Actual direct hits on newly response-guarded recipients before strip/expiry/another guard; may save zero HP due to clipping or stronger ward. Never multiply observed damage to estimate prevention.',
+  meanResponseNoEffect: 'Selected accepted response cancelled at action time because poison was already cleared or all living friends guarded. MP and shared use preserved.',
+  meanResponseWithheldTurns: 'Living initially eligible core turn choosing another action while the shared allowance is still ready. Does not assert a missed opportunity.',
+
+  ...Object.fromEntries(CASHOUT_METRICS.map(field => [`mean${field[0].toUpperCase()}${field.slice(1)}`, `Team A per-game ${field}; cashout addition is bounded, poison is consumed at actual impact; see undead audit for exact accounting definitions.`])),
+  meanCashoutActualAddedDamage: 'HP-clipped same-hit damage with addition minus same target, protection and random roll without addition. Local arithmetic attribution only, not a full battle counterfactual.',
+  meanCashoutFuturePoisonNominal: 'Consumed ticks times floor(target maxHP * 6%). Potential future poison sacrificed, not guaranteed realized loss: later cleanse, defeat and reapplication can change it.',
+  ...Object.fromEntries(PRESSURE_METRICS.map(field => [`mean${field[0].toUpperCase()}${field.slice(1)}`, ({
+    pressureSelections: 'Orders choosing a learned MP-marked attack, including explicit zero/off base controls and actors defeated before casting.',
+    pressureHpAttackSelections: 'HP-only learned attack selections by MP-marked actors/core29.', pressureBasicSelections: 'Free basic selections by MP-marked actors/core29.',
+    pressureCasts: 'Actual casts of MP-marked attacks, including explicit zero/off controls.', pressureMpSpent: 'Actual MP paid by MP-marked attacks; never enemy loss.',
+    pressureSourceMpAtCast: 'Sum of source MP immediately before each MP-marked cast; divide by casts for conditional mean.',
+    pressureTargetMpBefore: 'Sum of target MP immediately before actual resource-loss events; divide by events for conditional mean.', pressureTargetMpAfter: 'Sum of absolute target MP immediately after resource-loss events.',
+    mpDamageEvents: 'Actual surviving-hit resource-loss events, including zero.', mpDamageZeroEvents: 'Resource-loss events with zero actual MP loss.',
+    mpDamageActual: 'Actual enemy MP lost caused by this side, clipped by current MP.', mpDamageReceived: 'Actual enemy MP loss suffered; separate debit in initial + generated - spent - lost = final ledger.',
+    mpDamagePotential: 'Unmitigated MP damage on actual surviving targets only.', mpDamageMitigated: 'Surviving-hit MP budget removed by guard/ward/floor.', mpDamageClipped: 'Remaining surviving-hit MP budget wasted against insufficient target MP.',
+    mpDamageKilledTargets: 'MP-capable hits that killed the target and therefore caused no MP-loss event.', fallbackCasts: 'One free basic cast replacing an accepted paid order made unaffordable by earlier enemy loss, retaining its original queue position.'
+  })[field]])),
   winRate: 'Team A wins / games. Draws are not wins. Swapped physical sides retain team A identity.',
   scoreRate: '(Team A wins + 0.5 * draws) / games.',
   drawRate: 'Draws / games, including tied HP-fraction adjudication at the turn cap.',
@@ -420,6 +816,22 @@ export const METRIC_DEFINITIONS = {
   firstCastSideScoreRate: 'Score of the side making the first actual cast. Descriptive initiative association; not causal and not corrected for team speed or skill choice.',
   meanDirectDamage: 'HP-clipped direct damage caused by team A events per game. Overkill excluded; poison ticks lack actor attribution and are reported as poisonDamageTaken instead.',
   meanHealing: 'Actual HP restored by team A per game; overhealing excluded.',
+  meanSupplyEligible: 'Initially ready slime cores per game. Eligibility is fixed from starting membership.',
+  meanSupplySelections: 'Supply orders chosen by production autoOrders per game, including cores defeated before casting.',
+  meanSupplyCasts: 'Actual once-only supply consumption events per game, also counted as normal learned casts.',
+  meanSupplyGenerated: 'Actual MP credited by supply per game, clipped to living same-side slime missing MP.',
+  meanSupplyReceived: 'Actual supply MP received by team A per game.',
+  meanSupplyRecipients: 'Living same-side slime recipients at actual casts, including zero-gain full-MP units.',
+  meanSupplyPotential: 'Supply amount times actual living recipients at casts; excludes defeated recipients.',
+  meanSupplyWasted: 'Potential minus actual supply MP due to recipient maximum-MP clipping.',
+  meanSupplyUnused: 'Initially ready cores with no supply cast in the match.',
+  meanSupplyDefeatedBeforeUse: 'Ready cores defeated before consumption. Supply is nondispellable.',
+  meanSupplyMpSpent: 'MP charged by supply itself; strict skill schema requires zero. It still uses one action.',
+  meanSupplyTurn: 'Mean turn conditional on actual supply consumption; null when never cast.',
+  meanMpGenerated: 'Actual resource-gain MP credited per game, separate from debit/healing.',
+  meanInitialMp: 'Team initial MP after leader modifiers.',
+  meanMaximumMp: 'Team sum of maximum MP after leader modifiers.',
+  meanPeakMp: 'Sum of each team member highest observed MP; not a simultaneous peak.',
   meanMpSpent: 'MP resource events spent by team A per game. No MP is spent merely choosing an order.',
   meanPaidCasts: 'Number of actually executed positive-MP-cost casts by team A per game.',
   meanSpecialCasts: 'Executed learned-skill casts by team A per game, including any zero-cost learned guard; universal basic/defend commands excluded.',
@@ -458,7 +870,10 @@ export const METRIC_DEFINITIONS = {
   keyUnit: 'For optional scenario.keyUnitId on team A: first-turn deaths, zero-cast deaths and score conditional on survival/death. Survival association is not the causal value of that unit.',
 };
 export const LIMITATIONS = [
+  'Undead full-off disables both poison consumption and addition, including stale bonus; bonus-off retains base14 and consumption. Core32 retains its production public-state AI under all ablations. Target/order/RNG divergence is allowed, so paired outcomes are not fixed-order causality. Slow Naga can reapply poison after cashout; preserve this adverse exploit candidate.',
+  'Demon full-off sets base zero and removes bonus; bonus-only zero retains base6. Core29 retains identical all-target traversal under full-off. Both sides use the same production autoOrders with public current resources; adaptive skill/target choices and random-stream divergence mean this is not a fixed-order causal estimate.',
   'These are current-engine CPU-policy measurements, not human enjoyment, DQMSL reproduction, PvP balance, or optimal-play proof.',
+  'Slime supply AI acts only when current bounded gain can fund a currently unaffordable paid skill. It does not forecast later turns or optimize recipient timing; zero amount is never selected by this policy.',
   'autoOrders scores dragon finishers using current charge only. It does not predict charge from allies already ordered to act later in the same turn; low finisher usage may be a policy limitation.',
   'Large-roster sampling uses exact legal suffix counts and a seeded coprime rank walk, not a proven uniform random sample. Fixed exclusions, correlated ranks, shuffled leader order and curated opponent rotation limit coverage.',
   'Identical autoOrders policy is used on both sides. Shipping CPU variation remains unchanged outside the lab.',
@@ -617,7 +1032,7 @@ export function summarize(matches, keyUnitId) {
   const losses = matches.filter(match => focalScore(match) === 0).length;
   const draws = matches.length - wins - losses;
   const result = { games: matches.length, wins, losses, draws, winRate: round(wins / matches.length), scoreRate: round((wins + draws * 0.5) / matches.length), drawRate: round(draws / matches.length),
-    meanTurns: meanOf(matches.map(match => match.result.turns)), turnLimitGames: matches.filter(match => match.result.turnLimit).length,
+    meanTurns: meanOf(matches.map(match => match.result.turns)), turnLimitGames: matches.filter(match => match.result.turnLimit).length, adjudications: matches.filter(match => match.result.adjudicated).length, adjudicationRate: round(matches.filter(match => match.result.adjudicated).length / matches.length),
     physicalAllyScoreRate: meanOf(matches.map(match => physicalScore(match.result))),
     physicalAllyScoreBias: round(mean(matches.map(match => physicalScore(match.result))) - 0.5),
     firstCastSideScoreRate: meanOf(matches.filter(match => match.result.firstCastSide).map(match => match.result.firstCastSide === 'allies' ? physicalScore(match.result) : 1 - physicalScore(match.result))),
@@ -625,6 +1040,9 @@ export function summarize(matches, keyUnitId) {
   };
   for (const [output, field] of Object.entries({ meanDirectDamage: 'directDamage', meanHealing: 'healing', meanMpSpent: 'mpSpent', meanPaidCasts: 'paidCasts', meanSpecialCasts: 'specialCasts', meanCasts: 'casts', meanGuardApplications: 'guardApplications', meanEffectiveCleanses: 'effectiveCleanses', meanPoisonApplications: 'poisonApplications', meanDispelApplications: 'dispelApplications', meanNoAffordableSpecialTurns: 'noAffordableSpecialTurns', meanZeroMpTurns: 'zeroMpTurns', meanDamageConcentration: 'damageConcentration', meanPoisonDamageTaken: 'poisonDamageTaken', meanRemainingHpFraction: 'remainingHpFraction', meanDragonChargeGenerated: 'dragonChargeGenerated', meanDragonChargeSpent: 'dragonChargeSpent', meanDragonFinishers: 'dragonFinishers', meanChargedDragonFinishers: 'chargedDragonFinishers', meanDragonFinisherDamage: 'dragonFinisherDamage', meanDragonChargeDispelled: 'dragonChargeDispelled', meanDragonChargeLostOnDefeat: 'dragonChargeLostOnDefeat', meanPeakDragonCharge: 'peakDragonCharge' })) result[output] = meanOf(metrics.map(metric => metric[field]));
   for (const field of ['repairEligible', 'repairTriggers', 'repairHealing', 'repairReceived', 'repairRecipients', 'repairPotentialHealing', 'repairUnusedHealing', 'repairCancellations', 'repairFailedBeforeTrigger', 'repairDispelled', 'repairDefeatedBeforeTrigger', 'repairMpSpent']) result[`mean${field[0].toUpperCase()}${field.slice(1)}`] = meanOf(metrics.map(metric => metric[field]));
+  for (const field of [...SUPPLY_METRICS, ...PRESSURE_METRICS, ...CASHOUT_METRICS, ...RESPONSE_METRICS, ...POISON_METRICS]) result[`mean${field[0].toUpperCase()}${field.slice(1)}`] = meanOf(metrics.map(metric => metric[field]));
+  const supplyCasts = metrics.reduce((sum, metric) => sum + metric.supplyCasts, 0);
+  result.meanSupplyTurn = supplyCasts ? round(metrics.reduce((sum, metric) => sum + metric.supplyTurnSum, 0) / supplyCasts) : null;
   const repairTriggers = metrics.reduce((sum, metric) => sum + metric.repairTriggers, 0);
   result.meanRepairTriggerTurn = repairTriggers ? round(metrics.reduce((sum, metric) => sum + metric.repairTriggerTurnSum, 0) / repairTriggers) : null;
   if (keyUnitId !== undefined) {
@@ -675,7 +1093,7 @@ export function runSuite(input, onProgress) {
   }
   if (JSON.stringify(monsters) !== rosterBefore) fail('lab mutated production roster');
   const summarizePair = (rows, keyUnitId) => ({ baseline: summarize(rows.filter(row => row.variant === 'baseline'), keyUnitId), candidate: summarize(rows.filter(row => row.variant === 'candidate'), keyUnitId), pairedDelta: pairedDelta(rows) });
-  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { sampling: { smallRosterThreshold: 20, algorithm: monsters.length <= 20 ? 'historical-enumerate-shuffle-v1' : 'legal-suffix-dp-coprime-rank-walk-v1', uniformityClaim: false }, policy: POLICY_ID, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: true, sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
+  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { sampling: { smallRosterThreshold: 20, algorithm: monsters.length <= 20 ? 'historical-enumerate-shuffle-v1' : 'legal-suffix-dp-coprime-rank-walk-v1', uniformityClaim: false }, policy: POLICY_ID, policyArms: { baseline: 'independent-default', candidate: schedule.config.candidate.overrides.reservePoison === true ? 'reserve-planned-poison' : 'independent-default' }, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: true, sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
     scheduleCounts: { teams: schedule.teams.length, curatedTeams: schedule.config.teams.length, sampledTeams: schedule.teams.length - schedule.config.teams.length, matchupScenarios: schedule.scenarios.filter(scenario => scenario.kind === 'matchup').length, mirrorScenarios: schedule.teams.length, seeds: schedule.config.seeds.length, variants: 2, orientations: 2, matches: matches.length },
     teams: schedule.teams,
     summary: summarizePair(matches.filter(match => match.kind === 'matchup')),
