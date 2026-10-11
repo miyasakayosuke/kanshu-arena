@@ -23,6 +23,9 @@ async function finish(skip: boolean) {
   expect(document.querySelector('.result')).toBeTruthy();
 }
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers(); localStorage.clear(); window.history.replaceState(null, '', '#home');
   document.body.innerHTML = '<div id="test-root"></div>'; Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);

@@ -40,6 +40,9 @@ async function begin(scale?: number, currentMp?: number) {
 }
 
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers();
   localStorage.clear();
   window.history.replaceState(null, '', '#home');

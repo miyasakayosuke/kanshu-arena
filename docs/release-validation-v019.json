@@ -1,0 +1,62 @@
+{
+  "release": "0.19.0",
+  "recordedUtc": "2026-10-11T05:03:00Z",
+  "baseCommit": "3c4fa1157180d2d3f9e15e270fccf9aa3f326083",
+  "baseTree": "d974e21da54d5d2c5eb12977e5fa1578a923bd0c",
+  "checks": {
+    "vitest": {
+      "files": 97,
+      "tests": 2210,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "tests": 14,
+      "passed": true
+    },
+    "rightsSourceDist": true,
+    "typescript": true,
+    "viteBuild": true,
+    "labSmoke": {
+      "matches": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedChange": 0,
+      "passed": true
+    }
+  },
+  "logHashes": {
+    "tests": "0af66d4a582c2c5cb1a680ca35222a5109260037dc0cc7868d67881bd7db5be1",
+    "rights": "beecb101637ec914ec0ef923138fcfbe7a1abb54635c2fd40a4b4487da653102",
+    "smoke": "31469665d5d92f6406ce659bb4b7d7d861093e9ed5738f921d92e7d2250279bc",
+    "build": "753e2c15704660652f46f4ae1ce996a696b393c95bb4d4bacc6629bf1aacbaaa"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/MonsterArt.tsx": "0c5f550842a0b0eebe8b738f860e388498805a79fa110a9416af2223feb329a9",
+    "public/credits.html": "42291cbf934a9ab8c20f0c180fdcce12fcfdae673f4c1656d2cc1e00cfd5d581",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "limitations": [
+    "Exact CI/Pages and rendered v0.19.0 QA pending at record creation. Automated tests do not establish human comprehension or equal family balance.",
+    "Standard opponent exposure changes to seven pure recommended teams. COST15 has only pure nature; no over-budget substitution. Random repeats are possible.",
+    "Original failed mixed-counter/leader gates and later separately scoped confirmations remain unchanged. Professional rights review remains unperformed."
+  ],
+  "finalDocumentationChecks": {
+    "rightsSelftest": 14,
+    "sourceDistAndBuildPassed": true,
+    "rightsLogSHA256": "a30b51833d8df8242cc544de5aaf1e49c89b08d4c14349f592e961d71238df0f",
+    "buildLogSHA256": "bb230581a97c1a6f7fbfc7bcbb8dc10fed565f509a074ddfa4c9d489e119557a",
+    "changedAfterFullTests": "Only three reviewed rights documents plus release/validation documentation; runtime source and dependency lock unchanged."
+  },
+  "reviewFix": "Read-only integration review found Home-to-Arena selection lost keyboard focus. A one-shot reception heading focus was added and verified for Home/Arena entry before the final aggregate run.",
+  "initialFailures": {
+    "tests": 4,
+    "cause": "Three stale version-label expectations and one reception-copy expectation after the intentional v0.19 UI change. Explicit version assertions updated; clearer reception wording preserves the reveal-at-start requirement.",
+    "logSha256": "0e1a43a96902cf7c2c7667b4fcd0599a47fb101c5ea6807b6844ee8f4a9be1d5",
+    "finalPassed": true
+  }
+}

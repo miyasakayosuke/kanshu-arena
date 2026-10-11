@@ -4,6 +4,14 @@ import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import * as engine from './engine';
+
+// These timing/command regressions use their original deterministic battlefield.
+// Random family selection is exercised without this fixture in App.familyEncounters.test.tsx.
+vi.mock('./engine', async importOriginal => {
+  const engine = await importOriginal<typeof import('./engine')>();
+  return { ...engine, start: (team: number[], enemy: number[], seed?: number, options?: Parameters<typeof engine.start>[3]) =>
+    engine.start(team, enemy.length ? [1, 5, 8, 10, 6] : enemy, enemy.length ? 20261008 : seed, options) };
+});
 import { buildTimeline } from './playback';
 
 let root: Root;
@@ -31,6 +39,9 @@ async function finish(skip: boolean) {
   expect(document.querySelector('.result')).toBeTruthy();
 }
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers(); localStorage.clear(); window.history.replaceState(null, '', '#home');
   document.body.innerHTML = '<div id="test-root"></div>'; Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
@@ -42,7 +53,7 @@ describe('dragon wave battle UI', () => {
   it('charges once after a whole two-hit cast, debits MP and all charge at the finisher cast, and keeps ally portraits static', async () => {
     const resolve = vi.spyOn(engine, 'advanceWithEvents');
     await begin();
-    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.18');
+    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.19.0');
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('竜気:0/5');
     const portrait = document.querySelector<HTMLImageElement>('.commanderIcon img')?.src;
     await click(button('とくぎ'));

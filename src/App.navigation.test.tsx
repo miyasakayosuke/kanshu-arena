@@ -38,6 +38,9 @@ function unloadingIsBlocked() {
 }
 
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers();
   localStorage.clear();
   window.history.replaceState(null, '', '#home');
@@ -372,6 +375,7 @@ describe('safe battle navigation', () => {
   });
 
   it('keeps rematches in arena and advances to the next opponent exactly once', async () => {
+    const entropy = vi.spyOn(Math, 'random').mockReturnValue(41 / 0x100000000);
     const start = vi.spyOn(engine, 'start');
     await enterBattle();
     const original = structuredClone(start.mock.calls[0]);
@@ -385,7 +389,8 @@ describe('safe battle navigation', () => {
     expect(document.body.textContent).toContain('第2戦');
     await navigate('ホーム'); await navigate('闘技場');
     expect(document.body.textContent).toContain('第2戦');
+    entropy.mockReturnValue(1024 / 0x100000000);
     await startBattle();
-    expect(start.mock.calls[2][2]).toBe(original[2]! + 1);
+    expect(start.mock.calls[2][2]).toBe(1024);
   });
 });

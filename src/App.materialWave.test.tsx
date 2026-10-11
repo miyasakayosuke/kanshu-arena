@@ -29,8 +29,9 @@ async function defendAll(team = pure) {
 // cannot pass through a hand-authored fake healing event.
 function repairFixture(mutate?: (state: engine.State) => void) {
   const originalStart = engine.start, originalAdvance = engine.advanceWithEvents;
-  const setup = vi.spyOn(engine, 'start').mockImplementationOnce((...args) => {
-    const state = originalStart(...args);
+  const setup = vi.spyOn(engine, 'start').mockImplementationOnce((team, _enemy, _seed, options) => {
+    // Keep this single-passive timing fixture independent of random CPU families.
+    const state = originalStart(team, [1, 5, 8, 10, 6], 20261008, options);
     for (const unit of [...state.allies, ...state.enemies]) { unit.hp -= 60; unit.poison = 1; }
     mutate?.(state);
     return state;
@@ -41,6 +42,9 @@ function repairFixture(mutate?: (state: engine.State) => void) {
   return { setup, resolve };
 }
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers(); localStorage.clear(); window.history.replaceState(null, '', '#home');
   document.body.innerHTML = '<div id="test-root"></div>'; Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
@@ -53,7 +57,7 @@ describe('material repair live battle UI', () => {
     const { setup, resolve } = repairFixture();
     const renderStage = vi.spyOn(stage, 'default');
     await begin();
-    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.18');
+    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.19.0');
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('修復:待機');
     const beforePortraits = portraits(), beforeMp = mp();
     expect(beforePortraits).toHaveLength(5);

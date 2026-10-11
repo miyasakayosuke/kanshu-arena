@@ -18,19 +18,24 @@ async function startBattle(){await openArena();await click(button('この編成�
 async function mount(){await act(async()=>root.render(<App/>));await openTeam();}
 async function select(labelText:string,value:string){await act(async()=>{const el=document.querySelector<HTMLSelectElement>(`select[aria-label="${labelText}"]`)!;el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));});}
 async function finish(){for(let i=0;i<20&&!document.querySelector('.result');i++){await click(button('この指示でターン開始'));await click(button('演出をスキップ'));}expect(document.querySelector('.result')).toBeTruthy();}
-beforeEach(()=>{vi.useFakeTimers();localStorage.clear();window.history.replaceState(null,'','#home');document.body.innerHTML='<div id="test-root"></div>';Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(null);root=createRoot(document.getElementById('test-root')!);});
+beforeEach(()=>{
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+  vi.useFakeTimers();localStorage.clear();window.history.replaceState(null,'','#home');document.body.innerHTML='<div id="test-root"></div>';Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(null);root=createRoot(document.getElementById('test-root')!);});
 afterEach(async()=>{await act(async()=>root.unmount());vi.restoreAllMocks();vi.useRealTimers();});
 describe('strategy workshop and fair rules',()=>{
   it('changes a leader without changing membership and applies both leaders on battle start',async()=>{
+    // Pin fresh encounter entropy; the chosen pure demon party still exposes both leaders.
+    vi.spyOn(Math, 'random').mockReturnValue(3 / 0x100000000);
     const start=vi.spyOn(engine,'start');await mount();
     await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));
     expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('2');
     expect(document.querySelector('.leaderBanner')?.textContent).toContain('最大HP +12%');
     expect(document.querySelectorAll('.teamUnit')).toHaveLength(5);
     await startBattle();
-    expect(start).toHaveBeenLastCalledWith([2,0,3,4,6],[1,5,8,10,6],20261008,{leaders:true});
+    expect(start).toHaveBeenLastCalledWith([2,0,3,4,6],[29,1,8,30,31],3,{leaders:true});
     expect(document.querySelector('.commanderHp')?.textContent).toBe('HP 190/190');
-    await click(button('作戦'));expect(document.querySelector('.enemyIntel')?.textContent).toContain('HP 280/280');
+    await click(button('作戦'));expect(document.querySelector('.enemyIntel')?.textContent).toContain('HP 275/275');
   });
   it('saves and restores three independent team slots including leader and rules',async()=>{
     await mount();await click(label('編成1に保存'));

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
-  "release": "0.18.6 playtest candidate",
-  "auditBaseCommit": "3724cd36134ed4982f7ca62318fc74573744fff5",
+  "release": "v0.19.0",
+  "auditBaseCommit": "3c4fa1157180d2d3f9e15e270fccf9aa3f326083",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -287,7 +287,11 @@
         "src/LeaderComparison.tsx",
         "src/leaderComparison.ts",
         "src/playback.ts",
-        "src/battleInsights.ts"
+        "src/battleInsights.ts",
+        "src/HomeScreen.tsx",
+        "src/FamilyTrialPicker.tsx",
+        "src/familyTrialPicker.css",
+        "src/familyTrials.ts"
       ],
       "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。 v0.14の粘体系5体の設定・技説明は本作向けに独立して記述。参照はdocs/slime-family-reference.md、造形はdocs/slime-art-provenance.md。 v0.15の3体の設定・技説明・独自動作は本作用に記述。参照はdocs/demon-family-reference.md、造形はdocs/demon-art-provenance.md。 v0.16の4体の物語・技説明と、土布の低い押し、手綱の横引き、袖の囲い、逆さ糸の縫いのCanvas/CSS/動作コードはUI統合担当が本作用に直接記述。毒片が命中時だけ畳まれる交換効果を新作し、外部画像・効果・文章・コード・動作試料を取り込んでいない。参照はdocs/undead-family-reference.md、造形はdocs/undead-art-provenance.md。 v0.17ではヤヌスの物語・四技の説明、四分類の種類数と生存対象、共通一回のUIを本作用に直接記述。敷居を傾け掌を示す動作、空いた門を通る三本の流線、短い二枚の格子を外へ開くCanvas/CSS効果を新作した。HP回復を示す数字や光の十字を清めに使わず、実際の毒0/guard=trueイベントを表示。外部の画像・音・フォント・文章・コード・動作試料は持ち込んでいない。 全系統の調整検証に伴い、src/poisonDescription.tsの毒説明を本作の実装から独立に記述。即時ダメージと最大HP6%の継続毒、残り回数の更新、解除と予防の違いを区別し、実際のユニット設定またはエンジン既定値を表示する。制作担当は外部の説明文・コードを取り込まず、本作用の新規文面とヘルパーを記述したと申告。 v0.18の毒の機構・自動指示の限界・既存編成を使う対策、ヤヌスの推薦説明、プレイガイドは本作の実装と保存済み実測から独立に記述。外部の記事本文・説明文・画像・音・フォント・コードのコピーは追加していない。 v0.18.1のリーダー比較UI、HP/MP/攻撃/素早さの前後・対象表示と優先度の短い説明は、本作の開始処理から計算した実数を用いる独自コード・文面。キャラクターの能力・AI・アート・外部依存は追加変更せず、外部記事本文・説明文・画像・コードのコピーを用いない。最終制作申告と集約検証はdocs/rights/releases/2026-10-10-v0.18.1.mdに記録する。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
@@ -352,6 +356,20 @@
           ],
           "provenance": "AI-assisted presentation code and the brief Japanese recorded-action count written directly for this project. Accepted ally commands, cast events, defeat and queue boundaries are read from existing authoritative history; no new gameplay events or rules. No external code, prose, imagery, media, fonts, dependencies, character art or animation samples imported.",
           "reviewLimit": "Resolver fixtures and DOM tests establish recorded-data accuracy and expandable evidence, not human comprehension, winning alternatives, fairness or fun. Current failed mixed-counter and both-policy leader gates remain failed. Existing rights, expression-similarity and professional-review questions remain open."
+        },
+        {
+          "recordedAt": "2026-10-11",
+          "scope": "v0.19.0 family trial selection and random pure-family encounters, based on public v0.18.6 tree d974e21da54d5d2c5eb12977e5fa1578a923bd0c.",
+          "files": [
+            "src/App.tsx",
+            "src/HomeScreen.tsx",
+            "src/FamilyTrialPicker.tsx",
+            "src/familyTrialPicker.css",
+            "src/familyTrials.ts",
+            "src/style.css"
+          ],
+          "provenance": "AI-assisted UI, encounter-selection code, tests and short Japanese copy written directly for this game. Existing recommendations, family definitions and MonsterArt portraits are reused without alteration. No external code, descriptions, art, animation samples, audio, fonts or dependencies imported. Choosing a preset changes only active team/rule and ends held practice; three saved slots remain unchanged. New ordinary encounters draw a legal pure-family opponent with a fresh seed; retry/rebuild retain the prior enemy and seed. Battle engine, AI, stats, skills and save schema unchanged.",
+          "reviewLimit": "Seeded data and lifecycle tests cover eligibility, repeatability, rule limits and saved-slot preservation; live layout/keyboard/flow must be verified separately. Opponent exposure and difficulty change. This is not a fairness, human-comprehension or rights-clearance conclusion. Existing failed balance protocols and unresolved professional review remain recorded."
         }
       ]
     }

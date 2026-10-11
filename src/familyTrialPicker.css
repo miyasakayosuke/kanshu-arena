@@ -1,0 +1,123 @@
+/* Original picker layout and copy; existing portraits are rendered by MonsterArt. */
+.familyTrialOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: #060c14d9;
+}
+.familyTrialDialog {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 620px);
+  min-width: 0;
+  max-height: calc(100vh - 16px);
+  max-height: calc(100dvh - 16px);
+  overflow: hidden;
+  border: 1px solid #b6b17a80;
+  border-radius: 14px;
+  background: #13232e;
+  color: #e3e9d9;
+  box-shadow: 0 12px 40px #0008;
+  text-align: left;
+}
+.familyTrialHeader {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #a3b58a40;
+  background: #1c3038;
+}
+.familyTrialHeader h2 { margin: 0; min-width: 0; font-size: 17px; line-height: 1.5; letter-spacing: 0; }
+.familyTrialDialog button {
+  font: inherit;
+  min-height: 44px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+  border-radius: 7px;
+  font-size: 12px;
+}
+.familyTrialDialog button:focus-visible { outline: 2px solid #b3f7d8; outline-offset: 2px; }
+.familyTrialClose {
+  flex: 0 0 auto;
+  min-width: 62px;
+  padding: 7px 10px;
+  border: 1px solid #9bb9a578;
+  background: #213d42;
+  color: #eef4df;
+}
+.familyTrialScroll {
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px;
+  scroll-padding-block: 12px;
+}
+.familyTrialIntro { font-size: 12px; line-height: 1.7; color: #c4d3c2; }
+.familyTrialIntro p { margin: 0 0 7px; }
+.familyTrialIntro .familyTrialCurrentRule { margin: 10px 0 0; color: #e0cd98; font-weight: 600; }
+.familyTrialSection { margin-top: 17px; }
+.familyTrialSection h3 { margin: 0; font-size: 15px; line-height: 1.5; color: #ebd69d; }
+.familyTrialSectionHint { margin: 4px 0 10px; font-size: 11px; line-height: 1.6; color: #b7cbbd; }
+.familyTrialGrid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.familyTrialCard {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #94ae8757;
+  border-radius: 10px;
+  background: linear-gradient(130deg, #263c37, #172b36);
+  overflow-wrap: anywhere;
+}
+.familyTrialIdentity { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.familyTrialIdentity > div { min-width: 0; }
+.familyTrialPortrait {
+  display: grid;
+  place-items: center;
+  flex: 0 0 54px;
+  width: 54px;
+  height: 60px;
+  border-radius: 9px;
+  background: #0d1f2a;
+  border: 1px solid #9dac793b;
+}
+.familyTrialPortrait .monsterArt { display: block; width: 100%; height: 100%; object-fit: contain; }
+.familyTrialFamily { margin: 0 0 3px; color: #c1d4b4; font-size: 11px; line-height: 1.5; }
+.familyTrialIdentity h4 { margin: 0; font-size: 15px; line-height: 1.5; color: #f2e6bd; }
+.familyTrialCost { margin: 4px 0 0; font-size: 11px; color: #f0d998; line-height: 1.5; }
+.familyTrialCost span { color: #c3d4c2; }
+.familyTrialMembers { display: flex; flex-wrap: wrap; column-gap: 15px; row-gap: 3px; margin: 0; padding: 0; list-style: none; font-size: 12px; line-height: 1.65; }
+.familyTrialMembers li { min-width: 0; }
+.familyTrialMembers li:first-child { flex-basis: 100%; }
+.familyTrialMembers strong { color: #dfca91; font-size: 10px; }
+.familyTrialNote { margin: 0; color: #c4d3c2; font-size: 12px; line-height: 1.65; }
+.familyTrialDialog .familyTrialChoose {
+  width: 100%;
+  margin-top: auto;
+  padding: 9px 10px;
+  background: #536543;
+  color: #fff2c8;
+  border: 1px solid #c7c18399;
+  font-weight: 600;
+}
+.familyTrialMixed { padding-top: 15px; border-top: 1px solid #d0b87766; }
+.familyTrialMixed .familyTrialCard { border-color: #b8a4cf6b; background: linear-gradient(130deg, #353442, #202e39); }
+.familyTrialCancel { display: block; width: 100%; margin-top: 15px; padding: 9px 10px; color: #d5e2d2; border: 1px solid #9bb9a570; background: #20353c; }
+@media (min-width: 560px) {
+  .familyTrialGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .familyTrialMixed .familyTrialGrid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-height: 480px) {
+  .familyTrialHeader { padding-block: 4px; }
+  .familyTrialScroll { padding-top: 9px; }
+}

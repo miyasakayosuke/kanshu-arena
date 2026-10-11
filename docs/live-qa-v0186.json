@@ -1,0 +1,92 @@
+{
+  "release": "0.18.6",
+  "commit": "3c4fa1157180d2d3f9e15e270fccf9aa3f326083",
+  "tree": "d974e21da54d5d2c5eb12977e5fa1578a923bd0c",
+  "ci": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38111811547",
+  "url": "https://miyasakayosuke.github.io/kanshu-arena/#home",
+  "verified": [
+    {
+      "check": "exact-ci-pages",
+      "run": 38111811547,
+      "passed": true
+    },
+    {
+      "check": "version",
+      "banner": "0.18.6",
+      "savedSlotsPreserved": true
+    },
+    {
+      "check": "no-false-row",
+      "teams": [
+        "Janus mixed",
+        "pure dragon",
+        "legacy C15",
+        "pure material"
+      ],
+      "opponent": [
+        1,
+        5,
+        8,
+        10,
+        6
+      ],
+      "result": "No lost-action row where no qualifying earlier KO was observed. Janus fixed commands repeated v0.18.5 result:6 turns,35.6% ally HP."
+    },
+    {
+      "check": "real-lost-later-action",
+      "team": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "enemy": [
+        11,
+        9,
+        4,
+        7,
+        10
+      ],
+      "seed": 20261009,
+      "turns": 9,
+      "result": "DEFEAT,0% ally/19.6% enemy HP",
+      "row": "TURN 3：味方1 妖狐は「炎嵐」の発動前に戦闘不能。それまでの発動記録：2回。",
+      "evidence": "Expanded UI showed turns1/2 accepted 炎嵐 orders, casts and boundaries; turn3 accepted order, Anubis attack defeat, before-action and action-end without cast."
+    },
+    {
+      "check": "short-result",
+      "viewport": [
+        326,
+        432
+      ],
+      "pageWidth": 326,
+      "resultWidth": 298,
+      "evidenceWraps": true,
+      "keyboardCollapse": "Space",
+      "rematchReachable": true
+    },
+    {
+      "check": "same-encounter-retry",
+      "initialFox": "HP150/150 MP54/54",
+      "opponentUnchanged": true,
+      "sameAutomaticOutcome": "9turns,0%/19.6%,same TURN3 two-earlier-cast row"
+    },
+    {
+      "check": "html-notices",
+      "route": "home -> credits new tab -> expanded notices -> home0.18.6",
+      "permissionSections": 5,
+      "warrantySections": 5,
+      "preCharacters": 6777,
+      "shortPreClientWidth": 256,
+      "shortPreScrollWidth": 256
+    }
+  ],
+  "limitations": [
+    "No human comprehension or fairness study.",
+    "The first fixed CPU fixture did not produce a qualifying lost ally action; a bounded10-case local QA probe selected the second built-in opponent for real live confirmation. This was not a balance study.",
+    "Raw text notices endpoint remained untested due earlier browser restriction; full HTML notices were verified.",
+    "Result observations conservatively omit incomplete records and some earlier accepted-but-unexecuted support histories."
+  ],
+  "verifiedUtc": "2026-10-11T04:38:18Z"
+}

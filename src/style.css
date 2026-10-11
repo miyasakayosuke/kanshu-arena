@@ -151,3 +151,6 @@
   .battleMode:not(.resultMode) .battleMessage{white-space:normal;overflow:visible;min-height:27px;padding:5px 2px}
   .battleMode:not(.resultMode) .commandDock{max-height:none;overflow:visible;overflow-y:visible}
 }
+
+/* Existing-party entry stays separate from the one-selection family trial. */
+.familyTrialGate{border-color:#cfbb7980;background:linear-gradient(110deg,#314238,#173038);color:#efe1b5}.familyTrialGate strong{font-size:15px}.familyTrialGate:focus-visible{outline:2px solid #f3d895;outline-offset:3px}

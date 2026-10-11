@@ -16,6 +16,9 @@ const tick = async (ms: number) => { await act(async () => vi.advanceTimersByTim
 const hp = () => [...document.querySelectorAll('.commanderHp')].map(node => node.textContent);
 
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers(); localStorage.clear(); window.history.replaceState(null, '', '#home');
   document.body.innerHTML = '<div id="test-root"></div>';
   Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });

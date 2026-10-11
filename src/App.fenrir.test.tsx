@@ -23,6 +23,9 @@ async function finish(skip: boolean) {
   expect(document.querySelector('.result')).toBeTruthy();
 }
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers(); localStorage.clear();
   localStorage.setItem('kanshu-workshop-v1', JSON.stringify({team, rule:'standard'}));
   window.history.replaceState(null, '', '#home');

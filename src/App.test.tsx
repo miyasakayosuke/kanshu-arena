@@ -4,6 +4,14 @@ import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import * as engine from './engine';
+
+// These timing/command regressions use their original deterministic battlefield.
+// Random family selection is exercised without this fixture in App.familyEncounters.test.tsx.
+vi.mock('./engine', async importOriginal => {
+  const engine = await importOriginal<typeof import('./engine')>();
+  return { ...engine, start: (team: number[], enemy: number[], seed?: number, options?: Parameters<typeof engine.start>[3]) =>
+    engine.start(team, enemy.length ? [1, 5, 8, 10, 6] : enemy, enemy.length ? 20261008 : seed, options) };
+});
 let root: Root;
 const button = (text: string) => [...document.querySelectorAll('button')].find(b => b.textContent?.includes(text))!;
 const label = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
@@ -19,6 +27,9 @@ async function startBattle() { await openArena(); await click(button('この編�
 async function leaveBattle() { await click(label('闘技場に戻る')); await click(button('中断して移動')); }
 async function enterBattle() { await mount(); await startBattle(); }
 beforeEach(() => {
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+
   vi.useFakeTimers();
   localStorage.clear();
   window.history.replaceState(null, '', '#home');

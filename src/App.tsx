@@ -7,12 +7,15 @@ import {NUMBER_DURATION_MS} from './battleMotion';
 import TeamBuilder from './TeamBuilder';
 import TacticsPanel from './TacticsPanel';
 import HomeScreen, { ArenaLobby } from './HomeScreen';
+import FamilyTrialPicker from './FamilyTrialPicker';
+import { FAMILY_DEFINITIONS } from './families';
 import LeaveBattleDialog from './LeaveBattleDialog';
 import MonsterDetails from './MonsterDetails';
 import BattleResult from './BattleResult';
 import { battleEventLine, battleOrderLine } from './battleInsights';
 import { useScreenNavigation } from './navigation';
-import { fixedDamageHint, poisonCashoutHint, rules, opponentTeams, isValidTeam, initialTeam, loadTeamSlots, type RuleId } from './strategy';
+import { fixedDamageHint, poisonCashoutHint, rules, isValidTeam, initialTeam, loadTeamSlots, type RuleId } from './strategy';
+import { familyEncounterForSeed, familyTrialPresets, type FamilyTrialPreset, type FamilyEncounter } from './familyTrials';
 import { poisonSkillDetail, poisonSkillHint } from './poisonDescription';
 import './style.css';
 
@@ -45,8 +48,11 @@ export default function App() {
   const [focus, setFocus] = useState<number | null>(null);
   const [rule, setRule] = useState<RuleId>(workshop.rule);
   const [practice, setPractice] = useState(false);
-  const [encounter, setEncounter] = useState<{ enemy:number[]; seed:number; rule:RuleId } | null>(null);
+  const [encounter, setEncounter] = useState<FamilyEncounter | null>(null);
   const [showTactics, setShowTactics] = useState(false);
+  const [showFamilyTrials, setShowFamilyTrials] = useState(false);
+  const arenaHeading = useRef<HTMLHeadingElement>(null);
+  const trialApplied = useRef(false);
   const [round, setRound] = useState(0);
   const [showLog, setShowLog] = useState(false);
   const [effect, setEffect] = useState<{ text: string; type: string; tick: number } | null>(null);
@@ -79,7 +85,12 @@ export default function App() {
   const navigation = useScreenNavigation(!!battle && !battle.winner, discardBattle);
   const { page, navigate } = navigation;
   useEffect(() => () => { ++playbackId.current; clearTimers(); commandDeadline.current = null; }, []);
-  useEffect(() => { setFocus(null); setShowLog(false); setShowTactics(false); window.scrollTo(0, 0); }, [page]);
+  useEffect(() => { setFocus(null); setShowLog(false); setShowTactics(false); setShowFamilyTrials(false); window.scrollTo(0, 0); }, [page]);
+  useEffect(() => {
+    if (page === 'arena' && !showFamilyTrials && trialApplied.current) {
+      trialApplied.current = false; arenaHeading.current?.focus();
+    }
+  }, [page, showFamilyTrials]);
   useEffect(() => {
     if (page !== 'battle' || !battle || battle.winner) return;
     const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ''; };
@@ -101,7 +112,11 @@ export default function App() {
     if (!isValidTeam(team, rules[rule].budget)) return;
     startLock.current = true;
     ++playbackId.current;
-    const nextEncounter = (retry || practice) && encounter && encounter.rule === rule ? encounter : { enemy: opponentTeams(rule)[round % opponentTeams(rule).length], seed: round + 20261008, rule };
+    // Fresh ordinary encounters use non-security randomness. Retry/rebuild reuse
+    // the exact draw and battle seed without consuming randomness again.
+    const nextEncounter = (retry || practice) && encounter && encounter.rule === rule
+      ? encounter
+      : familyEncounterForSeed(rule, Math.floor(Math.random() * 0x100000000));
     setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
     setTimedOut(false);
@@ -222,20 +237,32 @@ export default function App() {
   const rebuild = () => { leavingForPractice.current = true; navigate('team'); };
   const leavePractice = () => { setPractice(false); setEncounter(null); setRound(n => n + 1); setNotice('同条件での再戦を終了しました。次の相手に挑みます。'); };
   const changeRule = (next: RuleId) => { if (next !== rule) { setRule(next); setPractice(false); setEncounter(null); setNotice(practice ? 'ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''); } };
+  const chooseFamilyTrial = (selection: FamilyTrialPreset) => {
+    const preset = familyTrialPresets.find(item => item.id === selection.id);
+    if (!preset || !isValidTeam(preset.team, 17)) return;
+    const nextRule = cost([...preset.team]) > rules[rule].budget ? 'standard' : rule;
+    trialApplied.current = true;
+    setTeam([...preset.team]); setRule(nextRule); setPractice(false); setEncounter(null);
+    setShowFamilyTrials(false);
+    setNotice(`${preset.name}を選びました。保存した3枠はそのままです。`);
+    navigate('arena');
+  };
+  const opponentLabel = encounter ? `対戦相手：${FAMILY_DEFINITIONS[encounter.family].label}` : '';
   const ready = living.filter(u => orders[u.key]).length;
   const incomingArea = playing && visualCast?.scope === 'all' && (visualCast.targets ?? []).some(key => battle?.allies.some(unit => unit.key === key));
   const areaLanded = incomingArea && impacts.some(event => (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss' || event.kind === 'cleanse' || event.kind === 'guard' || event.kind === 'poison') && event.actor === visualCast?.actor);
   const scopeLabel = ['responseCleanse', 'responseGuard'].includes(visualCast?.effect ?? '') ? `生存する${incomingArea ? '味方' : '敵側の仲間'}全員 ${visualCast?.targets?.length ?? 0}体` : visualCast?.effect === 'restoreMp' ? `生存する粘体系 ${visualCast.targets?.length ?? 0}体` : visualCast?.passive === 'material-repair' ? `生存する物質系 ${visualCast.targets?.length ?? 0}体` : visualCast?.scope === 'random' ? `ランダム${visualCast.hits}回` : visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
   const visibleCastCaption = playing && compactCastCaption?.event === visualCast ? compactCastCaption : null;
   return <div className={`app ${page === 'battle' ? `battleMode ${battle?.winner ? 'resultMode' : ''}` : `screen-${page}`}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.18.6</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
-    {page === 'home' && <HomeScreen practice={practice} team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
-    {page === 'arena' && <ArenaLobby notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.19.0</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
+    {showFamilyTrials && <FamilyTrialPicker presets={familyTrialPresets} rule={rule} onChoose={chooseFamilyTrial} onClose={() => setShowFamilyTrials(false)} />}
+    {page === 'home' && <HomeScreen onFamilyTrial={() => setShowFamilyTrials(true)} practice={practice} team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
+    {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
     {page === 'team' && <TeamBuilder slots={slots} setSlots={setSlots} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
     {page === 'battle' && battle && <main className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
       <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
       {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
-      <div className="battleMessage" aria-live="polite"><span className={visibleCastCaption ? 'castCaptionAnnouncement' : undefined}>{battle.winner ? '対戦終了' : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</span>{visibleCastCaption && <span className="battleCastCaption" aria-hidden="true">{visibleCastCaption.lines.map((line, index) => <span key={index}>{line}</span>)}<span>{replayProgress}</span></span>}</div>
+      <div className="battleMessage" aria-live="polite"><span className={visibleCastCaption ? 'castCaptionAnnouncement' : undefined}>{battle.winner ? `${opponentLabel} · 対戦終了` : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `${opponentLabel} · 行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</span>{visibleCastCaption && <span className="battleCastCaption" aria-hidden="true">{visibleCastCaption.lines.map((line, index) => <span key={index}>{line}</span>)}<span>{replayProgress}</span></span>}</div>
       {battle.winner ? <BattleResult battle={battle} onRematch={() => begin(true)} onRebuild={rebuild} onNext={() => navigate('arena')} onLog={() => setShowLog(true)} /> : <section className="commandDock" aria-label="行動指示">
         <div className={`commanderRow ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--hit-duration': `${300 / speed}ms`, '--number-duration': `${NUMBER_DURATION_MS / speed}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
           {incomingArea && <span key={`${effect?.tick}-${areaLanded}`} className="partySweep" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}

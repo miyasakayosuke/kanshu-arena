@@ -22,7 +22,10 @@ function fixture(){
 async function orders(){
  for(const id of pure){await click(label(`${engine.monsters[id].name}の行動を選択`));if(id===8){await click(button('とくぎ'));await click(button('灼熱拳'));await click(label('マモンを対象に選択'));}else await click(button('ぼうぎょ'));}
 }
-beforeEach(()=>{vi.useFakeTimers();localStorage.clear();window.history.replaceState(null,'','#home');document.body.innerHTML='<div id="test-root"></div>';Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(null);root=createRoot(document.getElementById('test-root')!);});
+beforeEach(()=>{
+  // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
+  vi.spyOn(Math, 'random').mockReturnValue(1 / 0x100000000);
+  vi.useFakeTimers();localStorage.clear();window.history.replaceState(null,'','#home');document.body.innerHTML='<div id="test-root"></div>';Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});vi.spyOn(HTMLCanvasElement.prototype,'getContext').mockReturnValue(null);root=createRoot(document.getElementById('test-root')!);});
 afterEach(async()=>{await act(async()=>root.unmount());vi.restoreAllMocks();vi.useRealTimers();});
 describe('demon family playable resource pressure',()=>{
  it.each([1,2])('shows both actual HP and MP loss at impact then explicit fallback at %sx',async speed=>{
