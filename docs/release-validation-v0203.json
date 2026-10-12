@@ -1,0 +1,100 @@
+{
+  "release": "0.20.3",
+  "status": "final-local-candidate-validated-publication-pending",
+  "recordedDateUtc": "2026-10-12",
+  "baseCommit": "c7699ca6006f9b20dc5063b3390d787fbb9611ed",
+  "baseTree": "67abe562f464620d23abefe7058af09fd59d09cf",
+  "reviewedCandidateTree": "b795863b9bd43d20a913745d1ae690b8d0680096",
+  "inputPatchSha256": "eb12565a045695edbfff5d62fb8e7e00856d8b745d7eb81e610210c4a86d77e0",
+  "checks": {
+    "vitest": {
+      "files": 103,
+      "tests": 2352,
+      "passed": true,
+      "durationSeconds": 59.94
+    },
+    "rightsSelfTests": {
+      "tests": 14,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "productionBuild": true,
+    "distRights": true,
+    "balanceSmoke": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.2",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.engineSha256",
+        "source.gameVersion"
+      ]
+    },
+    "independentInputReview": {
+      "status": "no remaining engine or UI blocker",
+      "initialSupportRegression": "corrected and independently retested",
+      "newTests": 33,
+      "baselineMatches": 250,
+      "baselineTurns": 1799,
+      "nonPoisonPartialPlans": 1000
+    },
+    "runtimeMatchesReviewedInputExceptVersion": true,
+    "dependencyLockUnchangedExceptRootVersion": true,
+    "sourcePreservation": {
+      "changedExistingTrackedFiles": [
+        "README.md",
+        "docs/rights/asset-manifest.json",
+        "package-lock.json",
+        "package.json",
+        "src/App.dragonWave.test.tsx",
+        "src/App.materialWave.test.tsx",
+        "src/App.tsx",
+        "src/TacticsPanel.tsx",
+        "src/engine.ts"
+      ],
+      "otherExistingFilesByteIdentical": 1124
+    }
+  },
+  "logHashes": {
+    "rights-selftests": "df8851eb17a32dfe1c98bc47a597ac28c8e93f3ad7438d7d7bc5de1a9a6a691e",
+    "rights-source": "7220ab91c1d5840e086f8d9cf51b833a5dec17f84e12f322d016c08a4154d836",
+    "full-tests": "414307d80b4a2ad5a591c1b6a8762efcf4ba9e3e4f0d204a50a28d0496dc78d9",
+    "build": "ea5cdca253d28a042eb4599233268a88fbd4c4da91dcde1a9d84396bde9d254c",
+    "lab-smoke": "e24a291098904fb73bf547b6e671020c99ef195ac3c355d751790be7f5d2e5c8"
+  },
+  "sourceHashes": {
+    "src/engine.ts": "59f857c47a84ea2ee4c9d636691b18279a596dc3722f59e8e534507eb02db59d",
+    "src/App.tsx": "3102eeae5ef3489c1f797f4f98ff8951457b4b748acd03dd4027cd16485bb99f",
+    "src/TacticsPanel.tsx": "34ff2c8bfc49e14979524e519ad2c7e98d8966b414746d7ac9743391d954c2f1",
+    "src/confirmedOrders.test.ts": "6ddf18d3a32cfa65c2b3952d47d27136b1c14b1cfd547f4b64ca6e4f01526c49",
+    "src/App.confirmedOrders.test.tsx": "6b7fdd3eab3855e395451ac5bf803566ab064fb7bf1866355907dbb19b65822f",
+    "src/BattleStage.tsx": "ce4921f526e1f500e3cd7f5424802227e649b228c5e9c56ae44d34071cde6815",
+    "src/navigation.ts": "052ff748f9a68e8cdf248f8b86016eca1dff7efa9ca9990e23233a4797e0730a",
+    "public/credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "distHashes": {
+    "THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c",
+    "assets/index-CcOi1w2F.css": "0632dd0ff0386560d414fccd1b8ea419a30e6ad303ab488b6a3dcfcca1381d4f",
+    "assets/index-Dvm8yLRt.js": "4732418ce762c693fa84c23ef453e540b619f6842af254efaea4e1da418ddde2",
+    "credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "index.html": "4d3e4f0ab97571ebe5c3f2094a4681041451bf468c7dd26b9e3ce55864db5467"
+  },
+  "buildWarning": "Existing >500 kB JS chunk advisory:645.28 kB minified/202.38 kB gzip.",
+  "publication": {
+    "status": "pending",
+    "commit": null,
+    "ci": null,
+    "deployment": null
+  },
+  "browserGate": "Pending exact-deployment verification and legal-UI nature-team confirmed poison, preview, individual auto, manual start, timeout, replacement, ordinary playback, rematch, saves, console and credits. Fixed seed42 and injected/synthetic boundary states are automated-test evidence, not live UI claims.",
+  "limits": [
+    "Only confirmed poison coordination changes; historical non-poison support override limitations remain.",
+    "Reservations use current living/affordable own casters and valid targets, without predicting enemy orders, future death, MP loss, cleansing, cashout or supply.",
+    "All-auto and reservePoison:false historical comparison behavior remain protected by sample parity and frozen fixtures, not exhaustive proof.",
+    "No performance, win-rate, human-comprehension, fairness or legal-clearance conclusion.",
+    "No artwork, skills/stats/scoring, save-schema, dependency, notice, repository-visibility or billing change."
+  ],
+  "priorLiveVerification": "docs/v0202-live-verification.md"
+}

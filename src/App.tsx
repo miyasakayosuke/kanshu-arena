@@ -1,6 +1,6 @@
 import MonsterArt from './MonsterArt';
 import React, { useEffect, useRef, useState } from 'react';
-import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, autoOrders, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
+import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, completeOrders, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage, {type CompactCastCaption} from './BattleStage';
 import {NUMBER_DURATION_MS} from './battleMotion';
@@ -156,7 +156,8 @@ export default function App() {
   };
   const selectAutomatic = () => {
     if (commandsExpired() || !battle || !active || battle.winner || playingLock.current) return;
-    const order = autoOrders(battle).find(order => order.key === active.key);
+    const order = completeOrders(battle, Object.values(orders).filter(order => order.key !== active.key))
+      .find(order => order.key === active.key);
     if (order) commitOrder(order.skill, order.target, true);
   };
   const resetOrders = () => {
@@ -176,8 +177,7 @@ export default function App() {
     // Lock synchronously: a manual click and the deadline can resolve this turn only once.
     playingLock.current = true; commandDeadline.current = null;
     setTimedOut(expired); setFocus(null); setShowLog(false); setShowTactics(false);
-    const automatic = autoOrders(battle);
-    const cmds = living.map(u => orders[u.key] ?? automatic.find(o => o.key === u.key)!);
+    const cmds = completeOrders(battle, Object.values(orders));
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
     setPlaying(true); setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setImpact(null); setImpacts([]);
@@ -264,7 +264,7 @@ export default function App() {
   const scopeLabel = ['responseCleanse', 'responseGuard'].includes(visualCast?.effect ?? '') ? `生存する${incomingArea ? '味方' : '敵側の仲間'}全員 ${visualCast?.targets?.length ?? 0}体` : visualCast?.effect === 'restoreMp' ? `生存する粘体系 ${visualCast.targets?.length ?? 0}体` : visualCast?.passive === 'material-repair' ? `生存する物質系 ${visualCast.targets?.length ?? 0}体` : visualCast?.scope === 'random' ? `ランダム${visualCast.hits}回` : visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
   const visibleCastCaption = playing && compactCastCaption?.event === visualCast ? compactCastCaption : null;
   return <div className={`app ${page === 'battle' ? `battleMode ${battle?.winner ? 'resultMode' : ''}` : `screen-${page}`}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.2</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.3</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
     {showFamilyTrials && <FamilyTrialPicker presets={familyTrialPresets} rule={rule} onChoose={chooseFamilyTrial} onClose={() => setShowFamilyTrials(false)} />}
     {page === 'home' && <HomeScreen onFamilyTrial={() => setShowFamilyTrials(true)} practice={practice} team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}

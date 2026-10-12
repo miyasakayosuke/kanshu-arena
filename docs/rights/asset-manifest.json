@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.2",
-  "auditBaseCommit": "9370b1a779c076433ff38df81665bd0c85b997a7",
+  "release": "v0.20.3",
+  "auditBaseCommit": "c7699ca6006f9b20dc5063b3390d787fbb9611ed",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -420,6 +420,28 @@
           ],
           "provenance": "AI-assisted code, regression tests and release text written directly for this project. A mount-local get-or-create lookup primes distinct current enemy bodies and lazily adds later enemy IDs. Existing art URLs, fallback, readiness checks, frame lifecycle and draw behavior are reused. Version/header expectations and package root metadata only beyond the renderer change. No external code, prose, image, media, font, dependency or motion samples imported.",
           "reviewLimit": "Mocked Image and frame tests establish allocation/source-assignment counts and lifecycle behavior, not real-device timing, network bytes, image decode time, first paint or bundle savings. All art modules remain eagerly bundled. Live browser behavior is a separate acceptance gate. Existing rights and similarity questions remain open."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.3 confirmed-order poison planning fix based on public v0.20.2 commit c7699ca6006f9b20dc5063b3390d787fbb9611ed / tree 67abe562f464620d23abefe7058af09fd59d09cf. Implementation evidence is in docs/confirmed-orders-candidate.md; release checks and publication acceptance are separate in docs/rights/releases/2026-10-12-v0.20.3.md.",
+          "files": [
+            "src/engine.ts",
+            "src/App.tsx",
+            "src/TacticsPanel.tsx",
+            "src/confirmedOrders.test.ts",
+            "src/App.confirmedOrders.test.tsx",
+            "docs/confirmed-orders-candidate.md",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "docs/release-validation-v0203.json",
+            "docs/rights/releases/2026-10-12-v0.20.3.md",
+            "docs/v0202-live-verification.md"
+          ],
+          "provenance": "AI-assisted completion helper and regression tests written directly for this project from its existing engine and reproduced command-flow defect. Confirmed legal own poison targets participate in the existing optional reservation policy. Existing command labels, art, animation, skills, scoring, battle effects, save formats, dependencies and notices are reused unchanged. No external code, prose, illustrations, media, fonts or extracted game materials imported.",
+          "reviewLimit": "Engine/DOM regressions, frozen battle parity and independent code review establish bounded behavior, not rendered-browser acceptance, balance improvement, legal clearance or elimination of existing expression/patent/trademark questions. Historical support override behavior is intentionally unchanged. No third-party contact, professional-review submission, fee or project-wide licensing choice. Authorized release publication is recorded separately; no legal clearance is asserted."
         }
       ]
     },

@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import { DEFAULT_RESERVE_POISON, autoOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, poisonCashoutPerTickFor, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
+import { DEFAULT_RESERVE_POISON, completeOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, poisonCashoutPerTickFor, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
 import { rules, monsterRole, fixedDamageHint, poisonCashoutHint, type RuleId } from './strategy';
 
 import { POISON_TIMING_HINT, poisonSkillDetail } from './poisonDescription';
@@ -7,9 +7,9 @@ import { POISON_TIMING_HINT, poisonSkillDetail } from './poisonDescription';
 type Props = { battle: State; orders: Record<string, Order>; playing: boolean; rule: RuleId; onClose: () => void };
 
 export default function TacticsPanel({battle, orders, playing, rule, onClose}: Props) {
-  const automatic = autoOrders(battle);
+  const completed = completeOrders(battle, Object.values(orders));
   const sequence = battle.allies.filter(u => u.hp > 0)
-    .map(unit => ({unit, order: orders[unit.key] ?? automatic.find(o => o.key === unit.key)}))
+    .map(unit => ({unit, order: completed.find(o => o.key === unit.key)}))
     .map(value => ({...value, skill: value.order ? battleSkill(value.unit.monster, value.order.skill) : undefined}))
     .sort((a, b) => (b.skill?.priority ?? 0) - (a.skill?.priority ?? 0) || speedFor(b.unit, battle.turn) - speedFor(a.unit, battle.turn));
   return <div className="overlay" onClick={onClose}>

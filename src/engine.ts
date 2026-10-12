@@ -444,6 +444,21 @@ export function extraordinaryResponseScore(unit: Unit, skill: Skill, friends: re
 
 /** Choose orders without changing state or consuming the battle's random seed. */
 export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'): Order[] {
+  return planOrders(state, side);
+}
+
+/** Preserve confirmed own commands and complete only the unselected actors.
+ * Reservations are rebuilt per call; no pending UI selection or enemy order is read.
+ */
+export function completeOrders(state: State, confirmed: readonly Order[], side: 'allies' | 'enemies' = 'allies'): Order[] {
+  // The comparison arm retains its historical context-free choices and overrides.
+  if (!(state.reservePoison ?? DEFAULT_RESERVE_POISON)) {
+    return autoOrders(state, side).map(order => confirmed.find(fixed => fixed.key === order.key) ?? order);
+  }
+  return planOrders(state, side, confirmed);
+}
+
+function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonly Order[] = []): Order[] {
   if (state.winner) return [];
   const friends = living(state[side]);
   const opponents = living(side === 'allies' ? state.enemies : state.allies);
@@ -455,12 +470,30 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
   const plannedHealing = new Map<string, number>();
   // Optional slot-order reservation, not optimal planning: a prior actor may be
   // defeated or lose its MP before casting. Only current living enemy targets and
-  // earlier own chosen all-target poisons are reserved. Do not forecast survival,
+  // confirmed own poisons and earlier automatic all-target poisons are reserved. Do not forecast survival,
   // enemy orders, future cashout, cleansing, or reapplication. Legal repeated casts
   // and their immediate damage utility remain available on either physical side.
   const reservePoison = state.reservePoison ?? DEFAULT_RESERVE_POISON;
   const plannedPoison = new Set<string>();
+  const fixedOrders = new Map(friends.flatMap(unit => {
+    // Match the resolver's first-order precedence even for duplicated input keys.
+    const order = confirmed.find(order => order.key === unit.key);
+    return order ? [[unit.key, order] as const] : [];
+  }));
+  if (reservePoison) for (const unit of friends) {
+    const order = fixedOrders.get(unit.key);
+    const skill = order && battleSkill(unit.monster, order.skill);
+    if (!order || !skill || skill.kind !== 'poison' || skill.randomHits || !canUseSkill(unit, skill, friends)) continue;
+    // As in execution, an explicit target on the wrong side is invalid even for
+    // an area skill. Missing single-target input is not a confirmed reservation.
+    const enemies = side === 'allies' ? state.enemies : state.allies;
+    if (order.target !== undefined && !enemies.some(target => target.key === order.target)) continue;
+    for (const target of opponents) if (skill.all || target.key === order.target) plannedPoison.add(target.key);
+  }
   return friends.map(unit => {
+    const fixed = fixedOrders.get(unit.key);
+    // Keep the existing support bookkeeping in slot order. This bounded fix
+    // changes poison reservations only; confirmed commands still win below.
     const specials = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS);
     const find = (kind: Skill['kind']) => specials.findIndex(skill => skill.kind === kind && canUseSkill(unit, skill, friends));
     const cleansing = find('cleanse');
@@ -468,19 +501,19 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
     if (cleansing >= 0 && poisoned) {
       cleansedTargets.add(poisoned.key);
       plannedHealing.set(poisoned.key, (plannedHealing.get(poisoned.key) ?? 0) + specials[cleansing]!.power);
-      return { key: unit.key, skill: cleansing, target: poisoned.key };
+      return fixed ?? { key: unit.key, skill: cleansing, target: poisoned.key };
     }
     const protecting = find('protect');
     const vulnerable = weakest(friends.filter(friend => !protectedTargets.has(friend.key) && friend.hp > incomingThreat * 0.5));
     if (protecting >= 0 && friends.length > 1 && vulnerable && vulnerable.hp / vulnerable.monster.hp <= 0.45 && incomingThreat > 0) {
       protectedTargets.add(vulnerable.key);
-      return { key: unit.key, skill: protecting, target: vulnerable.key };
+      return fixed ?? { key: unit.key, skill: protecting, target: vulnerable.key };
     }
     const healing = find('heal');
     const injured = weakest(friends.filter(friend => (friend.hp + (plannedHealing.get(friend.key) ?? 0)) / friend.monster.hp <= 0.6));
     if (healing >= 0 && injured) {
       plannedHealing.set(injured.key, (plannedHealing.get(injured.key) ?? 0) + specials[healing]!.power);
-      return { key: unit.key, skill: healing, target: injured.key };
+      return fixed ?? { key: unit.key, skill: healing, target: injured.key };
     }
     // Spend the one action on actual missing MP only when it funds a currently
     // unaffordable paid action. Never reserve a skill against future borrowed MP.
@@ -489,7 +522,7 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
       const recipients = friends.filter(friend => friend.monster.family === SLIME_SUPPLY.family);
       const fundsAction = recipients.some(friend => friend.monster.skills.some(skill =>
         skill.mpCost > friend.mp && skill.mpCost <= Math.min(friend.monster.mp, friend.mp + supplyAmountFor(unit))));
-      if (fundsAction) return { key: unit.key, skill: supply };
+      if (fundsAction) return fixed ?? { key: unit.key, skill: supply };
     }
     // Keep a free attack available. Spend only when a special adds useful damage or utility.
     // Keep the new core's policy stable when Lab disables its mechanic. Other
@@ -558,14 +591,14 @@ export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'):
     });
     if (responseActor && skillIndex >= 0 && isExtraordinaryResponse(specials[skillIndex]!)) {
       for (const friend of friends) (specials[skillIndex]!.kind === 'responseCleanse' ? cleansedTargets : protectedTargets).add(friend.key);
-      return { key: unit.key, skill: skillIndex };
+      return fixed ?? { key: unit.key, skill: skillIndex };
     }
-    if (reservePoison && skillIndex >= 0 && specials[skillIndex]!.kind === 'poison' && specials[skillIndex]!.all) {
+    if (!fixed && reservePoison && skillIndex >= 0 && specials[skillIndex]!.kind === 'poison' && specials[skillIndex]!.all) {
       for (const opponent of opponents) plannedPoison.add(opponent.key);
     }
     // Non-combat fixtures and passive defenders still have a meaningful legal stance.
     if (!specials.some(skill => skill.kind === 'hit' || skill.kind === 'poison') && unit.monster.atk === 0 && find('guard') >= 0) skillIndex = find('guard');
-    return { key: unit.key, skill: skillIndex, target: skillIndex >= 0 && specials[skillIndex]!.kind === 'guard' ? unit.key : selectedTarget?.key };
+    return fixed ?? { key: unit.key, skill: skillIndex, target: skillIndex >= 0 && specials[skillIndex]!.kind === 'guard' ? unit.key : selectedTarget?.key };
   });
 }
 
@@ -589,7 +622,7 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     if (unit.hp <= 0 && unit.supplyReady) { unit.supplyReady = false; emit({ kind: 'expire', target: unit.key, effect: 'supplyReady', supplyReady: false }); }
     if (unit.hp <= 0 && unit.responseReady) { unit.responseReady = false; emit({ kind: 'expire', target: unit.key, effect: 'responseReady', responseReady: false }); }
   }
-  const alliedAutomatic = autoOrders(battle);
+  const alliedAutomatic = completeOrders(battle, orders);
   const enemyAutomatic = autoOrders(battle, 'enemies');
   const enemyOrders = options.enemyOrders ?? enemyAutomatic;
   const actions: { unit: Unit; skill: Skill; side: 'allies' | 'enemies'; target?: string; skillIndex: number; tie: number }[] = [];
