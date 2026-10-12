@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
+import { useEffect, useLayoutEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { clampMythTime, MYTH_DURATION, MYTH_STILLS, mythBeat, mythScene, type MythScene } from '../mythVignettes';
 import { mythSceneSvg } from '../mythSceneSvg';
@@ -26,6 +26,7 @@ function MythPlayer({ scene, onClose }: { scene: MythScene; onClose: () => void 
   const player = useRef<HTMLElement>(null);
   const close = useRef<HTMLButtonElement>(null);
   const portal = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
   const titleId = useId(), descriptionId = useId();
   const sample = reduced ? MYTH_STILLS[still] : time;
   const beat = reduced ? still : mythBeat(time);
@@ -33,7 +34,7 @@ function MythPlayer({ scene, onClose }: { scene: MythScene; onClose: () => void 
   function seek(next: number) { const value = clampMythTime(next); timeRef.current = value; setTime(value); }
 
   useLayoutEffect(() => {
-    const previous = document.activeElement as HTMLElement | null;
+    previousFocus.current = document.activeElement as HTMLElement | null;
     const overflow = document.body.style.overflow;
     // Layout cleanup releases inert before an enclosing profile's passive focus
     // restoration, including when both dialogs unmount in the same commit.
@@ -47,8 +48,12 @@ function MythPlayer({ scene, onClose }: { scene: MythScene; onClose: () => void 
     return () => {
       inertStates.forEach(([node, wasInert]) => { if (!wasInert) node.removeAttribute('inert'); });
       if (overflow !== 'hidden') document.body.style.overflow = overflow;
-      if (previous?.isConnected) previous.focus({ preventScroll: true });
     };
+  }, []);
+  useEffect(() => () => {
+    // Restore after React's commit selection handling, which may otherwise
+    // restore surviving BODY focus over the trigger during portal removal.
+    if (previousFocus.current?.isConnected) previousFocus.current.focus({ preventScroll: true });
   }, []);
 
   useEffect(() => { if (reduced) { setPlaying(false); setStill(0); } }, [reduced]);
@@ -78,21 +83,38 @@ function MythPlayer({ scene, onClose }: { scene: MythScene; onClose: () => void 
     return () => { stopped = true; cancelAnimationFrame(frame); };
   }, [playing, reduced]);
 
-  function key(event: KeyboardEvent) {
-    if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); return; }
-    if (event.key !== 'Tab') return;
-    const controls = [...(player.current?.querySelectorAll<HTMLElement>('button, a[href], summary') ?? [])].filter(node => {
-      if (node.matches(':disabled')) return false;
-      const disclosure = node.closest('details');
-      return !disclosure || disclosure.open || node.tagName === 'SUMMARY';
-    });
-    if (!controls.length) return;
-    event.preventDefault(); event.stopPropagation();
-    const current = controls.indexOf(document.activeElement as HTMLElement);
-    const next = current < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (current + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
-    controls[next].focus();
-  }
-  return createPortal(<div ref={portal} className="mythOverlay" onClick={event => { event.stopPropagation(); if (event.target === event.currentTarget) onClose(); }} onKeyDown={key}>
+  useLayoutEffect(() => {
+    // Disabled terminal controls can drop native focus to BODY. The topmost
+    // portal must own these keys before any profile/page fallback, regardless
+    // of the event target. An inert player yields to a newer nested dialog.
+    const key = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || !portal.current || portal.current.closest('[inert]')) return;
+      if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); return; }
+      if (event.key !== 'Tab') return;
+      const controls = [...(player.current?.querySelectorAll<HTMLElement>('button, a[href], summary') ?? [])].filter(node => {
+        if (node.matches(':disabled')) return false;
+        const disclosure = node.closest('details');
+        return !disclosure || disclosure.open || node.tagName === 'SUMMARY';
+      });
+      if (!controls.length) return;
+      event.preventDefault(); event.stopPropagation();
+      const current = controls.indexOf(document.activeElement as HTMLElement);
+      const next = current < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (current + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
+      controls[next].focus();
+    };
+    window.addEventListener('keydown', key, true);
+    return () => window.removeEventListener('keydown', key, true);
+  }, [onClose]);
+
+  useLayoutEffect(() => {
+    if (!portal.current || portal.current.closest('[inert]')) return;
+    const active = document.activeElement;
+    // Repair only control-state transitions, never poll or refocus each frame.
+    // This covers both native BODY fallback and DOMs retaining disabled focus.
+    if (!player.current?.contains(active) || active?.matches(':disabled')) close.current?.focus({ preventScroll: true });
+  }, [ended, reduced, still]);
+
+  return createPortal(<div ref={portal} className="mythOverlay" onClick={event => { event.stopPropagation(); if (event.target === event.currentTarget) onClose(); }}>
     <section ref={player} className="mythPlayer" role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} style={{ '--myth-colour': scene.colour } as React.CSSProperties}>
       <header className="mythHeader"><div><span>{scene.name} · 小さな物語</span><h2 id={titleId}>{scene.title}</h2></div><button ref={close} type="button" className="mythClose" onClick={onClose} aria-label="物語を閉じて詳細に戻る">×</button></header>
       <div className="mythContent">

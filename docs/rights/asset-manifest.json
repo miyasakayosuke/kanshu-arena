@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.11",
-  "auditBaseCommit": "6852230e96184577f5d30cfe8e840ac2824d8115",
+  "release": "v0.20.12",
+  "auditBaseCommit": "30807c382d3f162772862ee1edc82e5e0a03de0f",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -873,14 +873,29 @@
       "sha256": {
         "src/mythVignettes.ts": "8aa476f67c91fe8bb17a10406ccf3d0c7f03441a77733710f6eac03eece417a9",
         "src/mythSceneSvg.ts": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5",
-        "src/components/MythVignette.tsx": "4d8bcb2f98116ace53ae1a52bfda5f935070a58ab264d3ec926e4fa3ba70bfc4",
+        "src/components/MythVignette.tsx": "3ab2bb95a326c79d22844e7d11d7201445da1fdf3b5a9e4f0099d2f589f29ab4",
         "src/components/mythVignette.css": "d286ff61b69a489b55183181c46f0b21e895acf417ed0bca62f320197c1be86d"
       },
       "references": [
         "docs/myth-vignettes-provenance.md",
-        "docs/catalog-myth-integration.md"
+        "docs/catalog-myth-integration.md",
+        "docs/myth-terminal-focus-candidate.md"
       ],
-      "distribution": "Inline deterministic SVG scenes in browser bundle; no preview videos distributed"
+      "distribution": "Inline deterministic SVG scenes in browser bundle; no preview videos distributed",
+      "changeRecords": [
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "Unpublished terminal-control focus and topmost keyboard repair on public v0.20.11 commit 30807c382d3f162772862ee1edc82e5e0a03de0f / tree 20a753b4d51e3ec4b7ccec29d8d18bb6be57f1cc.",
+          "files": [
+            "src/components/MythVignette.tsx",
+            "src/components/MythVignette.test.tsx",
+            "src/App.catalogMyths.test.tsx",
+            "docs/myth-terminal-focus-candidate.md"
+          ],
+          "provenance": "Project-specific AI-assisted focus/event lifecycle repair and regression tests written directly from the existing source and reproduced native-browser failure. The active non-inert story owns native Escape/Tab even when a disabled terminal control loses focus to BODY. Bounded control-state repair and post-commit trigger restoration preserve nested dismissal. No external code, prose, illustrations, animation samples, fonts, media or dependencies imported. Scene renderer, duration, timeline, art, gameplay, saved-team schema, runtime labels, version and notices are unchanged.",
+          "reviewLimit": "Explicit DOM focus-loss simulation establishes regression behavior but is not native-browser acceptance. Local browser launch and preview routes were known unavailable and were not retried. The publisher must verify the final deployed build in the supported browser. Inventory checks do not establish legal clearance."
+        }
+      ]
     },
     {
       "id": "selected-party-pasture-home",

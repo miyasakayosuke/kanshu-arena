@@ -1,0 +1,131 @@
+{
+  "release": "0.20.12",
+  "stage": "Final prepublication checks; exact native reproduction awaits deployment",
+  "baselineCommit": "30807c382d3f162772862ee1edc82e5e0a03de0f",
+  "baselineTree": "20a753b4d51e3ec4b7ccec29d8d18bb6be57f1cc",
+  "candidateTree": "e255bcae6f26f33979274f027e8701b527210388",
+  "candidatePatchSha256": "66e62aa21b8bc7edcb4f8ab2f3b8e8b5c7e13062cf0555abcd60fbfde837cfb6",
+  "checks": {
+    "tests": 2770,
+    "files": 134,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.11",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "96deb61e2277abb0c047f16ccf681361e7ffb121",
+          "release": "9ed41dc8b39b8496ad96f97de2d9e53af1aad252"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.11",
+          "release": "0.20.12"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "baselineCommit": "30807c382d3f162772862ee1edc82e5e0a03de0f",
+    "baselineTree": "20a753b4d51e3ec4b7ccec29d8d18bb6be57f1cc",
+    "runtimeChanged": [
+      "src/components/MythVignette.tsx"
+    ],
+    "creditsChange": "version marker only",
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/App.tsx",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "candidatePlayerSha256": "3ab2bb95a326c79d22844e7d11d7201445da1fdf3b5a9e4f0099d2f589f29ab4",
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "sceneRendererSha256": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5"
+  },
+  "independentReview": {
+    "focusedTests": 71,
+    "additionalLifecycleTests": 4,
+    "exactCandidateReconstruction": true,
+    "runtimeSourceBlockers": 0
+  },
+  "limits": [
+    "Native terminal-button focus/Escape/Tab repro must pass after exact deployment; DOM is not native browser acceptance.",
+    "Physical devices, screen readers, real reduced-motion preference changes and injected load failures are not verified live unless separately recorded.",
+    "Blocked local Chromium/socket/localhost/file routes were not retried.",
+    "Existing main-chunk advisory remains; no performance claim.",
+    "Rights checks are not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

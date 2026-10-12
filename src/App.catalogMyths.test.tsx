@@ -57,13 +57,16 @@ describe('catalog → profile → eight optional myth scenes', () => {
   expect(document.activeElement).toBe(card); expect(gallery.scrollTop).toBe(187); expect(document.body.style.overflow).toBe('auto');
   expect(localStorage.getItem('kanshu-workshop-v1')).toBe(saved); expect(window.location.hash).toBe('#catalog');
  });
- it('returns to the tapped card after both overlays unmount without browser click focus', async () => {
+ it('returns through both layers on separate window Escapes without browser click focus', async () => {
   await mount(); const card = label('フェンリルの詳細');
   expect(document.activeElement).not.toBe(card); await click(card);
   await act(async () => { await import('./components/MythVignette'); });
   await click(document.querySelector<HTMLButtonElement>('.mythPlay')!);
   await key('Escape', window);
-  expect(document.activeElement).toBe(card); expect(document.querySelector('.profileModal')).toBeNull(); expect(frames.size).toBe(0);
+  expect(document.querySelector('.mythPlayer')).toBeNull(); expect(document.querySelector('.profileModal')).toBeTruthy();
+  expect(document.activeElement).toBe(document.querySelector('.mythPlay')); expect(frames.size).toBe(0);
+  await key('Escape', window);
+  expect(document.activeElement).toBe(card); expect(document.querySelector('.profileModal')).toBeNull();
  });
  it('returns to the actual play trigger after pointer activation that did not focus it', async () => {
   await mount(); await openProfile();
@@ -90,13 +93,44 @@ describe('catalog → profile → eight optional myth scenes', () => {
   await key('Escape'); expect(document.querySelector('.profileModal')).toBeNull(); expect(document.activeElement).toBe(card);
   expect(family.value).toBe('beast'); expect(document.querySelector<HTMLDetailsElement>('.filterDisclosure')!.open).toBe(true);
  });
- it('returns focus to the catalog card if the parent profile is dismissed during playback', async () => {
-  await mount(); const card = await openProfile(); await openMovie();
-  // Exercise the parent's existing programmatic/window fallback, bypassing the child key handler.
-  await key('Escape', window);
-  expect(document.querySelector('.mythPlayer')).toBeNull(); expect(document.querySelector('.profileModal')).toBeNull();
-  expect(frames.size).toBe(0); expect(document.activeElement).toBe(card); expect(document.body.style.overflow).toBe('auto');
+ it('owns window-targeted Escape before the parent fallback, then releases it on close', async () => {
+  await mount(); const card = await openProfile(); const trigger = await openMovie();
+  expect((await key('Escape', window)).defaultPrevented).toBe(true);
+  expect(document.querySelector('.mythPlayer')).toBeNull(); expect(document.querySelector('.profileModal')).toBeTruthy();
+  expect(frames.size).toBe(0); expect(document.activeElement).toBe(trigger); expect(document.body.style.overflow).toBe('hidden');
   expect(document.getElementById('test-root')!.hasAttribute('inert')).toBe(false);
+  await key('Escape', window);
+  expect(document.querySelector('.profileModal')).toBeNull(); expect(document.activeElement).toBe(card); expect(document.body.style.overflow).toBe('auto');
+ });
+ it('keeps the home profile open after paused skip disables the focused terminal button', async () => {
+  localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team: [12, 0, 2, 3, 4], rule: 'standard' }));
+  window.history.replaceState(null, '', '#home'); await mount();
+  const saved = localStorage.getItem('kanshu-workshop-v1');
+  const card = await openProfile(); const trigger = await openMovie();
+  const pause = textButton('一時停止'); pause.focus(); await click(pause);
+  await key('Tab'); expect(document.activeElement).toBe(textButton('はじめから'));
+  const skip = textButton('結末へ'); skip.focus();
+  // Explicitly model the native Chromium blur missing from happy-dom.
+  const setAttribute = Element.prototype.setAttribute; let nativeLosses = 0;
+  vi.spyOn(Element.prototype, 'setAttribute').mockImplementation(function(this: Element, name: string, value: string) {
+   if (this === skip && name === 'disabled' && document.activeElement === skip) {
+    // happy-dom cannot blur a button after disabled is set.
+    skip.blur(); nativeLosses++; expect(document.activeElement).toBe(document.body);
+   }
+   setAttribute.call(this, name, value);
+  });
+  await click(skip); expect(nativeLosses).toBe(1); expect(skip.disabled).toBe(true);
+  expect(document.querySelector('.mythStage')?.getAttribute('data-time')).toBe('9000'); expect(frames.size).toBe(0);
+  expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(2);
+  expect(document.activeElement).toBe(label('物語を閉じて詳細に戻る'));
+  // A late external focus loss must still be safe, independently of commit repair.
+  (document.activeElement as HTMLElement).blur(); expect(document.activeElement).toBe(document.body);
+  expect((await key('Escape')).defaultPrevented).toBe(true);
+  expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(1); expect(document.activeElement).toBe(trigger);
+  expect(document.body.style.overflow).toBe('hidden'); expect(document.getElementById('test-root')!.hasAttribute('inert')).toBe(false);
+  await key('Escape'); expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(0);
+  expect(document.activeElement).toBe(card); expect(document.body.style.overflow).toBe('auto');
+  expect(window.location.hash).toBe('#home'); expect(localStorage.getItem('kanshu-workshop-v1')).toBe(saved);
  });
  it('cancels playback and inert on navigation unmount, and reopening starts closed', async () => {
   await mount(); await click(label('ホーム')); await click(label('図鑑')); await openProfile(); await openMovie();
