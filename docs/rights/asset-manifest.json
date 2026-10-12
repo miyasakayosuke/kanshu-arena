@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.13",
-  "auditBaseCommit": "5c7103585b9fba301059e6813e9f3542b5f32c5b",
+  "release": "v0.20.14",
+  "auditBaseCommit": "2fc2d47c9f11c331d57809992f16b96a191d8825",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -302,7 +302,8 @@
         "src/tabCopy.css",
         "src/monsterDetailContent.ts",
         "src/monsterDetails.css",
-        "src/teamWorkshop.ts"
+        "src/teamWorkshop.ts",
+        "src/teamFocusReveal.ts"
       ],
       "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。 v0.14の粘体系5体の設定・技説明は本作向けに独立して記述。参照はdocs/slime-family-reference.md、造形はdocs/slime-art-provenance.md。 v0.15の3体の設定・技説明・独自動作は本作用に記述。参照はdocs/demon-family-reference.md、造形はdocs/demon-art-provenance.md。 v0.16の4体の物語・技説明と、土布の低い押し、手綱の横引き、袖の囲い、逆さ糸の縫いのCanvas/CSS/動作コードはUI統合担当が本作用に直接記述。毒片が命中時だけ畳まれる交換効果を新作し、外部画像・効果・文章・コード・動作試料を取り込んでいない。参照はdocs/undead-family-reference.md、造形はdocs/undead-art-provenance.md。 v0.17ではヤヌスの物語・四技の説明、四分類の種類数と生存対象、共通一回のUIを本作用に直接記述。敷居を傾け掌を示す動作、空いた門を通る三本の流線、短い二枚の格子を外へ開くCanvas/CSS効果を新作した。HP回復を示す数字や光の十字を清めに使わず、実際の毒0/guard=trueイベントを表示。外部の画像・音・フォント・文章・コード・動作試料は持ち込んでいない。 全系統の調整検証に伴い、src/poisonDescription.tsの毒説明を本作の実装から独立に記述。即時ダメージと最大HP6%の継続毒、残り回数の更新、解除と予防の違いを区別し、実際のユニット設定またはエンジン既定値を表示する。制作担当は外部の説明文・コードを取り込まず、本作用の新規文面とヘルパーを記述したと申告。 v0.18の毒の機構・自動指示の限界・既存編成を使う対策、ヤヌスの推薦説明、プレイガイドは本作の実装と保存済み実測から独立に記述。外部の記事本文・説明文・画像・音・フォント・コードのコピーは追加していない。 v0.18.1のリーダー比較UI、HP/MP/攻撃/素早さの前後・対象表示と優先度の短い説明は、本作の開始処理から計算した実数を用いる独自コード・文面。キャラクターの能力・AI・アート・外部依存は追加変更せず、外部記事本文・説明文・画像・コードのコピーを用いない。最終制作申告と集約検証はdocs/rights/releases/2026-10-10-v0.18.1.mdに記録する。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
@@ -708,6 +709,17 @@
           ],
           "provenance": "Original project React/TypeScript/CSS and concise Japanese interface copy authored for the user request. Reuses existing project monster artwork and mechanics; no new media, external reference text, dependency, font, or copied third-party expression.",
           "reviewLimit": "Automated state, DOM, source-layout and build checks are not browser pixel acceptance or legal clearance. Native browser visual validation remains with the release owner. See docs/three-team-editor-candidate.md."
+        },
+        {
+          "date": "2026-10-12",
+          "change": "Narrow v0.20.13 team-editor focus-visibility correction. After the overview is revealed and focus restored, measure the visual viewport and actual fixed action/navigation docks, then synchronously scroll the page just enough to keep the selected slot clear. A slot taller than the uncovered band has its operable center centered in that band. Existing profile-open state defers a pending return until profile/nested-movie dismissal, without changing those dialogs.",
+          "files": [
+            "src/TeamBuilder.tsx",
+            "src/teamFocusReveal.ts",
+            "src/App.tsx"
+          ],
+          "provenance": "Original project TypeScript/React helper and regression tests authored directly from the live focus-obscuration report. No new artwork, copy, external reference material, dependency, font, or media.",
+          "reviewLimit": "DOM geometry probes do not replace native browser hit-testing; release owner verifies the native short-phone, landscape and zoom cases. No legal-clearance claim. See docs/team-focus-reveal-candidate.md."
         }
       ]
     },

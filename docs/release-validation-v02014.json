@@ -1,0 +1,145 @@
+{
+  "release": "0.20.14",
+  "stage": "Final prepublication checks; actual unobscured-focus native acceptance awaits deployment",
+  "baselineCommit": "2fc2d47c9f11c331d57809992f16b96a191d8825",
+  "baselineTree": "f762d7929ff6ac63f6d003f03bacf71c8e619b2d",
+  "candidateTree": "53b5a3ebe3bc86d2ce53d55e58eeca50713e362e",
+  "candidatePatchSha256": "07e6d28487e1d9da5aa556bdcc5e6857c2b96d9c0227dc65a338f11db75fcc37",
+  "checks": {
+    "tests": 2814,
+    "files": 139,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.13",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "990740bafaafa5db067f9257bf5348bf1a7f6cc8",
+          "release": "18d7bfacb2f3275c51bdf974441f5051881ea5bb"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.13",
+          "release": "0.20.14"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "baselineCommit": "2fc2d47c9f11c331d57809992f16b96a191d8825",
+    "baselineTree": "f762d7929ff6ac63f6d003f03bacf71c8e619b2d",
+    "runtimeModified": [
+      "src/App.tsx",
+      "src/TeamBuilder.tsx"
+    ],
+    "runtimeAdded": [
+      "src/teamFocusReveal.ts"
+    ],
+    "appChange": "passes existing details-open state to the editor only",
+    "creditsChange": "version marker only",
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "reviewedRuntimeSha256": {
+      "src/App.tsx": "d594e14b3dd6de0546ec317545bf85c76a6adf64b9b029d7f548ab1584fab7df",
+      "src/TeamBuilder.tsx": "f3b419b979109eefe57d77ea5ec1fc178d6f3a24186ba8b47a570af8a51165f1",
+      "src/teamFocusReveal.ts": "07a5167315700f2b6b88d52f252d80666c6a3aab4c45ed434de068e13a7c80f7"
+    }
+  },
+  "independentReview": {
+    "focusedTestsIncludingAdditionalProbes": 267,
+    "files": 19,
+    "runtimeSourceBlockers": 0,
+    "resolvedFindings": [
+      "focused slot obscured by fixed action bar",
+      "return target disabled after remote team shrink",
+      "background focus theft while a profile or nested movie remains open"
+    ]
+  },
+  "limits": [
+    "Native center-hit, short-height/zoom and nested/cross-tab dismissal acceptance remains after exact deployment.",
+    "Physical devices, screen readers, OS motion preference changes and storage failure injection are not claimed live.",
+    "The browser observation route activates background tabs, so native hidden pause was not established in v0.20.13.",
+    "Existing main-chunk advisory remains; no performance claim.",
+    "Rights checks are not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

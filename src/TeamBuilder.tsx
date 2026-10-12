@@ -6,6 +6,7 @@ import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamily
 import { rules, monsterRole, type RuleId } from './strategy';
 import { activeFamilyOptions } from './families';
 import type { TeamWorkshop } from './teamWorkshop';
+import { revealFocusedTeamSlot } from './teamFocusReveal';
 import './teamBuilder.css';
 import './familyPlanDisclosure.css';
 
@@ -21,6 +22,7 @@ type Props = {
   rule: RuleId;
   setRule: (rule: RuleId) => void;
   onFocus: (id: number) => void;
+  detailsOpen?: boolean;
   notice: string;
   setNotice: (message: string) => void;
   practice: boolean;
@@ -194,7 +196,7 @@ function MemberSummary({ monster, label }: { monster?: Monster; label: string })
   </div>;
 }
 
-export default function TeamBuilder({ workshop, saved, onSelectTeam, onResumeDraft, onRestoreDraft, onAssignDraft, team, setTeam, rule, setRule, onFocus, notice, setNotice, practice, leavePractice, onCatalog }: Props) {
+export default function TeamBuilder({ workshop, saved, onSelectTeam, onResumeDraft, onRestoreDraft, onAssignDraft, team, setTeam, rule, setRule, onFocus, detailsOpen = false, notice, setNotice, practice, leavePractice, onCatalog }: Props) {
   const [filters, setFilters] = useState(createRosterFilters);
   const [copyTarget, setCopyTarget] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
@@ -272,12 +274,17 @@ export default function TeamBuilder({ workshop, saved, onSelectTeam, onResumeDra
     setCandidateId(null);
   };
   useLayoutEffect(() => {
-    // The overview is hidden while picking. Restore only after React reveals it.
-    if (!editing && !browsing && restoreSlotFocus.current !== null) {
-      slotButtons.current[restoreSlotFocus.current]?.focus({ preventScroll: true });
+    // Restore only after the overview is revealed and any profile/movie yields focus.
+    if (!editing && !browsing && !detailsOpen && restoreSlotFocus.current !== null) {
+      // A synchronized team may have shrunk while its picker was open.
+      const slot = slotButtons.current[Math.min(restoreSlotFocus.current, team.length)];
+      if (slot) {
+        slot.focus({ preventScroll: true });
+        revealFocusedTeamSlot(slot);
+      }
       restoreSlotFocus.current = null;
     }
-  }, [editing, browsing]);
+  }, [editing, browsing, detailsOpen]);
   const closeBestiary = () => {
     restoreBrowseFocus.current = true;
     setBrowsing(false);

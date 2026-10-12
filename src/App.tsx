@@ -308,7 +308,7 @@ export default function App() {
     {page === 'home' && <HomeScreen team={team} rule={rule} onFocus={setFocus} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
     {page === 'catalog' && <CatalogScreen filters={catalogFilters} setFilters={setCatalogFilters} scrollPosition={catalogScroll} onFocus={setFocus} />}
-    {page === 'team' && <TeamBuilder onCatalog={() => navigate('catalog')} workshop={workshop} saved={teamSaved} onSelectTeam={index => {
+    {page === 'team' && <TeamBuilder detailsOpen={focus !== null} onCatalog={() => navigate('catalog')} workshop={workshop} saved={teamSaved} onSelectTeam={index => {
       const next = workshop.teams[index];
       if (next.rule !== rule) { setPractice(false); setEncounter(null); }
       setWorkshop(previous => selectWorkshopTeam(previous, index));
