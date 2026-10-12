@@ -1,16 +1,21 @@
 import MonsterArt from './MonsterArt';
 import LeaderComparison from './LeaderComparison';
 import RosterBrowser, { createRosterFilters } from './RosterBrowser';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamilyCount, extraordinaryResponseEligible, UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
-import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
+import { rules, monsterRole, type RuleId } from './strategy';
 import { activeFamilyOptions } from './families';
+import type { TeamWorkshop } from './teamWorkshop';
 import './teamBuilder.css';
 import './familyPlanDisclosure.css';
 
 type Props = {
-  slots: (TeamSlot | null)[];
-  setSlots: (slots: (TeamSlot | null)[]) => void;
+  workshop: TeamWorkshop;
+  saved: boolean;
+  onSelectTeam: (index: number) => void;
+  onResumeDraft: () => void;
+  onRestoreDraft: () => void;
+  onAssignDraft: (index: number) => void;
   team: number[];
   setTeam: (team: number[]) => void;
   rule: RuleId;
@@ -189,14 +194,16 @@ function MemberSummary({ monster, label }: { monster?: Monster; label: string })
   </div>;
 }
 
-export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setRule, onFocus, notice, setNotice, practice, leavePractice, onCatalog }: Props) {
+export default function TeamBuilder({ workshop, saved, onSelectTeam, onResumeDraft, onRestoreDraft, onAssignDraft, team, setTeam, rule, setRule, onFocus, notice, setNotice, practice, leavePractice, onCatalog }: Props) {
   const [filters, setFilters] = useState(createRosterFilters);
+  const [copyTarget, setCopyTarget] = useState<number | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [candidateId, setCandidateId] = useState<number | null>(null);
   const [browsing, setBrowsing] = useState(false);
   const slotButtons = useRef<(HTMLButtonElement | null)[]>([]);
   const browseButton = useRef<HTMLButtonElement | null>(null);
   const restoreBrowseFocus = useRef(false);
+  const restoreSlotFocus = useRef<number | null>(null);
   const editorHeading = useRef<HTMLHeadingElement | null>(null);
   const preview = useRef<HTMLDivElement | null>(null);
   const commitPending = useRef(false);
@@ -212,9 +219,10 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
 
   // A load or another parent update must never keep a candidate for an older party.
   useEffect(() => {
+    if (selectedSlot !== null) restoreSlotFocus.current = selectedSlot;
     setSelectedSlot(null);
     setCandidateId(null);
-  }, [teamKey]);
+  }, [teamKey, workshop.selected]);
 
   const replacement = (id: number) => {
     const next = [...team];
@@ -259,11 +267,17 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     setNotice('');
   };
   const closeEditor = () => {
-    const previousSlot = selectedSlot;
+    restoreSlotFocus.current = selectedSlot;
     setSelectedSlot(null);
     setCandidateId(null);
-    if (previousSlot !== null) slotButtons.current[previousSlot]?.focus({ preventScroll: true });
   };
+  useLayoutEffect(() => {
+    // The overview is hidden while picking. Restore only after React reveals it.
+    if (!editing && !browsing && restoreSlotFocus.current !== null) {
+      slotButtons.current[restoreSlotFocus.current]?.focus({ preventScroll: true });
+      restoreSlotFocus.current = null;
+    }
+  }, [editing, browsing]);
   const closeBestiary = () => {
     restoreBrowseFocus.current = true;
     setBrowsing(false);
@@ -290,24 +304,23 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     setNotice(`${monsters[currentId].name}をリーダーにしました`);
     closeEditor();
   };
-  const save = (index: number) => {
-    if (!isValidTeam(team, budget)) return;
-    const next = slots.map((slot, i) => i === index ? { team: [...team], rule } : slot);
-    setSlots(next);
-    let stored = false;
-    try { stored = saveTeamSlots(localStorage, next); } catch { /* Storage is optional. */ }
-    setNotice(stored ? `編成${index + 1}に保存しました` : 'このブラウザでは保存できません。再読み込みするまでは呼び出せます。');
-  };
-  const load = (index: number) => {
-    const slot = slots[index];
-    if (!slot) return;
+  const moveMember = (direction: -1 | 1) => {
+    if (commitPending.current || selectedSlot === null) return;
+    const destination = selectedSlot + direction;
+    if (destination < 0 || destination >= team.length) return;
+    const next = [...team];
+    [next[selectedSlot], next[destination]] = [next[destination], next[selectedSlot]];
     commitPending.current = true;
-    setRule(slot.rule);
-    setTeam([...slot.team]);
-    setSelectedSlot(null);
-    setCandidateId(null);
-    setBrowsing(false);
-    setNotice(`編成${index + 1}を呼び出しました${practice && slot.rule !== rule ? '。ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''}`);
+    setTeam(next); setNotice(`${current!.name}を${destination + 1}枠へ移動しました`); closeEditor();
+  };
+  const removeMember = () => {
+    if (commitPending.current || currentId === undefined) return;
+    commitPending.current = true;
+    setTeam(team.filter(id => id !== currentId)); setNotice(`${current!.name}を編成から外しました`); closeEditor();
+  };
+  const selectTeam = (index: number) => {
+    setSelectedSlot(null); setCandidateId(null); setBrowsing(false); setCopyTarget(null);
+    onSelectTeam(index);
   };
 
   useEffect(() => {
@@ -326,11 +339,20 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     return () => window.removeEventListener('keydown', dismiss);
   }, [selectedSlot, browsing]);
 
-  return <main className="home teamBuilder" aria-label="編成">
-    <h2 className="srOnly">編成</h2>
+  return <main className={`home teamBuilder${editing || browsing ? ' isPicking' : ''}`} aria-label="編成">
+    <div className="teamOverview" hidden={editing || browsing}>
+    <div className="workshopHeading"><h2>チーム編成</h2><span className={saved ? 'teamSaveState' : 'teamSaveState saveFailed'} role="status">{saved ? '変更は自動保存' : '保存できません・この画面では保持中'}</span></div>
+    <div className="teamTabs" aria-label="チームを選ぶ">{workshop.teams.map((slot, index) => <button key={index} aria-label={`チーム${index + 1}を選ぶ`} aria-pressed={workshop.selected === index} onClick={() => selectTeam(index)}>
+      <strong>チーム{index + 1}</strong><small>{slot.team.length ? `${slot.team.length}/5体 · C${cost(slot.team)}` : '未編成'}</small>
+    </button>)}</div>
+    {workshop.selected === null && <div className="previousDraftNotice"><strong>一時編成を使用中</strong><p>3チームは変更していません。この編成も自動保存されます。</p>
+      <details className="draftAssignment"><summary>この編成をチームに保存</summary><div className="draftTargets">{workshop.teams.map((slot, index) => <button key={index} onClick={() => slot.team.length ? setCopyTarget(index) : onAssignDraft(index)}>チーム{index + 1}{slot.team.length ? 'に上書き' : 'に保存'}</button>)}</div>
+      {copyTarget !== null && <div className="draftConfirmation" role="group" aria-label="チームの上書き確認"><p>チーム{copyTarget + 1}の5枠をこの編成で置き換えますか？</p><button onClick={() => { onAssignDraft(copyTarget); setCopyTarget(null); }}>置き換える</button><button onClick={() => setCopyTarget(null)}>やめる</button></div>}</details>
+    </div>}
+    {workshop.selected !== null && workshop.draft && <button className="secondary recoverDraft" onClick={onResumeDraft}>前回の一時編成に戻す</button>}
     {practice && <div className="practiceNotice">同じ相手・同じ条件で再挑戦 <button onClick={leavePractice}>通常の対戦へ</button></div>}
     <section className="partyCard" aria-label="出場パーティ">
-      <div className="sectionTitle">出場パーティ <span>{team.length}/5体 <b className={total > budget ? 'overBudget' : ''}>COST {total}/{budget}</b></span></div>
+      <div className="sectionTitle">{workshop.selected === null ? '一時編成' : `チーム${workshop.selected + 1}`} <span>{team.length}/5体 <b className={total > budget ? 'overBudget' : ''}>COST {total}/{budget}</b></span></div>
       <div className="team builderSlots">
         {Array.from({ length: 5 }, (_, index) => {
           const monster = team[index] === undefined ? undefined : monsters[team[index]];
@@ -346,30 +368,25 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           </button>;
         })}
       </div>
-      <div className="familyComposition" aria-label="系統の内訳">{familyOptions.map(([value, label]) => <span key={value}>{label} <b>{team.filter(id => (monsters[id].family ?? 'unassigned') === value).length}</b>体</span>)}</div>
-      {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small><FamilyRecipients team={team} applies={monster => leaderAppliesTo(leader, monster)} /></div>}
+      {leader && <div className="leaderBanner"><span>✦ {leader.name}</span><small>{leader.description}</small></div>}
+      <details className="builderDisclosure teamEffects"><summary>系統・特性の詳細</summary><div className="familyComposition" aria-label="系統の内訳">{familyOptions.map(([value, label]) => <span key={value}>{label} <b>{team.filter(id => (monsters[id].family ?? 'unassigned') === value).length}</b>体</span>)}</div>
+      {leader && <div className="leaderRecipients"><FamilyRecipients team={team} applies={monster => leaderAppliesTo(leader, monster)} /></div>}
       <OpeningSupport team={team} />
       <BeastBarrageBonus team={team} />
       <FamilyPlans team={team} />
+      </details>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
-    <aside className="newDragon newExtraordinary"><div><strong>ヤヌス</strong></div><button className="secondary" aria-label="ヤヌスの詳細" onClick={() => onFocus(EXTRAORDINARY_CORE_ID)}>詳しく見る</button></aside>
-    <aside className="newDragon newUndead"><div><strong>ドラウグル</strong></div><button className="secondary" aria-label="ドラウグルの詳細" onClick={() => onFocus(UNDEAD_CORE_ID)}>詳しく見る</button></aside>
-    <details className="builderDisclosure arrivalDisclosure"><summary>新しい不死の仲間<span>解除・守護・手当ての3体</span></summary><aside className="newFamilyMembers" aria-label="新しい不死系メンバー">{([33,34,35] as const).map(id => <button key={id} className="familyArrival undeadArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}</aside></details>
-    <aside className="newDragon newDemon"><div><strong>マモン</strong></div><button className="secondary" aria-label="マモンの詳細" onClick={() => onFocus(DEMON_CORE_ID)}>詳しく見る</button></aside>
-    <details className="builderDisclosure arrivalDisclosure">
-      <summary>新しい悪魔の仲間<span>解除・毒払いの2体</span></summary>
-      <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
-        {([30, 31] as const).map(id => <button key={id} className="familyArrival demonArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
-      </aside>
-      <p className="hint">これまでの仲間も、モンスター図鑑から全員の詳細を開けます。</p>
+    <details className="builderDisclosure ruleDisclosure">
+      <summary>ルール：{rules[rule].name}<span>COST上限 {budget}</span></summary>
+      {practice && <p className="hint">ルール変更で同条件再戦を解除します。</p>}
+      <div className="ruleTabs" aria-label="対戦ルール">{Object.values(rules).map(value => <button key={value.id} aria-pressed={rule === value.id} onClick={() => setRule(value.id)}><strong>{value.name}</strong><small>COST {value.budget}</small></button>)}</div>
+      <p className="hint ruleHint">{rules[rule].description}</p>
     </details>
-    <details className="builderDisclosure recommendedTeams">
-      <summary>編成のヒント<span>{recommendedTeams.length}つの組み合わせ例</span></summary>
-      <p className="hint">左がリーダー。参考用の一覧です。入れ替えは出場パーティの枠から。</p>
-      {recommendedTeams.map(example => <div className="recommendedTeam" key={example.name}><strong>{example.name}<span>COST {cost([...example.team])}</span></strong><p>{example.team.map(id => monsters[id].name).join('・')}</p><small>{example.note}</small></div>)}
-    </details>
+    {workshop.previous && <details className="builderDisclosure legacyRecovery"><summary>移行前の編成を復元</summary><p>{workshop.previous.team.map(id => monsters[id].name).join('・') || '空の編成'}</p><button className="secondary" onClick={onRestoreDraft}>移行前の編成に戻す</button></details>}
+    {!editing && !browsing && <button className="detailButton browseBestiary" ref={browseButton} onClick={() => { if (onCatalog) { onCatalog(); return; } setBrowsing(true); setFilters(previous => previous.costFilter === 'fit' ? { ...previous, costFilter: 'all' } : previous); }}>モンスター図鑑を開く</button>}
+    </div>
     <p className="saveNotice teamNotice" role="status">{notice}</p>
 
     {(editing || browsing) && <section className="candidatePanel" id="team-candidates" aria-labelledby="candidate-heading">
@@ -392,19 +409,25 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           {current && <button className="detailButton" aria-label={`現在の${current.name}の詳細`} onClick={() => onFocus(current.id)}>現在の詳細</button>}
           {candidate && <button className="detailButton" aria-label={`比較中の${candidate.name}の詳細`} onClick={() => onFocus(candidate.id)}>候補の詳細</button>}
         </div>
+        {current && <div className="memberOrderActions" aria-label="並び順とメンバーの変更">
+          <button className="secondary" disabled={selectedSlot === 0} onClick={() => moveMember(-1)}>← 前へ</button>
+          <button className="secondary" disabled={selectedSlot === team.length - 1} onClick={() => moveMember(1)}>後ろへ →</button>
+          <button className="detailButton" onClick={removeMember}>編成から外す</button>
+        </div>}
         {current && selectedSlot !== 0 && <div className="leaderMovePreview">
-          <LeaderComparison beforeTeam={team} afterTeam={movedLeaderTeam} idPrefix="leader-move" />
+          <details className="builderDisclosure leaderPreviewDetails"><summary>リーダー変更の比較</summary><LeaderComparison beforeTeam={team} afterTeam={movedLeaderTeam} idPrefix="leader-move" /></details>
           <button className="secondary leaderMoveConfirm" aria-label={`${current.name}をリーダーにする`} aria-describedby="leader-move-summary" onClick={makeLeader}>{current.name}をリーダーにする</button>
         </div>}
-        {candidate && selectedSlot === 0 && <LeaderComparison beforeTeam={team} afterTeam={projectedTeam} idPrefix="leader-replacement" />}
+        {candidate && selectedSlot === 0 && <details className="builderDisclosure leaderPreviewDetails"><summary>リーダー変更の比較</summary><LeaderComparison beforeTeam={team} afterTeam={projectedTeam} idPrefix="leader-replacement" /></details>}
         {candidate && <div className="candidateImpact" role="status">
           <p>合計COST <strong>{total} → {projectedCost}/{budget}</strong><span className={projectedCost > budget ? 'overBudget' : ''}>残り {budget - projectedCost}</span></p>
-          {projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
+          <details className="builderDisclosure projectedEffects"><summary>入れ替え後の効果を確認</summary>{projectedLeader && <div className="projectedLeader"><small>{selectedSlot === 0 ? '新リーダー効果' : '入れ替え後のリーダー効果'}：{projectedLeader.description}</small><FamilyRecipients team={projectedTeam} applies={monster => leaderAppliesTo(projectedLeader, monster)} /></div>}
           <OpeningSupport team={projectedTeam} />
           <BeastBarrageBonus team={projectedTeam} />
           <FamilyPlans team={projectedTeam} comparisonTeam={team} />
           <small>{monsterRole(candidate.id).strength}</small>
           <small>気をつけたいこと：{monsterRole(candidate.id).tradeoff}</small>
+          </details>
           {candidateReason && <p className="budgetWarning">{candidateReason}</p>}
         </div>}
         {candidate && <button className="primary confirmReplacement" disabled={!!candidateReason} aria-describedby={selectedSlot === 0 ? 'leader-replacement-summary' : undefined} onClick={confirmReplacement}>
@@ -417,16 +440,5 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       } : undefined} />
     </section>}
 
-    <details className="builderDisclosure ruleDisclosure">
-      <summary>ルール：{rules[rule].name}<span>COST上限 {budget}</span></summary>
-      {practice && <p className="hint">ルール変更で同条件再戦を解除します。</p>}
-      <div className="ruleTabs" aria-label="対戦ルール">{Object.values(rules).map(value => <button key={value.id} aria-pressed={rule === value.id} onClick={() => setRule(value.id)}><strong>{value.name}</strong><small>COST {value.budget}</small></button>)}</div>
-      <p className="hint ruleHint">{rules[rule].description}</p>
-    </details>
-    <details className="builderDisclosure savedTeams" aria-label="保存した編成">
-      <summary>保存した編成<span>このブラウザに3枠</span></summary>
-      <div className="slotGrid">{slots.map((slot, i) => <div className="teamSlot" key={i}><strong>編成 {i + 1}</strong><span className="slotIcons" aria-label={slot ? slot.team.map(id => monsters[id].name).join('・') : '未保存'}>{slot ? slot.team.map(id => <MonsterArt key={id} monster={monsters[id]} portrait />) : '未保存'}</span><small>{slot ? `${rules[slot.rule].name} · C${cost(slot.team)}` : 'リーダーも保存'}</small><div><button aria-label={`編成${i + 1}を呼び出す`} disabled={!slot} onClick={() => load(i)}>呼出</button><button aria-label={`編成${i + 1}に保存`} disabled={!isValidTeam(team, budget)} onClick={() => save(i)}>{slot ? '上書き' : '保存'}</button></div></div>)}</div>
-    </details>
-    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { if (onCatalog) { onCatalog(); return; } setBrowsing(true); setFilters(previous => previous.costFilter === 'fit' ? { ...previous, costFilter: 'all' } : previous); }}>モンスター図鑑を開く</button>}
   </main>;
 }

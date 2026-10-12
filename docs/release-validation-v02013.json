@@ -1,0 +1,142 @@
+{
+  "release": "0.20.13",
+  "stage": "Final prepublication checks; native migration and animation acceptance awaits deployment",
+  "baselineCommit": "5c7103585b9fba301059e6813e9f3542b5f32c5b",
+  "baselineTree": "5890b0e123210fa758ea7fad9b769f6cef80588b",
+  "integratedReviewedTree": "9f1a0b927b8c472a1f904e99c4fd70c2570677b3",
+  "candidatePatchSha256": {
+    "editor": "f101325e052a26242e0721cf3fed0e3a1e6f80e78e80874bce6bd785f9c9a635",
+    "homeIdle": "f06fd5aaea37af56ec4546b274a89d28a6b5510e1005c3803fb9ad44b1e30f1d"
+  },
+  "checks": {
+    "tests": 2794,
+    "files": 137,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.12",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "9ed41dc8b39b8496ad96f97de2d9e53af1aad252",
+          "release": "990740bafaafa5db067f9257bf5348bf1a7f6cc8"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.12",
+          "release": "0.20.13"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "baselineCommit": "5c7103585b9fba301059e6813e9f3542b5f32c5b",
+    "baselineTree": "5890b0e123210fa758ea7fad9b769f6cef80588b",
+    "runtimeModified": [
+      "src/App.tsx",
+      "src/HomePasture.tsx",
+      "src/TeamBuilder.tsx",
+      "src/homePasture.css",
+      "src/teamBuilder.css"
+    ],
+    "runtimeAdded": [
+      "src/HomeIdleArt.tsx",
+      "src/homeIdleMotion.ts",
+      "src/teamWorkshop.ts"
+    ],
+    "creditsChange": "version marker only",
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/tabCopy.css",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "moviePlayerSha256": "3ab2bb95a326c79d22844e7d11d7201445da1fdf3b5a9e4f0099d2f589f29ab4",
+    "reviewedRuntimeBytesPreserved": true
+  },
+  "independentReview": {
+    "focusedTests": 239,
+    "additionalCombinedProbes": 6,
+    "runtimeSourceBlockers": 0,
+    "standaloneEditorFocused": 179,
+    "standaloneHomeFocused": 19,
+    "homeRasterFrames": 472,
+    "all37NeutralArtPixelIdentical": true
+  },
+  "limits": [
+    "Native browser migration, layout, keyboard, SMIL playback and hidden pause/resume require postdeployment verification.",
+    "Physical devices, screen readers, real reduced-motion preference changes and injected storage failures are not verified live unless separately recorded.",
+    "Blocked local Chromium/socket/localhost/file routes were not retried.",
+    "Existing main-chunk advisory remains; no performance claim.",
+    "Rights checks are not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

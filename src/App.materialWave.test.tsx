@@ -18,7 +18,7 @@ const hp = () => [...document.querySelectorAll('.commanderHp')].map(node => node
 const mp = () => [...document.querySelectorAll('.commanderMp')].map(node => node.textContent);
 const portraits = () => [...document.querySelectorAll<HTMLImageElement>('.commanderIcon img')].map(node => ({ src: node.src, style: node.getAttribute('style'), className: node.className }));
 async function mount(team = pure, rule = 'standard') {
-  localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule }));
+  localStorage.removeItem('kanshu-team-workshop-v2');localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule }));
   await act(async () => root.render(<App />));
 }
 async function begin(team = pure) { await mount(team); await click(label('闘技場')); await click(button('この編成で対戦する')); }

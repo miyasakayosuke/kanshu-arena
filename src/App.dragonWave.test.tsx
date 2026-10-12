@@ -21,7 +21,7 @@ const button = (name: string) => [...document.querySelectorAll<HTMLButtonElement
 const click = async (node: HTMLElement) => { expect(node).toBeTruthy(); await act(async () => node.click()); };
 const tick = async (ms: number) => { await act(async () => vi.advanceTimersByTime(ms)); };
 async function mount(team = pure, rule = 'standard') {
-  localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule }));
+  localStorage.removeItem('kanshu-team-workshop-v2');localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule }));
   await act(async () => root.render(<App />));
 }
 async function begin(team = pure) { await mount(team); await click(label('闘技場')); await click(button('この編成で対戦する')); }

@@ -169,28 +169,18 @@ describe('separate home, workshop, and arena screens', () => {
     expect(advance).not.toHaveBeenCalled();
   });
 
-  it('preserves all three session-only saved teams across screen and battle navigation', async () => {
+  it('preserves session-only team edits across tabs, screens and battle navigation when storage fails', async () => {
     vi.spyOn(localStorage, 'getItem').mockImplementation(() => { throw Error('blocked'); });
     vi.spyOn(localStorage, 'setItem').mockImplementation(() => { throw Error('blocked'); });
     await mount(); await navigate('編成');
-    await click(label('編成1に保存'));
-    const first = team();
     await click(label('2枠・バステトを入れ替える')); await click(label('バステトをリーダーにする'));
-    await click(label('編成2に保存'));
-    const second = team();
-    await click(label('3枠・ドリュアスを入れ替える')); await click(label('ドリュアスをリーダーにする'));
-    await click(label('編成3に保存'));
-    const third = team();
-    expect(document.querySelector('.saveNotice')?.textContent).toContain('保存できません');
-    expect(document.querySelector('.saveNotice')?.textContent).toContain('再読み込みするまでは呼び出せます');
-    await navigate('ホーム'); await startBattle();
-    await click(label('闘技場に戻る')); await click(button('中断して移動'));
-    await navigate('編成');
-    for (const [index, expected] of [first, second, third].entries()) {
-      expect(label(`編成${index + 1}を呼び出す`).disabled).toBe(false);
-      await click(label(`編成${index + 1}を呼び出す`));
-      expect(team()).toEqual(expected);
-    }
+    const first=team();
+    await click(label('チーム2を選ぶ'));await click(label('1枠・空き枠に追加'));await click(label('フェンリルを候補に選ぶ'));await click(button('フェンリルを編成に加える'));
+    const second=team();await click(label('チーム3を選ぶ'));const third=team();
+    expect(document.querySelector('.teamSaveState')?.textContent).toContain('保存できません');
+    await click(label('チーム1を選ぶ'));await navigate('ホーム'); await startBattle();
+    await click(label('闘技場に戻る')); await click(button('中断して移動'));await navigate('編成');
+    for (const [index, expected] of [first,second,third].entries()) {await click(label(`チーム${index+1}を選ぶ`));expect(team()).toEqual(expected);}
   });
 
   it('handles ordinary browser Back and Forward without starting a battle', async () => {

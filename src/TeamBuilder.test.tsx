@@ -3,6 +3,7 @@ import React, { act, useState } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import TeamBuilder from './TeamBuilder';
+import { migrateTeamWorkshop, currentTeam, updateCurrentTeam, selectWorkshopTeam } from './teamWorkshop';
 import { cost, monsters } from './engine';
 import { initialTeam, type RuleId, type TeamSlot } from './strategy';
 
@@ -10,6 +11,7 @@ let root: Root;
 let updates: number[][];
 let onFocus: ReturnType<typeof vi.fn>;
 let latestTeam: number[];
+let latestWorkshop: ReturnType<typeof migrateTeamWorkshop>;
 const byLabel = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 const byText = (text: string) => [...document.querySelectorAll<HTMLButtonElement>('button')].find(button => button.textContent === text)!;
 const candidateButton = (id: number) => byLabel(`${monsters[id].name}を候補に選ぶ`);
@@ -34,15 +36,16 @@ async function disclose(selector: string) {
   await click(document.querySelector<HTMLElement>(`${selector} > summary`)!);
 }
 function Harness({ startingTeam = initialTeam, startingRule = 'standard', startingSlots = [null, null, null], practice = false }: { startingTeam?: number[]; startingRule?: RuleId; startingSlots?: (TeamSlot | null)[]; practice?: boolean }) {
-  const [team, setTeam] = useState([...startingTeam]);
-  const [rule, setRule] = useState(startingRule);
-  const [slots, setSlots] = useState(startingSlots);
+  const [workshop, setWorkshop] = useState(() => migrateTeamWorkshop({ team: startingTeam, rule: startingRule }, startingSlots));
+  const { team, rule } = currentTeam(workshop);
+  const setTeam = (team: number[]) => setWorkshop(previous => updateCurrentTeam(previous, { team }));
+  const setRule = (rule: RuleId) => setWorkshop(previous => updateCurrentTeam(previous, { rule }));
   const [notice, setNotice] = useState('');
   const [detail, setDetail] = useState<number | null>(null);
-  latestTeam = team;
+  latestTeam = team; latestWorkshop = workshop;
   return <>
     <TeamBuilder team={team} setTeam={next => { updates.push([...next]); setTeam(next); }} rule={rule} setRule={setRule}
-      slots={slots} setSlots={setSlots} notice={notice} setNotice={setNotice} practice={practice} leavePractice={() => {}}
+      workshop={workshop} saved={true} onSelectTeam={index => { updates.push([...workshop.teams[index].team]); setWorkshop(previous => selectWorkshopTeam(previous, index)); }} onResumeDraft={() => {}} onRestoreDraft={() => {}} onAssignDraft={() => {}} notice={notice} setNotice={setNotice} practice={practice} leavePractice={() => {}}
       onFocus={id => { onFocus(id); setDetail(id); }} />
     {detail !== null && <div role="dialog" aria-modal="true" aria-label={`${monsters[detail].name}の詳細`}><p>読み取り専用の詳細</p><button onClick={() => setDetail(null)}>詳細を閉じる</button></div>}
   </>;
@@ -64,7 +67,8 @@ describe('slot-first team workshop', () => {
     expect(document.querySelectorAll('.builderSlots .teamUnit')).toHaveLength(5);
     expect(document.querySelector('.candidatePanel')).toBeNull();
     expect(document.querySelector<HTMLDetailsElement>('.ruleDisclosure')!.open).toBe(false);
-    expect(document.querySelector<HTMLDetailsElement>('.savedTeams')!.open).toBe(false);
+    expect(document.querySelectorAll('.teamTabs button')).toHaveLength(3);
+    expect(document.querySelector('.savedTeams')).toBeNull();
     expect(document.querySelector('.leaderBanner')!.textContent).toContain('素早さ +8%');
     expect(document.querySelector('.partyCard')!.textContent).toContain('COST 15/17');
     expect(document.body.textContent).not.toContain('編成から外す');
@@ -270,19 +274,16 @@ describe('slot-first team workshop', () => {
     expect(updates).toEqual([]);
   });
 
-  it('saves three teams and clears a pending comparison when loading a different rule, including practice warning', async () => {
-    await mount({ practice: true, startingSlots: [{ team: [2, 0, 3, 4, 6], rule: 'light' }, null, null] });
-    await disclose('.savedTeams');
-    await click(byLabel('編成2に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[1]).toEqual({ team: initialTeam, rule: 'standard' });
-    await click(slotButton(0));
-    await click(candidateButton(1));
-    await click(byLabel('編成1を呼び出す'));
-    expect(latestTeam).toEqual([2, 0, 3, 4, 6]);
+  it('switches direct team tabs and clears an uncommitted comparison without changing the old party', async () => {
+    await mount({ startingSlots: [{ team: [2,0,3,4,6], rule: 'light' }, null, null] });
+    await click(slotButton(0)); await click(candidateButton(1));
+    await click(byLabel('チーム1を選ぶ'));
+    expect(latestTeam).toEqual([2,0,3,4,6]);
+    expect(latestWorkshop.teams[1].team).toEqual(initialTeam);
     expect(document.querySelector('.candidatePanel')).toBeNull();
-    expect(document.querySelector('.teamNotice')!.textContent).toContain('同じ相手・同じシードの再戦を解除');
     expect(document.querySelector('.ruleTabs [aria-pressed=true]')!.textContent).toContain('軽量戦');
   });
+
 });
 
 describe('family team building', () => {
@@ -310,7 +311,7 @@ describe('family team building', () => {
   it('separates nature leader, nature opening, and beast opening recipients on a mixed team', async () => {
     await mount({ startingTeam: [14, 12, 13, 6, 10] });
     expect(document.querySelector('.familyComposition')!.textContent).toBe('獣系 2体自然系 3体竜系 0体物質系 0体粘体系 0体悪魔系 0体不死系 0体超常系 0体');
-    const leader = document.querySelector('.partyCard .leaderBanner')!;
+    const leader = document.querySelector('.partyCard .leaderRecipients')!;
     expect(leader.querySelector('.familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
     expect(leader.querySelector('.familyExcluded')!.textContent).toBe('対象外 2体：フェンリル・ラタトスク');
     const beast = document.querySelector('.partyCard [data-support-id="12"]')!;
@@ -335,7 +336,7 @@ describe('family team building', () => {
     const beasts = [12, 0, 2, 11, 13];
     await mount({ startingTeam: beasts });
     expect(document.querySelector('.partyCard .beastBarrageBonus')!.textContent).toContain('獣系 5/5体追加1発あり · ランダム4回');
-    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')!.textContent).toBe('対象外 0体：なし');
+    expect(document.querySelector('.partyCard .leaderRecipients .familyExcluded')!.textContent).toBe('対象外 0体：なし');
     await click(slotButton(3));
     await click(candidateButton(6));
     expect(document.querySelector('.candidateImpact .beastBarrageBonus')!.textContent).toContain('獣系 4/5体追加1発なし · ランダム3回');
@@ -343,7 +344,7 @@ describe('family team building', () => {
     await click(confirmButton());
     expect(latestTeam).toEqual([12, 0, 2, 6, 13]);
     expect(document.querySelector('.partyCard .beastBarrageBonus')!.getAttribute('data-active')).toBe('false');
-    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')!.textContent).toBe('対象外 1体：ガルーダ');
+    expect(document.querySelector('.partyCard .leaderRecipients .familyExcluded')!.textContent).toBe('対象外 1体：ガルーダ');
   });
 
   it('does not enable the beast bonus for four beasts in an incomplete party', async () => {
@@ -366,12 +367,11 @@ describe('family team building', () => {
     await click(byLabel('玄武の詳細'));
     expect(onFocus).toHaveBeenLastCalledWith(14);
     await click(byText('詳細を閉じる'));
-    await click(byLabel('編成1を呼び出す'));
+    await click(byLabel('チーム1を選ぶ'));
     expect(latestTeam).toEqual([14, 13, 2, 6, 10]);
     expect(document.querySelector('.candidatePanel')).toBeNull();
-    await click(byLabel('編成2に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[1]).toEqual({ team: [14, 13, 2, 6, 10], rule: 'light' });
-    expect(document.querySelector('.partyCard .leaderBanner .familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
+    expect(latestWorkshop.teams[0]).toEqual({ team: [14, 13, 2, 6, 10], rule: 'light' });
+    expect(document.querySelector('.partyCard .leaderRecipients .familyRecipients')!.textContent).toBe('対象 3/5体：玄武・ガルーダ・ナーガ');
   });
 });
 
@@ -421,21 +421,15 @@ describe('dragon workshop conditions', () => {
     expect(updates).toEqual([]);
   });
 
-  it('keeps the pure cost17 team visible but blocks lightweight saves, and documents a cost15 mixed example', async () => {
-    await mount({ startingTeam: [15, 5, 16, 17, 18] });
-    expect(byLabel('編成1に保存').disabled).toBe(false);
-    await disclose('.recommendedTeams');
-    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(14);
-    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜系の蓄積COST 17');
-    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('竜3体の混成COST 15');
-    expect(updates).toEqual([]);
-    await disclose('.ruleDisclosure');
+  it('retains a cost17 draft under light rules and keeps the exact budget warning', async () => {
+    await mount({ startingTeam: [15,5,16,17,18] });
     await click([...document.querySelectorAll<HTMLButtonElement>('.ruleTabs button')].find(button => button.textContent?.includes('軽量戦'))!);
-    expect(byLabel('編成1に保存').disabled).toBe(true);
+    expect(latestWorkshop.teams[0].team).toEqual([15,5,16,17,18]);
     expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
     expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
-    expect(latestTeam).toEqual([15, 5, 16, 17, 18]);
+    expect(document.querySelector('.recommendedTeams')).toBeNull();
   });
+
 });
 
 describe('material workshop conditions', () => {
@@ -462,8 +456,8 @@ describe('material workshop conditions', () => {
   it('previews loss of the third material or core and recipient changes without changing the saved party', async () => {
     const mixed = [19, 20, 21, 6, 2];
     await mount({ startingTeam: mixed });
-    expect(document.querySelector('.partyCard .leaderBanner .familyRecipients')?.textContent).toBe('対象 3/5体：タロス・唐傘おばけ・ぬりかべ');
-    expect(document.querySelector('.partyCard .leaderBanner .familyExcluded')?.textContent).toBe('対象外 2体：ガルーダ・バステト');
+    expect(document.querySelector('.partyCard .leaderRecipients .familyRecipients')?.textContent).toBe('対象 3/5体：タロス・唐傘おばけ・ぬりかべ');
+    expect(document.querySelector('.partyCard .leaderRecipients .familyExcluded')?.textContent).toBe('対象外 2体：ガルーダ・バステト');
     await click(slotButton(2)); await click(candidateButton(13));
     const projected = document.querySelector('.candidateImpact .materialRepairPlan')!;
     expect(projected.getAttribute('data-active')).toBe('false');
@@ -483,20 +477,10 @@ describe('material workshop conditions', () => {
     expect(document.querySelector('.partyCard .materialRepairPlan')?.getAttribute('data-active')).toBe('false');
   });
 
-  it('features Mammon with two collapsed companions, while all prior material units remain inspectable in the bestiary', async () => {
-    await mount();
-    expect(document.querySelector('.newDemon')?.textContent).toContain('マモン');
-    expect(document.querySelector<HTMLDetailsElement>('.arrivalDisclosure')?.open).toBe(false);
-    expect([...document.querySelectorAll('.demonArrival')].map(node => node.getAttribute('aria-label'))).toEqual([30, 31].map(id => `${monsters[id].name}の詳細`));
-    await click(byLabel('マモンの詳細')); expect(onFocus).toHaveBeenLastCalledWith(29);
-    await click(byText('詳細を閉じる')); await disclose('.arrivalDisclosure');
-    for (const id of [30, 31]) {
-      await click(byLabel(`${monsters[id].name}の詳細`)); expect(onFocus).toHaveBeenLastCalledWith(id);
-      await click(byText('詳細を閉じる'));
-    }
-    await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!); await disclose('.filterDisclosure');
-    await chooseSelect('系統で絞り込み', 'material');
-    for (const id of [19, 20, 21, 22, 23]) {
+  it('removes promotional panels while every demon and material remains inspectable in the picker', async () => {
+    await mount(); expect(document.querySelector('.newDemon, .arrivalDisclosure')).toBeNull();
+    await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
+    for (const id of [29,30,31,19,20,21,22,23]) {
       await click(byLabel(`${monsters[id].name}の詳細`)); expect(onFocus).toHaveBeenLastCalledWith(id);
       await click(byText('詳細を閉じる'));
     }
@@ -517,31 +501,17 @@ describe('material workshop conditions', () => {
     expect(updates).toEqual([]);
   });
 
-  it('keeps COST17 visible but blocks light saves, then saves and restores a qualified COST15 mixed example', async () => {
-    const pure = [19, 20, 21, 22, 23], mixed = [19, 20, 21, 6, 2];
-    await mount({ startingTeam: pure, startingSlots: [null, { team: mixed, rule: 'light' }, null] });
-    await disclose('.recommendedTeams');
-    expect(document.querySelectorAll('.recommendedTeam')).toHaveLength(14);
-    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('物質系の反攻COST 17');
-    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('物質3体の混成COST 16');
-    expect(byLabel('編成1に保存').disabled).toBe(false);
-    await click(byLabel('編成1に保存'));
-    await disclose('.ruleDisclosure');
+  it('keeps full and mixed material teams independent, including a temporarily invalid light draft', async () => {
+    const pure = [19,20,21,22,23], mixed = [19,20,21,6,2];
+    await mount({ startingTeam: pure, startingSlots: [null,{ team: mixed, rule: 'light' },null] });
     await click([...document.querySelectorAll<HTMLButtonElement>('.ruleTabs button')].find(node => node.textContent?.includes('軽量戦'))!);
-    expect(byLabel('編成3に保存').disabled).toBe(true);
-    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
     expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
-    expect(latestTeam).toEqual(pure);
-    await click(byLabel('編成2を呼び出す'));
-    expect(latestTeam).toEqual(mixed);
+    await click(byLabel('チーム2を選ぶ')); expect(latestTeam).toEqual(mixed);
     expect(document.querySelector('.partyCard .materialRepairPlan')?.getAttribute('data-active')).toBe('true');
-    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 15/15');
-    await click(byLabel('編成3に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)).toEqual([{ team: pure, rule: 'standard' }, { team: mixed, rule: 'light' }, { team: mixed, rule: 'light' }]);
-    await click(byLabel('編成1を呼び出す'));
-    expect(latestTeam).toEqual(pure);
-    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/17');
+    await click(byLabel('チーム1を選ぶ')); expect(latestTeam).toEqual(pure);
+    expect(document.querySelector('.partyCard')?.textContent).toContain('COST 17/15');
   });
+
 });
 
 describe('slime workshop conditions', () => {
@@ -599,15 +569,15 @@ describe('undead poison exchange workshop',()=>{
     expect([...document.querySelectorAll('.candidateCard .rosterText strong')].map(n=>n.textContent)).toEqual([4,32,33,34,35].map(id=>monsters[id].name));
     await click(byText('毒交換'));expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);expect(document.querySelector('.candidateCard')?.textContent).toContain('ドラウグル');
   });
-  it('features the core and all three companions and saves the legal mixed C15 example',async()=>{
-    const pure=[32,4,33,34,35],mixed=[2,32,4,35,10];await mount({startingTeam:pure,startingSlots:[null,{team:mixed,rule:'light'},null]});
-    expect(document.querySelector('.newUndead')?.textContent).toContain('ドラウグル');expect(document.querySelectorAll('.undeadArrival')).toHaveLength(3);
-    await click(byLabel('ドラウグルの詳細'));expect(onFocus).toHaveBeenLastCalledWith(32);await click(byText('詳細を閉じる'));
-    expect(document.querySelector('.recommendedTeams')?.textContent).toContain('不死系の毒交換COST 17');expect(document.querySelector('.recommendedTeams')?.textContent).toContain('不死3体の混成COST 15');
-    await click(byLabel('編成1に保存'));await click([...document.querySelectorAll<HTMLButtonElement>('.ruleTabs button')].find(n=>n.textContent?.includes('軽量戦'))!);expect(byLabel('編成3に保存').disabled).toBe(true);
-    await click(byLabel('編成2を呼び出す'));expect(latestTeam).toEqual(mixed);expect(document.querySelector('.undeadCashoutPlan')?.getAttribute('data-active')).toBe('true');await click(byLabel('編成3に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)).toEqual([{team:pure,rule:'standard'},{team:mixed,rule:'light'},{team:mixed,rule:'light'}]);
+  it('keeps undead core and companions available without promotions and switches the legal mixed team', async () => {
+    const pure=[32,4,33,34,35], mixed=[2,32,4,35,10];
+    await mount({ startingTeam:pure, startingSlots:[null,{team:mixed,rule:'light'},null] });
+    expect(document.querySelector('.newUndead, .undeadArrival, .recommendedTeams')).toBeNull();
+    await click(byLabel('チーム2を選ぶ')); expect(latestTeam).toEqual(mixed);
+    expect(document.querySelector('.undeadCashoutPlan')?.getAttribute('data-active')).toBe('true');
+    expect(latestWorkshop.teams[0].team).toEqual(pure);
   });
+
 });
 
 describe('extraordinary mixed-family workshop',()=>{
@@ -617,24 +587,20 @@ describe('extraordinary mixed-family workshop',()=>{
  it('previews losing a unique family and preserves the original when cancelled',async()=>{
   const team=[36,12,2,30,26];await mount({startingTeam:team});await click(slotButton(4));await click(candidateButton(13));expect(document.querySelector('.candidateImpact .extraordinaryResponsePlan')?.getAttribute('data-active')).toBe('false');expect(document.querySelector('.candidateImpact .extraordinaryResponsePlan')?.textContent).toContain('所属系統 3種類');expect(document.querySelector('.partyCard .extraordinaryResponsePlan')?.getAttribute('data-active')).toBe('true');expect(updates).toEqual([]);await click(byText('キャンセル'));expect(latestTeam).toEqual(team);
  });
- it('features only Janus, filters both support kinds, and opens the static artwork read-only',async()=>{
-  await mount();expect(document.querySelector('.newExtraordinary')?.textContent).toContain('ヤヌス');await click(byLabel('ヤヌスの詳細'));expect(onFocus).toHaveBeenLastCalledWith(36);await click(byText('詳細を閉じる'));await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);await chooseSelect('系統で絞り込み','extraordinary');for(const name of ['毒解除','味方を守る','全体']){await click(byText(name));expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);expect(document.querySelector('.candidateCard')?.textContent).toContain('ヤヌス');}expect(document.querySelector('.candidateCard img')?.getAttribute('src')).toContain('data:image/svg+xml');expect(updates).toEqual([]);
+ it('keeps Janus discoverable through both support filters without a promotional panel',async()=>{
+  await mount();expect(document.querySelector('.newExtraordinary')).toBeNull();await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);await chooseSelect('系統で絞り込み','extraordinary');for(const name of ['毒解除','味方を守る','全体']){await click(byText(name));expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);expect(document.querySelector('.candidateCard')?.textContent).toContain('ヤヌス');}await click(byLabel('ヤヌスの詳細'));expect(onFocus).toHaveBeenLastCalledWith(36);expect(updates).toEqual([]);
  });
+
 });
 
 describe('saved-team original portraits',()=>{
-  it('shows the shared art for stored IDs and keeps names accessible without rewriting slots',async()=>{
+  it('shows shared portraits for the selected stored team without rewriting other IDs',async()=>{
     const slots: (TeamSlot|null)[]=[{team:[0,2,7,11,12],rule:'standard'},{team:[3,6,9,10,14],rule:'light'},null];
-    const before=JSON.stringify(slots);
-    await mount({startingSlots:slots});
+    const before=JSON.stringify(slots);await mount({startingSlots:slots});
+    await click(byLabel('チーム2を選ぶ'));expect(latestTeam).toEqual(slots[1]!.team);
     const {CHARACTER_ART}=await import('./MonsterArt');
-    const icons=[...document.querySelectorAll('.slotIcons')];
-    expect(icons).toHaveLength(3);
-    slots.forEach((slot,index)=>{
-      expect(icons[index].getAttribute('aria-label')).toBe(slot?slot.team.map(id=>monsters[id].name).join('・'):'未保存');
-      expect([...icons[index].querySelectorAll('img')].map(img=>img.getAttribute('src'))).toEqual(slot?slot.team.map(id=>CHARACTER_ART[id].portraitUrl):[]);
-    });
+    expect([...document.querySelectorAll('.builderSlots img')].map(img=>img.getAttribute('src'))).toEqual(slots[1]!.team.map(id=>CHARACTER_ART[id].portraitUrl));
     expect(JSON.stringify(slots)).toBe(before);
-    await click(byLabel('編成2を呼び出す'));expect(latestTeam).toEqual(slots[1]!.team);
   });
+
 });

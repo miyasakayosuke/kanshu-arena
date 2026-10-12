@@ -25,8 +25,10 @@ describe('selected-party pasture', () => {
     for (const [index, body] of slots().entries()) {
       const button = document.querySelectorAll<HTMLButtonElement>('.pastureDetails')[index];
       expect(button.getAttribute('aria-label')).toBe(`${monsters[team[index]].name}の詳細`);
-      expect(body.querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[team[index]].artUrl);
-      expect(body.querySelector('img')?.classList.contains('portraitArt')).toBe(false);
+      const source = new DOMParser().parseFromString(decodeURIComponent(CHARACTER_ART[team[index]].artUrl.split(',')[1]), 'image/svg+xml');
+      expect(body.querySelector('svg')?.getAttribute('viewBox')).toBe(source.documentElement.getAttribute('viewBox'));
+      expect([...body.querySelectorAll('path')].map(path => path.getAttribute('d'))).toEqual([...source.querySelectorAll('path')].map(path => path.getAttribute('d')));
+      expect(body.querySelector('.portraitArt')).toBeNull();
       await act(async () => button.click());
       expect(focus).toHaveBeenLastCalledWith(team[index]);
     }

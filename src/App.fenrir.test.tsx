@@ -39,7 +39,10 @@ afterEach(async () => {await act(async () => root.unmount()); vi.restoreAllMocks
 describe('Fenrir family UI and battle loop', () => {
   it('shares original portraits, scoped recipients and truthful profile details', async () => {
     await mount();
-    expect(document.querySelector<HTMLImageElement>('.pastureMonster img')?.src).toBe(FENRIR_ART_URL);
+    const original = new DOMParser().parseFromString(decodeURIComponent(FENRIR_ART_URL.split(',')[1]), 'image/svg+xml');
+    const homeArt = document.querySelector('.pastureMonster svg')!;
+    expect(homeArt.getAttribute('data-home-art')).toBe('12');
+    expect([...homeArt.querySelectorAll('path')].map(path => path.getAttribute('d'))).toEqual([...original.querySelectorAll('path')].map(path => path.getAttribute('d')));
     await click(label('編成'));
     expect(document.querySelector('.familyRecipients')?.textContent).toBe('対象 3/5体：フェンリル・妖狐・バステト');
     await click(label('1枠・フェンリルを入れ替える'));

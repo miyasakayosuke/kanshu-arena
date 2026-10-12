@@ -95,8 +95,7 @@ describe('build, battle, learn, rebuild loop', () => {
   it('also explains retry invalidation when a saved team loads another rule', async () => {
     localStorage.setItem('kanshu-team-slots-v1', JSON.stringify([{ team: [0,2,3,4,6], rule: 'light' }, null, null]));
     await mount(); await begin(); await finish(); await click(button('編成を見直して再戦'));
-    const saved = document.querySelector<HTMLDetailsElement>('.savedTeams')!;
-    await click(saved.querySelector('summary')!); await click(label('編成1を呼び出す'));
+    await click(label('チーム1を選ぶ'));
     expect(document.querySelector('.practiceNotice')).toBeNull();
     expect(document.querySelector('.teamNotice')?.textContent).toContain('同じ相手・同じシードの再戦を解除');
     await openArena(); expect(document.querySelector('.transitionNotice')?.textContent).toContain('再戦を解除');
@@ -106,13 +105,13 @@ describe('build, battle, learn, rebuild loop', () => {
   it('keeps every shared character profile read-only and preserves slot search and scroll on dismissal', async () => {
     await mount(); await click(label('妖狐の詳細'));
     expect(document.querySelector('.profileModal')?.textContent).toContain('閲覧のみ');
-    expect(button('編成から外す')).toBeUndefined(); expect(button('リーダーにする')).toBeUndefined();
+    expect(document.querySelector('.profileModal')?.textContent).not.toContain('編成から外す'); expect(button('リーダーにする')).toBeUndefined();
     await click(label('詳細を閉じる')); await click(label('編成'));
     await click(label('1枠・妖狐を入れ替える')); await click(label('トロルを候補に選ぶ'));
     const list = document.querySelector<HTMLElement>('.candidateList')!; list.scrollTop = 135;
     const original = JSON.parse(localStorage.getItem('kanshu-team')!);
     await click(label('比較中のトロルの詳細'));
-    expect(button('編成から外す')).toBeUndefined();
+    expect(document.querySelector('.profileModal')?.textContent).not.toContain('編成から外す');
     await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
     expect(document.querySelector('.profileModal')).toBeNull();
     expect(document.querySelector('.candidatePanel')).toBeTruthy();

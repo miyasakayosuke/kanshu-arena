@@ -4,6 +4,7 @@ import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import TeamBuilder from './TeamBuilder';
+import { migrateTeamWorkshop, currentTeam, updateCurrentTeam, selectWorkshopTeam } from './teamWorkshop';
 import { monsters } from './engine';
 import { compareLeaders } from './leaderComparison';
 import { type RuleId, type TeamSlot } from './strategy';
@@ -14,6 +15,7 @@ const demonTeam = [29, 8, 30, 7, 2];
 let root: Root;
 let updates: number[][];
 let latestTeam: number[];
+let latestWorkshop: ReturnType<typeof migrateTeamWorkshop>;
 let replaceTeam: (team: number[]) => void;
 const label = (name: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${name}"]`)!;
 const slot = (index: number) => document.querySelectorAll<HTMLButtonElement>('.builderSlots .teamUnit')[index];
@@ -26,16 +28,17 @@ const disclosure = () => comparison().querySelector<HTMLDetailsElement>('details
 async function click(element: HTMLElement) { expect(element).toBeTruthy(); await act(async () => element.click()); }
 async function escape() { await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))); }
 function Harness({ initial = demonTeam, saved = [null, null, null] }: { initial?: number[]; saved?: (TeamSlot | null)[] }) {
-  const [team, setTeam] = useState([...initial]);
-  const [rule, setRule] = useState<RuleId>('standard');
-  const [slots, setSlots] = useState(saved);
+  const [workshop, setWorkshop] = useState(() => migrateTeamWorkshop({ team: initial, rule: 'standard' }, saved));
+  const { team, rule } = currentTeam(workshop);
+  const setTeam = (team: number[]) => setWorkshop(previous => updateCurrentTeam(previous, { team }));
+  const setRule = (rule: RuleId) => setWorkshop(previous => updateCurrentTeam(previous, { rule }));
   const [notice, setNotice] = useState('');
   const [detail, setDetail] = useState(false);
-  latestTeam = team;
+  latestTeam = team; latestWorkshop = workshop;
   replaceTeam = setTeam;
   return <>
     <TeamBuilder team={team} setTeam={next => { updates.push([...next]); setTeam(next); }}
-      rule={rule} setRule={setRule} slots={slots} setSlots={setSlots} notice={notice} setNotice={setNotice}
+      rule={rule} setRule={setRule} workshop={workshop} saved={true} onSelectTeam={index => { updates.push([...workshop.teams[index].team]); setWorkshop(previous => selectWorkshopTeam(previous, index)); }} onResumeDraft={() => {}} onRestoreDraft={() => {}} onAssignDraft={() => {}} notice={notice} setNotice={setNotice}
       onFocus={() => setDetail(true)} practice={false} leavePractice={() => {}} />
     {detail && <div role="dialog" aria-modal="true"><button onClick={() => setDetail(false)}>閉じる</button></div>}
   </>;
@@ -157,7 +160,7 @@ describe('leader change preview', () => {
     await mount({ saved: [{ team: savedTeam, rule: 'standard' }, null, null] });
     await click(slot(0)); await click(candidate(13));
     const staleConfirm = confirm();
-    await click(label('編成1を呼び出す'));
+    await click(label('チーム1を選ぶ'));
     expect(latestTeam).toEqual(savedTeam); expect(document.querySelector('.candidatePanel')).toBeNull();
     await click(staleConfirm); expect(updates).toEqual([savedTeam]);
     await click(slot(1));
@@ -173,12 +176,10 @@ describe('leader change preview', () => {
 
   it('saves only the current formation while previewing, then saves the confirmed leader', async () => {
     await mount(); await click(slot(2));
-    await click(label('編成1に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[0].team).toEqual(demonTeam);
+    expect(latestWorkshop.teams[0].team).toEqual(demonTeam);
     expect(updates).toEqual([]);
     await click(label('コボルトをリーダーにする'));
-    await click(label('編成2に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[1].team).toEqual([30, 29, 8, 7, 2]);
+    expect(latestWorkshop.teams[0].team).toEqual([30, 29, 8, 7, 2]);
   });
 
   it('keeps leader-move and replacement intentions separate when selecting a nonleader candidate', async () => {
@@ -201,7 +202,7 @@ describe('leader change preview', () => {
     expect(updates).toEqual([]); expect(latestTeam).toEqual([]);
     const commit = confirm(); await act(async () => { commit.click(); commit.click(); });
     expect(updates).toEqual([[24]]);
-    expect(label('編成1に保存').disabled).toBe(true);
+    expect(latestWorkshop.teams[0].team).toEqual([24]);
     await click(slot(1)); await click(candidate(25));
     expect(document.querySelector('.leaderComparison')).toBeNull();
     await click(confirm()); await click(slot(1));

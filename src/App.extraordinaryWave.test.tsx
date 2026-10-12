@@ -14,7 +14,7 @@ const tick=async(ms:number)=>{await act(async()=>vi.advanceTimersByTime(ms));};
 const hp=()=>[...document.querySelectorAll('.commanderHp')].map(n=>n.textContent);
 const mp=()=>[...document.querySelectorAll('.commanderMp')].map(n=>n.textContent);
 const status=(index=0)=>document.querySelector(`#party-status-a${index}`)?.textContent;
-async function mount(team=mixed,rule='standard'){localStorage.setItem('kanshu-workshop-v1',JSON.stringify({team,rule}));await act(async()=>root.render(<App/>));}
+async function mount(team=mixed,rule='standard'){localStorage.removeItem('kanshu-team-workshop-v2');localStorage.setItem('kanshu-workshop-v1',JSON.stringify({team,rule}));await act(async()=>root.render(<App/>));}
 async function begin(team=mixed){await mount(team);await click(label('闘技場'));await click(button('この編成で対戦する'));}
 async function skills(){await click(label('ヤヌスの行動を選択'));await click(button('とくぎ'));}
 async function command(choice:number,team=mixed){for(const id of team){const n=label(`${engine.monsters[id].name}の行動を選択`);if(n.disabled)continue;await click(n);if(id===36){await click(button('とくぎ'));await click(button(engine.monsters[36].skills[choice]!.name));}else await click(button('ぼうぎょ'));}}

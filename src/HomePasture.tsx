@@ -1,11 +1,12 @@
-import { Fragment } from 'react';
-import MonsterArt, { CHARACTER_ART } from './MonsterArt';
+import { Fragment, useRef } from 'react';
+import { CHARACTER_ART } from './MonsterArt';
+import HomeIdleArt, { useHomeIdleVisibility } from './HomeIdleArt';
 import { monsters } from './engine';
 import { enemyFormation } from './enemyFormation';
 import { PASTURE_ART_URL, PASTURE_WIDTH } from './pastureScene';
 import './homePasture.css';
 
-/** Arena-derived five-slot front/back geometry, without a battle or animation loop. */
+/** Arena-derived five-slot front/back geometry, without battle state or a JS animation loop. */
 export function pastureSlot(index: number, monsterId?: number) {
   const slot = enemyFormation(index, 5, 1, monsterId === undefined ? undefined : CHARACTER_ART[monsterId]);
   const grow = slot.depth ? 1.12 : 1.19;
@@ -15,7 +16,9 @@ export function pastureSlot(index: number, monsterId?: number) {
 }
 
 export default function HomePasture({ team, onFocus }: { team: number[]; onFocus: (id: number) => void }) {
-  return <section className="homePasture" aria-label={`現在のパーティ ${team.length}/5体`}>
+  const ref = useRef<HTMLElement>(null);
+  const motion = useHomeIdleVisibility(ref);
+  return <section ref={ref} className="homePasture" data-home-motion={motion.reduced ? 'reduced' : motion.running ? 'running' : 'paused'} aria-label={`現在のパーティ ${team.length}/5体`}>
     <img className="pastureLandscape" src={PASTURE_ART_URL} alt="" draggable={false} />
     {Array.from({ length: 5 }, (_, index) => {
       const id = team[index];
@@ -29,7 +32,7 @@ export default function HomePasture({ team, onFocus }: { team: number[]; onFocus
         <div className={`pastureMonster ${slot.depth ? 'pastureFront' : 'pastureRear'}`} aria-hidden="true" data-monster-id={id} data-party-slot={index}
           style={{ left: `${(slot.foot.x - slot.width / 2) / PASTURE_WIDTH * 100}%`, ...floorStyle, width: `${slot.width / PASTURE_WIDTH * 100}%`, aspectRatio: `${slot.width} / ${slot.height}`, transform: `translateY(-${(slot.foot.y - slot.top) / slot.height * 100}%)`, zIndex: slot.depth + 1 }}>
           <span className="pastureShadow" style={{ top: `${(slot.foot.y - slot.top) / slot.height * 100}%` }} />
-          <MonsterArt monster={monster} />
+          <HomeIdleArt id={id} {...motion} />
         </div>
         {/* Separate name targets stay above every body, including transparent overlaps. */}
         <button className="pastureDetails" aria-label={`${monster.name}の詳細`} onClick={event => { event.currentTarget.focus({ preventScroll: true }); onFocus(id); }}

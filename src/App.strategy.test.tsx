@@ -37,29 +37,25 @@ describe('strategy workshop and fair rules',()=>{
     expect(document.querySelector('.commanderHp')?.textContent).toBe('HP 190/190');
     await click(button('作戦'));expect(document.querySelector('.enemyIntel')?.textContent).toContain('HP 275/275');
   });
-  it('saves and restores three independent team slots including leader and rules',async()=>{
-    await mount();await click(label('編成1に保存'));
+  it('autosaves three independent team tabs including leader and rules',async()=>{
+    localStorage.setItem('kanshu-team-slots-v1',JSON.stringify([null,{team:[0,2,3,4,6],rule:'light'},{team:[1,2,3,4,6],rule:'standard'}]));
+    await mount(); await click(label('チーム2を選ぶ'));
     await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));
-    await click(button('軽量戦'));await click(label('編成2に保存'));
-    await click(label('編成1を呼び出す'));
-    expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('0');
-    expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('標準戦');
-    await click(label('編成2を呼び出す'));
-    expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('2');
-    expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
-    expect(label('編成3を呼び出す').disabled).toBe(true);
-    const saved=JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!);
-    expect(saved).toHaveLength(3);expect(saved[0].team[0]).toBe(0);expect(saved[1].team[0]).toBe(2);expect(saved[1].rule).toBe('light');
+    await click(label('チーム1を選ぶ'));expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('0');
+    await click(label('チーム2を選ぶ'));expect(document.querySelector('.teamUnit')?.getAttribute('data-monster-id')).toBe('2');
+    const saved=JSON.parse(localStorage.getItem('kanshu-team-workshop-v2')!);
+    expect(saved.teams).toHaveLength(3);expect(saved.teams[0].team[0]).toBe(0);expect(saved.teams[1].rule).toBe('light');
     await act(async()=>root.unmount());root=createRoot(document.getElementById('test-root')!);await mount();
-    await click(label('編成2を呼び出す'));expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
+    expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
   });
+
   it('keeps an over-budget team visible but prevents battle and saving until it is legal',async()=>{
     localStorage.setItem('kanshu-team',JSON.stringify([0,5,7,8,10]));await mount();
     await openArena();expect(button('この編成で対戦する').disabled).toBe(false);
     await openTeam();await click(button('軽量戦'));
     expect(document.querySelectorAll('.teamUnit')).toHaveLength(5);
     expect(document.querySelector('.budgetWarning')?.textContent).toContain('COST 2');
-    expect(label('編成1に保存').disabled).toBe(true);
+    expect(JSON.parse(localStorage.getItem('kanshu-team-workshop-v2')!).teams[0].rule).toBe('light');
     await openArena();expect(button('この編成で対戦する').disabled).toBe(true);
     await click(button('標準戦'));expect(button('この編成で対戦する').disabled).toBe(false);
   });
@@ -82,9 +78,9 @@ describe('strategy workshop and fair rules',()=>{
   it('remains playable when saved-team storage reads or writes fail',async()=>{
     vi.spyOn(localStorage,'getItem').mockImplementation(()=>{throw Error('blocked');});
     vi.spyOn(localStorage,'setItem').mockImplementation(()=>{throw Error('blocked');});
-    await mount();await click(label('編成1に保存'));
-    expect(document.querySelector('.saveNotice')?.textContent).toContain('保存できません');
-    expect(label('編成1を呼び出す').disabled).toBe(false);
+    await mount();
+    expect(document.querySelector('.teamSaveState')?.textContent).toContain('保存できません');
+    expect(label('チーム1を選ぶ').disabled).toBe(false);
     await startBattle();expect(document.querySelector('.battleMode')).toBeTruthy();
   });
 });

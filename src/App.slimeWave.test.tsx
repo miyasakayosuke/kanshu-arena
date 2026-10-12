@@ -14,7 +14,7 @@ const click = async (n:HTMLElement) => { expect(n).toBeTruthy(); await act(async
 const tick = async (ms:number) => { await act(async()=>vi.advanceTimersByTime(ms)); };
 const hp = () => [...document.querySelectorAll('.commanderHp')].map(n=>n.textContent);
 const mp = () => [...document.querySelectorAll('.commanderMp')].map(n=>n.textContent);
-async function mount(team=pure, rule='standard') { localStorage.setItem('kanshu-workshop-v1',JSON.stringify({team,rule})); await act(async()=>root.render(<App/>)); }
+async function mount(team=pure, rule='standard') { localStorage.removeItem('kanshu-team-workshop-v2');localStorage.setItem('kanshu-workshop-v1',JSON.stringify({team,rule})); await act(async()=>root.render(<App/>)); }
 async function begin(team=pure) { await mount(team); await click(label('闘技場')); await click(button('この編成で対戦する')); }
 async function supplyOrder(team=pure) {
   await click(label('うつろ泉の行動を選択')); await click(button('とくぎ')); await click(button('蓄え分け'));

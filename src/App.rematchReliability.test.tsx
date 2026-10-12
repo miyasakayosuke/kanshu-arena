@@ -110,10 +110,11 @@ describe('controlled rematch reliability', () => {
     expect(draw).toHaveBeenCalledTimes(1);
     expect(localStorage.getItem(slotsKey)).toBe(saved);
     await finish(); await click(button('編成を見直して再戦'));
-    await click(document.querySelector<HTMLElement>('.savedTeams > summary')!);
-    for (const [index, slot] of savedTeams.entries()) {
-      expect(label(`編成${index + 1}を呼び出す`).disabled).toBe(false);
-      await click(label(`編成${index + 1}を呼び出す`));
+    const currentTeams = JSON.parse(localStorage.getItem('kanshu-team-workshop-v2')!).teams as TeamSlot[];
+    expect(currentTeams).toEqual(rule === 'standard' ? [{ team: edited, rule: 'standard' }, savedTeams[1], savedTeams[2]] : savedTeams);
+    for (const [index, slot] of currentTeams.entries()) {
+      expect(label(`チーム${index + 1}を選ぶ`).disabled).toBe(false);
+      await click(label(`チーム${index + 1}を選ぶ`));
       expect(workshopTeam()).toEqual(slot.team);
       expect(document.querySelector('.ruleTabs [aria-pressed="true"]')?.textContent).toContain(rules[slot.rule].name);
     }

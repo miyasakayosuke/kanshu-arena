@@ -45,7 +45,7 @@ describe('home pasture uses the workshop source of truth', () => {
     await click(label('2枠・バステトを入れ替える')); await click(label('バステトをリーダーにする'));
     await click(label('ホーム')); expect(shown()).toEqual([2, 1, 3, 4, 6]);
     await history('back'); expect(window.location.hash).toBe('#team'); await history('forward'); expect(shown()).toEqual([2, 1, 3, 4, 6]);
-    await click(label('編成')); await click(document.querySelector('.savedTeams > summary')!); await click(label('編成1を呼び出す'));
+    await click(label('編成')); await click(label('チーム1を選ぶ'));
     await click(label('ホーム')); expect(shown()).toEqual(savedTeam);
     await act(async () => root.unmount()); root = createRoot(document.getElementById('root')!); await mount(); expect(shown()).toEqual(savedTeam);
   });

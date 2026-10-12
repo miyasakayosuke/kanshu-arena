@@ -4,6 +4,7 @@
 .pastureLandscape{position:absolute;top:-35%;display:block;width:100%;height:135%;object-fit:cover;object-position:75% center;user-select:none;pointer-events:none}
 .pastureMonster{position:absolute;display:block;height:auto;min-width:44px;min-height:44px;margin:0;padding:0;border:0;border-radius:18px;background:transparent;pointer-events:none}
 .pastureMonster .monsterArt{position:relative;display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 1px #294e2525)}
+.homeIdleArt>svg{display:block;width:100%;height:100%;overflow:hidden;pointer-events:none}
 .pastureShadow{position:absolute;left:25%;width:50%;height:9%;border-radius:50%;background:#385b3640;transform:translateY(-45%);filter:blur(2px);pointer-events:none}
 .pastureDetails{position:absolute;z-index:4;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;transform:translate(-50%,4px);border:0;border-radius:12px;background:transparent;color:#304d3c;touch-action:manipulation}
 .pastureDetails>span{flex:none;white-space:nowrap;padding:3px 7px;border:1px solid #f7f1ca99;border-radius:20px;background:#f7f4d9ed;box-shadow:0 2px 5px #3e573417;font-size:clamp(8px,1.9vw,11px);line-height:1.2;letter-spacing:0;pointer-events:none}

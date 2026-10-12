@@ -4,6 +4,7 @@ import { createRoot, type Root } from 'react-dom/client';
 import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import TeamBuilder from './TeamBuilder';
+import { migrateTeamWorkshop, currentTeam, updateCurrentTeam, selectWorkshopTeam } from './teamWorkshop';
 import { monsters } from './engine';
 import { initialTeam, type RuleId, type TeamSlot } from './strategy';
 
@@ -14,6 +15,7 @@ const acceptanceTeam = [36, 12, 20, 4, 26];
 let root: Root;
 let updates: number[][];
 let latestTeam: number[];
+let latestWorkshop: ReturnType<typeof migrateTeamWorkshop>;
 let replaceTeam: (team: number[]) => void;
 const label = (name: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${name}"]`)!;
 const slot = (index: number) => document.querySelectorAll<HTMLButtonElement>('.builderSlots .teamUnit')[index];
@@ -27,14 +29,15 @@ async function click(element: HTMLElement) { expect(element).toBeTruthy(); await
 async function cancel() { await click([...document.querySelectorAll<HTMLButtonElement>('button')].find(button => button.textContent === 'キャンセル')!); }
 
 function Harness({ initial = acceptanceTeam, saved = [null, null, null] }: { initial?: number[]; saved?: (TeamSlot | null)[] }) {
-  const [team, setTeam] = useState([...initial]);
-  const [rule, setRule] = useState<RuleId>('standard');
-  const [slots, setSlots] = useState(saved);
+  const [workshop, setWorkshop] = useState(() => migrateTeamWorkshop({ team: initial, rule: 'standard' }, saved));
+  const { team, rule } = currentTeam(workshop);
+  const setTeam = (team: number[]) => setWorkshop(previous => updateCurrentTeam(previous, { team }));
+  const setRule = (rule: RuleId) => setWorkshop(previous => updateCurrentTeam(previous, { rule }));
   const [notice, setNotice] = useState('');
-  latestTeam = team;
+  latestTeam = team; latestWorkshop = workshop;
   replaceTeam = setTeam;
   return <TeamBuilder team={team} setTeam={next => { updates.push([...next]); setTeam(next); }}
-    rule={rule} setRule={setRule} slots={slots} setSlots={setSlots} notice={notice} setNotice={setNotice}
+    rule={rule} setRule={setRule} workshop={workshop} saved={true} onSelectTeam={index => { updates.push([...workshop.teams[index].team]); setWorkshop(previous => selectWorkshopTeam(previous, index)); }} onResumeDraft={() => {}} onRestoreDraft={() => {}} onAssignDraft={() => {}} notice={notice} setNotice={setNotice}
     onFocus={() => {}} practice={false} leavePractice={() => {}} />;
 }
 async function mount(props: React.ComponentProps<typeof Harness> = {}) { await act(async () => root.render(<Harness {...props} />)); }
@@ -57,16 +60,16 @@ describe('progressive family-condition help', () => {
       expect(plan(name).dataset.active).toBe('false');
     }
     const response = plan('extraordinaryResponsePlan');
-    expect(response.closest('details')).toBeNull();
+    expect(response.closest('.familyPlanDisclosure')).toBeNull();
     expect(response.dataset.active).toBe('true');
     expect(response.textContent).toContain('所属系統 5種類 / 必要4種類');
     expect(response.querySelector('.familyRecipients')?.textContent).toBe('対象 5/5体：ヤヌス・フェンリル・唐傘おばけ・バンシー・ひだまもり');
     const opening = plan('openingSupports');
-    expect(opening.closest('details')).toBeNull();
+    expect(opening.closest('.familyPlanDisclosure')).toBeNull();
     expect(opening.textContent).toContain('先頭以外でも編成中なら開幕に一度発動');
     expect(opening.querySelector('.familyRecipients')?.textContent).toBe('対象 1/5体：フェンリル');
-    expect(plan('leaderBanner').closest('details')).toBeNull();
-    expect(plan('leaderBanner').querySelector('.familyRecipients')?.textContent).toBe('対象 5/5体：ヤヌス・フェンリル・唐傘おばけ・バンシー・ひだまもり');
+    expect(plan('leaderBanner').closest('.familyPlanDisclosure')).toBeNull();
+    expect(plan('leaderRecipients').querySelector('.familyRecipients')?.textContent).toBe('対象 5/5体：ヤヌス・フェンリル・唐傘おばけ・バンシー・ひだまもり');
     expect(updates).toEqual([]);
   });
 
@@ -80,7 +83,7 @@ describe('progressive family-condition help', () => {
   ])('keeps the nonleader core $coreId visible when its threshold fails', async ({ coreId, className, team, count }) => {
     await mount({ initial: team });
     expect(team[0]).not.toBe(coreId);
-    expect(plan(className).closest('details')).toBeNull();
+    expect(plan(className).closest('.familyPlanDisclosure')).toBeNull();
     expect(plan(className).dataset.active).toBe('false');
     expect(plan(className).textContent).toContain('編成中');
     expect(plan(className).textContent).toContain(count);
@@ -113,7 +116,7 @@ describe('progressive family-condition help', () => {
     expect(party().querySelector('.dragonChargePlan, .materialRepairPlan, .slimeSupplyPlan, .demonPressurePlan')).toBeNull();
     expect(plan('undeadCashoutPlan').textContent).toContain('使用者：なし');
     expect(plan('extraordinaryResponsePlan').querySelector('.familyRecipients')?.textContent).toBe('対象 0/5体：なし');
-    expect(plan('leaderBanner').querySelector('.familyRecipients')?.textContent).toBe('対象 5/5体：妖狐・バステト・ドリュアス・バンシー・ガルーダ');
+    expect(plan('leaderRecipients').querySelector('.familyRecipients')?.textContent).toBe('対象 5/5体：妖狐・バステト・ドリュアス・バンシー・ガルーダ');
   });
 
   it('uses a native, focusable summary with wrapping CSS and no duplicated keyboard behavior', async () => {
@@ -150,21 +153,20 @@ describe('progressive family-condition help', () => {
     await click(slot(0)); await click(candidate(22));
     const impact = document.querySelector<HTMLElement>('.candidateImpact')!;
     expect(plan('materialRepairPlan').dataset.active).toBe('true');
-    expect(plan('materialRepairPlan').closest('details')).toBeNull();
+    expect(plan('materialRepairPlan').closest('.familyPlanDisclosure')).toBeNull();
     expect(plan('materialRepairPlan', impact).dataset.active).toBe('false');
-    expect(plan('materialRepairPlan', impact).closest('details')).toBeNull();
+    expect(plan('materialRepairPlan', impact).closest('.familyPlanDisclosure')).toBeNull();
     expect(summary(impact).textContent).not.toContain('タロス');
     expect(disclosure(impact).open).toBe(false);
     await click(summary(impact));
     expect(plan('materialRepairPlan', impact).querySelector('.familyRecipients')?.textContent).toBe('対象 3/5体：巡る三脚鼎・唐傘おばけ・ぬりかべ');
     expect(plan('materialRepairPlan', impact).textContent).toContain('先頭以外でも有効');
-    expect(plan('projectedLeader', impact).closest('details')).toBeNull();
+    expect(plan('projectedLeader', impact).closest('.familyPlanDisclosure')).toBeNull();
     const comparison = document.querySelector('.leaderComparison')!;
     expect(comparison.closest('.familyPlanDisclosure')).toBeNull();
-    expect(comparison.querySelector('.leaderComparisonSummary')?.closest('details')).toBeNull();
+    expect(comparison.querySelector('.leaderComparisonSummary')?.closest('.familyPlanDisclosure')).toBeNull();
     expect(comparison.textContent).toContain('タロス → 巡る三脚鼎');
-    await click(label('編成1に保存'));
-    expect(JSON.parse(localStorage.getItem('kanshu-team-slots-v1')!)[0].team).toEqual(original);
+    expect(latestWorkshop.teams[0].team).toEqual(original);
     expect(updates).toEqual([]);
     await cancel();
     expect(latestTeam).toEqual(original);
@@ -190,14 +192,14 @@ describe('progressive family-condition help', () => {
     await mount({ initial: original }); await click(slot(0)); await click(candidate(3));
     const impact = document.querySelector<HTMLElement>('.candidateImpact')!;
     const removed = plan(className, impact);
-    expect(removed.closest('details')).toBeNull();
+    expect(removed.closest('.familyPlanDisclosure')).toBeNull();
     expect(removed.dataset.active).toBe('false');
     expect(removed.textContent).toContain('未編成');
     expect(removed.textContent).toContain(count);
     if ([19, 24, 36].includes(coreId)) expect(removed.querySelector('.familyRecipients')?.textContent).toBe('対象 0/4体：なし');
     if (coreId === 32) expect(removed.textContent).toContain('使用者：なし。使用対象外：ドリュアス・妖狐・バステト・ガルーダ');
     expect(disclosure(impact)?.querySelector('summary')?.textContent ?? '').not.toContain(monsters[coreId].name);
-    expect(plan(className).closest('details')).toBeNull();
+    expect(plan(className).closest('.familyPlanDisclosure')).toBeNull();
     expect(plan(className).textContent).toContain('編成中');
     expect(latestTeam).toEqual(original);
     expect(updates).toEqual([]);
@@ -210,7 +212,7 @@ describe('progressive family-condition help', () => {
   it('promotes a newly selected below-threshold core immediately and preserves leader-move intent', async () => {
     await mount({ initial: [0, 20, 2, 4, 6] }); await click(slot(1)); await click(candidate(19));
     const impact = document.querySelector<HTMLElement>('.candidateImpact')!;
-    expect(plan('materialRepairPlan', impact).closest('details')).toBeNull();
+    expect(plan('materialRepairPlan', impact).closest('.familyPlanDisclosure')).toBeNull();
     expect(plan('materialRepairPlan', impact).dataset.active).toBe('false');
     expect(plan('materialRepairPlan', impact).textContent).toContain('物質系 1体 / 必要3体');
     expect(summary(impact).textContent).not.toContain('タロス');
@@ -240,17 +242,17 @@ describe('progressive family-condition help', () => {
     await click(summary());
     await click(slot(0)); await click(candidate(0));
     const staleCommit = confirm();
-    await click(label('編成1を呼び出す'));
+    await click(label('チーム1を選ぶ'));
     expect(latestTeam).toEqual(saved);
     expect(document.querySelector('.candidatePanel')).toBeNull();
-    expect(plan('materialRepairPlan').closest('details')).toBeNull();
+    expect(plan('materialRepairPlan').closest('.familyPlanDisclosure')).toBeNull();
     expect(summary().textContent).toBe('未編成の中核・条件を見る（1件）ヤヌス');
     await click(staleCommit);
     expect(updates).toEqual([saved]);
     await act(async () => replaceTeam([36, 12, 13, 2, 6]));
     expect(disclosure()).toBeNull();
     expect(plan('extraordinaryResponsePlan').dataset.active).toBe('false');
-    expect(plan('extraordinaryResponsePlan').closest('details')).toBeNull();
+    expect(plan('extraordinaryResponsePlan').closest('.familyPlanDisclosure')).toBeNull();
     await act(async () => replaceTeam([...acceptanceTeam]));
     expect(disclosure().open).toBe(false);
     expect(summary().textContent).toContain('タロス・うつろ泉・ドラウグル');

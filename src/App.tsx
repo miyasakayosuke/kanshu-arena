@@ -16,34 +16,25 @@ import MonsterDetails from './MonsterDetails';
 import BattleResult from './BattleResult';
 import { battleEventLine, battleOrderLine } from './battleInsights';
 import { useScreenNavigation } from './navigation';
-import { fixedDamageHint, poisonCashoutHint, rules, isValidTeam, initialTeam, loadTeamSlots, type RuleId } from './strategy';
+import { fixedDamageHint, poisonCashoutHint, rules, isValidTeam, initialTeam, type RuleId } from './strategy';
 import { familyEncounterForSeed, familyTrialPresets, type FamilyTrialPreset, type FamilyEncounter } from './familyTrials';
 import { poisonSkillDetail, poisonSkillHint } from './poisonDescription';
+import { loadTeamWorkshop, currentTeam, updateCurrentTeam, selectWorkshopTeam, useWorkshopDraft, restorePreviousTeam, assignDraftToTeam, saveTeamWorkshop, migrateTeamWorkshop, parseTeamWorkshop, TEAM_WORKSHOP_KEY } from './teamWorkshop';
 import './style.css';
 import './tabCopy.css';
 
 const COMMAND_SECONDS = 30;
-const initial = initialTeam;
-function loadTeam() {
-  try {
-    const saved: unknown = JSON.parse(localStorage.getItem('kanshu-team') ?? 'null');
-    if (Array.isArray(saved) && saved.length === 5 && new Set(saved).size === 5 && saved.every(id => Number.isInteger(id) && monsters[id]) && cost(saved) <= 17) return saved as number[];
-  } catch { /* A blocked or old save must never prevent playing. */ }
-  return initial;
-}
-function loadWorkshop() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('kanshu-workshop-v1') ?? 'null');
-    if (saved && ['standard', 'light'].includes(saved.rule) && Array.isArray(saved.team) && saved.team.length <= 5 && new Set(saved.team).size === saved.team.length && saved.team.every((id: unknown) => Number.isInteger(id) && monsters[id as number]) && cost(saved.team) <= 17) return saved as { team: number[]; rule: RuleId };
-  } catch { /* Optional local save. */ }
-  return { team: loadTeam(), rule: 'standard' as RuleId };
-}
 export default function App() {
-  const [workshop] = useState(loadWorkshop);
+  const [workshop, setWorkshop] = useState(() => { try { return loadTeamWorkshop(localStorage); } catch { return migrateTeamWorkshop({ team: initialTeam, rule: 'standard' }, [null, null, null]); } });
+  const [teamSaved, setTeamSaved] = useState(true);
+  const remoteTeamPending = useRef(false);
+  const teamPersistence = useRef(true);
+  const latestWorkshop = useRef(workshop); latestWorkshop.current = workshop;
+  const { team, rule } = currentTeam(workshop);
+  const setTeam = (team: number[]) => setWorkshop(previous => updateCurrentTeam(previous, { team }));
+  const setRule = (rule: RuleId) => setWorkshop(previous => updateCurrentTeam(previous, { rule }));
   const [catalogFilters, setCatalogFilters] = useState(createRosterFilters);
   const catalogScroll = useRef(0);
-  const [team, setTeam] = useState<number[]>(workshop.team);
-  const [slots, setSlots] = useState(() => { try { return loadTeamSlots(localStorage); } catch { return [null, null, null] as ReturnType<typeof loadTeamSlots>; } });
   const [battle, setBattle] = useState<State | null>(null);
   const [orders, setOrders] = useState<Record<string, Order>>({});
   const turnStartButton = useRef<HTMLButtonElement>(null);
@@ -53,7 +44,6 @@ export default function App() {
   const [showSkills, setShowSkills] = useState(false);
   const [automaticKeys, setAutomaticKeys] = useState<string[]>([]);
   const [focus, setFocus] = useState<number | null>(null);
-  const [rule, setRule] = useState<RuleId>(workshop.rule);
   const [practice, setPractice] = useState(false);
   const [encounter, setEncounter] = useState<FamilyEncounter | null>(null);
   const [showTactics, setShowTactics] = useState(false);
@@ -105,8 +95,31 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', warn);
   }, [page, battle?.winner]);
   useEffect(() => {
+    try { teamPersistence.current = saveTeamWorkshop(localStorage, workshop); } catch { teamPersistence.current = false; }
+    setTeamSaved(teamPersistence.current);
     try { localStorage.setItem('kanshu-workshop-v1', JSON.stringify({ team, rule })); if (team.length === 5) localStorage.setItem('kanshu-team', JSON.stringify(team)); } catch { /* optional */ }
-  }, [team, rule]);
+  }, [workshop]);
+  useEffect(() => {
+    const syncTeams = (event?: StorageEvent) => {
+      if (event && (event.key !== TEAM_WORKSHOP_KEY || !event.newValue)) return;
+      // Never discard edits that only exist in this tab after a storage failure.
+      if (!teamPersistence.current) return;
+      if (page === 'battle') { remoteTeamPending.current = true; return; }
+      if (!event && !remoteTeamPending.current) return;
+      remoteTeamPending.current = false;
+      // Team changes commit atomically; a remote change clears stale picker previews.
+      try {
+        const next = parseTeamWorkshop(JSON.parse(localStorage.getItem(TEAM_WORKSHOP_KEY) ?? 'null'));
+        if (!next) return;
+        if (currentTeam(next).rule !== currentTeam(latestWorkshop.current).rule) { setPractice(false); setEncounter(null); }
+        setWorkshop(previous => JSON.stringify(previous) === JSON.stringify(next) ? previous : next);
+      } catch { /* A denied storage area cannot block the in-memory party. */ }
+    };
+    // A battle retains its chosen party and same-condition retry; catch up when leaving.
+    if (page !== 'battle') syncTeams();
+    window.addEventListener('storage', syncTeams);
+    return () => window.removeEventListener('storage', syncTeams);
+  }, [page]);
   useEffect(() => {
     const close = (e: KeyboardEvent) => {
       if (e.key !== 'Escape' || e.defaultPrevented) return;
@@ -277,7 +290,7 @@ export default function App() {
     if (!preset || !isValidTeam(preset.team, 17)) return;
     const nextRule = cost([...preset.team]) > rules[rule].budget ? 'standard' : rule;
     trialApplied.current = true;
-    setTeam([...preset.team]); setRule(nextRule); setPractice(false); setEncounter(null);
+    setWorkshop(previous => useWorkshopDraft(previous, { team: [...preset.team], rule: nextRule })); setPractice(false); setEncounter(null);
     setShowFamilyTrials(false);
     setNotice(`${preset.name}を選びました。保存した3枠はそのままです。`);
     navigate('arena');
@@ -295,7 +308,12 @@ export default function App() {
     {page === 'home' && <HomeScreen team={team} rule={rule} onFocus={setFocus} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
     {page === 'catalog' && <CatalogScreen filters={catalogFilters} setFilters={setCatalogFilters} scrollPosition={catalogScroll} onFocus={setFocus} />}
-    {page === 'team' && <TeamBuilder onCatalog={() => navigate('catalog')} slots={slots} setSlots={setSlots} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
+    {page === 'team' && <TeamBuilder onCatalog={() => navigate('catalog')} workshop={workshop} saved={teamSaved} onSelectTeam={index => {
+      const next = workshop.teams[index];
+      if (next.rule !== rule) { setPractice(false); setEncounter(null); }
+      setWorkshop(previous => selectWorkshopTeam(previous, index));
+      setNotice(`チーム${index + 1}に切り替えました${practice && next.rule !== rule ? '。ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''}`);
+    }} onResumeDraft={() => { setWorkshop(previous => previous.draft ? { ...previous, selected: null } : previous); setPractice(false); setEncounter(null); setNotice('一時編成に戻しました'); }} onRestoreDraft={() => { setWorkshop(restorePreviousTeam); setPractice(false); setEncounter(null); setNotice('前回の編成を復元しました。3チームはそのままです。'); }} onAssignDraft={index => { setWorkshop(previous => assignDraftToTeam(previous, index)); setNotice(`チーム${index + 1}に保存しました`); }} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
     {page === 'battle' && battle && <main className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
       <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={() => setShowLog(true)}>ログ</button></div></div>
       {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}

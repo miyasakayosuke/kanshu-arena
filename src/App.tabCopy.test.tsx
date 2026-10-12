@@ -40,7 +40,7 @@ describe('functional tab copy without decorative title bands', () => {
 
   it('removes workshop slogans while preserving slot context, selection focus, details, and cancellation', async () => {
     await mount(); await click(label('編成'));
-    expect(document.querySelector('main[aria-label="編成"] h2.srOnly')?.textContent).toBe('編成');
+    expect(document.querySelector('main[aria-label="編成"] h2')?.textContent).toBe('チーム編成');
     expect(document.querySelector('.teamBuilder .intro, .teamBuilder .eyebrow')).toBeNull();
     expect(document.querySelector('.teamBuilder')?.textContent).not.toMatch(/変えたい枠を選んで|先頭がリーダー。枠を選ぶ|四系統を集め、|毒を残して待つか|相手の次の一手を、/);
     expect(document.querySelector('.partyCard')?.textContent).toContain('COST 15/17');
