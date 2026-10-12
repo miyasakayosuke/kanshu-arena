@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.5",
-  "auditBaseCommit": "0e8c2dd53b84942458522230b3432abda8931eec",
+  "release": "v0.20.6",
+  "auditBaseCommit": "ec739f98df957b6cb7042b035e089ca86f32d26c",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -487,6 +487,30 @@
           ],
           "provenance": "AI-assisted UI structure, CSS, dismissal guards, tests and this verification note written directly for this project from the existing source and reproduced public-browser defects. The fixed header reuses the existing monster name and detail label; the body preserves all existing art, skills, explanations and the return button. No external code, artwork, descriptions, animation samples, media, fonts or dependencies imported. Engine, stats, skills, families, rules, saved-team schema, art and notices unchanged. Release preparation adds only version labels, matching test expectations and accurate release records.",
           "reviewLimit": "CSS cascade and DOM/keyboard tests establish structural scroll ownership and event/focus behavior, not rendered-browser geometry, touch-device or orientation acceptance. The actual browser checks after an authorized release remain a separate gate. Existing ownership, expression-similarity, patent, trademark and professional-review questions remain open. Authorized publication uses the existing game repository; no outside contact, legal agreement, fee or project-wide license selection."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.6 home simplification and 37-monster identity text, based on public v0.20.5 commit ec739f98df957b6cb7042b035e089ca86f32d26c / tree ee5ac1dea75cdcf6c3b0b5fad37c5b7ebfcc5b43. Implementation evidence and final release/rendered checks are separately recorded.",
+          "files": [
+            "src/HomeScreen.tsx",
+            "src/App.tsx",
+            "src/MonsterDetails.tsx",
+            "src/strategy.ts",
+            "src/style.css",
+            "src/monsterLore.ts",
+            "docs/home-lore-candidate.md",
+            "docs/monster-lore-sources.json",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "docs/release-validation-v0206.json",
+            "docs/rights/releases/2026-10-12-v0.20.6.md",
+            "docs/v0205-live-verification.md"
+          ],
+          "provenance": "AI-assisted UI structure, concise labels, CSS, tests and implementation notes written directly for this project. Removed only two duplicate home navigation buttons, retaining footer navigation and the unique family-trial action. Short, separately labeled original fiction and sourced origin paragraphs appear under the existing portrait. Existing mechanics explanations, read-only details, fixed close header, Escape handling, art, engine and saved-party behavior are retained. No external UI code, fonts, media or dependencies were added. Release preparation updates only displayed/root package versions, matching tests and release records.",
+          "reviewLimit": "Automated DOM and CSS contract tests do not establish rendered browser geometry or all-device accessibility. Local browser rendering is blocked by the execution environment. Actual public-browser acceptance remains a separate gate after any authorized publication. Rights checks are inventory checks, not legal clearance."
         }
       ]
     },
@@ -579,6 +603,23 @@
         "docs/visual-review/v020-original12-light.png",
         "docs/visual-review/v020-all37-contact.png"
       ]
+    },
+    {
+      "id": "monster-identity-text",
+      "kind": "project-authored-game-fiction-and-tradition-summaries",
+      "files": [
+        "src/monsterLore.ts",
+        "docs/monster-lore-sources.json"
+      ],
+      "provenance": "2026-10-12: 37 short original Japanese flavour entries were independently written for this game with warm, everyday humour. Myth and folklore introductions were independently paraphrased from the linked cultural institutions, ancient texts and other identified sources, with per-entry claim support and qualifications in docs/monster-lore-sources.json. No existing game description sentence, contemporary source translation, reference image, media or external code was imported. IDs 24–28 remain the existing five game-original creatures; IDs 22, 23 and 33 are explicitly traditional-motif adaptations.",
+      "creator": "AI-assisted prose and UI integration written directly for this project.",
+      "createdFor": "v0.20.6",
+      "reviewLimit": "The sources support only the recorded general tradition claims. Linked source access does not license source expression. Character personalities, visual designs and abilities remain game fiction. Similarity, trademark, rights ownership and legal review remain unresolved as recorded in the existing review ledger.",
+      "references": [
+        "docs/monster-lore-sources.json",
+        "docs/home-lore-candidate.md"
+      ],
+      "distribution": "New original flavour and independently worded origin summaries with small outbound reference links; no source text or images bundled."
     }
   ],
   "software": [

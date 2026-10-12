@@ -12,14 +12,18 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); });
 const base = { team: [0, 2, 3, 4, 6], rule: 'standard' as const, onFocus: vi.fn(), onTeam: vi.fn(), practice: false };
-it('exposes the family trial entry separately from current-party battle entry', async () => {
-  const onFamilyTrial = vi.fn(); const onArena = vi.fn();
-  await act(async () => root.render(<HomeScreen {...base} onArena={onArena} onFamilyTrial={onFamilyTrial} />));
+it('keeps the unique family trial entry without duplicating the footer destinations', async () => {
+  const onFamilyTrial = vi.fn();
+  await act(async () => root.render(<HomeScreen {...base} onFamilyTrial={onFamilyTrial} />));
   const trial = document.querySelector<HTMLButtonElement>('button[aria-label="系統パーティを試す"]')!;
   expect(trial.textContent).toContain('保存枠はそのまま');
   await act(async () => trial.click());
-  expect(onFamilyTrial).toHaveBeenCalledOnce(); expect(onArena).not.toHaveBeenCalled();
+  expect(onFamilyTrial).toHaveBeenCalledOnce();
   expect(document.querySelectorAll('.partySummary [data-monster-id]')).toHaveLength(5);
+  expect([...document.querySelectorAll('.homeDestinations button')].map(button => button.textContent)).toHaveLength(1);
+  expect(document.querySelector('.arenaGate')).toBeNull();
+  expect(document.querySelector('.gameHome')?.textContent).not.toMatch(/闘技場へ|編成へ/);
+  expect(document.querySelector('a[href$="credits.html"]')).toBeTruthy();
 });
 it.each([
   ['standard', false, '7系統の純5体からランダム'],

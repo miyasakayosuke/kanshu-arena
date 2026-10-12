@@ -13,7 +13,7 @@ function put(root, path, text) { mkdirSync(dirname(join(root, path)), { recursiv
 function change(root, path, edit) { put(root, path, edit(readFileSync(join(root, path), 'utf8'))); }
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'arena-rights-test-')); temp.push(root);
-  for (const path of ['src', 'public', 'docs/rights', 'package-lock.json']) {
+  for (const path of ['src', 'public', 'docs/rights', 'docs/monster-lore-sources.json', 'package-lock.json']) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(repo, path), join(root, path), { recursive: true });
   }
@@ -101,4 +101,9 @@ test('the source must expose a credits route as well as the public page', () => 
 test('HTML must contain the same complete notice text as the text file', () => {
   const root = fixture(); change(root, 'public/credits.html', value => value.replace('Permission is hereby granted', 'Permission text omitted'));
   assert.throws(() => checkRights({ root }), /Embedded HTML notices are missing\/stale/);
+});
+
+test('missing documented monster-text provenance is detected', () => {
+  const root = fixture(); rmSync(join(root, 'docs/monster-lore-sources.json'));
+  assert.throws(() => checkRights({ root }), /Manifest refers to a missing file: docs\/monster-lore-sources\.json/);
 });

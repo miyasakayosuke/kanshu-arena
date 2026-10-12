@@ -1,0 +1,547 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-12",
+  "baselineRelease": "v0.20.5",
+  "baselineCommit": "ec739f98df957b6cb7042b035e089ca86f32d26c",
+  "baselineTree": "ee5ac1dea75cdcf6c3b0b5fad37c5b7ebfcc5b43",
+  "scope": "37 monster identity entries: original humorous game fiction and concise, independently paraphrased myth/folklore introductions. Sources are references, not licensed imported descriptions. Game mechanics, character art, names, IDs and saves are unchanged.",
+  "creationStatement": "AI-assisted Japanese prose written directly for this project. No Dragon Quest or other game description sentences, contemporary translations, reference artwork, archived pages, media, fonts or external code were copied into this change.",
+  "reviewLimit": "Sources support only the specific claims described per entry; traditions vary by place and period. Game fiction, visual adaptations and battle abilities are separate. This inventory is not legal clearance, an exhaustive similarity review or an expert opinion.",
+  "entries": [
+    {
+      "id": 0,
+      "name": "妖狐",
+      "flavour": "すました顔で狐火をともす、夜道のいたずら好き。しっぽをほめると、火の勢いまで少し得意げ。",
+      "origin": "日本の昔話などに出てくる、人に化けるふしぎなきつね。人をだます話もあれば、人を助ける話もある。",
+      "sourceTitle": "University of Arkansas Museum・Japan · Folklore in Masks",
+      "sourceUrl": "https://uamuseum.omeka.net/exhibits/show/folklore-in-masks/japan",
+      "support": "日本の民間伝承のきつねは姿を変える超自然的存在で、善行といたずらの両方の性格が伝えられる。 伝統芸能『釣狐』では、きつねが人である伯蔵主に化ける。人への変身の具体例。",
+      "uncertainty": "ここでは日本の変化する狐の伝承を紹介している。東アジア全体の狐の伝承の唯一の起源を日本と断定していない。妖狐がすべて悪者だとはしない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "徳川美術館・狂言面 狐 金漆銘「狐」(以下略）",
+          "url": "https://www.tokugawa-art-museum.jp/collections/%E7%8B%82%E8%A8%80%E9%9D%A2%E3%80%80%E7%8B%90-%E9%87%91%E6%BC%86%E9%8A%98%EF%BD%A2%E7%8B%90%EF%BD%A3%E4%BB%A5%E4%B8%8B%E7%95%A5%EF%BC%89/"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 1,
+      "name": "トロル",
+      "flavour": "大きな拳と、もっと大きな世話焼き心を持つ。仲間をかばって胸を張るが、せまい入口ではいつもつかえる。",
+      "origin": "ノルウェーなど北ヨーロッパの言い伝えに出てくる、山や深い森にすむふしぎな生き物。大きな体で描かれることが多いが、小さいものや人を助けるものの話もある。",
+      "sourceTitle": "Store norske leksikon・troll",
+      "sourceUrl": "https://snl.no/troll",
+      "support": "スカンディナヴィアの伝承に登場し、山や深い森にすむ。大小・善悪のさまざまな姿があり、ノルウェーでは大きな怪物型がよく見られる。スウェーデンの伝承には親切で人を助けるものもいる。",
+      "uncertainty": "外見や性格は地域・時代で異なる。全トロルが巨人、悪者、日光で石になる存在だとは断定しない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 2,
+      "name": "バステト",
+      "flavour": "鈴を鳴らして、仲間の手当てにやってくる猫の守り手。仕事がすむと、いちばん日当たりのよい場所を探す。",
+      "origin": "古代エジプトで信じられた、人々を守る女神。ねこの姿や、ねこの頭を持つ女性の姿で表される。",
+      "sourceTitle": "The Metropolitan Museum of Art・Statuette of cat-headed Bastet",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/558306",
+      "support": "バステトは古代エジプトの守護的な女神で、猫そのものや猫の頭を持つ姿で表された。",
+      "uncertainty": "ライオンの頭を持つ姿もある。紹介文はよく知られた猫の姿を述べており、唯一の姿とはしていない。怪物ではなく女神。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 3,
+      "name": "ドリュアス",
+      "flavour": "古い森から歩いてきた、枝葉をまとう木の精。仲間にはやさしいが、小枝を折る相手には少々手きびしい。",
+      "origin": "ギリシャ神話に登場する、木や森にすむ女性の精霊（せいれい）。木と命がつながり、木が枯れるとともに命を終える仲間もいる。",
+      "sourceTitle": "Theoi Project・Dryades & Oreiades: Tree and Mountain Nymphs",
+      "sourceUrl": "https://www.theoi.com/Nymphe/Dryades.html",
+      "support": "ドリュアスは樹木・森に結びつくニンフ。ハマドリュアスと呼ばれる仲間は特定の木と生死を共有する。ページには『ホメロス風讃歌』などの古典資料と、William Smithの神話辞典の記述を収録。",
+      "uncertainty": "ドリュアスとハマドリュアスの呼び分けは資料により重なる。すべての森のニンフが一本の木とともに死ぬとはしていない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 4,
+      "name": "バンシー",
+      "flavour": "霧の向こうから、よく通る声がひびいてくる。本人は静かに話したつもりでも、仲間は思わず耳をふさぐ。",
+      "origin": "アイルランドの言い伝えに登場する、女性の姿をしたふしぎな存在。ある家族のだれかに死が近づくと、悲しい泣き声で知らせるといわれる。",
+      "sourceTitle": "Dúchas / National Folklore Collection, University College Dublin・An Bhean Sí · Cnoc an Teampaill · The Schools’ Collection",
+      "sourceUrl": "https://www.duchas.ie/en/cbes/5070782/5062823/5094463",
+      "support": "アイルランド伝承の泣く女性であり、声は死を予告する。記事はアイルランドの語り手とUniversity College Dublinの民俗学者への取材を含む。 特定の家族の一員が死ぬ前、またはその夜にバンシーの声が聞こえるという採集された伝承。",
+      "uncertainty": "声の時期や姿は伝承によって異なる。死の知らせであり、声そのものが死を引き起こすとは説明しない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "Smithsonian Center for Folklife and Cultural Heritage・In Search of the Irish Family Banshee, Her Cry Echoing Across Generations",
+          "url": "https://folklife.si.edu/magazine/irish-banshee"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 5,
+      "name": "ケツァルコアトル",
+      "flavour": "色とりどりの羽をひるがえす、空の旅人。風を起こしたあとも、乱れた羽の手入れだけは忘れない。",
+      "origin": "今のメキシコにあたる地域で信じられた、「羽毛のあるへび」という名の神。アステカの神話では、人を生み出した神の一人で、風の神としての姿も持つ。",
+      "sourceTitle": "Vatican Museums・Quetzalcóatl",
+      "sourceUrl": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/museo-etnologico/collezione/quetzalcoatl.html",
+      "support": "羽毛のある蛇を意味する神名、メキシコ地域の信仰、メシカ／アステカでの人類創造への関与、風神エエカトルとしての姿を説明している。",
+      "uncertainty": "羽毛のある蛇の信仰はアステカ以前にも存在するため、アステカが最初に作った神とはしない。時代・地域による違いを一つの統一神話にまとめすぎない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 6,
+      "name": "ガルーダ",
+      "flavour": "高い空から戦場を見わたす、翼自慢の戦士。着地もかっこよく決めたいので、足元の小石が少し気になる。",
+      "origin": "インドのヒンドゥー教の神話に出てくる、神ヴィシュヌを乗せて飛ぶ大きな鳥。人と鳥を合わせた姿で表されることもある。",
+      "sourceTitle": "The Metropolitan Museum of Art・Garuda (Vishnu's Mount) Seated in Royal Ease",
+      "sourceUrl": "https://www.metmuseum.org/art/collection/search/38134",
+      "support": "ガルーダはヒンドゥー教の神ヴィシュヌが乗る大きな神鳥。インドでの彫刻例を解説。 神聖な鷲ガルーダがヴィシュヌを乗せて空を飛ぶ。 ヴィシュヌが、人と鳥が合わさった姿のガルーダに乗って空を飛ぶネパールの作品を解説。",
+      "uncertainty": "鳥としての姿と、人と鳥が合わさった姿の両方がある。仏教や東南アジアの伝承もあるが、短い紹介ではヒンドゥー教の代表的役割に絞る。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "Smithsonian National Museum of Asian Art・Garuda — Serpent",
+          "url": "https://asia.si.edu/interactives/symbols/serpent/garuda/index.html"
+        },
+        {
+          "title": "The Metropolitan Museum of Art・Vishnu Riding on Garuda",
+          "url": "https://www.metmuseum.org/art/collection/search/78185"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 7,
+      "name": "セルキー",
+      "flavour": "潮の香りを連れてくる、のんびりした海の仲間。手当てのあとにひと泳ぎするのが、いちばんの楽しみ。",
+      "origin": "スコットランドの島々などに伝わる、アザラシと人の姿を行き来するふしぎな存在。陸ではアザラシの皮をぬいで人になり、その皮を失うと海へ帰れないといわれる。",
+      "sourceTitle": "Historic Environment Scotland・Orkney’s Legends: 5 Orcadian folktales from The Outrun",
+      "sourceUrl": "https://blog.historicenvironment.scot/2024/09/orkney-folktales-the-outrun/",
+      "support": "オークニーの伝統的なセルキー説話では、アザラシの皮をぬいで人になり、皮を奪われると人の姿のまま海に戻れない。19世紀の民俗採集者Dennisonの記録に基づく具体的な説話を紹介。 スコットランドの民俗伝承に、人の姿をとるアザラシであるセルキー・フォークが登場する。",
+      "uncertainty": "変身の時期などは話ごとに違う。女性だけとは限らないため性別を限定しない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "National Museums Scotland・‘The Creeping and The Wise’: How the metamorphosis of animals in Scottish folklore and fossils became a recipe for glass",
+          "url": "https://blog.nms.ac.uk/2021/10/25/the-creeping-and-the-wise-how-the-metamorphosis-of-animals-in-scottish-folklore-and-fossils-became-a-recipe-for-glass/"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 8,
+      "name": "イフリート",
+      "flavour": "炎をまとった、見るからに熱そうな力自慢。気合いを入れるたび火の粉が散るので、仲間は少し離れて応援する。",
+      "origin": "アラビアやイスラム教の伝承に出てくる、ジンというふしぎな存在のうち、強い力を持つもの。『コーラン』では、女王の王座を遠くから運べると申し出る。",
+      "sourceTitle": "TDV İslâm Ansiklopedisi / İslâm Araştırmaları Merkezi・İFRİT",
+      "sourceUrl": "https://islamansiklopedisi.org.tr/ifrit",
+      "support": "アラビア・イスラム圏における語義と伝承、強力なジンとの関係、種類名と形容語の解釈の違いを説明する。 ジンのうちのイフリートが、ソロモンが席を立つ前に女王の玉座を運んでこられると申し出る一次資料。",
+      "uncertainty": "『コーラン』のイフリートは固定された種族名と断定できない。玉座を実際に瞬時に運ぶのは次の節の別の者なので、イフリートは『申し出る』とする。ゲーム的な炎の精霊像に限定しない。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "Quran.com / Quran Foundation・Surah An-Naml 27:39, with context 27:38–40",
+          "url": "https://quran.com/an-naml/39"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 9,
+      "name": "烏天狗",
+      "flavour": "山道をひと飛びで渡る、身軽な案内役。近道を教えるのは得意だが、翼のない仲間がついてこられるかは忘れがち。",
+      "origin": "日本の山の言い伝えに登場する、天狗の仲間。鳥のようなくちばしとつばさを持ち、空を自由に飛ぶといわれる。",
+      "sourceTitle": "曹洞宗 大雄山最乗寺・天狗伝説",
+      "sourceUrl": "https://daiyuuzan.or.jp/plan/tengu/",
+      "support": "日本の山に関わる天狗信仰、小天狗が烏天狗とも呼ばれること、烏のようなくちばしを持ち自由に飛ぶという伝承。 河鍋暁斎の烏天狗図に、くちばしと背中の翼が表される。鞍馬山を場面とした伝統的図像の資料。",
+      "uncertainty": "天狗の起源には複数の文化・信仰の影響がある。寺院解説の『インドの巨鳥が烏天狗になった』という単線的説明は紹介文に採用しない。長い鼻を持つ天狗と区別する。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "国際日本文化研究センター 怪異・妖怪画像データベース・天狗；テング，烏天狗；カラステング，嘴；クチバシ，翼；ツバサ",
+          "url": "https://www.nichibun.ac.jp/cgi-bin/YoukaiGazou/card.cgi?identifier=U426_nichibunken_0130_0001_0008"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 10,
+      "name": "ナーガ",
+      "flavour": "長い体を輪にして、仲間のそばに陣取る。守りは頼もしいが、休憩場所を決めるときは少し場所を取る。",
+      "origin": "インドのヒンドゥー教や仏教に登場する、へびの姿を持つふしぎな存在。水と深く結びつき、土地を守る神としても信じられてきた。",
+      "sourceTitle": "University of Michigan Museum of Art・Nagaraja (Serpent king)",
+      "sourceUrl": "https://umma.umich.edu/objects/nagaraja-serpent-king-2002-2-350/",
+      "support": "インドのナーガは蛇で、水と豊かさに結びつき、地域の守護神として信じられ、ヒンドゥー教と仏教にも取り入れられた。",
+      "uncertainty": "人に近い姿や複数の蛇の頭を持つ姿でも描かれる。すべてが同じ外見・性格・役割ではなく、東南アジアにも広がっている。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 11,
+      "name": "アヌビス",
+      "flavour": "静かに構える、まじめな境目の番人。見張り中はきりりとしているが、仲間の帰りには耳がぴんと立つ。",
+      "origin": "古代エジプトで、ミイラ作りにかかわり、死者を守る神。ジャッカルという犬に似た動物や、その頭を持つ人の姿で表される。",
+      "sourceTitle": "Kelsey Museum of Archaeology, University of Michigan・Anubis: Embalmer and Protector of the Dead",
+      "sourceUrl": "https://exhibitions.kelsey.lsa.umich.edu/jackal-gods-ancient-egypt/anubis.php",
+      "support": "古代エジプトの神アヌビスが遺体の保存・ミイラ作りに関わり、死者を保護する役割を持つ。 アヌビスは犬またはジャッカルの姿、およびジャッカルの頭を持つ男性の姿で表される。",
+      "uncertainty": "図像の動物は慣用的にジャッカルと呼ばれるが、実在の一種類だけと単純に同定できるとは限らない。死を引き起こす怪物ではなく、死者を守る神。 性格・衣装・戦闘特技は本作の創作。",
+      "extraSources": [
+        {
+          "title": "The Global Egyptian Museum・Anubis",
+          "url": "https://www.globalegyptianmuseum.org/glossary.aspx?id=67"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 12,
+      "name": "フェンリル",
+      "flavour": "切れた鎖を鳴らし、先頭を駆ける大きな狼。こわい顔で振り返るのは、仲間がちゃんと来ているか気になるから。",
+      "origin": "北欧神話に登場する、ロキの子である巨大なオオカミ。神々に特別なひもでしばられ、世界の終わりの戦いで自由になる。",
+      "sourceTitle": "『エッダ』ギュルヴィたぶらかし",
+      "sourceUrl": "https://sacred-texts.com/book/the-prose-edda/gylfaginning",
+      "support": "第34章にロキの子・巨狼・グレイプニルによる拘束、第51章に解放と神々との最終戦。",
+      "uncertainty": "群れへの支援、仲間思いの性格、技、切れた鎖の衣装は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 13,
+      "name": "ラタトスク",
+      "flavour": "枝から枝へ走り回る、小さな伝令役。木の実は弾にもおやつにもなるので、使う順番がなやましい。",
+      "origin": "北欧神話の世界樹ユグドラシルを走るリス。木の上のワシと根元の大蛇の間を行き来し、たがいを怒らせる言葉を運ぶ。",
+      "sourceTitle": "『エッダ』ギュルヴィたぶらかし",
+      "sourceUrl": "https://sacred-texts.com/book/the-prose-edda/gylfaginning",
+      "support": "第16章にリスRatatöskr、世界樹を上下しワシとニーズヘッグの間に悪意ある言葉を運ぶ記述。",
+      "uncertainty": "木の実を撃つことや味方への伝令は本作の創作。善良な仲介者と伝承を言い換えない。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 14,
+      "name": "玄武",
+      "flavour": "どっしり構えた甲羅と、くるりと巻いた蛇が目印。急ぐときほど落ち着いて、という教えを、今日ものんびり守っている。",
+      "origin": "古代中国から伝わる、北の方角を守る神獣。四神の一つで、ふつうは亀に蛇がからみついた姿で描かれる。",
+      "sourceTitle": "奈良文化財研究所・キトラ古墳の玄武",
+      "sourceUrl": "https://www.nabunken.go.jp/shijin/about/kitora-atlas/mural/post.html",
+      "support": "四神は古代中国起源で東西南北の方位をつかさどる。玄武は北・冬、亀と蛇の姿。",
+      "uncertainty": "森を載せた甲羅、回復、自然系全体の障壁は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 15,
+      "name": "ヴリトラ",
+      "flavour": "大きな体を巻き、じっと力をためる竜。考えごとをしているように見えるが、ほどく順番を確かめているだけかもしれない。",
+      "origin": "古代インドの『リグ・ヴェーダ』に登場する、水をせき止めた大蛇。雷の神インドラに倒されると、とらわれていた水が流れ出す。",
+      "sourceTitle": "『リグ・ヴェーダ』第1巻32歌",
+      "sourceUrl": "https://en.wikisource.org/wiki/The_Hymns_of_the_Rigveda/Book_1/Hymn_32",
+      "support": "1.32.1–2、5、8、11に雷を使うインドラ、大蛇ヴリトラ、水の解放。",
+      "uncertainty": "後世の物語には別の由来もある。本文はリグ・ヴェーダの話に限定。竜気と乾いた息は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 16,
+      "name": "リンドヴルム",
+      "flavour": "長い体をくねらせて、仲間の前にすべりこむ。たのもしい鱗の持ち主だが、寝床にはどうしても長い場所がいる。",
+      "origin": "ヨーロッパの伝説に登場する、長い蛇の体を持つ竜。オーストリアのクラーゲンフルトでは、沼にすみ人や家畜を襲ったと語られる。",
+      "sourceTitle": "クラーゲンフルト市・リンドヴルムの伝説",
+      "sourceUrl": "https://www.klagenfurt.at/stadtinfo/geschichte-persoenlichkeiten/sagen",
+      "support": "市公式ページのDie Lindwurmsage。沼地、家畜・人を害する怪物、長い蛇身を記す。",
+      "uncertainty": "地域ごとに姿が異なる。二本脚・翼なしが唯一の伝承の姿とはしない。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 17,
+      "name": "アンフィスバエナ",
+      "flavour": "前から見ても後ろから見ても、牙のある顔。見張りのすきは少ないが、行き先の相談には少し時間がかかる。",
+      "origin": "古代ギリシャやローマで語られた、体の両はしに頭を持つ蛇。しっぽ側の頭を先にしても進めるという。",
+      "sourceTitle": "アイリアノス／プリニウスの古代文献",
+      "sourceUrl": "https://www.theoi.com/Thaumasios/Amphisbainai.html",
+      "support": "Theoi収載のアイリアノス『動物の特性について』9.23は両端の頭と前後への移動、プリニウス『博物誌』8.85は尾の頭を記す。2026-10-12検索取得本文で確認。",
+      "uncertainty": "伝説上の蛇の紹介。実在のミミズトカゲと混同せず、古代の治療効能の話を採用しない。直接openは内部取得エラー、検索インデックス本文の古典引用で確認。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 18,
+      "name": "ジラント",
+      "flavour": "淡い雲を連れて旅する、青緑の翼の竜。仲間には水を分けてくれるが、自慢の翼がぬれると念入りに乾かす。",
+      "origin": "タタールの伝説に登場する、翼を持つ大蛇。ロシアのカザンにまつわる物語で語られ、町のシンボルにもなっている。",
+      "sourceTitle": "カザン公式観光案内・ジラント",
+      "sourceUrl": "https://go.kzn.ru/articles/kazan-misticeskaia",
+      "support": "カザン公式観光ページはタタール神話の大きな翼ある蛇と説明。タタール百科事典はカザン紋章のジラントの由来を説明。",
+      "uncertainty": "伝承と現代シンボルの意味には差がある。水を分ける雲の旅竜という性格・青緑の姿は本作の創作。",
+      "extraSources": [
+        {
+          "title": "タタール百科事典・紋章のジラント",
+          "url": "https://tatarica.org/ru/razdely/kazan/zilant-v-geraldike"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 19,
+      "name": "タロス",
+      "flavour": "重い足音で歩く、青銅の体の番人。仲間の手入れには熱心だが、自分のきしむひじは後回し。",
+      "origin": "ギリシャ神話でクレタ島を守る、青銅の体の番人。毎日島を見回り、近づく船へ大きな石を投げたという。",
+      "sourceTitle": "アポロドロス『ビブリオテーケー』1.9.26",
+      "sourceUrl": "https://www.theoi.com/Text/Apollodorus1.html",
+      "support": "1.9.26に青銅の人タロス、クレタを1日3周して守り、アルゴー船へ石を投げる記述。",
+      "uncertainty": "出生・製作者や姿に異説があり、製作者は断定しない。仲間を修復する炉心は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 20,
+      "name": "唐傘おばけ",
+      "flavour": "古びた傘が、ひょいと闘技場へやってきた。雨の日は張り切るけれど、晴れていても帰るつもりはないらしい。",
+      "origin": "日本の妖怪画に見られる、傘が化けたような妖怪。古い絵には、傘の頭に人のような体を持つ姿も描かれている。",
+      "sourceTitle": "国際日本文化研究センター・傘の妖怪",
+      "sourceUrl": "https://www.nichibun.ac.jp/YoukaiGazouCard/U426_nichibunken_0452_0001_0007.html",
+      "support": "妖怪画像DBの傘カードに「頭部が傘の妖怪。体は人のよう」。親資料は妖怪絵巻屏風。三次もののけミュージアムは江戸時代以降の傘お化け根付を展示。",
+      "uncertainty": "絵の姿には幅がある。特定の一つ目・一本脚・舌を必須の姿としない。カードの2022は公開年で、絵の制作年とは扱わない。",
+      "extraSources": [
+        {
+          "title": "三次もののけミュージアム・傘お化け根付",
+          "url": "https://miyoshi-mononoke.jp/exhibition/"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 21,
+      "name": "ぬりかべ",
+      "flavour": "仲間の前へ、ずずっと動く石の壁。あいさつのつもりで近づいても、通せんぼだと思われがち。",
+      "origin": "日本の福岡などに伝わる、夜道をふさぐ壁のような妖怪。下のほうを棒で払うと消える、という話が残っている。",
+      "sourceTitle": "国際日本文化研究センター・塗り壁",
+      "sourceUrl": "https://www.nichibun.ac.jp/cgi-bin/YoukaiDB3/youkai_card.cgi?ID=2180774",
+      "support": "柳田國男「妖怪名彙（四）」1938年、福岡県遠賀郡の伝承要約に夜道を壁がふさぎ下辺を払うと消える記述。",
+      "uncertainty": "姿の見えない怪異として記録される例。石積みの体と仲間をかばう役は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 22,
+      "name": "巡る三脚鼎",
+      "flavour": "ことこと湯気を立てながら、三つの車輪で走る器。仲間の手当てに急ぎたいけれど、曲がり角ではこぼさぬよう慎重に。",
+      "origin": "ギリシャ神話の、ひとりでに走る三脚の器がもと。鍛冶の神ヘパイストスが作って神々の集まりを行き来する器で、この名前と回復役の設定は本作の創作。",
+      "sourceTitle": "ホメロス『イリアス』第18巻",
+      "sourceUrl": "https://www.theoi.com/Olympios/HephaistosWorks.html",
+      "support": "TRIPODS OF THE GODS節の『イリアス』引用に三脚器、金の車輪、自ら神々の集まりへ行き帰る記述。",
+      "uncertainty": "「巡る三脚鼎」は原典の固有名ではない。湯を配る治療器という設定と本作の造形は創作。",
+      "extraSources": [],
+      "kind": "traditional-motif",
+      "gameOriginal": false
+    },
+    {
+      "id": 23,
+      "name": "青銅の牡牛",
+      "flavour": "どしんと踏み出す、重たい青銅の力自慢。角の手入れは欠かさないが、自分のおでこをみがくのは少し苦手。",
+      "origin": "ギリシャ神話の、火を吐く牛がもと。鍛冶の神が作った青銅の足と口を持つ牛で、英雄イアソンが畑を耕す試練で向き合う。",
+      "sourceTitle": "アポロニオス『アルゴナウティカ』第3巻",
+      "sourceUrl": "https://www.theoi.com/Text/ApolloniusRhodius3.html",
+      "support": "第3巻215行以降にヘパイストス製の青銅の足と口・火を吐く牛、1278行以降に2頭をつないで畑を耕す試練。",
+      "uncertainty": "古代神の固有名ではなく、神話の造物を本作の1体にした説明的な名称。原典の2頭タッグは実装しない。",
+      "extraSources": [],
+      "kind": "traditional-motif",
+      "gameOriginal": false
+    },
+    {
+      "id": 24,
+      "name": "うつろ泉",
+      "flavour": "ぽっかり空いた体に、静かな水をたたえる。仲間に力を分ける気前のよさと、自分の分を残す用心深さを両立したい。",
+      "origin": "このゲームのために作られた、泉のような体に水をたたえる生きもの。特定の神話や昔話に由来するモンスターではない。",
+      "sourceTitle": null,
+      "sourceUrl": null,
+      "support": "v0.20.5 src/strategy.ts、src/MonsterDetails.tsx、docs/slime-family-reference.mdは5体の名称・設定が本作用の創作と明示。",
+      "uncertainty": "実在の伝承に由来するモンスターへの置換は含まない。名称と造形・能力は本作の創作。",
+      "extraSources": [],
+      "kind": "game-original",
+      "gameOriginal": true
+    },
+    {
+      "id": 25,
+      "name": "ひも雫",
+      "flavour": "ほどけたひものように、するすると走る小さな雫。急ぐあまりに体が長くのび、到着してからうしろの端を待つことも。",
+      "origin": "このゲームのために作られた、細い水のひもの形をした生きもの。特定の神話や昔話に由来するモンスターではない。",
+      "sourceTitle": null,
+      "sourceUrl": null,
+      "support": "v0.20.5 src/strategy.ts、src/MonsterDetails.tsx、docs/slime-family-reference.mdは5体の名称・設定が本作用の創作と明示。",
+      "uncertainty": "実在の伝承に由来するモンスターへの置換は含まない。名称と造形・能力は本作の創作。",
+      "extraSources": [],
+      "kind": "game-original",
+      "gameOriginal": true
+    },
+    {
+      "id": 26,
+      "name": "ひだまもり",
+      "flavour": "何枚ものひだを広げ、仲間を包むやわらかな守り手。きれいにたたむのが好きで、休憩中もせっせと折り目を直す。",
+      "origin": "このゲームのために作られた、やわらかな膜を何枚も重ねた生きもの。特定の神話や昔話に由来するモンスターではない。",
+      "sourceTitle": null,
+      "sourceUrl": null,
+      "support": "v0.20.5 src/strategy.ts、src/MonsterDetails.tsx、docs/slime-family-reference.mdは5体の名称・設定が本作用の創作と明示。",
+      "uncertainty": "実在の伝承に由来するモンスターへの置換は含まない。名称と造形・能力は本作の創作。",
+      "extraSources": [],
+      "kind": "game-original",
+      "gameOriginal": true
+    },
+    {
+      "id": 27,
+      "name": "あわ枝",
+      "flavour": "枝の先に泡を実らせた、水辺の世話焼き。仲間に渡す泡を選ぶ様子は、くだもの屋さんのように真剣だ。",
+      "origin": "このゲームのために作られた、泡でできた枝を伸ばす生きもの。特定の神話や昔話に由来するモンスターではない。",
+      "sourceTitle": null,
+      "sourceUrl": null,
+      "support": "v0.20.5 src/strategy.ts、src/MonsterDetails.tsx、docs/slime-family-reference.mdは5体の名称・設定が本作用の創作と明示。",
+      "uncertainty": "実在の伝承に由来するモンスターへの置換は含まない。名称と造形・能力は本作の創作。",
+      "extraSources": [],
+      "kind": "game-original",
+      "gameOriginal": true
+    },
+    {
+      "id": 28,
+      "name": "ねりこぶし",
+      "flavour": "六つのこぶを、ぎゅっとまとめる力自慢。やわらかそうと油断すると重い一撃が飛んでくるので、つつくのはほどほどに。",
+      "origin": "このゲームのために作られた、六つのこぶを持つ、ねりもののような生きもの。特定の神話や昔話に由来するモンスターではない。",
+      "sourceTitle": null,
+      "sourceUrl": null,
+      "support": "v0.20.5 src/strategy.ts、src/MonsterDetails.tsx、docs/slime-family-reference.mdは5体の名称・設定が本作用の創作と明示。",
+      "uncertainty": "実在の伝承に由来するモンスターへの置換は含まない。名称と造形・能力は本作の創作。",
+      "extraSources": [],
+      "kind": "game-original",
+      "gameOriginal": true
+    },
+    {
+      "id": 29,
+      "name": "マモン",
+      "flavour": "指先で勘定を続ける、頭巾姿の抜け目ないやつ。敵の力の残りには細かいが、仲間のおやつ代まで数えたがるのが玉にきず。",
+      "origin": "もとは富や財産を意味する言葉。キリスト教の伝統では、お金への欲を一人の存在に見立て、悪魔として描くようにもなった。",
+      "sourceTitle": "『カトリック百科事典』マモン",
+      "sourceUrl": "https://www.newadvent.org/cathen/09580b.htm",
+      "support": "新約の語と擬人化、中世Peter Lombardの悪魔Mammonの例を記す。現代のOxford/New Catholic Encyclopediaも富・貪欲の擬人化を区別する。",
+      "uncertainty": "古代に独立した富の神として実際に信仰されたと断定しない。頭巾の会計役、MP削りは本作の創作。",
+      "extraSources": [
+        {
+          "title": "New Catholic Encyclopedia／Oxford辞典・Mammon",
+          "url": "https://www.encyclopedia.com/philosophy-and-religion/bible/biblical-proper-names/mammon"
+        }
+      ],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 30,
+      "name": "コボルト",
+      "flavour": "工具を抱えた、小さな仕事人。ゆるんだ留め具を見つけるのが得意で、敵の守りにもつい手を出してしまう。",
+      "origin": "ドイツの昔話に登場する、家にすみつく小さな精霊。家事を手伝ってくれる一方、怒らせるといたずらをするという。",
+      "sourceTitle": "グリム『ドイツ伝説集』コボルト",
+      "sourceUrl": "https://de.wikisource.org/wiki/Der_Kobold_(Br%C3%BCder_Grimm)",
+      "support": "第71話に家仕事を手伝う家の霊、供物を忘れると家事で災いを起こす話。",
+      "uncertainty": "コボルトには鉱山の霊など別の伝承もある。犬人・爬虫類人という現代ゲームの姿を伝承一般としない。工具で守りを解除する能力は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 31,
+      "name": "エンプーサ",
+      "flavour": "片脚をきらりと光らせ、影のように身をひるがえす。足音をひそめたいのに、かたい脚がこつんと鳴るのが悩み。",
+      "origin": "古代ギリシャで語られた、さまざまな姿に変わる怪物。喜劇『蛙』では、片脚が青銅でできていると語られる。",
+      "sourceTitle": "アリストパネス『蛙』大学公開訳",
+      "sourceUrl": "https://web.viu.ca/johnstoi/aristophanes/frogs.htm",
+      "support": "『蛙』約290行付近に牛・ロバ・女性・犬への変化、片脚が青銅のエンプーサの会話。",
+      "uncertainty": "喜劇の作中人物が怖がらせる場面での伝承利用。脚の姿には異説あり。本作に変身・魅了・吸血能力はない。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 32,
+      "name": "ドラウグル",
+      "flavour": "墓の土を肩にのせた、無口で力の強い古参。長く眠っていたせいか、集合の合図だけは少し大きな声で伝えたい。",
+      "origin": "北欧の古い物語に現れる、体を持ったまま動く死者。墓の中の宝を守り、近づいた人に襲いかかる話が残っている。",
+      "sourceTitle": "『グレティルのサガ』第18章",
+      "sourceUrl": "https://www.gutenberg.org/cache/epub/12747/pg12747-images.html",
+      "support": "第18章に墓の死者Karr、周囲を荒らす怪異、墓の財宝を取るGrettirに掴みかかり格闘する場面。",
+      "uncertainty": "ドラウグルのすべてが墓を守るわけではないため「話が残っている」と例示。毒を打撃に換える能力・本作衣装は創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 33,
+      "name": "首なしの馭者",
+      "flavour": "顔の代わりにあかりをかかげ、夜道を進む馬車の運転手。うなずけないぶん、返事は手綱（たづな）の動きでしっかり伝える。",
+      "origin": "アイルランドに伝わる、首のない者が走らせる死の馬車がもと。出会うことは、死や不幸が近いしるしだと考えられた。",
+      "sourceTitle": "クローカー『アイルランド南部の妖精伝説』",
+      "sourceUrl": "https://www.gutenberg.org/cache/epub/39752/pg39752-images.html",
+      "support": "Dullahan節、The Death Coachと注記に頭のない御者・馬・馬車、出現を死または不幸の予兆とする説明。",
+      "uncertainty": "「首なしの馭者」は本作の説明的な名称。顔の灯と手綱による解除は創作。原典の詩や固有の台詞は使用しない。",
+      "extraSources": [],
+      "kind": "traditional-motif",
+      "gameOriginal": false
+    },
+    {
+      "id": 34,
+      "name": "キョンシー",
+      "flavour": "小さく跳ねて進む、長い袖の持ち主。仲間をかばうときも真顔だが、袖の内側はなかなか居心地がよい。",
+      "origin": "中国の怪談に登場する、動き出した死体。清の時代の『子不語』には、ぴょんぴょん跳ぶものも描かれている。",
+      "sourceTitle": "袁枚『子不語』巻8「批僵屍頰」",
+      "sourceUrl": "https://zh.wikisource.org/wiki/%E5%AD%90%E4%B8%8D%E8%AA%9E/%E5%8D%B78",
+      "support": "「批僵屍頰」の節に夜の墓地から跳躍してくる裸足・髪を垂らした僵屍。",
+      "uncertainty": "官服・帽子・額のお札のセットを古い伝承で必須とはしない。袖で仲間をかばう役は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 35,
+      "name": "ヴェータラ",
+      "flavour": "枝から逆さに下がり、影のほつれを縫う小さな仲間。上下が逆でも手先は器用で、糸くずだけはよく頭に落ちてくる。",
+      "origin": "インドの物語に登場する、死体に宿る霊。王に運ばれながら不思議な話をして、最後になぞを出す物語で知られる。",
+      "sourceTitle": "ソーマデーヴァ『説話の大海』第75章",
+      "sourceUrl": "https://en.wikisource.org/wiki/The_Katha_Sarit_Sagara/Chapter_75",
+      "support": "第75章の枠物語にVetalaの宿った死体を木から下ろし王が運ぶ場面、物語を話し最後に王へ問いを出す場面。",
+      "uncertainty": "BurtonのVikram and the Vampireは自由編案のため主根拠にせず、TawneyによるSomadeva本文訳を採用。糸で回復・清めをする役は本作の創作。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    },
+    {
+      "id": 36,
+      "name": "ヤヌス",
+      "flavour": "二つの顔で行き来を見守る、律義な門番。どちら側から声をかけても返事はするが、同時に話しかけられると少し困る。",
+      "origin": "古代ローマの、門や物事の始まりをつかさどる神。前と後ろを同時に見られる、二つの顔を持つ姿で表される。",
+      "sourceTitle": "オウィディウス『祭暦』第1巻",
+      "sourceUrl": "https://www.theoi.com/Text/OvidFasti1.html",
+      "support": "第1巻63行以降に年の始まり、89–144行に二面、門の出入りと前後を見る説明。",
+      "uncertainty": "本作の四系統条件・毒解除・守護を伝承の能力として説明しない。",
+      "extraSources": [],
+      "kind": "tradition",
+      "gameOriginal": false
+    }
+  ]
+}

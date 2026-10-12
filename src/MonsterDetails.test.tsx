@@ -7,6 +7,7 @@ import MonsterDetails from './MonsterDetails';
 let root: Root;
 let opener: HTMLButtonElement;
 const closeButton = () => document.querySelector<HTMLButtonElement>('.profileModal .close')!;
+const sourceLink = () => document.querySelector<HTMLAnchorElement>('.profileStory .loreSource')!;
 const summary = () => document.querySelector<HTMLElement>('.profileBackground > summary')!;
 const returnButton = () => document.querySelector<HTMLButtonElement>('.closeProfile')!;
 async function mount(id = 0) { await act(async () => root.render(<MonsterDetails id={id} onClose={() => root.render(null)} />)); }
@@ -39,13 +40,13 @@ describe('read-only monster profile keyboard focus', () => {
     expect(header).toBeTruthy(); expect(body).toBeTruthy();
     expect(header.contains(closeButton())).toBe(true);
     expect(body.contains(closeButton())).toBe(false);
-    for (const selector of ['.profileHeading', '.roleBrief', '.leaderBanner', '.familyExplanation', '.skill', '.profileBackground', '.closeProfile']) {
+    for (const selector of ['.profileHeading', '.profileStory', '.roleBrief', '.leaderBanner', '.familyExplanation', '.skill', '.profileBackground', '.closeProfile']) {
       expect(body.querySelector(selector)).toBeTruthy();
     }
     expect(modal.getAttribute('aria-label')).toBe('ケツァルコアトルの詳細');
   });
 
-  it.each(['.close', '.profileBackground > summary', '.closeProfile'])('owns Escape from %s and restores focus without bubbling to the page', async selector => {
+  it.each(['.close', '.loreSource', '.profileBackground > summary', '.closeProfile'])('owns Escape from %s and restores focus without bubbling to the page', async selector => {
     const pageKeydown = vi.fn();
     window.addEventListener('keydown', pageKeydown);
     try {
@@ -62,14 +63,16 @@ describe('read-only monster profile keyboard focus', () => {
     } finally { window.removeEventListener('keydown', pageKeydown); }
   });
 
-  it('cycles Tab and Shift+Tab through Close, the disclosure summary, and Return', async () => {
+  it('cycles Tab and Shift+Tab through Close, the source, the disclosure summary, and Return', async () => {
     await mount();
     expect(document.activeElement).toBe(closeButton());
+    await tab(); expect(document.activeElement).toBe(sourceLink());
     await tab(); expect(document.activeElement).toBe(summary());
     await tab(); expect(document.activeElement).toBe(returnButton());
     await tab(); expect(document.activeElement).toBe(closeButton());
     await tab(true); expect(document.activeElement).toBe(returnButton());
     await tab(true); expect(document.activeElement).toBe(summary());
+    await tab(true); expect(document.activeElement).toBe(sourceLink());
     await tab(true); expect(document.activeElement).toBe(closeButton());
   });
 
@@ -159,8 +162,8 @@ describe('dragon profiles', () => {
     expect(text).not.toContain('まだ物語の記されていない');
     expect(text).not.toContain('未知の役割');
     expect(document.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
-    if (id === 16) expect(text).toContain('二本の脚');
-    if (id === 17) { expect(text).toContain('尾の先にも頭'); expect(text).toContain('敵ランダム2回（対象指定なし）'); }
+    if (id === 16) expect(text).toContain('長い蛇の体を持つ竜');
+    if (id === 17) { expect(text).toContain('体の両はしに頭'); expect(text).toContain('敵ランダム2回（対象指定なし）'); }
     if (id === 18) { expect(text).toContain('青緑の翼'); expect(text).toContain('固定基礎68'); expect(text).toContain('最終ダメージは乱数±10%'); }
   });
 

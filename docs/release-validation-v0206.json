@@ -1,0 +1,80 @@
+{
+  "release": "0.20.6",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; deployment/rendered acceptance recorded separately",
+  "publicBaselineCommit": "ec739f98df957b6cb7042b035e089ca86f32d26c",
+  "baselineTree": "ee5ac1dea75cdcf6c3b0b5fad37c5b7ebfcc5b43",
+  "reviewedCandidateTree": "f1259cabcf566172335e9bd38881befd1b9dd713",
+  "checks": {
+    "vitest": {
+      "tests": 2504,
+      "files": 110,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 15,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.5",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "8c583cf1685ba45bf027891e5aadd52ecbf308cd",
+          "release": "45d5df2f594b28201040e4df6e4509ce442dcba7"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.5",
+          "release": "0.20.6"
+        }
+      ]
+    }
+  },
+  "independentImplementationReview": {
+    "verdict": "no source blockers; rendered acceptance pending",
+    "focusedTests": 189
+  },
+  "preservation": {
+    "runtimeMatchesReviewedInputExceptAppVersion": true,
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "changedExistingFiles": [
+      "README.md",
+      "docs/rights/asset-manifest.json",
+      "package-lock.json",
+      "package.json",
+      "scripts/check-rights-selftest.mjs",
+      "src/App.dragonWave.test.tsx",
+      "src/App.materialWave.test.tsx",
+      "src/App.navigation.test.tsx",
+      "src/App.tsx",
+      "src/HomeScreen.familyTrials.test.tsx",
+      "src/HomeScreen.tsx",
+      "src/MonsterDetails.layout.test.ts",
+      "src/MonsterDetails.test.tsx",
+      "src/MonsterDetails.tsx",
+      "src/strategy.ts",
+      "src/style.css"
+    ],
+    "otherExistingFilesByteIdentical": 1135
+  },
+  "limits": [
+    "CSS/DOM checks are not rendered geometry proof",
+    "Actual home/profile geometry, all37 texts, source-link access, footer/trial navigation and preserved dismissals must be verified after deployment",
+    "Existing large-JS-chunk warning remains",
+    "No legal clearance or all-device acceptance claimed"
+  ],
+  "publicationPerformedAtRecordCreation": false,
+  "legalClearance": false
+}

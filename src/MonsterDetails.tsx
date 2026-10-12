@@ -1,9 +1,10 @@
 import MonsterArt from './MonsterArt';
 import { useEffect, useRef } from 'react';
 import { monsters, EXTRAORDINARY_CORE_ID, UNDEAD_CORE_ID, UNDEAD_CASHOUT, DEMON_CORE_ID, DEMON_PRESSURE, SLIME_CORE_ID, SLIME_SUPPLY, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, NATURE_WARD_PERCENT, familyLabel, leaderFor, skillOrderLabel, type Skill } from './engine';
-import { fixedDamageHint, monsterLore, monsterRole, skillLore } from './strategy';
+import { fixedDamageHint, monsterRole, skillLore } from './strategy';
 
 import { poisonSkillDetail } from './poisonDescription';
+import { monsterStory } from './monsterLore';
 
 const skillHint = (skill: Skill) => `MP ${skill.mpCost} · ${skillOrderLabel(skill)} · ${skill.kind === 'poison' ? poisonSkillDetail(skill) : skill.kind === 'responseCleanse' ? '生存する味方全員の現在の毒だけ解除・HP回復0・両技で共通1回' : skill.kind === 'responseGuard' ? '生存する味方全員を守る・今ターン直接ダメージ半減・両技で共通1回' : skill.kind === 'restoreMp' ? `生存する味方粘体系へMP+${SLIME_SUPPLY.amount}・戦闘中1回・通常の行動を使用` : skill.kind === 'heal' ? '味方1体を回復' : skill.kind === 'cleanse' ? '味方1体の毒解除＋回復' : skill.kind === 'protect' ? '味方1体を守る・今ターン直接ダメージ半減' : skill.kind === 'guard' ? '自分を守る・今ターン直接ダメージ半減' : skill.randomHits ? `敵ランダム${skill.randomHits}回（対象指定なし）` : skill.all ? '敵全体' : '敵1体'}${skill.poisonCashout ? ` · 命中時の毒残0〜3回×${UNDEAD_CASHOUT.base}（不死3体で${UNDEAD_CASHOUT.base + UNDEAD_CASHOUT.bonus}）を基礎へ追加し、毒を全消費。追加分も乱数・守り・自然障壁の対象` : ''}${skill.mpDamage ? ` · 命中後、生存する相手のMPを${skill.mpDamage}削る（悪魔3体の条件成立で${skill.mpDamage + DEMON_PRESSURE.bonus}）。守り・自然障壁で軽減、自己回復なし` : ''}${skill.familyBonusHit ? ' · 開戦時の5体すべてが獣系なら+1回（合計4回）。戦闘不能でも条件は変わらない' : ''}${skill.breaksGuard ? ' · 命中前に防御・守護・自然障壁・竜気・修復待ちを解除して攻撃' : ''}${skill.breaksGuardAfterHit ? ` · 各命中の後に守り（防御・守護）・群気・自然障壁・竜気・修復待ちを解除。守り中の初撃は半減、自然障壁だけなら${NATURE_WARD_PERCENT}%軽減` : ''}`;
 
@@ -13,6 +14,7 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
   const dialog = useRef<HTMLElement>(null);
   const monster = monsters[id];
   const role = monsterRole(id);
+  const story = monsterStory(id);
   useEffect(() => {
     const previousFocus = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
@@ -43,6 +45,10 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     <div className="profileHeader"><strong>{monster.name}の詳細</strong><button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
     <div className="profileBody">
     <div className="profileHeading"><span className="heroIcon"><MonsterArt monster={monster} /></span><div><span className="eyebrow">MONSTER PROFILE · COST {monster.cost}</span><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><small>閲覧のみ · 入れ替えは編成の枠から</small></div></div>
+    <section className="profileStory" aria-label={`${monster.name}のひとことと由来`}>
+      <div><span className="storyLabel">ひとこと <small>本作の創作</small></span><p className="monsterLore">{story.flavour}</p></div>
+      <div><span className="storyLabel">{story.gameOriginal ? 'ゲームオリジナル' : '伝承'}</span><p className="monsterOrigin">{story.origin}{story.sourceUrl && <a className="loreSource" href={story.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${monster.name}の伝承の出典: ${story.sourceTitle}（新しいタブ）`}>出典<span aria-hidden="true"> ↗</span></a>}</p></div>
+    </section>
     <div className="roleBrief"><strong>{role.name}</strong><p>{role.strength}</p><small>{role.tradeoff}</small></div>
     <div className="leaderBanner"><span>リーダー効果 · {leaderFor(id).name}</span><small>{leaderFor(id).description}</small></div>
     {monster.id === 12 && <p className="familyExplanation">獣系は本作の哺乳類モチーフの分類です。リーダー効果は先頭にいる時だけ。さらに編成中は「群れの遠吠え」が開幕に一度だけ発動し、味方の獣系へ攻撃/素早さ+5%の群気を2ターン付与。素早さが行動順へ反映されるのは2ターン目。重複せず、連牙で解除可能。獣系以外にはかかりません。先制で狙われると脆く、MP60で連牙は4回まで。連牙は自然障壁・竜気・修復待ちも命中後に解除します。リーダー効果や毒は解除しません。</p>}
@@ -62,7 +68,7 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     {monster.skills.some(skill => skill.fixedDamage) && <p className="familyExplanation fixedBasisExplanation">「固定基礎」の攻撃は攻撃力・群気に依存せず、全体攻撃の半減補正も受けません。最終ダメージは乱数±10%と守り・自然障壁で変わります。守りの半減や自然障壁の軽減は有効です。</p>}
     {monster.id === 5 && <p className="familyExplanation legacyBreathExplanation">嵐の息吹は従来の攻撃力を使う計算を維持しています。威力に補正後攻撃力の38%を加え、全体攻撃は半分が基礎です。技名が「息」でも固定基礎にはならず、「固定基礎」と明記された技だけが別の計算です。</p>}
     <h3>特技の使いどころ</h3>{monster.skills.map(skill => <div className="skill" key={skill.name}><strong>{skill.name}</strong><small>{skillHint(skill)}{skill.kind === 'poison' ? '' : skill.fixedDamage ? ` · ${fixedDamageHint(skill)}${skill.dragonChargeFinisher ? ' · 発動時に竜気を全消費' : ''}` : skill.randomHits ? ` · 1発は${skill.power ? `威力${skill.power}＋` : ''}補正後攻撃力の38%が基準（乱数±10%）` : skill.power > 0 ? ` · ${skill.kind === 'restoreMp' ? 'MP補給' : skill.kind === 'heal' || skill.kind === 'cleanse' ? '回復' : '威力'}${skill.power}` : ''}</small></div>)}
-    <details className="profileBackground"><summary>能力値と物語</summary><h3>基礎能力（リーダー補正前）</h3><div className="stats">{[['HP', monster.hp], ['MP', monster.mp], ['攻撃', monster.atk], ['素早さ', monster.speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div>{(monster.id === 12 || monster.id === 14 || monster.family === 'dragon' || monster.family === 'material' || monster.family === 'slime' || monster.family === 'demon' || monster.family === 'undead' || monster.family === 'extraordinary') && <p className="hint">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>}<p className="monsterLore">{monsterLore(id)}</p>{monster.skills.map(skill => <p className="skillLore" key={skill.name}><strong>{skill.name}</strong> · {skillLore(skill.name)}</p>)}</details>
+    <details className="profileBackground"><summary>能力値・特技の物語</summary><h3>基礎能力（リーダー補正前）</h3><div className="stats">{[['HP', monster.hp], ['MP', monster.mp], ['攻撃', monster.atk], ['素早さ', monster.speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div>{(monster.id === 12 || monster.id === 14 || monster.family === 'dragon' || monster.family === 'material' || monster.family === 'slime' || monster.family === 'demon' || monster.family === 'undead' || monster.family === 'extraordinary') && <p className="hint">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>}{monster.skills.map(skill => <p className="skillLore" key={skill.name}><strong>{skill.name}</strong> · {skillLore(skill.name)}</p>)}</details>
     <button className="secondary closeProfile" onClick={onClose}>閉じて戻る</button>
     </div>
   </section></div>;
