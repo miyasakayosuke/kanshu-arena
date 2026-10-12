@@ -1,0 +1,80 @@
+{
+  "release": "0.20.7",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; live acceptance recorded separately",
+  "publicBaselineCommit": "bb78f6c319df500139e5938bca41d6d210e19393",
+  "baselineTree": "b65e5ba0273e19534ce388f650742f6962e78647",
+  "reviewedCandidateTree": "ceed960083086f8e1ba87c2b8ac5c5d1ae56c67a",
+  "checks": {
+    "vitest": {
+      "tests": 2522,
+      "files": 113,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 15,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.6",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "45d5df2f594b28201040e4df6e4509ce442dcba7",
+          "release": "a5e109efa66a61bba2f6bd47e9c3b371a306b5bd"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.6",
+          "release": "0.20.7"
+        }
+      ]
+    }
+  },
+  "independentReview": {
+    "focusedTests": 199,
+    "unresolvedFunctionalFindings": 0,
+    "controlledActualCanvasRender": true,
+    "browserOrPhysicalDevice": false
+  },
+  "preservation": {
+    "runtimeMatchesReviewedCandidateExceptVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "protectedFiles": [
+      "src/engine.ts",
+      "src/playback.ts",
+      "src/battleMotion.ts",
+      "src/originalRosterMotion.ts",
+      "src/monsterLore.ts",
+      "src/MonsterDetails.tsx",
+      "src/HomeScreen.tsx",
+      "src/TeamBuilder.tsx",
+      "src/strategy.ts",
+      "src/style.css",
+      "public/credits.html",
+      "public/THIRD_PARTY_NOTICES.txt"
+    ],
+    "dependenciesUnchangedExceptRootVersions": true,
+    "lore37Unchanged": true,
+    "other36ArtRegistryUnchanged": "confirmed by independent candidate review"
+  },
+  "limits": [
+    "Code and controlled Canvas tests do not establish browser/mobile fps or memory.",
+    "17 cached SVG layers, nominal 2399552 RGBA bytes excluding static fallback and intermediates; maximum guard 20 layers and 8MiB.",
+    "Five-Yoko sharing, partial-load/failure, delayed impact and live reduced-motion changes are automated controlled scenarios, not asserted as live UI reproductions.",
+    "Actual live first load, portraits/details, enemy animation, hit/death/retry/skip/rate and compact viewports must be checked after deployment.",
+    "Existing large-JS-chunk advisory remains.",
+    "No legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.6",
-  "auditBaseCommit": "ec739f98df957b6cb7042b035e089ca86f32d26c",
+  "release": "v0.20.7",
+  "auditBaseCommit": "bb78f6c319df500139e5938bca41d6d210e19393",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -511,6 +511,21 @@
           ],
           "provenance": "AI-assisted UI structure, concise labels, CSS, tests and implementation notes written directly for this project. Removed only two duplicate home navigation buttons, retaining footer navigation and the unique family-trial action. Short, separately labeled original fiction and sourced origin paragraphs appear under the existing portrait. Existing mechanics explanations, read-only details, fixed close header, Escape handling, art, engine and saved-party behavior are retained. No external UI code, fonts, media or dependencies were added. Release preparation updates only displayed/root package versions, matching tests and release records.",
           "reviewLimit": "Automated DOM and CSS contract tests do not establish rendered browser geometry or all-device accessibility. Local browser rendering is blocked by the execution environment. Actual public-browser acceptance remains a separate gate after any authorized publication. Rights checks are inventory checks, not legal clearance."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "Unpublished Yoko-only articulated Canvas integration based on v0.20.6 frozen tree b65e5ba0273e19534ce388f650742f6962e78647",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/MonsterArt.tsx",
+            "src/BattleStage.test.tsx",
+            "src/BattleStage.yokoRig.test.tsx",
+            "src/storybookYokoRig.test.ts",
+            "src/storybookYokoBattleMotion.test.ts",
+            "docs/yoko-rig-integration-candidate.md"
+          ],
+          "provenance": "Direct project-specific implementation of once-per-arena cached independent part drawing, 800ms observed-impact mapping, static portrait/body consistency, death lifecycle, fallback and tests. Existing engine/playback/events/HP/MP/RNG/mechanics and remaining36 artwork unchanged. No external code, text, media, dependencies, fonts or animation captures copied.",
+          "reviewLimit": "Automated tests and non-browser rasterized Canvas validation establish bounded behavior only. Real-device frame budget, live layout and final publication acceptance remain separate. Rights inventory is not clearance."
         }
       ]
     },
@@ -620,6 +635,31 @@
         "docs/home-lore-candidate.md"
       ],
       "distribution": "New original flavour and independently worded origin summaries with small outbound reference links; no source text or images bundled."
+    },
+    {
+      "id": "storybook-yoko-articulated-rig",
+      "kind": "code-native-vector-and-cached-canvas-parts",
+      "files": [
+        "src/storybookYoko.ts",
+        "src/storybookYokoRig.ts",
+        "src/storybookYokoBattleMotion.ts"
+      ],
+      "provenance": "2026-10-12: original code-native Yoko prototype integrated into the existing Canvas renderer with static cropped SVG layers and individually sampled transforms. Geometry was newly drawn from the existing project Yoko identity; official DQM3 and Seven pages were visually inspected for broad shape/readability/warm painted-color observations. No reference assets, traced geometry, sampled animation frames, logos, external fonts or media are imported. Shared geometry feeds body, 48px-capable portrait and cached Canvas layers.",
+      "creator": "AI-assisted new SVG geometry, state sampler, cache and Canvas integration written for this project",
+      "createdFor": "v0.20.7",
+      "reviewLimit": "Independent code and controlled rasterized-Canvas review and provenance inventory are not a legal opinion or assurance of non-infringement/ownership. Actual browser acceptance is a separate post-deployment check; physical-device performance and memory are unverified. Existing project-wide rights review remains open.",
+      "sha256": {
+        "src/storybookYoko.ts": "60ff5a83ccd3d60b3a5f713a32238bfb1404b9f1200b76aa66beb03455e432ff",
+        "src/storybookYokoRig.ts": "2f9d2595091360046fb2200d73032f008789a3096386a4b2cb9cb88bf6530033",
+        "src/storybookYokoBattleMotion.ts": "577e66beef00bbf74ad7cc0e522da51fd0d12f0e865669ac1b1ad655c9cb9520"
+      },
+      "references": [
+        "docs/yoko-rig-integration-candidate.md",
+        "https://www.dragonquest.jp/monsters3/monsters/index.html",
+        "https://www.bandainamcoent.co.jp/cs/list/seven/job/index.html",
+        "https://www.bandainamcoent.co.jp/cs/list/seven/system.html"
+      ],
+      "distribution": "New project-authored geometry and cached SVG/Canvas-part code in browser bundle; no source media or external assets imported. No project-wide original-content license selected."
     }
   ],
   "software": [

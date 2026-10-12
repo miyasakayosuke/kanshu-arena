@@ -1130,7 +1130,7 @@ describe('complete first-roster sprites and choreography', () => {
     expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);expect(teamTransforms()).toHaveLength(0);
     const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
     expect(images.map(([image])=>image.src)).toEqual(ids.map(id=>CHARACTER_ART[id].artUrl));
-    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual(ids.map(id=>{const w=CHARACTER_ART[id].spriteWidth;return [-w/2,35.5-w*.75,w,w*.75];}));
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual(ids.map(id=>{const art=CHARACTER_ART[id],w=art.spriteWidth,h=art.spriteHeight??w*.75;return [-w/2,35.5-h*(art.footAnchor??1),w,h];}));
   });
   it.each(Array.from({length:12},(_,id)=>id))('routes ID%i through its pose and keeps ally portraits off the battlefield',async id=>{
     vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});

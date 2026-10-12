@@ -1,3 +1,5 @@
+import {YokoRigCache,drawYokoRig} from './storybookYokoRig';
+import {sampleYokoBattlePose} from './storybookYokoBattleMotion';
 import {sampleOriginalRosterMotion} from './originalRosterMotion';
 import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
@@ -891,6 +893,8 @@ export default function BattleStage(props: Props) {
     const ctx = element.getContext('2d');
     if (!ctx) return;
     const characterImages = new Map<number, HTMLImageElement>();
+    const yokoRig = new YokoRigCache();
+    const yokoDefeats = new Map<string, {started:number;rate:number}>();
     const getCharacterImage = (id: number) => {
       const cached = characterImages.get(id);
       if (cached) return cached;
@@ -902,6 +906,7 @@ export default function BattleStage(props: Props) {
     // Only enemies have bodies in the arena, including their defeated poses.
     // Prime before the first frame; the same mount can encounter new IDs later.
     latest.current.enemies.forEach(unit => getCharacterImage(unit.monster.id));
+    if (latest.current.enemies.some(unit=>unit.monster.id===0)) yokoRig.ensure();
     let handle = 0;
     let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
@@ -952,7 +957,7 @@ export default function BattleStage(props: Props) {
       const rate = Math.max(.5, Math.min(4, data.playbackRate ?? 1));
       if (observedClear !== clearVersion.current) {
         observedClear = clearVersion.current;
-        cast = null; lastCast = null; lastImpact = null; lastImpacts = undefined; impacts = []; health.clear();
+        cast = null; lastCast = null; lastImpact = null; lastImpacts = undefined; impacts = []; health.clear(); yokoDefeats.clear();
       }
       if (data.castEvent === null) {cast = null; lastCast = null;}
       const activeCast = data.castEvent ?? (data.impact?.kind === 'cast' ? data.impact : null);
@@ -1042,16 +1047,20 @@ export default function BattleStage(props: Props) {
         x: center.x + (point.x - center.x) * zoom + shake,
         y: center.y + (point.y - center.y) * zoom + shake * .4,
       } : point;
+      if(data.enemies.some(unit=>unit.monster.id===0)) yokoRig.ensure();
+      for(const key of yokoDefeats.keys()) if(!data.enemies.some(unit=>unit.key===key)) yokoDefeats.delete(key);
       const drawEnemies = () => data.enemies.forEach((unit, index) => {
         const point = position(index, data.enemies.length);
         const alive = unit.hp > 0;
         const hit = [...impacts].reverse().find(impact => impact.event.target === unit.key && impact.event.kind === 'damage' && (now - impact.started) * impact.rate < 260);
         const death = impacts.find(impact => impact.event.target === unit.key && impact.event.kind === 'defeat');
         const deathProgress = death ? clamp((now - death.started) * death.rate / 550) : 1;
+        if(alive) yokoDefeats.delete(unit.key);
+        else if(unit.monster.id===0&&!yokoDefeats.has(unit.key)) yokoDefeats.set(unit.key,death?{started:death.started,rate:death.rate}:{started:now-840/rate,rate});
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && ![14, 15, 16, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && ![0, 14, 15, 16, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
@@ -1111,11 +1120,15 @@ export default function BattleStage(props: Props) {
         // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
         ctx.fillStyle = '#ffffff';
         const characterImage = getCharacterImage(unit.monster.id);
-        if (characterImage?.complete && characterImage.naturalWidth > 0) {
+        if ((unit.monster.id===0 && yokoRig.ready) || (characterImage?.complete && characterImage.naturalWidth > 0)) {
           // Registry dimensions preserve every old silhouette and support later families.
           const width = CHARACTER_ART[unit.monster.id].spriteWidth;
-          const height = width * .75;
-          ctx.drawImage(characterImage, -width / 2, 35.5 - height, width, height);
+          const height = CHARACTER_ART[unit.monster.id].spriteHeight ?? width * .75;
+          const top = 35.5-height*(CHARACTER_ART[unit.monster.id].footAnchor??1);
+          const rigHit=unit.monster.id===0?[...impacts].reverse().find(item=>item.event.target===unit.key&&item.event.kind==='damage'&&(item.event.amount??0)>0&&item.type!=='poison'&&(now-item.started)*item.rate<620):undefined;
+          const rigDeath=yokoDefeats.get(unit.key);
+          const rigDrawn=unit.monster.id===0&&drawYokoRig(ctx,yokoRig,sampleYokoBattlePose({time:now+index*397,cast:attacker?cast?.event:undefined,actionAge:age,hurtAge:rigHit?(now-rigHit.started)*rigHit.rate:undefined,defeatAge:rigDeath?(now-rigDeath.started)*rigDeath.rate:undefined,reduced}),{x:-width/2,y:top,width,height});
+          if(!rigDrawn && characterImage?.complete && characterImage.naturalWidth>0) ctx.drawImage(characterImage, -width / 2, top, width, height);
           if (unit.monster.id === 24 && unit.supplyReady === true && alive) {
             // One non-dispellable command allowance, from state only; never inferred.
             const scale=width/280;
@@ -1259,6 +1272,7 @@ export default function BattleStage(props: Props) {
     handle = requestAnimationFrame(draw);
     return () => {
       cancelAnimationFrame(handle);
+      yokoRig.dispose();yokoDefeats.clear();
       observer.disconnect();
       publishCaption(null);
       media.removeEventListener('change', onMotionChange);
