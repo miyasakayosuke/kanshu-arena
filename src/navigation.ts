@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 
-export type Screen = 'home' | 'team' | 'arena' | 'battle';
-const hashes: Record<Screen, string> = { home: '#home', team: '#team', arena: '#arena', battle: '#arena/battle' };
+export type Screen = 'home' | 'team' | 'catalog' | 'arena' | 'battle';
+const hashes: Record<Screen, string> = { home: '#home', team: '#team', catalog: '#catalog', arena: '#arena', battle: '#arena/battle' };
 function readScreen(): Screen {
   return (Object.keys(hashes) as Screen[]).find(screen => hashes[screen] === window.location.hash) ?? 'home';
 }
 type Entry = { session: string; index: number };
 type Pending = { target: Screen; delta: number | null };
 
-/** Only the three non-battle screens are durable. A battle URL never starts a match. */
+/** Only the non-battle screens are durable. A battle URL never starts a match. */
 export function useScreenNavigation(blocked: boolean, onLeaveBattle: () => void) {
   const [page, setPage] = useState<Screen>(() => readScreen() === 'battle' ? 'arena' : readScreen());
   const [pending, setPending] = useState<Pending | null>(null);

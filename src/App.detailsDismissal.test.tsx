@@ -20,8 +20,7 @@ async function select(label: string, value: string) {
   await act(async () => { node.value = value; node.dispatchEvent(new Event('change', { bubbles: true })); });
 }
 async function openCatalog() {
-  await click(label('編成'));
-  await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);
+  await click(label('図鑑'));
   const input = document.querySelector<HTMLInputElement>('input[aria-label="検索"]')!;
   await act(async () => {
     Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, 'ケツァルコアトル');
@@ -69,11 +68,12 @@ describe('topmost monster-details dismissal in the real App', () => {
       expect(list.scrollTop).toBe(137); expect(catalog.scrollTop).toBe(223);
       expect(document.activeElement).toBe(opener); expect(focus).toHaveBeenLastCalledWith({ preventScroll: true });
       expect(document.body.style.overflow).toBe('auto');
-      expect(localStorage.getItem('kanshu-workshop-v1')).toBe(saved); expect(window.location.hash).toBe('#team');
+      expect(localStorage.getItem('kanshu-workshop-v1')).toBe(saved); expect(window.location.hash).toBe('#catalog');
     }
     await escape();
-    expect(document.querySelector('.candidatePanel')).toBeNull();
-    expect(document.activeElement).toBe(document.querySelector('.browseBestiary'));
+    expect(document.querySelector('.candidatePanel')).toBe(catalog);
+    expect(window.location.hash).toBe('#catalog');
+    expect(document.activeElement).toBe(opener);
   });
 
   it('preserves a selected replacement and returns focus before a second Escape cancels it', async () => {

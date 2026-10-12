@@ -1,0 +1,99 @@
+{
+  "release": "0.20.8",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; rendered acceptance recorded separately",
+  "publicBaselineCommit": "42a87128a7d79bf6b68121fc675fefcd9f756691",
+  "baselineTree": "81e5f2511b3fec31bf15d9906190c7405b953182",
+  "reviewedCandidateTree": "5613e959ceaff71930a90a5df4a20ce92682c3da",
+  "checks": {
+    "vitest": {
+      "tests": 2535,
+      "files": 115,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 15,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.7",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "a5e109efa66a61bba2f6bd47e9c3b371a306b5bd",
+          "release": "531c70ac6701566dd6aa575ab0b42534443dd316"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.7",
+          "release": "0.20.8"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeMatchesReviewedCandidateExceptAppVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "byteIdenticalProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "public/credits.html",
+      "src/BattleStage.tsx",
+      "src/HomeScreen.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterLore.ts",
+      "src/natureOriginalArt.ts",
+      "src/originalRosterMotion.ts",
+      "src/playback.ts",
+      "src/slimeArt.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/undeadArt.ts"
+    ],
+    "byteIdenticalProtectedFileCount": 28,
+    "versionOnlyFiles": [
+      "package.json",
+      "package-lock.json"
+    ],
+    "dependenciesUnchangedExceptRootVersions": true,
+    "allArtIncludingYokoRigUnchanged": true,
+    "all37LoreUnchanged": true
+  },
+  "independentImplementationReview": {
+    "noBlockingFindings": true,
+    "focusedTests": 98,
+    "smallCatalogControlsCorrected": true
+  },
+  "limits": [
+    "Local browser launch blocked by process socket restriction; no local rendered pass claimed.",
+    "DOM/CSS tests do not prove overflow geometry, native keyboard or physical-device touch behavior.",
+    "Postdeployment direct/reloaded catalog, filters/history/list scroll, detail close and planning/playback leave guards must be checked through actual browser.",
+    "Existing large JS chunk advisory remains.",
+    "No legal clearance or performance improvement claimed."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

@@ -15,7 +15,7 @@ const partyVitals = () => [...document.querySelectorAll('.commanderHp, .commande
 async function click(element: HTMLElement) { expect(element).toBeTruthy(); await act(async () => element.click()); }
 async function mount() { await act(async () => root.render(<App />)); }
 async function tick(milliseconds: number) { await act(async () => vi.advanceTimersByTime(milliseconds)); }
-async function navigate(name: 'ホーム' | '編成' | '闘技場') { await click(label(name)); }
+async function navigate(name: 'ホーム' | '編成' | '図鑑' | '闘技場') { await click(label(name)); }
 async function startBattle() {
   if (window.location.hash !== '#arena') await navigate('闘技場');
   await click(button('この編成で対戦する'));
@@ -61,8 +61,8 @@ describe('separate home, workshop, and arena screens', () => {
     expect(team()).toHaveLength(5);
     expect(label('闘技場')).toBeTruthy();
     expect(label('編成')).toBeTruthy();
-    expect(document.querySelectorAll('.mainNav button')).toHaveLength(3);
-    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '編成', '闘技場']);
+    expect(document.querySelectorAll('.mainNav button')).toHaveLength(4);
+    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '編成', '図鑑', '闘技場']);
     expect(document.querySelector('.gameHome')?.textContent).not.toMatch(/闘技場へ|編成へ/);
     expect(document.querySelector('.ruleTabs')).toBeNull();
     expect(document.querySelector('.roster')).toBeNull();
@@ -211,7 +211,7 @@ describe('separate home, workshop, and arena screens', () => {
   });
 
   it.each([
-    ['#home', '#home'], ['#team', '#team'], ['#arena', '#arena'],
+    ['#home', '#home'], ['#team', '#team'], ['#catalog', '#catalog'], ['#arena', '#arena'],
     ['#arena/battle', '#arena'], ['#unknown', '#home'],
   ])('normalizes fresh navigation from %s to %s without automatic battle creation', async (initial, expected) => {
     const start = vi.spyOn(engine, 'start');

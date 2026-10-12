@@ -1,5 +1,6 @@
 import MonsterArt from './MonsterArt';
 import LeaderComparison from './LeaderComparison';
+import RosterBrowser, { createRosterFilters } from './RosterBrowser';
 import { useEffect, useRef, useState } from 'react';
 import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamilyCount, extraordinaryResponseEligible, UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
 import { rules, monsterRole, recommendedTeams, saveTeamSlots, isValidTeam, type RuleId, type TeamSlot } from './strategy';
@@ -19,13 +20,8 @@ type Props = {
   setNotice: (message: string) => void;
   practice: boolean;
   leavePractice: () => void;
+  onCatalog?: () => void;
 };
-
-const roleOptions = [
-  ['all', 'すべて'], ['fast', '先制'], ['anchor', 'アンカー'], ['heal', '回復'],
-  ['random', 'ランダム連撃'], ['area', '全体'], ['poison', '毒'], ['protect', '味方を守る'],
-  ['poisonCashout', '毒交換'], ['mpDamage', 'MP削り'], ['restoreMp', 'MP補給'], ['cleanse', '毒解除'], ['break', '防御解除'], ['guard', '防御'],
-];
 
 const familyOptions = activeFamilyOptions(monsters);
 
@@ -193,13 +189,8 @@ function MemberSummary({ monster, label }: { monster?: Monster; label: string })
   </div>;
 }
 
-export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setRule, onFocus, notice, setNotice, practice, leavePractice }: Props) {
-  const [filter, setFilter] = useState('');
-  const [role, setRole] = useState('all');
-  const [sort, setSort] = useState('id');
-  const [leaderFilter, setLeaderFilter] = useState('all');
-  const [familyFilter, setFamilyFilter] = useState('all');
-  const [costFilter, setCostFilter] = useState('all');
+export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setRule, onFocus, notice, setNotice, practice, leavePractice, onCatalog }: Props) {
+  const [filters, setFilters] = useState(createRosterFilters);
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
   const [candidateId, setCandidateId] = useState<number | null>(null);
   const [browsing, setBrowsing] = useState(false);
@@ -259,15 +250,6 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
   const projectedCost = candidate ? cost(replacement(candidate.id)) : total;
   const projectedTeam = candidate ? replacement(candidate.id) : team;
   const projectedLeader = projectedTeam.length ? leaderFor(projectedTeam[0]) : null;
-  const visible = monsters.filter(m => {
-    const trait = leaderFor(m.id);
-    const query = filter.trim().toLocaleLowerCase();
-    return (!query || `${m.name} ${familyLabel(m)} ${trait.name} ${trait.description} ${m.skills.map(s => s.name).join(' ')}`.toLocaleLowerCase().includes(query))
-      && (role === 'all' || m.skills.some(s => role === 'poisonCashout' ? (s.poisonCashout ?? 0) > 0 : role === 'mpDamage' ? (s.mpDamage ?? 0) > 0 : role === 'cleanse' ? (s.kind === 'cleanse' || s.kind === 'responseCleanse') : role === 'protect' ? (s.kind === 'protect' || s.kind === 'responseGuard') : role === 'fast' ? s.priority >= 2 : role === 'anchor' ? s.priority < 0 : role === 'area' ? s.all : role === 'random' ? !!s.randomHits : role === 'break' ? (s.breaksGuard || s.breaksGuardAfterHit) : s.kind === role))
-      && (leaderFilter === 'all' || trait.stat === leaderFilter || trait.secondary?.stat === leaderFilter)
-      && (familyFilter === 'all' || (m.family ?? 'unassigned') === familyFilter)
-      && (costFilter === 'all' || (costFilter === 'fit' ? !unavailableReason(m.id) : m.cost === Number(costFilter)));
-  }).sort((a, b) => sort === 'speed' ? b.speed - a.speed : sort === 'hp' ? b.hp - a.hp : sort === 'atk' ? b.atk - a.atk : sort === 'cost' ? a.cost - b.cost : a.id - b.id);
 
   const pickSlot = (index: number) => {
     commitPending.current = false;
@@ -327,9 +309,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     setBrowsing(false);
     setNotice(`編成${index + 1}を呼び出しました${practice && slot.rule !== rule ? '。ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''}`);
   };
-  const resetFilters = () => {
-    setFilter(''); setRole('all'); setLeaderFilter('all'); setCostFilter('all'); setFamilyFilter('all'); setSort('id');
-  };
+
   useEffect(() => {
     const dismiss = (event: KeyboardEvent) => {
       // App owns detail dialogs. The same Escape must not also discard this preview.
@@ -345,7 +325,6 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     window.addEventListener('keydown', dismiss);
     return () => window.removeEventListener('keydown', dismiss);
   }, [selectedSlot, browsing]);
-  const filterCount = Number(familyFilter !== 'all') + Number(role !== 'all') + Number(leaderFilter !== 'all') + Number(costFilter !== 'all');
 
   return <main className="home teamBuilder">
     <div className="intro"><span className="eyebrow">PARTY WORKSHOP</span><h2>編成</h2><p>変えたい枠を選んで、候補を比べよう。</p></div>
@@ -385,7 +364,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
         {([30, 31] as const).map(id => <button key={id} className="familyArrival demonArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}
       </aside>
-      <p className="hint">これまでの仲間も、下のモンスター図鑑から全員の詳細を開けます。</p>
+      <p className="hint">これまでの仲間も、モンスター図鑑から全員の詳細を開けます。</p>
     </details>
     <details className="builderDisclosure recommendedTeams">
       <summary>編成のヒント<span>{recommendedTeams.length}つの組み合わせ例</span></summary>
@@ -434,40 +413,10 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
           {`${candidate.name}${current ? 'に入れ替える' : 'を編成に加える'}`}
         </button>}
       </div>}
-      <div className="sectionTitle">{editing ? '候補を選ぶ' : '全モンスター'} <span>{visible.length} / {monsters.length}体</span></div>
-      <div className="tools">
-        <input aria-label="検索" placeholder="名前・特技・リーダーを検索" value={filter} onChange={e => setFilter(e.target.value)} />
-        <select aria-label="並べ替え" value={sort} onChange={e => setSort(e.target.value)}><option value="id">図鑑順</option><option value="speed">素早さ順</option><option value="hp">HP順</option><option value="atk">攻撃力順</option><option value="cost">低コスト順</option></select>
-      </div>
-      <details className="builderDisclosure filterDisclosure">
-        <summary>詳しく絞り込む{filterCount > 0 ? `（${filterCount}件）` : ''}</summary>
-        <div className="filterChips" aria-label="特技で絞り込み">{roleOptions.map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => setRole(value)}>{label}</button>)}</div>
-        <div className="advancedFilters">
-          <select aria-label="リーダー効果で絞り込み" value={leaderFilter} onChange={e => setLeaderFilter(e.target.value)}><option value="all">全リーダー効果</option><option value="hp">HPアップ</option><option value="mp">MPアップ</option><option value="atk">攻撃アップ</option><option value="speed">素早さアップ</option></select>
-          <select aria-label="系統で絞り込み" value={familyFilter} onChange={e => setFamilyFilter(e.target.value)}><option value="all">全系統</option>{familyOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
-          <select aria-label="コストで絞り込み" value={costFilter} onChange={e => setCostFilter(e.target.value)}><option value="all">全コスト</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option>{editing && <option value="fit">この枠に編成可能</option>}</select>
-        </div>
-      </details>
-      <button className="detailButton resetFilters" aria-label="絞り込みをリセット" onClick={resetFilters}>検索・絞り込みをリセット</button>
-      <div className="roster candidateList" aria-label={editing ? '入れ替え候補一覧' : '図鑑一覧'} tabIndex={0}>
-        {visible.map(m => {
-          const reason = editing ? unavailableReason(m.id) : '';
-          return <article className={`rosterItem candidateCard ${candidateId === m.id && editing ? 'selected' : ''}`} key={m.id}>
-            <div className="candidateCardBody">
-              <span className="avatar" aria-hidden="true"><MonsterArt monster={m} portrait /></span>
-              <div className="rosterText"><strong>{m.name}</strong><em>{familyLabel(m)} · {monsterRole(m.id).name}</em><small>HP {m.hp} · MP {m.mp}</small><small>攻撃 {m.atk} · 素早さ {m.speed}</small></div>
-              <span className="cost">C{m.cost}</span>
-            </div>
-            <div className="candidateCardActions">
-              {editing && <button className="candidateSelect" aria-label={`${m.name}を候補に選ぶ`} aria-pressed={candidateId === m.id} aria-describedby={reason ? `candidate-reason-${m.id}` : undefined} disabled={!!reason} onClick={() => { setCandidateId(m.id); if (candidateId === m.id) revealPreview(); }}>{candidateId === m.id ? '比較中' : '候補にする'}</button>}
-              <button className="detailButton" aria-label={`${m.name}の詳細`} onClick={() => onFocus(m.id)}>詳細</button>
-            </div>
-            {editing && <small className="candidateReason" id={`candidate-reason-${m.id}`}>{reason || `入れ替え後 C${cost(replacement(m.id))}/${budget} · 残り ${budget - cost(replacement(m.id))}`}</small>}
-          </article>;
-        })}
-      </div>
-      {!visible.length && <p className="emptySearch">該当するモンスターがいません。検索や絞り込みを変えてみてください。</p>}
-      <p className="hint">候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。詳細を開いても編成は変わりません。</p>
+      <RosterBrowser filters={filters} setFilters={setFilters} onFocus={onFocus} editing={editing ? {
+        candidateId, unavailableReason, projectedCost: id => cost(replacement(id)), budget,
+        onSelect: id => { setCandidateId(id); if (candidateId === id) revealPreview(); },
+      } : undefined} />
     </section>}
 
     <details className="builderDisclosure ruleDisclosure">
@@ -480,6 +429,6 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <summary>保存した編成<span>このブラウザに3枠</span></summary>
       <div className="slotGrid">{slots.map((slot, i) => <div className="teamSlot" key={i}><strong>編成 {i + 1}</strong><span className="slotIcons" aria-label={slot ? slot.team.map(id => monsters[id].name).join('・') : '未保存'}>{slot ? slot.team.map(id => <MonsterArt key={id} monster={monsters[id]} portrait />) : '未保存'}</span><small>{slot ? `${rules[slot.rule].name} · C${cost(slot.team)}` : 'リーダーも保存'}</small><div><button aria-label={`編成${i + 1}を呼び出す`} disabled={!slot} onClick={() => load(i)}>呼出</button><button aria-label={`編成${i + 1}に保存`} disabled={!isValidTeam(team, budget)} onClick={() => save(i)}>{slot ? '上書き' : '保存'}</button></div></div>)}</div>
     </details>
-    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { setBrowsing(true); if (costFilter === 'fit') setCostFilter('all'); }}>モンスター図鑑を開く <span>{monsters.length}体の役割・特技を見る</span></button>}
+    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { if (onCatalog) { onCatalog(); return; } setBrowsing(true); setFilters(previous => previous.costFilter === 'fit' ? { ...previous, costFilter: 'all' } : previous); }}>モンスター図鑑を開く <span>{monsters.length}体の役割・特技を見る</span></button>}
   </main>;
 }

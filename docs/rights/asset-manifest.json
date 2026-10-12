@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.7",
-  "auditBaseCommit": "bb78f6c319df500139e5938bca41d6d210e19393",
+  "release": "v0.20.8",
+  "auditBaseCommit": "42a87128a7d79bf6b68121fc675fefcd9f756691",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -292,7 +292,10 @@
         "src/FamilyTrialPicker.tsx",
         "src/familyTrialPicker.css",
         "src/familyTrials.ts",
-        "src/originalRosterMotion.ts"
+        "src/originalRosterMotion.ts",
+        "src/CatalogScreen.tsx",
+        "src/RosterBrowser.tsx",
+        "src/navigation.ts"
       ],
       "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。 v0.14の粘体系5体の設定・技説明は本作向けに独立して記述。参照はdocs/slime-family-reference.md、造形はdocs/slime-art-provenance.md。 v0.15の3体の設定・技説明・独自動作は本作用に記述。参照はdocs/demon-family-reference.md、造形はdocs/demon-art-provenance.md。 v0.16の4体の物語・技説明と、土布の低い押し、手綱の横引き、袖の囲い、逆さ糸の縫いのCanvas/CSS/動作コードはUI統合担当が本作用に直接記述。毒片が命中時だけ畳まれる交換効果を新作し、外部画像・効果・文章・コード・動作試料を取り込んでいない。参照はdocs/undead-family-reference.md、造形はdocs/undead-art-provenance.md。 v0.17ではヤヌスの物語・四技の説明、四分類の種類数と生存対象、共通一回のUIを本作用に直接記述。敷居を傾け掌を示す動作、空いた門を通る三本の流線、短い二枚の格子を外へ開くCanvas/CSS効果を新作した。HP回復を示す数字や光の十字を清めに使わず、実際の毒0/guard=trueイベントを表示。外部の画像・音・フォント・文章・コード・動作試料は持ち込んでいない。 全系統の調整検証に伴い、src/poisonDescription.tsの毒説明を本作の実装から独立に記述。即時ダメージと最大HP6%の継続毒、残り回数の更新、解除と予防の違いを区別し、実際のユニット設定またはエンジン既定値を表示する。制作担当は外部の説明文・コードを取り込まず、本作用の新規文面とヘルパーを記述したと申告。 v0.18の毒の機構・自動指示の限界・既存編成を使う対策、ヤヌスの推薦説明、プレイガイドは本作の実装と保存済み実測から独立に記述。外部の記事本文・説明文・画像・音・フォント・コードのコピーは追加していない。 v0.18.1のリーダー比較UI、HP/MP/攻撃/素早さの前後・対象表示と優先度の短い説明は、本作の開始処理から計算した実数を用いる独自コード・文面。キャラクターの能力・AI・アート・外部依存は追加変更せず、外部記事本文・説明文・画像・コードのコピーを用いない。最終制作申告と集約検証はdocs/rights/releases/2026-10-10-v0.18.1.mdに記録する。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
@@ -526,6 +529,26 @@
           ],
           "provenance": "Direct project-specific implementation of once-per-arena cached independent part drawing, 800ms observed-impact mapping, static portrait/body consistency, death lifecycle, fallback and tests. Existing engine/playback/events/HP/MP/RNG/mechanics and remaining36 artwork unchanged. No external code, text, media, dependencies, fonts or animation captures copied.",
           "reviewLimit": "Automated tests and non-browser rasterized Canvas validation establish bounded behavior only. Real-device frame budget, live layout and final publication acceptance remain separate. Rights inventory is not clearance."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.8 catalog-footer release integration based on public v0.20.7 commit 42a87128a7d79bf6b68121fc675fefcd9f756691 / tree 81e5f2511b3fec31bf15d9906190c7405b953182. Implementation and verification limits: docs/catalog-footer-candidate.md.",
+          "files": [
+            "src/App.tsx",
+            "src/TeamBuilder.tsx",
+            "src/CatalogScreen.tsx",
+            "src/RosterBrowser.tsx",
+            "src/navigation.ts",
+            "src/style.css",
+            "src/App.catalogNavigation.test.tsx",
+            "src/App.detailsDismissal.test.tsx",
+            "src/App.navigation.test.tsx",
+            "src/CatalogScreen.layout.test.ts",
+            "src/HomeScreen.layout.test.ts",
+            "docs/catalog-footer-candidate.md"
+          ],
+          "provenance": "AI-assisted project-specific navigation, shared roster extraction, CSS, concise interface text and tests written directly from the existing game source. The existing 37-monster catalog and filters are reused in a read-only durable route, with a generic Unicode catalog glyph rendered by the device font. No external code, imagery, descriptions, fonts, animation samples or dependencies added. Existing character identities, lore, skills, stats, families, artwork including the Yoko rig, battle mechanics, saved-team data and third-party notices are unchanged.",
+          "reviewLimit": "Automated DOM, history and CSS contract checks are not browser geometry or touch-device verification. Local Chromium cannot launch because the executor rejects its process socket; actual rendered acceptance remains a separate publisher gate. Inventory checks are not legal clearance; existing ownership, similarity, trademark, patent and professional-review questions remain open."
         }
       ]
     },
