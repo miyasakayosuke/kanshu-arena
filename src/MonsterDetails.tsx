@@ -96,14 +96,13 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     <section className="profilePanel" id={`${tabPrefix}-abilities-panel`} role="tabpanel" aria-labelledby={`${tabPrefix}-abilities-tab`} hidden={activeTab !== 'abilities'} tabIndex={0}>
       <DetailPages key={`${id}-abilities`} pages={abilityPages} label="能力" />
     </section>
-    <section className="profilePanel" id={`${tabPrefix}-skills-panel`} role="tabpanel" aria-labelledby={`${tabPrefix}-skills-tab`} hidden={activeTab !== 'skills'} tabIndex={0}>
+    <section className="profilePanel profileSkills" id={`${tabPrefix}-skills-panel`} role="tabpanel" aria-labelledby={`${tabPrefix}-skills-tab`} hidden={activeTab !== 'skills'} tabIndex={0}>
       <div className="detailSkillPicker" aria-label="表示する特技">{monster.skills.map((skill, index) => <button key={skill.name} type="button" aria-pressed={index === skillIndex} onClick={() => setSkillIndex(index)}>{skill.name}</button>)}</div>
-      {monster.skills.map((skill, index) => <div className="detailSkillReading skill" key={`${id}-${skill.name}`} hidden={index !== skillIndex}>
-        <DetailPages label={skill.name} pages={[
-          ...detailTextPages(skillDetail(skill)).map(text => ({ title: skill.name, content: <small className="detailSkillRule">{text}</small> })),
-          { title: `${skill.name} · 物語`, content: <p className="skillLore">{skillLore(skill.name)}</p> },
-        ]} />
-      </div>)}
+      <div className="detailSkillReadings" aria-live="polite" aria-atomic="true">{monster.skills.map((skill, index) => <div className="detailSkillReading skill" key={`${id}-${skill.name}`} hidden={index !== skillIndex}>
+        <h3>{skill.name}</h3>
+        <small className="detailSkillRule">{skillDetail(skill)}</small>
+        <div className="detailSkillStory" role="group" aria-label={`${skill.name}の物語`}><p className="skillLore">{skillLore(skill.name)}</p></div>
+      </div>)}</div>
     </section>
     </div>
   </section></div>;

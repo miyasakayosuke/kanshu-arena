@@ -26,17 +26,13 @@ async function profilePoisonText(profile: Element) {
   await click(profile.querySelector<HTMLElement>('[data-detail-tab=skills]')!);
   await click([...profile.querySelectorAll<HTMLButtonElement>('.detailSkillPicker button')].find(node => node.textContent === '毒霧')!);
   const reading = profile.querySelector('.detailSkillReading:not([hidden])')!;
-  const next = reading.querySelectorAll<HTMLButtonElement>('.detailPager button')[1];
-  const chunks: string[] = [];
-  do {
-    const page = reading.querySelector('.detailPage:not([hidden])')!;
-    expect(page.closest('[hidden]')).toBeNull();
-    chunks.push(page.querySelector('.detailSkillRule')?.textContent ?? '');
-    if (!next || next.getAttribute('aria-disabled') === 'true') break;
-    await click(next);
-  } while (chunks.length < 20);
-  expect(chunks.length).toBeLessThan(20);
-  return chunks.join('');
+  const effect = reading.querySelector('.detailSkillRule')!;
+  const story = reading.querySelector('.skillLore')!;
+  expect(effect.closest('[hidden]')).toBeNull();
+  expect(story.closest('[hidden]')).toBeNull();
+  expect(effect.nextElementSibling).toBe(story.parentElement);
+  expect(reading.querySelector('.detailPager, .detailPage')).toBeNull();
+  return effect.textContent ?? '';
 }
 
 async function begin(scale?: number, currentMp?: number) {

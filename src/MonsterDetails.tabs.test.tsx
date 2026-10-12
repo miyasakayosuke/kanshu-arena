@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
 import React, { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import MonsterDetails from './MonsterDetails';
 import { monsters } from './engine';
@@ -38,6 +39,27 @@ async function readAllPages(container: Element, selector: string): Promise<strin
 }
 
 describe('manual detail groups', () => {
+  it('preserves all 37 profiles and 106 complete skill effects/stories in server-rendered markup', () => {
+    expect(monsters).toHaveLength(37);
+    let skillCount = 0;
+    for (const monster of monsters) {
+      const container = document.createElement('div');
+      container.innerHTML = renderToStaticMarkup(<MonsterDetails id={monster.id} onClose={() => {}} />);
+      const readings = [...container.querySelectorAll('.detailSkillReading')];
+      expect(readings).toHaveLength(monster.skills.length);
+      for (const [index, skill] of monster.skills.entries()) {
+        const effect = readings[index].querySelector('.detailSkillRule')!;
+        const story = readings[index].querySelector('.skillLore')!;
+        expect(effect.textContent).toBe(skillDetail(skill));
+        expect(story.textContent).toBe(skillLore(skill.name));
+        expect(effect.nextElementSibling).toBe(story.parentElement);
+        expect(readings[index].querySelector('.detailPager, .detailPage')).toBeNull();
+        skillCount++;
+      }
+    }
+    expect(skillCount).toBe(106);
+  });
+
   it('uses four related ARIA tabs, one roving stop, and explicit keyboard changes only', async () => {
     await mount(0);
     expect([...document.querySelectorAll('[role=tab]')].map(node => node.textContent)).toEqual(['姿', '物語', '能力', '特技']);
@@ -57,7 +79,7 @@ describe('manual detail groups', () => {
     expect(document.querySelector('.mythPlayer')).toBeNull();
   });
 
-  it.each(monsters)('makes every $name rule and skill story reachable by manual pages', async monster => {
+  it.each(monsters)('keeps every $name rule reachable and each full skill story immediately below its effect', async monster => {
     await mount(monster.id);
     expect(document.querySelector('.roleBrief')).toBeNull();
     const text = document.querySelector('.profileModal')!.textContent;
@@ -70,9 +92,21 @@ describe('manual detail groups', () => {
     for (const [index, skill] of monster.skills.entries()) {
       await click(visiblePanel().querySelectorAll<HTMLButtonElement>('.detailSkillPicker button')[index]);
       const reading = visiblePanel().querySelector('.detailSkillReading:not([hidden])')!;
-      const all = await readAllPages(reading, '.detailSkillRule, .skillLore');
-      expect(all).toBe(skillDetail(skill) + skillLore(skill.name));
+      expect(visiblePanel().querySelectorAll('.detailSkillReading:not([hidden])')).toHaveLength(1);
+      expect(reading.closest('[hidden]')).toBeNull();
+      const effect = reading.querySelector('.detailSkillRule')!;
+      const story = reading.querySelector('.skillLore')!;
+      expect(effect.textContent).toBe(skillDetail(skill));
+      expect(story.textContent).toBe(skillLore(skill.name));
+      expect(effect.nextElementSibling).toBe(story.parentElement);
+      expect(story.parentElement?.getAttribute('role')).toBe('group');
+      expect(story.parentElement?.getAttribute('aria-label')).toBe(`${skill.name}の物語`);
+      expect(effect.closest('[hidden]')).toBeNull();
+      expect(story.closest('[hidden]')).toBeNull();
+      expect(reading.querySelector('h3')!.textContent).toBe(skill.name);
+      expect(reading.querySelector('.detailPager, .detailPage, button')).toBeNull();
     }
+    expect(visiblePanel().querySelector('.detailPager')).toBeNull();
   });
 
   it('keeps boundary controls focused and neither skips pages nor resets unrelated groups', async () => {
@@ -87,7 +121,7 @@ describe('manual detail groups', () => {
     for (let i = 0; i < 20; i++) await click(next);
     next.focus(); await click(next); expect(document.activeElement).toBe(next); expect(next.getAttribute('aria-disabled')).toBe('true');
     await mount(0); expect(tab('appearance').getAttribute('aria-selected')).toBe('true');
-    await click(tab('abilities')); expect(document.querySelector('.detailPager')).toBeTruthy(); // Other skills have story pages.
+    await click(tab('abilities')); expect(visiblePanel().querySelector('.detailPager')).toBeNull();
     expect(visiblePanel().querySelector('.detailPage:not([hidden]) h3')!.textContent).toBe('基礎能力（リーダー補正前）');
   });
 
@@ -97,6 +131,28 @@ describe('manual detail groups', () => {
     body.scrollTop = 140;
     await click(tab('abilities'));
     expect(body.scrollTop).toBe(0);
+    expect(document.body.style.overflow).toBe('hidden');
+  });
+
+  it('changes the effect and story together, retains skill selection, and resets only local fallback scrolling', async () => {
+    await mount(36); await click(tab('skills'));
+    const body = document.querySelector<HTMLElement>('.profileBody')!;
+    const buttons = [...visiblePanel().querySelectorAll<HTMLButtonElement>('.detailSkillPicker button')];
+    body.scrollTop = 160;
+    buttons[1].focus(); await click(buttons[1]);
+    expect(document.activeElement).toBe(buttons[1]);
+    expect(body.scrollTop).toBe(0);
+    expect(buttons.map(button => button.getAttribute('aria-pressed'))).toEqual(['false', 'true', 'false', 'false']);
+    const reading = visiblePanel().querySelector('.detailSkillReading:not([hidden])')!;
+    expect(reading.querySelector('.detailSkillRule')!.textContent).toBe(skillDetail(monsters[36].skills[1]!));
+    expect(reading.querySelector('.skillLore')!.textContent).toBe(skillLore(monsters[36].skills[1]!.name));
+    expect(reading.parentElement?.getAttribute('aria-live')).toBe('polite');
+    expect(reading.parentElement?.getAttribute('aria-atomic')).toBe('true');
+    await click(buttons[1]); expect(document.activeElement).toBe(buttons[1]);
+    await click(tab('story')); await click(tab('skills'));
+    expect(visiblePanel().querySelector('.detailSkillReading:not([hidden])')).toBe(reading);
+    await mount(12); await click(tab('skills'));
+    expect(visiblePanel().querySelector('[aria-pressed=true]')!.textContent).toBe(monsters[12].skills[0]!.name);
     expect(document.body.style.overflow).toBe('hidden');
   });
 });

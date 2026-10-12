@@ -1,5 +1,5 @@
-/* Four manual reading groups. The only overflow fallback is for unusually short
-   viewports, enlarged text, or future content; ordinary phone pages fit in place. */
+/* Four manual reading groups. A selected skill keeps its full effect and story
+   together; long content and enlarged text use the local scrolling fallback. */
 .overlay.profileOverlay{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
 .profileModal.profileTabbed{height:min(680px, calc(100dvh - 24px));max-height:100%;max-width:500px;overflow:hidden}
 .profileModal.profileTabbed .profileHeader{min-height:52px;padding:3px 8px 3px 14px}
@@ -48,6 +48,12 @@
 .detailSkillPicker button{min-height:44px;min-width:0;padding:7px 5px;border:1px solid #7d9a8977;border-radius:8px;background:#192f37;color:#c5d6c9;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
 .detailSkillPicker button[aria-pressed=true]{border-color:#e5cf92;background:#485641;color:#f6e8bc}
 .profileModal.profileTabbed .detailSkillReading{display:flex;flex-direction:column;flex:1;min-width:0;padding:0;border:0}
+.detailSkillReadings{min-width:0}
+.profileModal.profileTabbed .detailSkillReading h3{font-size:15px;line-height:1.5;color:#e6dab9;margin:0 0 8px}
+.profileModal.profileTabbed .detailSkillReading .detailSkillRule,.profileModal.profileTabbed .detailSkillReading .skillLore{font-size:14px;line-height:1.65}
+.profileModal.profileTabbed .detailSkillStory{margin:10px 0 0;padding-top:10px;border-top:1px solid #95aa8155}
+.profileModal.profileTabbed .profileSkills{padding:12px}
+.profileModal.profileTabbed .detailSkillPicker{margin-bottom:12px}
 /* At extreme zoom or short landscape heights, let the reader scroll rather than
    shrink text, crop a rule, or move Close/the group selector out of reach. */
 @media(max-height:440px){.profileModal.profileTabbed .profilePanel{flex-shrink:0}.profileModal.profileTabbed .profileAppearance{min-height:min-content}.profileModal.profileTabbed .profileBody{overflow-y:auto}}

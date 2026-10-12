@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.14",
-  "auditBaseCommit": "2fc2d47c9f11c331d57809992f16b96a191d8825",
+  "release": "v0.20.15",
+  "auditBaseCommit": "29f06a843f032cb5cb61bbb5572b146969a9c7ec",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -720,6 +720,20 @@
           ],
           "provenance": "Original project TypeScript/React helper and regression tests authored directly from the live focus-obscuration report. No new artwork, copy, external reference material, dependency, font, or media.",
           "reviewLimit": "DOM geometry probes do not replace native browser hit-testing; release owner verifies the native short-phone, landscape and zoom cases. No legal-clearance claim. See docs/team-focus-reveal-candidate.md."
+        },
+        {
+          "date": "2026-10-12",
+          "change": "v0.20.15 Skill reading presentation on the exact public v0.20.14 baseline: each selected skill shows its complete mechanical effect followed immediately by its existing story, without separate effect/story pages. The four profile tabs and ability pages are unchanged. Compact spacing keeps 14px body text; long copy and zoom use the existing local overflow reader.",
+          "files": [
+            "src/MonsterDetails.tsx",
+            "src/monsterDetails.css",
+            "src/MonsterDetails.tabs.test.tsx",
+            "src/MonsterDetails.layout.test.ts",
+            "src/App.poisonDescription.test.tsx",
+            "docs/combined-skill-story-candidate.md"
+          ],
+          "provenance": "Original project-local React/CSS layout adjustment and regression tests authored for the requested display change. All existing 106 skill effect/story texts and 37 monster profiles are reused unchanged. No new artwork, narrative, external reference text, dependency, font, audio or media.",
+          "reviewLimit": "DOM, SSR and CSS cascade checks verify content/order and accessibility contracts, not rendered phone fit or screen-reader behavior. Native phone/zoom acceptance remains with the release publisher; local browser restrictions were not retried. No legal-clearance claim. Final release checks: docs/release-validation-v02015.json. Native rendering is verified after deployment, separately from these source checks."
         }
       ]
     },

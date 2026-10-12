@@ -1,0 +1,142 @@
+{
+  "release": "0.20.15",
+  "stage": "Final prepublication checks; rendered native acceptance follows exact deployment",
+  "baselineCommit": "29f06a843f032cb5cb61bbb5572b146969a9c7ec",
+  "baselineTree": "6ea74bac10a47934ad324f1597c86fab10ad9b14",
+  "candidateTree": "bc58faeff6ad82d6931708f9b5f71993920bdca0",
+  "candidatePatchSha256": "8eb969653c7868201eef517ea1f3b15556b302038af7c86fde828ae350fe0dd2",
+  "checks": {
+    "tests": 2819,
+    "files": 139,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.14",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion",
+        "source.workingTreeDirty"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "bdfd70bce9c8cae306e0652808446d0726cfbbdd",
+          "release": "932264f12caf58a08d14d20cbbfa903d7b5c0a31"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.14",
+          "release": "0.20.15"
+        },
+        {
+          "field": "source.workingTreeDirty",
+          "baseline": false,
+          "release": true
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeChanged": [
+      "src/MonsterDetails.tsx",
+      "src/monsterDetails.css"
+    ],
+    "reviewedRuntimeSha256": {
+      "src/MonsterDetails.tsx": "9b25a498f0d9856002559a225a6fc7a219d066abcf0867bceef8b5aa18e084bc",
+      "src/monsterDetails.css": "47a34e9b18ca98eff246ae21446abefdcf14531e2f26e04db348a1d21df4c3e3"
+    },
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/App.tsx",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamFocusReveal.ts",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "dependenciesUnchangedExceptRootVersion": true,
+    "creditsChange": "version marker only",
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "textProviderSha256": "26d54d0b9baf5561bd4cc98278a7c40d95cf25ee72a7270179d2195ce73be8f3"
+  },
+  "independentCandidateReview": {
+    "tests": 81,
+    "profiles": 37,
+    "skillInstances": 106,
+    "report": "Candidate independent DOM/keyboard/CSS review passed; exact release payload is separately audited before publication."
+  },
+  "limits": [
+    "Native full-text fit, local scrolling, keyboard/movie/focus and save preservation require exact post-deployment acceptance.",
+    "Physical-device touch/safe-area, real screen-reader announcements, text-only zoom and performance are not established by DOM tests.",
+    "Known unavailable local browser routes were not retried.",
+    "Recovered public baseline is verified, but unavailable prior local QA captures were not recreated.",
+    "Existing large-main-chunk advisory remains; rights inventory is not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

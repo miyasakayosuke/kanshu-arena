@@ -11,7 +11,7 @@ function styles(width: number, height: number, order: string[]) {
   window.document.body.innerHTML = `<style>${css}</style><div class="overlay profileOverlay"><section class="modal profileModal profileArtFirst profileTabbed">
     <div class="profileHeader"><strong>No. 006 · ケツァルコアトル</strong><button class="close">×</button></div>
     <div class="profileTabs" role="tablist"><button aria-selected="true">姿</button><button>物語</button></div>
-    <div class="profileBody"><section class="profilePanel profileAppearance"><div class="profileHeading"><span class="heroIcon"><img class="monsterArt"></span><div class="profileIdentity"><h2>ケツァルコアトル</h2></div><div class="mythEntryHost"><div class="mythEntry"><button class="mythPlay">物語</button></div></div></div></section><section class="profilePanel" hidden><section class="profileStory"><div><span class="storyLabel">ひとこと <small>本作の創作</small></span><p class="monsterLore">長い日本語のひとこと</p></div><div><span class="storyLabel">伝承</span><p class="monsterOrigin">伝承の紹介</p><a class="loreSource">出典</a></div></section><div class="detailPages"><div class="detailPageContent"><div class="detailPage"><h3>能力</h3><p class="familyExplanation">効果</p><small class="detailSkillRule">特技</small><p class="skillLore">物語</p></div><div class="detailPage" hidden>次のページ</div></div><nav class="detailPager"><button>前へ</button><span>1 / 2</span><button>次へ</button></nav></div><div class="detailSkillReading" hidden>非表示の特技</div><div class="detailSkillPicker"><button>特技</button></div></section></div>
+    <div class="profileBody"><section class="profilePanel profileAppearance"><div class="profileHeading"><span class="heroIcon"><img class="monsterArt"></span><div class="profileIdentity"><h2>ケツァルコアトル</h2></div><div class="mythEntryHost"><div class="mythEntry"><button class="mythPlay">物語</button></div></div></div></section><section class="profilePanel profileSkills" hidden><section class="profileStory"><div><span class="storyLabel">ひとこと <small>本作の創作</small></span><p class="monsterLore">長い日本語のひとこと</p></div><div><span class="storyLabel">伝承</span><p class="monsterOrigin">伝承の紹介</p><a class="loreSource">出典</a></div></section><div class="detailPages"><div class="detailPageContent"><div class="detailPage"><h3>能力</h3><p class="familyExplanation">効果</p><small class="detailSkillRule">特技</small><p class="skillLore">物語</p></div><div class="detailPage" hidden>次のページ</div></div><nav class="detailPager"><button>前へ</button><span>1 / 2</span><button>次へ</button></nav></div><div class="detailSkillReading" hidden>非表示の特技</div><div class="detailSkillPicker"><button>特技</button></div><div class="detailSkillReadings"><div class="detailSkillReading skill" data-combined-skill><h3>破縛の連牙</h3><small class="detailSkillRule">省略しない効果の説明</small><div class="detailSkillStory" role="group" aria-label="破縛の連牙の物語"><p class="skillLore">効果のすぐ下に置く物語</p></div></div></div></section></div>
   </section></div><section class="modal tacticsModal"><button class="close">×</button></section>`;
   return Object.assign((selector: string) => window.getComputedStyle(window.document.querySelector(selector)!), { window });
 }
@@ -21,7 +21,7 @@ describe.each([
   ['style.css', 'catalog.css', 'monsterDetails.css'],
   ['monsterDetails.css', 'style.css', 'catalog.css'],
 ])('compact profile cascade in %s + %s + %s order', (...order) => {
-  it.each([[360, 640], [400, 606], [802, 394], [326, 432], [500, 758], [720, 900], [240, 320]])('keeps Close and tabs fixed, with an accessible fallback at %s×%s', (width, height) => {
+  it.each([[360, 533], [360, 640], [400, 606], [802, 394], [326, 432], [500, 758], [720, 900], [240, 320]])('keeps Close and tabs fixed, with an accessible fallback at %s×%s', (width, height) => {
     const style = styles(width, height, order);
     expect(style('.profileModal').display).toBe('flex');
     expect(style('.profileModal').flexDirection).toBe('column');
@@ -53,6 +53,21 @@ describe.each([
     expect(style('.detailSkillReading[hidden]').display).toBe('none');
     for (const selector of ['.profileTabs button', '.detailPager button', '.detailSkillPicker button', '.mythPlay', '.loreSource']) expect(parseFloat(style(selector).minHeight)).toBeGreaterThanOrEqual(44);
     expect(style('.detailPageContent').overflow).not.toBe('hidden');
+    expect(style('.profileSkills').padding).toBe('12px');
+    expect(style('.detailSkillPicker').marginBottom).toBe('12px');
+    expect(style('.detailSkillReadings').overflow).not.toBe('hidden');
+    expect(style('[data-combined-skill]').overflow).not.toBe('hidden');
+    expect(['', 'none']).toContain(style('[data-combined-skill]').maxHeight);
+    expect(style('[data-combined-skill] h3').marginBottom).toBe('8px');
+    expect(style('.detailSkillStory').marginTop).toBe('10px');
+    expect(style('.detailSkillStory').paddingTop).toBe('10px');
+    for (const selector of ['[data-combined-skill] .detailSkillRule', '[data-combined-skill] .skillLore']) {
+      expect(style(selector).fontSize).toBe('14px');
+      expect(parseFloat(style(selector).lineHeight)).toBeGreaterThanOrEqual(1.65);
+      expect(style(selector).overflow).not.toBe('hidden');
+      expect(style(selector).whiteSpace).not.toBe('nowrap');
+      expect(style(selector).textOverflow).not.toBe('ellipsis');
+    }
     style.window.document.querySelector('.heroIcon')!.innerHTML = '<span class="catalogArtFallback"><span>狐</span><small>画像を表示できません</small></span>';
     expect(style('.heroIcon').minHeight).toBe('min-content');
     expect(style('.heroIcon').flexBasis).toBe('auto');
