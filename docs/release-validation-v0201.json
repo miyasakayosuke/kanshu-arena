@@ -1,0 +1,111 @@
+{
+  "release": "0.20.1",
+  "status": "local-release-candidate-validated-unpublished",
+  "recordedDateUtc": "2026-10-12",
+  "baseCommit": "6242ce8b9c0f007a4b056d686b50ccedbc98d637",
+  "localEquivalentBaseCommit": "f2b1bbab2cc59357e7dc6b3572dafc315ce52f2a",
+  "baseTree": "d4ef64289016365232b9ff84a599560f1d7d77aa",
+  "inputRematchPatchSha256": "8df16bf08ca09cf94552d5e39cb1ea71731aeb51df7e08222374e885ed2adc74",
+  "scope": [
+    "Existing result-to-workshop synchronous lock prevents repeated rebuild clicks from leaving stale rematch intent.",
+    "Navigation outcome permits rollback of temporary lock and intent when queued history restoration declines the transition.",
+    "Version 0.20.1, corresponding header expectations, provenance, validation and release documentation only."
+  ],
+  "checks": {
+    "vitest": {
+      "command": "npm test",
+      "files": 100,
+      "tests": 2307,
+      "durationSeconds": 53.44,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "command": "npm run rights:test",
+      "tests": 14,
+      "passed": true
+    },
+    "rightsSource": {
+      "command": "npm run rights:check",
+      "passed": true
+    },
+    "build": {
+      "command": "NODE_OPTIONS=--max-old-space-size=1536 npm run build",
+      "typescript": true,
+      "vite": true,
+      "distNotices": true,
+      "passed": true
+    },
+    "independentReview": {
+      "status": "passed-no-material-findings",
+      "regressionFiles": 7,
+      "regressionTests": 152,
+      "additionalDisposableHookTests": 2,
+      "passedTests": true,
+      "runtimeFindings": "No demonstrated user-reachable blocker. Synthetic same-render Next-then-Rebuild dispatch edge is pre-existing in the frozen base and does not reproduce with separately committed events. Kept narrow patch unchanged; actual browser QA remains pending.",
+      "command": "npm test -- src/App.rematchReliability.test.tsx src/App.navigation.test.tsx src/navigation.test.ts src/App.familyEncounters.test.tsx src/strategy.test.ts src/TeamBuilder.test.tsx src/familyTrials.test.ts",
+      "releaseDocsReviewed": true
+    },
+    "runtimePatchMatchesReviewedInputExceptVersion": true,
+    "dependencyLockfileUnchangedExceptRootVersion": true,
+    "trackedSrcPublicScriptsConfigs": {
+      "filesCompared": 368,
+      "changedTrackedFiles": [
+        "src/App.dragonWave.test.tsx",
+        "src/App.materialWave.test.tsx",
+        "src/App.tsx",
+        "src/navigation.ts"
+      ],
+      "allOtherComparedFilesByteIdentical": true
+    },
+    "frozenBaseUnchanged": true,
+    "gitDiffCheck": true
+  },
+  "logHashes": {
+    "full-tests": "60ff018030f96884bcd442cc54b5999f69b588e96167ea4715f946e4729fa4bb",
+    "rights-selftests": "3202a58b7c2acb10e4cf12ec62586d0611af8612c78dbc1d3cfe59bc3d48a7b0",
+    "rights-source": "74cf695f7cd63872a9a7cc96b3396b9d0458a122cab198e41d913a1fdd8987b9",
+    "build": "c8136ad33d64fd478eb97acbae62b699e1042b1846aa5392cbe43b52d0767396",
+    "rights-source-final-docs": "74cf695f7cd63872a9a7cc96b3396b9d0458a122cab198e41d913a1fdd8987b9"
+  },
+  "sourceHashes": {
+    "src/App.tsx": "590be7a8af7e6f1e13c1d848b8df75a976119a9df6c54075da5eadb5c3180227",
+    "src/navigation.ts": "052ff748f9a68e8cdf248f8b86016eca1dff7efa9ca9990e23233a4797e0730a",
+    "src/App.rematchReliability.test.tsx": "88f38ad36c899a6ca522e9367a4cd5afb2421be79c1cb3b1c19dea7fab2e7838",
+    "package.json": "4059d4e5233d65a907ce121b2ebdbe48df8601207857073a7fce1270e089b7bd",
+    "package-lock.json": "f34536923783bdbb0bc5cb53fd827d05bd6aedd371cae56f455360a886d316fe"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/familyTrials.ts": "0705b4f0d82f79dd9f028b52cf3755b9a984bff8b1aab00c5ea79df6258b896c",
+    "src/TeamBuilder.tsx": "70b60e9131950e83de5ade49feb906cd614aebf707676970e4017598a0aadb0a",
+    "src/BattleResult.tsx": "3282226543fbfd54349b9d4298f77f7d3cff257ea7a7b50221a2c3c0961317e1",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "public/credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "distHashes": {
+    "THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c",
+    "assets/index-Cat8_Zkh.js": "a16457c84591837b3d871e70dbaa92575fb15741462dbbdb882b4d07f3224429",
+    "assets/index-CcOi1w2F.css": "0632dd0ff0386560d414fccd1b8ea419a30e6ad303ab488b6a3dcfcca1381d4f",
+    "credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "index.html": "f4ff5de4a62c350368f0413fcd17d028f5c3dff1ca97169857fa79da1a52700f"
+  },
+  "publication": {
+    "status": "not-published-by-this-task",
+    "commit": null,
+    "ci": null,
+    "deployment": null
+  },
+  "browserGate": "Pending exact-deployment verification and live mobile portrait/landscape rematch, repeated-input, interruption, Back/Forward, three-slot save/recall, credits and notices checks. Happy-dom cannot establish actual browser history traversal or click reachability.",
+  "reviewLimits": [
+    "No mythical-water replacement candidate, names, artwork or animation is included.",
+    "No numerical engine, AI, family, cost, ID, save-schema or dependency change.",
+    "Automated checks do not establish human fun, balance improvement or legal clearance; earlier unresolved rights and similarity questions remain.",
+    "No new balance simulations or art-render pass: numerical and art source files remain byte-identical to v0.20.0."
+  ],
+  "buildWarning": "Existing Vite warning: minified JS chunk 644.60 kB (gzip 202.17 kB) exceeds 500 kB threshold; build succeeds.",
+  "baseLiveVerification": "docs/v020-live-verification.json (v0.20.0 only; not a v0.20.1 browser pass)"
+}

@@ -234,7 +234,17 @@ export default function App() {
       if (commandDeadline.current === deadline) commandDeadline.current = null;
     };
   }, [page, battle?.turn, battle?.winner, playing]);
-  const rebuild = () => { leavingForPractice.current = true; navigate('team'); };
+  const rebuild = () => {
+    // Consume this result action once, before navigation clears the leave flag.
+    // A second click in the same render must not arm a later unrelated exit.
+    if (startLock.current || page !== 'battle' || !battle?.winner) return;
+    startLock.current = true;
+    leavingForPractice.current = true;
+    if (!navigate('team')) {
+      startLock.current = false;
+      leavingForPractice.current = false;
+    }
+  };
   const leavePractice = () => { setPractice(false); setEncounter(null); setRound(n => n + 1); setNotice('同条件での再戦を終了しました。次の相手に挑みます。'); };
   const changeRule = (next: RuleId) => { if (next !== rule) { setRule(next); setPractice(false); setEncounter(null); setNotice(practice ? 'ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''); } };
   const chooseFamilyTrial = (selection: FamilyTrialPreset) => {
@@ -254,7 +264,7 @@ export default function App() {
   const scopeLabel = ['responseCleanse', 'responseGuard'].includes(visualCast?.effect ?? '') ? `生存する${incomingArea ? '味方' : '敵側の仲間'}全員 ${visualCast?.targets?.length ?? 0}体` : visualCast?.effect === 'restoreMp' ? `生存する粘体系 ${visualCast.targets?.length ?? 0}体` : visualCast?.passive === 'material-repair' ? `生存する物質系 ${visualCast.targets?.length ?? 0}体` : visualCast?.scope === 'random' ? `ランダム${visualCast.hits}回` : visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
   const visibleCastCaption = playing && compactCastCaption?.event === visualCast ? compactCastCaption : null;
   return <div className={`app ${page === 'battle' ? `battleMode ${battle?.winner ? 'resultMode' : ''}` : `screen-${page}`}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.0</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.1</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : 'ARENA'}</span>}</header>
     {showFamilyTrials && <FamilyTrialPicker presets={familyTrialPresets} rule={rule} onChoose={chooseFamilyTrial} onClose={() => setShowFamilyTrials(false)} />}
     {page === 'home' && <HomeScreen onFamilyTrial={() => setShowFamilyTrials(true)} practice={practice} team={team} rule={rule} onFocus={setFocus} onArena={() => navigate('arena')} onTeam={() => navigate('team')} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}

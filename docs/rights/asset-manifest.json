@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-11",
-  "release": "v0.20.0",
-  "auditBaseCommit": "83109c7b57c066ce848f77089450121077ba8913",
+  "reviewedAt": "2026-10-12",
+  "release": "v0.20.1",
+  "auditBaseCommit": "6242ce8b9c0f007a4b056d686b50ccedbc98d637",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -380,6 +380,27 @@
           ],
           "provenance": "One original CSS selector receives the existing portraitArt class to outrank the later generic 1.15em portrait size. Existing original SVG portraits and all gameplay code remain unchanged; no external asset/code/text/dependency imported.",
           "reviewLimit": "Live v0.19.0 measured 18.4px images inside 54×60px holders. A combined stylesheet cascade test and later live measurements verify the fix; no legal-clearance or gameplay-balance claim."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.1 controlled-rematch reliability fix on v0.20.0: repeated result-to-workshop clicks and queued-history restoration rollback. Base tree d4ef64289016365232b9ff84a599560f1d7d77aa. Publication and browser-verification status are recorded separately in docs/rights/releases/2026-10-12-v0.20.1.md.",
+          "files": [
+            "src/App.tsx",
+            "src/navigation.ts",
+            "src/App.rematchReliability.test.tsx",
+            "docs/rematch-reliability-candidate.md",
+            "README.md",
+            "package.json",
+            "package-lock.json",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "docs/release-validation-v0201.json",
+            "docs/rights/releases/2026-10-12-v0.20.1.md",
+            "docs/v020-live-verification.md",
+            "docs/v020-live-verification.json"
+          ],
+          "provenance": "AI-assisted application-state guard, tests and verification note written directly for this project. The existing result-to-workshop action reuses the synchronous start lock so repeated clicks cannot retain a stale same-opponent request. Navigation reports whether it performed a transition, allowing the lock and temporary intent to roll back when queued browser-history restoration declines the request. No external code, article text, imagery, media, fonts, dependencies, character art, animations or new runtime wording imported. Engine, AI, stats, skills, family/cost rules, IDs and saved-team schema remain unchanged. Release 0.20.1 display, matching header expectations, package version metadata and directly authored release notes are included; dependency versions and third-party notices are unchanged.",
+          "reviewLimit": "Frontend tests check exact opponent/order/seed/start options, deliberately changed own party, full initial HP/MP, legal-cost gating, cancellation, browser navigation and preservation/recall of all three saved slots. Automated checks are not real-browser proof, human-fun measurement, balance improvement or rights clearance. Actual post-release browser acceptance and earlier unresolved review questions remain separate."
         }
       ]
     },

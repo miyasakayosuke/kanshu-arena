@@ -1,0 +1,61 @@
+{
+  "release": "0.20.0",
+  "verifiedUtc": "2026-10-12T00:43:00Z",
+  "publishedCommit": "6242ce8b9c0f007a4b056d686b50ccedbc98d637",
+  "publishedTree": "d4ef64289016365232b9ff84a599560f1d7d77aa",
+  "site": "https://miyasakayosuke.github.io/kanshu-arena/#home",
+  "ci": {
+    "url": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38188003013",
+    "result": "success"
+  },
+  "browser": "Cloud Chrome, ordinary window resizing and 175% browser zoom for compact portrait; no DevTools emulation",
+  "viewportsCssPx": [
+    [
+      500,
+      755
+    ],
+    [
+      326,
+      432
+    ],
+    [
+      845,
+      389
+    ]
+  ],
+  "liveAssets": [
+    "index-BEqgXHBk.js",
+    "index-CcOi1w2F.css"
+  ],
+  "checks": {
+    "allEightPresetsApplied": true,
+    "all37RosterPortraitsLoaded": true,
+    "all37DetailBodiesLoaded": true,
+    "detailBodySizeCssPx": [
+      140,
+      105
+    ],
+    "static48pxPortraitRenders": 37,
+    "representativeMatches": [
+      "mixed vs material: victory 16 turns, 18.6% remaining HP",
+      "nature vs nature: victory 10 turns, 27.1% remaining HP",
+      "beast vs material: victory 6 turns, 49% remaining HP"
+    ],
+    "sameEncounterRetry": "All initial enemy/ally HP and MP restored; repair ready, Janus one-use, and beast opening resource restored. Entire visible 16-turn battle log identical under 2x/skip. Numeric seed is covered by engine tests, not hidden browser-state inspection.",
+    "motion": "Actual screenshots show fire attack wind-up, impact and recovery separately from healing. New nature bodies render in battle; enemy labels stayed stationary across 24 compact and 48 landscape samples. Ally portraits computed animation:none and transform:none.",
+    "compactLayout": "Bodies and growing status lines do not overlap; one intentional battle scroll region reaches all command controls.",
+    "savedSlots": "All three slots remain unmodified and empty, matching pre-release browser baseline. Nonempty save compatibility has automated coverage.",
+    "inlineNotices": "DOM text equals public/THIRD_PARTY_NOTICES.txt ignoring final newline",
+    "gameOriginConsoleErrors": 0
+  },
+  "limits": [
+    "No nearest-modern-comparator or legal-clearance conclusion.",
+    "Reduced-motion equivalence is automated; no OS reduced-motion browser toggle was exercised.",
+    "All 37 body/portrait SVGs were loaded in live detail/roster UI; combat animation was sampled with representative parties, not every character/action in every viewport.",
+    "48px portraits were statically rendered. Actual in-game portrait sizes vary by layout; no claim that every game slot is exactly 48 CSS px.",
+    "Direct .txt navigation was client-blocked; full inline HTML notices were verified instead.",
+    "Browser-extension metadata errors occurred, with no game-origin errors in the queried console."
+  ],
+  "evidenceFileCount": 403,
+  "evidenceManifestSha256": "30c11096091f24114e5fbe74ba0288cbe2722aec735db414b668aed4063fb910"
+}

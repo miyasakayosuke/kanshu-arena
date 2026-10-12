@@ -46,12 +46,15 @@ export function useScreenNavigation(blocked: boolean, onLeaveBattle: () => void)
     }
   };
   const navigate = (next: Screen, replaceEntry = false) => {
-    if (current.current === next || restoring.current) return;
-    if (current.current === 'battle' && options.current.blocked) { ask({ target: next, delta: null }); return; }
+    // Report whether this call actually left the current screen, so callers can
+    // roll back one-shot intent when history restoration defers navigation.
+    if (current.current === next || restoring.current) return false;
+    if (current.current === 'battle' && options.current.blocked) { ask({ target: next, delta: null }); return false; }
     clearPending();
     transition(next);
     if (!replaceEntry) index.current += 1;
     window.history[replaceEntry ? 'replaceState' : 'pushState']({ kanshuNavigation: entry() }, '', hashes[next]);
+    return true;
   };
   useEffect(() => {
     replace(current.current);
