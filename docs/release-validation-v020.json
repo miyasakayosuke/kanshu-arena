@@ -1,0 +1,66 @@
+{
+  "release": "0.20.0",
+  "recordedUtc": "2026-10-11T14:30:01Z",
+  "baseCommit": "83109c7b57c066ce848f77089450121077ba8913",
+  "baseTree": "e4be180440ce978e29af019d8f389a528a89c7fb",
+  "checks": {
+    "vitest": {
+      "files": 99,
+      "tests": 2297,
+      "passed": true
+    },
+    "rightsSelftest": {
+      "tests": 14,
+      "passed": true
+    },
+    "rightsSourceDist": true,
+    "typescript": true,
+    "viteBuild": true,
+    "labSmoke": {
+      "matches": 736,
+      "baselineScore": 45.19,
+      "candidateScore": 45.19,
+      "pairedChange": 0,
+      "passed": true
+    },
+    "staticSvgRenders": {
+      "fullBodies": 37,
+      "portraits": 37,
+      "renderer": "Inkscape",
+      "passed": true
+    }
+  },
+  "logHashes": {
+    "vitest": "f6e5d2656eaf163fad7641168fd05693d25504c6f5137aea229499b5f39cc58c",
+    "rightsSelftest": "741cd576435dcd8844b946cf14246e85d70b5a20f4497d31355abaa8bd98aa86",
+    "rightsSource": "01267001a55de275f3f5fcebce278ba85b89b68bf4197f5576b844df4ea28ed8",
+    "build": "47e38777b9c6f315463e4f4fbee3c025e4a879d922c66dc8603d658a0b62cae3",
+    "labSmoke": "cad569b8021374b038779633bb5b47bde1b4dedfed9e7dd3131435409bf0dda8"
+  },
+  "preservedHashes": {
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/strategy.ts": "e06cb71dd259556992a9e32a14299e1b836bce19092426fafb537eb71a579524",
+    "src/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/familyTrials.ts": "0705b4f0d82f79dd9f028b52cf3755b9a984bff8b1aab00c5ea79df6258b896c",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "newArtHashes": {
+    "src/beastOriginalArt.ts": "810d4f37b20a3525ea4dcfa49611a91e7e95a5ca443e697c7d5a155441548a68",
+    "src/natureOriginalArt.ts": "4fe33500cec0c40630267c1fc355e26b4afc6cc8c3425a6b759cad1c2f853337",
+    "src/mixedOriginalArt.ts": "8132168f662feddb101d5138afcaf263e56d032b036d65479e45e6ca7a9240a0"
+  },
+  "visualEvidenceHashes": {
+    "docs/visual-review/v020-original12-light.png": "9407b4cfb4518c6b5033bda3a8b850007c254d5a13afc11ea3b2d9422e7421dd",
+    "docs/visual-review/v020-original12-dark.png": "01a780a380550c9101b293d1c7533b0d8e37b86773e6a97e76ef5b1f58a7363b",
+    "docs/visual-review/v020-all37-contact.png": "08644eed26f7f5af86a472ad6a400cae3a2e1a8a38abd1a0ce0d7eb9a5620979"
+  },
+  "browserGate": "Postdeployment pending. Workspace HTTP server is not reachable from provided cloud Chrome; file:// refused by browser policy. Static render + full tests before authorized release; actual browser verification follows publication.",
+  "reviewLimits": [
+    "Source provenance and limited static inspection are not legal clearance.",
+    "Closest modern comparator not established for all12 designs.",
+    "No changes to character names, stats, AI, engine, saves, families, cost or retry rules."
+  ],
+  "buildWarning": "Vite reports a minified chunk over500kB; current JS is645kB before gzip. No runtime error was reported by the build."
+}

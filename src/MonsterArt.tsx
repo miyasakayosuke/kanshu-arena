@@ -1,3 +1,6 @@
+import {BEAST_ORIGINAL_ART} from './beastOriginalArt';
+import {NATURE_ORIGINAL_ART} from './natureOriginalArt';
+import {MIXED_ORIGINAL_ART} from './mixedOriginalArt';
 import { DRAGON_ART } from './dragonArt';
 import { MATERIAL_ART } from './materialArt';
 import { EXTRAORDINARY_ART } from './extraordinaryArt';
@@ -10,6 +13,9 @@ import { GENBU_ART_URL, GENBU_PORTRAIT_URL, RATATOSKR_ART_URL, RATATOSKR_PORTRAI
 
 export type CharacterArt = {artUrl: string; portraitUrl: string; spriteWidth: number};
 export const CHARACTER_ART: Readonly<Record<number, CharacterArt>> = {
+  ...BEAST_ORIGINAL_ART,
+  ...NATURE_ORIGINAL_ART,
+  ...MIXED_ORIGINAL_ART,
   12: {artUrl: FENRIR_ART_URL, portraitUrl: FENRIR_PORTRAIT_URL, spriteWidth: 110},
   13: {artUrl: RATATOSKR_ART_URL, portraitUrl: RATATOSKR_PORTRAIT_URL, spriteWidth: 99},
   14: {artUrl: GENBU_ART_URL, portraitUrl: GENBU_PORTRAIT_URL, spriteWidth: 121},

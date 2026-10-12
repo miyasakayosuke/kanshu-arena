@@ -1,3 +1,4 @@
+import {sampleOriginalRosterMotion} from './originalRosterMotion';
 import {useEffect, useRef} from 'react';
 import {effectStatus, type BattleEvent, type Unit} from './engine';
 import {drawAreaEffect} from './areaEffects';
@@ -1019,6 +1020,7 @@ export default function BattleStage(props: Props) {
         : seedBarrage ? sampleRatatoskrMotion(age, hitCount, reduced)
         : barrage ? sampleFenrirMotion(age, hitCount, reduced)
         : genbuField ? sampleGenbuMotion(age, reduced)
+        : actorId !== undefined && actorId < 12 && cast ? sampleOriginalRosterMotion(actorId, cast.event, age, reduced)
         : sampleActionMotion(cast ? motionKind(cast.event) : 'support', age, reduced);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
       ctx.clearRect(0, 0, WIDTH, HEIGHT);

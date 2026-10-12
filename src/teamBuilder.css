@@ -176,3 +176,7 @@
 }
 .extraordinaryResponsePlan small,.extraordinaryResponsePlan strong {min-width:0;overflow-wrap:anywhere}
 @media(max-width:380px){.teamBuilder .advancedFilters{grid-template-columns:1fr 1fr}.teamBuilder .advancedFilters select:last-child{grid-column:1 / -1}.extraordinaryResponsePlan{padding:10px}.extraordinaryResponsePlan small{font-size:10px}}
+
+/* Saved teams share the full roster's original portraits, without changing save IDs. */
+.teamBuilder .slotIcons{display:flex;align-items:center;gap:1px;min-height:24px}
+.teamBuilder .slotIcons .monsterArt.portraitArt{width:calc((100% - 4px)/5);height:auto;aspect-ratio:1;min-width:0;object-fit:contain;flex:0 1 auto}

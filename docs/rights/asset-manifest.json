@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-11",
-  "release": "v0.19.1",
-  "auditBaseCommit": "6387a940d5e70a97f272726e0f4baa3a4962a5f4",
+  "release": "v0.20.0",
+  "auditBaseCommit": "83109c7b57c066ce848f77089450121077ba8913",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -212,7 +212,7 @@
         "src/MonsterArt.tsx",
         "src/BattleStage.tsx"
       ],
-      "provenance": "キャラのicon値を端末の文字としてDOM/Canvasで描画。既存12体は主に絵文字、25体は本作用SVGで表示しicon値はフォールバックや保存枠にも残る。フォントや字形画像は同梱しない。",
+      "provenance": "全37体の通常表示と保存編成は本作用SVG。既存icon値は互換性とCanvas画像読込み中の代替表示に残す。Unicodeは端末の文字として描画し、フォントや字形画像を同梱しない。",
       "reviewLimit": "字形の作者を本作開発者としない。端末依存の描画であり、フォントや絵文字画像の再配布許諾を得たことを意味しない。",
       "rosterIcons": [
         "🦊",
@@ -291,7 +291,8 @@
         "src/HomeScreen.tsx",
         "src/FamilyTrialPicker.tsx",
         "src/familyTrialPicker.css",
-        "src/familyTrials.ts"
+        "src/familyTrials.ts",
+        "src/originalRosterMotion.ts"
       ],
       "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。 v0.14の粘体系5体の設定・技説明は本作向けに独立して記述。参照はdocs/slime-family-reference.md、造形はdocs/slime-art-provenance.md。 v0.15の3体の設定・技説明・独自動作は本作用に記述。参照はdocs/demon-family-reference.md、造形はdocs/demon-art-provenance.md。 v0.16の4体の物語・技説明と、土布の低い押し、手綱の横引き、袖の囲い、逆さ糸の縫いのCanvas/CSS/動作コードはUI統合担当が本作用に直接記述。毒片が命中時だけ畳まれる交換効果を新作し、外部画像・効果・文章・コード・動作試料を取り込んでいない。参照はdocs/undead-family-reference.md、造形はdocs/undead-art-provenance.md。 v0.17ではヤヌスの物語・四技の説明、四分類の種類数と生存対象、共通一回のUIを本作用に直接記述。敷居を傾け掌を示す動作、空いた門を通る三本の流線、短い二枚の格子を外へ開くCanvas/CSS効果を新作した。HP回復を示す数字や光の十字を清めに使わず、実際の毒0/guard=trueイベントを表示。外部の画像・音・フォント・文章・コード・動作試料は持ち込んでいない。 全系統の調整検証に伴い、src/poisonDescription.tsの毒説明を本作の実装から独立に記述。即時ダメージと最大HP6%の継続毒、残り回数の更新、解除と予防の違いを区別し、実際のユニット設定またはエンジン既定値を表示する。制作担当は外部の説明文・コードを取り込まず、本作用の新規文面とヘルパーを記述したと申告。 v0.18の毒の機構・自動指示の限界・既存編成を使う対策、ヤヌスの推薦説明、プレイガイドは本作の実装と保存済み実測から独立に記述。外部の記事本文・説明文・画像・音・フォント・コードのコピーは追加していない。 v0.18.1のリーダー比較UI、HP/MP/攻撃/素早さの前後・対象表示と優先度の短い説明は、本作の開始処理から計算した実数を用いる独自コード・文面。キャラクターの能力・AI・アート・外部依存は追加変更せず、外部記事本文・説明文・画像・コードのコピーを用いない。最終制作申告と集約検証はdocs/rights/releases/2026-10-10-v0.18.1.mdに記録する。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
@@ -380,6 +381,96 @@
           "provenance": "One original CSS selector receives the existing portraitArt class to outrank the later generic 1.15em portrait size. Existing original SVG portraits and all gameplay code remain unchanged; no external asset/code/text/dependency imported.",
           "reviewLimit": "Live v0.19.0 measured 18.4px images inside 54×60px holders. A combined stylesheet cascade test and later live measurements verify the fix; no legal-clearance or gameplay-balance claim."
         }
+      ]
+    },
+    {
+      "id": "original-roster-beast-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/beastOriginalArt.ts"
+      ],
+      "monsterIds": [
+        0,
+        2,
+        7,
+        11
+      ],
+      "provenance": "本作向けにAI支援でSVG座標を直接記述。全身と顔は同じ図形を共有。制作担当は参照画像の取得・トレース・他作品の図形転用をしていないと申告。各IDの形・配色・構図と制作経緯は参照文書に記録。",
+      "creator": "本作開発でのAI支援コード制作。人による作画変更は今回確認されていない。",
+      "createdFor": "v0.20.0",
+      "sha256": {
+        "src/beastOriginalArt.ts": "810d4f37b20a3525ea4dcfa49611a91e7e95a5ca443e697c7d5a155441548a68"
+      },
+      "references": [
+        "docs/beast-original-art-provenance.md"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; source imagery/fonts not bundled; original-content license not selected",
+      "reviewLimit": "制作申告、ソース構造、全身/48px顔の実ラスタ確認は独立した権利帰属や包括的な類似性の証明ではない。現代他作品との横断比較・専門家の法的評価は未完了。",
+      "visualReview": "Inkscapeで全身・顔を実描画し、明暗背景の12体一覧と全37体の一覧を目視。公開前のクラウドブラウザ候補表示は実行環境分離により未実施。公開後の実画面確認をリリース記録へ追記する。",
+      "evidenceFiles": [
+        "docs/visual-review/v020-original12-dark.png",
+        "docs/visual-review/v020-original12-light.png",
+        "docs/visual-review/v020-all37-contact.png"
+      ]
+    },
+    {
+      "id": "original-roster-nature-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/natureOriginalArt.ts"
+      ],
+      "monsterIds": [
+        3,
+        6,
+        9,
+        10
+      ],
+      "provenance": "本作向けにAI支援でSVG座標を直接記述。全身と顔は同じ図形を共有。制作担当は参照画像の取得・トレース・他作品の図形転用をしていないと申告。各IDの形・配色・構図と制作経緯は参照文書に記録。",
+      "creator": "本作開発でのAI支援コード制作。人による作画変更は今回確認されていない。",
+      "createdFor": "v0.20.0",
+      "sha256": {
+        "src/natureOriginalArt.ts": "4fe33500cec0c40630267c1fc355e26b4afc6cc8c3425a6b759cad1c2f853337"
+      },
+      "references": [
+        "docs/nature-original-art-provenance.md"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; source imagery/fonts not bundled; original-content license not selected",
+      "reviewLimit": "制作申告、ソース構造、全身/48px顔の実ラスタ確認は独立した権利帰属や包括的な類似性の証明ではない。現代他作品との横断比較・専門家の法的評価は未完了。",
+      "visualReview": "Inkscapeで全身・顔を実描画し、明暗背景の12体一覧と全37体の一覧を目視。公開前のクラウドブラウザ候補表示は実行環境分離により未実施。公開後の実画面確認をリリース記録へ追記する。",
+      "evidenceFiles": [
+        "docs/visual-review/v020-original12-dark.png",
+        "docs/visual-review/v020-original12-light.png",
+        "docs/visual-review/v020-all37-contact.png"
+      ]
+    },
+    {
+      "id": "original-roster-mixed-svg",
+      "kind": "code-native-vector",
+      "files": [
+        "src/mixedOriginalArt.ts"
+      ],
+      "monsterIds": [
+        1,
+        4,
+        5,
+        8
+      ],
+      "provenance": "本作向けにAI支援でSVG座標を直接記述。全身と顔は同じ図形を共有。制作担当は参照画像の取得・トレース・他作品の図形転用をしていないと申告。各IDの形・配色・構図と制作経緯は参照文書に記録。",
+      "creator": "本作開発でのAI支援コード制作。人による作画変更は今回確認されていない。",
+      "createdFor": "v0.20.0",
+      "sha256": {
+        "src/mixedOriginalArt.ts": "8132168f662feddb101d5138afcaf263e56d032b036d65479e45e6ca7a9240a0"
+      },
+      "references": [
+        "docs/mixed-original-art-provenance.md"
+      ],
+      "distribution": "Inline SVG data URLs in browser bundle; source imagery/fonts not bundled; original-content license not selected",
+      "reviewLimit": "制作申告、ソース構造、全身/48px顔の実ラスタ確認は独立した権利帰属や包括的な類似性の証明ではない。現代他作品との横断比較・専門家の法的評価は未完了。",
+      "visualReview": "Inkscapeで全身・顔を実描画し、明暗背景の12体一覧と全37体の一覧を目視。公開前のクラウドブラウザ候補表示は実行環境分離により未実施。公開後の実画面確認をリリース記録へ追記する。",
+      "evidenceFiles": [
+        "docs/visual-review/v020-original12-dark.png",
+        "docs/visual-review/v020-original12-light.png",
+        "docs/visual-review/v020-all37-contact.png"
       ]
     }
   ],

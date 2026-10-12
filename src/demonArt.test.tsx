@@ -96,14 +96,14 @@ describe('original demon SVG registry', () => {
     expect(JSON.stringify(art)).toBe(before);
   });
 
-  it('can be merged without changing earlier SVG entries or old emoji fallbacks', () => {
+  it('can be merged without changing earlier SVG entries or old original-roster SVG registrations', () => {
     const combined: Readonly<Record<number, CharacterArt>> = {...CHARACTER_ART, ...DEMON_ART};
     for (const [id, art] of Object.entries(CHARACTER_ART)) {
       if (Number(id) < 29) expect(combined[Number(id)]).toBe(art);
     }
     for (const [id, art] of Object.entries({...DRAGON_ART, ...MATERIAL_ART})) expect(combined[Number(id)]).toBe(art);
     for (const monster of monsters.filter(monster => monster.id < 12)) {
-      expect(renderToStaticMarkup(<MonsterArt monster={monster}/>)).toBe(monster.icon);
+      expect(new DOMParser().parseFromString(renderToStaticMarkup(<MonsterArt monster={monster}/>), 'text/html').querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
     }
     for (const [id, art] of entries) expect(combined[Number(id)]).toBe(art);
   });

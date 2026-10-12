@@ -621,3 +621,20 @@ describe('extraordinary mixed-family workshop',()=>{
   await mount();expect(document.querySelector('.newExtraordinary')?.textContent).toContain('一度の応答を選ぶ ヤヌス');await click(byLabel('ヤヌスの詳細'));expect(onFocus).toHaveBeenLastCalledWith(36);await click(byText('詳細を閉じる'));await click(document.querySelector<HTMLButtonElement>('.browseBestiary')!);await chooseSelect('系統で絞り込み','extraordinary');for(const name of ['毒解除','味方を守る','全体']){await click(byText(name));expect(document.querySelectorAll('.candidateCard')).toHaveLength(1);expect(document.querySelector('.candidateCard')?.textContent).toContain('ヤヌス');}expect(document.querySelector('.candidateCard img')?.getAttribute('src')).toContain('data:image/svg+xml');expect(updates).toEqual([]);
  });
 });
+
+describe('saved-team original portraits',()=>{
+  it('shows the shared art for stored IDs and keeps names accessible without rewriting slots',async()=>{
+    const slots: (TeamSlot|null)[]=[{team:[0,2,7,11,12],rule:'standard'},{team:[3,6,9,10,14],rule:'light'},null];
+    const before=JSON.stringify(slots);
+    await mount({startingSlots:slots});
+    const {CHARACTER_ART}=await import('./MonsterArt');
+    const icons=[...document.querySelectorAll('.slotIcons')];
+    expect(icons).toHaveLength(3);
+    slots.forEach((slot,index)=>{
+      expect(icons[index].getAttribute('aria-label')).toBe(slot?slot.team.map(id=>monsters[id].name).join('・'):'未保存');
+      expect([...icons[index].querySelectorAll('img')].map(img=>img.getAttribute('src'))).toEqual(slot?slot.team.map(id=>CHARACTER_ART[id].portraitUrl):[]);
+    });
+    expect(JSON.stringify(slots)).toBe(before);
+    await click(byLabel('編成2を呼び出す'));expect(latestTeam).toEqual(slots[1]!.team);
+  });
+});

@@ -3,7 +3,7 @@ import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {describe, expect, it} from 'vitest';
 import {monsters} from './engine';
-import MonsterArt from './MonsterArt';
+import MonsterArt, {CHARACTER_ART} from './MonsterArt';
 import {GENBU_ART_URL, GENBU_PORTRAIT_SVG, GENBU_PORTRAIT_URL, GENBU_SVG, RATATOSKR_ART_URL, RATATOSKR_PORTRAIT_SVG, RATATOSKR_PORTRAIT_URL, RATATOSKR_SVG} from './familyArt';
 import {FENRIR_ART_URL, FENRIR_PORTRAIT_URL} from './fenrirArt';
 
@@ -41,7 +41,7 @@ describe('original family character art', () => {
     }
   });
 
-  it('preserves every earlier emoji character fallback', () => {
-    for (const monster of monsters.filter(monster => monster.id < 12)) expect(renderToStaticMarkup(<MonsterArt monster={monster}/>)).toBe(monster.icon);
+  it('preserves every original-roster SVG registration', () => {
+    for (const monster of monsters.filter(monster => monster.id < 12)) expect(new DOMParser().parseFromString(renderToStaticMarkup(<MonsterArt monster={monster}/>), 'text/html').querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
   });
 });

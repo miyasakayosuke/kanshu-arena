@@ -1,3 +1,5 @@
+import {CHARACTER_ART} from './MonsterArt';
+import * as originalMotion from './originalRosterMotion';
 // @vitest-environment happy-dom
 import React, {act} from 'react';
 import {createRoot, type Root} from 'react-dom/client';
@@ -478,8 +480,8 @@ describe('original wolf enemy asset and random-hit presentation', () => {
     const barrage:BattleEvent={kind:'cast',actor:'e0',scope:'random',skill:'破縛の連牙',effect:'hit',hits:5,targets:['a0'],hitTargets:['a0','a0','a0','a0','a0']};
     const props={allies:state.allies,enemies:state.enemies,effect:{text:'破縛の連牙',type:'slash',tick:1},impact:barrage,castEvent:barrage};
     await render(props);frame(100);
-    expect(context.drawImage).toHaveBeenCalled();expect(sprites).toHaveLength(1);
-    expect(glyphs.map(value=>value.text)).toEqual(state.enemies.slice(1).map(unit=>unit.monster.icon));
+    expect(context.drawImage).toHaveBeenCalled();expect(sprites).toHaveLength(5);
+    expect(glyphs).toHaveLength(0);
     const idle=sprites[0];frame(440);expect(sprites[0]).not.toEqual(idle);
     frame(899);const released=sprites[0];
     for(let index=0;index<5;index++) {
@@ -511,12 +513,13 @@ describe('new family art and enemy-only signature effects', () => {
     vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
     const state = start([13,14,0,2,6], [12,13,14,0,2]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
-    expect(sprites).toHaveLength(3);
+    expect(sprites).toHaveLength(5);
     const images = context.drawImage.mock.calls as unknown as [HTMLImageElement, number, number, number, number][];
     expect(images.some(([image]) => image.src === RATATOSKR_ART_URL)).toBe(true);
     expect(images.some(([image]) => image.src === GENBU_ART_URL)).toBe(true);
-    expect(images.map(([,x,y,w,h]) => [x,y,w,h])).toEqual([[-55,-47,110,82.5],[-49.5,-38.75,99,74.25],[-60.5,-55.25,121,90.75]]);
-    expect(glyphs.map(glyph => glyph.text)).toEqual(state.enemies.slice(3).map(unit => unit.monster.icon));
+    expect(images.slice(0,3).map(([,x,y,w,h]) => [x,y,w,h])).toEqual([[-55,-47,110,82.5],[-49.5,-38.75,99,74.25],[-60.5,-55.25,121,90.75]]);
+    expect(images.slice(3).map(([image]) => image.src)).toEqual(state.enemies.slice(3).map(unit => CHARACTER_ART[unit.monster.id].artUrl));
+    expect(glyphs).toHaveLength(0);
     expect(teamTransforms()).toHaveLength(0);
   });
 
@@ -626,11 +629,11 @@ describe('dragon art and authoritative storm choreography', () => {
     const {DRAGON_ART} = await import('./dragonArt');
     const state = start([15,16,17,18,5],[15,16,17,18,5]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
-    expect(sprites).toHaveLength(4);
+    expect(sprites).toHaveLength(5);
     const images = context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
-    expect(images.map(([image])=>image.src)).toEqual(Object.values(DRAGON_ART).map(art=>art.artUrl));
-    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([127,118,125,116].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
-    expect(glyphs.map(glyph=>glyph.text)).toEqual([state.enemies[4].monster.icon]);
+    expect(images.map(([image])=>image.src)).toEqual([...Object.values(DRAGON_ART).map(art=>art.artUrl),CHARACTER_ART[5].artUrl]);
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([127,118,125,116,CHARACTER_ART[5].spriteWidth].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+    expect(glyphs).toHaveLength(0);
     expect(teamTransforms()).toHaveLength(0);
   });
 
@@ -948,12 +951,12 @@ describe('demon MP impact presentation',()=>{
 });
 
 describe('undead art and authoritative poison exchange effects',()=>{
- it('registers only new original full bodies, preserves Banshee fallback and leaves allies offscreen',async()=>{
+ it('registers the complete undead team including Banshee and leaves allies offscreen',async()=>{
   vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});const {UNDEAD_ART}=await import('./undeadArt');const state=start([32,4,33,34,35],[32,4,33,34,35]);
   await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
   const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
-  expect(images.map(([img])=>img.src)).toEqual(Object.values(UNDEAD_ART).map(art=>art.artUrl));expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([120,116,116,112].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
-  expect(glyphs.map(g=>g.text)).toEqual(['👻']);expect(teamTransforms()).toHaveLength(0);
+  expect(images.map(([img])=>img.src)).toEqual([UNDEAD_ART[32].artUrl,CHARACTER_ART[4].artUrl,UNDEAD_ART[33].artUrl,UNDEAD_ART[34].artUrl,UNDEAD_ART[35].artUrl]);expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([120,CHARACTER_ART[4].spriteWidth,116,116,112].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
+  expect(glyphs).toHaveLength(0);expect(teamTransforms()).toHaveLength(0);
  });
  it.each([[32,'塚底の取り立て','sampleDraugrMotion'],[33,'手綱ほどき','sampleHeadlessDriverMotion'],[34,'袖の囲い','sampleJiangshiMotion'],[35,'影の縫い直し','sampleVetalaMotion']] as const)('routes ID%i to independent body motion, with still reduced-motion geometry',async(id,skill,sampler)=>{
   vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});vi.mocked(window.matchMedia).mockReturnValue({matches:true,addEventListener:vi.fn(),removeEventListener:vi.fn()} as unknown as MediaQueryList);
@@ -1116,5 +1119,30 @@ describe('responsive cast label layout', () => {
     await render(props); frame(10000); frame(10600);
     expect(caption.mock.calls.at(-1)?.[0]?.event).toBe(event);
     expect(caption.mock.calls.at(-1)?.[0]?.lines).toContain('ランダム2回 · 構え');
+  });
+});
+
+describe('complete first-roster sprites and choreography', () => {
+  it.each([[0,1,2,3,4],[5,6,7,8,9],[10,11,0,2,7]])('renders every initial body with no loaded-image glyph fallback: %j', async (...ids) => {
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const state=start([0,2,7,11,12],ids);
+    await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
+    expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);expect(teamTransforms()).toHaveLength(0);
+    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    expect(images.map(([image])=>image.src)).toEqual(ids.map(id=>CHARACTER_ART[id].artUrl));
+    expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual(ids.map(id=>{const w=CHARACTER_ART[id].spriteWidth;return [-w/2,35.5-w*.75,w,w*.75];}));
+  });
+  it.each(Array.from({length:12},(_,id)=>id))('routes ID%i through its pose and keeps ally portraits off the battlefield',async id=>{
+    vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});
+    const own=vi.spyOn(originalMotion,'sampleOriginalRosterMotion');
+    const state=start([0,2,7,11,12],[id]);
+    const event:BattleEvent={kind:'cast',actor:'e0',target:'a0',skill:'通常攻撃',effect:'hit',scope:'single'};
+    const props={allies:state.allies,enemies:state.enemies,effect:{text:'通常攻撃',type:'slash',tick:1},impact:event,castEvent:event};
+    await render(props);frame(100);const idle=[...sprites[0]];frame(440);
+    expect(own).toHaveBeenLastCalledWith(id,event,340,false);expect(sprites[0]).not.toEqual(idle);
+    frame(899);const release=[...sprites[0]];
+    const hit:BattleEvent={kind:'damage',actor:'e0',target:'a0',amount:20,hp:130};
+    await render({...props,impact:hit,impacts:[hit]});frame(900);frame(1500);
+    expect(sprites[0]).not.toEqual(release);expect(teamTransforms()).toHaveLength(0);expect(glyphs).toHaveLength(0);
   });
 });
