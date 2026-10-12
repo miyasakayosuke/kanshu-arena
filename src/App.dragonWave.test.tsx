@@ -53,7 +53,7 @@ describe('dragon wave battle UI', () => {
   it('charges once after a whole two-hit cast, debits MP and all charge at the finisher cast, and keeps ally portraits static', async () => {
     const resolve = vi.spyOn(engine, 'advanceWithEvents');
     await begin();
-    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.4');
+    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.5');
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('竜気:0/5');
     const portrait = document.querySelector<HTMLImageElement>('.commanderIcon img')?.src;
     await click(button('とくぎ'));

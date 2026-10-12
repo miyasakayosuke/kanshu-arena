@@ -154,3 +154,10 @@
 
 /* Existing-party entry stays separate from the one-selection family trial. */
 .familyTrialGate{border-color:#cfbb7980;background:linear-gradient(110deg,#314238,#173038);color:#efe1b5}.familyTrialGate strong{font-size:15px}.familyTrialGate:focus-visible{outline:2px solid #f3d895;outline-offset:3px}
+
+/* Keep profile dismissal outside the scrollable reading area at every height. */
+.profileModal{display:flex;flex-direction:column;max-height:min(88dvh, calc(100dvh - 34px));overflow:hidden;padding:0}
+.profileHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0;padding:7px 9px 7px 19px;border-bottom:1px solid #a5a37b44;text-align:left}
+.profileHeader>strong{min-width:0;font-size:12px;line-height:1.4;overflow-wrap:anywhere;color:#d8d8bf}
+.profileHeader .close{position:static;flex:0 0 44px;width:44px;height:44px;padding:0;line-height:1}
+.profileBody{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:12px 19px 22px}

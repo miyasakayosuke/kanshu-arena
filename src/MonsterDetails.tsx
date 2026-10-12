@@ -21,6 +21,9 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     return () => { document.body.style.overflow = previousOverflow; previousFocus?.focus({ preventScroll: true }); };
   }, []);
   return <div className="overlay" onClick={onClose}><section ref={dialog} className="modal profileModal" role="dialog" aria-modal="true" aria-label={`${monster.name}の詳細`} onClick={event => event.stopPropagation()} onKeyDown={event => {
+    if (event.defaultPrevented) return;
+    // Own dismissal before it can reach the catalog or other page-level handlers.
+    if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); return; }
     if (event.key !== 'Tab') return;
     const controls = [...(dialog.current?.querySelectorAll<HTMLElement>('button, a[href], input, select, textarea, summary, [tabindex]') ?? [])].filter(element => {
       if (element.matches(':disabled') || (element.hasAttribute('tabindex') && element.tabIndex < 0)) return false;
@@ -37,7 +40,8 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     const next = index < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
     controls[next].focus();
   }}>
-    <button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button>
+    <div className="profileHeader"><strong>{monster.name}の詳細</strong><button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
+    <div className="profileBody">
     <div className="profileHeading"><span className="heroIcon"><MonsterArt monster={monster} /></span><div><span className="eyebrow">MONSTER PROFILE · COST {monster.cost}</span><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><small>閲覧のみ · 入れ替えは編成の枠から</small></div></div>
     <div className="roleBrief"><strong>{role.name}</strong><p>{role.strength}</p><small>{role.tradeoff}</small></div>
     <div className="leaderBanner"><span>リーダー効果 · {leaderFor(id).name}</span><small>{leaderFor(id).description}</small></div>
@@ -60,5 +64,6 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     <h3>特技の使いどころ</h3>{monster.skills.map(skill => <div className="skill" key={skill.name}><strong>{skill.name}</strong><small>{skillHint(skill)}{skill.kind === 'poison' ? '' : skill.fixedDamage ? ` · ${fixedDamageHint(skill)}${skill.dragonChargeFinisher ? ' · 発動時に竜気を全消費' : ''}` : skill.randomHits ? ` · 1発は${skill.power ? `威力${skill.power}＋` : ''}補正後攻撃力の38%が基準（乱数±10%）` : skill.power > 0 ? ` · ${skill.kind === 'restoreMp' ? 'MP補給' : skill.kind === 'heal' || skill.kind === 'cleanse' ? '回復' : '威力'}${skill.power}` : ''}</small></div>)}
     <details className="profileBackground"><summary>能力値と物語</summary><h3>基礎能力（リーダー補正前）</h3><div className="stats">{[['HP', monster.hp], ['MP', monster.mp], ['攻撃', monster.atk], ['素早さ', monster.speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div>{(monster.id === 12 || monster.id === 14 || monster.family === 'dragon' || monster.family === 'material' || monster.family === 'slime' || monster.family === 'demon' || monster.family === 'undead' || monster.family === 'extraordinary') && <p className="hint">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>}<p className="monsterLore">{monsterLore(id)}</p>{monster.skills.map(skill => <p className="skillLore" key={skill.name}><strong>{skill.name}</strong> · {skillLore(skill.name)}</p>)}</details>
     <button className="secondary closeProfile" onClick={onClose}>閉じて戻る</button>
+    </div>
   </section></div>;
 }

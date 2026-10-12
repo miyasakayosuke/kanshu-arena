@@ -31,6 +31,37 @@ afterEach(async () => {
 });
 
 describe('read-only monster profile keyboard focus', () => {
+  it('keeps the close header separate from every scrollable profile detail', async () => {
+    await mount(5);
+    const modal = document.querySelector('.profileModal')!;
+    const header = modal.querySelector(':scope > .profileHeader')!;
+    const body = modal.querySelector(':scope > .profileBody')!;
+    expect(header).toBeTruthy(); expect(body).toBeTruthy();
+    expect(header.contains(closeButton())).toBe(true);
+    expect(body.contains(closeButton())).toBe(false);
+    for (const selector of ['.profileHeading', '.roleBrief', '.leaderBanner', '.familyExplanation', '.skill', '.profileBackground', '.closeProfile']) {
+      expect(body.querySelector(selector)).toBeTruthy();
+    }
+    expect(modal.getAttribute('aria-label')).toBe('ケツァルコアトルの詳細');
+  });
+
+  it.each(['.close', '.profileBackground > summary', '.closeProfile'])('owns Escape from %s and restores focus without bubbling to the page', async selector => {
+    const pageKeydown = vi.fn();
+    window.addEventListener('keydown', pageKeydown);
+    try {
+      await mount(5);
+      const control = document.querySelector<HTMLElement>(`.profileModal ${selector}`)!;
+      control.focus();
+      const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+      await act(async () => control.dispatchEvent(event));
+      expect(event.defaultPrevented).toBe(true);
+      expect(document.querySelector('.profileModal')).toBeNull();
+      expect(pageKeydown).not.toHaveBeenCalled();
+      expect(document.activeElement).toBe(opener);
+      expect(document.body.style.overflow).toBe('auto');
+    } finally { window.removeEventListener('keydown', pageKeydown); }
+  });
+
   it('cycles Tab and Shift+Tab through Close, the disclosure summary, and Return', async () => {
     await mount();
     expect(document.activeElement).toBe(closeButton());

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.4",
-  "auditBaseCommit": "b59ba99f847c89050bcc13a2c6ce859f0e7aff09",
+  "release": "v0.20.5",
+  "auditBaseCommit": "0e8c2dd53b84942458522230b3432abda8931eec",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -464,6 +464,29 @@
           ],
           "provenance": "AI-assisted implementation, tests and verification note written directly for this project using its existing engine and reproduced phantom support reservations. Fixed commands are accounted for at their existing party slots, reserving only their actual currently usable support effects. No external code, prose, illustrations, animation samples, media, fonts, dependencies or extracted game materials imported. No runtime labels, art, stats, skills, battle execution or saved-team schema changed. Release preparation changes only the displayed/root package version, corresponding test expectations and release records.",
           "reviewLimit": "Engine/DOM regressions and exact-baseline comparison establish bounded command-planning behavior, not rendered-browser acceptance, balance improvement or legal clearance. Later-slot support duplication remains intentionally deferred because blanket pre-reservation can suppress a necessary faster heal. Existing rights, ownership, expression-similarity, patent and trademark questions remain open. Authorized publication uses the existing game repository; no outside contact, professional-review submission, legal agreement, fee or project-wide licensing choice."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.5 monster-details dismissal fix based on public v0.20.4 commit 0e8c2dd53b84942458522230b3432abda8931eec / tree c5e45086fb32d14e8fa9b344e97b1c3d9f53feb2. Implementation evidence: docs/details-dismissal-candidate.md; final release checks and rendered acceptance are recorded separately.",
+          "files": [
+            "src/App.tsx",
+            "src/MonsterDetails.tsx",
+            "src/style.css",
+            "src/MonsterDetails.test.tsx",
+            "src/MonsterDetails.layout.test.ts",
+            "src/App.detailsDismissal.test.tsx",
+            "docs/details-dismissal-candidate.md",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "docs/release-validation-v0205.json",
+            "docs/rights/releases/2026-10-12-v0.20.5.md",
+            "docs/v0204-live-verification.md"
+          ],
+          "provenance": "AI-assisted UI structure, CSS, dismissal guards, tests and this verification note written directly for this project from the existing source and reproduced public-browser defects. The fixed header reuses the existing monster name and detail label; the body preserves all existing art, skills, explanations and the return button. No external code, artwork, descriptions, animation samples, media, fonts or dependencies imported. Engine, stats, skills, families, rules, saved-team schema, art and notices unchanged. Release preparation adds only version labels, matching test expectations and accurate release records.",
+          "reviewLimit": "CSS cascade and DOM/keyboard tests establish structural scroll ownership and event/focus behavior, not rendered-browser geometry, touch-device or orientation acceptance. The actual browser checks after an authorized release remain a separate gate. Existing ownership, expression-similarity, patent, trademark and professional-review questions remain open. Authorized publication uses the existing game repository; no outside contact, legal agreement, fee or project-wide license selection."
         }
       ]
     },

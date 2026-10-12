@@ -1,0 +1,74 @@
+{
+  "release": "0.20.5",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; deployment/rendered acceptance recorded separately",
+  "publicBaselineCommit": "0e8c2dd53b84942458522230b3432abda8931eec",
+  "baselineTree": "c5e45086fb32d14e8fa9b344e97b1c3d9f53feb2",
+  "reviewedCandidateTree": "f9c453d2c23f712b2345e5ced11158119b5bb05a",
+  "checks": {
+    "vitest": {
+      "tests": 2416,
+      "files": 107,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 14,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.4",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "5653878af56de64ed179b3c59a74806b742732e5",
+          "release": "8c583cf1685ba45bf027891e5aadd52ecbf308cd"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.4",
+          "release": "0.20.5"
+        }
+      ]
+    }
+  },
+  "independentImplementationReview": {
+    "verdict": "no source blockers; rendered acceptance pending",
+    "focusedTests": 158
+  },
+  "preservation": {
+    "runtimeMatchesReviewedInputExceptAppVersion": true,
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "changedExistingFiles": [
+      "README.md",
+      "docs/rights/asset-manifest.json",
+      "package-lock.json",
+      "package.json",
+      "src/App.dragonWave.test.tsx",
+      "src/App.materialWave.test.tsx",
+      "src/App.tsx",
+      "src/MonsterDetails.test.tsx",
+      "src/MonsterDetails.tsx",
+      "src/style.css"
+    ],
+    "otherExistingFilesByteIdentical": 1135
+  },
+  "limits": [
+    "CSS/DOM checks are not rendered geometry proof",
+    "Actual profile header/body geometry, nested Escape, focus and all content must be verified after deployment",
+    "Existing large-JS-chunk warning remains",
+    "No legal clearance or all-device acceptance claimed"
+  ],
+  "publicationPerformedAtRecordCreation": false,
+  "legalClearance": false
+}

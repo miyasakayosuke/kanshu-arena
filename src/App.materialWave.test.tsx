@@ -57,7 +57,7 @@ describe('material repair live battle UI', () => {
     const { setup, resolve } = repairFixture();
     const renderStage = vi.spyOn(stage, 'default');
     await begin();
-    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.4');
+    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.5');
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('修復:待機');
     const beforePortraits = portraits(), beforeMp = mp();
     expect(beforePortraits).toHaveLength(5);
