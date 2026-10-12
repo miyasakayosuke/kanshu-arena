@@ -102,6 +102,6 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
         })}
       </div>
       {!visible.length && <p className="emptySearch">該当するモンスターがいません。検索や絞り込みを変えてみてください。</p>}
-      {!gallery && <p className="hint">{editing ? '候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。' : '能力値はリーダー補正前です。'}詳細を開いても編成は変わりません。</p>}
+      {!gallery && <p className="hint">{editing ? '候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。' : '能力値はリーダー補正前です。'}</p>}
   </>;
 }

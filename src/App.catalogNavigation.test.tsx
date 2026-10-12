@@ -51,7 +51,7 @@ describe('first-class read-only footer catalog', () => {
     const start = vi.spyOn(engine, 'start');
     await mount();
     const saved = localStorage.getItem('kanshu-workshop-v1');
-    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '編成', '図鑑', '闘技場']);
+    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '図鑑', '編成', '闘技場']);
     expect(document.querySelector('.gameHome .browseBestiary')).toBeNull();
     const push = vi.spyOn(window.history, 'pushState');
     const button = label('図鑑'); button.focus();

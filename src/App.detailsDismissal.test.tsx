@@ -55,7 +55,7 @@ describe('topmost monster-details dismissal in the real App', () => {
       if (mode === 'close-button') await click(label('詳細を閉じる'));
       else if (mode === 'backdrop') await click(document.querySelector<HTMLElement>('.overlay')!);
       else {
-        const target = mode === 'window-fallback' ? window : mode === 'dialog-body' ? document.querySelector('.profileBackground > summary')! : document.activeElement!;
+        const target = mode === 'window-fallback' ? window : mode === 'dialog-body' ? document.querySelector('.profilePanel:not([hidden])')! : document.activeElement!;
         const event = await escape(target);
         expect(event.defaultPrevented).toBe(true);
       }

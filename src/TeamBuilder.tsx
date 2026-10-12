@@ -326,8 +326,8 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
     return () => window.removeEventListener('keydown', dismiss);
   }, [selectedSlot, browsing]);
 
-  return <main className="home teamBuilder">
-    <div className="intro"><span className="eyebrow">PARTY WORKSHOP</span><h2>編成</h2><p>変えたい枠を選んで、候補を比べよう。</p></div>
+  return <main className="home teamBuilder" aria-label="編成">
+    <h2 className="srOnly">編成</h2>
     {practice && <div className="practiceNotice">同じ相手・同じ条件で再挑戦 <button onClick={leavePractice}>通常の対戦へ</button></div>}
     <section className="partyCard" aria-label="出場パーティ">
       <div className="sectionTitle">出場パーティ <span>{team.length}/5体 <b className={total > budget ? 'overBudget' : ''}>COST {total}/{budget}</b></span></div>
@@ -351,14 +351,13 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <OpeningSupport team={team} />
       <BeastBarrageBonus team={team} />
       <FamilyPlans team={team} />
-      <p className="hint">先頭がリーダー。枠を選ぶと、入れ替えやリーダー変更ができます。</p>
       {total > budget && <p className="budgetWarning" role="status">あとCOST {total - budget}減らすと出場できます。</p>}
       {team.length < 5 && <p className="hint">空き枠からあと{5 - team.length}体を追加してください。</p>}
     </section>
-    <aside className="newDragon newExtraordinary"><div><span className="eyebrow">NEW · EXTRAORDINARY</span><strong>一度の応答を選ぶ ヤヌス</strong><small>四系統を集め、清めるか、守るか。</small></div><button className="secondary" aria-label="ヤヌスの詳細" onClick={() => onFocus(EXTRAORDINARY_CORE_ID)}>詳しく見る</button></aside>
-    <aside className="newDragon newUndead"><div><span className="eyebrow">NEW · UNDEAD</span><strong>残り毒を一撃へ ドラウグル</strong><small>毒を残して待つか、いま使い切るか。</small></div><button className="secondary" aria-label="ドラウグルの詳細" onClick={() => onFocus(UNDEAD_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newExtraordinary"><div><strong>ヤヌス</strong></div><button className="secondary" aria-label="ヤヌスの詳細" onClick={() => onFocus(EXTRAORDINARY_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newUndead"><div><strong>ドラウグル</strong></div><button className="secondary" aria-label="ドラウグルの詳細" onClick={() => onFocus(UNDEAD_CORE_ID)}>詳しく見る</button></aside>
     <details className="builderDisclosure arrivalDisclosure"><summary>新しい不死の仲間<span>解除・守護・手当ての3体</span></summary><aside className="newFamilyMembers" aria-label="新しい不死系メンバー">{([33,34,35] as const).map(id => <button key={id} className="familyArrival undeadArrival" onClick={() => onFocus(id)} aria-label={`${monsters[id].name}の詳細`}><span aria-hidden="true"><MonsterArt monster={monsters[id]} portrait /></span><span><small>{familyLabel(monsters[id])} · COST {monsters[id].cost}</small><strong>{monsters[id].name}</strong><em>{monsterRole(id).name}</em></span><b aria-hidden="true">›</b></button>)}</aside></details>
-    <aside className="newDragon newDemon"><div><span className="eyebrow">NEW · DEMON</span><strong>残りMPを読む マモン</strong><small>相手の次の一手を、残された力から読もう。</small></div><button className="secondary" aria-label="マモンの詳細" onClick={() => onFocus(DEMON_CORE_ID)}>詳しく見る</button></aside>
+    <aside className="newDragon newDemon"><div><strong>マモン</strong></div><button className="secondary" aria-label="マモンの詳細" onClick={() => onFocus(DEMON_CORE_ID)}>詳しく見る</button></aside>
     <details className="builderDisclosure arrivalDisclosure">
       <summary>新しい悪魔の仲間<span>解除・毒払いの2体</span></summary>
       <aside className="newFamilyMembers" aria-label="新しい系統メンバー">
@@ -375,8 +374,7 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
 
     {(editing || browsing) && <section className="candidatePanel" id="team-candidates" aria-labelledby="candidate-heading">
       <div className="candidateHeading">
-        <div><span className="eyebrow">{editing ? 'CHOOSE & COMPARE' : 'BESTIARY'}</span>
-          <h3 id="candidate-heading" ref={editorHeading} tabIndex={-1}>{editing ? `${selectedSlot + 1}枠の${current ? '入れ替え' : '追加'}` : 'モンスター図鑑'}</h3>
+        <div><h3 id="candidate-heading" ref={editorHeading} tabIndex={-1}>{editing ? `${selectedSlot + 1}枠の${current ? '入れ替え' : '追加'}` : 'モンスター図鑑'}</h3>
         </div>
         <button className="secondary" onClick={editing ? closeEditor : closeBestiary}>
           {editing ? 'キャンセル' : '図鑑を閉じる'}
@@ -429,6 +427,6 @@ export default function TeamBuilder({ slots, setSlots, team, setTeam, rule, setR
       <summary>保存した編成<span>このブラウザに3枠</span></summary>
       <div className="slotGrid">{slots.map((slot, i) => <div className="teamSlot" key={i}><strong>編成 {i + 1}</strong><span className="slotIcons" aria-label={slot ? slot.team.map(id => monsters[id].name).join('・') : '未保存'}>{slot ? slot.team.map(id => <MonsterArt key={id} monster={monsters[id]} portrait />) : '未保存'}</span><small>{slot ? `${rules[slot.rule].name} · C${cost(slot.team)}` : 'リーダーも保存'}</small><div><button aria-label={`編成${i + 1}を呼び出す`} disabled={!slot} onClick={() => load(i)}>呼出</button><button aria-label={`編成${i + 1}に保存`} disabled={!isValidTeam(team, budget)} onClick={() => save(i)}>{slot ? '上書き' : '保存'}</button></div></div>)}</div>
     </details>
-    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { if (onCatalog) { onCatalog(); return; } setBrowsing(true); setFilters(previous => previous.costFilter === 'fit' ? { ...previous, costFilter: 'all' } : previous); }}>モンスター図鑑を開く <span>{monsters.length}体の役割・特技を見る</span></button>}
+    {!editing && !browsing && <button className="secondary browseBestiary" ref={browseButton} onClick={() => { if (onCatalog) { onCatalog(); return; } setBrowsing(true); setFilters(previous => previous.costFilter === 'fit' ? { ...previous, costFilter: 'all' } : previous); }}>モンスター図鑑を開く</button>}
   </main>;
 }

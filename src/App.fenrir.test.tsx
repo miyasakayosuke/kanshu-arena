@@ -39,7 +39,7 @@ afterEach(async () => {await act(async () => root.unmount()); vi.restoreAllMocks
 describe('Fenrir family UI and battle loop', () => {
   it('shares original portraits, scoped recipients and truthful profile details', async () => {
     await mount();
-    expect(document.querySelector<HTMLImageElement>('.teamUnit img')?.src).toBe(FENRIR_PORTRAIT_URL);
+    expect(document.querySelector<HTMLImageElement>('.pastureMonster img')?.src).toBe(FENRIR_ART_URL);
     await click(label('編成'));
     expect(document.querySelector('.familyRecipients')?.textContent).toBe('対象 3/5体：フェンリル・妖狐・バステト');
     await click(label('1枠・フェンリルを入れ替える'));

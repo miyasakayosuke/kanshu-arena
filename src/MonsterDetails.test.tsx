@@ -8,8 +8,9 @@ let root: Root;
 let opener: HTMLButtonElement;
 const closeButton = () => document.querySelector<HTMLButtonElement>('.profileModal .close')!;
 const sourceLink = () => document.querySelector<HTMLAnchorElement>('.profileStory .loreSource')!;
-const summary = () => document.querySelector<HTMLElement>('.profileBackground > summary')!;
-const returnButton = () => document.querySelector<HTMLButtonElement>('.closeProfile')!;
+const selectedTab = () => document.querySelector<HTMLButtonElement>('.profileTabs [aria-selected=true]')!;
+const panel = () => document.querySelector<HTMLElement>('.profilePanel:not([hidden])')!;
+async function selectTab(id: string) { await act(async () => document.querySelector<HTMLButtonElement>(`[data-detail-tab=${id}]`)!.click()); }
 async function mount(id = 0) { await act(async () => root.render(<MonsterDetails id={id} onClose={() => root.render(null)} />)); }
 async function tab(shiftKey = false) {
   const event = new KeyboardEvent('keydown', { key: 'Tab', shiftKey, bubbles: true, cancelable: true });
@@ -32,25 +33,25 @@ afterEach(async () => {
 });
 
 describe('read-only monster profile keyboard focus', () => {
-  it('keeps the close header separate from every scrollable profile detail', async () => {
+  it('keeps Close and the group selector outside the bounded reader', async () => {
     await mount(5);
     const modal = document.querySelector('.profileModal')!;
     const header = modal.querySelector(':scope > .profileHeader')!;
     const body = modal.querySelector(':scope > .profileBody')!;
-    expect(header).toBeTruthy(); expect(body).toBeTruthy();
     expect(header.contains(closeButton())).toBe(true);
     expect(body.contains(closeButton())).toBe(false);
-    for (const selector of ['.profileHeading', '.profileStory', '.roleBrief', '.leaderBanner', '.familyExplanation', '.skill', '.profileBackground', '.closeProfile']) {
-      expect(body.querySelector(selector)).toBeTruthy();
-    }
+    expect(modal.querySelector(':scope > .profileTabs')).toBeTruthy();
+    for (const selector of ['.profileHeading', '.profileStory', '.leaderBanner', '.familyExplanation', '.skill', '.stats']) expect(body.querySelector(selector)).toBeTruthy();
+    expect(body.querySelector('.roleBrief')).toBeNull();
     expect(modal.getAttribute('aria-label')).toBe('ケツァルコアトルの詳細');
   });
 
-  it.each(['.close', '.loreSource', '.profileBackground > summary', '.closeProfile'])('owns Escape from %s and restores focus without bubbling to the page', async selector => {
+  it.each(['.close', '.loreSource', '[role=tab][aria-selected=true]', '.profilePanel:not([hidden])'])('owns Escape from %s and restores focus without bubbling to the page', async selector => {
     const pageKeydown = vi.fn();
     window.addEventListener('keydown', pageKeydown);
     try {
       await mount(5);
+      if (selector === '.loreSource') await selectTab('story');
       const control = document.querySelector<HTMLElement>(`.profileModal ${selector}`)!;
       control.focus();
       const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
@@ -63,43 +64,37 @@ describe('read-only monster profile keyboard focus', () => {
     } finally { window.removeEventListener('keydown', pageKeydown); }
   });
 
-  it('cycles Tab and Shift+Tab through Close, the source, the disclosure summary, and Return', async () => {
+  it('cycles only the active tab, panel and visible controls in both directions', async () => {
     await mount();
     expect(document.activeElement).toBe(closeButton());
-    await tab(); expect(document.activeElement).toBe(sourceLink());
-    await tab(); expect(document.activeElement).toBe(summary());
-    await tab(); expect(document.activeElement).toBe(returnButton());
+    await tab(); expect(document.activeElement).toBe(selectedTab());
+    await tab(); expect(document.activeElement).toBe(panel());
     await tab(); expect(document.activeElement).toBe(closeButton());
-    await tab(true); expect(document.activeElement).toBe(returnButton());
-    await tab(true); expect(document.activeElement).toBe(summary());
-    await tab(true); expect(document.activeElement).toBe(sourceLink());
+    await tab(true); expect(document.activeElement).toBe(panel());
+    await tab(true); expect(document.activeElement).toBe(selectedTab());
     await tab(true); expect(document.activeElement).toBe(closeButton());
+    await selectTab('story');
+    closeButton().focus();
+    await tab(); expect(document.activeElement).toBe(selectedTab());
+    await tab(); expect(document.activeElement).toBe(panel());
+    await tab(); expect(document.activeElement).toBe(sourceLink());
+    await tab(); expect(document.activeElement).toBe(closeButton());
+    await tab(true); expect(document.activeElement).toBe(sourceLink());
   });
 
-  it('includes disclosure descendants only while open, retaining the closed summary', async () => {
-    await mount();
-    const details = document.querySelector<HTMLDetailsElement>('.profileBackground')!;
-    const inside = document.createElement('button');
-    inside.textContent = '展開後の操作';
-    details.append(inside);
-    summary().focus();
-    await tab(); expect(document.activeElement).toBe(returnButton());
-    await act(async () => summary().click());
-    expect(details.open).toBe(true);
-    summary().focus();
-    await tab(); expect(document.activeElement).toBe(inside);
-    await tab(); expect(document.activeElement).toBe(returnButton());
-    await tab(true); expect(document.activeElement).toBe(inside);
-    await act(async () => summary().click());
-    expect(details.open).toBe(false);
-    returnButton().focus();
-    await tab(true); expect(document.activeElement).toBe(summary());
+  it('does not focus controls in hidden ability pages or hidden skills', async () => {
+    await mount(36);
+    await selectTab('abilities');
+    const hidden = document.querySelector<HTMLElement>('.detailPage[hidden]')!;
+    const inside = document.createElement('button'); inside.textContent = '非表示の操作'; hidden.append(inside);
+    closeButton().focus();
+    for (let step = 0; step < 12; step++) { await tab(); expect(document.activeElement).not.toBe(inside); expect(document.activeElement?.closest('[hidden]')).toBeNull(); }
   });
 
   it('restores the opener and its prior body scrolling when closed', async () => {
     await mount();
     expect(document.body.style.overflow).toBe('hidden');
-    await act(async () => returnButton().click());
+    await act(async () => closeButton().click());
     expect(document.querySelector('.profileModal')).toBeNull();
     expect(document.activeElement).toBe(opener);
     expect(document.body.style.overflow).toBe('auto');
@@ -133,7 +128,8 @@ describe('family monster profiles', () => {
     expect(profile.textContent).not.toContain('未知の役割');
     expect(document.activeElement).toBe(closeButton());
     await tab(true);
-    expect(document.activeElement).toBe(returnButton());
+    expect(document.activeElement?.closest('[hidden]')).toBeNull();
+    expect(document.activeElement?.closest('.profileModal')).toBeTruthy();
   });
 
   it('keeps pre-hit breakers distinct from Fenrir post-hit removal', async () => {
@@ -185,10 +181,11 @@ describe('material profiles', () => {
     expect(profile.querySelector('.leaderBanner')?.textContent).toContain('味方の物質系だけ 最大HP +10%');
     for (const phrase of ['タロスを含む物質系3体以上', '先頭以外でも', '開始時の条件は変わりません', '1ターン目の終了時', '両軍の毒ダメージを受けた後', '一度だけ', '本人が生存', '生存する味方の物質系', '各最大HPの14%', '小数点以下は切り捨て、最大HPまで', 'MPも行動も使わず', '蘇生ではありません', '防御解除は命中前', 'フェンリルの連牙は命中後', '再付与や2ターン目の再発動はありません']) expect(profile.textContent).toContain(phrase);
     expect(profile.querySelectorAll('.skill')).toHaveLength(3);
-    expect([...profile.querySelectorAll('.skill strong')].map(node => node.textContent)).toEqual(['炉心の槌', '環銅の衝撃', '鋳輪の備え']);
+    expect([...profile.querySelectorAll('.detailSkillPicker button')].map(node => node.textContent)).toEqual(['炉心の槌', '環銅の衝撃', '鋳輪の備え']);
     expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
     expect(document.activeElement).toBe(closeButton());
-    await tab(true); expect(document.activeElement).toBe(returnButton());
+    await tab(true); expect(document.activeElement?.closest('[hidden]')).toBeNull();
+    expect(document.activeElement?.closest('.profileModal')).toBeTruthy();
   });
 
   it.each([20, 21, 22, 23])('gives material companion %s distinct lore and real abilities without adding the passive as a command', async id => {
@@ -201,7 +198,7 @@ describe('material profiles', () => {
     expect(profile.querySelector('.materialExplanation')).toBeNull();
     expect(profile.querySelectorAll('.skill').length).toBeGreaterThanOrEqual(2);
     expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
-    expect([...profile.querySelectorAll('.skill strong')].map(node => node.textContent)).not.toContain('炉心の修復');
+    expect([...profile.querySelectorAll('.detailSkillPicker button')].map(node => node.textContent)).not.toContain('炉心の修復');
     if (id === 20) expect(profile.textContent).toContain('味方1体の毒解除＋回復');
     if (id === 21) expect(profile.textContent).toContain('味方1体を守る');
     if (id === 22) expect(profile.textContent).toContain('命中前に防御・守護・自然障壁・竜気・修復待ちを解除');
@@ -214,7 +211,7 @@ describe('slime profiles',()=>{
     await mount(24);const profile=document.querySelector('.profileModal')!;
     expect(profile.querySelector('.familyTag')?.textContent).toBe('粘体系');
     for(const phrase of ['最大MP・開戦時MP+10%','自然回復はありません','粘体系3体以上','通常順の行動を使い','各MP+8','戦闘中1回だけ','全員満タンなら使えず','指示・取消でも回数は減りません','HP回復・毒解除・蘇生はしません','防御解除で消えません','本人が倒れると失います','名称・設定は本作用の創作'])expect(profile.textContent).toContain(phrase);
-    expect([...profile.querySelectorAll('.skill strong')].map(n=>n.textContent)).toEqual(['蓄え分け','押し流し','水面のかばい']);expect(profile.textContent).toContain('固定基礎128');expect(profile.querySelector('.fixedBasisExplanation')?.textContent).toContain('「固定基礎」の攻撃');
+    expect([...profile.querySelectorAll('.detailSkillPicker button')].map(n=>n.textContent)).toEqual(['蓄え分け','押し流し','水面のかばい']);expect(profile.textContent).toContain('固定基礎128');expect(profile.querySelector('.fixedBasisExplanation')?.textContent).toContain('「固定基礎」の攻撃');
   });
   it.each([25,26,27,28])('gives new companion %s authored lore and only implemented roles',async id=>{
     await mount(id);const profile=document.querySelector('.profileModal')!;expect(profile.querySelector('.familyTag')?.textContent).toBe('粘体系');expect(profile.textContent).not.toContain('未知の役割');expect(profile.textContent).not.toContain('まだ物語の記されていない');expect(profile.querySelector('.slimeExplanation')).toBeNull();expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
@@ -234,15 +231,15 @@ describe('demon profiles',()=>{
 
 describe('undead profiles are finite and game-authored',()=>{
  it('explains exact poison tradeoff, starting condition and counters without a revival promise',async()=>{
-   await mount(32);const text=document.querySelector('.undeadExplanation')!.textContent!;
-   for(const phrase of ['MP18','毒残0〜3回','基礎14','22','先頭以外でも有効','最大HP6%×残回数','毒0','最大3回','残りMP8','HP回復・MP獲得・追加行動はありません','清め','MPを削る','新しく残3'])expect(text).toContain(phrase);
+   await mount(32);const text=[...document.querySelectorAll('.undeadExplanation')].map(node => node.textContent).join('');
+   for(const phrase of ['MP18','毒残0〜3回','基礎14','22','先頭以外でも有効','最大HP6%×残回数','毒0','最大3回','残りMP8','HP回復・MP獲得・追加行動はありません','清め','新しく残3'])expect(text).toContain(phrase);
    expect(document.querySelectorAll('.profileModal .skill')).toHaveLength(2);expect(document.querySelector('.heroIcon img')).toBeTruthy();
  });
  it.each([33,34,35])('gives ID%i independent art, lore and at most four skills',async id=>{
    await mount(id);expect(document.querySelector('.heroIcon img')).toBeTruthy();expect(document.querySelectorAll('.profileModal .skill').length).toBeLessThanOrEqual(4);expect(document.querySelector('.monsterLore')?.textContent).not.toContain('まだ物語');
  });
  it('keeps Banshee’s old three skills and adds only a minimal family explanation',async()=>{
-   await mount(4);expect(document.querySelector('.familyTag')?.textContent).toBe('不死系');expect([...document.querySelectorAll('.profileModal .skill strong')].map(n=>n.textContent)).toEqual(['悲鳴','毒霧','影縫い']);expect(document.querySelector('.familyExplanation')?.textContent).toContain('従来の能力値・特技は変わりません');
+   await mount(4);expect(document.querySelector('.familyTag')?.textContent).toBe('不死系');expect([...document.querySelectorAll('.profileModal .detailSkillPicker button')].map(n=>n.textContent)).toEqual(['悲鳴','毒霧','影縫い']);expect(document.querySelector('.familyExplanation')?.textContent).toContain('従来の能力値・特技は変わりません');
  });
 });
 

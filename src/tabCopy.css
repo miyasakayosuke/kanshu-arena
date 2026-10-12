@@ -1,0 +1,5 @@
+/* Keep document and route identity available without a decorative title band. */
+.srOnly{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.screen-team>.teamBuilder,.screen-arena>.arenaLobby{padding-top:16px}
+.battleMode>.battleNavigation{padding:3px 9px;border-bottom:0}
+.battleNavigation .headerHome{min-width:44px;min-height:44px}

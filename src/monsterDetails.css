@@ -1,0 +1,53 @@
+/* Four manual reading groups. The only overflow fallback is for unusually short
+   viewports, enlarged text, or future content; ordinary phone pages fit in place. */
+.overlay.profileOverlay{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))}
+.profileModal.profileTabbed{height:min(680px, calc(100dvh - 24px));max-height:100%;max-width:500px;overflow:hidden}
+.profileModal.profileTabbed .profileHeader{min-height:52px;padding:3px 8px 3px 14px}
+.profileModal.profileTabbed .profileHeader>strong{font-size:12px;line-height:1.5;letter-spacing:.4px}
+.profileTabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));flex:0 0 auto;background:#132a32;border-bottom:1px solid #95aa8155}
+.profileTabs button{min-height:46px;min-width:0;border:0;border-bottom:3px solid transparent;background:transparent;color:#becfc4;font-size:14px;padding:8px 3px;line-height:1.5}
+.profileTabs button[aria-selected=true]{border-bottom-color:#dfc687;color:#f1e1ae;background:#375048}
+.profileModal.profileTabbed button:focus-visible,.profileModal.profileTabbed a:focus-visible,.profilePanel:focus-visible{outline:2px solid #ffe2a2;outline-offset:-3px}
+.profileModal.profileTabbed .profileBody{display:flex;flex-direction:column;flex:1 1 0;min-height:0;padding:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+.profilePanel{flex:1 0 auto;display:flex;flex-direction:column;min-width:0;padding:16px;overflow-wrap:anywhere;text-align:left}
+.profileModal.profileTabbed .profilePanel[hidden],.profileModal.profileTabbed .detailPage[hidden],.profileModal.profileTabbed .detailSkillReading[hidden]{display:none}
+.profilePanel.profileAppearance{padding:0;flex:1 0 300px;min-height:min-content}
+.profileModal.profileTabbed .profileHeading{display:flex;flex:1 0 auto;min-height:min-content;overflow:visible;flex-direction:column;flex-wrap:nowrap;margin:0;width:100%;text-align:center}
+.profileModal.profileTabbed .profileHeading:has(.monsterArt)>div{flex:0 0 auto;min-width:0}
+.profileModal.profileTabbed .profileHeading .heroIcon,.profileModal.profileTabbed .profileHeading:has(.monsterArt) .heroIcon{flex:1 0 100px;width:100%;min-height:100px;height:auto;padding:8px 16px 0;margin:0;overflow:hidden}
+.profileModal.profileTabbed .heroIcon .monsterArt{position:absolute;inset:8px 16px 0;width:calc(100% - 32px);height:calc(100% - 8px);max-width:none;object-fit:contain}
+.profileModal.profileTabbed .profileIdentity{flex:0 0 auto;padding:8px 12px 14px}
+.profileModal.profileTabbed .profileIdentity h2{font-size:22px;margin:0 0 7px;line-height:1.35}
+.profileModal.profileTabbed .profileIdentity .profileEpithet{font-size:12px;line-height:1.4;margin-bottom:2px}
+.profileModal.profileTabbed .familyTag{padding:3px 8px}
+.profileModal.profileTabbed .profileHeading .mythEntry{padding:0 12px 12px}
+.profileModal.profileTabbed .profileHeading .mythPlay{min-height:48px;font-size:14px}
+.profileModal.profileTabbed .mythEntryPending{min-height:48px;padding:0 12px 12px}
+.profileModal.profileTabbed .catalogArtFallback{padding:8px}
+.profileModal.profileTabbed .profileHeading .heroIcon:has(.catalogArtFallback){min-height:min-content;flex-basis:auto;overflow:visible}
+.profileModal.profileTabbed .profileStory{margin:0;padding:0;border:0;gap:20px}
+.profileModal.profileTabbed .profileStory p{font-size:14px;line-height:1.75;margin:6px 0 0}
+.profileModal.profileTabbed .profileStory .loreSource{display:inline-flex;align-items:center;min-height:44px;font-size:13px;margin:4px 0 0}
+.detailPages{display:flex;flex:1;flex-direction:column;min-width:0}
+.detailPageContent{flex:1}
+.profileModal.profileTabbed .detailPage h3{font-size:15px;line-height:1.6;color:#e6dab9;margin:0 0 12px}
+.profileModal.profileTabbed .familyExplanation,.profileModal.profileTabbed .detailSkillRule,.profileModal.profileTabbed .skillLore{font-size:14px;line-height:1.8;margin:0;color:#c7d3c4;overflow-wrap:anywhere}
+.profileModal.profileTabbed .detailSkillRule{display:block}
+.profileModal.profileTabbed .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.profileModal.profileTabbed .stats div{padding:9px 3px}
+.profileModal.profileTabbed .stats small{font-size:12px;color:#c3d1c3}
+.profileModal.profileTabbed .stats b{font-size:22px;margin-top:5px}
+.profileModal.profileTabbed .leaderBanner{padding:10px;margin:15px 0 12px;gap:6px}
+.profileModal.profileTabbed .leaderBanner span,.profileModal.profileTabbed .leaderBanner small,.detailMechanicsNote{font-size:13px;line-height:1.75;overflow-wrap:anywhere;color:#c7d3c4}
+.detailMechanicsNote{margin:0}
+.detailPager{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;flex:0 0 auto;margin-top:16px}
+.detailPager button{min-height:44px;min-width:44px;border:1px solid #91aa8e77;border-radius:8px;background:#233e40;color:#e0e8d5;font-size:14px}
+.detailPager button[aria-disabled=true]{opacity:.42;cursor:default}
+.detailPager span{font-size:13px;color:#cbd8c5;font-variant-numeric:tabular-nums}
+.detailSkillPicker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;flex:0 0 auto;margin-bottom:16px}
+.detailSkillPicker button{min-height:44px;min-width:0;padding:7px 5px;border:1px solid #7d9a8977;border-radius:8px;background:#192f37;color:#c5d6c9;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.detailSkillPicker button[aria-pressed=true]{border-color:#e5cf92;background:#485641;color:#f6e8bc}
+.profileModal.profileTabbed .detailSkillReading{display:flex;flex-direction:column;flex:1;min-width:0;padding:0;border:0}
+/* At extreme zoom or short landscape heights, let the reader scroll rather than
+   shrink text, crop a rule, or move Close/the group selector out of reach. */
+@media(max-height:440px){.profileModal.profileTabbed .profilePanel{flex-shrink:0}.profileModal.profileTabbed .profileAppearance{min-height:min-content}.profileModal.profileTabbed .profileBody{overflow-y:auto}}

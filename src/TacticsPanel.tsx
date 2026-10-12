@@ -15,7 +15,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
   return <div className="overlay" onClick={onClose}>
     <section className="modal tacticsModal" role="dialog" aria-modal="true" aria-label="対戦の作戦情報" onClick={e => e.stopPropagation()}>
       <button className="close" aria-label="作戦情報を閉じる" onClick={onClose}>×</button>
-      <span className="eyebrow">READ THE MATCHUP</span><h2>作戦と行動順</h2>
+      <h2>作戦と行動順</h2>
       <p className="hint">{rules[rule].name} · 両軍COST上限{rules[rule].budget}。確認中も入力時間は進みます。</p>
       <div className="tacticsLeaders"><p>味方 ✦ {leaderFor(battle.allies[0].monster.id).description}</p><p>敵 ✦ {leaderFor(battle.enemies[0].monster.id).description}</p></div>
       <h3>味方のHP・MP・状態</h3>

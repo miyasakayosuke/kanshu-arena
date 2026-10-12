@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import MonsterDetails from './MonsterDetails';
 import { monsters } from './engine';
 import { monsterStory } from './monsterLore';
+import { skillLore } from './strategy';
 
 let root: Root;
 beforeEach(() => {
@@ -17,25 +18,23 @@ afterEach(async () => { await act(async () => root.unmount()); });
 
 const mount = async (id: number) => { await act(async () => root.render(<MonsterDetails id={id} onClose={() => root.render(null)} />)); };
 
-describe('readable identity at every monster entry', () => {
-  it.each(monsters)('shows $name flavour and origin before the battle rules without expanding stats', async monster => {
+describe('complete stories in a dedicated reading group', () => {
+  it.each(monsters)('preserves $name flavour, origin, source and every skill story', async monster => {
     await mount(monster.id);
     const story = monsterStory(monster.id);
+    expect(document.querySelector('.profileAppearance')?.hasAttribute('hidden')).toBe(false);
+    await act(async () => document.querySelector<HTMLButtonElement>('[data-detail-tab=story]')!.click());
     const section = document.querySelector('.profileStory')!;
-    const background = document.querySelector<HTMLDetailsElement>('.profileBackground')!;
-    expect(section.closest('details')).toBeNull();
-    expect(background.open).toBe(false);
+    expect(section.closest('[hidden]')).toBeNull();
     expect(section.querySelector('.monsterLore')?.textContent).toBe(story.flavour);
-    expect(section.querySelector('.monsterOrigin')?.textContent).toContain(story.origin);
+    expect(section.querySelector('.monsterOrigin')?.textContent).toBe(story.origin);
     expect(section.textContent).toContain('ひとこと');
     expect(section.textContent).toContain('本作の創作');
     expect(section.textContent).toContain(story.gameOriginal ? 'ゲームオリジナル' : '伝承');
-    expect(section.previousElementSibling?.className).toBe('profileHeading');
-    expect(section.nextElementSibling?.className).toBe('roleBrief');
     expect(document.querySelectorAll('.monsterLore')).toHaveLength(1);
     expect(document.querySelectorAll('.monsterOrigin')).toHaveLength(1);
     expect(document.querySelectorAll('.skill')).toHaveLength(monster.skills.length);
-    expect(document.querySelectorAll('.skillLore')).toHaveLength(monster.skills.length);
+    expect([...document.querySelectorAll('.skillLore')].map(node => node.textContent)).toEqual(monster.skills.map(skill => skillLore(skill.name)));
     const source = section.querySelector('a');
     if (story.gameOriginal) expect(source).toBeNull();
     else {
@@ -47,15 +46,18 @@ describe('readable identity at every monster entry', () => {
     }
   });
 
-  it('cycles through the movie trigger and reading controls without a historical source', async () => {
+  it('includes the movie trigger only in the visible art group, without autoplay', async () => {
     await mount(24);
+    // Dynamic import completion is asynchronous; it must not move focus.
+    for (let attempt = 0; attempt < 20 && !document.querySelector('.mythPlay'); attempt++) await act(async () => { await new Promise(resolve => setTimeout(resolve, 10)); });
     const close = document.querySelector<HTMLButtonElement>('.profileHeader .close')!;
     expect(document.activeElement).toBe(close);
-    await act(async () => close.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })));
-    expect(document.activeElement).toBe(document.querySelector('.mythPlay'));
-    await act(async () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })));
-    expect(document.activeElement).toBe(document.querySelector('.profileBackground > summary'));
-    await act(async () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })));
+    expect(document.querySelector('.mythPlayer')).toBeNull();
+    const key = async (key: string) => { await act(async () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }))); };
+    await key('Tab'); expect(document.activeElement?.getAttribute('role')).toBe('tab');
+    await key('Tab'); expect(document.activeElement?.getAttribute('role')).toBe('tabpanel');
+    await key('Tab'); expect(document.activeElement).toBe(document.querySelector('.mythPlay'));
+    await key('Escape');
     expect(document.querySelector('.profileModal')).toBeNull();
     expect(document.activeElement).toBe(document.getElementById('opener'));
   });

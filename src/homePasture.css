@@ -1,0 +1,14 @@
+/* Presentation only. The scene fills the home viewport while bodies keep their original proportions. */
+.screen-home .gameHome{padding:14px 12px 0}
+.homePasture{position:relative;isolation:isolate;width:100%;height:calc(100svh - 148px - env(safe-area-inset-bottom));min-height:260px;overflow:hidden;border:1px solid #d4dbae80;border-radius:17px;background:#a7cf9a;box-shadow:0 12px 32px #03110e30}
+.pastureLandscape{position:absolute;top:-35%;display:block;width:100%;height:135%;object-fit:cover;object-position:75% center;user-select:none;pointer-events:none}
+.pastureMonster{position:absolute;display:block;height:auto;min-width:44px;min-height:44px;margin:0;padding:0;border:0;border-radius:18px;background:transparent;pointer-events:none}
+.pastureMonster .monsterArt{position:relative;display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;pointer-events:none;filter:drop-shadow(0 3px 1px #294e2525)}
+.pastureShadow{position:absolute;left:25%;width:50%;height:9%;border-radius:50%;background:#385b3640;transform:translateY(-45%);filter:blur(2px);pointer-events:none}
+.pastureDetails{position:absolute;z-index:4;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;transform:translate(-50%,4px);border:0;border-radius:12px;background:transparent;color:#304d3c;touch-action:manipulation}
+.pastureDetails>span{flex:none;white-space:nowrap;padding:3px 7px;border:1px solid #f7f1ca99;border-radius:20px;background:#f7f4d9ed;box-shadow:0 2px 5px #3e573417;font-size:clamp(8px,1.9vw,11px);line-height:1.2;letter-spacing:0;pointer-events:none}
+.pastureDetails:focus-visible{outline:2px solid #284e3b;outline-offset:1px;background:#fff6d033}
+.pastureEmpty{position:absolute;display:grid;place-items:center;width:9%;aspect-ratio:2 / 1;transform:translate(-50%,-45%);border:1px dashed #496e4480;border-radius:50%;background:#deedb94d;color:#426844;font-size:18px}
+.screen-home .homeCredits{margin:4px 0 0}
+@media(min-width:600px){.screen-home .gameHome{padding:18px 16px 0}.homePasture{border-radius:20px}}
+@media(max-height:480px) and (min-width:500px){.screen-home .gameHome{max-width:500px;margin:auto;padding-top:10px}.homePasture{height:calc(100svh - 132px - env(safe-area-inset-bottom));min-height:262px}}

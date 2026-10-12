@@ -54,7 +54,7 @@ describe('complete playtest flow', () => {
   it('rejects a corrupted save and allows a valid party to enter battle', async () => {
     localStorage.setItem('kanshu-team', '[99,99,99,99,99]');
     await mount();
-    expect(document.querySelectorAll('.teamUnit')).toHaveLength(5);
+    expect(document.querySelectorAll('.pastureMonster')).toHaveLength(5);
     await startBattle();
     expect(document.querySelector('.battleMode')).toBeTruthy();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');

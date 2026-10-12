@@ -1,5 +1,6 @@
 import type { RefObject } from 'react';
 import MonsterArt from './MonsterArt';
+import HomePasture from './HomePasture';
 import { monsters, cost, leaderFor } from './engine';
 import { rules, isValidTeam, type RuleId } from './strategy';
 import { pureFamilyOpponentPresets } from './familyTrials';
@@ -18,8 +19,7 @@ export function PartySummary({ team, rule, onFocus, compact = false }: PartyProp
 }
 export default function HomeScreen(props: PartyProps) {
   return <main className="gameHome" aria-label="ゲームホーム">
-    <section className="homeHero"><div className="homeSigil" aria-hidden="true">✦</div><span className="eyebrow">BUILD · BATTLE · LEARN</span><h2>次の一手を、試そう。</h2><p>5体を組む。対戦で確かめる。また組み直す。</p></section>
-    <PartySummary {...props} compact />
+    <HomePasture team={props.team} onFocus={props.onFocus} />
     <div className="homeCredits"><a href={`${import.meta.env.BASE_URL}credits.html`} target="_blank" rel="noopener noreferrer">クレジット・権利情報<span className="srOnly">（新しいタブ）</span></a></div>
   </main>;
 }
@@ -28,7 +28,7 @@ export function ArenaLobby(props: PartyProps & { headingRef?: RefObject<HTMLHead
   const opponents = pureFamilyOpponentPresets(props.rule);
   const opponentHint = props.practice ? '同じ相手との再戦です。ルールを変えると同条件での再戦を解除します。' : opponents.length > 1 ? `相手は${opponents.length}系統の純5体からランダム。相手の編成は対戦開始時に公開します。` : `このルールの純5体の相手は${opponents.map(preset => FAMILY_DEFINITIONS[preset.family].label).join('・')}のみ。ほかの系統とは標準戦で対戦できます。`;
   return <main className="arenaLobby" aria-label="闘技場の受付">
-    <div className="screenIntro"><span className="eyebrow">BATTLE RECEPTION</span><h2 ref={props.headingRef} tabIndex={-1}>闘技場の受付</h2><p>{props.practice ? '編成や指示を変えて、同じ相手で確かめよう。' : `第${props.round + 1}戦 · 条件を選んで出場しよう。`}</p></div>
+    <h2 className="srOnly" ref={props.headingRef} tabIndex={-1}>闘技場の受付</h2>
     <div className="ruleTabs" aria-label="対戦ルール">{Object.values(rules).map(rule => <button key={rule.id} aria-pressed={props.rule === rule.id} onClick={() => props.onRule(rule.id)}><strong>{rule.name}</strong><small>COST {rule.budget}</small></button>)}</div>
     <p className="hint ruleHint">{opponentHint}</p>
     {props.practice && <div className="practiceNotice"><span>同じ相手・同じシード・同じルールを保持中</span><button onClick={props.onLeavePractice}>次の相手へ</button></div>}

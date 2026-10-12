@@ -42,7 +42,7 @@ describe('one-click family trials without saving over slots', () => {
     const start=vi.spyOn(engine,'start'); const draw=vi.spyOn(trials,'familyEncounterForSeed');
     await mount(); await open(); await choose(preset.id);
     expect(window.location.hash).toBe('#arena'); expect(picker()).toBeNull();
-    expect(document.activeElement).toBe(document.querySelector('.screenIntro h2'));
+    expect(document.activeElement).toBe(document.querySelector('.arenaLobby h2.srOnly'));
     expect(active()).toEqual({team:preset.team,rule:'standard'});
     expect([...document.querySelectorAll('.teamUnit')].map(n=>Number(n.getAttribute('data-monster-id')))).toEqual(preset.team);
     expect(button('この編成で対戦する').disabled).toBe(false);
@@ -67,7 +67,7 @@ describe('one-click family trials without saving over slots', () => {
     expect(document.querySelector('[data-family="nature"] .familyTrialChoose')?.textContent).toBe('軽量戦 COST15のまま受付へ');
     expect(document.querySelector('[data-family="dragon"] .familyTrialChoose')?.textContent).toBe('標準戦 COST17に切り替えて受付へ');
     await choose('nature'); expect(active().rule).toBe('light'); expect(document.body.textContent).toContain('相手は自然系のみ');
-    await open(); await choose('dragon'); expect(active().rule).toBe('standard'); expect(document.activeElement).toBe(document.querySelector('.screenIntro h2')); expect(button('この編成で対戦する').disabled).toBe(false);
+    await open(); await choose('dragon'); expect(active().rule).toBe('standard'); expect(document.activeElement).toBe(document.querySelector('.arenaLobby h2.srOnly')); expect(button('この編成で対戦する').disabled).toBe(false);
     expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);
   });
   it('preserves practice on cancel but clears it and draws anew after applying a preset',async()=>{

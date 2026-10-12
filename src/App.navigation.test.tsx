@@ -10,7 +10,7 @@ const button = (text: string) => [...document.querySelectorAll<HTMLButtonElement
 const label = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 const dialog = () => document.querySelector('[role="alertdialog"][aria-label="対戦を中断しますか"]');
 const timer = () => document.querySelector('[role="timer"]');
-const team = () => [...document.querySelectorAll('.teamUnit[data-monster-id]')].map(element => element.getAttribute('data-monster-id'));
+const team = () => [...document.querySelectorAll('.teamUnit[data-monster-id], .pastureMonster[data-monster-id]')].map(element => element.getAttribute('data-monster-id'));
 const partyVitals = () => [...document.querySelectorAll('.commanderHp, .commanderMp')].map(element => element.textContent);
 async function click(element: HTMLElement) { expect(element).toBeTruthy(); await act(async () => element.click()); }
 async function mount() { await act(async () => root.render(<App />)); }
@@ -62,7 +62,7 @@ describe('separate home, workshop, and arena screens', () => {
     expect(label('闘技場')).toBeTruthy();
     expect(label('編成')).toBeTruthy();
     expect(document.querySelectorAll('.mainNav button')).toHaveLength(4);
-    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '編成', '図鑑', '闘技場']);
+    expect([...document.querySelectorAll('.mainNav button')].map(node => node.getAttribute('aria-label'))).toEqual(['ホーム', '図鑑', '編成', '闘技場']);
     expect(document.querySelector('.gameHome')?.textContent).not.toMatch(/闘技場へ|編成へ/);
     expect(document.querySelector('.ruleTabs')).toBeNull();
     expect(document.querySelector('.roster')).toBeNull();

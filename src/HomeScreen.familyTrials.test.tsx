@@ -12,11 +12,11 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); });
 const base = { team: [0, 2, 3, 4, 6], rule: 'standard' as const, onFocus: vi.fn(), onTeam: vi.fn(), practice: false };
-it('keeps the home party summary and credits without the family-trial entry', async () => {
+it('keeps the home pasture party and credits without the family-trial entry', async () => {
   await act(async () => root.render(<HomeScreen {...base} />));
   expect(document.querySelector('.familyTrialGate')).toBeNull();
   expect(document.querySelector('.homeDestinations')).toBeNull();
-  expect(document.querySelectorAll('.partySummary [data-monster-id]')).toHaveLength(5);
+  expect(document.querySelectorAll('.homePasture [data-monster-id]')).toHaveLength(5);
   expect(document.querySelector('.arenaGate')).toBeNull();
   expect(document.querySelector('.gameHome')?.textContent).not.toMatch(/系統パーティを試す|闘技場へ|編成へ/);
   expect(document.querySelector('a[href$="credits.html"]')).toBeTruthy();

@@ -22,6 +22,23 @@ const click = async (node: HTMLElement) => { expect(node).toBeTruthy(); await ac
 const tick = async (ms: number) => { await act(async () => vi.advanceTimersByTime(ms)); };
 const poisonRow = (container: Element) => [...container.querySelectorAll('p, .skill')].find(node => node.querySelector('strong')?.textContent?.startsWith('毒霧'))!;
 
+async function profilePoisonText(profile: Element) {
+  await click(profile.querySelector<HTMLElement>('[data-detail-tab=skills]')!);
+  await click([...profile.querySelectorAll<HTMLButtonElement>('.detailSkillPicker button')].find(node => node.textContent === '毒霧')!);
+  const reading = profile.querySelector('.detailSkillReading:not([hidden])')!;
+  const next = reading.querySelectorAll<HTMLButtonElement>('.detailPager button')[1];
+  const chunks: string[] = [];
+  do {
+    const page = reading.querySelector('.detailPage:not([hidden])')!;
+    expect(page.closest('[hidden]')).toBeNull();
+    chunks.push(page.querySelector('.detailSkillRule')?.textContent ?? '');
+    if (!next || next.getAttribute('aria-disabled') === 'true') break;
+    await click(next);
+  } while (chunks.length < 20);
+  expect(chunks.length).toBeLessThan(20);
+  return chunks.join('');
+}
+
 async function begin(scale?: number, currentMp?: number) {
   const start = engine.start;
   const setup = vi.spyOn(engine, 'start').mockImplementationOnce(() => {
@@ -80,8 +97,9 @@ describe('poison copy at existing player-facing entry points', () => {
     expect(poisonButton().title).toBe(poisonSkillDetail(state.allies[0].monster.skills[2]!, { ...state.allies[0], poisonImpactScale: engine.DEFAULT_POISON_IMPACT_SCALE }));
     await click(button('コマンドに戻る')); await click(button('詳細'));
     const profile = document.querySelector('.profileModal')!;
-    expect(poisonRow(profile).textContent).toContain(poisonSkillDetail(engine.monsters[3].skills[2]!));
-    expect(poisonRow(profile).textContent).toContain('MP 16 · 通常順 · 敵全体');
+    const text = await profilePoisonText(profile);
+    expect(text).toContain(poisonSkillDetail(engine.monsters[3].skills[2]!));
+    expect(text).toContain('MP 16 · 通常順 · 敵全体');
     expect(profile.querySelectorAll('.skill')).toHaveLength(3);
   });
 
@@ -90,12 +108,12 @@ describe('poison copy at existing player-facing entry points', () => {
     const scaleFor = engine.poisonImpactScaleFor;
     vi.spyOn(engine, 'poisonImpactScaleFor').mockImplementation(unit => unit.poisonImpactScale === undefined ? scale : scaleFor(unit));
     await act(async () => root.render(<MonsterDetails id={3} onClose={() => {}} />));
-    const row = poisonRow(document.querySelector('.profileModal')!);
-    expect(row.textContent).toContain(poisonSkillDetail(engine.monsters[3].skills[2]!));
-    expect(row.textContent).toContain(POISON_TIMING_HINT);
-    expect(row.textContent!.includes('即時のHPダメージはありません')).toBe(scale === 0);
-    expect(row.textContent!.includes('）の半分')).toBe(scale === 0.5);
-    if (scale === 0) expect(row.textContent).not.toContain('威力12');
+    const text = await profilePoisonText(document.querySelector('.profileModal')!);
+    expect(text).toContain(poisonSkillDetail(engine.monsters[3].skills[2]!));
+    expect(text).toContain(POISON_TIMING_HINT);
+    expect(text.includes('即時のHPダメージはありません')).toBe(scale === 0);
+    expect(text.includes('）の半分')).toBe(scale === 0.5);
+    if (scale === 0) expect(text).not.toContain('威力12');
   });
 
   it('keeps mixed-scale enemy previews distinct and recomputes current attack on rerender', async () => {

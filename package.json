@@ -1,6 +1,6 @@
 {
   "name": "kanshu-arena",
-  "version": "0.20.10",
+  "version": "0.20.11",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
