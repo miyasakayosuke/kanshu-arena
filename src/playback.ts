@@ -9,7 +9,8 @@ export type BattleCue = {
   /** Exclude from command/cast counts and label separately from poison. */
   passive?: 'material-repair';
 };
-export type BattleTimeline = { cues: BattleCue[]; duration: number };
+export type CommandSpan = { actor: string; start: number; end: number };
+export type BattleTimeline = { cues: BattleCue[]; duration: number; commands: CommandSpan[] };
 
 /** Shared by the event timeline and visuals so windup ends at the HP change. */
 export const CAST_IMPACT_MS = 800;
@@ -82,9 +83,11 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
     }
   }
   const cues: BattleCue[] = [];
+  const commands: CommandSpan[] = [];
   let time = 0;
   if (before.length) cues.push({ at: 0, cast: null, impacts: [], updates: before });
   for (const group of groups) {
+    const commandStart = time;
     let cast: BattleEvent | null = null;
     if (group.cast) {
       // Older event streams lack scope metadata. Count distinct impact recipients,
@@ -112,7 +115,9 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
       if (group.endUpdates.length) cues.push({ at: time + (cast ? CAST_IMPACT_MS : 240), cast: null, impacts: [], updates: group.endUpdates });
       time += cast ? ACTION_DURATION_MS : 950;
     }
+    // Only authoritative casts consume commands; repair adapters and poison do not.
+    if (group.cast?.actor && !group.passive) commands.push({ actor: group.cast.actor, start: commandStart, end: time });
   }
   if (after.length) cues.push({ at: time, cast: null, impacts: [], updates: after });
-  return { cues, duration: time + 150 };
+  return { cues, duration: time + 150, commands };
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.15",
-  "auditBaseCommit": "29f06a843f032cb5cb61bbb5572b146969a9c7ec",
+  "release": "v0.20.16",
+  "auditBaseCommit": "4fad2dc598168f1161bf3bbd5dc221fdbe8354e8",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -734,6 +734,19 @@
           ],
           "provenance": "Original project-local React/CSS layout adjustment and regression tests authored for the requested display change. All existing 106 skill effect/story texts and 37 monster profiles are reused unchanged. No new artwork, narrative, external reference text, dependency, font, audio or media.",
           "reviewLimit": "DOM, SSR and CSS cascade checks verify content/order and accessibility contracts, not rendered phone fit or screen-reader behavior. Native phone/zoom acceptance remains with the release publisher; local browser restrictions were not retried. No legal-clearance claim. Final release checks: docs/release-validation-v02015.json. Native rendering is verified after deployment, separately from these source checks."
+        },
+        {
+          "date": "2026-10-12",
+          "change": "v0.20.16 Completed-command portrait indication: static subtle opacity and 行動済 distinguish completed allies from the current actor and waiting allies during turn replay.",
+          "files": [
+            "src/App.tsx",
+            "src/playback.ts",
+            "src/style.css",
+            "src/App.completedActions.test.tsx",
+            "src/playback.completedActions.test.ts"
+          ],
+          "provenance": "Project-specific AI-assisted React/TypeScript/CSS and tests, using only the abstract observation that completed turns can be indicated by dimming. No reference video, frames, artwork, audio, text, code or dependencies copied or bundled. Existing project portraits remain stationary.",
+          "reviewLimit": "Source and DOM replay checks cover command identity and lifecycle. Native rendered phone contrast/fit needs publisher verification. No legal-clearance claim. Final aggregate receipt: docs/release-validation-v02016.json; rendered verification follows exact deployment."
         }
       ]
     },

@@ -1,0 +1,136 @@
+{
+  "release": "0.20.16",
+  "stage": "Final prepublication checks; rendered native acceptance follows exact deployment",
+  "baselineCommit": "4fad2dc598168f1161bf3bbd5dc221fdbe8354e8",
+  "baselineTree": "7aebc1a25d14b3da45ec2c79078d69ee4132ccd8",
+  "candidateTree": "3690fd4b8674abb857e8ba186223e71ba354ae0f",
+  "candidatePatchSha256": "f502a69a45d706acf8dca2c454e3f5cffeda56659645640f45d828a73df87345",
+  "checks": {
+    "tests": 2827,
+    "files": 141,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.15",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "932264f12caf58a08d14d20cbbfa903d7b5c0a31",
+          "release": "0f00a99faf8b2d32d23f1370de1145e0a8db41b4"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.15",
+          "release": "0.20.16"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeChanged": [
+      "src/App.tsx",
+      "src/playback.ts",
+      "src/style.css"
+    ],
+    "reviewedRuntimeSha256": {
+      "src/App.tsx": "16c4f2ce3f4d143216ebf77840053230813aef2a058871c054fef6b745e7f88e",
+      "src/playback.ts": "4358fb3793c27e7c18fdc6f986c3d0cbf8b766ac26ccbf606a34d57d113ceefc",
+      "src/style.css": "95e0fecdafb0dab5ef04d5fcf4019f608f901252b37900dadd064126361e29b2"
+    },
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamFocusReveal.ts",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "dependenciesUnchangedExceptRootVersion": true,
+    "creditsChange": "version marker only",
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "samePageSkillRuntimeUnchanged": true
+  },
+  "independentCandidateReview": {
+    "tests": 86,
+    "report": "Candidate independent review passed; exact release payload and real battle cue/duration parity are separately audited before publication."
+  },
+  "limits": [
+    "Native portrait contrast/fit and replay lifecycle need exact postdeployment acceptance.",
+    "Physical-device touch, actual screen-reader speech and performance are not established by DOM tests.",
+    "Native reduced-motion preference acceptance is separate from static CSS checks.",
+    "Native visual acceptance is separate from automated DOM checks.",
+    "Standalone public notices URL response was not newly re-verified; source/dist and prior live inline full notices match.",
+    "Existing large-main-chunk advisory remains; rights inventory is not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

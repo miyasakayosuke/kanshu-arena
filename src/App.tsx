@@ -58,6 +58,8 @@ export default function App() {
   const [compactCastCaption, setCompactCastCaption] = useState<CompactCastCaption | null>(null);
   const [impacts, setImpacts] = useState<BattleEvent[]>([]);
   const [playing, setPlaying] = useState(false);
+  const [commandPlayback, setCommandPlayback] = useState<{ current: string | null; completed: string[] }>({ current: null, completed: [] });
+  const resetCommandPlayback = () => setCommandPlayback({ current: null, completed: [] });
   const [speed, setSpeed] = useState(1);
   const [notice, setNotice] = useState('');
   const [replayProgress, setReplayProgress] = useState('');
@@ -72,6 +74,7 @@ export default function App() {
   const leavingForPractice = useRef(false);
   const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
   const discardBattle = () => {
+    resetCommandPlayback();
     commandDeadline.current = null;
     ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
     setBattle(null); setPlaying(false); setOrders({}); setAutomaticKeys([]); setEffect(null); setVisualCast(null); setImpact(null); setImpacts([]);
@@ -147,6 +150,7 @@ export default function App() {
       : familyEncounterForSeed(rule, Math.floor(Math.random() * 0x100000000));
     setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
+    resetCommandPlayback();
     setTimedOut(false);
     setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
     setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setImpact(null); setImpacts([]);
@@ -203,6 +207,7 @@ export default function App() {
     button.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
   }, [orders, page, battle, playing, pendingSkill, focus, showLog, showTactics, navigation.pending]);
   const finishPlayback = () => {
+    resetCommandPlayback();
     clearTimers();
     const next = latestResult.current;
     if (next) { setBattle(next); setActiveKey(next.allies.find(u => u.hp > 0)?.key ?? 'a0'); }
@@ -218,10 +223,22 @@ export default function App() {
     const cmds = completeOrders(battle, Object.values(orders));
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
+    resetCommandPlayback();
     setPlaying(true); setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setImpact(null); setImpacts([]);
     clearTimers();
     const timeline = buildTimeline(result.events);
     const id = ++playbackId.current;
+    for (const command of timeline.commands) {
+      timers.current.push(setTimeout(() => {
+        if (id === playbackId.current) setCommandPlayback(previous => ({ ...previous, current: command.actor }));
+      }, command.start / speed));
+      timers.current.push(setTimeout(() => {
+        if (id === playbackId.current) setCommandPlayback(previous => ({
+          current: previous.current === command.actor ? null : previous.current,
+          completed: [...new Set([...previous.completed, command.actor])],
+        }));
+      }, command.end / speed));
+    }
     let castIndex = 0;
     let visualIndex = 0;
     const total = result.events.filter(e => e.kind === 'cast').length;
@@ -326,18 +343,19 @@ export default function App() {
           const cashout = impacts.find(event => event.target === u.key && event.kind === 'poison-cashout');
           const feedbacks = impacts.filter(event => event.target === u.key && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
           const feedback = feedbacks[0];
-          const acting = playing && visualCast?.actor === u.key;
+          const acting = playing && commandPlayback.current === u.key;
+          const completed = playing && commandPlayback.completed.includes(u.key) && !acting && u.hp > 0;
           const landed = acting && impacts.some(event => event.actor === u.key);
           const areaTarget = incomingArea && visualCast?.targets?.includes(u.key);
           const status = u.hp <= 0 ? '戦闘不能' : effectStatus(u);
-          return <button key={u.key} className={`commander ${!playing && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${u.hp <= 0 ? 'fallen' : ''} ${u.ward && u.hp > 0 ? 'natureWarded' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={!playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key}`} onClick={() => { setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
+          return <button key={u.key} className={`commander ${!playing && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${completed ? 'actionCompleted' : ''} ${u.hp <= 0 ? 'fallen' : ''} ${u.ward && u.hp > 0 ? 'natureWarded' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={!playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key} party-command-${u.key}`} onClick={() => { setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
             <span className="commanderIcon" aria-hidden="true"><MonsterArt monster={u.monster} portrait /></span>
             {areaTarget && <span key={`${effect?.tick}-${areaLanded}`} className="partyAura" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}
             <small className="commanderHp" id={`party-hp-${u.key}`}>HP {u.hp}/{u.monster.hp}</small>
             <div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div>
             <small className="commanderMp" id={`party-mp-${u.key}`}>MP {u.mp}/{u.monster.mp}</small>
             <div className="mpBar"><b style={{ width: `${u.monster.mp > 0 ? u.mp / u.monster.mp * 100 : 0}%` }} /></div>
-            <i>{u.hp <= 0 ? '戦闘不能' : playing ? acting ? '行動中' : '待機' : orders[u.key] ? automaticKeys.includes(u.key) ? 'おまかせ ✓' : '指示済 ✓' : '未選択'}</i>
+            <i id={`party-command-${u.key}`}>{u.hp <= 0 ? '戦闘不能' : playing ? acting ? '行動中' : completed ? '行動済' : '待機' : orders[u.key] ? automaticKeys.includes(u.key) ? 'おまかせ ✓' : '指示済 ✓' : '未選択'}</i>
             <em className="commanderStatus" id={`party-status-${u.key}`} aria-label={status || '状態異常なし'}>{u.hp > 0 ? status : ''}</em>
             {response && <em className="partyResponse" role="status">{response.kind === 'cleanse' ? '現在の毒を解除' : '守り:今T'}</em>}
             {cashout && <em className="partyCashout" role="status">毒{cashout.poisonTicksConsumed}回消費 · 基礎+{cashout.poisonCashoutAdded}</em>}
