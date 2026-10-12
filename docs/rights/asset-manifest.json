@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.18",
-  "auditBaseCommit": "e1b482bc6748bae19ae08b44167a49f6ee96b998",
+  "release": "v0.20.19",
+  "auditBaseCommit": "5f2f7e8f159005477755237f936589406c51b78a",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1019,6 +1019,19 @@
       "creator": "AI-assisted implementation for this project",
       "distribution": "Browser UI code and short original labels; existing battle art, timeline, mechanics and third-party notices unchanged.",
       "reviewLimit": "Implementation and automated inventory checks are not legal clearance or independent rights ownership/similarity proof. Existing review-ledger questions remain open."
+    },
+    {
+      "id": "battle-log-keyboard-lifecycle",
+      "kind": "original-ui-code",
+      "files": [
+        "src/App.tsx",
+        "src/BattleResult.tsx",
+        "src/BattleLogDialog.tsx"
+      ],
+      "provenance": "2026-10-13 JST: AI-assisted project-specific repair of the existing battle-log focus lifecycle. Adds initial focus, keyboard containment, top-layer Escape, opener/fallback restoration and inert/scroll cleanup while retaining existing log text and battle data. No external code, media, dependencies or third-party text imported.",
+      "creator": "AI-assisted implementation for this project",
+      "distribution": "Browser UI code only; existing log content, gameplay, artwork and third-party notices retained.",
+      "reviewLimit": "Automated and implementation review are not legal clearance or independent proof of rights ownership/non-infringement."
     }
   ],
   "software": [
