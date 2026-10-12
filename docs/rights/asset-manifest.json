@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.16",
-  "auditBaseCommit": "4fad2dc598168f1161bf3bbd5dc221fdbe8354e8",
+  "release": "v0.20.17",
+  "auditBaseCommit": "dc65454c31d23e969f98390af1942e938b097204",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -747,6 +747,35 @@
           ],
           "provenance": "Project-specific AI-assisted React/TypeScript/CSS and tests, using only the abstract observation that completed turns can be indicated by dimming. No reference video, frames, artwork, audio, text, code or dependencies copied or bundled. Existing project portraits remain stationary.",
           "reviewLimit": "Source and DOM replay checks cover command identity and lifecycle. Native rendered phone contrast/fit needs publisher verification. No legal-clearance claim. Final aggregate receipt: docs/release-validation-v02016.json; rendered verification follows exact deployment."
+        },
+        {
+          "date": "2026-10-12",
+          "change": "v0.20.17 Catalog detail previous/next navigation follows the current filtered and sorted result snapshot. The active detail group and underlying catalog selection context remain intact. Header-only 44px controls, first/last stop without wrap; no extra reader row.",
+          "files": [
+            "src/App.tsx",
+            "src/CatalogScreen.tsx",
+            "src/RosterBrowser.tsx",
+            "src/MonsterDetails.tsx",
+            "src/monsterDetails.css",
+            "src/App.catalogBrowse.test.tsx",
+            "docs/catalog-browse-candidate.md"
+          ],
+          "provenance": "Original project-local React/CSS implementation based on the general continuous-viewing interaction. No reference screenshots, video assets, names, art, sounds, text, code, or layouts copied or bundled. Existing project art and all narrative/mechanical copy are unchanged.",
+          "reviewLimit": "General interaction analysis and automated regression checks are not rights clearance. Native short-phone/header-fit and zoom acceptance remain separate from source checks. Final combined aggregate receipt: docs/release-validation-v02017.json."
+        },
+        {
+          "date": "2026-10-12",
+          "change": "v0.20.17 Independent ally impact number retention across later impacts, bounded to four fixed lanes per ally with individual existing display durations. Battle state updates and command spans are unchanged. Status/response badges flow in a separate content-sized band below HP/MP and command state; portrait/number lanes remain separately anchored and numbers are not dimmed on death.",
+          "files": [
+            "src/App.tsx",
+            "src/style.css",
+            "src/partyNumbers.ts",
+            "src/App.partyNumbers.test.tsx",
+            "src/partyNumbers.test.ts",
+            "src/App.materialWave.test.tsx"
+          ],
+          "provenance": "Original project-local React/TypeScript/CSS and regression tests. Presentation queue reuses existing battle event data and glyphs; no external media, fonts, text, source code or dependencies.",
+          "reviewLimit": "Source/DOM tests establish queue lifetime/lifecycle contracts, not physical-device rendering or performance. Native fit and actual readonly observations follow deployment. No legal-clearance claim. Final combined aggregate receipt: docs/release-validation-v02017.json."
         }
       ]
     },

@@ -18,7 +18,7 @@ type Props = {
   gallery?: boolean;
   filters: RosterFilters;
   setFilters: Dispatch<SetStateAction<RosterFilters>>;
-  onFocus: (id: number) => void;
+  onFocus: (id: number, visibleIds?: number[]) => void;
   scrollPosition?: RefObject<number>;
   editing?: {
     candidateId: number | null;
@@ -82,7 +82,7 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
         {visible.map(m => {
           const reason = editing?.unavailableReason(m.id) ?? '';
           if (gallery) return <article className="rosterItem catalogCard" data-family={m.family} key={m.id}>
-            <button className="catalogCardOpen" aria-label={`${m.name}の詳細`} onClick={event => { event.currentTarget.focus({ preventScroll: true }); onFocus(m.id); }}>
+            <button className="catalogCardOpen" aria-label={`${m.name}の詳細`} onClick={event => { event.currentTarget.focus({ preventScroll: true }); onFocus(m.id, visible.map(monster => monster.id)); }}>
               <span className="catalogArtStage" aria-hidden="true"><span className="catalogNumber">{String(m.id + 1).padStart(3, '0')}</span><CatalogArt monster={m} /></span>
               <span className="catalogCardCaption rosterText"><strong>{m.name}</strong><span>{familyLabel(m)}</span></span>
             </button>

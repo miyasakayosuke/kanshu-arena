@@ -121,7 +121,7 @@ describe('material repair live battle UI', () => {
     expect(document.querySelectorAll('.commander.areaTarget')).toHaveLength(2);
     expect(document.querySelector('.battleMessage')?.textContent).toContain('生存する物質系 2体');
     expect(document.querySelector('.battleMessage')?.textContent).not.toContain('味方全体');
-    expect([...document.querySelectorAll('.commander .partyImpact.heal')].map(node => node.parentElement?.getAttribute('aria-label'))).toEqual(['タロスの行動を選択', 'ぬりかべの行動を選択']);
+    expect([...document.querySelectorAll('.commander .partyImpact.heal')].map(node => node.closest('.commander')?.getAttribute('aria-label'))).toEqual(['タロスの行動を選択', 'ぬりかべの行動を選択']);
     expect(hp()).toEqual(result.state.allies.map(unit => `HP ${unit.hp}/${unit.monster.hp}`));
     await click(button('演出をスキップ'));
     await defendAll([19, 21, 6, 2]); await click(button('この指示でターン開始'));

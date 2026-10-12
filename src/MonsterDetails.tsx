@@ -27,7 +27,7 @@ function DetailPages({ pages, label }: { pages: ReadingPage[]; label: string }) 
 }
 
 /** All entry points inspect the same read-only profile; editing belongs to the five slots. */
-export default function MonsterDetails({ id, onClose }: { id: number; onClose: () => void }) {
+export default function MonsterDetails({ id, onClose, navigation }: { id: number; onClose: () => void; navigation?: { ids: number[]; onSelect: (id: number) => void } }) {
   const close = useRef<HTMLButtonElement>(null);
   const dialog = useRef<HTMLElement>(null);
   const body = useRef<HTMLDivElement>(null);
@@ -35,6 +35,12 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
   const [skillIndex, setSkillIndex] = useState(0);
   const tabPrefix = useId();
   const monster = monsters[id];
+  const browseIndex = navigation?.ids.indexOf(id) ?? -1;
+  const canBrowse = !!navigation && navigation.ids.length > 1 && browseIndex >= 0;
+  const browse = (direction: number) => {
+    const next = browseIndex + direction;
+    if (navigation && browseIndex >= 0 && next >= 0 && next < navigation.ids.length) navigation.onSelect(navigation.ids[next]);
+  };
   const story = monsterStory(id);
   const rules = detailRules(id);
   const abilityPages: ReadingPage[] = [{ title: '基礎能力（リーダー補正前）', content: <>
@@ -42,8 +48,9 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     <div className="leaderBanner"><span>リーダー効果 · {leaderFor(id).name}</span><small>{leaderFor(id).description}</small></div>
     <p className="detailMechanicsNote">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>
   </> }, ...rules.flatMap(rule => detailTextPages(rule.text).map(text => ({ title: rule.title, content: <p className={rule.className}>{text}</p> })))];
-  useEffect(() => { setActiveTab('appearance'); setSkillIndex(0); }, [id]);
-  useEffect(() => { if (body.current) body.current.scrollTop = 0; }, [activeTab, skillIndex]);
+  // Keep the reading group while browsing; skill/page selection belongs to each monster.
+  useEffect(() => { if (!navigation) setActiveTab('appearance'); setSkillIndex(0); }, [id]);
+  useEffect(() => { if (body.current) body.current.scrollTop = 0; }, [id, activeTab, skillIndex]);
   useEffect(() => {
     const previousFocus = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
@@ -71,7 +78,7 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     const next = index < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
     controls[next].focus();
   }}>
-    <div className="profileHeader"><strong>No. {String(monster.id + 1).padStart(3, '0')} · {monster.name}</strong><button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
+    <div className="profileHeader"><strong aria-live="polite" aria-atomic="true">No. {String(monster.id + 1).padStart(3, '0')} · {monster.name}</strong>{canBrowse && <nav className="profileBrowse" aria-label="図鑑の前後のモンスター"><button type="button" aria-label={`前のモンスター${browseIndex > 0 ? `：${monsters[navigation.ids[browseIndex - 1]].name}` : ''}`} aria-disabled={browseIndex === 0} onClick={() => browse(-1)}>‹</button><button type="button" aria-label={`次のモンスター${browseIndex < navigation.ids.length - 1 ? `：${monsters[navigation.ids[browseIndex + 1]].name}` : ''}`} aria-disabled={browseIndex === navigation.ids.length - 1} onClick={() => browse(1)}>›</button></nav>}<button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
     <div className="profileTabs" role="tablist" aria-label="モンスター詳細" onKeyDown={event => {
       const index = TABS.findIndex(tab => tab.id === activeTab);
       const next = event.key === 'ArrowRight' ? (index + 1) % TABS.length : event.key === 'ArrowLeft' ? (index + TABS.length - 1) % TABS.length : event.key === 'Home' ? 0 : event.key === 'End' ? TABS.length - 1 : -1;

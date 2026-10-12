@@ -1,0 +1,148 @@
+{
+  "release": "0.20.17",
+  "stage": "Final prepublication checks; actual native acceptance follows exact deployment",
+  "baselineCommit": "dc65454c31d23e969f98390af1942e938b097204",
+  "baselineTree": "8faf92d4b349e281bdf1eb3ca88b8ee1e2efd966",
+  "inputs": {
+    "numbersPatchSha256": "165022b11252afb40a9369b0e83f79ff029797e213f6e8682db18b5183d236f8",
+    "catalogScopedPatchSha256": "97965dd317144caf6d5ac8c883d9dd25c3c13cceda749490cd24325549a5fb68",
+    "badgeRuntimePatchSha256": "d34dcfb19c883e6f80d6dbf27c83c18cc03c95cfadb1258998d2a969437d60d2",
+    "badgeTestsPatchSha256": "82c4b0697824f9e239584ea01f3ae18ecfd24bc42ad37a98f752cb535641d34e",
+    "completeBadgeCorrectionPatchSha256": "42cc8b380aebb5a078d65b8259574ce9c6eed8515fd4b104e18bbb1af6186868"
+  },
+  "checks": {
+    "tests": 2841,
+    "files": 144,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "comparedAgainst": "0.20.16",
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "0f00a99faf8b2d32d23f1370de1145e0a8db41b4",
+          "release": "d57347c715b2b59d9df8018f1d330dee4faf8fbe"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.16",
+          "release": "0.20.17"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeChanged": [
+      "src/App.tsx",
+      "src/style.css",
+      "src/CatalogScreen.tsx",
+      "src/RosterBrowser.tsx",
+      "src/MonsterDetails.tsx",
+      "src/monsterDetails.css",
+      "src/partyNumbers.ts"
+    ],
+    "reviewedRuntimeSha256": {
+      "src/App.tsx": "fb1951afd88572d4915c4b14a5528a2b1d61faad9334f829c66e212398563345",
+      "src/style.css": "e0ba5a7d98b754e63bf96e4dacbffe4720dcd16948f58b446a9bbeb6bb53f7f9",
+      "src/CatalogScreen.tsx": "98172eb4d0753d068a64a734fd554e41b7455d394353a99787504374bf419909",
+      "src/RosterBrowser.tsx": "1ac39d3a7a5ba7ffc6aed612aea3b4894d75e5412bc0072ac5936b43dfd5de45",
+      "src/MonsterDetails.tsx": "92f785b60b77179f26ca8e4fb90088028c99c402b16a112c50f3044643e315be",
+      "src/monsterDetails.css": "3c372991a65b0f560b8440a00881c55ae5c537df19fda8d282637f99a4ddb0f8",
+      "src/partyNumbers.ts": "3e8aec3dba8b85324c20b030dbc24a65499e156dbdbab4a20307435e180dae41"
+    },
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamFocusReveal.ts",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "reviewedPatchCompositionVerified": true,
+    "dependenciesUnchangedExceptRootVersion": true,
+    "creditsChange": "version marker only",
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "playbackSha256": "4358fb3793c27e7c18fdc6f986c3d0cbf8b766ac26ccbf606a34d57d113ceefc",
+    "battleMotionSha256": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "sameSkillTextProvidersUnchanged": true
+  },
+  "independentIntegrationReview": {
+    "resolvedFinding": "Retained labels shared the old status/response overlay area. The final structure anchors numbers to the portrait region and lets badges wrap in an independent in-flow band below vitals/command, preserving undimmed numbers and stable portrait anchors.",
+    "review": "Focused command/number and catalog/movie/history/lifecycle checks passed; exact frozen payload is separately audited before publication."
+  },
+  "limits": [
+    "Native narrow number lanes, badge flow and catalog header/navigation need exact postdeployment acceptance.",
+    "Physical-device touch, actual screen-reader speech and performance are not established by DOM tests.",
+    "Native reduced-motion preference and text-only zoom acceptance are separate from CSS checks.",
+    "Standalone public notices URL response was not newly verified; source/dist and prior live inline full notices match.",
+    "Existing large-main-chunk advisory remains; rights inventory is not legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

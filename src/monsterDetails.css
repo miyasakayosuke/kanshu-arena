@@ -57,3 +57,11 @@
 /* At extreme zoom or short landscape heights, let the reader scroll rather than
    shrink text, crop a rule, or move Close/the group selector out of reach. */
 @media(max-height:440px){.profileModal.profileTabbed .profilePanel{flex-shrink:0}.profileModal.profileTabbed .profileAppearance{min-height:min-content}.profileModal.profileTabbed .profileBody{overflow-y:auto}}
+
+/* Browse the current catalog results without dismissing the reader. */
+.profileModal.profileTabbed .profileHeader:has(.profileBrowse){gap:4px}
+.profileModal.profileTabbed .profileHeader>strong{flex:1;min-width:0;overflow-wrap:anywhere}
+.profileBrowse{display:flex;flex:0 0 auto;gap:2px;margin-left:4px}
+.profileBrowse button{min-width:44px;min-height:44px;padding:0;border:1px solid #91aa8e55;border-radius:8px;background:#233e40;color:#e0e8d5;font-size:27px;line-height:1}
+.profileBrowse button[aria-disabled=true]{opacity:.35;cursor:default}
+.profileModal.profileTabbed .profileHeader>.close{flex:0 0 44px}

@@ -5,7 +5,7 @@ import RosterBrowser, { type RosterFilters } from './RosterBrowser';
 export default function CatalogScreen({ filters, setFilters, onFocus, scrollPosition }: {
   filters: RosterFilters;
   setFilters: Dispatch<SetStateAction<RosterFilters>>;
-  onFocus: (id: number) => void;
+  onFocus: (id: number, visibleIds?: number[]) => void;
   scrollPosition: RefObject<number>;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
