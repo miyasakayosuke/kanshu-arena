@@ -1,0 +1,90 @@
+{
+  "release": "0.20.2",
+  "status": "final-local-candidate-validated-publication-pending",
+  "recordedDateUtc": "2026-10-12",
+  "baseCommit": "9370b1a779c076433ff38df81665bd0c85b997a7",
+  "baseTree": "5d719bd93cb378bdf8ea3e2d1bc3228fa7a389c7",
+  "reviewedLoadingCandidateTree": "decdba0d257defbbaae9c8ceb82c09dc66b3c06d",
+  "inputPatchSha256": "8a7a07cb38639b787abe9fe9c6fbff70f5eb4cd432ff2d2dc3fbcccc84c2354e",
+  "checks": {
+    "vitest": {
+      "files": 101,
+      "tests": 2319,
+      "passed": true,
+      "durationSeconds": 55.51
+    },
+    "rightsSelftests": {
+      "tests": 14,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "viteProductionBuild": true,
+    "distRights": true,
+    "balanceSmoke": {
+      "matches": 736,
+      "passed": true,
+      "pairedChangePercentagePoints": 0
+    },
+    "independentLoadingReview": {
+      "newTests": 12,
+      "existingRendererTests": 177,
+      "blockingFindings": 0
+    },
+    "runtimePatchMatchesReviewedInput": true,
+    "versionOnlyApplicationChanges": true,
+    "dependencyLockUnchangedExceptRootVersion": true,
+    "sourcePreservation": {
+      "changedExistingTrackedFiles": [
+        "README.md",
+        "docs/rights/asset-manifest.json",
+        "package-lock.json",
+        "package.json",
+        "src/App.dragonWave.test.tsx",
+        "src/App.materialWave.test.tsx",
+        "src/App.tsx",
+        "src/BattleStage.tsx"
+      ],
+      "otherExistingFilesByteIdentical": 1121
+    }
+  },
+  "logHashes": {
+    "full-tests": "d6456bf2edc11826574f2d050c7c4fad447cf42fac3b2c520a11949905cd0ece",
+    "rights-selftests": "e3dc28d8d2623ec3de8daefaac62b62bbc47c0e502871f30445c2cacc0a81f21",
+    "rights-source": "78be977dab39ee7b4b85bcdf1af64572d6dee5c466a4df02298c193dab06bcdf",
+    "build": "559e730af9e3dbf84d972face8a03ff7bf69a061e6def225159cf10d47fb3536",
+    "lab-smoke": "2deae26753975c56d14b5a51232457753164285d805481852207ad7d8d27555b"
+  },
+  "runtimeSourceHashes": {
+    "src/BattleStage.tsx": "ce4921f526e1f500e3cd7f5424802227e649b228c5e9c56ae44d34071cde6815",
+    "src/BattleStage.imageLoading.test.tsx": "f6b6bfaded54d691a0695e18b8b98dc5b84c857db7c98e7f94c652dc2387256c",
+    "src/App.tsx": "5f8a111eaa60079f784669310a7d1a985691fc2d94109999d1de6c2b1a379e6f",
+    "src/engine.ts": "82a48ff2d83d8790840ff2e6008117f664f2351df878de39a135f8187bf3c9dc",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/MonsterArt.tsx": "df9c98f3f4e8a3caa444a77e0ac3fcfcbbe6e0b807f789eeebf8f9ef7e0701db",
+    "src/navigation.ts": "052ff748f9a68e8cdf248f8b86016eca1dff7efa9ca9990e23233a4797e0730a",
+    "public/credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c"
+  },
+  "distHashes": {
+    "THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c",
+    "assets/index-BTJ5SPr-.js": "5a406f271f9043342c0ca06709028e403b114143d75bc97179d1ecc5bdc9a56b",
+    "assets/index-CcOi1w2F.css": "0632dd0ff0386560d414fccd1b8ea419a30e6ad303ab488b6a3dcfcca1381d4f",
+    "credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25",
+    "index.html": "96bb5ad43fe9c7005ed513063e9a3feb686ce78672362f206782821b510e6aa8"
+  },
+  "buildWarning": "Existing >500 kB JS chunk warning remains: 644.72 kB minified, 202.19 kB gzip. No bundle reduction claim.",
+  "publication": {
+    "status": "pending",
+    "commit": null,
+    "ci": null,
+    "deployment": null
+  },
+  "browserGate": "Pending this release: version/runtime asset, enemy bodies and allied portraits, normal/2x/skip, immediate and edited-party retry, next opponent, compact view, saved slots, console and live notices. Image allocation/lifecycle instrumentation is automated, not a real-browser measurement.",
+  "limits": [
+    "No runtime timing, Pixel, first-paint, decode or network-byte improvement measured.",
+    "Artwork modules remain eagerly bundled; art and numerical game rules are unchanged.",
+    "Automated success does not establish human fun, balance fairness or legal clearance."
+  ],
+  "priorLiveVerification": "docs/v0201-live-verification.md"
+}

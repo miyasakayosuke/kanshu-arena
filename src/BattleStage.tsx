@@ -891,9 +891,17 @@ export default function BattleStage(props: Props) {
     const ctx = element.getContext('2d');
     if (!ctx) return;
     const characterImages = new Map<number, HTMLImageElement>();
-    for (const [id, art] of Object.entries(CHARACTER_ART)) {
-      const image = new Image(); image.src = art.artUrl; characterImages.set(Number(id), image);
-    }
+    const getCharacterImage = (id: number) => {
+      const cached = characterImages.get(id);
+      if (cached) return cached;
+      const art = CHARACTER_ART[id];
+      if (!art) return;
+      const image = new Image(); image.src = art.artUrl; characterImages.set(id, image);
+      return image;
+    };
+    // Only enemies have bodies in the arena, including their defeated poses.
+    // Prime before the first frame; the same mount can encounter new IDs later.
+    latest.current.enemies.forEach(unit => getCharacterImage(unit.monster.id));
     let handle = 0;
     let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
@@ -1102,7 +1110,7 @@ export default function BattleStage(props: Props) {
         ctx.shadowOffsetY = 4;
         // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
         ctx.fillStyle = '#ffffff';
-        const characterImage = characterImages.get(unit.monster.id);
+        const characterImage = getCharacterImage(unit.monster.id);
         if (characterImage?.complete && characterImage.naturalWidth > 0) {
           // Registry dimensions preserve every old silhouette and support later families.
           const width = CHARACTER_ART[unit.monster.id].spriteWidth;

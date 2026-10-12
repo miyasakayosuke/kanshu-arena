@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.1",
-  "auditBaseCommit": "6242ce8b9c0f007a4b056d686b50ccedbc98d637",
+  "release": "v0.20.2",
+  "auditBaseCommit": "9370b1a779c076433ff38df81665bd0c85b997a7",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -401,6 +401,25 @@
           ],
           "provenance": "AI-assisted application-state guard, tests and verification note written directly for this project. The existing result-to-workshop action reuses the synchronous start lock so repeated clicks cannot retain a stale same-opponent request. Navigation reports whether it performed a transition, allowing the lock and temporary intent to roll back when queued browser-history restoration declines the request. No external code, article text, imagery, media, fonts, dependencies, character art, animations or new runtime wording imported. Engine, AI, stats, skills, family/cost rules, IDs and saved-team schema remain unchanged. Release 0.20.1 display, matching header expectations, package version metadata and directly authored release notes are included; dependency versions and third-party notices are unchanged.",
           "reviewLimit": "Frontend tests check exact opponent/order/seed/start options, deliberately changed own party, full initial HP/MP, legal-cost gating, cancellation, browser navigation and preservation/recall of all three saved slots. Automated checks are not real-browser proof, human-fun measurement, balance improvement or rights clearance. Actual post-release browser acceptance and earlier unresolved review questions remain separate."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.2 enemy-only body image preparation on public v0.20.1 tree 5d719bd93cb378bdf8ea3e2d1bc3228fa7a389c7. See docs/rights/releases/2026-10-12-v0.20.2.md.",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/BattleStage.imageLoading.test.tsx",
+            "src/App.tsx",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "docs/rights/releases/2026-10-12-v0.20.2.md",
+            "docs/release-validation-v0202.json",
+            "docs/v0201-live-verification.md"
+          ],
+          "provenance": "AI-assisted code, regression tests and release text written directly for this project. A mount-local get-or-create lookup primes distinct current enemy bodies and lazily adds later enemy IDs. Existing art URLs, fallback, readiness checks, frame lifecycle and draw behavior are reused. Version/header expectations and package root metadata only beyond the renderer change. No external code, prose, image, media, font, dependency or motion samples imported.",
+          "reviewLimit": "Mocked Image and frame tests establish allocation/source-assignment counts and lifecycle behavior, not real-device timing, network bytes, image decode time, first paint or bundle savings. All art modules remain eagerly bundled. Live browser behavior is a separate acceptance gate. Existing rights and similarity questions remain open."
         }
       ]
     },
