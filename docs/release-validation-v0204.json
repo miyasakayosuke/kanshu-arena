@@ -1,0 +1,82 @@
+{
+  "release": "0.20.4",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication verification; later CI and live acceptance recorded separately",
+  "publicBaselineCommit": "b59ba99f847c89050bcc13a2c6ce859f0e7aff09",
+  "baselineTree": "6dba00c1e480d2a8a7303bd01d75d622943defa6",
+  "reviewedImplementationTree": "a0eefc8003f40a62e80fb2fbccf96eefc295ea06",
+  "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+  "checks": {
+    "vitest": {
+      "tests": 2399,
+      "files": 105,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 14,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "productionBuild": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.3",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.engineSha256",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "ad34fd8121dc54f8e4f67f579d37cb093b108274",
+          "release": "5653878af56de64ed179b3c59a74806b742732e5"
+        },
+        {
+          "field": "source.engineSha256",
+          "baseline": "59f857c47a84ea2ee4c9d636691b18279a596dc3722f59e8e534507eb02db59d",
+          "release": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.3",
+          "release": "0.20.4"
+        }
+      ]
+    }
+  },
+  "independentImplementationReview": {
+    "result": "no blockers",
+    "randomizedSnapshots": 12000,
+    "completeBattles": 2625,
+    "edgeProbes": 115,
+    "normalizedFields": []
+  },
+  "preservation": {
+    "sourceMatchesReviewedCandidateExceptVersion": true,
+    "dependencyLockUnchangedExceptRootVersion": true,
+    "changedExistingFiles": [
+      "README.md",
+      "docs/rights/asset-manifest.json",
+      "package-lock.json",
+      "package.json",
+      "src/App.dragonWave.test.tsx",
+      "src/App.materialWave.test.tsx",
+      "src/App.tsx",
+      "src/confirmedOrders.test.ts",
+      "src/engine.ts"
+    ],
+    "otherExistingFilesByteIdentical": 1130
+  },
+  "behaviorBoundary": "Only actual usable confirmed support at its existing party slot reserves effects. Poison prepass and ordinary automatic policies remain unchanged. Later-slot support duplication is deferred; necessary earlier fast healing remains. HP1 poison and staggered-heal fixtures are automated, not live-browser claims.",
+  "publicationPerformedAtRecordCreation": false,
+  "legalClearance": false,
+  "limitations": [
+    "Existing large-JS-chunk build advisory remains",
+    "Rendered-browser and exact-head CI/Pages acceptance occur after publication",
+    "No legal clearance, measured performance or win-rate improvement is asserted"
+  ]
+}

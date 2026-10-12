@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.3",
-  "auditBaseCommit": "c7699ca6006f9b20dc5063b3390d787fbb9611ed",
+  "release": "v0.20.4",
+  "auditBaseCommit": "b59ba99f847c89050bcc13a2c6ce859f0e7aff09",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -442,6 +442,28 @@
           ],
           "provenance": "AI-assisted completion helper and regression tests written directly for this project from its existing engine and reproduced command-flow defect. Confirmed legal own poison targets participate in the existing optional reservation policy. Existing command labels, art, animation, skills, scoring, battle effects, save formats, dependencies and notices are reused unchanged. No external code, prose, illustrations, media, fonts or extracted game materials imported.",
           "reviewLimit": "Engine/DOM regressions, frozen battle parity and independent code review establish bounded behavior, not rendered-browser acceptance, balance improvement, legal clearance or elimination of existing expression/patent/trademark questions. Historical support override behavior is intentionally unchanged. No third-party contact, professional-review submission, fee or project-wide licensing choice. Authorized release publication is recorded separately; no legal clearance is asserted."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.4 phantom-support reservation correction based on public v0.20.3 commit b59ba99f847c89050bcc13a2c6ce859f0e7aff09 / tree 6dba00c1e480d2a8a7303bd01d75d622943defa6. Implementation evidence: docs/support-orders-candidate.md. Final release checks and deployment acceptance are recorded separately.",
+          "files": [
+            "src/engine.ts",
+            "src/confirmedOrders.test.ts",
+            "src/supportOrders.test.ts",
+            "src/App.supportOrders.test.tsx",
+            "docs/support-orders-candidate.md",
+            "src/App.tsx",
+            "src/App.dragonWave.test.tsx",
+            "src/App.materialWave.test.tsx",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "docs/release-validation-v0204.json",
+            "docs/rights/releases/2026-10-12-v0.20.4.md",
+            "docs/v0203-live-verification.md"
+          ],
+          "provenance": "AI-assisted implementation, tests and verification note written directly for this project using its existing engine and reproduced phantom support reservations. Fixed commands are accounted for at their existing party slots, reserving only their actual currently usable support effects. No external code, prose, illustrations, animation samples, media, fonts, dependencies or extracted game materials imported. No runtime labels, art, stats, skills, battle execution or saved-team schema changed. Release preparation changes only the displayed/root package version, corresponding test expectations and release records.",
+          "reviewLimit": "Engine/DOM regressions and exact-baseline comparison establish bounded command-planning behavior, not rendered-browser acceptance, balance improvement or legal clearance. Later-slot support duplication remains intentionally deferred because blanket pre-reservation can suppress a necessary faster heal. Existing rights, ownership, expression-similarity, patent and trademark questions remain open. Authorized publication uses the existing game repository; no outside contact, professional-review submission, legal agreement, fee or project-wide licensing choice."
         }
       ]
     },

@@ -120,9 +120,13 @@ describe('completion boundaries and comparison controls', () => {
     const automatic = autoOrders(state);
     expect(automatic.filter(order => battleSkill(state.allies.find(unit => unit.key === order.key)!.monster, order.skill)?.kind === kind)).toHaveLength(2);
     expect(completeOrders(state, [automatic[0]])).toEqual(automatic);
-    // Overriding support is outside this poison-only change: preserve prior coordination.
+    // An overridden support contributes no phantom reservation. The next actor
+    // now covers the first target instead of skipping to the second one.
     const fixed = {...automatic[0], skill: BASIC_ATTACK, target: 'e0'};
-    expect(completeOrders(state, [fixed])).toEqual(automatic.map(order => order.key === fixed.key ? fixed : order));
+    const completed = completeOrders(state, [fixed]);
+    expect(completed[0]).toBe(fixed);
+    expect(completed[1]).toEqual({...automatic[1], target: automatic[0].target});
+    expect(completed.slice(2)).toEqual(automatic.slice(2));
   });
   it('returns no orders after the battle has ended', () => {
     const state = fixture(); state.winner = 'win';

@@ -492,8 +492,33 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
   }
   return friends.map(unit => {
     const fixed = fixedOrders.get(unit.key);
-    // Keep the existing support bookkeeping in slot order. This bounded fix
-    // changes poison reservations only; confirmed commands still win below.
+    if (fixed) {
+      // Account for the command that will actually be returned, at this actor's
+      // existing slot. Do not reserve a discarded automatic suggestion or pull
+      // later supports forward: a faster earlier heal may still be necessary.
+      const skill = battleSkill(unit.monster, fixed.skill);
+      if (skill && canUseSkill(unit, skill, friends)) {
+        if (isExtraordinaryResponse(skill)) {
+          // Responses affect all living friends. An explicit wrong-side or
+          // unknown target is still rejected by execution, even for an area skill.
+          if (fixed.target === undefined || state[side].some(friend => friend.key === fixed.target)) {
+            for (const friend of friends) (skill.kind === 'responseCleanse' ? cleansedTargets : protectedTargets).add(friend.key);
+          }
+        } else {
+          // Missing/dead targets may retarget during execution; do not invent a
+          // reservation for that future fallback while completing public orders.
+          const recipient = friends.find(friend => friend.key === fixed.target);
+          if (recipient) {
+            if (skill.kind === 'protect') protectedTargets.add(recipient.key);
+            if (skill.kind === 'cleanse') cleansedTargets.add(recipient.key);
+            if (skill.kind === 'heal' || skill.kind === 'cleanse') {
+              plannedHealing.set(recipient.key, (plannedHealing.get(recipient.key) ?? 0) + skill.power);
+            }
+          }
+        }
+      }
+      return fixed;
+    }
     const specials = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS);
     const find = (kind: Skill['kind']) => specials.findIndex(skill => skill.kind === kind && canUseSkill(unit, skill, friends));
     const cleansing = find('cleanse');
@@ -501,19 +526,19 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
     if (cleansing >= 0 && poisoned) {
       cleansedTargets.add(poisoned.key);
       plannedHealing.set(poisoned.key, (plannedHealing.get(poisoned.key) ?? 0) + specials[cleansing]!.power);
-      return fixed ?? { key: unit.key, skill: cleansing, target: poisoned.key };
+      return { key: unit.key, skill: cleansing, target: poisoned.key };
     }
     const protecting = find('protect');
     const vulnerable = weakest(friends.filter(friend => !protectedTargets.has(friend.key) && friend.hp > incomingThreat * 0.5));
     if (protecting >= 0 && friends.length > 1 && vulnerable && vulnerable.hp / vulnerable.monster.hp <= 0.45 && incomingThreat > 0) {
       protectedTargets.add(vulnerable.key);
-      return fixed ?? { key: unit.key, skill: protecting, target: vulnerable.key };
+      return { key: unit.key, skill: protecting, target: vulnerable.key };
     }
     const healing = find('heal');
     const injured = weakest(friends.filter(friend => (friend.hp + (plannedHealing.get(friend.key) ?? 0)) / friend.monster.hp <= 0.6));
     if (healing >= 0 && injured) {
       plannedHealing.set(injured.key, (plannedHealing.get(injured.key) ?? 0) + specials[healing]!.power);
-      return fixed ?? { key: unit.key, skill: healing, target: injured.key };
+      return { key: unit.key, skill: healing, target: injured.key };
     }
     // Spend the one action on actual missing MP only when it funds a currently
     // unaffordable paid action. Never reserve a skill against future borrowed MP.
@@ -522,7 +547,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
       const recipients = friends.filter(friend => friend.monster.family === SLIME_SUPPLY.family);
       const fundsAction = recipients.some(friend => friend.monster.skills.some(skill =>
         skill.mpCost > friend.mp && skill.mpCost <= Math.min(friend.monster.mp, friend.mp + supplyAmountFor(unit))));
-      if (fundsAction) return fixed ?? { key: unit.key, skill: supply };
+      if (fundsAction) return { key: unit.key, skill: supply };
     }
     // Keep a free attack available. Spend only when a special adds useful damage or utility.
     // Keep the new core's policy stable when Lab disables its mechanic. Other
@@ -591,14 +616,14 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
     });
     if (responseActor && skillIndex >= 0 && isExtraordinaryResponse(specials[skillIndex]!)) {
       for (const friend of friends) (specials[skillIndex]!.kind === 'responseCleanse' ? cleansedTargets : protectedTargets).add(friend.key);
-      return fixed ?? { key: unit.key, skill: skillIndex };
+      return { key: unit.key, skill: skillIndex };
     }
-    if (!fixed && reservePoison && skillIndex >= 0 && specials[skillIndex]!.kind === 'poison' && specials[skillIndex]!.all) {
+    if (reservePoison && skillIndex >= 0 && specials[skillIndex]!.kind === 'poison' && specials[skillIndex]!.all) {
       for (const opponent of opponents) plannedPoison.add(opponent.key);
     }
     // Non-combat fixtures and passive defenders still have a meaningful legal stance.
     if (!specials.some(skill => skill.kind === 'hit' || skill.kind === 'poison') && unit.monster.atk === 0 && find('guard') >= 0) skillIndex = find('guard');
-    return fixed ?? { key: unit.key, skill: skillIndex, target: skillIndex >= 0 && specials[skillIndex]!.kind === 'guard' ? unit.key : selectedTarget?.key };
+    return { key: unit.key, skill: skillIndex, target: skillIndex >= 0 && specials[skillIndex]!.kind === 'guard' ? unit.key : selectedTarget?.key };
   });
 }
 
