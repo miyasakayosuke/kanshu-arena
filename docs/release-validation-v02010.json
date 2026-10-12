@@ -1,0 +1,145 @@
+{
+  "release": "0.20.10",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; live acceptance follows exact commit deployment",
+  "publicBaselineCommit": "b8477a7b06053248adf702a5ab0081f1fd8d27af",
+  "baselineTree": "7365df70612a45382edd828a564f8459fde0212c",
+  "reviewedCandidateTree": "3add852c42d69c13a7f6e34929cbdca0f604a650",
+  "reviewedCandidatePatchSha256": "12ea3dec08230433c7b19d4297451205bf145220b4081e149bae47931d520b95",
+  "checks": {
+    "vitest": {
+      "tests": 2680,
+      "files": 127,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 15,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.9",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "dfe1efdc4e16ac373009709c5a86c2bb0f5b82f2",
+          "release": "7f72c6766e74e44f07d7e022c70e221e4d46fc1d"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.9",
+          "release": "0.20.10"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "publicBaselineCommit": "b8477a7b06053248adf702a5ab0081f1fd8d27af",
+    "baselineTree": "7365df70612a45382edd828a564f8459fde0212c",
+    "existingRuntimeChangedFiles": [
+      "src/App.tsx",
+      "src/CatalogScreen.tsx",
+      "src/MonsterDetails.tsx",
+      "src/RosterBrowser.tsx"
+    ],
+    "appChange": "PLAYTEST version literal only",
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "public/credits.html",
+      "src/BattleResult.tsx",
+      "src/BattleStage.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterLore.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/teamBuilder.css",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "candidateSourceSha256": {
+      "src/App.catalogMyths.test.tsx": "fa24a41fdae4b27b75187dfb36e5121fa94eb8ec918ccaebfec0ba088ab92820",
+      "src/CatalogArt.tsx": "ba6692a9566684f91fbfe64503a7949a95ff26414ffc7f1bf428762a6086a977",
+      "src/CatalogScreen.artFirst.test.tsx": "fa2a1a0dd94539972e84f5624eb100732b1a9e752a06c34abdf3de4fcb33c846",
+      "src/CatalogScreen.artFirstLayout.test.ts": "9eecf5bf2eb5a6ae563bda492ee074695b524ae2a71cc0d312eae9ff4b3e4578",
+      "src/CatalogScreen.tsx": "1c3867d1336f6934b35dde63b15710c0fd6299a64590461aad89a33434d12144",
+      "src/MonsterDetails.lore.test.tsx": "00a613643e5ab5ed4d4d162007b2c68c36b6790425612be77ff2b9f386c6bf50",
+      "src/MonsterDetails.tsx": "5ff094b00f40b549ef34464f306c201bd4534058e67ca739de5d980d4402697d",
+      "src/MythVignetteEntry.test.tsx": "f13f5933278c35a5bb76905c6f7398e58fd4734a4b3b5f002e0127db357dc518",
+      "src/MythVignetteEntry.tsx": "eb88b115b56ecbf50a05839db7efc2220574d5eee056668983f50ba6b6682773",
+      "src/RosterBrowser.tsx": "6591d7066e290513a63f4171f8b502824ff5a21a2508cb3e8c324d773035e7a8",
+      "src/catalog.css": "bca8fe141029f98fa60f81275df1ed6cc49e1a6adfee3060623a6a60e3df6ad6",
+      "src/components/MythVignette.test.tsx": "7c2e6337d3d44fca0c1e432e27acbe890c6c32e45b6b56c7fa36b7441686d3dd",
+      "src/components/MythVignette.tsx": "4d8bcb2f98116ace53ae1a52bfda5f935070a58ab264d3ec926e4fa3ba70bfc4",
+      "src/components/mythVignette.css": "d286ff61b69a489b55183181c46f0b21e895acf417ed0bca62f320197c1be86d",
+      "src/mythSceneSvg.test.ts": "cf0ce1276a60f8f30f43735c66b5bd6bd45936997c86e406869045e85668fb6c",
+      "src/mythSceneSvg.ts": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5",
+      "src/mythVignettes.ts": "8aa476f67c91fe8bb17a10406ccf3d0c7f03441a77733710f6eac03eece417a9"
+    },
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "movieRendererSha256": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5"
+  },
+  "independentIntegrationReview": {
+    "result": "source/DOM gate passed",
+    "focusedTests": 167,
+    "testFiles": 11,
+    "renderer": "actual rasterized SVG frames for all eight scenes, exact renderer preserved; not continuous browser playback"
+  },
+  "limits": [
+    "Local Chromium unavailable due to known process/socket restrictions; no local browser pass claimed.",
+    "Final live mobile, short-landscape, zoom, native pointer/keyboard, scroll/history, all-eight continuous movie playback and console verification pending exact deployment.",
+    "Physical touch, safe-area hardware, screen-reader behavior and device performance unmeasured.",
+    "Reduced-motion stills, lazy import failure/retry and cancellation are controlled automated checks unless additionally exercised via supported browser settings.",
+    "Existing large main JavaScript chunk advisory remains.",
+    "Rights provenance/notice checks are not expert legal clearance."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

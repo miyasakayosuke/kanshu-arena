@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, type Dispatch, type SetStateAction, type RefObject } from 'react';
 import MonsterArt from './MonsterArt';
+import CatalogArt from './CatalogArt';
 import { monsters, familyLabel, leaderFor } from './engine';
 import { monsterRole } from './strategy';
 import { activeFamilyOptions } from './families';
@@ -14,6 +15,7 @@ export const createRosterFilters = (): RosterFilters => ({
   familyFilter: 'all', costFilter: 'all', expanded: false,
 });
 type Props = {
+  gallery?: boolean;
   filters: RosterFilters;
   setFilters: Dispatch<SetStateAction<RosterFilters>>;
   onFocus: (id: number) => void;
@@ -36,7 +38,7 @@ const roleOptions = [
 const familyOptions = activeFamilyOptions(monsters);
 
 /** One roster for both the read-only catalog and explicit team replacements. */
-export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosition, editing }: Props) {
+export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosition, editing, gallery = false }: Props) {
   const { filter, role, sort, leaderFilter, familyFilter, costFilter } = filters;
   const list = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -57,14 +59,17 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
       && (costFilter === 'all' || (costFilter === 'fit' ? !(editing?.unavailableReason(m.id) ?? '') : m.cost === Number(costFilter)));
   }).sort((a, b) => sort === 'speed' ? b.speed - a.speed : sort === 'hp' ? b.hp - a.hp : sort === 'atk' ? b.atk - a.atk : sort === 'cost' ? a.cost - b.cost : a.id - b.id);
 
+  const applied = [familyOptions.find(([value]) => value === familyFilter)?.[1], roleOptions.find(([value]) => value === role && value !== 'all')?.[1], leaderFilter !== 'all' ? `リーダー ${({ hp: 'HP', mp: 'MP', atk: '攻撃', speed: '素早さ' } as Record<string, string>)[leaderFilter] ?? leaderFilter}` : '', costFilter !== 'all' ? `コスト ${costFilter}` : ''].filter(Boolean);
+  const filtered = !!filter.trim() || filterCount > 0 || sort !== 'id';
+
   return <>
-      <div className="sectionTitle">{editing ? '候補を選ぶ' : '全モンスター'} <span>{visible.length} / {monsters.length}体</span></div>
+      {!gallery && <div className="sectionTitle">{editing ? '候補を選ぶ' : '全モンスター'} <span>{visible.length} / {monsters.length}体</span></div>}
       <div className="tools">
-        <input aria-label="検索" placeholder="名前・特技・リーダーを検索" value={filter} onChange={e => update({ filter: e.target.value })} />
+        <input aria-label="検索" placeholder={gallery ? '名前・特技を検索' : '名前・特技・リーダーを検索'} value={filter} onChange={e => update({ filter: e.target.value })} />
         <select aria-label="並べ替え" value={sort} onChange={e => update({ sort: e.target.value })}><option value="id">図鑑順</option><option value="speed">素早さ順</option><option value="hp">HP順</option><option value="atk">攻撃力順</option><option value="cost">低コスト順</option></select>
       </div>
       <details className="builderDisclosure filterDisclosure" open={filters.expanded}>
-        <summary onClick={event => { event.preventDefault(); update({ expanded: !filters.expanded }); }}>詳しく絞り込む{filterCount > 0 ? `（${filterCount}件）` : ''}</summary>
+        <summary onClick={event => { event.preventDefault(); update({ expanded: !filters.expanded }); }}>{gallery ? '絞り込み' : '詳しく絞り込む'}{filterCount > 0 ? `（${filterCount}件）` : ''}{gallery && <span className="catalogCount" aria-live="polite">{visible.length} / {monsters.length}体</span>}</summary>
         <div className="filterChips" aria-label="特技で絞り込み">{roleOptions.map(([value, label]) => <button key={value} aria-pressed={role === value} onClick={() => update({ role: value })}>{label}</button>)}</div>
         <div className="advancedFilters">
           <select aria-label="リーダー効果で絞り込み" value={leaderFilter} onChange={e => update({ leaderFilter: e.target.value })}><option value="all">全リーダー効果</option><option value="hp">HPアップ</option><option value="mp">MPアップ</option><option value="atk">攻撃アップ</option><option value="speed">素早さアップ</option></select>
@@ -72,10 +77,16 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
           <select aria-label="コストで絞り込み" value={costFilter} onChange={e => update({ costFilter: e.target.value })}><option value="all">全コスト</option><option value="2">COST 2</option><option value="3">COST 3</option><option value="4">COST 4</option><option value="5">COST 5</option>{editing && <option value="fit">この枠に編成可能</option>}</select>
         </div>
       </details>
-      <button className="detailButton resetFilters" aria-label="絞り込みをリセット" onClick={resetFilters}>検索・絞り込みをリセット</button>
-      <div ref={list} onScroll={event => { if (scrollPosition) scrollPosition.current = event.currentTarget.scrollTop; }} className="roster candidateList" aria-label={editing ? '入れ替え候補一覧' : '図鑑一覧'} tabIndex={0}>
+      {(!gallery || filtered) && <div className={gallery ? "catalogApplied" : undefined}>{gallery && <span>{applied.join(" · ") || (filter.trim() ? `「${filter.trim()}」` : "並べ替え中")}</span>}<button className="detailButton resetFilters" aria-label="絞り込みをリセット" onClick={resetFilters}>{gallery ? "リセット" : "検索・絞り込みをリセット"}</button></div>}
+      <div ref={list} onScroll={event => { if (scrollPosition) scrollPosition.current = event.currentTarget.scrollTop; }} className={`roster candidateList${gallery ? ' catalogGallery' : ''}`} aria-label={editing ? '入れ替え候補一覧' : '図鑑一覧'} tabIndex={0}>
         {visible.map(m => {
           const reason = editing?.unavailableReason(m.id) ?? '';
+          if (gallery) return <article className="rosterItem catalogCard" data-family={m.family} key={m.id}>
+            <button className="catalogCardOpen" aria-label={`${m.name}の詳細`} onClick={event => { event.currentTarget.focus({ preventScroll: true }); onFocus(m.id); }}>
+              <span className="catalogArtStage" aria-hidden="true"><span className="catalogNumber">{String(m.id + 1).padStart(3, '0')}</span><CatalogArt monster={m} /></span>
+              <span className="catalogCardCaption rosterText"><strong>{m.name}</strong><span>{familyLabel(m)}</span></span>
+            </button>
+          </article>;
           return <article className={`rosterItem candidateCard ${editing?.candidateId === m.id && editing ? 'selected' : ''}`} key={m.id}>
             <div className="candidateCardBody">
               <span className="avatar" aria-hidden="true"><MonsterArt monster={m} portrait /></span>
@@ -91,6 +102,6 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
         })}
       </div>
       {!visible.length && <p className="emptySearch">該当するモンスターがいません。検索や絞り込みを変えてみてください。</p>}
-      <p className="hint">{editing ? '候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。' : '能力値はリーダー補正前です。'}詳細を開いても編成は変わりません。</p>
+      {!gallery && <p className="hint">{editing ? '候補一覧・個体の能力値はリーダー補正前。「リーダー変更の比較」だけ補正後です。' : '能力値はリーダー補正前です。'}詳細を開いても編成は変わりません。</p>}
   </>;
 }

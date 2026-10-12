@@ -1,4 +1,6 @@
-import MonsterArt from './MonsterArt';
+import './catalog.css';
+import CatalogArt from './CatalogArt';
+import MythVignetteEntry from './MythVignetteEntry';
 import { useEffect, useRef } from 'react';
 import { monsters, EXTRAORDINARY_CORE_ID, UNDEAD_CORE_ID, UNDEAD_CASHOUT, DEMON_CORE_ID, DEMON_PRESSURE, SLIME_CORE_ID, SLIME_SUPPLY, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, NATURE_WARD_PERCENT, familyLabel, leaderFor, skillOrderLabel, type Skill } from './engine';
 import { fixedDamageHint, monsterRole, skillLore } from './strategy';
@@ -22,7 +24,7 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     close.current?.focus({ preventScroll: true });
     return () => { document.body.style.overflow = previousOverflow; previousFocus?.focus({ preventScroll: true }); };
   }, []);
-  return <div className="overlay" onClick={onClose}><section ref={dialog} className="modal profileModal" role="dialog" aria-modal="true" aria-label={`${monster.name}の詳細`} onClick={event => event.stopPropagation()} onKeyDown={event => {
+  return <div className="overlay" onClick={onClose}><section ref={dialog} className="modal profileModal profileArtFirst" role="dialog" aria-modal="true" aria-label={`${monster.name}の詳細`} onClick={event => event.stopPropagation()} onKeyDown={event => {
     if (event.defaultPrevented) return;
     // Own dismissal before it can reach the catalog or other page-level handlers.
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); return; }
@@ -42,9 +44,13 @@ export default function MonsterDetails({ id, onClose }: { id: number; onClose: (
     const next = index < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
     controls[next].focus();
   }}>
-    <div className="profileHeader"><strong>{monster.name}の詳細</strong><button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
+    <div className="profileHeader"><strong>No. {String(monster.id + 1).padStart(3, '0')}</strong><button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
     <div className="profileBody">
-    <div className="profileHeading"><span className="heroIcon"><MonsterArt monster={monster} /></span><div><span className="eyebrow">MONSTER PROFILE · COST {monster.cost}</span><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><small>閲覧のみ · 入れ替えは編成の枠から</small></div></div>
+    <div className="profileHeading" data-family={monster.family}>
+      <span className="heroIcon"><CatalogArt monster={monster} /></span>
+      <div className="profileIdentity"><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><span className="profileCost">コスト {monster.cost}</span><small className="catalogAccessibleTitle">閲覧のみ · 入れ替えは編成の枠から</small></div>
+      <MythVignetteEntry id={id} />
+    </div>
     <section className="profileStory" aria-label={`${monster.name}のひとことと由来`}>
       <div><span className="storyLabel">ひとこと <small>本作の創作</small></span><p className="monsterLore">{story.flavour}</p></div>
       <div><span className="storyLabel">{story.gameOriginal ? 'ゲームオリジナル' : '伝承'}</span><p className="monsterOrigin">{story.origin}{story.sourceUrl && <a className="loreSource" href={story.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${monster.name}の伝承の出典: ${story.sourceTitle}（新しいタブ）`}>出典<span aria-hidden="true"> ↗</span></a>}</p></div>

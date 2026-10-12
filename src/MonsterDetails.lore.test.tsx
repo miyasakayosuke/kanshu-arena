@@ -47,11 +47,13 @@ describe('readable identity at every monster entry', () => {
     }
   });
 
-  it('cycles only the existing controls when a game-original monster has no historical source', async () => {
+  it('cycles through the movie trigger and reading controls without a historical source', async () => {
     await mount(24);
     const close = document.querySelector<HTMLButtonElement>('.profileHeader .close')!;
     expect(document.activeElement).toBe(close);
     await act(async () => close.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })));
+    expect(document.activeElement).toBe(document.querySelector('.mythPlay'));
+    await act(async () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })));
     expect(document.activeElement).toBe(document.querySelector('.profileBackground > summary'));
     await act(async () => document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })));
     expect(document.querySelector('.profileModal')).toBeNull();

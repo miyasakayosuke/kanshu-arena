@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.9",
-  "auditBaseCommit": "e64abcfc251ef5c599f4dbb11d1fdafd482a45e7",
+  "release": "v0.20.10",
+  "auditBaseCommit": "b8477a7b06053248adf702a5ab0081f1fd8d27af",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -613,6 +613,38 @@
           "provenance": "AI-assisted project-specific layout, Canvas depth sorting, pixel target hit testing, separate readable status/target cards and regression tests written directly from the existing game. The user requested the general idea of larger front/back overlapping enemies with DQMSL as a gameplay presentation reference. No screen, art, code, text, sound, font, layout trace or other material from that game was imported. Existing 37 original body/portrait assets, rig source, engine, abilities, RNG, combat and save data remain unchanged.",
           "reviewLimit": "General front/back arrangement is not a claim of clearance for particular expression. Current non-browser raster review uses the actual project Canvas and assets, plus geometry/CSS contracts; actual mobile/browser hit testing, scrolling, font rendering and performance remain a publisher gate. Existing ownership, similarity, trademark, patent and professional review questions remain open.",
           "integrationNote": "Combined v0.20.9 review detected enlarged Fenrir paws below shallow stage bounds before impact. Only ID12 world travel distance is scaled to0.6 in enemyFormation/BattleStage; existing curve, lift/tilt, rig pose, authoritative impacts and other species remain unchanged. Actual transformed-rig silhouette regression and pixel hit verification are rerun; no legal or real-device performance clearance implied."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.10 art-first catalog component. Originally reviewed on public v0.20.8 tree 7851e8f405fec1131e299a555d3075636572424a; then integrated with the separately reviewed scenes on v0.20.9. See docs/catalog-art-first-candidate.md.",
+          "files": [
+            "src/CatalogScreen.tsx",
+            "src/RosterBrowser.tsx",
+            "src/MonsterDetails.tsx",
+            "src/catalog.css",
+            "src/CatalogScreen.artFirst.test.tsx",
+            "src/CatalogScreen.artFirstLayout.test.ts",
+            "docs/catalog-art-first-candidate.md",
+            "src/CatalogArt.tsx"
+          ],
+          "provenance": "AI-assisted project-specific React, CSS, interface text and tests independently authored for large existing full-body character art. Official Pocket collection/immersive promotional samples and Apple Design Award game images were inspected for abstract principles: art prominence, progressive controls, one-thumb interaction and accessibility. Only source links are recorded; no reference images, frames, proprietary card treatments, icons, fonts, audiovisual content, external code or dependencies imported. Existing art, lore, game mechanics, save data and third-party notices are unchanged.",
+          "reviewLimit": "The art-first component itself adds no character geometry. The combined release includes separately recorded myth-vignette scenes. All 37 monsters remain available, without invented scarcity or power tier. DOM/CSS checks are not rendered mobile acceptance, independent similarity clearance or a legal opinion."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.10 combined art-first catalog and eight myth scenes on exact published v0.20.9 tree 7365df70612a45382edd828a564f8459fde0212c.",
+          "files": [
+            "src/MonsterDetails.tsx",
+            "src/RosterBrowser.tsx",
+            "src/MythVignetteEntry.tsx",
+            "src/MythVignetteEntry.test.tsx",
+            "src/App.catalogMyths.test.tsx",
+            "src/MonsterDetails.lore.test.tsx",
+            "src/catalog.css",
+            "docs/catalog-myth-integration.md"
+          ],
+          "provenance": "New project-authored async entry wrapper, parent integration, button-focus correction, tests and documentation. Reuses separately reviewed original scene modules without adding external assets, code or dependencies. Player loads only for an opened applicable profile and requires a separate explicit play action. No engine, balance, canonical Fenrir art/rig, save schema, economy or licensing changes.",
+          "reviewLimit": "Source/DOM and controlled-frame tests establish state, lazy import and focus contracts, not actual browser/device geometry or performance. Rendered scene review is inherited only for the byte-identical scene renderer; live integrated responsive/player acceptance remains separate. Rights inventory checks are not legal clearance."
         }
       ]
     },
@@ -774,6 +806,31 @@
         "https://www.bandainamcoent.co.jp/cs/list/seven/job/index.html"
       ],
       "distribution": "New project-authored shared body/portrait geometry and cached SVG part data in browser bundle; no external media. No new license for project original code or artwork selected."
+    },
+    {
+      "id": "myth-vignette-scenes",
+      "kind": "original-vector-scenes-and-player",
+      "files": [
+        "src/mythVignettes.ts",
+        "src/mythSceneSvg.ts",
+        "src/components/MythVignette.tsx",
+        "src/components/mythVignette.css"
+      ],
+      "provenance": "Newly authored fixed-camera nine-second SVG scenes, original text and controls; existing project character vectors reused, with original environment geometry and articulated motion. No external artwork, film, sound, font or third-party code imported. See docs/myth-vignettes-provenance.md. Integration corrects the displayed Draugr spelling to match the roster and explicitly focuses the play trigger; scene geometry and animation remain byte-identical to the reviewed renderer.",
+      "reviewLimit": "AI-assisted creation statement and rendered review are not legal clearance or proof of exclusive rights; independent similarity and ownership assessment remain pending.",
+      "creator": "OpenAI coding assistant for this project, 2026-10-12",
+      "createdFor": "v0.20.10 eight family-core optional myth scenes",
+      "sha256": {
+        "src/mythVignettes.ts": "8aa476f67c91fe8bb17a10406ccf3d0c7f03441a77733710f6eac03eece417a9",
+        "src/mythSceneSvg.ts": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5",
+        "src/components/MythVignette.tsx": "4d8bcb2f98116ace53ae1a52bfda5f935070a58ab264d3ec926e4fa3ba70bfc4",
+        "src/components/mythVignette.css": "d286ff61b69a489b55183181c46f0b21e895acf417ed0bca62f320197c1be86d"
+      },
+      "references": [
+        "docs/myth-vignettes-provenance.md",
+        "docs/catalog-myth-integration.md"
+      ],
+      "distribution": "Inline deterministic SVG scenes in browser bundle; no preview videos distributed"
     }
   ],
   "software": [

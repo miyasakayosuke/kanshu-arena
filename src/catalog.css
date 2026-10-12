@@ -1,0 +1,85 @@
+/* An art-first catalog. This scope never changes the editor or battle layout. */
+.app.screen-catalog:not(.battleMode){display:flex;flex-direction:column;height:100dvh;min-height:0;overflow-x:hidden;overflow-y:auto;padding-bottom:0;background:radial-gradient(ellipse at 20% 0,#213c3b 0,transparent 65%),#0d1c25}
+.screen-catalog>header{display:none}
+.catalogAccessibleTitle{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.teamBuilder.catalogScreen{display:flex;flex-direction:column;flex:1;min-height:0;padding:12px 12px 0}
+.teamBuilder.catalogScreen .candidatePanel{display:flex;flex-direction:column;flex:1;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent}
+.catalogScreen .tools{flex-shrink:0;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.teamBuilder.catalogScreen .tools input,.teamBuilder.catalogScreen .tools select{font-size:16px;min-height:44px;background:#172e37;border-color:#809b9766;border-radius:10px;padding:10px}
+.catalogScreen .tools input::placeholder{color:#a9bcb8;opacity:1}
+.teamBuilder.catalogScreen .filterDisclosure{flex:0 1 auto;min-height:44px;max-height:45%;overflow:auto;overscroll-behavior:contain;margin:3px 0 0;border:0}
+.teamBuilder.catalogScreen .filterDisclosure>summary{position:sticky;top:0;z-index:2;min-height:44px;padding:11px 3px;background:#12272f;color:#d5e0d9;font-size:12px;line-height:22px}
+.teamBuilder.catalogScreen .filterDisclosure>summary::marker{color:#c4b67e}
+.teamBuilder.catalogScreen .filterDisclosure>summary .catalogCount{float:right;font-size:12px;color:#c0cec8;letter-spacing:.4px}
+.teamBuilder.catalogScreen .filterChips{padding:4px 0 8px}
+.teamBuilder.catalogScreen .filterChips button{font-size:12px;color:#c9d7d0}
+.teamBuilder.catalogScreen .advancedFilters{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.teamBuilder.catalogScreen .advancedFilters select{font-size:11px;padding:8px 5px}
+.catalogScreen .catalogApplied{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0;font-size:12px;color:#d7ceae;border-top:1px solid #617b6944}
+.catalogScreen .catalogApplied>span{min-width:0;overflow-wrap:anywhere}
+.teamBuilder.catalogScreen .catalogApplied .resetFilters{margin:0;padding:7px 3px;flex-shrink:0;font-size:12px;color:#d9dbc6}
+.teamBuilder.catalogScreen .catalogGallery{display:grid;flex:1;min-height:100px;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;align-content:start;gap:12px 10px;overflow-y:auto;overscroll-behavior:contain;padding:5px 2px 14px;scroll-padding:5px;scrollbar-width:thin;scrollbar-color:#78988a #142631}
+.catalogGallery .catalogCard{--catalog-glow:#8fa991;--catalog-dark:#274139;position:relative;display:block;padding:0;min-width:0;overflow:hidden;border:1px solid #78978b77;border-radius:15px;background:#1d333a;box-shadow:0 4px 14px #0003}
+.catalogCard[data-family=beast],.profileArtFirst .profileHeading[data-family=beast]{--catalog-glow:#d2af70;--catalog-dark:#443b2e}
+.catalogCard[data-family=nature],.profileArtFirst .profileHeading[data-family=nature]{--catalog-glow:#9abd8b;--catalog-dark:#284739}
+.catalogCard[data-family=dragon],.profileArtFirst .profileHeading[data-family=dragon]{--catalog-glow:#7ccbc4;--catalog-dark:#21444b}
+.catalogCard[data-family=material],.profileArtFirst .profileHeading[data-family=material]{--catalog-glow:#d3ae7e;--catalog-dark:#473e35}
+.catalogCard[data-family=slime],.profileArtFirst .profileHeading[data-family=slime]{--catalog-glow:#a7bddf;--catalog-dark:#343d56}
+.catalogCard[data-family=demon],.profileArtFirst .profileHeading[data-family=demon]{--catalog-glow:#baa2c9;--catalog-dark:#44394c}
+.catalogCard[data-family=undead],.profileArtFirst .profileHeading[data-family=undead]{--catalog-glow:#abae99;--catalog-dark:#394340}
+.catalogCard[data-family=extraordinary],.profileArtFirst .profileHeading[data-family=extraordinary]{--catalog-glow:#c8c9a5;--catalog-dark:#36484a}
+.catalogCardOpen{display:block;width:100%;height:100%;padding:0;border:0;border-radius:inherit;background:none;text-align:left;color:#f1eddb}
+.catalogCardOpen:focus-visible{outline:3px solid #ffe2a2;outline-offset:-3px}
+.catalogArtStage{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1.12;overflow:hidden;background:radial-gradient(ellipse at 50% 56%,var(--catalog-glow),transparent 78%),linear-gradient(155deg,var(--catalog-dark),#152932)}
+.catalogArtStage::before{content:'';position:absolute;z-index:-1;inset:12% 7% 6%;border:1px solid #f0e6bd33;border-radius:50% 50% 42% 42%;box-shadow:0 0 0 8px #e2dfb808}
+.catalogArtStage::after{content:'';position:absolute;z-index:-1;width:72%;height:12%;bottom:11%;border-radius:50%;background:#0a182977;filter:blur(8px)}
+.catalogArtStage .monsterArt{display:block;width:100%;height:92%;object-fit:contain;filter:drop-shadow(0 7px 4px #06131f44)}
+.catalogNumber{position:absolute;left:11px;top:10px;z-index:1;color:#e5e6d2;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:1.5px;text-shadow:0 1px 5px #000}
+.catalogCardCaption{display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:67px;padding:10px 11px;background:linear-gradient(110deg,#21363b,#152932)}
+.catalogCardCaption.rosterText strong{font-size:16px;line-height:1.45;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;font-weight:600;letter-spacing:.2px}
+.catalogCardCaption>span{font-size:12px;line-height:1.4;color:#c2c9b1}
+.catalogScreen .emptySearch{margin:0;padding:14px;font-size:13px;flex-shrink:0;color:#c2d0c4}
+@media(min-width:600px){.teamBuilder.catalogScreen{padding:16px 18px 0}.teamBuilder.catalogScreen .catalogGallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.catalogArtStage{aspect-ratio:1/1.1}}
+@media(max-width:350px){.teamBuilder.catalogScreen{padding:8px 8px 0}.catalogScreen .tools{grid-template-columns:minmax(0,1fr) auto}.teamBuilder.catalogScreen .catalogGallery{gap:9px 8px}.catalogCardCaption{padding:9px;min-height:68px}.catalogCardCaption.rosterText strong{font-size:14px}.teamBuilder.catalogScreen .advancedFilters{grid-template-columns:1fr}.teamBuilder.catalogScreen .advancedFilters select{font-size:12px}.catalogArtStage{aspect-ratio:1/1.16}}
+@media(max-height:440px) and (min-width:500px){.teamBuilder.catalogScreen{padding-top:6px}.teamBuilder.catalogScreen .catalogGallery{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.catalogArtStage{aspect-ratio:1.15/1}.catalogCardCaption{min-height:56px;padding:7px 9px}.catalogCardCaption.rosterText strong{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.catalogCard,.catalogCardOpen,.catalogArtStage .monsterArt{animation:none;transition:none;scroll-behavior:auto}}
+
+/* Full-body, art-led details retain one bounded reader and its fixed Close. */
+.profileArtFirst .profileHeader{padding:3px 7px 3px 15px;background:#12272f}
+.profileArtFirst .profileHeader>strong{font-size:11px;font-weight:500;letter-spacing:1.5px;color:#c6cfbe}
+.profileArtFirst .profileBody{padding:0 16px 20px}
+.profileArtFirst .profileHeading{display:block;margin:0 -16px 15px;text-align:center;background:linear-gradient(180deg,var(--catalog-dark,#294340),#152a33);overflow:hidden}
+.profileArtFirst .heroIcon{display:flex;align-items:center;justify-content:center;position:relative;isolation:isolate;width:100%;height:clamp(170px,36dvh,310px);padding:10px 16px 0;filter:none;background:radial-gradient(ellipse at 50% 60%,var(--catalog-glow,#9abd8b),transparent 75%)}
+.profileArtFirst .heroIcon::before{content:'';position:absolute;z-index:-1;inset:6% 12% 3%;border:1px solid #f0e6bd33;border-radius:50% 50% 42% 42%;box-shadow:0 0 0 14px #e2dfb807}
+.profileArtFirst .heroIcon .monsterArt{width:100%;height:100%;max-width:390px;object-fit:contain;filter:drop-shadow(0 10px 6px #06131f55)}
+.profileArtFirst .profileIdentity{padding:7px 15px 16px}
+.profileArtFirst .profileIdentity h2{font-size:24px;line-height:1.4;margin:0 0 9px;overflow-wrap:anywhere;letter-spacing:.6px}
+.profileArtFirst .profileIdentity .profileEpithet{font-size:12px;line-height:1.5;margin:0 0 3px;color:#d4d9c0}
+.profileArtFirst .familyTag{font-size:12px;color:#d2ddca;background:#142a3388;border-color:#adc9ba55;padding:5px 9px}
+.profileArtFirst .profileCost{font-size:12px;color:#d3d7c0;margin-left:12px}
+@media(max-height:440px) and (min-width:500px){.profileArtFirst .profileHeading{display:grid;grid-template-columns:1fr 1fr;align-items:center}.profileArtFirst .heroIcon{height:190px}.profileArtFirst .profileIdentity{padding:12px}.profileArtFirst .profileIdentity h2{font-size:21px}}
+
+.catalogCardOpen:active .catalogArtStage{filter:brightness(1.12)}
+
+.catalogArtFallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;max-width:100%;padding:14px;color:#f0edda;text-align:center}
+.catalogArtFallback>span{font-size:50px;line-height:1.3}
+.catalogArtFallback>small{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.profileArtFirst .profileHeading:has(.monsterArt) .heroIcon{padding:10px 16px 0}
+.profileArtFirst .roleBrief>strong,.profileArtFirst .skill>strong{font-size:15px;line-height:1.6}
+.profileArtFirst .roleBrief p{font-size:14px;line-height:1.8}
+.profileArtFirst .roleBrief small,.profileArtFirst .leaderBanner span,.profileArtFirst .leaderBanner small,.profileArtFirst .familyExplanation,.profileArtFirst .skill small,.profileArtFirst .skillLore,.profileArtFirst .profileBackground .hint{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.profileArtFirst h3,.profileArtFirst .profileBackground summary{font-size:14px;line-height:1.7}
+.profileArtFirst .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.profileArtFirst .stats small{font-size:12px}.profileArtFirst .stats b{font-size:22px}
+
+/* In-flow nav reserves its real, text-scaled height instead of a fixed 64px guess. */
+.screen-catalog .mainNav{position:static;flex:0 0 auto;width:100%;margin:0 auto}
+@media(max-width:279px){.catalogScreen .tools{grid-template-columns:1fr}.teamBuilder.catalogScreen .catalogGallery{grid-template-columns:minmax(0,1fr)}}
+@media(max-height:320px){.teamBuilder.catalogScreen{flex:0 0 auto;height:270px}.screen-catalog .mainNav{position:sticky;bottom:0}}
+
+.profileArtFirst .profileHeading .mythEntry{grid-column:1 / -1;margin:0;padding:0 16px 16px}
+.profileArtFirst .profileHeading .mythPlay{min-height:52px;border-radius:10px;font-size:14px}
+.mythEntryPending{grid-column:1 / -1;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;min-height:52px;padding:0 16px 16px;font-size:13px;color:#d8dece}
+.mythEntryPending button{min-height:44px;min-width:44px;font-size:13px}
+
+.mythEntryHost{grid-column:1 / -1;min-width:0;width:100%}.mythEntryPending button[aria-disabled=true]{opacity:.6;cursor:wait}
