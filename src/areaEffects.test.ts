@@ -13,7 +13,7 @@ describe('formation-wide effect choreography', () => {
   it.each(['fire','wind','water','shadow','poison','slash'])('covers the whole formation and marks every intended target for %s', type => {
     const ctx = context();
     drawAreaEffect(ctx, {...fixture, type});
-    expect(ctx.fillRect).toHaveBeenCalledWith(28, 156, 664, 142);
+    expect(ctx.fillRect).toHaveBeenCalledWith(28, 150, 664, 142);
     const markers = vi.mocked(ctx.ellipse).mock.calls.filter(call => call[2] === 34 && call[3] === 10);
     expect(markers.map(call => call[0])).toEqual(targets.map(p => p.x));
     expect(ctx.scale).toHaveBeenCalledWith(1, .6);
@@ -21,7 +21,7 @@ describe('formation-wide effect choreography', () => {
   it('retains wide coverage for a single survivor without marking dead slots', () => {
     const ctx = context();
     drawAreaEffect(ctx, {...fixture, targets:[targets[3]], age:CAST_IMPACT_MS, impacted:true});
-    expect(ctx.fillRect).toHaveBeenCalledWith(28, 156, 664, 142);
+    expect(ctx.fillRect).toHaveBeenCalledWith(28, 150, 664, 142);
     expect(vi.mocked(ctx.ellipse).mock.calls.filter(call => call[2] === 34).map(call => call[0])).toEqual([498]);
   });
   it('renders different geometry for fire, wind, water and poison instead of recoloring a projectile', () => {

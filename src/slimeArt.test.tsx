@@ -50,7 +50,7 @@ describe('original invented slime SVG registry',()=>{
     expect(SLIME_ART[28].full).toContain('Exactly six low, radial pressure lobes');
   });
   it('preserves the twelve earlier drawings and the completed original roster',()=>{
-    expect([12,13,14,15,16,17,18,19,20,21,22,23].map(id=>CHARACTER_ART[id].spriteWidth)).toEqual([110,99,121,127,118,125,116,112,116,124,115,127]);
+    expect([12,13,14,15,16,17,18,19,20,21,22,23].map(id=>CHARACTER_ART[id].spriteWidth)).toEqual([142,99,121,127,118,125,116,112,116,124,115,127]);
     for(const [id,art] of Object.entries({...DRAGON_ART,...MATERIAL_ART})) expect(CHARACTER_ART[Number(id)]).toBe(art);
     for(const monster of monsters.filter(m=>m.id<12)) expect(new DOMParser().parseFromString(renderToStaticMarkup(<MonsterArt monster={monster}/>), 'text/html').querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
   });

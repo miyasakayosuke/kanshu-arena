@@ -25,7 +25,7 @@ export function drawAreaEffect(ctx: CanvasRenderingContext2D, effect: AreaEffect
   const charge = clamp(age / CAST_IMPACT_MS);
   const release = impacted ? clamp((age - CAST_IMPACT_MS) / 500) : 0;
   const opacity = impacted ? 1 - release : .2 + charge * .42;
-  const y = incoming ? 475 : 231;
+  const y = incoming ? 475 : targets.reduce((sum, point) => sum + point.y, 0) / Math.max(1, targets.length);
   const sy = incoming ? Math.max(.65, scaleY) : scaleY;
   const left = 28;
   const right = 692;

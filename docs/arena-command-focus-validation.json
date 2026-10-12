@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-12",
+  "baseCommit": "e64abcfc251ef5c599f4dbb11d1fdafd482a45e7",
+  "baseTree": "7851e8f405fec1131e299a555d3075636572424a",
+  "publication": "component candidate checks before v0.20.9 integration; not an independent publication",
+  "checks": {
+    "affectedTests": {
+      "files": 10,
+      "passed": 163
+    },
+    "fullTests": {
+      "files": 116,
+      "passed": 2556,
+      "failed": 0
+    },
+    "rightsSelftests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "sourceRights": "passed; not legal clearance",
+    "build": "passed; TypeScript, Vite and distribution notices",
+    "diffWhitespace": "passed"
+  },
+  "preservedSha256": {
+    "src/engine.ts": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "src/playback.ts": "70dfc8683836ff4c6773c8a8665796778b31cb7bdd84ba0e48ec6635f288762e",
+    "src/battleMotion.ts": "e2f8a8e4f010e641d5c49f2a3b4ccb8d0ad3fa228275a47fee594546893e3cc9",
+    "src/BattleStage.tsx": "94e23ce56edef4038d07c5173b81f2fd08036579defa3046eb53d1b349dadb67",
+    "src/MonsterArt.tsx": "3f8d510a76c648b682d67b73083682984a17e0693fb64875cfef09daf74fa8e4",
+    "src/strategy.ts": "1cdd13e1a00c46acdf942f7926152e04633dd0aaf10c9f31efb56f61a047d84d",
+    "src/familyTrials.ts": "0705b4f0d82f79dd9f028b52cf3755b9a984bff8b1aab00c5ea79df6258b896c",
+    "src/navigation.ts": "12fc3a533f27bfe6273d2038ec85f979cbe0d11d38c8761c98d82c32c8955b70",
+    "src/CatalogScreen.tsx": "eee09c1b80e11e7a26a8cfdd118c58235e81eaf0d1ed3307213f938798a0d2ed",
+    "src/RosterBrowser.tsx": "cc87967c47b2baa4d6ab245cc20efe76db35d417af3061214db6a6564c6a1e0f",
+    "src/TeamBuilder.tsx": "99c5a218379098d1b81b384b1670086a4b2daa6d7a7a9bad1ec1882d53686040",
+    "package.json": "70b5f7fdd31d0cfbde210d4ac9778e0631aa4a752ae5738304e2579147a31661",
+    "package-lock.json": "b4be0240bc8c15257f5da01530f1b268c851bfb9e66c0eb22e30061adffc983a",
+    "public/THIRD_PARTY_NOTICES.txt": "7d95a4f4274dc1844bf31998a2ae0f0814af7deb04503743f8aeb2ae1fbef99c",
+    "public/credits.html": "6f6990284179e0010555e40379b4e067954ee29f7764713fc428e65564d12b25"
+  },
+  "renderedBrowser": "not verified: Chromium aborted before page load because process_singleton_posix socket() is not permitted",
+  "acceptanceChecklist": "docs/arena-command-focus-candidate.md",
+  "independentReview": {
+    "result": "Passed; no code blocker found",
+    "testsPassed": 150,
+    "testFiles": 11,
+    "newFocusCasesIncluded": 20,
+    "diffWhitespace": "passed",
+    "limits": "happy-dom does not establish rendered scrolling, native key activation or pointer hit-testing; final browser QA must check short-screen focus and rapid double-tap after scrollIntoView."
+  },
+  "integratedRelease": "0.20.9",
+  "combinedValidation": "release-validation-v0209.json"
+}

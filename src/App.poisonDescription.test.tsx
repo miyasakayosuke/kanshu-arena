@@ -122,8 +122,8 @@ describe('poison copy preserves command and playback semantics', () => {
     await click(button('とくぎ')); await click(poisonButton());
     expect(document.querySelector('.targetButtons')).toBeNull();
     expect(mp()).toEqual(beforeMp); expect(hp()).toEqual(beforeHp); expect(enemyVitals()).toEqual(beforeEnemies);
-    // Clear the first order, then select it again: neither step pays MP or consumes poison.
-    await click(button('全員おまかせ')); await click(button('とくぎ')); await click(poisonButton());
+    // Replace the first order, then select it again: neither step pays MP or consumes poison.
+    await click(label('ドリュアスの行動を選択')); await click(button('ぼうぎょ')); await click(label('ドリュアスの行動を選択')); await click(button('とくぎ')); await click(poisonButton());
     expect(mp()).toEqual(beforeMp); expect(resolve).not.toHaveBeenCalled();
     for (const id of team.slice(1)) { await click(label(`${engine.monsters[id].name}の行動を選択`)); await click(button('ぼうぎょ')); }
     await click(button('この指示でターン開始'));

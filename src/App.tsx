@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, completeOrders, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage, {type CompactCastCaption} from './BattleStage';
@@ -45,6 +45,8 @@ export default function App() {
   const [slots, setSlots] = useState(() => { try { return loadTeamSlots(localStorage); } catch { return [null, null, null] as ReturnType<typeof loadTeamSlots>; } });
   const [battle, setBattle] = useState<State | null>(null);
   const [orders, setOrders] = useState<Record<string, Order>>({});
+  const turnStartButton = useRef<HTMLButtonElement>(null);
+  const focusTurnStart = useRef(false);
   const [activeKey, setActiveKey] = useState('a0');
   const [pendingSkill, setPendingSkill] = useState<number | null>(null);
   const [showSkills, setShowSkills] = useState(false);
@@ -158,6 +160,7 @@ export default function App() {
     setAutomaticKeys(keys => automatic ? [...keys.filter(key => key !== active.key), active.key] : keys.filter(key => key !== active.key));
     const unselected = living.find(u => !next[u.key]);
     if (unselected) setActiveKey(unselected.key);
+    else focusTurnStart.current = true;
   };
   const selectSkill = (index: number) => {
     if (commandsExpired() || !active || battle?.winner || playingLock.current) return;
@@ -172,10 +175,19 @@ export default function App() {
       .find(order => order.key === active.key);
     if (order) commitOrder(order.skill, order.target, true);
   };
-  const resetOrders = () => {
-    if (commandsExpired() || !battle || battle.winner || playingLock.current) return;
-    setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setActiveKey(living[0]?.key ?? 'a0');
-  };
+  useLayoutEffect(() => {
+    if (!focusTurnStart.current) return;
+    // Consume the request in this commit. A later dialog dismissal, turn, or
+    // navigation must not resurrect it or take focus away from an overlay.
+    focusTurnStart.current = false;
+    if (page !== 'battle' || !battle || battle.winner || playing || playingLock.current || pendingSkill !== null
+      || focus !== null || showLog || showTactics || navigation.pending || !living.length || living.some(unit => !orders[unit.key])
+      || commandDeadline.current === null || Date.now() >= commandDeadline.current) return;
+    const button = turnStartButton.current;
+    if (!button || button.disabled) return;
+    button.focus({ preventScroll: true });
+    button.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+  }, [orders, page, battle, playing, pendingSkill, focus, showLog, showTactics, navigation.pending]);
   const finishPlayback = () => {
     clearTimers();
     const next = latestResult.current;
@@ -276,9 +288,9 @@ export default function App() {
   const scopeLabel = ['responseCleanse', 'responseGuard'].includes(visualCast?.effect ?? '') ? `生存する${incomingArea ? '味方' : '敵側の仲間'}全員 ${visualCast?.targets?.length ?? 0}体` : visualCast?.effect === 'restoreMp' ? `生存する粘体系 ${visualCast.targets?.length ?? 0}体` : visualCast?.passive === 'material-repair' ? `生存する物質系 ${visualCast.targets?.length ?? 0}体` : visualCast?.scope === 'random' ? `ランダム${visualCast.hits}回` : visualCast?.scope === 'all' ? `${incomingArea ? '味方' : '敵'}全体 ${visualCast.targets?.length ?? 0}体` : '';
   const visibleCastCaption = playing && compactCastCaption?.event === visualCast ? compactCastCaption : null;
   return <div className={`app ${page === 'battle' ? `battleMode ${battle?.winner ? 'resultMode' : ''}` : `screen-${page}`}`}>
-    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.8</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : page === 'catalog' ? 'CATALOG' : 'ARENA'}</span>}</header>
+    <header><div className="brandMark">✦</div><div><div className="eyebrow">KANSHU ARENA · PLAYTEST 0.20.9</div><h1>環獣のアリーナ</h1></div>{page === 'battle' ? <button className="headerHome iconButton" aria-label="ホーム" onClick={() => navigate('home')}>⌂ ホーム</button> : <span className="previewBadge">{page === 'home' ? 'HOME' : page === 'team' ? 'TEAM' : page === 'catalog' ? 'CATALOG' : 'ARENA'}</span>}</header>
     {showFamilyTrials && <FamilyTrialPicker presets={familyTrialPresets} rule={rule} onChoose={chooseFamilyTrial} onClose={() => setShowFamilyTrials(false)} />}
-    {page === 'home' && <HomeScreen onFamilyTrial={() => setShowFamilyTrials(true)} team={team} rule={rule} onFocus={setFocus} />}
+    {page === 'home' && <HomeScreen team={team} rule={rule} onFocus={setFocus} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} />}
     {page === 'catalog' && <CatalogScreen filters={catalogFilters} setFilters={setCatalogFilters} scrollPosition={catalogScroll} onFocus={setFocus} />}
     {page === 'team' && <TeamBuilder onCatalog={() => navigate('catalog')} slots={slots} setSlots={setSlots} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
@@ -320,8 +332,8 @@ export default function App() {
             <button className={automaticKeys.includes(active.key) ? 'chosen' : ''} onClick={selectAutomatic}><strong>おまかせ</strong><small>この味方を自動選択</small></button>
           </div>}
         </>}
-        <div className="turnControls"><button className="autoButton" disabled={playing} onClick={resetOrders}>全員おまかせ</button><button className="speedButton" disabled={playing} aria-label="演出速度" onClick={() => setSpeed(speed === 1 ? 2 : 1)}>演出 ×{speed}</button></div>
-        {!playing && <button className="primary turnStart" disabled={pendingSkill !== null} onClick={() => execute()}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>}
+        <div className="turnControls"><button className="speedButton" disabled={playing} aria-label="演出速度" onClick={() => setSpeed(speed === 1 ? 2 : 1)}>演出 ×{speed}</button></div>
+        {!playing && <button ref={turnStartButton} className="primary turnStart" disabled={pendingSkill !== null} onKeyDown={event => { if (event.repeat && (event.key === 'Enter' || event.key === ' ')) event.preventDefault(); }} onClick={() => execute()}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>}
       </section>}
     </main>}
     {focus !== null && <MonsterDetails id={focus} onClose={() => setFocus(null)} />}

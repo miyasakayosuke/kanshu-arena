@@ -44,7 +44,7 @@ describe('slime supply playable UI',()=>{
     const beforeHp=hp(),beforeMp=mp(),portraits=[...document.querySelectorAll<HTMLImageElement>('.commanderIcon img')].map(n=>n.src);
     if(speed===2)await click(label('演出速度'));
     await supplyOrder();expect(document.querySelector('#party-status-a0')?.textContent).toBe('補給:残1回');expect(mp()).toEqual(beforeMp);
-    await click(button('全員おまかせ'));expect(document.querySelector('#party-status-a0')?.textContent).toBe('補給:残1回');await supplyOrder();await click(button('この指示でターン開始'));
+    await click(label('うつろ泉の行動を選択'));await click(button('ぼうぎょ'));expect(document.querySelector('#party-status-a0')?.textContent).toBe('補給:残1回');await supplyOrder();await click(button('この指示でターン開始'));
     const result=resolve.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>,tl=buildTimeline(result.events);
     const cast=tl.cues.find(c=>c.cast?.effect==='restoreMp'&&!c.impacts.length)!,impact=tl.cues.find(c=>c.impacts.some(e=>e.kind==='resource-gain'))!;
     expect(cast.passive).toBeUndefined();expect(result.events.filter(e=>e.kind==='cast')).toHaveLength(10);

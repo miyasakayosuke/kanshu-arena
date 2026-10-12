@@ -14,7 +14,7 @@ const click = async (node: HTMLElement) => { expect(node).toBeTruthy(); await ac
 const mount = async () => { await act(async () => root.render(<App />)); };
 const active = () => JSON.parse(localStorage.getItem('kanshu-workshop-v1')!);
 const picker = () => document.querySelector('.familyTrialDialog');
-async function open() { await click(button('系統パーティを試す')); }
+async function open() { if (window.location.hash === '#home') await click(label('闘技場')); await click(button('系統パーティを試す')); }
 async function choose(id: string) { await click(document.querySelector<HTMLButtonElement>(`.familyTrialCard[data-family="${id}"] .familyTrialChoose`)!); }
 async function finish() {
   for (let turn=0; turn<20 && !document.querySelector('.result'); turn++) { await click(button('この指示でターン開始')); await click(button('演出をスキップ')); }
@@ -30,6 +30,14 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMocks(); vi.useRealTimers(); });
 describe('one-click family trials without saving over slots', () => {
+  it('removes the home shortcut but keeps the arena picker reachable through the footer', async () => {
+    await mount(); expect(button('系統パーティを試す')).toBeUndefined();
+    expect(document.querySelector('.homeDestinations')).toBeNull();
+    await click(label('闘技場')); await open(); expect(picker()).toBeTruthy();
+    await click(label('編成を変えずに閉じる'));
+    await click(label('ホーム')); expect(button('系統パーティを試す')).toBeUndefined();
+    expect(active().team).toEqual(oldTeam); expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);
+  });
   it.each(trials.familyTrialPresets)('applies $id with its leader and opens reception without starting a battle', async preset => {
     const start=vi.spyOn(engine,'start'); const draw=vi.spyOn(trials,'familyEncounterForSeed');
     await mount(); await open(); await choose(preset.id);
@@ -50,7 +58,7 @@ describe('one-click family trials without saving over slots', () => {
     await mount(); const original=localStorage.getItem('kanshu-workshop-v1'); await open();
     if(mode==='escape') await act(async()=>{picker()!.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));});
     else await click(mode==='close'?label('編成を変えずに閉じる'):mode==='cancel'?button('キャンセルして'):document.querySelector<HTMLElement>('.familyTrialOverlay')!);
-    expect(picker()).toBeNull(); expect(window.location.hash).toBe('#home');
+    expect(picker()).toBeNull(); expect(window.location.hash).toBe('#arena');
     expect(localStorage.getItem('kanshu-workshop-v1')).toBe(original); expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);
   });
   it('retains light for nature and explicitly switches to standard for COST17',async()=>{
@@ -74,7 +82,7 @@ describe('one-click family trials without saving over slots', () => {
     expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);
   });
   it('closes on a route change and does not apply a merely opened preset',async()=>{
-    await mount(); await open(); await click(label('闘技場'));
+    await mount(); await open(); await click(label('編成'));
     expect(picker()).toBeNull(); expect(active().team).toEqual(oldTeam);
     await click(label('ホーム')); expect(picker()).toBeNull();
   });

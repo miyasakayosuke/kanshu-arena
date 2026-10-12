@@ -49,6 +49,7 @@ function frame(time: number) {
   context.fillText.mockClear();
   callback(time);
 }
+const paintOrder = <T,>(items: T[]) => [1,3,0,2,4].map(index=>items[index]);
 function drawnImages() {return context.drawImage.mock.calls.map(call => call[0]);}
 function drawnGlyphs() {
   const icons = new Set([...party.allies, ...party.enemies].map(unit => unit.monster.icon));
@@ -101,7 +102,7 @@ describe('mount-local enemy body image loading', () => {
     await render({...base, enemies: base.enemies.map(unit => ({...unit, hp: 0}))});
     expect(images).toHaveLength(5);
     frame(100); frame(900);
-    expect(drawnImages()).toEqual(images);
+    expect(drawnImages()).toEqual(paintOrder(images));
     expect(document.querySelectorAll('.enemyVital.fallen')).toHaveLength(5);
   });
 
@@ -109,7 +110,7 @@ describe('mount-local enemy body image loading', () => {
     await render();
     frame(100);
     expect(drawnImages()).toEqual([]);
-    expect(drawnGlyphs()).toEqual(base.enemies.map(unit => unit.monster.icon));
+    expect(drawnGlyphs()).toEqual(paintOrder(base.enemies).map(unit => unit.monster.icon));
     images[0].load(); images[1].fail();
     images[2].naturalWidth = 280; // A known width alone does not mean the body is complete.
     expect(images[2].complete).toBe(false);
@@ -117,7 +118,7 @@ describe('mount-local enemy body image loading', () => {
     expect(frames.size).toBe(1);
     frame(200);
     expect(drawnImages()).toEqual([images[0]]);
-    expect(drawnGlyphs()).toEqual(base.enemies.slice(1).map(unit => unit.monster.icon));
+    expect(drawnGlyphs()).toEqual([base.enemies[1],base.enemies[3],base.enemies[2],base.enemies[4]].map(unit => unit.monster.icon));
     frame(300); frame(400);
     expect(images).toHaveLength(5); expect(assignments).toHaveLength(5);
     expect(requestAnimationFrame).toHaveBeenCalledTimes(scheduled + 3);
@@ -126,7 +127,7 @@ describe('mount-local enemy body image loading', () => {
   it('draws synchronously available bodies in the first frame without waiting for every image', async () => {
     immediatelyLoaded = true;
     await render(); frame(100);
-    expect(drawnImages()).toEqual(images);
+    expect(drawnImages()).toEqual(paintOrder(images));
     expect(drawnGlyphs()).toEqual([]);
     expect(images).toHaveLength(5); expect(assignments).toHaveLength(5);
   });
@@ -148,19 +149,19 @@ describe('mount-local enemy body image loading', () => {
   it('primes only same-mount cache misses from latest enemies and retains entries when an old enemy returns', async () => {
     await render(); images.forEach(image => image.load()); frame(100);
     const original = [...images];
-    const replacement = start([0, 2, 3, 4, 6], [12, 5, 8, 10, 11]);
+    const replacement = start([0, 2, 3, 4, 6], [18, 5, 8, 10, 11]);
     const scheduled = vi.mocked(requestAnimationFrame).mock.calls.length;
     await render({...base, enemies: replacement.enemies});
     expect(requestAnimationFrame).toHaveBeenCalledTimes(scheduled);
     expect(images).toHaveLength(5); // The persistent renderer reads latest props at the next frame.
     frame(200);
     expect(images).toHaveLength(6);
-    expect(assignments).toEqual([...base.enemies.map(unit => CHARACTER_ART[unit.monster.id].artUrl), CHARACTER_ART[12].artUrl]);
-    expect(drawnImages()).toEqual(original.slice(1));
+    expect(assignments).toEqual([...base.enemies.map(unit => CHARACTER_ART[unit.monster.id].artUrl), CHARACTER_ART[18].artUrl]);
+    expect(drawnImages()).toEqual([original[1],original[3],original[2],original[4]]);
     images[5].load(); frame(300);
-    expect(drawnImages()).toEqual([images[5], ...original.slice(1)]);
+    expect(drawnImages()).toEqual([original[1],original[3],images[5],original[2],original[4]]);
     await render(); frame(400);
-    expect(drawnImages()).toEqual(original);
+    expect(drawnImages()).toEqual(paintOrder(original));
     await render({...base, enemies: replacement.enemies}); frame(500);
     expect(images).toHaveLength(6); expect(assignments).toHaveLength(6);
     expect(cancelAnimationFrame).not.toHaveBeenCalled(); expect(disconnect).not.toHaveBeenCalled();
@@ -190,7 +191,7 @@ describe('mount-local enemy body image loading', () => {
     const caption = vi.fn();
     await render({...base, onCompactCastCaption: caption});
     const old = [...images];
-    const replacement = start([0, 2, 3, 4, 6], [12, 13, 14, 15, 16]);
+    const replacement = start([0, 2, 3, 4, 6], [18, 13, 14, 15, 16]);
     await render({...base, enemies: replacement.enemies, onCompactCastCaption: caption}); frame(100);
     const current = images.slice(5);
     expect(current).toHaveLength(5);
@@ -222,7 +223,7 @@ describe('mount-local enemy body image loading', () => {
     old.forEach(image => image.load()); frame(100);
     expect(drawnImages()).toEqual([]);
     images.slice(5).forEach(image => image.load()); frame(200);
-    expect(drawnImages()).toEqual(images.slice(5));
+    expect(drawnImages()).toEqual(paintOrder(images.slice(5)));
     expect(frames.size).toBe(1);
   });
 
@@ -236,7 +237,7 @@ describe('mount-local enemy body image loading', () => {
     images.slice(0, 5).forEach(image => image.load()); frame(100);
     expect(drawnImages()).toEqual([]);
     images.slice(5).forEach(image => image.load()); frame(200);
-    expect(drawnImages()).toEqual(images.slice(5));
+    expect(drawnImages()).toEqual(paintOrder(images.slice(5)));
     await unmount();
     expect(frames.size).toBe(0); expect(disconnect).toHaveBeenCalledTimes(2);
     expect(removeMotionListener).toHaveBeenCalledTimes(2);

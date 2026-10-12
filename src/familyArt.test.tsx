@@ -5,7 +5,7 @@ import {describe, expect, it} from 'vitest';
 import {monsters} from './engine';
 import MonsterArt, {CHARACTER_ART} from './MonsterArt';
 import {GENBU_ART_URL, GENBU_PORTRAIT_SVG, GENBU_PORTRAIT_URL, GENBU_SVG, RATATOSKR_ART_URL, RATATOSKR_PORTRAIT_SVG, RATATOSKR_PORTRAIT_URL, RATATOSKR_SVG} from './familyArt';
-import {FENRIR_ART_URL, FENRIR_PORTRAIT_URL} from './fenrirArt';
+import {STORYBOOK_FENRIR_ART_URL as FENRIR_ART_URL, STORYBOOK_FENRIR_PORTRAIT_URL as FENRIR_PORTRAIT_URL} from './storybookFenrir';
 
 describe('original family character art', () => {
   it.each([

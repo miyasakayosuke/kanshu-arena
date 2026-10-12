@@ -31,11 +31,11 @@ beforeEach(()=>{
 afterEach(async()=>{await act(async()=>root.unmount());vi.restoreAllMocks();vi.useRealTimers();});
 
 describe('extraordinary shared response UI',()=>{
- it.each([0,1])('offers response %s as one group order; cancelling spends neither MP nor shared use',async choice=>{
+ it.each([0,1])('offers response %s as one group order; replacing spends neither MP nor shared use',async choice=>{
   fixture();await begin();await skills();expect(document.querySelectorAll('.skillButtons button')).toHaveLength(4);
   expect(button('境目の清め').textContent).toContain('HP回復0');expect(button('合流の扉').textContent).toContain('生存味方全員');
   await click(button(engine.monsters[36].skills[choice]!.name));expect(document.querySelector('.targetButtons')).toBeNull();expect(document.querySelectorAll('.battleTarget')).toHaveLength(0);
-  expect(mp()[0]).toBe('MP 58/58');expect(status()).toContain('応答:残1回');await click(button('全員おまかせ'));await skills();expect(button('境目の清め').disabled).toBe(false);expect(button('合流の扉').disabled).toBe(false);expect(mp()[0]).toBe('MP 58/58');
+  expect(mp()[0]).toBe('MP 58/58');expect(status()).toContain('応答:残1回');await click(label('ヤヌスの行動を選択'));await click(button('ぼうぎょ'));await skills();expect(button('境目の清め').disabled).toBe(false);expect(button('合流の扉').disabled).toBe(false);expect(mp()[0]).toBe('MP 58/58');
  });
  it.each([0,1].flatMap(choice=>[1,2].map(speed=>({choice,speed}))))('debits once at cast and applies only living recipients at impact: $choice/$speed',async({choice,speed})=>{
   const {setup,resolve}=fixture(choice,s=>{s.allies[4].hp=0;});await begin();if(speed===2)await click(label('演出速度'));await command(choice);

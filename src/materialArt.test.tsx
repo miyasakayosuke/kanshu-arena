@@ -49,7 +49,7 @@ describe('original material SVG registry',()=>{
     expect(MATERIAL_ART[23].full).toContain('far pair of legs');
   });
   it('preserves the seven earlier drawings and the completed original roster',()=>{
-    expect([12,13,14,15,16,17,18].map(id=>CHARACTER_ART[id].spriteWidth)).toEqual([110,99,121,127,118,125,116]);
+    expect([12,13,14,15,16,17,18].map(id=>CHARACTER_ART[id].spriteWidth)).toEqual([142,99,121,127,118,125,116]);
     for(const [id,art] of Object.entries(DRAGON_ART)) expect(CHARACTER_ART[Number(id)]).toBe(art);
     for(const monster of monsters.filter(m=>m.id<12)) expect(new DOMParser().parseFromString(renderToStaticMarkup(<MonsterArt monster={monster}/>), 'text/html').querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
   });

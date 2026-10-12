@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.8",
-  "auditBaseCommit": "42a87128a7d79bf6b68121fc675fefcd9f756691",
+  "release": "v0.20.9",
+  "auditBaseCommit": "e64abcfc251ef5c599f4dbb11d1fdafd482a45e7",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -22,7 +22,7 @@
       "references": [
         "docs/fenrir-reference.md"
       ],
-      "distribution": "Inline SVG data URLs in browser bundle; original-content license not selected"
+      "distribution": "Retained historical source, no longer imported by production registry; superseded by storybook-fenrir-articulated-rig. No license for original content selected."
     },
     {
       "id": "family-svg",
@@ -295,7 +295,9 @@
         "src/originalRosterMotion.ts",
         "src/CatalogScreen.tsx",
         "src/RosterBrowser.tsx",
-        "src/navigation.ts"
+        "src/navigation.ts",
+        "src/enemyFormation.ts",
+        "src/enemyHitTest.ts"
       ],
       "provenance": "Canvas/CSS描画、UI、能力/説明文は本作のソースで定義。設計参照と変更内容はREADME、docs/fenrir-reference.md、docs/family-wave-reference.md、docs/all-families-reference.md、docs/dragon-art-provenance.mdに記録。 v0.13の5体の設定・技説明は本作向けに独立して記述。物質系の参照と専用動作はdocs/material-family-reference.mdとdocs/material-art-provenance.mdに記録。 v0.14の粘体系5体の設定・技説明は本作向けに独立して記述。参照はdocs/slime-family-reference.md、造形はdocs/slime-art-provenance.md。 v0.15の3体の設定・技説明・独自動作は本作用に記述。参照はdocs/demon-family-reference.md、造形はdocs/demon-art-provenance.md。 v0.16の4体の物語・技説明と、土布の低い押し、手綱の横引き、袖の囲い、逆さ糸の縫いのCanvas/CSS/動作コードはUI統合担当が本作用に直接記述。毒片が命中時だけ畳まれる交換効果を新作し、外部画像・効果・文章・コード・動作試料を取り込んでいない。参照はdocs/undead-family-reference.md、造形はdocs/undead-art-provenance.md。 v0.17ではヤヌスの物語・四技の説明、四分類の種類数と生存対象、共通一回のUIを本作用に直接記述。敷居を傾け掌を示す動作、空いた門を通る三本の流線、短い二枚の格子を外へ開くCanvas/CSS効果を新作した。HP回復を示す数字や光の十字を清めに使わず、実際の毒0/guard=trueイベントを表示。外部の画像・音・フォント・文章・コード・動作試料は持ち込んでいない。 全系統の調整検証に伴い、src/poisonDescription.tsの毒説明を本作の実装から独立に記述。即時ダメージと最大HP6%の継続毒、残り回数の更新、解除と予防の違いを区別し、実際のユニット設定またはエンジン既定値を表示する。制作担当は外部の説明文・コードを取り込まず、本作用の新規文面とヘルパーを記述したと申告。 v0.18の毒の機構・自動指示の限界・既存編成を使う対策、ヤヌスの推薦説明、プレイガイドは本作の実装と保存済み実測から独立に記述。外部の記事本文・説明文・画像・音・フォント・コードのコピーは追加していない。 v0.18.1のリーダー比較UI、HP/MP/攻撃/素早さの前後・対象表示と優先度の短い説明は、本作の開始処理から計算した実数を用いる独自コード・文面。キャラクターの能力・AI・アート・外部依存は追加変更せず、外部記事本文・説明文・画像・コードのコピーを用いない。最終制作申告と集約検証はdocs/rights/releases/2026-10-10-v0.18.1.mdに記録する。",
       "reviewLimit": "具体的な画面/動作/文章の比較、商標、特許確認を自動的に満たさない。用語が一般的・神話由来というだけで一律に確認済みにしない。",
@@ -549,6 +551,68 @@
           ],
           "provenance": "AI-assisted project-specific navigation, shared roster extraction, CSS, concise interface text and tests written directly from the existing game source. The existing 37-monster catalog and filters are reused in a read-only durable route, with a generic Unicode catalog glyph rendered by the device font. No external code, imagery, descriptions, fonts, animation samples or dependencies added. Existing character identities, lore, skills, stats, families, artwork including the Yoko rig, battle mechanics, saved-team data and third-party notices are unchanged.",
           "reviewLimit": "Automated DOM, history and CSS contract checks are not browser geometry or touch-device verification. Local Chromium cannot launch because the executor rejects its process socket; actual rendered acceptance remains a separate publisher gate. Inventory checks are not legal clearance; existing ownership, similarity, trademark, patent and professional-review questions remain open."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.9 arena command-focus and home-entry cleanup integration based on v0.20.8 commit e64abcfc251ef5c599f4dbb11d1fdafd482a45e7 / tree 7851e8f405fec1131e299a555d3075636572424a. Implementation and acceptance limits: docs/arena-command-focus-candidate.md.",
+          "files": [
+            "src/App.tsx",
+            "src/HomeScreen.tsx",
+            "src/style.css",
+            "src/App.commandFocus.test.tsx",
+            "src/App.test.tsx",
+            "src/App.confirmedOrders.test.tsx",
+            "src/App.supportOrders.test.tsx",
+            "src/App.extraordinaryWave.test.tsx",
+            "src/App.slimeWave.test.tsx",
+            "src/App.poisonDescription.test.tsx",
+            "src/App.familyTrials.test.tsx",
+            "src/HomeScreen.familyTrials.test.tsx",
+            "src/HomeScreen.layout.test.ts",
+            "docs/arena-command-focus-candidate.md",
+            "docs/arena-command-focus-validation.json"
+          ],
+          "provenance": "Project-specific AI-assisted UI deletion, commit-scoped focus management, existing-palette focus styling and tests written directly from the existing source. Removed only the whole-team reset control and home family-trial shortcut; per-unit automatic commands and arena family picker remain. No external code, text, images, media, fonts, motion samples or dependencies imported. Engine, battle stage, gameplay, artwork, saved-data schema and third-party notices unchanged.",
+          "reviewLimit": "DOM and CSS checks cover focus and control behavior, not rendered mobile geometry or native repeated-key activation. Local Chromium launch is blocked by a process-socket restriction. Supported browser acceptance remains a separate combined-release gate. Rights inventory is not legal clearance; existing legal review questions remain open."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.9 Fenrir articulated Canvas integration. Originally independently reviewed against v0.20.7 frozen tree 81e5f2511b3fec31bf15d9906190c7405b953182; combined with separately reviewed formation and command UI changes on v0.20.8.",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/MonsterArt.tsx",
+            "src/BattleStage.test.tsx",
+            "src/BattleStage.imageLoading.test.tsx",
+            "src/BattleStage.fenrirRig.test.tsx",
+            "src/storybookFenrirRig.test.ts",
+            "src/storybookFenrirBattleMotion.test.ts",
+            "src/App.fenrir.test.tsx",
+            "src/familyArt.test.tsx",
+            "src/dragonArt.test.tsx",
+            "src/materialArt.test.tsx",
+            "src/slimeArt.test.tsx",
+            "docs/fenrir-rig-integration-candidate.md"
+          ],
+          "provenance": "Project-authored Canvas adapter and tests, following the existing Yoko cache architecture without altering Yoko art or sampler. Frame state reads existing authoritative single/multihit timing, defeat, damage and reduced motion. Static loading-contract tests use a remaining static-render species; additional actual-stage tests cover the new rig cache. No external source code, prose, fonts, media or animation samples imported. Engine, RNG, HP/MP, abilities, balance, App/home/nav and lore are unchanged.",
+          "reviewLimit": "Controlled actual-Canvas raster and automated source/test checks do not establish browser/device frame time, GPU/memory or legal clearance. Publication and final browser acceptance are separate."
+        },
+        {
+          "recordedAt": "2026-10-12",
+          "scope": "v0.20.9 larger staggered enemy formation integration based on v0.20.8 commit e64abcfc251ef5c599f4dbb11d1fdafd482a45e7 / tree 7851e8f405fec1131e299a555d3075636572424a. Implementation: docs/layered-enemy-formation-candidate.md.",
+          "files": [
+            "src/BattleStage.tsx",
+            "src/enemyFormation.ts",
+            "src/enemyHitTest.ts",
+            "src/areaEffects.ts",
+            "src/style.css",
+            "src/enemyFormation.test.ts",
+            "src/enemyHitTest.test.ts",
+            "src/BattleStage.test.tsx",
+            "src/BattleStage.shortLayout.test.tsx"
+          ],
+          "provenance": "AI-assisted project-specific layout, Canvas depth sorting, pixel target hit testing, separate readable status/target cards and regression tests written directly from the existing game. The user requested the general idea of larger front/back overlapping enemies with DQMSL as a gameplay presentation reference. No screen, art, code, text, sound, font, layout trace or other material from that game was imported. Existing 37 original body/portrait assets, rig source, engine, abilities, RNG, combat and save data remain unchanged.",
+          "reviewLimit": "General front/back arrangement is not a claim of clearance for particular expression. Current non-browser raster review uses the actual project Canvas and assets, plus geometry/CSS contracts; actual mobile/browser hit testing, scrolling, font rendering and performance remain a publisher gate. Existing ownership, similarity, trademark, patent and professional review questions remain open.",
+          "integrationNote": "Combined v0.20.9 review detected enlarged Fenrir paws below shallow stage bounds before impact. Only ID12 world travel distance is scaled to0.6 in enemyFormation/BattleStage; existing curve, lift/tilt, rig pose, authoritative impacts and other species remain unchanged. Actual transformed-rig silhouette regression and pixel hit verification are rerun; no legal or real-device performance clearance implied."
         }
       ]
     },
@@ -683,6 +747,33 @@
         "https://www.bandainamcoent.co.jp/cs/list/seven/system.html"
       ],
       "distribution": "New project-authored geometry and cached SVG/Canvas-part code in browser bundle; no source media or external assets imported. No project-wide original-content license selected."
+    },
+    {
+      "id": "storybook-fenrir-articulated-rig",
+      "kind": "code-native-vector-and-cached-canvas-parts",
+      "files": [
+        "src/storybookFenrir.ts",
+        "src/storybookFenrirRig.ts",
+        "src/storybookFenrirBattleMotion.ts"
+      ],
+      "provenance": "2026-10-12: newly authored SVG geometry and independent joint sampler for existing roster12 Fenrir. Drawn from the existing project identity: long canine muzzle, four weight-bearing paws, one brush tail, slate/ivory coat, green eyes and broken brass shackles. Original authored paths replace old body/portrait while preserving the myth/lore and mechanics. Broad warm painted color and readable-face observations carry forward from the official DQM3/Seven artwork actually viewed for the prior Yoko study; no game character geometry, texture samples, animation frames, logos, prose, images, fonts or media imported. Fenrir has distinct wolf articulation rather than a recolored fox rig.",
+      "creator": "AI-assisted new vector paths, independent head/jaw/ears/mane/four legs/tail/three-link chain motion and project-specific cached Canvas adapter",
+      "createdFor": "v0.20.9 integration; original candidate based on v0.20.7",
+      "reviewLimit": "Original-authoring and source/rendering review are not a legal opinion or assurance of rights ownership/non-infringement. Physical-device performance and browser decoding/layout remain unverified. Existing project rights-review questions remain open.",
+      "sha256": {
+        "src/storybookFenrir.ts": "e097ac927280065435d3cb6fe519e528d14b283e435cc1356b1ef1d293c3792f",
+        "src/storybookFenrirRig.ts": "02cb1daa054b9f43fe95174494a0c05f306814985e8d88aeab8b2f04f6b08f8d",
+        "src/storybookFenrirBattleMotion.ts": "a93cb9f48477c1f19b1d9f0f271b704db6af9ef4511440a69d7c16f2a9edfbae"
+      },
+      "references": [
+        "docs/fenrir-rig-integration-candidate.md",
+        "docs/fenrir-reference.md",
+        "src/monsterLore.ts",
+        "https://sacred-texts.com/book/the-prose-edda/gylfaginning",
+        "https://www.dragonquest.jp/monsters3/monsters/index.html",
+        "https://www.bandainamcoent.co.jp/cs/list/seven/job/index.html"
+      ],
+      "distribution": "New project-authored shared body/portrait geometry and cached SVG part data in browser bundle; no external media. No new license for project original code or artwork selected."
     }
   ],
   "software": [

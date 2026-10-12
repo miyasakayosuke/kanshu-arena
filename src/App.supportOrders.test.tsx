@@ -156,22 +156,19 @@ describe('confirmed commands reserve only support they will actually perform', (
     ]));
   });
 
-  it('reset discards confirmed support and automatic labels and rebuilds the original automatic plan', async () => {
-    const { state, advance } = await begin();
+  it('a fresh turn discards previous support and automatic labels and rebuilds the automatic plan', async () => {
+    const { advance } = await begin();
     await chooseAttack();
-    await click(label('唐傘おばけの行動を選択'));
-    await click(individualAuto());
+    await click(label('唐傘おばけの行動を選択')); await click(individualAuto());
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(2);
-    await click(button('全員おまかせ'));
+    await click(button('この指示でターン開始')); await click(button('演出をスキップ'));
+    const next = (advance.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>).state;
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     expect(label('唐傘おばけの行動を選択').textContent).toContain('未選択');
-    const lines = await checkPreview(state, []);
-    expect(lines.find(line => line.includes('バステト'))).toContain('清めの鈴 ·');
-    expect(lines.find(line => line.includes('唐傘おばけ'))).not.toContain('傘下の清め ·');
+    await checkPreview(next, []);
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(state));
+    expect(advance.mock.calls[1][1]).toEqual(engine.autoOrders(next));
   });
-
   it.each(['back', 'escape', 'actor change', 'timeout'] as const)('an unfinished replacement target creates no support reservation on %s', async route => {
     const { state, advance } = await begin();
     await chooseAttack();

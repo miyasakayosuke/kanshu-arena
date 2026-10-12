@@ -57,14 +57,14 @@ describe('material repair live battle UI', () => {
     const { setup, resolve } = repairFixture();
     const renderStage = vi.spyOn(stage, 'default');
     await begin();
-    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.8');
+    expect(document.querySelector('header')?.textContent).toContain('PLAYTEST 0.20.9');
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('修復:待機');
     const beforePortraits = portraits(), beforeMp = mp();
     expect(beforePortraits).toHaveLength(5);
     for (const portrait of beforePortraits) { expect(portrait.style).toBeNull(); expect(portrait.className).not.toMatch(/motion|animat/); }
-    expect([...document.querySelectorAll('.battleStage .enemyVital strong')].map(node => node.textContent)).toEqual(setup.mock.results[0].value.enemies.map((unit: engine.Unit) => unit.monster.name));
+    expect([...document.querySelectorAll('.battleStage .enemyVital strong')].map(node => node.textContent)).toEqual(setup.mock.results[0].value.enemies.map((unit: engine.Unit, index: number) => `${index + 1}${unit.monster.name}`));
     expect(document.querySelectorAll('.battleStage .commanderIcon')).toHaveLength(0);
-    expect(document.querySelector('.battleCanvas')?.getAttribute('aria-label')).toContain('敵だけが表示される戦闘フィールド');
+    expect(document.querySelector('.battleCanvas')?.getAttribute('aria-label')).toContain('敵だけが前後に重なる戦闘フィールド');
     expect(document.querySelectorAll('.commandButtons button')).toHaveLength(4);
     if (speed === 2) await click(label('演出速度'));
     await defendAll(); await click(button('この指示でターン開始'));

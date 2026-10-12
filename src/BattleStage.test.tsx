@@ -1,3 +1,4 @@
+import {enemyFormation} from './enemyFormation';
 import {CHARACTER_ART} from './MonsterArt';
 import * as originalMotion from './originalRosterMotion';
 // @vitest-environment happy-dom
@@ -21,7 +22,7 @@ let glyphs: {text: string; matrix: Matrix; font: string}[];
 let textDraws: {text: string; matrix: Matrix; font: string; x: number; y: number}[];
 const context = {
   ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
-  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(),
+  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(), getTransform: vi.fn(),
   createLinearGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   createRadialGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   measureText: vi.fn(() => ({width: 90})),
@@ -39,6 +40,15 @@ function frame(time: number) {
   context.fillText.mockClear();
   glyphs = []; sprites = []; textDraws = [];
   callback(time);
+  // Motion assertions address logical left-to-right slots; depth order has its
+  // own renderer contract and is intentionally independent of combat identity.
+  glyphs.sort((a,b)=>a.matrix[4]-b.matrix[4]);
+  sprites.sort((a,b)=>a[4]-b[4]);
+}
+function imageCallsBySlot(enemies: typeof base.enemies) {
+  return [...context.drawImage.mock.calls].sort((a,b)=>
+    enemies.findIndex(unit=>CHARACTER_ART[unit.monster.id]?.artUrl===(a[0] as HTMLImageElement).src)-
+    enemies.findIndex(unit=>CHARACTER_ART[unit.monster.id]?.artUrl===(b[0] as HTMLImageElement).src));
 }
 function labels() {return context.fillText.mock.calls.map(call => call[0]);}
 function teamTransforms(enemy = false) {
@@ -68,6 +78,7 @@ beforeEach(() => {
   vi.mocked(ctx.translate).mockImplementation((x, y) => multiply([1, 0, 0, 1, x, y]));
   vi.mocked(ctx.scale).mockImplementation((x, y) => multiply([x, 0, 0, y, 0, 0]));
   vi.mocked(ctx.rotate).mockImplementation(angle => multiply([Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), 0, 0]));
+  context.getTransform.mockImplementation(()=>{const [a,b,c,d,e,f]=matrix;return {a,b,c,d,e,f};});
   context.drawImage.mockImplementation(() => {sprites.push([...matrix]);});
   context.fillText.mockImplementation((text: string, x: number, y: number) => {
     textDraws.push({text, matrix: [...matrix], font: ctx.font, x, y});
@@ -110,21 +121,21 @@ describe('battle presentation', () => {
     const vitals = document.querySelector('.enemyVitals')!;
     expect(document.querySelectorAll('canvas')).toHaveLength(1);
     expect(canvas.parentElement).toBe(scene);
-    expect(scene.contains(document.querySelector('.battleTargets'))).toBe(true);
+    expect(scene.contains(document.querySelector('.battleTargets'))).toBe(false);
     expect(scene.contains(vitals)).toBe(false);
     expect(vitals.previousElementSibling).toBe(scene);
     expect(vitals.querySelector('em')?.textContent).toBe(effectStatus(enemies[0]));
     expect(vitals.querySelectorAll('.enemyVital')).toHaveLength(5);
     expect(vitals.querySelector('.fallen em')?.textContent).toBe('戦闘不能');
-    const target = scene.querySelector<HTMLButtonElement>('[data-target="e2"]')!;
-    expect(target.style.top).toBe(`${232 / 460 * 100}%`);
-    expect(target.style.left).toBe('50%');
+    const target = vitals.querySelector<HTMLButtonElement>('[data-target="e2"]')!;
+    expect(target.closest('.enemyVital')).toBe(vitals.children[2]);
     expect(target.style.minHeight).toBe('44px');
     expect(target.getAttribute('aria-pressed')).toBe('true');
-    expect(scene.querySelectorAll('.battleTarget')).toHaveLength(4);
+    expect(vitals.querySelectorAll('.battleTarget')).toHaveLength(4);
     await act(async () => target.click());
     expect(select).toHaveBeenLastCalledWith('e2');
-    canvas.dispatchEvent(new MouseEvent('click', {clientX: bounds.left + width / 2, clientY: bounds.top + height * 232 / 460, bubbles: true}));
+    const at=enemyFormation(2,5,(width/720)/(height/460),CHARACTER_ART[enemies[2].monster.id]).point;
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: bounds.left + width * at.x/720, clientY: bounds.top + height * at.y/460, bubbles: true}));
     expect(select).toHaveBeenCalledTimes(2);
     expect(select).toHaveBeenLastCalledWith('e2');
     expect(teamTransforms()).toHaveLength(0);
@@ -302,9 +313,11 @@ describe('battle presentation', () => {
     const select = vi.fn();
     await render({...base, targetKeys: ['e0'], onSelectTarget: select});
     const canvas = document.querySelector('canvas')!;
-    canvas.dispatchEvent(new MouseEvent('click', {clientX: 84, clientY: 216, bubbles: true}));
+    frame(100);
+    const at=enemyFormation(0,5,1,CHARACTER_ART[base.enemies[0].monster.id]).point;
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: at.x, clientY: at.y, bubbles: true}));
     expect(select).toHaveBeenCalledExactlyOnceWith('e0');
-    canvas.dispatchEvent(new MouseEvent('click', {clientX: 84, clientY: 336, bubbles: true}));
+    canvas.dispatchEvent(new MouseEvent('click', {clientX: 10, clientY: 440, bubbles: true}));
     expect(select).toHaveBeenCalledTimes(1);
   });
 
@@ -342,7 +355,7 @@ describe('scope-correct battlefield effects', () => {
     await render({...base, effect: {...effect, type}, impact:event});
     frame(100); frame(700);
     const args = vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1];
-    expect(args.targets.map(p => p.x)).toEqual([84,222,360,498,636]);
+    expect(args.targets.map(p => p.x)).toEqual([124,242,360,478,596]);
     expect(args.incoming).toBe(false); expect(args.impacted).toBe(false);
     expect(labels()).toContain('敵全体 · 5体');
     expect(glyphs).toHaveLength(5);
@@ -357,7 +370,7 @@ describe('scope-correct battlefield effects', () => {
     const enemies = base.enemies.map((u,i) => ({...u,hp:i===3?20:0}));
     await render({...base,enemies,effect,impact:{...cast,scope:'all',targets:['e3'],target:undefined}});
     frame(100); frame(700);
-    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].targets).toEqual([{x:498,y:224}]);
+    expect(vi.mocked(areaEffects.drawAreaEffect).mock.calls.at(-1)![1].targets).toEqual([enemyFormation(3,5,1,CHARACTER_ART[base.enemies[3].monster.id]).point]);
     expect(labels()).toContain('敵全体 · 1体');
     const hit:BattleEvent={kind:'damage',actor:'a0',target:'e3',amount:20,hp:0};
     await render({...base,enemies:enemies.map(u=>({...u,hp:0})),effect,impact:hit,impacts:[hit]});
@@ -432,7 +445,7 @@ describe('motion accessibility and delayed recovery', () => {
     expect(teamTransforms(true)[0][1]).not.toBe(0);
     frame(100+2600/playbackRate);
     expect(teamTransforms(true)[0][1]).toBe(0);
-    expect(teamTransforms(true)[0][0]).toBe(1);
+    expect(teamTransforms(true)[0][0]).toBe(enemyFormation(0,5,1,CHARACTER_ART[base.enemies[0].monster.id]).scale);
   });
   it('reacts to a live reduced-motion preference without restarting the renderer', async () => {
     const media={matches:false,addEventListener:vi.fn(),removeEventListener:vi.fn()};
@@ -442,7 +455,7 @@ describe('motion accessibility and delayed recovery', () => {
     expect(teamTransforms(true)[0][1]).not.toBe(0);
     media.matches=true; media.addEventListener.mock.calls[0][1](); frame(850);
     expect(teamTransforms(true)[0][1]).toBe(0);
-    expect(teamTransforms(true)[0][0]).toBe(1);
+    expect(teamTransforms(true)[0][0]).toBe(enemyFormation(0,5,1,CHARACTER_ART[base.enemies[0].monster.id]).scale);
     expect(labels()).toContain('通常攻撃');
     expect(labels()).toContain('敵 · トロル');
     expect(cancelAnimationFrame).not.toHaveBeenCalled();
@@ -509,15 +522,15 @@ describe('original wolf enemy asset and random-hit presentation', () => {
 });
 
 describe('new family art and enemy-only signature effects', () => {
-  it('loads both original sprites without drawing an ally or changing the wolf dimensions', async () => {
+  it('loads original family sprites and the new wolf dimensions without drawing an ally', async () => {
     vi.stubGlobal('Image', class {src=''; complete=true; naturalWidth=280;});
     const state = start([13,14,0,2,6], [12,13,14,0,2]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
     expect(sprites).toHaveLength(5);
-    const images = context.drawImage.mock.calls as unknown as [HTMLImageElement, number, number, number, number][];
+    const images = imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement, number, number, number, number][];
     expect(images.some(([image]) => image.src === RATATOSKR_ART_URL)).toBe(true);
     expect(images.some(([image]) => image.src === GENBU_ART_URL)).toBe(true);
-    expect(images.slice(0,3).map(([,x,y,w,h]) => [x,y,w,h])).toEqual([[-55,-47,110,82.5],[-49.5,-38.75,99,74.25],[-60.5,-55.25,121,90.75]]);
+    expect(images.slice(0,3).map(([,x,y,w,h]) => [x,y,w,h])).toEqual([[-71,35.5-(142*286/350)*(252/286),142,142*286/350],[-49.5,-38.75,99,74.25],[-60.5,-55.25,121,90.75]]);
     expect(images.slice(3).map(([image]) => image.src)).toEqual(state.enemies.slice(3).map(unit => CHARACTER_ART[unit.monster.id].artUrl));
     expect(glyphs).toHaveLength(0);
     expect(teamTransforms()).toHaveLength(0);
@@ -557,8 +570,9 @@ describe('new family art and enemy-only signature effects', () => {
       expect(vi.mocked(ctx.ellipse).mock.calls.filter(args=>args[2]===4.5&&args[3]===6)).toHaveLength(1);
       const targetIndex = Number(hitTargets[index].slice(1));
       const shake = index ? battleMotion.sampleHitMotion(80).shake : 0;
-      const targetX = 360 + ((84+targetIndex*138)-360)*1.004 + shake;
-      const targetY = 246 + ((232-Math.abs(targetIndex-2)*8)-246)*1.004 + shake*.4;
+      const target=enemyFormation(targetIndex,5,1,CHARACTER_ART[base.enemies[targetIndex].monster.id]).point;
+      const targetX = 360 + (target.x-360)*1.004 + shake;
+      const targetY = 246 + (target.y-246)*1.004 + shake*.4;
       const progress = 70/170;
       const x = 354+(targetX-354)*progress;
       const y = 521+(targetY-521)*progress-Math.sin(progress*Math.PI)*20;
@@ -612,7 +626,7 @@ describe('new family art and enemy-only signature effects', () => {
     fill.mockImplementation(()=>{fills.push((context as unknown as CanvasRenderingContext2D).fillStyle);});
     const enemies = base.enemies.map((unit,index)=>index===0?{...unit,ward:2}:unit);
     await render({...base,enemies}); frame(100);
-    expect(fills.filter(fill=>fill==='#73d0ad24')).toHaveLength(2);
+    expect(fills.filter(fill=>fill==='#73d0ad24')).toHaveLength(1); // The additional tiny HP-bar ward moved to the readable DOM status.
     fills.length=0;
     const broken: BattleEvent = {kind:'break',actor:'a0',target:'e0',ward:0,removed:['ward']};
     await render({...base,impact:broken,impacts:[broken]}); frame(900);
@@ -630,7 +644,7 @@ describe('dragon art and authoritative storm choreography', () => {
     const state = start([15,16,17,18,5],[15,16,17,18,5]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null}); frame(100);
     expect(sprites).toHaveLength(5);
-    const images = context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    const images = imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement,number,number,number,number][];
     expect(images.map(([image])=>image.src)).toEqual([...Object.values(DRAGON_ART).map(art=>art.artUrl),CHARACTER_ART[5].artUrl]);
     expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([127,118,125,116,CHARACTER_ART[5].spriteWidth].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
     expect(glyphs).toHaveLength(0);
@@ -746,7 +760,7 @@ describe('material figures, repair and grounded effects',()=>{
     const state=start([19,20,21,22,23],[19,20,21,22,23]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
     expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);
-    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    const images=imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement,number,number,number,number][];
     expect(images.map(([img])=>img.src)).toEqual(Object.values(MATERIAL_ART).map(art=>art.artUrl));
     expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([112,116,124,115,127].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
     expect(teamTransforms()).toHaveLength(0);
@@ -826,7 +840,7 @@ describe('slime figures and selected MP supply',()=>{
     const state=start([24,25,26,27,28],[24,25,26,27,28]);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
     expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);
-    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    const images=imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement,number,number,number,number][];
     expect(images.map(([img])=>img.src)).toEqual(Object.values(SLIME_ART).map(art=>art.artUrl));
     expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([119,126,119,114,127].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
     expect(teamTransforms()).toHaveLength(0);
@@ -954,7 +968,7 @@ describe('undead art and authoritative poison exchange effects',()=>{
  it('registers the complete undead team including Banshee and leaves allies offscreen',async()=>{
   vi.stubGlobal('Image',class {src='';complete=true;naturalWidth=280;});const {UNDEAD_ART}=await import('./undeadArt');const state=start([32,4,33,34,35],[32,4,33,34,35]);
   await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
-  const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+  const images=imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement,number,number,number,number][];
   expect(images.map(([img])=>img.src)).toEqual([UNDEAD_ART[32].artUrl,CHARACTER_ART[4].artUrl,UNDEAD_ART[33].artUrl,UNDEAD_ART[34].artUrl,UNDEAD_ART[35].artUrl]);expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual([120,CHARACTER_ART[4].spriteWidth,116,116,112].map(w=>[-w/2,35.5-w*.75,w,w*.75]));
   expect(glyphs).toHaveLength(0);expect(teamTransforms()).toHaveLength(0);
  });
@@ -1128,7 +1142,7 @@ describe('complete first-roster sprites and choreography', () => {
     const state=start([0,2,7,11,12],ids);
     await render({allies:state.allies,enemies:state.enemies,effect:null,impact:null});frame(100);
     expect(sprites).toHaveLength(5);expect(glyphs).toHaveLength(0);expect(teamTransforms()).toHaveLength(0);
-    const images=context.drawImage.mock.calls as unknown as [HTMLImageElement,number,number,number,number][];
+    const images=imageCallsBySlot(state.enemies) as unknown as [HTMLImageElement,number,number,number,number][];
     expect(images.map(([image])=>image.src)).toEqual(ids.map(id=>CHARACTER_ART[id].artUrl));
     expect(images.map(([,x,y,w,h])=>[x,y,w,h])).toEqual(ids.map(id=>{const art=CHARACTER_ART[id],w=art.spriteWidth,h=art.spriteHeight??w*.75;return [-w/2,35.5-h*(art.footAnchor??1),w,h];}));
   });

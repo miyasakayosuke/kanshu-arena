@@ -1,3 +1,7 @@
+import {FenrirRigCache,drawFenrirRig} from './storybookFenrirRig';
+import {sampleFenrirBattlePose} from './storybookFenrirBattleMotion';
+import {createEnemyPixelReader, enemyAtPixel, type EnemyImageDraw} from './enemyHitTest';
+import {enemyFormation, enemyPaintOrder, enemyTravelDistance} from './enemyFormation';
 import {YokoRigCache,drawYokoRig} from './storybookYokoRig';
 import {sampleYokoBattlePose} from './storybookYokoBattleMotion';
 import {sampleOriginalRosterMotion} from './originalRosterMotion';
@@ -30,7 +34,6 @@ type Point = {x: number; y: number};
 type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair' | 'liquid' | 'ribbon' | 'fold' | 'bubble' | 'knead' | 'supply' | 'ledger' | 'tool' | 'mantle' | 'mp-loss' | 'burial' | 'reins' | 'sleeves' | 'stitch' | 'cashout' | 'threshold' | 'portal' | 'lattice';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
 type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
-type Health = {value: number; trail: number; target: number; changed: number};
 const WIDTH = 720;
 const HEIGHT = 460;
 const TAU = Math.PI * 2;
@@ -73,15 +76,13 @@ const palettes: Record<Visual, {light: string; core: string; dark: string}> = {
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const ease = (value: number) => 1 - (1 - clamp(value)) ** 3;
 const mix = (a: number, b: number, progress: number) => a + (b - a) * progress;
-function position(index: number, count: number): Point {
-  const spread = Math.min(138, 552 / Math.max(1, count - 1));
-  const offset = index - (count - 1) / 2;
-  return {x: WIDTH / 2 + offset * spread, y: 232 - Math.abs(offset) * 8};
+function position(index: number, count: number, aspect = 1, id?: number): Point {
+  return enemyFormation(index, count, aspect, id === undefined ? undefined : CHARACTER_ART[id]).point;
 }
-function locate(key: string | undefined, props: Props): Point | undefined {
+function locate(key: string | undefined, props: Props, aspect = 1): Point | undefined {
   if (!key) return undefined;
   const enemy = props.enemies.findIndex(unit => unit.key === key);
-  return enemy >= 0 ? position(enemy, props.enemies.length) : undefined;
+  return enemy >= 0 ? position(enemy, props.enemies.length, aspect, props.enemies[enemy].monster.id) : undefined;
 }
 const undeadVisuals: Visual[] = ['burial','reins','sleeves','stitch','cashout'];
 const materialVisuals: Visual[] = ['bronze','paper','masonry','steam','bull','repair'];
@@ -306,7 +307,7 @@ function drawSeedBarrage(ctx: CanvasRenderingContext2D, cast: Cast, targets: Poi
 function drawGenbuField(ctx: CanvasRenderingContext2D, cast: Cast, age: number, reduced: boolean, scaleY: number) {
   const sinceImpact = Math.max(0, age - CAST_IMPACT_MS);
   if (cast.impacted && sinceImpact >= 600) return;
-  const y = cast.incoming ? 475 : 231;
+  const y = cast.incoming ? 475 : cast.targets.reduce((sum,p)=>sum+p.y,0)/Math.max(1,cast.targets.length);
   const sy = cast.incoming ? Math.max(.65, scaleY) : scaleY;
   const charge = clamp(age / CAST_IMPACT_MS);
   const fade = cast.impacted ? 1 - clamp(sinceImpact / 600) : 1;
@@ -350,7 +351,7 @@ function drawVritraStorm(ctx: CanvasRenderingContext2D, cast: Cast, age: number,
   const sinceImpact = Math.max(0, age - CAST_IMPACT_MS);
   if (cast.impacted && sinceImpact >= 550) return;
   const fade = cast.impacted ? 1 - clamp((sinceImpact - 170) / 380) : 1;
-  const y = cast.incoming ? 472 : 231;
+  const y = cast.incoming ? 472 : cast.targets.reduce((sum,p)=>sum+p.y,0)/Math.max(1,cast.targets.length);
   const sy = cast.incoming ? Math.max(.65, scaleY) : scaleY;
   const preparation = clamp(age / CAST_IMPACT_MS);
   const halfHeight = (cast.impacted ? 30 : 8) * stormScale;
@@ -496,7 +497,7 @@ function drawMaterialCast(ctx: CanvasRenderingContext2D, cast: Cast, age: number
     for(const target of targets) mark(target,spread);
     // Talos's all-target hammer releases a low ground pulse after the hit only.
     if(all&&cast.type==='bronze') {
-      const ground=cast.incoming?HEIGHT-3:264;
+      const ground=cast.incoming?HEIGHT-3:358;
       for(let i=0;i<2;i++) {
         ellipse(ctx,360,ground-i*7*scaleY,290+(reduced?0:ease(since/250)*i*32),(22+i*9)*scaleY);
         ctx.strokeStyle=i?'#e1c493':'#8d7952';ctx.lineWidth=i?2:3;ctx.stroke();
@@ -882,6 +883,9 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
 
 export default function BattleStage(props: Props) {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const bodyHits = useRef<EnemyImageDraw[]>([]);
+  const pixelReader = useRef<ReturnType<typeof createEnemyPixelReader> | null>(null);
+  if (!pixelReader.current) pixelReader.current = createEnemyPixelReader();
   const latest = useRef(props);
   latest.current = props;
   const clearVersion = useRef(0);
@@ -893,8 +897,19 @@ export default function BattleStage(props: Props) {
     const ctx = element.getContext('2d');
     if (!ctx) return;
     const characterImages = new Map<number, HTMLImageElement>();
+    const originalDrawImage = ctx.drawImage;
+    let hitKey: string | undefined;
+    const trackedDrawImage = function(...args: unknown[]) {
+      if (hitKey && args.length === 5 && typeof ctx.getTransform === 'function') {
+        const [image,x,y,width,height] = args as [HTMLImageElement,number,number,number,number];
+        const {a,b,c,d,e,f} = ctx.getTransform();
+        bodyHits.current.push({key:hitKey,image,rect:{x,y,width,height},matrix:{a,b,c,d,e,f},alpha:ctx.globalAlpha});
+      }
+      Reflect.apply(originalDrawImage, ctx, args);
+    } as CanvasRenderingContext2D['drawImage'];
     const yokoRig = new YokoRigCache();
-    const yokoDefeats = new Map<string, {started:number;rate:number}>();
+    const fenrirRig = new FenrirRigCache();
+    const rigDefeats = new Map<string, {started:number;rate:number}>();
     const getCharacterImage = (id: number) => {
       const cached = characterImages.get(id);
       if (cached) return cached;
@@ -907,8 +922,8 @@ export default function BattleStage(props: Props) {
     // Prime before the first frame; the same mount can encounter new IDs later.
     latest.current.enemies.forEach(unit => getCharacterImage(unit.monster.id));
     if (latest.current.enemies.some(unit=>unit.monster.id===0)) yokoRig.ensure();
+    if (latest.current.enemies.some(unit=>unit.monster.id===12)) fenrirRig.ensure();
     let handle = 0;
-    let previous = performance.now();
     let lastImpact: BattleEvent | null = null;
     let lastCast: BattleEvent | null = null;
     let observedClear = clearVersion.current;
@@ -916,7 +931,6 @@ export default function BattleStage(props: Props) {
     const seenImpacts = new WeakSet<BattleEvent>();
     let cast: Cast | null = null;
     let impacts: Impact[] = [];
-    const health = new Map<string, Health>();
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let reduced = media.matches;
     const onMotionChange = () => {reduced = media.matches;};
@@ -931,6 +945,8 @@ export default function BattleStage(props: Props) {
       latest.current.onCompactCastCaption?.(caption);
     };
     const updateAspect = () => {
+      // Canvas resize clears its pixels; discard old hit transforms until rAF redraws.
+      bodyHits.current = [];
       const bounds = element.getBoundingClientRect();
       if (bounds.width && bounds.height) {
         scaleY = (bounds.width / WIDTH) / (bounds.height / HEIGHT);
@@ -951,13 +967,12 @@ export default function BattleStage(props: Props) {
     window.addEventListener('resize', resize);
     const draw = (now: number) => {
       const data = latest.current;
-      const dt = Math.min(50, now - previous);
-      previous = now;
+      bodyHits.current = [];
       // The rAF clock lives for the entire mounted battle. New HP arrays do not restart it.
       const rate = Math.max(.5, Math.min(4, data.playbackRate ?? 1));
       if (observedClear !== clearVersion.current) {
         observedClear = clearVersion.current;
-        cast = null; lastCast = null; lastImpact = null; lastImpacts = undefined; impacts = []; health.clear(); yokoDefeats.clear();
+        cast = null; lastCast = null; lastImpact = null; lastImpacts = undefined; impacts = []; rigDefeats.clear();
       }
       if (data.castEvent === null) {cast = null; lastCast = null;}
       const activeCast = data.castEvent ?? (data.impact?.kind === 'cast' ? data.impact : null);
@@ -966,11 +981,11 @@ export default function BattleStage(props: Props) {
         impacts = [];
         const event = activeCast;
         // Party members act from below the frame; no ally occupies the arena.
-        const from = locate(event.actor, data) ?? {x: WIDTH / 2, y: HEIGHT + 70};
+        const from = locate(event.actor, data, scaleY) ?? {x: WIDTH / 2, y: HEIGHT + 70};
         const fallback = ['guard', 'protect', 'heal', 'cleanse', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(event.effect ?? '') ? from : {x: WIDTH / 2, y: HEIGHT + 70};
-        const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data); return at ? [at] : [];});
+        const targets = (event.targets ?? (event.target ? [event.target] : [])).flatMap(key => {const at = locate(key, data, scaleY); return at ? [at] : [];});
         const incoming = (event.targets ?? []).some(key => data.allies.some(unit => unit.key === key));
-        cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data) ?? fallback};
+        cast = {targets, incoming, impacted: false, event, type: visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id), name: event.skill ?? data.effect?.text ?? '攻撃', started: now, rate, from, to: locate(event.target, data, scaleY) ?? fallback};
       }
       if (data.impact !== lastImpact || data.impacts !== lastImpacts) {
         lastImpact = data.impact;
@@ -981,7 +996,7 @@ export default function BattleStage(props: Props) {
           if (cast && event.actor === cast.event.actor && event.hitIndex !== undefined && (cast.lastHitIndex === undefined || event.hitIndex > cast.lastHitIndex)) {cast.lastHitIndex = event.hitIndex; cast.lastHitAt = now;}
           if (seenImpacts.has(event)) continue;
           seenImpacts.add(event);
-          const at = locate(event.target, data);
+          const at = locate(event.target, data, scaleY);
           if (at) {
             const sameCast = cast && event.actor && cast.event.actor === event.actor;
             const type = event.kind === 'resource-gain' || event.kind === 'resource-loss' || event.kind === 'heal' || event.kind === 'guard' || event.kind === 'poison' || event.effect === 'poison'
@@ -992,6 +1007,13 @@ export default function BattleStage(props: Props) {
       }
       if (!data.effect && !data.impact) {cast = null; lastCast = null; impacts = [];}
       impacts = impacts.filter(impact => (now - impact.started) * impact.rate < 1000);
+      if (cast) {
+        cast.from = locate(cast.event.actor, data, scaleY) ?? {x: WIDTH / 2, y: HEIGHT + 70};
+        const support = ['guard', 'protect', 'heal', 'cleanse', 'restoreMp', 'responseCleanse', 'responseGuard'].includes(cast.event.effect ?? '');
+        cast.to = locate(cast.event.target, data, scaleY) ?? (support ? cast.from : {x: WIDTH / 2, y: HEIGHT + 70});
+        cast.targets = (cast.event.targets ?? (cast.event.target ? [cast.event.target] : [])).flatMap(key => {const at = locate(key, data, scaleY); return at ? [at] : [];});
+      }
+      for (const impact of impacts) impact.at = locate(impact.event.target, data, scaleY) ?? impact.at;
       const elapsed = cast ? (now - cast.started) * cast.rate : 2000;
       let age = cast ? actionAge(elapsed, cast.impactedAt === undefined ? undefined : (now - cast.impactedAt) * cast.rate) : 2000;
       const barrage = cast?.event.scope === 'random';
@@ -1048,24 +1070,26 @@ export default function BattleStage(props: Props) {
         y: center.y + (point.y - center.y) * zoom + shake * .4,
       } : point;
       if(data.enemies.some(unit=>unit.monster.id===0)) yokoRig.ensure();
-      for(const key of yokoDefeats.keys()) if(!data.enemies.some(unit=>unit.key===key)) yokoDefeats.delete(key);
-      const drawEnemies = () => data.enemies.forEach((unit, index) => {
-        const point = position(index, data.enemies.length);
+      if(data.enemies.some(unit=>unit.monster.id===12)) fenrirRig.ensure();
+      for(const key of rigDefeats.keys()) if(!data.enemies.some(unit=>unit.key===key)) rigDefeats.delete(key);
+      const slots = data.enemies.map((unit, index) => ({unit, ...enemyFormation(index, data.enemies.length, scaleY, CHARACTER_ART[unit.monster.id])}));
+      const drawEnemies = () => enemyPaintOrder(slots).forEach(({unit, index, point, foot, scale: bodyScale}) => {
         const alive = unit.hp > 0;
         const hit = [...impacts].reverse().find(impact => impact.event.target === unit.key && impact.event.kind === 'damage' && (now - impact.started) * impact.rate < 260);
         const death = impacts.find(impact => impact.event.target === unit.key && impact.event.kind === 'defeat');
         const deathProgress = death ? clamp((now - death.started) * death.rate / 550) : 1;
-        if(alive) yokoDefeats.delete(unit.key);
-        else if(unit.monster.id===0&&!yokoDefeats.has(unit.key)) yokoDefeats.set(unit.key,death?{started:death.started,rate:death.rate}:{started:now-840/rate,rate});
+        if(alive) rigDefeats.delete(unit.key);
+        else if([0,12].includes(unit.monster.id)&&!rigDefeats.has(unit.key)) rigDefeats.set(unit.key,death?{started:death.started,rate:death.rate}:{started:now-840/rate,rate});
         const attacker = cast?.event.actor === unit.key && motion.phase !== 'rest';
         const type = cast?.type ?? 'slash';
         let x = point.x;
-        let y = point.y + (!reduced && alive && ![0, 14, 15, 16, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
+        let y = point.y + (!reduced && alive && ![0, 12, 14, 15, 16, 19, 21, 22, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35].includes(unit.monster.id) && (!attacker || motion.phase !== 'impact') ? Math.sin(now / 760 + index * 1.2) * 2.2 : 0);
         let tilt = 0;
         if (attacker && cast) {
           const distance = Math.hypot(cast.to.x - point.x, cast.to.y - point.y) || 1;
-          x += (cast.to.x - point.x) / distance * motion.travel;
-          y += (cast.to.y - point.y) / distance * motion.travel - motion.lift;
+          const travel = enemyTravelDistance(unit.monster.id, motion.travel);
+          x += (cast.to.x - point.x) / distance * travel;
+          y += (cast.to.y - point.y) / distance * travel - motion.lift;
           tilt = motion.tilt;
         }
         const reaction = sampleHitMotion(hit ? (now - hit.started) * hit.rate : 300, reduced, hit?.type !== 'poison');
@@ -1073,28 +1097,19 @@ export default function BattleStage(props: Props) {
         if (!alive && !reduced) y += deathProgress * 13;
         ctx.save();
         ctx.globalAlpha = alive ? 1 : mix(.85, .24, deathProgress);
-        ellipse(ctx, point.x, point.y + 33 * scaleY, alive ? 31 : 24, 8 * scaleY, '#526f612d');
+        ellipse(ctx, foot.x, foot.y, (alive ? 31 : 24) * bodyScale, 8 * scaleY * bodyScale, '#526f612d');
         const eligible = alive && data.targetKeys?.includes(unit.key);
         const selected = eligible && data.selectedTarget === unit.key;
         if (eligible) {
-          const ringWidth = selected ? 41 : 37;
-          const ringHeight = selected ? 13 : 11;
-          ellipse(ctx, point.x, point.y + 32 * scaleY, ringWidth, ringHeight * scaleY, selected ? '#bca85a38' : '#fdf9e746');
+          const ringWidth = (selected ? 41 : 37) * bodyScale;
+          const ringHeight = (selected ? 13 : 11) * bodyScale;
+          ellipse(ctx, foot.x, foot.y, ringWidth, ringHeight * scaleY, selected ? '#bca85a38' : '#fdf9e746');
           ctx.strokeStyle = selected ? '#a47e29' : '#789c896a';
           ctx.lineWidth = selected ? 2.5 : 1.5;
           ctx.setLineDash(selected ? [] : [4, 4]);
           ctx.stroke();
           ctx.setLineDash([]);
-          if (selected) {
-            const tip = point.y - 48 * scaleY + (!reduced ? Math.sin(now / 270) * 2 : 0);
-            ctx.beginPath();
-            ctx.moveTo(point.x - 6, tip - 7);
-            ctx.lineTo(point.x + 6, tip - 7);
-            ctx.lineTo(point.x, tip);
-            ctx.closePath();
-            ctx.fillStyle = '#a67e2c';
-            ctx.fill();
-          }
+
         }
         ctx.save();
         ctx.translate(x, y);
@@ -1109,6 +1124,7 @@ export default function BattleStage(props: Props) {
         }
         ctx.save();
         ctx.translate(x, y);
+        ctx.scale(bodyScale, bodyScale);
         ctx.rotate(tilt);
         ctx.scale((attacker ? motion.scaleX : 1) / reaction.squash, (attacker ? motion.scaleY : 1) * reaction.squash);
         ctx.textAlign = 'center';
@@ -1119,15 +1135,18 @@ export default function BattleStage(props: Props) {
         ctx.shadowOffsetY = 4;
         // Color emoji inherit the current fill alpha in Chromium; reset the translucent arena brush.
         ctx.fillStyle = '#ffffff';
+        hitKey = data.targetKeys?.length ? unit.key : undefined;
         const characterImage = getCharacterImage(unit.monster.id);
-        if ((unit.monster.id===0 && yokoRig.ready) || (characterImage?.complete && characterImage.naturalWidth > 0)) {
+        if ((unit.monster.id===0 && yokoRig.ready) || (unit.monster.id===12 && fenrirRig.ready) || (characterImage?.complete && characterImage.naturalWidth > 0)) {
           // Registry dimensions preserve every old silhouette and support later families.
           const width = CHARACTER_ART[unit.monster.id].spriteWidth;
           const height = CHARACTER_ART[unit.monster.id].spriteHeight ?? width * .75;
           const top = 35.5-height*(CHARACTER_ART[unit.monster.id].footAnchor??1);
-          const rigHit=unit.monster.id===0?[...impacts].reverse().find(item=>item.event.target===unit.key&&item.event.kind==='damage'&&(item.event.amount??0)>0&&item.type!=='poison'&&(now-item.started)*item.rate<620):undefined;
-          const rigDeath=yokoDefeats.get(unit.key);
-          const rigDrawn=unit.monster.id===0&&drawYokoRig(ctx,yokoRig,sampleYokoBattlePose({time:now+index*397,cast:attacker?cast?.event:undefined,actionAge:age,hurtAge:rigHit?(now-rigHit.started)*rigHit.rate:undefined,defeatAge:rigDeath?(now-rigDeath.started)*rigDeath.rate:undefined,reduced}),{x:-width/2,y:top,width,height});
+          const rigHit=[0,12].includes(unit.monster.id)?[...impacts].reverse().find(item=>item.event.target===unit.key&&item.event.kind==='damage'&&(item.event.amount??0)>0&&item.type!=='poison'&&(now-item.started)*item.rate<620):undefined;
+          const rigDeath=rigDefeats.get(unit.key);
+          const rigFrame={time:now+index*397,cast:attacker?cast?.event:undefined,actionAge:age,hitCount,hurtAge:rigHit?(now-rigHit.started)*rigHit.rate:undefined,defeatAge:rigDeath?(now-rigDeath.started)*rigDeath.rate:undefined,reduced};
+          const rigTarget={x:-width/2,y:top,width,height};
+          const rigDrawn=unit.monster.id===0?drawYokoRig(ctx,yokoRig,sampleYokoBattlePose(rigFrame),rigTarget):unit.monster.id===12?drawFenrirRig(ctx,fenrirRig,sampleFenrirBattlePose(rigFrame),rigTarget):false;
           if(!rigDrawn && characterImage?.complete && characterImage.naturalWidth>0) ctx.drawImage(characterImage, -width / 2, top, width, height);
           if (unit.monster.id === 24 && unit.supplyReady === true && alive) {
             // One non-dispellable command allowance, from state only; never inferred.
@@ -1145,41 +1164,19 @@ export default function BattleStage(props: Props) {
             const heldForBreath = attacker && vritraStorm;
             drawDragonCharge(ctx, width, heldForBreath ? age < CAST_IMPACT_MS ? cast?.event.dragonChargeSpent ?? 0 : 0 : unit.dragonCharge);
           }
-        } else ctx.fillText(unit.monster.icon, 0, 0);
+        } else {
+          if (hitKey && typeof ctx.getTransform === 'function') {
+            const {a,b,c,d,e,f}=ctx.getTransform();
+            bodyHits.current.push({key:hitKey,rect:{x:-28.5,y:-28.5,width:57,height:57},matrix:{a,b,c,d,e,f},alpha:ctx.globalAlpha});
+          }
+          ctx.fillText(unit.monster.icon, 0, 0);
+        }
+        hitKey = undefined;
         ctx.restore();
         ctx.restore();
-        let hp = health.get(unit.key);
-        if (!hp) {hp = {value: unit.hp, trail: unit.hp, target: unit.hp, changed: now}; health.set(unit.key, hp);}
-        if (hp.target !== unit.hp) {hp.target = unit.hp; hp.changed = now;}
-        hp.value = reduced ? hp.target : mix(hp.value, hp.target, 1 - Math.exp(-dt * rate / 95));
-        if ((now - hp.changed) * rate > 160 || hp.trail < hp.target || reduced) hp.trail = mix(hp.trail, hp.target, reduced ? 1 : 1 - Math.exp(-dt * rate / 150));
-        const barY = point.y + 46 * scaleY;
-        ctx.fillStyle = '#6574682b';
-        ctx.beginPath();
-        ctx.roundRect(point.x - 33, barY, 66, 6, 3);
-        ctx.fill();
-        const fillBar = (value: number, color: string) => {
-          const width = 64 * clamp(value / unit.monster.hp);
-          if (width < .3) return;
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.roundRect(point.x - 32, barY + 1, width, 4, 2);
-          ctx.fill();
-        };
-        fillBar(hp.trail, '#e6c481');
-        fillBar(hp.value, '#c97765');
-        if (unit.poison > 0 && alive) {
-          ellipse(ctx, point.x + 39, barY + 3, 5, 5, '#81894f');
-          ctx.fillStyle = '#fff9dd';
-          ctx.font = 'bold 8px system-ui';
-          ctx.fillText('•', point.x + 39, barY + 2);
-        }
-        if (unit.guard && alive) {
-          shield(ctx, point.x - 41, barY + 3, 5, 1);
-        }
-        if ((unit.ward ?? 0) > 0 && alive) shield(ctx, point.x - (unit.guard ? 54 : 41), barY + 3, 5, 1, true);
         ctx.restore();
       });
+
       ctx.save();
       ctx.translate(center.x + shake, center.y + shake * .4);
       ctx.scale(zoom, zoom);
@@ -1194,9 +1191,22 @@ export default function BattleStage(props: Props) {
         else if (genbuField) drawGenbuField(ctx, cast, age, reduced, scaleY);
         else drawAreaEffect(ctx, {type: cast.type, palette: palettes[cast.type], targets: cast.targets, incoming: cast.incoming, age: age, impacted: cast.impacted, reduced, scaleY});
       }
-      drawEnemies();
+      ctx.drawImage = trackedDrawImage;
+      try {drawEnemies();} finally {ctx.drawImage = originalDrawImage;}
       ctx.restore();
-      if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data) || locate(cast.event.target, data))) {
+      // Numbered markers match the five non-overlapping target cards below.
+      // Pixel hit-testing follows the same paint order, including moving rig parts.
+      for (const {unit, index, foot} of slots) {
+        const selected = unit.hp > 0 && data.selectedTarget === unit.key && data.targetKeys?.includes(unit.key);
+        const at = frameEffectPoint(foot);
+        ctx.save(); ctx.translate(at.x, at.y + 18 * scaleY); ctx.scale(1, scaleY);
+        ellipse(ctx, 0, 0, 12, 12, selected ? '#966d26' : '#fff7e8ed');
+        ctx.strokeStyle = selected ? '#fff1bc' : '#678578'; ctx.lineWidth = selected ? 2.5 : 1.3; ctx.stroke();
+        ctx.font = '700 15px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = selected ? '#fff9dd' : '#405d50'; ctx.fillText(String(index + 1), 0, .5);
+        ctx.restore();
+      }
+      if (cast && cast.event.scope !== 'all' && (locate(cast.event.actor, data, scaleY) || locate(cast.event.target, data, scaleY))) {
         const framed = {...cast,from:frameEffectPoint(cast.from),to:frameEffectPoint(cast.to),targets:cast.targets.map(frameEffectPoint)};
         if (['threshold','portal','lattice'].includes(cast.type)) drawExtraordinaryCast(ctx,framed,age,reduced,scaleY);
         else if (undeadVisuals.includes(cast.type)) drawUndeadCast(ctx,framed,age,reduced,scaleY);
@@ -1206,8 +1216,8 @@ export default function BattleStage(props: Props) {
         else drawCast(ctx,framed,age,reduced);
       }
       if (cast && seedBarrage) {
-        const sequence = (cast.event.hitTargets ?? []).map(key => frameEffectPoint(locate(key, data) ?? {x: WIDTH / 2, y: HEIGHT + 70}));
-        const enemyOrigin = locate(cast.event.actor, data);
+        const sequence = (cast.event.hitTargets ?? []).map(key => frameEffectPoint(locate(key, data, scaleY) ?? {x: WIDTH / 2, y: HEIGHT + 70}));
+        const enemyOrigin = locate(cast.event.actor, data, scaleY);
         const from = enemyOrigin ? {x: cast.from.x, y: cast.from.y + motion.travel - motion.lift} : cast.from;
         drawSeedBarrage(ctx, {...cast, from: frameEffectPoint(from), to: frameEffectPoint(cast.to)}, sequence, age, reduced);
       }
@@ -1272,14 +1282,15 @@ export default function BattleStage(props: Props) {
     handle = requestAnimationFrame(draw);
     return () => {
       cancelAnimationFrame(handle);
-      yokoRig.dispose();yokoDefeats.clear();
+      yokoRig.dispose();fenrirRig.dispose();rigDefeats.clear();
       observer.disconnect();
+      bodyHits.current = [];
+      if (ctx.drawImage === trackedDrawImage) ctx.drawImage = originalDrawImage;
       publishCaption(null);
       media.removeEventListener('change', onMotionChange);
       window.removeEventListener('resize', resize);
     };
   }, []);
-  const selectable = props.enemies.map((unit, index) => ({unit, point: position(index, props.enemies.length)})).filter(({unit}) => unit.hp > 0 && props.targetKeys?.includes(unit.key));
   const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
   const recipientName=(event:BattleEvent)=>[...props.allies,...props.enemies].find(unit=>unit.key===event.target)?.monster.name??'';
   const feedbackLabel=(event:BattleEvent)=>`${recipientName(event)} ${event.kind==='resource-loss'?`MP −${event.amount}`:event.kind==='resource-gain'?`MP +${event.amount}`:`${event.kind==='heal'?'回復':'ダメージ'} ${event.amount}`}`;
@@ -1289,31 +1300,37 @@ export default function BattleStage(props: Props) {
     ? `${new Set(feedback.map(event=>event.target)).size}体に${feedback.every(event=>event.kind==='resource-gain')?'同時MP補給':feedback.every(event=>event.kind==='heal')?'同時回復':'同時着弾'}。${feedback.map(feedbackLabel).join('、')}`
     : props.impact?.kind === 'cast' ? `${props.impact.skill ?? '特技'} ${['responseCleanse','responseGuard'].includes(props.impact.effect ?? '')?`生存する同陣営 ${props.impact.targets?.length ?? 0}体へ${props.impact.effect === 'responseCleanse' ? '現在毒解除' : '今T守護'}`:props.impact.effect==='restoreMp'?`生存粘体 ${props.impact.targets?.length??0}体へMP補給`:props.impact.scope === 'random' ? `ランダム${props.impact.hits}回` : props.impact.scope === 'all' ? `全体 ${props.impact.targets?.length ?? 0}体へ` : '単体'} 発動`
     : props.impact?.amount !== undefined && ['damage','heal','resource-gain', 'resource-loss'].includes(props.impact.kind) ? feedbackLabel(props.impact) : '');
-  return <div className="battleStage">
+  return <div className="battleStage layeredBattleStage">
     <div className="battleScene">
-    <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}
-      role="img" aria-label="敵だけが表示される戦闘フィールド。敵の下のバーは残りHP、下部に各敵のHP・MP・状態を表示しています。味方は画面下のアイコンで確認できます。"
-      style={{display: 'block', width: '100%', height: '100%'}}
-      onClick={event => {
-        if (!props.onSelectTarget) return;
-        const bounds = event.currentTarget.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width * WIDTH;
-        const y = (event.clientY - bounds.top) / bounds.height * HEIGHT;
-        const target = selectable.find(({point}) => Math.abs(point.x - x) < 51 && Math.abs(point.y - y) < 51);
-        if (target) props.onSelectTarget(target.unit.key);
-      }}/>
-    {props.onSelectTarget && <div className="battleTargets" role="group" aria-label="特技の対象を選択">
-      {selectable.map(({unit, point}) => <button key={unit.key} type="button" className="battleTarget" data-target={unit.key}
-        aria-label={`${unit.monster.name}を対象にする HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp}`}
-        aria-pressed={props.selectedTarget === unit.key}
-        title={`${unit.monster.name} · HP ${unit.hp}/${unit.monster.hp} · MP ${unit.mp}/${unit.monster.mp}`}
-        style={{position: 'absolute', left: `${point.x / WIDTH * 100}%`, top: `${point.y / HEIGHT * 100}%`, width: '13%', height: '22%', minWidth: 44, minHeight: 44, transform: 'translate(-50%, -50%)', padding: 0, background: 'transparent', border: 0, borderRadius: '50%', cursor: 'pointer', touchAction: 'manipulation'}}
-        onClick={() => props.onSelectTarget?.(unit.key)}/>)}
-    </div>}
+      <canvas className="battleCanvas" ref={canvas} width={WIDTH} height={HEIGHT}
+        role="img" aria-label="敵だけが前後に重なる戦闘フィールド。姿の番号と下部の同じ番号で各敵を確認・選択できます。HP・MP・状態は下部、味方は画面下のアイコンに表示します。"
+        style={{display: 'block', width: '100%', height: '100%'}}
+        onClick={event => {
+          if (!props.onSelectTarget || !pixelReader.current) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (!bounds.width || !bounds.height) return;
+          const x=(event.clientX-bounds.left)/bounds.width*event.currentTarget.width;
+          const y=(event.clientY-bounds.top)/bounds.height*event.currentTarget.height;
+          const key=enemyAtPixel(bodyHits.current,x,y,pixelReader.current);
+          if (key && props.targetKeys?.includes(key) && props.enemies.some(unit=>unit.key===key && unit.hp>0)) props.onSelectTarget(key);
+        }}/>
+
     </div>
-    <div className="enemyVitals" aria-label="敵のHP・MP・状態">{props.enemies.map(unit => <div className={`enemyVital ${unit.hp <= 0 ? 'fallen' : ''}`} key={unit.key} aria-label={`${unit.monster.name} HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp} ${unit.hp <= 0 ? '戦闘不能' : effectStatus(unit) || '状態異常なし'}`}>
-      <strong>{unit.monster.name}</strong><small>HP {unit.hp}/{unit.monster.hp}</small><small className="enemyMp">MP {unit.mp}/{unit.monster.mp}</small><em>{unit.hp <= 0 ? '戦闘不能' : effectStatus(unit)}</em>
-    </div>)}</div>
+    <div className="enemyVitals battleTargets" role="group" aria-label="敵のHP・MP・状態。番号のカードで特技の対象を選択">{props.enemies.map((unit, index) => {
+      const eligible = unit.hp > 0 && !!props.onSelectTarget && props.targetKeys?.includes(unit.key);
+      const selected = eligible && props.selectedTarget === unit.key;
+      return <div className={`enemyVital ${unit.hp <= 0 ? 'fallen' : ''} ${eligible ? 'eligible' : ''} ${selected ? 'selected' : ''}`} key={unit.key} aria-label={`${unit.monster.name} HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp} ${unit.hp <= 0 ? '戦闘不能' : effectStatus(unit) || '状態異常なし'}`}>
+        <strong><b className="enemySlotNumber" aria-hidden="true">{index + 1}</b>{unit.monster.name}</strong>
+        <span className="enemyHealthBar" aria-hidden="true"><i style={{width: `${clamp(unit.hp / unit.monster.hp) * 100}%`}}/></span>
+        <small>HP {unit.hp}/{unit.monster.hp}</small><small className="enemyMp">MP {unit.mp}/{unit.monster.mp}</small><em>{unit.hp <= 0 ? '戦闘不能' : effectStatus(unit)}</em>
+        {eligible && <button type="button" className="battleTarget" data-target={unit.key}
+          aria-label={`${index + 1}番 ${unit.monster.name}を対象にする HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp}`}
+          aria-pressed={selected}
+          title={`${index + 1}番 ${unit.monster.name} · HP ${unit.hp}/${unit.monster.hp} · MP ${unit.mp}/${unit.monster.mp}`}
+          style={{minWidth:44,minHeight:44}}
+          onClick={() => props.onSelectTarget?.(unit.key)}/>}
+      </div>;
+    })}</div>
     <span aria-live="polite" aria-atomic="true" style={{position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', border: 0}}>{announcement}</span>
   </div>;
 }

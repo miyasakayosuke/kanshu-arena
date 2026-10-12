@@ -55,7 +55,7 @@ describe('independently authored dragon artwork', () => {
   });
 
   it('preserves all earlier sprite dimensions and original-roster SVG registrations', () => {
-    expect([12,13,14].map(id => CHARACTER_ART[id].spriteWidth)).toEqual([110,99,121]);
+    expect([12,13,14].map(id => CHARACTER_ART[id].spriteWidth)).toEqual([142,99,121]);
     for (const monster of monsters.filter(monster => monster.id < 12)) expect(new DOMParser().parseFromString(renderToStaticMarkup(<MonsterArt monster={monster}/>), 'text/html').querySelector('img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
   });
 });

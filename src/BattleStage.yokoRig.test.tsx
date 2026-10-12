@@ -102,8 +102,8 @@ describe('actual battle Canvas Yoko integration',()=>{
  it('keeps a loaded body while any rig part is delayed or failed',async()=>{
   await render(yokoBase);images.slice(0,5).forEach(image=>image.load());
   const parts=yokoImages();parts.slice(1).forEach(image=>image.load());frame(100);
-  expect(drawnImages()).toEqual(images.slice(0,5));
-  parts[0].fail();frame(200);frame(300);expect(drawnImages()).toEqual(images.slice(0,5));
+  expect(drawnImages()).toEqual([images[1],images[3],images[0],images[2],images[4]]);
+  parts[0].fail();frame(200);frame(300);expect(drawnImages()).toEqual([images[1],images[3],images[0],images[2],images[4]]);
   expect(yokoImages()).toHaveLength(compileYokoLayers().length);
  });
  it.each(['pending','failed'])('uses a fully ready rig even when its static fallback is %s',async status=>{
@@ -115,7 +115,7 @@ describe('actual battle Canvas Yoko integration',()=>{
  });
  it('switches atomically to the ready rig and preserves the other four exact images',async()=>{
   await render(yokoBase);images.forEach(image=>image.load());frame(100);
-  expect(drawnImages().slice(-4)).toEqual(images.slice(1,5));
+  expect(drawnImages().filter(image=>images.slice(1,5).includes(image))).toEqual([images[1],images[3],images[2],images[4]]);
   expect(drawnImages()).not.toContain(images[0]);
   const allocations=images.length;await render({...yokoBase,playbackRate:4});frame(400);
   expect(images).toHaveLength(allocations);

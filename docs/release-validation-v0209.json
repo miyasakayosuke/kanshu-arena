@@ -1,0 +1,149 @@
+{
+  "release": "0.20.9",
+  "recordedDateUtc": "2026-10-12",
+  "stage": "final prepublication checks; live acceptance follows exact commit deployment",
+  "publicBaselineCommit": "e64abcfc251ef5c599f4dbb11d1fdafd482a45e7",
+  "baselineTree": "7851e8f405fec1131e299a555d3075636572424a",
+  "reviewedCandidates": {
+    "commandHome": "46b13c2efe75092026b50e80ed2e626e96d7a1af",
+    "fenrirRig": "71090de0c7db50d1450135f4cd029f1a863778e7",
+    "layeredFormation": "c0a22e582388ae06125b5434e551b11e60d1ba2a"
+  },
+  "checks": {
+    "vitest": {
+      "tests": 2610,
+      "files": 121,
+      "passed": true
+    },
+    "rightsSelfTests": {
+      "tests": 15,
+      "passed": true
+    },
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "comparedAgainstPublicVersion": "0.20.8",
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "531c70ac6701566dd6aa575ab0b42534443dd316",
+          "release": "dfe1efdc4e16ac373009709c5a86c2bb0f5b82f2"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.8",
+          "release": "0.20.9"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "publicBaseCommit": "e64abcfc251ef5c599f4dbb11d1fdafd482a45e7",
+    "publicBaseTree": "7851e8f405fec1131e299a555d3075636572424a",
+    "existingRuntimeChangedFiles": [
+      "src/App.tsx",
+      "src/BattleStage.tsx",
+      "src/HomeScreen.tsx",
+      "src/MonsterArt.tsx",
+      "src/areaEffects.ts",
+      "src/style.css"
+    ],
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "public/credits.html",
+      "src/BattleResult.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterDetails.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterLore.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/teamBuilder.css",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "candidateIdentityComparisons": {
+      "src/App.tsx": "kanshu-arena-command-focus (version display only)",
+      "src/HomeScreen.tsx": "kanshu-arena-command-focus exact",
+      "src/MonsterArt.tsx": "kanshu-arena-fenrir-rig-candidate exact",
+      "src/areaEffects.ts": "kanshu-arena-layered-enemies exact",
+      "src/enemyHitTest.ts": "kanshu-arena-layered-enemies exact",
+      "src/storybookFenrir.ts": "reviewed Fenrir candidate exact",
+      "src/storybookFenrirRig.ts": "reviewed Fenrir candidate exact",
+      "src/storybookFenrirBattleMotion.ts": "reviewed Fenrir candidate exact"
+    },
+    "combinedRuntimeReviewRequired": [
+      "src/BattleStage.tsx",
+      "src/enemyFormation.ts",
+      "src/style.css"
+    ],
+    "intentionalIntegrationAdjustment": "Only ID12 world travel multiplier0.6, preserving existing curve, lift/tilt, joints and event clock.",
+    "dependenciesUnchangedExceptRootVersion": true,
+    "engineSha256": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
+    "all37LoreUnchanged": true,
+    "yokoModuleHashes": {
+      "src/storybookYoko.ts": "60ff5a83ccd3d60b3a5f713a32238bfb1404b9f1200b76aa66beb03455e432ff",
+      "src/storybookYokoRig.ts": "2f9d2595091360046fb2200d73032f008789a3096386a4b2cb9cb88bf6530033",
+      "src/storybookYokoBattleMotion.ts": "577e66beef00bbf74ad7cc0e522da51fd0d12f0e865669ac1b1ad655c9cb9520"
+    }
+  },
+  "independentIntegrationReview": {
+    "result": "pass after correcting pre-impact Fenrir clipping",
+    "cutoffUtc": "2026-10-12T05:48:50Z",
+    "finalBattleStageSha256": "586ceb1a48af513b563b53c3909a66549ff563cd1c7a08cd53ef50e2f3ee28c0",
+    "finalEnemyFormationSha256": "664950f481633acf4f2dee6ed82b4dac3867257061f426be067ec9bdff1e3ce3",
+    "motionSamples": 165,
+    "clippedSamples": 0,
+    "pixelQueries": 1179900,
+    "focusedTests": 217,
+    "testFiles": 5,
+    "renderedEvidence": "actual decoded SVG parts and Canvas with controlled React/Happy DOM mount; not a browser"
+  },
+  "limits": [
+    "Local Chromium unavailable due to process socket restrictions; no local browser pass claimed.",
+    "Postdeployment native focus/held keys/rapid repeat input, short-screen scrolling and body targeting must be verified in actual browser.",
+    "Physical touch, screen reader, fps and decoded browser memory unmeasured.",
+    "Existing large JavaScript chunk advisory remains.",
+    "No legal clearance, speedup or all-bug-free claim."
+  ],
+  "publicationPerformedAtRecordCreation": false
+}

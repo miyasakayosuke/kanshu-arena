@@ -5,7 +5,7 @@ import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import App from './App';
 import * as engine from './engine';
 import {buildTimeline} from './playback';
-import {FENRIR_ART_URL, FENRIR_PORTRAIT_URL} from './fenrirArt';
+import {STORYBOOK_FENRIR_ART_URL as FENRIR_ART_URL, STORYBOOK_FENRIR_PORTRAIT_URL as FENRIR_PORTRAIT_URL} from './storybookFenrir';
 
 let root: Root;
 const team = [12, 0, 2, 6, 10];

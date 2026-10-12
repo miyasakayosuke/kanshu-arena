@@ -16,11 +16,10 @@ export function PartySummary({ team, rule, onFocus, compact = false }: PartyProp
     {compact && <p className={`homeReadiness ${ready ? '' : 'overBudget'}`}>{ready ? `${rules[rule].name}に出場できます` : team.length < 5 ? `あと${5 - team.length}体を編成しよう` : `${rules[rule].name}の上限までCOST ${cost(team) - rules[rule].budget}調整が必要`}</p>}
   </section>;
 }
-export default function HomeScreen(props: PartyProps & { onFamilyTrial: () => void }) {
+export default function HomeScreen(props: PartyProps) {
   return <main className="gameHome" aria-label="ゲームホーム">
     <section className="homeHero"><div className="homeSigil" aria-hidden="true">✦</div><span className="eyebrow">BUILD · BATTLE · LEARN</span><h2>次の一手を、試そう。</h2><p>5体を組む。対戦で確かめる。また組み直す。</p></section>
     <PartySummary {...props} compact />
-    <div className="homeDestinations"><button className="workshopLink familyTrialGate" onClick={props.onFamilyTrial} aria-label="系統パーティを試す"><span><strong>系統パーティを試す</strong><small>おすすめ5体を選んで受付へ · 保存枠はそのまま</small></span><b aria-hidden="true">›</b></button></div>
     <div className="homeCredits"><a href={`${import.meta.env.BASE_URL}credits.html`} target="_blank" rel="noopener noreferrer">クレジット・権利情報<span className="srOnly">（新しいタブ）</span></a></div>
   </main>;
 }
