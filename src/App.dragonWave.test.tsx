@@ -32,11 +32,14 @@ async function special(id: number, index: number, target?: string) {
   if (target) await click(label(`${target}を対象に選択`));
 }
 async function finish(skip: boolean) {
-  for (let i = 0; i < 20 && !document.querySelector('.result'); i++) {
+  for (let i = 0; i < 20 && !document.querySelector('.arenaLobby'); i++) {
     await click(button('この指示でターン開始'));
     if (skip) await click(button('演出をスキップ')); else await tick(24000);
   }
-  expect(document.querySelector('.result')).toBeTruthy();
+  expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+  expect(window.location.hash).toBe('#arena');
+  expect(document.querySelector('.battleMode')).toBeNull();
+  expect(document.querySelector('.rematchActions,.retryContract,[role=timer]')).toBeNull();
 }
 beforeEach(() => {
   // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
@@ -125,11 +128,11 @@ describe('dragon wave battle UI', () => {
     expect(document.querySelectorAll('.commander')).toHaveLength(5);
   });
 
-  it('restores full HP, MP and zero charge on the exact same retry, with natural and skipped playback equal', async () => {
+  it('starts another pinned battle from the lobby with full HP, MP and zero charge, and equal natural and skipped outcomes', async () => {
     const setup = vi.spyOn(engine, 'start'), resolve = vi.spyOn(engine, 'advanceWithEvents');
     await begin(); await finish(true);
     const completed = resolve.mock.results.at(-1)!.value.state;
-    await click(button('同じ編成ですぐ再戦'));
+    await click(button('この編成で対戦する'));
     expect(setup.mock.calls.at(-1)).toEqual(setup.mock.calls[0]);
     expect(setup.mock.results.at(-1)!.value.allies[0]).toMatchObject({ hp: 242, mp: 62, dragonCharge: 0 });
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('竜気:0/5');

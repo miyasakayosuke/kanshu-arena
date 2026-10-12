@@ -22,13 +22,13 @@ it('keeps the home pasture party and credits without the family-trial entry', as
   expect(document.querySelector('a[href$="credits.html"]')).toBeTruthy();
 });
 it.each([
-  ['standard', false, '7系統の純5体からランダム'],
-  ['light', false, '自然系のみ'],
-  ['standard', true, '同じ相手との再戦'],
-] as const)('describes the actual %s opponent pool, practice=%s', async (rule, practice, expected) => {
+  ['standard', '7系統の純5体からランダム'],
+  ['light', '自然系のみ'],
+] as const)('describes the actual %s opponent pool without rematch choices', async (rule, expected) => {
   const onFamilyTrial = vi.fn();
-  await act(async () => root.render(<ArenaLobby {...base} rule={rule} practice={practice} round={0} notice="" onRule={vi.fn()} onLeavePractice={vi.fn()} onFamilyTrial={onFamilyTrial} />));
+  await act(async () => root.render(<ArenaLobby {...base} rule={rule} round={0} notice="" onRule={vi.fn()} onLeavePractice={vi.fn()} onFamilyTrial={onFamilyTrial} />));
   expect(document.querySelector('.ruleHint')?.textContent).toContain(expected);
+  expect(document.querySelector('.practiceNotice, .rematchActions')).toBeNull();
   if (rule === 'light') {
     expect(document.querySelector('.ruleHint')?.textContent).toContain('ほかの系統とは標準戦');
     expect(document.querySelector('.ruleHint')?.textContent).not.toContain('ランダム');

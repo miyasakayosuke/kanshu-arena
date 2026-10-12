@@ -83,8 +83,18 @@ describe('extraordinary shared response UI',()=>{
   // game still uses its unchanged skills; this only puts the UI at that boundary.
   const team=[36,1,2,30,26];const {resolve}=fixture(1,s=>{s.allies.slice(2).forEach(u=>u.hp=0);s.allies[1].hp=1;s.allies[1].monster={...s.allies[1].monster,speed:120};s.enemies[0].monster={...s.enemies[0].monster,speed:90,skills:[{...s.enemies[0].monster.skills[0]!,priority:3}]};},[0,2,3,4,6],s=>s.enemies.map((u,i)=>i===0?{key:u.key,skill:0,target:'a1'}:{key:u.key,skill:engine.DEFEND}));await begin(team);await command(1,team);await click(label('トロルの行動を選択'));await click(button('とくぎ'));await click(button('守護の誓い'));await click(label('ヤヌスを対象に選択'));await click(button('この指示でターン開始'));const r=resolve.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;expect(r.events.some(e=>e.kind==='cast'&&e.actor==='a0')).toBe(false);expect(r.events.some(e=>e.kind==='response'&&e.actor==='a0')).toBe(false);await click(button('演出をスキップ'));expect(mp()[0]).toBe('MP 58/58');expect(status()).toContain('応答:残1回');
  });
- it('restores MP and the one response on same-encounter retry and cancels all prior playback',async()=>{
-  const {setup,resolve}=fixture(1,s=>s.enemies.forEach(u=>{u.hp=1;u.poison=1;}),mixed,s=>s.enemies.map(u=>({key:u.key,skill:engine.DEFEND})));await begin();await command(1);await click(button('この指示でターン開始'));await click(button('演出をスキップ'));expect(document.querySelector('.result')).toBeTruthy();await click(button('同じ編成ですぐ再戦'));expect(setup).toHaveBeenCalledTimes(2);expect(setup.mock.calls[1]).toEqual(setup.mock.calls[0]);expect(mp()[0]).toBe('MP 58/58');expect(status()).toContain('応答:残1回');expect(document.querySelector('.partyResponse')).toBeNull();expect(document.querySelector('[role=timer]')?.textContent).toContain('30');expect(resolve).toHaveBeenCalledTimes(1);
+ it('restores MP and the one response for a new lobby battle and cancels all prior playback',async()=>{
+  const {setup,resolve}=fixture(1,s=>s.enemies.forEach(u=>{u.hp=1;u.poison=1;}),mixed,s=>s.enemies.map(u=>({key:u.key,skill:engine.DEFEND})));
+  await begin();await command(1);await click(button('この指示でターン開始'));await click(button('演出をスキップ'));
+  expect(document.querySelector('.arenaLobby .result')).toBeTruthy();expect(window.location.hash).toBe('#arena');
+  expect(document.querySelector('.battleMode,.partyResponse,.rematchActions,.retryContract,[role=timer]')).toBeNull();
+  await tick(buildTimeline(resolve.mock.results[0].value.events).duration+1);
+  expect(setup).toHaveBeenCalledTimes(1);expect(resolve).toHaveBeenCalledTimes(1);
+  vi.mocked(Math.random).mockReturnValue(2 / 0x100000000);
+  await click(button('この編成で対戦する'));
+  expect(setup).toHaveBeenCalledTimes(2);expect(setup.mock.calls[1][2]).toBe(2);expect(setup.mock.calls[1][2]).not.toBe(setup.mock.calls[0][2]);
+  expect(mp()[0]).toBe('MP 58/58');expect(status()).toContain('応答:残1回');expect(document.querySelector('.partyResponse')).toBeNull();
+  expect(document.querySelector('[role=timer]')?.textContent).toContain('30');expect(resolve).toHaveBeenCalledTimes(1);
  });
 
 });

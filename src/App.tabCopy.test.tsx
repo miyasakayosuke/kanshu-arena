@@ -90,12 +90,14 @@ describe('functional tab copy without decorative title bands', () => {
     expect(document.querySelector('.battleNavigation')).toBeTruthy();
   });
 
-  it.each(['win', 'lose', 'draw'] as const)('keeps %s result and replay terms without a motivational prompt', async winner => {
+  it.each(['win', 'lose', 'draw'] as const)('keeps compact %s metrics and expandable records without terminal choices', async winner => {
     const battle = { ...start([1,2,3,4,6], [1,2,3,4,6]), winner };
-    await act(async () => root.render(<BattleResult battle={battle} onRematch={() => {}} onRebuild={() => {}} onNext={() => {}} onLog={() => {}} />));
-    expect(document.querySelector('.result > h2')?.textContent).toBe(winner === 'win' ? 'VICTORY' : winner === 'lose' ? 'DEFEAT' : 'DRAW');
+    await act(async () => root.render(<BattleResult battle={battle} onLog={() => {}} />));
+    expect(document.querySelector('.result h2')?.textContent).toContain(winner === 'win' ? 'VICTORY' : winner === 'lose' ? 'DEFEAT' : 'DRAW');
     expect(document.querySelector('.result .eyebrow, .resultPrompt')).toBeNull();
-    expect(document.querySelector('.retryContract')?.textContent).toContain('同じ相手・シード・ルール');
-    expect(document.querySelectorAll('.rematchActions button')).toHaveLength(3);
+    expect(document.querySelector('.resultMetrics')).toBeTruthy();
+    expect(document.querySelector<HTMLDetailsElement>('.resultDetails')?.open).toBe(false);
+    expect(document.querySelector('.retryContract, .rematchActions')).toBeNull();
+    expect(document.querySelectorAll('.result button')).toHaveLength(1);
   });
 });

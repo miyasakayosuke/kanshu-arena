@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-12",
-  "release": "v0.20.17",
-  "auditBaseCommit": "dc65454c31d23e969f98390af1942e938b097204",
+  "release": "v0.20.18",
+  "auditBaseCommit": "e1b482bc6748bae19ae08b44167a49f6ee96b998",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1004,6 +1004,21 @@
         "docs/home-idle-candidate.md"
       ],
       "distribution": "Inline SVG and project React/CSS in the browser bundle. Native home-only SVG animation tracks reuse the existing drawings. No new package, external media or bundled font. No license selected for project-original content."
+    },
+    {
+      "id": "arena-completed-match-return",
+      "kind": "original-ui-code-and-copy",
+      "files": [
+        "docs/arena-auto-return-candidate.md",
+        "src/App.tsx",
+        "src/BattleResult.tsx",
+        "src/HomeScreen.tsx",
+        "src/style.css"
+      ],
+      "provenance": "2026-10-13: project-specific AI-assisted lifecycle and UI changes implementing the user request to return completed matches directly to arena reception. Existing authoritative outcome metrics, event facts and full logs are retained in a compact expandable lobby record. New Japanese UI copy was authored directly for this project. No external code, assets, media, dependencies, game descriptions or research excerpts imported.",
+      "creator": "AI-assisted implementation for this project",
+      "distribution": "Browser UI code and short original labels; existing battle art, timeline, mechanics and third-party notices unchanged.",
+      "reviewLimit": "Implementation and automated inventory checks are not legal clearance or independent rights ownership/similarity proof. Existing review-ledger questions remain open."
     }
   ],
   "software": [

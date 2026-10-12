@@ -13,7 +13,7 @@ function put(root, path, text) { mkdirSync(dirname(join(root, path)), { recursiv
 function change(root, path, edit) { put(root, path, edit(readFileSync(join(root, path), 'utf8'))); }
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'arena-rights-test-')); temp.push(root);
-  for (const path of ['src', 'public', 'docs/rights', 'docs/monster-lore-sources.json', 'package-lock.json']) {
+  for (const path of ['src', 'public', 'docs', 'package-lock.json']) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(repo, path), join(root, path), { recursive: true });
   }

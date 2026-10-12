@@ -68,24 +68,25 @@ describe('random pure-family encounter lifecycle', () => {
     expect(battleStarts(setup)[0].state.seed).toBe(42);
   });
 
-  it('reuses enemy, seed and rule on immediate retry and after rebuilding without drawing again', async () => {
-    seededDraws(1);
+  it('draws afresh for each explicit start, including after rebuilding', async () => {
+    const random = seededDraws(1);
     const setup = vi.spyOn(engine, 'start');
     const draw = vi.spyOn(trials, 'familyEncounterForSeed');
-    await mount(); await begin();
-    const original = structuredClone(battleStarts(setup)[0]);
-    await finish(); await click(button('同じ編成ですぐ再戦'));
-    expect(battleStarts(setup)[1]).toEqual(original);
-    await finish(); await click(button('編成を見直して再戦'));
+    await mount(); await begin(); await finish();
+    expect(window.location.hash).toBe('#arena');
+    expect(draw).toHaveBeenCalledTimes(1);
+    random.mockReturnValue(2 / 0x100000000);
+    await click(button('この編成で対戦する'));
+    expect(battleStarts(setup)[1].args[2]).toBe(2);
+    await finish(); await click(label('編成'));
     await click(label('2枠・バステトを入れ替える')); await click(label('バステトをリーダーにする'));
-    await arena(); await click(button('この編成で同じ相手に再戦'));
+    random.mockReturnValue(3 / 0x100000000); await begin();
     const rebuilt = battleStarts(setup)[2];
     expect(rebuilt.args[0]).toEqual([2, 0, 3, 4, 6]);
-    expect(rebuilt.args.slice(1)).toEqual(original.args.slice(1));
-    expect(rebuilt.state.enemies).toEqual(original.state.enemies);
-    expect(rebuilt.state.seed).toBe(original.state.seed);
+    expect(rebuilt.args[1]).toEqual(draw.mock.results[2].value.enemy);
+    expect(rebuilt.args[2]).toBe(3);
     expect(rebuilt.state.history).toEqual([]);
-    expect(draw).toHaveBeenCalledTimes(1);
+    expect(draw).toHaveBeenCalledTimes(3);
   });
 
   it('draws anew after a finished ordinary battle and after an interrupted battle', async () => {
@@ -93,7 +94,7 @@ describe('random pure-family encounter lifecycle', () => {
     const draw = vi.spyOn(trials, 'familyEncounterForSeed');
     const setup = vi.spyOn(engine, 'start');
     await mount(); await begin(); await finish();
-    await click(button('闘技場に戻る → 次の相手'));
+    expect(window.location.hash).toBe('#arena');
     random.mockReturnValue(2 / 0x100000000); await click(button('この編成で対戦する'));
     await click(label('闘技場に戻る')); await click(button('中断して移動'));
     random.mockReturnValue(3 / 0x100000000); await click(button('この編成で対戦する'));
@@ -102,23 +103,25 @@ describe('random pure-family encounter lifecycle', () => {
     expect(draw).toHaveBeenCalledTimes(3);
   });
 
-  it('draws a fresh legal nature encounter when a rule change cancels controlled practice', async () => {
+  it('draws a fresh legal nature encounter after changing the next match rule', async () => {
     const random = seededDraws(1);
     const draw = vi.spyOn(trials, 'familyEncounterForSeed');
     const setup = vi.spyOn(engine, 'start');
-    await mount(); await begin(); await finish(); await click(button('編成を見直して再戦'));
+    await mount(); await begin(); await finish(); await click(label('編成'));
     await click(button('軽量戦')); random.mockReturnValue(2 / 0x100000000); await begin();
     expect(battleStarts(setup)[1].args.slice(1)).toEqual([[14, 3, 6, 9, 10], 2, { leaders: true }]);
     expect(document.querySelector('.practiceNotice')).toBeNull();
     expect(draw).toHaveBeenCalledTimes(2);
   });
 
-  it('draws again when the user explicitly leaves same-encounter practice', async () => {
+  it('does not draw while visiting other screens after a result', async () => {
     const random = seededDraws(1);
     const draw = vi.spyOn(trials, 'familyEncounterForSeed');
     const setup = vi.spyOn(engine, 'start');
-    await mount(); await begin(); await finish(); await click(button('編成を見直して再戦'));
-    await click(button('通常の対戦へ')); random.mockReturnValue(2 / 0x100000000); await begin();
+    await mount(); await begin(); await finish(); await click(label('編成'));
+    await click(label('ホーム')); await arena(); expect(draw).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('.practiceNotice')).toBeNull();
+    random.mockReturnValue(2 / 0x100000000); await begin();
     expect(battleStarts(setup)[1].args[2]).toBe(2);
     expect(battleStarts(setup)[1].args[1]).toEqual(draw.mock.results[1].value.enemy);
     expect(draw).toHaveBeenCalledTimes(2);

@@ -50,17 +50,18 @@ describe('home pasture uses the workshop source of truth', () => {
     await act(async () => root.unmount()); root = createRoot(document.getElementById('root')!); await mount(); expect(shown()).toEqual(savedTeam);
   });
 
-  it('shows rebuilt rematch selections while preserving the held enemy and seed', async () => {
+  it('shows edits after a finished match and draws anew only on the next explicit start', async () => {
     const start = vi.spyOn(engine, 'start'), draw = vi.spyOn(trials, 'familyEncounterForSeed');
     await mount(); await click(label('闘技場')); await click(textButton('この編成で対戦する'));
     for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) { await click(textButton('この指示でターン開始')); await click(textButton('演出をスキップ')); }
-    expect(document.querySelector('.result')).toBeTruthy(); await click(textButton('編成を見直して再戦'));
+    expect(document.querySelector('.result')).toBeTruthy(); expect(window.location.hash).toBe('#arena'); await click(label('編成'));
     await click(label('1枠・妖狐を入れ替える')); await click(label('トロルを候補に選ぶ')); await click(document.querySelector('.confirmReplacement')!);
     await click(label('ホーム')); expect(shown()).toEqual([1, 2, 3, 4, 6]);
     await act(async () => vi.advanceTimersByTime(60000));
     expect(document.querySelector('[role="timer"]')).toBeNull();
-    await click(label('闘技場')); expect(document.querySelector('.practiceNotice')).toBeTruthy(); await click(textButton('この編成で同じ相手に再戦'));
+    await click(label('闘技場')); expect(document.querySelector('.practiceNotice')).toBeNull(); expect(draw).toHaveBeenCalledOnce();
+    vi.mocked(Math.random).mockReturnValue(2 / 0x100000000); await click(textButton('この編成で対戦する'));
     const battles = start.mock.calls.filter(([, enemies]) => enemies.length > 0);
-    expect(battles).toHaveLength(2); expect(battles[1][0]).toEqual([1, 2, 3, 4, 6]); expect(battles[1].slice(1)).toEqual(battles[0].slice(1)); expect(draw).toHaveBeenCalledOnce();
+    expect(battles).toHaveLength(2); expect(battles[1][0]).toEqual([1, 2, 3, 4, 6]); expect(battles[1][2]).toBe(2); expect(battles[1][1]).toEqual(draw.mock.results[1].value.enemy); expect(draw).toHaveBeenCalledTimes(2);
   });
 });

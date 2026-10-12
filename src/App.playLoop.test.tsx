@@ -49,6 +49,8 @@ describe('build, battle, learn, rebuild loop', () => {
     expect(firstFacts).toEqual(resultFacts(firstState).map(fact => fact.text));
     expect(document.querySelector('.battleStage')).toBeNull();
     expect(document.querySelector('[role=timer]')).toBeNull();
+    const resultDetails = document.querySelector<HTMLDetailsElement>('.resultDetails')!;
+    expect(resultDetails.open).toBe(false); await click(resultDetails.querySelector('summary')!);
     const detail = document.querySelector<HTMLDetailsElement>('.battleFindings details')!;
     await click(detail.querySelector('summary')!);
     expect(detail.open).toBe(true);
@@ -59,23 +61,26 @@ describe('build, battle, learn, rebuild loop', () => {
     expect(ledger.querySelectorAll(':scope > details')).toHaveLength(firstState.history!.length);
     expect(ledger.textContent).toContain('確定した指示'); expect(ledger.textContent).toContain('実際の出来事');
     await click(label('戦闘ログを閉じる'));
-    await click(button('同じ編成ですぐ再戦')); await finish(false);
+    await click(button('この編成で対戦する')); await finish(false);
     expect(facts()).toEqual(firstFacts);
     const replay = advance.mock.results.at(-1)!.value.state as engine.State;
     expect(replay).toEqual(firstState);
   });
 
-  it('retains opponent, seed and rule through an atomic roster swap and resets the next battle', async () => {
+  it('starts a fresh encounter after an atomic roster swap and resets the next battle', async () => {
     const start = vi.spyOn(engine, 'start'); const advance = vi.spyOn(engine, 'advanceWithEvents');
     await mount(); await begin(); const original = structuredClone(battleStarts(start)[0].args);
-    await finish(); await click(button('編成を見直して再戦'));
+    await finish(); expect(window.location.hash).toBe('#arena'); await click(label('編成'));
     await click(label('1枠・妖狐を入れ替える')); await click(label('トロルを候補に選ぶ'));
     await click(button('トロルに入れ替える'));
-    expect(document.querySelector('.practiceNotice')).toBeTruthy();
-    await openArena(); await click(button('この編成で同じ相手に再戦'));
+    expect(document.querySelector('.practiceNotice')).toBeNull();
+    vi.mocked(Math.random).mockReturnValue(2 / 0x100000000);
+    await openArena(); await click(button('この編成で対戦する'));
     expect(battleStarts(start)).toHaveLength(2);
     expect(battleStarts(start)[1].args[0]).toEqual([1,2,3,4,6]);
-    expect(battleStarts(start)[1].args.slice(1)).toEqual(original.slice(1));
+    expect(battleStarts(start)[1].args[2]).toBe(2);
+    expect(battleStarts(start)[1].args[1]).not.toEqual(original[1]);
+    expect(battleStarts(start)[1].args[3]).toEqual(original[3]);
     expect(battleStarts(start)[1].state.history).toEqual([]);
     expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
     const resolved = advance.mock.calls.length;
@@ -83,22 +88,22 @@ describe('build, battle, learn, rebuild loop', () => {
     expect([...document.querySelectorAll('.commanderMp')].map(element => element.textContent)).toEqual(battleStarts(start)[1].state.allies.map((unit: engine.Unit) => `MP ${unit.mp}/${unit.mp}`));
   });
 
-  it('states when changing a rule cancels controlled retry', async () => {
-    await mount(); await begin(); await finish(); await click(button('編成を見直して再戦'));
+  it('lets the user change the next match rule after automatic return', async () => {
+    await mount(); await begin(); await finish(); expect(window.location.hash).toBe('#arena'); await click(label('編成'));
     const ruleDisclosure = document.querySelector<HTMLDetailsElement>('.ruleDisclosure')!;
     await click(ruleDisclosure.querySelector('summary')!); await click(button('軽量戦'));
     expect(document.querySelector('.practiceNotice')).toBeNull();
-    expect(document.querySelector('.teamNotice')?.textContent).toContain('同じ相手・同じシードの再戦を解除');
-    await openArena(); expect(document.querySelector('.transitionNotice')?.textContent).toContain('再戦を解除');
+    await openArena(); expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
+    expect(button('この編成で対戦する')).toBeTruthy();
   });
 
-  it('also explains retry invalidation when a saved team loads another rule', async () => {
+  it('uses the saved team rule for the next match without a held encounter', async () => {
     localStorage.setItem('kanshu-team-slots-v1', JSON.stringify([{ team: [0,2,3,4,6], rule: 'light' }, null, null]));
-    await mount(); await begin(); await finish(); await click(button('編成を見直して再戦'));
+    await mount(); await begin(); await finish(); expect(window.location.hash).toBe('#arena'); await click(label('編成'));
     await click(label('チーム1を選ぶ'));
     expect(document.querySelector('.practiceNotice')).toBeNull();
-    expect(document.querySelector('.teamNotice')?.textContent).toContain('同じ相手・同じシードの再戦を解除');
-    await openArena(); expect(document.querySelector('.transitionNotice')?.textContent).toContain('再戦を解除');
+    await openArena(); expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
+    expect(button('この編成で対戦する')).toBeTruthy();
     expect(document.querySelector('.ruleTabs [aria-pressed=true]')?.textContent).toContain('軽量戦');
   });
 

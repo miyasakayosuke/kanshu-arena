@@ -111,18 +111,21 @@ describe('complete playtest flow', () => {
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
     expect(document.querySelector('.playingPanel')).toBeNull();
   });
-  it('reaches a result, opens and closes the log, and can play the next opponent', async () => {
+  it('automatically returns with a result, opens and closes its log, and starts the next opponent', async () => {
     await mount(); await startBattle();
     for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
       await click(button('この指示でターン開始'));
       await click(button('演出をスキップ'));
     }
     expect(document.querySelector('.result')).toBeTruthy();
-    await click(button('ログ')); expect(document.querySelector('.logModal')).toBeTruthy();
+    expect(window.location.hash).toBe('#arena');
+    await click(document.querySelector('.resultDetails > summary')!);
+    await click(button('全ターンのログを見る')); expect(document.querySelector('.logModal')).toBeTruthy();
     const played = [...(document.querySelector('.log')?.textContent ?? '').matchAll(/── TURN (\d+) ──/g)];
-    expect(document.querySelector('.battleTop')?.textContent).toContain(`TURN ${played.at(-1)![1]}`);
+    expect(document.querySelector('.resultMetrics')?.textContent).toContain(`${played.at(-1)![1]}ターン`);
+    expect(document.querySelector('.battleTop')).toBeNull();
     await click(label('戦闘ログを閉じる'));
-    await click(button('闘技場に戻る → 次の相手')); expect(document.querySelector('footer')?.textContent).toContain('第2戦');
+    expect(document.querySelector('footer')?.textContent).toContain('第2戦');
     await startBattle();
     expect(document.querySelector('.battleTop')?.textContent).toContain('TURN 1');
   });
@@ -674,7 +677,7 @@ describe('30-second command deadline', () => {
     expect(advance).toHaveBeenCalledTimes(1);
   });
 
-  it('stops on the result screen and releases command callbacks on unmount', async () => {
+  it('stops in the lobby after a result and releases command callbacks on unmount', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
     for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
@@ -686,7 +689,7 @@ describe('30-second command deadline', () => {
     const count = advance.mock.calls.length;
     await tick(60000);
     expect(advance).toHaveBeenCalledTimes(count);
-    await click(button('闘技場に戻る → 次の相手'));
+    expect(window.location.hash).toBe('#arena');
     await startBattle();
     await act(async () => root.unmount());
     await tick(60000);

@@ -84,7 +84,7 @@ describe('strategy workshop and fair rules',()=>{
     await startBattle();expect(document.querySelector('.battleMode')).toBeTruthy();
   });
 });
-describe('counterplay, reading opponents and practice',()=>{
+describe('counterplay, reading opponents and subsequent matches',()=>{
   it('uses the same allied target panel for protect and cleanse and keeps four command buttons',async()=>{
     localStorage.setItem('kanshu-team',JSON.stringify([1,2,3,4,6]));const advance=vi.spyOn(engine,'advanceWithEvents');await mount();await startBattle();
     expect(document.querySelectorAll('.commandButtons button')).toHaveLength(4);
@@ -102,18 +102,18 @@ describe('counterplay, reading opponents and practice',()=>{
     await act(async()=>vi.advanceTimersByTime(10000));expect(document.querySelector('[role=timer]')?.textContent).toContain('20');
     await act(async()=>vi.advanceTimersByTime(20000));expect(document.querySelector('.tacticsModal')).toBeNull();expect(document.querySelector('.playingPanel')).toBeTruthy();
   });
-  it('restarts the exact encounter and supports rebuilding before the same matchup',async()=>{
+  it('starts fresh matches with recovered resources and an explicitly edited party',async()=>{
     const start=vi.spyOn(engine,'start');await mount();await startBattle();const original=structuredClone(battleStarts(start)[0].args);
-    await finish();await click(button('同じ編成ですぐ再戦'));
+    await finish();await click(button('この編成で対戦する'));
     expect(battleStarts(start)).toHaveLength(2);expect(battleStarts(start)[1].args).toEqual(original);expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
     expect([...document.querySelectorAll('.commanderMp')].map(el=>el.textContent)).toEqual(battleStarts(start)[1].state.allies.map((unit:engine.Unit)=>`MP ${unit.monster.mp}/${unit.monster.mp}`));
-    await finish();await click(button('編成を見直して再戦'));expect(document.querySelector('.practiceNotice')).toBeTruthy();
-    await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));await openArena();await click(button('この編成で同じ相手に再戦'));
+    await finish();await click(label('編成'));expect(document.querySelector('.practiceNotice')).toBeNull();
+    await click(label('2枠・バステトを入れ替える'));await click(label('バステトをリーダーにする'));await openArena();await click(button('この編成で対戦する'));
     expect(battleStarts(start)).toHaveLength(3);expect(battleStarts(start)[2].args[0][0]).toBe(2);expect(battleStarts(start)[2].args.slice(1)).toEqual(original.slice(1));
     expect(document.querySelector('[role=timer]')?.textContent).toContain('30');
   });
-  it('cancels controlled practice when the rule is changed',async()=>{
-    const start=vi.spyOn(engine,'start');await mount();await startBattle();await finish();await click(button('編成を見直して再戦'));
+  it('applies a changed rule to the next match after automatic return',async()=>{
+    const start=vi.spyOn(engine,'start');await mount();await startBattle();await finish();await click(label('編成'));
     await click(button('軽量戦'));expect(document.querySelector('.practiceNotice')).toBeNull();await startBattle();
     expect(engine.cost(battleStarts(start)[1].args[1])).toBeLessThanOrEqual(15);
   });

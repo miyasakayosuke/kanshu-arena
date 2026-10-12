@@ -94,14 +94,20 @@ describe('completed command portrait state', () => {
     expect(stateLabel('a0')).toBe('行動済');
     expect(card('a0').getAttribute('aria-describedby')).toContain('party-command-a0');
   });
-  it('starts a rematch without completed portraits or old replay timers', async () => {
-    fixture(); await begin();
-    for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
+  it('returns to the lobby and starts another battle without completed portraits or old replay timers', async () => {
+    const advance = fixture(); await begin();
+    for (let turn = 0; turn < 20 && !document.querySelector('.arenaLobby'); turn++) {
       await click(button('この指示でターン開始')); await tick(1501);
       await click(button('演出をスキップ'));
     }
-    expect(document.querySelector('.result')).toBeTruthy();
-    await click(button('同じ編成ですぐ再戦'));
+    expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+    expect(window.location.hash).toBe('#arena');
+    expect(document.querySelector('.battleMode,.actionCompleted,.commander.acting,[role=timer]')).toBeNull();
+    const completedTurns = advance.mock.calls.length;
+    await tick(60000);
+    expect(advance).toHaveBeenCalledTimes(completedTurns);
+    expect(window.location.hash).toBe('#arena');
+    await click(button('この編成で対戦する'));
     expect(document.querySelectorAll('.actionCompleted,.commander.acting')).toHaveLength(0);
     await tick(1000);
     expect(stateLabel('a0')).toBe('未選択');

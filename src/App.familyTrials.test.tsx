@@ -70,13 +70,13 @@ describe('one-click family trials without saving over slots', () => {
     await open(); await choose('dragon'); expect(active().rule).toBe('standard'); expect(document.activeElement).toBe(document.querySelector('.arenaLobby h2.srOnly')); expect(button('この編成で対戦する').disabled).toBe(false);
     expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);
   });
-  it('preserves practice on cancel but clears it and draws anew after applying a preset',async()=>{
+  it('keeps the lobby unchanged on cancel and draws only after starting an applied preset',async()=>{
     const draw=vi.spyOn(trials,'familyEncounterForSeed');
     await mount(); await click(label('闘技場')); await click(button('この編成で対戦する')); await finish();
-    await click(button('編成を見直して再戦')); await click(label('闘技場'));
-    expect(button('この編成で同じ相手に再戦')).toBeTruthy();
+    expect(window.location.hash).toBe('#arena');
+    expect(button('この編成で対戦する')).toBeTruthy();
     await open(); await click(label('編成を変えずに閉じる'));
-    expect(button('この編成で同じ相手に再戦')).toBeTruthy(); expect(draw).toHaveBeenCalledTimes(1);
+    expect(button('この編成で対戦する')).toBeTruthy(); expect(draw).toHaveBeenCalledTimes(1);
     await open(); await choose('beast'); expect(document.querySelector('.practiceNotice')).toBeNull();
     expect(draw).toHaveBeenCalledTimes(1); await click(button('この編成で対戦する')); expect(draw).toHaveBeenCalledTimes(2);
     expect(localStorage.getItem('kanshu-team-slots-v1')).toBe(saved);

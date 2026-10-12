@@ -60,7 +60,7 @@ describe('retained ally hit labels', () => {
     await tick(400/speed); expect(numbers()).toHaveLength(0); expect(numbers('a1')).toHaveLength(0);
     expect(advance).toHaveBeenCalledTimes(1);
   });
-  it('clears on skip, new replay, navigation, and rematch without stale timers', async () => {
+  it('clears on skip, new replay, navigation, and a new lobby battle without stale timers', async () => {
     fixture(); await begin(); await click(button('この指示でターン開始')); await tick(801);
     expect(numbers()).toHaveLength(2); await click(button('演出をスキップ'));
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
@@ -71,7 +71,12 @@ describe('retained ally hit labels', () => {
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
     vi.mocked(engine.advanceWithEvents).mockRestore(); fixture(true);
     await click(button('この指示でターン開始')); await tick(801); await click(button('演出をスキップ'));
-    await click(button('同じ編成ですぐ再戦')); await tick(1000);
+    expect(window.location.hash).toBe('#arena');
+    expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+    expect(document.querySelector('.battleMode,.partyImpact,[role=timer]')).toBeNull();
+    await tick(5000);
+    expect(document.querySelector('.partyImpact')).toBeNull();
+    await click(button('この編成で対戦する')); await tick(1000);
     expect(document.querySelectorAll('.partyImpact')).toHaveLength(0);
   });
   it('separates wrapped status/response badges from four numeric lanes and stable portrait/vitals', async () => {

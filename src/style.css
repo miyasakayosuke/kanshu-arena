@@ -232,3 +232,10 @@
 .commander .commanderBadges .commanderStatus,.commander .commanderBadges .partyResponse{position:static;inset:auto;max-width:100%;white-space:normal;overflow-wrap:anywhere;z-index:auto}
 .commander .commanderBadges .partyResponse{line-height:11px;padding:2px 1px}
 .commander.fallen .commanderIcon{opacity:.35;filter:grayscale(1)}
+
+/* Completed matches return here; the record stays readable without a decision screen. */
+.arenaLobby .lobbyResult{position:static;margin:0 0 14px;padding:12px 14px;text-align:left;overflow:visible;max-height:none;border:1px solid #c2c69933;border-radius:9px;background:#192c31}
+.arenaLobby .lobbyResult h2{font-size:16px;letter-spacing:1px;margin:0 0 5px}
+.arenaLobby .lobbyResult .resultMetrics{font-size:11px;line-height:1.6}
+.resultDetails>summary{cursor:pointer;font-size:12px;min-height:36px;padding:10px 0 2px;color:#d4dec6}
+.lobbyResult .battleFindings{margin:10px 0 0}

@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); });
 
-it('expands both turns of authoritative lost-action evidence and keeps every result/retry control usable', async () => {
+it('expands authoritative lost-action evidence and full logs without terminal match choices', async () => {
   let battle = start([2], [1]);
   battle.enemies[0].monster = { ...battle.enemies[0].monster, hp: 5000, skills: [
     { name: '休息', kind: 'heal', power: 0, priority: 0, mpCost: 0 },
@@ -24,8 +24,11 @@ it('expands both turns of authoritative lost-action evidence and keeps every res
   battle = advanceWithEvents(battle, [{ key: 'a0', skill: BASIC_ATTACK, target: 'e0' }], { enemyOrders: [{ key: 'e0', skill: 0 }] }).state;
   battle = advanceWithEvents(battle, [{ key: 'a0', skill: 3, target: 'a0' }], { enemyOrders: [{ key: 'e0', skill: 1, target: 'a0' }] }).state;
   expect(battle.winner).toBe('lose');
-  const callbacks = { onRematch: vi.fn(), onRebuild: vi.fn(), onNext: vi.fn(), onLog: vi.fn() };
+  const callbacks = { onLog: vi.fn() };
   await act(async () => root.render(<BattleResult battle={battle} {...callbacks} />));
+  const disclosure = document.querySelector<HTMLDetailsElement>('.resultDetails')!;
+  expect(disclosure.open).toBe(false); await act(async () => disclosure.querySelector('summary')!.click());
+  expect(disclosure.open).toBe(true);
   const fact = resultFacts(battle)[0];
   expect(fact.kind).toBe('lost-action');
   const rows = document.querySelectorAll('.battleFindings > ul > li');
@@ -43,15 +46,9 @@ it('expands both turns of authoritative lost-action evidence and keeps every res
   expect(detail.textContent).toContain('行動終了');
   await act(async () => detail.querySelector('summary')!.click());
   expect(detail.open).toBe(false);
-  const actions = [
-    ['全ターンのログを見る', callbacks.onLog], ['編成を見直して再戦', callbacks.onRebuild],
-    ['同じ編成ですぐ再戦', callbacks.onRematch], ['闘技場に戻る', callbacks.onNext],
-  ] as const;
-  for (const [label, callback] of actions) {
-    const button = [...document.querySelectorAll('button')].find(element => element.textContent?.includes(label))!;
-    expect(button.disabled).toBe(false);
-    await act(async () => button.click());
-    expect(callback).toHaveBeenCalledTimes(1);
-  }
-  expect(document.querySelector('.retryContract')?.textContent).toContain('指示を変えると乱数の使われ方も変わります');
+  const log = [...document.querySelectorAll('button')].find(element => element.textContent?.includes('全ターンのログを見る'))!;
+  expect(log.disabled).toBe(false); await act(async () => log.click());
+  expect(callbacks.onLog).toHaveBeenCalledTimes(1);
+  expect(document.querySelector('.rematchActions, .retryContract')).toBeNull();
+  expect(document.querySelectorAll('.result button')).toHaveLength(1);
 });

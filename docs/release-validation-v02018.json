@@ -1,0 +1,131 @@
+{
+  "release": "0.20.18",
+  "stage": "Final prepublication checks; native acceptance follows exact deployment",
+  "baselineCommit": "e1b482bc6748bae19ae08b44167a49f6ee96b998",
+  "baselineTree": "4b1c180d1b4286024dfcb4be0db2695f4b3bdf6d",
+  "candidateTree": "0363d0119d047b7035e5deeaf4d6815f6444cf86",
+  "candidatePatchSha256": "c22075919216c5aebfdce02ca633833cca882b59a349386e138b18553e345743",
+  "checks": {
+    "tests": 2849,
+    "files": 144,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "d57347c715b2b59d9df8018f1d330dee4faf8fbe",
+          "release": "a118f4acead12fec6ccecdba2ffaa00ff7240e93"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.17",
+          "release": "0.20.18"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeChanged": [
+      "src/App.tsx",
+      "src/BattleResult.tsx",
+      "src/HomeScreen.tsx",
+      "src/style.css"
+    ],
+    "runtimeSha256": {
+      "src/App.tsx": "fc6725e9f2442f29b35f620a3b8a128f80fb32119bf924436407f64f3502aad5",
+      "src/BattleResult.tsx": "90966e18413e6c8bb00ba09756f28b35af8bf79d16ae24c42d440af3d3aacf86",
+      "src/HomeScreen.tsx": "0620641227aba7cc90d8a3cd46178fa8226b6ca194fc6a708ea6be55904a3d0d",
+      "src/style.css": "50627d7c4c66f46b0410fb0aae469f3d1bff330c141e21ae52c8d92bde84a022"
+    },
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/BattleStage.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyFormation.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/partyNumbers.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamFocusReveal.ts",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "protectedCount": 67,
+    "dependenciesOnlyRootVersionChanged": true,
+    "creditsOnlyVersionChanged": true,
+    "allPriorManifestRecordsPreserved": true,
+    "additionalNonRuntimeChange": "Rights checker fixture now copies public docs directory, so all inventoried documents are present; negative checks unchanged."
+  },
+  "limits": [
+    "Source/DOM checks do not prove rendered native geometry or focus/history behavior",
+    "Exact deployed browser acceptance and credits to follow publication",
+    "Existing main-chunk advisory remains",
+    "Rights inventory is not legal clearance"
+  ]
+}

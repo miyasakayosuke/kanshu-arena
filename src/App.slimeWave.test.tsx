@@ -76,13 +76,13 @@ describe('slime supply playable UI',()=>{
     localStorage.setItem('kanshu-team',JSON.stringify([0,2,3,4,6]));await act(async()=>root.render(<App/>));await click(label('編成'));expect([...document.querySelectorAll('.builderSlots .teamUnit')].map(n=>Number(n.getAttribute('data-monster-id')))).toEqual([0,2,3,4,6]);
     await act(async()=>root.unmount());root=createRoot(document.getElementById('test-root')!);await mount(pure,'light');await click(label('闘技場'));expect(button('この編成で対戦する').disabled).toBe(true);await click(button('標準戦'));expect(button('この編成で対戦する').disabled).toBe(false);
   });
-  it('retries at full MP with one allowance and preserves exact battle results across normal,2x and skipped playback',async()=>{
+  it('starts from the lobby at full MP with one allowance and preserves pinned battle results across normal,2x and skipped playback',async()=>{
     const setup=vi.spyOn(engine,'start'),resolve=vi.spyOn(engine,'advanceWithEvents');await begin();const opening=structuredClone(setup.mock.results[0].value),outcomes:engine.State[]=[];
     for(const mode of ['skip','normal','double']){
-      if(mode!=='skip'){await click(button('同じ編成ですぐ再戦'));expect(setup.mock.calls.at(-1)).toEqual(setup.mock.calls[0]);expect(setup.mock.results.at(-1)!.value).toEqual(opening);expect(document.querySelector('#party-status-a0')?.textContent).toBe('補給:残1回');}
+      if(mode!=='skip'){await click(button('この編成で対戦する'));expect(setup.mock.calls.at(-1)).toEqual(setup.mock.calls[0]);expect(setup.mock.results.at(-1)!.value).toEqual(opening);expect(document.querySelector('#party-status-a0')?.textContent).toBe('補給:残1回');}
       if(mode==='double')await click(label('演出速度'));
-      for(let turn=0;turn<20&&!document.querySelector('.result');turn++){await click(button('この指示でターン開始'));if(mode==='skip')await click(button('演出をスキップ'));else await tick(buildTimeline(resolve.mock.results.at(-1)!.value.events).duration/(mode==='double'?2:1)+1);}
-      expect(document.querySelector('.result')).toBeTruthy();outcomes.push(resolve.mock.results.at(-1)!.value.state);
+      for(let turn=0;turn<20&&!document.querySelector('.arenaLobby');turn++){await click(button('この指示でターン開始'));if(mode==='skip')await click(button('演出をスキップ'));else await tick(buildTimeline(resolve.mock.results.at(-1)!.value.events).duration/(mode==='double'?2:1)+1);}
+      expect(document.querySelector('.arenaLobby .result')).toBeTruthy();expect(window.location.hash).toBe('#arena');expect(document.querySelector('.battleMode,.rematchActions,.retryContract,[role=timer]')).toBeNull();outcomes.push(resolve.mock.results.at(-1)!.value.state);
     }
     expect(outcomes[1]).toEqual(outcomes[0]);expect(outcomes[2]).toEqual(outcomes[0]);
   });

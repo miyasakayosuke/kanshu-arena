@@ -361,29 +361,26 @@ describe('safe battle navigation', () => {
     expect(unloadingIsBlocked()).toBe(false);
     await startBattle(); await finishBattle();
     expect(unloadingIsBlocked()).toBe(false);
-    await click(button('闘技場に戻る → 次の相手'));
     expect(dialog()).toBeNull();
     expect(window.location.hash).toBe('#arena');
     expect(unloadingIsBlocked()).toBe(false);
   });
 
-  it('keeps rematches in arena and advances to the next opponent exactly once', async () => {
+  it('returns to reception and advances the round exactly once per completed match', async () => {
     const entropy = vi.spyOn(Math, 'random').mockReturnValue(41 / 0x100000000);
     const start = vi.spyOn(engine, 'start');
-    await enterBattle();
-    const original = structuredClone(start.mock.calls[0]);
-    await finishBattle(); await click(button('同じ編成ですぐ再戦'));
-    expect(window.location.hash).toBe('#arena/battle');
-    expect(start.mock.calls[1]).toEqual(original);
-    await finishBattle();
-    const next = button('闘技場に戻る → 次の相手');
-    await act(async () => { next.click(); next.click(); });
+    await enterBattle(); await finishBattle();
     expect(window.location.hash).toBe('#arena');
     expect(document.body.textContent).toContain('第2戦');
+    expect(button('同じ編成ですぐ再戦')).toBeUndefined();
+    expect(button('編成を見直して再戦')).toBeUndefined();
     await navigate('ホーム'); await navigate('闘技場');
     expect(document.body.textContent).toContain('第2戦');
-    entropy.mockReturnValue(1024 / 0x100000000);
-    await startBattle();
-    expect(start.mock.calls[2][2]).toBe(1024);
+    entropy.mockReturnValue(1024 / 0x100000000); await startBattle();
+    expect(start.mock.calls[1][2]).toBe(1024);
+    await finishBattle();
+    expect(window.location.hash).toBe('#arena');
+    expect(document.body.textContent).toContain('第3戦');
+    expect(start).toHaveBeenCalledTimes(2);
   });
 });

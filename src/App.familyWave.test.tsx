@@ -16,11 +16,14 @@ async function begin(team: number[]) {
   await act(async () => root.render(<App />)); await click(label('闘技場')); await click(button('この編成で対戦する'));
 }
 async function finish(skip: boolean) {
-  for (let i = 0; i < 20 && !document.querySelector('.result'); i++) {
+  for (let i = 0; i < 20 && !document.querySelector('.arenaLobby'); i++) {
     await click(button('この指示でターン開始'));
     if (skip) await click(button('演出をスキップ')); else await tick(24000);
   }
-  expect(document.querySelector('.result')).toBeTruthy();
+  expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+  expect(window.location.hash).toBe('#arena');
+  expect(document.querySelector('.battleMode')).toBeNull();
+  expect(document.querySelector('.rematchActions,.retryContract,[role=timer]')).toBeNull();
 }
 beforeEach(() => {
   // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
@@ -50,14 +53,14 @@ describe('family-wave live battle UI', () => {
     await click(button('演出をスキップ'));
     expect(document.querySelector('#party-mp-a4')?.textContent).toBe('MP 34/44');
   });
-  it('shows static nature ward, spends MP at cast, and restores HP/MP/ward for identical retry', async () => {
+  it('shows static nature ward and restores HP/MP/ward when starting another pinned battle from the lobby', async () => {
     const resolve = vi.spyOn(engine, 'advanceWithEvents'), setup = vi.spyOn(engine, 'start');
     await begin([14,3,6,9,10]);
     expect(document.querySelectorAll('.natureWarded')).toHaveLength(5);
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('自然障壁:残2T');
     expect(document.querySelector('#party-hp-a0')?.textContent).toBe('HP 276/276');
     await finish(true); const completed = resolve.mock.results.at(-1)!.value.state;
-    await click(button('同じ編成ですぐ再戦'));
+    await click(button('この編成で対戦する'));
     expect(setup.mock.results.at(-1)!.value.allies[0]).toMatchObject({ hp: 276, mp: 64, ward: 2 });
     expect(document.querySelectorAll('.natureWarded')).toHaveLength(5);
     await click(label('演出速度')); await finish(false);

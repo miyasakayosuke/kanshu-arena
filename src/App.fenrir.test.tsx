@@ -16,11 +16,14 @@ const tick = async (ms: number) => {await act(async () => vi.advanceTimersByTime
 async function mount() {await act(async () => root.render(<App/>));}
 async function begin() {await click(label('闘技場')); await click(button('この編成で対戦する'));}
 async function finish(skip: boolean) {
-  for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
+  for (let turn = 0; turn < 20 && !document.querySelector('.arenaLobby'); turn++) {
     await click(button('この指示でターン開始'));
     if (skip) await click(button('演出をスキップ')); else await tick(22000);
   }
-  expect(document.querySelector('.result')).toBeTruthy();
+  expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+  expect(window.location.hash).toBe('#arena');
+  expect(document.querySelector('.battleMode')).toBeNull();
+  expect(document.querySelector('.rematchActions,.retryContract,[role=timer]')).toBeNull();
 }
 beforeEach(() => {
   // Pin ordinary draws to pure slime; scenario-specific fixtures may override it.
@@ -94,12 +97,12 @@ describe('Fenrir family UI and battle loop', () => {
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('群気:残1T');
   });
 
-  it('keeps natural playback, skip, results, and exact rematch identical with rally and multihits', async () => {
+  it('returns to the lobby after natural and skipped playback with identical pinned rally and multihit results', async () => {
     const resolve = vi.spyOn(engine, 'advanceWithEvents'); const setup = vi.spyOn(engine, 'start');
     await mount(); await begin(); await finish(true);
     const completed = resolve.mock.results.at(-1)!.value.state;
     expect(completed.history.some((turn: engine.BattleTurnRecord) => turn.events.some(event => event.scope === 'random'))).toBe(true);
-    await click(button('同じ編成ですぐ再戦'));
+    await click(button('この編成で対戦する'));
     expect(setup.mock.results.at(-1)!.value.allies[0]).toMatchObject({hp:150,mp:60,rally:2});
     await finish(false);
     expect(resolve.mock.results.at(-1)!.value.state).toEqual(completed);

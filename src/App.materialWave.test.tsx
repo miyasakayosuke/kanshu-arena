@@ -224,14 +224,14 @@ describe('material repair live battle UI', () => {
     }
   });
 
-  it('retries the same battle with full HP, MP and repair readiness and agrees for normal,2x and skipped playback', async () => {
+  it('starts another pinned battle from the lobby with full HP, MP and repair readiness and equal normal,2x and skipped outcomes', async () => {
     const setup = vi.spyOn(engine, 'start'), resolve = vi.spyOn(engine, 'advanceWithEvents');
     await begin();
     const opening = structuredClone(setup.mock.results[0].value) as engine.State;
     const outcomes: engine.State[] = [];
     for (const mode of ['skip', 'normal', 'double']) {
       if (mode !== 'skip') {
-        await click(button('同じ編成ですぐ再戦'));
+        await click(button('この編成で対戦する'));
         expect(setup.mock.calls.at(-1)).toEqual(setup.mock.calls[0]);
         expect(setup.mock.results.at(-1)!.value).toEqual(opening);
         expect(hp()).toEqual(opening.allies.map(unit => `HP ${unit.monster.hp}/${unit.monster.hp}`));
@@ -239,12 +239,14 @@ describe('material repair live battle UI', () => {
         expect(document.querySelector('#party-status-a0')?.textContent).toBe('修復:待機');
       }
       if (mode === 'double') await click(label('演出速度'));
-      for (let turn = 0; turn < 20 && !document.querySelector('.result'); turn++) {
+      for (let turn = 0; turn < 20 && !document.querySelector('.arenaLobby'); turn++) {
         await click(button('この指示でターン開始'));
         if (mode === 'skip') await click(button('演出をスキップ'));
         else await tick(buildTimeline(resolve.mock.results.at(-1)!.value.events).duration / (mode === 'double' ? 2 : 1) + 1);
       }
-      expect(document.querySelector('.result')).toBeTruthy();
+      expect(document.querySelector('.arenaLobby .result')).toBeTruthy();
+      expect(window.location.hash).toBe('#arena');
+      expect(document.querySelector('.battleMode,.rematchActions,.retryContract,[role=timer]')).toBeNull();
       outcomes.push(resolve.mock.results.at(-1)!.value.state);
     }
     expect(outcomes[1]).toEqual(outcomes[0]); expect(outcomes[2]).toEqual(outcomes[0]);
