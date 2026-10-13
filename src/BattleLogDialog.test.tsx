@@ -26,7 +26,7 @@ beforeEach(() => {
   battle = advanceWithEvents(state, state.allies.map(unit => ({ key: unit.key, skill: DEFEND }))).state;
   opener().focus();
 });
-afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMocks(); });
+afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
 describe('battle log keyboard lifecycle', () => {
   it('focuses close, traps both directions, and skips all descendants of a closed ledger', async () => {
     await mount(); expect(document.activeElement).toBe(close());
@@ -72,5 +72,57 @@ describe('battle log keyboard lifecycle', () => {
     await act(async () => close().click()); expect(onClose).toHaveBeenCalledTimes(1);
     await act(async () => document.querySelector<HTMLElement>('.overlay')!.click()); expect(onClose).toHaveBeenCalledTimes(2);
     expect(JSON.stringify(battle)).toBe(before);
+  });
+});
+
+describe('restored log focus visibility', () => {
+  const geometry = (target: HTMLElement, top: number) => {
+    vi.spyOn(target, 'getBoundingClientRect').mockReturnValue(new DOMRect(20, top, 180, 34));
+    const action = document.createElement('footer'); action.className = 'screenAction'; document.body.append(action);
+    const nav = document.createElement('nav'); nav.className = 'mainNav'; document.body.append(nav);
+    vi.spyOn(action, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 282, 320, 86));
+    vi.spyOn(nav, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 368, 320, 64));
+    vi.stubGlobal('visualViewport', { offsetTop: 0, height: 432 });
+    return vi.spyOn(window, 'scrollBy').mockImplementation(() => {});
+  };
+  it('minimally reveals the native post-history opener above both fixed docks', async () => {
+    const scroll = geometry(opener(), 404.366);
+    await mount(); await act(async () => root.render(null));
+    expect(document.activeElement).toBe(opener());
+    expect(scroll).toHaveBeenCalledOnce();
+    expect(scroll.mock.calls[0][0]).toMatchObject({ left: 0, behavior: 'instant' });
+    expect((scroll.mock.calls[0][0] as ScrollToOptions).top).toBeCloseTo(168.366, 3);
+    expect(document.getElementById('root')!.hasAttribute('inert')).toBe(false);
+  });
+  it('does not reset page scroll when the restored opener is already visible', async () => {
+    const scroll = geometry(opener(), 199.223);
+    await mount(); await act(async () => root.render(null));
+    expect(document.activeElement).toBe(opener()); expect(scroll).not.toHaveBeenCalled();
+  });
+  it('reveals the current fallback if history removes the opener', async () => {
+    const scroll = geometry(fallback()!, -30);
+    await mount(); opener().remove(); await act(async () => root.render(null));
+    expect(document.activeElement).toBe(fallback());
+    expect(scroll).toHaveBeenCalledExactlyOnceWith({ top: -42, left: 0, behavior: 'instant' });
+  });
+  it('does not scroll a fixed navigation fallback', async () => {
+    const scroll = geometry(fallback()!, 390); fallback()!.className = 'mainNav';
+    await mount(); opener().remove(); await act(async () => root.render(null));
+    expect(document.activeElement).toBe(fallback()); expect(scroll).not.toHaveBeenCalled();
+  });
+  it('does not move the page for the clipped reception heading', async () => {
+    const scroll = geometry(fallback()!, -30); fallback()!.className = 'srOnly';
+    await mount(); opener().remove(); await act(async () => root.render(null));
+    expect(document.activeElement).toBe(fallback()); expect(scroll).not.toHaveBeenCalled();
+  });
+  it('does not reveal the background when a newer modal retains focus', async () => {
+    const scroll = geometry(opener(), 404.366);
+    await mount();
+    const top = document.createElement('button'); document.body.append(top);
+    const ownFocus = () => { top.focus(); };
+    opener().addEventListener('focus', ownFocus);
+    await act(async () => root.render(null));
+    expect(document.activeElement).toBe(top); expect(scroll).not.toHaveBeenCalled();
+    opener().removeEventListener('focus', ownFocus);
   });
 });

@@ -15,7 +15,7 @@ export function teamFocusScrollDelta(slot: VerticalRect, visibleTop: number, vis
   return 0;
 }
 
-export function revealFocusedTeamSlot(slot: HTMLButtonElement): void {
+export function revealFocusedPageControl(slot: HTMLElement): void {
   if (!slot.isConnected || slot.closest('[hidden]')) return;
   const rect = slot.getBoundingClientRect();
   if (rect.width <= 0 || rect.height <= 0) return;
@@ -34,3 +34,6 @@ export function revealFocusedTeamSlot(slot: HTMLButtonElement): void {
   // callback, or candidate-list scroll to interfere with dismissal/navigation.
   if (Math.abs(delta) > 0.5) window.scrollBy({ top: delta, left: 0, behavior: 'instant' });
 }
+
+// Existing team callers share the same fixed-dock-aware geometry.
+export const revealFocusedTeamSlot = revealFocusedPageControl;

@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { State } from './engine';
+import { revealFocusedPageControl } from './teamFocusReveal';
 import { battleEventLine, battleOrderLine } from './battleInsights';
 
 type Props = { battle: State; playing: boolean; onClose: () => void; fallbackFocus: () => HTMLElement | null };
@@ -35,7 +36,12 @@ export default function BattleLogDialog({ battle, playing, onClose, fallbackFocu
       return true;
     };
     const target = available(previousFocus.current) ? previousFocus.current : fallback.current();
-    if (available(target)) target.focus({ preventScroll: true });
+    if (available(target)) {
+      target.focus({ preventScroll: true });
+      // History can restore page scroll under the fixed bottom docks. Reveal
+      // only the restored control, and yield if another modal took focus.
+      if (document.activeElement === target && !target.closest('.srOnly, .screenAction, .mainNav, [role="dialog"], [role="alertdialog"]')) revealFocusedPageControl(target);
+    }
   }, []);
 
   useLayoutEffect(() => {

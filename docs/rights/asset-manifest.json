@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-12",
-  "release": "v0.20.19",
-  "auditBaseCommit": "5f2f7e8f159005477755237f936589406c51b78a",
+  "reviewedAt": "2026-10-13",
+  "release": "v0.20.20",
+  "auditBaseCommit": "8b7edaf208a5f4170a59baffebd444eaaa7c0b48",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1032,6 +1032,18 @@
       "creator": "AI-assisted implementation for this project",
       "distribution": "Browser UI code only; existing log content, gameplay, artwork and third-party notices retained.",
       "reviewLimit": "Automated and implementation review are not legal clearance or independent proof of rights ownership/non-infringement."
+    },
+    {
+      "id": "battle-log-visible-focus-restoration",
+      "kind": "original-ui-code",
+      "files": [
+        "src/BattleLogDialog.tsx",
+        "src/teamFocusReveal.ts"
+      ],
+      "provenance": "2026-10-13: AI-assisted project-specific correction to the restored battle-log opener after native history scroll restoration. Reuses the existing measured fixed-dock-aware page reveal calculation; existing team caller behavior preserved. No external code, media, dependencies or text imported.",
+      "creator": "AI-assisted implementation for this project",
+      "distribution": "Browser focus/scroll lifecycle code only; gameplay, save format, log content, artwork and third-party notices unchanged.",
+      "reviewLimit": "Automated inventory and implementation review are not legal clearance or independent proof of rights ownership/non-infringement."
     }
   ],
   "software": [
