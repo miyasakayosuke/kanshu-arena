@@ -1,0 +1,41 @@
+{
+  "release": "0.20.29",
+  "baselineCommit": "62ee78740135496e6d038c459fcd83feb3f7b61d",
+  "baselineTree": "e70c6a463c68c08dfc64baf2b3ebd41c0b947855",
+  "scope": "Impact-only ordinary allied guard outline; new original vector and presentation helper, lifecycle wiring. No pre-cast, cleanse or extraordinary change.",
+  "checks": {
+    "tests": 3122,
+    "files": 157,
+    "newFocusedTests": 70,
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "diffCheck": true,
+    "smokeParity": {
+      "matches": 736,
+      "allNonSourceFieldsEqual": true,
+      "configByteEqual": true,
+      "sourceDifferences": {
+        "gameVersion": {
+          "baseline": "0.20.28",
+          "candidate": "0.20.29"
+        },
+        "gitCommit": {
+          "baseline": "1da8b723e5e8cd6db4245b7878620af865a9fd0f",
+          "candidate": "9bfe9d7f18b22308857fd572b85f407c8a330079"
+        }
+      }
+    },
+    "independentReview": "PASS: final runtime source, TypeScript, diff check and58 focused cases; author final focused coverage70; native remains pending"
+  },
+  "runtimeSha256": {
+    "src/App.tsx": "0f294dfd687d00fc5e0785b83b3ea90f0cd6921b3cc1fe9d1daeb1825669a567",
+    "src/style.css": "35364d7a8e06dfcc724e4eb847f075ce679debdde5ce8af9d7c32ddae97f78f8",
+    "src/partyGuardCues.ts": "b23b9d3d4e5f72142e66c2c2c9dc1e0160a311fbafba2a404c4b05ece563bd6a",
+    "src/PartyGuardShield.tsx": "5d9d2784417df9d2f6748153cac94bdf0fc91f055c760acc4ada9a4391e107ed"
+  },
+  "nativeAcceptance": "Pending sole publisher natural playback/geometry/1x2x/zoom/reduced-motion sequence. No animation quality or performance claim.",
+  "legalClearance": false
+}

@@ -4,6 +4,8 @@ import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWit
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage, {type CompactCastCaption} from './BattleStage';
 import { partyNumberDuration, retainPartyNumbers, type PartyNumber } from './partyNumbers';
+import { partyGuardCues, type PartyGuardCue } from './partyGuardCues';
+import PartyGuardShield from './PartyGuardShield';
 import TeamBuilder from './TeamBuilder';
 import CatalogScreen from './CatalogScreen';
 import { createRosterFilters } from './RosterBrowser';
@@ -92,6 +94,14 @@ export default function App() {
   const [compactCastCaption, setCompactCastCaption] = useState<CompactCastCaption | null>(null);
   const [impacts, setImpacts] = useState<BattleEvent[]>([]);
   const [partyNumbers, setPartyNumbers] = useState<PartyNumber[]>([]);
+  const [partyGuards, setPartyGuards] = useState<PartyGuardCue[]>([]);
+  useEffect(() => {
+    if (!partyGuards.length) return;
+    const expireGuards = () => setPartyGuards(previous => previous.filter(item => item.expires > Date.now()));
+    window.addEventListener('focus', expireGuards);
+    document.addEventListener('visibilitychange', expireGuards);
+    return () => { window.removeEventListener('focus', expireGuards); document.removeEventListener('visibilitychange', expireGuards); };
+  }, [partyGuards.length]);
   const [playing, setPlaying] = useState(false);
   const [commandPlayback, setCommandPlayback] = useState<{ current: string | null; completed: string[] }>({ current: null, completed: [] });
   const resetCommandPlayback = () => setCommandPlayback({ current: null, completed: [] });
@@ -112,7 +122,7 @@ export default function App() {
     resetCommandPlayback();
     commandDeadline.current = null;
     ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
-    setBattle(null); setPlaying(false); setOrders({}); setAutomaticKeys([]); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyNumbers([]);
+    setBattle(null); setPlaying(false); setOrders({}); setAutomaticKeys([]); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]);
     setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setFocus(null); setEnemyFocus(null); setReplayProgress('');
     if (battle?.winner) { setLastBattle(battle); setRound(n => n + 1); }
     setPractice(false); setEncounter(null);
@@ -209,7 +219,7 @@ export default function App() {
     resetCommandPlayback();
     setTimedOut(false); setEnemyFocus(null);
     setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
-    setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyNumbers([]);
+    setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]);
     setPlaying(false); setShowLog(false); setShowTactics(false); navigate('battle'); setNotice('');
   };
   const living = battle?.allies.filter(u => u.hp > 0) ?? [];
@@ -318,7 +328,7 @@ export default function App() {
     clearTimers();
     const next = latestResult.current;
     if (next) { setBattle(next); setActiveKey(next.allies.find(u => u.hp > 0)?.key ?? 'a0'); }
-    setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyNumbers([]); setPlaying(false); playingLock.current = false;
+    setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]); setPlaying(false); playingLock.current = false;
     setReplayProgress(''); latestResult.current = null;
   };
   const execute = (timeout = false) => {
@@ -331,10 +341,11 @@ export default function App() {
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
     resetCommandPlayback();
-    setPlaying(true); setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setImpact(null); setImpacts([]); setPartyNumbers([]);
+    setPlaying(true); setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]);
     clearTimers();
     const timeline = buildTimeline(result.events);
     const id = ++playbackId.current;
+    const playbackStartedAt = Date.now();
     for (const command of timeline.commands) {
       timers.current.push(setTimeout(() => {
         if (id === playbackId.current) setCommandPlayback(previous => ({ ...previous, current: command.actor }));
@@ -360,7 +371,7 @@ export default function App() {
         if (updates.length) setBattle(prev => prev ? applyBattleEvents(prev, updates) : prev);
         if (!cue.cast && !cue.impacts.length && cue.updates?.length) return;
         if (!cue.impacts.length) {
-          setVisualCast(cue.cast); setImpacts([]); setImpact(cue.cast);
+          setVisualCast(cue.cast); setImpacts([]); setPartyGuards([]); setImpact(cue.cast);
           if (cue.cast) {
             setEffect({ text: cue.cast.skill ?? '攻撃', type: cue.cast.effect === 'responseCleanse' ? 'portal' : cue.cast.effect === 'responseGuard' ? 'lattice' : effectType(cue.cast.skill ?? '', cue.cast.effect), tick: id * 100 + tick });
             setReplayProgress(cue.updates?.some(event => event.kind === 'fallback') ? `${Math.min(command, total)} / ${total} · MP不足で通常攻撃` : cue.passive ? '特性 · 一度だけ' : `${Math.min(command, total)} / ${total}`);
@@ -369,6 +380,12 @@ export default function App() {
           setImpact(cue.impacts.find(e => e.kind === 'damage' || e.kind === 'heal' || e.kind === 'resource-gain' || e.kind === 'resource-loss') ?? cue.impacts[0]);
           setImpacts(cue.impacts);
           const now = Date.now();
+          const guards = partyGuardCues(cue.impacts, battle.allies.map(unit => unit.key), id, cueIndex,
+            playbackStartedAt + cue.at / speed, speed, now);
+          setPartyGuards(guards);
+          if (guards.length) timers.current.push(setTimeout(() => {
+            if (id === playbackId.current) setPartyGuards(previous => previous.filter(item => item.expires > Date.now()));
+          }, Math.max(0, guards[0].expires - now)));
           setPartyNumbers(previous => retainPartyNumbers(previous, cue.impacts, battle.allies.map(unit => unit.key), id, tick, cueIndex, now, speed));
           // Independent expiry: a later hit/cast must not erase a still-readable number.
           timers.current.push(setTimeout(() => {
@@ -448,6 +465,7 @@ export default function App() {
           const feedbacks = impacts.filter(event => event.target === u.key && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
           const feedback = feedbacks[0];
           const numbers = partyNumbers.filter(item => item.event.target === u.key);
+          const guardCue = playing && u.hp > 0 ? partyGuards.find(item => item.target === u.key && item.expires > Date.now()) : undefined;
           const acting = playing && commandPlayback.current === u.key;
           const completed = playing && commandPlayback.completed.includes(u.key) && !acting && u.hp > 0;
           const landed = acting && impacts.some(event => event.actor === u.key);
@@ -456,6 +474,7 @@ export default function App() {
           return <button key={u.key} className={`commander ${allyTargeting && u.hp > 0 ? 'allyRecipient' : ''} ${!playing && !allyTargeting && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${completed ? 'actionCompleted' : ''} ${u.hp <= 0 ? 'fallen' : ''} ${u.ward && u.hp > 0 ? 'natureWarded' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={allyTargeting ? `味方${slot + 1} ${u.monster.name}を${selectedSkill!.name}の対象に選択` : `${u.monster.name}の行動を選択`} aria-pressed={allyTargeting ? undefined : !playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key} party-command-${u.key}`} onClick={event => { if (event.detail > 1) return; if (allyTargeting) { selectTarget(u.key, event); return; } if (commandsExpired() || playingLock.current || navigation.pending) return; ++targetGeneration.current; setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
             <div className="commanderVisual">
             <span className="commanderIcon" aria-hidden="true"><MonsterArt monster={u.monster} portrait /></span>
+            {guardCue && <PartyGuardShield key={guardCue.id} cue={guardCue} />}
             {numbers.map(({ id, event: feedback, lane }) => <b style={{top: 2 + lane * 14}} key={id} data-number-id={id} className={`partyImpact ${feedback.kind}`} aria-label={`${feedback.kind === 'resource-loss' ? 'MP減少' : feedback.kind === 'resource-gain' ? 'MP補給' : feedback.kind === 'heal' ? '回復' : 'ダメージ'} ${feedback.amount}`}>{feedback.kind === 'resource-loss' ? 'MP−' : feedback.kind === 'resource-gain' ? 'MP+' : feedback.kind === 'heal' ? '+' : '−'}{feedback.amount}</b>)}
             </div>
             {areaTarget && <span key={`${effect?.tick}-${areaLanded}`} className="partyAura" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}

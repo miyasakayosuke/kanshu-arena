@@ -260,3 +260,10 @@
 /* Commands change within this dock. Do not let a removed skill button become
    the browser's scroll anchor and move the unchanged party recipient row. */
 .commandDock{overflow-anchor:none}
+
+/* An ordinary guard arriving on its recipient, distinct from the green ward ring.
+   Outline only: the portrait center and higher-layer result numbers stay clear. */
+.commanderVisual>.partyGuardCue{position:absolute;inset:0;margin:auto;width:44px;max-width:100%;height:100%;overflow:visible;pointer-events:none;z-index:1;fill:none;stroke:#ffe1a0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 2px #70501e);animation:partyGuardArrival 640ms ease-out both}
+.partyGuardCue path{vector-effect:non-scaling-stroke}
+@keyframes partyGuardArrival{0%{opacity:0;stroke-dasharray:18 150;stroke-dashoffset:20}22%{opacity:.95}48%{stroke-dasharray:170 0;stroke-dashoffset:0;opacity:.95}72%{opacity:.8}100%{opacity:0;stroke-dasharray:170 0;stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.commanderVisual>.partyGuardCue{animation:none!important;opacity:.8;stroke-dasharray:none;stroke-dashoffset:0}}

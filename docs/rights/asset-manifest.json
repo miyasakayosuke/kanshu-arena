@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.28",
-  "auditBaseCommit": "050706a11130fb6923e5c5bb0da59c5b0d3a56dd",
+  "release": "v0.20.29",
+  "auditBaseCommit": "62ee78740135496e6d038c459fcd83feb3f7b61d",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1145,6 +1145,26 @@
       ],
       "reviewLimit": "Production claim and source review are not legal clearance; existing rights, attribution, similarity and trademark questions remain open.",
       "distribution": "Original React/CSS interface in browser build; no new media or dependency."
+    },
+    {
+      "id": "ordinary-allied-guard-arrival",
+      "kind": "code-native-vector-and-presentation",
+      "files": [
+        "src/PartyGuardShield.tsx",
+        "src/partyGuardCues.ts",
+        "src/App.tsx",
+        "src/style.css"
+      ],
+      "creator": "AI-assisted original path geometry and presentation code authored for this project on 2026-10-13.",
+      "provenance": "A brief outline-only gold shield, positioned inside the existing allied portrait and triggered only by the authoritative ordinary guard:true impact event. Simple symmetric outline path authored directly for this project, distinct from existing green ward rings. No pre-cast protection claim, interception, stacking, new rule or persistent badge. Reference research informed recipient-local feedback only; no reference effect/artwork, image, footage, prose, code, sound or font imported.",
+      "sha256": {
+        "src/PartyGuardShield.tsx": "5d9d2784417df9d2f6748153cac94bdf0fc91f055c760acc4ada9a4391e107ed"
+      },
+      "references": [
+        "docs/rights/releases/2026-10-13-v0.20.29.md"
+      ],
+      "reviewLimit": "Source authorship statement and inventory are not independent ownership/similarity or legal clearance. Native visual review is required; all existing ledger questions remain open.",
+      "distribution": "Original inline SVG/CSS in browser build; no external media or new dependency."
     }
   ],
   "software": [
