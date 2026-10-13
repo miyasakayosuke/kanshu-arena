@@ -38,3 +38,11 @@ export function enemyPaintOrder<T extends {depth: number; index: number}>(slots:
 export function enemyTravelDistance(monsterId: number, distance: number): number {
   return monsterId === 12 ? distance * .6 : distance;
 }
+
+/** Width-scaled text sits above the numbered foot marker, independently of
+ * body height, recoil, attack travel, and the shared particle/projectile point.
+ * Its existing rise and multi-hit offsets animate upward from this baseline. */
+export function enemyResultAnchor(slot: EnemySlot, aspect = 1): FormationPoint {
+  const safeAspect = Math.max(.1, Number.isFinite(aspect) ? aspect : 1);
+  return {x: slot.foot.x, y: slot.foot.y - 24 * safeAspect};
+}

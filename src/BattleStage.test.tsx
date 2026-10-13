@@ -19,10 +19,10 @@ let observerDisconnect: ReturnType<typeof vi.fn>;
 type Matrix = [number, number, number, number, number, number];
 let sprites: Matrix[];
 let glyphs: {text: string; matrix: Matrix; font: string}[];
-let textDraws: {text: string; matrix: Matrix; font: string; x: number; y: number}[];
+let textDraws: {text: string; matrix: Matrix; font: string; x: number; y: number; alpha: number}[];
 const context = {
   ...Object.fromEntries(['clearRect', 'setTransform', 'save', 'restore', 'translate', 'scale', 'rotate', 'beginPath', 'ellipse', 'fill', 'stroke', 'moveTo', 'lineTo', 'quadraticCurveTo', 'bezierCurveTo', 'closePath', 'fillRect', 'arc', 'roundRect', 'setLineDash'].map(name => [name, vi.fn()])),
-  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), drawImage: vi.fn(), getTransform: vi.fn(),
+  fillText: vi.fn(), strokeText: vi.fn(), scale: vi.fn(), translate: vi.fn(), drawImage: vi.fn(), getTransform: vi.fn(),
   createLinearGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   createRadialGradient: vi.fn(() => ({addColorStop: vi.fn()})),
   measureText: vi.fn(() => ({width: 90})),
@@ -81,7 +81,7 @@ beforeEach(() => {
   context.getTransform.mockImplementation(()=>{const [a,b,c,d,e,f]=matrix;return {a,b,c,d,e,f};});
   context.drawImage.mockImplementation(() => {sprites.push([...matrix]);});
   context.fillText.mockImplementation((text: string, x: number, y: number) => {
-    textDraws.push({text, matrix: [...matrix], font: ctx.font, x, y});
+    textDraws.push({text, matrix: [...matrix], font: ctx.font, x, y, alpha: ctx.globalAlpha});
     if (ctx.font.includes('Apple Color Emoji')) glyphs.push({text, matrix: [...matrix], font: ctx.font});
   });
   vi.stubGlobal('ResizeObserver', class {
@@ -1159,4 +1159,127 @@ describe('complete first-roster sprites and choreography', () => {
     await render({...props,impact:hit,impacts:[hit]});frame(900);frame(1500);
     expect(sprites[0]).not.toEqual(release);expect(teamTransforms()).toHaveLength(0);expect(glyphs).toHaveLength(0);
   });
+});
+
+describe('enemy lower-body result bands', () => {
+  const worldPoint = (draw: typeof textDraws[number]) => ({
+    x: draw.matrix[0] * draw.x + draw.matrix[2] * draw.y + draw.matrix[4],
+    y: draw.matrix[1] * draw.x + draw.matrix[3] * draw.y + draw.matrix[5],
+  });
+  it.each([1, 2].flatMap(rate => [false, true].flatMap(reduced => [1, 1.4, 2.82].map(aspect => ({rate, reduced, aspect})))))
+  ('keeps all-target results over their own lower bodies at $rate×, reduced=$reduced, aspect=$aspect', async ({rate, reduced, aspect}) => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches: reduced, addEventListener: vi.fn(), removeEventListener: vi.fn()} as unknown as MediaQueryList);
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 720, height: 460 / aspect, left: 0, top: 0} as DOMRect);
+    const state = start([0, 2, 3, 4, 6], [12, 0, 24, 31, 25]);
+    const events: BattleEvent[] = state.enemies.map((unit, i) => ({kind: 'damage', actor: 'a0', target: unit.key, amount: 71 + i, hp: 0}));
+    const props = {...base, enemies: state.enemies.map(unit => ({...unit, hp: 0})), playbackRate: rate, impact: events[0], impacts: events};
+    await render(props); frame(100); frame(100 + 210 / rate);
+    for (const [i, unit] of state.enemies.entries()) {
+      const result = textDraws.find(draw => draw.text === String(71 + i))!;
+      const point = worldPoint(result);
+      const slot = enemyFormation(i, 5, aspect, CHARACTER_ART[unit.monster.id]);
+      expect(point.x).toBeCloseTo(slot.foot.x);
+      expect(point.y).toBeCloseTo(slot.foot.y - (24 + (reduced ? 0 : 22)) * aspect);
+      expect(point.y - 18 * aspect).toBeGreaterThan(0);
+      expect(point.y + 18 * aspect).toBeLessThan(slot.foot.y + 6 * aspect);
+    }
+    // Each event retains the original lifetime, including lethal hits.
+    frame(100 + battleMotion.NUMBER_DURATION_MS / rate + 1);
+    for (let i = 0; i < 5; i++) expect(textDraws.find(draw => draw.text === String(71 + i))?.alpha ?? 0).toBe(0);
+    frame(100 + 1001 / rate);
+    for (let i = 0; i < 5; i++) expect(labels()).not.toContain(String(71 + i));
+  });
+  it.each([1, 2, 3, 4, 5])('anchors damage, heal and MP results to stable slots in a %i-enemy formation', async count => {
+    const enemies = base.enemies.slice(0, count);
+    const kinds = ['damage', 'heal', 'resource-gain', 'resource-loss'] as const;
+    for (const [i, kind] of kinds.entries()) {
+      const event: BattleEvent = {kind, actor: 'a0', target: enemies[count - 1].key, amount: 80 + i};
+      await render({...base, enemies, impact: event, impacts: [event]}); frame(100 + i * 1000);
+      const label = kind === 'damage' ? '80' : kind === 'heal' ? '+81' : kind === 'resource-gain' ? 'MP +82' : 'MP −83';
+      const point = worldPoint(textDraws.find(draw => draw.text === label)!);
+      const slot = enemyFormation(count - 1, count, 1, CHARACTER_ART[enemies[count - 1].monster.id]);
+      expect(point).toEqual({x: slot.foot.x, y: slot.foot.y - 24});
+    }
+  });
+  it('preserves each multi-hit offset and keeps simultaneous HP and MP in distinct stable lanes', async () => {
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e1', amount: 61};
+    const mp: BattleEvent = {kind: 'resource-loss', actor: 'a0', target: 'e1', amount: 12};
+    await render({...base, impact: hit, impacts: [hit, mp]}); frame(100);
+    const hpY = worldPoint(textDraws.find(draw => draw.text === '61')!).y;
+    const mpY = worldPoint(textDraws.find(draw => draw.text === 'MP −12')!).y;
+    expect(mpY - hpY).toBe(34);
+    const hits: BattleEvent[] = [0, 1, 2].map(hitIndex => ({kind: 'damage', actor: 'a0', target: 'e0', amount: 91 + hitIndex, hitIndex}));
+    await render({...base, impact: hits[0], impacts: hits}); frame(200);
+    const points = hits.map((_, i) => worldPoint(textDraws.find(draw => draw.text === String(91 + i))!));
+    expect(points.map(point => point.x)).toEqual([103, 124, 145]);
+    expect(points.map(point => point.y)).toEqual([334, 321, 334]);
+    // Later batches retain an earlier event's reserved line and identity.
+    expect(worldPoint(textDraws.find(draw => draw.text === '61')!).y).toBeCloseTo(hpY - battleMotion.sampleNumberMotion(100).rise);
+  });
+  it('reanchors text on aspect resize while preserving the original reaction geometry', async () => {
+    const event: BattleEvent = {kind: 'heal', actor: 'e0', target: 'e0', amount: 87};
+    await render({...base, impact: event}); frame(100);
+    const oldReaction = enemyFormation(0, 5, 2, CHARACTER_ART[base.enemies[0].monster.id]).point;
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 720, height: 230, left: 0, top: 0} as DOMRect);
+    context.translate.mockClear();
+    resize(); frame(200);
+    const point = worldPoint(textDraws.find(draw => draw.text === '+87')!);
+    expect(point.y).toBeCloseTo(358 - (24 + battleMotion.sampleNumberMotion(100).rise) * 2);
+    expect(context.translate).toHaveBeenCalledWith(oldReaction.x, oldReaction.y);
+  });
+  it.each([false, true].flatMap(reduced => ['break', 'poison-cashout'].map(kind => ({reduced, kind}))))
+  ('keeps numeric damage clear of unchanged $kind subtitles, reduced=$reduced', async ({reduced, kind}) => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches: reduced, addEventListener: vi.fn(), removeEventListener: vi.fn()} as unknown as MediaQueryList);
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 98};
+    const subtitle: BattleEvent = kind === 'break' ? {kind: 'break', actor: 'a0', target: 'e0', removed: ['guard']} :
+      {kind: 'poison-cashout', actor: 'a0', target: 'e0', poisonTicksConsumed: 2, poisonCashoutAdded: 44};
+    await render({...base, impact: hit, impacts: [hit, subtitle]}); frame(100);
+    for (const age of [0, 85, 210]) {
+      frame(100 + age);
+      const number = worldPoint(textDraws.find(draw => draw.text === '98')!);
+      const label = worldPoint(textDraws.find(draw => draw.text === (kind === 'break' ? '守り解除' : '毒2回消費 · 基礎+44'))!);
+      expect(label.y - number.y).toBeGreaterThan(34);
+      const original = enemyFormation(0, 5, 1, CHARACTER_ART[base.enemies[0].monster.id]).point;
+      const shake = age < 190 ? battleMotion.sampleHitMotion(age, reduced).shake * .4 : 0;
+      expect(label.y).toBeCloseTo(original.y + (kind === 'break' ? 48 : 47) + shake);
+    }
+  });
+
+  it('reserves a later multi-hit result above the still-visible removal subtitle', async () => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn()} as unknown as MediaQueryList);
+    const first: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 81, hitIndex: 0};
+    const strip: BattleEvent = {kind: 'break', actor: 'a0', target: 'e0', removed: ['guard'], hitIndex: 0};
+    await render({...base, impact: first, impacts: [first, strip]}); frame(100);
+    const second: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 82, hitIndex: 1};
+    await render({...base, impact: second, impacts: [second]}); frame(280);
+    const subtitle = worldPoint(textDraws.find(draw => draw.text === '守り解除')!);
+    for (const value of ['81', '82']) expect(subtitle.y - worldPoint(textDraws.find(draw => draw.text === value)!).y).toBeGreaterThan(34);
+  });
+  it('keeps the numeric anchor in the foot marker camera frame during a real cast', async () => {
+    await render({...base, effect, castEvent: cast, impact: cast}); frame(100);
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e0', amount: 73};
+    await render({...base, effect, castEvent: cast, impact: hit, impacts: [hit]}); frame(650);
+    const marker = worldPoint(textDraws.find(draw => draw.text === '1')!);
+    const otherMarker = worldPoint(textDraws.find(draw => draw.text === '3')!);
+    const zoom = (otherMarker.x - marker.x) / 236;
+    expect(zoom).toBeGreaterThan(1);
+    const result = worldPoint(textDraws.find(draw => draw.text === '73')!);
+    expect(result.x).toBeCloseTo(marker.x);
+    expect(marker.y - result.y).toBeCloseTo(24 * zoom + 18.5);
+  });
+  it('keeps lifted rear HP text inside the canvas in an exceptionally shallow stage', async () => {
+    const aspect = (618 / 720) / (140 / 460);
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 618, height: 140, left: 0, top: 0} as DOMRect);
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e1', amount: 78};
+    const loss: BattleEvent = {kind: 'resource-loss', actor: 'a0', target: 'e1', amount: 14};
+    await render({...base, impact: hit, impacts: [hit, loss]}); frame(100);
+    for (const age of [0, 85, 210, 500]) {
+      frame(100 + age);
+      const draw = textDraws.find(draw => draw.text === '78')!;
+      const point = worldPoint(draw);
+      expect(point.y - (31 * battleMotion.sampleNumberMotion(age).scale / 2 + 2.5) * aspect).toBeGreaterThan(0);
+      expect(worldPoint(textDraws.find(draw => draw.text === 'MP −14')!).y - point.y).toBeGreaterThan(26 * aspect);
+    }
+  });
+
 });

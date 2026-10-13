@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.21",
-  "auditBaseCommit": "117c988d0c6cd8c0488b365d7e2a4d37f17f24ed",
+  "release": "v0.20.22",
+  "auditBaseCommit": "6512be3cc7ced82ba7971699a9db85de90967a67",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1063,6 +1063,21 @@
         "src/MonsterDetails.tsx": "b3a75d9ca0a6e74dee0efbf13490f97458a3ce5171ca09d27cf0d0ed7bd0e0df",
         "src/monsterDetails.css": "e2823e03b5d5c184da05f18974457586eaa1b32826fb252650f18d554904cba4"
       }
+    },
+    {
+      "id": "enemy-lower-body-result-band",
+      "kind": "original-presentation-code",
+      "files": [
+        "src/BattleStage.tsx",
+        "src/enemyFormation.ts",
+        "src/BattleStage.test.tsx",
+        "src/enemyFormation.test.ts",
+        "docs/enemy-result-band-candidate.md"
+      ],
+      "provenance": "2026-10-13: project-specific AI-assisted canvas result-text placement, derived from the existing formation foot and display aspect. General readability principle from private gameplay observation: keep result numbers away from creature faces. No third-party image, video frame, art, animation choreography, prose, code, font, or dependency was imported or redistributed.",
+      "createdFor": "v0.20.22 enemy result-text placement",
+      "distribution": "Original browser presentation code and repository tests/documentation; no new media or external asset.",
+      "reviewLimit": "Automated geometry/render-spy checks do not substitute for native font/pixel review or legal clearance. Existing artwork ownership/similarity questions remain open; publisher owns final native browser acceptance."
     }
   ],
   "software": [

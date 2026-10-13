@@ -50,3 +50,21 @@ describe('enlarged Fenrir world-travel envelope',()=>{
   expect(enemyTravelDistance(12,0)).toBe(0);
  });
 });
+
+describe('stable lower-body result anchors', () => {
+  it.each([1, 2, 3, 4, 5])('keeps %i partial slots and every artwork above the foot markers', async count => {
+    const {enemyResultAnchor} = await import('./enemyFormation');
+    for (const aspect of [.75, 1, 1.4, 2.82]) for (const art of Object.values(CHARACTER_ART)) for (let index = 0; index < count; index++) {
+      const slot = enemyFormation(index, count, aspect, art);
+      const anchor = enemyResultAnchor(slot, aspect);
+      expect(anchor.x).toBe(slot.foot.x);
+      expect(anchor.y).toBeCloseTo(slot.foot.y - 24 * aspect);
+      expect(anchor.y).toBeGreaterThan(slot.point.y);
+      // Existing rise, alternating hit offset, full em and outline all fit.
+      expect(anchor.y - (22 + 13 + 21) * aspect).toBeGreaterThan(0);
+      expect(anchor.x - 80).toBeGreaterThan(0);
+      expect(anchor.x + 80).toBeLessThan(720);
+      expect(anchor.y + 21 * aspect).toBeLessThan(slot.foot.y + 6 * aspect);
+    }
+  });
+});

@@ -1,7 +1,7 @@
 import {FenrirRigCache,drawFenrirRig} from './storybookFenrirRig';
 import {sampleFenrirBattlePose} from './storybookFenrirBattleMotion';
 import {createEnemyPixelReader, enemyAtPixel, type EnemyImageDraw} from './enemyHitTest';
-import {enemyFormation, enemyPaintOrder, enemyTravelDistance} from './enemyFormation';
+import {enemyFormation, enemyPaintOrder, enemyTravelDistance, enemyResultAnchor} from './enemyFormation';
 import {YokoRigCache,drawYokoRig} from './storybookYokoRig';
 import {sampleYokoBattlePose} from './storybookYokoBattleMotion';
 import {sampleOriginalRosterMotion} from './originalRosterMotion';
@@ -33,7 +33,7 @@ type Props = {
 type Point = {x: number; y: number};
 type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair' | 'liquid' | 'ribbon' | 'fold' | 'bubble' | 'knead' | 'supply' | 'ledger' | 'tool' | 'mantle' | 'mp-loss' | 'burial' | 'reins' | 'sleeves' | 'stitch' | 'cashout' | 'threshold' | 'portal' | 'lattice';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
-type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point};
+type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point; resultLift: number};
 const WIDTH = 720;
 const HEIGHT = 460;
 const TAU = Math.PI * 2;
@@ -861,24 +861,38 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
       ellipse(ctx, x + Math.cos(angle) * radius, y + Math.sin(angle) * radius * .7, 1.8, 1.8, palette.light);
     }
   }
+  ctx.restore();
+}
+
+/** Result text has its own stable lower-body anchor. Particles and support
+ * reactions retain their original impact point and never move with this band. */
+function drawImpactNumber(ctx: CanvasRenderingContext2D, impact: Impact, age: number, reduced: boolean, scaleY: number, at: Point) {
+  const {event, type} = impact;
   // Numbers belong to the actual impact, never to a cast or an unrelated heal.
   if (event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss')) {
+    ctx.save();
+    ctx.translate(at.x, at.y);
+    ctx.scale(1, scaleY);
     const number = sampleNumberMotion(age, reduced);
     ctx.globalAlpha = number.alpha;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = `800 ${31 * number.scale}px system-ui, sans-serif`;
     const label = event.kind === 'resource-loss' ? `MP −${event.amount}` : event.kind === 'resource-gain' ? `MP +${event.amount}` : event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
-    const px = x + (event.hitIndex === undefined ? 0 : (event.hitIndex % 3 - 1) * 21);
-    const py = y - (event.kind === 'resource-loss' ? 10 : 44) - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
+    const px = event.hitIndex === undefined ? 0 : (event.hitIndex % 3 - 1) * 21;
+    const desiredY = -impact.resultLift - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
+    // A lifted HP/removal lane on an exceptionally shallow rear slot can run
+    // out of headroom. Bound only its text envelope, after camera framing;
+    // ordinary trajectories, all reactions, and the lifetime remain intact.
+    const py = Math.max(desiredY, -at.y / scaleY + 31 * number.scale / 2 + 3);
     ctx.lineJoin = 'round';
     ctx.lineWidth = 5;
     ctx.strokeStyle = '#fffbed';
     ctx.strokeText(label, px, py);
     ctx.fillStyle = event.kind === 'resource-loss' ? '#644983' : event.kind === 'resource-gain' ? '#775489' : event.kind === 'heal' ? '#238467' : type === 'poison' ? '#777644' : '#9c5435';
     ctx.fillText(label, px, py);
+    ctx.restore();
   }
-  ctx.restore();
 }
 
 export default function BattleStage(props: Props) {
@@ -1001,7 +1015,18 @@ export default function BattleStage(props: Props) {
             const sameCast = cast && event.actor && cast.event.actor === event.actor;
             const type = event.kind === 'resource-gain' || event.kind === 'resource-loss' || event.kind === 'heal' || event.kind === 'guard' || event.kind === 'poison' || event.effect === 'poison'
               ? visual(data.effect, event, [...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id) : sameCast ? cast!.type : visual(null,event,[...data.allies,...data.enemies].find(unit=>unit.key===event.actor)?.monster.id);
-            impacts.push({event, type, started: now, rate, at});
+            // Reserve result lanes once per authoritative impact batch. Keep
+            // HP above a simultaneous MP result, and both above unchanged
+            // removal/cashout subtitles that already occupy the foot band.
+            const companions = [
+              ...(data.impacts ?? []).filter(other => other.target === event.target),
+              ...impacts.filter(other => other.event.target === event.target && (now - other.started) * other.rate < NUMBER_DURATION_MS).map(other => other.event),
+            ];
+            const hasSubtitle = companions.some(other => ['break', 'poison-cashout'].includes(other.kind) ||
+              ['extraordinary-response-cleanse', 'extraordinary-response-guard'].includes(other.effect ?? ''));
+            const hasMp = companions.some(other => other.amount !== undefined && ['resource-gain', 'resource-loss'].includes(other.kind));
+            const resultLift = (hasSubtitle ? 34 : 0) + (['damage', 'heal'].includes(event.kind) && hasMp ? 34 : 0);
+            impacts.push({event, type, started: now, rate, at, resultLift});
           }
         }
       }
@@ -1222,7 +1247,14 @@ export default function BattleStage(props: Props) {
         drawSeedBarrage(ctx, {...cast, from: frameEffectPoint(from), to: frameEffectPoint(cast.to)}, sequence, age, reduced);
       }
       if (cast && twinStrike) drawTwinStrikes(ctx, cast, age, reduced, frameEffectPoint);
-      for (const impact of impacts) drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, (now - impact.started) * impact.rate, reduced, scaleY);
+      for (const impact of impacts) {
+        const impactAge = (now - impact.started) * impact.rate;
+        drawImpact(ctx, {...impact, at: frameEffectPoint(impact.at)}, impactAge, reduced, scaleY);
+        // Resolve the existing slot every frame so resizing or defeat cannot
+        // leave numbers at a stale aspect, a moving face, or a different target.
+        const slot = slots.find(slot => slot.unit.key === impact.event.target);
+        if (slot) drawImpactNumber(ctx, impact, impactAge, reduced, scaleY, frameEffectPoint(enemyResultAnchor(slot, scaleY)));
+      }
       // The label stack shares one transform so its line spacing cannot collapse.
       // Compact stages put the exact same labels in the existing DOM caption.
       let caption: CompactCastCaption | null = null;

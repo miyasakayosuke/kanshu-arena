@@ -1,0 +1,130 @@
+{
+  "release": "0.20.22",
+  "stage": "Final prepublication checks; native acceptance follows exact deployment",
+  "baselineCommit": "6512be3cc7ced82ba7971699a9db85de90967a67",
+  "baselineTree": "69bcb7984730e6ca959d40c685ae2087f7d3d5d6",
+  "candidateTree": "d9e103ca1263acd97731acef6e5a84c1a53e3e4f",
+  "candidatePatchSha256": "69519566aad2e969279608a4df72dc8ccd4d928ac055861ac1d4779564b715d2",
+  "checks": {
+    "tests": 2904,
+    "files": 147,
+    "rightsSelfTests": 15,
+    "sourceRights": true,
+    "typescript": true,
+    "build": true,
+    "distNotices": true,
+    "smokeParity": {
+      "matches": 736,
+      "exactEquality": true,
+      "excludedMetadata": [
+        "source.gitCommit",
+        "source.gameVersion"
+      ],
+      "metadataDifferences": [
+        {
+          "field": "source.gitCommit",
+          "baseline": "77d36ded1cf585c8ed2c8209b99509e15ee9559f",
+          "release": "c28b5a9b040c3187a9bf4f3ee9a69aa590d2d5c8"
+        },
+        {
+          "field": "source.gameVersion",
+          "baseline": "0.20.21",
+          "release": "0.20.22"
+        }
+      ]
+    }
+  },
+  "preservation": {
+    "runtimeChanged": [
+      "src/BattleStage.tsx",
+      "src/enemyFormation.ts"
+    ],
+    "runtimeSha256": {
+      "src/BattleStage.tsx": "f2e482d8c9ea8966378e56c9b8badbe840ff7b21a04e17581195eb123c1b0b9d",
+      "src/enemyFormation.ts": "460de0c25742b3a9255a570032a97ee7069d847efb8e9f0480bc9ed08e3ca5cc"
+    },
+    "unchangedProtectedFiles": [
+      "public/THIRD_PARTY_NOTICES.txt",
+      "src/App.tsx",
+      "src/BattleLogDialog.tsx",
+      "src/BattleResult.tsx",
+      "src/CatalogArt.tsx",
+      "src/CatalogScreen.tsx",
+      "src/FamilyTrialPicker.tsx",
+      "src/HomeIdleArt.tsx",
+      "src/HomePasture.tsx",
+      "src/HomeScreen.tsx",
+      "src/LeaderComparison.tsx",
+      "src/LeaveBattleDialog.tsx",
+      "src/MonsterArt.tsx",
+      "src/MonsterDetails.tsx",
+      "src/MythVignetteEntry.tsx",
+      "src/RosterBrowser.tsx",
+      "src/TacticsPanel.tsx",
+      "src/TeamBuilder.tsx",
+      "src/areaEffects.ts",
+      "src/battleInsights.ts",
+      "src/battleMotion.ts",
+      "src/beastOriginalArt.ts",
+      "src/catalog.css",
+      "src/components/MythVignette.tsx",
+      "src/components/mythVignette.css",
+      "src/demonArt.ts",
+      "src/dragonArt.ts",
+      "src/enemyHitTest.ts",
+      "src/engine.ts",
+      "src/extraordinaryArt.ts",
+      "src/families.ts",
+      "src/familyArt.ts",
+      "src/familyPlanDisclosure.css",
+      "src/familyTrialPicker.css",
+      "src/familyTrials.ts",
+      "src/fenrirArt.ts",
+      "src/homeIdleMotion.ts",
+      "src/homePasture.css",
+      "src/leaderComparison.ts",
+      "src/legacyPoisonTestControls.ts",
+      "src/main.tsx",
+      "src/materialArt.ts",
+      "src/mixedOriginalArt.ts",
+      "src/monsterDetailContent.ts",
+      "src/monsterDetails.css",
+      "src/monsterLore.ts",
+      "src/mythSceneSvg.ts",
+      "src/mythVignettes.ts",
+      "src/natureOriginalArt.ts",
+      "src/navigation.ts",
+      "src/originalRosterMotion.ts",
+      "src/partyNumbers.ts",
+      "src/pastureScene.ts",
+      "src/playback.ts",
+      "src/poisonDescription.ts",
+      "src/slimeArt.ts",
+      "src/storybookFenrir.ts",
+      "src/storybookFenrirBattleMotion.ts",
+      "src/storybookFenrirRig.ts",
+      "src/storybookYoko.ts",
+      "src/storybookYokoBattleMotion.ts",
+      "src/storybookYokoRig.ts",
+      "src/strategy.ts",
+      "src/style.css",
+      "src/tabCopy.css",
+      "src/teamBuilder.css",
+      "src/teamFocusReveal.ts",
+      "src/teamWorkshop.ts",
+      "src/undeadArt.ts",
+      "src/vite-env.d.ts"
+    ],
+    "protectedCount": 70,
+    "dependenciesOnlyRootVersionChanged": true,
+    "creditsOnlyVersionChanged": true,
+    "allPriorManifestRecordsPreserved": true,
+    "additionalNonRuntimeChange": "Release version, rights provenance, tests and accurate public documentation only."
+  },
+  "limits": [
+    "Source/DOM checks do not prove rendered native geometry or focus/history behavior",
+    "Exact deployed browser acceptance and credits to follow publication",
+    "Existing main-chunk advisory remains",
+    "Rights inventory is not legal clearance"
+  ]
+}
