@@ -1,0 +1,31 @@
+{
+  "release": "0.20.27",
+  "baselineCommit": "0de358490f54799bf0575ab4bf881b2ca03e5662",
+  "baselineTree": "4d55eae5f83c788434871523695a301adfa4e6ae",
+  "scope": "Direct recipient selection through existing ally HP/MP/status buttons only while pending single-ally support; original enemy heading retained. No engine/AI/RNG/balance/save/art/dependency changes.",
+  "checks": {
+    "tests": 3051,
+    "files": 153,
+    "newDirectAllyTests": 29,
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "smokeParity": {
+      "matches": 736,
+      "jsonEqualExcludingSourceVersionAndCommit": true,
+      "markdownEqualExcludingVersionAndCommitLine": true,
+      "configByteEqual": true,
+      "workingTreeDirtyRetained": true
+    },
+    "independentReview": "PASS: source and test review; independent TypeScript and diff check; runtime hashes below."
+  },
+  "runtimeSha256": {
+    "src/App.tsx": "5b6f6096e83475538f3d74cf9f4a6654f5d3c39cc691368fc1943ac3bfc563cb",
+    "src/style.css": "d6f4797af56e456b709f76f7db49673b2bc7352eb7721a1085db6f5ca0950ce5"
+  },
+  "nativeAcceptance": "Pending sole publisher native gate. Portrait stability/target bounds, short screens/zoom and native keyboard defaults remain unclaimed.",
+  "knownExistingBehavior": "Tactics Escape closes tactics and cancels pending target; explicit tactics close resumes targeting. No new behavior introduced here.",
+  "legalClearance": false
+}

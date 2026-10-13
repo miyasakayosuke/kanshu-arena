@@ -57,7 +57,7 @@ describe('last confirmed command focuses the explicit turn start', () => {
       await special(mode === 'single-target special' ? '狐火' : '生命の雫');
       expect(document.activeElement).not.toBe(turnStart()); expect(turnStart().disabled).toBe(true);
       expect(document.querySelectorAll('.commander.ordered')).toHaveLength(4);
-      await click(label(`${mode === 'single-target special' ? 'トロル' : '妖狐'}を対象に選択`));
+      await click(label(mode === 'single-target special' ? 'トロルを対象に選択' : '味方1 妖狐を生命の雫の対象に選択'));
     }
     expect(document.activeElement).toBe(turnStart()); expect(turnStart().disabled).toBe(false);
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(5); expect(advance).not.toHaveBeenCalled();

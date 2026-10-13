@@ -46,6 +46,35 @@ export default function App() {
   const [activeKey, setActiveKey] = useState('a0');
   const [pendingSkill, setPendingSkill] = useState<number | null>(null);
   const [showSkills, setShowSkills] = useState(false);
+  const commandDock = useRef<HTMLElement>(null);
+  const targetEntry = useRef<HTMLButtonElement | null>(null);
+  const targetDockHeight = useRef<number | undefined>(undefined);
+  const targetConsumed = useRef(false);
+  const targetGeneration = useRef(0);
+  const heldActivation = useRef(false);
+  const suppressActivation = useRef(false);
+  const targetEntrySkill = useRef<number | null>(null);
+  const focusNextActor = useRef(false);
+  const restoreTargetFocus = useRef(false);
+  const cancelTarget = () => { ++targetGeneration.current; targetConsumed.current = true; restoreTargetFocus.current = true; setPendingSkill(null); };
+  // A key held while focus changes must not activate a recipient or turn start.
+  useEffect(() => {
+    const down = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.repeat && event.target instanceof Element && event.target.closest('.commandDock')) event.preventDefault();
+      heldActivation.current = true;
+    };
+    const up = (event: KeyboardEvent) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (suppressActivation.current) event.preventDefault();
+      heldActivation.current = false; suppressActivation.current = false;
+    };
+    const blur = () => { heldActivation.current = false; suppressActivation.current = false; };
+    window.addEventListener('keydown', down, true);
+    window.addEventListener('keyup', up, true);
+    window.addEventListener('blur', blur);
+    return () => { window.removeEventListener('keydown', down, true); window.removeEventListener('keyup', up, true); window.removeEventListener('blur', blur); };
+  }, []);
   const [automaticKeys, setAutomaticKeys] = useState<string[]>([]);
   const [focus, setFocus] = useState<number | null>(null);
   const [enemyFocus, setEnemyFocus] = useState<string | null>(null);
@@ -79,6 +108,7 @@ export default function App() {
   const latestResult = useRef<State | null>(null);
   const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
   const discardBattle = () => {
+    ++targetGeneration.current; targetConsumed.current = true;
     resetCommandPlayback();
     commandDeadline.current = null;
     ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
@@ -157,7 +187,8 @@ export default function App() {
       // its unmount can expose the catalog/editor to another window listener.
       if (enemyFocus !== null) { e.preventDefault(); setEnemyFocus(null); return; }
       if (focus !== null) { e.preventDefault(); setFocus(null); return; }
-      setShowLog(false); setShowTactics(false); setPendingSkill(null);
+      setShowLog(false); setShowTactics(false);
+      if (pendingSkill !== null) { e.preventDefault(); cancelTarget(); }
       if (pendingSkill === null) setShowSkills(false);
     };
     window.addEventListener('keydown', close);
@@ -187,6 +218,22 @@ export default function App() {
   const selectedSkill = pendingSkill !== null && active ? battleSkill(active.monster, pendingSkill) : null;
   const targets = battle && selectedSkill ? (skillTargetsAllies(selectedSkill) ? battle.allies : battle.enemies).filter(u => u.hp > 0) : [];
   const targetKeys = targets.map(u => u.key);
+  const renderedTargetGeneration = targetGeneration.current;
+  const allyTargeting = !!selectedSkill && skillTargetsAllies(selectedSkill);
+  const targetContext = useRef({ activeKey: active?.key, pendingSkill, page, battle, blocked: false });
+  targetContext.current = { activeKey: active?.key, pendingSkill, page, battle,
+    blocked: playing || !!navigation.pending || focus !== null || enemyFocus !== null || showLog || showTactics };
+  useLayoutEffect(() => {
+    if (pendingSkill !== null && allyTargeting && page === 'battle' && !playing && !navigation.pending && focus === null && enemyFocus === null && !showLog && !showTactics) {
+      // Start at explicit cancellation, away from recipients and held-key defaults.
+      commandDock.current?.querySelector<HTMLButtonElement>('.backToSkills')?.focus({ preventScroll: true });
+    } else if (restoreTargetFocus.current) {
+      restoreTargetFocus.current = false;
+      if (page === 'battle' && !playing && !navigation.pending && focus === null && enemyFocus === null && !showLog && !showTactics
+        && commandDeadline.current !== null && Date.now() < commandDeadline.current) (commandDock.current?.querySelector<HTMLButtonElement>(`[data-skill-index="${targetEntrySkill.current}"]`) ?? targetEntry.current)?.focus({ preventScroll: true });
+    }
+    if (pendingSkill === null) targetDockHeight.current = undefined;
+  }, [pendingSkill, allyTargeting, page, playing, navigation.pending]);
   // A delayed browser timer must not accept a command after the real deadline.
   const commandsExpired = () => {
     if (commandDeadline.current !== null && Date.now() >= commandDeadline.current) {
@@ -214,7 +261,7 @@ export default function App() {
     setOrders(next); setPendingSkill(null); setShowSkills(false);
     setAutomaticKeys(keys => automatic ? [...keys.filter(key => key !== active.key), active.key] : keys.filter(key => key !== active.key));
     const unselected = living.find(u => !next[u.key]);
-    if (unselected) setActiveKey(unselected.key);
+    if (unselected) { setActiveKey(unselected.key); focusNextActor.current = true; }
     else focusTurnStart.current = true;
   };
   const selectSkill = (index: number) => {
@@ -222,8 +269,31 @@ export default function App() {
     const skill = battleSkill(active.monster, index);
     if (!skill || !canUseSkill(active, skill, battle?.allies)) return;
     if (skill.all || skill.randomHits || skill.kind === 'guard') commitOrder(index);
-    else setPendingSkill(index);
+    else {
+      targetConsumed.current = false;
+      ++targetGeneration.current;
+      suppressActivation.current = heldActivation.current;
+      targetEntrySkill.current = index;
+      targetEntry.current = document.activeElement instanceof HTMLButtonElement ? document.activeElement : null;
+      targetDockHeight.current = skillTargetsAllies(skill) ? commandDock.current?.getBoundingClientRect().height : undefined;
+      setPendingSkill(index);
+    }
   };
+  const selectTarget = (key: string, event?: React.MouseEvent) => {
+    const latest = targetContext.current;
+    if (targetConsumed.current || renderedTargetGeneration !== targetGeneration.current || latest.activeKey !== active?.key || latest.pendingSkill !== pendingSkill
+      || latest.battle !== battle || latest.page !== 'battle' || latest.blocked || pendingSkill === null
+      || !targetKeys.includes(key) || (event && (event.detail > 1 || (event.detail === 0 && suppressActivation.current)))) return;
+    targetConsumed.current = true;
+    commitOrder(pendingSkill, key);
+  };
+  useLayoutEffect(() => {
+    if (!focusNextActor.current) return;
+    focusNextActor.current = false;
+    if (page === 'battle' && !playing && !navigation.pending && pendingSkill === null && focus === null && enemyFocus === null && !showLog && !showTactics
+      && commandDeadline.current !== null && Date.now() < commandDeadline.current)
+      commandDock.current?.querySelector<HTMLButtonElement>('.commander.active')?.focus({ preventScroll: true });
+  }, [orders, activeKey, page, playing, pendingSkill, navigation.pending]);
   const selectAutomatic = () => {
     if (commandsExpired() || !battle || !active || battle.winner || playingLock.current) return;
     const order = completeOrders(battle, Object.values(orders).filter(order => order.key !== active.key))
@@ -366,13 +436,13 @@ export default function App() {
       setNotice(`チーム${index + 1}に切り替えました${practice && next.rule !== rule ? '。ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''}`);
     }} onResumeDraft={() => { setWorkshop(previous => previous.draft ? { ...previous, selected: null } : previous); setPractice(false); setEncounter(null); setNotice('一時編成に戻しました'); }} onRestoreDraft={() => { setWorkshop(restorePreviousTeam); setPractice(false); setEncounter(null); setNotice('前回の編成を復元しました。3チームはそのままです。'); }} onAssignDraft={index => { setWorkshop(previous => assignDraftToTeam(previous, index)); setNotice(`チーム${index + 1}に保存しました`); }} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
     {page === 'battle' && battle && <main tabIndex={-1} className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
-      <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={event => { event.currentTarget.focus({ preventScroll: true }); setShowLog(true); }}>ログ</button></div></div>
-      {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} onInspectEnemy={inspectionAllowed ? inspectEnemy : undefined} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
+      <div className="battleTop"><button className="iconButton" onClick={() => { ++targetGeneration.current; navigate('arena'); }} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => { ++targetGeneration.current; setShowTactics(true); }}>作戦</button><button className="iconButton" onClick={event => { ++targetGeneration.current; event.currentTarget.focus({ preventScroll: true }); setShowLog(true); }}>ログ</button></div></div>
+      {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} onInspectEnemy={inspectionAllowed ? inspectEnemy : undefined} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => selectTarget(key)} />}
       <div className="battleMessage" aria-live="polite"><span className={visibleCastCaption ? 'castCaptionAnnouncement' : undefined}>{battle.winner ? `${opponentLabel} · 対戦終了` : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `${opponentLabel} · 行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</span>{visibleCastCaption && <span className="battleCastCaption" aria-hidden="true">{visibleCastCaption.lines.map((line, index) => <span key={index}>{line}</span>)}<span>{replayProgress}</span></span>}</div>
-      {!battle.winner && <section className="commandDock" aria-label="行動指示">
+      {!battle.winner && <section ref={commandDock} onClickCapture={event => { if (event.detail > 1) { event.preventDefault(); event.stopPropagation(); } }} className={`commandDock${allyTargeting ? ' choosingAlly' : ''}`} style={allyTargeting && targetDockHeight.current ? { minHeight: targetDockHeight.current } : undefined} aria-label="行動指示">
         <div className={`commanderRow ${playing ? 'retainingNumbers' : ''} ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--hit-duration': `${300 / speed}ms`, '--number-duration': `${partyNumberDuration(speed)}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
           {incomingArea && <span key={`${effect?.tick}-${areaLanded}`} className="partySweep" aria-hidden="true" style={{animationDuration: `${(areaLanded ? 650 : 800) / speed}ms`}} />}
-          {battle.allies.map(u => {
+          {battle.allies.map((u, slot) => {
           const response = impacts.find(event => event.target === u.key && (event.effect === 'extraordinary-response-cleanse' || event.effect === 'extraordinary-response-guard'));
           const cashout = impacts.find(event => event.target === u.key && event.kind === 'poison-cashout');
           const feedbacks = impacts.filter(event => event.target === u.key && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
@@ -383,7 +453,7 @@ export default function App() {
           const landed = acting && impacts.some(event => event.actor === u.key);
           const areaTarget = incomingArea && visualCast?.targets?.includes(u.key);
           const status = u.hp <= 0 ? '戦闘不能' : effectStatus(u);
-          return <button key={u.key} className={`commander ${!playing && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${completed ? 'actionCompleted' : ''} ${u.hp <= 0 ? 'fallen' : ''} ${u.ward && u.hp > 0 ? 'natureWarded' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={`${u.monster.name}の行動を選択`} aria-pressed={!playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key} party-command-${u.key}`} onClick={() => { setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
+          return <button key={u.key} className={`commander ${allyTargeting && u.hp > 0 ? 'allyRecipient' : ''} ${!playing && !allyTargeting && active?.key === u.key ? 'active' : ''} ${orders[u.key] ? 'ordered' : ''} ${acting ? `acting ${landed ? 'recovering' : 'preparing'}` : ''} ${completed ? 'actionCompleted' : ''} ${u.hp <= 0 ? 'fallen' : ''} ${u.ward && u.hp > 0 ? 'natureWarded' : ''} ${feedback ? `party-${feedback.kind}` : ''} ${areaTarget ? 'areaTarget' : ''}`} data-area-target={areaTarget ? 'true' : undefined} disabled={playing || u.hp <= 0} aria-label={allyTargeting ? `味方${slot + 1} ${u.monster.name}を${selectedSkill!.name}の対象に選択` : `${u.monster.name}の行動を選択`} aria-pressed={allyTargeting ? undefined : !playing && active?.key === u.key} aria-describedby={`party-hp-${u.key} party-mp-${u.key} party-status-${u.key} party-command-${u.key}`} onClick={event => { if (event.detail > 1) return; if (allyTargeting) { selectTarget(u.key, event); return; } if (commandsExpired() || playingLock.current || navigation.pending) return; ++targetGeneration.current; setActiveKey(u.key); setPendingSkill(null); setShowSkills(false); }}>
             <div className="commanderVisual">
             <span className="commanderIcon" aria-hidden="true"><MonsterArt monster={u.monster} portrait /></span>
             {numbers.map(({ id, event: feedback, lane }) => <b style={{top: 2 + lane * 14}} key={id} data-number-id={id} className={`partyImpact ${feedback.kind}`} aria-label={`${feedback.kind === 'resource-loss' ? 'MP減少' : feedback.kind === 'resource-gain' ? 'MP補給' : feedback.kind === 'heal' ? '回復' : 'ダメージ'} ${feedback.amount}`}>{feedback.kind === 'resource-loss' ? 'MP−' : feedback.kind === 'resource-gain' ? 'MP+' : feedback.kind === 'heal' ? '+' : '−'}{feedback.amount}</b>)}
@@ -393,7 +463,7 @@ export default function App() {
             <div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div>
             <small className="commanderMp" id={`party-mp-${u.key}`}>MP {u.mp}/{u.monster.mp}</small>
             <div className="mpBar"><b style={{ width: `${u.monster.mp > 0 ? u.mp / u.monster.mp * 100 : 0}%` }} /></div>
-            <i id={`party-command-${u.key}`}>{u.hp <= 0 ? '戦闘不能' : playing ? acting ? '行動中' : completed ? '行動済' : '待機' : orders[u.key] ? automaticKeys.includes(u.key) ? 'おまかせ ✓' : '指示済 ✓' : '未選択'}</i>
+            <i id={`party-command-${u.key}`}>{u.hp <= 0 ? '戦闘不能' : allyTargeting ? '＋ 対象に選択' : playing ? acting ? '行動中' : completed ? '行動済' : '待機' : orders[u.key] ? automaticKeys.includes(u.key) ? 'おまかせ ✓' : '指示済 ✓' : '未選択'}</i>
             <div className="commanderBadges">
             <em className="commanderStatus" id={`party-status-${u.key}`} aria-label={status || '状態異常なし'}>{u.hp > 0 ? status : ''}</em>
             {response && <em className="partyResponse" role="status">{response.kind === 'cleanse' ? '現在の毒を解除' : '守り:今T'}</em>}
@@ -402,8 +472,8 @@ export default function App() {
 
           </button>;
         })}</div>
-        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>{timedOut ? '時間切れ · 未入力はおまかせで行動' : 'モンスターが行動中'}</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className={`commandHeading${!showSkills && !selectedSkill && committedCommand ? ' hasCommittedOrder' : ''}`}><span>{selectedSkill ? `${selectedSkill.name} · MP ${selectedSkill.mpCost} · ${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : <>{active.monster.name} {!showSkills && committedCommand ? <span className="committedOrder"> / {committedCommand}</span> : <small>{showSkills ? `とくぎ ${Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)}/${MAX_SPECIAL_SKILLS} · MP ${active.mp}/${active.monster.mp}` : `HP ${active.hp}/${active.monster.hp} · MP ${active.mp}/${active.monster.mp}`}</small>}</>}</span>{selectedSkill || showSkills ? <button className="backToSkills" onClick={() => { if (pendingSkill !== null) setPendingSkill(null); else setShowSkills(false); }}>‹ {selectedSkill && showSkills ? '特技に戻る' : 'コマンドに戻る'}</button> : <button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button>}</div>
-          {selectedSkill ? <div className={`targetButtons ${skillTargetsAllies(selectedSkill) ? 'allyTargets' : 'enemyTargets'}`} aria-label={`${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}の対象を選択`}>{targets.map(u => <button key={u.key} aria-label={`${u.monster.name}を対象に選択`} onClick={() => { if (pendingSkill !== null) commitOrder(pendingSkill, u.key); }}><span aria-hidden="true"><MonsterArt monster={u.monster} portrait /></span><small>{u.hp}/{u.monster.hp}</small>{selectedSkill.poisonCashout && <em className="cashoutTargetHint" title={poisonCashoutHint(active, selectedSkill, u)}>{poisonCashoutHint(active, selectedSkill, u, true)}</em>}<div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div> : showSkills ? <div className="skillButtons" aria-label="とくぎを選択">{active.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((s, i) => <button key={i} className={`${!automaticKeys.includes(active.key) && orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} disabled={!canUseSkill(active, s, battle.allies)} title={s.kind === 'poison' ? poisonSkillDetail(s, active) : isExtraordinaryResponse(s) ? '生存味方全員が対象。二つで共通の1回、発動時にMP24と回数を消費。HP回復・蘇生・毒予防なし。' : s.poisonCashout ? poisonCashoutHint(active, s) + '。今後の毒を失い、守り・自然障壁で追加分も軽減。' : s.fixedDamage ? `${fixedDamageHint(s, active)}。攻撃力に依存せず、乱数±10%・守り・自然障壁は有効。${s.dragonChargeFinisher ? '竜気は中核＋竜系3体以上で有効。息の発動時に全消費し、解除・中核撃破で失います。' : ''}` : undefined} onClick={() => selectSkill(i)}><strong>{s.name}</strong><span className={`skillMp ${!canUseSkill(active, s, battle.allies) ? 'insufficient' : ''}`}>MP {s.mpCost}{!canUseSkill(active, s, battle.allies) ? ` · ${skillUnavailableLabel(skillUnavailableReason(active, s, battle.allies)!)}` : ''}</span><small>{skillOrderLabel(s)} / {s.kind === 'poison' ? poisonSkillHint(s, active) : s.poisonCashout ? poisonCashoutHint(active, s) : s.kind === 'responseCleanse' ? `生存味方全員の現在毒解除・HP回復0・共通1回` : s.kind === 'responseGuard' ? `生存味方全員の守り:今T・共通1回` : s.kind === 'restoreMp' ? `MP補給+${s.power} · 粘体系・一度だけ` : s.kind === 'guard' ? '防御' : s.kind === 'protect' ? '味方を守る' : s.kind === 'cleanse' ? '毒解除＋回復' : s.kind === 'heal' ? '味方1体を回復' : s.randomHits ? `ランダム${barrageHits(s, battle.allies)}回${s.breaksGuardAfterHit ? '・強化解除' : s.familyBonusHit && barrageHits(s, battle.allies) > s.randomHits ? '・獣5体の追撃' : ''}` : s.breaksGuard ? '守り・蓄積・修復待ち解除' : s.fixedDamage ? `${s.all ? '全体' : '単体'}・${fixedDamageHint(s, active)}${s.dragonChargeFinisher ? '・全消費' : ''}` : `${s.all ? '全体' : '単体'}攻撃${s.mpDamage ? ` · 相手MP−${mpDamageFor(active, s)}` : ''}`} </small></button>)}</div> : <div className="commandButtons" aria-label="コマンドを選択">
+        {playing ? <div className="playingPanel"><div className="playPulse">✦</div><p>{timedOut ? '時間切れ · 未入力はおまかせで行動' : 'モンスターが行動中'}</p><button className="secondary" onClick={finishPlayback}>演出をスキップ</button></div> : active && <><div className={`commandHeading${!showSkills && !selectedSkill && committedCommand ? ' hasCommittedOrder' : ''}`}><span>{selectedSkill ? `${allyTargeting ? `${active.monster.name}：` : ''}${selectedSkill.name} · MP ${selectedSkill.mpCost} · ${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : <>{active.monster.name} {!showSkills && committedCommand ? <span className="committedOrder"> / {committedCommand}</span> : <small>{showSkills ? `とくぎ ${Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)}/${MAX_SPECIAL_SKILLS} · MP ${active.mp}/${active.monster.mp}` : `HP ${active.hp}/${active.monster.hp} · MP ${active.mp}/${active.monster.mp}`}</small>}</>}</span>{selectedSkill || showSkills ? <button className="backToSkills" onClick={event => { if (event.detail === 0 && suppressActivation.current) return; if (pendingSkill !== null) cancelTarget(); else setShowSkills(false); }}>‹ {selectedSkill && showSkills ? '特技に戻る' : 'コマンドに戻る'}</button> : <button onClick={() => setFocus(active.monster.id)} className="detailButton">詳細</button>}</div>
+          {selectedSkill ? allyTargeting ? null : <div className={`targetButtons ${skillTargetsAllies(selectedSkill) ? 'allyTargets' : 'enemyTargets'}`} aria-label={`${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}の対象を選択`}>{targets.map(u => <button key={u.key} aria-label={`${u.monster.name}を対象に選択`} onClick={event => selectTarget(u.key, event)}><span aria-hidden="true"><MonsterArt monster={u.monster} portrait /></span><small>{u.hp}/{u.monster.hp}</small>{selectedSkill.poisonCashout && <em className="cashoutTargetHint" title={poisonCashoutHint(active, selectedSkill, u)}>{poisonCashoutHint(active, selectedSkill, u, true)}</em>}<div className="hpBar"><b style={{ width: `${u.hp / u.monster.hp * 100}%` }} /></div></button>)}</div> : showSkills ? <div className="skillButtons" aria-label="とくぎを選択">{active.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((s, i) => <button key={i} data-skill-index={i} className={`${!automaticKeys.includes(active.key) && orders[active.key]?.skill === i ? 'chosen' : ''} skill-${effectType(s.name, s.kind)}`} disabled={!canUseSkill(active, s, battle.allies)} title={s.kind === 'poison' ? poisonSkillDetail(s, active) : isExtraordinaryResponse(s) ? '生存味方全員が対象。二つで共通の1回、発動時にMP24と回数を消費。HP回復・蘇生・毒予防なし。' : s.poisonCashout ? poisonCashoutHint(active, s) + '。今後の毒を失い、守り・自然障壁で追加分も軽減。' : s.fixedDamage ? `${fixedDamageHint(s, active)}。攻撃力に依存せず、乱数±10%・守り・自然障壁は有効。${s.dragonChargeFinisher ? '竜気は中核＋竜系3体以上で有効。息の発動時に全消費し、解除・中核撃破で失います。' : ''}` : undefined} onClick={() => selectSkill(i)}><strong>{s.name}</strong><span className={`skillMp ${!canUseSkill(active, s, battle.allies) ? 'insufficient' : ''}`}>MP {s.mpCost}{!canUseSkill(active, s, battle.allies) ? ` · ${skillUnavailableLabel(skillUnavailableReason(active, s, battle.allies)!)}` : ''}</span><small>{skillOrderLabel(s)} / {s.kind === 'poison' ? poisonSkillHint(s, active) : s.poisonCashout ? poisonCashoutHint(active, s) : s.kind === 'responseCleanse' ? `生存味方全員の現在毒解除・HP回復0・共通1回` : s.kind === 'responseGuard' ? `生存味方全員の守り:今T・共通1回` : s.kind === 'restoreMp' ? `MP補給+${s.power} · 粘体系・一度だけ` : s.kind === 'guard' ? '防御' : s.kind === 'protect' ? '味方を守る' : s.kind === 'cleanse' ? '毒解除＋回復' : s.kind === 'heal' ? '味方1体を回復' : s.randomHits ? `ランダム${barrageHits(s, battle.allies)}回${s.breaksGuardAfterHit ? '・強化解除' : s.familyBonusHit && barrageHits(s, battle.allies) > s.randomHits ? '・獣5体の追撃' : ''}` : s.breaksGuard ? '守り・蓄積・修復待ち解除' : s.fixedDamage ? `${s.all ? '全体' : '単体'}・${fixedDamageHint(s, active)}${s.dragonChargeFinisher ? '・全消費' : ''}` : `${s.all ? '全体' : '単体'}攻撃${s.mpDamage ? ` · 相手MP−${mpDamageFor(active, s)}` : ''}`} </small></button>)}</div> : <div className="commandButtons" aria-label="コマンドを選択">
             <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === BASIC_ATTACK ? 'chosen' : ''} onClick={() => selectSkill(BASIC_ATTACK)}><strong>たたかう</strong><small>通常攻撃 · MP 0</small></button>
             <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === DEFEND ? 'chosen' : ''} onClick={() => commitOrder(DEFEND)}><strong>ぼうぎょ</strong><small>今ターン半減 · MP 0</small></button>
             <button className={!automaticKeys.includes(active.key) && (orders[active.key]?.skill ?? -1) >= 0 ? 'chosen' : ''} disabled={!active.monster.skills.length} onClick={() => setShowSkills(true)}><strong>とくぎ</strong><small>{Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)} / {MAX_SPECIAL_SKILLS} 習得</small></button>

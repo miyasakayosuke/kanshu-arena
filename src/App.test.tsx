@@ -17,6 +17,8 @@ const button = (text: string) => [...document.querySelectorAll('button')].find(b
 const label = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 const targets = () => [...document.querySelectorAll<HTMLButtonElement>('.targetButtons button')];
 const target = (name: string) => document.querySelector<HTMLButtonElement>(`.targetButtons button[aria-label="${name}を対象に選択"]`)!;
+const allyTargets = () => [...document.querySelectorAll<HTMLButtonElement>('.commander.allyRecipient')];
+const allyTarget = (name: string) => allyTargets().find(node => node.getAttribute('aria-label')?.includes(` ${name}を`))!;
 const activeCommander = () => document.querySelector('.commander.active')?.getAttribute('aria-label');
 async function click(el: HTMLElement) { expect(el).toBeTruthy(); await act(async () => el.click()); }
 async function chooseSkill(name: string) { if (!document.querySelector('.skillButtons')) await click(button('とくぎ')); await click(button(name)); }
@@ -150,11 +152,12 @@ describe('command and target controls', () => {
     await click(label('バステトの行動を選択'));
     await chooseSkill('生命の雫');
     expect(document.querySelector('.skillButtons')).toBeNull();
-    expect(targets().map(b => b.getAttribute('aria-label'))).toEqual(
-      ['妖狐', 'バステト', 'ドリュアス', 'バンシー', 'ガルーダ'].map(name => `${name}を対象に選択`),
+    expect(allyTargets().map(b => b.getAttribute('aria-label'))).toEqual(
+      ['妖狐', 'バステト', 'ドリュアス', 'バンシー', 'ガルーダ'].map((name, slot) => `味方${slot + 1} ${name}を生命の雫の対象に選択`),
     );
+    expect(document.querySelector('.targetButtons')).toBeNull();
     expect(target('トロル')).toBeNull();
-    await click(target('ドリュアス'));
+    await click(allyTarget('ドリュアス'));
     expect(activeCommander()).toContain('妖狐');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
     await click(button('この指示でターン開始'));
@@ -245,7 +248,7 @@ describe('command and target controls', () => {
     expect(document.querySelector('.commandButtons')).toBeTruthy();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     await chooseSkill('生命の雫');
-    expect(target('妖狐')).toBeTruthy();
+    expect(allyTarget('妖狐')).toBeTruthy();
     expect(target('トロル')).toBeNull();
     await click(button('特技に戻る'));
     expect(button('この指示でターン開始').disabled).toBe(false);
@@ -289,9 +292,10 @@ describe('command and target controls', () => {
     expect(target('トロル')).toBeNull();
     await click(button('特技に戻る'));
     await chooseSkill('生命の雫');
-    expect(targets()).toHaveLength(4);
-    expect(target('妖狐')).toBeNull();
-    await click(target('バステト'));
+    expect(allyTargets()).toHaveLength(4);
+    expect(allyTarget('妖狐')).toBeUndefined();
+    expect(label('味方1 妖狐を生命の雫の対象に選択').disabled).toBe(true);
+    await click(allyTarget('バステト'));
     expect(activeCommander()).toContain('ドリュアス');
     await chooseSkill('樹海の槍');
     await click(label('バステトの行動を選択'));
@@ -552,7 +556,7 @@ describe('30-second command deadline', () => {
     await enterBattle();
     await click(button('ぼうぎょ'));
     await chooseSkill('生命の雫');
-    expect(targets()).toHaveLength(5);
+    expect(allyTargets()).toHaveLength(5);
     await tick(30000);
     const automatic = engine.autoOrders(initialState());
     expect(advance.mock.calls[0][1]).toEqual([
@@ -708,13 +712,14 @@ describe('bottom-only allied battle feedback', () => {
     expect(document.querySelector('canvas')?.getAttribute('aria-label')).toContain('敵だけ');
     await click(label('バステトの行動を選択'));
     await chooseSkill('生命の雫');
-    expect(targets()).toHaveLength(5);
+    expect(allyTargets()).toHaveLength(5);
     expect(document.querySelectorAll('.battleStage .battleTarget')).toHaveLength(0);
-    expect(document.querySelector('.allyTargets')?.closest('.commandDock')).toBeTruthy();
+    expect(allyTargets().every(node => node.closest('.commanderRow')?.closest('.commandDock'))).toBe(true);
+    expect(document.querySelector('.targetButtons,.allyTargets')).toBeNull();
     await click(button('特技に戻る'));
     expect(document.querySelector('.skillButtons')).toBeTruthy();
     await chooseSkill('生命の雫');
-    await click(target('妖狐'));
+    await click(allyTarget('妖狐'));
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
   });
 

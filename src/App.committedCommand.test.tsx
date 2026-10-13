@@ -12,6 +12,7 @@ const button = (text: string) => [...document.querySelectorAll<HTMLButtonElement
 const label = (text: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${text}"]`)!;
 const actor = (index: number) => document.querySelectorAll<HTMLButtonElement>('.commander')[index];
 const target = (index: number) => document.querySelectorAll<HTMLButtonElement>('.targetButtons button')[index];
+const allyTarget = (index: number) => document.querySelector<HTMLButtonElement>(`.commander.allyRecipient[aria-label^="味方${index + 1} "]`)!;
 const turnStart = () => document.querySelector<HTMLButtonElement>('.turnStart')!;
 const summary = () => document.querySelector<HTMLElement>('.commandHeading .committedOrder');
 const summaryText = () => summary()?.textContent?.replace(/\s+/g, ' ').trim();
@@ -111,7 +112,7 @@ describe('committed skill and target in the existing actor heading', () => {
   ])('shows stored ally recipient for $name without a resource spend', async scenario => {
     const { advance } = await begin({ team: scenario.team });
     const beforeMp = mp();
-    await chooseSpecial(scenario.actor, scenario.name); await click(target(scenario.recipient));
+    await chooseSpecial(scenario.actor, scenario.name); await click(allyTarget(scenario.recipient));
     await click(actor(scenario.actor)); expectSummary(scenario.name, scenario.expected);
     expect(mp()).toEqual(beforeMp); expect(advance).not.toHaveBeenCalled();
   });
@@ -120,7 +121,7 @@ describe('committed skill and target in the existing actor heading', () => {
     const { advance } = await begin();
     await commitAttack(0, 1); await click(actor(0));
     expectSummary('通常攻撃', '敵2 バステト');
-    await chooseSpecial(2, '生命の雫'); await click(target(1)); await click(actor(2));
+    await chooseSpecial(2, '生命の雫'); await click(allyTarget(1)); await click(actor(2));
     expectSummary('生命の雫', '味方2 バステト');
     await click(actor(0)); expectSummary('通常攻撃', '敵2 バステト');
     await click(turnStart());

@@ -113,7 +113,7 @@ describe('confirmed commands reserve only support they will actually perform', (
     const { state, advance } = await begin();
     if (previous === 'manual') {
       await chooseSupport('バステト', '清めの鈴');
-      await click(label('妖狐を対象に選択'));
+      await click(label('味方3 妖狐を清めの鈴の対象に選択'));
     } else {
       await click(label('バステトの行動を選択'));
       await click(individualAuto());
@@ -134,7 +134,7 @@ describe('confirmed commands reserve only support they will actually perform', (
   it('a confirmed heal leaves the poisoned target available for the next automatic cleanser', async () => {
     const { state, advance } = await begin();
     await chooseSupport('バステト', '生命の雫');
-    await click(label('妖狐を対象に選択'));
+    await click(label('味方3 妖狐を生命の雫の対象に選択'));
     const heal: engine.Order = { key: 'a0', skill: 1, target: 'a2' };
     const lines = await checkPreview(state, [heal]);
     expect(lines.find(line => line.includes('バステト'))).toContain('生命の雫 ·');
@@ -146,7 +146,7 @@ describe('confirmed commands reserve only support they will actually perform', (
   it('a later confirmed cleanse does not reserve support ahead of its party slot', async () => {
     const { state, advance } = await begin();
     await chooseSupport('唐傘おばけ', '傘下の清め');
-    await click(label('妖狐を対象に選択'));
+    await click(label('味方3 妖狐を傘下の清めの対象に選択'));
     const lines = await checkPreview(state, [cleanse]);
     expect(lines.find(line => line.includes('バステト'))).toContain('清めの鈴 ·');
     expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
@@ -169,11 +169,12 @@ describe('confirmed commands reserve only support they will actually perform', (
     await click(button('この指示でターン開始'));
     expect(advance.mock.calls[1][1]).toEqual(engine.autoOrders(next));
   });
-  it.each(['back', 'escape', 'actor change', 'timeout'] as const)('an unfinished replacement target creates no support reservation on %s', async route => {
+  it.each(['back', 'escape', 'cancel then actor change', 'timeout'] as const)('an unfinished replacement target creates no support reservation on %s', async route => {
     const { state, advance } = await begin();
     await chooseAttack();
     await chooseSupport('バステト', '清めの鈴');
-    expect(document.querySelector('.targetButtons')).toBeTruthy();
+    expect(document.querySelectorAll('.commander.allyRecipient')).toHaveLength(5);
+    expect(document.querySelector('.targetButtons')).toBeNull();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
     expect(button('対象を選んでください').disabled).toBe(true);
     const lines = await checkPreview(state, [attack]);
@@ -183,7 +184,7 @@ describe('confirmed commands reserve only support they will actually perform', (
     else {
       if (route === 'back') await click(button('特技に戻る'));
       else if (route === 'escape') await act(async () => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })));
-      else await click(label('ガルーダの行動を選択'));
+      else { await click(button('特技に戻る')); await click(label('ガルーダの行動を選択')); }
       expect(document.querySelector('.targetButtons')).toBeNull();
       await click(button('この指示でターン開始'));
     }

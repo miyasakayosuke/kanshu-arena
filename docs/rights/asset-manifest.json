@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.26",
-  "auditBaseCommit": "c87183a92fa87c91299a649dc32f4b2d5554cbe0",
+  "release": "v0.20.27",
+  "auditBaseCommit": "0de358490f54799bf0575ab4bf881b2ca03e5662",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1129,6 +1129,21 @@
       "creator": "AI-assisted implementation for this project",
       "distribution": "Read-only enemy profile entry during command selection, using existing real deadline. No AI intent or combat state changes.",
       "reviewLimit": "Source/inventory and automated checks are not legal clearance, measured usability gains or native-browser acceptance. Existing art/similarity review questions remain open."
+    },
+    {
+      "id": "direct-ally-target-controls",
+      "kind": "original-interface-code-and-copy",
+      "files": [
+        "src/App.tsx",
+        "src/style.css"
+      ],
+      "creator": "AI-assisted original implementation for this project, 2026-10-13.",
+      "provenance": "Existing party HP/MP/status portraits become recipient controls only during pending single-ally commands. Original slot/action accessible names and target cue reuse existing art. Private reference recording informed party-status continuity only; it did not establish this target gesture. No external code, art, audio, fonts, descriptions, screenshots, video or article excerpts imported.",
+      "references": [
+        "docs/rights/releases/2026-10-13-v0.20.27.md"
+      ],
+      "reviewLimit": "Production claim and source review are not legal clearance; existing rights, attribution, similarity and trademark questions remain open.",
+      "distribution": "Original React/CSS interface in browser build; no new media or dependency."
     }
   ],
   "software": [

@@ -137,7 +137,10 @@ describe('enemy-card read-only skill inspection', () => {
     else await chooseSpecial(scenario.actor, scenario.name);
     expect(document.querySelectorAll('.enemyInspect')).toHaveLength(0);
     expect(document.querySelectorAll('.enemyVital .battleTarget')).toHaveLength(scenario.ally ? 0 : 4);
-    expect(document.querySelector('.targetButtons')).not.toBeNull();
+    if (scenario.ally) {
+      expect(document.querySelector('.targetButtons')).toBeNull();
+      expect(document.querySelectorAll('.commander.allyRecipient')).toHaveLength(5);
+    } else expect(document.querySelector('.targetButtons')).not.toBeNull();
     expect(turnStart().disabled).toBe(true);
     await click(document.querySelector<HTMLElement>('.enemyVital.fallen')!);
     expect(dialog()).toBeNull(); expect(advance).not.toHaveBeenCalled();

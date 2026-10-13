@@ -85,14 +85,14 @@ describe('strategy workshop and fair rules',()=>{
   });
 });
 describe('counterplay, reading opponents and subsequent matches',()=>{
-  it('uses the same allied target panel for protect and cleanse and keeps four command buttons',async()=>{
+  it('uses the existing ally buttons for protect and cleanse and keeps four command buttons',async()=>{
     localStorage.setItem('kanshu-team',JSON.stringify([1,2,3,4,6]));const advance=vi.spyOn(engine,'advanceWithEvents');await mount();await startBattle();
     expect(document.querySelectorAll('.commandButtons button')).toHaveLength(4);
     await click(button('とくぎ'));expect(document.querySelectorAll('.skillButtons button')).toHaveLength(4);await click(button('守護の誓い'));
-    expect(document.querySelectorAll('.allyTargets button')).toHaveLength(5);expect(document.querySelector('.enemyTargets')).toBeNull();
-    await click(label('バステトを対象に選択'));
-    await click(button('とくぎ'));await click(button('清めの鈴'));expect(document.querySelectorAll('.allyTargets button')).toHaveLength(5);
-    await click(label('トロルを対象に選択'));await click(button('この指示でターン開始'));
+    expect(document.querySelectorAll('.commander.allyRecipient')).toHaveLength(5);expect(document.querySelector('.enemyTargets')).toBeNull();
+    await click(label('味方2 バステトを守護の誓いの対象に選択'));
+    await click(button('とくぎ'));await click(button('清めの鈴'));expect(document.querySelectorAll('.commander.allyRecipient')).toHaveLength(5);
+    await click(label('味方1 トロルを清めの鈴の対象に選択'));await click(button('この指示でターン開始'));
     expect(advance.mock.calls[0][1]).toContainEqual({key:'a0',skill:3,target:'a1'});expect(advance.mock.calls[0][1]).toContainEqual({key:'a1',skill:3,target:'a0'});
   });
   it('explains estimated initiative without revealing enemy orders or pausing the 30-second deadline',async()=>{
