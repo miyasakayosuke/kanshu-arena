@@ -128,12 +128,12 @@ describe('material same-policy accounting and replay evidence', () => {
     expect(result.sides[reverse ? 'enemies' : 'allies'].repairReceived).toBe(healing);
   });
 
-  it.each(['before', 'after', 'ko', 'before-ko', 'after-ko'] as const)('separates %s cancellation, dispel, and pre-trigger defeat without double counting', kind => {
+  it.each(['before', 'after', 'ko', 'before-ko', 'after-ko'] as const)('separates %s cancellation, dispel, and pre-trigger defeat with explicit mechanic controls', kind => {
     for (const reverse of [false, true]) {
       const skill = { name: 'Fixture material pressure', kind: 'hit', power: kind.includes('ko') ? 10000 : 50, fixedDamage: true, all: true, mpCost: 1, priority: 10,
         ...(kind.startsWith('before') ? { breaksGuard: true } : kind.startsWith('after') ? { breaksGuardAfterHit: true } : {}) };
       const result = runMatch({ teamA: reverse ? nature : material, teamB: reverse ? material : nature, seed: 42,
-        overrides: { monsters: { 14: { skills: [skill] } } }, trace: true });
+        overrides: { monsters: { 14: { skills: [skill] } } }, trace: true, policy: 'explicit-snapshot' });
       const coreKey = reverse ? 'e0' : 'a0', attackerKey = reverse ? 'a0' : 'e0';
       const core = result.units.find((unit: { key: string }) => unit.key === coreKey);
       const attacker = result.units.find((unit: { key: string }) => unit.key === attackerKey);

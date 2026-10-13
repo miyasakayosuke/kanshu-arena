@@ -14,7 +14,7 @@ beforeEach(() => {
 afterEach(async () => { await act(async () => root.unmount()); document.body.innerHTML = ''; });
 
 describe('poison counterplay and actual automatic-order policy', () => {
-  it.each<[StartOptions, boolean]>([[{},true],[{reservePoison:true},true],[{reservePoison:false},false]])('describes the real policy %j', async (options, reserved) => {
+  it.each<[StartOptions, boolean]>([[{},true],[{reservePoison:true},true],[{reservePoison:false},false]])('describes the real policy %j', async (options, _reserved) => {
     const battle = start([14,3,6,9,10], [29,1,8,30,31], 42, options);
     await act(async () => root.render(<TacticsPanel battle={battle} orders={{}} playing={false} rule="standard" onClose={() => {}} />));
     const text = document.body.textContent!;
@@ -22,7 +22,8 @@ describe('poison counterplay and actual automatic-order policy', () => {
     expect(text).toContain('悪魔系のMP圧力');
     expect(text).toContain('玄武の障壁は自然系だけ');
     expect(text).toContain('手動で合法な指示へ変えられます');
-    expect(text.includes('自動指示は同じターンの重複予定を控えます')).toBe(reserved);
-    expect(text.includes('同じターンの他の毒の予定を考慮しません')).toBe(!reserved);
+    expect(text).toContain('おまかせは行動時の状態で特技・対象を判断します');
+    expect(text).toContain('特技・対象未決定');
+    expect(text).not.toContain('現時点のおまかせ案');
   });
 });

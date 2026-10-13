@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { withoutPoisonControlMetadata as withoutControls } from './legacyPoisonTestControls';
 import { describe, expect, it } from 'vitest';
@@ -33,12 +34,12 @@ const predecessorDigests = [
 ];
 
 describe('playtest poison defaults, explicit comparison arms, and historical predecessor contract', () => {
-  it('preserves all 1,014 complete historical old37 battles with explicit scale 1 / reservation false', () => {
+  it('historical v30 reference: preserves all 1,014 complete historical old37 battles with explicit scale 1 / reservation false', () => {
     const hashes = [createHash('sha256'), createHash('sha256'), createHash('sha256')];
     let count = 0;
     for (const team of predecessorParties) for (const enemy of predecessorParties) for (const seed of [0,42,4294967295]) for (const samePolicy of [false,true]) {
-      let state = start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       const line = JSON.stringify({ team, enemy, seed, samePolicy, state: withoutControls(state) }) + '\n';
       hashes[0].update(line); hashes[samePolicy ? 2 : 1].update(line); count++;
     }

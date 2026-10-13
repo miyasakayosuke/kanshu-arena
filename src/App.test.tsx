@@ -190,7 +190,7 @@ describe('command and target controls', () => {
   it('keeps unselected allies automatic after cancelling a pending target without a whole-team reset', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
-    const automatic = engine.autoOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
+    const automatic = engine.automaticOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
     expect(button('全員おまかせ')).toBeUndefined();
     await chooseSkill('狐火');
     expect(targets()).toHaveLength(5);
@@ -371,7 +371,7 @@ describe('four-command actor menu', () => {
   it('replaces just one manual order with automatic, advances, and resets next turn', async () => {
     const advance = vi.spyOn(engine, 'advanceWithEvents');
     await enterBattle();
-    const automatic = engine.autoOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
+    const automatic = engine.automaticOrders(engine.start([0, 2, 3, 4, 6], [1, 5, 8, 10, 6], 20261008));
     await click(button('ぼうぎょ'));
     await click(button('ぼうぎょ'));
     await click(label('妖狐の行動を選択'));
@@ -546,7 +546,7 @@ describe('30-second command deadline', () => {
     expect(advance).not.toHaveBeenCalled();
     await tick(1000);
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(initialState()));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(initialState()));
     expect(timer()).toBeNull();
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
   });
@@ -558,7 +558,7 @@ describe('30-second command deadline', () => {
     await chooseSkill('生命の雫');
     expect(allyTargets()).toHaveLength(5);
     await tick(30000);
-    const automatic = engine.autoOrders(initialState());
+    const automatic = engine.automaticOrders(initialState());
     expect(advance.mock.calls[0][1]).toEqual([
       { key: 'a0', skill: engine.DEFEND, target: undefined }, ...automatic.slice(1),
     ]);
@@ -618,7 +618,7 @@ describe('30-second command deadline', () => {
     vi.setSystemTime(Date.now() + 30001);
     await click(target('ナーガ'));
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(initialState()));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(initialState()));
   });
 
   it.each(['manual-first', 'timeout-first'])('resolves a manual/timeout race once: %s', async order => {

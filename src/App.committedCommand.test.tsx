@@ -157,17 +157,17 @@ describe('committed skill and target in the existing actor heading', () => {
     expect(chosen.target).toBeUndefined();
   });
 
-  it('keeps the stored automatic skill even when later manual commands would change a fresh automatic proposal', async () => {
+  it('keeps automatic intent undecided when a later manual command is chosen', async () => {
     const { state, advance } = await begin({ team: [14, 3, 6, 9, 10], enemies: [29, 1, 8, 30, 31] });
-    const automatic = engine.completeOrders(state, []).find(order => order.key === 'a1')!;
-    expect(engine.battleSkill(state.allies[1].monster, automatic.skill)?.name).toBe('毒霧');
+    const automatic = engine.automaticOrders(state, []).find(order => order.key === 'a1')!;
+    expect(automatic).toEqual({key:'a1', skill:engine.AUTO});
     await click(actor(1)); await click(command('おまかせ'));
-    await click(actor(1)); expectSummary('毒霧', '生存敵全体', true);
+    await click(actor(1)); expect(summary()?.textContent).toBe(' / おまかせ · 行動時に判断');
     await chooseSpecial(3, '毒霧');
     const manual: engine.Order = { key: 'a3', skill: 2 };
-    const recalculated = engine.completeOrders(state, [manual]).find(order => order.key === 'a1')!;
-    expect(recalculated.skill).not.toBe(automatic.skill);
-    await click(actor(1)); expectSummary('毒霧', '生存敵全体', true);
+    const recalculated = engine.automaticOrders(state, [manual]).find(order => order.key === 'a1')!;
+    expect(recalculated).toEqual(automatic);
+    await click(actor(1)); expect(summary()?.textContent).toBe(' / おまかせ · 行動時に判断');
     expect(actor(1).textContent).toContain('おまかせ ✓');
     await click(turnStart());
     expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([automatic, manual]));
@@ -277,7 +277,7 @@ describe('committed summaries across command deadlines and battle lifecycle', ()
       });
     }
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e1' }]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e1' }]));
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
     expect(summary()).toBeNull(); expect(document.querySelector('.targetButtons')).toBeNull();
     expect(mp()).toEqual(beforeMp);

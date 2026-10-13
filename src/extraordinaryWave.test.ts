@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
@@ -81,11 +82,11 @@ describe('extraordinary roster, opening family count, and old36 contract', () =>
     }
     expect(start(natureMixed, []).allies[1].ward).toBe(2);
   });
-  it('under explicit legacy poison controls, preserves all 600 frozen full old36 battles for normal CPU and same-AI orders', () => {
+  it('historical v30 reference: under explicit legacy poison controls, preserves all 600 frozen full old36 battles for normal CPU and same-AI orders', () => {
     const results = [];
     for (const team of oldParties) for (const enemy of oldParties) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       results.push({ team, enemy, seed, samePolicy, state: withoutPoisonControlMetadata(state) });
     }
     expect(hash(results)).toBe('2b6a2192f9d66e90fac8c2f4d8d8d5ba61d2f2a3099007a8b8b579e85f0d463b');
@@ -288,7 +289,7 @@ describe('public-state response AI, offensive withholding, and stable ablation p
       const before = structuredClone(state), expected = autoOrders(state, 'enemies')[0];
       expect(expected).toEqual({ key: 'e0', skill: 2, target: 'a0' }); expect(state).toEqual(before);
       expect(autoOrders({ ...state, seed: 123456 }, 'enemies')).toEqual(autoOrders(state, 'enemies'));
-      const result = advanceWithEvents(state, noOrders(state));
+      const result = advanceWithEvents(state, noOrders(state), { enemyOrders: autoOrders(state, 'enemies') });
       expect(result.state.history![0].orders.find(order => order.key === 'e0')).toMatchObject(expected);
     }
     const threat = start(mixed, [28, 23, 8, 15, 5]); threat.allies.forEach(unit => { unit.hp = Math.floor(unit.hp * 0.5); });
@@ -301,7 +302,7 @@ describe('public-state response AI, offensive withholding, and stable ablation p
       state.enemies[0].monster = { ...state.enemies[0].monster, skills: [{ ...monsters[29].skills[0]!, mpDamage: 0 }, monsters[29].skills[1]!, monsters[29].skills[2]!] };
       state.allies[0].hp = 90; state.allies[1].hp = 30;
       const expected = autoOrders(state, 'enemies')[0];
-      const result = advanceWithEvents(state, noOrders(state));
+      const result = advanceWithEvents(state, noOrders(state), { enemyOrders: autoOrders(state, 'enemies') });
       expect(result.state.history![0].orders.find(order => order.key === 'e0')).toMatchObject(expected);
     }
   });

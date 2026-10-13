@@ -1,7 +1,7 @@
 /** Development-only lab. All turns resolve through the shipping combat engine. */
 import { createHash } from 'node:crypto';
 import {
-  advanceWithEvents, autoOrders, battleSkill, baseDamage, poisonImpactScaleFor, leaderAppliesTo, leaderFor, BASIC_ATTACK,
+  advanceWithEvents, automaticOrders, autoOrders, chooseAutomaticOrder, chooseLegacyEnemyOrder, AUTO, battleSkill, baseDamage, poisonImpactScaleFor, leaderAppliesTo, leaderFor, BASIC_ATTACK,
   EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, extraordinaryResponseEligible, isExtraordinaryResponse, skillUnavailableReason,
   UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, poisonCashoutPerTickFor, poisonTicksFor,
   DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, mpDamageFor, mpLossFor, directDamageScale, speedFor,
@@ -13,7 +13,7 @@ import {
 import { FAMILY_IDS } from '../../src/families.ts';
 
 export const SCHEMA_VERSION = 1;
-export const POLICY_ID = 'production-autoOrders-both-sides-v1';
+export const POLICY_ID = 'production-action-time-player-legacy-enemy-guardfix-v4';
 export const MAX_MATCHES = 20_000;
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -395,12 +395,28 @@ const freshMetric = unit => ({
   finalHp: unit.hp, finalMp: unit.mp,
 });
 
-export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTrace = false }) {
-  const request = { teamA: clone(teamA), teamB: clone(teamB), seed, overrides: clone(overrides) };
+// explicit-snapshot is an opt-in mechanic/fault-injection control only. The CLI
+// config has no switch for it; every production suite uses deferred action-time AI.
+export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTrace = false, policy = 'action-time' }) {
+  if (!['action-time', 'explicit-snapshot'].includes(policy)) fail('unknown match policy');
+  const request = { teamA: clone(teamA), teamB: clone(teamB), seed, overrides: clone(overrides), ...(policy === 'explicit-snapshot' ? { policy } : {}) };
   let state = createBattle(teamA, teamB, seed, overrides);
-  const trace = { initialState: clone(state), turns: [] };
+  const trace = { initialState: clone(state), turns: [], ...(policy === 'explicit-snapshot' ? { policy } : {}) };
   const metrics = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, freshMetric(unit)]));
   const initialUnits = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
+  const countSelection = (order, unit) => {
+    const selected = battleSkill(unit.monster, order.skill), metric = metrics.get(unit.key);
+    if (selected.kind === 'poison') metric.poisonSelections++;
+    if (own(selected, 'poisonCashout')) metric.cashoutSelections++;
+    if (selected.kind === 'restoreMp') metric.supplySelections++;
+    if (isExtraordinaryResponse(selected)) { metric.responseSelections++; metric[selected.kind === 'responseCleanse' ? 'responseCleanseSelections' : 'responseGuardSelections']++; }
+    else if (unit.responseReady === true) metric.responseWithheldTurns++;
+    if (unit.monster.id === DEMON_CORE_ID || unit.monster.skills.some(skill => own(skill, 'mpDamage'))) {
+      if (own(selected, 'mpDamage')) metric.pressureSelections++;
+      else if (order.skill === BASIC_ATTACK) metric.pressureBasicSelections++;
+      else if (selected.kind === 'hit') metric.pressureHpAttackSelections++;
+    }
+  };
   let firstCastSide = null;
   const responseClearedTargets = new Map();
   const poisonDamageTaken = { allies: 0, enemies: 0 };
@@ -413,35 +429,52 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
         const paidSkills = unit.monster.skills.filter(skill => skill.mpCost > 0);
         if (paidSkills.length && paidSkills.every(skill => skill.mpCost > unit.mp)) metric.noAffordableSpecialTurns++;
       }
-      const orders = autoOrders(state, 'allies');
-      const enemyOrders = autoOrders(state, 'enemies');
-      for (const order of [...orders, ...enemyOrders]) {
-        const unit = [...state.allies, ...state.enemies].find(unit => unit.key === order.key);
-        const selected = battleSkill(unit.monster, order.skill), metric = metrics.get(unit.key);
-        if (selected.kind === 'poison') metric.poisonSelections++;
-        if (own(selected, 'poisonCashout')) metric.cashoutSelections++;
-        if (selected?.kind === 'restoreMp') metric.supplySelections++;
-        if (isExtraordinaryResponse(selected)) { metric.responseSelections++; metric[selected.kind === 'responseCleanse' ? 'responseCleanseSelections' : 'responseGuardSelections']++; }
-        else if (unit.responseReady === true) metric.responseWithheldTurns++;
-        if (unit.monster.id === DEMON_CORE_ID || unit.monster.skills.some(skill => own(skill, 'mpDamage'))) {
-          if (own(selected, 'mpDamage')) metric.pressureSelections++;
-          else if (order.skill === BASIC_ATTACK) metric.pressureBasicSelections++;
-          else if (selected.kind === 'hit') metric.pressureHpAttackSelections++;
-        }
-      }
+      const orders = policy === 'action-time' ? automaticOrders(state) : autoOrders(state);
+      const enemyOrders = policy === 'action-time' ? undefined : autoOrders(state, 'enemies');
+      if (policy === 'explicit-snapshot') for (const order of [...orders, ...enemyOrders]) countSelection(order, [...state.allies, ...state.enemies].find(unit => unit.key === order.key));
       const before = clone(state);
-      trace.activeAttempt = { turn: state.turn, seedBefore: state.seed, orders: clone(orders), enemyOrders: clone(enemyOrders), unitsBefore: unitSnapshot(state) };
-      const resolved = advanceWithEvents(state, orders, { enemyOrders });
+      trace.activeAttempt = { turn: state.turn, seedBefore: state.seed, orders: clone(orders), ...(enemyOrders ? { enemyOrders: clone(enemyOrders) } : { enemyPolicy: 'legacy-pre-turn' }), unitsBefore: unitSnapshot(state) };
+      const resolved = advanceWithEvents(state, orders, enemyOrders ? { enemyOrders } : undefined);
       const record = resolved.state.history.at(-1);
       trace.turns.push({ turn: state.turn, seedBefore: state.seed, seedAfter: resolved.state.seed, orders: clone(record.orders), events: clone(resolved.events), unitsAfter: unitSnapshot(resolved.state) });
       if (JSON.stringify(state) !== JSON.stringify(before)) fail('resolver mutated input state');
       for (const order of record.orders) if (!order.accepted && ['responseCleanse','responseGuard'].includes(order.skillKind)) metrics.get(order.key).responseRejectedSelections++;
-      if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
-      const expectedOrders = [...orders, ...enemyOrders];
-      if (record.orders.length !== expectedOrders.length || record.orders.some(order => order.source !== 'explicit' || !expectedOrders.some(expected => expected.key === order.key && expected.skill === order.skill && expected.target === order.target))) fail('accepted orders differ from explicit same-policy choices');
+      const expectedOrders = [...orders, ...(enemyOrders ?? state.enemies.filter(unit => unit.hp > 0).map(unit => ({key: unit.key, skill: AUTO})))];
+      if (policy === 'action-time' && (record.orders.length !== expectedOrders.length || new Set(record.orders.map(order => order.key)).size !== expectedOrders.length || record.orders.some(order => order.source !== 'automatic' || !expectedOrders.some(expected => expected.key === order.key && expected.skill === AUTO)))) fail('resolved orders differ from shipping automatic actors');
+      if (policy === 'explicit-snapshot') {
+        if (record.orders.some(order => !order.accepted)) fail('same-policy AI selected an invalid order');
+        if (record.orders.length !== expectedOrders.length || record.orders.some(order => order.source !== 'explicit' || !expectedOrders.some(expected => expected.key === order.key && expected.skill === order.skill && expected.target === order.target))) fail('accepted orders differ from explicit same-policy choices');
+      }
+      const bands = new Set([0, 1, ...[...state.allies, ...state.enemies].flatMap(unit => unit.monster.skills.map(skill => skill.priority))]);
+      // Mirror authoritative turn-start cleanup before checking fixed CPU decisions.
+      const planningState = clone(state);
+      for (const unit of [...planningState.allies, ...planningState.enemies]) {
+        unit.guard = false;
+        if (unit.hp <= 0) { unit.poison = 0; for (const field of ['repairReady','supplyReady','responseReady']) if (unit[field]) unit[field] = false; }
+      }
+      const legacyEnemyPlan = policy === 'action-time' ? autoOrders(planningState, 'enemies') : [];
+      if (policy === 'action-time') for (const order of record.orders.filter(order => order.side === 'enemies' && order.accepted)) countSelection(order, planningState.enemies.find(unit => unit.key === order.key));
       let queueSeed = state.seed;
-      const queue = record.orders.map(order => { queueSeed = rngStep(queueSeed); const unit = [...state.allies, ...state.enemies].find(unit => unit.key === order.key); return { key: order.key, skill: battleSkill(unit.monster, order.skill), speed: speedFor(unit, state.turn), tie: queueSeed }; }).sort((a, b) => b.skill.priority - a.skill.priority || b.speed - a.speed || a.tie - b.tie);
-      if (JSON.stringify(resolved.events.filter(event => event.kind === 'phase' && event.phase === 'before-action').map(event => event.actor)) !== JSON.stringify(queue.map(action => action.key))) fail('accepted original action queue was changed');
+      const queue = record.orders.map(order => {
+        // Legacy CPU indexes the PRE-draw seed. It never adds a choice draw.
+        const expectedEnemy = policy === 'action-time' && order.side === 'enemies' ? chooseLegacyEnemyOrder(planningState, order.key, queueSeed, legacyEnemyPlan) : undefined;
+        queueSeed = rngStep(queueSeed);
+        const unit = [...state.allies, ...state.enemies].find(unit => unit.key === order.key);
+        const skill = battleSkill(unit.monster, order.skill);
+        const deferred = policy === 'action-time' && order.side === 'allies';
+        if (expectedEnemy && (!order.accepted || order.skill !== expectedEnemy.skill || order.target !== expectedEnemy.target || order.decisionPriority !== undefined || order.nativePriority !== undefined || order.skillName !== skill?.name || order.skillKind !== skill?.kind || order.skillPower !== skill?.power)) fail('legacy enemy pre-turn choice or fixed queue metadata differs');
+        if (deferred && order.accepted) {
+          if (order.skillName !== skill?.name || order.skillKind !== skill?.kind || order.skillPower !== skill?.power) fail('automatic skill metadata differs from its actual skill');
+          if (order.nativePriority !== skill?.priority) fail('automatic native priority differs from its actual skill');
+          if (!skill || !bands.has(order.decisionPriority) || skill.priority < order.decisionPriority || order.rejection !== undefined) fail('automatic choice has an invalid decision checkpoint');
+        } else if (deferred) {
+          const final = [...resolved.state.allies, ...resolved.state.enemies].find(unit => unit.key === order.key);
+          const opponents = resolved.state[order.side === 'allies' ? 'enemies' : 'allies'];
+          if (order.skill !== AUTO || order.skillName !== undefined || order.target !== undefined || order.decisionPriority !== undefined || order.nativePriority !== undefined || !['defeated', 'no-opponents'].includes(order.rejection) || (order.rejection === 'defeated' ? final.hp > 0 : opponents.some(unit => unit.hp > 0))) fail('unresolved automatic actor lacks a valid skip reason');
+        }
+        return { key: order.key, accepted: order.accepted, priority: deferred ? order.decisionPriority : skill.priority, speed: speedFor(unit, state.turn), tie: queueSeed };
+      }).filter(action => action.accepted).sort((a, b) => b.priority - a.priority || b.speed - a.speed || a.tie - b.tie);
+      if (JSON.stringify(resolved.events.filter(event => event.kind === 'phase' && event.phase === 'before-action').map(event => event.actor)) !== JSON.stringify(queue.map(action => action.key))) fail('automatic checkpoint order, fixed speed/tie or once-only action invariant failed');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
         if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || !Number.isInteger(unit.mp) || unit.monster.mp !== initialUnits.get(unit.key).monster.mp || !Number.isInteger(unit.poison) || unit.poison < 0 || unit.poison > 3 || unit.poisonCashoutBonus !== initialUnits.get(unit.key).poisonCashoutBonus || (unit.poisonCashoutBonus !== undefined && (unit.monster.id !== UNDEAD_CORE_ID || !Number.isInteger(unit.poisonCashoutBonus) || unit.poisonCashoutBonus < 0 || unit.poisonCashoutBonus > 30)) || unit.mpDamageBonus !== initialUnits.get(unit.key).mpDamageBonus || (unit.mpDamageBonus !== undefined && (unit.monster.id !== DEMON_CORE_ID || !Number.isInteger(unit.mpDamageBonus) || unit.mpDamageBonus < 0 || unit.mpDamageBonus > 30)) || !responseResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key)) || !materialResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !slimeResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key))) fail(`resource invariant failed for ${unit.key}`);
       }
@@ -478,7 +511,18 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
           pendingDefeat = null;
         }
         if (pendingCashout && event.kind !== 'damage') fail('cashout missing immediate direct hit');
-        if (event.kind === 'phase' && event.phase === 'before-action') actionsStarted.add(event.actor);
+        if (event.kind === 'phase' && event.phase === 'before-action') {
+          if (actionsStarted.has(event.actor)) fail('actor entered more than one action checkpoint');
+          const order = record.orders.find(order => order.key === event.actor);
+          if (policy === 'action-time' && order.side === 'allies') {
+          const publicState = { ...state, allies: state.allies.map(unit => current.get(unit.key)), enemies: state.enemies.map(unit => current.get(unit.key)) };
+          const remaining = new Set(expectedOrders.map(order => order.key).filter(key => !actionsStarted.has(key)));
+          const choice = chooseAutomaticOrder(publicState, event.actor, order.side, remaining);
+          if (choice.skill !== order.skill || choice.target !== order.target) fail('automatic choice differs from current public state at its action');
+          }
+          actionsStarted.add(event.actor);
+          if (policy === 'action-time' && order.side === 'allies') countSelection(order, current.get(event.actor));
+        }
         if (pendingMpLoss && event.kind !== 'resource-loss') fail('MP damage missing immediate loss after surviving HP hit');
         if (event.kind === 'phase' && event.phase === 'before-action') activeActor = event.actor;
         const actor = metrics.get(event.actor);
@@ -798,7 +842,7 @@ export const METRIC_DEFINITIONS = {
   meanCashoutActualAddedDamage: 'HP-clipped same-hit damage with addition minus same target, protection and random roll without addition. Local arithmetic attribution only, not a full battle counterfactual.',
   meanCashoutFuturePoisonNominal: 'Consumed ticks times floor(target maxHP * 6%). Potential future poison sacrificed, not guaranteed realized loss: later cleanse, defeat and reapplication can change it.',
   ...Object.fromEntries(PRESSURE_METRICS.map(field => [`mean${field[0].toUpperCase()}${field.slice(1)}`, ({
-    pressureSelections: 'Orders choosing a learned MP-marked attack, including explicit zero/off base controls and actors defeated before casting.',
+    pressureSelections: 'Actual recorded choices of a learned MP-marked attack (player action-time, enemy pre-turn), including zero/off base controls; actors defeated before a player decision are excluded; accepted pre-turn enemy decisions remain counted.',
     pressureHpAttackSelections: 'HP-only learned attack selections by MP-marked actors/core29.', pressureBasicSelections: 'Free basic selections by MP-marked actors/core29.',
     pressureCasts: 'Actual casts of MP-marked attacks, including explicit zero/off controls.', pressureMpSpent: 'Actual MP paid by MP-marked attacks; never enemy loss.',
     pressureSourceMpAtCast: 'Sum of source MP immediately before each MP-marked cast; divide by casts for conditional mean.',
@@ -817,7 +861,7 @@ export const METRIC_DEFINITIONS = {
   meanDirectDamage: 'HP-clipped direct damage caused by team A events per game. Overkill excluded; poison ticks lack actor attribution and are reported as poisonDamageTaken instead.',
   meanHealing: 'Actual HP restored by team A per game; overhealing excluded.',
   meanSupplyEligible: 'Initially ready slime cores per game. Eligibility is fixed from starting membership.',
-  meanSupplySelections: 'Supply orders chosen by production autoOrders per game, including cores defeated before casting.',
+  meanSupplySelections: 'Recorded supply choices per game: player action-time and enemy pre-turn. An enemy selected before defeat can count without casting.',
   meanSupplyCasts: 'Actual once-only supply consumption events per game, also counted as normal learned casts.',
   meanSupplyGenerated: 'Actual MP credited by supply per game, clipped to living same-side slime missing MP.',
   meanSupplyReceived: 'Actual supply MP received by team A per game.',
@@ -871,13 +915,14 @@ export const METRIC_DEFINITIONS = {
 };
 export const LIMITATIONS = [
   'Undead full-off disables both poison consumption and addition, including stale bonus; bonus-off retains base14 and consumption. Core32 retains its production public-state AI under all ablations. Target/order/RNG divergence is allowed, so paired outcomes are not fixed-order causality. Slow Naga can reapply poison after cashout; preserve this adverse exploit candidate.',
-  'Demon full-off sets base zero and removes bonus; bonus-only zero retains base6. Core29 retains identical all-target traversal under full-off. Both sides use the same production autoOrders with public current resources; adaptive skill/target choices and random-stream divergence mean this is not a fixed-order causal estimate.',
+  'Demon full-off sets base zero and removes bonus; bonus-only zero retains base6. Core29 retains identical all-target traversal under full-off. Player auto chooses at actual checkpoints; enemies choose once before the queue under the legacy public-state policy, with only exhausted guard-only progress correction; adaptive skill/target choices and random-stream divergence mean this is not a fixed-order causal estimate.',
   'These are current-engine CPU-policy measurements, not human enjoyment, DQMSL reproduction, PvP balance, or optimal-play proof.',
   'Slime supply AI acts only when current bounded gain can fund a currently unaffordable paid skill. It does not forecast later turns or optimize recipient timing; zero amount is never selected by this policy.',
-  'autoOrders scores dragon finishers using current charge only. It does not predict charge from allies already ordered to act later in the same turn; low finisher usage may be a policy limitation.',
+  'Action-time automatic choices use current charge at each descending-priority checkpoint. They observe completed actions but do not forecast later allies, hidden opposing commands or future rolls; low finisher usage may be a policy limitation.',
   'Large-roster sampling uses exact legal suffix counts and a seeded coprime rank walk, not a proven uniform random sample. Fixed exclusions, correlated ranks, shuffled leader order and curated opponent rotation limit coverage.',
-  'Identical autoOrders policy is used on both sides. Shipping CPU variation remains unchanged outside the lab.',
+  'Both sides share combat rules and public information. Player automatic choices use current action-time support preferences. Enemy choices retain legacy pre-turn timing and seeded variation; only an exhausted learned-guard-only pool adds a free basic and removes unjustified guard. Explicit enemy AUTO and symmetric headless scorers are diagnostic controls, not the shipping Lab policy. Archived all-auto outcomes are not parity expectations.',
   'Paired seeds use common initial random streams, not identical per-action draws after skill/target choices diverge.',
+  'reservePoison is retained in saved comparison configurations and the explicit-snapshot mechanic control; action-time actors do not reserve imagined allies or confirmed future actions.',
   'Mirrors diagnose physical side effects; team-A normalized mirror score after swaps is 0.5 by construction, so read physicalAllyScoreRate.',
   'Support, initiative, MP opportunity and damage concentration metrics are proxies. Poison ticks cannot be credited to an original caster in the current engine.',
   'All candidate patches apply roster-wide to both sides. No automatic changes are made to shipping balance.',
@@ -1093,7 +1138,7 @@ export function runSuite(input, onProgress) {
   }
   if (JSON.stringify(monsters) !== rosterBefore) fail('lab mutated production roster');
   const summarizePair = (rows, keyUnitId) => ({ baseline: summarize(rows.filter(row => row.variant === 'baseline'), keyUnitId), candidate: summarize(rows.filter(row => row.variant === 'candidate'), keyUnitId), pairedDelta: pairedDelta(rows) });
-  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { sampling: { smallRosterThreshold: 20, algorithm: monsters.length <= 20 ? 'historical-enumerate-shuffle-v1' : 'legal-suffix-dp-coprime-rank-walk-v1', uniformityClaim: false }, policy: POLICY_ID, policyArms: { baseline: 'independent-default', candidate: schedule.config.candidate.overrides.reservePoison === true ? 'reserve-planned-poison' : 'independent-default' }, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: true, sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
+  return { schemaVersion: SCHEMA_VERSION, config: schedule.config, methodology: { sampling: { smallRosterThreshold: 20, algorithm: monsters.length <= 20 ? 'historical-enumerate-shuffle-v1' : 'legal-suffix-dp-coprime-rank-walk-v1', uniformityClaim: false }, policy: POLICY_ID, policyArms: { baseline: 'shipping-action-time', candidate: 'shipping-action-time' }, candidateScope: 'roster-wide-on-both-sides', samePolicyBothSides: false, sameRulesAndPublicInformation: true, allyPolicy: 'live-support', enemyPolicy: 'legacy-pre-turn-exhausted-guardfix', sideSwaps: true, pairedSeeds: true, mirrorsIncluded: true, maxTurns: MAX_TURNS, metricDefinitions: METRIC_DEFINITIONS, limitations: LIMITATIONS },
     scheduleCounts: { teams: schedule.teams.length, curatedTeams: schedule.config.teams.length, sampledTeams: schedule.teams.length - schedule.config.teams.length, matchupScenarios: schedule.scenarios.filter(scenario => scenario.kind === 'matchup').length, mirrorScenarios: schedule.teams.length, seeds: schedule.config.seeds.length, variants: 2, orientations: 2, matches: matches.length },
     teams: schedule.teams,
     summary: summarizePair(matches.filter(match => match.kind === 'matchup')),

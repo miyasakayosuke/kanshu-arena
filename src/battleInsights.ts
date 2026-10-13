@@ -1,4 +1,4 @@
-import { DRAGON_CHARGE_CAP, skillUnavailableLabel, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
+import { AUTO, DRAGON_CHARGE_CAP, skillUnavailableLabel, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
 
 export type BattleEvidence = {
   turn: number;
@@ -65,6 +65,7 @@ function completeRecordedTurns(state: State, history: BattleTurnRecord[]): Recor
       if (orders.has(order.key) || !['allies', 'enemies'].includes(order.side) || sideFor(state, order.key) !== order.side || typeof order.accepted !== 'boolean'
         || !Number.isInteger(order.skill) || !['explicit', 'automatic'].includes(order.source)
         || (order.accepted && (typeof order.skillName !== 'string' || !order.skillName.trim() || order.rejection !== undefined))) return;
+      if (order.skill === AUTO && (order.source !== 'automatic' || order.accepted || order.skillName !== undefined || order.target !== undefined || order.decisionPriority !== undefined || order.nativePriority !== undefined)) return;
       orders.set(order.key, index);
     }
     const actions: RecordedAction[] = [];
@@ -116,7 +117,17 @@ function lostQueuedAction(state: State, history: BattleTurnRecord[]): BattleFact
   // Earliest recorded turn, then original accepted-order index: stable even for mirrors.
   for (const [turnIndex, { turn, actions }] of turns.entries()) {
     for (const [orderIndex, order] of turn.orders.entries()) {
-      if (!order.accepted || order.side !== 'allies') continue;
+      if (order.side !== 'allies') continue;
+      if (order.skill === AUTO && order.source === 'automatic' && order.accepted === false && order.rejection === 'defeated'
+        && order.skillName === undefined && order.target === undefined && order.decisionPriority === undefined && order.nativePriority === undefined) {
+        const defeatIndex = turn.events.findIndex(event => event.kind === 'defeat' && event.target === order.key);
+        if (defeatIndex >= 0 && !turn.events.some(event => event.kind === 'cast' && event.actor === order.key)) return {
+          id: `lost-action-${turn.turn}-${order.key}`, kind: 'lost-action',
+          text: `TURN ${turn.turn}：${battleUnitLabel(state, order.key)}はおまかせの判断前に戦闘不能（特技・対象は未決定）。`,
+          evidence: [reference(turn, defeatIndex, orderIndex)],
+        };
+      }
+      if (!order.accepted) continue;
       const action = actions.find(item => item.orderIndex === orderIndex)!;
       if (action.castIndex !== undefined || turn.events.some(event => event.kind === 'cast' && event.actor === order.key)) continue;
       const defeatIndex = turn.events.findIndex((event, index) => index < action.beforeIndex && event.kind === 'defeat' && event.target === order.key);
@@ -326,8 +337,9 @@ export function battleEventLine(state: State, event: BattleEvent): string {
 }
 
 export function battleOrderLine(state: State, order: BattleOrderRecord): string {
-  const reason = order.rejection === 'invalid-skill' ? '不正な特技' : order.rejection === 'invalid-target' ? '不正な対象' : order.rejection ? skillUnavailableLabel(order.rejection) : 'MP不足';
-  return `${battleUnitLabel(state, order.key)}の指示：「${order.skillName ?? `特技 ${order.skill}`}」${order.target ? ` → ${battleUnitLabel(state, order.target)}` : ''}${order.accepted ? '（実行予定）' : `（取り消し：${reason}）`}`;
+  if (order.skill === AUTO) return `${battleUnitLabel(state, order.key)}のおまかせ：行動前に${order.rejection === 'defeated' ? '戦闘不能' : '戦闘終了'}（特技・対象は未決定）`;
+  const reason = order.rejection === 'no-opponents' ? '相手なし' : order.rejection === 'invalid-skill' ? '不正な特技' : order.rejection === 'invalid-target' ? '不正な対象' : order.rejection ? skillUnavailableLabel(order.rejection) : 'MP不足';
+  return `${battleUnitLabel(state, order.key)}の指示：「${order.skillName ?? `特技 ${order.skill}`}」${order.target ? ` → ${battleUnitLabel(state, order.target)}` : ''}${order.accepted ? order.source === 'automatic' && order.decisionPriority !== undefined ? `（行動時に判断・実行順 ${order.decisionPriority}）` : order.source === 'automatic' ? '（ターン開始時の指示）' : '（実行予定）' : `（取り消し：${reason}）`}`;
 }
 
 /** Every displayed observation can expand to actual commands and indexed events. */

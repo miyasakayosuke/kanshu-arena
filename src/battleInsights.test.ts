@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, BASIC_ATTACK, DEFEND, start } from './engine';
+import { AUTO, advanceWithEvents as resolve, BASIC_ATTACK, DEFEND, start } from './engine';
 import type { BattleEvent, Monster, Skill, SpecialSkills, State, Unit } from './engine';
 import { battleEventLine, battleFactEvidenceLines, battleOrderLine, battleUnitLabel, resultFacts } from './battleInsights';
+
+// Evidence fixtures specify their enemy action; they do not test AI preferences.
+const advanceWithEvents: typeof resolve = (state, orders, options = {}) => resolve(state, orders, options.enemyOrders ? options : { ...options, enemyOrders: state.enemies.filter(unit => unit.hp > 0).map(unit => ({ key:unit.key, skill:0 })) });
 
 const guard: Skill = { name: '守り', kind: 'guard', power: 0, priority: 1, mpCost: 0 };
 const hit: Skill = { name: '攻撃', kind: 'hit', power: 50, priority: 0, mpCost: 0 };
@@ -76,12 +79,26 @@ describe('evidence-only battle result facts', () => {
     assertEvidence(state);
   });
 
-  it('also records the actual automatic heal plan before an actor is defeated', () => {
+  it('records an undecided automatic actor defeated before choosing without inventing a heal', () => {
     const initial = battle([unit('a0', [heal], { speed: 1 })], [unit('e0', [{ ...hit, power: 1000, priority: 2 }])]);
     initial.allies[0].hp = 20;
     const state = advanceWithEvents(initial, []).state;
-    expect(state.history![0].orders[0]).toMatchObject({ skillKind: 'heal', source: 'automatic', accepted: true });
+    expect(state.history![0].orders[0]).toMatchObject({ skill: AUTO, source: 'automatic', accepted: false, rejection: 'defeated' });
+    expect(state.history![0].orders[0].skillName).toBeUndefined();
+    expect(resultFacts(state).find(fact => fact.kind === 'lost-action')?.text).toContain('特技・対象は未決定');
     expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(true);
+  });
+
+  it.each([
+    { source: 'explicit' as const }, { accepted: true }, { skillName: 'invented heal' },
+    { target: 'a0' }, { decisionPriority: 0 }, { nativePriority: 0 },
+  ])('rejects inconsistent undecided-auto history %j', patch => {
+    const initial = battle([unit('a0', [heal], { speed: 1 })], [unit('e0', [{ ...hit, power: 1000, priority: 2 }])]);
+    initial.allies[0].hp = 20;
+    const state = advanceWithEvents(initial, []).state;
+    expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(true);
+    Object.assign(state.history![0].orders[0], patch);
+    expect(resultFacts(state).some(fact => fact.kind === 'lost-action')).toBe(false);
   });
 
   it.each(['invalid-target', 'insufficient-mp', 'already-cast'] as const)('does not claim a missed heal for %s', condition => {

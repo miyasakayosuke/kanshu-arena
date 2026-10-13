@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import {
-  advanceWithEvents, autoOrders, BASIC_ATTACK, battleSkill, cost, DEFEND, leaderFor,
+  advanceWithEvents as resolve, autoOrders, BASIC_ATTACK, battleSkill, cost, DEFEND, leaderFor,
   MAX_TURNS, monsters, start,
 } from './engine';
 import type { BattleEvent, Order, Skill, State, Unit } from './engine';
 import { isValidTeam, monsterRole, opponentTeams, rules, type RuleId } from './strategy';
+
+// Explicit fixture commands keep role/mechanics checks independent of the AI policy.
+const advanceWithEvents: typeof resolve = (state, orders, options = {}) => resolve(state, orders, options.enemyOrders ? options : state.enemies.every(unit => unit.monster.id === -1 || unit.monster.skills.length === 1) ? { ...options, enemyOrders: state.enemies.filter(unit => unit.hp > 0).map(unit => ({key:unit.key,skill:0})) } : options);
 
 // Role checks use real roster stats, learned skill indexes, and resource budgets.
 // A harmless, explicitly labelled training target isolates damage/resource costs;

@@ -101,7 +101,7 @@ describe('enemy-card read-only skill inspection', () => {
     const { state, advance } = await begin();
     await commitAttack(0, 2);
     await click(actor(1)); await click(command('おまかせ'));
-    const automatic = engine.completeOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e2' }]).find(order => order.key === 'a1')!;
+    const automatic = engine.automaticOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e2' }]).find(order => order.key === 'a1')!;
     await click(actor(0));
     const manualSummary = summaryText();
     await click(command('とくぎ'));
@@ -183,7 +183,7 @@ describe('inspection deadline and lifecycle boundaries', () => {
       });
     }
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e1' }]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [{ key: 'a0', skill: engine.BASIC_ATTACK, target: 'e1' }]));
     expect(dialog()).toBeNull(); expect(document.querySelectorAll('.enemyInspect')).toHaveLength(0);
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
     if (mode === 'timer') expect(document.activeElement).toBe(document.querySelector('main.battle'));

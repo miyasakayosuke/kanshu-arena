@@ -7,6 +7,7 @@ import * as engine from './engine';
 
 const team = [2, 20, 0, 6, 11];
 const attack: engine.Order = { key: 'a0', skill: engine.BASIC_ATTACK, target: 'e0' };
+const autoCleanse: engine.Order = { key: 'a1', skill: engine.AUTO };
 const cleanse: engine.Order = { key: 'a1', skill: 1, target: 'a2' };
 let root: Root;
 const button = (text: string) => [...document.querySelectorAll<HTMLButtonElement>('button')].find(element => element.textContent?.includes(text))!;
@@ -51,9 +52,9 @@ async function checkPreview(state: engine.State, fixed: engine.Order[]) {
   const before = JSON.stringify(state);
   await click(button('作戦'));
   const lines = preview();
-  for (const order of engine.completeOrders(state, fixed)) {
+  for (const order of engine.automaticOrders(state, fixed)) {
     const unit = state.allies.find(unit => unit.key === order.key)!;
-    expect(lines.find(line => line.includes(unit.monster.name))).toContain(`${engine.battleSkill(unit.monster, order.skill)!.name} ·`);
+    expect(lines.find(line => line.includes(unit.monster.name))).toContain(order.skill === engine.AUTO ? 'おまかせ・行動時に判断' : `${engine.battleSkill(unit.monster, order.skill)!.name} ·`);
   }
   expect(JSON.stringify(state)).toBe(before);
   await click(label('作戦情報を閉じる'));
@@ -71,18 +72,18 @@ beforeEach(() => {
 });
 afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMocks(); vi.useRealTimers(); });
 
-describe('confirmed commands reserve only support they will actually perform', () => {
-  it.each(['manual', 'timeout'] as const)('previews and executes the needed automatic cleanse on %s start', async route => {
+describe('confirmed support and unresolved automatic intent', () => {
+  it.each(['manual', 'timeout'] as const)('keeps automatic support unresolved then executes a current-state cleanse on %s start', async route => {
     const { state, advance } = await begin();
     await chooseAttack();
     const lines = await checkPreview(state, [attack]);
     expect(lines.find(line => line.includes('バステト'))).toContain('通常攻撃 ·');
-    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     if (route === 'timeout') await act(async () => vi.advanceTimersByTime(30000));
     else await click(button('この指示でターン開始'));
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [attack]));
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [attack]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, autoCleanse]));
     const result = advance.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;
     expect(result.events).toContainEqual(expect.objectContaining({ kind: 'cleanse', actor: 'a1', target: 'a2' }));
     expect(result.state.allies[2].poison).toBe(0);
@@ -96,17 +97,17 @@ describe('confirmed commands reserve only support they will actually perform', (
     expect(advance).toHaveBeenCalledTimes(1);
   });
 
-  it('individual auto commits the same cleanse shown by the preview after a fixed attack', async () => {
+  it('individual auto stores intent without promising a cleanse after a fixed attack', async () => {
     const { state, advance } = await begin();
     await chooseAttack();
     await click(label('唐傘おばけの行動を選択'));
     await click(individualAuto());
     expect(label('唐傘おばけの行動を選択').textContent).toContain('おまかせ ✓');
-    const lines = await checkPreview(state, [attack, cleanse]);
-    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    const lines = await checkPreview(state, [attack, autoCleanse]);
+    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [attack, cleanse]));
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [attack, autoCleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, autoCleanse]));
   });
 
   it.each(['manual', 'individual auto'] as const)('replacing the %s cleanse with an attack releases its reservation', async previous => {
@@ -118,17 +119,17 @@ describe('confirmed commands reserve only support they will actually perform', (
       await click(label('バステトの行動を選択'));
       await click(individualAuto());
     }
-    const before = await checkPreview(state, [{ key: 'a0', skill: 3, target: 'a2' }]);
-    expect(before.find(line => line.includes('バステト'))).toContain('清めの鈴 ·');
+    const before = await checkPreview(state, [previous === 'manual' ? { key: 'a0', skill: 3, target: 'a2' } : { key: 'a0', skill: engine.AUTO }]);
+    expect(before.find(line => line.includes('バステト'))).toContain(previous === 'manual' ? '清めの鈴 ·' : 'おまかせ・行動時に判断');
     expect(before.find(line => line.includes('唐傘おばけ'))).not.toContain('傘下の清め ·');
     await chooseAttack();
     expect(label('バステトの行動を選択').textContent).toContain('指示済 ✓');
     expect(label('バステトの行動を選択').textContent).not.toContain('おまかせ ✓');
     const after = await checkPreview(state, [attack]);
-    expect(after.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    expect(after.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [attack]));
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [attack]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, autoCleanse]));
   });
 
   it('a confirmed heal leaves the poisoned target available for the next automatic cleanser', async () => {
@@ -138,9 +139,9 @@ describe('confirmed commands reserve only support they will actually perform', (
     const heal: engine.Order = { key: 'a0', skill: 1, target: 'a2' };
     const lines = await checkPreview(state, [heal]);
     expect(lines.find(line => line.includes('バステト'))).toContain('生命の雫 ·');
-    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([heal, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([heal, autoCleanse]));
   });
 
   it('a later confirmed cleanse does not reserve support ahead of its party slot', async () => {
@@ -148,11 +149,11 @@ describe('confirmed commands reserve only support they will actually perform', (
     await chooseSupport('唐傘おばけ', '傘下の清め');
     await click(label('味方3 妖狐を傘下の清めの対象に選択'));
     const lines = await checkPreview(state, [cleanse]);
-    expect(lines.find(line => line.includes('バステト'))).toContain('清めの鈴 ·');
+    expect(lines.find(line => line.includes('バステト'))).toContain('おまかせ・行動時に判断');
     expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
     await click(button('この指示でターン開始'));
     expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([
-      { key: 'a0', skill: 3, target: 'a2' }, cleanse,
+      { key: 'a0', skill: engine.AUTO }, cleanse,
     ]));
   });
 
@@ -167,7 +168,7 @@ describe('confirmed commands reserve only support they will actually perform', (
     expect(label('唐傘おばけの行動を選択').textContent).toContain('未選択');
     await checkPreview(next, []);
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[1][1]).toEqual(engine.autoOrders(next));
+    expect(advance.mock.calls[1][1]).toEqual(engine.automaticOrders(next));
   });
   it.each(['back', 'escape', 'cancel then actor change', 'timeout'] as const)('an unfinished replacement target creates no support reservation on %s', async route => {
     const { state, advance } = await begin();
@@ -179,7 +180,7 @@ describe('confirmed commands reserve only support they will actually perform', (
     expect(button('対象を選んでください').disabled).toBe(true);
     const lines = await checkPreview(state, [attack]);
     expect(lines.find(line => line.includes('バステト'))).toContain('通常攻撃 ·');
-    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     if (route === 'timeout') await act(async () => vi.advanceTimersByTime(30000));
     else {
       if (route === 'back') await click(button('特技に戻る'));
@@ -189,8 +190,8 @@ describe('confirmed commands reserve only support they will actually perform', (
       await click(button('この指示でターン開始'));
     }
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [attack]));
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [attack]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, autoCleanse]));
   });
 
   it('canceling battle navigation preserves the fixed attack and the needed automatic cleanse', async () => {
@@ -205,10 +206,10 @@ describe('confirmed commands reserve only support they will actually perform', (
     expect(label('バステトの行動を選択').textContent).toContain('指示済 ✓');
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(1);
     const lines = await checkPreview(state, [attack]);
-    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('傘下の清め ·');
+    expect(lines.find(line => line.includes('唐傘おばけ'))).toContain('おまかせ・行動時に判断');
     await click(button('この指示でターン開始'));
     expect(advance).toHaveBeenCalledTimes(1);
     expect(advance.mock.calls[0][0]).toBe(state);
-    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, cleanse]));
+    expect(advance.mock.calls[0][1]).toEqual(expect.arrayContaining([attack, autoCleanse]));
   });
 });

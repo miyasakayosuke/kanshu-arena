@@ -7,7 +7,7 @@ const pure=[32,4,33,34,35],nature=[14,3,6,9,10];
 const fixture={monsters:Object.fromEntries([...pure,...nature].map(id=>[id,{hp:1000,atk:0,speed:id===4?100:id===32?40:0,mp:300,skills:id===32?[monsters[32].skills[0]!]:id===4?[monsters[4].skills[1]!]:[]}]))};
 const req={teamA:pure,teamB:nature,seed:42,overrides:fixture};
 type Failure=Error&{trace:{activeAttempt:{turn:number;unitsBefore:{key:string;poisonCashoutBonus?:number}[]};turns:{events:BattleEvent[]}[];initialState:State;lastState:State}};
-const capture=(request:object=req):Failure=>{try{runMatch(request);}catch(e){expect(e).toBeInstanceOf(MatchFailure);return e as Failure;}throw Error('Expected preserved failure');};
+const capture=(request:object=req):Failure=>{try{runMatch({...request,policy:'explicit-snapshot'});}catch(e){expect(e).toBeInstanceOf(MatchFailure);return e as Failure;}throw Error('Expected preserved failure');};
 beforeEach(async()=>{const actual=await vi.importActual<typeof import('./engine')>('./engine');vi.mocked(advanceWithEvents).mockReset().mockImplementation(actual.advanceWithEvents);});
 describe('undead Lab failure resource snapshots',()=>{
  it.each([false,true])('preserves absent/default/zero bonus on first and partial failure right=%s',async reverse=>{

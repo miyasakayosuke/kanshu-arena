@@ -1,6 +1,6 @@
 import MonsterArt from './MonsterArt';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, completeOrders, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
+import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, automaticOrders, AUTO, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
 import { applyBattleEvents, buildTimeline, effectType } from './playback';
 import BattleStage, {type CompactCastCaption} from './BattleStage';
 import { partyNumberDuration, retainPartyNumbers, type PartyNumber } from './partyNumbers';
@@ -266,7 +266,7 @@ export default function App() {
   const commitOrder = (skill: number, target?: string, automatic = false) => {
     if (commandsExpired() || !active || battle?.winner || playingLock.current) return;
     const selected = battleSkill(active.monster, skill);
-    if (!selected || !canUseSkill(active, selected, battle?.allies)) return;
+    if (skill !== AUTO && (!selected || !canUseSkill(active, selected, battle?.allies))) return;
     const next = { ...orders, [active.key]: { key: active.key, skill, target } };
     setOrders(next); setPendingSkill(null); setShowSkills(false);
     setAutomaticKeys(keys => automatic ? [...keys.filter(key => key !== active.key), active.key] : keys.filter(key => key !== active.key));
@@ -306,9 +306,7 @@ export default function App() {
   }, [orders, activeKey, page, playing, pendingSkill, navigation.pending]);
   const selectAutomatic = () => {
     if (commandsExpired() || !battle || !active || battle.winner || playingLock.current) return;
-    const order = completeOrders(battle, Object.values(orders).filter(order => order.key !== active.key))
-      .find(order => order.key === active.key);
-    if (order) commitOrder(order.skill, order.target, true);
+    commitOrder(AUTO, undefined, true);
   };
   useLayoutEffect(() => {
     if (!focusTurnStart.current) return;
@@ -337,7 +335,7 @@ export default function App() {
     // Lock synchronously: a manual click and the deadline can resolve this turn only once.
     playingLock.current = true; commandDeadline.current = null;
     setTimedOut(expired); setFocus(null); setEnemyFocus(null); setShowLog(false); setShowTactics(false);
-    const cmds = completeOrders(battle, Object.values(orders));
+    const cmds = automaticOrders(battle, Object.values(orders));
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
     resetCommandPlayback();
@@ -496,7 +494,7 @@ export default function App() {
             <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === BASIC_ATTACK ? 'chosen' : ''} onClick={() => selectSkill(BASIC_ATTACK)}><strong>たたかう</strong><small>通常攻撃 · MP 0</small></button>
             <button className={!automaticKeys.includes(active.key) && orders[active.key]?.skill === DEFEND ? 'chosen' : ''} onClick={() => commitOrder(DEFEND)}><strong>ぼうぎょ</strong><small>今ターン半減 · MP 0</small></button>
             <button className={!automaticKeys.includes(active.key) && (orders[active.key]?.skill ?? -1) >= 0 ? 'chosen' : ''} disabled={!active.monster.skills.length} onClick={() => setShowSkills(true)}><strong>とくぎ</strong><small>{Math.min(active.monster.skills.length, MAX_SPECIAL_SKILLS)} / {MAX_SPECIAL_SKILLS} 習得</small></button>
-            <button className={automaticKeys.includes(active.key) ? 'chosen' : ''} onClick={selectAutomatic}><strong>おまかせ</strong><small>この味方を自動選択</small></button>
+            <button className={automaticKeys.includes(active.key) ? 'chosen' : ''} onClick={selectAutomatic}><strong>おまかせ</strong><small>行動時に判断</small></button>
           </div>}
         </>}
         <div className="turnControls"><button className="speedButton" disabled={playing} aria-label="演出速度" onClick={() => setSpeed(speed === 1 ? 2 : 1)}>演出 ×{speed}</button></div>

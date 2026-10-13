@@ -1,7 +1,10 @@
 import{beforeEach,describe,it,expect,vi}from'vitest';
 import{start,autoOrders,DEFEND,BASIC_ATTACK,type State,type Order}from'./engine';
 // @ts-ignore Development-only native Node Lab.
-import{runMatch,MatchFailure}from'../scripts/balance-lab/core.mjs';
+import{runMatch as resolveMatch,MatchFailure}from'../scripts/balance-lab/core.mjs';
+// Explicit snapshot orders are injected to exercise mechanics, not the live AI.
+const runMatch=(request:object)=>resolveMatch({...request,policy:'explicit-snapshot'});
+
 vi.mock('./engine',async original=>{const a=await original<typeof import('./engine')>();return{...a,start:vi.fn(a.start),autoOrders:vi.fn(a.autoOrders)};});
 const mixed=[36,12,2,30,26],demon=[29,1,8,30,31],strip=[30,28,1,20,35];
 beforeEach(async()=>{const a=await vi.importActual<typeof import('./engine')>('./engine');vi.mocked(start).mockReset().mockImplementation(a.start);vi.mocked(autoOrders).mockReset().mockImplementation(a.autoOrders);});

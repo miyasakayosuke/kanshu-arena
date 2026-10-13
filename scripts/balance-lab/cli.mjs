@@ -123,7 +123,7 @@ try {
     if (args.overwrite) for (const name of previous) rmSync(resolve(args.out, name));
     beganRun = true;
     activeSource = sourceVersion(schedule.config);
-    console.log(`Running ${schedule.cases.length} matches: identical policy, paired seeds, side swaps and mirrors.`);
+    console.log(`Running ${schedule.cases.length} matches: shipping player/CPU policies, paired seeds, side swaps and mirrors.`);
     const report = runSuite(config, ({ completed, total }) => { if (completed % 1000 === 0) console.log(`${completed}/${total}`); });
     const afterSource = sourceVersion(report.config);
     if (afterSource.engineSha256 !== activeSource.engineSha256 || afterSource.familySha256 !== activeSource.familySha256 || afterSource.labSha256 !== activeSource.labSha256) throw new Error('Engine/lab source changed during this run. Rerun on a stable version before saving evidence.');

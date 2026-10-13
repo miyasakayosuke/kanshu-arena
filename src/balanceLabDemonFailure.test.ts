@@ -156,7 +156,7 @@ describe('demon fallback action evidence invariants', () => {
       else if (kind === 'second-cast') resolved.events.splice(castIndex + 1, 0, structuredClone(cast));
       return resolved;
     });
-    const failure = capture();
+    const failure = capture({...request, policy:'explicit-snapshot'});
     expect(failure.message).toMatch(/fallback|MP|cast|queue/);
     expect(failure.trace.turns).toHaveLength(1);
     expect(failure.trace.turns[0].events.some(event => event.kind === 'resource-loss')).toBe(true);

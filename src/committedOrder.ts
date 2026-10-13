@@ -1,8 +1,9 @@
-import { battleSkill, skillTargetsAllies, type Order, type State, type Unit } from './engine';
+import { AUTO, battleSkill, skillTargetsAllies, type Order, type State, type Unit } from './engine';
 
 /** Describe the saved intent only. Never ask the AI or resolve future hit recipients. */
 export function committedOrderLabel(state: State, actor: Unit, order: Order | undefined, automatic = false): string | null {
   if (!order || order.key !== actor.key || actor.hp <= 0) return null;
+  if (order.skill === AUTO) return 'おまかせ · 行動時に判断';
   const skill = battleSkill(actor.monster, order.skill);
   if (!skill) return null;
   let scope: string;

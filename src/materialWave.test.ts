@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
@@ -241,12 +242,12 @@ describe('repair evidence and deterministic regressions', () => {
       expect([...result.allies, ...result.enemies].every(unit => unit.hp >= 0 && unit.hp <= unit.monster.hp && unit.mp >= 0)).toBe(true);
     }
   });
-  it('under explicit legacy poison controls, preserves frozen v0.12 dragon events, orders, RNG, winners and units across24 complete battles', () => {
+  it('historical v30 reference: under explicit legacy poison controls, preserves frozen v0.12 dragon events, orders, RNG, winners and units across24 complete battles', () => {
     // Captured before material edits from the frozen d8e717a399b84b749c21aba86380cbdd57cb53a6 tree.
     const dragon = [15, 5, 16, 17, 18], opponents = [dragon, [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [1, 5, 8, 10, 6]], results = [];
     for (const enemy of opponents) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(dragon, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(dragon, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       const historical = withoutPoisonControlMetadata(state);
       results.push({ enemy, seed, samePolicy, events: state.history!.map(turn => turn.events), orders: state.history!.map(turn => turn.orders), seedAfter: state.seed, winner: state.winner, allies: historical.allies, enemies: historical.enemies });
     }

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { advanceWithEvents, autoOrders } from './engine';
+import { advanceWithEvents, automaticOrders } from './engine';
 import type { BattleEvent, Order, State } from './engine';
 // The JavaScript CLI module is shared with Node's native TypeScript loader.
 // @ts-ignore No declaration file is needed for this test-only CLI module.
@@ -19,7 +19,7 @@ type Failure = Error & {
   trace: {
     initialState: State;
     turns: { turn: number; events: BattleEvent[]; unitsAfter: { key: string; hp: number; mp: number }[] }[];
-    activeAttempt: { turn: number; seedBefore: number; orders: Order[]; enemyOrders: Order[]; unitsBefore: { key: string; hp: number; mp: number }[] };
+    activeAttempt: { turn: number; seedBefore: number; orders: Order[]; enemyOrders?: Order[]; enemyPolicy?: string; unitsBefore: { key: string; hp: number; mp: number }[] };
     lastState: State;
   };
 };
@@ -47,7 +47,7 @@ describe('balance lab failure evidence', () => {
     expect(failure.trace.lastState).toEqual(initial);
     expect(failure.trace.turns).toEqual([]);
     expect(failure.trace.activeAttempt).toMatchObject({
-      turn: 1, seedBefore: 42, orders: autoOrders(initial), enemyOrders: autoOrders(initial, 'enemies'),
+      turn: 1, seedBefore: 42, orders: automaticOrders(initial), enemyPolicy: 'legacy-pre-turn',
     });
     expect(failure.trace.activeAttempt.unitsBefore).toHaveLength(10);
     expect(JSON.parse(JSON.stringify(failure.trace))).toEqual(failure.trace);
@@ -60,7 +60,7 @@ describe('balance lab failure evidence', () => {
       .mockImplementationOnce(() => { throw new Error('Injected turn-two failure'); });
     const failure = capture(() => runMatch(request));
     const initial: State = createBattle(teamA, teamB, 42);
-    const first = actual.advanceWithEvents(initial, autoOrders(initial), { enemyOrders: autoOrders(initial, 'enemies') });
+    const first = actual.advanceWithEvents(initial, automaticOrders(initial));
     expect(failure.trace.turns).toHaveLength(1);
     expect(failure.trace.turns[0].events).toEqual(first.events);
     expect(failure.trace.lastState).toEqual(first.state);
@@ -94,6 +94,7 @@ describe('balance lab failure evidence', () => {
     expect(failure.message).toBe('Injected suite failure');
     expect(failure.request).toEqual(request);
     expect(failure.trace.activeAttempt.orders).toHaveLength(5);
-    expect(failure.trace.activeAttempt.enemyOrders).toHaveLength(5);
+    expect(failure.trace.activeAttempt).not.toHaveProperty('enemyOrders');
+    expect(failure.trace.activeAttempt).toHaveProperty('enemyPolicy','legacy-pre-turn');
   });
 });

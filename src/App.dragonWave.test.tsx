@@ -54,7 +54,9 @@ afterEach(async () => { await act(async () => root.unmount()); vi.restoreAllMock
 
 describe('dragon wave battle UI', () => {
   it('charges once after a whole two-hit cast, debits MP and all charge at the finisher cast, and keeps ally portraits static', async () => {
-    const resolve = vi.spyOn(engine, 'advanceWithEvents');
+    const original = engine.advanceWithEvents;
+    // Pin enemies for this charge/playback contract; automatic tactics are separate.
+    const resolve = vi.spyOn(engine, 'advanceWithEvents').mockImplementation((state, orders) => original(state, orders, { enemyOrders: state.enemies.map(unit => ({key:unit.key, skill:engine.DEFEND})) }));
     await begin();
     expect(document.querySelector('header .headerHome')?.getAttribute('aria-label')).toBe('ホーム');
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('竜気:0/5');

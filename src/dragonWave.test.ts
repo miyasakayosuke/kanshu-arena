@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { advanceWithEvents, autoOrders, baseDamage, BASIC_ATTACK, cost, DEFEND, dragonChargeEligible, DRAGON_CHARGE_CAP, effectStatus, leaderFor, monsters, start, type BattleEvent, type Order, type State, type Unit } from './engine';
@@ -182,13 +183,13 @@ describe('literal breath and dispel counterplay', () => {
       expect([...result.allies, ...result.enemies].every(unit => unit.hp >= 0 && unit.mp >= 0 && (unit.dragonCharge ?? 0) <= 5)).toBe(true);
     }
   });
-  it('under explicit legacy poison controls, preserves ff52abef old-team events, orders, RNG and winners across36 complete battles', () => {
+  it('historical v30 reference: under explicit legacy poison controls, preserves ff52abef old-team events, orders, RNG and winners across36 complete battles', () => {
     // Captured before this wave from ff52abef77a2a719fd39e0b21a7a83ba7e534f28.
     const teams = [[0, 2, 3, 4, 6], [1, 5, 8, 10, 6], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [12, 14, 0, 6, 10], [11, 9, 4, 7, 10]];
     const results = [];
     for (let i = 0; i < teams.length; i++) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(teams[i], teams[(i + 1) % teams.length], seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(teams[i], teams[(i + 1) % teams.length], seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       results.push({ i, seed, samePolicy, events: state.history!.map(turn => turn.events), orders: state.history!.map(turn => turn.orders), seedAfter: state.seed, winner: state.winner });
     }
     expect(createHash('sha256').update(JSON.stringify(results)).digest('hex')).toBe('98c8fd7585339355c5d56ee4a6a3f1582844bff41508541dab4cba6654e8f5ee');

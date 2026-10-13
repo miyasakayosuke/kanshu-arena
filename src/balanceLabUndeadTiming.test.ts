@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { autoOrders, start, BASIC_ATTACK, DEFEND, type Order, type State } from './engine';
 // @ts-ignore Development-only JavaScript.
-import { runMatch } from '../scripts/balance-lab/core.mjs';
+import { runMatch as resolveMatch } from '../scripts/balance-lab/core.mjs';
+// Explicit snapshot orders are injected to exercise mechanics, not the live AI.
+const runMatch=(request:object)=>resolveMatch({...request,policy:'explicit-snapshot'});
+
 vi.mock('./engine',async original=>{const a=await original<typeof import('./engine')>();return{...a,start:vi.fn(a.start),autoOrders:vi.fn(a.autoOrders)};});
 const pure=[32,4,33,34,35],mixed=[32,4,35,3,10],controls=[2,1,8,10,6],demons=[29,1,8,30,31];
 const rows=(s:State,side:'allies'|'enemies',orders:Record<string,{skill:number;target?:string}>)=>s[side].filter(u=>u.hp>0).map(u=>({key:u.key,...(orders[u.key]??{skill:DEFEND})}));

@@ -58,9 +58,9 @@ const individualAuto = () => document.querySelector<HTMLButtonElement>('.command
 async function checkPreview(state: engine.State, fixed: engine.Order[]) {
   await click(button('作戦'));
   const lines = preview();
-  for (const order of engine.completeOrders(state, fixed)) {
+  for (const order of engine.automaticOrders(state, fixed)) {
     const unit = state.allies.find(unit => unit.key === order.key)!;
-    expect(lines.find(line => line.includes(unit.monster.name))).toContain(`${engine.battleSkill(unit.monster, order.skill)!.name} ·`);
+    expect(lines.find(line => line.includes(unit.monster.name))).toContain(order.skill === engine.AUTO ? 'おまかせ・行動時に判断' : `${engine.battleSkill(unit.monster, order.skill)!.name} ·`);
   }
   await click(label('作戦情報を閉じる'));
 }
@@ -70,7 +70,7 @@ describe('shared completion, replacement and interrupted input', () => {
     const { setup, advance } = await begin();
     const state = setup.mock.results[0].value as engine.State;
     await choosePoison('烏天狗');
-    const fixed = [fixedPoison(state, 3)], expected = engine.completeOrders(state, fixed);
+    const fixed = [fixedPoison(state, 3)], expected = engine.automaticOrders(state, fixed);
     const before = JSON.stringify(state);
     await checkPreview(state, fixed);
     expect(JSON.stringify(state)).toBe(before);
@@ -92,14 +92,14 @@ describe('shared completion, replacement and interrupted input', () => {
     const state = setup.mock.results[0].value as engine.State;
     await choosePoison('烏天狗');
     const fixed = [fixedPoison(state, 3)];
-    const selected = engine.completeOrders(state, fixed).find(order => order.key === 'a1')!;
-    expect(engine.battleSkill(state.allies[1].monster, selected.skill)?.kind).not.toBe('poison');
+    const selected = engine.automaticOrders(state, fixed).find(order => order.key === 'a1')!;
+    expect(selected).toEqual({ key: 'a1', skill: engine.AUTO });
     await click(label('ドリュアスの行動を選択')); await click(individualAuto());
     fixed.push(selected);
     expect(label('ドリュアスの行動を選択').textContent).toContain('おまかせ ✓');
     await checkPreview(state, fixed);
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, fixed));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, fixed));
   });
   it.each(['attack', 'poison'] as const)('individual auto replaces its own previous %s instead of treating it as fixed', async previous => {
     const { setup, advance } = await begin();
@@ -111,21 +111,22 @@ describe('shared completion, replacement and interrupted input', () => {
       await click(label(`${name}の行動を選択`)); await click(button('たたかう')); await click(label('マモンを対象に選択'));
     }
     await click(label(`${name}の行動を選択`)); await click(individualAuto());
-    const expected = engine.autoOrders(state).find(order => order.key === `a${index}`)!;
+    const expected = engine.automaticOrders(state).find(order => order.key === `a${index}`)!;
     await checkPreview(state, [expected]);
     await click(button('この指示でターン開始'));
     expect(advance.mock.calls[0][1].find(order => order.key === expected.key)).toEqual(expected);
   });
-  it('a committed individual-auto poison remains fixed when a second poison is explicitly chosen', async () => {
+  it('individual auto remains undecided when another poison is explicitly chosen', async () => {
     const { setup, advance } = await begin();
     const state = setup.mock.results[0].value as engine.State;
     await click(label('ドリュアスの行動を選択')); await click(individualAuto());
     await choosePoison('烏天狗');
     await click(button('作戦'));
-    expect(preview().filter(line => line.includes('毒霧'))).toHaveLength(2);
+    expect(preview().filter(line => line.includes('毒霧'))).toHaveLength(1);
+    expect(preview().find(line => line.includes('ドリュアス'))).toContain('行動時に判断');
     await click(label('作戦情報を閉じる')); await click(button('この指示でターン開始'));
     const chosen = advance.mock.calls[0][1];
-    expect(chosen.find(order => order.key === 'a1')?.skill).toBe(fixedPoison(state, 1).skill);
+    expect(chosen.find(order => order.key === 'a1')).toEqual({ key: 'a1', skill: engine.AUTO });
     expect(chosen.find(order => order.key === 'a3')?.skill).toBe(fixedPoison(state, 3).skill);
   });
   it('replacing the first poison with an attack clears its reservation for the remaining automatic allies', async () => {
@@ -136,8 +137,8 @@ describe('shared completion, replacement and interrupted input', () => {
     const fixed = [{key: 'a1', skill: engine.BASIC_ATTACK, target: 'e0'}];
     await checkPreview(state, fixed);
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, fixed));
-    expect(advance.mock.calls[0][1].find(order => order.key === 'a3')?.skill).toBe(fixedPoison(state, 3).skill);
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, fixed));
+    expect(advance.mock.calls[0][1].find(order => order.key === 'a3')).toEqual({ key: 'a3', skill: engine.AUTO });
   });
   it('a fresh turn clears poison reservations and automatic labels, returning to an automatic plan', async () => {
     const { advance } = await begin();
@@ -148,7 +149,7 @@ describe('shared completion, replacement and interrupted input', () => {
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     await checkPreview(next, []);
     await click(button('この指示でターン開始'));
-    expect(advance.mock.calls[1][1]).toEqual(engine.autoOrders(next));
+    expect(advance.mock.calls[1][1]).toEqual(engine.automaticOrders(next));
   });
   it.each(['back', 'escape', 'timeout'] as const)('unfinished single-target poison creates no reservation on %s', async route => {
     const { setup, advance } = await begin(state => {
@@ -167,7 +168,7 @@ describe('shared completion, replacement and interrupted input', () => {
       expect(document.querySelector('.targetButtons')).toBeNull();
       await click(button('この指示でターン開始'));
     }
-    expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(state));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state));
   });
   it('the deadline and repeated start clicks resolve the same confirmed commands exactly once', async () => {
     const { setup, advance } = await begin();
@@ -180,7 +181,7 @@ describe('shared completion, replacement and interrupted input', () => {
       window.dispatchEvent(new Event('focus'));
     });
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [fixedPoison(state, 3)]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [fixedPoison(state, 3)]));
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
   });
 });

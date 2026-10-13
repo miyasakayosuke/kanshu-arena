@@ -65,3 +65,15 @@ v0.20.27の実ブラウザで、対象選択へ移るとスクロール位置が
 ## v0.20.30追補（2026-10-13）
 
 詳細「姿」の既存の大きな絵に、既存の待機モーションを再利用する。妖狐・フェンリルの部位別動作と、残る35体の全身の呼吸を区別し、新しいリグや絵を作ったとは主張しない。選択中の詳細表示だけを動かし、任意の物語再生中は明示的に停止する。基準commit `4a9403613f869a5c3cfa2e16b07c3a9ee89c2a6b`、tree `52a6864b3247fa1ab75ec2d578ea99cf4364b8a0`。全37体の元絵・動作データ・106の技・8つの物語・戦闘・保存データは不変。参考録画の画像・動作・UIや外部素材は持ち込まない。既存の権利帰属・類似性・商標等の残件は維持。専門家連絡・契約・資料送付・法的クリアランスは未実施。[記録](releases/2026-10-13-v0.20.30.md)。
+
+
+## Unreleased action-time automatic policy candidate — 2026-10-13
+
+Direct user request, isolated candidate only. Automatic intent stays unresolved until an actual priority checkpoint. Valid manual mechanics, roster/skill data, art/tracks, dependencies, saves and notices are preserved. New material is original decision/scheduling integration and truthful intent/history copy. Exact prior project engine/families are test-only references with hashes; no new external code or license. No reference media/art, external consultation/transmission, fee, agreement or project-license choice added.
+
+Broad tactical scoring was rejected for shorter play and starter losses. One narrower live-support/CPU-variety comparison fixes exhausted guard loops but still fails unchanged starter gates. Freeze/publication held pending the user's difficulty decision. Historical archives remain unchanged; current manual differential and automatic evaluation are separate. Final policy approval, complete current gates and native acceptance remain required. Inventory is not legal clearance.
+
+
+## v0.20.31 narrowed scope — 2026-10-13
+
+After the held comparison above, the user explicitly approved player action-time auto with established pre-turn enemy policy retained except exhausted guard-only choices. This approved candidate restores all three starter victories and five turn1 survivors; exact timing changes are documented, not hidden by lowering survival/victory gates. The broader tactical and enemy action-time variants remain rejected comparison evidence. Current source, test-only reference provenance, actual-event history and policy-specific evaluation are included in the review packet. Native acceptance and final gates remain separate. No art, skill/roster numbers, dependencies, saves, notices, external consultation or legal-clearance claim changed.

@@ -1,3 +1,4 @@
+import * as historical from '../tests/reference-v02030/engine';
 import { describe, expect, it } from 'vitest';
 import { autoOrders, monsters, poisonCashoutPerTickFor, start, type BattleEvent, type Skill, type State, type Unit } from './engine';
 // @ts-ignore Development-only lab loaded through the native Node TypeScript loader.
@@ -38,13 +39,13 @@ describe('undead strict isolated Lab configuration', () => {
 });
 
 describe('undead actual impact and resource accounting',()=>{
- it.each(['poison','guard'])('counts actual cashout, mitigation and sacrificed future ticks with%s',mode=>{
-  for(const reverse of [false,true]) {const r=runMatch({teamA:reverse?nature:pure,teamB:reverse?pure:nature,seed:42,overrides:synthetic(mode),trace:true});const key=reverse?'e0':'a0',core=r.units.find((u:Unit)=>u.key===key);
+ it.each(['poison','guard'])('counts actual cashout, mitigation and sacrificed ticks under explicit %s mechanic controls',mode=>{
+  for(const reverse of [false,true]) {const r=runMatch({teamA:reverse?nature:pure,teamB:reverse?pure:nature,seed:42,overrides:synthetic(mode),trace:true,policy:'explicit-snapshot'});const key=reverse?'e0':'a0',core=r.units.find((u:Unit)=>u.key===key);
    const events=r.trace.turns.flatMap((t:{events:unknown[]})=>t.events);const consumed=events.filter((e:{kind:string;actor:string})=>e.kind==='poison-cashout'&&e.actor===key);
    expect(consumed.length).toBeGreaterThan(0);expect(core.cashoutEvents).toBe(consumed.length);expect(core.cashoutCasts).toBe(consumed.length);expect(core.cashoutMpSpent).toBe(consumed.length*18);
    expect(core.cashoutTicksConsumed).toBe(consumed.reduce((n:number,e:{poisonTicksConsumed:number})=>n+e.poisonTicksConsumed,0));expect(core.cashoutAddedBasis).toBe(core.cashoutTicksConsumed*22);
    expect(core.cashoutActualAddedDamage).toBeGreaterThan(0);expect(core.cashoutFuturePoisonNominal).toBeGreaterThan(core.cashoutActualAddedDamage);if(mode==='guard')expect(core.cashoutGuardedEvents).toBeGreaterThan(0);
-   // The default reservation policy permits later-turn reapplication after each positive cashout.
+   // The explicit snapshot control preserves the original repeated-cashout mechanic fixture.
    expect(core.cashoutSurvivingTargets).toBe(consumed.length);
    expect(r.units.find((u:Unit)=>u.key===(reverse?'e1':'a1')).poisonReapplicationsAfterCashout).toBe(consumed.length);
    for(const event of consumed) expect(events.findIndex((next:BattleEvent,index:number)=>index>events.indexOf(event)&&next.kind==='poison'&&next.target===event.target)).toBeGreaterThan(events.indexOf(event));
@@ -60,7 +61,24 @@ describe('undead actual impact and resource accounting',()=>{
  });
  it('retains the historical impact=1, reservation=false loss and three-tick overkill fixture',()=>{
   // This original loss is a historical mechanic control, not an outcome promised by the adopted defaults.
-  const r=runMatch({teamA:pure,teamB:nature,seed:42,overrides:{poisonImpactScale:1,reservePoison:false},trace:true});
-  expect(r.winner).toBe('lose');expect(r.units[0]).toMatchObject({cashoutEvents:1,cashoutTicksConsumed:3,cashoutActualAddedDamage:0,cashoutKills:1,cashoutDecisiveKills:0});
+  let state=historical.start(pure,nature,42,{leaders:true,poisonImpactScale:1,reservePoison:false});
+  const cashouts: historical.BattleEvent[]=[];let addedDamage=0,kills=0,decisiveKills=0;
+  const step=(seed:number)=>(Math.imul(seed,1664525)+1013904223)>>>0;
+  while(!state.winner){const result=historical.advanceWithEvents(state,historical.autoOrders(state),{enemyOrders:historical.autoOrders(state,'enemies')});
+   const current=new Map([...state.allies,...state.enemies].map(unit=>[unit.key,structuredClone(unit)]));
+   let seed=state.seed;for(const order of result.state.history!.at(-1)!.orders)if(order.accepted)seed=step(seed);
+   const bases=new Map<string,number>();let pending:historical.BattleEvent|undefined;
+   for(const event of result.events){
+    if(event.kind==='cast'){const source=current.get(event.actor!)!,order=result.state.history!.at(-1)!.orders.find(order=>order.key===event.actor)!;bases.set(event.actor!,historical.baseDamage(source,historical.battleSkill(source.monster,order.skill)!));}
+    if(event.kind==='poison-cashout'&&event.actor==='a0'){cashouts.push(event);pending=event;}
+    if(event.kind==='damage'&&event.effect!=='poison'){
+     seed=step(seed);const roll=(90+seed%21)/100;
+     if(pending){const target=current.get(event.target!)!,without=Math.min(target.hp,Math.max(1,Math.floor(bases.get(event.actor!)!*roll*historical.directDamageScale(target))));
+      addedDamage+=event.amount!-without;if(event.hp===0)kills++;if(event.hp===0&&without<target.hp)decisiveKills++;pending=undefined;}
+    }
+    if(event.target&&current.has(event.target)){const target=current.get(event.target)!;for(const field of ['hp','mp','guard','poison','ward','rally'] as const)if(event[field]!==undefined)Object.assign(target,{[field]:event[field]});}
+   }state=result.state;}
+  expect(state.winner).toBe('lose');expect(cashouts).toHaveLength(1);expect(cashouts[0].poisonTicksConsumed).toBe(3);expect(addedDamage).toBe(0);expect(kills).toBe(1);expect(decisiveKills).toBe(0);
+
  });
 });

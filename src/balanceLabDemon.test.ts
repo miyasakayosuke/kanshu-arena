@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BASIC_ATTACK, DEMON_PRESSURE, monsters, mpDamageFor, start } from './engine';
+import { advanceWithEvents, DEFEND, BASIC_ATTACK, DEMON_PRESSURE, monsters, mpDamageFor, start } from './engine';
 import type { BattleEvent, BattleOrderRecord, Skill, State, Unit } from './engine';
 // @ts-ignore Development-only JavaScript shared with Node's native TypeScript loader.
 import { createBattle, replayMatch, runMatch, runSuite, validateOverrides } from '../scripts/balance-lab/core.mjs';
@@ -183,25 +183,32 @@ describe('demon Lab loss ledger, actual casts and replay', () => {
   });
 
   it.each([10, 75])('validates guard and ward using the strongest protection with ward %s', percent => {
-    const result = runMatch({ teamA: demons, teamB: nature, seed: 42,
-      overrides: { ...pressure(true), openingWard: { percent } }, trace: true });
-    expect(assertEventLedger(result.trace)).toBeGreaterThan(0);
-    const first = result.trace.turns[0].events.find((event: BattleEvent) => event.kind === 'resource-loss');
+    // A fully explicit mechanic control guarantees guard and ward overlap;
+    // tactical AI is now allowed to avoid guarded recipients.
+    const initialState: State = createBattle(demons, nature, 42, { ...pressure(true), openingWard: { percent } });
+    const result = advanceWithEvents(initialState, initialState.allies.map((unit,index)=>({key:unit.key,skill:index===0?0:DEFEND,...(index===0?{target:'e0'}:{})})), {enemyOrders: initialState.enemies.map(unit=>({key:unit.key,skill:DEFEND}))});
+    const trace: Trace = {initialState,finalState:result.state,turns:[{turn:1,events:result.events,orders:result.state.history!.at(-1)!.orders,unitsAfter:result.state.enemies}]};
+    expect(assertEventLedger(trace)).toBeGreaterThan(0);
+    const first = result.events.find((event: BattleEvent) => event.kind === 'resource-loss')!;
     expect(first.amount).toBe(percent === 10 ? 5 : 2);
   });
 
-  it('counts a resource-blocked accepted anchor as its actual basic cast, without its original MP debit', () => {
-    const result = runMatch({ teamA: demons, teamB: nature, seed: 42, overrides: pressure(), trace: true });
+  it.each([false,true])('distinguishes fresh allied choice from the fixed CPU anchor fallback (pressure on enemies=%s)', reverse => {
+    const result = runMatch({ teamA: reverse?nature:demons, teamB: reverse?demons:nature, seed: 42, overrides: pressure(), trace: true });
     const trace: Trace = result.trace;
-    const fallback = trace.turns[0].events.find(event => event.kind === 'fallback')!;
-    expect(fallback).toMatchObject({ fromSkill: 0, toSkill: BASIC_ATTACK, requiredMP: 16, queuePriority: -2 });
-    expect(trace.turns[0].orders.find(order => order.key === fallback.actor)).toMatchObject({ skill: 0, accepted: true });
-    const actorEvents = trace.turns[0].events.filter(event => event.actor === fallback.actor);
+    const recipient=reverse?'a0':'e0';
+    const loss = trace.turns[0].events.find(event => event.kind === 'resource-loss')!;
+    expect(loss).toMatchObject({target:recipient,amount:9,mp:7});
+    const fallback=trace.turns[0].events.find(event=>event.kind==='fallback');
+    const recorded=trace.turns[0].orders.find(order => order.key === recipient)!;
+    if(reverse){expect(fallback).toBeUndefined();expect(recorded).toMatchObject({skill:BASIC_ATTACK,source:'automatic',accepted:true,decisionPriority:0});}
+    else {expect(fallback).toMatchObject({actor:recipient,fromSkill:0,toSkill:BASIC_ATTACK,requiredMP:16,queuePriority:-2});expect(recorded).toMatchObject({skill:0,source:'automatic',accepted:true});expect(recorded.decisionPriority).toBeUndefined();}
+    const actorEvents = trace.turns[0].events.filter(event => event.actor === recipient);
     expect(actorEvents.filter(event => event.kind === 'cast')).toEqual([expect.objectContaining({ skill: '通常攻撃', effect: 'hit' })]);
     expect(actorEvents.filter(event => event.kind === 'resource')).toHaveLength(0);
-    const metric = result.units.find((unit: { key: string }) => unit.key === fallback.actor);
-    expect(metric).toMatchObject({ paidCasts: 0, specialCasts: 0, mpSpent: 0 });
-    expect(metric.casts).toBe(trace.turns.flatMap(turn => turn.events).filter(event => event.kind === 'cast' && event.actor === fallback.actor).length);
+    const metric = result.units.find((unit: { key: string }) => unit.key === recipient);
+    expect(metric).toMatchObject({ paidCasts: 0, specialCasts: 0, mpSpent: 0, fallbackCasts:reverse?0:1 });
+    expect(metric.casts).toBe(trace.turns.flatMap(turn => turn.events).filter(event => event.kind === 'cast' && event.actor === recipient).length);
   });
 
   it('counts HP kills separately instead of inventing an MP-loss event or potential budget', () => {

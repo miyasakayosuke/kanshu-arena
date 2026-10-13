@@ -6,6 +6,8 @@ export type SpecialSkills = readonly [] | readonly [Skill] | readonly [Skill, Sk
 export type Monster={id:number;name:string;icon:string;cost:number;hp:number;mp:number;atk:number;speed:number;family?:Family;skills:SpecialSkills};
 export const BASIC_ATTACK = -1;
 export const DEFEND = -2;
+/** Deferred automatic intent; never a learned skill or a cast. */
+export const AUTO = -3;
 export const MAX_SPECIAL_SKILLS = 4;
 const hit=(name:string,power:number,priority=0,all=false,mpCost=all?18:priority<0?20:priority>0?12:10):Skill=>({name,power,priority,mpCost,kind:'hit',all});
 const heal:Skill={name:'生命の雫',power:65,priority:0,mpCost:18,kind:'heal'};
@@ -192,13 +194,17 @@ export type BattleEvent = {
 };
 export type BattleOrderRecord = Order & {
   side: 'allies' | 'enemies';
-  /** An explicit order may itself have been selected with the UI's auto command. */
+  /** Old explicit records may contain an eager UI-auto choice. Automatic records
+   * may be fixed pre-turn CPU orders or real player checkpoint decisions. */
   source: 'explicit' | 'automatic';
   skillName?: string;
   skillKind?: Skill['kind'];
   skillPower?: number;
   accepted: boolean;
-  rejection?: 'invalid-skill' | 'invalid-target' | SkillUnavailableReason;
+  rejection?: 'invalid-skill' | 'invalid-target' | 'no-opponents' | SkillUnavailableReason;
+  /** Auto decisions are recorded only at their real checkpoint, possibly late. */
+  decisionPriority?: number;
+  nativePriority?: number;
 };
 export type BattleTurnRecord = {
   turn: number;
@@ -442,7 +448,8 @@ export function extraordinaryResponseScore(unit: Unit, skill: Skill, friends: re
   }, 0) - cost;
 }
 
-/** Choose orders without changing state or consuming the battle's random seed. */
+/** Legacy snapshot planner for explicit-plan comparisons. Gameplay uses automaticOrders.
+ * Does not change state or consume the seed; its result is a fixed manual plan. */
 export function autoOrders(state: State, side: 'allies' | 'enemies' = 'allies'): Order[] {
   return planOrders(state, side);
 }
@@ -458,12 +465,13 @@ export function completeOrders(state: State, confirmed: readonly Order[], side: 
   return planOrders(state, side, confirmed);
 }
 
-function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonly Order[] = []): Order[] {
+type LiveChoice = { key: string; remaining?: ReadonlySet<string>; excluded?: ReadonlySet<number> };
+function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonly Order[] = [], live?: LiveChoice): Order[] {
   if (state.winner) return [];
   const friends = living(state[side]);
   const opponents = living(side === 'allies' ? state.enemies : state.allies);
   const target = opponents.reduce<Unit | undefined>((best, unit) => !best || unit.hp < best.hp ? unit : best, undefined);
-  const incomingThreat = opponents.reduce((largest, opponent) => Math.max(largest, attackFor(opponent),
+  const incomingThreat = opponents.filter(opponent => !live?.remaining || live.remaining.has(opponent.key)).reduce((largest, opponent) => Math.max(largest, attackFor(opponent),
     ...opponent.monster.skills.filter(skill => canUseSkill(opponent, skill) && (skill.kind === 'hit' || skill.kind === 'poison')).map(skill => baseDamage(opponent, skill))), 0);
   const protectedTargets = new Set<string>();
   const cleansedTargets = new Set<string>();
@@ -490,7 +498,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
     if (order.target !== undefined && !enemies.some(target => target.key === order.target)) continue;
     for (const target of opponents) if (skill.all || target.key === order.target) plannedPoison.add(target.key);
   }
-  return friends.map(unit => {
+  return (live ? friends.filter(unit => unit.key === live.key) : friends).map(unit => {
     const fixed = fixedOrders.get(unit.key);
     if (fixed) {
       // Account for the command that will actually be returned, at this actor's
@@ -520,7 +528,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
       return fixed;
     }
     const specials = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS);
-    const find = (kind: Skill['kind']) => specials.findIndex(skill => skill.kind === kind && canUseSkill(unit, skill, friends));
+    const find = (kind: Skill['kind']) => specials.findIndex((skill, index) => !live?.excluded?.has(index) && skill.kind === kind && canUseSkill(unit, skill, friends));
     const cleansing = find('cleanse');
     const poisoned = weakest(friends.filter(friend => friend.poison > 0 && !cleansedTargets.has(friend.key)));
     if (cleansing >= 0 && poisoned) {
@@ -529,7 +537,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
       return { key: unit.key, skill: cleansing, target: poisoned.key };
     }
     const protecting = find('protect');
-    const vulnerable = weakest(friends.filter(friend => !protectedTargets.has(friend.key) && friend.hp > incomingThreat * 0.5));
+    const vulnerable = weakest(friends.filter(friend => !protectedTargets.has(friend.key) && (!live || !friend.guard) && friend.hp > incomingThreat * 0.5));
     if (protecting >= 0 && friends.length > 1 && vulnerable && vulnerable.hp / vulnerable.monster.hp <= 0.45 && incomingThreat > 0) {
       protectedTargets.add(vulnerable.key);
       return { key: unit.key, skill: protecting, target: vulnerable.key };
@@ -546,7 +554,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
     if (supply >= 0) {
       const recipients = friends.filter(friend => friend.monster.family === SLIME_SUPPLY.family);
       const fundsAction = recipients.some(friend => friend.monster.skills.some(skill =>
-        skill.mpCost > friend.mp && skill.mpCost <= Math.min(friend.monster.mp, friend.mp + supplyAmountFor(unit))));
+        skill.mpCost > friend.mp && skill.mpCost <= Math.min(friend.monster.mp, friend.mp + supplyAmountFor(unit)) && (!live || canUseSkill({ ...friend, mp: Math.min(friend.monster.mp, friend.mp + supplyAmountFor(unit)) }, skill, state[side]))));
       if (fundsAction) return { key: unit.key, skill: supply };
     }
     // Keep a free attack available. Spend only when a special adds useful damage or utility.
@@ -557,11 +565,14 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
     // Keep core policy fixed when the Lab disables MP damage.
     const pressureActor = unit.monster.id === DEMON_CORE_ID || specials.some(skill => (skill.mpDamage ?? 0) > 0);
     const score = (skill: Skill, singleTarget = target) => {
+      if (live && responseActor && isExtraordinaryResponse(skill)) return skill.kind === 'responseGuard'
+        ? friends.reduce((sum, friend) => sum + automaticProtectionValue(state, unit.key, side, friend, live.remaining), 0) - skill.mpCost * .18 - 10
+        : friends.reduce((sum, friend) => sum + Math.min(friend.hp, Math.floor(friend.monster.hp * .06) * Math.min(poisonTicksFor(friend), MAX_TURNS - state.turn + 1)) * .8, 0) - skill.mpCost * .18 - 10;
       if (responseActor && isExtraordinaryResponse(skill)) return extraordinaryResponseScore(unit, skill, friends.map(friend => cleansedTargets.has(friend.key) ? { ...friend, poison: 0 } : friend), state[side === 'allies' ? 'enemies' : 'allies'], state.turn);
       if (skill.kind !== 'hit' && skill.kind !== 'poison') return -1;
       const targets = skill.all || skill.randomHits ? opponents : singleTarget ? [singleTarget] : [];
       return targets.reduce((total, opponent) => {
-        const guardMitigation = opponent.guard && skill.priority < 1 && !skill.breaksGuard ? (skill.breaksGuardAfterHit ? 0.75 : 0.5) : 1;
+        const guardMitigation = opponent.guard && (live || skill.priority < 1) && !skill.breaksGuard ? (skill.breaksGuardAfterHit ? 0.75 : 0.5) : 1;
         const wardMitigation = !opponent.ward || skill.breaksGuard ? 1 : 1 - (opponent.wardPercent ?? NATURE_WARD_PERCENT) / 100 * (skill.breaksGuardAfterHit ? 0.5 : 1);
         const mitigation = Math.min(guardMitigation, wardMitigation);
         // New cashout actors alone compare immediate damage/kill chance against
@@ -570,7 +581,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
         if (cashoutActor) {
           const cashout = poisonCashoutPerTickFor(unit, skill) > 0;
           const basis = baseDamage(unit, skill) + poisonCashoutDamageFor(unit, skill, opponent);
-          const remainingPoison = Math.floor(opponent.monster.hp * 0.06) * poisonTicksFor(opponent);
+          const remainingPoison = Math.floor(opponent.monster.hp * 0.06) * Math.min(poisonTicksFor(opponent), live ? MAX_TURNS - state.turn + 1 : Infinity);
           return total + Array.from({ length: 21 }, (_, roll) => {
             const hit = Math.min(opponent.hp, Math.max(1, Math.floor(basis * (0.9 + roll / 100) * mitigation)));
             const lostPoison = cashout ? Math.min(opponent.hp - hit, remainingPoison) : 0;
@@ -579,7 +590,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
         }
         const damage = Math.min(opponent.hp, baseDamage(unit, skill) * mitigation * (skill.randomHits ? barrageHits(skill, state[side]) / Math.max(1, opponents.length) : 1));
         const poisonDamage = skill.kind === 'poison' && opponent.poison === 0 && !(reservePoison && plannedPoison.has(opponent.key))
-          ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * 2) : 0;
+          ? Math.min(Math.max(0, opponent.hp - damage), Math.floor(opponent.monster.hp * 0.06) * (live ? Math.min(2, MAX_TURNS - state.turn + 1) : 2)) : 0;
         // Only the new MP-damage branch values resource pressure. Two HP-equivalent
         // points per actual MP lost, plus at most 16 for the fraction of currently
         // affordable learned options made unaffordable. No hidden orders are read.
@@ -589,7 +600,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
         if (mpDamageFor(unit, skill) > 0) {
           const preview = { ...opponent, guard: guardMitigation < 1, ward: skill.breaksGuard ? 0 : opponent.ward };
           const loss = mpLossFor(unit, skill, preview);
-          const paid = opponent.monster.skills.filter(option => option.mpCost > 0 && option.mpCost <= opponent.mp);
+          const paid = opponent.monster.skills.filter(option => option.mpCost > 0 && option.mpCost <= opponent.mp && (!live || canUseSkill(opponent, option, state[side === 'allies' ? 'enemies' : 'allies'])));
           const crossing = paid.filter(option => option.mpCost > opponent.mp - loss).length;
           const survival = Array.from({ length: 21 }, (_, roll) => opponent.hp > Math.max(1, Math.floor(baseDamage(unit, skill) * (0.9 + roll / 100) * mitigation))).filter(Boolean).length / 21;
           resourceUtility = paid.length ? survival * (loss * 2 + 16 * crossing / paid.length) : 0;
@@ -607,7 +618,7 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
       if (candidate > bestScore) { bestScore = candidate; selectedTarget = candidateTarget; }
     }
     specials.forEach((skill, index) => {
-      if (!canUseSkill(unit, skill, friends)) return;
+      if (live?.excluded?.has(index) || !canUseSkill(unit, skill, friends)) return;
       const candidates = (pressureActor || cashoutActor) && !skill.all && !skill.randomHits && skill.kind === 'hit' ? opponents : [target];
       for (const candidateTarget of candidates) {
         const candidate = score(skill, candidateTarget);
@@ -627,8 +638,197 @@ function planOrders(state: State, side: 'allies' | 'enemies', confirmed: readonl
   });
 }
 
+/** Keep automatic intent unresolved. Explicit commands, including invalid ones, stay fixed. */
+export function automaticOrders(state: State, confirmed: readonly Order[] = [], side: 'allies' | 'enemies' = 'allies'): Order[] {
+  if (state.winner) return [];
+  return living(state[side]).map(unit => confirmed.find(order => order.key === unit.key) ?? { key: unit.key, skill: AUTO });
+}
+
+/** Marginal current-turn protection only; never interception, stacking or poison reduction. */
+export function automaticProtectionValue(state: State, key: string, side: 'allies' | 'enemies', recipient: Unit, remainingKeys?: ReadonlySet<string>): number {
+  const friends = living(state[side]);
+  const opponents = living(state[side === 'allies' ? 'enemies' : 'allies']);
+  const remaining = (other: Unit) => !remainingKeys || remainingKeys.has(other.key);
+  const attackOptions = (other: Unit, team: Unit[]) => [battleSkill(other.monster, BASIC_ATTACK)!, ...other.monster.skills]
+    .filter(skill => (skill.kind === 'hit' || skill.kind === 'poison') && canUseSkill(other, skill, team));
+  const futureAttackers = opponents.filter(remaining);
+  const alliedProgress = friends.some(friend => friend.key !== key && remaining(friend) && attackOptions(friend, friends).some(skill => baseDamage(friend, skill) > 1));
+  const poisonProgress = opponents.some(opponent => opponent.poison > 0);
+  const judgingLead = state.turn >= MAX_TURNS && friends.reduce((sum, friend) => sum + friend.hp / friend.monster.hp, 0) > opponents.reduce((sum, enemy) => sum + enemy.hp / enemy.monster.hp, 0);
+  const protection = (): number => {
+    if (recipient.guard || (!alliedProgress && !poisonProgress && !judgingLead)) return 0;
+    return futureAttackers.reduce((sum, enemy) => {
+      const options = attackOptions(enemy, opponents).filter(skill => !skill.breaksGuard);
+      return sum + options.reduce((best, skill) => {
+        const raw = baseDamage(enemy, skill);
+        const before = Math.min(recipient.hp, raw * directDamageScale(recipient));
+        const after = Math.min(recipient.hp, raw * Math.min(.5, directDamageScale(recipient)));
+        const hitCount = skill.randomHits ? barrageHits(skill, state[side === 'allies' ? 'enemies' : 'allies']) : 1;
+        const exposure = skill.all ? 1 : skill.breaksGuardAfterHit ? 1 - (1 - 1 / friends.length) ** hitCount : hitCount / friends.length;
+        const savesLife = before >= recipient.hp && after < recipient.hp;
+        return Math.max(best, ((before - after) * .6 + (savesLife ? 25 : 0)) * exposure);
+      }, 0);
+    }, 0);
+  };
+  return protection();
+}
+
+/** Public-state, deterministic action-time utility. No seed, queued command or future
+ * outcome is read. Scores are documented HP-equivalent heuristics, not win forecasts.
+ * remainingKeys contains only publicly unacted actors, never their chosen commands.
+ */
+export function chooseTacticalAutomaticOrder(state: State, key: string, side: 'allies' | 'enemies' = 'allies', remainingKeys?: ReadonlySet<string>): Order {
+  const friends = living(state[side]);
+  const opponents = living(state[side === 'allies' ? 'enemies' : 'allies']);
+  const unit = friends.find(friend => friend.key === key);
+  if (!unit) return { key, skill: BASIC_ATTACK };
+  const horizon = Math.max(0, MAX_TURNS - state.turn + 1);
+  const ticks = (target: Unit) => Math.min(horizon, poisonTicksFor(target));
+  const remaining = (other: Unit) => !remainingKeys || remainingKeys.has(other.key);
+  const protection = (recipient: Unit) => automaticProtectionValue(state, key, side, recipient, remainingKeys);
+  const damageScore = (skill: Skill, target: Unit) => {
+    const mitigation = skill.breaksGuard ? 1 : directDamageScale(target);
+    const basis = baseDamage(unit, skill) + poisonCashoutDamageFor(unit, skill, target);
+    const hits = skill.randomHits ? barrageHits(skill, state[side]) : 1;
+    const chance = skill.randomHits ? 1 / opponents.length : 1;
+    // Binomial occupancy is a bounded public estimate, not a guaranteed split.
+    // It cannot credit more knockouts than hits. Actual rolls/retargeting remain
+    // solely in the resolver; this estimate never samples the battle seed.
+    let total = 0;
+    for (let count = 1; count <= hits; count++) {
+      let combinations = 1;
+      for (let j = 1; j <= count; j++) combinations *= (hits - j + 1) / j;
+      const probability = combinations * chance ** count * (1 - chance) ** (hits - count);
+      if (!probability) continue;
+      for (let roll = 90; roll <= 110; roll++) {
+        const first = Math.max(1, Math.floor(basis * roll / 100 * mitigation));
+        const later = skill.breaksGuardAfterHit ? Math.max(1, Math.floor(basis * roll / 100)) : first;
+        const damage = skill.kind === 'poison' && poisonImpactScaleFor(unit) === 0 ? 0 : Math.min(target.hp, first + later * (count - 1));
+        const survives = damage < target.hp;
+        const poisonGain = skill.kind === 'poison' && !target.poison && survives ? Math.min(target.hp - damage, Math.floor(target.monster.hp * .06) * Math.min(horizon, 1.6)) : 0;
+        const lostPoison = skill.poisonCashout && survives ? Math.min(target.hp - damage, Math.floor(target.monster.hp * .06) * ticks(target) * .8) : 0;
+        const paid = target.monster.skills.filter(option => option.mpCost > 0 && canUseSkill(target, option, state[side === 'allies' ? 'enemies' : 'allies']));
+        const loss = survives && paid.length ? mpLossFor(unit, skill, target) : 0;
+        const crossing = paid.filter(option => !canUseSkill({ ...target, mp: target.mp - loss }, option, state[side === 'allies' ? 'enemies' : 'allies'])).length;
+        const dispel = survives && (skill.breaksGuard || skill.breaksGuardAfterHit) ? Math.min(18, (skill.breaksGuardAfterHit && target.rally && remaining(target) ? 4 : 0) + (target.dragonCharge ?? 0) * 2 + (target.repairReady ? 8 : 0)) : 0;
+        total += probability * (damage + (!survives ? 25 : 0) + poisonGain - lostPoison + dispel + loss * 1.5 + (paid.length ? 12 * crossing / paid.length : 0));
+      }
+    }
+    return total / 21;
+  };
+  let best: Order = { key, skill: BASIC_ATTACK, target: opponents[0]?.key };
+  let bestScore = -Infinity;
+  // Free attack wins exact utility ties, then stable original skill/target slots.
+  const options = [BASIC_ATTACK, ...unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((_, index) => index), DEFEND];
+  for (const index of options) {
+    const skill = battleSkill(unit.monster, index)!;
+    if (!canUseSkill(unit, skill, friends)) continue;
+    const targets = skill.kind === 'guard' ? [unit] : skillTargetsAllies(skill) ? friends : opponents;
+    const candidates = skill.all || skill.randomHits ? [undefined] : targets;
+    for (const target of candidates) {
+      let utility = 0;
+      if (skill.kind === 'hit' || skill.kind === 'poison') utility = (target ? [target] : opponents).reduce((sum, enemy) => sum + damageScore(skill, enemy), 0);
+      else if (skill.kind === 'heal' || skill.kind === 'cleanse') {
+        if (!target) continue;
+        const heal = Math.min(target.monster.hp - target.hp, skill.power);
+        utility = heal * (target.hp / target.monster.hp < .45 ? 1.25 : .85);
+        if (skill.kind === 'cleanse' && target.poison) utility += Math.min(target.hp, Math.floor(target.monster.hp * .06) * ticks(target)) * .8;
+      } else if (skill.kind === 'guard' || skill.kind === 'protect') utility = target ? protection(target) : 0;
+      else if (skill.kind === 'responseGuard') utility = friends.reduce((sum, friend) => sum + protection(friend), 0) - 10;
+      else if (skill.kind === 'responseCleanse') utility = friends.reduce((sum, friend) => sum + Math.min(friend.hp, Math.floor(friend.monster.hp * .06) * ticks(friend)) * .8, 0) - 10;
+      else if (skill.kind === 'restoreMp') utility = friends.filter(friend => friend.monster.family === SLIME_SUPPLY.family).reduce((sum, friend) => {
+        const gain = Math.min(friend.monster.mp - friend.mp, supplyAmountFor(unit));
+        const funded = friend.monster.skills.some(option => option.mpCost > friend.mp && canUseSkill({ ...friend, mp: friend.mp + gain }, option, state[side]));
+        return sum + (funded ? gain * 3 : 0);
+      }, 0);
+      utility -= skill.mpCost * .18;
+      if (utility > bestScore) { bestScore = utility; best = { key, skill: index, ...(target ? { target: target.key } : {}) }; }
+    }
+  }
+  return best;
+}
+
+/** Shipping player auto: retain the established support preferences, but evaluate
+ * only this actor against actual live state. No imaginary earlier allies or hidden
+ * opponent commands are reserved. A positively justified self-defense can still win.
+ */
+export function chooseAutomaticOrder(state: State, key: string, side: 'allies' | 'enemies' = 'allies', remainingKeys?: ReadonlySet<string>): Order {
+  const unit = state[side].find(unit => unit.key === key);
+  if (!unit) return { key, skill: BASIC_ATTACK };
+  const excluded = new Set<number>();
+  let choice: Order;
+  let skill: Skill | undefined;
+  do {
+    choice = planOrders(state, side, [], { key, remaining: remainingKeys, excluded }).find(order => order.key === key) ?? { key, skill: BASIC_ATTACK };
+    skill = battleSkill(unit.monster, choice.skill);
+    const protectedFriends = skill?.kind === 'responseGuard' ? living(state[side]) : state[side].filter(friend => friend.key === (skill?.kind === 'guard' ? key : choice.target));
+    if (!skill || !['guard', 'protect', 'responseGuard'].includes(skill.kind) || protectedFriends.some(friend => automaticProtectionValue(state, key, side, friend, remainingKeys) > 0)) break;
+    excluded.add(choice.skill);
+  } while (excluded.size <= MAX_SPECIAL_SKILLS);
+  if (!skill || skillTargetsAllies(skill)) return choice;
+  const defense = chooseTacticalAutomaticOrder(state, key, side, remainingKeys);
+  return battleSkill(unit.monster, defense.skill)?.kind === 'guard' ? defense : choice;
+}
+
+/** Headless superseded CPU comparison, not the shipping default.
+ * Bounded learned-attack variety uses its ONE fixed initiative token.
+ * Reassessment changes legal options, never redraws randomness. Support/core policies
+ * stay deliberate; basic attack is always a candidate and guard requires positive
+ * defensive utility. This strategy differs from player auto, not its information or rules.
+ */
+export function chooseEnemyAutomaticOrder(state: State, key: string, remainingKeys: ReadonlySet<string>, token: number): Order {
+  const choice = chooseAutomaticOrder(state, key, 'enemies', remainingKeys);
+  const unit = state.enemies.find(unit => unit.key === key);
+  const skill = unit && battleSkill(unit.monster, choice.skill);
+  if (!unit || !skill || skillTargetsAllies(skill) || [DEMON_CORE_ID, UNDEAD_CORE_ID, EXTRAORDINARY_CORE_ID].includes(unit.monster.id)
+    || unit.monster.skills.some(option => (option.mpDamage ?? 0) > 0)) return choice;
+  const defense = chooseTacticalAutomaticOrder(state, key, 'enemies', remainingKeys);
+  const guardWorthwhile = battleSkill(unit.monster, defense.skill)?.kind === 'guard';
+  const candidates = [BASIC_ATTACK, ...unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((_, index) => index)]
+    .filter(index => { const option = battleSkill(unit.monster, index)!; return canUseSkill(unit, option, state.enemies)
+      && (option.kind === 'hit' || option.kind === 'poison' || (option.kind === 'guard' && guardWorthwhile)); });
+  const index = candidates[(token >>> 0) % candidates.length] ?? BASIC_ATTACK;
+  const target = living(state.allies).find(friend => friend.key === choice.target) ?? weakest(state.allies);
+  return { key, skill: index, target: battleSkill(unit.monster, index)!.kind === 'guard' ? key : target?.key };
+}
+
+/** Shipping CPU keeps the established pre-turn policy. Its only new branch is a
+ * learned-guard-only affordable pool: include free attack, and retain guard only
+ * when public-state defensive utility justifies it. Healthy offensive pools and
+ * deliberate support/core choices keep the exact v30 seed-modulo selection.
+ * seedBeforeTie is the existing seed before this actor's one initiative draw;
+ * this function itself consumes no randomness and is called once, never per band.
+ */
+export function chooseLegacyEnemyOrder(state: State, key: string, seedBeforeTie: number, planned: readonly Order[] = autoOrders(state, 'enemies')): Order {
+  const unit = state.enemies.find(unit => unit.key === key);
+  const order = planned.find(order => order.key === key) ?? { key, skill: BASIC_ATTACK };
+  if (!unit) return order;
+  const automatic = battleSkill(unit.monster, order.skill);
+  const tacticalSupport = automatic && skillTargetsAllies(automatic);
+  const candidates = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((skill, index) => ({ skill, index }))
+    .filter(({ skill }) => canUseSkill(unit, skill, state.enemies) && (skill.kind === 'hit' || skill.kind === 'poison' || skill.kind === 'guard' || (skill.kind === 'heal' && skill.power === 0)));
+  if (tacticalSupport || !candidates.length || [DEMON_CORE_ID, UNDEAD_CORE_ID, EXTRAORDINARY_CORE_ID].includes(unit.monster.id) || unit.monster.skills.some(skill => (skill.mpDamage ?? 0) > 0)) return order;
+  if (candidates.every(({ skill }) => skill.kind === 'guard')) {
+    const remaining = new Set([...living(state.allies), ...living(state.enemies)].map(actor => actor.key));
+    const defensive = chooseTacticalAutomaticOrder(state, key, 'enemies', remaining);
+    const guardWorthwhile = battleSkill(unit.monster, defensive.skill)?.kind === 'guard';
+    const pool = [{ skill: battleSkill(unit.monster, BASIC_ATTACK)!, index: BASIC_ATTACK }, ...(guardWorthwhile ? candidates : [])];
+    const chosen = pool[(seedBeforeTie >>> 0) % pool.length];
+    const target = living(state.allies).find(target => target.key === order.target) ?? weakest(state.allies);
+    return { key, skill: chosen.index, target: chosen.skill.kind === 'guard' ? key : target?.key };
+  }
+  const chosen = candidates[seedBeforeTie % candidates.length];
+  return { key, skill: chosen.index, target: chosen.skill.kind === 'guard' ? key : order.target };
+}
+
 /** Opt-in explicit opposing orders for headless tests. Omission preserves the gameplay CPU. */
-export type AdvanceOptions = { enemyOrders?: Order[] };
+export type AdvanceOptions = { enemyOrders?: Order[]; /** Headless comparison only; no UI/save setting. */ automaticPolicy?: 'tactical' | 'snapshot-live' | 'narrow-live' };
+/** Comparison arm: old scoring, current actor first so no hypothetical ally plan is reserved. */
+export function chooseSnapshotAutomaticOrder(state: State, key: string, side: 'allies' | 'enemies' = 'allies'): Order {
+  const actor = state[side].find(unit => unit.key === key);
+  if (!actor) return { key, skill: BASIC_ATTACK };
+  return planOrders({ ...state, [side]: [actor, ...state[side].filter(unit => unit.key !== key)] }, side).find(order => order.key === key) ?? { key, skill: BASIC_ATTACK };
+}
 export function advanceWithEvents(old: State, orders: Order[], options: AdvanceOptions = {}): { state: State; events: BattleEvent[] } {
   const events: BattleEvent[] = [];
   if (old.winner) return { state: old, events };
@@ -647,47 +847,40 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
     if (unit.hp <= 0 && unit.supplyReady) { unit.supplyReady = false; emit({ kind: 'expire', target: unit.key, effect: 'supplyReady', supplyReady: false }); }
     if (unit.hp <= 0 && unit.responseReady) { unit.responseReady = false; emit({ kind: 'expire', target: unit.key, effect: 'responseReady', responseReady: false }); }
   }
-  const alliedAutomatic = completeOrders(battle, orders);
-  const enemyAutomatic = autoOrders(battle, 'enemies');
-  const enemyOrders = options.enemyOrders ?? enemyAutomatic;
-  const actions: { unit: Unit; skill: Skill; side: 'allies' | 'enemies'; target?: string; skillIndex: number; tie: number }[] = [];
+  type Action = { unit: Unit; skill: Skill; side: 'allies' | 'enemies'; target?: string; skillIndex: number; tie: number; speed: number; automatic: boolean; record: BattleOrderRecord; queuePriority: number };
+  const actions: Action[] = [];
   const enemyMpLoss = new Set<string>();
+  const legacyEnemyPlan = options.automaticPolicy === undefined && options.enemyOrders === undefined ? autoOrders(battle, 'enemies') : undefined;
+  const bands = [...new Set([0, 1, ...[...battle.allies, ...battle.enemies].flatMap(unit => unit.monster.skills.map(skill => skill.priority))])].sort((a, b) => b - a);
   for (const side of ['allies', 'enemies'] as const) {
     for (const unit of living(battle[side])) {
-      let order = (side === 'allies' ? orders : enemyOrders).find(candidate => candidate.key === unit.key)
-        ?? (side === 'allies' ? alliedAutomatic : enemyAutomatic).find(candidate => candidate.key === unit.key);
-      if (side === 'enemies' && options.enemyOrders === undefined) {
-        const automatic = order && battleSkill(unit.monster, order.skill);
-        const tacticalSupport = automatic && skillTargetsAllies(automatic);
-        // Preserve legacy seeded variation outside the explicit new core policies.
-        // Drain-capable actors and the undead/extraordinary cores retain public-state autoOrders
-        // on both sides; the isolated Lab supplies autoOrders explicitly for all actors.
-        const candidates = unit.monster.skills.slice(0, MAX_SPECIAL_SKILLS).map((skill, index) => ({ skill, index }))
-          .filter(({ skill }) => canUseSkill(unit, skill, battle[side]) && (skill.kind === 'hit' || skill.kind === 'poison' || skill.kind === 'guard' || (skill.kind === 'heal' && skill.power === 0)));
-        if (!tacticalSupport && candidates.length && unit.monster.id !== DEMON_CORE_ID && unit.monster.id !== UNDEAD_CORE_ID && unit.monster.id !== EXTRAORDINARY_CORE_ID && !unit.monster.skills.some(skill => (skill.mpDamage ?? 0) > 0)) {
-          const chosen = candidates[seed % candidates.length];
-          order = { key: unit.key, skill: chosen.index, target: chosen.skill.kind === 'guard' ? unit.key : order?.target };
-        }
-      }
-      const skill = battleSkill(unit.monster, order?.skill ?? BASIC_ATTACK);
+      const submitted = (side === 'allies' ? orders : options.enemyOrders ?? []).find(candidate => candidate.key === unit.key);
+      const legacyEnemy = side === 'enemies' && legacyEnemyPlan !== undefined;
+      const order = submitted ?? (legacyEnemy ? chooseLegacyEnemyOrder(battle, unit.key, seed, legacyEnemyPlan) : { key: unit.key, skill: AUTO });
+      const automatic = order.skill === AUTO;
+      const skill = automatic ? battleSkill(unit.monster, BASIC_ATTACK)! : battleSkill(unit.monster, order.skill);
       const sameSide = skill && skillTargetsAllies(skill) ? battle[side] : side === 'allies' ? battle.enemies : battle.allies;
-      const badTarget = skill && skill.kind !== 'guard' && order?.target !== undefined && !sameSide.some(target => target.key === order!.target);
-      const rejection = !skill ? 'invalid-skill' : badTarget ? 'invalid-target' : skillUnavailableReason(unit, skill, battle[side]);
-      recordedOrders.push({
-        key: unit.key, skill: order?.skill ?? BASIC_ATTACK, ...(order?.target !== undefined ? { target: order.target } : {}),
-        side, source: (side === 'allies' ? orders : options.enemyOrders ?? []).some(candidate => candidate.key === unit.key) ? 'explicit' : 'automatic',
-        ...(skill ? { skillName: skill.name, skillKind: skill.kind, skillPower: skill.power } : {}),
-        accepted: rejection === undefined, ...(rejection ? { rejection } : {}),
-      });
-      if (!skill || !canUseSkill(unit, skill, battle[side]) || badTarget) {
+      const badTarget = !automatic && skill && skill.kind !== 'guard' && order.target !== undefined && !sameSide.some(target => target.key === order.target);
+      const rejection = automatic ? undefined : !skill ? 'invalid-skill' : badTarget ? 'invalid-target' : skillUnavailableReason(unit, skill, battle[side]);
+      const record: BattleOrderRecord = {
+        key: unit.key, skill: order.skill, ...(!automatic && order.target !== undefined ? { target: order.target } : {}), side,
+        source: automatic || legacyEnemy ? 'automatic' : 'explicit',
+        ...(!automatic && skill ? { skillName: skill.name, skillKind: skill.kind, skillPower: skill.power } : {}),
+        accepted: !automatic && rejection === undefined, ...(rejection ? { rejection } : {}),
+      };
+      recordedOrders.push(record);
+      if (!skill || rejection) {
         battle.log.push(`${unit.monster.name}の指示は取り消し（${!skill ? '不正な特技' : badTarget ? '対象が不正' : skillUnavailableLabel(rejection as SkillUnavailableReason)}・MP消費なし）`);
         continue;
       }
       seed = random(seed);
-      actions.push({ unit, skill, side, skillIndex: order?.skill ?? BASIC_ATTACK, target: order?.target, tie: seed });
+      const action = { unit, skill, side, skillIndex: order.skill, target: automatic ? undefined : order.target, tie: seed, speed: speedFor(unit, battle.turn), automatic, record };
+      for (const queuePriority of automatic ? bands : [skill.priority]) actions.push({ ...action, queuePriority });
     }
   }
-  actions.sort((a, b) => b.skill.priority - a.skill.priority || speedFor(b.unit, battle.turn) - speedFor(a.unit, battle.turn) || a.tie - b.tie);
+  actions.sort((a, b) => b.queuePriority - a.queuePriority || b.speed - a.speed || a.tie - b.tie);
+  const completed = new Set<string>();
+  const remaining = new Set(actions.map(action => action.unit.key));
   const damage = (target: Unit, requested: number, actor?: string, effect?: string, hitIndex?: number) => {
     const amount = Math.min(target.hp, Math.max(1, Math.floor(requested)));
     target.hp -= amount;
@@ -706,6 +899,21 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
   };
   for (const action of actions) {
     const { unit, side } = action;
+    if (completed.has(unit.key)) continue;
+    if (action.automatic) {
+      if (unit.hp <= 0 || !living(side === 'allies' ? battle.enemies : battle.allies).length) {
+        action.record.rejection = unit.hp <= 0 ? 'defeated' : 'no-opponents';
+        completed.add(unit.key); remaining.delete(unit.key); continue;
+      }
+      const choice = options.automaticPolicy === 'snapshot-live' ? chooseSnapshotAutomaticOrder(battle, unit.key, side)
+        : options.automaticPolicy === 'tactical' ? chooseTacticalAutomaticOrder(battle, unit.key, side, remaining)
+        : side === 'enemies' ? chooseEnemyAutomaticOrder(battle, unit.key, remaining, action.tie) : chooseAutomaticOrder(battle, unit.key, side, remaining);
+      const chosen = battleSkill(unit.monster, choice.skill)!;
+      if (chosen.priority < action.queuePriority) continue;
+      action.skill = chosen; action.skillIndex = choice.skill; action.target = choice.target;
+      Object.assign(action.record, choice, { skillName: chosen.name, skillKind: chosen.kind, skillPower: chosen.power, accepted: true, decisionPriority: action.queuePriority, nativePriority: chosen.priority });
+    }
+    completed.add(unit.key); remaining.delete(unit.key);
     let skill = action.skill;
     phase('before-action', unit.key);
     const opponents = side === 'allies' ? battle.enemies : battle.allies;

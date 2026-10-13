@@ -33,7 +33,7 @@ describe('extraordinary isolated typed Lab contract',()=>{
   }
  });
  it('counts actual clear, nominal ticks and reapplication separately without any response healing',()=>{
-  const r=runMatch({teamA:ward,teamB:ward,seed:0,trace:true});const c=r.units[0];expect(c.responseCleanseCasts).toBe(1);expect(c.responseClearedTicks).toBeGreaterThan(0);expect(c.responseClearNominalPotential).toBeGreaterThan(0);expect(c.responseLaterReapplications).toBeGreaterThan(0);
+  const overrides={monsters:Object.fromEntries(ward.map(id=>[id,{hp:1000,atk:0,mp:300,speed:id===10?100:id===36?10:0,skills:id===36?monsters[36].skills:id===10?[monsters[10].skills[1]]:[]}]))};const r=runMatch({teamA:ward,teamB:ward,seed:0,overrides,trace:true});const c=r.units[0];expect(c.responseCleanseCasts).toBe(1);expect(c.responseClearedTicks).toBeGreaterThan(0);expect(c.responseClearNominalPotential).toBeGreaterThan(0);expect(c.responseLaterReapplications).toBeGreaterThan(0);
   expect(r.trace.turns.flatMap((t:{events:{kind:string;effect?:string}[]})=>t.events).some((e:{kind:string;effect?:string})=>e.kind==='heal'&&e.effect?.startsWith('extraordinary'))).toBe(false);
  });
  it('never borrows natural slime MP and retains exact enabled control and disabled shared policy',()=>{

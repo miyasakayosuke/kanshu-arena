@@ -1,5 +1,6 @@
 import { afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -13,7 +14,7 @@ function put(root, path, text) { mkdirSync(dirname(join(root, path)), { recursiv
 function change(root, path, edit) { put(root, path, edit(readFileSync(join(root, path), 'utf8'))); }
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'arena-rights-test-')); temp.push(root);
-  for (const path of ['src', 'public', 'docs', 'package-lock.json']) {
+  for (const path of ['src', 'public', 'docs', 'scripts', 'tests', 'package-lock.json']) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(repo, path), join(root, path), { recursive: true });
   }
@@ -67,6 +68,12 @@ test('a new external asset URL is flagged', () => {
 });
 test('roster emoji changes need an inventory update', () => {
   const root = fixture(); change(root, 'src/engine.ts', value => value.replace("[0,'妖狐','🦊'", "[0,'妖狐','🐱'"));
+  // Even a refreshed source digest cannot bypass the separate roster-glyph inventory.
+  change(root, 'docs/rights/asset-manifest.json', value => {
+    const manifest = JSON.parse(value);
+    for (const asset of manifest.assets) if (asset.sha256?.['src/engine.ts']) asset.sha256['src/engine.ts'] = createHash('sha256').update(readFileSync(join(root, 'src/engine.ts'))).digest('hex');
+    return JSON.stringify(manifest);
+  });
   assert.throws(() => checkRights({ root }), /Roster emoji changed/);
 });
 test('missing built notices and missing compiled credits link are detected', () => {

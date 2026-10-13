@@ -136,7 +136,7 @@ describe('dragon same-policy evidence', () => {
     expect(disabled.sides.allies.dragonChargeGenerated).toBe(0); expect(disabled.sides.allies.dragonChargeSpent).toBe(0);
     expect(disabled.sides.allies.mpSpent).toBeGreaterThan(0);
     for (const turn of disabled.trace.turns) expect(turn.unitsAfter.every((unit: object) => !Object.hasOwn(unit, 'dragonCharge'))).toBe(true);
-    expect(report.methodology.limitations.join(' ')).toContain('current charge only');
+    expect(report.methodology.limitations.join(' ')).toContain('current charge at each descending-priority checkpoint');
   });
   it('is deterministic, unique and legal at the 37-monster milestone without enumerating five-subsets', () => {
     const roster = Array.from({ length: 37 }, (_, id) => ({ id, cost: 2 + id % 4 }));

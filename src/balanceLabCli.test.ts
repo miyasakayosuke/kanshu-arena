@@ -167,14 +167,15 @@ describe('balance lab real CLI integration', () => {
   it('captures a resolver failure and verifies its request, error, and full trace on replay', () => {
     const failure = readJson<{
       error: string; matchId: string; traceSha256: string;
-      trace: { activeAttempt: { turn: number; orders: unknown[]; enemyOrders: unknown[] }; turns: unknown[] };
+      trace: { activeAttempt: { turn: number; orders: unknown[]; enemyOrders?: unknown[]; enemyPolicy?: string }; turns: unknown[] };
     }>(failurePath);
     expect(failure.error).toBe('fixture resolver failure');
     expect(failure.matchId).toBe('beasts-vs-guards__s42__a-left__baseline');
     expect(failure.traceSha256).toMatch(/^[a-f0-9]{64}$/);
     expect(failure.trace.activeAttempt.turn).toBe(1);
     expect(failure.trace.activeAttempt.orders).toHaveLength(5);
-    expect(failure.trace.activeAttempt.enemyOrders).toHaveLength(5);
+    expect(failure.trace.activeAttempt).not.toHaveProperty('enemyOrders');
+    expect(failure.trace.activeAttempt.enemyPolicy).toBe('legacy-pre-turn');
     expect(failure.trace.turns).toEqual([]);
     expect(existsSync(join(temporary, 'failure/report.json'))).toBe(false);
     const destination = join(temporary, 'replayed-failure.json');

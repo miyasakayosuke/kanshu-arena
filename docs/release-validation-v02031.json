@@ -1,0 +1,69 @@
+{
+  "release": "0.20.31",
+  "status": "Prepared release; native acceptance pending",
+  "baselineCommit": "02033f38523840df3b7b776673502370bc759ed0",
+  "baselineTree": "fc4a6b7a1bc38747621a75d96a071b6f246d42a6",
+  "scope": "Player action-time AUTO intent; established enemy pre-turn policy retained except guard-only affordable pool correction. No stats, art, saves or dependencies changed.",
+  "checks": {
+    "fullAggregate": {
+      "status": "PASS on exact final source/tests",
+      "tests": 3306,
+      "files": 162
+    },
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "diffCheck": true,
+    "explicitManualParity": {
+      "games": 144,
+      "turns": 1032,
+      "exact": true
+    },
+    "independentManualRounds": 1449,
+    "independentCpuPreservation": {
+      "archivedStates": 2525,
+      "enemyOrders": 6650,
+      "healthyOpenersByteExact": 300,
+      "unaffectedLaterRoundsByteExact": 1603,
+      "changedEnemyOrdersGuardOnly": 1089
+    },
+    "currentPolicySmoke": {
+      "matches": 736,
+      "identityCandidateNoOutcomeDelta": true,
+      "matchupScorePercent": 48.56,
+      "historicalAllAutoParity": false,
+      "engineSha256": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
+      "labSha256": "be133d9cf55f487d7f79a5ef3e59f213035e8cb9971e149d0b3ea0661530076d",
+      "reportSha256": "c8978e02a741e35206f70ec1f53e32f872b911ee180af3d8c08a516b0ca8cbd7"
+    },
+    "independentReview": "PASS exact source/UI, targeted tests and probes; native pending"
+  },
+  "runtimeSha256": {
+    "src/engine.ts": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
+    "src/App.tsx": "9192a655fbceb7e9aefba713256221183b950ad6f5743083352d174e98e5d37f",
+    "src/TacticsPanel.tsx": "e117c2abccca25db56ef610c8f4aa9191ce7d46c6daca481e066170bb9685960",
+    "src/battleInsights.ts": "deae9e9c8deecc2afe87cec026b60b3c128afee0f94c7b971868acd1a4005be2",
+    "src/committedOrder.ts": "77e1e63a1e627aa6fa24585e32334fc0aacaa1f7c0d6f4c92e61970c1b4263f5"
+  },
+  "evaluation": {
+    "auditEngineSha256": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
+    "pairedCases": 144,
+    "starterOpeningWinsTurns": [
+      7,
+      6,
+      6
+    ],
+    "allThreeFirstTurnSurvivors": 5,
+    "starterPanelGames": 180,
+    "withinThreeToSevenTurns": 154,
+    "minimumPacingFraction": 0.85,
+    "exhaustedCohortGames": 36,
+    "exhaustedGuardCasts": 2,
+    "exhaustedLongestGuardStreak": 1,
+    "limits": "Bounded simulations, not optimal-play or universal difficulty guarantee. Changed action choices diverge RNG streams. Rejected arms retained."
+  },
+  "nativeAcceptance": "Pending sole publisher. No native or performance claim.",
+  "legalClearance": false
+}

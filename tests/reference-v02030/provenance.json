@@ -1,0 +1,9 @@
+{
+  "sourceCommit": "02033f38523840df3b7b776673502370bc759ed0",
+  "sourceTree": "fc4a6b7a1bc38747621a75d96a071b6f246d42a6",
+  "purpose": "Frozen historical automatic-policy reference and explicit-manual differential only. Excluded from runtime import graph. Existing project-authored code; no new license or ownership clearance asserted.",
+  "sha256": {
+    "families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+    "engine.ts": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489"
+  }
+}

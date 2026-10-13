@@ -89,7 +89,7 @@ describe('last confirmed command focuses the explicit turn start', () => {
     if (mode === 'timeout') await act(async () => vi.advanceTimersByTime(30000));
     else await act(async () => { vi.setSystemTime(Date.now() + 30001); label('トロルを対象に選択').click(); });
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [1,2,3,4].map(index => ({key:`a${index}`,skill:engine.DEFEND}))));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [1,2,3,4].map(index => ({key:`a${index}`,skill:engine.DEFEND}))));
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
     expect(HTMLElement.prototype.scrollIntoView).not.toHaveBeenCalled(); expect(turnStart()).toBeNull();
     await click(button('演出をスキップ')); expect(document.activeElement).not.toBe(turnStart()); expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);

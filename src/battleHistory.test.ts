@@ -72,7 +72,8 @@ describe('authoritative full battle history', () => {
     const allEvents = [];
     for (let turn = 1; turn <= MAX_TURNS; turn++) {
       const before = structuredClone(state);
-      const result = advanceWithEvents(freeze(state), state.allies.map(unit => ({ key: unit.key, skill: DEFEND })));
+      const result = advanceWithEvents(freeze(state), state.allies.map(unit => ({ key: unit.key, skill: DEFEND })),
+        { enemyOrders: state.enemies.map(unit => ({ key: unit.key, skill: DEFEND })) });
       expect(state).toEqual(before);
       allEvents.push(...result.events);
       state = result.state;

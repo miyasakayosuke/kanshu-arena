@@ -152,7 +152,7 @@ describe('cancelling a direct ally recipient', () => {
     if (previous === 'manual') {
       await chooseSpecial(1, '生命の雫'); await click(actor(2)); oldOrder = { key: 'a1', skill: 1, target: 'a2' };
     } else if (previous === 'automatic') {
-      oldOrder = engine.completeOrders(state, [{ key: 'a4', skill: engine.DEFEND }]).find(order => order.key === 'a1');
+      oldOrder = engine.automaticOrders(state, [{ key: 'a4', skill: engine.DEFEND }]).find(order => order.key === 'a1');
       await click(actor(1)); await click(button('おまかせ'));
     }
     const beforeResources = resources(), beforeSave = saved();
@@ -173,7 +173,7 @@ describe('cancelling a direct ally recipient', () => {
     expect(advance).not.toHaveBeenCalled();
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(previous === 'unselected' ? 1 : 2);
     await click(turnStart());
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [{ key: 'a4', skill: engine.DEFEND }, ...(oldOrder ? [oldOrder] : [])]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [{ key: 'a4', skill: engine.DEFEND }, ...(oldOrder ? [oldOrder] : [])]));
   });
 
   it.each(['back', 'escape'] as const)('invalidates a queued recipient click when %s cancels it in the same batch', async route => {
@@ -188,7 +188,7 @@ describe('cancelling a direct ally recipient', () => {
     expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     expect(document.querySelector('.skillButtons')).not.toBeNull();
     expect(document.activeElement).toBe(button('生命の雫'));
-    await click(turnStart()); expect(advance.mock.calls[0][1]).toEqual(engine.autoOrders(state));
+    await click(turnStart()); expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state));
   });
 });
 
@@ -245,7 +245,7 @@ describe('direct ally keyboard, repeat, timeout, and navigation safety', () => {
       else await act(async () => { document.dispatchEvent(new Event('visibilitychange')); window.dispatchEvent(new Event('focus')); });
     }
     expect(advance).toHaveBeenCalledTimes(1);
-    expect(advance.mock.calls[0][1]).toEqual(engine.completeOrders(state, [{ key: 'a1', skill: engine.DEFEND }, { key: 'a4', skill: engine.DEFEND }]));
+    expect(advance.mock.calls[0][1]).toEqual(engine.automaticOrders(state, [{ key: 'a1', skill: engine.DEFEND }, { key: 'a4', skill: engine.DEFEND }]));
     expect(document.querySelector('.playingPanel')?.textContent).toContain('時間切れ');
     expect(recipients()).toHaveLength(0); expect(actors().every(node => node.disabled)).toBe(true);
     await act(async () => recipient.click()); expect(advance).toHaveBeenCalledTimes(1);

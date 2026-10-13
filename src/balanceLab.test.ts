@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, attackFor, autoOrders, DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, start } from './engine';
+import { advanceWithEvents, attackFor, automaticOrders, autoOrders, DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, start } from './engine';
 import type { BattleEvent, Skill, State } from './engine';
 // The command-line lab is intentionally JavaScript, loaded directly by Node and Vitest.
 // @ts-ignore No declaration file is needed for this test-only CLI module.
@@ -361,7 +361,7 @@ describe('seeded equal-policy matches and trace evidence', () => {
     for (const turn of result.trace!.turns) {
       expect(turn.turn).toBe(expected.turn);
       expect(turn.seedBefore).toBe(expected.seed);
-      const next = advanceWithEvents(expected, autoOrders(expected), { enemyOrders: autoOrders(expected, 'enemies') });
+      const next = advanceWithEvents(expected, automaticOrders(expected));
       expect(turn.events).toEqual(next.events);
       expect(turn.seedAfter).toBe(next.state.seed);
       expectResources(next.state);

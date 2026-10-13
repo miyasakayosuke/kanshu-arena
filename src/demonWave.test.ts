@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
@@ -219,7 +220,7 @@ describe('bounded public-information AI and distinct battle evidence', () => {
     const state = start([29], [29]); state.allies[0].mp = 16; state.enemies[0].mp = 16; const before = structuredClone(state);
     expect(autoOrders(state)[0]).toEqual({ key: 'a0', skill: 0, target: 'e0' });
     expect(autoOrders(state, 'enemies')[0]).toEqual({ key: 'e0', skill: 0, target: 'a0' }); expect(state).toEqual(before);
-    const result = advanceWithEvents(state, autoOrders(state));
+    const result = advanceWithEvents(state, autoOrders(state), { enemyOrders: autoOrders(state, 'enemies') });
     expect(result.state.history![0].orders.map(order => order.skill)).toEqual([0, 0]);
   });
   it('chooses HP damage against empty MP or free-only targets, and does not repeatedly drain exhausted targets', () => {
@@ -247,14 +248,14 @@ describe('bounded public-information AI and distinct battle evidence', () => {
     expect(battleEventLine(result.state, fallbacks(result.events)[0])).toContain('通常攻撃へ変更');
     expect(result.state.history![0].events).toEqual(result.events);
   });
-  it('under explicit legacy poison controls, keeps all294 captured historical battles identical except later intentional family tags', () => {
+  it('historical v30 reference: under explicit legacy poison controls, keeps all294 captured historical battles identical except later intentional family tags', () => {
     // Captured from the untouched slime engine before demon implementation.
     // Keep the existing IDs1/4/8 family-tag normalization; additionally omit only
     // the two explicit poison control metadata fields. All combat state stays exact.
     const parties = [[19, 20, 21, 22, 23], [15, 5, 16, 17, 18], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [1, 5, 8, 10, 6], [4, 7, 8, 13, 22], [24, 25, 26, 27, 28]], results = [];
     for (const team of parties) for (const enemy of parties) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       results.push({ team, enemy, seed, samePolicy, state: withoutPoisonControlMetadata(state) });
     }
     expect(hash(normalizeLegacyMetadata(results))).toBe('bde4793870911dfc90c44a137659bb77d55950c32b1d1581590718abddbea292');

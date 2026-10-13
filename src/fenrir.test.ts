@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
-  advanceWithEvents, attackFor, autoOrders, BASIC_ATTACK, battleSkill, canUseSkill, cost,
-  DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, start,
+  advanceWithEvents, attackFor, autoOrders, automaticOrders, AUTO, BASIC_ATTACK, battleSkill, canUseSkill, cost,
+  DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, skillUnavailableReason, start,
   type BattleEvent, type Monster, type Skill, type State, type Unit,
 } from './engine';
 import { applyBattleEvents, barrageDuration, buildTimeline, CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS } from './playback';
@@ -200,7 +200,7 @@ describe('seeded, per-hit living-target barrage', () => {
   it('deals guarded first-hit damage before stripping guard and rally, preserving poison and leadership', () => {
     const initial = training();
     initial.enemies[0] = { ...dummy('e0', { skills: [guarding], atk: 58, speed: 104 }), rally: 2, poison: 3 };
-    const result = resolveBarrage(initial);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0 }], { enemyOrders: [{ key: 'e0', skill: 0 }] });
     const firstDamage = result.events.findIndex(e => e.kind === 'damage' && e.actor === 'a0');
     const firstBreak = result.events.findIndex(e => e.kind === 'break' && e.actor === 'a0');
     expect(firstBreak).toBe(firstDamage + 1);
@@ -349,7 +349,7 @@ describe('damage profile, durability, and actual counterplay', () => {
       const state = start(protect ? [12, 1] : [12], [0, 0, 0], 42);
       state.enemies = state.enemies.map(u => ({ ...u, monster: { ...u.monster, skills: [u.monster.skills[1]!] } }));
       const orders = [{ key: 'a0', skill: 0 }, ...(protect ? [{ key: 'a1', skill: 3, target: 'a0' }] : [])];
-      return advanceWithEvents(state, orders);
+      return advanceWithEvents(state, orders, { enemyOrders: state.enemies.map(unit => ({ key: unit.key, skill: 0, target: 'a0' })) });
     };
     const exposed = scenario(false);
     expect(exposed.state.allies[0].hp).toBe(0);
@@ -366,16 +366,56 @@ describe('legal full-roster 5v5 invariants, not arbitrary win-rate thresholds', 
   it('finishes both orientations across seeds with legal orders, nonnegative resources, and matching playback', () => {
     const team = [12, 0, 2, 6, 10];
     expect(isValidTeam(team, rules.light.budget)).toBe(true);
-    let barrages = 0;
+    let barrages = 0, deferredSkips = 0;
     for (const enemy of opponentTeams('standard')) for (const seed of [0, 1, 2, 7, 42, 2026, 20261009, 0xffffffff]) for (const reverse of [false, true]) {
       expect(isValidTeam(enemy)).toBe(true);
       let state = start(reverse ? enemy : team, reverse ? team : enemy, seed, { leaders: true });
       while (!state.winner && state.turn <= MAX_TURNS) {
-        const result = advanceWithEvents(state, autoOrders(state));
+        const result = advanceWithEvents(state, automaticOrders(state));
         const played = buildTimeline(result.events).cues.reduce((s, c) => applyBattleEvents(s, [...(c.updates ?? []), ...c.impacts]), state);
         expect(played.allies).toEqual(result.state.allies);
         expect(played.enemies).toEqual(result.state.enemies);
-        expect(result.state.history!.at(-1)!.orders.every(o => o.accepted)).toBe(true);
+        const records = result.state.history!.at(-1)!.orders;
+        for (const order of records) {
+          const casts = result.events.filter(event => event.kind === 'cast' && event.actor === order.key);
+          expect(order.source).toBe('automatic');
+          if (order.accepted) {
+            const actor = state[order.side].find(unit => unit.key === order.key)!;
+            expect(battleSkill(actor.monster, order.skill)).toBeDefined();
+            if (order.decisionPriority !== undefined) expect(casts).toHaveLength(1);
+            else expect(casts.length).toBeLessThanOrEqual(1); // Fixed pre-turn CPU intent may be prevented.
+            if (casts.length) {
+              const fallback = result.events.some(event => event.kind === 'fallback' && event.actor === order.key);
+              expect(casts[0].skill).toBe(fallback ? battleSkill(actor.monster, BASIC_ATTACK)!.name : order.skillName);
+            } else {
+              expect(order.side).toBe('enemies');
+              const beforeIndex = result.events.findIndex(event => event.kind === 'phase' && event.phase === 'before-action' && event.actor === order.key);
+              expect(beforeIndex).toBeGreaterThanOrEqual(0);
+              const before = applyBattleEvents(state, result.events.slice(0, beforeIndex));
+              const liveActor = before[order.side].find(unit => unit.key === order.key)!;
+              const opposing = before[order.side === 'allies' ? 'enemies' : 'allies'];
+              const unavailable = skillUnavailableReason(liveActor, battleSkill(liveActor.monster, order.skill)!, before[order.side]);
+              const priorMpLoss = result.events.slice(0, beforeIndex).some(event => event.kind === 'resource-loss' && event.target === order.key && (event.amount ?? 0) > 0);
+              // A living paid order blocked by actual MP loss must cast its basic fallback.
+              const mustFallback = liveActor.hp > 0 && opposing.some(unit => unit.hp > 0) && unavailable === 'insufficient-mp' && priorMpLoss;
+              expect(mustFallback).toBe(false);
+              expect(liveActor.hp <= 0 || opposing.every(unit => unit.hp <= 0) || unavailable !== undefined).toBe(true);
+              expect(result.events.filter(event => event.kind === 'resource' && event.actor === order.key)).toHaveLength(0);
+            }
+          } else {
+            // A defeated/not-needed actor never reaches a decision checkpoint.
+            // Preserve its unresolved intent instead of inventing a legal cast.
+            deferredSkips++;
+            expect(order.skill).toBe(AUTO);
+            expect(['defeated', 'no-opponents']).toContain(order.rejection);
+            expect(order.skillName).toBeUndefined();
+            expect(order.target).toBeUndefined();
+            expect(casts).toHaveLength(0);
+            if (order.rejection === 'defeated') expect(result.state[order.side].find(unit => unit.key === order.key)!.hp).toBe(0);
+            else expect(result.state[order.side === 'allies' ? 'enemies' : 'allies'].every(unit => unit.hp === 0)).toBe(true);
+          }
+        }
+        expect(result.events.filter(event => event.kind === 'cast').every(event => records.some(order => order.key === event.actor && order.accepted))).toBe(true);
         for (const unit of [...result.state.allies, ...result.state.enemies]) {
           expect(unit.hp).toBeGreaterThanOrEqual(0);
           expect(unit.hp).toBeLessThanOrEqual(unit.monster.hp);
@@ -390,5 +430,6 @@ describe('legal full-roster 5v5 invariants, not arbitrary win-rate thresholds', 
       expect(state.turn - 1).toBeLessThanOrEqual(MAX_TURNS);
     }
     expect(barrages).toBeGreaterThan(0);
-  });
+    expect(deferredSkips).toBeGreaterThan(0);
+  }, 20000);
 });

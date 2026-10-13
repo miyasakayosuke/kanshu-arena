@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { advanceWithEvents, autoOrders, battleSkill, completeOrders, start, BASIC_ATTACK, DEFEND, type Order, type Skill, type State } from './engine';
 
+// Legacy snapshot-planner contracts: execute completeOrders as an explicit fixed plan.
+// Gameplay automaticOrders/chooseAutomaticOrder are covered by action-time tests.
 const enemies = [29, 1, 8, 30, 31];
 const fixture = (team = [2, 20, 0, 6, 11]) => start(team, enemies, 42, { leaders: true });
 const attack: Order = { key: 'a0', skill: BASIC_ATTACK, target: 'e0' };
@@ -13,13 +15,13 @@ const next = (state: State, fixed: Order[], key = 'a1') => completeOrders(state,
 const kind = (state: State, order: Order) => battleSkill(state.allies.find(unit => unit.key === order.key)!.monster, order.skill)?.kind;
 const defendingEnemies = (state: State) => ({ enemyOrders: state.enemies.map(unit => ({ key: unit.key, skill: DEFEND })) });
 
-describe('confirmed commands contribute only their actual support in party-slot order', () => {
+describe('explicit snapshot planner: confirmed commands contribute only their actual support in party-slot order', () => {
   it('replaces an overridden cleanse with real automatic cleansing and prevents lethal poison', () => {
     const state = fixture(); state.allies[2].hp = 1; state.allies[2].poison = 3;
     const cleanse = orderFor(state, 1, 'cleanse', 'a2');
     expect(next(state, [attack])).toEqual(cleanse);
-    const result = advanceWithEvents(state, [attack], defendingEnemies(state));
-    const manual = advanceWithEvents(state, [attack, cleanse], defendingEnemies(state));
+    const result = advanceWithEvents(state, completeOrders(state, [attack]), defendingEnemies(state));
+    const manual = advanceWithEvents(state, completeOrders(state, [attack, cleanse]), defendingEnemies(state));
     expect(result.state.allies[2]).toMatchObject({ hp: 31, poison: 0 });
     expect(result.events).toEqual(manual.events);
     expect(result.events).toContainEqual(expect.objectContaining({ kind: 'cleanse', actor: 'a1', target: 'a2' }));
@@ -29,9 +31,9 @@ describe('confirmed commands contribute only their actual support in party-slot 
     const state = fixture([2, 7, 0, 6, 11]); state.allies[2].hp = 80;
     const heal = orderFor(state, 1, 'heal', 'a2');
     expect(next(state, [attack])).toEqual(heal);
-    const result = advanceWithEvents(state, [attack], defendingEnemies(state));
+    const result = advanceWithEvents(state, completeOrders(state, [attack]), defendingEnemies(state));
     expect(result.state.allies[2].hp).toBe(145);
-    expect(result.events).toEqual(advanceWithEvents(state, [attack, heal], defendingEnemies(state)).events);
+    expect(result.events).toEqual(advanceWithEvents(state, completeOrders(state, [attack, heal]), defendingEnemies(state)).events);
   });
 
   it('replaces overridden protection before the incoming hit', () => {
@@ -39,9 +41,9 @@ describe('confirmed commands contribute only their actual support in party-slot 
     const protect = orderFor(state, 1, 'protect', 'a0');
     expect(next(state, [attack])).toEqual(protect);
     const options = defendingEnemies(state); options.enemyOrders[0] = { key: 'e0', skill: 1, target: 'a0' } as Order;
-    const result = advanceWithEvents(state, [attack], options);
+    const result = advanceWithEvents(state, completeOrders(state, [attack]), options);
     expect(result.state.allies[0].hp).toBe(56);
-    expect(result.events).toEqual(advanceWithEvents(state, [attack, protect], options).events);
+    expect(result.events).toEqual(advanceWithEvents(state, completeOrders(state, [attack, protect]), options).events);
   });
 
   it('does not reserve the whole party for an overridden response cleanse', () => {
@@ -51,7 +53,7 @@ describe('confirmed commands contribute only their actual support in party-slot 
     expect(kind(state, plan[1])).toBe('cleanse');
     expect(kind(state, plan[2])).toBe('cleanse');
     expect(plan[1].target).not.toBe(plan[2].target);
-    const result = advanceWithEvents(state, [attack], defendingEnemies(state));
+    const result = advanceWithEvents(state, completeOrders(state, [attack]), defendingEnemies(state));
     expect(result.events.filter(event => event.kind === 'cleanse' && event.actor?.startsWith('a'))).toHaveLength(2);
   });
 
@@ -97,7 +99,7 @@ describe('confirmed commands contribute only their actual support in party-slot 
   });
 });
 
-describe('invalid or unavailable fixed support never invents a reservation', () => {
+describe('explicit snapshot planner: invalid or unavailable fixed support never invents a reservation', () => {
   it.each(['heal', 'cleanse', 'protect'] as const)('checks %s actor, skill, affordability and exact living target', support => {
     for (const reason of ['dead-actor', 'unaffordable', 'invalid-skill', 'missing-target', 'dead-target', 'wrong-side', 'unknown-target', 'unknown-actor'] as const) {
       const state = fixture(support === 'protect' ? [1, 10, 0, 6, 11] : [2, 7, 0, 6, 11]);
@@ -128,7 +130,7 @@ describe('invalid or unavailable fixed support never invents a reservation', () 
   });
 });
 
-describe('actual responses, additive healing and conservative timing', () => {
+describe('explicit snapshot planner: actual responses, additive healing and conservative timing', () => {
   it('reserves a confirmed response guard even when the automatic suggestion would attack', () => {
     const state = fixture([36, 10, 2, 6, 20]); state.allies[2].hp = 70;
     expect(kind(state, autoOrders(state)[0])).toBe('hit');
@@ -186,7 +188,7 @@ describe('actual responses, additive healing and conservative timing', () => {
     const state = fixture([2, 7, 0, 6, 11]); state.allies[2].hp = 1;
     const fixed = orderFor(state, 0, 'heal', 'a2');
     expect(next(state, [fixed])).toEqual(orderFor(state, 1, 'heal', 'a2'));
-    const result = advanceWithEvents(state, [fixed], defendingEnemies(state));
+    const result = advanceWithEvents(state, completeOrders(state, [fixed]), defendingEnemies(state));
     expect(result.state.allies[2].hp).toBe(131);
     expect(result.events.filter(event => event.kind === 'heal' && event.target === 'a2').map(event => event.amount)).toEqual([65, 65]);
   });
@@ -202,12 +204,12 @@ describe('actual responses, additive healing and conservative timing', () => {
     const fixed = orderFor(state, 1, 'heal', 'a2');
     expect(next(state, [fixed], 'a0')).toEqual(orderFor(state, 0, 'heal', 'a2'));
     const options = { enemyOrders: [{ key: 'e0', skill: 1, target: 'a2' }, ...state.enemies.slice(1).map(unit => ({ key: unit.key, skill: DEFEND }))] };
-    const result = advanceWithEvents(state, [fixed], options);
+    const result = advanceWithEvents(state, completeOrders(state, [fixed]), options);
     expect(result.state.allies[2].hp).toBe(102);
     const casts = result.events.filter(event => event.kind === 'cast').map(event => event.actor);
     expect(casts.indexOf('a0')).toBeLessThan(casts.indexOf('e0'));
     expect(casts.indexOf('e0')).toBeLessThan(casts.indexOf('a1'));
-    expect(advanceWithEvents(state, [attack, fixed], options).state.allies[2].hp).toBe(0);
+    expect(advanceWithEvents(state, completeOrders(state, [attack, fixed]), options).state.allies[2].hp).toBe(0);
   });
 
   it('rebuilds removed and replaced support without retaining hidden choices or consuming RNG', () => {

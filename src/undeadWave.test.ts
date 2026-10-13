@@ -1,3 +1,4 @@
+import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
@@ -191,7 +192,7 @@ describe('public-state cashout AI and authoritative evidence', () => {
     state.allies[0].hp = 105; state.enemies[0].hp = 105; const before = structuredClone(state);
     const expected = autoOrders(state); expect(state).toEqual(before);
     for (const seed of [0, 1, 42, 0xffffffff]) expect(autoOrders({ ...state, seed })).toEqual(expected);
-    const result = advanceWithEvents(state, expected);
+    const result = advanceWithEvents(state, expected, { enemyOrders: autoOrders(state, 'enemies') });
     expect(result.state.history![0].orders.find(order => order.key === 'e0')!.skill).toBe(autoOrders(state, 'enemies')[0].skill);
   });
   it('selects a meaningful poisoned target beyond the lowestHP enemy', () => {
@@ -205,7 +206,7 @@ describe('public-state cashout AI and authoritative evidence', () => {
       state.enemies[0].monster = { ...state.enemies[0].monster, skills: [{ ...cashoutSkill, poisonCashout }, monsters[32].skills[1]!] };
       const expected = autoOrders(state, 'enemies')[0];
       expect(expected).toEqual({ key: 'e0', skill: 1, target: 'a0' });
-      const result = advanceWithEvents(state, orders(state, 'allies', DEFEND));
+      const result = advanceWithEvents(state, orders(state, 'allies', DEFEND), { enemyOrders: autoOrders(state, 'enemies') });
       expect(result.state.history![0].orders.find(order => order.key === 'e0')).toMatchObject({ skill: expected.skill, target: expected.target });
       expect(cashouts(result.events)).toHaveLength(0);
     }
@@ -217,14 +218,14 @@ describe('public-state cashout AI and authoritative evidence', () => {
     expect(battleEventLine(result.state, cashouts(result.events)[0])).toContain('残り0回・一撃を強化');
     expect(result.state.history![0].events).toEqual(result.events); expect(facts.some(fact => fact.kind === 'healing')).toBe(false);
   });
-  it('under explicit legacy poison controls, matches all384 independently frozen complete old32 battles, including normal CPU and explicit same-AI', () => {
+  it('historical v30 reference: under explicit legacy poison controls, matches all384 independently frozen complete old32 battles, including normal CPU and explicit same-AI', () => {
     // Frozen BEFORE modifying the predecessor engine, with full final state,
     // history, orders, events, logs, RNG, HP/MP and statuses. Keep the existing
     // ID4 family-tag normalization and omit only the two poison control metadata fields.
     const parties = [[19, 20, 21, 22, 23], [15, 5, 16, 17, 18], [12, 0, 2, 11, 13], [14, 3, 6, 9, 10], [1, 5, 8, 10, 6], [4, 7, 8, 13, 22], [24, 25, 26, 27, 28], [29, 1, 8, 30, 31]], results = [];
     for (const team of parties) for (const enemy of parties) for (const seed of [0, 42, 4294967295]) for (const samePolicy of [false, true]) {
-      let state = start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
-      while (!state.winner) state = advanceWithEvents(state, autoOrders(state), samePolicy ? { enemyOrders: autoOrders(state, 'enemies') } : {}).state;
+      let state = historicalEngine.start(team, enemy, seed, { leaders: true, poisonImpactScale: 1, reservePoison: false });
+      while (!state.winner) state = historicalEngine.advanceWithEvents(state, historicalEngine.autoOrders(state), samePolicy ? { enemyOrders: historicalEngine.autoOrders(state, 'enemies') } : {}).state;
       results.push({ team, enemy, seed, samePolicy, state: withoutPoisonControlMetadata(state) });
     }
     expect(hash(normalizeLegacy(results))).toBe('a76f4180f168512679d49c97adf80baa6051d02267dbc98b98238fdeab3c9e99');

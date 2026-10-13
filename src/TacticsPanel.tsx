@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import { DEFAULT_RESERVE_POISON, completeOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
+import { automaticOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
 import { rules, monsterRole, fixedDamageHint, poisonCashoutHint, type RuleId } from './strategy';
 
 import { POISON_TIMING_HINT, poisonSkillDetail } from './poisonDescription';
@@ -7,7 +7,7 @@ import { POISON_TIMING_HINT, poisonSkillDetail } from './poisonDescription';
 type Props = { battle: State; orders: Record<string, Order>; playing: boolean; rule: RuleId; onClose: () => void };
 
 export default function TacticsPanel({battle, orders, playing, rule, onClose}: Props) {
-  const completed = completeOrders(battle, Object.values(orders));
+  const completed = automaticOrders(battle, Object.values(orders));
   const sequence = battle.allies.filter(u => u.hp > 0)
     .map(unit => ({unit, order: completed.find(o => o.key === unit.key)}))
     .map(value => ({...value, skill: value.order ? battleSkill(value.unit.monster, value.order.skill) : undefined}))
@@ -56,10 +56,10 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
       })}
       <h3>味方の行動順の目安</h3>
       <p className="hint">守護 → 先制 → 防御 → 通常 → アンカー。同じ区分は素早さ順。同速は抽選。</p>
-      <p className="hint">敵の行動は未公開。この間に割り込みます。未入力は現時点のおまかせ案です。</p>
+      <p className="hint">敵の行動は未公開。この間に割り込みます。おまかせ・未入力の特技と対象は行動時に決まり、この一覧の位置は確定順ではありません。</p>
       {playing ? <p className="hint">演出中です。次のターンに新しい指示を確認できます。</p> : <ol className="initiativeList">{sequence.map(({unit, skill}) => <li key={unit.key}>
         <span><MonsterArt monster={unit.monster} portrait /> {unit.monster.name}</span>
-        <small>{skill?.name} · {skill ? `${skillOrderLabel(skill)} · MP ${skill.mpCost}` : '未定'} · SPD {speedFor(unit, battle.turn)}{!orders[unit.key] ? ' / 自動案' : ''}</small>
+        <small>{skill?.name ?? 'おまかせ・行動時に判断'} · {skill ? `${skillOrderLabel(skill)} · MP ${skill.mpCost}` : '特技・対象未決定'} · SPD {speedFor(unit, battle.turn)}</small>
       </li>)}</ol>}
       <h3>相手の編成と得意技</h3>
       <div className="enemyIntel">{battle.enemies.map(unit => <details key={unit.key}>
@@ -85,7 +85,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
       <p className="counterGuide">門口の応答は二つで共通の1回。MP24と回数は有効な発動時に消費し、毒解除・守りは命中時に反映します。選択・取消・実行時に変化なし・MP不足で通常攻撃へ切替の場合は回数を使いません。先に毒を清めても再付与を予防せず、守りは毒を減らさずターン末で消えます。通常の解除が通り、自然障壁とは強い軽減だけが有効。集中攻撃やMP削りで中核の応答を阻めます。本人の無料防御は共通回数とは別で、ヤヌスは粘体専用MP補給を受けません。</p>
       <h3>読み合いのヒント</h3>
       <p className="counterGuide">自然障壁と毒の混成には、編成画面の「物質系の反攻」「悪魔系のMP圧力」も試せます。玄武の障壁は自然系だけ。ねりこぶしなど対象外の仲間も、現在HPと状態を見て攻撃先を選びます。清めを繰り返すだけでなく、守護で手番をつなぎ、単体攻撃や解除を使い分けましょう。</p>
-      <p className="counterGuide">毒は同時に重ねても継続ダメージが増えません。{(battle.reservePoison ?? DEFAULT_RESERVE_POISON) ? '自動指示は同じターンの重複予定を控えますが、予定した仲間が先に倒れる場合もあります。' : 'この対戦の自動指示は、同じターンの他の毒の予定を考慮しません。'}相手の残りMPや行動順を見て、手動で合法な指示へ変えられます。</p>
+      <p className="counterGuide">毒は同時に重ねても継続ダメージが増えません。おまかせは行動時の状態で特技・対象を判断します。先制から順に判断し、遅い技を待つ場合があります。過ぎた順には戻りません。相手の残りMPや行動順を見て、手動で合法な指示へ変えられます。</p>
       <p className="counterGuide">フェンリルの連牙は敵を毎回抽選。守りは命中後に解除するため、最初の一撃は半減。先制技で先に倒す・回復で粘る・防御で初撃をしのぐ選択があります。</p>
       <p className="counterGuide">速い攻撃には「味方を守る」。守りを固める相手には「防御解除」。毒を受けたら「毒解除＋回復」。守護と防御の直接ダメージ軽減は重なりません。毒の継続ダメージは軽減できません。どれも1回の行動を使います。</p>
     </section>

@@ -138,13 +138,13 @@ describe('MP is charged only for executed legal actions', () => {
 
   it('charges an explicitly cast full-health heal rather than silently changing the player command', () => {
     const initial = battle([unit('a0', [heal])], [unit('e0')]);
-    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a0' }]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a0' }], { enemyOrders: [{ key: 'e0', skill: 0 }] });
     expect(result.events).toContainEqual(expect.objectContaining({ kind: 'heal', target: 'a0', amount: 0 }));
     expect(result.state.allies[0].mp).toBe(initial.allies[0].mp - heal.mpCost);
     expect(spendingBy(result.events, 'a0')).toHaveLength(1);
   });
 
-  it.each([99, -3, 0.5, Number.NaN])('cancels invalid explicit special index %s without spending or a fallback attack', skill => {
+  it.each([99, -4, 0.5, Number.NaN])('cancels invalid explicit special index %s without spending or a fallback attack', skill => {
     const initial = battle([unit('a0', [hit])], [unit('e0')]);
     const result = advanceWithEvents(initial, [{ key: 'a0', skill }]);
     expect(castsBy(result.events, 'a0')).toEqual([]);
@@ -181,7 +181,8 @@ describe('MP is charged only for executed legal actions', () => {
 
   it('does not charge an actor killed before its scheduled cast', () => {
     const initial = battle([unit('a0', [hit], { hp: 20, speed: 1 })], [unit('e0', [{ ...hit, power: 1000, priority: 2 }])]);
-    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'e0' }]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'e0' }],
+      { enemyOrders: [{ key: 'e0', skill: 0, target: 'a0' }] });
     expect(result.state.allies[0].hp).toBe(0);
     expect(result.state.allies[0].mp).toBe(initial.allies[0].mp);
     expect(castsBy(result.events, 'a0')).toEqual([]);
@@ -299,7 +300,7 @@ describe('explicit effect clock and absolute replay', () => {
     const initial = battle([unit('a0', [protect]), unit('a1', [guard])], [unit('e0', [hit])]);
     initial.allies[1].hp = 100;
     initial.allies[1].poison = 2;
-    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a1' }, { key: 'a1', skill: DEFEND }]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: 0, target: 'a1' }, { key: 'a1', skill: DEFEND }], { enemyOrders: [{ key: 'e0', skill: 0, target: 'a1' }] });
     const applied = result.events.findIndex(event => event.target === 'a1' && event.guard === true);
     const directHit = result.events.findIndex(event => event.target === 'a1' && event.kind === 'damage' && event.actor === 'e0');
     const poisonTick = result.events.findIndex(event => event.target === 'a1' && event.kind === 'damage' && event.effect === 'poison');
@@ -356,7 +357,8 @@ describe('explicit effect clock and absolute replay', () => {
     const initial = battle([unit('a0')], [unit('e0', cause === 'hit' ? [{ ...hit, power: 1000 }] : [guard])]);
     initial.allies[0].hp = cause === 'hit' ? 50 : 5;
     initial.allies[0].poison = 2;
-    const result = advanceWithEvents(initial, [{ key: 'a0', skill: DEFEND }]);
+    const result = advanceWithEvents(initial, [{ key: 'a0', skill: DEFEND }],
+      { enemyOrders: [{ key: 'e0', skill: 0, target: 'a0' }] });
     expect(result.state.allies[0]).toMatchObject({ hp: 0, guard: false, poison: 0 });
     expect(result.events).toContainEqual(expect.objectContaining({ kind: 'defeat', target: 'a0', hp: 0, guard: false, poison: 0 }));
     expectReplay(initial, result.state, result.events);
