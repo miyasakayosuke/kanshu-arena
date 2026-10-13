@@ -222,10 +222,10 @@ describe('demon profiles',()=>{
  it('explains MP loss, qualification, mitigation and fallback without claiming lockout',async()=>{
   await mount(29);const profile=document.querySelector('.profileModal')!;
   for(const phrase of ['悪魔系','MP16','MPを6削り','悪魔系3体以上','10になり','先頭以外','守りならMP削りも半減','本人へは戻りません','元の行動順で通常攻撃','宗教上の分類'])expect(profile.textContent).toContain(phrase);
-  expect(profile.querySelector('.demonExplanation')).toBeTruthy();expect(profile.querySelector('img')).toBeTruthy();
+  expect(profile.querySelector('.demonExplanation')).toBeTruthy();expect(profile.querySelector('.heroIcon svg[data-home-art]')).toBeTruthy();
  });
  it.each([30,31])('shows original art and authored role for %s',async id=>{
-  await mount(id);const profile=document.querySelector('.profileModal')!;expect(profile.querySelector('img')).toBeTruthy();expect(profile.textContent).not.toContain('まだ物語の記されていない');expect(profile.textContent).not.toContain('未知の役割');expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
+  await mount(id);const profile=document.querySelector('.profileModal')!;expect(profile.querySelector('.heroIcon svg[data-home-art]')).toBeTruthy();expect(profile.textContent).not.toContain('まだ物語の記されていない');expect(profile.textContent).not.toContain('未知の役割');expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
  });
 });
 
@@ -233,10 +233,10 @@ describe('undead profiles are finite and game-authored',()=>{
  it('explains exact poison tradeoff, starting condition and counters without a revival promise',async()=>{
    await mount(32);const text=[...document.querySelectorAll('.undeadExplanation')].map(node => node.textContent).join('');
    for(const phrase of ['MP18','毒残0〜3回','残り毒が多いほど一撃を強め','さらに強まり','先頭以外でも有効','残回数ぶん','毒0','最大3回','残りMP8','HP回復・MP獲得・追加行動はありません','清め','新しく残3'])expect(text).toContain(phrase);
-   expect(document.querySelectorAll('.profileModal .skill')).toHaveLength(2);expect(document.querySelector('.heroIcon img')).toBeTruthy();
+   expect(document.querySelectorAll('.profileModal .skill')).toHaveLength(2);expect(document.querySelector('.heroIcon svg[data-home-art]')).toBeTruthy();
  });
  it.each([33,34,35])('gives ID%i independent art, lore and at most four skills',async id=>{
-   await mount(id);expect(document.querySelector('.heroIcon img')).toBeTruthy();expect(document.querySelectorAll('.profileModal .skill').length).toBeLessThanOrEqual(4);expect(document.querySelector('.monsterLore')?.textContent).not.toContain('まだ物語');
+   await mount(id);expect(document.querySelector('.heroIcon svg[data-home-art]')).toBeTruthy();expect(document.querySelectorAll('.profileModal .skill').length).toBeLessThanOrEqual(4);expect(document.querySelector('.monsterLore')?.textContent).not.toContain('まだ物語');
  });
  it('keeps Banshee’s old three skills and adds only a minimal family explanation',async()=>{
    await mount(4);expect(document.querySelector('.familyTag')?.textContent).toBe('不死系');expect([...document.querySelectorAll('.profileModal .detailSkillPicker button')].map(n=>n.textContent)).toEqual(['悲鳴','毒霧','影縫い']);expect(document.querySelector('.familyExplanation')?.textContent).toContain('従来の能力値・特技は変わりません');
@@ -245,6 +245,6 @@ describe('undead profiles are finite and game-authored',()=>{
 
 describe('extraordinary core profile',()=>{
  it('explains the shared response with four assigned families, precise ally scope and independent story',async()=>{
-  await mount(36);const profile=document.querySelector('.profileModal')!,text=profile.textContent!;expect(profile.querySelector('.familyTag')?.textContent).toBe('超常系');expect(profile.querySelectorAll('.skill')).toHaveLength(4);expect(profile.querySelector('.heroIcon img')?.getAttribute('src')).toContain('data:image/svg+xml');for(const phrase of ['所属系統4種類以上','重複・未所属は数えず','5種類でも追加効果はありません','先頭以外でも有効','HP回復0・予防なし','生存する味方全員が対象','二つを一回ずつ使うことはできません','実行時も変化がなければ','粘体専用補給の対象外','無料の本人防御','最大HP +8%'])expect(text).toContain(phrase);expect(text).not.toContain('まだ物語の記されていない');expect(text).not.toContain('未知の役割');expect([...profile.querySelectorAll('.skill')].slice(0,2).every(n=>!n.textContent?.includes('敵全体'))).toBe(true);
+  await mount(36);const profile=document.querySelector('.profileModal')!,text=profile.textContent!;expect(profile.querySelector('.familyTag')?.textContent).toBe('超常系');expect(profile.querySelectorAll('.skill')).toHaveLength(4);expect(profile.querySelector('.heroIcon svg')?.getAttribute('data-home-art')).toBe('36');for(const phrase of ['所属系統4種類以上','重複・未所属は数えず','5種類でも追加効果はありません','先頭以外でも有効','HP回復0・予防なし','生存する味方全員が対象','二つを一回ずつ使うことはできません','実行時も変化がなければ','粘体専用補給の対象外','無料の本人防御','最大HP +8%'])expect(text).toContain(phrase);expect(text).not.toContain('まだ物語の記されていない');expect(text).not.toContain('未知の役割');expect([...profile.querySelectorAll('.skill')].slice(0,2).every(n=>!n.textContent?.includes('敵全体'))).toBe(true);
  });
 });

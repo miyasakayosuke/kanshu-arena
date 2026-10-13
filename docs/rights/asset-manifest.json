@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.29",
-  "auditBaseCommit": "62ee78740135496e6d038c459fcd83feb3f7b61d",
+  "release": "v0.20.30",
+  "auditBaseCommit": "4a9403613f869a5c3cfa2e16b07c3a9ee89c2a6b",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -974,7 +974,7 @@
       "sha256": {
         "src/mythVignettes.ts": "8aa476f67c91fe8bb17a10406ccf3d0c7f03441a77733710f6eac03eece417a9",
         "src/mythSceneSvg.ts": "e9a83ceed24a4e8daf040b87e7b48a15a4f8aaeb30938dea38e8959afeb0aaa5",
-        "src/components/MythVignette.tsx": "3ab2bb95a326c79d22844e7d11d7201445da1fdf3b5a9e4f0099d2f589f29ab4",
+        "src/components/MythVignette.tsx": "fdc1915a0381848af09dc7a23f93143081204bd3db80b0e06fda141937d4f79c",
         "src/components/mythVignette.css": "d286ff61b69a489b55183181c46f0b21e895acf417ed0bca62f320197c1be86d"
       },
       "references": [
@@ -995,6 +995,12 @@
           ],
           "provenance": "Project-specific AI-assisted focus/event lifecycle repair and regression tests written directly from the existing source and reproduced native-browser failure. The active non-inert story owns native Escape/Tab even when a disabled terminal control loses focus to BODY. Bounded control-state repair and post-commit trigger restoration preserve nested dismissal. No external code, prose, illustrations, animation samples, fonts, media or dependencies imported. Scene renderer, duration, timeline, art, gameplay, saved-team schema, runtime labels, version and notices are unchanged.",
           "reviewLimit": "Explicit DOM focus-loss simulation establishes regression behavior but is not native-browser acceptance. Local browser launch and preview routes were known unavailable and were not retried. The publisher must verify the final deployed build in the supported browser. Inventory checks do not establish legal clearance."
+        },
+        {
+          "recordedAt": "2026-10-13",
+          "scope": "v0.20.30 large Pose-tab reuse of existing idle renderer; only active detail presentation mounted, explicit nested-movie pause, optional existing CatalogArt fallback and partial-SMIL guard.",
+          "provenance": "Project-specific lifecycle integration only. All character vectors, track amplitudes/timings, myth scene geometry/text, battle code and dependencies retained unchanged. No reference frames, traced shapes, imported code, motion, audio, fonts or external assets.",
+          "reviewLimit": "Revised source hashes cover integration changes, not new artwork or legal clearance. Native full-cycle and footprint review remains a release gate."
         }
       ]
     },
@@ -1016,14 +1022,22 @@
         "src/pastureScene.ts": "2a182dc936f1b037e175fd5d84237e6dd811c157a4e8885e87a18ca23ea96e5c",
         "src/HomePasture.tsx": "a7faa7fd58270f0f2cf580c4dca441dd9e57138623a39d18a966cf5d7c4386eb",
         "src/homePasture.css": "7c82a911b4e36077adc3d57b924f4f48d4bac52ecbcc6b80d2a819e4980c629c",
-        "src/HomeIdleArt.tsx": "abcebd7282781cdafad72cb9f261ca247ffcdd47643222e3f32084e051a0343a",
+        "src/HomeIdleArt.tsx": "6b4a413ce20cc63c93a5844a298c45f8fc6549213982711f908b10350b89fef0",
         "src/homeIdleMotion.ts": "580491629059f7a00e32537fcd7232659a103aca0a1cd816cbdf22d70cf84c01"
       },
       "references": [
         "docs/home-pasture-candidate.md",
         "docs/home-idle-candidate.md"
       ],
-      "distribution": "Inline SVG and project React/CSS in the browser bundle. Native home-only SVG animation tracks reuse the existing drawings. No new package, external media or bundled font. No license selected for project-original content."
+      "distribution": "Inline SVG and project React/CSS in the browser bundle. Native home-only SVG animation tracks reuse the existing drawings. No new package, external media or bundled font. No license selected for project-original content.",
+      "changeRecords": [
+        {
+          "recordedAt": "2026-10-13",
+          "scope": "v0.20.30 large Pose-tab reuse of existing idle renderer; only active detail presentation mounted, explicit nested-movie pause, optional existing CatalogArt fallback and partial-SMIL guard.",
+          "provenance": "Project-specific lifecycle integration only. All character vectors, track amplitudes/timings, myth scene geometry/text, battle code and dependencies retained unchanged. No reference frames, traced shapes, imported code, motion, audio, fonts or external assets.",
+          "reviewLimit": "Revised source hashes cover integration changes, not new artwork or legal clearance. Native full-cycle and footprint review remains a release gate."
+        }
+      ]
     },
     {
       "id": "arena-completed-match-return",
@@ -1080,9 +1094,17 @@
       "reviewLimit": "Automated DOM/cascade tests are not native-browser geometry or legal clearance. Existing artwork ownership and similarity review questions remain open. Exact deployed native phone/zoom acceptance is required before completion; the previous verified release is retained for recovery.",
       "distribution": "Existing original SVG rendered inline in a noninteractive header preview. No new external resource or asset.",
       "sha256": {
-        "src/MonsterDetails.tsx": "703767f4c2622a174d7d70c2d9833e74347ff9330407566bc115a529b94f429d",
-        "src/monsterDetails.css": "abbc1acdc326f135ce27bdc9ed7488a25541bbb3da3fe92529a169d5534eaddc"
-      }
+        "src/MonsterDetails.tsx": "e566d7d2cdb4a265530734d3157eca91114621b1c7632d7b6fafd06ba8a238e8",
+        "src/monsterDetails.css": "db33d91b36b51cc226963ed6c6f2cf8e33a3d831f213932cb4eff4394e2d4365"
+      },
+      "changeRecords": [
+        {
+          "recordedAt": "2026-10-13",
+          "scope": "v0.20.30 large Pose-tab reuse of existing idle renderer; only active detail presentation mounted, explicit nested-movie pause, optional existing CatalogArt fallback and partial-SMIL guard.",
+          "provenance": "Project-specific lifecycle integration only. All character vectors, track amplitudes/timings, myth scene geometry/text, battle code and dependencies retained unchanged. No reference frames, traced shapes, imported code, motion, audio, fonts or external assets.",
+          "reviewLimit": "Revised source hashes cover integration changes, not new artwork or legal clearance. Native full-cycle and footprint review remains a release gate."
+        }
+      ]
     },
     {
       "id": "enemy-lower-body-result-band",
@@ -1165,6 +1187,24 @@
       ],
       "reviewLimit": "Source authorship statement and inventory are not independent ownership/similarity or legal clearance. Native visual review is required; all existing ledger questions remain open.",
       "distribution": "Original inline SVG/CSS in browser build; no external media or new dependency."
+    },
+    {
+      "id": "detail-large-pose-idle",
+      "kind": "original-read-only-presentation-integration",
+      "files": [
+        "src/MonsterDetails.tsx",
+        "src/monsterDetails.css",
+        "src/HomeIdleArt.tsx",
+        "src/MythVignetteEntry.tsx",
+        "src/components/MythVignette.tsx"
+      ],
+      "creator": "AI-assisted original integration for this project, 2026-10-13.",
+      "provenance": "Reuses existing full-body SVG and existing idle motion in the same large Pose art box. Yoko and Fenrir keep existing articulated parts; other35 use unchanged whole-body breathing. Exactly one current detail presentation is mounted; optional movie opening explicitly pauses that detail idle. Existing HomePasture behavior outside the detail is unchanged. Original artwork, idle track data, all106skills/story descriptions and eight myth scenes are unchanged. Private video supported character continuity generally, not a license or exact rig claim. No reference media, geometry, choreography, copied UI, article text, sound, font or dependency imported.",
+      "references": [
+        "docs/rights/releases/2026-10-13-v0.20.30.md"
+      ],
+      "reviewLimit": "Source origin statement and inventory are not legal clearance or independent ownership/similarity analysis. Native geometry/full-cycle/reduced-motion checks remain separate; no phone performance or measured engagement claim.",
+      "distribution": "Reused original inline SVG and presentation/lifecycle code in browser build; no new art or media asset."
     }
   ],
   "software": [

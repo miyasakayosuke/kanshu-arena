@@ -12,12 +12,13 @@ const TABS = [{ id: 'appearance', label: '姿' }, { id: 'story', label: '物語'
 type DetailTab = typeof TABS[number]['id'];
 type ReadingPage = { title: string; content: ReactNode };
 
-/** The reading preview owns one visibility observer, and unmounts on the large art tab. */
-function DetailPreview({ id }: { id: number }) {
+/** Exactly one visible profile presentation owns the idle instance/observer. */
+function DetailArt({ id, appearance = false, suspended }: { id: number; appearance?: boolean; suspended: boolean }) {
   const host = useRef<HTMLSpanElement>(null);
   const visibility = useHomeIdleVisibility(host);
-  return <span ref={host} className="profileReadingPreview" aria-hidden="true" data-detail-art={id} data-detail-motion={visibility.reduced ? 'reduced' : visibility.running ? 'running' : 'paused'}>
-    <HomeIdleArt key={id} id={id} {...visibility} />
+  const running = visibility.running && !suspended;
+  return <span ref={host} className={appearance ? 'heroIcon profileAppearanceArt' : 'profileReadingPreview'} aria-hidden={appearance ? undefined : true} data-detail-art={id} data-detail-motion={visibility.reduced ? 'reduced' : running ? 'running' : 'paused'}>
+    <HomeIdleArt key={id} id={id} running={running} reduced={visibility.reduced} fallback={<CatalogArt key={id} monster={monsters[id]} />} />
   </span>;
 }
 
@@ -43,6 +44,7 @@ export default function MonsterDetails({ id, onClose, navigation, initialTab = '
   const body = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<DetailTab>(initialTab);
   const [skillIndex, setSkillIndex] = useState(0);
+  const [movieOpen, setMovieOpen] = useState(false);
   const tabPrefix = useId();
   const monster = monsters[id];
   const browseIndex = navigation?.ids.indexOf(id) ?? -1;
@@ -88,7 +90,7 @@ export default function MonsterDetails({ id, onClose, navigation, initialTab = '
     const next = index < 0 ? (event.shiftKey ? controls.length - 1 : 0) : (index + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
     controls[next].focus();
   }}>
-    <div className="profileHeader">{activeTab !== 'appearance' && <DetailPreview id={id} />}{battleContext ? <div className="profileBattleContext"><span aria-live="polite" aria-atomic="true">{battleContext.label}</span><output role="timer" aria-live="off" aria-label={`コマンド入力 残り${battleContext.seconds}秒`}>残り {battleContext.seconds} 秒</output></div> : <strong aria-live="polite" aria-atomic="true">No. {String(monster.id + 1).padStart(3, '0')} · {monster.name}</strong>}{canBrowse && <nav className="profileBrowse" aria-label="図鑑の前後のモンスター"><button type="button" aria-label={`前のモンスター${browseIndex > 0 ? `：${monsters[navigation.ids[browseIndex - 1]].name}` : ''}`} aria-disabled={browseIndex === 0} onClick={() => browse(-1)}>‹</button><button type="button" aria-label={`次のモンスター${browseIndex < navigation.ids.length - 1 ? `：${monsters[navigation.ids[browseIndex + 1]].name}` : ''}`} aria-disabled={browseIndex === navigation.ids.length - 1} onClick={() => browse(1)}>›</button></nav>}<button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
+    <div className="profileHeader">{activeTab !== 'appearance' && <DetailArt key={`reading-${id}`} id={id} suspended={movieOpen} />}{battleContext ? <div className="profileBattleContext"><span aria-live="polite" aria-atomic="true">{battleContext.label}</span><output role="timer" aria-live="off" aria-label={`コマンド入力 残り${battleContext.seconds}秒`}>残り {battleContext.seconds} 秒</output></div> : <strong aria-live="polite" aria-atomic="true">No. {String(monster.id + 1).padStart(3, '0')} · {monster.name}</strong>}{canBrowse && <nav className="profileBrowse" aria-label="図鑑の前後のモンスター"><button type="button" aria-label={`前のモンスター${browseIndex > 0 ? `：${monsters[navigation.ids[browseIndex - 1]].name}` : ''}`} aria-disabled={browseIndex === 0} onClick={() => browse(-1)}>‹</button><button type="button" aria-label={`次のモンスター${browseIndex < navigation.ids.length - 1 ? `：${monsters[navigation.ids[browseIndex + 1]].name}` : ''}`} aria-disabled={browseIndex === navigation.ids.length - 1} onClick={() => browse(1)}>›</button></nav>}<button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
     <div className="profileTabs" role="tablist" aria-label="モンスター詳細" onKeyDown={event => {
       const index = TABS.findIndex(tab => tab.id === activeTab);
       const next = event.key === 'ArrowRight' ? (index + 1) % TABS.length : event.key === 'ArrowLeft' ? (index + TABS.length - 1) % TABS.length : event.key === 'Home' ? 0 : event.key === 'End' ? TABS.length - 1 : -1;
@@ -99,9 +101,9 @@ export default function MonsterDetails({ id, onClose, navigation, initialTab = '
     <div ref={body} className="profileBody">
     <section className="profilePanel profileAppearance" id={`${tabPrefix}-appearance-panel`} role="tabpanel" aria-labelledby={`${tabPrefix}-appearance-tab`} hidden={activeTab !== 'appearance'} tabIndex={0}>
       <div className="profileHeading" data-family={monster.family}>
-        <span className="heroIcon"><CatalogArt monster={monster} /></span>
+        {activeTab === 'appearance' && <DetailArt key={`appearance-${id}`} id={id} appearance suspended={movieOpen} />}
         <div className="profileIdentity"><h2>{monster.id === 12 ? <><small className="profileEpithet">破縛の魔狼</small>フェンリル</> : monster.name}</h2><span className="familyTag">{familyLabel(monster)}</span><span className="profileCost">コスト {monster.cost}</span><small className="catalogAccessibleTitle">閲覧のみ · 入れ替えは編成の枠から</small></div>
-        <MythVignetteEntry key={id} id={id} />
+        <MythVignetteEntry key={id} id={id} onOpenChange={setMovieOpen} />
       </div>
     </section>
     <section className="profilePanel" id={`${tabPrefix}-story-panel`} role="tabpanel" aria-labelledby={`${tabPrefix}-story-tab`} hidden={activeTab !== 'story'} tabIndex={0}>

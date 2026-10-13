@@ -98,3 +98,7 @@
   .profileModal.profileTabbed .profileHeader>.profileBattleContext{grid-column:1 / -1;grid-row:1}
   .profileModal.profileTabbed .profileHeader:has(.profileReadingPreview)>.profileBattleContext{grid-column:2 / -1}
 }
+
+/* The same full-body box now hosts the existing native SVG idle. Keep the SVG's
+   original viewBox/aspect fitting, rather than stretching/cropping its silhouette. */
+.profileModal.profileTabbed .heroIcon .homeIdleArt>svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}

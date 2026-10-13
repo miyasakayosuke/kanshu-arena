@@ -51,7 +51,9 @@ describe('Fenrir family UI and battle loop', () => {
     await click(label('1枠・フェンリルを入れ替える'));
     await click(label('現在のフェンリルの詳細'));
     const profile = document.querySelector('.profileModal')!;
-    expect(profile.querySelector<HTMLImageElement>('img')?.src).toBe(FENRIR_ART_URL);
+    const profileArt = profile.querySelector('.heroIcon svg')!;
+    expect(profileArt.getAttribute('data-home-art')).toBe('12');
+    expect([...profileArt.querySelectorAll('path')].map(path => path.getAttribute('d'))).toEqual([...original.querySelectorAll('path')].map(path => path.getAttribute('d')));
     expect(profile.textContent).toContain('対象指定なし');
     expect(profile.textContent).toContain('守り中の初撃は半減');
     expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');

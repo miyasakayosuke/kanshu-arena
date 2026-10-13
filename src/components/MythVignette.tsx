@@ -147,10 +147,12 @@ function MythPlayer({ scene, onClose }: { scene: MythScene; onClose: () => void 
 }
 
 /** Only the eight existing family cores have stories. No rarity or gameplay change. */
-export default function MythVignette({ id }: { id: number }) {
+export default function MythVignette({ id, onOpenChange }: { id: number; onOpenChange?: (open: boolean) => void }) {
   const scene = mythScene(id);
   const [openedId, setOpenedId] = useState<number | null>(null);
   useEffect(() => { setOpenedId(null); }, [id]);
+  useLayoutEffect(() => { onOpenChange?.(openedId === id); }, [id, openedId, onOpenChange]);
+  useLayoutEffect(() => () => onOpenChange?.(false), [onOpenChange]);
   if (!scene) return null;
   return <div className="mythEntry"><button type="button" className="mythPlay" onClick={event => { event.stopPropagation(); event.currentTarget.focus({ preventScroll: true }); setOpenedId(id); }} aria-haspopup="dialog"><span aria-hidden="true">▷</span><span>小さな物語を見る<small>{scene.title} · 約9秒</small></span></button>{openedId === id && <MythPlayer key={id} scene={scene} onClose={() => setOpenedId(null)} />}</div>;
 }

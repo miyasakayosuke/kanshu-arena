@@ -1,0 +1,43 @@
+{
+  "release": "0.20.30",
+  "status": "Prepared release; native acceptance pending",
+  "baselineCommit": "4a9403613f869a5c3cfa2e16b07c3a9ee89c2a6b",
+  "baselineTree": "52a6864b3247fa1ab75ec2d578ea99cf4364b8a0",
+  "scope": "Reuse existing idle in large Pose; one selected detail instance, movie/visibility/reduced/fallback lifecycle. Existing art and tracks unchanged.",
+  "checks": {
+    "tests": 3192,
+    "files": 158,
+    "newFocusedTests": 70,
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "diffCheck": true,
+    "smokeParity": {
+      "matches": 736,
+      "allNonSourceFieldsEqual": true,
+      "configByteEqual": true,
+      "sourceDifferences": {
+        "gameVersion": {
+          "baseline": "0.20.29",
+          "candidate": "0.20.30"
+        },
+        "gitCommit": {
+          "baseline": "a5948683f41f11c8afcd6278eeca72c6b070a047",
+          "candidate": "0e6ca81665ca621eb42b9411be51d86fa3a04775"
+        }
+      }
+    },
+    "independentReview": "PASS: 66 new and 47 supporting tests, TypeScript and diff; native pending"
+  },
+  "runtimeSha256": {
+    "src/HomeIdleArt.tsx": "6b4a413ce20cc63c93a5844a298c45f8fc6549213982711f908b10350b89fef0",
+    "src/MonsterDetails.tsx": "e566d7d2cdb4a265530734d3157eca91114621b1c7632d7b6fafd06ba8a238e8",
+    "src/MythVignetteEntry.tsx": "37cd7a2315f82f02a691dc6806581ea942ff592a10fef1c74112f26dc33a3d9b",
+    "src/components/MythVignette.tsx": "fdc1915a0381848af09dc7a23f93143081204bd3db80b0e06fda141937d4f79c",
+    "src/monsterDetails.css": "db33d91b36b51cc226963ed6c6f2cf8e33a3d831f213932cb4eff4394e2d4365"
+  },
+  "nativeAcceptance": "Pending sole publisher comparison to all 37 static baselines at both phone sizes, full cycles, movie controls and viewport/zoom. No rendered motion or performance claim.",
+  "legalClearance": false
+}

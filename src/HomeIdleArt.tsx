@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState, type RefObject } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { homeIdleSvg } from './homeIdleMotion';
 
 type Visibility = { running: boolean; reduced: boolean };
@@ -32,17 +32,21 @@ export function useHomeIdleVisibility(ref: RefObject<HTMLElement | null>): Visib
 }
 
 /** Native SVG animation touches only body parts. Static first paint needs no image loading. */
-export default function HomeIdleArt({ id, running, reduced }: { id: number } & Visibility) {
+export default function HomeIdleArt({ id, running, reduced, fallback }: { id: number; fallback?: ReactNode } & Visibility) {
   const instance = useId(), ref = useRef<HTMLSpanElement>(null);
   // Removing native tracks on reduced motion also discards their SMIL instance-time
   // history. Re-enabling can never inherit an old end time or a half-closed eye.
-  const markup = useMemo(() => homeIdleSvg(id, instance, reduced ? 0 : undefined), [id, instance, reduced]);
+  const hasFallback = fallback !== undefined;
+  const markup = useMemo(() => {
+    try { return homeIdleSvg(id, instance, reduced ? 0 : undefined); }
+    catch (error) { if (!hasFallback) throw error; return null; }
+  }, [id, instance, reduced, hasFallback]);
   const started = useRef(false);
   useEffect(() => {
     const svg = ref.current?.querySelector('svg');
     const tracks = [...(svg?.querySelectorAll('animateTransform') ?? [])] as SVGAnimationElement[];
     // Unsupported/older SVG implementations retain the already-visible neutral drawing.
-    if (!svg || !tracks.length || typeof svg.pauseAnimations !== 'function' || !tracks.every(track => typeof track.beginElement === 'function')) return;
+    if (!svg || !tracks.length || typeof svg.pauseAnimations !== 'function' || typeof svg.unpauseAnimations !== 'function' || !tracks.every(track => typeof track.beginElement === 'function')) return;
     if (running && !reduced) {
       if (!started.current) { tracks.forEach(track => track.beginElement()); started.current = true; }
       svg.unpauseAnimations();
@@ -52,5 +56,6 @@ export default function HomeIdleArt({ id, running, reduced }: { id: number } & V
     const svg = ref.current?.querySelector('svg');
     return () => { svg?.pauseAnimations?.(); started.current = false; };
   }, [markup]);
+  if (markup === null) return fallback;
   return <span ref={ref} className="monsterArt homeIdleArt" aria-hidden="true" dangerouslySetInnerHTML={{ __html: markup }} />;
 }

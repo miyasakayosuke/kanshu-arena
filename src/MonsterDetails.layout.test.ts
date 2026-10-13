@@ -127,3 +127,25 @@ describe('reading preview responsive cascade', () => {
     }
   });
 });
+
+describe('large Pose inline idle cascade', () => {
+  // CSS declarations only, not a native silhouette/clipping or zoom measurement.
+  it.each([[360, 533], [400, 606], [802, 395], [195, 422]])('retains the original art box and contain-sized SVG at %s×%s', (width, height) => {
+    for (const order of [['style.css', 'catalog.css', 'monsterDetails.css'], ['monsterDetails.css', 'style.css', 'catalog.css']]) {
+      const style = styles(width, height, order);
+      const host = style.window.document.querySelector('.heroIcon')!;
+      const originalBox = ['min-height', 'flex', 'padding', 'width', 'height'].map(name => style('.heroIcon').getPropertyValue(name));
+      host.classList.add('profileAppearanceArt');
+      host.innerHTML = '<span class="monsterArt homeIdleArt" aria-hidden="true"><svg viewBox="0 0 350 286" focusable="false" aria-hidden="true"></svg></span>';
+      expect(['min-height', 'flex', 'padding', 'width', 'height'].map(name => style('.heroIcon').getPropertyValue(name))).toEqual(originalBox);
+      expect(style('.heroIcon .homeIdleArt').position).toBe('absolute');
+      expect(style('.heroIcon .homeIdleArt>svg').display).toBe('block');
+      expect(style('.heroIcon .homeIdleArt>svg').width).toBe('100%');
+      expect(style('.heroIcon .homeIdleArt>svg').height).toBe('100%');
+      expect(style('.heroIcon .homeIdleArt>svg').overflow).toBe('visible');
+      expect(style('.heroIcon .homeIdleArt>svg').pointerEvents).toBe('none');
+      expect(style('.profileHeader .close').width).toBe('44px');
+      expect(style('.profileBody').overflowY).toBe('auto');
+    }
+  });
+});

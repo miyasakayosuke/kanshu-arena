@@ -40,9 +40,10 @@ const mount = async (id = 0) => { await act(async () => root.render(<MonsterDeta
 const preview = () => document.querySelector<HTMLElement>('.profileReadingPreview')!;
 
 describe('detail reading creature preview', () => {
-  it('keeps a single noninteractive illustration outside the reader, with no idle instance on appearance', async () => {
+  it('keeps exactly one active illustration, moving from the large Pose art to the reading header', async () => {
     await mount();
-    expect(preview()).toBeNull(); expect(begin).not.toHaveBeenCalled();
+    expect(preview()).toBeNull(); expect(begin).toHaveBeenCalledTimes(10);
+    expect(document.querySelectorAll('.profileAppearance [data-home-art]')).toHaveLength(1);
     await select('story');
     expect(preview().parentElement?.className).toBe('profileHeader');
     expect(preview().closest('.profileBody')).toBeNull();
@@ -50,12 +51,13 @@ describe('detail reading creature preview', () => {
     expect(preview().querySelector('button, a, [tabindex]')).toBeNull();
     expect(document.querySelectorAll('[data-home-art]')).toHaveLength(1);
     const svg = preview().querySelector('svg');
-    expect(begin).toHaveBeenCalledTimes(10);
+    expect(begin).toHaveBeenCalledTimes(20);
     await select('abilities'); await select('skills');
-    expect(preview().querySelector('svg')).toBe(svg); expect(begin).toHaveBeenCalledTimes(10);
-    pause.mockClear(); await select('appearance');
+    expect(preview().querySelector('svg')).toBe(svg); expect(begin).toHaveBeenCalledTimes(20);
+    pause.mockClear(); disconnect.mockClear(); await select('appearance');
     expect(preview()).toBeNull(); expect(pause).toHaveBeenCalled(); expect(disconnect).toHaveBeenCalledOnce();
     expect(document.querySelector('.profileAppearance .heroIcon .monsterArt')).not.toBeNull();
+    expect(document.querySelectorAll('[data-home-art]')).toHaveLength(1); expect(begin).toHaveBeenCalledTimes(30);
   });
   it('keeps all 37 names and original art synchronized when browsing, and retains the reading tab', async () => {
     function Browse() {
@@ -76,12 +78,12 @@ describe('detail reading creature preview', () => {
   });
   it('pauses in background/offscreen, restores without restart, and removes animation tracks for reduced motion', async () => {
     await mount(12); await select('story');
-    expect(begin).toHaveBeenCalledTimes(11);
+    expect(begin).toHaveBeenCalledTimes(22);
     const svg = preview().querySelector('svg');
     hidden = true; await act(async () => document.dispatchEvent(new Event('visibilitychange')));
     expect(preview().dataset.detailMotion).toBe('paused'); expect(pause).toHaveBeenCalled();
     hidden = false; await act(async () => document.dispatchEvent(new Event('visibilitychange')));
-    expect(preview().dataset.detailMotion).toBe('running'); expect(begin).toHaveBeenCalledTimes(11);
+    expect(preview().dataset.detailMotion).toBe('running'); expect(begin).toHaveBeenCalledTimes(22);
     await act(async () => observerCallback([{ target: preview(), isIntersecting: false } as unknown as IntersectionObserverEntry], {} as IntersectionObserver));
     expect(preview().dataset.detailMotion).toBe('paused'); expect(preview().querySelector('svg')).toBe(svg);
     Object.defineProperty(media, 'matches', { configurable: true, value: true });
@@ -89,7 +91,7 @@ describe('detail reading creature preview', () => {
     expect(preview().dataset.detailMotion).toBe('reduced'); expect(preview().querySelector('animateTransform')).toBeNull();
     const remove = vi.spyOn(document, 'removeEventListener');
     await act(async () => document.querySelector<HTMLButtonElement>('.profileHeader .close')!.click());
-    expect(disconnect).toHaveBeenCalledOnce(); expect(remove).toHaveBeenCalledWith('visibilitychange', expect.any(Function));
+    expect(disconnect).toHaveBeenCalledTimes(2); expect(remove).toHaveBeenCalledWith('visibilitychange', expect.any(Function));
     expect(media.removeEventListener).toHaveBeenCalledWith('change', expect.any(Function));
     expect(document.activeElement?.id).toBe('opener');
   });

@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 import { CHARACTER_ART } from './MonsterArt';
 import { monsters } from './engine';
+import * as idle from './homeIdleMotion';
 let root: Root;
 const button = (name: string) => document.querySelector<HTMLButtonElement>(`button[aria-label="${name}"]`)!;
 const click = async (node: HTMLElement) => { await act(async () => node.click()); };
@@ -46,7 +47,10 @@ describe('art-first catalog without invented collection economy', () => {
     for (const monster of monsters) {
       const opener = button(`${monster.name}の詳細`); opener.focus();
       await click(opener);
-      expect(document.querySelector('.profileArtFirst .heroIcon img')?.getAttribute('src')).toBe(CHARACTER_ART[monster.id].artUrl);
+      const original = new DOMParser().parseFromString(decodeURIComponent(CHARACTER_ART[monster.id].artUrl.split(',')[1]), 'image/svg+xml');
+      const art = document.querySelector('.profileArtFirst .heroIcon svg')!;
+      expect(art.getAttribute('data-home-art')).toBe(String(monster.id));
+      expect([...art.querySelectorAll('path')].map(path => path.getAttribute('d'))).toEqual([...original.querySelectorAll('path')].map(path => path.getAttribute('d')));
       expect(document.querySelector('.profileIdentity h2')?.textContent).toContain(monster.name);
       expect(document.querySelectorAll('.profileModal .skill')).toHaveLength(monster.skills.length);
       await click(button('詳細を閉じる'));
@@ -77,6 +81,8 @@ describe('art-first catalog without invented collection economy', () => {
     expect(opener.querySelector('img')).toBeNull();
     expect(opener.querySelector('.catalogArtFallback')?.textContent).toContain('画像を表示できません');
     expect(opener.querySelector('strong')?.textContent).toBe('妖狐');
+    // An invalid inline-art build preserves the existing image/error fallback.
+    vi.spyOn(idle, 'homeIdleSvg').mockImplementation(() => { throw new Error('invalid bundled markup'); });
     opener.focus(); await click(opener);
     await act(async () => document.querySelector('.heroIcon img')!.dispatchEvent(new Event('error')));
     expect(document.querySelector('.heroIcon .catalogArtFallback')?.getAttribute('aria-label')).toContain('妖狐');
