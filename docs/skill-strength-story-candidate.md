@@ -1,0 +1,15 @@
+# Story-led skill strength implementation (v0.20.23)
+
+Base: public v0.20.22 commit `9e45bf3130d3105a5c53a1c71061150f5552d8bf`, tree `212b14fe3b478d6d23b23ab3f5658f2fd342636a`.
+
+The user's request is to remove displayed skill power and convey strength through the skill's story. This implementation removes HP attack/healing power from the shared detail copy, arena buttons, fixed-basis description, poison detail, and titles. The common profile supplies the catalog, party, and battle detail entry points. Enemy tactics share the same skill hint. No hidden/ARIA duplicate is retained. MP costs, target scope, action order, hit count, status timing, charge count, secondary-effect behavior and actual battle results remain. Prospective HP-strength numbers are also removed for charge/cashout bonuses, poison damage and passive repair. Status durations/counts, mitigation, stat buffs and MP amounts remain numeric. The shared log formatter hides explanatory potency while preserving authoritative stored lines and actual executed HP results. Zero-poison cases explicitly have no additional strength.
+
+Existing original story images are revised in place: light/heavy individual blows; per-recipient spread of area attacks; light multihit blows accumulating; strength conditional on charge/remaining poison; substantial healing versus modest cleanse healing. There are no automatic universal power tiers, promised exact damage, new mechanic claims, or imported DQMSL descriptions. The user's comparison does not establish a verified claim about DQMSL's current interface.
+
+Specific corrections: Genbu's area attack has an unmodified basis of 14.75 and is described as a shallow, broad resonance, not a heavy hit. Uncharged Vritra starts at 10 and its story describes a faint breath growing with charge. Fenrir's individual bites are light; overlapping bites deepen the wound without implying target selection. Slime fixed single-target attack at 128 is depicted as a forceful stream. Cleanse healing at 20–35 is restrained relative to dedicated healing at 50–70. Comparisons are local within a creature/category rather than a guarantee across buffs, mitigation or targets.
+
+All 106 roster skill instances have a complete story; all stories are at most 100 Japanese characters. Monster myth/origin text, source links, movie renderer, CSS and effect-above/story-below layout are unchanged. Existing local reader overflow behavior remains for short screens/zoom; native font/layout acceptance is the publisher's separate gate.
+
+Runtime engine, skill definitions, formulas, RNG, enemy policy, playback, saved-team schema, art are unchanged; the release version is updated separately. Only display modules and their assertions change. Rights inventory is provenance bookkeeping, not legal clearance. No new dependency or third-party material.
+
+Final release checks and preservation scope are recorded in [release-validation-v02023.json](release-validation-v02023.json). Native browser acceptance follows exact deployment and remains distinct from source/DOM checks.

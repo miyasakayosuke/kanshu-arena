@@ -309,7 +309,7 @@ export function battleEventLine(state: State, event: BattleEvent): string {
     case 'defeat': return `${target}が戦闘不能${event.effect === 'poison' ? '（毒）' : event.actor ? `（${actor}の攻撃）` : ''}`;
     case 'guard': return `${actor} → ${target}に守り（このターンの直接ダメージ半減）`;
     case 'poison': return `${actor} → ${target}に毒（残り ${event.poison ?? 3}回）`;
-    case 'poison-cashout': return `${actor}の毒交換 → ${target}の毒${event.poisonTicksConsumed ?? 0}回分を消費（残り0回・直接攻撃の基礎に＋${event.poisonCashoutAdded ?? 0}、1回分${event.poisonCashoutPerTick ?? 0}）`;
+    case 'poison-cashout': return `${actor}の毒交換 → ${target}の毒${event.poisonTicksConsumed ?? 0}回分を消費（残り0回・${(event.poisonCashoutAdded ?? 0) > 0 ? '一撃を強化' : '追加なし'}）`;
     case 'cleanse': return `${actor} → ${target}を浄化（毒は0）`;
     case 'break': return `${actor} → ${target}の${event.removed ? event.removed.map(value => value === 'rally' ? '群気' : value === 'ward' ? '自然障壁' : value === 'dragonCharge' ? '竜気' : value === 'repairReady' ? '修復待機' : '守り').join('・') : '守り'}を解除${event.hitIndex !== undefined ? `（${event.hitIndex + 1}撃目の後）` : ''}`;
     case 'charge': return `${actor} → ${target}の竜気${event.effect === 'dragon-charge-spend' ? 'を消費' : 'を蓄積'}（${event.dragonCharge ?? 0}/${DRAGON_CHARGE_CAP}）`;

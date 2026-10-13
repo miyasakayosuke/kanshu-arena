@@ -214,7 +214,7 @@ describe('public-state cashout AI and authoritative evidence', () => {
     const state = fixture(true); state.enemies[0].hp = 1; const result = resolve(state), facts = resultFacts(result.state);
     expect(facts[0]).toMatchObject({ kind: 'poison-cashout' }); expect(facts[0].text).toContain('味方 3回分／敵 0回分');
     expect(battleFactEvidenceLines(result.state, facts[0]).join('\n')).toContain('毒3回分を消費');
-    expect(battleEventLine(result.state, cashouts(result.events)[0])).toContain('基礎に＋66');
+    expect(battleEventLine(result.state, cashouts(result.events)[0])).toContain('残り0回・一撃を強化');
     expect(result.state.history![0].events).toEqual(result.events); expect(facts.some(fact => fact.kind === 'healing')).toBe(false);
   });
   it('under explicit legacy poison controls, matches all384 independently frozen complete old32 battles, including normal CPU and explicit same-AI', () => {

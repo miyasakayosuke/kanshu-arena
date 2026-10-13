@@ -2,7 +2,7 @@ import MonsterArt from './MonsterArt';
 import LeaderComparison from './LeaderComparison';
 import RosterBrowser, { createRosterFilters } from './RosterBrowser';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamilyCount, extraordinaryResponseEligible, UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
+import { monsters, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, assignedFamilyCount, extraordinaryResponseEligible, UNDEAD_CORE_ID, undeadCashoutEligible, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, MATERIAL_CORE_ID, materialRepairEligible, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, dragonChargeEligible, NATURE_WARD_PERCENT, cost, familyLabel, leaderAppliesTo, leaderFor, type Monster } from './engine';
 import { rules, monsterRole, type RuleId } from './strategy';
 import { activeFamilyOptions } from './families';
 import type { TeamWorkshop } from './teamWorkshop';
@@ -89,7 +89,7 @@ function MaterialRepairPlan({ team }: { team: number[] }) {
     <strong>炉心の修復 · {active ? '条件成立' : '条件未成立'}</strong>
     <small>中核 {monsters[MATERIAL_CORE_ID].name}：{hasCore ? '編成中' : '未編成'} · 物質系 {members.length}体 / 必要3体</small>
     <small>タロスを含む物質系3体以上で開戦すると、一度だけ修復待ち。先頭以外でも有効で、開始時の人数条件は変わりません。</small>
-    <small>1ターン目終了時、両軍の毒ダメージ後に発動。タロスが生存し修復待ちなら、生き残った物質系のHPを各最大HPの{MATERIAL_REPAIR_PERCENT}%回復します。MP・行動を使わず、戦闘不能の仲間は戻りません。</small>
+    <small>1ターン目終了時、両軍の毒ダメージ後に発動。タロスが生存し修復待ちなら、生き残った物質系の傷を最大HPに応じて少し修復します。MP・行動を使わず、戦闘不能の仲間は戻りません。</small>
     <FamilyRecipients team={team} applies={monster => monster.family === 'material'} />
     <small>防御解除で修復待ちを消すか、毒を含む集中攻撃でタロスを先に倒すと不発。再付与はありません。</small>
   </div>;
@@ -129,7 +129,7 @@ function UndeadCashoutPlan({ team }: { team: number[] }) {
   return <div className="undeadCashoutPlan" data-active={active} aria-label="毒交換の編成条件">
     <strong>塚底の取り立て · {active ? '毒交換強化あり' : '毒交換強化なし'}</strong>
     <small>中核 ドラウグル：{hasCore ? '編成中' : '未編成'} · 不死系 {members.length}体 / 必要3体</small>
-    <small>自身を含む不死系3体以上で開戦すると、毒1回の追加基礎が{UNDEAD_CASHOUT.base}→{UNDEAD_CASHOUT.base + UNDEAD_CASHOUT.bonus}。先頭以外でも有効で、開始時の条件は仲間が倒れても変わりません。</small>
+    <small>自身を含む不死系3体以上で開戦すると、毒を消費した一撃がさらに強まります。先頭以外でも有効で、開始時の条件は仲間が倒れても変わりません。</small>
     <small>使用者：{hasCore ? 'ドラウグルだけ' : 'なし'}。使用対象外：{team.filter(id => id !== UNDEAD_CORE_ID).map(id => monsters[id].name).join('・') || 'なし'}。仲間の技には毒交換を追加しません。</small>
     <small>MP18と一手で、実際に命中した相手の毒残0〜3回を全消費。今後の毒ダメージを捨て、追加分も守り・自然障壁で軽減されます。HP回復・MP獲得・追加行動はありません。</small>
     <small>毒役や中核を先に倒す、命中前に清める、守護で受ける、敵MP削りで特技を通常攻撃へ切り替えさせる対策があります。</small>

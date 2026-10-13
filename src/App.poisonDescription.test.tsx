@@ -108,7 +108,7 @@ describe('poison copy at existing player-facing entry points', () => {
     expect(text).toContain(poisonSkillDetail(engine.monsters[3].skills[2]!));
     expect(text).toContain(POISON_TIMING_HINT);
     expect(text.includes('即時のHPダメージはありません')).toBe(scale === 0);
-    expect(text.includes('）の半分')).toBe(scale === 0.5);
+    expect(text.includes('弱めの')).toBe(scale === 0.5);
     if (scale === 0) expect(text).not.toContain('威力12');
   });
 
@@ -122,7 +122,7 @@ describe('poison copy at existing player-facing entry points', () => {
     state.enemies[0].monster = { ...state.enemies[0].monster, atk: 100 };
     state.enemies[0].rally = 1; state.enemies[0].rallyPercent = 10;
     await render();
-    expect(poisonRow(document.querySelector('.enemyIntel details')!).textContent).toContain('現在の基礎目安：約53.8');
+    expect(poisonRow(document.querySelector('.enemyIntel details')!).textContent).not.toMatch(/53\.8|基礎目安|威力\s*\d/);
   });
 });
 

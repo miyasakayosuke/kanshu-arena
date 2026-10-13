@@ -1,5 +1,5 @@
 import MonsterArt from './MonsterArt';
-import { DEFAULT_RESERVE_POISON, completeOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, poisonCashoutPerTickFor, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, MATERIAL_REPAIR_PERCENT, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, DRAGON_CHARGE_PER_POINT, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
+import { DEFAULT_RESERVE_POISON, completeOrders, EXTRAORDINARY_CORE_ID, assignedFamilyCount, UNDEAD_CORE_ID, DEMON_CORE_ID, mpDamageFor, NATURE_WARD_PERCENT, SLIME_CORE_ID, SLIME_SUPPLY, skillUnavailableReason, skillUnavailableLabel, MATERIAL_CORE_ID, DRAGON_CORE_ID, DRAGON_CHARGE_CAP, barrageHits, attackFor, speedFor, battleSkill, canUseSkill, effectStatus, familyLabel, leaderFor, skillOrderLabel, type Order, type State } from './engine';
 import { rules, monsterRole, fixedDamageHint, poisonCashoutHint, type RuleId } from './strategy';
 
 import { POISON_TIMING_HINT, poisonSkillDetail } from './poisonDescription';
@@ -47,7 +47,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
         const core = units.find(unit => unit.monster.id === UNDEAD_CORE_ID);
         if (!core) return null;
         const skill = core.monster.skills[0]!;
-        return <div className="counterGuide undeadTactics" key={`cashout-${label}`}><strong>{label}の毒交換：1回あたり{poisonCashoutPerTickFor(core, skill)} · {core.poisonCashoutBonus ? '開戦時の不死3体条件成立' : '条件未成立'}</strong><p>ドラウグルだけが使用。{core.hp <= 0 ? '本人は戦闘不能' : canUseSkill(core, skill, units) ? `現在MP ${core.mp}・使用可能` : `現在MP ${core.mp}・MP不足`}。MP18と通常順の一手を使い、命中時に毒を全消費します。</p>{targets.filter(unit => unit.hp > 0).map(target => <small key={target.key}>{target.monster.name}：{poisonCashoutHint(core, skill, target)}</small>)}</div>;
+        return <div className="counterGuide undeadTactics" key={`cashout-${label}`}><strong>{label}の毒交換：残り毒で一撃を強化 · {core.poisonCashoutBonus ? '開戦時の不死3体条件成立' : '条件未成立'}</strong><p>ドラウグルだけが使用。{core.hp <= 0 ? '本人は戦闘不能' : canUseSkill(core, skill, units) ? `現在MP ${core.mp}・使用可能` : `現在MP ${core.mp}・MP不足`}。MP18と通常順の一手を使い、命中時に毒を全消費します。</p>{targets.filter(unit => unit.hp > 0).map(target => <small key={target.key}>{target.monster.name}：{poisonCashoutHint(core, skill, target)}</small>)}</div>;
       })}
       {([{ label: '味方', friends: battle.allies }, { label: '敵', friends: battle.enemies }]).map(({ label, friends }) => {
         const core = friends.find(unit => unit.monster.id === EXTRAORDINARY_CORE_ID);
@@ -74,10 +74,10 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
       <p className="counterGuide">MPは特技の発動時に消費。指示の選択・取消では消費しません。戦闘中の自然回復はなく、再戦を含む対戦開始時に全回復します。MPが足りないときは「たたかう」「ぼうぎょ」が使えます。</p>
       <p className="counterGuide">「守り:今T」はこのターンの終了まで有効。「毒:残N回」は残りのダメージ回数です。{POISON_TIMING_HINT}</p>
       <p className="counterGuide">「自然障壁:残NT」は直接ダメージを{NATURE_WARD_PERCENT}%軽減し、ターン終了に残りが1減ります。守りと重ねても半減まで。玄武が倒れても残り期間は続き、毒は防げません。防御解除は命中前、フェンリルの連牙は命中後に自然障壁を消します。</p>
-      <p className="counterGuide">竜気は中核だけが持つ0〜{DRAGON_CHARGE_CAP}の資源。味方の竜系がMPを払う攻撃特技を使い終えるたび+1で、連撃も1回分です。通常攻撃・支援・毒・渇天の息では増えません。開始時の人数条件は仲間が倒れても維持されます。渇天の息は発動時に全消費し、固定基礎に1点あたり{DRAGON_CHARGE_PER_POINT}を加えます。先に動いた味方が溜めた分も使えます。</p>
+      <p className="counterGuide">竜気は中核だけが持つ0〜{DRAGON_CHARGE_CAP}の資源。味方の竜系がMPを払う攻撃特技を使い終えるたび+1で、連撃も1回分です。通常攻撃・支援・毒・渇天の息では増えません。開始時の人数条件は仲間が倒れても維持されます。渇天の息は発動時に全消費し、蓄えが多いほど息が強まります。先に動いた味方が溜めた分も使えます。</p>
       <p className="counterGuide">竜気を消すには、通常の防御解除を命中前に当てるか、フェンリルの連牙を命中させます（命中後に解除）。解除後は再蓄積できます。中核を倒せば竜気も消え、以後は溜まりません。アンカーの息に合わせて守護・防御を使う対策もあります。</p>
       <p className="counterGuide">固定基礎の攻撃は攻撃力・群気・全体半減に依存しません。乱数±10%と守り・自然障壁は適用されます。ケツァルコアトルの嵐の息吹は従来どおり攻撃力を使い、全体半減も適用されます。防御力・賢さ・属性相性は未導入です。</p>
-      <p className="counterGuide">炉心の修復は1ターン目終了時、両軍の毒ダメージ後に一度だけ。タロスが生存し修復待ちなら、生存する物質系を各最大HPの{MATERIAL_REPAIR_PERCENT}%回復します。MP・行動を使わず、戦闘不能の仲間は戻りません。通常の防御解除は命中前、フェンリルは命中後に修復待ちを消します。中核を倒す、毒で回復前に倒す、解除を当てる対策があります。</p>
+      <p className="counterGuide">炉心の修復は1ターン目終了時、両軍の毒ダメージ後に一度だけ。タロスが生存し修復待ちなら、生存する物質系を最大HPに応じて傷を少し修復します。MP・行動を使わず、戦闘不能の仲間は戻りません。通常の防御解除は命中前、フェンリルは命中後に修復待ちを消します。中核を倒す、毒で回復前に倒す、解除を当てる対策があります。</p>
       <p className="counterGuide">蓄え分けは通常順の行動を1回使い、生存する味方粘体系へ各MP+{SLIME_SUPPLY.amount}（最大MPまで）。本人も対象です。戦闘中1回だけで、指示・取消では回数を使わず、発動時に消費します。全員満タンでは選べません。HP回復・蘇生・毒解除はしません。回数は防御解除で消えず、中核の撃破で失います。先制で傷ついた仲間を倒す、守護を強いて手番とMPを使わせる対策があります。</p>
       <p className="counterGuide">空勘の爪はHP命中後、生存した相手のMPを削ります。MP回復ではありません。受理済みの特技が敵のMP削りで発動前に不足すると、元の行動順で通常攻撃に切り替わり、余分な一手は発生しません。実際に先行したMP補給で足りれば元の特技を使います。指示時に不足している特技は予約できません。MP0でも通常攻撃・防御は可能です。</p>
       <p className="counterGuide">毒交換は今後の毒ダメージを失う代わりに、単体攻撃の基礎へ追加します。追加分も乱数・守り・自然障壁の対象。毒0なら追加0で、HP回復・MP獲得・追加行動はありません。ドラウグルを含む開戦時の不死系3体条件は先頭以外でも有効で、仲間の撃破で変わりません。仲間の攻撃には追加されません。</p>

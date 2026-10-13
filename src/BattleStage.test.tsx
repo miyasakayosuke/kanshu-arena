@@ -986,11 +986,11 @@ describe('undead art and authoritative poison exchange effects',()=>{
   const consume:BattleEvent={kind:'poison-cashout',effect:'poison-cashout',actor:'a0',target:'e0',skill:event.skill,poison:0,poisonTicksConsumed:3,poisonCashoutPerTick:22,poisonCashoutAdded:66};
   const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',skill:event.skill,amount:126,hp:100};
   const props={allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},castEvent:event,impact:event,playbackRate:rate};
-  await render(props);frame(100);frame(5000);expect(labels()).not.toContain('毒3回消費 · 基礎+66');expect(labels()).not.toContain('126');expect(document.querySelector('.enemyVital')?.textContent).toContain('毒:残3回');
+  await render(props);frame(100);frame(5000);expect(labels()).not.toContain('毒3回消費');expect(labels()).not.toContain('126');expect(document.querySelector('.enemyVital')?.textContent).toContain('毒:残3回');
   await render({...props,enemies:state.enemies.map((u,i)=>i?u:{...u,poison:0,hp:100}),impact:hit,impacts:[consume,hit]});frame(5010);
-  expect(labels()).toContain('毒3回消費 · 基礎+66');expect(labels()).toContain('126');expect(labels()).not.toContain('+66');expect(document.querySelector('.enemyVital')?.textContent).not.toContain('毒:');expect(document.querySelector('[aria-live]')?.textContent).toContain('毒3回を消費、追加基礎66');
-  await render({...props,effect:null,castEvent:null,impact:null,impacts:[]});frame(5100);expect(labels()).not.toContain('毒3回消費 · 基礎+66');
-  await render({...props,effect:null,castEvent:null,impact:hit,impacts:[consume,hit]});frame(5200);expect(labels()).not.toContain('毒3回消費 · 基礎+66');expect(labels()).not.toContain('126');
+  expect(labels()).toContain('毒3回消費');expect(labels()).toContain('126');expect(labels()).not.toContain('+66');expect(document.querySelector('.enemyVital')?.textContent).not.toContain('毒:');expect(document.querySelector('[aria-live]')?.textContent).toContain('毒3回を消費');
+  await render({...props,effect:null,castEvent:null,impact:null,impacts:[]});frame(5100);expect(labels()).not.toContain('毒3回消費');
+  await render({...props,effect:null,castEvent:null,impact:hit,impacts:[consume,hit]});frame(5200);expect(labels()).not.toContain('毒3回消費');expect(labels()).not.toContain('126');
  });
  it.each([{ticks:0,lethal:false},{ticks:3,lethal:true}])('retains exact zero/lethal cue: $ticks/$lethal',async({ticks,lethal})=>{
   const state=start([32,4,33,34,35],[32,4,33,34,35]);if(lethal)state.enemies[0].hp=0;
@@ -999,7 +999,7 @@ describe('undead art and authoritative poison exchange effects',()=>{
   const hit:BattleEvent={kind:'damage',actor:'a0',target:'e0',amount:lethal?9:64,hp:lethal?0:160};
   const impacts:BattleEvent[]=[consume,hit,...(lethal?[{kind:'defeat' as const,target:'e0'}]:[])];
   await render({allies:state.allies,enemies:state.enemies,effect:{text:event.skill!,type:'slash',tick:1},castEvent:event,impact:hit,impacts});frame(100);
-  expect(labels()).toContain(`毒${ticks}回消費 · 基礎+${ticks*22}`);expect(labels()).toContain(event.skill!);expect(teamTransforms()).toHaveLength(0);
+  expect(labels()).toContain(`毒${ticks}回消費`);expect(labels()).toContain(event.skill!);expect(teamTransforms()).toHaveLength(0);
  });
 });
 
@@ -1214,7 +1214,7 @@ describe('enemy lower-body result bands', () => {
     expect(points.map(point => point.x)).toEqual([103, 124, 145]);
     expect(points.map(point => point.y)).toEqual([334, 321, 334]);
     // Later batches retain an earlier event's reserved line and identity.
-    expect(worldPoint(textDraws.find(draw => draw.text === '61')!).y).toBeCloseTo(hpY - battleMotion.sampleNumberMotion(100).rise);
+    expect(worldPoint(textDraws.find(draw => draw.text === '61')!).y).toBeCloseTo(hpY);
   });
   it('reanchors text on aspect resize while preserving the original reaction geometry', async () => {
     const event: BattleEvent = {kind: 'heal', actor: 'e0', target: 'e0', amount: 87};
@@ -1237,7 +1237,7 @@ describe('enemy lower-body result bands', () => {
     for (const age of [0, 85, 210]) {
       frame(100 + age);
       const number = worldPoint(textDraws.find(draw => draw.text === '98')!);
-      const label = worldPoint(textDraws.find(draw => draw.text === (kind === 'break' ? '守り解除' : '毒2回消費 · 基礎+44'))!);
+      const label = worldPoint(textDraws.find(draw => draw.text === (kind === 'break' ? '守り解除' : '毒2回消費'))!);
       expect(label.y - number.y).toBeGreaterThan(34);
       const original = enemyFormation(0, 5, 1, CHARACTER_ART[base.enemies[0].monster.id]).point;
       const shake = age < 190 ? battleMotion.sampleHitMotion(age, reduced).shake * .4 : 0;
@@ -1280,6 +1280,44 @@ describe('enemy lower-body result bands', () => {
       expect(point.y - (31 * battleMotion.sampleNumberMotion(age).scale / 2 + 2.5) * aspect).toBeGreaterThan(0);
       expect(worldPoint(textDraws.find(draw => draw.text === 'MP −14')!).y - point.y).toBeGreaterThan(26 * aspect);
     }
+  });
+
+  it.each([1, 2].flatMap(rate => [false, true].flatMap(reduced => [1, 1.4, 2.82].map(aspect => ({rate, reduced, aspect})))))
+  ('keeps co-emitted HP/MP in a planted lower-body stack while preserving pop and fade at $rate×, reduced=$reduced, aspect=$aspect', async ({rate, reduced, aspect}) => {
+    vi.mocked(window.matchMedia).mockReturnValue({matches: reduced, addEventListener: vi.fn(), removeEventListener: vi.fn()} as unknown as MediaQueryList);
+    vi.mocked(HTMLCanvasElement.prototype.getBoundingClientRect).mockReturnValue({width: 720, height: 460 / aspect, left: 0, top: 0} as DOMRect);
+    const state = start([29, 1, 8, 30, 31], [32, 4, 33, 34, 35]);
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e1', amount: 62};
+    const loss: BattleEvent = {kind: 'resource-loss', actor: 'a0', target: 'e1', amount: 10};
+    const props = {...base, enemies: state.enemies, playbackRate: rate, impact: hit, impacts: [hit, loss]};
+    await render(props); frame(100);
+    const slot = enemyFormation(1, 5, aspect, CHARACTER_ART[4]);
+    for (const age of [0, 85, 210, 500, 680]) {
+      frame(100 + age / rate);
+      const hp = textDraws.find(draw => draw.text === '62')!;
+      const mp = textDraws.find(draw => draw.text === 'MP −10')!;
+      const shake = age < 190 ? battleMotion.sampleHitMotion(age, reduced).shake : 0;
+      expect(worldPoint(hp).x).toBeCloseTo(slot.foot.x + shake);
+      expect(worldPoint(hp).y).toBeCloseTo(slot.foot.y - 54 * aspect + shake * .4);
+      expect(worldPoint(mp).x).toBeCloseTo(slot.foot.x + shake);
+      expect(worldPoint(mp).y).toBeCloseTo(slot.foot.y - 20 * aspect + shake * .4);
+      expect(hp.font).toBe(`800 ${31 * battleMotion.sampleNumberMotion(age, reduced).scale}px system-ui, sans-serif`);
+      expect(hp.alpha).toBe(battleMotion.sampleNumberMotion(age, reduced).alpha);
+      expect(mp.alpha).toBe(hp.alpha);
+      const halfEnvelope = 31 * battleMotion.sampleNumberMotion(age, reduced).scale / 2 + 2.5;
+      expect(worldPoint(mp).y + halfEnvelope * aspect).toBeLessThan(slot.foot.y + 6 * aspect + shake * .4);
+    }
+  });
+
+  it('does not freeze only the later half of an unrelated cross-batch HP/MP sequence', async () => {
+    const loss: BattleEvent = {kind: 'resource-loss', actor: 'a0', target: 'e1', amount: 13};
+    await render({...base, impact: loss, impacts: [loss]}); frame(100);
+    const hit: BattleEvent = {kind: 'damage', actor: 'a0', target: 'e1', amount: 63};
+    await render({...base, impact: hit, impacts: [hit]}); frame(280);
+    frame(490);
+    const slot = enemyFormation(1, 5, 1, CHARACTER_ART[base.enemies[1].monster.id]);
+    expect(worldPoint(textDraws.find(draw => draw.text === '63')!).y).toBeCloseTo(slot.foot.y - 58 - 22);
+    expect(worldPoint(textDraws.find(draw => draw.text === 'MP −13')!).y).toBeCloseTo(slot.foot.y - 24 - 22);
   });
 
 });

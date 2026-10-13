@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { attackFor, baseDamage, DEFAULT_POISON_IMPACT_SCALE, monsters, poisonImpactScaleFor, start } from './engine';
+import { attackFor, DEFAULT_POISON_IMPACT_SCALE, monsters, poisonImpactScaleFor, start } from './engine';
 import { POISON_TIMING_HINT, poisonSkillDetail, poisonSkillHint } from './poisonDescription';
 
 const poison = monsters[3].skills[2]!;
@@ -11,7 +11,7 @@ describe('poison descriptions follow authoritative mechanics', () => {
     const compact = poisonSkillHint(poison, unit);
     const detail = poisonSkillDetail(poison, unit);
     expect(compact).toContain('敵全体');
-    expect(compact).toContain('T末・最大HP6%×3回');
+    expect(compact).toContain('T末・3回');
     expect(compact.length).toBeLessThanOrEqual(58);
     expect(detail).toContain(POISON_TIMING_HINT);
     if (scale === 0) {
@@ -20,13 +20,13 @@ describe('poison descriptions follow authoritative mechanics', () => {
       expect(detail).not.toContain('最低1');
       expect(detail).not.toContain('威力12');
     } else {
-      expect(compact).toContain(`基礎約${Number(baseDamage(unit, poison).toFixed(2))}`);
-      expect(detail).toContain('威力12＋補正後攻撃力の38%');
+      expect(compact).toContain('即時ダメージ');
+      expect(detail).not.toMatch(/威力\s*\d|基礎約|基礎目安/);
       expect(detail).toContain('全体攻撃の半減補正は受けません');
       expect(detail).toContain('乱数±10%・守り・自然障壁');
       expect(detail).toContain('相手の残りHPまで');
-      expect(detail).toContain('表示は確定ダメージではありません');
-      expect(detail.includes('）の半分')).toBe(scale === 0.5);
+      expect(detail).toContain('最終ダメージは攻撃力');
+      expect(detail.includes('弱めの')).toBe(scale === 0.5);
     }
   });
 
@@ -46,17 +46,17 @@ describe('poison descriptions follow authoritative mechanics', () => {
     expect(poisonSkillDetail(poison, unit)).toBe(poisonSkillDetail(poison, { ...unit, poisonImpactScale: normalized }));
   });
 
-  it('uses current battle attack and rally rather than roster attack and does not mutate inputs', () => {
+  it('keeps actual attack private without mutating the battle inputs', () => {
     const unit = { ...defaultUnit(), monster: { ...monsters[3], atk: 100 }, rally: 1, rallyPercent: 10, poisonImpactScale: 0.5 };
     const before = structuredClone({ unit, poison });
     expect(attackFor(unit)).toBe(110);
-    expect(poisonSkillDetail(poison, unit)).toContain('現在の基礎目安：約26.9');
-    expect(poisonSkillHint(poison, unit)).toContain('即時基礎約26.9（基礎半分）');
+    expect(poisonSkillDetail(poison, unit)).not.toMatch(/26\.9|基礎目安/);
+    expect(poisonSkillHint(poison, unit)).toContain('即時ダメージ（弱め）');
     expect({ unit, poison }).toEqual(before);
   });
 
   it('explains three ticks, refresh without stacking, and cleanse without future prevention', () => {
-    for (const phrase of ['付与したターンを含むターン終了時', '最大HPの6%', '3回', '残り3回へ更新', '重ねがけなし', '毒解除は現在の毒を消し', '後からの毒付与は予防しません', '守り・自然障壁は継続毒を軽減しません']) {
+    for (const phrase of ['付与したターンを含むターン終了時', '最大HPに応じたダメージ', '3回', '残り3回へ更新', '重ねがけなし', '毒解除は現在の毒を消し', '後からの毒付与は予防しません', '守り・自然障壁は継続毒を軽減しません']) {
       expect(POISON_TIMING_HINT).toContain(phrase);
     }
   });

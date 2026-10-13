@@ -445,7 +445,7 @@ describe('material workshop conditions', () => {
     expect(plan.getAttribute('data-active')).toBe(String(active));
     expect(plan.textContent).toContain(`物質系 ${count}体 / 必要3体`);
     expect(plan.textContent).toContain(team.includes(19) ? 'タロス：編成中' : 'タロス：未編成');
-    for (const phrase of ['先頭以外でも有効', '開始時の人数条件は変わりません', '両軍の毒ダメージ後', '各最大HPの14%', 'MP・行動を使わず', '戦闘不能の仲間は戻りません', '防御解除で修復待ちを消す', '再付与はありません']) expect(plan.textContent).toContain(phrase);
+    for (const phrase of ['先頭以外でも有効', '開始時の人数条件は変わりません', '両軍の毒ダメージ後', '最大HPに応じて', 'MP・行動を使わず', '戦闘不能の仲間は戻りません', '防御解除で修復待ちを消す', '再付与はありません']) expect(plan.textContent).toContain(phrase);
     const recipients = team.filter(id => monsters[id].family === 'material').map(id => monsters[id].name);
     const excluded = team.filter(id => monsters[id].family !== 'material').map(id => monsters[id].name);
     expect(plan.querySelector('.familyRecipients')?.textContent).toBe(`対象 ${count}/5体：${recipients.join('・')}`);
@@ -558,7 +558,7 @@ describe('undead poison exchange workshop',()=>{
   ])('states fixed qualification and only one allowed actor for $team',async({team,count,active})=>{
     await mount({startingTeam:team});const plan=document.querySelector('.partyCard .undeadCashoutPlan')!;
     expect(plan.getAttribute('data-active')).toBe(String(active));expect(plan.textContent).toContain(`不死系 ${count}体 / 必要3体`);
-    for(const phrase of ['14→22','先頭以外でも有効','仲間が倒れても変わりません','毒残0〜3回を全消費','今後の毒ダメージを捨て','HP回復・MP獲得・追加行動はありません'])expect(plan.textContent).toContain(phrase);
+    for(const phrase of ['毒を消費した一撃がさらに強まります','先頭以外でも有効','仲間が倒れても変わりません','毒残0〜3回を全消費','今後の毒ダメージを捨て','HP回復・MP獲得・追加行動はありません'])expect(plan.textContent).toContain(phrase);
     expect(plan.textContent).toContain(`使用者：${team.includes(32)?'ドラウグルだけ':'なし'}`);
     expect(plan.textContent).toContain(`使用対象外：${team.filter(id=>id!==32).map(id=>monsters[id].name).join('・')}`);expect(updates).toEqual([]);
   });

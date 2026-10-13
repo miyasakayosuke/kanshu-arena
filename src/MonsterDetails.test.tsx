@@ -124,7 +124,7 @@ describe('family monster profiles', () => {
     }
     expect(profile.querySelectorAll('.skill')).toHaveLength(3);
     expect(profile.textContent).toContain('MP 22 · アンカー · 敵全体');
-    expect(profile.textContent).toContain('MP 20 · 通常順 · 味方1体を回復 · 回復70');
+    expect(profile.textContent).toContain('MP 20 · 通常順 · 味方1体を回復');
     expect(profile.textContent).not.toContain('未知の役割');
     expect(document.activeElement).toBe(closeButton());
     await tab(true);
@@ -145,7 +145,7 @@ describe('dragon profiles', () => {
   it('explains charge qualification, cast timing, fixed basis, and precise counterplay', async () => {
     await mount(15);
     const text = document.querySelector('.profileModal')!.textContent!;
-    for (const phrase of ['竜系3体以上', '先頭でなくても', '連撃も1回分', '竜気は0〜5', '発動時にMPを払い、竜気を全消費', '指示した時点では消費せず', '条件未成立でも息は使えます', '防御解除は命中前', 'フェンリルは命中後', '解除後は再び溜められます', '本人の戦闘不能後は増えません', '固定基礎10＋竜気×18（最大100）', '乱数±10%', '防御力・賢さ・属性相性は現在の戦闘では未導入']) expect(text).toContain(phrase);
+    for (const phrase of ['竜系3体以上', '先頭でなくても', '連撃も1回分', '竜気は0〜5', '発動時にMPを払い、竜気を全消費', '指示した時点では消費せず', '条件未成立でも息は使えます', '防御解除は命中前', 'フェンリルは命中後', '解除後は再び溜められます', '本人の戦闘不能後は増えません', '竜気を溜めるほど強まる息', '乱数±10%', '防御力・賢さ・属性相性は現在の戦闘では未導入']) expect(text).toContain(phrase);
     expect(document.querySelectorAll('.skill')).toHaveLength(3);
     expect(text).not.toContain('未知の役割');
     expect(text).not.toContain('MPと竜気を全消費');
@@ -160,15 +160,15 @@ describe('dragon profiles', () => {
     expect(document.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);
     if (id === 16) expect(text).toContain('長い蛇の体を持つ竜');
     if (id === 17) { expect(text).toContain('体の両はしに頭'); expect(text).toContain('敵ランダム2回（対象指定なし）'); }
-    if (id === 18) { expect(text).toContain('青緑の翼'); expect(text).toContain('固定基礎68'); expect(text).toContain('最終ダメージは乱数±10%'); }
+    if (id === 18) { expect(text).toContain('青緑の翼'); expect(text).toContain('攻撃力に依存しない一撃'); expect(text).toContain('最終ダメージは乱数±10%'); }
   });
 
   it('keeps the existing breath attack-based instead of claiming all breaths use fixed damage', async () => {
     await mount(5);
     const text = document.querySelector('.legacyBreathExplanation')!.textContent!;
     expect(text).toContain('従来の攻撃力を使う計算を維持');
-    expect(text).toContain('補正後攻撃力の38%');
-    expect(text).toContain('全体攻撃は半分');
+    expect(text).toContain('攻撃力が高まるほど強くなり');
+    expect(text).toContain('一体あたりへの衝撃は薄まります');
     expect(document.querySelector('.fixedBasisExplanation')).toBeNull();
   });
 });
@@ -179,7 +179,7 @@ describe('material profiles', () => {
     const profile = document.querySelector('.profileModal')!;
     expect(profile.querySelector('.familyTag')?.textContent).toBe('物質系');
     expect(profile.querySelector('.leaderBanner')?.textContent).toContain('味方の物質系だけ 最大HP +10%');
-    for (const phrase of ['タロスを含む物質系3体以上', '先頭以外でも', '開始時の条件は変わりません', '1ターン目の終了時', '両軍の毒ダメージを受けた後', '一度だけ', '本人が生存', '生存する味方の物質系', '各最大HPの14%', '小数点以下は切り捨て、最大HPまで', 'MPも行動も使わず', '蘇生ではありません', '防御解除は命中前', 'フェンリルの連牙は命中後', '再付与や2ターン目の再発動はありません']) expect(profile.textContent).toContain(phrase);
+    for (const phrase of ['タロスを含む物質系3体以上', '先頭以外でも', '開始時の条件は変わりません', '1ターン目の終了時', '両軍の毒ダメージを受けた後', '一度だけ', '本人が生存', '生存する味方の物質系', '最大HPに応じて', '小数点以下は切り捨て、最大HPまで', 'MPも行動も使わず', '蘇生ではありません', '防御解除は命中前', 'フェンリルの連牙は命中後', '再付与や2ターン目の再発動はありません']) expect(profile.textContent).toContain(phrase);
     expect(profile.querySelectorAll('.skill')).toHaveLength(3);
     expect([...profile.querySelectorAll('.detailSkillPicker button')].map(node => node.textContent)).toEqual(['炉心の槌', '環銅の衝撃', '鋳輪の備え']);
     expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
@@ -211,7 +211,7 @@ describe('slime profiles',()=>{
     await mount(24);const profile=document.querySelector('.profileModal')!;
     expect(profile.querySelector('.familyTag')?.textContent).toBe('粘体系');
     for(const phrase of ['最大MP・開戦時MP+10%','自然回復はありません','粘体系3体以上','通常順の行動を使い','各MP+8','戦闘中1回だけ','全員満タンなら使えず','指示・取消でも回数は減りません','HP回復・毒解除・蘇生はしません','防御解除で消えません','本人が倒れると失います','名称・設定は本作用の創作'])expect(profile.textContent).toContain(phrase);
-    expect([...profile.querySelectorAll('.detailSkillPicker button')].map(n=>n.textContent)).toEqual(['蓄え分け','押し流し','水面のかばい']);expect(profile.textContent).toContain('固定基礎128');expect(profile.querySelector('.fixedBasisExplanation')?.textContent).toContain('「固定基礎」の攻撃');
+    expect([...profile.querySelectorAll('.detailSkillPicker button')].map(n=>n.textContent)).toEqual(['蓄え分け','押し流し','水面のかばい']);expect(profile.textContent).toContain('攻撃力に依存しない一撃');expect(profile.querySelector('.fixedBasisExplanation')?.textContent).toContain('「攻撃力に依存しない一撃」と竜気を使う息');
   });
   it.each([25,26,27,28])('gives new companion %s authored lore and only implemented roles',async id=>{
     await mount(id);const profile=document.querySelector('.profileModal')!;expect(profile.querySelector('.familyTag')?.textContent).toBe('粘体系');expect(profile.textContent).not.toContain('未知の役割');expect(profile.textContent).not.toContain('まだ物語の記されていない');expect(profile.querySelector('.slimeExplanation')).toBeNull();expect(profile.querySelectorAll('.skill').length).toBeLessThanOrEqual(4);expect(profile.textContent).toContain('防御力・賢さ・属性相性は現在の戦闘では未導入');
@@ -232,7 +232,7 @@ describe('demon profiles',()=>{
 describe('undead profiles are finite and game-authored',()=>{
  it('explains exact poison tradeoff, starting condition and counters without a revival promise',async()=>{
    await mount(32);const text=[...document.querySelectorAll('.undeadExplanation')].map(node => node.textContent).join('');
-   for(const phrase of ['MP18','毒残0〜3回','基礎14','22','先頭以外でも有効','最大HP6%×残回数','毒0','最大3回','残りMP8','HP回復・MP獲得・追加行動はありません','清め','新しく残3'])expect(text).toContain(phrase);
+   for(const phrase of ['MP18','毒残0〜3回','残り毒が多いほど一撃を強め','さらに強まり','先頭以外でも有効','残回数ぶん','毒0','最大3回','残りMP8','HP回復・MP獲得・追加行動はありません','清め','新しく残3'])expect(text).toContain(phrase);
    expect(document.querySelectorAll('.profileModal .skill')).toHaveLength(2);expect(document.querySelector('.heroIcon img')).toBeTruthy();
  });
  it.each([33,34,35])('gives ID%i independent art, lore and at most four skills',async id=>{

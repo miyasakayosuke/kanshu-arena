@@ -1,3 +1,4 @@
+import { displayBattleLogLine } from './skillDisplay';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import type { State } from './engine';
@@ -74,7 +75,7 @@ export default function BattleLogDialog({ battle, playing, onClose, fallbackFocu
     <section ref={dialog} className="modal logModal" role="dialog" aria-modal="true" aria-label="戦闘ログ">
       <button ref={close} className="close" aria-label="戦闘ログを閉じる" onClick={onClose}>×</button><h2>戦闘ログ</h2>
       {playing && <p className="hint">現在のターンの記録は演出後に表示されます。</p>}
-      <div className="log">{battle.log.map((line, i) => <div key={i}>{line}</div>)}</div>
+      <div className="log">{battle.log.map((line, i) => <div key={i}>{displayBattleLogLine(line)}</div>)}</div>
       <details className="historyLedger"><summary>全ターンの指示・イベント記録</summary>{battle.history?.map(record => <details key={record.turn}><summary>TURN {record.turn} · {record.events.length}件の記録</summary><h3>確定した指示</h3><ol>{record.orders.map((order, index) => <li key={index}>{battleOrderLine(battle, order)}</li>)}</ol><h3>実際の出来事</h3><ol>{record.events.map((event, index) => <li key={index}>{battleEventLine(battle, event)}</li>)}</ol></details>)}</details>
     </section>
   </div>, document.body);

@@ -60,7 +60,7 @@ describe('dragon wave battle UI', () => {
     expect(document.querySelector('#party-status-a0')?.textContent).toBe('竜気:0/5');
     const portrait = document.querySelector<HTMLImageElement>('.commanderIcon img')?.src;
     await click(button('とくぎ'));
-    expect(button('渇天の息').textContent).toContain('固定基礎10（現在の竜気0）');
+    expect(button('渇天の息').textContent).toContain('竜気を溜めるほど強まる息（現在の竜気0）');
     expect(button('渇天の息').title).toContain('乱数±10%');
     await click(button('渇天の息'));
     expect(document.querySelector('.targetButtons')).toBeNull();

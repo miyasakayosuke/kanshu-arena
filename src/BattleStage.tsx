@@ -33,7 +33,7 @@ type Props = {
 type Point = {x: number; y: number};
 type Visual = 'slash' | 'fire' | 'wind' | 'water' | 'shadow' | 'guard' | 'poison' | 'seed' | 'storm' | 'twin' | 'bronze' | 'paper' | 'masonry' | 'steam' | 'bull' | 'repair' | 'liquid' | 'ribbon' | 'fold' | 'bubble' | 'knead' | 'supply' | 'ledger' | 'tool' | 'mantle' | 'mp-loss' | 'burial' | 'reins' | 'sleeves' | 'stitch' | 'cashout' | 'threshold' | 'portal' | 'lattice';
 type Cast = {event: BattleEvent; type: Visual; name: string; started: number; rate: number; from: Point; to: Point; targets: Point[]; incoming: boolean; impacted: boolean; impactedAt?: number; lastHitIndex?: number; lastHitAt?: number};
-type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point; resultLift: number};
+type Impact = {event: BattleEvent; type: Visual; started: number; rate: number; at: Point; resultLift: number; pairedResult: boolean};
 const WIDTH = 720;
 const HEIGHT = 460;
 const TAU = Math.PI * 2;
@@ -737,7 +737,7 @@ function drawImpact(ctx: CanvasRenderingContext2D, impact: Impact, age: number, 
     }
     drawUndeadMark(ctx,'burial',x,y,1 + .12*collapse);
     ctx.font='700 12px system-ui';ctx.fillStyle=palette.dark;ctx.textAlign='center';
-    ctx.fillText(`毒${ticks}回消費 · 基礎+${event.poisonCashoutAdded ?? 0}`,x,y+47);
+    ctx.fillText(`毒${ticks}回消費`,x,y+47);
   } else if (undeadVisuals.includes(type)) {
     drawUndeadMark(ctx,type,x,y,reduced?1:1+ease(progress)*.12);
   } else if (demonVisuals.includes(type)) {
@@ -880,7 +880,11 @@ function drawImpactNumber(ctx: CanvasRenderingContext2D, impact: Impact, age: nu
     ctx.font = `800 ${31 * number.scale}px system-ui, sans-serif`;
     const label = event.kind === 'resource-loss' ? `MP −${event.amount}` : event.kind === 'resource-gain' ? `MP +${event.amount}` : event.kind === 'heal' ? `+${event.amount}` : String(event.amount);
     const px = event.hitIndex === undefined ? 0 : (event.hitIndex % 3 - 1) * 21;
-    const desiredY = -impact.resultLift - number.rise - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
+    // Two lines already occupy the lower-body reading band. Keep that pair
+    // planted instead of lifting its HP line back across the target's face.
+    // Four extra units clear the chin while leaving the MP line above the
+    // numbered foot marker. Pop, fade, lifetime and camera keep their clocks.
+    const desiredY = -impact.resultLift + (impact.pairedResult ? 4 : -number.rise) - (event.hitIndex === undefined ? 0 : event.hitIndex % 2 * 13);
     // A lifted HP/removal lane on an exceptionally shallow rear slot can run
     // out of headroom. Bound only its text envelope, after camera framing;
     // ordinary trajectories, all reactions, and the lifetime remain intact.
@@ -1018,15 +1022,20 @@ export default function BattleStage(props: Props) {
             // Reserve result lanes once per authoritative impact batch. Keep
             // HP above a simultaneous MP result, and both above unchanged
             // removal/cashout subtitles that already occupy the foot band.
+            const batchCompanions = (data.impacts ?? []).filter(other => other.target === event.target);
             const companions = [
-              ...(data.impacts ?? []).filter(other => other.target === event.target),
+              ...batchCompanions,
               ...impacts.filter(other => other.event.target === event.target && (now - other.started) * other.rate < NUMBER_DURATION_MS).map(other => other.event),
             ];
             const hasSubtitle = companions.some(other => ['break', 'poison-cashout'].includes(other.kind) ||
               ['extraordinary-response-cleanse', 'extraordinary-response-guard'].includes(other.effect ?? ''));
             const hasMp = companions.some(other => other.amount !== undefined && ['resource-gain', 'resource-loss'].includes(other.kind));
+            // Only a co-emitted HP/MP pair shares the stationary stack. An
+            // unrelated earlier result must retain its existing trajectory.
+            const pairedResult = batchCompanions.some(other => other.amount !== undefined && ['resource-gain', 'resource-loss'].includes(other.kind)) &&
+              batchCompanions.some(other => other.amount !== undefined && ['damage', 'heal'].includes(other.kind));
             const resultLift = (hasSubtitle ? 34 : 0) + (['damage', 'heal'].includes(event.kind) && hasMp ? 34 : 0);
-            impacts.push({event, type, started: now, rate, at, resultLift});
+            impacts.push({event, type, started: now, rate, at, resultLift, pairedResult});
           }
         }
       }
@@ -1326,7 +1335,7 @@ export default function BattleStage(props: Props) {
   const feedback = (props.impacts ?? []).filter(event => event.amount !== undefined && (event.kind === 'damage' || event.kind === 'heal' || event.kind === 'resource-gain' || event.kind === 'resource-loss'));
   const recipientName=(event:BattleEvent)=>[...props.allies,...props.enemies].find(unit=>unit.key===event.target)?.monster.name??'';
   const feedbackLabel=(event:BattleEvent)=>`${recipientName(event)} ${event.kind==='resource-loss'?`MP −${event.amount}`:event.kind==='resource-gain'?`MP +${event.amount}`:`${event.kind==='heal'?'回復':'ダメージ'} ${event.amount}`}`;
-  const cashoutAnnouncement = (props.impacts ?? []).filter(event => event.kind === 'poison-cashout').map(event => `${recipientName(event)}の毒${event.poisonTicksConsumed}回を消費、追加基礎${event.poisonCashoutAdded}。`).join('');
+  const cashoutAnnouncement = (props.impacts ?? []).filter(event => event.kind === 'poison-cashout').map(event => `${recipientName(event)}の毒${event.poisonTicksConsumed}回を消費。`).join('');
   const responseAnnouncement=(props.impacts ?? []).filter(event=>event.effect==='extraordinary-response-cleanse'||event.effect==='extraordinary-response-guard').map(event=>`${recipientName(event)}：${event.kind==='cleanse'?'現在の毒を解除（HP回復なし）':'守り:今T'}。`).join('');
   const announcement = responseAnnouncement + cashoutAnnouncement + (feedback.length > 1
     ? `${new Set(feedback.map(event=>event.target)).size}体に${feedback.every(event=>event.kind==='resource-gain')?'同時MP補給':feedback.every(event=>event.kind==='heal')?'同時回復':'同時着弾'}。${feedback.map(feedbackLabel).join('、')}`

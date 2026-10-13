@@ -40,7 +40,7 @@ describe('undead poison cashout playable UI',()=>{
   await tick(cast.at/speed+1);expect(hp()).toEqual(beforeHp);expect(status()).toContain('毒:残3回');expect(document.querySelector('.partyCashout')).toBeNull();
   await tick((impact.at-cast.at)/speed-2);expect(hp()).toEqual(beforeHp);expect(status()).toContain('毒:残3回');await tick(1);
   const hit=impact.impacts.find(e=>e.kind==='damage')!;
-  expect(hp()[0]).toBe(`HP ${hit.hp}/${setup.mock.results[0].value.allies[0].monster.hp}`);expect(status()).not.toContain('毒:');expect(document.querySelector('.partyCashout')?.textContent).toBe('毒3回消費 · 基礎+66');
+  expect(hp()[0]).toBe(`HP ${hit.hp}/${setup.mock.results[0].value.allies[0].monster.hp}`);expect(status()).not.toContain('毒:');expect(document.querySelector('.partyCashout')?.textContent).toBe('毒3回消費');
   expect(document.querySelector('.partyImpact.damage')?.textContent).toBe(`−${hit.amount}`);expect(mp()).toEqual(beforeMp);expect(document.querySelector('.partyImpact.heal')).toBeNull();expect(document.querySelector('.partyImpact.resource-gain')).toBeNull();
   expect([...document.querySelectorAll<HTMLImageElement>('.commanderIcon img')].map(n=>n.src)).toEqual(portraits);
   expect(result.events.filter(e=>e.kind==='cast')).toHaveLength(10);expect(result.events.filter(e=>e.kind==='poison-cashout')).toHaveLength(1);
@@ -55,7 +55,7 @@ describe('undead poison cashout playable UI',()=>{
  it.each([{ticks:0,lethal:false},{ticks:3,lethal:true}])('retains named zero/lethal cashout metadata: $ticks/$lethal',async({ticks,lethal})=>{
   const {resolve}=fixture(s=>{s.allies[0].poison=ticks;if(lethal)s.allies[0].hp=1;});await begin();await defend();await click(button('この指示でターン開始'));
   const r=resolve.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>,impact=buildTimeline(r.events).cues.find(c=>c.impacts.some(e=>e.kind==='poison-cashout'))!;await tick(impact.at+1);
-  expect(document.querySelector('.battleMessage')?.textContent).toContain('塚底の取り立て');expect(document.querySelector('.partyCashout')?.textContent).toBe(`毒${ticks}回消費 · 基礎+${ticks*22}`);
+  expect(document.querySelector('.battleMessage')?.textContent).toContain('塚底の取り立て');expect(document.querySelector('.partyCashout')?.textContent).toBe(`毒${ticks}回消費`);
   expect(status()).not.toContain('毒:');if(lethal)expect(hp()[0]).toMatch(/^HP 0\//);expect(impact.impacts.some(e=>e.kind==='defeat')).toBe(lethal);
  });
  it('reapplies fresh poison only at the later real poison impact and ticks it at turn end',async()=>{
@@ -65,14 +65,14 @@ describe('undead poison cashout playable UI',()=>{
   await click(button('演出をスキップ'));expect(status()).toContain('毒:残2回');expect(r.events.filter(e=>e.kind==='poison-cashout')).toHaveLength(1);
  });
  it('offers current target tradeoff without reserving poison, and cancel leaves state intact',async()=>{
-  const {setup}=fixture(s=>{s.enemies[0].poison=3;s.enemies[1].poison=1;});await begin();await click(button('とくぎ'));expect(document.querySelectorAll('.skillButtons button')).toHaveLength(2);expect(button('塚底の取り立て').textContent).toContain('×22');
-  await click(button('塚底の取り立て'));const hints=[...document.querySelectorAll('.cashoutTargetHint')];expect(hints[0].textContent).toContain('毒3回 → 基礎+66');expect(hints[1].textContent).toContain('毒1回 → 基礎+22');expect(hints[2].textContent).toContain('毒0回 → 基礎+0');
-  expect(hints[0].getAttribute('title')).toContain(`最大${Math.floor(setup.mock.results[0].value.enemies[0].monster.hp*.06)*3}の経過ダメージ`);expect(hints[0].getAttribute('title')).toContain('実際の命中時に再判定');
+  const {setup}=fixture(s=>{s.enemies[0].poison=3;s.enemies[1].poison=1;});await begin();await click(button('とくぎ'));expect(document.querySelectorAll('.skillButtons button')).toHaveLength(2);expect(button('塚底の取り立て').textContent).toContain('不死の連携でさらに強まる');
+  await click(button('塚底の取り立て'));const hints=[...document.querySelectorAll('.cashoutTargetHint')];expect(hints[0].textContent).toContain('毒3回 → 一撃を強める');expect(hints[1].textContent).toContain('毒1回 → 一撃を強める');expect(hints[2].textContent).toContain('毒0回 → 追加なし');
+  expect(hints[0].getAttribute('title')).toContain('残す場合はターン末の毒が続く');expect(hints[0].getAttribute('title')).toContain('実際の命中時に再判定');
   await click(button('特技に戻る'));expect(mp()[0]).toBe('MP 62/62');expect(document.querySelectorAll('.enemyVital')[0].textContent).toContain('毒:残3回');
  });
  it.each([{team:mixed,qualified:true},{team:[2,32,4,6,10],qualified:false}])('shows offleader fixed bonus/current legality and mixed exclusion for $team',async({team,qualified})=>{
   fixture(s=>{s.allies[1].mp=17;s.allies[2].hp=0;});await begin(team);await click(label('ドラウグルの行動を選択'));await click(button('とくぎ'));expect(button('塚底の取り立て').disabled).toBe(true);expect(button('塚底の取り立て').textContent).toContain('MP不足');expect(button('土蓋の拳').disabled).toBe(false);
-  await click(button('作戦'));const tactics=document.querySelector('.undeadTactics')!;expect(tactics.textContent).toContain(`1回あたり${qualified?22:14}`);expect(tactics.textContent).toContain('現在MP 17・MP不足');expect(tactics.textContent).toContain('ドラウグルだけ');expect(document.body.textContent).toContain('仲間の攻撃には追加されません');
+  await click(button('作戦'));const tactics=document.querySelector('.undeadTactics')!;expect(tactics.textContent).toContain(qualified ? '開戦時の不死3体条件成立' : '条件未成立');expect(tactics.textContent).toContain('現在MP 17・MP不足');expect(tactics.textContent).toContain('ドラウグルだけ');expect(document.body.textContent).toContain('仲間の攻撃には追加されません');
  });
  it('leaves old saves/navigation intact and rejects pure C17 under light C15',async()=>{
   localStorage.setItem('kanshu-team',JSON.stringify([0,2,3,4,6]));await act(async()=>root.render(<App/>));await click(label('編成'));expect([...document.querySelectorAll('.builderSlots .teamUnit')].map(n=>Number(n.getAttribute('data-monster-id')))).toEqual([0,2,3,4,6]);

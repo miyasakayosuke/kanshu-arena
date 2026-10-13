@@ -322,9 +322,9 @@ describe('fixed-basis skill copy', () => {
     const state = start([15, 16, 18, 2, 6], [1]);
     state.allies[0].dragonCharge = 3;
     const finisher = monsters[15].skills.find(skill => skill.dragonChargeFinisher)!;
-    expect(fixedDamageHint(finisher)).toContain('10＋竜気×18');
-    expect(fixedDamageHint(finisher, state.allies[0])).toContain('固定基礎64（現在の竜気3）');
-    expect(fixedDamageHint(monsters[18].skills[0]!)).toBe('1体あたり固定基礎68');
+    expect(fixedDamageHint(finisher)).toContain('竜気を溜めるほど強まる息');
+    expect(fixedDamageHint(finisher, state.allies[0])).toContain('竜気を溜めるほど強まる息（現在の竜気3）');
+    expect(fixedDamageHint(monsters[18].skills[0]!)).toBe('攻撃力に依存しない一撃');
     expect(fixedDamageHint(monsters[5].skills[1]!)).toBe('');
   });
 });
@@ -337,9 +337,9 @@ describe('undead examples and current poison tradeoffs',()=>{
  });
  it('derives bounded previews from actual target/max HP without consuming any state',async()=>{
   const {poisonCashoutHint}=await import('./strategy');const state=start([2,32,4,35,10],[32,4,33,34,35]),core=state.allies[1],skill=core.monster.skills[0]!,target=state.enemies[0];target.poison=3;const before=structuredClone(state);
-  expect(poisonCashoutHint(core,skill)).toContain('×22');expect(poisonCashoutHint(core,skill,target)).toContain('基礎+66');expect(poisonCashoutHint(core,skill,target)).toContain(`最大${Math.floor(target.monster.hp*.06)*3}の経過ダメージ`);expect(state).toEqual(before);
-  target.poison=1;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+22');target.poison=0;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+0');target.poison=3;target.hp=0;expect(poisonCashoutHint(core,skill,target)).toContain('基礎+0');
-  const unqualified=start([32,4,0,2,10],[1]);expect(poisonCashoutHint(unqualified.allies[0],skill)).toContain('×14');expect(poisonCashoutHint(core,core.monster.skills[1]!)).toBe('');
+  expect(poisonCashoutHint(core,skill)).toContain('不死の連携でさらに強まる');expect(poisonCashoutHint(core,skill,target)).toContain('残3回 → 消費で一撃を強める');expect(poisonCashoutHint(core,skill,target)).toContain('残す場合はターン末の毒が続く');expect(state).toEqual(before);
+  target.poison=1;expect(poisonCashoutHint(core,skill,target)).toContain('残1回 → 消費で一撃を強める');target.poison=0;expect(poisonCashoutHint(core,skill,target)).toContain('追加なし');target.poison=3;target.hp=0;expect(poisonCashoutHint(core,skill,target)).toContain('追加なし');
+  const unqualified=start([32,4,0,2,10],[1]);expect(poisonCashoutHint(unqualified.allies[0],skill)).toContain('残り毒が多いほど強まる');expect(poisonCashoutHint(core,core.monster.skills[1]!)).toBe('');
  });
  it('round-trips pure, mixed and unchanged old saves without a migration',()=>{
   const slots:TeamSlot[]=[{team:[32,4,33,34,35],rule:'standard'},{team:[2,32,4,35,10],rule:'light'},{team:[0,2,3,4,6],rule:'standard'}];let saved='';expect(saveTeamSlots({setItem:(_key,value)=>{saved=value;}},slots)).toBe(true);expect(loadTeamSlots({getItem:()=>saved})).toEqual(slots);

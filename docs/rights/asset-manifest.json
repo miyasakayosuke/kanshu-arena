@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.22",
-  "auditBaseCommit": "6512be3cc7ced82ba7971699a9db85de90967a67",
+  "release": "v0.20.23",
+  "auditBaseCommit": "9e45bf3130d3105a5c53a1c71061150f5552d8bf",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -776,6 +776,26 @@
           ],
           "provenance": "Original project-local React/TypeScript/CSS and regression tests. Presentation queue reuses existing battle event data and glyphs; no external media, fonts, text, source code or dependencies.",
           "reviewLimit": "Source/DOM tests establish queue lifetime/lifecycle contracts, not physical-device rendering or performance. Native fit and actual readonly observations follow deployment. No legal-clearance claim. Final combined aggregate receipt: docs/release-validation-v02017.json."
+        },
+        {
+          "date": "2026-10-13",
+          "change": "Story-led skill strength: hide numeric prospective HP attack/heal strength, conditional additions, poison/repair rates and forecasts across profiles, team/tactics, controls, tooltips, Canvas, accessible announcements and display-formatted logs. Retain MP, targets, timing, counts, mitigation and actual executed damage/heal outcomes. Existing myth/origin prose preserved.",
+          "files": [
+            "src/strategy.ts",
+            "src/monsterDetailContent.ts",
+            "src/poisonDescription.ts",
+            "src/App.tsx",
+            "src/skillStrengthStory.test.tsx",
+            "docs/skill-strength-story-candidate.md",
+            "src/TeamBuilder.tsx",
+            "src/TacticsPanel.tsx",
+            "src/BattleStage.tsx",
+            "src/BattleLogDialog.tsx",
+            "src/battleInsights.ts",
+            "src/skillDisplay.ts"
+          ],
+          "provenance": "AI-assisted original Japanese prose revisions authored directly from existing project imagery and the actual engine definitions. General interface preference requested by the user; no third-party skill descriptions, art, media, code, fonts or dependencies imported. No verified factual claim about the referenced game interface.",
+          "reviewLimit": "Qualitative local/category comparisons, not exact damage guarantees or universal power tiers. Independent copy review and native phone/zoom verification remain separate gates. Existing legal/ownership review questions remain open."
         }
       ]
     },
@@ -1072,9 +1092,10 @@
         "src/enemyFormation.ts",
         "src/BattleStage.test.tsx",
         "src/enemyFormation.test.ts",
-        "docs/enemy-result-band-candidate.md"
+        "docs/enemy-result-band-candidate.md",
+        "docs/paired-result-stack-candidate.md"
       ],
-      "provenance": "2026-10-13: project-specific AI-assisted canvas result-text placement, derived from the existing formation foot and display aspect. General readability principle from private gameplay observation: keep result numbers away from creature faces. No third-party image, video frame, art, animation choreography, prose, code, font, or dependency was imported or redistributed.",
+      "provenance": "2026-10-13: project-specific AI-assisted canvas result-text placement, derived from the existing formation foot and display aspect. General readability principle from private gameplay observation: keep result numbers away from creature faces. No third-party image, video frame, art, animation choreography, prose, code, font, or dependency was imported or redistributed. Follow-up: co-emitted HP/MP results keep a stationary lower-body stack with a four-unit downward offset, authored within the existing presentation code. Typography, media, effect choreography and dependencies remain unchanged.",
       "createdFor": "v0.20.22 enemy result-text placement",
       "distribution": "Original browser presentation code and repository tests/documentation; no new media or external asset.",
       "reviewLimit": "Automated geometry/render-spy checks do not substitute for native font/pixel review or legal clearance. Existing artwork ownership/similarity questions remain open; publisher owns final native browser acceptance."

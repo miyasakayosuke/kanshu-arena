@@ -138,7 +138,7 @@ describe('material repair live battle UI', () => {
     await click(button('作戦'));
     expect(document.querySelector('.materialTactics')?.textContent).toContain(text);
     const tactics = document.querySelector('.tacticsModal')!.textContent!;
-    for (const phrase of ['両軍の毒ダメージ後', '一度だけ', '各最大HPの14%', 'MP・行動を使わず', '戦闘不能の仲間は戻りません', '通常の防御解除は命中前', 'フェンリルは命中後']) expect(tactics).toContain(phrase);
+    for (const phrase of ['両軍の毒ダメージ後', '一度だけ', '最大HPに応じて', 'MP・行動を使わず', '戦闘不能の仲間は戻りません', '通常の防御解除は命中前', 'フェンリルは命中後']) expect(tactics).toContain(phrase);
     expect(document.querySelectorAll('.initiativeList li')).toHaveLength(5);
     await tick(6000);
     expect(document.querySelector('[role="timer"]')?.textContent).toContain('24');
