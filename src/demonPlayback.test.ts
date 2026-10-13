@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, autoOrders, BASIC_ATTACK, DEFEND, start, type BattleEvent, type State } from './engine';
+import { advanceWithEvents, autoOrders, BASIC_ATTACK, DEFEND, start as economyStart, type BattleEvent, type State } from './engine';
 import { ACTION_DURATION_MS, applyBattleEvents, buildTimeline, CAST_IMPACT_MS, type BattleCue } from './playback';
 
 const demons = [29, 1, 8, 30, 31];
@@ -113,3 +113,7 @@ describe('demon MP loss and fallback playback', () => {
     expect(totalLoss).toBeGreaterThan(0); expect(totalFallbacks).toBeGreaterThan(0); expect(totalBasic).toBeGreaterThan(0); expect(totalDrain).toBeGreaterThan(0); expect(totalDirect).toBeGreaterThan(0);
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

@@ -1,9 +1,10 @@
-/** Bounded v30 gameplay comparison, not historical all-auto parity or optimal-play proof.
+/** HISTORICAL v30→v31 comparison, not current v32 policy or optimal-play proof.
+ * Both inputs are frozen test-only references. Current MP policy uses mp-recovery-audit.mjs.
  * Run: node scripts/action-time-ai-audit.mjs [output-directory]
  * Manual control uses the SAME fully explicit orders in BOTH engines on every turn.
  */
 import * as before from '../tests/reference-v02030/engine.ts';
-import * as after from '../src/engine.ts';
+import * as after from '../tests/reference-v02031/engine.ts';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -13,10 +14,11 @@ import assert from 'node:assert/strict';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const out = resolve(process.argv[2] ?? resolve(root, '../action-time-ai-candidate'));
 const baselinePath = resolve(root, 'tests/reference-v02030/engine.ts');
-const candidatePath = resolve(root, 'src/engine.ts');
+const candidatePath = resolve(root, 'tests/reference-v02031/engine.ts');
 const sha = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const baselineHash = sha(baselinePath), candidateHash = sha(candidatePath);
 assert.equal(baselineHash, '1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489', 'Baseline must be the exact accepted v30 engine');
+assert.equal(candidateHash,'0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73','Historical candidate must be exact v31');
 const seeds = [0, 1, 42, 20261013, 0x7fffffff, 0xffffffff];
 const teams = {
   ordinary: [0, 2, 3, 4, 6], guards: [1, 2, 5, 8, 10],

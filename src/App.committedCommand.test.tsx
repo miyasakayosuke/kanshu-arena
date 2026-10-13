@@ -213,7 +213,7 @@ describe('reviewing and replacing a committed command', () => {
     expect(advance).toHaveBeenCalledTimes(1);
     expect(advance.mock.calls[0][1].find(order => order.key === 'a0')).toEqual({ key: 'a0', skill: 0, target: 'e3' });
     const result = advance.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;
-    expect(result.state.allies[0].mp).toBe(state.allies[0].mp - state.allies[0].monster.skills[0]!.mpCost);
+    expect(result.state.allies[0].mp).toBe(state.allies[0].mp - state.allies[0].monster.skills[0]!.mpCost + 2);
     expect(result.events.filter(event => event.kind === 'cast' && event.actor === 'a0')).toHaveLength(1);
   });
 

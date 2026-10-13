@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   advanceWithEvents, attackFor, autoOrders, automaticOrders, AUTO, BASIC_ATTACK, battleSkill, canUseSkill, cost,
-  DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, skillUnavailableReason, start,
+  DEFEND, leaderFor, MAX_TURNS, monsters, speedFor, skillUnavailableReason, start as economyStart,
   type BattleEvent, type Monster, type Skill, type State, type Unit,
 } from './engine';
 import { applyBattleEvents, barrageDuration, buildTimeline, CAST_IMPACT_MS, MULTIHIT_INTERVAL_MS } from './playback';
@@ -433,3 +433,7 @@ describe('legal full-roster 5v5 invariants, not arbitrary win-rate thresholds', 
     expect(deferredSkips).toBeGreaterThan(0);
   }, 20000);
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

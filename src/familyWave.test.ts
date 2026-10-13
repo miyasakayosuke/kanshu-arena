@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, autoOrders, barrageHits, BASIC_ATTACK, cost, DEFEND, directDamageScale, effectStatus, leaderFor, monsters, start, type BattleEvent, type Monster, type State, type Unit } from './engine';
+import { advanceWithEvents, autoOrders, barrageHits, BASIC_ATTACK, cost, DEFEND, directDamageScale, effectStatus, leaderFor, monsters, start as economyStart, type BattleEvent, type Monster, type State, type Unit } from './engine';
 import { applyBattleEvents, buildTimeline, MULTIHIT_INTERVAL_MS } from './playback';
 import { isValidTeam, loadTeamSlots, saveTeamSlots } from './strategy';
 
@@ -142,3 +142,7 @@ describe('Ratatoskr full-beast signature follow-up', () => {
     expect([...result.allies, ...result.enemies].every(u => u.mp >= 0 && u.hp >= 0 && (u.ward ?? 0) >= 0)).toBe(true);
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

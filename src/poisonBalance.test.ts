@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import {
   advanceWithEvents, autoOrders, baseDamage, battleSkill, BASIC_ATTACK, canUseSkill,
   DEFAULT_POISON_IMPACT_SCALE, DEFAULT_RESERVE_POISON, DEFEND, directDamageScale,
-  monsters, poisonImpactScaleFor, start, type BattleEvent, type Order, type StartOptions, type State,
+  monsters, poisonImpactScaleFor, start as economyStart, type BattleEvent, type Order, type StartOptions, type State,
 } from './engine';
 
 const digest = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -305,3 +305,7 @@ describe('default public same-side poison reservation policy and independent ove
     expect(expected[1].skill).toBe(0); // Later cashout is not treated as a reason to reserve another poison.
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

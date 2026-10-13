@@ -1,7 +1,7 @@
 /** Development-only lab. All turns resolve through the shipping combat engine. */
 import { createHash } from 'node:crypto';
 import {
-  advanceWithEvents, automaticOrders, autoOrders, chooseAutomaticOrder, chooseLegacyEnemyOrder, AUTO, battleSkill, baseDamage, poisonImpactScaleFor, leaderAppliesTo, leaderFor, BASIC_ATTACK,
+  turnMpRecoveryAmount, advanceWithEvents, automaticOrders, autoOrders, chooseAutomaticOrder, chooseLegacyEnemyOrder, AUTO, battleSkill, baseDamage, poisonImpactScaleFor, leaderAppliesTo, leaderFor, BASIC_ATTACK,
   EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, extraordinaryResponseEligible, isExtraordinaryResponse, skillUnavailableReason,
   UNDEAD_CORE_ID, UNDEAD_CASHOUT, undeadCashoutEligible, poisonCashoutPerTickFor, poisonTicksFor,
   DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, mpDamageFor, mpLossFor, directDamageScale, speedFor,
@@ -13,7 +13,7 @@ import {
 import { FAMILY_IDS } from '../../src/families.ts';
 
 export const SCHEMA_VERSION = 1;
-export const POLICY_ID = 'production-action-time-player-legacy-enemy-guardfix-v4';
+export const POLICY_ID = 'production-action-time-player-legacy-enemy-regen2-v5';
 export const MAX_MATCHES = 20_000;
 const clone = value => structuredClone(value);
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -377,7 +377,7 @@ export const POISON_DEFINITIONS = {
 export const RESPONSE_METRICS = ['responseEligible','responseSelections','responseCleanseSelections','responseGuardSelections','responseWithheldTurns','responseRejectedSelections','responseNoEffect','responseCancelledSelections','responseFallbacks','responseCasts','responseCleanseCasts','responseGuardCasts','responseMpSpent','responseSourceMpAtCast','responseMpAfterCast','responseRecipients','responseClearRecipients','responseClearedTicks','responseClearNominalPotential','responseLaterReapplications','responseGuardNewRecipients','responseGuardAlreadyRecipients','responseGuardProtectedHits','responseGuardHpDamageObserved','responseGuardActualPrevented','responseGuardStrippedRecipients','responseGuardIdleRecipients','responseGuardNoHitCasts','responseUnused','responseDeadWithUnused','responseSurvivedUnused'];
 export const CASHOUT_METRICS = ['cashoutEligible', 'cashoutSelections', 'cashoutCasts', 'cashoutMpSpent', 'cashoutSourceMpAtCast', 'cashoutEvents', 'cashoutZeroPoison', 'cashoutTicksConsumed', 'cashoutAddedBasis', 'cashoutScaledAddition', 'cashoutActualAddedDamage', 'cashoutDirectDamage', 'cashoutFuturePoisonNominal', 'cashoutKills', 'cashoutDecisiveKills', 'cashoutKillsBeforeTargetAction', 'cashoutKillTurnSum', 'cashoutRetargets', 'cashoutLaterReapplications', 'cashoutSurvivingTargets', 'cashoutGuardedEvents', 'cashoutWardedEvents', 'hpDamageTaken', 'hpHealingReceived', 'finalMp'];
 export const PRESSURE_METRICS = ['pressureSelections', 'pressureHpAttackSelections', 'pressureBasicSelections', 'pressureCasts', 'pressureMpSpent', 'pressureSourceMpAtCast', 'pressureTargetMpBefore', 'pressureTargetMpAfter', 'mpDamageEvents', 'mpDamageZeroEvents', 'mpDamageActual', 'mpDamageReceived', 'mpDamagePotential', 'mpDamageMitigated', 'mpDamageClipped', 'mpDamageKilledTargets', 'fallbackCasts'];
-export const SUPPLY_METRICS = ['supplyEligible', 'supplySelections', 'supplyCasts', 'supplyGenerated', 'supplyReceived', 'supplyRecipients', 'supplyPotential', 'supplyWasted', 'supplyUnused', 'supplyDefeatedBeforeUse', 'supplyMpSpent', 'mpGenerated', 'initialMp', 'maximumMp', 'peakMp'];
+export const SUPPLY_METRICS = ['supplyEligible', 'supplySelections', 'supplyCasts', 'supplyGenerated', 'supplyReceived', 'supplyRecipients', 'supplyPotential', 'supplyWasted', 'supplyUnused', 'supplyDefeatedBeforeUse', 'supplyMpSpent', 'mpGenerated', 'turnMpRecovered', 'initialMp', 'maximumMp', 'peakMp'];
 const freshMetric = unit => ({
   ...Object.fromEntries(POISON_METRICS.map(field => [field, 0])),
   ...Object.fromEntries([...PRESSURE_METRICS, ...CASHOUT_METRICS, ...RESPONSE_METRICS].map(field => [field, 0])),
@@ -391,7 +391,7 @@ const freshMetric = unit => ({
   repairCancellations: 0, repairFailedBeforeTrigger: 0, repairDispelled: 0, repairDefeatedBeforeTrigger: 0, repairTriggerTurn: null, repairMpSpent: 0,
   supplyEligible: unit.supplyReady === true ? 1 : 0, supplySelections: 0, supplyCasts: 0, supplyGenerated: 0, supplyReceived: 0, supplyRecipients: 0,
   supplyPotential: 0, supplyWasted: 0, supplyUnused: 0, supplyDefeatedBeforeUse: 0, supplyMpSpent: 0, supplyTurn: null,
-  mpGenerated: 0, initialMp: unit.mp, maximumMp: unit.monster.mp, peakMp: unit.mp,
+  mpGenerated: 0, turnMpRecovered: 0, initialMp: unit.mp, maximumMp: unit.monster.mp, peakMp: unit.mp,
   finalHp: unit.hp, finalMp: unit.mp,
 });
 
@@ -478,6 +478,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) {
         if (![unit.hp, unit.mp, unit.poison].every(Number.isFinite) || unit.hp < 0 || unit.hp > unit.monster.hp || unit.mp < 0 || unit.mp > unit.monster.mp || !Number.isInteger(unit.mp) || unit.monster.mp !== initialUnits.get(unit.key).monster.mp || !Number.isInteger(unit.poison) || unit.poison < 0 || unit.poison > 3 || unit.poisonCashoutBonus !== initialUnits.get(unit.key).poisonCashoutBonus || (unit.poisonCashoutBonus !== undefined && (unit.monster.id !== UNDEAD_CORE_ID || !Number.isInteger(unit.poisonCashoutBonus) || unit.poisonCashoutBonus < 0 || unit.poisonCashoutBonus > 30)) || unit.mpDamageBonus !== initialUnits.get(unit.key).mpDamageBonus || (unit.mpDamageBonus !== undefined && (unit.monster.id !== DEMON_CORE_ID || !Number.isInteger(unit.mpDamageBonus) || unit.mpDamageBonus < 0 || unit.mpDamageBonus > 30)) || !responseResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !supportResourcesValid(unit) || !dragonResourcesValid(unit, initialUnits.get(unit.key)) || !materialResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key)) || !slimeResourcesValid(unit, initialUnits.get(unit.key), [...state.allies, ...state.enemies].find(prior => prior.key === unit.key))) fail(`resource invariant failed for ${unit.key}`);
       }
+      if (resolved.state.turnMpRecovery !== trace.initialState.turnMpRecovery) fail('turn recovery economy changed during battle');
       if (resolved.state.reservePoison !== trace.initialState.reservePoison) fail('poison reservation policy changed during battle');
       for (const unit of [...resolved.state.allies, ...resolved.state.enemies]) if (unit.poisonImpactScale !== initialUnits.get(unit.key).poisonImpactScale) fail('poison impact scale changed during battle');
       const current = new Map([...state.allies, ...state.enemies].map(unit => [unit.key, clone(unit)]));
@@ -497,7 +498,16 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       const pendingDebit = new Map();
       const pendingSupplyCast = new Set();
       let repairPhase = false;
+      let turnEnded = false, recoveryBoundary = false;
+      const pendingRecovery = new Map();
       for (const event of resolved.events) {
+        if (event.kind === 'phase' && event.phase === 'turn-end') turnEnded = true;
+        if (event.kind === 'phase' && event.phase === 'next-turn-start') {
+          keys(event, ['kind', 'phase', 'nextTurn'], 'turn recovery boundary');
+          if (!turnEnded || recoveryBoundary || resolved.state.winner || event.nextTurn !== state.turn + 1 || turnMpRecoveryAmount(state.turnMpRecovery) <= 0) fail('invalid turn recovery boundary');
+          recoveryBoundary = true;
+          for (const unit of current.values()) if (unit.hp > 0) { const amount = Math.min(turnMpRecoveryAmount(state.turnMpRecovery), unit.monster.mp - unit.mp); if (amount > 0) pendingRecovery.set(unit.key, amount); }
+        } else if (recoveryBoundary && !(event.kind === 'resource-gain' && event.effect === 'turn-mp-recovery')) fail('unexpected event after turn recovery boundary');
         if (pendingResponse) {
           const p = pendingResponse;
           if (p.stage === 'debit' && (event.kind !== 'resource' || event.actor !== p.actor || event.target !== p.actor)) fail('response cast missing immediate MP debit');
@@ -586,7 +596,12 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
           actor.supplyPotential += recipients.length * supplyAmountFor(core);
           pendingSupply.set(event.actor, new Map(recipients.map(unit => [unit.key, Math.min(supplyAmountFor(core), unit.monster.mp - unit.mp)])));
         }
-        if (event.kind === 'resource-gain') {
+        if (event.kind === 'resource-gain' && event.effect === 'turn-mp-recovery') {
+          keys(event, ['kind','target','amount','mp','effect','nextTurn','phase'], 'turn recovery gain');
+          const recipient = current.get(event.target);
+          if (!recoveryBoundary || !target || !recipient || recipient.hp <= 0 || event.phase !== 'next-turn-start' || event.nextTurn !== state.turn + 1 || !pendingRecovery.has(event.target) || event.amount !== pendingRecovery.get(event.target) || event.mp !== recipient.mp + event.amount) fail('turn recovery absolute credit/recipient invariant failed');
+          target.mpGenerated += event.amount; target.turnMpRecovered += event.amount; target.peakMp = Math.max(target.peakMp, event.mp); pendingRecovery.delete(event.target);
+        } else if (event.kind === 'resource-gain') {
           const pending = pendingSupply.get(event.actor), recipient = current.get(event.target);
           if (!actor || !target || event.effect !== 'slime-supply' || event.phase !== 'action' || !pending?.has(event.target) || event.amount !== pending.get(event.target) || event.mp !== recipient.mp + event.amount || recipient.hp <= 0 || recipient.monster.family !== SLIME_SUPPLY.family || event.actor[0] !== event.target[0]) fail('slime supply MP credit/recipient invariant failed');
           actor.supplyGenerated += event.amount; target.supplyReceived += event.amount; target.mpGenerated += event.amount;
@@ -782,6 +797,7 @@ export function runMatch({ teamA, teamB, seed, overrides = {}, trace: includeTra
       if (damageSeed !== resolved.state.seed) fail('direct damage RNG accounting differs');
       if (pendingMpLoss) fail('MP damage missing loss event');
       for (const key of fallbackActors) if (!castActors.has(key)) fail('fallback missing one basic cast');
+      if (pendingRecovery.size || recoveryBoundary !== (!resolved.state.winner && turnMpRecoveryAmount(state.turnMpRecovery) > 0)) fail('turn recovery missing boundary or recipient gain');
       if (pendingSupplyCast.size) fail('slime supply cast missing consumption event');
       if (pendingDebit.size) fail('cast missing MP debit event');
       for (const pending of pendingSupply.values()) if (pending.size) fail('slime supply missing recipient gain events');
@@ -873,6 +889,7 @@ export const METRIC_DEFINITIONS = {
   meanSupplyMpSpent: 'MP charged by supply itself; strict skill schema requires zero. It still uses one action.',
   meanSupplyTurn: 'Mean turn conditional on actual supply consumption; null when never cast.',
   meanMpGenerated: 'Actual resource-gain MP credited per game, separate from debit/healing.',
+  meanTurnMpRecovered: 'Actual capped recurring turn-start MP credits per game, separate from once-only slime supply.',
   meanInitialMp: 'Team initial MP after leader modifiers.',
   meanMaximumMp: 'Team sum of maximum MP after leader modifiers.',
   meanPeakMp: 'Sum of each team member highest observed MP; not a simultaneous peak.',

@@ -29,11 +29,14 @@ describe('slime event credit and once-only action invariants',()=>{
  if(kind==='gain-phase')gain.phase='turn-end';
  if(kind==='gain-as-heal')gain.kind='heal';
  if(kind==='supply-as-debit')gain.kind='resource';
- if(kind==='reenable')r.events.push({kind:'expire',target:'a0',supplyReady:true});
- if(kind==='break-supply')r.events.push({kind:'break',target:'a0',supplyReady:false});
+ if(kind==='reenable')appendBeforeRecovery(r.events, {kind:'expire',target:'a0',supplyReady:true});
+ if(kind==='break-supply')appendBeforeRecovery(r.events, {kind:'break',target:'a0',supplyReady:false});
  if(kind==='cast-effect')r.events.find(e=>e.kind==='cast'&&e.effect==='restoreMp')!.effect='heal';
- if(kind==='debit-amount'){const debit=r.events.find(e=>e.kind==='resource');if(debit)debit.amount!++;else r.events.push({kind:'resource',actor:'a0',target:'a0',amount:1,mp:1,effect:'mp'});}
+ if(kind==='debit-amount'){const debit=r.events.find(e=>e.kind==='resource');if(debit)debit.amount!++;else appendBeforeRecovery(r.events, {kind:'resource',actor:'a0',target:'a0',amount:1,mp:1,effect:'mp'});}
  if(kind==='unrecorded-credit')r.state.allies[0].mp++;
  if(kind==='missing-cast')r.events=r.events.filter(e=>!(e.kind==='cast'&&e.effect==='restoreMp'));
  return r;});const f=capture();expect(changed).toBe(true);expect(f.message).toMatch(/supply|MP|resource invariant/);expect(f.trace.turns.length).toBeGreaterThan(0);});
 });
+
+// Preserve the original corrupt action/end-turn probe before the new valid recovery suffix.
+function appendBeforeRecovery(events: import("./engine").BattleEvent[], event: import("./engine").BattleEvent) { const at=events.findIndex(e=>e.kind==='phase'&&e.phase==='next-turn-start'); events.splice(at<0?events.length:at,0,event); }

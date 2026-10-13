@@ -71,7 +71,7 @@ export default function TacticsPanel({battle, orders, playing, rule, onClose}: P
         </p>)}</div>
       </details>)}</div>
       <h3>MPと効果のタイミング</h3>
-      <p className="counterGuide">MPは特技の発動時に消費。指示の選択・取消では消費しません。戦闘中の自然回復はなく、再戦を含む対戦開始時に全回復します。MPが足りないときは「たたかう」「ぼうぎょ」が使えます。</p>
+      <p className="counterGuide">MPは特技の発動時に消費。指示の選択・取消では消費しません。2ターン目から、各ターン開始時に生存中の両軍がMP+2（最大まで）。対戦開始時は全回復します。MPが足りないときは「たたかう」「ぼうぎょ」が使えます。</p>
       <p className="counterGuide">「守り:今T」はこのターンの終了まで有効。「毒:残N回」は残りのダメージ回数です。{POISON_TIMING_HINT}</p>
       <p className="counterGuide">「自然障壁:残NT」は直接ダメージを{NATURE_WARD_PERCENT}%軽減し、ターン終了に残りが1減ります。守りと重ねても半減まで。玄武が倒れても残り期間は続き、毒は防げません。防御解除は命中前、フェンリルの連牙は命中後に自然障壁を消します。</p>
       <p className="counterGuide">竜気は中核だけが持つ0〜{DRAGON_CHARGE_CAP}の資源。味方の竜系がMPを払う攻撃特技を使い終えるたび+1で、連撃も1回分です。通常攻撃・支援・毒・渇天の息では増えません。開始時の人数条件は仲間が倒れても維持されます。渇天の息は発動時に全消費し、蓄えが多いほど息が強まります。先に動いた味方が溜めた分も使えます。</p>

@@ -537,9 +537,9 @@ describe('automatic orders and complete battles', () => {
       rounds++;
     }
     expect(state.winner).toBe('win');
-    // Intentional action-time player improvement: old snapshot openings were 8/8/6.
+    // Intentional recovery economy: v31 openings were 7/6/6; 2 MP each turn yields 6/6/5.
     // Preserve the existing victory and all-five opening-survival gates above.
-    expect(rounds).toBe(opening === 'auto' ? 7 : 6);
+    expect(rounds).toBe(opening === 'manual-first-special' ? 5 : 6);
   });
 
   it('retains the 85% three-to-seven-turn pacing gate on the current shipping player/CPU panel', () => {
@@ -714,7 +714,7 @@ describe('leader traits', () => {
   });
 
   it('handles empty sides without trying to derive a nonexistent leader', () => {
-    expect(start([], [], 42, { leaders: true }).log).toEqual(['戦闘開始！', 'MPは対戦ごとに全回復。戦闘中の自然回復はありません。']);
+    expect(start([], [], 42, { leaders: true }).log).toEqual(['戦闘開始！', 'MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。']);
     expect(() => start([99], [], 42, { leaders: true })).toThrow('Unknown monster id: 99');
   });
 

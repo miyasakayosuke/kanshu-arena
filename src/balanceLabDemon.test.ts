@@ -158,7 +158,7 @@ describe('demon Lab loss ledger, actual casts and replay', () => {
     const trace: Trace = result.trace;
     const events = trace.turns.flatMap(turn => turn.events);
     expect(assertEventLedger(trace)).toBeGreaterThan(0);
-    expect(events.filter(event => event.kind === 'resource-gain')).toHaveLength(0);
+    expect(events.filter(event => event.kind === 'resource-gain' && event.effect !== 'turn-mp-recovery')).toHaveLength(0);
     const losses = events.filter(event => event.kind === 'resource-loss');
     for (const unit of result.units) {
       const lost = losses.filter(event => event.target === unit.key).reduce((sum, event) => sum + event.amount!, 0);
@@ -179,7 +179,7 @@ describe('demon Lab loss ledger, actual casts and replay', () => {
     const totalLoss = losses.reduce((sum, event) => sum + event.amount!, 0);
     expect(result.sides[sourceSide].mpDamageActual).toBe(totalLoss);
     expect(result.sides[targetSide].mpDamageReceived).toBe(totalLoss);
-    expect(result.sides[sourceSide].mpGenerated).toBe(0);
+    expect(result.sides[sourceSide].mpGenerated).toBe(result.sides[sourceSide].turnMpRecovered);
   });
 
   it.each([10, 75])('validates guard and ward using the strongest protection with ward %s', percent => {
@@ -207,7 +207,9 @@ describe('demon Lab loss ledger, actual casts and replay', () => {
     expect(actorEvents.filter(event => event.kind === 'cast')).toEqual([expect.objectContaining({ skill: '通常攻撃', effect: 'hit' })]);
     expect(actorEvents.filter(event => event.kind === 'resource')).toHaveLength(0);
     const metric = result.units.find((unit: { key: string }) => unit.key === recipient);
-    expect(metric).toMatchObject({ paidCasts: 0, specialCasts: 0, mpSpent: 0, fallbackCasts:reverse?0:1 });
+    expect(metric.fallbackCasts).toBe(trace.turns.flatMap(turn=>turn.events).filter(event=>event.kind==='fallback'&&event.actor===recipient).length);
+    const debits=trace.turns.flatMap(turn=>turn.events).filter(event=>event.kind==='resource'&&event.actor===recipient);expect(metric.mpSpent).toBe(debits.reduce((sum,event)=>sum+event.amount!,0));expect(metric.paidCasts).toBe(debits.length);
+    expect(metric.specialCasts).toBe(trace.turns.flatMap(turn=>turn.events).filter(event=>event.kind==='cast'&&event.actor===recipient&&event.skill!=='通常攻撃'&&event.skill!=='ぼうぎょ').length);
     expect(metric.casts).toBe(trace.turns.flatMap(turn => turn.events).filter(event => event.kind === 'cast' && event.actor === recipient).length);
   });
 

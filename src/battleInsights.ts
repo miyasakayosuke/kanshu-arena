@@ -1,4 +1,4 @@
-import { AUTO, DRAGON_CHARGE_CAP, skillUnavailableLabel, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
+import { turnMpRecoveryAmount, AUTO, DRAGON_CHARGE_CAP, skillUnavailableLabel, type BattleEvent, type BattleOrderRecord, type BattleTurnRecord, type State } from './engine';
 
 export type BattleEvidence = {
   turn: number;
@@ -58,6 +58,7 @@ function readableTurn(turn: BattleTurnRecord): boolean {
 function completeRecordedTurns(state: State, history: BattleTurnRecord[]): RecordedTurn[] | undefined {
   if (!history.length || history.length !== state.history?.length || history.at(-1)!.turn !== state.turn - 1) return;
   const turns: RecordedTurn[] = [];
+  const defeated = new Set<string>();
   for (const [turnIndex, turn] of history.entries()) {
     if (turn.turn !== turnIndex + 1) return;
     const orders = new Map<string, number>();
@@ -73,15 +74,24 @@ function completeRecordedTurns(state: State, history: BattleTurnRecord[]): Recor
     let pending: Omit<RecordedAction, 'endIndex'> | undefined;
     let phase: BattleEvent['phase'];
     let ended = false;
+    let nextTurnStarted = false;
+    const recovered = new Set<string>();
     for (const [index, event] of turn.events.entries()) {
       if (event.kind !== 'phase') {
         if (!phase || event.phase !== phase) return;
+        if (phase === 'next-turn-start' && (event.kind !== 'resource-gain' || event.effect !== 'turn-mp-recovery' || event.actor !== undefined || !event.target || !sideFor(state, event.target) || recovered.has(event.target) || event.nextTurn !== turn.turn + 1 || !Number.isInteger(event.amount) || event.amount! <= 0 || event.amount! > turnMpRecoveryAmount(state.turnMpRecovery) || !Number.isInteger(event.mp) || event.mp! < event.amount! || event.mp! > [...state.allies, ...state.enemies].find(unit => unit.key === event.target)!.monster.mp || defeated.has(event.target) || Object.keys(event).some(key => !['kind','target','amount','mp','effect','nextTurn','phase'].includes(key)))) return;
+        if (phase === 'next-turn-start') recovered.add(event.target!);
+        if (event.kind === 'defeat' && event.target) defeated.add(event.target);
         if (event.kind === 'cast') {
           if (!pending || phase !== 'action' || event.actor !== turn.orders[pending.orderIndex].key
             || pending.castIndex !== undefined || !event.skill || event.passive) return;
           pending.castIndex = index;
         }
         continue;
+      }
+      if (event.phase === 'next-turn-start') {
+        if (!ended || nextTurnStarted || (state.winner && turn === history.at(-1)) || Object.keys(event).some(key => !['kind','phase','nextTurn'].includes(key)) || event.actor || event.nextTurn !== turn.turn + 1) return;
+        nextTurnStarted = true; phase = event.phase; continue;
       }
       if (ended) return;
       if (event.phase === 'turn-start') {
@@ -328,11 +338,11 @@ export function battleEventLine(state: State, event: BattleEvent): string {
     case 'resource': return `${actor} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
     case 'resource-loss': return `${actor}のMP削り → ${target} MP −${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
     case 'fallback': return `${actor}「${event.skill ?? '有料技'}」は敵のMP削りでMP不足（残り ${event.availableMP ?? '?'}／必要 ${event.requiredMP ?? '?'}）。元の行動順で通常攻撃へ変更 → ${target}`;
-    case 'resource-gain': return `${actor}の補給 → ${target} MP ＋${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
+    case 'resource-gain': if (event.effect === 'turn-mp-recovery') return `TURN ${event.nextTurn ?? '?'} 開始：${target} MP ＋${event.amount ?? 0}（残り ${event.mp ?? '?'}）`; return `${actor}の補給 → ${target} MP ＋${event.amount ?? 0}（残り ${event.mp ?? '?'}）`;
     case 'response': return `${actor}が「${event.skill ?? '応答'}」で共通の応答を消費（残0回・解除不可）`;
     case 'supply': return `${actor}が補給の使用権を消費（残0回・解除不可）`;
     case 'expire': return event.effect === 'responseReady' ? `${target}の共通の応答が終了（戦闘不能）` : event.effect === 'supplyReady' ? `${target}の補給の使用権が終了（戦闘不能）` : event.effect === 'repairReady' ? `${target}の修復待機が終了` : event.effect === 'ward' ? `${target}の自然障壁${event.ward ? `：残り${event.ward}ターン` : 'が終了'}` : event.effect === 'rally' ? `${target}の群気${event.rally ? `：残り${event.rally}ターン` : 'が終了'}` : `${target}の${event.effect === 'poison' ? '毒' : '守り'}が終了`;
-    case 'phase': return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;
+    case 'phase': if (event.phase === 'next-turn-start') return `TURN ${event.nextTurn ?? '?'} 開始・MP回復`; return event.phase === 'turn-start' ? 'ターン開始' : event.phase === 'turn-end' ? 'ターン終了時の処理' : `${actor}：${event.phase === 'before-action' ? '行動前確認' : event.phase === 'action-end' ? '行動終了' : '行動開始'}`;
   }
 }
 

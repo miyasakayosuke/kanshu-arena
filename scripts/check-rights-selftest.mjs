@@ -94,14 +94,17 @@ test('a newly generated media file is not silently omitted from the inventory', 
 });
 test('the source must expose a credits route as well as the public page', () => {
   const root = fixture();
+  const changedPaths = new Set();
   function removeLink(dir) {
     for (const item of readdirSync(join(root, dir), { withFileTypes: true })) {
       const path = `${dir}/${item.name}`;
       if (item.isDirectory()) removeLink(path);
-      else if (readFileSync(join(root, path), 'utf8').includes('credits.html')) change(root, path, value => value.replaceAll('credits.html', 'removed.html'));
+      else if (readFileSync(join(root, path), 'utf8').includes('credits.html')) { change(root, path, value => value.replaceAll('credits.html', 'removed.html')); changedPaths.add(path); }
     }
   }
   removeLink('src');
+  // Source inventory must not mask the independently required visible credits route.
+  change(root, 'docs/rights/asset-manifest.json', value => { const manifest=JSON.parse(value); for(const asset of manifest.assets)for(const path of changedPaths)if(asset.sha256?.[path])asset.sha256[path]=createHash('sha256').update(readFileSync(join(root,path))).digest('hex'); return JSON.stringify(manifest); });
   assert.throws(() => checkRights({ root }), /Game UI must provide a credits link/);
 });
 

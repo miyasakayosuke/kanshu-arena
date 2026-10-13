@@ -1,0 +1,7 @@
+{
+  "purpose": "Test-only exact v31 AI baseline for recovery-disabled mechanics and synthetic resource comparison; excluded from production imports.",
+  "baseTree": "801fa56bdc295697d7ef9ee52ea2a4588990210f",
+  "engineSha256": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
+  "familiesSha256": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+  "origin": "Existing project-owned source, exact frozen candidate; no new third-party code or license grant."
+}

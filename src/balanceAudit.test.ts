@@ -10,7 +10,7 @@ import { isValidTeam, monsterRole, opponentTeams, rules, type RuleId } from './s
 const advanceWithEvents: typeof resolve = (state, orders, options = {}) => resolve(state, orders, options.enemyOrders ? options : state.enemies.every(unit => unit.monster.id === -1 || unit.monster.skills.length === 1) ? { ...options, enemyOrders: state.enemies.filter(unit => unit.hp > 0).map(unit => ({key:unit.key,skill:0})) } : options);
 
 // Role checks use real roster stats, learned skill indexes, and resource budgets.
-// A harmless, explicitly labelled training target isolates damage/resource costs;
+// A harmless recovery-disabled training target isolates damage/resource costs;
 // the final section additionally exercises unmodified, legal 5v5 battles.
 const idle: Skill = { name: '試験待機', kind: 'heal', power: 0, priority: 0, mpCost: 0 };
 const dummy = (key: string, hp = 1000): Unit => ({
@@ -18,7 +18,7 @@ const dummy = (key: string, hp = 1000): Unit => ({
   hp, mp: 0, guard: false, poison: 0,
 });
 const training = (ids: number[], count = 1, hp = 1000): State => ({
-  ...start(ids, [], 42), enemies: Array.from({ length: count }, (_, index) => dummy(`e${index}`, hp)),
+  ...start(ids, [], 42, {turnMpRecovery:0}), enemies: Array.from({ length: count }, (_, index) => dummy(`e${index}`, hp)),
 });
 const damageBy = (events: BattleEvent[], actor: string) =>
   events.filter(event => event.kind === 'damage' && event.actor === actor).reduce((sum, event) => sum + event.amount!, 0);
@@ -259,8 +259,9 @@ describe('guard breakers unlock later hits rather than replacing initiative', ()
     expect(damageBy(broken.events, 'a1')).toBeGreaterThanOrEqual(damageBy(guarded.events, 'a1') * 2);
     expect(broken.events.findIndex(event => event.kind === 'break')).toBeLessThan(broken.events.findIndex(event => event.kind === 'damage' && event.actor === 'a1'));
     expect(monsters[breaker].skills[breakerSkill]?.priority).toBe(0);
-    expect(broken.state.allies[0].mp).toBe(monsters[breaker].mp - 14);
-    expect(guarded.state.allies[0].mp).toBe(monsters[breaker].mp - 10);
+    expect(broken.events.find(e=>e.kind==='resource'&&e.actor==='a0')).toMatchObject({amount:14,mp:monsters[breaker].mp-14});
+    expect(broken.state.allies[0].mp).toBe(monsters[breaker].mp - 14 + 2);
+    expect(guarded.state.allies[0].mp).toBe(monsters[breaker].mp - 10 + 2);
   });
 
   it('distinguishes COST3 イフリート coverage from COST4 アヌビス initiative and heavier attacks', () => {

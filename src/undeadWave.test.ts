@@ -2,7 +2,7 @@ import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
-import { advanceWithEvents, autoOrders, baseDamage, BASIC_ATTACK, cost, DEFEND, leaderFor, monsters, poisonCashoutDamageFor, poisonCashoutPerTickFor, poisonTicksFor, start, UNDEAD_CASHOUT, UNDEAD_CORE_ID, undeadCashoutEligible, type BattleEvent, type Order, type Skill, type State, type Unit } from './engine';
+import { advanceWithEvents, autoOrders, baseDamage, BASIC_ATTACK, cost, DEFEND, leaderFor, monsters, poisonCashoutDamageFor, poisonCashoutPerTickFor, poisonTicksFor, start as economyStart, UNDEAD_CASHOUT, UNDEAD_CORE_ID, undeadCashoutEligible, type BattleEvent, type Order, type Skill, type State, type Unit } from './engine';
 import { battleEventLine, battleFactEvidenceLines, resultFacts } from './battleInsights';
 
 const undead = [32, 4, 33, 34, 35];
@@ -26,7 +26,7 @@ describe('undead roster and fixed opening qualification', () => {
   it('preserves all old32 fields except Banshee family and adds the exact C17 roster', () => {
     expect(monsters.slice(0, 36)).toHaveLength(36); expect(monsters.slice(32, 36).map(monster => monster.id)).toEqual([32, 33, 34, 35]);
     expect(monsters.filter(monster => monster.family === 'undead').map(monster => monster.id)).toEqual([4, 32, 33, 34, 35]);
-    expect(hash(normalizeLegacy(monsters.slice(0, 32).map(monster => ({ monster, leader: leaderFor(monster.id) }))))).toBe('df26738816328e65cf893236556e4601a012458049eb9273e760cb043c1131b6');
+    expect(hash(normalizeLegacy(monsters.slice(0, 32).map(monster => ({ monster, leader: { ...leaderFor(monster.id), description: [24,35].includes(monster.id) ? historicalEngine.leaderFor(monster.id).description : leaderFor(monster.id).description } }))))).toBe('df26738816328e65cf893236556e4601a012458049eb9273e760cb043c1131b6');
     expect(cost(undead)).toBe(17); expect(cost([32, 4, 35, 3, 10])).toBe(15);
     expect(monsters.every(monster => monster.skills.length <= 4)).toBe(true);
     expect(monsters.slice(32, 36).map(({ hp, mp, atk, speed, cost }) => [hp, mp, atk, speed, cost])).toEqual([[205, 62, 42, 49, 5], [175, 48, 50, 84, 4], [220, 42, 34, 32, 3], [125, 50, 25, 63, 2]]);
@@ -233,3 +233,7 @@ describe('public-state cashout AI and authoritative evidence', () => {
     expect(hash(normalizeLegacy(results.filter(result => result.samePolicy)))).toBe('c6fab8bd5d06b3b01c66efcf7871fffab2efd88450765e7734c99c6fd36d0aff');
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

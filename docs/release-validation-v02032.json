@@ -1,0 +1,82 @@
+{
+  "release": "0.20.32",
+  "status": "Prepared local candidate; native acceptance and publication pending",
+  "baselineTree": "801fa56bdc295697d7ef9ee52ea2a4588990210f",
+  "baselineIdentity": "Published v31 AI release; its native acceptance remains a separate prerequisite",
+  "scope": "Both living sides recover2 MP at each next-turn start fromT2, capped at maximum, before command entry. No recovery on terminal battles. Original costs/HP/attack/speed and AI policy remain.",
+  "engineSha256": "c2559ea2cdfe71566c84acaa0bc259523b1e54284687b548ed30ecd8d11ce1e7",
+  "checks": {
+    "fullAggregate": {
+      "status": "PASS; final packet rerun receipt is outside the tree",
+      "tests": 3443,
+      "files": 166
+    },
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "currentPolicySmoke": {
+      "matches": 736,
+      "policy": "production-action-time-player-legacy-enemy-regen2-v5",
+      "identityDelta": 0,
+      "historicalAllAutoParityClaim": false
+    },
+    "productionBalance": {
+      "gamesPerVersion": 726,
+      "allSpecies": 37,
+      "productionExactlyMatchesOffline2MpGameRecords": true
+    },
+    "currentVsSyntheticV31": {
+      "games": 55,
+      "fullRoundEventsBeforeRecoveryAndActualOrderSeedState": true
+    },
+    "independentFocused": {
+      "engineHistoryPlayback": 32,
+      "lab": 40
+    },
+    "nativeAcceptance": "PENDING; publisher only"
+  },
+  "balance": {
+    "meanTurns": {
+      "v31": 6.366391184573002,
+      "v32": 6.181818181818182
+    },
+    "paidOffenseUnaffordableAmongLivingTurnStarts": {
+      "turn5PercentBefore": 57.3,
+      "turn5PercentAfter": 32.3,
+      "turn6PercentBefore": 78.6,
+      "turn6PercentAfter": 52.4,
+      "turn7PercentBefore": 93.2,
+      "turn7PercentAfter": 66.6
+    },
+    "starterPanel": {
+      "games": 180,
+      "within3To7": 160,
+      "wins": 156,
+      "firstTurnWipes": 0,
+      "thresholdUnchanged": 0.85
+    },
+    "starterOpenings": {
+      "auto": 6,
+      "manualFox": 6,
+      "manualFirstSpecial": 5,
+      "allWin": true,
+      "allFiveSurviveTurn1": true
+    },
+    "stress": {
+      "games": 276,
+      "turn20": 1,
+      "natureSupportVersusHealerSupportSeed0": "finite basic-attack attrition, not a repeated-heal/guard loop"
+    }
+  },
+  "limits": [
+    "Turn-start populations differ after trajectories diverge.",
+    "MP-price affordability does not assert all status/finite-use legality or optimal choice.",
+    "No universal absence of20-turn judgments or overpowered team composition is claimed.",
+    "Frozen historical fixtures and recovery-disabled mechanic controls do not prove current full-auto parity.",
+    "DQMSL conditional-recovery references do not establish this game's universal2-MP rule or numerical value.",
+    "Native/browser acceptance has not been performed for this candidate."
+  ],
+  "baselineCommit": "b84ea8b806eb3529deb7da35cd81c7632e86fd29"
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, autoOrders, BASIC_ATTACK, DEFEND, start, type BattleEvent, type State } from './engine';
+import { advanceWithEvents, autoOrders, BASIC_ATTACK, DEFEND, start as economyStart, type BattleEvent, type State } from './engine';
 import { ACTION_DURATION_MS, applyBattleEvents, buildTimeline, CAST_IMPACT_MS, type BattleCue } from './playback';
 
 const undead = [32, 4, 33, 34, 35];
@@ -142,3 +142,7 @@ describe('undead poison-cashout playback and evidence conservation', () => {
     expect(totalCashout).toBeGreaterThan(0); expect(totalTicks).toBeGreaterThan(0); expect(totalPoison).toBeGreaterThan(0); expect(totalHealing).toBeGreaterThan(0);
   }, 30000);
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

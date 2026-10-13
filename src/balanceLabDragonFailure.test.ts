@@ -45,8 +45,11 @@ describe('dragon failure evidence and immutable enablement', () => {
     const actual = await vi.importActual<typeof import('./engine')>('./engine');
     vi.mocked(advanceWithEvents).mockImplementationOnce((state, orders, options) => {
       const result = actual.advanceWithEvents(state, orders, options);
-      result.events.push({ kind: 'charge', actor: 'a0', target: 'a0', dragonCharge: result.state.allies[0].dragonCharge === 5 ? 4 : 5, effect: 'corrupt' }); return result;
+      appendBeforeRecovery(result.events, { kind: 'charge', actor: 'a0', target: 'a0', dragonCharge: result.state.allies[0].dragonCharge === 5 ? 4 : 5, effect: 'corrupt' }); return result;
     });
     expect(capture({ teamA: dragon, teamB: nature, seed: 42 }).message).toMatch(/charge event\/state mismatch/);
   });
 });
+
+// Preserve the original corrupt action/end-turn probe before the new valid recovery suffix.
+function appendBeforeRecovery(events: import("./engine").BattleEvent[], event: import("./engine").BattleEvent) { const at=events.findIndex(e=>e.kind==='phase'&&e.phase==='next-turn-start'); events.splice(at<0?events.length:at,0,event); }

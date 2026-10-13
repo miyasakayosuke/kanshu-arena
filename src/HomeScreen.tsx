@@ -38,6 +38,6 @@ export function ArenaLobby(props: PartyProps & { headingRef?: RefObject<HTMLHead
     <p className={`entryStatus ${ready ? '' : 'overBudget'}`} role="status">{ready ? '出場準備完了 · 5体 / 重複なし / コスト以内' : props.team.length < 5 ? `出場にはあと${5 - props.team.length}体必要です` : `あとCOST ${cost(props.team) - rules[props.rule].budget}減らすと出場できます`}</p>
     <button className="secondary editParty familyTrialGate" onClick={props.onFamilyTrial}>系統パーティを試す</button>
     <button className="secondary editParty" onClick={props.onTeam}>編成を見直す</button>
-    <details className="arenaRules"><summary>対戦ルールと操作を確認</summary><p>5体・重複なし。両軍ともCOST {rules[props.rule].budget}以内。</p><p>各ターン30秒。未入力はおまかせ。最大20ターンで決着。</p><p>MPは特技の発動時に消費。戦闘中の自然回復はなく、対戦・再戦の開始時に全回復。</p><p>作戦・詳細・ログを開いても入力時間は進みます。同じ相手でも指示を変えると乱数の使われ方と結果が変わることがあります。</p></details>
+    <details className="arenaRules"><summary>対戦ルールと操作を確認</summary><p>5体・重複なし。両軍ともCOST {rules[props.rule].budget}以内。</p><p>各ターン30秒。未入力はおまかせ。最大20ターンで決着。</p><p>MPは特技の発動時に消費。2ターン目から両軍とも毎ターン開始時にMP+2（生存中のみ・最大まで）。対戦開始時は全回復。</p><p>作戦・詳細・ログを開いても入力時間は進みます。同じ相手でも指示を変えると乱数の使われ方と結果が変わることがあります。</p></details>
   </main>;
 }

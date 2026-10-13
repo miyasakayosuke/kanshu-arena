@@ -7,7 +7,7 @@ export type BattleCue = {
   impacts: BattleEvent[];
   updates?: BattleEvent[];
   /** Exclude from command/cast counts and label separately from poison. */
-  passive?: 'material-repair';
+  passive?: 'material-repair' | 'turn-mp-recovery';
 };
 export type CommandSpan = { actor: string; start: number; end: number };
 export type BattleTimeline = { cues: BattleCue[]; duration: number; commands: CommandSpan[] };
@@ -52,12 +52,18 @@ export function applyBattleEvents(state: State, events: BattleEvent[]): State {
 // before its direct HP hit, including lethal hits; it is never a friendly cleanse.
 // A fallback reuses its cast boundary without another action.
 export function buildTimeline(events: BattleEvent[]): BattleTimeline {
-  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[]; passive?: 'material-repair' }[] = [];
+  const groups: { cast: BattleEvent | null; impacts: BattleEvent[]; updates: BattleEvent[]; endUpdates: BattleEvent[]; passive?: 'material-repair' | 'turn-mp-recovery' }[] = [];
   const before: BattleEvent[] = [];
   const pendingFallback: BattleEvent[] = [];
   const after: BattleEvent[] = [];
   for (const event of events) {
-    if (event.kind === 'phase') continue;
+    if (event.kind === 'phase') {
+      if (event.phase === 'next-turn-start') {
+        // Flush guard/status expiry before a distinct cast-free next-turn MP cue.
+        groups.push({ cast: null, impacts: [], updates: after.splice(0), endUpdates: [], passive: 'turn-mp-recovery' });
+      }
+      continue;
+    }
     if (event.kind === 'fallback') {
       // A fallback belongs to its following replacement cast, never the prior hit.
       pendingFallback.push(event);
@@ -87,6 +93,11 @@ export function buildTimeline(events: BattleEvent[]): BattleTimeline {
   let time = 0;
   if (before.length) cues.push({ at: 0, cast: null, impacts: [], updates: before });
   for (const group of groups) {
+    if (group.passive === 'turn-mp-recovery' && !group.impacts.length) {
+      // A full-MP party received nothing: keep expiry updates without claiming a recovery.
+      if (group.updates.length) cues.push({ at: time, cast: null, impacts: [], updates: group.updates });
+      continue;
+    }
     const commandStart = time;
     let cast: BattleEvent | null = null;
     if (group.cast) {

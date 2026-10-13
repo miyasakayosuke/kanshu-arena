@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.31",
-  "auditBaseCommit": "02033f38523840df3b7b776673502370bc759ed0",
+  "release": "v0.20.32",
+  "auditBaseCommit": "b84ea8b806eb3529deb7da35cd81c7632e86fd29",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1241,23 +1241,63 @@
       "creator": "Original project implementation with AI assistance, 2026-10-13",
       "provenance": "Direct user request for action-time automatic decisions and exhausted guard correction. Existing project code reused; exact v30 engine/families copied to tests/reference-v02030 with SHA provenance, excluded from runtime imports. No third-party source, art, media, excerpt or new package.",
       "sha256": {
-        "src/engine.ts": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
-        "src/App.tsx": "9192a655fbceb7e9aefba713256221183b950ad6f5743083352d174e98e5d37f",
-        "src/TacticsPanel.tsx": "e117c2abccca25db56ef610c8f4aa9191ce7d46c6daca481e066170bb9685960",
-        "src/battleInsights.ts": "deae9e9c8deecc2afe87cec026b60b3c128afee0f94c7b971868acd1a4005be2",
+        "src/engine.ts": "c2559ea2cdfe71566c84acaa0bc259523b1e54284687b548ed30ecd8d11ce1e7",
+        "src/App.tsx": "ca476cf671ec622a5a4212338120e2a1ead6dc616b5db3c771c3c172a2c9eed7",
+        "src/TacticsPanel.tsx": "d22d7ac476ae0b8ec571631e94e0d919938dcac62adef89355447b53f884d482",
+        "src/battleInsights.ts": "96b84c99397953e312dc2a62d0fceb4bb6aad2142b40403140ffb6d57b0c673a",
         "src/committedOrder.ts": "77e1e63a1e627aa6fa24585e32334fc0aacaa1f7c0d6f4c92e61970c1b4263f5",
-        "scripts/balance-lab/core.mjs": "f05977acea8ad38248b2f611e5c1f0328f4b40cb4067ae8a907afa9715ce4176",
-        "scripts/action-time-ai-audit.mjs": "429795a0e645f4a18f7eebe4c3ffbcae907e7fcebca63f140445c00d6fc53d51",
+        "scripts/balance-lab/core.mjs": "905a1c44c6c52160929c606df0a56f1d5d223813a15e2e7364293ab951d9c43f",
+        "scripts/action-time-ai-audit.mjs": "08dffab39a60ad40ddf46f9830965ea3a2a6cd42a035d437d4358097deef22b3",
         "tests/reference-v02030/engine.ts": "1f6cf122daf5fe3010ac97e73a7a09eb7bcee2fab033d670db49e7e170557489",
         "tests/reference-v02030/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
         "tests/reference-v02030/provenance.json": "7df86fd551224525d7b5c080822292ee5ebd3dd358783b1d759270ea6d5c60a2",
         "scripts/balance-lab/cli.mjs": "140ca0cbc87fc6b9ce87438c505d9e295656430ddf045dfa171f86e87ba47796",
-        "scripts/check-rights-selftest.mjs": "6b2f35d75c044c149d0256bc3ba676292f5202aba55fb98ec0af6a4878b27005",
+        "scripts/check-rights-selftest.mjs": "0c39a21da720602ac7421c92abf2b40e8e7b27fdc5288032a3c7ad7093b99a4f",
         "docs/action-time-auto.md": "a849aea0fb8af76d2019a549c18609300e52a16f82825817fcc1ffdb27531510",
         "docs/rights/releases/2026-10-13-v0.20.31.md": "1e6fd7fe4c0243c79d5edfc7b84454fdefa67b8b75a8fbf4d10d5da7825237d0"
       },
       "reviewLimit": "Prepared release candidate; native acceptance pending. Manual mechanics differential and changed automatic outcomes are distinct. Broad tactical and enemy action-time variants rejected on pacing; final scope keeps established enemy pre-turn policy except exhausted guard pool. Ownership/distribution questions remain open; inventory is not legal clearance.",
       "distribution": "Runtime integration only if later approved; reference engine and evaluation are repository-only, not browser assets."
+    },
+    {
+      "id": "recurring-turn-mp-recovery",
+      "kind": "original game resource rule, UI/history wording and evaluation",
+      "files": [
+        "src/engine.ts",
+        "src/App.tsx",
+        "src/playback.ts",
+        "src/battleInsights.ts",
+        "src/HomeScreen.tsx",
+        "src/TacticsPanel.tsx",
+        "src/monsterDetailContent.ts",
+        "scripts/balance-lab/core.mjs",
+        "scripts/mp-recovery-audit.mjs",
+        "tests/reference-v02031/engine.ts",
+        "tests/reference-v02031/families.ts",
+        "tests/reference-v02031/provenance.json",
+        "docs/mp-recovery.md",
+        "docs/rights/releases/2026-10-13-v0.20.32.md"
+      ],
+      "creator": "Original project implementation with AI assistance, 2026-10-13",
+      "provenance": "Direct user request for recurring small MP recovery;2/3/4/5 compared independently. New2-MP rule and text are original; no reference art/media/code copied. Exact existing project v31 source is test-only with hashes, excluded from browser imports.",
+      "sha256": {
+        "src/engine.ts": "c2559ea2cdfe71566c84acaa0bc259523b1e54284687b548ed30ecd8d11ce1e7",
+        "src/App.tsx": "ca476cf671ec622a5a4212338120e2a1ead6dc616b5db3c771c3c172a2c9eed7",
+        "src/playback.ts": "269b65e2a7c6e163caa02add8312ba7bb84074dc105df0366656884cf8a0c53a",
+        "src/battleInsights.ts": "96b84c99397953e312dc2a62d0fceb4bb6aad2142b40403140ffb6d57b0c673a",
+        "src/HomeScreen.tsx": "662303f1b6a843cf853a69677d33580ee4dac504971819f1ebfc6a965388906f",
+        "src/TacticsPanel.tsx": "d22d7ac476ae0b8ec571631e94e0d919938dcac62adef89355447b53f884d482",
+        "src/monsterDetailContent.ts": "824a04f88a1f9c69ebe87a58a4dee1feb086d039514de12465ced40446bb4286",
+        "scripts/balance-lab/core.mjs": "905a1c44c6c52160929c606df0a56f1d5d223813a15e2e7364293ab951d9c43f",
+        "scripts/mp-recovery-audit.mjs": "e9c1aafdd9b08594ccfa156196426d5ecfe32a8b8360c0fe8645d7db3b6784db",
+        "tests/reference-v02031/engine.ts": "0e9ebfc59c7befbf08c4b0ca7a4584e1fbb5479a3a82befe0a37b5cf464bae73",
+        "tests/reference-v02031/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
+        "tests/reference-v02031/provenance.json": "3d625d3131747aaa330113197edef0cdf060bec8eb19aa6166f649b4313457fa",
+        "docs/mp-recovery.md": "cb14fcda0be5f26e56bf8739b47d2f192b8fc938e0bff11f93c5da1610161c46",
+        "docs/rights/releases/2026-10-13-v0.20.32.md": "88699946ab8b3afe8618c14028cc3876e63e1fe7bf9750298748b79c84012554"
+      },
+      "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
+      "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
     }
   ],
   "software": [
@@ -1338,5 +1378,6 @@
     "No downloaded game image, raster asset, music, voice, effect-audio, or font file found in tracked source/runtime artifact.",
     "No DQMSL archive, screenshot, or external image embedded in the reviewed browser build."
   ],
-  "openReview": "docs/rights/review-ledger.md"
+  "openReview": "docs/rights/review-ledger.md",
+  "auditBaseTree": "801fa56bdc295697d7ef9ee52ea2a4588990210f"
 }

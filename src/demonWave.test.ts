@@ -2,7 +2,7 @@ import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
-import { advanceWithEvents, autoOrders, BASIC_ATTACK, cost, DEFEND, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, leaderFor, monsters, mpDamageFor, mpLossFor, start, type BattleEvent, type Order, type State, type Unit } from './engine';
+import { advanceWithEvents, autoOrders, BASIC_ATTACK, cost, DEFEND, DEMON_CORE_ID, DEMON_PRESSURE, demonPressureEligible, leaderFor, monsters, mpDamageFor, mpLossFor, start as economyStart, type BattleEvent, type Order, type State, type Unit } from './engine';
 import { battleEventLine, battleFactEvidenceLines, resultFacts } from './battleInsights';
 
 const demons = [29, 1, 8, 30, 31];
@@ -30,7 +30,7 @@ describe('demon roster and immutable opening qualification', () => {
       [['留め具ほどき', 'hit', 43, 12, 0], ['木片はじき', 'hit', 42, 7, 0]],
       [['片脚の踏み込み', 'hit', 76, 14, 0], ['薄影の払い', 'cleanse', 30, 12, 0], ['影の投げ針', 'hit', 52, 8, 0]],
     ]);
-    expect(hash(normalizeLegacyMetadata(monsters.slice(0, 29).map(monster => ({ monster, leader: leaderFor(monster.id) }))))).toBe('374118233d3a614eed083a96d0ef953573d0f17408ecffd37e0f82d432cf48a1');
+    expect(hash(normalizeLegacyMetadata(monsters.slice(0, 29).map(monster => ({ monster, leader: { ...leaderFor(monster.id), description: [24,35].includes(monster.id) ? historicalEngine.leaderFor(monster.id).description : leaderFor(monster.id).description } }))))).toBe('374118233d3a614eed083a96d0ef953573d0f17408ecffd37e0f82d432cf48a1');
   });
   it.each([[29], [29, 1], [29, 0, 2], [1, 8, 30, 31]])('does not qualify %j', (...ids) => {
     const state = start(ids, []); expect(demonPressureEligible(state.allies)).toBe(false); expect(state.allies.every(unit => unit.mpDamageBonus === undefined)).toBe(true);
@@ -261,3 +261,7 @@ describe('bounded public-information AI and distinct battle evidence', () => {
     expect(hash(normalizeLegacyMetadata(results))).toBe('bde4793870911dfc90c44a137659bb77d55950c32b1d1581590718abddbea292');
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

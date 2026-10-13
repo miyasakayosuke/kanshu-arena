@@ -120,7 +120,7 @@ describe('material event-stream accounting invariants', () => {
       else if (kind === 'trigger-phase') passive.phase = 'action';
       else if (kind === 'unrelated-passive') {
         resolved.events = resolved.events.filter(event => event.effect !== 'material-repair');
-        resolved.events.push({ kind: 'passive', actor: 'a0', target: 'a0', effect: 'unrelated-fixture', repairReady: false, phase: 'turn-end' });
+        appendBeforeRecovery(resolved.events, { kind: 'passive', actor: 'a0', target: 'a0', effect: 'unrelated-fixture', repairReady: false, phase: 'turn-end' });
       }
       else if (kind === 'cast-effect') resolved.events.splice(passiveIndex, 0, { kind: 'cast', actor: 'a0', target: 'e0', effect: 'material-repair', phase: 'action' });
       else if (kind === 'wrong-recipient') passive.targets = ['e0'];
@@ -130,10 +130,10 @@ describe('material event-stream accounting invariants', () => {
       else if (kind === 'wrong-amount') heal.amount = (heal.amount ?? 0) + 1;
       else if (kind === 'wrong-hp') heal.hp = (heal.hp ?? 0) + 1;
       else if (kind === 'heal-phase') heal.phase = 'action';
-      else if (kind === 'reenabled-event') resolved.events.push({ kind: 'expire', target: 'a0', repairReady: true });
+      else if (kind === 'reenabled-event') appendBeforeRecovery(resolved.events, { kind: 'expire', target: 'a0', repairReady: true });
       else if (kind === 'repair-mp-before' || kind === 'repair-mp-after') resolved.events.splice(passiveIndex + (kind === 'repair-mp-before' ? 0 : 1), 0,
         { kind: 'resource', actor: 'a0', target: 'a0', amount: 1, mp: resolved.state.allies[0].mp - 1, effect: 'material-repair', phase: 'turn-end' });
-      else if (kind === 'poison-after') resolved.events.push({ kind: 'damage', target: 'a0', amount: 1, effect: 'poison', phase: 'turn-end' });
+      else if (kind === 'poison-after') appendBeforeRecovery(resolved.events, { kind: 'damage', target: 'a0', amount: 1, effect: 'poison', phase: 'turn-end' });
       return resolved;
     });
     const failure = capture(request);
@@ -142,3 +142,6 @@ describe('material event-stream accounting invariants', () => {
     expect(failure.trace.turns[0].events.length).toBeGreaterThan(0);
   });
 });
+
+// Preserve the original corrupt action/end-turn probe before the new valid recovery suffix.
+function appendBeforeRecovery(events: import("./engine").BattleEvent[], event: import("./engine").BattleEvent) { const at=events.findIndex(e=>e.kind==='phase'&&e.phase==='next-turn-start'); events.splice(at<0?events.length:at,0,event); }

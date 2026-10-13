@@ -6,7 +6,7 @@ import {
   advanceWithEvents, assignedFamilyCount, autoOrders, BASIC_ATTACK, canUseSkill, cost, DEFEND,
   directDamageScale, effectStatus, EXTRAORDINARY_CORE_ID, EXTRAORDINARY_RESPONSE, extraordinaryResponseEligible,
   extraordinaryResponseScore, isExtraordinaryResponse, leaderFor, monsters, skillTargetsAllies, skillUnavailableLabel,
-  skillUnavailableReason, start, type BattleEvent, type Monster, type Order, type State,
+  skillUnavailableReason, start as economyStart, type BattleEvent, type Monster, type Order, type State,
 } from './engine';
 import { battleEventLine } from './battleInsights';
 
@@ -40,7 +40,7 @@ describe('extraordinary roster, opening family count, and old36 contract', () =>
     const boosted = start(mixed, [], 42, { leaders: true });
     expect(boosted.allies.map(unit => unit.monster.hp)).toEqual(mixed.map(id => Math.round(monsters[id].hp * 1.08)));
     expect(boosted.allies.map(unit => unit.mp)).toEqual(mixed.map(id => monsters[id].mp));
-    expect(hash(monsters.slice(0, 36).map(monster => ({ monster, leader: leaderFor(monster.id) })))).toBe('b5d390eef7cf38f5d5e216c1d777d9fe776b7d66f457a148dd867c3858dd683e');
+    expect(hash(monsters.slice(0, 36).map(monster => ({ monster, leader: { ...leaderFor(monster.id), description: [24,35].includes(monster.id) ? historicalEngine.leaderFor(monster.id).description : leaderFor(monster.id).description } })))).toBe('b5d390eef7cf38f5d5e216c1d777d9fe776b7d66f457a148dd867c3858dd683e');
   });
   it.each([
     [[36, 12, 2, 10, 14], 3, false], [mixed, 4, true], [[36, 12, 10, 30, 35], 5, true],
@@ -323,3 +323,7 @@ describe('public-state response AI, offensive withholding, and stable ablation p
     expect(result.state.allies[0].responseReady).toBe(false);
   });
 });
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

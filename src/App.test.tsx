@@ -513,7 +513,7 @@ describe('MP-aware commands', () => {
     await click(target('トロル'));
     await click(button('この指示でターン開始'));
     const expected: engine.State = advance.mock.results[0].value.state;
-    expect(expected.allies[0].mp).toBe(engine.monsters[0].mp - engine.monsters[0].skills[0]!.mpCost);
+    expect(expected.allies[0].mp).toBe(engine.monsters[0].mp - engine.monsters[0].skills[0]!.mpCost + 2);
     if (mode === 'skip') await click(button('演出をスキップ'));
     else await act(async () => vi.runAllTimers());
     for (const unit of expected.allies) {

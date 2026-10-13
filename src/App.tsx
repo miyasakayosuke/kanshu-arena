@@ -367,13 +367,13 @@ export default function App() {
         // Resource spend and phase expiry are authoritative, including cues without a visual.
         const updates = [...(cue.updates ?? []), ...cue.impacts];
         if (updates.length) setBattle(prev => prev ? applyBattleEvents(prev, updates) : prev);
-        if (!cue.cast && !cue.impacts.length && cue.updates?.length) return;
+        if (!cue.cast && !cue.impacts.length && cue.updates?.length && cue.passive !== 'turn-mp-recovery') return;
         if (!cue.impacts.length) {
           setVisualCast(cue.cast); setImpacts([]); setPartyGuards([]); setImpact(cue.cast);
           if (cue.cast) {
             setEffect({ text: cue.cast.skill ?? '攻撃', type: cue.cast.effect === 'responseCleanse' ? 'portal' : cue.cast.effect === 'responseGuard' ? 'lattice' : effectType(cue.cast.skill ?? '', cue.cast.effect), tick: id * 100 + tick });
             setReplayProgress(cue.updates?.some(event => event.kind === 'fallback') ? `${Math.min(command, total)} / ${total} · MP不足で通常攻撃` : cue.passive ? '特性 · 一度だけ' : `${Math.min(command, total)} / ${total}`);
-          } else { setEffect({ text: '毒のダメージ', type: 'shadow', tick: id * 100 + tick }); }
+          } else { setEffect({ text: cue.passive === 'turn-mp-recovery' ? 'ターン開始・MP回復' : '毒のダメージ', type: cue.passive === 'turn-mp-recovery' ? 'water' : 'shadow', tick: id * 100 + tick }); if (cue.passive === 'turn-mp-recovery') setReplayProgress('次のターンへ · MP回復'); }
         } else {
           setImpact(cue.impacts.find(e => e.kind === 'damage' || e.kind === 'heal' || e.kind === 'resource-gain' || e.kind === 'resource-loss') ?? cue.impacts[0]);
           setImpacts(cue.impacts);

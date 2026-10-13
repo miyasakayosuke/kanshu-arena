@@ -210,7 +210,7 @@ describe('slime profiles',()=>{
   it('distinguishes a finite MP action from passive HP recovery and natural regeneration',async()=>{
     await mount(24);const profile=document.querySelector('.profileModal')!;
     expect(profile.querySelector('.familyTag')?.textContent).toBe('粘体系');
-    for(const phrase of ['最大MP・開戦時MP+10%','自然回復はありません','粘体系3体以上','通常順の行動を使い','各MP+8','戦闘中1回だけ','全員満タンなら使えず','指示・取消でも回数は減りません','HP回復・毒解除・蘇生はしません','防御解除で消えません','本人が倒れると失います','名称・設定は本作用の創作'])expect(profile.textContent).toContain(phrase);
+    for(const phrase of ['最大MP・開戦時MP+10%','毎ターンMP+2とは別','粘体系3体以上','通常順の行動を使い','各MP+8','戦闘中1回だけ','全員満タンなら使えず','指示・取消でも回数は減りません','HP回復・毒解除・蘇生はしません','防御解除で消えません','本人が倒れると失います','名称・設定は本作用の創作'])expect(profile.textContent).toContain(phrase);
     expect([...profile.querySelectorAll('.detailSkillPicker button')].map(n=>n.textContent)).toEqual(['蓄え分け','押し流し','水面のかばい']);expect(profile.textContent).toContain('攻撃力に依存しない一撃');expect(profile.querySelector('.fixedBasisExplanation')?.textContent).toContain('「攻撃力に依存しない一撃」と竜気を使う息');
   });
   it.each([25,26,27,28])('gives new companion %s authored lore and only implemented roles',async id=>{

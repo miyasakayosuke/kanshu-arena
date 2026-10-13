@@ -7,14 +7,20 @@ const teams=[
   [15,5,16,17,18],[19,20,21,22,23],[29,1,8,30,31],[32,4,33,34,35],[36,12,2,30,26],
 ];
 describe('approved enemy difficulty scope preserves the healthy legacy pre-turn policy',()=>{
-  it.each(teams.flatMap((team,index)=>[0,1,42,20261008,0xffffffff].map(seed=>({team,index,seed}))))('keeps exact enemy choices, initiative, events and resources for healthy opening $index / $seed',({team,index,seed})=>{
+  it.each(teams.flatMap((team,index)=>[0,1,42,20261008,0xffffffff].map(seed=>({team,index,seed}))))('keeps exact enemy choices, initiative and action events before next-turn recovery for healthy opening $index / $seed',({team,index,seed})=>{
     const opponents=teams[(index+3)%teams.length];
     const old=baseline.start(team,opponents,seed,{leaders:true}),state=engine.start(team,opponents,seed,{leaders:true});
     // Fully concrete allied commands isolate the CPU preservation requirement.
     // Omitted opposing orders exercise shipping legacy CPU, never a test-only scorer.
     const orders=baseline.autoOrders(old);
     const expected=baseline.advanceWithEvents(old,orders),actual=engine.advanceWithEvents(state,orders);
-    expect(actual).toEqual(expected);
+    expect(actual.events.filter(e=>e.phase!=='next-turn-start')).toEqual(expected.events);
+    expect(actual.state.seed).toBe(expected.state.seed);expect(actual.state.winner).toBe(expected.state.winner);
+    expect(actual.state.history![0].orders).toEqual(expected.state.history![0].orders);
+    for(const side of ['allies','enemies'] as const)for(const [i,u]of actual.state[side].entries()){
+      const oldUnit=expected.state[side][i]; const mp=oldUnit.hp>0&&!expected.state.winner?Math.min(oldUnit.monster.mp,oldUnit.mp+2):oldUnit.mp;
+      expect(u).toEqual({...oldUnit,mp});
+    }
   });
   it.each([0,1,42,20261008,0xffffffff])('makes progress when every remaining enemy learned option is a free guard (seed %s)',seed=>{
     let state=engine.start([1,2,5,8,10],[1,2,5,8,10],seed,{leaders:true});
@@ -27,7 +33,7 @@ describe('approved enemy difficulty scope preserves the healthy legacy pre-turn 
       expect(new Set(casts.map(event=>event.actor)).size).toBe(casts.length);
       expect(casts.some(event=>event.effect==='hit')).toBe(true);
       enemyBasics+=casts.filter(event=>event.actor?.startsWith('e')&&event.skill==='通常攻撃').length;
-      expect([...result.state.allies,...result.state.enemies].every(unit=>unit.mp===0)).toBe(true);
+      expect([...result.state.allies,...result.state.enemies].every(unit=>unit.mp>=0&&unit.mp<=unit.monster.mp)).toBe(true);
       state=result.state;
     }
     expect(enemyBasics).toBeGreaterThan(0);expect(state.winner).not.toBeNull();
@@ -49,7 +55,7 @@ describe('exhausted enemy exception is bounded to a learned-guard-only pool',()=
     for(const seed of [0,1,42,0xffffffff]){
       const previous=baseline.advanceWithEvents({...old,seed},[{key:'a0',skill:baseline.DEFEND}]);
       const actual=engine.advanceWithEvents({...state,seed},[{key:'a0',skill:engine.DEFEND}]);
-      expect(actual).toEqual(previous);
+      expect(actual.events.filter(e=>e.phase!=='next-turn-start')).toEqual(previous.events);expect(actual.state.seed).toBe(previous.state.seed);expect(actual.state.history![0].orders).toEqual(previous.state.history![0].orders);
     }
   });
 });

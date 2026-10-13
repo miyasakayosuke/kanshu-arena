@@ -77,3 +77,8 @@ Broad tactical scoring was rejected for shorter play and starter losses. One nar
 ## v0.20.31 narrowed scope — 2026-10-13
 
 After the held comparison above, the user explicitly approved player action-time auto with established pre-turn enemy policy retained except exhausted guard-only choices. This approved candidate restores all three starter victories and five turn1 survivors; exact timing changes are documented, not hidden by lowering survival/victory gates. The broader tactical and enemy action-time variants remain rejected comparison evidence. Current source, test-only reference provenance, actual-event history and policy-specific evaluation are included in the review packet. Native acceptance and final gates remain separate. No art, skill/roster numbers, dependencies, saves, notices, external consultation or legal-clearance claim changed.
+
+
+## v0.20.32 prepared recurring MP recovery — 2026-10-13
+
+User requested small every-turn recovery and delegated numeric tuning. A separate2-MP candidate follows controlled2/3/4/5 comparisons; once-only12 is superseded. Original engine/UI/history code and prose, existing MP feedback reused, test-only exact v31 source retained with provenance. No new art/audio/rig/dependency, external consultation, fee, agreement, media copying or license choice. Official DQMSL links confirm conditional recovery existed, not that universal2 MP is its rule. Full gates and native acceptance are separate; existing professional-review questions remain open.

@@ -95,7 +95,7 @@ describe('Fenrir family UI and battle loop', () => {
     expect(document.querySelector('.battleMessage')?.textContent).toContain('ランダム5回');
     expect(document.querySelector<HTMLImageElement>('.commanderIcon img')?.src).toBe(portrait);
     await click(button('演出をスキップ'));
-    expect(document.querySelector('#party-mp-a0')?.textContent).toBe('MP 47/60');
+    expect(document.querySelector('#party-mp-a0')?.textContent).toBe('MP 49/60');
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('群気:残1T');
   });
 

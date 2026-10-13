@@ -2,7 +2,7 @@ import * as historicalEngine from '../tests/reference-v02030/engine';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { withoutPoisonControlMetadata } from './legacyPoisonTestControls';
-import { advanceWithEvents, autoOrders, baseDamage, BASIC_ATTACK, battleSkill, canUseSkill, cost, DEFEND, effectStatus, leaderFor, monsters, skillTargetsAllies, skillUnavailableLabel, skillUnavailableReason, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, start, supplyAmountFor, type BattleEvent, type Order, type State } from './engine';
+import { advanceWithEvents, autoOrders, baseDamage, BASIC_ATTACK, battleSkill, canUseSkill, cost, DEFEND, effectStatus, leaderFor, monsters, skillTargetsAllies, skillUnavailableLabel, skillUnavailableReason, SLIME_CORE_ID, SLIME_SUPPLY, slimeSupplyEligible, start as economyStart, supplyAmountFor, type BattleEvent, type Order, type State } from './engine';
 import { battleEventLine, battleFactEvidenceLines, battleOrderLine, resultFacts } from './battleInsights';
 import { isValidTeam, loadTeamSlots, saveTeamSlots } from './strategy';
 
@@ -285,3 +285,7 @@ describe('slime evidence, deterministic AI, and frozen historical parity', () =>
 const oldFamilyMetadata = (_key: string, item: unknown) => {
  if (_key === 'monster' && item && typeof item === 'object' && 'id' in item && (item.id === 1 || item.id === 4 || item.id === 8)) {const copy={...item} as Record<string, unknown>;delete copy.family;return copy;}return item;
 };
+
+// Isolate this skill/family contract from the separately tested recurring economy.
+// Shipping default and all-family combinations are covered by turnMpRecovery tests and current Lab.
+function start(...args: Parameters<typeof economyStart>): ReturnType<typeof economyStart> { return economyStart(args[0], args[1], args[2], { ...args[3], turnMpRecovery: 0 }); }

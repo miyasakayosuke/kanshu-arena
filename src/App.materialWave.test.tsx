@@ -125,7 +125,7 @@ describe('material repair live battle UI', () => {
     expect(hp()).toEqual(result.state.allies.map(unit => `HP ${unit.hp}/${unit.monster.hp}`));
     await click(button('演出をスキップ'));
     await defendAll([19, 21, 6, 2]); await click(button('この指示でターン開始'));
-    expect(buildTimeline(resolve.mock.results[1].value.events).cues.some(cue => cue.passive)).toBe(false);
+    expect(buildTimeline(resolve.mock.results[1].value.events).cues.some(cue => cue.passive === 'material-repair')).toBe(false);
   });
 
   it.each([
@@ -176,7 +176,7 @@ describe('material repair live battle UI', () => {
     await begin(); await defendAll(); await click(button('この指示でターン開始'));
     const result = resolve.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;
     const timeline = buildTimeline(result.events);
-    expect(timeline.cues.some(cue => cue.passive)).toBe(false);
+    expect(timeline.cues.some(cue => cue.passive === 'material-repair')).toBe(false);
     await tick(timeline.duration + 1);
     expect(document.querySelector('#party-hp-a0')?.textContent).toBe(`HP 0/${result.state.allies[0].monster.hp}`);
     expect(label('タロスの行動を選択').classList.contains('fallen')).toBe(true);
@@ -200,7 +200,7 @@ describe('material repair live battle UI', () => {
     const result = resolve.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;
     const timeline = buildTimeline(result.events);
     const strip = timeline.cues.find(cue => [...(cue.updates ?? []), ...cue.impacts].some(event => event.kind === 'break' && event.repairReady === false))!;
-    expect(strip).toBeTruthy(); expect(timeline.cues.some(cue => cue.passive)).toBe(false);
+    expect(strip).toBeTruthy(); expect(timeline.cues.some(cue => cue.passive === 'material-repair')).toBe(false);
     await tick(strip.at - 1);
     expect(document.querySelector('#party-status-a0')?.textContent).toContain('修復:待機');
     await tick(1);

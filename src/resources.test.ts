@@ -18,7 +18,7 @@ function unit(key: string, skills: SpecialSkills = [guard], options: Partial<Mon
   return { key, monster, hp: monster.hp, mp: monster.mp, guard: false, poison: 0 };
 }
 function battle(allies: Unit[], enemies: Unit[], options: Partial<State> = {}): State {
-  return { turn: 1, seed: 42, allies, enemies, log: [], winner: null, ...options };
+  return { turn: 1, seed: 42, allies, enemies, log: [], winner: null, turnMpRecovery: 0, ...options }; // Isolated skill-clock fixture; full-party tests below use shipping recovery.
 }
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object') {
@@ -433,7 +433,7 @@ describe('seeded full-party resource and replay invariants', () => {
           const old = allUnits(state).find(unit => unit.key === actor.key)!;
           expect(Number.isInteger(actor.mp)).toBe(true);
           expect(actor.mp).toBeGreaterThanOrEqual(0);
-          expect(actor.mp).toBeLessThanOrEqual(old.mp);
+          expect(actor.mp).toBeLessThanOrEqual(old.mp + result.events.filter(e=>e.kind==='resource-gain'&&e.target===actor.key).reduce((sum,e)=>sum+(e.amount??0),0));
           expect(actor.mp).toBeLessThanOrEqual(actor.monster.mp);
           expect(actor.guard).toBe(false);
           expect(actor.poison).toBeGreaterThanOrEqual(0);
@@ -443,7 +443,8 @@ describe('seeded full-party resource and replay invariants', () => {
           expect(actorCasts.length).toBeLessThanOrEqual(1);
           const cast = actorCasts[0];
           const skill = cast ? [battleSkill(old.monster, BASIC_ATTACK)!, battleSkill(old.monster, DEFEND)!, ...old.monster.skills].find(skill => skill.name === cast.skill)! : undefined;
-          expect(actor.mp).toBe(old.mp - (skill?.mpCost ?? 0));
+          const credits=result.events.filter(event=>event.kind==='resource-gain'&&event.target===actor.key).reduce((sum,event)=>sum+(event.amount??0),0);
+          expect(actor.mp).toBe(old.mp - (skill?.mpCost ?? 0) + credits);
         }
         state = result.state;
         turns++;

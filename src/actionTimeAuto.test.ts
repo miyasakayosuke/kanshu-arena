@@ -12,7 +12,7 @@ function unit(key: string, skills: SpecialSkills = [], options: Partial<Monster>
   const monster: Monster = {id:0,name:key,icon:'⚔️',cost:1,hp:500,mp:60,atk:20,speed:50,skills,...options};
   return {key,monster,hp:monster.hp,mp:monster.mp,guard:false,poison:0};
 }
-function battle(allies: Unit[], enemies: Unit[], options: Partial<State> = {}): State {return {turn:1,seed:42,allies,enemies,log:[],winner:null,...options};}
+function battle(allies: Unit[], enemies: Unit[], options: Partial<State> = {}): State {return {turn:1,seed:42,allies,enemies,log:[],winner:null,turnMpRecovery:0,...options};}
 const record = (result: ReturnType<typeof advanceWithEvents>, key: string) => result.state.history!.at(-1)!.orders.find(order=>order.key===key)!;
 const casts = (result: ReturnType<typeof advanceWithEvents>) => result.events.filter(event=>event.kind==='cast');
 const actionActors = (result: ReturnType<typeof advanceWithEvents>) => result.events.filter(event=>event.kind==='phase' && event.phase==='before-action').map(event=>event.actor);
@@ -148,9 +148,9 @@ describe('priority checkpoints, seed consumption, and unchanged explicit command
     expect(diagnostic.state.seed).toBe(seed);expect(diagnostic.events).toEqual(result.events);
     expect(record(result,'e0').decisionPriority).toBeUndefined();expect(record(diagnostic,'e0').decisionPriority).toBe(0);
   });
-  it.each([0,1,42,0xffffffff])('retains full explicit-manual baseline parity through a whole match (seed %s)', seed => {
+  it.each([0,1,42,0xffffffff])('retains full explicit-manual baseline parity with recovery disabled through a whole match (seed %s)', seed => {
     let old=baseline.start([14,3,6,9,10],[29,1,8,30,31],seed,{leaders:true});
-    let current=start([14,3,6,9,10],[29,1,8,30,31],seed,{leaders:true});expect(current).toEqual(old);
+    let current=start([14,3,6,9,10],[29,1,8,30,31],seed,{leaders:true,turnMpRecovery:0}); current.log=[...old.log]; Object.assign(old,{turnMpRecovery:0}); expect(current).toEqual(old);
     for(let turn=0;!old.winner;turn++) {
       expect(turn).toBeLessThan(MAX_TURNS);
       const orders=baseline.autoOrders(old),enemyOrders=baseline.autoOrders(old,'enemies');
@@ -165,7 +165,8 @@ describe('priority checkpoints, seed consumption, and unchanged explicit command
       expect(turns++).toBeLessThan(MAX_TURNS);const result=advanceWithEvents(state,automaticOrders(state));
       expect(casts(result).some(event=>event.effect==='hit')).toBe(true);
       expect(new Set(casts(result).map(event=>event.actor)).size).toBe(casts(result).length);
-      expect([...result.state.allies,...result.state.enemies].every(unit=>unit.mp===0)).toBe(true);state=result.state;
+      expect([...result.state.allies,...result.state.enemies].every(unit=>unit.mp>=0&&unit.mp<=unit.monster.mp)).toBe(true);
+      expect(result.events.filter(e=>e.effect==='turn-mp-recovery').every(e=>e.amount===2||e.mp===[...result.state.allies,...result.state.enemies].find(u=>u.key===e.target)!.monster.mp)).toBe(true);state=result.state;
     }
     expect(state.winner).not.toBeNull();
   });

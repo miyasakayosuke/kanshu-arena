@@ -99,7 +99,7 @@ export function leaderFor(id: number): LeaderTrait {
   if (id === 21) return { name: '重なる石段', stat: 'hp', percent: 8, family: 'material', description: '味方の物質系だけ 最大HP +8%' };
   if (id === 22) return { name: '湯輪の集い', stat: 'hp', percent: 8, family: 'material', description: '味方の物質系だけ 最大HP +8%' };
   if (id === 23) return { name: '銅蹄の号令', stat: 'atk', percent: 8, family: 'material', description: '味方の物質系だけ 攻撃力 +8%' };
-  if (id === 24) return { name: '澄み溜まり', stat: 'mp', percent: 10, family: 'slime', description: '味方の粘体系だけ 最大MP・初期MP +10%（自然回復なし）' };
+  if (id === 24) return { name: '澄み溜まり', stat: 'mp', percent: 10, family: 'slime', description: '味方の粘体系だけ 最大MP・初期MP +10%（毎ターンのMP回復とは別）' };
   if (id === 25) return { name: '雫の道筋', stat: 'speed', percent: 8, family: 'slime', description: '味方の粘体系だけ 素早さ +8%' };
   if (id === 26) return { name: 'ひだの囲い', stat: 'hp', percent: 8, family: 'slime', description: '味方の粘体系だけ 最大HP +8%' };
   if (id === 27) return { name: '泡の寄り合い', stat: 'hp', percent: 8, family: 'slime', description: '味方の粘体系だけ 最大HP +8%' };
@@ -110,7 +110,7 @@ export function leaderFor(id: number): LeaderTrait {
   if (id === 32) return { name: '塚守の結束', stat: 'hp', percent: 10, family: 'undead', description: '味方の不死系だけ 最大HP +10%' };
   if (id === 33) return { name: '夜道の手綱', stat: 'speed', percent: 8, family: 'undead', description: '味方の不死系だけ 素早さ +8%' };
   if (id === 34) return { name: '重ね布の陣', stat: 'hp', percent: 8, family: 'undead', description: '味方の不死系だけ 最大HP +8%' };
-  if (id === 35) return { name: '逆さの結び', stat: 'mp', percent: 8, family: 'undead', description: '味方の不死系だけ 最大MP・初期MP +8%（自然回復なし）' };
+  if (id === 35) return { name: '逆さの結び', stat: 'mp', percent: 8, family: 'undead', description: '味方の不死系だけ 最大MP・初期MP +8%（毎ターンのMP回復とは別）' };
   if (id === 36) return { name: '門口の結び', stat: 'hp', percent: 8, description: '味方全員の最大HP +8%' };
   const trait = leaderTraits[id];
   if (!trait) throw new Error(`Unknown monster id: ${id}`);
@@ -144,9 +144,11 @@ export type State = {
   winner: null | 'win' | 'lose' | 'draw';
   /** Optional same-side public-order reservation heuristic, independent of direct scale. */
   reservePoison?: boolean;
+  /** Headless economy comparison only. Ordinary battles use TURN_MP_RECOVERY. */
+  turnMpRecovery?: number;
 };
 export type Order = { key: string; skill: number; target?: string };
-export type BattlePhase = 'turn-start' | 'before-action' | 'action' | 'action-end' | 'turn-end';
+export type BattlePhase = 'turn-start' | 'before-action' | 'action' | 'action-end' | 'turn-end' | 'next-turn-start';
 export type BattleEvent = {
   kind: 'cast' | 'damage' | 'heal' | 'guard' | 'poison' | 'cleanse' | 'break' | 'defeat' | 'resource' | 'expire' | 'phase' | 'charge' | 'passive' | 'supply' | 'resource-gain' | 'resource-loss' | 'fallback' | 'poison-cashout' | 'response';
   actor?: string;
@@ -189,6 +191,8 @@ export type BattleEvent = {
   passive?: 'material-repair';
   /** Charge captured before the finisher spends it; presentation never reconstructs it. */
   dragonChargeSpent?: number;
+  /** Only the next-turn recovery boundary carries the upcoming turn number. */
+  nextTurn?: number;
   phase?: BattlePhase;
   effect?: string;
 };
@@ -214,6 +218,9 @@ export type BattleTurnRecord = {
 };
 
 export const MAX_TURNS = 20;
+export const TURN_MP_RECOVERY = 2;
+/** Explicit test/Lab ablation is bounded and never exposed as a gameplay setting. */
+export const turnMpRecoveryAmount = (value: number | undefined): number => value === undefined ? TURN_MP_RECOVERY : Number.isFinite(value) ? Math.max(0, Math.min(5, Math.floor(value))) : TURN_MP_RECOVERY;
 export const cost = (team: number[]) => team.reduce((total, id) => total + (monsters[id]?.cost ?? 0), 0);
 
 export const RALLY_PERCENT = 5;
@@ -299,7 +306,7 @@ export function poisonImpactScaleFor(unit: Pick<Unit, 'poisonImpactScale'>): num
   const scale = unit.poisonImpactScale ?? DEFAULT_POISON_IMPACT_SCALE;
   return Number.isFinite(scale) ? Math.max(0, Math.min(1, scale)) : DEFAULT_POISON_IMPACT_SCALE;
 }
-export type StartOptions = { leaders?: boolean; familySupport?: boolean; /** Isolated opening-allowance ablation; does not select a different AI policy. */ extraordinaryResponse?: boolean; /** Applies symmetrically to every unit only when explicitly provided. */ poisonImpactScale?: number; /** Separate optional AI arm; does not change the ordinary enemy-variation branch. */ reservePoison?: boolean };
+export type StartOptions = { /** Headless comparison only; default is 2 MP each new turn. */ turnMpRecovery?: number; leaders?: boolean; familySupport?: boolean; /** Isolated opening-allowance ablation; does not select a different AI policy. */ extraordinaryResponse?: boolean; /** Applies symmetrically to every unit only when explicitly provided. */ poisonImpactScale?: number; /** Separate optional AI arm; does not change the ordinary enemy-variation branch. */ reservePoison?: boolean };
 export function start(team: number[], enemy: number[], seed = 42, options: StartOptions = {}): State {
   const units = (ids: number[], prefix: string): Unit[] => {
     const leader = options.leaders && ids.length ? leaderFor(ids[0]) : undefined;
@@ -328,7 +335,8 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     allies: units(team, 'a'),
     enemies: units(enemy, 'e'),
     history: [],
-    log: ['戦闘開始！', 'MPは対戦ごとに全回復。戦闘中の自然回復はありません。', ...(options.leaders ? [
+    ...(options.turnMpRecovery !== undefined ? { turnMpRecovery: turnMpRecoveryAmount(options.turnMpRecovery) } : {}),
+    log: ['戦闘開始！', `MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +${turnMpRecoveryAmount(options.turnMpRecovery)}（最大MPまで）。`, ...(options.leaders ? [
       ...(team.length ? [`味方リーダー ${monsters[team[0]].name}「${leaderFor(team[0]).name}」：${leaderFor(team[0]).description}`] : []),
       ...(enemy.length ? [`敵リーダー ${monsters[enemy[0]].name}「${leaderFor(enemy[0]).name}」：${leaderFor(enemy[0]).description}`] : []),
     ] : []), ...(options.familySupport !== false ? [
@@ -352,7 +360,7 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
         ? [`${side}「${EXTRAORDINARY_RESPONSE.name}」：開戦時にヤヌス本人を含む系統4種類以上で、毒除去か今ターンの守りを共通の1回から選択。各MP24・行動を消費。使用権は解除不可、本人の戦闘不能で終了。5種類の追加効果、回復・蘇生・毒予防はありません。`]
         : []),
       ...([[team, '味方'], [enemy, '敵']] as const).flatMap(([ids, side]) => slimeSupplyEligible(ids.map(id => ({ monster: monsters[id] })))
-        ? [`${side}「${SLIME_SUPPLY.name}」：開戦時にうつろ泉を含む粘体系3体以上で使用可能。通常順の行動を使い、生存する味方粘体系へ各MP+${SLIME_SUPPLY.amount}（最大MPまで）。戦闘中1回・MP消費なし・解除不可。全員満タンなら使わず残1回を保持。HP回復・自然回復はありません。`]
+        ? [`${side}「${SLIME_SUPPLY.name}」：開戦時にうつろ泉を含む粘体系3体以上で使用可能。通常順の行動を使い、生存する味方粘体系へ各MP+${SLIME_SUPPLY.amount}（最大MPまで）。戦闘中1回・MP消費なし・解除不可。全員満タンなら使わず残1回を保持。HPは回復しません。毎ターンのMP回復とは別の補給です。`]
         : []),
     ] : [])],
     winner: null,
@@ -1139,6 +1147,22 @@ export function advanceWithEvents(old: State, orders: Order[], options: AdvanceO
   }
   if (battle.winner) battle.log.push(battle.winner === 'win' ? '勝利！' : battle.winner === 'lose' ? '敗北…' : '引き分け');
   battle.turn++;
+  // Prepare the next command phase only after all poison, expiry and terminal checks.
+  // Manual commands and player auto see the same recovered MP; playback never re-runs this.
+  const recovery = turnMpRecoveryAmount(battle.turnMpRecovery);
+  if (!battle.winner && recovery > 0) {
+    currentPhase = 'next-turn-start';
+    emit({ kind: 'phase', nextTurn: battle.turn });
+    battle.log.push(`── TURN ${battle.turn} 開始・MP回復 ──`);
+    for (const unit of [...battle.allies, ...battle.enemies]) {
+      if (unit.hp <= 0) continue;
+      const amount = Math.max(0, Math.min(recovery, unit.monster.mp - unit.mp));
+      if (!amount) continue;
+      unit.mp += amount;
+      emit({ kind: 'resource-gain', target: unit.key, amount, mp: unit.mp, effect: 'turn-mp-recovery', nextTurn: battle.turn });
+      battle.log.push(`${unit.monster.name} MP +${amount}（残り ${unit.mp}・ターン開始回復）`);
+    }
+  }
   battle.seed = seed;
   // Playback may repeat or skip cues; only this authoritative resolver records a turn.
   // Keep independent event/target snapshots so presentation cannot alter the evidence.

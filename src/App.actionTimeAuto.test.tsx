@@ -61,7 +61,7 @@ describe('automatic command UI defers the actual choice to the authoritative act
     const result=advance.mock.results[0].value as ReturnType<typeof engine.advanceWithEvents>;
     expect(result.state.history!.at(-1)!.orders.find(order=>order.key==='a0')).toMatchObject({skill:1,target:'a1',source:'automatic',decisionPriority:0,accepted:true});
     const heal=result.events.find(event=>event.kind==='heal'&&event.actor==='a0');expect(heal).toMatchObject({target:'a1'});expect(heal!.amount).toBeGreaterThan(0);
-    expect(result.state.allies[0].mp).toBe(52);expect(state.allies[0].mp).toBe(60);
+    expect(result.events.find(e=>e.kind==='resource'&&e.actor==='a0')).toMatchObject({mp:52});expect(result.state.allies[0].mp).toBe(54);expect(state.allies[0].mp).toBe(60);
     await click(button('演出をスキップ'));expect(document.querySelectorAll('.commander.ordered')).toHaveLength(0);
     await act(async()=>vi.advanceTimersByTime(1000));expect(advance).toHaveBeenCalledTimes(1);
   });
