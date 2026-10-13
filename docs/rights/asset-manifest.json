@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.27",
-  "auditBaseCommit": "0de358490f54799bf0575ab4bf881b2ca03e5662",
+  "release": "v0.20.28",
+  "auditBaseCommit": "050706a11130fb6923e5c5bb0da59c5b0d3a56dd",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1138,9 +1138,10 @@
         "src/style.css"
       ],
       "creator": "AI-assisted original implementation for this project, 2026-10-13.",
-      "provenance": "Existing party HP/MP/status portraits become recipient controls only during pending single-ally commands. Original slot/action accessible names and target cue reuse existing art. Private reference recording informed party-status continuity only; it did not establish this target gesture. No external code, art, audio, fonts, descriptions, screenshots, video or article excerpts imported.",
+      "provenance": "Existing party HP/MP/status portraits become recipient controls only during pending single-ally commands. Original slot/action accessible names and target cue reuse existing art. Private reference recording informed party-status continuity only; it did not establish this target gesture. No external code, art, audio, fonts, descriptions, screenshots, video or article excerpts imported. v0.20.28: original CSS excludes the command dock from browser scroll anchoring before its skill controls disappear. Native v27 evidence showed a 20.8px viewport shift with unchanged dock dimensions. No new material or interaction rule.",
       "references": [
-        "docs/rights/releases/2026-10-13-v0.20.27.md"
+        "docs/rights/releases/2026-10-13-v0.20.27.md",
+        "docs/rights/releases/2026-10-13-v0.20.28.md"
       ],
       "reviewLimit": "Production claim and source review are not legal clearance; existing rights, attribution, similarity and trademark questions remain open.",
       "distribution": "Original React/CSS interface in browser build; no new media or dependency."

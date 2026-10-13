@@ -1,0 +1,37 @@
+{
+  "release": "0.20.28",
+  "baselineCommit": "050706a11130fb6923e5c5bb0da59c5b0d3a56dd",
+  "baselineTree": "63aa3b36cb83b3e4a03b51d175a8f3a7bbaa95ac",
+  "scope": "Only runtime change is unconditional .commandDock overflow-anchor:none. App.tsx, sizing/focus/input/gameplay/save/art/dependencies remain unchanged.",
+  "checks": {
+    "tests": 3052,
+    "files": 154,
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "smokeParity": {
+      "matches": 736,
+      "allNonSourceFieldsEqual": true,
+      "configByteEqual": true,
+      "sourceDifferences": {
+        "gameVersion": {
+          "baseline": "0.20.27",
+          "candidate": "0.20.28"
+        },
+        "gitCommit": {
+          "baseline": "a849dd81da8dfc604145122c299f7d0aa3725ae4",
+          "candidate": "14b55a6961faa3664092260c0440694095144747"
+        }
+      }
+    },
+    "independentReview": "PASS: one-declaration source change, five focused suites/93 tests, TypeScript and diff check; native acceptance remains pending"
+  },
+  "runtimeSha256": {
+    "src/App.tsx": "5b6f6096e83475538f3d74cf9f4a6654f5d3c39cc691368fc1943ac3bfc563cb",
+    "src/style.css": "ca381194a038cfef0652957fa6b1b4da8cd55423f810374a9db7728701aed9c7"
+  },
+  "nativeAcceptance": "Pending sole publisher comparison of main scrollTop/recipient row geometry, then all v27 native gates; no geometry guarantee claimed",
+  "legalClearance": false
+}

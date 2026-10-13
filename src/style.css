@@ -256,3 +256,7 @@
 
 .choosingAlly{display:flex;flex-direction:column}
 .choosingAlly .turnControls{margin-top:auto}
+
+/* Commands change within this dock. Do not let a removed skill button become
+   the browser's scroll anchor and move the unchanged party recipient row. */
+.commandDock{overflow-anchor:none}
