@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.25",
-  "auditBaseCommit": "e060afef313fe750a5f59537d216981521dd986b",
+  "release": "v0.20.26",
+  "auditBaseCommit": "c87183a92fa87c91299a649dc32f4b2d5554cbe0",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1080,8 +1080,8 @@
       "reviewLimit": "Automated DOM/cascade tests are not native-browser geometry or legal clearance. Existing artwork ownership and similarity review questions remain open. Exact deployed native phone/zoom acceptance is required before completion; the previous verified release is retained for recovery.",
       "distribution": "Existing original SVG rendered inline in a noninteractive header preview. No new external resource or asset.",
       "sha256": {
-        "src/MonsterDetails.tsx": "be2caf8a8c9090d0bb03ba3ae63ff9cbb6f89931072e39170bed644b09975671",
-        "src/monsterDetails.css": "d180e2c860c18776de9c14bbdd02736503e649dfd37f04b666eb3d42f0400eec"
+        "src/MonsterDetails.tsx": "703767f4c2622a174d7d70c2d9833e74347ff9330407566bc115a529b94f429d",
+        "src/monsterDetails.css": "abbc1acdc326f135ce27bdc9ed7488a25541bbb3da3fe92529a169d5534eaddc"
       }
     },
     {
@@ -1125,7 +1125,7 @@
         "src/App.enemyInspection.test.tsx",
         "src/MonsterDetails.enemyInspection.test.tsx"
       ],
-      "provenance": "2026-10-13: AI-assisted original card button, enemy slot/name context and initial-tab configuration. Reuses existing profile, skills, stories and artwork. No imported media, footage, article excerpts, art, prose, dependency or license. Private research sources stay in private evidence.",
+      "provenance": "2026-10-13: AI-assisted original card button, enemy slot/name context and initial-tab configuration. Reuses existing profile, skills, stories and artwork. No imported media, footage, article excerpts, art, prose, dependency or license. Private research sources stay in private evidence. v0.20.26: native short-phone review found added context-row reading overflow; original compact header now replaces duplicated catalog identity within the existing header height. Fonts, tap targets, all prose and timing behavior preserved. No imported material.",
       "creator": "AI-assisted implementation for this project",
       "distribution": "Read-only enemy profile entry during command selection, using existing real deadline. No AI intent or combat state changes.",
       "reviewLimit": "Source/inventory and automated checks are not legal clearance, measured usability gains or native-browser acceptance. Existing art/similarity review questions remain open."

@@ -1,0 +1,38 @@
+{
+  "release": "0.20.26",
+  "baselineCommit": "c87183a92fa87c91299a649dc32f4b2d5554cbe0",
+  "baselineTree": "ae5827b5d82e3ba78802e14d80342093fc2f67f4",
+  "scope": "Header-only repair; existing body spacing, fonts, controls, content and lifecycle unchanged",
+  "checks": {
+    "tests": 3022,
+    "files": 152,
+    "rightsSelfTests": 15,
+    "typescript": true,
+    "build": true,
+    "sourceRights": true,
+    "distRights": true,
+    "smokeParity": {
+      "matches": 736,
+      "jsonEqual": true,
+      "markdownEqual": true,
+      "configByteEqual": true,
+      "excludedMetadata": {
+        "gitCommit": [
+          "2377a140a472b2e7a2a71edda1561c17059839b6",
+          "35341cb2f5279d2b094cfb9ad02708117868a249"
+        ],
+        "gameVersion": [
+          "0.20.25",
+          "0.20.26"
+        ]
+      },
+      "workingTreeDirtyRetained": true
+    },
+    "independentReview": "PASS: final header-only runtime hashes;138 tests/5files plus TypeScript"
+  },
+  "runtimeSha256": {
+    "src/MonsterDetails.tsx": "703767f4c2622a174d7d70c2d9833e74347ff9330407566bc115a529b94f429d",
+    "src/monsterDetails.css": "abbc1acdc326f135ce27bdc9ed7488a25541bbb3da3fe92529a169d5534eaddc"
+  },
+  "nativeAcceptance": "Pending publisher exact-deployed native check; no rendered fit guarantee or live acceptance claimed"
+}

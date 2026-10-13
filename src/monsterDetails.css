@@ -89,6 +89,12 @@
   .profileModal.profileTabbed .profileHeader>.close{grid-column:3;grid-row:2}
 }
 
-.profileBattleContext{display:flex;flex:0 0 auto;align-items:center;justify-content:space-between;gap:8px;padding:4px 12px;background:#132a32;color:#e6dab9;font-size:12px;line-height:1.5}
-.profileBattleContext span{min-width:0;overflow-wrap:anywhere}
-.profileBattleContext output{flex:0 0 auto;font-variant-numeric:tabular-nums}
+/* Battle identity replaces the catalog number/name, rather than adding a row
+   between the header and tabs. Timer stays outside the live identity label. */
+.profileModal.profileTabbed .profileHeader>.profileBattleContext{flex:1 1 auto;min-width:0;font-size:12px;line-height:1.5;color:#e6dab9}
+.profileBattleContext span{display:block;min-width:0;overflow-wrap:anywhere;font-weight:700}
+.profileBattleContext output{display:block;font-size:12px;line-height:1.5;font-variant-numeric:tabular-nums}
+@media(max-width:300px){
+  .profileModal.profileTabbed .profileHeader>.profileBattleContext{grid-column:1 / -1;grid-row:1}
+  .profileModal.profileTabbed .profileHeader:has(.profileReadingPreview)>.profileBattleContext{grid-column:2 / -1}
+}

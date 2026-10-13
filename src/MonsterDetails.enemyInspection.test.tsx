@@ -67,15 +67,19 @@ describe.each([
     const style = (selector: string) => window.getComputedStyle(window.document.querySelector(selector)!);
     expect(style('.profileModal').display).toBe('flex');
     expect(style('.profileModal').overflow).toBe('hidden');
-    for (const selector of ['.profileHeader', '.profileTabs', '.profileBattleContext']) expect(style(selector).flexShrink).toBe('0');
+    for (const selector of ['.profileHeader', '.profileTabs']) expect(style(selector).flexShrink).toBe('0');
     expect(style('.profileHeader .close').width).toBe('44px');
     expect(style('.profileHeader .close').height).toBe('44px');
     expect(style('.profileBattleContext span').overflowWrap).toBe('anywhere');
-    expect(style('.profileBattleContext output').flexShrink).toBe('0');
+    expect(style('.profileBattleContext output').fontSize).toBe('12px');
+    expect(window.document.querySelector('.profileBattleContext')?.parentElement?.className).toBe('profileHeader');
+    expect(window.document.querySelector('.profileBattleContext output')?.closest('[aria-live="polite"]')).toBeNull();
     expect(style('.profileBody').overflowY).toBe('auto');
     expect(parseFloat(style('.profileBody').minHeight)).toBe(0);
     expect(style('.profileAppearance[hidden]').display).toBe('none');
     expect(style('.detailSkillRule').fontSize).toBe('14px');
+    expect(style('.skillLore').fontSize).toBe('14px');
+    expect(style('.detailSkillPicker button').minHeight).toBe('44px');
     for (const selector of ['.detailSkillRule', '.skillLore']) {
       expect(style(selector).overflowWrap).toBe('anywhere');
       expect(style(selector).whiteSpace).not.toBe('nowrap');
