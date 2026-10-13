@@ -239,3 +239,6 @@
 .arenaLobby .lobbyResult .resultMetrics{font-size:11px;line-height:1.6}
 .resultDetails>summary{cursor:pointer;font-size:12px;min-height:36px;padding:10px 0 2px;color:#d4dec6}
 .lobbyResult .battleFindings{margin:10px 0 0}
+
+/* A saved command occupies the existing heading; keep its target readable. */
+.commandHeading.hasCommittedOrder>span{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.23",
-  "auditBaseCommit": "9e45bf3130d3105a5c53a1c71061150f5552d8bf",
+  "release": "v0.20.24",
+  "auditBaseCommit": "1e275f73e628cb74efeee7113ac504204c2a9ead",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1099,6 +1099,19 @@
       "createdFor": "v0.20.22 enemy result-text placement",
       "distribution": "Original browser presentation code and repository tests/documentation; no new media or external asset.",
       "reviewLimit": "Automated geometry/render-spy checks do not substitute for native font/pixel review or legal clearance. Existing artwork ownership/similarity questions remain open; publisher owns final native browser acceptance."
+    },
+    {
+      "id": "committed-command-heading",
+      "kind": "original-ui-code-and-copy",
+      "files": [
+        "src/committedOrder.ts",
+        "src/App.tsx",
+        "src/style.css"
+      ],
+      "provenance": "Original presentation code and short Japanese command/target wording, using existing project character and skill names. General actor-linked readability principle informed by private user-provided gameplay footage and public commentary; no frames, copied text, sounds, logos or third-party game assets included. Private source identifiers and observation timestamps remain in the private review packet.",
+      "creator": "AI-assisted implementation for this project.",
+      "reviewLimit": "Presentation and source inventory review only; not legal clearance, proof of non-infringement or evidence of gameplay outcome improvement. No new asset, dependency or license.",
+      "distribution": "Existing command heading displays a stored command and target/scope; portraits retain HP/MP."
     }
   ],
   "software": [
