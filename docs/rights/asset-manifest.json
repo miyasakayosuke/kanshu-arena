@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-13",
-  "release": "v0.20.20",
-  "auditBaseCommit": "8b7edaf208a5f4170a59baffebd444eaaa7c0b48",
+  "release": "v0.20.21",
+  "auditBaseCommit": "117c988d0c6cd8c0488b365d7e2a4d37f17f24ed",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1044,6 +1044,25 @@
       "creator": "AI-assisted implementation for this project",
       "distribution": "Browser focus/scroll lifecycle code only; gameplay, save format, log content, artwork and third-party notices unchanged.",
       "reviewLimit": "Automated inventory and implementation review are not legal clearance or independent proof of rights ownership/non-infringement."
+    },
+    {
+      "id": "detail-reading-creature-preview",
+      "kind": "original-read-only-ui-code",
+      "files": [
+        "src/MonsterDetails.tsx",
+        "src/monsterDetails.css",
+        "src/MonsterDetails.preview.test.tsx",
+        "docs/detail-preview-candidate.md",
+        "src/MonsterDetails.layout.test.ts"
+      ],
+      "provenance": "2026-10-13: project-specific AI-assisted header layout and lifecycle integration reuse the existing original full-body SVG and HomeIdleArt quiet motion on detail reading tabs. General usability principle: keep the inspected creature visible while changing information. No third-party artwork, video frames, text, animation choreography, media, fonts, dependencies or code imported. The existing large appearance artwork/content, creature geometry, motion tracks, stories and battle behavior are unchanged. At extreme widths <=300px the header uses two rows on all tabs to retain reachable 44px controls.",
+      "creator": "AI-assisted implementation written directly for this project",
+      "reviewLimit": "Automated DOM/cascade tests are not native-browser geometry or legal clearance. Existing artwork ownership and similarity review questions remain open. Exact deployed native phone/zoom acceptance is required before completion; the previous verified release is retained for recovery.",
+      "distribution": "Existing original SVG rendered inline in a noninteractive header preview. No new external resource or asset.",
+      "sha256": {
+        "src/MonsterDetails.tsx": "b3a75d9ca0a6e74dee0efbf13490f97458a3ce5171ca09d27cf0d0ed7bd0e0df",
+        "src/monsterDetails.css": "e2823e03b5d5c184da05f18974457586eaa1b32826fb252650f18d554904cba4"
+      }
     }
   ],
   "software": [

@@ -98,3 +98,32 @@ it('retains readable contrast for story and mechanical copy', () => {
   const backgrounds = style('.profileModal').backgroundImage.match(/#[a-f\d]{6}/gi)!;
   for (const selector of ['.storyLabel', '.storyLabel small', '.monsterLore', '.monsterOrigin', '.loreSource', '.familyExplanation', '.detailSkillRule', '.skillLore']) for (const background of backgrounds) expect(contrast(style(selector).color, background), `${selector} on ${background}`).toBeGreaterThanOrEqual(4.5);
 });
+
+
+describe('reading preview responsive cascade', () => {
+  it.each([[320, 568, 32, 36], [360, 533, 32, 36], [400, 606, 44, 40], [390, 844, 92, 76], [844, 390, 44, 40], [195, 422, 32, 36]])('uses an in-header noninteractive preview at %s×%s', (width, height, artWidth, artHeight) => {
+    for (const order of [['style.css', 'catalog.css', 'monsterDetails.css'], ['monsterDetails.css', 'style.css', 'catalog.css']]) {
+      const style = styles(width, height, order);
+      const header = style.window.document.querySelector('.profileHeader')!;
+      header.insertAdjacentHTML('afterbegin', '<span class="profileReadingPreview" aria-hidden="true"><span class="monsterArt homeIdleArt"><svg viewBox="0 0 280 210"></svg></span></span>');
+      header.insertAdjacentHTML('beforeend', '<nav class="profileBrowse"><button>‹</button><button>›</button></nav>');
+      expect(style('.profileReadingPreview').width).toBe(`${artWidth}px`);
+      expect(style('.profileReadingPreview').height).toBe(`${artHeight}px`);
+      expect(style('.profileReadingPreview').flexShrink).toBe('0');
+      expect(style('.profileReadingPreview').pointerEvents).toBe('none');
+      expect(style('.profileReadingPreview svg').overflow).toBe('visible');
+      expect(style('.profileHeader').minHeight).toBe('52px');
+      expect(style('.profileHeader strong').overflowWrap).toBe('anywhere');
+      expect(style('.profileBrowse button').minWidth).toBe('44px');
+      expect(style('.profileBrowse button').minHeight).toBe('44px');
+      expect(style('.profileHeader .close').width).toBe('44px');
+      expect(style('.profileBody').overflowY).toBe('auto');
+      if (width <= 300) {
+        expect(style('.profileHeader').display).toBe('grid');
+        expect(style('.profileHeader strong').gridColumn).toBe('2 / -1');
+        expect(style('.profileBrowse').gridRow).toBe('2');
+        expect(style('.profileHeader .close').gridRow).toBe('2');
+      }
+    }
+  });
+});

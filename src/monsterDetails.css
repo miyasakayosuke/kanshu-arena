@@ -65,3 +65,26 @@
 .profileBrowse button{min-width:44px;min-height:44px;padding:0;border:1px solid #91aa8e55;border-radius:8px;background:#233e40;color:#e0e8d5;font-size:27px;line-height:1}
 .profileBrowse button[aria-disabled=true]{opacity:.35;cursor:default}
 .profileModal.profileTabbed .profileHeader>.close{flex:0 0 44px}
+
+/* Keep the creature beside its name while reading. This uses the existing header
+   height on short phones instead of taking a row away from effects and stories.
+   There is only one mounted preview; it is decorative and never a focus stop. */
+.profileModal.profileTabbed .profileHeader:has(.profileReadingPreview){gap:4px}
+.profileReadingPreview{display:block;position:relative;flex:0 0 44px;width:44px;height:40px;pointer-events:none}
+.profileReadingPreview .homeIdleArt{display:block;width:100%;height:100%;filter:none}
+.profileReadingPreview .homeIdleArt>svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+@media(max-width:380px){.profileReadingPreview{flex-basis:32px;width:32px;height:36px}}
+/* Extra illustration space is available only on tall, comfortably wide screens.
+   Browser zoom naturally falls back to the small header thumbnail. */
+@media(min-height:700px) and (min-width:381px){.profileReadingPreview{flex-basis:92px;width:92px;height:76px}}
+/* At extreme text/browser zoom, fixed 44px navigation targets cannot share one
+   row with the title. Let the header grow; keep every control reachable and the
+   remaining text in the existing local scrolling reader. */
+@media(max-width:300px){
+  .profileModal.profileTabbed .profileHeader{display:grid;grid-template-columns:32px minmax(0,1fr) 44px;gap:4px}
+  .profileModal.profileTabbed .profileHeader>strong{grid-column:1 / -1;grid-row:1}
+  .profileModal.profileTabbed .profileHeader:has(.profileReadingPreview)>strong{grid-column:2 / -1}
+  .profileReadingPreview{grid-column:1;grid-row:1}
+  .profileModal.profileTabbed .profileHeader>.profileBrowse{grid-column:1 / 3;grid-row:2;margin-left:0;justify-self:start}
+  .profileModal.profileTabbed .profileHeader>.close{grid-column:3;grid-row:2}
+}
