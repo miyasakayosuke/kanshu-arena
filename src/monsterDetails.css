@@ -88,3 +88,7 @@
   .profileModal.profileTabbed .profileHeader>.profileBrowse{grid-column:1 / 3;grid-row:2;margin-left:0;justify-self:start}
   .profileModal.profileTabbed .profileHeader>.close{grid-column:3;grid-row:2}
 }
+
+.profileBattleContext{display:flex;flex:0 0 auto;align-items:center;justify-content:space-between;gap:8px;padding:4px 12px;background:#132a32;color:#e6dab9;font-size:12px;line-height:1.5}
+.profileBattleContext span{min-width:0;overflow-wrap:anywhere}
+.profileBattleContext output{flex:0 0 auto;font-variant-numeric:tabular-nums}

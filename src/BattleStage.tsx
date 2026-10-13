@@ -27,6 +27,7 @@ type Props = {
   targetKeys?: string[];
   selectedTarget?: string;
   onSelectTarget?: (key: string) => void;
+  onInspectEnemy?: (key: string) => void;
   /** Use the existing DOM caption when a readable label stack cannot fit above enemies. */
   onCompactCastCaption?: (caption: CompactCastCaption | null) => void;
 };
@@ -1357,13 +1358,17 @@ export default function BattleStage(props: Props) {
         }}/>
 
     </div>
-    <div className="enemyVitals battleTargets" role="group" aria-label="敵のHP・MP・状態。番号のカードで特技の対象を選択">{props.enemies.map((unit, index) => {
+    <div className="enemyVitals battleTargets" role="group" aria-label={props.onInspectEnemy ? "敵のHP・MP・状態。番号のカードで特技を確認" : "敵のHP・MP・状態。番号のカードで特技の対象を選択"}>{props.enemies.map((unit, index) => {
       const eligible = unit.hp > 0 && !!props.onSelectTarget && props.targetKeys?.includes(unit.key);
       const selected = eligible && props.selectedTarget === unit.key;
-      return <div className={`enemyVital ${unit.hp <= 0 ? 'fallen' : ''} ${eligible ? 'eligible' : ''} ${selected ? 'selected' : ''}`} key={unit.key} aria-label={`${unit.monster.name} HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp} ${unit.hp <= 0 ? '戦闘不能' : effectStatus(unit) || '状態異常なし'}`}>
+      return <div className={`enemyVital ${unit.hp <= 0 ? 'fallen' : ''} ${eligible ? 'eligible' : ''} ${props.onInspectEnemy && !eligible ? 'inspectable' : ''} ${selected ? 'selected' : ''}`} key={unit.key} aria-label={`${unit.monster.name} HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp} ${unit.hp <= 0 ? '戦闘不能' : effectStatus(unit) || '状態異常なし'}`}>
         <strong><b className="enemySlotNumber" aria-hidden="true">{index + 1}</b>{unit.monster.name}</strong>
         <span className="enemyHealthBar" aria-hidden="true"><i style={{width: `${clamp(unit.hp / unit.monster.hp) * 100}%`}}/></span>
         <small>HP {unit.hp}/{unit.monster.hp}</small><small className="enemyMp">MP {unit.mp}/{unit.monster.mp}</small><em>{unit.hp <= 0 ? '戦闘不能' : effectStatus(unit)}</em>
+        {!eligible && props.onInspectEnemy && <button type="button" className="enemyInspect" data-inspect-enemy={unit.key}
+          aria-label={`敵${index + 1} ${unit.monster.name}の特技を確認${unit.hp <= 0 ? ' · 戦闘不能' : ''}`}
+          onKeyDown={event => { if (event.repeat && (event.key === 'Enter' || event.key === ' ')) event.preventDefault(); }}
+          onClick={event => { event.currentTarget.focus({ preventScroll: true }); props.onInspectEnemy?.(unit.key); }}><span aria-hidden="true">›</span></button>}
         {eligible && <button type="button" className="battleTarget" data-target={unit.key}
           aria-label={`${index + 1}番 ${unit.monster.name}を対象にする HP ${unit.hp}/${unit.monster.hp} MP ${unit.mp}/${unit.monster.mp}`}
           aria-pressed={selected}

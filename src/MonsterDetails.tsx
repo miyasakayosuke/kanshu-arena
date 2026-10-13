@@ -37,11 +37,11 @@ function DetailPages({ pages, label }: { pages: ReadingPage[]; label: string }) 
 }
 
 /** All entry points inspect the same read-only profile; editing belongs to the five slots. */
-export default function MonsterDetails({ id, onClose, navigation }: { id: number; onClose: () => void; navigation?: { ids: number[]; onSelect: (id: number) => void } }) {
+export default function MonsterDetails({ id, onClose, navigation, initialTab = 'appearance', battleContext, fallbackFocus }: { id: number; onClose: () => void; initialTab?: DetailTab; battleContext?: { label: string; seconds: number }; fallbackFocus?: () => HTMLElement | null; navigation?: { ids: number[]; onSelect: (id: number) => void } }) {
   const close = useRef<HTMLButtonElement>(null);
   const dialog = useRef<HTMLElement>(null);
   const body = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState<DetailTab>('appearance');
+  const [activeTab, setActiveTab] = useState<DetailTab>(initialTab);
   const [skillIndex, setSkillIndex] = useState(0);
   const tabPrefix = useId();
   const monster = monsters[id];
@@ -59,16 +59,16 @@ export default function MonsterDetails({ id, onClose, navigation }: { id: number
     <p className="detailMechanicsNote">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>
   </> }, ...rules.flatMap(rule => detailTextPages(rule.text).map(text => ({ title: rule.title, content: <p className={rule.className}>{text}</p> })))];
   // Keep the reading group while browsing; skill/page selection belongs to each monster.
-  useEffect(() => { if (!navigation) setActiveTab('appearance'); setSkillIndex(0); }, [id]);
+  useEffect(() => { if (!navigation) setActiveTab(initialTab); setSkillIndex(0); }, [id]);
   useEffect(() => { if (body.current) body.current.scrollTop = 0; }, [id, activeTab, skillIndex]);
   useEffect(() => {
     const previousFocus = document.activeElement as HTMLElement | null;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     close.current?.focus({ preventScroll: true });
-    return () => { document.body.style.overflow = previousOverflow; previousFocus?.focus({ preventScroll: true }); };
+    return () => { document.body.style.overflow = previousOverflow; const target = previousFocus?.isConnected && !previousFocus.matches(':disabled') ? previousFocus : fallbackFocus?.(); target?.focus({ preventScroll: true }); };
   }, []);
-  return <div className="overlay profileOverlay" onClick={onClose}><section ref={dialog} className="modal profileModal profileArtFirst profileTabbed" role="dialog" aria-modal="true" aria-label={`${monster.name}の詳細`} onClick={event => event.stopPropagation()} onKeyDown={event => {
+  return <div className="overlay profileOverlay" onClick={onClose}><section ref={dialog} className="modal profileModal profileArtFirst profileTabbed" role="dialog" aria-modal="true" aria-label={`${battleContext?.label ?? monster.name}の詳細`} onClick={event => event.stopPropagation()} onKeyDown={event => {
     if (event.defaultPrevented) return;
     // Own dismissal before it can reach the catalog or other page-level handlers.
     if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); onClose(); return; }
@@ -89,6 +89,7 @@ export default function MonsterDetails({ id, onClose, navigation }: { id: number
     controls[next].focus();
   }}>
     <div className="profileHeader">{activeTab !== 'appearance' && <DetailPreview id={id} />}<strong aria-live="polite" aria-atomic="true">No. {String(monster.id + 1).padStart(3, '0')} · {monster.name}</strong>{canBrowse && <nav className="profileBrowse" aria-label="図鑑の前後のモンスター"><button type="button" aria-label={`前のモンスター${browseIndex > 0 ? `：${monsters[navigation.ids[browseIndex - 1]].name}` : ''}`} aria-disabled={browseIndex === 0} onClick={() => browse(-1)}>‹</button><button type="button" aria-label={`次のモンスター${browseIndex < navigation.ids.length - 1 ? `：${monsters[navigation.ids[browseIndex + 1]].name}` : ''}`} aria-disabled={browseIndex === navigation.ids.length - 1} onClick={() => browse(1)}>›</button></nav>}<button ref={close} className="close" aria-label="詳細を閉じる" onClick={onClose}>×</button></div>
+    {battleContext && <div className="profileBattleContext"><span>{battleContext.label}</span><output role="timer" aria-live="off" aria-label={`コマンド入力 残り${battleContext.seconds}秒`}>残り {battleContext.seconds} 秒</output></div>}
     <div className="profileTabs" role="tablist" aria-label="モンスター詳細" onKeyDown={event => {
       const index = TABS.findIndex(tab => tab.id === activeTab);
       const next = event.key === 'ArrowRight' ? (index + 1) % TABS.length : event.key === 'ArrowLeft' ? (index + TABS.length - 1) % TABS.length : event.key === 'Home' ? 0 : event.key === 'End' ? TABS.length - 1 : -1;

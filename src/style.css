@@ -242,3 +242,9 @@
 
 /* A saved command occupies the existing heading; keep its target readable. */
 .commandHeading.hasCommittedOrder>span{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+
+/* Read-only enemy reference entry shares the existing card geometry. */
+.layeredBattleStage .enemyVital.inspectable{border-color:#315d6477}
+.layeredBattleStage .enemyInspect{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;border-radius:5px;background:transparent;color:#315d64;cursor:pointer;z-index:1}
+.layeredBattleStage .enemyInspect span{position:absolute;top:0;right:2px;font-size:10px;line-height:12px}
+.layeredBattleStage .enemyInspect:focus-visible{outline:3px solid #315d64;outline-offset:-3px;background:#a5dfd222}

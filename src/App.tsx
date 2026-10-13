@@ -48,6 +48,7 @@ export default function App() {
   const [showSkills, setShowSkills] = useState(false);
   const [automaticKeys, setAutomaticKeys] = useState<string[]>([]);
   const [focus, setFocus] = useState<number | null>(null);
+  const [enemyFocus, setEnemyFocus] = useState<string | null>(null);
   const [practice, setPractice] = useState(false);
   const [encounter, setEncounter] = useState<FamilyEncounter | null>(null);
   const [showTactics, setShowTactics] = useState(false);
@@ -82,7 +83,7 @@ export default function App() {
     commandDeadline.current = null;
     ++playbackId.current; clearTimers(); latestResult.current = null; playingLock.current = false;
     setBattle(null); setPlaying(false); setOrders({}); setAutomaticKeys([]); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyNumbers([]);
-    setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setFocus(null); setReplayProgress('');
+    setPendingSkill(null); setShowSkills(false); setShowLog(false); setShowTactics(false); setFocus(null); setEnemyFocus(null); setReplayProgress('');
     if (battle?.winner) { setLastBattle(battle); setRound(n => n + 1); }
     setPractice(false); setEncounter(null);
   };
@@ -154,13 +155,14 @@ export default function App() {
       if (navigation.pending) { e.preventDefault(); navigation.cancel(); return; }
       // Fallback for Escape outside the focused dialog. Claim the event before
       // its unmount can expose the catalog/editor to another window listener.
+      if (enemyFocus !== null) { e.preventDefault(); setEnemyFocus(null); return; }
       if (focus !== null) { e.preventDefault(); setFocus(null); return; }
       setShowLog(false); setShowTactics(false); setPendingSkill(null);
       if (pendingSkill === null) setShowSkills(false);
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  }, [focus, pendingSkill, navigation.pending]);
+  }, [focus, enemyFocus, pendingSkill, navigation.pending]);
   const startLock = useRef(false);
   useEffect(() => { startLock.current = false; }, [page, battle?.winner]);
   const begin = () => {
@@ -174,7 +176,7 @@ export default function App() {
     setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
     resetCommandPlayback();
-    setTimedOut(false);
+    setTimedOut(false); setEnemyFocus(null);
     setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
     setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyNumbers([]);
     setPlaying(false); setShowLog(false); setShowTactics(false); navigate('battle'); setNotice('');
@@ -193,6 +195,17 @@ export default function App() {
     }
     return false;
   };
+  const inspectionAllowed = page === 'battle' && !!battle && !battle.winner && !playing && pendingSkill === null && !navigation.pending && focus === null && !showLog && !showTactics;
+  const latestInspection = useRef({ allowed: inspectionAllowed, battle });
+  latestInspection.current = { allowed: inspectionAllowed, battle };
+  const inspectEnemy = (key: string) => {
+    // Recheck current state and the wall-clock deadline even for a queued click.
+    if (!latestInspection.current.allowed || playingLock.current || commandsExpired()) return;
+    if (!latestInspection.current.battle?.enemies.some(unit => unit.key === key)) return;
+    setEnemyFocus(key);
+  };
+  useEffect(() => { setEnemyFocus(null); }, [page, battle?.turn, battle?.winner, navigation.pending]);
+  const inspectedEnemy = inspectionAllowed && enemyFocus !== null ? battle?.enemies.find(unit => unit.key === enemyFocus) : undefined;
   const commitOrder = (skill: number, target?: string, automatic = false) => {
     if (commandsExpired() || !active || battle?.winner || playingLock.current) return;
     const selected = battleSkill(active.monster, skill);
@@ -223,13 +236,13 @@ export default function App() {
     // navigation must not resurrect it or take focus away from an overlay.
     focusTurnStart.current = false;
     if (page !== 'battle' || !battle || battle.winner || playing || playingLock.current || pendingSkill !== null
-      || focus !== null || showLog || showTactics || navigation.pending || !living.length || living.some(unit => !orders[unit.key])
+      || focus !== null || enemyFocus !== null || showLog || showTactics || navigation.pending || !living.length || living.some(unit => !orders[unit.key])
       || commandDeadline.current === null || Date.now() >= commandDeadline.current) return;
     const button = turnStartButton.current;
     if (!button || button.disabled) return;
     button.focus({ preventScroll: true });
     button.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
-  }, [orders, page, battle, playing, pendingSkill, focus, showLog, showTactics, navigation.pending]);
+  }, [orders, page, battle, playing, pendingSkill, focus, enemyFocus, showLog, showTactics, navigation.pending]);
   const finishPlayback = () => {
     resetCommandPlayback();
     clearTimers();
@@ -243,7 +256,7 @@ export default function App() {
     if (page !== 'battle' || !battle || battle.winner || playingLock.current || commandDeadline.current === null || (!expired && pendingSkill !== null)) return;
     // Lock synchronously: a manual click and the deadline can resolve this turn only once.
     playingLock.current = true; commandDeadline.current = null;
-    setTimedOut(expired); setFocus(null); setShowLog(false); setShowTactics(false);
+    setTimedOut(expired); setFocus(null); setEnemyFocus(null); setShowLog(false); setShowTactics(false);
     const cmds = completeOrders(battle, Object.values(orders));
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
@@ -352,9 +365,9 @@ export default function App() {
       setWorkshop(previous => selectWorkshopTeam(previous, index));
       setNotice(`チーム${index + 1}に切り替えました${practice && next.rule !== rule ? '。ルールを変更したため、同じ相手・同じシードの再戦を解除しました。' : ''}`);
     }} onResumeDraft={() => { setWorkshop(previous => previous.draft ? { ...previous, selected: null } : previous); setPractice(false); setEncounter(null); setNotice('一時編成に戻しました'); }} onRestoreDraft={() => { setWorkshop(restorePreviousTeam); setPractice(false); setEncounter(null); setNotice('前回の編成を復元しました。3チームはそのままです。'); }} onAssignDraft={index => { setWorkshop(previous => assignDraftToTeam(previous, index)); setNotice(`チーム${index + 1}に保存しました`); }} team={team} setTeam={setTeam} rule={rule} setRule={changeRule} onFocus={setFocus} notice={notice} setNotice={setNotice} practice={practice} leavePractice={leavePractice} />}
-    {page === 'battle' && battle && <main className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
+    {page === 'battle' && battle && <main tabIndex={-1} className={`battle${visibleCastCaption ? ' hasCompactCastCaption' : ''}`}>
       <div className="battleTop"><button className="iconButton" onClick={()=>navigate('arena')} aria-label="闘技場に戻る">‹ 闘技場</button><span><b>TURN {Math.min(battle.turn - (battle.winner ? 1 : 0), 20)}</b><small>敵 {battle.enemies.filter(u => u.hp > 0).length} / 味方 {living.length}</small>{!battle.winner && !playing && <output className={`commandClock ${commandSeconds <= 10 ? 'urgent' : ''}`} role="timer" aria-label={`コマンド入力 残り${commandSeconds}秒`}>残り <b>{commandSeconds}</b> 秒</output>}</span><div className="battleMenu"><button className="iconButton" onClick={() => setShowTactics(true)}>作戦</button><button className="iconButton" onClick={event => { event.currentTarget.focus({ preventScroll: true }); setShowLog(true); }}>ログ</button></div></div>
-      {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
+      {!battle.winner && <BattleStage onCompactCastCaption={setCompactCastCaption} allies={battle.allies} enemies={battle.enemies} effect={effect} castEvent={visualCast} impact={impact} impacts={impacts} playbackRate={speed} targetKeys={targetKeys} onInspectEnemy={inspectionAllowed ? inspectEnemy : undefined} selectedTarget={active ? orders[active.key]?.target : undefined} onSelectTarget={key => { if (pendingSkill !== null && targetKeys.includes(key)) commitOrder(pendingSkill, key); }} />}
       <div className="battleMessage" aria-live="polite"><span className={visibleCastCaption ? 'castCaptionAnnouncement' : undefined}>{battle.winner ? `${opponentLabel} · 対戦終了` : playing ? `${effect?.text ?? '行動開始'}${scopeLabel ? ` · ${scopeLabel}` : ''}　${replayProgress}` : selectedSkill ? `${selectedSkill.name}：下の${skillTargetsAllies(selectedSkill) ? '味方' : '敵'}を選択` : ready === living.length ? '指示がそろいました。ターンを開始できます。' : `${opponentLabel} · 行動を選択 ${ready}/${living.length}　未選択はおまかせ`}</span>{visibleCastCaption && <span className="battleCastCaption" aria-hidden="true">{visibleCastCaption.lines.map((line, index) => <span key={index}>{line}</span>)}<span>{replayProgress}</span></span>}</div>
       {!battle.winner && <section className="commandDock" aria-label="行動指示">
         <div className={`commanderRow ${playing ? 'retainingNumbers' : ''} ${incomingArea ? `partyArea area-${effect?.type ?? 'slash'} ${areaLanded ? 'landed' : 'charging'}` : ''}`} style={{'--hit-duration': `${300 / speed}ms`, '--number-duration': `${partyNumberDuration(speed)}ms`, '--hp-duration': `${180 / speed}ms`} as React.CSSProperties} data-area-targets={incomingArea ? visualCast?.targets?.join(',') : undefined}>
@@ -401,6 +414,7 @@ export default function App() {
         {!playing && <button ref={turnStartButton} className="primary turnStart" disabled={pendingSkill !== null} onKeyDown={event => { if (event.repeat && (event.key === 'Enter' || event.key === ' ')) event.preventDefault(); }} onClick={() => execute()}>{pendingSkill !== null ? '対象を選んでください' : 'この指示でターン開始'}</button>}
       </section>}
     </main>}
+    {inspectedEnemy && battle && <MonsterDetails key={`enemy-${inspectedEnemy.key}`} id={inspectedEnemy.monster.id} initialTab="skills" onClose={() => setEnemyFocus(null)} battleContext={{ label: `敵${battle.enemies.findIndex(unit => unit.key === inspectedEnemy.key) + 1} ${inspectedEnemy.monster.name}${inspectedEnemy.hp <= 0 ? ' · 戦闘不能' : ''}`, seconds: commandSeconds }} fallbackFocus={() => document.querySelector<HTMLElement>('main.battle, .mainNav button[aria-current="page"]')} />}
     {focus !== null && <MonsterDetails id={focus} onClose={() => setFocus(null)} navigation={page === 'catalog' ? { ids: catalogDetailIds, onSelect: setFocus } : undefined} />}
     {showTactics && battle && <TacticsPanel battle={battle} orders={orders} playing={playing} rule={rule} onClose={()=>setShowTactics(false)} />}
     {showLog && logBattle && !navigation.pending && <BattleLogDialog battle={logBattle} playing={playing} onClose={() => setShowLog(false)} fallbackFocus={() => arenaHeading.current ?? document.querySelector<HTMLButtonElement>('.battleMenu button:last-child, .mainNav button[aria-current="page"]')} />}
