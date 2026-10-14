@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 43,
+  "revision": 44,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -779,6 +779,20 @@
         },
         "revision": 43
       }
+    },
+    "motion-preview-hold": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "fenrir-motion-candidate",
+        "generation": 3,
+        "reason": "Current crouch candidate is not selected for adoption. Owner prefers larger motion; independent review found rubbery chest and leg compression and no distinct foreleg step. Visual acceptance remains unmet. Technical capture and packaging passed. Candidate source is preserved separately. No deployment. Next articulated method requires a fresh scoped assignment.",
+        "operationId": "motion-preview-hold"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 44
+      }
     }
   },
   "tasks": [
@@ -894,15 +908,14 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "notBefore": 1791980803.3172991,
       "lastFailure": "Prior worker stopped during a candidate asset write. No object identifier was returned after a tool catalog change. No candidate branch or deployment occurred. Owner visual acceptance remains required.",
       "implementer": "fenrir-motion-candidate",
-      "assignment": {
-        "role": "implement",
-        "worker": "fenrir-motion-candidate",
-        "generation": 3,
-        "expiresAt": 1791984414.8308792
+      "block": {
+        "type": "approval",
+        "reason": "Current crouch candidate is not selected for adoption. Owner prefers larger motion; independent review found rubbery chest and leg compression and no distinct foreleg step. Visual acceptance remains unmet. Technical capture and packaging passed. Candidate source is preserved separately. No deployment. Next articulated method requires a fresh scoped assignment.",
+        "previousRole": "implement"
       }
     },
     {
