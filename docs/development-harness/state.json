@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 18,
+  "revision": 19,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -337,6 +337,24 @@
         "status": "review",
         "revision": 18
       }
+    },
+    "safe-review-catalog": {
+      "command": {
+        "action": "claim",
+        "task": "catalog-filter-scroll",
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "operationId": "safe-review-catalog"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "combined-ui-review-one",
+          "generation": 3,
+          "expiresAt": 1791956561.5055687
+        },
+        "revision": 19
+      }
     }
   },
   "tasks": [
@@ -351,10 +369,10 @@
       ],
       "required": true,
       "attempts": 1,
-      "generation": 2,
+      "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "review",
+      "status": "reviewing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -374,6 +392,12 @@
         "Changed filters show first result without stale scroll": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+      },
+      "assignment": {
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "generation": 3,
+        "expiresAt": 1791956561.5055687
       }
     },
     {
