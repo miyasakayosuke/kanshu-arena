@@ -1,13 +1,66 @@
-<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>フェンリル・重心モーション候補</title><style>
-*{box-sizing:border-box}body{margin:0;background:#ece9df;color:#27352f;font:15px system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:24px}h1{font-size:25px;margin:4px 0 8px}p{line-height:1.65;margin:5px 0}header small{color:#6d6656;letter-spacing:.1em}.grid{display:grid;grid-template-columns:minmax(0,650px) minmax(0,390px);gap:24px;margin-top:22px}section{min-width:0}h2{font-size:16px;margin:0 0 10px}.stage{background:radial-gradient(ellipse at 50% 80%,#d1d7c4,#e2e3d9 65%);border-radius:18px;position:relative;overflow:hidden;border:1px solid #c4c9ba}.large{aspect-ratio:1.05}.large canvas{width:100%;height:100%;display:block}.floor{position:absolute;left:10%;right:10%;bottom:4%;height:1px;background:#87968155}canvas{position:relative}.smallstage{width:100%;aspect-ratio:720/400}.smallstage canvas{width:100%;height:100%;display:block}.label{position:absolute;left:14px;top:12px;font-size:12px;color:#4c5b50}.original{width:150px;height:140px;object-fit:contain;display:block;margin:14px auto;background:#e2e3d9;border-radius:8px}button{font:inherit;padding:9px 15px;border:1px solid #9ca99e;background:#f8f6ef;border-radius:8px;cursor:pointer}button.active{background:#284e43;color:white}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:16px 0}input{flex:1;min-width:130px;accent-color:#315d4b}.note{font-size:13px;color:#606b60;margin:14px 0}.phase{font-size:13px;min-width:85px}aside{border-top:1px solid #c5cabd;padding-top:14px;margin-top:16px}a{color:#315d4b}@media(max-width:750px){main{padding:16px}.grid{grid-template-columns:1fr}.smallstage{max-width:390px}h1{font-size:22px}}
-</style><main><header><small>MOTION STUDY · 01</small><h1>フェンリル：重心と踏ん張り</h1><p>肩を前へ沈める → 前脚で受ける → 体を戻す。元の絵を使った6秒の候補です。</p></header><div class="grid"><section><h2>大きく確認</h2><div class="stage large"><span class="label">原画の顔・毛並み・装具を使用</span><div class="floor"></div><canvas id="large" width="1000" height="952"></canvas></div><div class="controls"><button id="play" class="active">一時停止</button><button id="still">原画と比較</button><input id="time" aria-label="再生位置" type="range" min="0" max="6" step=".01" value="0"><span id="phase" class="phase"></span></div></section><section><h2>ゲーム画面相当の大きさ</h2><div class="stage smallstage"><span class="label">390px幅・前列相当</span><div class="floor"></div><canvas id="small" width="720" height="400"></canvas></div><p class="note">現行の戦場座標720pxに対して体幅240px。390px表示では約130pxです。拡大画と同じ動きを同時に再生します。</p><aside><h2>元の絵</h2><img class="original" src="original.png" alt="変更前のフェンリル原画"><p class="note">顔の描き直しや口の開閉は加えていません。これは1枚絵の2D変形による候補で、立体的な振り向きではありません。</p><p class="note">実ゲームへの採用前の確認用。ゲーム本体・保存データには変更を加えません。</p><p id="error" role="alert"></p></aside></section></div></main><script type="module">
-import {createRenderer} from './rig.mjs';
-const image=new Image();image.src='original.png';await image.decode();
-const large=createRenderer(document.querySelector('#large'),image),small=createRenderer(document.querySelector('#small'),image);
-const slider=document.querySelector('#time'),play=document.querySelector('#play'),still=document.querySelector('#still'),phase=document.querySelector('#phase');
-let playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,compare=false,time=0,last=performance.now();
-function draw(){const p=large.render(time,{reduced:compare,spriteWidth:900,bottom:923});small.render(time,{reduced:compare,spriteWidth:240,bottom:365});slider.value=time;phase.textContent=compare?'元の姿勢':p.phase;play.textContent=playing?'一時停止':'再生';play.classList.toggle('active',playing);still.classList.toggle('active',compare)}
-play.onclick=()=>{playing=!playing;draw()};still.onclick=()=>{compare=!compare;draw()};slider.oninput=()=>{playing=false;time=+slider.value;draw()};
-window.preview={setTime(t){time=t;playing=false;compare=false;draw()},setCompare(v){compare=v;draw()},get time(){return time}};
-function frame(now){if(playing&&!document.hidden)time=(time+(now-last)/1000)%6;last=now;draw();requestAnimationFrame(frame)}requestAnimationFrame(frame);draw();window.ready=true;
-</script></html>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>フェンリル・前脚の踏み込み候補</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f1eee7;color:#29382f;font:15px system-ui,sans-serif}main{max-width:1120px;margin:auto;padding:24px}h1{font-size:25px;margin:5px 0 8px}p{line-height:1.7;margin:5px 0}header small{color:#6c695e;letter-spacing:.12em}.grid{display:grid;grid-template-columns:minmax(0,650px) minmax(0,390px);gap:24px;margin-top:20px}section{min-width:0}h2{font-size:16px;margin:0 0 10px}.stage{background:#e8e6dd;border-radius:16px;position:relative;overflow:hidden;border:1px solid #c4c9bd;transition:background .15s}.stage.dark{background:#18212a;border-color:#354350}.large{aspect-ratio:1000/960}.large canvas{width:100%;height:100%;display:block}.smallstage{aspect-ratio:390/230}.smallstage canvas{width:100%;height:100%;display:block}.label{position:absolute;z-index:1;left:14px;top:12px;font-size:12px;color:#59665c;pointer-events:none}.dark .label{color:#c5d3d9}.originalstage{display:flex;align-items:center;justify-content:center;min-height:160px;margin-top:10px}.original{width:130px;height:auto;display:block}button{font:inherit;padding:9px 13px;border:1px solid #9ca99e;background:#fcfaf4;border-radius:8px;cursor:pointer}button.active{background:#294f43;color:white}button:disabled{opacity:.5;cursor:default}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0}input{flex:1;min-width:130px;accent-color:#315d4b}.note{font-size:13px;color:#647064;margin:11px 0}.phase{font-size:13px;min-height:1.5em}aside{border-top:1px solid #c5cabd;padding-top:15px;margin-top:16px}.pose-controls{display:flex;gap:6px;flex-wrap:wrap}.pose-controls button{font-size:12px;padding:7px 9px}#error{font-size:13px;color:#9a2f25;white-space:pre-wrap}#status{font-size:12px;color:#647064}a{color:#315d4b}@media(max-width:750px){main{padding:16px}.grid{grid-template-columns:1fr;gap:17px}h1{font-size:22px}.smallstage{max-width:390px}.originalstage{max-width:390px}.controls{gap:7px}}
+</style>
+</head>
+<body><main>
+<header><small>ARTICULATED MOTION STUDY · REVIEW ONLY</small><h1>フェンリル：前脚を上げ、踏み込む</h1><p>前脚を上げる → 前へ接地 → 体重を移す → 脚を上げて戻す。5秒の分節モーション候補です。</p></header>
+<div class="grid">
+<section><h2>大きく確認</h2><div class="stage large"><span class="label">元の顔・毛並み・装具を、剛体パーツとして保持</span><canvas id="large" width="1000" height="960" aria-label="大きなモーションプレビュー"></canvas></div>
+<div class="controls"><button id="play" class="active">一時停止</button><button id="still">原画と比較</button><button id="theme">暗い背景</button><input id="time" aria-label="再生位置" type="range" min="0" max="5" step=".01" value="0"></div>
+<div id="phase" class="phase" aria-live="off"></div>
+<div class="pose-controls"><button data-pose="neutral">構え</button><button data-pose="lifted">持ち上げ</button><button data-pose="planted">接地</button><button data-pose="braced">踏ん張り</button><button data-pose="recovery">戻りの持ち上げ</button><button data-pose="recovered">回復</button></div>
+<p id="status"></p><p id="error" role="alert"></p>
+</section>
+<section><h2>実表示幅 約130px</h2><div class="stage smallstage"><span class="label">大きなプレビューと同じ時刻・130 CSS px</span><canvas id="small" width="780" height="460" aria-label="幅130ピクセルのモーションプレビュー"></canvas></div>
+<p class="note">画面幅に合わせて絵を縮めず、体幅を130 CSS pxに保ちます。脚の持ち上げ約9px、前方への踏み込み約11pxを確認できます。</p>
+<aside><h2>元の絵（同じ130px）</h2><div class="stage originalstage"><img class="original" src="original.png" alt="変更前のフェンリル原画"></div>
+<p class="note">顔・目・模様は描き直さず、体を潰す変形も使っていません。脚は長さ固定のパーツを回転し、接地した3本の支持脚は元の位置を保ちます。</p>
+<p class="note">補助画像は動く脚の奥に隠れていた胸の狭い範囲だけに表示します。鎖は元の形を保つ1つの剛体です。真の3D動作ではありません。</p>
+<p class="note">採用前の確認用です。大きな表示と明暗両方の背景で、肩・肘・手首の継ぎ目や毛の重なりを確認してください。</p>
+</aside></section>
+</div></main>
+<script type="module">
+import {createRenderer,measurePose,DURATION,POSES} from './rig.mjs';
+window.ready=false;
+const $=s=>document.querySelector(s),slider=$('#time'),play=$('#play'),still=$('#still'),phase=$('#phase'),theme=$('#theme'),error=$('#error');
+const motionQuery=matchMedia('(prefers-reduced-motion: reduce)');
+let reduced=motionQuery.matches,playing=!reduced,compare=false,time=0,last=performance.now(),background='light',lastPose=null;
+function fail(e){playing=false;error.textContent=e.message;window.previewError=e.message;play.disabled=true;slider.disabled=true;}
+try {
+ const image=new Image();image.src='original.png';await image.decode();
+ const patchImage=new Image();patchImage.src='chest-patch.png';
+ try{await patchImage.decode();}catch{throw new Error('胸の補助画像 chest-patch.png を読み込めません。隠れていた胸の素材がないため、分節モーションを開始できません。');}
+ const large=createRenderer($('#large'),image,{patchImage}),small=createRenderer($('#small'),image,{patchImage});
+ function draw(){
+  const staticPose=compare||reduced;
+  lastPose=large.render(time,{reduced:staticPose,spriteWidth:900,bottom:932});
+  const smallCanvas=$('#small'),cssWidth=smallCanvas.getBoundingClientRect().width;
+  small.render(time,{reduced:staticPose,spriteWidth:130*smallCanvas.width/cssWidth,bottom:smallCanvas.height*.91});
+  slider.value=time;phase.textContent=compare?'元の姿勢':lastPose.phase;
+  play.textContent=playing?'一時停止':'再生';play.classList.toggle('active',playing);still.classList.toggle('active',compare);
+  play.disabled=reduced;slider.disabled=reduced;document.querySelectorAll('[data-pose]').forEach(b=>b.disabled=reduced);
+  $('#status').textContent=reduced?'端末の「動きを減らす」に合わせて静止しています。':`${time.toFixed(2)} / ${DURATION.toFixed(2)}秒 · 分節・長さ固定 · 検討用`;
+ }
+ function setTheme(value){background=value==='dark'?'dark':'light';document.querySelectorAll('.stage').forEach(s=>s.classList.toggle('dark',background==='dark'));theme.textContent=background==='dark'?'明るい背景':'暗い背景';draw();}
+ play.onclick=()=>{if(!reduced){playing=!playing;last=performance.now();draw();}};
+ still.onclick=()=>{compare=!compare;draw();};theme.onclick=()=>setTheme(background==='light'?'dark':'light');
+ slider.oninput=()=>{playing=false;time=+slider.value;compare=false;draw();};
+ for(const button of document.querySelectorAll('[data-pose]'))button.onclick=()=>window.preview.setTime(POSES[button.dataset.pose]);
+ motionQuery.addEventListener('change',e=>{reduced=e.matches;playing=false;time=0;draw();});
+ window.preview={
+  setTime(t){time=Math.max(0,Math.min(DURATION,t));playing=false;compare=false;draw();return measurePose(lastPose);},
+  setCompare(v){compare=!!v;draw();},setTheme,
+  get time(){return time;},get state(){return {time,playing,compare,reduced,background,hasPatch:large.hasPatch,smallCssSpriteWidth:130,technique:large.technique,pose:measurePose(lastPose)};},
+  sample(){return measurePose(lastPose);},poses:POSES,
+ };
+ function frame(now){try{if(playing&&!reduced&&!document.hidden)time=(time+(now-last)/1000)%DURATION;last=now;if(playing)draw();requestAnimationFrame(frame);}catch(e){fail(e);}}
+ new ResizeObserver(()=>draw()).observe($('#small'));
+ draw();window.ready=true;requestAnimationFrame(frame);
+} catch(e){fail(e);}
+</script>
+</body></html>

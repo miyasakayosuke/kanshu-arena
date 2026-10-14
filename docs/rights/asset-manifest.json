@@ -1383,8 +1383,8 @@
       ]
     },
     {
-      "id": "fenrir-original-motion-candidate",
-      "kind": "isolated-original-texture-motion-preview",
+      "id": "fenrir-articulated-motion-candidate",
+      "kind": "isolated-original-texture-articulated-preview",
       "files": [
         "docs/fenrir-motion-preview/index.html",
         "docs/fenrir-motion-preview/rig.mjs",
@@ -1395,28 +1395,32 @@
         "qa/fenrir-motion/render.mjs",
         "qa/fenrir-motion/package.json",
         "qa/fenrir-motion/package-lock.json",
-        "docs/fenrir-motion-preview/verification.md"
+        "docs/fenrir-motion-preview/verification.md",
+        "docs/fenrir-motion-preview/chest-patch.png",
+        "docs/fenrir-motion-preview/chest-patch-prompt.txt"
       ],
-      "provenance": "Existing user-selected project reference reused byte-for-byte, plus newly written procedural mesh motion and preview tooling. No new raster generation or third-party animation is included.",
-      "reviewLimit": "Original creation provenance has not been independently reverified in this pass. No authorship, license, visual acceptance or legal clearance is asserted. Actual rendered review and owner approval remain required before adoption.",
-      "creator": "Procedural mesh code and review UI written for this project with AI assistance; original illustration creation record remains to be reverified.",
+      "provenance": "Original selected project illustration retained byte-for-byte. New AI-assisted project code uses runtime rigid cutouts and fixed-length IK. A single built-in image editing call generated a same-canvas hidden-chest plate; only the narrow previously occluded chest mask is consumed. Exact prompt and generation limits are recorded in the preview README. No external animation bytes or third-party generation service were used.",
+      "reviewLimit": "Hidden anatomy is a draft hypothesis. Full generated plate contains changes outside the target that must never be consumed. Source landmarks under fur are inferred. Numeric fixed-length tests do not establish rendered seams, anatomical quality, owner acceptance, ownership or legal clearance. Independent light/dark and game-scale review remains required.",
+      "creator": "Project-specific rig and preview code written with AI assistance; hidden-chest draft generated with the built-in image editor on 2026-10-14. Original illustration creation record remains to be reverified.",
       "createdFor": "Isolated motion preview, not production release",
       "references": [
         "docs/fenrir-motion-preview/README.md"
       ],
-      "distribution": "Candidate branch review material only. Not imported by the game or deployed. Original remains unchanged; no license selected.",
+      "distribution": "Isolated candidate review material only, not production-imported or deployed. Original remains unchanged. No license selected; explicit owner visual acceptance remains required.",
       "sha256": {
-        "docs/fenrir-motion-preview/index.html": "8fd412710d3e217c0f528a2062d5718aeb0cf04a8092966d4e2ca5f65d18ac97",
-        "docs/fenrir-motion-preview/rig.mjs": "ee1de714d374cad5234af85d701de7b7882350a97cfd1b1fe98ba4b0ff7a5b34",
-        "docs/fenrir-motion-preview/rig-checks.mjs": "7bc0ee5f44fe1db67d340678655ccd58b036a16c44fd61afe05bd0318fea3886",
-        "docs/fenrir-motion-preview/README.md": "f9eb595bdb11382d81233d420909dcf068fbbef176c3d78abad5fcf965f2886f",
-        ".github/workflows/fenrir-motion-preview.yml": "e8827f206901d6a7c35d16b6b92780156dbdbc1e6622b4daa604a817a96d40af",
-        "qa/fenrir-motion/render.mjs": "acf206eff6592be4d2be0ef04873f7c31f4d8d6eada66723c3f54c4f71bf4f24",
+        "docs/fenrir-motion-preview/index.html": "d5e9a3d88132aa2891f64dd6a0be186cbb882adbd2313e39d10b8bfd2cc24dec",
+        "docs/fenrir-motion-preview/rig.mjs": "f2a0b715a1c7d075231578af449c43e7a9c889e9d9feab474dd67af432531ed9",
+        "docs/fenrir-motion-preview/rig-checks.mjs": "36a6d617a5ef477c2ff1a214fa65525004e764ba2958272f1d5a02bfa9462596",
+        "docs/fenrir-motion-preview/README.md": "d404efe78240ba130ecc3b6d269d6c99b678a038857fb282897722128d366bb0",
+        ".github/workflows/fenrir-motion-preview.yml": "66c2e8c4612269801de8c78c9096bb7c970174453425923686dcfef92b412aaa",
+        "qa/fenrir-motion/render.mjs": "2e1e840bb896fd39b8f712fe62e7e7c9b38c5a673a081986a14d2b551e07edeb",
         "qa/fenrir-motion/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0",
         "qa/fenrir-motion/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b",
-        "docs/fenrir-motion-preview/verification.md": "321e4f4e9ba598749bf39878e93b9efdf148fb8bde2fce96781d274929bc89a5"
+        "docs/fenrir-motion-preview/verification.md": "807de415eb358af604daae3dbf90c3860cc7d216169853e88f8d454eb3c242b3",
+        "docs/fenrir-motion-preview/chest-patch-prompt.txt": "53542b0df1570bcf1aa5dc2b80a9288b6aadd67bb15cd2111bc486a710089f31"
       },
-      "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137"
+      "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+      "supplementalBinarySha256": "db88301fac2c1c3ad7c82597ddef0ccc7daa3ed900285ba176fe2f9f84921a40"
     }
   ],
   "software": [

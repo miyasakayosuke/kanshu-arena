@@ -1,15 +1,15 @@
-name: Fenrir original-texture motion preview
+name: Fenrir articulated step review
 on:
   push:
-    branches: [candidate/fenrir-original-motion]
+    branches: [candidate/fenrir-articulated-motion]
 permissions:
   contents: read
 concurrency:
-  group: fenrir-original-motion-render
+  group: fenrir-articulated-motion-render
   cancel-in-progress: false
 jobs:
   render:
-    if: github.repository == 'miyasakayosuke/kanshu-arena' && github.ref == 'refs/heads/candidate/fenrir-original-motion'
+    if: github.repository == 'miyasakayosuke/kanshu-arena' && github.ref == 'refs/heads/candidate/fenrir-articulated-motion'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
