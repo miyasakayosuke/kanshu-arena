@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 38,
+  "revision": 39,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -699,6 +699,21 @@
         "status": "candidate",
         "revision": 38
       }
+    },
+    "fenrir-motion-preview-resolve": {
+      "command": {
+        "action": "resolve",
+        "task": "replacement-animation",
+        "outcome": "retry",
+        "evidence": "Previous assignments are inactive. Prepare a new isolated motion preview from the original artwork. Existing owner visual acceptance and release criteria remain unmet; no adoption or deployment is authorized.",
+        "authorizationRef": "Owner explicitly requested prioritizing motion implementation and review of a new candidate. This does not approve the resulting artwork.",
+        "operationId": "fenrir-motion-preview-resolve"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791969158.4437966,
+        "revision": 39
+      }
     }
   },
   "tasks": [
@@ -814,11 +829,9 @@
       "generation": 1,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
-      "block": {
-        "type": "approval",
-        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
-      }
+      "status": "retry",
+      "notBefore": 1791969158.4437966,
+      "lastFailure": "Previous assignments are inactive. Prepare a new isolated motion preview from the original artwork. Existing owner visual acceptance and release criteria remain unmet; no adoption or deployment is authorized."
     },
     {
       "id": "v1-acceptance",
