@@ -12,7 +12,7 @@ import tempfile
 import time
 import uuid
 
-STATES = {'ready', 'running', 'review', 'reviewing', 'candidate', 'publishing', 'released', 'accepted', 'blocked', 'retry', 'decided'}
+STATES = {'ready', 'running', 'review', 'reviewing', 'candidate', 'publishing', 'released', 'accepted', 'blocked', 'retry', 'decided', 'verified'}
 ROLES = {'implement': ('ready', 'running', 2), 'review': ('review', 'reviewing', 1), 'publish': ('candidate', 'publishing', 1)}
 SHA = re.compile(r'^[0-9a-f]{40}$')
 CHECKS = {'rights:test', 'rights:check', 'test', 'build', 'scope-qa'}
@@ -27,8 +27,31 @@ def nonempty(value):
     return isinstance(value, str) and bool(value.strip())
 
 
+def deliverable(t):
+    return 'decision' if t['kind'] == 'decision' else t.get('deliverableKind', 'release')
+
+
+def dependencies(t):
+    return [(d, 'legacy') if isinstance(d, str) else (d['task'], d['stage']) for d in t['dependsOn']]
+
+
+def dependency_met(s, dep, stage):
+    target = next(x for x in s['tasks'] if x['id'] == dep)
+    if stage == 'verified':
+        return deliverable(target) == 'internal' and target['status'] == 'verified'
+    if stage == 'decided':
+        return target['kind'] == 'decision' and target['status'] == 'decided'
+    if stage == 'accepted':
+        return deliverable(target) == 'release' and target['status'] == 'accepted'
+    return target['status'] in ({'released', 'accepted', 'decided'} if stage == 'legacy' else {'released', 'accepted'})
+
+
+def complete_task(t):
+    return t['status'] == {'internal': 'verified', 'release': 'accepted', 'decision': 'decided'}[deliverable(t)]
+
+
 def validate(s):
-    require(s.get('schemaVersion') == 1, 'unsupported schema')
+    require(s.get('schemaVersion') in {1, 2}, 'unsupported schema')
     require(type(s.get('revision')) is int and s['revision'] >= 0, 'invalid revision')
     require(isinstance(s.get('operations'), dict), 'invalid operations')
     require(isinstance(s.get('tasks'), list) and bool(s['tasks']), 'invalid tasks')
@@ -41,7 +64,19 @@ def validate(s):
         require(type(t['attempts']) is int and 0 <= t['attempts'] <= 3, 'invalid attempts')
         require(isinstance(t['criteria'], list) and t['criteria'] and all(nonempty(x) for x in t['criteria']), 'criteria required')
         require(len(t['criteria']) == len(set(t['criteria'])), 'duplicate criterion')
-        require(set(t['dependsOn']) <= set(ids) and t['id'] not in t['dependsOn'], 'invalid dependencies')
+        deps = dependencies(t)
+        require({d for d, _ in deps} <= set(ids) and t['id'] not in {d for d, _ in deps}, 'invalid dependencies')
+        require(len(deps) == len({d for d, _ in deps}), 'duplicate dependency')
+        if s['schemaVersion'] == 2:
+            require(t['kind'] == 'decision' or t.get('deliverableKind') in {'internal', 'release'}, 'explicit deliverable kind required')
+            for dep, stage in deps:
+                target = next(x for x in s['tasks'] if x['id'] == dep)
+                allowed = {'internal': {'verified'}, 'release': {'released', 'accepted'}, 'decision': {'decided'}}[deliverable(target)]
+                require(stage in allowed, 'dependency stage incompatible with target deliverable')
+        else:
+            require('deliverableKind' not in t and all(stage == 'legacy' for _, stage in deps), 'migrate v1 before adding deliverable kinds/stages')
+        require(t['status'] != 'verified' or (s['schemaVersion'] == 2 and deliverable(t) == 'internal'), 'verified is internal only')
+        require(deliverable(t) != 'internal' or t['status'] not in {'candidate', 'publishing', 'released', 'accepted'}, 'internal deliverables cannot publish or accept')
         require(type(t['required']) is bool, 'required must be boolean')
         lease = t.get('lease')
         active = t['status'] in {'running', 'reviewing', 'publishing'}
@@ -52,11 +87,14 @@ def validate(s):
             require(type(lease['expiresAt']) in {int, float}, 'invalid lease expiry')
         if t['status'] == 'blocked':
             require(t.get('block', {}).get('type') in {'approval', 'uncertain', 'exhausted', 'external', 'dependency'}, 'block reason required')
-        if t['status'] in {'review', 'reviewing', 'candidate', 'publishing', 'released', 'accepted'}:
+        if t['status'] in {'review', 'reviewing', 'candidate', 'publishing', 'released', 'accepted', 'verified'}:
             require(bool(SHA.fullmatch(t.get('commit', ''))), 'exact candidate commit required')
-        if t['status'] in {'candidate', 'publishing', 'released', 'accepted'}:
+        if t['status'] in {'candidate', 'publishing', 'released', 'accepted', 'verified'}:
             require(t.get('review', {}).get('commit') == t['commit'], 'review does not match commit')
-            require(t['review']['worker'] != t.get('implementer'), 'review must be independent')
+            require(nonempty(t.get('implementer')) and nonempty(t['review'].get('worker')) and t['review']['worker'] != t['implementer'], 'review must be independent')
+            require(nonempty(t['review'].get('evidence')), 'review evidence required')
+            require(set(t.get('checks', {})) >= CHECKS and all(nonempty(t['checks'][k]) for k in CHECKS), 'passing check evidence required')
+            require(set(t.get('criteriaEvidence', {})) == set(t['criteria']) and all(nonempty(v) for v in t['criteriaEvidence'].values()), 'criterion evidence required')
         if t['status'] in {'released', 'accepted'}:
             require(t.get('release', {}).get('commit') == t['commit'], 'release does not match commit')
         if t['status'] == 'decided':
@@ -67,7 +105,7 @@ def validate(s):
         require(sum(t['status'] == active for t in s['tasks']) <= cap, f'{role} capacity exceeded')
     def visit(task, path):
         require(task['id'] not in path, 'dependency cycle')
-        for dep in task['dependsOn']:
+        for dep, _ in dependencies(task):
             visit(next(x for x in s['tasks'] if x['id'] == dep), path | {task['id']})
     for t in s['tasks']:
         visit(t, set())
@@ -75,7 +113,7 @@ def validate(s):
 
 
 def summary(s, now):
-    return {'revision': s['revision'], 'complete': all(t['status'] in {'accepted', 'decided'} for t in s['tasks'] if t['required']),
+    return {'revision': s['revision'], 'complete': all(complete_task(t) for t in s['tasks'] if t['required']),
             'tasks': [{'id': t['id'], 'status': t['status'], 'stale': bool(t.get('lease') and t['lease']['expiresAt'] <= now),
                        'block': t.get('block'), 'notBefore': t.get('notBefore')} for t in s['tasks']]}
 
@@ -83,6 +121,8 @@ def summary(s, now):
 def operate(s, cmd, now):
     """Pure mutation on a private copy; persistence handles CAS and idempotency."""
     action = cmd['action']
+    if action == 'migrate-v2':
+        return migrate_v2(s, cmd)
     if action == 'reconcile':
         stale = []
         for t in s['tasks']:
@@ -102,7 +142,7 @@ def operate(s, cmd, now):
         if t['status'] == 'retry' and now >= t['notBefore']:
             t['status'] = 'ready'
         require(t['status'] == eligible, 'not eligible; never duplicate a fresh or uncertain claim')
-        require(all(next(x for x in s['tasks'] if x['id'] == dep)['status'] in {'released', 'accepted', 'decided'} for dep in t['dependsOn']), 'dependency unresolved')
+        require(all(dependency_met(s, dep, stage) for dep, stage in dependencies(t)), 'dependency unresolved')
         require(sum(x['status'] == active for x in s['tasks']) < cap, 'capacity reached')
         if role == 'implement':
             require(t['kind'] != 'decision', 'owner decisions cannot be implemented')
@@ -112,6 +152,7 @@ def operate(s, cmd, now):
         elif role == 'review':
             require(cmd['worker'] != t['implementer'], 'review must be independent')
         else:
+            require(deliverable(t) == 'release', 'only release deliverables can publish')
             require(nonempty(cmd.get('authorizationRef')), 'publication authorization required')
             t['publicationAuthorization'] = cmd['authorizationRef']
         ttl = cmd.get('ttl', 1800)
@@ -141,10 +182,11 @@ def operate(s, cmd, now):
             require(nonempty(cmd.get('evidence')), 'review evidence required')
             require(type(cmd.get('approved')) is bool, 'approved must be boolean')
             if cmd['approved']:
-                t.update(status='candidate', review={'worker': lease['worker'], 'commit': t['commit'], 'evidence': cmd['evidence']})
+                t.update(status='verified' if deliverable(t) == 'internal' else 'candidate', review={'worker': lease['worker'], 'commit': t['commit'], 'evidence': cmd['evidence']})
             else:
                 retry(t, now, cmd['evidence'])
         elif action == 'release':
+            require(deliverable(t) == 'release', 'only release deliverables can publish')
             require(lease['role'] == 'publish' and cmd.get('commit') == t['commit'], 'publisher lease and reviewed commit required')
             for key in ('deployment', 'liveCheck', 'creditsCheck', 'noticesCheck'):
                 require(nonempty(cmd.get(key)), f'{key} evidence required')
@@ -167,6 +209,7 @@ def operate(s, cmd, now):
         retry(t, now, cmd['evidence'])
         return {'status': t['status'], 'notBefore': t.get('notBefore')}
     if action == 'accept':
+        require(deliverable(t) == 'release', 'only release deliverables can be owner-accepted')
         require(t['status'] == 'released', 'only released work can be accepted')
         require(nonempty(cmd.get('authorizationRef')), 'explicit owner acceptance required')
         t.update(status='accepted', acceptanceRef=cmd['authorizationRef'])
@@ -181,6 +224,45 @@ def operate(s, cmd, now):
         t.pop('block', None)
         return {'decisionRecorded': t['id']}
     raise ValueError('unknown action')
+
+
+def migrate_v2(s, cmd):
+    """Explicit, CAS-protected configuration migration; never reset work or receipts."""
+    require(set(cmd) <= {'action', 'operationId', 'expectedRevision', 'authorizationRef', 'internalTaskIds', 'verifiedDependencies', 'candidateRefs'}, 'unknown migration field')
+    require(s['schemaVersion'] == 1, 'migration requires v1 state')
+    require(nonempty(cmd.get('authorizationRef')), 'reviewed migration reference required')
+    internal = cmd.get('internalTaskIds', [])
+    require(isinstance(internal, list) and len(internal) == len(set(internal)), 'invalid internal task list')
+    require(set(internal) == {'awakening-storage', 'baseline-regression'}, 'migration is limited to reviewed internal task classification')
+    by_id = {t['id']: t for t in s['tasks']}
+    require(set(internal) <= set(by_id), 'unknown internal task')
+    for id in internal:
+        task = by_id[id]
+        require(task['kind'] != 'decision', 'cannot classify decision as internal')
+        require(task['status'] not in {'candidate', 'publishing', 'released', 'accepted'}, 'cannot reclassify public review/release history')
+    edges = cmd.get('verifiedDependencies', [])
+    require(isinstance(edges, list), 'invalid verified dependencies')
+    require(all(isinstance(e, dict) and set(e) == {'task', 'dependency'} for e in edges), 'invalid migration edge fields')
+    edge_set = {(e['task'], e['dependency']) for e in edges}
+    require(len(edge_set) == len(edges), 'duplicate migration edge')
+    require(edge_set == {('awakening-integration', 'awakening-storage')}, 'migration is limited to reviewed storage dependency')
+    for task, dep in edge_set:
+        require(task in by_id and dep in by_id[task]['dependsOn'] and dep in internal, 'verified dependency must target declared internal task')
+    for task in s['tasks']:
+        if task['kind'] != 'decision':
+            task['deliverableKind'] = 'internal' if task['id'] in internal else 'release'
+        task['dependsOn'] = [dict(task=dep, stage='verified' if (task['id'], dep) in edge_set else 'decided' if by_id[dep]['kind'] == 'decision' else 'released') for dep in task['dependsOn']]
+    refs = cmd.get('candidateRefs', {})
+    require(isinstance(refs, dict) and set(refs) <= {'catalog-filter-scroll', 'awakening-preview'}, 'candidate references limited to existing UI candidates')
+    for id, urls in refs.items():
+        require(id in by_id and by_id[id]['status'] == 'blocked', 'candidate task must remain blocked')
+        require(isinstance(urls, list) and 0 < len(urls) <= 10 and all(isinstance(url, str) and re.fullmatch(r'https://github\.com/miyasakayosuke/kanshu-arena/(?:tree|blob|commit)/[A-Za-z0-9._/-]+', url) for url in urls), 'public repository candidate URLs required')
+        require('candidateRefs' not in by_id[id] or by_id[id]['candidateRefs'] == urls, 'existing candidate references cannot be overwritten')
+        by_id[id]['candidateRefs'] = urls
+    s['schemaVersion'] = 2
+    require(isinstance(s.get('migrations', []), list), 'invalid migration history')
+    s.setdefault('migrations', []).append({'from': 1, 'to': 2, 'authorizationRef': cmd['authorizationRef']})
+    return {'schemaVersion': 2, 'internalTaskIds': internal}
 
 
 def retry(t, now, reason):

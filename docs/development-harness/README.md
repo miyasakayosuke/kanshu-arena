@@ -83,7 +83,9 @@ for remote compare-and-swap.
 7. `submit` requires an exact 40-character commit, passing evidence references
    for rights:test, rights:check, test, build, scope-qa and every task criterion.
    The coordinator must read the evidence: the CLI validates records, not their
-   truth. Independent review uses a different worker and the same commit. Code
+   truth. Independent review uses a different worker and the same commit. In schema v2,
+   an explicitly internal deliverable becomes `verified` after that review. This
+   is an internal artifact checkpoint, not a release or owner acceptance. Code
    changed after review needs a new attempt and review; candidate is not released.
 8. Only the single publisher may publish, after independently verified authority
    for that exact destination and scope. `release` records the reviewed commit,
@@ -96,8 +98,8 @@ for remote compare-and-swap.
    authorize unrelated scope. `owner-decision` records explicit owner scope/criteria evidence as `decided`; the
    coordinator must make a separately reviewed criteria/state amendment. It never
    silently changes game behavior or treats a rejected artifact as accepted.
-10. Stop dispatching when all required implementation/validation tasks are accepted, decisions are
-    recorded, and owner-approved v1
+10. Stop dispatching when required internal deliverables are independently verified, required public
+    release deliverables are owner-accepted, decisions are recorded, and owner-approved v1
     criteria are satisfied. If only blocked decisions remain, report the specific
     decision once and wait; do not invent chores to look active. Report material
     progress, blockers, release evidence and completion. Routine wakes stay quiet.
@@ -129,3 +131,42 @@ verify against their actual source. Lease workers and acceptance actors are not
 cryptographically authenticated. Git availability failures pause new dispatch.
 No automatic deletion, credential provisioning, fees, agreements, new feature
 scope, rejected art adoption or owner acceptance is authorized by this harness.
+
+
+## Internal artifacts and schema v2 migration
+
+Schema v1 remains strict and readable. Missing deliverableKind in v1 means the
+original release lifecycle; loading newer code never reclassifies an old task.
+Only an explicit reviewed migrate-v2 transaction changes that configuration.
+
+In schema v2 every non-decision task has deliverableKind: internal or release.
+Internal work still needs exact-commit test/criterion evidence and independent
+review. Passing review makes it verified, a terminal internal checkpoint.
+Internal tasks cannot publish, release or be marked owner-accepted. Release work
+retains candidate -> publishing -> released -> owner-accepted gates unchanged.
+
+Dependencies are objects with task and stage. verified can reference only
+an internal deliverable and requires its verified status. released / accepted
+can reference only release work; decided can reference only owner decisions.
+A public release candidate cannot satisfy a verified dependency. Internal storage
+therefore unlocks gameplay integration without requiring a fictitious standalone
+game release; unresolved quantities still block that integration.
+
+Migration is deliberately bounded to classifying awakening-storage and
+baseline-regression as internal, and changing awakening-integration's storage
+dependency to verified. Its quantities dependency becomes decided. All other
+non-decision work remains release work. The migration preserves task status,
+attempts, active lease/token/expiry, all prior operation receipts and existing
+history; it adds exactly one revision and one idempotent operation receipt.
+The same owned lease can continue after migration. There is no automatic reset.
+Optional candidateRefs adds only public repository URLs to the two already
+blocked UI tasks; it never implies new review, release or visual acceptance.
+
+Install the reviewed backward-compatible source first, then have the sole state
+coordinator fetch the newest remote state and execute the migration with its
+current expectedRevision. On conflict, reload; never migrate an old local seed
+over active state. Retry the same operation ID/payload after an uncertain write.
+The source state.json stays the original v1 bootstrap seed, not the live ledger.
+See migration-v2.json for the reviewed operation body; the coordinator supplies a
+unique operationId and current expectedRevision. A fresh installation must also
+apply this migration after seeding before dispatching internal work.

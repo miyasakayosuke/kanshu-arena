@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Arena development harness state v1",
+  "title": "Arena development harness state v1/v2",
   "type": "object",
   "required": [
     "schemaVersion",
@@ -10,7 +10,10 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "enum": [
+        1,
+        2
+      ]
     },
     "revision": {
       "type": "integer",
@@ -78,7 +81,8 @@
               "accepted",
               "blocked",
               "retry",
-              "decided"
+              "decided",
+              "verified"
             ]
           },
           "attempts": {
@@ -102,7 +106,33 @@
             "type": "array",
             "uniqueItems": true,
             "items": {
-              "type": "string"
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "task",
+                    "stage"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "task": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "stage": {
+                      "enum": [
+                        "verified",
+                        "released",
+                        "accepted",
+                        "decided"
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           },
           "lease": {
@@ -178,10 +208,92 @@
           "acceptanceRef": {
             "type": "string",
             "minLength": 1
+          },
+          "deliverableKind": {
+            "enum": [
+              "internal",
+              "release"
+            ]
+          },
+          "candidateRefs": {
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^https://github\\.com/miyasakayosuke/kanshu-arena/(tree|blob|commit)/[A-Za-z0-9._/-]+$"
+            }
           }
         }
       }
     }
   },
-  "$comment": "Runtime validation additionally enforces DAG acyclicity, state/lease correspondence, role capacities and exact-commit review/release invariants. References are not proof of authorization or passing checks."
+  "$comment": "Runtime validation additionally enforces DAG acyclicity, state/lease correspondence, role capacities and exact-commit review/release invariants. References are not proof of authorization or passing checks.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "tasks": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "enum": [
+                          "implementation",
+                          "validation"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "deliverableKind"
+                    ]
+                  }
+                },
+                {
+                  "properties": {
+                    "dependsOn": {
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "tasks": {
+            "items": {
+              "not": {
+                "required": [
+                  "deliverableKind"
+                ]
+              },
+              "properties": {
+                "dependsOn": {
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }
