@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 3,
+  "revision": 4,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -43,6 +43,21 @@
         },
         "revision": 3
       }
+    },
+    "safe-resolve-catalog": {
+      "command": {
+        "action": "resolve",
+        "task": "catalog-filter-scroll",
+        "outcome": "retry",
+        "evidence": "Preserved candidate and prior review inspected. Prior implementation finished. Remaining browser QA uses isolated content-read CI without deployment.",
+        "authorizationRef": "Owner approved ongoing repository development and testing.",
+        "operationId": "safe-resolve-catalog"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791951924.904947,
+        "revision": 4
+      }
     }
   },
   "tasks": [
@@ -60,15 +75,13 @@
       "generation": 1,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
-      "block": {
-        "type": "external",
-        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
-      },
+      "status": "retry",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
-      ]
+      ],
+      "notBefore": 1791951924.904947,
+      "lastFailure": "Preserved candidate and prior review inspected. Prior implementation finished. Remaining browser QA uses isolated content-read CI without deployment."
     },
     {
       "id": "awakening-preview",
