@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 45,
+  "revision": 46,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -808,6 +808,25 @@
         "notBefore": 1791983839.8009763,
         "revision": 45
       }
+    },
+    "claim-articulated": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "fenrir-articulated",
+        "ttl": 3600,
+        "operationId": "claim-articulated"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-articulated",
+          "generation": 4,
+          "expiresAt": 1791987459.6346302
+        },
+        "revision": 46
+      }
     }
   },
   "tasks": [
@@ -919,14 +938,20 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 2,
-      "generation": 3,
+      "attempts": 3,
+      "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "notBefore": 1791983839.8009763,
       "lastFailure": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
-      "implementer": "fenrir-motion-candidate"
+      "implementer": "fenrir-articulated",
+      "assignment": {
+        "role": "implement",
+        "worker": "fenrir-articulated",
+        "generation": 4,
+        "expiresAt": 1791987459.6346302
+      }
     },
     {
       "id": "v1-acceptance",
