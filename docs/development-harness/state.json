@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 3,
+  "revision": 0,
+  "operations": {},
+  "tasks": [
+    {
+      "id": "catalog-filter-scroll",
+      "title": "Reset catalog scroll when filters change",
+      "kind": "implementation",
+      "criteria": [
+        "Changed filters show first result without stale scroll",
+        "Existing detail dismissal and scroll restoration still pass",
+        "Narrow viewport and keyboard QA recorded"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
+      "block": {
+        "type": "external",
+        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
+      },
+      "candidateRefs": [
+        "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
+        "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
+      ]
+    },
+    {
+      "id": "awakening-preview",
+      "title": "Review read-only awakening preview",
+      "kind": "implementation",
+      "criteria": [
+        "Preview has no save, combat or progression side effects",
+        "Comparison labels and narrow viewport behavior are reviewed",
+        "Independent evidence covers existing accepted behavior"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
+      "block": {
+        "type": "external",
+        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
+      },
+      "candidateRefs": [
+        "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
+        "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
+      ]
+    },
+    {
+      "id": "replacement-animation",
+      "title": "Meet approved replacement-animation visual acceptance",
+      "kind": "implementation",
+      "criteria": [
+        "Explicit owner approval of replacement visual evidence; rejected v0.20.33 is never a shipping requirement",
+        "Independent rendered-motion review and provenance inventory",
+        "Rollback-safe reviewed release evidence"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
+      "block": {
+        "type": "approval",
+        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
+      }
+    },
+    {
+      "id": "v1-acceptance",
+      "title": "Confirm bounded v1 acceptance scope",
+      "kind": "decision",
+      "criteria": [
+        "Owner confirms final release scope and mandatory criteria"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "status": "blocked",
+      "block": {
+        "type": "approval",
+        "reason": "Owner decision evidence must be reverified before recording it in the new ledger."
+      }
+    },
+    {
+      "id": "baseline-regression",
+      "title": "Verify accepted baseline and remaining release gates",
+      "kind": "validation",
+      "criteria": [
+        "Verify exact live commit against the accepted baseline",
+        "Record passing rights tests, rights inventory, full tests and build",
+        "Check play loop, catalog, team preservation, keyboard and narrow viewport flows",
+        "List only evidence-backed remaining defects without inventing new feature work"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "internal",
+      "status": "ready"
+    },
+    {
+      "id": "awakening-storage",
+      "title": "Harden awakening storage and migration drivers",
+      "kind": "implementation",
+      "criteria": [
+        "Inspect existing storage candidate before editing to avoid duplicate work",
+        "Validate versioned parsing, invalid saves, migration and repeated load/save behavior",
+        "Keep current accepted combat and collection behavior unchanged until integration is approved",
+        "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities"
+      ],
+      "required": true,
+      "attempts": 1,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "internal",
+      "status": "blocked",
+      "block": {
+        "type": "uncertain",
+        "reason": "Legacy runtime claim and evidence retired. Verify the previous worker is stopped; import candidate evidence only through fresh assignment and independent review."
+      },
+      "candidateRefs": [
+        "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
+        "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
+      ]
+    },
+    {
+      "id": "awakening-quantities",
+      "title": "Confirm awakening collection and progression quantities",
+      "kind": "decision",
+      "criteria": [
+        "Owner confirms quantities and bounded progression rules before gameplay integration"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "status": "blocked",
+      "block": {
+        "type": "approval",
+        "reason": "Owner decision evidence must be reverified before recording it in the new ledger."
+      }
+    },
+    {
+      "id": "awakening-integration",
+      "title": "Integrate approved awakening progression",
+      "kind": "implementation",
+      "criteria": [
+        "Implement the approved 95/98/100 percent HP/ATK progression",
+        "Use owner-approved collection/progression quantities and migration rules",
+        "Cover battle, collection, reload, invalid-save and repeated-action regression paths",
+        "Record independent review and browser QA before release"
+      ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [
+        {
+          "task": "awakening-storage",
+          "stage": "verified"
+        },
+        {
+          "task": "awakening-quantities",
+          "stage": "decided"
+        }
+      ],
+      "deliverableKind": "release",
+      "status": "ready"
+    }
+  ],
+  "provenance": {
+    "priorCheckpointSHA": "410f0158903bbdc40a42617a3152cb8d00c4d975",
+    "priorRevision": 2,
+    "method": "Fresh public checkpoint; prior runtime claims retired; evidence needs fresh review"
+  }
+}
