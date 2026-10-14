@@ -1248,7 +1248,7 @@
       "provenance": "Direct user request for action-time automatic decisions and exhausted guard correction. Existing project code reused; exact v30 engine/families copied to tests/reference-v02030 with SHA provenance, excluded from runtime imports. No third-party source, art, media, excerpt or new package.",
       "sha256": {
         "src/engine.ts": "5b2034a26942a34af3dce720bf629cd1dfa3f611f0efa5823edb1bb6071aa92d",
-        "src/App.tsx": "d85a48591928e07dae7e6983d408a6ad9b0793935782f6a0bce84686b896ec3b",
+        "src/App.tsx": "f85ec903099b1b8b0acaa4fe927ba4c86e2be04bb513d83ab6328056ebf55f35",
         "src/TacticsPanel.tsx": "d22d7ac476ae0b8ec571631e94e0d919938dcac62adef89355447b53f884d482",
         "src/battleInsights.ts": "96b84c99397953e312dc2a62d0fceb4bb6aad2142b40403140ffb6d57b0c673a",
         "src/committedOrder.ts": "77e1e63a1e627aa6fa24585e32334fc0aacaa1f7c0d6f4c92e61970c1b4263f5",
@@ -1288,7 +1288,7 @@
       "provenance": "Direct user request for recurring small MP recovery;2/3/4/5 compared independently. New2-MP rule and text are original; no reference art/media/code copied. Exact existing project v31 source is test-only with hashes, excluded from browser imports.",
       "sha256": {
         "src/engine.ts": "5b2034a26942a34af3dce720bf629cd1dfa3f611f0efa5823edb1bb6071aa92d",
-        "src/App.tsx": "d85a48591928e07dae7e6983d408a6ad9b0793935782f6a0bce84686b896ec3b",
+        "src/App.tsx": "f85ec903099b1b8b0acaa4fe927ba4c86e2be04bb513d83ab6328056ebf55f35",
         "src/playback.ts": "269b65e2a7c6e163caa02add8312ba7bb84074dc105df0366656884cf8a0c53a",
         "src/battleInsights.ts": "96b84c99397953e312dc2a62d0fceb4bb6aad2142b40403140ffb6d57b0c673a",
         "src/HomeScreen.tsx": "662303f1b6a843cf853a69677d33580ee4dac504971819f1ebfc6a965388906f",
@@ -1401,21 +1401,22 @@
         "src/awakening/README.md",
         "src/awakening/STORAGE.md",
         "docs/awakening-progression.md",
-        "docs/rights/releases/2026-10-14-v0.20.35.md"
+        "docs/rights/releases/2026-10-14-v0.20.35.md",
+        "src/navigation.ts"
       ],
       "creator": "Project-specific AI-assisted original implementation, 2026-10-14.",
       "provenance": "Approved provisional progression implemented in original code; existing native IndexedDB driver reused from reviewed storage candidate. No external copied code, new packages or art.",
       "reviewLimit": "Inventory checks are not legal clearance. Independent exact-source review and browser QA required before publication.",
       "sha256": {
-        "src/App.tsx": "d85a48591928e07dae7e6983d408a6ad9b0793935782f6a0bce84686b896ec3b",
+        "src/App.tsx": "f85ec903099b1b8b0acaa4fe927ba4c86e2be04bb513d83ab6328056ebf55f35",
         "src/engine.ts": "5b2034a26942a34af3dce720bf629cd1dfa3f611f0efa5823edb1bb6071aa92d",
-        "src/App.awakening.test.tsx": "be9998f6e69bd0dd47b132eb346169bd8216fcb09c353bd417e3ba9a346797a3",
+        "src/App.awakening.test.tsx": "536d264b87ebb3affc165f660d1a566effa78756fd97f6bde4f90921e164ede7",
         "src/awakening/domain.ts": "148228438e93125d61e2a9d0207318e51ee0a300fbecbd312f89e33340bcad28",
         "src/awakening/AwakeningPreview.tsx": "dbc4c93fe4583116e2921303f430c80ffb99150ed90a32802e15ef7341024546",
         "src/awakening/playSession.ts": "77ae0371fd3cbf12ea4ca44329e18b142e56e950a0c4b7a48d7aaec15472910b",
         "src/awakening/playSession.test.ts": "1c7e16a08e421957d4504212bca7453f0a9823ea556d0b608a33695ea874f2ca",
         "src/awakening/useAwakening.ts": "31bfb6bae27106995c15ed90e8e53c712c9e57872e8d6788e65ac3bd9e849a26",
-        "src/awakening/AwakeningPanel.tsx": "31705d33671c7489526d470ff8749dfc8ad17bc3bc68d077c36c727c5d00ca55",
+        "src/awakening/AwakeningPanel.tsx": "24452639b58675a1a7a63e09ead5a35223287c8893b344121c7e552d687e880f",
         "src/awakening/progression.css": "63490f6f5b5c1883261ec170e21563702755db24adb944b98bf7ddeae9c3adcc",
         "src/awakening/indexedDbStorage.ts": "da03ab4894a0c2a8c991ebf7adadcbf41d0618ba7dddaec6b91589238647f9de",
         "src/awakening/indexedDbStorage.test.ts": "fbda1e4b66c1bd8300979a192991685346996442dad0a826d366de731f157df2",
@@ -1423,7 +1424,8 @@
         "src/awakening/README.md": "dbc2ef2c85e10a0a01b687ef921be2acfbc7a8941443bd1eae34ef2f91309a10",
         "src/awakening/STORAGE.md": "deaf9cb08fdd01cddb4d09391dea7b12281b3f397c7f6f41145687d98ce2f24a",
         "docs/awakening-progression.md": "ed7c5169e24029200189bdaa9f3e7e635526e48fc722f299d7f96762e1a74817",
-        "docs/rights/releases/2026-10-14-v0.20.35.md": "e61cb9e6f8d0d6070e8361d2fa23437f852a17b5711ff85392f4a07205117cac"
+        "docs/rights/releases/2026-10-14-v0.20.35.md": "e61cb9e6f8d0d6070e8361d2fa23437f852a17b5711ff85392f4a07205117cac",
+        "src/navigation.ts": "a5e6f0bdd2ccf97b273649e0f80aec24b6de0c2e15d52eb2599a7174a2a83a1a"
       },
       "references": [
         "docs/awakening-progression.md"

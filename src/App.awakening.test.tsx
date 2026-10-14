@@ -52,3 +52,32 @@ it('leaving unfinished combat grants zero and a reload never silently abandons a
   await click(button('未終了の対戦を整理する')); await click(button('報酬なしで終了する'));
   const result = await new AwakeningStorage(driver, rosterIds, trialRules).load(); if (result.status !== 'ready') throw Error('missing'); expect(result.snapshot.progress.common).toBe(0); expect(result.snapshot.progress.activeBattle).toBeNull();
 });
+
+it('cancels a delayed start after navigation away and back, without reviving an old intent', async () => {
+  await mount(); await click(nav('闘技場'));
+  let release!: () => void;
+  const original = driver.transaction.bind(driver);
+  vi.spyOn(driver, 'transaction').mockImplementationOnce(change => new Promise<void>(resolve => { release = resolve; }).then(() => original(change)));
+  await click(button('この編成で対戦する'));
+  await click(nav('ホーム')); await click(nav('闘技場'));
+  await act(async () => { release(); });
+  expect(window.location.hash).toBe('#arena'); expect(document.querySelector('.battleMode')).toBeNull();
+  const result = await new AwakeningStorage(driver, rosterIds, trialRules).load();
+  if (result.status !== 'ready') throw Error('missing');
+  expect(result.snapshot.progress.activeBattle).toBeNull(); expect(result.snapshot.progress.common).toBe(0);
+  expect(result.snapshot.progress.receipt?.outcome).toBe('abandoned');
+});
+it('does not retarget an interrupted-match confirmation after another tab starts a newer match', async () => {
+  const storage = new AwakeningStorage(driver, rosterIds, trialRules);
+  const first = await storage.initialize();
+  const context = { initialStateJson: '{}', mode: 'standard', teamId: 'party', statRuleVersion: first.progress.statRuleVersion };
+  const active = await storage.dispatch(first.token, { kind: 'begin', context });
+  await mount(); await click(button('未終了の対戦を整理する'));
+  const finished = await storage.dispatch(active.snapshot.token, { kind: 'settle', sequence: 1, completion: { kind: 'abandoned' } });
+  const next = await storage.dispatch(finished.snapshot.token, { kind: 'begin', context });
+  await click(button('報酬なしで終了する'));
+  const after = await storage.load(); if (after.status !== 'ready') throw Error('missing');
+  expect(after.snapshot.token).toBe(next.snapshot.token); expect(after.snapshot.progress.activeBattle?.sequence).toBe(2);
+  await click(button('未終了の対戦を整理する')); await click(button('保存を再確認'));
+  expect(button('報酬なしで終了する')).toBeUndefined();
+});

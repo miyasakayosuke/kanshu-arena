@@ -8,7 +8,7 @@ import './progression.css';
 export default function AwakeningPanel({ control }: { control: AwakeningController }) {
   const [species, setSpecies] = useState('0');
   const [confirmation, setConfirmation] = useState<{ token: string; level: number; species: string } | null>(null);
-  const [discard, setDiscard] = useState(false);
+  const [discard, setDiscard] = useState<{ token: string; sequence: number } | null>(null);
   const { snapshot, session, loading, busy, message } = control;
   const progress = snapshot?.progress;
   const base = monsters.find(monster => String(monster.id) === species)!;
@@ -19,13 +19,13 @@ export default function AwakeningPanel({ control }: { control: AwakeningControll
   return <section className="awakeningPanel" aria-label="育成と対戦報酬">
     <h2>覚醒育成 <small>試行版</small></h2>
     {message && <p role="status">{message}</p>}
-    {session && <button type="button" disabled={busy || loading} onClick={() => { setConfirmation(null); void control.retry(); }}>保存を再確認</button>}
+    {session && <button type="button" disabled={busy || loading} onClick={() => { setConfirmation(null); setDiscard(null); void control.retry(); }}>保存を再確認</button>}
     {loading && <p>読み込みが終わるまでお待ちください。</p>}
     {progress && <>
       <p>共通素材 <b>{progress.common}</b> · 累計 <b>{progress.wins}勝</b> · 選択報酬 <b>{progress.selections.length}回分</b></p>
       {progress.receipt && <p>直近の対戦：共通素材 +{progress.receipt.common}{progress.receipt.selection ? ' · 選択報酬を獲得' : ''}（保存済み）</p>}
       {progress.activeBattle && <div role="status"><p>未終了の対戦が保存されています。ほかのタブで対戦中なら、そちらで終了してください。</p>
-        {!discard ? <button disabled={busy} onClick={() => setDiscard(true)}>未終了の対戦を整理する</button> : <><p>この対戦を報酬なしで終了します。続行できなくなります。</p><button disabled={busy} onClick={() => { void control.run(() => session!.discardInterrupted(snapshot!.token, progress.activeBattle!.sequence), '未終了の対戦を報酬なしで終了しました。'); setDiscard(false); }}>報酬なしで終了する</button><button onClick={() => setDiscard(false)}>戻る</button></>}
+        {!discard ? <button disabled={busy} onClick={() => setDiscard({ token: snapshot!.token, sequence: progress.activeBattle!.sequence })}>未終了の対戦を整理する</button> : <><p>この対戦を報酬なしで終了します。続行できなくなります。</p><button disabled={busy} onClick={() => { void control.run(() => session!.discardInterrupted(discard.token, discard.sequence), '未終了の対戦を報酬なしで終了しました。'); setDiscard(null); }}>報酬なしで終了する</button><button onClick={() => setDiscard(null)}>戻る</button></>}
       </div>}
       <details><summary>素材を使って育成する</summary>
         <label>育成するモンスター<select value={species} onChange={event => { setSpecies(event.target.value); setConfirmation(null); }}>{monsters.map(monster => <option key={monster.id} value={String(monster.id)}>{monster.name}</option>)}</select></label>

@@ -36,6 +36,9 @@ export default function App() {
   const remoteTeamPending = useRef(false);
   const teamPersistence = useRef(true);
   const latestWorkshop = useRef(workshop); latestWorkshop.current = workshop;
+  const workshopRevision = useRef(0);
+  const previousWorkshop = useRef(workshop);
+  if (previousWorkshop.current !== workshop) { workshopRevision.current += 1; previousWorkshop.current = workshop; }
   const { team, rule } = currentTeam(workshop);
   const setTeam = (team: number[]) => setWorkshop(previous => updateCurrentTeam(previous, { team }));
   const setRule = (rule: RuleId) => setWorkshop(previous => updateCurrentTeam(previous, { rule }));
@@ -218,11 +221,12 @@ export default function App() {
     ++playbackId.current;
     // A new match begins only on an explicit lobby action and uses a fresh draw.
     const nextEncounter = familyEncounterForSeed(rule, Math.floor(Math.random() * 0x100000000));
+    const startNavigation = navigation.revision.current, startWorkshop = workshopRevision.current;
     let starting: State;
     if (awakening.session && awakening.snapshot) {
       const prepared = await awakening.run(() => awakening.session!.begin(team, nextEncounter.enemy, nextEncounter.seed, rule));
       if (!prepared) { startLock.current = false; return; }
-      if (latestPage.current !== 'arena' || JSON.stringify(currentTeam(latestWorkshop.current)) !== JSON.stringify({ team, rule })) { awakening.abandon(); startLock.current = false; return; }
+      if (navigation.revision.current !== startNavigation || workshopRevision.current !== startWorkshop || latestPage.current !== 'arena' || JSON.stringify(currentTeam(latestWorkshop.current)) !== JSON.stringify({ team, rule })) { awakening.abandon(); startLock.current = false; return; }
       starting = prepared;
     } else starting = start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true });
     setLastBattle(null);

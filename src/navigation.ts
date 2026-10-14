@@ -13,6 +13,7 @@ export function useScreenNavigation(blocked: boolean, onLeaveBattle: () => void)
   const [page, setPage] = useState<Screen>(() => readScreen() === 'battle' ? 'arena' : readScreen());
   const [pending, setPending] = useState<Pending | null>(null);
   const current = useRef(page);
+  const revision = useRef(0);
   const pendingRef = useRef<Pending | null>(null);
   const options = useRef({ blocked, onLeaveBattle });
   options.current = { blocked, onLeaveBattle };
@@ -26,6 +27,7 @@ export function useScreenNavigation(blocked: boolean, onLeaveBattle: () => void)
   const transition = (next: Screen) => {
     if (next === current.current) return;
     if (current.current === 'battle') options.current.onLeaveBattle();
+    revision.current += 1;
     current.current = next;
     setPage(next);
   };
@@ -125,5 +127,5 @@ export function useScreenNavigation(blocked: boolean, onLeaveBattle: () => void)
       window.removeEventListener('hashchange', onHistory);
     };
   }, []);
-  return { page, navigate, pending, cancel: clearPending, confirm };
+  return { page, navigate, pending, cancel: clearPending, confirm, revision };
 }
