@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 2,
+  "revision": 3,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -24,6 +24,24 @@
         "status": "retry",
         "notBefore": 1791951663.9932458,
         "revision": 2
+      }
+    },
+    "safe-cycle-one-claim-baseline": {
+      "command": {
+        "action": "claim",
+        "task": "baseline-regression",
+        "role": "implement",
+        "worker": "baseline-validator-one",
+        "operationId": "safe-cycle-one-claim-baseline"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "baseline-validator-one",
+          "generation": 2,
+          "expiresAt": 1791953188.526059
+        },
+        "revision": 3
       }
     }
   },
@@ -124,11 +142,18 @@
         "List only evidence-backed remaining defects without inventing new feature work"
       ],
       "required": true,
-      "attempts": 0,
-      "generation": 1,
+      "attempts": 1,
+      "generation": 2,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "ready"
+      "status": "running",
+      "implementer": "baseline-validator-one",
+      "assignment": {
+        "role": "implement",
+        "worker": "baseline-validator-one",
+        "generation": 2,
+        "expiresAt": 1791953188.526059
+      }
     },
     {
       "id": "awakening-storage",
