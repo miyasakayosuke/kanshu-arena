@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 19,
+  "revision": 20,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -355,6 +355,22 @@
         },
         "revision": 19
       }
+    },
+    "safe-approve-catalog": {
+      "command": {
+        "action": "review",
+        "task": "catalog-filter-scroll",
+        "worker": "combined-ui-review-one",
+        "generation": 3,
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "approved": true,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md",
+        "operationId": "safe-approve-catalog"
+      },
+      "result": {
+        "status": "candidate",
+        "revision": 20
+      }
     }
   },
   "tasks": [
@@ -372,7 +388,7 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "reviewing",
+      "status": "candidate",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -393,11 +409,10 @@
         "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
       },
-      "assignment": {
-        "role": "review",
+      "review": {
         "worker": "combined-ui-review-one",
-        "generation": 3,
-        "expiresAt": 1791956561.5055687
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md"
       }
     },
     {
