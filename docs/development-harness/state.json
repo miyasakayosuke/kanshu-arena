@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 39,
+  "revision": 40,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -714,6 +714,25 @@
         "notBefore": 1791969158.4437966,
         "revision": 39
       }
+    },
+    "fenrir-motion-preview-claim": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "fenrir-motion-candidate",
+        "ttl": 3600,
+        "operationId": "fenrir-motion-preview-claim"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-motion-candidate",
+          "generation": 2,
+          "expiresAt": 1791972770.676239
+        },
+        "revision": 40
+      }
     }
   },
   "tasks": [
@@ -825,13 +844,20 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 0,
-      "generation": 1,
+      "attempts": 1,
+      "generation": 2,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "notBefore": 1791969158.4437966,
-      "lastFailure": "Previous assignments are inactive. Prepare a new isolated motion preview from the original artwork. Existing owner visual acceptance and release criteria remain unmet; no adoption or deployment is authorized."
+      "lastFailure": "Previous assignments are inactive. Prepare a new isolated motion preview from the original artwork. Existing owner visual acceptance and release criteria remain unmet; no adoption or deployment is authorized.",
+      "implementer": "fenrir-motion-candidate",
+      "assignment": {
+        "role": "implement",
+        "worker": "fenrir-motion-candidate",
+        "generation": 2,
+        "expiresAt": 1791972770.676239
+      }
     },
     {
       "id": "v1-acceptance",
