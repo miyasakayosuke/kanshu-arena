@@ -1460,7 +1460,7 @@
         "qa/browser/storage.spec.mjs": "038a26e9b49a3d326dfe072fcb7026e6f7c7b4dd96ee786a13c0f2c094ec5712",
         "qa/browser/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
         "qa/browser/ui.spec.mjs": "58220ee5e401c732f7931acc2d4867cf09d9d340c31f405f72e7850ead1061a9",
-        "qa/browser/progression-helpers.mjs": "7ed9996349503f46c5f5b6561d7a9d933d18df05793bcce83c375e8bf175e1d4",
+        "qa/browser/progression-helpers.mjs": "0e677eba389821512ea38a8da0197dd7f68a7357df6623cae4bd6d84d07ea4d2",
         "qa/browser/progression.spec.mjs": "8020f07e7d5c838bcf687772e1b9bb4a3e69865acf6192c74dd204261aa52a46",
         "qa/browser/verify-results.test.mjs": "9ebc8bbc91dfa5e4bc05ccd39860bae5376d5bf64af6e711e6216a4074111caf",
         "qa/browser/verify-results.mjs": "1d55d9d60039b3c46d3665827fe6b5f67aa9c952f552c9657830734f768ef2dd",

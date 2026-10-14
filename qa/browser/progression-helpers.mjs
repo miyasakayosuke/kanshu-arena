@@ -56,9 +56,9 @@ export async function seed(page, mode = 'fresh') {
     await new AwakeningStorage(backend, P.rosterIds, P.trialRules).initialize();
     const slots = [{ team: [0, 2, 3, 4, 6], rule: 'standard' }, { team: [1, 2, 3, 4, 6], rule: 'standard' }, { team: [3, 2, 0, 4, 6], rule: 'light' }];
     localStorage.setItem('kanshu-team-workshop-v2', JSON.stringify({ version: 2, teams: slots, selected: 0, draft: null, previous: null }));
-    localStorage.setItem('kanshu-workshop-v1', '\n' + JSON.stringify(slots[1], null, 2) + '\n');
+    localStorage.setItem('kanshu-workshop-v1', JSON.stringify(slots[0]));
     localStorage.setItem('kanshu-team-slots-v1', '\n' + JSON.stringify(slots, null, 2) + '\n');
-    localStorage.setItem('kanshu-team', '[ 0, 2, 3, 4, 6 ]');
+    localStorage.setItem('kanshu-team', JSON.stringify(slots[0].team));
   }, mode);
   const before = await teams(page);
   await page.goto('./');
