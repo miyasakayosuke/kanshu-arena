@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 21,
+  "revision": 22,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -389,6 +389,22 @@
         },
         "revision": 21
       }
+    },
+    "safe-approve-preview": {
+      "command": {
+        "action": "review",
+        "task": "awakening-preview",
+        "worker": "combined-ui-review-one",
+        "generation": 3,
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "approved": true,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/f977bb0b2ba0243ed275b2c27903dba748ffc19c/docs/development-harness/evidence/preview-review.md",
+        "operationId": "safe-approve-preview"
+      },
+      "result": {
+        "status": "candidate",
+        "revision": 22
+      }
     }
   },
   "tasks": [
@@ -447,7 +463,7 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "reviewing",
+      "status": "candidate",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
@@ -468,11 +484,10 @@
         "Comparison labels and narrow viewport behavior are reviewed": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Independent evidence covers existing accepted behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
       },
-      "assignment": {
-        "role": "review",
+      "review": {
         "worker": "combined-ui-review-one",
-        "generation": 3,
-        "expiresAt": 1791956904.5470183
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/f977bb0b2ba0243ed275b2c27903dba748ffc19c/docs/development-harness/evidence/preview-review.md"
       }
     },
     {
