@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 4,
+  "revision": 5,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -57,6 +57,24 @@
         "status": "retry",
         "notBefore": 1791951924.904947,
         "revision": 4
+      }
+    },
+    "safe-claim-storage": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-storage",
+        "role": "implement",
+        "worker": "storage-validation-one",
+        "operationId": "safe-claim-storage"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "storage-validation-one",
+          "generation": 2,
+          "expiresAt": 1791953466.454396
+        },
+        "revision": 5
       }
     }
   },
@@ -179,17 +197,24 @@
         "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities"
       ],
       "required": true,
-      "attempts": 1,
-      "generation": 1,
+      "attempts": 2,
+      "generation": 2,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "retry",
+      "status": "running",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
       ],
       "notBefore": 1791951663.9932458,
-      "lastFailure": "Previous implementation stopped. Exact preserved candidate and independent technical evidence inspected; no game deployment. Reimport through fresh assignment and review."
+      "lastFailure": "Previous implementation stopped. Exact preserved candidate and independent technical evidence inspected; no game deployment. Reimport through fresh assignment and review.",
+      "implementer": "storage-validation-one",
+      "assignment": {
+        "role": "implement",
+        "worker": "storage-validation-one",
+        "generation": 2,
+        "expiresAt": 1791953466.454396
+      }
     },
     {
       "id": "awakening-quantities",
