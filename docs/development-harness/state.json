@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 24,
+  "revision": 25,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -438,6 +438,21 @@
         "status": "blocked",
         "revision": 24
       }
+    },
+    "approved-resolve-catalog": {
+      "command": {
+        "action": "resolve",
+        "task": "catalog-filter-scroll",
+        "outcome": "retry",
+        "authorizationRef": "Owner explicitly approved v0.20.34 and subsequent tested approved-scope game publication.",
+        "evidence": "Main and candidate rechecked unchanged. Prior publisher stopped without deployment. Reimport exact reviewed candidate and checks; no implementation changes needed.",
+        "operationId": "approved-resolve-catalog"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791961004.2866292,
+        "revision": 25
+      }
     }
   },
   "tasks": [
@@ -455,13 +470,13 @@
       "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "retry",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
       ],
-      "notBefore": 1791951924.904947,
-      "lastFailure": "Preserved candidate and prior review inspected. Prior implementation finished. Remaining browser QA uses isolated content-read CI without deployment.",
+      "notBefore": 1791961004.2866292,
+      "lastFailure": "Main and candidate rechecked unchanged. Prior publisher stopped without deployment. Reimport exact reviewed candidate and checks; no implementation changes needed.",
       "implementer": "browser-qa-builder-one",
       "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
       "checks": {
@@ -481,12 +496,7 @@
         "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md"
       },
-      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
-      "block": {
-        "type": "approval",
-        "reason": "Publication awaits explicit owner approval. Reviewed candidate and completed checks remain valid; main readback is unchanged at accepted baseline. No deployment performed.",
-        "previousRole": "publish"
-      }
+      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope."
     },
     {
       "id": "awakening-preview",
