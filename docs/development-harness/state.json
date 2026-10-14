@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 8,
+  "revision": 9,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -139,6 +139,22 @@
         },
         "revision": 8
       }
+    },
+    "safe-approve-storage": {
+      "command": {
+        "action": "review",
+        "task": "awakening-storage",
+        "worker": "storage-review-one",
+        "generation": 3,
+        "commit": "2b6de6bdad0b25f22de387559a70f4f9da3babb0",
+        "approved": true,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-review.md",
+        "operationId": "safe-approve-storage"
+      },
+      "result": {
+        "status": "verified",
+        "revision": 9
+      }
     }
   },
   "tasks": [
@@ -271,7 +287,7 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "reviewing",
+      "status": "verified",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
@@ -293,11 +309,10 @@
         "Keep current accepted combat and collection behavior unchanged until integration is approved": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
         "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md"
       },
-      "assignment": {
-        "role": "review",
+      "review": {
         "worker": "storage-review-one",
-        "generation": 3,
-        "expiresAt": 1791953656.0088236
+        "commit": "2b6de6bdad0b25f22de387559a70f4f9da3babb0",
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-review.md"
       }
     },
     {
