@@ -1298,6 +1298,25 @@
       },
       "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
       "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
+    },
+    {
+      "id": "awakening-indexeddb-driver-candidate",
+      "kind": "original-code-and-documentation",
+      "files": [
+        "src/awakening/indexedDbStorage.ts",
+        "src/awakening/indexedDbStorage.test.ts",
+        "src/awakening/INDEXEDDB.md",
+        "src/awakening/STORAGE.md",
+        "docs/awakening-indexeddb-driver-evidence.md"
+      ],
+      "provenance": "Original AI-assisted isolated storage driver, scripted contract tests, and candidate documentation created for this project on 2026-10-14. No third-party code, samples, artwork, personal identifiers, or dependencies imported. Existing storage/domain implementation preserved.",
+      "creator": "Project AI-assisted code and documentation authoring.",
+      "createdFor": "isolated v0.20.32 awakening driver candidate",
+      "references": [
+        "https://www.w3.org/TR/IndexedDB/#transaction-concept"
+      ],
+      "distribution": "Candidate source and evidence only; no app imports, game deployment, or license change.",
+      "reviewLimit": "Standards-informed design and deterministic scripted event tests do not establish real browser conformance or legal clearance."
     }
   ],
   "software": [
