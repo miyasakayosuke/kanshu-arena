@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 1,
+  "revision": 2,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -10,6 +10,20 @@
       "result": {
         "stale": [],
         "revision": 1
+      }
+    },
+    "safe-cycle-one-resolve-storage": {
+      "command": {
+        "action": "resolve",
+        "task": "awakening-storage",
+        "outcome": "retry",
+        "evidence": "Previous implementation stopped. Exact preserved candidate and independent technical evidence inspected; no game deployment. Reimport through fresh assignment and review.",
+        "operationId": "safe-cycle-one-resolve-storage"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791951663.9932458,
+        "revision": 2
       }
     }
   },
@@ -131,15 +145,13 @@
       "generation": 1,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "blocked",
-      "block": {
-        "type": "uncertain",
-        "reason": "Legacy runtime claim and evidence retired. Verify the previous worker is stopped; import candidate evidence only through fresh assignment and independent review."
-      },
+      "status": "retry",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
-      ]
+      ],
+      "notBefore": 1791951663.9932458,
+      "lastFailure": "Previous implementation stopped. Exact preserved candidate and independent technical evidence inspected; no game deployment. Reimport through fresh assignment and review."
     },
     {
       "id": "awakening-quantities",
