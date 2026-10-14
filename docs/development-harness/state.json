@@ -1,7 +1,15 @@
 {
   "schemaVersion": 1,
-  "revision": 0,
-  "operations": {},
+  "revision": 1,
+  "operations": {
+    "cycle-20261014-001-reconcile": {
+      "fingerprint": "5fa45f136bfadb02c6111e5c5c75c1f665f518a6b461dae61488212d25063c57",
+      "result": {
+        "stale": [],
+        "revision": 1
+      }
+    }
+  },
   "baseline": {
     "version": "0.20.32",
     "verification": "Coordinator must re-read the live deployment and repository head before importing work."
