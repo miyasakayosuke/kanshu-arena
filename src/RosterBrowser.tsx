@@ -46,6 +46,16 @@ export default function RosterBrowser({ filters, setFilters, onFocus, scrollPosi
     if (node && scrollPosition) node.scrollTop = scrollPosition.current;
     return () => { if (node && scrollPosition) scrollPosition.current = node.scrollTop; };
   }, []);
+  // A changed query/order starts a new result set. Disclosure toggles and
+  // returning from another screen retain the user's existing browsing position.
+  const resultKey = JSON.stringify([filter, role, sort, leaderFilter, familyFilter, costFilter]);
+  const previousResultKey = useRef(resultKey);
+  useLayoutEffect(() => {
+    if (previousResultKey.current === resultKey) return;
+    previousResultKey.current = resultKey;
+    if (list.current) list.current.scrollTop = 0;
+    if (scrollPosition) scrollPosition.current = 0;
+  }, [resultKey, scrollPosition]);
   const update = (patch: Partial<RosterFilters>) => setFilters(previous => ({ ...previous, ...patch }));
   const resetFilters = () => setFilters(previous => ({ ...createRosterFilters(), expanded: previous.expanded }));
   const filterCount = Number(familyFilter !== 'all') + Number(role !== 'all') + Number(leaderFilter !== 'all') + Number(costFilter !== 'all');

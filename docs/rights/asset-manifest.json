@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-13",
-  "release": "v0.20.32",
-  "auditBaseCommit": "b84ea8b806eb3529deb7da35cd81c7632e86fd29",
+  "reviewedAt": "2026-10-14",
+  "release": "v0.20.34",
+  "auditBaseCommit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
   "status": "ongoing-review-not-legal-clearance",
   "scope": "src, public, package-lock.json and the built browser artifact. Final release commit/public checks belong in docs/rights/releases/.",
   "assets": [
@@ -1107,7 +1107,7 @@
       "reviewLimit": "Automated DOM/cascade tests are not native-browser geometry or legal clearance. Existing artwork ownership and similarity review questions remain open. Exact deployed native phone/zoom acceptance is required before completion; the previous verified release is retained for recovery.",
       "distribution": "Existing original SVG rendered inline in a noninteractive header preview. No new external resource or asset.",
       "sha256": {
-        "src/MonsterDetails.tsx": "e566d7d2cdb4a265530734d3157eca91114621b1c7632d7b6fafd06ba8a238e8",
+        "src/MonsterDetails.tsx": "1fcf994e5ff8d7c2c4641b09f04c7de1e2c51d58bfcb61aca7c3a6835a28fd84",
         "src/monsterDetails.css": "db33d91b36b51cc226963ed6c6f2cf8e33a3d831f213932cb4eff4394e2d4365"
       },
       "changeRecords": [
@@ -1116,6 +1116,12 @@
           "scope": "v0.20.30 large Pose-tab reuse of existing idle renderer; only active detail presentation mounted, explicit nested-movie pause, optional existing CatalogArt fallback and partial-SMIL guard.",
           "provenance": "Project-specific lifecycle integration only. All character vectors, track amplitudes/timings, myth scene geometry/text, battle code and dependencies retained unchanged. No reference frames, traced shapes, imported code, motion, audio, fonts or external assets.",
           "reviewLimit": "Revised source hashes cover integration changes, not new artwork or legal clearance. Native full-cycle and footprint review remains a release gate."
+        },
+        {
+          "recordedAt": "2026-10-14",
+          "scope": "Isolated awakening detail preview: import and read-only disclosure on base abilities page, excluded during battle inspection.",
+          "provenance": "Original project-specific UI; no artwork, animation, story, dependency, battle or save changes. See docs/awakening-detail-preview.md.",
+          "reviewLimit": "Hash update records inspected source delta, not legal clearance."
         }
       ]
     },
@@ -1298,6 +1304,82 @@
       },
       "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
       "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
+    },
+    {
+      "id": "awakening-detail-preview-candidate",
+      "kind": "original-ui-code-and-text",
+      "files": [
+        "src/MonsterDetails.tsx",
+        "src/awakening/AwakeningPreview.tsx",
+        "src/awakening/preview.css",
+        "src/awakening/preview.test.tsx",
+        "docs/awakening-detail-preview.md"
+      ],
+      "provenance": "AI-assisted original React/CSS implementation and Japanese explanatory UI text for this project on 2026-10-14. Uses the existing isolated awakening domain formula approved for this project. No third-party source prose or media imported.",
+      "creator": "Project development with AI assistance",
+      "createdFor": "isolated v0.20.32 awakening preview candidate",
+      "references": [
+        "docs/awakening-detail-preview.md"
+      ],
+      "distribution": "Local review candidate only; no publication authorized by this task. No license for project originals selected.",
+      "reviewLimit": "Source change and provenance inventory only, not an independent legal opinion or universal non-infringement finding."
+    },
+    {
+      "id": "catalog-result-position-reset",
+      "kind": "original-ui-code",
+      "files": [
+        "src/RosterBrowser.tsx",
+        "src/RosterBrowser.resultPosition.test.tsx"
+      ],
+      "creator": "AI-assisted implementation for this project",
+      "provenance": "Original result-list scroll lifecycle correction. No copied external code, new artwork, text, audio, fonts or dependencies.",
+      "createdFor": "Unpublished candidate based on v0.20.32, 2026-10-14",
+      "distribution": "Browser result-list behavior; regression tests are development-only.",
+      "reviewLimit": "Lifecycle and regression review only; not legal clearance. Existing notices and provenance retained."
+    },
+    {
+      "id": "readonly-catalog-awakening-release-v02034",
+      "kind": "original-code-and-release-documentation",
+      "files": [
+        "public/credits.html",
+        "docs/rights/releases/2026-10-14-v0.20.34.md",
+        "docs/candidate-browser-qa-2026-10-14.md",
+        "src/awakening/domain.ts",
+        "src/awakening/domain.test.ts",
+        "src/awakening/storage.ts",
+        "src/awakening/storage.test.ts",
+        "src/awakening/fakeStorage.ts",
+        "src/awakening/README.md",
+        "src/awakening/STORAGE.md"
+      ],
+      "creator": "Project-specific AI-assisted integration of existing reviewed candidates, 2026-10-14.",
+      "createdFor": "v0.20.34 read-only calculator and catalog scroll behavior",
+      "provenance": "Exact accepted v0.20.32 base plus original existing catalog and awakening calculator candidate sources. Retains isolated domain/storage tests but imports no storage backend into production. New original release descriptions and curated evidence; no copied third-party code or artwork.",
+      "sha256": {
+        "docs/rights/releases/2026-10-14-v0.20.34.md": "c7fb6ba7b82532c6600c0eba0d06b20329b8a81cec10f29b4763109eb277fde7",
+        "docs/candidate-browser-qa-2026-10-14.md": "c83393114550c51726106276ae9f164691da7761a5f709bf0ebe74cc82b328f6",
+        "src/awakening/domain.ts": "94ef9c51a7bebd7d0f731f49d1fe4b66eac702afa94bf722491af65c487ce07e",
+        "src/awakening/domain.test.ts": "77ea2a8c371bd5e71b4d51ffcb2f82b90ec4988298278a3c53ff148e50f3f870",
+        "src/awakening/storage.ts": "d386ac8c7b70dfdb74d2ec68f112c76885878708aa14435552abda5d47392a7b",
+        "src/awakening/storage.test.ts": "f1dc395df1306a0617f236ad1c61c07b21a7b808cb7e7d759963e3bd51b3a6b6",
+        "src/awakening/fakeStorage.ts": "ed74b856f2c1ad7c3f09edb62a26ed0f13aeadbff456ec01f46a41086963ffab",
+        "src/awakening/README.md": "ba680d49ce6631c0a3d56ddcceda1e89c986f5a7fbed55fc03603d69473c6a89",
+        "src/awakening/STORAGE.md": "b1200ae5d4898038d4292a8803602ee88d69e02922bbf3d9f852e2a2216c37cd"
+      },
+      "references": [
+        "docs/rights/releases/2026-10-14-v0.20.34.md",
+        "docs/candidate-browser-qa-2026-10-14.md",
+        "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
+        "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1"
+      ],
+      "distribution": "Version/credits display and read-only UI only. Existing art, gameplay engine, save behavior, production dependencies and full third-party license notices unchanged. No v0.20.33 artwork or indexedDB driver added.",
+      "reviewLimit": "Exact combined-source independent review and browser QA are required before publication. Existing isolated candidate results are not a combined-source pass. Inventory checks do not establish legal clearance; no new project license selected.",
+      "releaseMetadataFiles": [
+        "README.md",
+        "package.json",
+        "package-lock.json",
+        "public/credits.html"
+      ]
     }
   ],
   "software": [
@@ -1379,5 +1461,5 @@
     "No DQMSL archive, screenshot, or external image embedded in the reviewed browser build."
   ],
   "openReview": "docs/rights/review-ledger.md",
-  "auditBaseTree": "801fa56bdc295697d7ef9ee52ea2a4588990210f"
+  "auditBaseTree": "0b68d439d1d4eb794df3550a094d7219c8e32b37"
 }

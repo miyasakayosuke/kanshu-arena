@@ -1,4 +1,5 @@
 import './catalog.css';
+import AwakeningPreview from './awakening/AwakeningPreview';
 import './monsterDetails.css';
 import CatalogArt from './CatalogArt';
 import HomeIdleArt, { useHomeIdleVisibility } from './HomeIdleArt';
@@ -59,6 +60,7 @@ export default function MonsterDetails({ id, onClose, navigation, initialTab = '
     <div className="stats">{[['HP', monster.hp], ['MP', monster.mp], ['攻撃', monster.atk], ['素早さ', monster.speed]].map(([label, value]) => <div key={label}><small>{label}</small><b>{value}</b></div>)}</div>
     <div className="leaderBanner"><span>リーダー効果 · {leaderFor(id).name}</span><small>{leaderFor(id).description}</small></div>
     <p className="detailMechanicsNote">防御力・賢さ・属性相性は現在の戦闘では未導入。耐久はHPと守りで表現しています。</p>
+    {!battleContext && <AwakeningPreview key={id} base={monster} />}
   </> }, ...rules.flatMap(rule => detailTextPages(rule.text).map(text => ({ title: rule.title, content: <p className={rule.className}>{text}</p> })))];
   // Keep the reading group while browsing; skill/page selection belongs to each monster.
   useEffect(() => { if (!navigation) setActiveTab(initialTab); setSkillIndex(0); }, [id]);
