@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 23,
+  "revision": 24,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -424,6 +424,20 @@
         },
         "revision": 23
       }
+    },
+    "safe-block-publication": {
+      "command": {
+        "action": "block",
+        "task": "catalog-filter-scroll",
+        "worker": "release-coordinator-one",
+        "generation": 4,
+        "reason": "Publication awaits explicit owner approval. Reviewed candidate and completed checks remain valid; main readback is unchanged at accepted baseline. No deployment performed.",
+        "operationId": "safe-block-publication"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 24
+      }
     }
   },
   "tasks": [
@@ -441,7 +455,7 @@
       "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "publishing",
+      "status": "blocked",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -468,11 +482,10 @@
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md"
       },
       "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
-      "assignment": {
-        "role": "publish",
-        "worker": "release-coordinator-one",
-        "generation": 4,
-        "expiresAt": 1791957072.4774716
+      "block": {
+        "type": "approval",
+        "reason": "Publication awaits explicit owner approval. Reviewed candidate and completed checks remain valid; main readback is unchanged at accepted baseline. No deployment performed.",
+        "previousRole": "publish"
       }
     },
     {
