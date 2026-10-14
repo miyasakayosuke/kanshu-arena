@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 5,
+  "revision": 6,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -75,6 +75,33 @@
           "expiresAt": 1791953466.454396
         },
         "revision": 5
+      }
+    },
+    "safe-submit-storage": {
+      "command": {
+        "action": "submit",
+        "task": "awakening-storage",
+        "worker": "storage-validation-one",
+        "generation": 2,
+        "commit": "2b6de6bdad0b25f22de387559a70f4f9da3babb0",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md"
+        },
+        "criteriaEvidence": {
+          "Inspect existing storage candidate before editing to avoid duplicate work": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+          "Validate versioned parsing, invalid saves, migration and repeated load/save behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+          "Keep current accepted combat and collection behavior unchanged until integration is approved": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+          "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md"
+        },
+        "operationId": "safe-submit-storage"
+      },
+      "result": {
+        "status": "review",
+        "revision": 6
       }
     }
   },
@@ -201,7 +228,7 @@
       "generation": 2,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "running",
+      "status": "review",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
@@ -209,11 +236,19 @@
       "notBefore": 1791951663.9932458,
       "lastFailure": "Previous implementation stopped. Exact preserved candidate and independent technical evidence inspected; no game deployment. Reimport through fresh assignment and review.",
       "implementer": "storage-validation-one",
-      "assignment": {
-        "role": "implement",
-        "worker": "storage-validation-one",
-        "generation": 2,
-        "expiresAt": 1791953466.454396
+      "commit": "2b6de6bdad0b25f22de387559a70f4f9da3babb0",
+      "checks": {
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-checks.md"
+      },
+      "criteriaEvidence": {
+        "Inspect existing storage candidate before editing to avoid duplicate work": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+        "Validate versioned parsing, invalid saves, migration and repeated load/save behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+        "Keep current accepted combat and collection behavior unchanged until integration is approved": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
+        "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md"
       }
     },
     {
