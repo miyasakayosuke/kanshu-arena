@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 11,
+  "revision": 12,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -200,6 +200,21 @@
         "status": "review",
         "revision": 11
       }
+    },
+    "safe-resolve-preview": {
+      "command": {
+        "action": "resolve",
+        "task": "awakening-preview",
+        "outcome": "retry",
+        "evidence": "Preserved candidate and actual browser results inspected. Prior worker stopped. Prepare combined read-only UI release under fresh assignment and exact review.",
+        "authorizationRef": "Owner approved ongoing game repository development and publication.",
+        "operationId": "safe-resolve-preview"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791953510.822592,
+        "revision": 12
+      }
     }
   },
   "tasks": [
@@ -246,15 +261,13 @@
       "generation": 1,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
-      "block": {
-        "type": "external",
-        "reason": "Reviewed template gate retained; no legacy status establishes approval or new review."
-      },
+      "status": "retry",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
-      ]
+      ],
+      "notBefore": 1791953510.822592,
+      "lastFailure": "Preserved candidate and actual browser results inspected. Prior worker stopped. Prepare combined read-only UI release under fresh assignment and exact review."
     },
     {
       "id": "replacement-animation",
