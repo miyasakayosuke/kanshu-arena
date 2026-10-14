@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 25,
+  "revision": 26,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -453,6 +453,24 @@
         "notBefore": 1791961004.2866292,
         "revision": 25
       }
+    },
+    "approved-claim-catalog": {
+      "command": {
+        "action": "claim",
+        "task": "catalog-filter-scroll",
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "operationId": "approved-claim-catalog"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "browser-qa-builder-one",
+          "generation": 5,
+          "expiresAt": 1791962862.83502
+        },
+        "revision": 26
+      }
     }
   },
   "tasks": [
@@ -466,11 +484,11 @@
         "Narrow viewport and keyboard QA recorded"
       ],
       "required": true,
-      "attempts": 1,
-      "generation": 4,
+      "attempts": 2,
+      "generation": 5,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -496,7 +514,13 @@
         "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md"
       },
-      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope."
+      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
+      "assignment": {
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "generation": 5,
+        "expiresAt": 1791962862.83502
+      }
     },
     {
       "id": "awakening-preview",
