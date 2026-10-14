@@ -1394,7 +1394,8 @@
         ".github/workflows/fenrir-motion-preview.yml",
         "qa/fenrir-motion/render.mjs",
         "qa/fenrir-motion/package.json",
-        "qa/fenrir-motion/package-lock.json"
+        "qa/fenrir-motion/package-lock.json",
+        "docs/fenrir-motion-preview/verification.md"
       ],
       "provenance": "Existing user-selected project reference reused byte-for-byte, plus newly written procedural mesh motion and preview tooling. No new raster generation or third-party animation is included.",
       "reviewLimit": "Original creation provenance has not been independently reverified in this pass. No authorship, license, visual acceptance or legal clearance is asserted. Actual rendered review and owner approval remain required before adoption.",
@@ -1409,10 +1410,11 @@
         "docs/fenrir-motion-preview/rig.mjs": "ee1de714d374cad5234af85d701de7b7882350a97cfd1b1fe98ba4b0ff7a5b34",
         "docs/fenrir-motion-preview/rig-checks.mjs": "7bc0ee5f44fe1db67d340678655ccd58b036a16c44fd61afe05bd0318fea3886",
         "docs/fenrir-motion-preview/README.md": "f9eb595bdb11382d81233d420909dcf068fbbef176c3d78abad5fcf965f2886f",
-        ".github/workflows/fenrir-motion-preview.yml": "ce9f4d7d388509b8b5b529db81ceb0f1a07179370c281b3db74ff91a33229611",
+        ".github/workflows/fenrir-motion-preview.yml": "e8827f206901d6a7c35d16b6b92780156dbdbc1e6622b4daa604a817a96d40af",
         "qa/fenrir-motion/render.mjs": "acf206eff6592be4d2be0ef04873f7c31f4d8d6eada66723c3f54c4f71bf4f24",
         "qa/fenrir-motion/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0",
-        "qa/fenrir-motion/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b"
+        "qa/fenrir-motion/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b",
+        "docs/fenrir-motion-preview/verification.md": "321e4f4e9ba598749bf39878e93b9efdf148fb8bde2fce96781d274929bc89a5"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137"
     }
