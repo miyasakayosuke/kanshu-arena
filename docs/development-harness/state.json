@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 6,
+  "revision": 7,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -102,6 +102,24 @@
       "result": {
         "status": "review",
         "revision": 6
+      }
+    },
+    "safe-review-storage": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-storage",
+        "role": "review",
+        "worker": "storage-review-one",
+        "operationId": "safe-review-storage"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "storage-review-one",
+          "generation": 3,
+          "expiresAt": 1791953656.0088236
+        },
+        "revision": 7
       }
     }
   },
@@ -225,10 +243,10 @@
       ],
       "required": true,
       "attempts": 2,
-      "generation": 2,
+      "generation": 3,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "review",
+      "status": "reviewing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/2b6de6bdad0b25f22de387559a70f4f9da3babb0",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-storage-driver-v032"
@@ -249,6 +267,12 @@
         "Validate versioned parsing, invalid saves, migration and repeated load/save behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
         "Keep current accepted combat and collection behavior unchanged until integration is approved": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md",
         "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/storage-validation.md"
+      },
+      "assignment": {
+        "role": "review",
+        "worker": "storage-review-one",
+        "generation": 3,
+        "expiresAt": 1791953656.0088236
       }
     },
     {
