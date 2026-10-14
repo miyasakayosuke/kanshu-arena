@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 27,
+  "revision": 28,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -497,6 +497,24 @@
         "status": "review",
         "revision": 27
       }
+    },
+    "approved-review-catalog": {
+      "command": {
+        "action": "claim",
+        "task": "catalog-filter-scroll",
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "operationId": "approved-review-catalog"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "combined-ui-review-one",
+          "generation": 6,
+          "expiresAt": 1791963015.3390276
+        },
+        "revision": 28
+      }
     }
   },
   "tasks": [
@@ -511,10 +529,10 @@
       ],
       "required": true,
       "attempts": 2,
-      "generation": 5,
+      "generation": 6,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "review",
+      "status": "reviewing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -535,7 +553,13 @@
         "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
         "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
       },
-      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope."
+      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
+      "assignment": {
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "generation": 6,
+        "expiresAt": 1791963015.3390276
+      }
     },
     {
       "id": "awakening-preview",
