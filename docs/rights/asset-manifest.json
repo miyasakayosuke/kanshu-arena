@@ -1107,7 +1107,7 @@
       "reviewLimit": "Automated DOM/cascade tests are not native-browser geometry or legal clearance. Existing artwork ownership and similarity review questions remain open. Exact deployed native phone/zoom acceptance is required before completion; the previous verified release is retained for recovery.",
       "distribution": "Existing original SVG rendered inline in a noninteractive header preview. No new external resource or asset.",
       "sha256": {
-        "src/MonsterDetails.tsx": "e566d7d2cdb4a265530734d3157eca91114621b1c7632d7b6fafd06ba8a238e8",
+        "src/MonsterDetails.tsx": "1fcf994e5ff8d7c2c4641b09f04c7de1e2c51d58bfcb61aca7c3a6835a28fd84",
         "src/monsterDetails.css": "db33d91b36b51cc226963ed6c6f2cf8e33a3d831f213932cb4eff4394e2d4365"
       },
       "changeRecords": [
@@ -1116,6 +1116,12 @@
           "scope": "v0.20.30 large Pose-tab reuse of existing idle renderer; only active detail presentation mounted, explicit nested-movie pause, optional existing CatalogArt fallback and partial-SMIL guard.",
           "provenance": "Project-specific lifecycle integration only. All character vectors, track amplitudes/timings, myth scene geometry/text, battle code and dependencies retained unchanged. No reference frames, traced shapes, imported code, motion, audio, fonts or external assets.",
           "reviewLimit": "Revised source hashes cover integration changes, not new artwork or legal clearance. Native full-cycle and footprint review remains a release gate."
+        },
+        {
+          "recordedAt": "2026-10-14",
+          "scope": "Isolated awakening detail preview: import and read-only disclosure on base abilities page, excluded during battle inspection.",
+          "provenance": "Original project-specific UI; no artwork, animation, story, dependency, battle or save changes. See docs/awakening-detail-preview.md.",
+          "reviewLimit": "Hash update records inspected source delta, not legal clearance."
         }
       ]
     },
@@ -1298,6 +1304,25 @@
       },
       "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
       "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
+    },
+    {
+      "id": "awakening-detail-preview-candidate",
+      "kind": "original-ui-code-and-text",
+      "files": [
+        "src/MonsterDetails.tsx",
+        "src/awakening/AwakeningPreview.tsx",
+        "src/awakening/preview.css",
+        "src/awakening/preview.test.tsx",
+        "docs/awakening-detail-preview.md"
+      ],
+      "provenance": "AI-assisted original React/CSS implementation and Japanese explanatory UI text for this project on 2026-10-14. Uses the existing isolated awakening domain formula approved for this project. No third-party source prose or media imported.",
+      "creator": "Project development with AI assistance",
+      "createdFor": "isolated v0.20.32 awakening preview candidate",
+      "references": [
+        "docs/awakening-detail-preview.md"
+      ],
+      "distribution": "Local review candidate only; no publication authorized by this task. No license for project originals selected.",
+      "reviewLimit": "Source change and provenance inventory only, not an independent legal opinion or universal non-infringement finding."
     }
   ],
   "software": [

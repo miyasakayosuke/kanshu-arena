@@ -1,0 +1,15 @@
+.profileModal .awakeningPreview{margin-top:16px;border:1px solid #6f6147;border-radius:10px;padding:10px;color:#efe5cf;font-size:14px;line-height:1.65;overflow-wrap:anywhere;min-width:0}
+.profileModal .awakeningPreview summary{cursor:pointer;min-height:44px;display:list-item;align-content:center;font-weight:700}
+.profileModal .awakeningPreview p{font-size:14px;line-height:1.65;margin:10px 0;color:#efe5cf}
+.profileModal .awakeningPreview label{display:block;font-weight:700}
+.profileModal .awakeningPreview input{display:block;width:100%;min-width:0;min-height:44px;margin:0;accent-color:#ead59b}
+.profileModal .awakeningControls{display:flex;flex-wrap:wrap;gap:6px}
+.profileModal .awakeningControls button{min-width:44px;min-height:44px;padding:6px 10px;flex:1 0 auto;font-size:14px}
+.profileModal .awakeningControls button[aria-pressed=true]{outline:2px solid #ead59b;outline-offset:-3px}
+.profileModal .awakeningPreview :focus-visible{outline:3px solid #f3d57c;outline-offset:2px}
+.profileModal .awakeningResult{margin-top:12px;padding-top:10px;border-top:1px solid #6f6147;font-variant-numeric:tabular-nums}
+.profileModal .awakeningResult dl{margin:8px 0}
+.profileModal .awakeningResult dl>div{display:flex;flex-wrap:wrap;gap:6px 12px}
+.profileModal .awakeningResult dt{min-width:3em}
+.profileModal .awakeningResult dd{margin:0}
+.profileModal .awakeningPreview small{font-size:12px;line-height:1.65;display:block;color:#e6dab9}
