@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 15,
+  "revision": 16,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -267,6 +267,24 @@
         "status": "verified",
         "revision": 15
       }
+    },
+    "safe-claim-preview": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-preview",
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "operationId": "safe-claim-preview"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "browser-qa-builder-one",
+          "generation": 2,
+          "expiresAt": 1791955341.6108398
+        },
+        "revision": 16
+      }
     }
   },
   "tasks": [
@@ -309,17 +327,24 @@
         "Independent evidence covers existing accepted behavior"
       ],
       "required": true,
-      "attempts": 0,
-      "generation": 1,
+      "attempts": 1,
+      "generation": 2,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
       ],
       "notBefore": 1791953510.822592,
-      "lastFailure": "Preserved candidate and actual browser results inspected. Prior worker stopped. Prepare combined read-only UI release under fresh assignment and exact review."
+      "lastFailure": "Preserved candidate and actual browser results inspected. Prior worker stopped. Prepare combined read-only UI release under fresh assignment and exact review.",
+      "implementer": "browser-qa-builder-one",
+      "assignment": {
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "generation": 2,
+        "expiresAt": 1791955341.6108398
+      }
     },
     {
       "id": "replacement-animation",
