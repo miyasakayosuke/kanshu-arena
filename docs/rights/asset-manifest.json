@@ -1258,12 +1258,13 @@
         "tests/reference-v02030/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
         "tests/reference-v02030/provenance.json": "7df86fd551224525d7b5c080822292ee5ebd3dd358783b1d759270ea6d5c60a2",
         "scripts/balance-lab/cli.mjs": "140ca0cbc87fc6b9ce87438c505d9e295656430ddf045dfa171f86e87ba47796",
-        "scripts/check-rights-selftest.mjs": "0c39a21da720602ac7421c92abf2b40e8e7b27fdc5288032a3c7ad7093b99a4f",
+        "scripts/check-rights-selftest.mjs": "a9c638a5ae9fe6cd75265c506567a5353ce8416af08442d41d6add7c53d465c5",
         "docs/action-time-auto.md": "a849aea0fb8af76d2019a549c18609300e52a16f82825817fcc1ffdb27531510",
         "docs/rights/releases/2026-10-13-v0.20.31.md": "1e6fd7fe4c0243c79d5edfc7b84454fdefa67b8b75a8fbf4d10d5da7825237d0"
       },
       "reviewLimit": "Prepared release candidate; native acceptance pending. Manual mechanics differential and changed automatic outcomes are distinct. Broad tactical and enemy action-time variants rejected on pacing; final scope keeps established enemy pre-turn policy except exhausted guard pool. Ownership/distribution questions remain open; inventory is not legal clearance.",
-      "distribution": "Runtime integration only if later approved; reference engine and evaluation are repository-only, not browser assets."
+      "distribution": "Runtime integration only if later approved; reference engine and evaluation are repository-only, not browser assets.",
+      "candidateFixtureNote": "Motion preview QA: fixture now copies all explicitly inventoried files, including isolated docs and QA tooling. Existing assertions and enforcement remain intact."
     },
     {
       "id": "recurring-turn-mp-recovery",
