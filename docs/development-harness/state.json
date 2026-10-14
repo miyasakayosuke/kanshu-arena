@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 33,
+  "revision": 34,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -605,6 +605,19 @@
         "status": "released",
         "revision": 33
       }
+    },
+    "trial-quantities": {
+      "command": {
+        "action": "owner-decision",
+        "task": "awakening-quantities",
+        "operationId": "trial-quantities",
+        "authorizationRef": "Owner explicitly approved provisional awakening quantities and progression rules for implementation and validation.",
+        "evidence": "Completed battle: one common material; victory: four extra common materials. Each ten cumulative victories grants ten materials for a chosen species, with no expiry. Each awakening stage costs ten materials through stage ninety-nine. No daily reset or login streak. Abandoned battles grant no rewards. Quantities remain adjustable after playtesting."
+      },
+      "result": {
+        "decisionRecorded": "awakening-quantities",
+        "revision": 34
+      }
     }
   },
   "tasks": [
@@ -834,11 +847,7 @@
       "attempts": 0,
       "generation": 1,
       "dependsOn": [],
-      "status": "blocked",
-      "block": {
-        "type": "approval",
-        "reason": "Owner decision evidence must be reverified before recording it in the new ledger."
-      }
+      "status": "decided"
     },
     {
       "id": "awakening-integration",
@@ -871,5 +880,11 @@
     "priorCheckpointSHA": "410f0158903bbdc40a42617a3152cb8d00c4d975",
     "priorRevision": 2,
     "method": "Fresh public checkpoint; prior runtime claims retired; evidence needs fresh review"
+  },
+  "decisions": {
+    "awakening-quantities": {
+      "reference": "Owner explicitly approved provisional awakening quantities and progression rules for implementation and validation.",
+      "evidence": "Completed battle: one common material; victory: four extra common materials. Each ten cumulative victories grants ten materials for a chosen species, with no expiry. Each awakening stage costs ten materials through stage ninety-nine. No daily reset or login streak. Abandoned battles grant no rewards. Quantities remain adjustable after playtesting."
+    }
   }
 }
