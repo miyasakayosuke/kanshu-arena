@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 import path from 'node:path';
 if (!process.env.QA_APP_ROOT) throw new Error('QA_APP_ROOT must identify the immutable candidate checkout');
-if (!['baseline', 'preview', 'catalog', 'storage'].includes(process.env.QA_CANDIDATE)) throw new Error('Unknown QA_CANDIDATE');
+if (!['baseline', 'preview', 'catalog', 'storage', 'combined'].includes(process.env.QA_CANDIDATE)) throw new Error('Unknown QA_CANDIDATE');
 export default defineConfig({
   testDir: '.', testMatch: '*.spec.mjs', fullyParallel: false, workers: 1,
   retries: 0, timeout: 90_000, expect: { timeout: 10_000 },

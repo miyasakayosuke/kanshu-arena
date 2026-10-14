@@ -66,7 +66,7 @@ test('catalog navigation, detail keyboard focus, team and complete play loop', a
   await info.attach('party-preserved-through-play-and-reload', { body: JSON.stringify(partyBefore), contentType: 'application/json' });
 });
 test('catalog result changes reset real scroll and navigation retains it', async ({ page }, info) => {
-  test.skip(kind !== 'catalog', 'Feature assertion belongs only to the catalog candidate');
+  test.skip(!['catalog', 'combined'].includes(kind), 'Feature assertion belongs only to the catalog candidate');
   await nav(page, '図鑑').click();
   const list = page.getByLabel('図鑑一覧', { exact: true });
   await scrollList(list);
@@ -91,7 +91,7 @@ test('catalog result changes reset real scroll and navigation retains it', async
   await screenshot(page, info, 'catalog-reset');
 });
 test('awakening calculator is hypothetical, bounded and resets between monsters and reopen', async ({ page }, info) => {
-  test.skip(kind !== 'preview', 'Calculator assertion belongs only to the awakening preview candidate');
+  test.skip(!['preview', 'combined'].includes(kind), 'Calculator assertion belongs only to the awakening preview candidate');
   await nav(page, '図鑑').click();
   const catalogBefore = await page.locator('.catalogGallery').innerText();
   await page.getByRole('button', { name: '妖狐の詳細', exact: true }).click();

@@ -1,30 +1,37 @@
-# Isolated browser QA for v0.20.32 candidates
+# Isolated browser QA for combined v0.20.34
 
 This is test-only infrastructure, based on accepted main commit
 `8343d81405b9eb3c59621a4b0ead4052e2d3949e`. The rights self-test fixture copies only exact manifest-listed QA/workflow files with path containment checks. It changes no application source,
 root dependencies, production notices, existing deployment workflow or settings.
-The new workflow runs only on pushes to `candidate/browser-qa-v032` in
+The new workflow runs only on pushes to `candidate/browser-qa-v034` in
 `miyasakayosuke/kanshu-arena`. There is no manual dispatch, pull-request trigger,
 secret use, OIDC, Pages deployment, environment grant or write permission.
 Independent source/security review must precede publication of that branch.
 
 ## Exact matrix and pass contract
 
-- baseline: `8343d81405b9eb3c59621a4b0ead4052e2d3949e`, 2 passed / 10 skipped
-- preview: `da7954108e36b69955c730eafc7bd7782be809e1`, 4 passed / 8 skipped
-- catalog: `e91dbdb5376a44c8a851a76b0bf70251882fff62`, 4 passed / 8 skipped
-- storage: `2b6de6bdad0b25f22de387559a70f4f9da3babb0`, 6 passed / 6 skipped
+The new branch derives from the independently reviewed QA commit
+`74ca824dcea6a92a6b350743ecfd666dd58c0941`. Its matrix contains only the combined
+v0.20.34 candidate. The prior four-row QA branch and run remain unchanged.
 
-Each row has twelve discovered cases. Each executed case runs at desktop
-1440×1000 and touch/mobile 390×844. The result guard rejects missing projects,
-all-skipped runs, unexpected counts, extra retries and runner errors. The baseline
-does not assert either new UI feature. No row imports another row's source.
+- combined: `14134f351d8eca79714199e1f2b34dc76e826a4e`, 6 passed / 6 skipped
 
-UI rows build with the candidate's existing `npm run build` (including source and
-dist rights checks), then serve that production bundle with loopback Vite preview.
-The storage row uses a loopback Vite development server solely to import the
-isolated TypeScript driver directly; its production UI tests are explicitly skipped.
-It never imports the driver into the production application.
+The coordinator must substitute the independently reviewed exact combined commit
+SHA before publication, update the workflow's inventory digest and have the final
+substitution checked. A placeholder is not authorization to run an arbitrary ref.
+
+The twelve discovered cases are the shared UI, catalog, calculator and storage
+specifications at desktop 1440×1000 and touch/mobile 390×844. The combined row
+executes shared UI, catalog reset and awakening calculator checks at both sizes;
+all six storage cases are deliberately skipped. The result guard rejects missing
+projects, all-skipped runs, unexpected counts, retries and runner errors. Support
+for the historical tags remains in the test helpers solely to minimize unrelated
+changes; the workflow cannot select them.
+
+The combined candidate builds with its unchanged `npm run build` including source
+and dist rights checks, then serves its production bundle through loopback Vite
+preview. There is no development-server driver import for this matrix row.
+The old storage spec remains available but is not part of combined acceptance.
 
 ## Coverage
 
@@ -46,7 +53,7 @@ are checked. Storage mutation calls and before/after bytes stay unchanged;
 displayed base stats and catalog roster content remain unchanged. This does not
 inspect private in-memory React/module objects or prove every engine invariant.
 
-Storage-only checks execute the actual driver/adapter in independent same-origin
+Historical storage-only checks (skipped for combined) execute the actual driver/adapter in independent same-origin
 pages and real browser IndexedDB connections. Five races per viewport assert one
 head writer, one stale rejection, one duplicate settlement and exactly one reward.
 A reload during an active battle grants nothing. Explicit synthetic legacy progress
@@ -72,11 +79,11 @@ long-running stress or comprehensive accessibility. The synthetic legacy fixture
 is not proof that any historical production save can be migrated. Real abort
 rollback is not evidence of crash durability or quota handling.
 
-Local pre-publication verification on 2026-10-14: dependency lock creation and
+Historical initial local pre-publication verification on 2026-10-14: dependency lock creation and
 `npm ci --ignore-scripts` succeeded; Node syntax/test discovery and result-guard
 self-tests succeeded. Chromium launch was blocked before test bodies by the local
 sandbox (`socket() failed: Operation not permitted`). No browser pass is claimed.
-The same-job standard Ubuntu CI run remains necessary.
+The prior four rows subsequently passed CI run 38512498551 with16 executed passes. Those results do not establish combined-source acceptance; the new exact combined run and screenshot review remain required.
 
 ## Dependencies and local use
 
@@ -94,7 +101,7 @@ For an authorized environment with a browser, from this directory:
     npm ci --ignore-scripts --no-audit --no-fund
     npm run test:guards
     npx --no-install playwright install chromium
-    QA_APP_ROOT=/absolute/immutable/checkout QA_CANDIDATE=catalog QA_SOURCE_SHA=<exact-sha> npm test
+    QA_APP_ROOT=/absolute/immutable/checkout QA_CANDIDATE=combined QA_SOURCE_SHA=<exact-sha> npm test
 
 Build UI checkouts first using their unchanged `npm run build`. Storage does not
 need a build. QA_CHROMIUM_PATH may point to an already installed local Chromium;

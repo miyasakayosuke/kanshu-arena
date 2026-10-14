@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 export function verify(report, candidate) {
-  const counts = { baseline: 2, preview: 4, catalog: 4, storage: 6 };
+  const counts = { baseline: 2, preview: 4, catalog: 4, storage: 6, combined: 6 };
   if (!Object.hasOwn(counts, candidate)) throw new Error('Unknown candidate');
   const tests = [];
   const visit = suite => {
