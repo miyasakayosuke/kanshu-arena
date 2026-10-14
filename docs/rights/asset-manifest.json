@@ -1431,6 +1431,42 @@
         "docs/awakening-progression.md"
       ],
       "distribution": "Browser gameplay and local IndexedDB only. Existing art and notices unchanged."
+    },
+    {
+      "id": "isolated-browser-qa-v035",
+      "kind": "original-test-code",
+      "files": [
+        ".github/workflows/candidate-browser-qa.yml",
+        "qa/browser/package-lock.json",
+        "qa/browser/playwright.config.mjs",
+        "qa/browser/fixtures.mjs",
+        "qa/browser/storage.spec.mjs",
+        "qa/browser/.gitignore",
+        "qa/browser/ui.spec.mjs",
+        "qa/browser/progression-helpers.mjs",
+        "qa/browser/progression.spec.mjs",
+        "qa/browser/verify-results.test.mjs",
+        "qa/browser/verify-results.mjs",
+        "qa/browser/README.md",
+        "qa/browser/package.json"
+      ],
+      "provenance": "Original project browser QA adapted from exact existing harness2c7b195442be1d3940f505477b68a59462e46712. Existing locked development-only Playwright dependencies and official Chromium runtime. No app dependencies or deployment changes.",
+      "reviewLimit": "Test assertions and screenshots require inspection; not legal clearance. Test-only branch does not deploy.",
+      "sha256": {
+        ".github/workflows/candidate-browser-qa.yml": "7c1dc0b3cea76f97205de8507de9d4995c88b782653b0913265a2774ed3a7585",
+        "qa/browser/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b",
+        "qa/browser/playwright.config.mjs": "60f1abc4a373c9e9e66b0e2e3de9c7999ab63246a69fffae59e2036f59eaf97e",
+        "qa/browser/fixtures.mjs": "00ca93eb8e9682cbc0db09870715cde1a30a9251ee10d21b901b25c75c5accea",
+        "qa/browser/storage.spec.mjs": "038a26e9b49a3d326dfe072fcb7026e6f7c7b4dd96ee786a13c0f2c094ec5712",
+        "qa/browser/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
+        "qa/browser/ui.spec.mjs": "58220ee5e401c732f7931acc2d4867cf09d9d340c31f405f72e7850ead1061a9",
+        "qa/browser/progression-helpers.mjs": "7ed9996349503f46c5f5b6561d7a9d933d18df05793bcce83c375e8bf175e1d4",
+        "qa/browser/progression.spec.mjs": "8020f07e7d5c838bcf687772e1b9bb4a3e69865acf6192c74dd204261aa52a46",
+        "qa/browser/verify-results.test.mjs": "9ebc8bbc91dfa5e4bc05ccd39860bae5376d5bf64af6e711e6216a4074111caf",
+        "qa/browser/verify-results.mjs": "1d55d9d60039b3c46d3665827fe6b5f67aa9c952f552c9657830734f768ef2dd",
+        "qa/browser/README.md": "488fe29755b862984aea1f7ffe262b8cea7d8c6d3841c7cd480e01e5e8b1cb7b",
+        "qa/browser/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0"
+      }
     }
   ],
   "software": [

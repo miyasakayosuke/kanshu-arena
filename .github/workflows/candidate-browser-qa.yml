@@ -1,0 +1,79 @@
+name: Isolated awakening progression v0.20.35 browser QA
+on:
+  push:
+    branches: [candidate/browser-qa-v035]
+permissions:
+  contents: read
+concurrency:
+  group: candidate-browser-qa-v035
+  cancel-in-progress: false
+jobs:
+  browser-qa:
+    if: github.repository == 'miyasakayosuke/kanshu-arena' && github.ref == 'refs/heads/candidate/browser-qa-v035'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - candidate: awakening
+            sha: 0961f09d8081c357c08388ee807f4385835a8f47
+    steps:
+      - name: Check out reviewed QA harness
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          path: harness
+          persist-credentials: false
+      - name: Check out immutable application candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ matrix.sha }}
+          path: app
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Verify source identity
+        env:
+          EXPECTED_SHA: ${{ matrix.sha }}
+        run: |
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git -C app rev-parse HEAD)" = "$EXPECTED_SHA"
+      - name: Install locked application tooling without lifecycle scripts
+        working-directory: app
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build immutable production UI candidate and check rights inventory
+        working-directory: app
+        run: npm run build
+      - name: Install separate locked QA dependencies
+        working-directory: harness/qa/browser
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify fail-closed result guards
+        working-directory: harness/qa/browser
+        run: npm run test:guards
+      - name: Install official Chromium test runtime
+        working-directory: harness/qa/browser
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Run browser QA with a same-job loopback Vite server (production preview for UI)
+        working-directory: harness/qa/browser
+        env:
+          QA_APP_ROOT: ${{ github.workspace }}/app
+          QA_CANDIDATE: ${{ matrix.candidate }}
+          QA_SOURCE_SHA: ${{ matrix.sha }}
+        run: npm test
+      - name: Confirm candidate source was not edited
+        if: always()
+        run: test -z "$(git -C app status --porcelain --untracked-files=no)"
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: browser-qa-${{ matrix.candidate }}-${{ matrix.sha }}
+          path: |
+            harness/qa/browser/test-results/
+            harness/qa/browser/playwright-report/
+          if-no-files-found: error
+          retention-days: 7
+
