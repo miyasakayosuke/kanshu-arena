@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arena development harness state v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "revision",
+    "operations",
+    "tasks"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "operations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "fingerprint",
+          "result"
+        ],
+        "properties": {
+          "fingerprint": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "status",
+          "attempts",
+          "required",
+          "criteria",
+          "dependsOn"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "implementation",
+              "validation",
+              "decision"
+            ]
+          },
+          "status": {
+            "enum": [
+              "ready",
+              "running",
+              "review",
+              "reviewing",
+              "candidate",
+              "publishing",
+              "released",
+              "accepted",
+              "blocked",
+              "retry",
+              "decided"
+            ]
+          },
+          "attempts": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "criteria": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "dependsOn": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "lease": {
+            "type": "object",
+            "required": [
+              "worker",
+              "token",
+              "role",
+              "expiresAt"
+            ],
+            "properties": {
+              "worker": {
+                "type": "string",
+                "minLength": 1
+              },
+              "token": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "enum": [
+                  "implement",
+                  "review",
+                  "publish"
+                ]
+              },
+              "expiresAt": {
+                "type": "number"
+              }
+            }
+          },
+          "block": {
+            "type": "object",
+            "required": [
+              "type",
+              "reason"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "approval",
+                  "uncertain",
+                  "exhausted",
+                  "external",
+                  "dependency"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "commit": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}$"
+          },
+          "notBefore": {
+            "type": "number"
+          },
+          "checks": {
+            "type": "object"
+          },
+          "criteriaEvidence": {
+            "type": "object"
+          },
+          "review": {
+            "type": "object"
+          },
+          "release": {
+            "type": "object"
+          },
+          "acceptanceRef": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Runtime validation additionally enforces DAG acyclicity, state/lease correspondence, role capacities and exact-commit review/release invariants. References are not proof of authorization or passing checks."
+}

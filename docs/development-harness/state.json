@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "revision": 0,
+  "operations": {},
+  "baseline": {
+    "version": "0.20.32",
+    "verification": "Coordinator must re-read the live deployment and repository head before importing work."
+  },
+  "tasks": [
+    {
+      "id": "catalog-filter-scroll",
+      "title": "Reset catalog scroll when filters change",
+      "status": "blocked",
+      "kind": "implementation",
+      "attempts": 0,
+      "criteria": [
+        "Changed filters show first result without stale scroll",
+        "Existing detail dismissal and scroll restoration still pass",
+        "Narrow viewport and keyboard QA recorded"
+      ],
+      "dependsOn": [],
+      "required": true,
+      "block": {
+        "type": "external",
+        "reason": "Existing candidate passed code/test review; browser visual QA is still pending. Inspect the existing worker and candidate before importing; do not duplicate implementation or treat it as released."
+      }
+    },
+    {
+      "id": "awakening-preview",
+      "title": "Review read-only awakening preview",
+      "status": "blocked",
+      "kind": "implementation",
+      "attempts": 0,
+      "criteria": [
+        "Preview has no save, combat or progression side effects",
+        "Comparison labels and narrow viewport behavior are reviewed",
+        "Independent evidence covers existing accepted behavior"
+      ],
+      "dependsOn": [],
+      "required": true,
+      "block": {
+        "type": "external",
+        "reason": "Existing candidate passed code/test review; browser visual QA is still pending. Inspect the existing worker and candidate before importing; do not duplicate implementation or treat it as released."
+      }
+    },
+    {
+      "id": "replacement-animation",
+      "title": "Meet approved replacement-animation visual acceptance",
+      "status": "blocked",
+      "kind": "implementation",
+      "attempts": 0,
+      "criteria": [
+        "Explicit owner approval of replacement visual evidence; rejected v0.20.33 is never a shipping requirement",
+        "Independent rendered-motion review and provenance inventory",
+        "Rollback-safe reviewed release evidence"
+      ],
+      "dependsOn": [],
+      "required": true,
+      "block": {
+        "type": "approval",
+        "reason": "Rejected visual release remains blocked; no automatic art adoption or redeployment."
+      }
+    },
+    {
+      "id": "v1-acceptance",
+      "title": "Confirm bounded v1 acceptance scope",
+      "status": "blocked",
+      "kind": "decision",
+      "attempts": 0,
+      "criteria": [
+        "Owner confirms final release scope and mandatory criteria"
+      ],
+      "dependsOn": [],
+      "required": true,
+      "block": {
+        "type": "approval",
+        "reason": "Proposed acceptance checklist needs an owner decision; independent approved work can continue."
+      }
+    },
+    {
+      "id": "baseline-regression",
+      "title": "Verify accepted baseline and remaining release gates",
+      "status": "ready",
+      "kind": "validation",
+      "attempts": 0,
+      "criteria": [
+        "Verify exact live commit against the accepted baseline",
+        "Record passing rights tests, rights inventory, full tests and build",
+        "Check play loop, catalog, team preservation, keyboard and narrow viewport flows",
+        "List only evidence-backed remaining defects without inventing new feature work"
+      ],
+      "dependsOn": [],
+      "required": true
+    },
+    {
+      "id": "awakening-storage",
+      "title": "Harden awakening storage and migration drivers",
+      "kind": "implementation",
+      "status": "ready",
+      "attempts": 0,
+      "criteria": [
+        "Inspect existing storage candidate before editing to avoid duplicate work",
+        "Validate versioned parsing, invalid saves, migration and repeated load/save behavior",
+        "Keep current accepted combat and collection behavior unchanged until integration is approved",
+        "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities"
+      ],
+      "dependsOn": [],
+      "required": true
+    },
+    {
+      "id": "awakening-quantities",
+      "title": "Confirm awakening collection and progression quantities",
+      "kind": "decision",
+      "status": "blocked",
+      "attempts": 0,
+      "criteria": [
+        "Owner confirms quantities and bounded progression rules before gameplay integration"
+      ],
+      "dependsOn": [],
+      "required": true,
+      "block": {
+        "type": "approval",
+        "reason": "Collection/progression quantities remain an owner decision; storage and pure driver tests may proceed independently."
+      }
+    },
+    {
+      "id": "awakening-integration",
+      "title": "Integrate approved awakening progression",
+      "kind": "implementation",
+      "status": "ready",
+      "attempts": 0,
+      "criteria": [
+        "Implement the approved 95/98/100 percent HP/ATK progression",
+        "Use owner-approved collection/progression quantities and migration rules",
+        "Cover battle, collection, reload, invalid-save and repeated-action regression paths",
+        "Record independent review and browser QA before release"
+      ],
+      "dependsOn": [
+        "awakening-storage",
+        "awakening-quantities"
+      ],
+      "required": true
+    }
+  ]
+}
