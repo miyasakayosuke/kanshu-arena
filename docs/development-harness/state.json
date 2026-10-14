@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 20,
+  "revision": 21,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -371,6 +371,24 @@
         "status": "candidate",
         "revision": 20
       }
+    },
+    "safe-review-preview": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-preview",
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "operationId": "safe-review-preview"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "combined-ui-review-one",
+          "generation": 3,
+          "expiresAt": 1791956904.5470183
+        },
+        "revision": 21
+      }
     }
   },
   "tasks": [
@@ -426,10 +444,10 @@
       ],
       "required": true,
       "attempts": 1,
-      "generation": 2,
+      "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "review",
+      "status": "reviewing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
@@ -449,6 +467,12 @@
         "Preview has no save, combat or progression side effects": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Comparison labels and narrow viewport behavior are reviewed": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
         "Independent evidence covers existing accepted behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+      },
+      "assignment": {
+        "role": "review",
+        "worker": "combined-ui-review-one",
+        "generation": 3,
+        "expiresAt": 1791956904.5470183
       }
     },
     {
