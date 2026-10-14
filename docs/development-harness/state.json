@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 35,
+  "revision": 36,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -637,6 +637,33 @@
         },
         "revision": 35
       }
+    },
+    "trial-submit": {
+      "command": {
+        "action": "submit",
+        "task": "awakening-integration",
+        "worker": "awakening-integrator",
+        "generation": 2,
+        "operationId": "trial-submit",
+        "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
+        },
+        "criteriaEvidence": {
+          "Implement the approved 95/98/100 percent HP/ATK progression": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "Use owner-approved collection/progression quantities and migration rules": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "Cover battle, collection, reload, invalid-save and repeated-action regression paths": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+          "Record independent review and browser QA before release": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
+        }
+      },
+      "result": {
+        "status": "review",
+        "revision": 36
+      }
     }
   },
   "tasks": [
@@ -892,13 +919,21 @@
         }
       ],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "review",
       "implementer": "awakening-integrator",
-      "assignment": {
-        "role": "implement",
-        "worker": "awakening-integrator",
-        "generation": 2,
-        "expiresAt": 1791970126.9660072
+      "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
+      "checks": {
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
+      },
+      "criteriaEvidence": {
+        "Implement the approved 95/98/100 percent HP/ATK progression": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "Use owner-approved collection/progression quantities and migration rules": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "Cover battle, collection, reload, invalid-save and repeated-action regression paths": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
+        "Record independent review and browser QA before release": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
       }
     }
   ],
