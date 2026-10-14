@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 14,
+  "revision": 15,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -251,6 +251,22 @@
         },
         "revision": 14
       }
+    },
+    "safe-approve-baseline": {
+      "command": {
+        "action": "review",
+        "task": "baseline-regression",
+        "worker": "baseline-review-one",
+        "generation": 3,
+        "commit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
+        "approved": true,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-review.md",
+        "operationId": "safe-approve-baseline"
+      },
+      "result": {
+        "status": "verified",
+        "revision": 15
+      }
     }
   },
   "tasks": [
@@ -357,7 +373,7 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "reviewing",
+      "status": "verified",
       "implementer": "baseline-validator-one",
       "commit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
       "checks": {
@@ -373,11 +389,10 @@
         "Check play loop, catalog, team preservation, keyboard and narrow viewport flows": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
         "List only evidence-backed remaining defects without inventing new feature work": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md"
       },
-      "assignment": {
-        "role": "review",
+      "review": {
         "worker": "baseline-review-one",
-        "generation": 3,
-        "expiresAt": 1791955058.2584856
+        "commit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-review.md"
       }
     },
     {
