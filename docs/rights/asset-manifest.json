@@ -1252,7 +1252,7 @@
         "tests/reference-v02030/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
         "tests/reference-v02030/provenance.json": "7df86fd551224525d7b5c080822292ee5ebd3dd358783b1d759270ea6d5c60a2",
         "scripts/balance-lab/cli.mjs": "140ca0cbc87fc6b9ce87438c505d9e295656430ddf045dfa171f86e87ba47796",
-        "scripts/check-rights-selftest.mjs": "0c39a21da720602ac7421c92abf2b40e8e7b27fdc5288032a3c7ad7093b99a4f",
+        "scripts/check-rights-selftest.mjs": "7aba6df52956111684e8a7f2baecc6c731a2a69aac0a5cc8a37d49d3ccb9386c",
         "docs/action-time-auto.md": "a849aea0fb8af76d2019a549c18609300e52a16f82825817fcc1ffdb27531510",
         "docs/rights/releases/2026-10-13-v0.20.31.md": "1e6fd7fe4c0243c79d5edfc7b84454fdefa67b8b75a8fbf4d10d5da7825237d0"
       },
@@ -1298,6 +1298,51 @@
       },
       "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
       "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
+    },
+    {
+      "id": "isolated-candidate-browser-qa-v032",
+      "kind": "original-development-test-code",
+      "files": [
+        ".github/workflows/candidate-browser-qa.yml",
+        "qa/browser/.gitignore",
+        "qa/browser/README.md",
+        "qa/browser/fixtures.mjs",
+        "qa/browser/package-lock.json",
+        "qa/browser/package.json",
+        "qa/browser/playwright.config.mjs",
+        "qa/browser/storage.spec.mjs",
+        "qa/browser/ui.spec.mjs",
+        "qa/browser/verify-results.mjs",
+        "qa/browser/verify-results.test.mjs",
+        "scripts/check-rights-selftest.mjs"
+      ],
+      "creator": "AI-assisted original QA implementation for this project, 2026-10-14 UTC.",
+      "provenance": "Original workflow, browser tests, result guards and documentation; no third-party source snippets or artwork copied. Uses exact existing application candidates, isolated npmjs Playwright test tooling and pinned official GitHub actions.",
+      "createdFor": "v0.20.32 candidate QA only",
+      "sha256": {
+        ".github/workflows/candidate-browser-qa.yml": "b9614c551688a1c52ed40d7264616a875d1d3593d1ca652a00b1c0ac45499d6c",
+        "qa/browser/.gitignore": "a1b9b3aabbabe90958f5b13afee01981b529713cc1a54d5109e4ba88c5b0c77f",
+        "qa/browser/README.md": "d9ca80469179e543fe7cfeb76f22f3f428280074b8c287caa17751f71e7ee1cf",
+        "qa/browser/fixtures.mjs": "00ca93eb8e9682cbc0db09870715cde1a30a9251ee10d21b901b25c75c5accea",
+        "qa/browser/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b",
+        "qa/browser/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0",
+        "qa/browser/playwright.config.mjs": "6ae7b431e223d3ab6584120d0b71f1f7ca1d95f168f9e5fb0ace0f7383b66a14",
+        "qa/browser/storage.spec.mjs": "bbc2ce79f25c5167f98c88bb767dba6a88a854a65da56776886753a061e8a2e9",
+        "qa/browser/ui.spec.mjs": "8a92828d7353d4bf570806b7a637914a2487c66c1c424458eca5d84f92593089",
+        "qa/browser/verify-results.mjs": "3b49c66237c9a038efc9d9cb1f819d9d9865b5c7f653eace885c9151fade545d",
+        "qa/browser/verify-results.test.mjs": "243a9270cd713903e2ef189a092cdf1f54cad8fbf069dcd2c54a0c7ddbb3d388",
+        "scripts/check-rights-selftest.mjs": "7aba6df52956111684e8a7f2baecc6c731a2a69aac0a5cc8a37d49d3ccb9386c"
+      },
+      "references": [
+        "qa/browser/README.md",
+        "qa/browser/package-lock.json",
+        "https://github.com/microsoft/playwright",
+        "https://github.com/actions/checkout",
+        "https://github.com/actions/setup-node",
+        "https://github.com/actions/upload-artifact"
+      ],
+      "distribution": "QA branch source only. No production app import, root dependency change, browser-tool redistribution or Pages publication. Installed dependency LICENSE/NOTICE files retained; Playwright packages Apache-2.0 and optional Darwin fsevents MIT.",
+      "reviewLimit": "Browser execution is pending reviewed CI; local sandbox prevents Chromium launch. Screenshot manual review, production legacy-save compatibility, quota/crash durability, and other browsers remain unverified. Not a release, acceptance or legal clearance."
     }
   ],
   "software": [

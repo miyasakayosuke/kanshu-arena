@@ -1,9 +1,9 @@
 import { afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, lstatSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkRights } from './check-rights.mjs';
 
@@ -17,6 +17,20 @@ function fixture() {
   for (const path of ['src', 'public', 'docs', 'scripts', 'tests', 'package-lock.json']) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(repo, path), join(root, path), { recursive: true });
+  }
+  // Test-only QA inventory entries live outside the traditional game fixture.
+  // Copy exactly listed regular files; never recursively copy tooling/reports.
+  const inventory = JSON.parse(readFileSync(join(repo, 'docs/rights/asset-manifest.json'), 'utf8'));
+  const repositoryRoot = realpathSync(repo);
+  for (const path of new Set(inventory.assets.flatMap(asset => asset.files))) {
+    assert.equal(typeof path, 'string');
+    assert(!isAbsolute(path) && !path.includes('\\') && !path.split('/').some(part => ['', '.', '..'].includes(part)), 'Unsafe inventory fixture path');
+    if (!path.startsWith('.github/') && !path.startsWith('qa/')) continue;
+    const source = resolve(repo, path), target = resolve(root, path);
+    const inside = (parent, child) => { const part = relative(parent, child); return part !== '' && part !== '..' && !part.startsWith(`..${sep}`) && !isAbsolute(part); };
+    assert(inside(repositoryRoot, realpathSync(source)) && inside(root, target), 'Inventory fixture path escapes its root');
+    assert(lstatSync(source).isFile(), 'Inventory fixture must be a regular file');
+    put(root, path, readFileSync(source, 'utf8'));
   }
   for (const name of ['react', 'react-dom', 'scheduler', 'vite']) {
     for (const filename of ['package.json', name === 'vite' ? 'LICENSE.md' : 'LICENSE']) {
