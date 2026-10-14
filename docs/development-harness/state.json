@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 9,
+  "revision": 10,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -155,6 +155,24 @@
         "status": "verified",
         "revision": 9
       }
+    },
+    "safe-baseline-heartbeat": {
+      "command": {
+        "action": "heartbeat",
+        "task": "baseline-regression",
+        "worker": "baseline-validator-one",
+        "generation": 2,
+        "operationId": "safe-baseline-heartbeat"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "baseline-validator-one",
+          "generation": 2,
+          "expiresAt": 1791954876.6084409
+        },
+        "revision": 10
+      }
     }
   },
   "tasks": [
@@ -269,7 +287,7 @@
         "role": "implement",
         "worker": "baseline-validator-one",
         "generation": 2,
-        "expiresAt": 1791953188.526059
+        "expiresAt": 1791954876.6084409
       }
     },
     {
