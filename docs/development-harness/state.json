@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 42,
+  "revision": 43,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -760,6 +760,25 @@
         "notBefore": 1791980803.3172991,
         "revision": 42
       }
+    },
+    "motion-resume": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "fenrir-motion-candidate",
+        "ttl": 3600,
+        "operationId": "motion-resume"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-motion-candidate",
+          "generation": 3,
+          "expiresAt": 1791984414.8308792
+        },
+        "revision": 43
+      }
     }
   },
   "tasks": [
@@ -871,14 +890,20 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 1,
-      "generation": 2,
+      "attempts": 2,
+      "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "notBefore": 1791980803.3172991,
       "lastFailure": "Prior worker stopped during a candidate asset write. No object identifier was returned after a tool catalog change. No candidate branch or deployment occurred. Owner visual acceptance remains required.",
-      "implementer": "fenrir-motion-candidate"
+      "implementer": "fenrir-motion-candidate",
+      "assignment": {
+        "role": "implement",
+        "worker": "fenrir-motion-candidate",
+        "generation": 3,
+        "expiresAt": 1791984414.8308792
+      }
     },
     {
       "id": "v1-acceptance",
