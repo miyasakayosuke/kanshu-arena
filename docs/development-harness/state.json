@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 40,
+  "revision": 42,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -733,6 +733,33 @@
         },
         "revision": 40
       }
+    },
+    "motion-reconcile": {
+      "command": {
+        "action": "reconcile",
+        "operationId": "motion-reconcile"
+      },
+      "result": {
+        "stale": [
+          "replacement-animation"
+        ],
+        "revision": 41
+      }
+    },
+    "motion-retry-tool": {
+      "command": {
+        "action": "resolve",
+        "task": "replacement-animation",
+        "outcome": "retry",
+        "evidence": "Prior worker stopped during a candidate asset write. No object identifier was returned after a tool catalog change. No candidate branch or deployment occurred. Owner visual acceptance remains required.",
+        "authorizationRef": "Owner approved game code and assets in the existing repository and prioritized motion implementation. This does not adopt the visual candidate.",
+        "operationId": "motion-retry-tool"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791980803.3172991,
+        "revision": 42
+      }
     }
   },
   "tasks": [
@@ -848,16 +875,10 @@
       "generation": 2,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
-      "notBefore": 1791969158.4437966,
-      "lastFailure": "Previous assignments are inactive. Prepare a new isolated motion preview from the original artwork. Existing owner visual acceptance and release criteria remain unmet; no adoption or deployment is authorized.",
-      "implementer": "fenrir-motion-candidate",
-      "assignment": {
-        "role": "implement",
-        "worker": "fenrir-motion-candidate",
-        "generation": 2,
-        "expiresAt": 1791972770.676239
-      }
+      "status": "retry",
+      "notBefore": 1791980803.3172991,
+      "lastFailure": "Prior worker stopped during a candidate asset write. No object identifier was returned after a tool catalog change. No candidate branch or deployment occurred. Owner visual acceptance remains required.",
+      "implementer": "fenrir-motion-candidate"
     },
     {
       "id": "v1-acceptance",
