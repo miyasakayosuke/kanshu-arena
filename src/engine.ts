@@ -306,7 +306,7 @@ export function poisonImpactScaleFor(unit: Pick<Unit, 'poisonImpactScale'>): num
   const scale = unit.poisonImpactScale ?? DEFAULT_POISON_IMPACT_SCALE;
   return Number.isFinite(scale) ? Math.max(0, Math.min(1, scale)) : DEFAULT_POISON_IMPACT_SCALE;
 }
-export type StartOptions = { /** Headless comparison only; default is 2 MP each new turn. */ turnMpRecovery?: number; leaders?: boolean; familySupport?: boolean; /** Isolated opening-allowance ablation; does not select a different AI policy. */ extraordinaryResponse?: boolean; /** Applies symmetrically to every unit only when explicitly provided. */ poisonImpactScale?: number; /** Separate optional AI arm; does not change the ordinary enemy-variation branch. */ reservePoison?: boolean };
+export type StartOptions = { /** Frozen player-only levels; enemies retain baseline stats. */ allyAwakeningStats?: Readonly<Record<string, { hp: number; atk: number }>>; /** Headless comparison only; default is 2 MP each new turn. */ turnMpRecovery?: number; leaders?: boolean; familySupport?: boolean; /** Isolated opening-allowance ablation; does not select a different AI policy. */ extraordinaryResponse?: boolean; /** Applies symmetrically to every unit only when explicitly provided. */ poisonImpactScale?: number; /** Separate optional AI arm; does not change the ordinary enemy-variation branch. */ reservePoison?: boolean };
 export function start(team: number[], enemy: number[], seed = 42, options: StartOptions = {}): State {
   const units = (ids: number[], prefix: string): Unit[] => {
     const leader = options.leaders && ids.length ? leaderFor(ids[0]) : undefined;
@@ -319,7 +319,9 @@ export function start(team: number[], enemy: number[], seed = 42, options: Start
     const response = options.familySupport !== false && options.extraordinaryResponse !== false && extraordinaryResponseEligible(ids.map(id => ({ monster: monsters[id] })).filter(friend => friend.monster));
     const supply = options.familySupport !== false && slimeSupplyEligible(ids.map(id => ({ monster: monsters[id] })).filter(friend => friend.monster));
     return ids.map((id, i) => {
-      const source = monsters[id];
+      const base = monsters[id];
+      const growth = prefix === 'a' ? options.allyAwakeningStats?.[String(id)] : undefined;
+      const source = base && growth ? { ...base, hp: growth.hp, atk: growth.atk } : base;
       if (!source) throw new Error(`Unknown monster id: ${id}`);
       // Derive battle-only stats; never accumulate boosts in the shared roster.
       const monster = leader && leaderAppliesTo(leader, source) ? {

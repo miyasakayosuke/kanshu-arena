@@ -55,6 +55,10 @@ export function proposedTrialRules(): EconomyRules {
   return { version: 'proposal-A-10-20-v1', stepCosts: Array.from({ length: 99 }, (_, n) => n < 4 ? 10 : 20),
     completionCommon: 1, winBonusCommon: 4, selectionEveryWins: 10, essencePerSelection: 10 };
 }
+/** Owner-approved provisional policy; immutable version for later explicit migration. */
+export function approvedTrialRules(): EconomyRules {
+  return { version: 'trial-flat-ten-v1', stepCosts: Array(99).fill(10), completionCommon: 1, winBonusCommon: 4, selectionEveryWins: 10, essencePerSelection: 10 };
+}
 export function validateRules(value: unknown): asserts value is EconomyRules {
   object(value); exactKeys(value, ['version', 'stepCosts', 'completionCommon', 'winBonusCommon', 'selectionEveryWins', 'essencePerSelection']);
   id(value.version); requireThat(Array.isArray(value.stepCosts) && value.stepCosts.length === 99, 'Expected 99 step costs');

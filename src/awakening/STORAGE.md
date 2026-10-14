@@ -1,3 +1,5 @@
+> v0.20.35 integration update: production now uses the reviewed IndexedDB driver and approvedTrialRules (flat ten materials per stage). The following candidate notes are historical design context; current integration and recovery behavior is in ../../docs/awakening-progression.md. proposedTrialRules remains an isolated old test fixture, never the production default.
+
 # Isolated awakening storage candidate
 
 Injected adapter and in-memory transactional fake only. No app imports, browser globals, localStorage/IndexedDB calls, team writes, engine changes, network access, or final economy choices. Tests deliberately use an explicit fixture different from the proposal.

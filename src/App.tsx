@@ -1,3 +1,5 @@
+import AwakeningPanel from './awakening/AwakeningPanel';
+import { useAwakening } from './awakening/useAwakening';
 import MonsterArt from './MonsterArt';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { monsters, isExtraordinaryResponse, mpDamageFor, cost, start, advanceWithEvents, automaticOrders, AUTO, barrageHits, battleSkill, BASIC_ATTACK, DEFEND, MAX_SPECIAL_SKILLS, skillTargetsAllies, skillOrderLabel, canUseSkill, skillUnavailableReason, skillUnavailableLabel, effectStatus, type State, type Order, type BattleEvent } from './engine';
@@ -28,6 +30,7 @@ import './tabCopy.css';
 
 const COMMAND_SECONDS = 30;
 export default function App() {
+  const awakening = useAwakening();
   const [workshop, setWorkshop] = useState(() => { try { return loadTeamWorkshop(localStorage); } catch { return migrateTeamWorkshop({ team: initialTeam, rule: 'standard' }, [null, null, null]); } });
   const [teamSaved, setTeamSaved] = useState(true);
   const remoteTeamPending = useRef(false);
@@ -118,6 +121,7 @@ export default function App() {
   const latestResult = useRef<State | null>(null);
   const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
   const discardBattle = () => {
+    awakening.abandon();
     ++targetGeneration.current; targetConsumed.current = true;
     resetCommandPlayback();
     commandDeadline.current = null;
@@ -129,6 +133,7 @@ export default function App() {
   };
   const navigation = useScreenNavigation(!!battle && !battle.winner, discardBattle);
   const { page, navigate } = navigation;
+  const latestPage = useRef(page); latestPage.current = page;
   useEffect(() => () => { ++playbackId.current; clearTimers(); commandDeadline.current = null; }, []);
   useEffect(() => {
     if (page !== 'battle' || !battle?.winner || playing) return;
@@ -206,21 +211,30 @@ export default function App() {
   }, [focus, enemyFocus, pendingSkill, navigation.pending]);
   const startLock = useRef(false);
   useEffect(() => { startLock.current = false; }, [page, battle?.winner]);
-  const begin = () => {
-    if (startLock.current || page !== 'arena') return;
+  const begin = async () => {
+    if (startLock.current || page !== 'arena' || awakening.loading || awakening.busy || awakening.snapshot?.progress.activeBattle || awakening.session?.pending) return;
     if (!isValidTeam(team, rules[rule].budget)) return;
     startLock.current = true;
     ++playbackId.current;
     // A new match begins only on an explicit lobby action and uses a fresh draw.
     const nextEncounter = familyEncounterForSeed(rule, Math.floor(Math.random() * 0x100000000));
+    let starting: State;
+    if (awakening.session && awakening.snapshot) {
+      const prepared = await awakening.run(() => awakening.session!.begin(team, nextEncounter.enemy, nextEncounter.seed, rule));
+      if (!prepared) { startLock.current = false; return; }
+      if (latestPage.current !== 'arena' || JSON.stringify(currentTeam(latestWorkshop.current)) !== JSON.stringify({ team, rule })) { awakening.abandon(); startLock.current = false; return; }
+      starting = prepared;
+    } else starting = start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true });
     setLastBattle(null);
     setEncounter(nextEncounter);
     clearTimers(); commandDeadline.current = null; playingLock.current = false; latestResult.current = null;
     resetCommandPlayback();
     setTimedOut(false); setEnemyFocus(null);
-    setBattle(start(team, nextEncounter.enemy, nextEncounter.seed, { leaders: true }));
+    setBattle(starting);
     setOrders({}); setAutomaticKeys([]); setActiveKey('a0'); setPendingSkill(null); setShowSkills(false); setEffect(null); setVisualCast(null); setCompactCastCaption(null); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]);
-    setPlaying(false); setShowLog(false); setShowTactics(false); navigate('battle'); setNotice('');
+    setPlaying(false); setShowLog(false); setShowTactics(false);
+    if (!navigate('battle')) { awakening.abandon(); setBattle(null); startLock.current = false; }
+    setNotice('');
   };
   const living = battle?.allies.filter(u => u.hp > 0) ?? [];
   const active = living.find(u => u.key === activeKey) ?? living[0];
@@ -338,6 +352,7 @@ export default function App() {
     const cmds = automaticOrders(battle, Object.values(orders));
     const result = advanceWithEvents(battle, cmds);
     latestResult.current = result.state;
+    awakening.terminal(result.state);
     resetCommandPlayback();
     setPlaying(true); setOrders({}); setAutomaticKeys([]); setPendingSkill(null); setShowSkills(false); setImpact(null); setImpacts([]); setPartyGuards([]); setPartyNumbers([]);
     clearTimers();
@@ -443,6 +458,7 @@ export default function App() {
     {showFamilyTrials && <FamilyTrialPicker presets={familyTrialPresets} rule={rule} onChoose={chooseFamilyTrial} onClose={() => setShowFamilyTrials(false)} />}
     {page === 'home' && <HomeScreen team={team} rule={rule} onFocus={setFocus} />}
     {page === 'arena' && <ArenaLobby headingRef={arenaHeading} onFamilyTrial={() => setShowFamilyTrials(true)} notice={notice} team={team} rule={rule} onFocus={setFocus} round={round} practice={practice} onRule={changeRule} onTeam={() => navigate('team')} onLeavePractice={leavePractice} result={lastBattle ? <BattleResult battle={lastBattle} onLog={() => setShowLog(true)} /> : null} />}
+    {(page === 'home' || page === 'arena') && <AwakeningPanel control={awakening} />}
     {page === 'catalog' && <CatalogScreen filters={catalogFilters} setFilters={setCatalogFilters} scrollPosition={catalogScroll} onFocus={(id, ids) => { setCatalogDetailIds(ids ?? []); setFocus(id); }} />}
     {page === 'team' && <TeamBuilder detailsOpen={focus !== null} onCatalog={() => navigate('catalog')} workshop={workshop} saved={teamSaved} onSelectTeam={index => {
       const next = workshop.teams[index];
@@ -505,7 +521,7 @@ export default function App() {
     {focus !== null && <MonsterDetails id={focus} onClose={() => setFocus(null)} navigation={page === 'catalog' ? { ids: catalogDetailIds, onSelect: setFocus } : undefined} />}
     {showTactics && battle && <TacticsPanel battle={battle} orders={orders} playing={playing} rule={rule} onClose={()=>setShowTactics(false)} />}
     {showLog && logBattle && !navigation.pending && <BattleLogDialog battle={logBattle} playing={playing} onClose={() => setShowLog(false)} fallbackFocus={() => arenaHeading.current ?? document.querySelector<HTMLButtonElement>('.battleMenu button:last-child, .mainNav button[aria-current="page"]')} />}
-    {(page === 'arena' || page === 'team') && <footer className="screenAction"><p>{page === 'team' ? `${rules[rule].name} · ${team.length}/5体 · COST ${cost(team)}/${rules[rule].budget}` : team.length !== 5 ? `あと${5 - team.length}体を編成してください` : cost(team) > rules[rule].budget ? `あとCOST ${cost(team) - rules[rule].budget}減らすと出場できます` : `第${round + 1}戦 · ${rules[rule].name} · 準備完了`}</p><button className="primary" disabled={page === 'arena' && !isValidTeam(team, rules[rule].budget)} onClick={() => page === 'team' ? navigate('arena') : begin()}>{page === 'team' ? '闘技場へ →' : practice ? 'この編成で同じ相手に再戦 →' : 'この編成で対戦する →'}</button></footer>}
+    {(page === 'arena' || page === 'team') && <footer className="screenAction"><p>{page === 'team' ? `${rules[rule].name} · ${team.length}/5体 · COST ${cost(team)}/${rules[rule].budget}` : team.length !== 5 ? `あと${5 - team.length}体を編成してください` : cost(team) > rules[rule].budget ? `あとCOST ${cost(team) - rules[rule].budget}減らすと出場できます` : `第${round + 1}戦 · ${rules[rule].name} · 準備完了`}</p><button className="primary" disabled={page === 'arena' && (!isValidTeam(team, rules[rule].budget) || awakening.loading || awakening.busy || !!awakening.snapshot?.progress.activeBattle || !!awakening.session?.pending)} onClick={() => page === 'team' ? navigate('arena') : begin()}>{page === 'team' ? '闘技場へ →' : practice ? 'この編成で同じ相手に再戦 →' : 'この編成で対戦する →'}</button></footer>}
     {page !== 'battle' && <nav className="mainNav" aria-label="メインメニュー">{([['home', 'ホーム', '⌂'], ['catalog', '図鑑', '▤'], ['team', '編成', '✦'], ['arena', '闘技場', '⚔']] as const).map(([target, label, icon]) => <button key={target} aria-label={label} aria-current={page === target ? 'page' : undefined} onClick={() => navigate(target)}><span aria-hidden="true">{icon}</span>{label}</button>)}</nav>}
     {navigation.pending && <LeaveBattleDialog onCancel={navigation.cancel} onConfirm={navigation.confirm} finished={!!battle?.winner} />}
 

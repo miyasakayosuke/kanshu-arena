@@ -1,0 +1,10 @@
+.awakeningPanel { margin: 16px auto 100px; padding: 18px; max-width: 850px; background: #152733; color: #f1f5f8; border: 1px solid #536878; border-radius: 16px; }
+.awakeningPanel h2 { margin: 0 0 12px; font-size: 20px; }
+.awakeningPanel h2 small { font-size: 12px; }
+.awakeningPanel p { line-height: 1.65; overflow-wrap: anywhere; }
+.awakeningPanel details { margin-top: 14px; }
+.awakeningPanel summary { cursor: pointer; padding: 10px 0; }
+.awakeningPanel select { display: block; width: 100%; max-width: 400px; min-height: 44px; color: #152733; background: #fff; margin: 8px 0; }
+.awakeningPanel button { min-height: 44px; margin: 4px; white-space: normal; }
+.awakeningPanel button:focus-visible, .awakeningPanel summary:focus-visible { outline: 3px solid #ffd780; outline-offset: 3px; }
+@media(max-width: 480px) { .awakeningPanel { margin: 12px 8px 170px; padding: 14px; } }

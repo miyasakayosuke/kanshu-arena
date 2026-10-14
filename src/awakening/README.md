@@ -1,3 +1,5 @@
+> v0.20.35 integration update: production now uses the reviewed IndexedDB driver and approvedTrialRules (flat ten materials per stage). The following candidate notes are historical design context; current integration and recovery behavior is in ../../docs/awakening-progression.md. proposedTrialRules remains an isolated old test fixture, never the production default.
+
 # Awakening domain candidate (not connected)
 
 This folder is a pure, isolated implementation trial. Nothing imports it in the
