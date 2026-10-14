@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 44,
+  "revision": 45,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -793,6 +793,21 @@
         "status": "blocked",
         "revision": 44
       }
+    },
+    "resolve-articulated": {
+      "command": {
+        "action": "resolve",
+        "task": "replacement-animation",
+        "outcome": "retry",
+        "evidence": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
+        "authorizationRef": "Owner requested larger motion as the next review-only candidate direction. This authorizes candidate development, not visual adoption or deployment.",
+        "operationId": "resolve-articulated"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1791983839.8009763,
+        "revision": 45
+      }
     }
   },
   "tasks": [
@@ -908,15 +923,10 @@
       "generation": 3,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
-      "notBefore": 1791980803.3172991,
-      "lastFailure": "Prior worker stopped during a candidate asset write. No object identifier was returned after a tool catalog change. No candidate branch or deployment occurred. Owner visual acceptance remains required.",
-      "implementer": "fenrir-motion-candidate",
-      "block": {
-        "type": "approval",
-        "reason": "Current crouch candidate is not selected for adoption. Owner prefers larger motion; independent review found rubbery chest and leg compression and no distinct foreleg step. Visual acceptance remains unmet. Technical capture and packaging passed. Candidate source is preserved separately. No deployment. Next articulated method requires a fresh scoped assignment.",
-        "previousRole": "implement"
-      }
+      "status": "retry",
+      "notBefore": 1791983839.8009763,
+      "lastFailure": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
+      "implementer": "fenrir-motion-candidate"
     },
     {
       "id": "v1-acceptance",
