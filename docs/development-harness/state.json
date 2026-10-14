@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 17,
+  "revision": 18,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -311,6 +311,32 @@
         "status": "review",
         "revision": 17
       }
+    },
+    "safe-submit-preview": {
+      "command": {
+        "action": "submit",
+        "task": "awakening-preview",
+        "worker": "browser-qa-builder-one",
+        "generation": 2,
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+        },
+        "criteriaEvidence": {
+          "Preview has no save, combat or progression side effects": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "Comparison labels and narrow viewport behavior are reviewed": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+          "Independent evidence covers existing accepted behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+        },
+        "operationId": "safe-submit-preview"
+      },
+      "result": {
+        "status": "review",
+        "revision": 18
+      }
     }
   },
   "tasks": [
@@ -364,7 +390,7 @@
       "generation": 2,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "review",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
@@ -372,11 +398,18 @@
       "notBefore": 1791953510.822592,
       "lastFailure": "Preserved candidate and actual browser results inspected. Prior worker stopped. Prepare combined read-only UI release under fresh assignment and exact review.",
       "implementer": "browser-qa-builder-one",
-      "assignment": {
-        "role": "implement",
-        "worker": "browser-qa-builder-one",
-        "generation": 2,
-        "expiresAt": 1791955341.6108398
+      "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+      "checks": {
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+      },
+      "criteriaEvidence": {
+        "Preview has no save, combat or progression side effects": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "Comparison labels and narrow viewport behavior are reviewed": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
+        "Independent evidence covers existing accepted behavior": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
       }
     },
     {
