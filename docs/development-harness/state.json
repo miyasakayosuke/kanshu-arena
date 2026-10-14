@@ -1,12 +1,24 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
+  "revision": 2,
   "operations": {
     "cycle-20261014-001-reconcile": {
       "fingerprint": "5fa45f136bfadb02c6111e5c5c75c1f665f518a6b461dae61488212d25063c57",
       "result": {
         "stale": [],
         "revision": 1
+      }
+    },
+    "cycle-20261014-001-claim-storage": {
+      "fingerprint": "7bb8a245c764237a6888e7f30c327c50ddba6644f951567d15c5dfbc12aa6e20",
+      "result": {
+        "lease": {
+          "role": "implement",
+          "worker": "awakening-storage-cycle-001",
+          "token": "a6b5593b249946899f16890abaeaca93",
+          "expiresAt": 1791950431.121957
+        },
+        "revision": 2
       }
     }
   },
@@ -104,8 +116,8 @@
       "id": "awakening-storage",
       "title": "Harden awakening storage and migration drivers",
       "kind": "implementation",
-      "status": "ready",
-      "attempts": 0,
+      "status": "running",
+      "attempts": 1,
       "criteria": [
         "Inspect existing storage candidate before editing to avoid duplicate work",
         "Validate versioned parsing, invalid saves, migration and repeated load/save behavior",
@@ -113,7 +125,14 @@
         "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities"
       ],
       "dependsOn": [],
-      "required": true
+      "required": true,
+      "implementer": "awakening-storage-cycle-001",
+      "lease": {
+        "role": "implement",
+        "worker": "awakening-storage-cycle-001",
+        "token": "a6b5593b249946899f16890abaeaca93",
+        "expiresAt": 1791950431.121957
+      }
     },
     {
       "id": "awakening-quantities",
