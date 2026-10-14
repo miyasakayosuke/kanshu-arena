@@ -1,145 +1,161 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 3,
   "revision": 0,
   "operations": {},
-  "baseline": {
-    "version": "0.20.32",
-    "verification": "Coordinator must re-read the live deployment and repository head before importing work."
-  },
   "tasks": [
     {
       "id": "catalog-filter-scroll",
       "title": "Reset catalog scroll when filters change",
-      "status": "blocked",
       "kind": "implementation",
-      "attempts": 0,
       "criteria": [
         "Changed filters show first result without stale scroll",
         "Existing detail dismissal and scroll restoration still pass",
         "Narrow viewport and keyboard QA recorded"
       ],
-      "dependsOn": [],
       "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
       "block": {
         "type": "external",
-        "reason": "Existing candidate passed code/test review; browser visual QA is still pending. Inspect the existing worker and candidate before importing; do not duplicate implementation or treat it as released."
+        "reason": "Existing gate retained; coordinator must verify the pending decision or candidate before resuming."
       }
     },
     {
       "id": "awakening-preview",
       "title": "Review read-only awakening preview",
-      "status": "blocked",
       "kind": "implementation",
-      "attempts": 0,
       "criteria": [
         "Preview has no save, combat or progression side effects",
         "Comparison labels and narrow viewport behavior are reviewed",
         "Independent evidence covers existing accepted behavior"
       ],
-      "dependsOn": [],
       "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
       "block": {
         "type": "external",
-        "reason": "Existing candidate passed code/test review; browser visual QA is still pending. Inspect the existing worker and candidate before importing; do not duplicate implementation or treat it as released."
+        "reason": "Existing gate retained; coordinator must verify the pending decision or candidate before resuming."
       }
     },
     {
       "id": "replacement-animation",
       "title": "Meet approved replacement-animation visual acceptance",
-      "status": "blocked",
       "kind": "implementation",
-      "attempts": 0,
       "criteria": [
         "Explicit owner approval of replacement visual evidence; rejected v0.20.33 is never a shipping requirement",
         "Independent rendered-motion review and provenance inventory",
         "Rollback-safe reviewed release evidence"
       ],
-      "dependsOn": [],
       "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "deliverableKind": "release",
+      "status": "blocked",
       "block": {
         "type": "approval",
-        "reason": "Rejected visual release remains blocked; no automatic art adoption or redeployment."
+        "reason": "Existing gate retained; coordinator must verify the pending decision or candidate before resuming."
       }
     },
     {
       "id": "v1-acceptance",
       "title": "Confirm bounded v1 acceptance scope",
-      "status": "blocked",
       "kind": "decision",
-      "attempts": 0,
       "criteria": [
         "Owner confirms final release scope and mandatory criteria"
       ],
-      "dependsOn": [],
       "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "status": "blocked",
       "block": {
         "type": "approval",
-        "reason": "Proposed acceptance checklist needs an owner decision; independent approved work can continue."
+        "reason": "Owner decision evidence must be reverified before recording it in the new ledger."
       }
     },
     {
       "id": "baseline-regression",
       "title": "Verify accepted baseline and remaining release gates",
-      "status": "ready",
       "kind": "validation",
-      "attempts": 0,
       "criteria": [
         "Verify exact live commit against the accepted baseline",
         "Record passing rights tests, rights inventory, full tests and build",
         "Check play loop, catalog, team preservation, keyboard and narrow viewport flows",
         "List only evidence-backed remaining defects without inventing new feature work"
       ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
       "dependsOn": [],
-      "required": true
+      "deliverableKind": "internal",
+      "status": "ready"
     },
     {
       "id": "awakening-storage",
       "title": "Harden awakening storage and migration drivers",
       "kind": "implementation",
-      "status": "ready",
-      "attempts": 0,
       "criteria": [
         "Inspect existing storage candidate before editing to avoid duplicate work",
         "Validate versioned parsing, invalid saves, migration and repeated load/save behavior",
         "Keep current accepted combat and collection behavior unchanged until integration is approved",
         "Add independent tests for 95/98/100 percent HP/ATK stages without deciding collection quantities"
       ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
       "dependsOn": [],
-      "required": true
+      "deliverableKind": "internal",
+      "status": "ready"
     },
     {
       "id": "awakening-quantities",
       "title": "Confirm awakening collection and progression quantities",
       "kind": "decision",
-      "status": "blocked",
-      "attempts": 0,
       "criteria": [
         "Owner confirms quantities and bounded progression rules before gameplay integration"
       ],
-      "dependsOn": [],
       "required": true,
+      "attempts": 0,
+      "generation": 1,
+      "dependsOn": [],
+      "status": "blocked",
       "block": {
         "type": "approval",
-        "reason": "Collection/progression quantities remain an owner decision; storage and pure driver tests may proceed independently."
+        "reason": "Owner decision evidence must be reverified before recording it in the new ledger."
       }
     },
     {
       "id": "awakening-integration",
       "title": "Integrate approved awakening progression",
       "kind": "implementation",
-      "status": "ready",
-      "attempts": 0,
       "criteria": [
         "Implement the approved 95/98/100 percent HP/ATK progression",
         "Use owner-approved collection/progression quantities and migration rules",
         "Cover battle, collection, reload, invalid-save and repeated-action regression paths",
         "Record independent review and browser QA before release"
       ],
+      "required": true,
+      "attempts": 0,
+      "generation": 1,
       "dependsOn": [
-        "awakening-storage",
-        "awakening-quantities"
+        {
+          "task": "awakening-storage",
+          "stage": "verified"
+        },
+        {
+          "task": "awakening-quantities",
+          "stage": "decided"
+        }
       ],
-      "required": true
+      "deliverableKind": "release",
+      "status": "ready"
     }
   ]
 }

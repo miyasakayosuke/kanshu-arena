@@ -20,8 +20,9 @@ def git(repo, *args):
 
 
 def persist(repo, remote, branch, command):
-    harness.require(branch.startswith('harness-state/') and '..' not in branch, 'use dedicated harness-state/* branch')
-    harness.require(remote and not remote.startswith('-'), 'invalid remote')
+    harness.require(branch.startswith('harness-public-v3/') and '..' not in branch, 'use dedicated harness-public-v3/* branch')
+    harness.public_schema.identifier(remote)
+    harness.require('/' not in remote and ':' not in remote, 'use an already configured remote name')
     git(repo, 'check-ref-format', 'refs/heads/' + branch)
     # FETCH_HEAD is avoided: concurrent readers can fetch different refs.
     parent = git(repo, 'ls-remote', '--exit-code', remote, 'refs/heads/' + branch).split()[0]
@@ -62,7 +63,7 @@ def persist(repo, remote, branch, command):
 
 
 def confirmed_result(repo, remote, branch, command):
-    """Ancestry proves durability, not that a lease still authorizes dispatch."""
+    """Ancestry proves durability, not that an assignment still matches current work."""
     current = git(repo, 'ls-remote', '--exit-code', remote, 'refs/heads/' + branch).split()[0]
     git(repo, 'fetch', '--no-tags', remote, current)
     raw = git(repo, 'show', current + ':' + STATE)

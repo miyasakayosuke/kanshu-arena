@@ -25,7 +25,7 @@ class PersistTest(unittest.TestCase):
         path.write_bytes(seed.read_bytes())
         self.git('add','.')
         self.git('commit','-m','seed')
-        self.git('push','origin','HEAD:refs/heads/harness-state/test')
+        self.git('push','origin','HEAD:refs/heads/harness-public-v3/test')
 
     def git(self,*args):
         return persist.git(self.repo,*args)
@@ -34,10 +34,10 @@ class PersistTest(unittest.TestCase):
         return dict(action='claim',task='baseline-regression',role='implement',worker=id,operationId=id,expectedRevision=0)
 
     def test_durable_claim_and_replay(self):
-        result = persist.persist(self.repo,'origin','harness-state/test',self.command())
-        replay = persist.persist(self.repo,'origin','harness-state/test',self.command())
-        self.assertEqual(result['lease'],replay['lease'])
-        remote = self.git('ls-remote','origin','refs/heads/harness-state/test').split()[0]
+        result = persist.persist(self.repo,'origin','harness-public-v3/test',self.command())
+        replay = persist.persist(self.repo,'origin','harness-public-v3/test',self.command())
+        self.assertEqual(result['assignment'],replay['assignment'])
+        remote = self.git('ls-remote','origin','refs/heads/harness-public-v3/test').split()[0]
         self.assertEqual(result['stateCommit'],remote)
         # Local source seed remains unchanged.
         self.assertEqual(0,json.loads((self.repo/persist.STATE).read_text())['revision'])
@@ -50,12 +50,12 @@ class PersistTest(unittest.TestCase):
             if args[0] == 'push' and not fired:
                 fired = True
                 with patch.object(persist,'git',real):
-                    persist.persist(self.repo,'origin','harness-state/test',self.command('winner'))
+                    persist.persist(self.repo,'origin','harness-public-v3/test',self.command('winner'))
             return real(repo,*args)
         with patch.object(persist,'git',racing):
             with self.assertRaisesRegex(ValueError,'not confirmed'):
-                persist.persist(self.repo,'origin','harness-state/test',self.command('loser'))
-        remote = self.git('ls-remote','origin','refs/heads/harness-state/test').split()[0]
+                persist.persist(self.repo,'origin','harness-public-v3/test',self.command('loser'))
+        remote = self.git('ls-remote','origin','refs/heads/harness-public-v3/test').split()[0]
         state = json.loads(self.git('show',remote+':'+persist.STATE))
         self.assertIn('winner',state['operations'])
         self.assertNotIn('loser',state['operations'])

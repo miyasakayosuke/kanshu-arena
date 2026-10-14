@@ -15,7 +15,7 @@ class Adversarial(unittest.TestCase):
   p.git(self.repo,'remote','add','origin',str(self.remote))
   self.path=self.repo/p.STATE;self.path.parent.mkdir(parents=True)
   self.path.write_bytes((SRC.parents[1]/p.STATE).read_bytes())
-  p.git(self.repo,'add','.');p.git(self.repo,'commit','-m','seed');p.git(self.repo,'push','origin','HEAD:refs/heads/harness-state/test')
+  p.git(self.repo,'add','.');p.git(self.repo,'commit','-m','seed');p.git(self.repo,'push','origin','HEAD:refs/heads/harness-public-v3/test')
  def cmd(self,id='claim',**kw):return dict(action='claim',task='baseline-regression',role='implement',worker=id,operationId=id,expectedRevision=0,**kw)
  def test_replayed_claim_after_reconcile_is_not_dispatchable(self):
   cmd=self.cmd();h.transaction(self.path,cmd,1000)
@@ -29,27 +29,27 @@ class Adversarial(unittest.TestCase):
    result=real(repo,*args)
    if args[0]=='push':raise subprocess.CalledProcessError(128,['git','push'])
    return result
-  with patch.object(p,'git',lost):r=p.persist(self.repo,'origin','harness-state/test',self.cmd())
-  self.assertEqual(r['stateCommit'],real(self.repo,'ls-remote','origin','refs/heads/harness-state/test').split()[0])
+  with patch.object(p,'git',lost):r=p.persist(self.repo,'origin','harness-public-v3/test',self.cmd())
+  self.assertEqual(r['stateCommit'],real(self.repo,'ls-remote','origin','refs/heads/harness-public-v3/test').split()[0])
  def test_two_concurrent_distinct_claims_have_one_winner(self):
   barrier=threading.Barrier(2);real=p.git
   def race(repo,*args):
    if args[0]=='push':barrier.wait(timeout=10)
    return real(repo,*args)
   def execute(id):
-   try:return p.persist(self.repo,'origin','harness-state/test',self.cmd(id))
+   try:return p.persist(self.repo,'origin','harness-public-v3/test',self.cmd(id))
    except ValueError:return None
   with patch.object(p,'git',race),concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:rs=list(pool.map(execute,['a','b']))
   self.assertEqual(sum(r is not None for r in rs),1)
-  head=real(self.repo,'ls-remote','origin','refs/heads/harness-state/test').split()[0]
+  head=real(self.repo,'ls-remote','origin','refs/heads/harness-public-v3/test').split()[0]
   state=json.loads(real(self.repo,'show',head+':'+p.STATE));self.assertEqual(state['revision'],1);self.assertEqual(len(state['operations']),1)
  def test_failure_checkpoint_does_not_advance_state(self):
   real=p.git
   def rejected(repo,*args):
    if args[0]=='push':raise subprocess.CalledProcessError(128,['git','push'])
    return real(repo,*args)
-  with patch.object(p,'git',rejected),self.assertRaises(ValueError):p.persist(self.repo,'origin','harness-state/test',self.cmd())
-  head=real(self.repo,'ls-remote','origin','refs/heads/harness-state/test').split()[0]
+  with patch.object(p,'git',rejected),self.assertRaises(ValueError):p.persist(self.repo,'origin','harness-public-v3/test',self.cmd())
+  head=real(self.repo,'ls-remote','origin','refs/heads/harness-public-v3/test').split()[0]
   state=json.loads(real(self.repo,'show',head+':'+p.STATE));self.assertEqual(state['operations'],{});self.assertEqual(state['revision'],0)
  def test_claim_invalidated_before_remote_confirmation_is_not_dispatchable(self):
   real=p.git;fired=False
@@ -58,14 +58,14 @@ class Adversarial(unittest.TestCase):
    result=real(repo,*args)
    if args[0]=='push' and not fired:
     fired=True
-    head=real(repo,'ls-remote','origin','refs/heads/harness-state/test').split()[0]
+    head=real(repo,'ls-remote','origin','refs/heads/harness-public-v3/test').split()[0]
     state=json.loads(real(repo,'show',head+':'+p.STATE))
     task=next(t for t in state['tasks'] if t['id']=='baseline-regression')
     with patch.object(p,'git',real):
-     p.persist(repo,'origin','harness-state/test',dict(action='fail',task=task['id'],worker=task['lease']['worker'],token=task['lease']['token'],reason='Worker cancelled while acknowledgement pending',operationId='invalidate',expectedRevision=1))
+     p.persist(repo,'origin','harness-public-v3/test',dict(action='fail',task=task['id'],worker=task['assignment']['worker'],generation=task['assignment']['generation'],reason='Worker cancelled while acknowledgement pending',operationId='invalidate',expectedRevision=1))
    return result
   try:
-   with patch.object(p,'git',invalidated):r=p.persist(self.repo,'origin','harness-state/test',self.cmd())
+   with patch.object(p,'git',invalidated):r=p.persist(self.repo,'origin','harness-public-v3/test',self.cmd())
   except ValueError:return
   self.assertFalse(r.get('dispatchable',True),'Confirmed historical ancestor claim has since been invalidated')
  def test_empty_ledger_is_not_complete(self):
