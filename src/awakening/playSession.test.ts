@@ -66,3 +66,12 @@ describe('engine and durable session boundary', () => {
     await expect(session.load()).rejects.toThrow(); expect(driver.inspect().head).toBe('{bad'); expect(session.snapshot).toBeNull();
   });
 });
+
+it('retires a superseded local completion after another tab advances beyond its receipt', async () => {
+  const { session, storage } = setup(); await session.load(); const old = await session.begin(team, team, 1, 'standard');
+  const other = new AwakeningPlaySession(storage); const first = await other.load(); await other.discardInterrupted(first.token, 1);
+  await other.begin(team, team, 2, 'standard'); await other.abandon();
+  await expect(session.terminal({ ...old, winner: 'win' })).rejects.toThrow('別のタブ');
+  expect(session.pending).toBeNull(); expect(session.sequence).toBeNull(); expect(session.snapshot!.progress.common).toBe(0);
+  await expect(session.begin(team, team, 3, 'standard')).resolves.toBeTruthy();
+});

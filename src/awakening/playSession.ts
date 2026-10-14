@@ -2,6 +2,7 @@ import { monsters, start, type State } from '../engine';
 import { approvedTrialRules, deriveAwakeningMonster, STAT_RULE_VERSION, type BattleCompletion } from './domain';
 import { AwakeningStorage, StorageError, type Snapshot, type Command } from './storage';
 
+export class SupersededBattleError extends Error {}
 export const AWAKENING_DATABASE = 'kanshu-awakening-v1';
 export const rosterIds = monsters.map(monster => String(monster.id));
 export const trialRules = approvedTrialRules();
@@ -47,6 +48,10 @@ export class AwakeningPlaySession {
       const pending = this.pending;
       const loaded = await this.storage.load();
       if (loaded.status !== 'ready') throw new StorageError('blocked', '保存データを確認してください');
+      if (loaded.snapshot.progress.nextBattleSequence - 1 > pending.sequence) {
+        this.snapshot = loaded.snapshot; this.pending = null; this.sequence = null;
+        throw new SupersededBattleError('別のタブで対戦が更新されました。古い対戦の報酬は追加せず、最新の保存を読み込みました。');
+      }
       const result = await this.storage.dispatch(loaded.snapshot.token, { kind: 'settle', ...pending });
       this.snapshot = result.snapshot; this.pending = null; this.sequence = null;
     } finally { this.busy = false; }
