@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 32,
+  "revision": 33,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -587,6 +587,24 @@
         },
         "revision": 32
       }
+    },
+    "release034-record-preview": {
+      "command": {
+        "action": "release",
+        "task": "awakening-preview",
+        "worker": "release-publisher-034",
+        "generation": 4,
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "deployment": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "liveCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "creditsCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "noticesCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "operationId": "release034-record-preview"
+      },
+      "result": {
+        "status": "released",
+        "revision": 33
+      }
     }
   },
   "tasks": [
@@ -653,7 +671,7 @@
       "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "publishing",
+      "status": "released",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
@@ -680,11 +698,12 @@
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/f977bb0b2ba0243ed275b2c27903dba748ffc19c/docs/development-harness/evidence/preview-review.md"
       },
       "publicationApprovalRef": "Owner explicitly approved tested v0.20.34 publication to the existing public repository and game site.",
-      "assignment": {
-        "role": "publish",
-        "worker": "release-publisher-034",
-        "generation": 4,
-        "expiresAt": 1791964195.6912253
+      "release": {
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "deployment": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "liveCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "creditsCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md",
+        "noticesCheck": "https://github.com/miyasakayosuke/kanshu-arena/blob/b879ae8fae06181da4d55c301e8467e179295af5/docs/development-harness/evidence/release-v034.md"
       }
     },
     {
