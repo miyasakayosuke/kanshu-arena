@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 29,
+  "revision": 30,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -531,6 +531,25 @@
         "status": "candidate",
         "revision": 29
       }
+    },
+    "release034-claim-catalog": {
+      "command": {
+        "action": "claim",
+        "task": "catalog-filter-scroll",
+        "role": "publish",
+        "worker": "release-publisher-034",
+        "authorizationRef": "Owner explicitly approved tested v0.20.34 publication to the existing public repository and game site.",
+        "operationId": "release034-claim-catalog"
+      },
+      "result": {
+        "assignment": {
+          "role": "publish",
+          "worker": "release-publisher-034",
+          "generation": 7,
+          "expiresAt": 1791963549.9243808
+        },
+        "revision": 30
+      }
     }
   },
   "tasks": [
@@ -545,10 +564,10 @@
       ],
       "required": true,
       "attempts": 2,
-      "generation": 6,
+      "generation": 7,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "candidate",
+      "status": "publishing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -569,11 +588,17 @@
         "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
         "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
       },
-      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
+      "publicationApprovalRef": "Owner explicitly approved tested v0.20.34 publication to the existing public repository and game site.",
       "review": {
         "worker": "combined-ui-review-one",
         "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/0f6a78dcf3ddc0b6109e3e873b09a106edfe402d/docs/development-harness/evidence/catalog-reimport.md"
+      },
+      "assignment": {
+        "role": "publish",
+        "worker": "release-publisher-034",
+        "generation": 7,
+        "expiresAt": 1791963549.9243808
       }
     },
     {
