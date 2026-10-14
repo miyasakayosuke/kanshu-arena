@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 37,
+  "revision": 38,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -683,6 +683,22 @@
         },
         "revision": 37
       }
+    },
+    "trial-accept-review": {
+      "command": {
+        "action": "review",
+        "task": "awakening-integration",
+        "worker": "awakening-reviewer",
+        "generation": 3,
+        "operationId": "trial-accept-review",
+        "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
+        "approved": true,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/3e93e7795499da1fc6d49035dd28b9447a3c6e87/docs/development-harness/evidence/review-v035.md"
+      },
+      "result": {
+        "status": "candidate",
+        "revision": 38
+      }
     }
   },
   "tasks": [
@@ -938,7 +954,7 @@
         }
       ],
       "deliverableKind": "release",
-      "status": "reviewing",
+      "status": "candidate",
       "implementer": "awakening-integrator",
       "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
       "checks": {
@@ -954,11 +970,10 @@
         "Cover battle, collection, reload, invalid-save and repeated-action regression paths": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
         "Record independent review and browser QA before release": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
       },
-      "assignment": {
-        "role": "review",
+      "review": {
         "worker": "awakening-reviewer",
-        "generation": 3,
-        "expiresAt": 1791971969.1918898
+        "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/3e93e7795499da1fc6d49035dd28b9447a3c6e87/docs/development-harness/evidence/review-v035.md"
       }
     }
   ],
