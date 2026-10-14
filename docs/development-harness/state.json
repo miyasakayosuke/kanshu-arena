@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 7,
+  "revision": 8,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -121,6 +121,24 @@
         },
         "revision": 7
       }
+    },
+    "safe-claim-browser-qa": {
+      "command": {
+        "action": "claim",
+        "task": "catalog-filter-scroll",
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "operationId": "safe-claim-browser-qa"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "browser-qa-builder-one",
+          "generation": 2,
+          "expiresAt": 1791953731.118554
+        },
+        "revision": 8
+      }
     }
   },
   "tasks": [
@@ -134,17 +152,24 @@
         "Narrow viewport and keyboard QA recorded"
       ],
       "required": true,
-      "attempts": 0,
-      "generation": 1,
+      "attempts": 1,
+      "generation": 2,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
       ],
       "notBefore": 1791951924.904947,
-      "lastFailure": "Preserved candidate and prior review inspected. Prior implementation finished. Remaining browser QA uses isolated content-read CI without deployment."
+      "lastFailure": "Preserved candidate and prior review inspected. Prior implementation finished. Remaining browser QA uses isolated content-read CI without deployment.",
+      "implementer": "browser-qa-builder-one",
+      "assignment": {
+        "role": "implement",
+        "worker": "browser-qa-builder-one",
+        "generation": 2,
+        "expiresAt": 1791953731.118554
+      }
     },
     {
       "id": "awakening-preview",
