@@ -1,0 +1,42 @@
+name: Fenrir original-texture motion preview
+on:
+  push:
+    branches: [candidate/fenrir-original-motion]
+permissions:
+  contents: read
+concurrency:
+  group: fenrir-original-motion-render
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.repository == 'miyasakayosuke/kanshu-arena' && github.ref == 'refs/heads/candidate/fenrir-original-motion'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run rights:test && npm run rights:check && npm test && npm run build
+      - run: node --test docs/fenrir-motion-preview/rig-checks.mjs
+      - working-directory: qa/fenrir-motion
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - working-directory: qa/fenrir-motion
+        run: npx --no-install playwright install --with-deps chromium
+      - working-directory: qa/fenrir-motion
+        run: node render.mjs
+      - working-directory: qa/fenrir-motion
+        run: |
+          ffmpeg -y -framerate 24 -i evidence/frames/%03d.png -c:v libx264 -crf 18 -pix_fmt yuv420p -movflags +faststart evidence/fenrir-motion-preview.mp4
+          rm -r evidence/frames
+      - name: Retain rendered preview and QA results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: fenrir-motion-${{ github.sha }}
+          path: qa/fenrir-motion/evidence/
+          if-no-files-found: error
+          retention-days: 7

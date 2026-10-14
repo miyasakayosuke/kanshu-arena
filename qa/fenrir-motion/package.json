@@ -1,0 +1,13 @@
+{
+  "name": "kanshu-arena-isolated-browser-qa",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test && node verify-results.mjs",
+    "test:guards": "node --test verify-results.test.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

@@ -1380,6 +1380,40 @@
         "package-lock.json",
         "public/credits.html"
       ]
+    },
+    {
+      "id": "fenrir-original-motion-candidate",
+      "kind": "isolated-original-texture-motion-preview",
+      "files": [
+        "docs/fenrir-motion-preview/index.html",
+        "docs/fenrir-motion-preview/rig.mjs",
+        "docs/fenrir-motion-preview/rig-checks.mjs",
+        "docs/fenrir-motion-preview/README.md",
+        "docs/fenrir-motion-preview/original.png",
+        ".github/workflows/fenrir-motion-preview.yml",
+        "qa/fenrir-motion/render.mjs",
+        "qa/fenrir-motion/package.json",
+        "qa/fenrir-motion/package-lock.json"
+      ],
+      "provenance": "Existing user-selected project reference reused byte-for-byte, plus newly written procedural mesh motion and preview tooling. No new raster generation or third-party animation is included.",
+      "reviewLimit": "Original creation provenance has not been independently reverified in this pass. No authorship, license, visual acceptance or legal clearance is asserted. Actual rendered review and owner approval remain required before adoption.",
+      "creator": "Procedural mesh code and review UI written for this project with AI assistance; original illustration creation record remains to be reverified.",
+      "createdFor": "Isolated motion preview, not production release",
+      "references": [
+        "docs/fenrir-motion-preview/README.md"
+      ],
+      "distribution": "Candidate branch review material only. Not imported by the game or deployed. Original remains unchanged; no license selected.",
+      "sha256": {
+        "docs/fenrir-motion-preview/index.html": "8fd412710d3e217c0f528a2062d5718aeb0cf04a8092966d4e2ca5f65d18ac97",
+        "docs/fenrir-motion-preview/rig.mjs": "ee1de714d374cad5234af85d701de7b7882350a97cfd1b1fe98ba4b0ff7a5b34",
+        "docs/fenrir-motion-preview/rig-checks.mjs": "7bc0ee5f44fe1db67d340678655ccd58b036a16c44fd61afe05bd0318fea3886",
+        "docs/fenrir-motion-preview/README.md": "f9eb595bdb11382d81233d420909dcf068fbbef176c3d78abad5fcf965f2886f",
+        ".github/workflows/fenrir-motion-preview.yml": "ce9f4d7d388509b8b5b529db81ceb0f1a07179370c281b3db74ff91a33229611",
+        "qa/fenrir-motion/render.mjs": "acf206eff6592be4d2be0ef04873f7c31f4d8d6eada66723c3f54c4f71bf4f24",
+        "qa/fenrir-motion/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0",
+        "qa/fenrir-motion/package-lock.json": "07dc4de8aa8fc3b50b534a0680b513f58c61201cb86a8742cc6e6f0e492ded2b"
+      },
+      "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137"
     }
   ],
   "software": [
