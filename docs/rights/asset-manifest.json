@@ -1298,6 +1298,19 @@
       },
       "reviewLimit": "Prepared candidate; native acceptance pending. Controlled results are limited panels, not a universal balance claim or legal clearance. Previous rights questions remain open.",
       "distribution": "Runtime integration only after independent gates and publisher acceptance; frozen reference/evaluation are repository-only."
+    },
+    {
+      "id": "catalog-result-position-reset",
+      "kind": "original-ui-code",
+      "files": [
+        "src/RosterBrowser.tsx",
+        "src/RosterBrowser.resultPosition.test.tsx"
+      ],
+      "creator": "AI-assisted implementation for this project",
+      "provenance": "Original result-list scroll lifecycle correction. No copied external code, new artwork, text, audio, fonts or dependencies.",
+      "createdFor": "Unpublished candidate based on v0.20.32, 2026-10-14",
+      "distribution": "Browser result-list behavior; regression tests are development-only.",
+      "reviewLimit": "Lifecycle and regression review only; not legal clearance. Existing notices and provenance retained."
     }
   ],
   "software": [
