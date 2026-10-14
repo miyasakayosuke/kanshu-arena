@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 13,
+  "revision": 14,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -233,6 +233,24 @@
         },
         "revision": 13
       }
+    },
+    "safe-catalog-heartbeat": {
+      "command": {
+        "action": "heartbeat",
+        "task": "catalog-filter-scroll",
+        "worker": "browser-qa-builder-one",
+        "generation": 2,
+        "operationId": "safe-catalog-heartbeat"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "browser-qa-builder-one",
+          "generation": 2,
+          "expiresAt": 1791955221.724795
+        },
+        "revision": 14
+      }
     }
   },
   "tasks": [
@@ -262,7 +280,7 @@
         "role": "implement",
         "worker": "browser-qa-builder-one",
         "generation": 2,
-        "expiresAt": 1791953731.118554
+        "expiresAt": 1791955221.724795
       }
     },
     {
