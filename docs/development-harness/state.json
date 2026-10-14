@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 10,
+  "revision": 11,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -173,6 +173,33 @@
         },
         "revision": 10
       }
+    },
+    "safe-submit-baseline": {
+      "command": {
+        "action": "submit",
+        "task": "baseline-regression",
+        "worker": "baseline-validator-one",
+        "generation": 2,
+        "commit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md"
+        },
+        "criteriaEvidence": {
+          "Verify exact live commit against the accepted baseline": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "Record passing rights tests, rights inventory, full tests and build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "Check play loop, catalog, team preservation, keyboard and narrow viewport flows": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+          "List only evidence-backed remaining defects without inventing new feature work": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md"
+        },
+        "operationId": "safe-submit-baseline"
+      },
+      "result": {
+        "status": "review",
+        "revision": 11
+      }
     }
   },
   "tasks": [
@@ -281,13 +308,21 @@
       "generation": 2,
       "dependsOn": [],
       "deliverableKind": "internal",
-      "status": "running",
+      "status": "review",
       "implementer": "baseline-validator-one",
-      "assignment": {
-        "role": "implement",
-        "worker": "baseline-validator-one",
-        "generation": 2,
-        "expiresAt": 1791954876.6084409
+      "commit": "8343d81405b9eb3c59621a4b0ead4052e2d3949e",
+      "checks": {
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md"
+      },
+      "criteriaEvidence": {
+        "Verify exact live commit against the accepted baseline": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "Record passing rights tests, rights inventory, full tests and build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "Check play loop, catalog, team preservation, keyboard and narrow viewport flows": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md",
+        "List only evidence-backed remaining defects without inventing new feature work": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/baseline-qa.md"
       }
     },
     {

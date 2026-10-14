@@ -1,6 +1,6 @@
 # Accepted public baseline QA
 
-Reviewed 2026-10-14, approximately 04:16–04:21 UTC. Status: **partial browser coverage; current-cycle narrow-screen gate remains open.** No product defect was established in the exercised flows. This is not an all-criteria acceptance or a new release approval.
+Reviewed 2026-10-14: live checks approximately 04:16–04:21 UTC; isolated CI artifacts and screenshots reviewed approximately 04:44–04:45 UTC. Status: **bounded baseline browser checks pass, including the new 390×844 narrow-screen check.** No product defect was established in the exercised flows. This is not an all-criteria acceptance or a new release approval; standalone notices delivery remains unverified.
 
 ## Identity and deployment evidence
 
@@ -70,11 +70,23 @@ Environment: cloud Chrome, measured CSS viewport **944×606**, ordinary supporte
 - A screenshot showed the arena at 944×606 with the party and start control rendered. This does not certify every page at all scroll positions.
 - A bounded warning/error query filtered for the application origin returned no entries. Unfiltered records contained extension-origin metadata errors, not application-origin errors.
 
-## Remaining gates and limitations
+## New exact-source CI viewport evidence
 
-1. **Current-cycle narrow viewport remains unverified.** The documented browser capability inventory exposed no resize/emulation API. A keyboard zoom attempt did not change the measured viewport (still 944×606), so it is not narrow-screen evidence. A separate exact-baseline CI browser check is pending; its results must be reviewed before closing this gate.
-2. Historical v0.20.32 acceptance describes 400×606, 361×533, 803×396 and 270×400-at-200%-zoom observations and an independent recorded-evidence audit. That is relevant prior evidence, explicitly attributed to the previous release acceptance. It does not silently substitute for the pending current-cycle narrow-screen gate.
+- [Isolated browser workflow run 38512498551](https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38512498551), harness commit `74ca824dcea6a92a6b350743ecfd666dd58c0941`, tested baseline runtime source `8343d81405b9eb3c59621a4b0ead4052e2d3949e`. This is a production build served by Vite preview inside CI, not a deployment or a live-site phone test.
+- GitHub artifact `11870786433` is the baseline artifact. Downloaded ZIP SHA-256: `c10e553fcbd4837cd3a7040f51de27084c0e9db575b2d5854be68a419dbd6aac`; the download coordinator verified it against GitHub. The reviewed JSON report SHA-256 is `aabed395eb9b1b2b2811a9fcd6d6e6b7d081704bcbc0f8ffd50c0451bf925ca1`.
+- Runtime attachments identify Chromium **141.0.7390.37**, desktop **1440×1000**, phone **390×844**, and the exact baseline source SHA for both. Phone project enables mobile/touch emulation; this is not a physical-phone test.
+- Results: **2 expected UI passes, 0 unexpected failures, 0 flaky, 10 intentional skips**, with no report-level errors. The skips cover feature-specific catalog-scroll, awakening-preview and storage-candidate cases; they are not counted as baseline passes.
+- The baseline UI assertion checks all 37 catalog cards, catalog-heading focus, Right-arrow story-tab focus/selection, Escape dismissal/focus restoration, initial team, battle start, repeated ordinary turn-start/animation-skip inputs through result, and identical five member IDs/labels after play and reload. It asserts no document horizontal overflow at catalog, team and battle checkpoints. The shared fixture also rejects uncaught page errors.
+- For reproducibility the harness replaces `Math.random` with a constant before navigation. Timers, rendering and storage are not mocked in this UI flow. This deterministic fixture must not be described as an unseeded/random encounter or a general balance result. Both screenshots show **9-turn DEFEAT**, distinct from the separately observed live four-turn battle.
+- All **10 actual PNGs** were visually inspected: catalog, story detail, team, battle and result for each viewport. At 390×844, catalog forms a readable two-column list; story text wraps inside its dialog; all five team slots remain visible; the battle's HP/MP rows and command buttons fit; result and next-battle controls are visible. Desktop uses a centered three-column catalog and readable dialog/battle layout. No clipping or overlap defect was established in these captured states. Partially visible next catalog rows are normal scrollable continuation, not a claim that every card is simultaneously visible.
+
+The previously open narrow-screen gate is now closed **for this exact-source, one-phone-viewport flow and inspected screenshots**. The separate public deployment binding remains the exact-commit CI/live-asset evidence above. No product changes or deployment occurred as part of this isolated check.
+
+## Remaining limitations
+
+1. Live-site interactive checks remain limited to 944×606. The documented cloud-browser capability inventory exposed no resize/emulation API, and keyboard zoom did not change that viewport. Narrow evidence comes from the isolated exact-source CI run, not that failed zoom attempt. Other phone sizes, short landscape, zoom and physical-device behavior are not newly certified.
+2. Historical v0.20.32 acceptance describes 400×606, 361×533, 803×396 and 270×400-at-200%-zoom observations and an independent recorded-evidence audit. That is relevant prior evidence, explicitly attributed to the previous release acceptance and kept separate from the new CI screenshots.
 3. Standalone notices delivery is unverified under the supported browser route; inline notices are verified readable. No legal-clearance conclusion follows from either.
 4. No exhaustive roster, touch/physical-phone, screen-reader, all-keyboard, hidden-tab, reduced-motion, performance or balance certification. No current suite rerun is implied.
 
-No claim is made that all acceptance criteria pass. Review future narrow-browser evidence against the exact accepted commit and retain the distinctions between tests actually executed, inherited exact-release evidence and unverified stages.
+No claim is made that all acceptance criteria pass. Retain the distinctions between live observations, newly inspected exact-source CI results, inherited exact-release evidence and unverified stages.
