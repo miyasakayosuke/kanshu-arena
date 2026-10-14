@@ -1,7 +1,18 @@
 {
   "schemaVersion": 3,
-  "revision": 0,
-  "operations": {},
+  "revision": 1,
+  "operations": {
+    "safe-cycle-one-reconcile": {
+      "command": {
+        "action": "reconcile",
+        "operationId": "safe-cycle-one-reconcile"
+      },
+      "result": {
+        "stale": [],
+        "revision": 1
+      }
+    }
+  },
   "tasks": [
     {
       "id": "catalog-filter-scroll",
