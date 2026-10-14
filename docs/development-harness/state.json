@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 31,
+  "revision": 32,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -568,6 +568,25 @@
         "status": "released",
         "revision": 31
       }
+    },
+    "release034-claim-preview": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-preview",
+        "role": "publish",
+        "worker": "release-publisher-034",
+        "authorizationRef": "Owner explicitly approved tested v0.20.34 publication to the existing public repository and game site.",
+        "operationId": "release034-claim-preview"
+      },
+      "result": {
+        "assignment": {
+          "role": "publish",
+          "worker": "release-publisher-034",
+          "generation": 4,
+          "expiresAt": 1791964195.6912253
+        },
+        "revision": 32
+      }
     }
   },
   "tasks": [
@@ -631,10 +650,10 @@
       ],
       "required": true,
       "attempts": 1,
-      "generation": 3,
+      "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "candidate",
+      "status": "publishing",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/da7954108e36b69955c730eafc7bd7782be809e1",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/awakening-preview-v032"
@@ -659,6 +678,13 @@
         "worker": "combined-ui-review-one",
         "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/f977bb0b2ba0243ed275b2c27903dba748ffc19c/docs/development-harness/evidence/preview-review.md"
+      },
+      "publicationApprovalRef": "Owner explicitly approved tested v0.20.34 publication to the existing public repository and game site.",
+      "assignment": {
+        "role": "publish",
+        "worker": "release-publisher-034",
+        "generation": 4,
+        "expiresAt": 1791964195.6912253
       }
     },
     {
