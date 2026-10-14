@@ -1409,9 +1409,9 @@
       "distribution": "Isolated candidate review material only, not production-imported or deployed. Original remains unchanged. No license selected; explicit owner visual acceptance remains required.",
       "sha256": {
         "docs/fenrir-motion-preview/index.html": "d5e9a3d88132aa2891f64dd6a0be186cbb882adbd2313e39d10b8bfd2cc24dec",
-        "docs/fenrir-motion-preview/rig.mjs": "f2a0b715a1c7d075231578af449c43e7a9c889e9d9feab474dd67af432531ed9",
+        "docs/fenrir-motion-preview/rig.mjs": "d863caf14cef4fa9d00203fc2141c026318863fe365445463c79abc9e71c9fd4",
         "docs/fenrir-motion-preview/rig-checks.mjs": "36a6d617a5ef477c2ff1a214fa65525004e764ba2958272f1d5a02bfa9462596",
-        "docs/fenrir-motion-preview/README.md": "d404efe78240ba130ecc3b6d269d6c99b678a038857fb282897722128d366bb0",
+        "docs/fenrir-motion-preview/README.md": "f0e5077a1db098fb775bfa5d18890e250ccc25b985de8c17e5907fe5ff31cc43",
         ".github/workflows/fenrir-motion-preview.yml": "66c2e8c4612269801de8c78c9096bb7c970174453425923686dcfef92b412aaa",
         "qa/fenrir-motion/render.mjs": "2e1e840bb896fd39b8f712fe62e7e7c9b38c5a673a081986a14d2b551e07edeb",
         "qa/fenrir-motion/package.json": "d9cc6f9b8e2b05f44cc9e233f0a84adf00c5fcb5140f50dfb29729ca98d5a5c0",

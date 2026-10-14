@@ -4,7 +4,7 @@ Isolated review-only successor to the unselected mesh crouch. No production impo
 
 The five-second study uses original-texture rigid plates, a two-bone foreleg with fixed lengths, a separately rotating paw, and stationary support-leg plates. The near paw lifts approximately 90 source pixels and advances 110 pixels before planting; the torso then transfers 40 pixels forward. A 40-pixel rigid downward load keeps the plant reachable without stretching the leg or compressing the chest. Shoulder/elbow centers beneath fur are inferred pivots, not anatomically recovered facts. Support contacts retain their different perspective heights.
 
-The entire head and torso use a rigid translation, without full-body squash. The original cuff remains with the lower foreleg. The original chain remains a rigid assembly with limited sway rather than individually reconstructed links. It is not a true 3D turn or a physically simulated chain. Original overlapping mane and fur plates conceal attachment cuts; rendered seam acceptance is required.
+The entire head and torso use a rigid translation, without full-body squash. The original cuff remains with the lower foreleg. The original chain remains a rigid assembly with limited sway rather than individually reconstructed links. The tail currently follows the torso rigidly without a separate delayed response. It is not a true 3D turn or a physically simulated chain. Original overlapping mane and fur plates conceal attachment cuts; rendered seam acceptance is required.
 
 ## Artwork
 
