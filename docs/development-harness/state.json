@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 34,
+  "revision": 35,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -618,6 +618,25 @@
         "decisionRecorded": "awakening-quantities",
         "revision": 34
       }
+    },
+    "trial-claim-integration": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-integration",
+        "role": "implement",
+        "worker": "awakening-integrator",
+        "operationId": "trial-claim-integration",
+        "ttl": 3600
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "awakening-integrator",
+          "generation": 2,
+          "expiresAt": 1791970126.9660072
+        },
+        "revision": 35
+      }
     }
   },
   "tasks": [
@@ -860,8 +879,8 @@
         "Record independent review and browser QA before release"
       ],
       "required": true,
-      "attempts": 0,
-      "generation": 1,
+      "attempts": 1,
+      "generation": 2,
       "dependsOn": [
         {
           "task": "awakening-storage",
@@ -873,7 +892,14 @@
         }
       ],
       "deliverableKind": "release",
-      "status": "ready"
+      "status": "running",
+      "implementer": "awakening-integrator",
+      "assignment": {
+        "role": "implement",
+        "worker": "awakening-integrator",
+        "generation": 2,
+        "expiresAt": 1791970126.9660072
+      }
     }
   ],
   "provenance": {
