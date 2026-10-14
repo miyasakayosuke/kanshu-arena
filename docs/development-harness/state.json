@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 46,
+  "revision": 47,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -827,6 +827,20 @@
         },
         "revision": 46
       }
+    },
+    "block-articulated": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "fenrir-articulated",
+        "generation": 4,
+        "reason": "Final articulated candidate has clearer foreleg action and passing technical capture, but independent rendered review still fails on geometric chest and thigh attachment edges after a bounded mask correction. Visual acceptance remains unmet. Third implementation attempt is complete; no further automatic iteration, adoption or deployment. Candidate and final review evidence are preserved separately.",
+        "operationId": "block-articulated"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 47
+      }
     }
   },
   "tasks": [
@@ -942,15 +956,14 @@
       "generation": 4,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "notBefore": 1791983839.8009763,
       "lastFailure": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
       "implementer": "fenrir-articulated",
-      "assignment": {
-        "role": "implement",
-        "worker": "fenrir-articulated",
-        "generation": 4,
-        "expiresAt": 1791987459.6346302
+      "block": {
+        "type": "approval",
+        "reason": "Final articulated candidate has clearer foreleg action and passing technical capture, but independent rendered review still fails on geometric chest and thigh attachment edges after a bounded mask correction. Visual acceptance remains unmet. Third implementation attempt is complete; no further automatic iteration, adoption or deployment. Candidate and final review evidence are preserved separately.",
+        "previousRole": "implement"
       }
     },
     {
