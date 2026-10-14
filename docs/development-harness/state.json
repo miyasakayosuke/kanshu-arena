@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 36,
+  "revision": 37,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -664,6 +664,25 @@
         "status": "review",
         "revision": 36
       }
+    },
+    "trial-claim-review": {
+      "command": {
+        "action": "claim",
+        "task": "awakening-integration",
+        "role": "review",
+        "worker": "awakening-reviewer",
+        "operationId": "trial-claim-review",
+        "ttl": 3600
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "awakening-reviewer",
+          "generation": 3,
+          "expiresAt": 1791971969.1918898
+        },
+        "revision": 37
+      }
     }
   },
   "tasks": [
@@ -907,7 +926,7 @@
       ],
       "required": true,
       "attempts": 1,
-      "generation": 2,
+      "generation": 3,
       "dependsOn": [
         {
           "task": "awakening-storage",
@@ -919,7 +938,7 @@
         }
       ],
       "deliverableKind": "release",
-      "status": "review",
+      "status": "reviewing",
       "implementer": "awakening-integrator",
       "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
       "checks": {
@@ -934,6 +953,12 @@
         "Use owner-approved collection/progression quantities and migration rules": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
         "Cover battle, collection, reload, invalid-save and repeated-action regression paths": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md",
         "Record independent review and browser QA before release": "https://github.com/miyasakayosuke/kanshu-arena/blob/1ee9ddc1f1fbe1228d40e04e7f67ddfc689e6a7b/docs/development-harness/evidence/awakening-v035-checks.md"
+      },
+      "assignment": {
+        "role": "review",
+        "worker": "awakening-reviewer",
+        "generation": 3,
+        "expiresAt": 1791971969.1918898
       }
     }
   ],
