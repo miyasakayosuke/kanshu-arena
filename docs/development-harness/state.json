@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 26,
+  "revision": 27,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -471,6 +471,32 @@
         },
         "revision": 26
       }
+    },
+    "approved-submit-catalog": {
+      "command": {
+        "action": "submit",
+        "task": "catalog-filter-scroll",
+        "worker": "browser-qa-builder-one",
+        "generation": 5,
+        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
+        },
+        "criteriaEvidence": {
+          "Changed filters show first result without stale scroll": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+          "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
+        },
+        "operationId": "approved-submit-catalog"
+      },
+      "result": {
+        "status": "review",
+        "revision": 27
+      }
     }
   },
   "tasks": [
@@ -488,7 +514,7 @@
       "generation": 5,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "review",
       "candidateRefs": [
         "https://github.com/miyasakayosuke/kanshu-arena/commit/e91dbdb5376a44c8a851a76b0bf70251882fff62",
         "https://github.com/miyasakayosuke/kanshu-arena/tree/candidate/catalog-result-position-v032"
@@ -498,29 +524,18 @@
       "implementer": "browser-qa-builder-one",
       "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
       "checks": {
-        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
       },
       "criteriaEvidence": {
-        "Changed filters show first result without stale scroll": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md",
-        "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/ui-checks.md"
+        "Changed filters show first result without stale scroll": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "Existing detail dismissal and scroll restoration still pass": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md",
+        "Narrow viewport and keyboard QA recorded": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/ui-checks.md"
       },
-      "review": {
-        "worker": "combined-ui-review-one",
-        "commit": "14134f351d8eca79714199e1f2b34dc76e826a4e",
-        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/6a1bd283bbd10b5ee0abf92cb04ef50690c5a373/docs/development-harness/evidence/catalog-review.md"
-      },
-      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope.",
-      "assignment": {
-        "role": "implement",
-        "worker": "browser-qa-builder-one",
-        "generation": 5,
-        "expiresAt": 1791962862.83502
-      }
+      "publicationApprovalRef": "Owner approved ongoing game source and site publication; reviewed read-only UI release within that scope."
     },
     {
       "id": "awakening-preview",
