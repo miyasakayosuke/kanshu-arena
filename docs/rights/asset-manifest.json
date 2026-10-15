@@ -1391,6 +1391,7 @@
         "docs/fenrir-acting-bite/BROWSER-REVIEW.md",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md",
         "docs/fenrir-acting-bite/CORRECTION-PROMPT.md",
+        "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PLAN.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-DESCENDING-BITE-PLAN.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-PROMPTS.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-REVIEW.md",
@@ -1467,6 +1468,17 @@
         "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/d155e88b/normal.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/INDEPENDENT-REVIEW.md",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/provenance.json",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-1120x900-rear-tall-playing-natural-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-1120x900-rear-tall-playing-top-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-front-tall-playing-top-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-keyboard.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-playing-natural-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-playing-top-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x844-rear-tall-playing-top-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-844x390-rear-tall-playing-top-pitch.png",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-checks.json",
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-native.png",
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-overlay.jpg",
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-six-static.jpg",
@@ -1550,7 +1562,11 @@
         "qa/fenrir-acting-bite/stage-render.mjs": "40a2261a995e8de6cdade0a696f8d667507eed5e5bc279305784f403e49a4d11",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-checks.json": "754b9c12fceac6d589d700a8dc4dd7b79f17665f6eccc839747f73495a2c4bfc",
         "docs/fenrir-acting-bite/evidence/ad2e4338/provenance.json": "1084268631b23008a6e3026fe090056b9b9f4ec3b788bffafe6ac50cebd1c29a",
-        "docs/fenrir-acting-bite/evidence/ad2e4338/INDEPENDENT-REVIEW.md": "f1f86f50d0acc932f7e9ae4032d9e8ea7195470c2c495a1c107a86fd35f9ba56"
+        "docs/fenrir-acting-bite/evidence/ad2e4338/INDEPENDENT-REVIEW.md": "f1f86f50d0acc932f7e9ae4032d9e8ea7195470c2c495a1c107a86fd35f9ba56",
+        "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PLAN.md": "990a18decde4867362a471362a8ae0c9726d329b90e97e964f9fcd7b31c0cd22",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/INDEPENDENT-REVIEW.md": "638a4bac6f2837d41a05d11e0ab58197e355a3da0ab73079187824c7123313cc",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-checks.json": "548e6ff78dc34ab76abae816d8574462635395d12d67dca6d34915420e1b95f9",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/provenance.json": "7cee95d38403a263d1b16e5eabf58eee9a9bbe068e17a6f6ad456eabf0c0f44d"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1607,7 +1623,15 @@
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-tall-apex.png": "8321d7d1401471264b5091594f6bde8131e5b73f9b767df2833de1c5b9789ff3",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-tall-controls.png": "b98d417e96fb020a85129c3a276b2c32bae6cda4dddc8a1d1d8541dd06301b04",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-clip-descent.png": "339ea002f0556d90cdcd5bc25650a51455e46e0158b4771fc2f68cbf0234f536",
-        "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-tall-descent.png": "0706034819c311b9eb3580455bd510d02237c658b113efd6dc644423afb49361"
+        "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-tall-descent.png": "0706034819c311b9eb3580455bd510d02237c658b113efd6dc644423afb49361",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-1120x900-rear-tall-playing-top-pitch.png": "7c3e7b79fa1b9f3e67be232a831926d2ff48528be54042a7da2209fb2a95712c",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-playing-natural-pitch.png": "84025db491a816622d4af82160dd5a65977f8220bafcd69913a2377be6cb0b49",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-1120x900-rear-tall-playing-natural-pitch.png": "67afff904c007fcdb74ace86e670dc33a062ade5f78c14361248610cb3d12315",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-keyboard.png": "b98d417e96fb020a85129c3a276b2c32bae6cda4dddc8a1d1d8541dd06301b04",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-playing-top-pitch.png": "02936e786165de78377d2ed830253892b959ff8562f84b2348a3def8a88e385e",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-844x390-rear-tall-playing-top-pitch.png": "dc9daa0388a126a1b23e126a12c16ba60dfc40e14b4b22bb6694b82659b3406d",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-front-tall-playing-top-pitch.png": "e8a2090b07ad913b2fc4fb7d1b94bbd132b2b7c24d233f7c06d5d333110afb8f",
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x844-rear-tall-playing-top-pitch.png": "6cff07c1388b659b12bb5d71cad69c437d277e8f1ec8c40b347b422521f5499b"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }

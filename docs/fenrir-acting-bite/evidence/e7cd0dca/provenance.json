@@ -1,0 +1,203 @@
+{
+  "sourceCommit": "e7cd0dcaee824a50ea90263f816c049cbdc3885b",
+  "workflowRun": 38726276181,
+  "artifactId": 11967924499,
+  "archiveBytes": 94857866,
+  "archiveSha256": "c370e748f61c4e886df747f7e75e4b7a2a66bad2886858ee7494d4522d6323d8",
+  "expiresAt": "2026-10-22T11:27:10Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "scope": "Actual App playing-panel layout through a test-only setter; real Tab navigation, no combat activation. Full500–890ms/10ms bounds sweeps.",
+  "tallModeSummary": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "front",
+      "physicalWidth": 123.33333333333333,
+      "sceneHeight": 318.28125,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 0,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 0,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "rear",
+      "physicalWidth": 114.08333333333333,
+      "sceneHeight": 318.28125,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 0,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 0,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "front",
+      "physicalWidth": 123.33333333333333,
+      "sceneHeight": 231,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 115,
+      "naturalViewportFit": false,
+      "naturalPotentialUiOverlapCount": 40,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "rear",
+      "physicalWidth": 114.08333333333333,
+      "sceneHeight": 262,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 146,
+      "naturalViewportFit": false,
+      "naturalPotentialUiOverlapCount": 40,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "front",
+      "physicalWidth": 108.33333333333333,
+      "sceneHeight": 207.625,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 0,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 0,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "rear",
+      "physicalWidth": 100.20833333333333,
+      "sceneHeight": 233,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 7,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 0,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "front",
+      "physicalWidth": 206,
+      "sceneHeight": 394.828125,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 18,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 0,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "rear",
+      "physicalWidth": 190.55,
+      "sceneHeight": 422,
+      "tabReached": true,
+      "tabPresses": 21,
+      "turnButtonDisabled": false,
+      "turnButtonCenterHit": true,
+      "naturalScrollTop": 64,
+      "naturalViewportFit": true,
+      "naturalPotentialUiOverlapCount": 10,
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "revealedPotentialUiOverlapCount": 0
+    }
+  ],
+  "files": {
+    "stage-checks.json": {
+      "bytes": 5257199,
+      "sha256": "548e6ff78dc34ab76abae816d8574462635395d12d67dca6d34915420e1b95f9"
+    },
+    "stage-390x640-rear-tall-keyboard.png": {
+      "bytes": 140804,
+      "sha256": "b98d417e96fb020a85129c3a276b2c32bae6cda4dddc8a1d1d8541dd06301b04"
+    },
+    "stage-390x640-rear-tall-playing-natural-pitch.png": {
+      "bytes": 129076,
+      "sha256": "84025db491a816622d4af82160dd5a65977f8220bafcd69913a2377be6cb0b49"
+    },
+    "stage-390x640-rear-tall-playing-top-pitch.png": {
+      "bytes": 157321,
+      "sha256": "02936e786165de78377d2ed830253892b959ff8562f84b2348a3def8a88e385e"
+    },
+    "stage-390x640-front-tall-playing-top-pitch.png": {
+      "bytes": 158328,
+      "sha256": "e8a2090b07ad913b2fc4fb7d1b94bbd132b2b7c24d233f7c06d5d333110afb8f"
+    },
+    "stage-390x844-rear-tall-playing-top-pitch.png": {
+      "bytes": 203466,
+      "sha256": "6cff07c1388b659b12bb5d71cad69c437d277e8f1ec8c40b347b422521f5499b"
+    },
+    "stage-844x390-rear-tall-playing-top-pitch.png": {
+      "bytes": 163588,
+      "sha256": "dc9daa0388a126a1b23e126a12c16ba60dfc40e14b4b22bb6694b82659b3406d"
+    },
+    "stage-1120x900-rear-tall-playing-natural-pitch.png": {
+      "bytes": 373576,
+      "sha256": "67afff904c007fcdb74ace86e670dc33a062ade5f78c14361248610cb3d12315"
+    },
+    "stage-1120x900-rear-tall-playing-top-pitch.png": {
+      "bytes": 371252,
+      "sha256": "7c3e7b79fa1b9f3e67be232a831926d2ff48528be54042a7da2209fb2a95712c"
+    }
+  }
+}
