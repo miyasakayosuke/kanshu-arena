@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 49,
+  "revision": 50,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -860,6 +860,34 @@
         },
         "revision": 49
       }
+    },
+    "submit-bounded-replan-candidate": {
+      "command": {
+        "action": "submit",
+        "task": "harness-bounded-replanning",
+        "worker": "harness-replan-builder",
+        "generation": 1,
+        "commit": "33aef99fb6f7e606afd5d1636763f3f05dcdb2f2",
+        "checks": {
+          "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
+        },
+        "criteriaEvidence": {
+          "Preserve all pre-bootstrap tasks, historical operation receipts and lifetime implementation claim counts": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "Add explicit bounded plan revisions with separately verified new approval, method and supplemental success criteria": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "Keep original task acceptance gates and invalidate stale candidate, review, publication and acceptance evidence on replan": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+          "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
+        },
+        "operationId": "submit-bounded-replan-candidate"
+      },
+      "result": {
+        "status": "review",
+        "revision": 50
+      }
     }
   },
   "tasks": [
@@ -1146,7 +1174,7 @@
       "title": "Add audited bounded plan revisions",
       "kind": "implementation",
       "deliverableKind": "internal",
-      "status": "running",
+      "status": "review",
       "attempts": 1,
       "generation": 1,
       "required": true,
@@ -1159,11 +1187,20 @@
         "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests"
       ],
       "implementer": "harness-replan-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "harness-replan-builder",
-        "generation": 1,
-        "expiresAt": 1792026547.9542599
+      "commit": "33aef99fb6f7e606afd5d1636763f3f05dcdb2f2",
+      "checks": {
+        "rights:test": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "rights:check": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "test": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "build": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "scope-qa": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
+      },
+      "criteriaEvidence": {
+        "Preserve all pre-bootstrap tasks, historical operation receipts and lifetime implementation claim counts": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "Add explicit bounded plan revisions with separately verified new approval, method and supplemental success criteria": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "Keep original task acceptance gates and invalidate stale candidate, review, publication and acceptance evidence on replan": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
+        "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
       }
     }
   ],
