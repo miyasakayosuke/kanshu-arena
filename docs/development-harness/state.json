@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 61,
+  "revision": 62,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1096,6 +1096,26 @@
         "notBefore": 1792046673.0449824,
         "revision": 61
       }
+    },
+    "claim-fenrir-plan1-02": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "fenrir-acting-builder",
+        "planRevision": 1,
+        "ttl": 3600,
+        "operationId": "claim-fenrir-plan1-02"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-acting-builder",
+          "generation": 7,
+          "expiresAt": 1792050291.9033735
+        },
+        "revision": 62
+      }
     }
   },
   "tasks": [
@@ -1207,11 +1227,11 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 4,
-      "generation": 6,
+      "attempts": 5,
+      "generation": 7,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "retry",
+      "status": "running",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1244,7 +1264,13 @@
       ],
       "implementer": "fenrir-acting-builder",
       "notBefore": 1792046673.0449824,
-      "lastFailure": "Previous real worker confirmed stopped and ready. The interrupted action was only an unattached image blob; no commit, ref update or deployment followed. Exact blob lookup still returns not found; candidate and main remain at the preserved baseline. Renewed owner confirmation for saving the trial image was verified separately. Preserve plan 1 and all prior claims; resume only after cooldown and a fresh assignment."
+      "lastFailure": "Previous real worker confirmed stopped and ready. The interrupted action was only an unattached image blob; no commit, ref update or deployment followed. Exact blob lookup still returns not found; candidate and main remain at the preserved baseline. Renewed owner confirmation for saving the trial image was verified separately. Preserve plan 1 and all prior claims; resume only after cooldown and a fresh assignment.",
+      "assignment": {
+        "role": "implement",
+        "worker": "fenrir-acting-builder",
+        "generation": 7,
+        "expiresAt": 1792050291.9033735
+      }
     },
     {
       "id": "v1-acceptance",
