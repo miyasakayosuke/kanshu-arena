@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 51,
+  "revision": 52,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -907,6 +907,22 @@
         },
         "revision": 51
       }
+    },
+    "reject-bounded-replan-first": {
+      "command": {
+        "action": "review",
+        "task": "harness-bounded-replanning",
+        "worker": "harness-replan-reviewer",
+        "generation": 2,
+        "commit": "33aef99fb6f7e606afd5d1636763f3f05dcdb2f2",
+        "approved": false,
+        "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/89399d26b59344882f7b9c703490830b351eaf23/docs/development-harness/evidence/replan-review-first.md",
+        "operationId": "reject-bounded-replan-first"
+      },
+      "result": {
+        "status": "retry",
+        "revision": 52
+      }
     }
   },
   "tasks": [
@@ -1193,7 +1209,7 @@
       "title": "Add audited bounded plan revisions",
       "kind": "implementation",
       "deliverableKind": "internal",
-      "status": "reviewing",
+      "status": "retry",
       "attempts": 1,
       "generation": 2,
       "required": true,
@@ -1221,12 +1237,8 @@
         "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
         "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
       },
-      "assignment": {
-        "role": "review",
-        "worker": "harness-replan-reviewer",
-        "generation": 2,
-        "expiresAt": 1792027040.546682
-      }
+      "notBefore": 1792023979.131959,
+      "lastFailure": "https://github.com/miyasakayosuke/kanshu-arena/blob/89399d26b59344882f7b9c703490830b351eaf23/docs/development-harness/evidence/replan-review-first.md"
     }
   ],
   "provenance": {
