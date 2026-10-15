@@ -1,0 +1,10 @@
+{
+  "commit": "3505ab26c263e499a407c0e4a2d41249bbc762e9",
+  "run": 38753422571,
+  "result": "failure at timer callback equality, not completed matrix",
+  "artifact": 11983016417,
+  "bytes": 92297857,
+  "sha256": "e8164d8b4d174962c5ab3af436de68d7640a92d0911fcc727ffc147d7da78fa3",
+  "expiresAt": "2026-10-22T14:48:08Z",
+  "capturedCases": 1
+}

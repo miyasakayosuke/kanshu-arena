@@ -1,0 +1,4327 @@
+{
+  "kind": "opt-in-actual-combat-lifecycle",
+  "controlledClock": true,
+  "realTimeSchedulingPerformanceTested": false,
+  "engineChanged": false,
+  "productionSourceChanged": false,
+  "visualAcceptance": false,
+  "cases": [
+    {
+      "name": "normal-desktop",
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "front",
+      "speed": 1,
+      "video": true,
+      "failedRequests": [],
+      "initial": {
+        "state": {
+          "battle": {
+            "turn": 1,
+            "seed": 0,
+            "allies": [
+              {
+                "key": "a0",
+                "monster": {
+                  "id": 0,
+                  "name": "妖狐",
+                  "icon": "🦊",
+                  "cost": 4,
+                  "hp": 150,
+                  "mp": 54,
+                  "atk": 47,
+                  "speed": 92,
+                  "family": "beast",
+                  "skills": [
+                    {
+                      "name": "狐火",
+                      "power": 55,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "疾風斬り",
+                      "power": 38,
+                      "priority": 2,
+                      "mpCost": 12,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "炎嵐",
+                      "power": 28,
+                      "priority": 0,
+                      "mpCost": 18,
+                      "kind": "hit",
+                      "all": true
+                    }
+                  ]
+                },
+                "hp": 150,
+                "mp": 54,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "a1",
+                "monster": {
+                  "id": 1,
+                  "name": "トロル",
+                  "icon": "🪨",
+                  "cost": 3,
+                  "hp": 250,
+                  "mp": 44,
+                  "atk": 53,
+                  "speed": 25,
+                  "family": "demon",
+                  "skills": [
+                    {
+                      "name": "巨人の鉄槌",
+                      "power": 65,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "終焉の一撃",
+                      "power": 110,
+                      "priority": -2,
+                      "mpCost": 20,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "鉄壁の構え",
+                      "power": 0,
+                      "priority": 1,
+                      "mpCost": 0,
+                      "kind": "guard"
+                    },
+                    {
+                      "name": "守護の誓い",
+                      "power": 0,
+                      "priority": 3,
+                      "mpCost": 10,
+                      "kind": "protect"
+                    }
+                  ]
+                },
+                "hp": 250,
+                "mp": 44,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "a2",
+                "monster": {
+                  "id": 2,
+                  "name": "バステト",
+                  "icon": "🐈",
+                  "cost": 3,
+                  "hp": 170,
+                  "mp": 72,
+                  "atk": 30,
+                  "speed": 62,
+                  "family": "beast",
+                  "skills": [
+                    {
+                      "name": "爪撃",
+                      "power": 45,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "生命の雫",
+                      "power": 65,
+                      "priority": 0,
+                      "mpCost": 18,
+                      "kind": "heal"
+                    },
+                    {
+                      "name": "鉄壁の構え",
+                      "power": 0,
+                      "priority": 1,
+                      "mpCost": 0,
+                      "kind": "guard"
+                    },
+                    {
+                      "name": "清めの鈴",
+                      "power": 35,
+                      "priority": 0,
+                      "mpCost": 12,
+                      "kind": "cleanse"
+                    }
+                  ]
+                },
+                "hp": 170,
+                "mp": 72,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "a3",
+                "monster": {
+                  "id": 3,
+                  "name": "ドリュアス",
+                  "icon": "🌳",
+                  "cost": 3,
+                  "hp": 180,
+                  "mp": 64,
+                  "atk": 35,
+                  "speed": 72,
+                  "family": "nature",
+                  "skills": [
+                    {
+                      "name": "樹海の槍",
+                      "power": 60,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "生命の雫",
+                      "power": 65,
+                      "priority": 0,
+                      "mpCost": 18,
+                      "kind": "heal"
+                    },
+                    {
+                      "name": "毒霧",
+                      "power": 12,
+                      "priority": 0,
+                      "mpCost": 16,
+                      "kind": "poison",
+                      "all": true
+                    }
+                  ]
+                },
+                "hp": 180,
+                "mp": 64,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "a4",
+                "monster": {
+                  "id": 4,
+                  "name": "バンシー",
+                  "icon": "👻",
+                  "cost": 3,
+                  "hp": 155,
+                  "mp": 56,
+                  "atk": 38,
+                  "speed": 81,
+                  "family": "undead",
+                  "skills": [
+                    {
+                      "name": "悲鳴",
+                      "power": 54,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "毒霧",
+                      "power": 12,
+                      "priority": 0,
+                      "mpCost": 16,
+                      "kind": "poison",
+                      "all": true
+                    },
+                    {
+                      "name": "影縫い",
+                      "power": 35,
+                      "priority": 2,
+                      "mpCost": 12,
+                      "kind": "hit",
+                      "all": false
+                    }
+                  ]
+                },
+                "hp": 155,
+                "mp": 56,
+                "guard": false,
+                "poison": 0
+              }
+            ],
+            "enemies": [
+              {
+                "key": "e0",
+                "monster": {
+                  "id": 12,
+                  "name": "フェンリル",
+                  "icon": "🐺",
+                  "cost": 4,
+                  "hp": 150,
+                  "mp": 60,
+                  "atk": 58,
+                  "speed": 104,
+                  "family": "beast",
+                  "skills": [
+                    {
+                      "name": "破縛の連牙",
+                      "power": 0,
+                      "priority": 0,
+                      "mpCost": 13,
+                      "kind": "hit",
+                      "all": false,
+                      "randomHits": 5,
+                      "breaksGuardAfterHit": true
+                    },
+                    {
+                      "name": "月下の一咬",
+                      "power": 55,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    }
+                  ]
+                },
+                "hp": 150,
+                "mp": 60,
+                "guard": false,
+                "poison": 0,
+                "rally": 2
+              },
+              {
+                "key": "e1",
+                "monster": {
+                  "id": 5,
+                  "name": "ケツァルコアトル",
+                  "icon": "🐉",
+                  "cost": 4,
+                  "hp": 200,
+                  "mp": 54,
+                  "atk": 52,
+                  "speed": 47,
+                  "family": "dragon",
+                  "skills": [
+                    {
+                      "name": "竜の牙",
+                      "power": 65,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "嵐の息吹",
+                      "power": 34,
+                      "priority": 0,
+                      "mpCost": 18,
+                      "kind": "hit",
+                      "all": true
+                    },
+                    {
+                      "name": "鉄壁の構え",
+                      "power": 0,
+                      "priority": 1,
+                      "mpCost": 0,
+                      "kind": "guard"
+                    }
+                  ]
+                },
+                "hp": 200,
+                "mp": 54,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "e2",
+                "monster": {
+                  "id": 18,
+                  "name": "ジラント",
+                  "icon": "🐲",
+                  "cost": 3,
+                  "hp": 165,
+                  "mp": 56,
+                  "atk": 33,
+                  "speed": 67,
+                  "family": "dragon",
+                  "skills": [
+                    {
+                      "name": "翠雲の息",
+                      "power": 68,
+                      "priority": 0,
+                      "mpCost": 12,
+                      "kind": "hit",
+                      "all": false,
+                      "fixedDamage": true
+                    },
+                    {
+                      "name": "雲の湧き水",
+                      "power": 50,
+                      "priority": 0,
+                      "mpCost": 16,
+                      "kind": "heal"
+                    },
+                    {
+                      "name": "雲払い",
+                      "power": 25,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "cleanse"
+                    }
+                  ]
+                },
+                "hp": 165,
+                "mp": 56,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "e3",
+                "monster": {
+                  "id": 20,
+                  "name": "唐傘おばけ",
+                  "icon": "☂️",
+                  "cost": 2,
+                  "hp": 145,
+                  "mp": 54,
+                  "atk": 29,
+                  "speed": 86,
+                  "family": "material",
+                  "skills": [
+                    {
+                      "name": "雨縫い",
+                      "power": 50,
+                      "priority": 0,
+                      "mpCost": 8,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "傘下の清め",
+                      "power": 30,
+                      "priority": 0,
+                      "mpCost": 10,
+                      "kind": "cleanse"
+                    }
+                  ]
+                },
+                "hp": 145,
+                "mp": 54,
+                "guard": false,
+                "poison": 0
+              },
+              {
+                "key": "e4",
+                "monster": {
+                  "id": 23,
+                  "name": "青銅の牡牛",
+                  "icon": "🐂",
+                  "cost": 4,
+                  "hp": 215,
+                  "mp": 50,
+                  "atk": 58,
+                  "speed": 42,
+                  "family": "material",
+                  "skills": [
+                    {
+                      "name": "銅角の突き",
+                      "power": 75,
+                      "priority": 0,
+                      "mpCost": 12,
+                      "kind": "hit",
+                      "all": false
+                    },
+                    {
+                      "name": "鋳火の突貫",
+                      "power": 115,
+                      "priority": -2,
+                      "mpCost": 22,
+                      "kind": "hit",
+                      "all": false
+                    }
+                  ]
+                },
+                "hp": 215,
+                "mp": 50,
+                "guard": false,
+                "poison": 0
+              }
+            ],
+            "history": [],
+            "log": [
+              "戦闘開始！",
+              "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+              "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+              "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+              "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+            ],
+            "winner": null
+          },
+          "playing": false,
+          "visualCast": null,
+          "impact": null,
+          "playbackId": 0
+        },
+        "frame": {
+          "eligible": false,
+          "animate": false,
+          "serial": null,
+          "reason": "unrelated-or-clear",
+          "age": 2000,
+          "at": 1792022401923,
+          "reduced": false
+        },
+        "draw": {
+          "at": 1792022401923,
+          "age": 2000,
+          "pose": "original",
+          "serial": null,
+          "animate": false,
+          "eligible": false,
+          "reason": "unrelated-or-clear",
+          "row": "front",
+          "index": 0,
+          "physicalWidth": 206,
+          "floor": {
+            "x": 357.43333333333334,
+            "y": 396.2792798913043
+          },
+          "stage": {
+            "x": 251,
+            "y": 89,
+            "width": 618,
+            "height": 394.828125,
+            "right": 869,
+            "bottom": 483.828125
+          },
+          "box": [
+            254.59034552845526,
+            211.16190184252383,
+            460.4333333333333,
+            396.5933042815482
+          ],
+          "withinStage": true
+        },
+        "cache": {
+          "ready": true,
+          "errors": [],
+          "originalReady": true
+        },
+        "runs": [],
+        "clears": [],
+        "layout": {
+          "scene": {
+            "x": 251,
+            "y": 89,
+            "width": 618,
+            "height": 394.828125,
+            "right": 869,
+            "bottom": 483.828125
+          },
+          "battle": {
+            "scrollTop": 0,
+            "clientHeight": 850,
+            "scrollHeight": 887
+          },
+          "skip": null
+        }
+      },
+      "snapshots": [
+        {
+          "logicalMs": 799,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 768,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403235,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403235,
+            "age": 768,
+            "pose": "descent",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              261.1848577235772,
+              152.23172167382864,
+              446.61626016260163,
+              330.28355094212134
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 800,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "damage",
+              "actor": "e0",
+              "target": "a0",
+              "amount": 74,
+              "hp": 76,
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 784,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403251,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403251,
+            "age": 784,
+            "pose": "descent",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              261.1848577235772,
+              157.44313419126743,
+              446.61626016260163,
+              335.49496345956015
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 817,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "damage",
+              "actor": "e0",
+              "target": "a0",
+              "amount": 74,
+              "hp": 76,
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 800,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403267,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403267,
+            "age": 800,
+            "pose": "close",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              259.9287601626016,
+              162.0145844085507,
+              446.61626016260163,
+              342.10757221342874
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 1390,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "damage",
+              "actor": "e0",
+              "target": "a0",
+              "amount": 74,
+              "hp": 76,
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 1360,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403827,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403827,
+            "age": 1360,
+            "pose": "near",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              258.04461382113817,
+              197.87226769618238,
+              450.38455284552845,
+              380.0064140376458
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 1499,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "e0",
+              "scope": "single",
+              "targets": [
+                "a0"
+              ],
+              "target": "a0",
+              "skill": "月下の一咬",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "damage",
+              "actor": "e0",
+              "target": "a0",
+              "amount": 74,
+              "hp": 76,
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 1472,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403939,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403939,
+            "age": 1472,
+            "pose": "original",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              254.59034552845526,
+              193.16190184252383,
+              460.4333333333333,
+              378.5933042815482
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 1500,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "a0",
+              "scope": "single",
+              "targets": [
+                "e4"
+              ],
+              "target": "e4",
+              "skill": "通常攻撃",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "cast",
+              "actor": "a0",
+              "scope": "single",
+              "targets": [
+                "e4"
+              ],
+              "target": "e4",
+              "skill": "通常攻撃",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": true,
+            "animate": true,
+            "serial": 1,
+            "assetsLatched": true,
+            "reason": "candidate",
+            "age": 1472,
+            "actorId": 12,
+            "skill": "月下の一咬",
+            "actor": "e0",
+            "at": 1792022403939,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403939,
+            "age": 1472,
+            "pose": "original",
+            "serial": 1,
+            "animate": true,
+            "eligible": true,
+            "reason": "candidate",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              254.59034552845526,
+              193.16190184252383,
+              460.4333333333333,
+              378.5933042815482
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        },
+        {
+          "logicalMs": 1534,
+          "state": {
+            "battle": {
+              "turn": 1,
+              "seed": 0,
+              "allies": [
+                {
+                  "key": "a0",
+                  "monster": {
+                    "id": 0,
+                    "name": "妖狐",
+                    "icon": "🦊",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 54,
+                    "atk": 47,
+                    "speed": 92,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "狐火",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "疾風斬り",
+                        "power": 38,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "炎嵐",
+                        "power": 28,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 76,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a1",
+                  "monster": {
+                    "id": 1,
+                    "name": "トロル",
+                    "icon": "🪨",
+                    "cost": 3,
+                    "hp": 250,
+                    "mp": 44,
+                    "atk": 53,
+                    "speed": 25,
+                    "family": "demon",
+                    "skills": [
+                      {
+                        "name": "巨人の鉄槌",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "終焉の一撃",
+                        "power": 110,
+                        "priority": -2,
+                        "mpCost": 20,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "守護の誓い",
+                        "power": 0,
+                        "priority": 3,
+                        "mpCost": 10,
+                        "kind": "protect"
+                      }
+                    ]
+                  },
+                  "hp": 250,
+                  "mp": 44,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a2",
+                  "monster": {
+                    "id": 2,
+                    "name": "バステト",
+                    "icon": "🐈",
+                    "cost": 3,
+                    "hp": 170,
+                    "mp": 72,
+                    "atk": 30,
+                    "speed": 62,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "爪撃",
+                        "power": 45,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      },
+                      {
+                        "name": "清めの鈴",
+                        "power": 35,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 170,
+                  "mp": 72,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a3",
+                  "monster": {
+                    "id": 3,
+                    "name": "ドリュアス",
+                    "icon": "🌳",
+                    "cost": 3,
+                    "hp": 180,
+                    "mp": 64,
+                    "atk": 35,
+                    "speed": 72,
+                    "family": "nature",
+                    "skills": [
+                      {
+                        "name": "樹海の槍",
+                        "power": 60,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "生命の雫",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      }
+                    ]
+                  },
+                  "hp": 180,
+                  "mp": 64,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "a4",
+                  "monster": {
+                    "id": 4,
+                    "name": "バンシー",
+                    "icon": "👻",
+                    "cost": 3,
+                    "hp": 155,
+                    "mp": 56,
+                    "atk": 38,
+                    "speed": 81,
+                    "family": "undead",
+                    "skills": [
+                      {
+                        "name": "悲鳴",
+                        "power": 54,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "毒霧",
+                        "power": 12,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "poison",
+                        "all": true
+                      },
+                      {
+                        "name": "影縫い",
+                        "power": 35,
+                        "priority": 2,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 155,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "enemies": [
+                {
+                  "key": "e0",
+                  "monster": {
+                    "id": 12,
+                    "name": "フェンリル",
+                    "icon": "🐺",
+                    "cost": 4,
+                    "hp": 150,
+                    "mp": 60,
+                    "atk": 58,
+                    "speed": 104,
+                    "family": "beast",
+                    "skills": [
+                      {
+                        "name": "破縛の連牙",
+                        "power": 0,
+                        "priority": 0,
+                        "mpCost": 13,
+                        "kind": "hit",
+                        "all": false,
+                        "randomHits": 5,
+                        "breaksGuardAfterHit": true
+                      },
+                      {
+                        "name": "月下の一咬",
+                        "power": 55,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 150,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0,
+                  "rally": 2
+                },
+                {
+                  "key": "e1",
+                  "monster": {
+                    "id": 5,
+                    "name": "ケツァルコアトル",
+                    "icon": "🐉",
+                    "cost": 4,
+                    "hp": 200,
+                    "mp": 54,
+                    "atk": 52,
+                    "speed": 47,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "竜の牙",
+                        "power": 65,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "嵐の息吹",
+                        "power": 34,
+                        "priority": 0,
+                        "mpCost": 18,
+                        "kind": "hit",
+                        "all": true
+                      },
+                      {
+                        "name": "鉄壁の構え",
+                        "power": 0,
+                        "priority": 1,
+                        "mpCost": 0,
+                        "kind": "guard"
+                      }
+                    ]
+                  },
+                  "hp": 200,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e2",
+                  "monster": {
+                    "id": 18,
+                    "name": "ジラント",
+                    "icon": "🐲",
+                    "cost": 3,
+                    "hp": 165,
+                    "mp": 56,
+                    "atk": 33,
+                    "speed": 67,
+                    "family": "dragon",
+                    "skills": [
+                      {
+                        "name": "翠雲の息",
+                        "power": 68,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false,
+                        "fixedDamage": true
+                      },
+                      {
+                        "name": "雲の湧き水",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 16,
+                        "kind": "heal"
+                      },
+                      {
+                        "name": "雲払い",
+                        "power": 25,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 165,
+                  "mp": 56,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e3",
+                  "monster": {
+                    "id": 20,
+                    "name": "唐傘おばけ",
+                    "icon": "☂️",
+                    "cost": 2,
+                    "hp": 145,
+                    "mp": 54,
+                    "atk": 29,
+                    "speed": 86,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "雨縫い",
+                        "power": 50,
+                        "priority": 0,
+                        "mpCost": 8,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "傘下の清め",
+                        "power": 30,
+                        "priority": 0,
+                        "mpCost": 10,
+                        "kind": "cleanse"
+                      }
+                    ]
+                  },
+                  "hp": 145,
+                  "mp": 54,
+                  "guard": false,
+                  "poison": 0
+                },
+                {
+                  "key": "e4",
+                  "monster": {
+                    "id": 23,
+                    "name": "青銅の牡牛",
+                    "icon": "🐂",
+                    "cost": 4,
+                    "hp": 215,
+                    "mp": 50,
+                    "atk": 58,
+                    "speed": 42,
+                    "family": "material",
+                    "skills": [
+                      {
+                        "name": "銅角の突き",
+                        "power": 75,
+                        "priority": 0,
+                        "mpCost": 12,
+                        "kind": "hit",
+                        "all": false
+                      },
+                      {
+                        "name": "鋳火の突貫",
+                        "power": 115,
+                        "priority": -2,
+                        "mpCost": 22,
+                        "kind": "hit",
+                        "all": false
+                      }
+                    ]
+                  },
+                  "hp": 215,
+                  "mp": 50,
+                  "guard": false,
+                  "poison": 0
+                }
+              ],
+              "history": [],
+              "log": [
+                "戦闘開始！",
+                "MPは対戦ごとに全回復。2ターン目から各ターン開始時、生存中の両軍はMP +2（最大MPまで）。",
+                "味方リーダー 妖狐「暁の追い風」：味方全員の素早さ +8%",
+                "敵リーダー フェンリル「解き放つ群れ」：味方の獣系だけ 素早さ +12%・攻撃力 +8%",
+                "敵「群れの遠吠え」：獣系だけ攻撃+5%・2ターン。素早さ+5%の行動順反映は2ターン目から。重複なし・解除可能。"
+              ],
+              "winner": null
+            },
+            "playing": true,
+            "visualCast": {
+              "kind": "cast",
+              "actor": "a0",
+              "scope": "single",
+              "targets": [
+                "e4"
+              ],
+              "target": "e4",
+              "skill": "通常攻撃",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "impact": {
+              "kind": "cast",
+              "actor": "a0",
+              "scope": "single",
+              "targets": [
+                "e4"
+              ],
+              "target": "e4",
+              "skill": "通常攻撃",
+              "effect": "hit",
+              "phase": "action"
+            },
+            "playbackId": 1
+          },
+          "frame": {
+            "eligible": false,
+            "animate": false,
+            "serial": null,
+            "reason": "unrelated-or-clear",
+            "age": 16,
+            "actorId": 0,
+            "skill": "通常攻撃",
+            "actor": "a0",
+            "at": 1792022403971,
+            "reduced": false
+          },
+          "draw": {
+            "at": 1792022403971,
+            "age": 16,
+            "pose": "original",
+            "serial": null,
+            "animate": false,
+            "eligible": false,
+            "reason": "unrelated-or-clear",
+            "row": "front",
+            "index": 0,
+            "physicalWidth": 206,
+            "floor": {
+              "x": 357.43333333333334,
+              "y": 378.2792798913043
+            },
+            "stage": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "box": [
+              254.59034552845526,
+              193.16190184252383,
+              460.4333333333333,
+              378.5933042815482
+            ],
+            "withinStage": true
+          },
+          "layout": {
+            "scene": {
+              "x": 251,
+              "y": 71,
+              "width": 618,
+              "height": 394.828125,
+              "right": 869,
+              "bottom": 465.828125
+            },
+            "battle": {
+              "scrollTop": 18,
+              "clientHeight": 850,
+              "scrollHeight": 907
+            },
+            "skip": {
+              "x": 502,
+              "y": 788.796875,
+              "width": 116,
+              "height": 37,
+              "right": 618,
+              "bottom": 825.796875
+            }
+          }
+        }
+      ],
+      "assertions": [],
+      "turnStart": {
+        "disabled": false,
+        "focused": true,
+        "rect": {
+          "x": 264,
+          "y": 856.1875,
+          "width": 592,
+          "height": 44,
+          "top": 856.1875,
+          "right": 856,
+          "bottom": 900.1875,
+          "left": 264
+        }
+      },
+      "clockStart": 1792022402451,
+      "videoFrames": 97
+    }
+  ],
+  "errors": [],
+  "completed": false,
+  "error": "AssertionError [ERR_ASSERTION]: cue not on authoritative wall clock"
+}

@@ -1636,7 +1636,14 @@
         "qa/fenrir-acting-bite/lifecycle-fixture.html",
         "qa/fenrir-acting-bite/lifecycle-fixture.mjs",
         "qa/fenrir-acting-bite/lifecycle.config.mjs",
-        "qa/fenrir-acting-bite/lifecycle-render.mjs"
+        "qa/fenrir-acting-bite/lifecycle-render.mjs",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-checks.json",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-799.png",
+        "docs/fenrir-acting-bite/evidence/3505ab26/RUN-FAILURE.md",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-817.png",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-800.png",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop.mp4",
+        "docs/fenrir-acting-bite/evidence/3505ab26/provenance.json"
       ],
       "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment. One adjacent-conditioned descending jaw-closure key and its same-scale source inspection are retained with a visible tail-edge cleanup issue; no static-image or motion acceptance is implied. The single adjacent-conditioned forepaw-reach key and its static review are retained with a connected fixed-scale descent/contact diagnostic; early toe clearance and chain/edge defects remain exposed. No additional artwork or production integration is included. Actual connected normal/2x/slow Chromium evidence and independent review are retained with explicit toe/contact defects. A bounded local contact handoff repair is planned before further art. Two bounded local handoff edits are retained: contact has a modest head-angle change with unresolved toe/chain detail; reach clearance overshot and remains unadopted. Separate actual-browser comparisons isolate the contact candidate from the failed paw cleanup. No third art attempt. Independent actual review retains contact-only as a rough improvement and rejects the paw overshoot. Exact rendered evidence is preserved. The next original-derived crouch/toe-off pair is planned before artwork. First original-derived deep-load key, exact prompt and same-physical-scale static inspection are retained pending the source gate; no grounded-motion acceptance is implied. The one adjacent-conditioned toe-off, explicit single-support registration and full1500/0–560 browser diagnostics are retained; no further art was generated before review. Backward-load, broad rear support and pose-boundary limits remain explicit. The rejected paw edit is not selected. A test-only real-combat lifecycle fixture uses hash-locked production sources, legal UI orders, unchanged seeded CPU choices and a passive per-cast asset latch. Actual browser verification is pending; no production integration or new artwork is included.",
       "reviewLimit": "Original reference provenance remains unverified. Actual Chromium output independently reviewed as an unapproved rough diagnostic; smoothness, chain/face identity, contact compression and game integration remain unmet. See BROWSER-REVIEW.md. No license or legal clearance is asserted.",
@@ -1761,7 +1768,10 @@
         "qa/fenrir-acting-bite/lifecycle-fixture.html": "ad029f89fb81917e90bb8511a553d923f6f20300d6c3d263777aa42a69e727f4",
         "qa/fenrir-acting-bite/lifecycle-fixture.mjs": "7879360e3d55c1e003eed16ebede41328bfa04fa244cc1e4faf947a4bfba84b9",
         "qa/fenrir-acting-bite/lifecycle.config.mjs": "5973ff459be09bd5e65323336897286471ae9149922fd3ece8ba5672c0db1dba",
-        "qa/fenrir-acting-bite/lifecycle-render.mjs": "6f367c710464ad6bf3f9c4c83ece07fafcb008bfeba057738b7c33bfccc0fd11"
+        "qa/fenrir-acting-bite/lifecycle-render.mjs": "beed5825fc6eaaba027ebc84d993d06d21c158223c274b23b011dc387f54b9bb",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-checks.json": "4e180e703cea89e56103f9fdd6a6828e055f77cd9d1895a7d1dc452dfcbc8ef6",
+        "docs/fenrir-acting-bite/evidence/3505ab26/RUN-FAILURE.md": "8f951ab60d0650c0739e1332ee4fe54ab7646707142c74fe7a104c3d66179abf",
+        "docs/fenrir-acting-bite/evidence/3505ab26/provenance.json": "44be3b4b715235f2b47b6aee42cba2926f32c32f55daecc9842b57a1db6e4000"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1903,7 +1913,11 @@
         "docs/fenrir-acting-bite/evidence/5a4f5fd8/extension-tuck-full.mp4": "2f53caa5fc092fe72b150d2391b691ad85200fa52778c62a856b68d006b57d4e",
         "docs/fenrir-acting-bite/evidence/5a4f5fd8/extension-tuck-full-1120-light-429.png": "66ac2dcb88963f101d2e47b8974417c3e0678996162c3af0d3331c30622532dc",
         "docs/fenrir-acting-bite/evidence/5a4f5fd8/tuck-stage-390x640-rear-460.png": "566b5e8a5bd12472d3b26d140319bafd399713379d59ae1586351076434c864b",
-        "docs/fenrir-acting-bite/evidence/5a4f5fd8/extension-tuck-full-1120-light-460.png": "c2d6720f2003dcc74b8dbf3d22323492f7a89cf90c123fe67276ea0ac6e26304"
+        "docs/fenrir-acting-bite/evidence/5a4f5fd8/extension-tuck-full-1120-light-460.png": "c2d6720f2003dcc74b8dbf3d22323492f7a89cf90c123fe67276ea0ac6e26304",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-799.png": "3b2ecb3e8dcddee75e52688d141e26024e9ecd0ac5a2e579be85f63f76cc946f",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-817.png": "996d6eade18ef51e39931b212cff0b06774a83c964faff15f357ee03100ee766",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop-800.png": "32da27ce8787f1ff294f61d005ff0c6fbf67911b0483297aeb39c35ba8e53b98",
+        "docs/fenrir-acting-bite/evidence/3505ab26/lifecycle-normal-desktop.mp4": "7663f35d36426ee3eccedc65b487f21cb6adbed198c93e8b04eb55baa8242ec8"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }
