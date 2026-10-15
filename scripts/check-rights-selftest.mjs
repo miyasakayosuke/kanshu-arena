@@ -1,7 +1,7 @@
 import { afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { cpSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +17,15 @@ function fixture() {
   for (const path of ['src', 'public', 'docs', 'scripts', 'tests', 'package-lock.json']) {
     mkdirSync(dirname(join(root, path)), { recursive: true });
     cpSync(join(repo, path), join(root, path), { recursive: true });
+  }
+  // Review-only registered assets may live in qa/ or .github/. Preserve the
+  // complete declared fixture rather than weakening missing-file validation.
+  const manifest = JSON.parse(readFileSync(join(repo, 'docs/rights/asset-manifest.json'), 'utf8'));
+  for (const path of new Set(manifest.assets.flatMap(asset => asset.files))) {
+    if (!existsSync(join(root, path))) {
+      mkdirSync(dirname(join(root, path)), { recursive: true });
+      cpSync(join(repo, path), join(root, path));
+    }
   }
   for (const name of ['react', 'react-dom', 'scheduler', 'vite']) {
     for (const filename of ['package.json', name === 'vite' ? 'LICENSE.md' : 'LICENSE']) {

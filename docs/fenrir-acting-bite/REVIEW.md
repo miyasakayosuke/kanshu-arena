@@ -69,3 +69,13 @@ Nothing here establishes legal clearance, game adoption, release, or acceptance.
 ## Reproducible byte checks
 
 Run `node docs/fenrir-acting-bite/verify-study.mjs` for all PNG byte hashes and dimensions. The existing general rights checker hashes UTF-8 text; binary PNG hashes are therefore recorded separately as `binarySha256`, with this explicit check rather than treating decoded text as image bytes. The general inventory still checks all listed files exist and verifies text hashes.
+
+## Narrow corrections and diagnostic playback
+
+A separate independent static review found the two-pose correction's left pose useful as a closed-jaw hind-load key. Its right pose reads as settled low recovery, not forepaws-first landing, and is used only in that role. Both show four limbs, coherent bent hocks and clearer broken chain ends. Two additional bridge poses target grounded hind drive and forepaw contact with airborne rear paws. Independent static review found both usable for timed keypose diagnosis: readable four-limb anatomy, correct cuff locations, open chain terminal, raised forepaws with hind support in the drive, and airborne rear paws at forepaw contact. Keep the already-open jaw continuous into the bite; verify body scale and floor contact in playback. This is not motion acceptance.
+
+The new index.html is an isolated **discrete keypose diagnostic**, not a smooth motion or game integration. It uses an explicit exposure schedule preserving 800 ms impact and 1500 ms total. It displays the exact reference at the beginning and end; there is no body deformation, crossfade, motion blur or camera movement. The switches deliberately expose missing in-betweens and identity/foot-position jumps. Chain differences in the old bite remain visible and unresolved.
+
+The renderer selects one connected whole wolf from each sheet, preserving its source RGBA and a four-pixel soft edge. This is whole-sprite isolation, not articulated body-part masking. Original files remain untouched. Transparent fringes, missing islands, ground contacts, relative scale and all transitions need actual rendered inspection; the selection algorithm does not establish visual quality.
+
+A branch-only isolated CI workflow renders normal, double-speed and reduced-motion videos, desktop/mobile light/dark key screenshots, and checks skip/repeat/late-load/defeat/fallback behavior. These are preview-controller checks, not proof of integration with the game's authoritative events. At this checkpoint CI and rendered review are pending. No game sources or release workflow are modified.

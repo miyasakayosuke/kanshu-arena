@@ -1258,7 +1258,7 @@
         "tests/reference-v02030/families.ts": "9843608be0d2bb3385ad989898e29bb016ba25d314030768e66449072a57a516",
         "tests/reference-v02030/provenance.json": "7df86fd551224525d7b5c080822292ee5ebd3dd358783b1d759270ea6d5c60a2",
         "scripts/balance-lab/cli.mjs": "140ca0cbc87fc6b9ce87438c505d9e295656430ddf045dfa171f86e87ba47796",
-        "scripts/check-rights-selftest.mjs": "0c39a21da720602ac7421c92abf2b40e8e7b27fdc5288032a3c7ad7093b99a4f",
+        "scripts/check-rights-selftest.mjs": "0fbb746e9e91e0f13d7bb1eddded267a4bec3a3c9e6ed4fcd8e0bf0680eeab68",
         "docs/action-time-auto.md": "a849aea0fb8af76d2019a549c18609300e52a16f82825817fcc1ffdb27531510",
         "docs/rights/releases/2026-10-13-v0.20.31.md": "1e6fd7fe4c0243c79d5edfc7b84454fdefa67b8b75a8fbf4d10d5da7825237d0"
       },
@@ -1385,6 +1385,7 @@
       "id": "fenrir-acting-bite-plan-one-studies",
       "kind": "isolated-raster-keypose-study",
       "files": [
+        "docs/fenrir-acting-bite/BRIDGE-PROMPT.md",
         "docs/fenrir-acting-bite/CORRECTION-PROMPT.md",
         "docs/fenrir-acting-bite/PLAN.md",
         "docs/fenrir-acting-bite/PROMPTS.md",
@@ -1393,13 +1394,22 @@
         "docs/fenrir-acting-bite/assets/inbetween-study.png",
         "docs/fenrir-acting-bite/assets/keyposes-first.png",
         "docs/fenrir-acting-bite/assets/reference.png",
+        "docs/fenrir-acting-bite/assets/weight-transfer-bridges.png",
+        "docs/fenrir-acting-bite/index.html",
+        "docs/fenrir-acting-bite/motion.mjs",
+        "docs/fenrir-acting-bite/motion.test.mjs",
         "docs/fenrir-acting-bite/pose-gallery.html",
         "docs/fenrir-acting-bite/pose-render.png",
+        "docs/fenrir-acting-bite/preview.mjs",
         "docs/fenrir-acting-bite/provenance.json",
-        "docs/fenrir-acting-bite/verify-study.mjs"
+        "docs/fenrir-acting-bite/verify-study.mjs",
+        ".github/workflows/fenrir-acting-bite-review.yml",
+        "qa/fenrir-acting-bite/package-lock.json",
+        "qa/fenrir-acting-bite/package.json",
+        "qa/fenrir-acting-bite/render.mjs"
       ],
-      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved.",
-      "reviewLimit": "Original reference creation provenance remains unverified. Generated face and chain identity and motion continuity require correction. Actual browser motion review and owner visual acceptance have not passed. No authorship, license or legal clearance is asserted.",
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game.",
+      "reviewLimit": "Original reference creation provenance remains unverified. Generated face and chain identity and motion continuity require correction. Actual browser motion review and owner visual acceptance have not passed. No authorship, license or legal clearance is asserted. Whole-sprite isolation and all generated transitions need rendered inspection; keypose playback is not smooth animation or game integration.",
       "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
       "createdFor": "Single-action Moonlit Bite review pilot",
       "references": [
@@ -1409,13 +1419,22 @@
       ],
       "distribution": "Isolated candidate review material only; not imported by game or deployed. No license selected.",
       "sha256": {
+        "docs/fenrir-acting-bite/BRIDGE-PROMPT.md": "aa09d90868ad3645a0afbf4cf17dd14f35fd882dfbaf107bfb66a25343ec66d3",
         "docs/fenrir-acting-bite/CORRECTION-PROMPT.md": "e62b478bf23b9187d317fd5ba499490bbfcdaecd40d1313c709254a81c032165",
         "docs/fenrir-acting-bite/PLAN.md": "4af9ee7033c9c0cfd8fe258bfa157add75968eee8bff196313d6b29b978f330d",
         "docs/fenrir-acting-bite/PROMPTS.md": "96cf00e78f05096d02ac01216c47570afab29b9a623085300b77dba222265d94",
-        "docs/fenrir-acting-bite/REVIEW.md": "871619ab1daf38da5afaf7d4cab23e360bd3961db1e2fa0f3125d57da50d917b",
+        "docs/fenrir-acting-bite/REVIEW.md": "640a50cce95883fa69d8dbdb98843adf81273296f48a5992842112ad2bc58410",
+        "docs/fenrir-acting-bite/index.html": "a08b4a9c5fbd0c4caf33b6290b99c2af55b92f5bf0bdea183032c0d8bbdfe6ee",
+        "docs/fenrir-acting-bite/motion.mjs": "bac465e853462bd26c8e6969b01354d39fb589651778ef8260e1534e92860286",
+        "docs/fenrir-acting-bite/motion.test.mjs": "66e3a0cc16282cb23e0042d215a46f347242e76d7637d9121841d39f2c0eb9e3",
         "docs/fenrir-acting-bite/pose-gallery.html": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
-        "docs/fenrir-acting-bite/provenance.json": "ad3983c278de2dc7104288128b91280a39a693f09fdcd0ac5897807c2e621867",
-        "docs/fenrir-acting-bite/verify-study.mjs": "fd8fba7bd39351cd3b2eca78835c12451a18fe8446402145219c99d27fd19c0d"
+        "docs/fenrir-acting-bite/preview.mjs": "6ecc89672c40b3724779eecdf7bd10d98d894600c804e20c6320c4f702885637",
+        "docs/fenrir-acting-bite/provenance.json": "0c5829e4b4598193264558d7881743bbefc882207f9930e80d30463b98562383",
+        "docs/fenrir-acting-bite/verify-study.mjs": "d0b9eb9f5aeccbdd2783330d472d95b3d46577d152c0f4a0e9a5770f282cd1ee",
+        ".github/workflows/fenrir-acting-bite-review.yml": "e051eec182d1bf3e9af52bb71563da955eb105817f18724e3b7dbd2d5f485184",
+        "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
+        "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
+        "qa/fenrir-acting-bite/render.mjs": "95ff23623ae0b4fb4ffab9dca6879e5ed37c3423dd51b2af83705469c5fc5038"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1423,6 +1442,7 @@
         "docs/fenrir-acting-bite/assets/inbetween-study.png": "0133e41c2919997232c6acbd0fc55f0d244332a4f590b4fbd1251c0bf04fb01d",
         "docs/fenrir-acting-bite/assets/keyposes-first.png": "89f39e9c09f5c49950ed3313d4d7cd2c1c6e8796bc12ffaa9116603623da741d",
         "docs/fenrir-acting-bite/assets/reference.png": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+        "docs/fenrir-acting-bite/assets/weight-transfer-bridges.png": "c49b5df5bd837ec38cf4324e03c25bf64cee64cc46b8af8bc6ad0b5c8d2747c0",
         "docs/fenrir-acting-bite/pose-render.png": "e5064ca5b8df023597905d8eaa8ebe7896787313683b5382bfe4fa83ad84da19"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"

@@ -13,6 +13,7 @@ const expected = {
   'assets/keyposes-first.png': [1536, 1024],
   'assets/inbetween-study.png': [1024, 1536],
   'pose-render.png': [1536, 2360],
+  'assets/weight-transfer-bridges.png': [1536, 1024],
   'assets/anticipation-landing-correction.png': [1536, 1024],
 };
 for (const [file, [width, height]] of Object.entries(expected)) {
@@ -25,4 +26,4 @@ for (const [file, [width, height]] of Object.entries(expected)) {
 }
 assert.equal(entry.binarySha256['docs/fenrir-acting-bite/assets/reference.png'],
   'e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137');
-console.log('5 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');
+console.log('6 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');

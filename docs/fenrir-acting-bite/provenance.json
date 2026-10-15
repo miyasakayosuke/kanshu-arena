@@ -63,7 +63,7 @@
     },
     {
       "file": "REVIEW.md",
-      "sha256": "871619ab1daf38da5afaf7d4cab23e360bd3961db1e2fa0f3125d57da50d917b",
+      "sha256": "640a50cce95883fa69d8dbdb98843adf81273296f48a5992842112ad2bc58410",
       "origin": "Supplemental independent static-review findings and verification limits",
       "adopted": false
     },
@@ -76,6 +76,17 @@
       ],
       "mode": "RGBA",
       "origin": "Built-in imagegen narrow two-pose correction; exact prompt in CORRECTION-PROMPT.md",
+      "adopted": false
+    },
+    {
+      "file": "assets/weight-transfer-bridges.png",
+      "sha256": "c49b5df5bd837ec38cf4324e03c25bf64cee64cc46b8af8bc6ad0b5c8d2747c0",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen narrow grounded-drive and forepaw-contact bridges; exact prompt in BRIDGE-PROMPT.md",
       "adopted": false
     }
   ],
