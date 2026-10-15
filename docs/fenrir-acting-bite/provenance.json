@@ -66,6 +66,17 @@
       "sha256": "871619ab1daf38da5afaf7d4cab23e360bd3961db1e2fa0f3125d57da50d917b",
       "origin": "Supplemental independent static-review findings and verification limits",
       "adopted": false
+    },
+    {
+      "file": "assets/anticipation-landing-correction.png",
+      "sha256": "1db5082404092185a8184b45d125d9dda988baf6523431e89f19e0a8c2f81dd2",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen narrow two-pose correction; exact prompt in CORRECTION-PROMPT.md",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
