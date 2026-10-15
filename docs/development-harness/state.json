@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 47,
+  "revision": 48,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1121,6 +1121,24 @@
         "commit": "0961f09d8081c357c08388ee807f4385835a8f47",
         "evidence": "https://github.com/miyasakayosuke/kanshu-arena/blob/3e93e7795499da1fc6d49035dd28b9447a3c6e87/docs/development-harness/evidence/review-v035.md"
       }
+    },
+    {
+      "id": "harness-bounded-replanning",
+      "title": "Add audited bounded plan revisions",
+      "kind": "implementation",
+      "deliverableKind": "internal",
+      "status": "ready",
+      "attempts": 0,
+      "generation": 0,
+      "required": true,
+      "dependsOn": [],
+      "criteria": [
+        "Preserve all pre-bootstrap tasks, historical operation receipts and lifetime implementation claim counts",
+        "Add explicit bounded plan revisions with separately verified new approval, method and supplemental success criteria",
+        "Keep original task acceptance gates and invalidate stale candidate, review, publication and acceptance evidence on replan",
+        "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap",
+        "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests"
+      ]
     }
   ],
   "provenance": {
