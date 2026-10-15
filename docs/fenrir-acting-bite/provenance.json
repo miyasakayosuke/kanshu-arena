@@ -1,0 +1,73 @@
+{
+  "status": "unapproved-review-only",
+  "baseline": "14134f351d8eca79714199e1f2b34dc76e826a4e",
+  "sourceIdentityUnchanged": true,
+  "legalClearance": "Not established",
+  "files": [
+    {
+      "file": "assets/inbetween-study.png",
+      "sha256": "0133e41c2919997232c6acbd0fc55f0d244332a4f590b4fbd1251c0bf04fb01d",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen, 2026-10-15 UTC; exact prompt in PROMPTS.md",
+      "adopted": false
+    },
+    {
+      "file": "assets/keyposes-first.png",
+      "sha256": "89f39e9c09f5c49950ed3313d4d7cd2c1c6e8796bc12ffaa9116603623da741d",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen, 2026-10-15 UTC; exact prompt in PROMPTS.md",
+      "adopted": false
+    },
+    {
+      "file": "assets/reference.png",
+      "sha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "origin": "Owner-selected original reference; creation provenance unverified",
+      "adopted": false
+    },
+    {
+      "file": "pose-gallery.html",
+      "sha256": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
+      "origin": "Project-authored review documentation or deterministic display of the generated studies",
+      "adopted": false
+    },
+    {
+      "file": "pose-render.png",
+      "sha256": "e5064ca5b8df023597905d8eaa8ebe7896787313683b5382bfe4fa83ad84da19",
+      "origin": "Project-authored review documentation or deterministic display of the generated studies",
+      "adopted": false
+    },
+    {
+      "file": "PLAN.md",
+      "sha256": "4af9ee7033c9c0cfd8fe258bfa157add75968eee8bff196313d6b29b978f330d",
+      "origin": "Project-authored review documentation or deterministic display of the generated studies",
+      "adopted": false
+    },
+    {
+      "file": "PROMPTS.md",
+      "sha256": "96cf00e78f05096d02ac01216c47570afab29b9a623085300b77dba222265d94",
+      "origin": "Project-authored review documentation or deterministic display of the generated studies",
+      "adopted": false
+    },
+    {
+      "file": "REVIEW.md",
+      "sha256": "871619ab1daf38da5afaf7d4cab23e360bd3961db1e2fa0f3125d57da50d917b",
+      "origin": "Supplemental independent static-review findings and verification limits",
+      "adopted": false
+    }
+  ],
+  "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
+  "visualStatus": "Independent static review requires corrections; actual browser motion unverified."
+}

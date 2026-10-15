@@ -1380,6 +1380,48 @@
         "package-lock.json",
         "public/credits.html"
       ]
+    },
+    {
+      "id": "fenrir-acting-bite-plan-one-studies",
+      "kind": "isolated-raster-keypose-study",
+      "files": [
+        "docs/fenrir-acting-bite/PLAN.md",
+        "docs/fenrir-acting-bite/PROMPTS.md",
+        "docs/fenrir-acting-bite/REVIEW.md",
+        "docs/fenrir-acting-bite/assets/inbetween-study.png",
+        "docs/fenrir-acting-bite/assets/keyposes-first.png",
+        "docs/fenrir-acting-bite/assets/reference.png",
+        "docs/fenrir-acting-bite/pose-gallery.html",
+        "docs/fenrir-acting-bite/pose-render.png",
+        "docs/fenrir-acting-bite/provenance.json",
+        "docs/fenrir-acting-bite/verify-study.mjs"
+      ],
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used.",
+      "reviewLimit": "Original reference creation provenance remains unverified. Generated face and chain identity and motion continuity require correction. Actual browser motion review and owner visual acceptance have not passed. No authorship, license or legal clearance is asserted.",
+      "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
+      "createdFor": "Single-action Moonlit Bite review pilot",
+      "references": [
+        "docs/fenrir-acting-bite/PROMPTS.md",
+        "docs/fenrir-acting-bite/REVIEW.md",
+        "docs/fenrir-acting-bite/PLAN.md"
+      ],
+      "distribution": "Isolated candidate review material only; not imported by game or deployed. No license selected.",
+      "sha256": {
+        "docs/fenrir-acting-bite/PLAN.md": "4af9ee7033c9c0cfd8fe258bfa157add75968eee8bff196313d6b29b978f330d",
+        "docs/fenrir-acting-bite/PROMPTS.md": "96cf00e78f05096d02ac01216c47570afab29b9a623085300b77dba222265d94",
+        "docs/fenrir-acting-bite/REVIEW.md": "871619ab1daf38da5afaf7d4cab23e360bd3961db1e2fa0f3125d57da50d917b",
+        "docs/fenrir-acting-bite/pose-gallery.html": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
+        "docs/fenrir-acting-bite/provenance.json": "0b7ffc4959885b41fe33b3291a26b8b7f9775b9a79d6ff213e47aa69ba5c66cb",
+        "docs/fenrir-acting-bite/verify-study.mjs": "64de0fc534cf6a8dc534360e5ff80f232a71e535947693f5823eac1780383829"
+      },
+      "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+      "binarySha256": {
+        "docs/fenrir-acting-bite/assets/inbetween-study.png": "0133e41c2919997232c6acbd0fc55f0d244332a4f590b4fbd1251c0bf04fb01d",
+        "docs/fenrir-acting-bite/assets/keyposes-first.png": "89f39e9c09f5c49950ed3313d4d7cd2c1c6e8796bc12ffaa9116603623da741d",
+        "docs/fenrir-acting-bite/assets/reference.png": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+        "docs/fenrir-acting-bite/pose-render.png": "e5064ca5b8df023597905d8eaa8ebe7896787313683b5382bfe4fa83ad84da19"
+      },
+      "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }
   ],
   "software": [
