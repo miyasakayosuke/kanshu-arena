@@ -1,0 +1,12 @@
+{
+  "sourceCommit": "3e8ed69c2c89ffbd12db57a047431a8519093696",
+  "workflowRun": 38719240234,
+  "artifactId": 11964443149,
+  "archiveBytes": 32730867,
+  "archiveSha256": "c0c08da72869e242143bc50371d0c0aa7971ffb14844ac0a39f5b053470feea7",
+  "expiresAt": "2026-10-22T10:23:18Z",
+  "captureFps": 60,
+  "doubleSpeed": true,
+  "artworkAndActionClockUnchanged": true,
+  "visualAcceptance": false
+}
