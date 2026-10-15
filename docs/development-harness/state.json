@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 73,
+  "revision": 74,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1325,6 +1325,25 @@
         },
         "revision": 73
       }
+    },
+    "beat-fenrir-plan1-13": {
+      "command": {
+        "action": "heartbeat",
+        "operationId": "beat-fenrir-plan1-13",
+        "task": "replacement-animation",
+        "worker": "fenrir-acting-builder",
+        "generation": 7,
+        "ttl": 3600
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-acting-builder",
+          "generation": 7,
+          "expiresAt": 1792077426.9521503
+        },
+        "revision": 74
+      }
     }
   },
   "tasks": [
@@ -1478,7 +1497,7 @@
         "role": "implement",
         "worker": "fenrir-acting-builder",
         "generation": 7,
-        "expiresAt": 1792075313.035626
+        "expiresAt": 1792077426.9521503
       }
     },
     {
