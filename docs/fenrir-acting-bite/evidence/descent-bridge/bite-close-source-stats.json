@@ -1,0 +1,40 @@
+{
+  "path": "docs/fenrir-acting-bite/assets/high-leap-bite-close-study.png",
+  "bytes": 1829621,
+  "size": [
+    1254,
+    1254
+  ],
+  "sha256": "a7941bd3e6c8ac216069b4f4e31ac7bd7db89068b7c77654fe4c70f3ab419372",
+  "gitBlob": "a0f53a6fb48ec3139f5e6cc057471c98f3522587",
+  "alpha16Bounds": [
+    65,
+    52,
+    1254,
+    1199
+  ],
+  "edgeAlpha": [
+    {
+      "max": 0,
+      "above16": 0,
+      "above128": 0
+    },
+    {
+      "max": 217,
+      "above16": 49,
+      "above128": 24
+    },
+    {
+      "max": 0,
+      "above16": 0,
+      "above128": 0
+    },
+    {
+      "max": 0,
+      "above16": 0,
+      "above128": 0
+    }
+  ],
+  "visualAcceptance": false,
+  "tool": "built-in image generation"
+}

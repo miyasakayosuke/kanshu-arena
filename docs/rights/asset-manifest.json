@@ -1392,6 +1392,7 @@
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md",
         "docs/fenrir-acting-bite/CORRECTION-PROMPT.md",
         "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PLAN.md",
+        "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PROMPTS.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-DESCENDING-BITE-PLAN.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-PROMPTS.md",
         "docs/fenrir-acting-bite/HIGH-LEAP-REVIEW.md",
@@ -1404,6 +1405,7 @@
         "docs/fenrir-acting-bite/assets/anticipation-landing-correction.png",
         "docs/fenrir-acting-bite/assets/continuity-four-key-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-apex-study.png",
+        "docs/fenrir-acting-bite/assets/high-leap-bite-close-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-descent-study.png",
         "docs/fenrir-acting-bite/assets/inbetween-study.png",
         "docs/fenrir-acting-bite/assets/keyposes-first.png",
@@ -1468,6 +1470,8 @@
         "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/d155e88b/normal.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/descent-bridge/bite-close-source-stats.json",
+        "docs/fenrir-acting-bite/evidence/descent-bridge/descent-close-static.png",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/INDEPENDENT-REVIEW.md",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/provenance.json",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-1120x900-rear-tall-playing-natural-pitch.png",
@@ -1502,7 +1506,7 @@
         "qa/fenrir-acting-bite/stage-render.mjs",
         "qa/fenrir-acting-bite/stage.config.mjs"
       ],
-      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment.",
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment. One adjacent-conditioned descending jaw-closure key and its same-scale source inspection are retained with a visible tail-edge cleanup issue; no static-image or motion acceptance is implied.",
       "reviewLimit": "Original reference provenance remains unverified. Actual Chromium output independently reviewed as an unapproved rough diagnostic; smoothness, chain/face identity, contact compression and game integration remain unmet. See BROWSER-REVIEW.md. No license or legal clearance is asserted.",
       "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
       "createdFor": "Single-action Moonlit Bite review pilot",
@@ -1524,7 +1528,7 @@
         "docs/fenrir-acting-bite/pose-gallery.html": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
         "docs/fenrir-acting-bite/preview.mjs": "df8bea9fd55ffa4d3e8da72f2f526a7a80de1de9f0908ba8a08b5b741a05b745",
         "docs/fenrir-acting-bite/provenance.json": "99438cc18e7bd6e2fcc52bfa6fdf573692aaacfe0da06c3497960215c8849c92",
-        "docs/fenrir-acting-bite/verify-study.mjs": "6798edd4f4c246112cb9708e62d312dba0f19d9aa98e92a1cd86a42e8230a5b0",
+        "docs/fenrir-acting-bite/verify-study.mjs": "1656725fc9bd6f23dabd2a2a2f9b80edc58958d794d6c38b79b0b4b43be1cb55",
         ".github/workflows/fenrir-acting-bite-review.yml": "6e0d39783fe8f87db51b97bb938e84d2449c441a351a578ba4346ec84b89bc6b",
         "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
         "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
@@ -1566,7 +1570,9 @@
         "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PLAN.md": "990a18decde4867362a471362a8ae0c9726d329b90e97e964f9fcd7b31c0cd22",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/INDEPENDENT-REVIEW.md": "638a4bac6f2837d41a05d11e0ab58197e355a3da0ab73079187824c7123313cc",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-checks.json": "548e6ff78dc34ab76abae816d8574462635395d12d67dca6d34915420e1b95f9",
-        "docs/fenrir-acting-bite/evidence/e7cd0dca/provenance.json": "7cee95d38403a263d1b16e5eabf58eee9a9bbe068e17a6f6ad456eabf0c0f44d"
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/provenance.json": "7cee95d38403a263d1b16e5eabf58eee9a9bbe068e17a6f6ad456eabf0c0f44d",
+        "docs/fenrir-acting-bite/DESCENT-CONTACT-BRIDGE-PROMPTS.md": "9badf514802992bd5193787778eaa6c29cc0cafd3858a9cc34b1966aa9d1c4b6",
+        "docs/fenrir-acting-bite/evidence/descent-bridge/bite-close-source-stats.json": "efc56e34d8546a1844c572fdc42c08c3ea95e9ee19f7659323477447f86222b9"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1631,7 +1637,9 @@
         "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-rear-tall-playing-top-pitch.png": "02936e786165de78377d2ed830253892b959ff8562f84b2348a3def8a88e385e",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-844x390-rear-tall-playing-top-pitch.png": "dc9daa0388a126a1b23e126a12c16ba60dfc40e14b4b22bb6694b82659b3406d",
         "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x640-front-tall-playing-top-pitch.png": "e8a2090b07ad913b2fc4fb7d1b94bbd132b2b7c24d233f7c06d5d333110afb8f",
-        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x844-rear-tall-playing-top-pitch.png": "6cff07c1388b659b12bb5d71cad69c437d277e8f1ec8c40b347b422521f5499b"
+        "docs/fenrir-acting-bite/evidence/e7cd0dca/stage-390x844-rear-tall-playing-top-pitch.png": "6cff07c1388b659b12bb5d71cad69c437d277e8f1ec8c40b347b422521f5499b",
+        "docs/fenrir-acting-bite/assets/high-leap-bite-close-study.png": "a7941bd3e6c8ac216069b4f4e31ac7bd7db89068b7c77654fe4c70f3ab419372",
+        "docs/fenrir-acting-bite/evidence/descent-bridge/descent-close-static.png": "e96902cb52f8dd598815a71adf13bbd006527d3cb2d4e72a24344abc60996b7d"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }
