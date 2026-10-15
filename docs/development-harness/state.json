@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 57,
+  "revision": 58,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1030,6 +1030,26 @@
         "planRevision": 1,
         "revision": 57
       }
+    },
+    "claim-fenrir-acting-one": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "fenrir-acting-builder",
+        "planRevision": 1,
+        "ttl": 3600,
+        "operationId": "claim-fenrir-acting-one"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "fenrir-acting-builder",
+          "generation": 6,
+          "expiresAt": 1792028027.4290023
+        },
+        "revision": 58
+      }
     }
   },
   "tasks": [
@@ -1141,11 +1161,11 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 3,
-      "generation": 5,
+      "attempts": 4,
+      "generation": 6,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "ready",
+      "status": "running",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1175,7 +1195,14 @@
             }
           }
         }
-      ]
+      ],
+      "implementer": "fenrir-acting-builder",
+      "assignment": {
+        "role": "implement",
+        "worker": "fenrir-acting-builder",
+        "generation": 6,
+        "expiresAt": 1792028027.4290023
+      }
     },
     {
       "id": "v1-acceptance",
