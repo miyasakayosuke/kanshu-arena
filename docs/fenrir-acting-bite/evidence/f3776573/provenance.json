@@ -1,0 +1,184 @@
+{
+  "sourceCommit": "f37765736c8d54cd185fea3f215e37d5464f5b25",
+  "workflowRun": 38733911507,
+  "artifactId": 11972011393,
+  "archiveBytes": 148667024,
+  "archiveSha256": "6e7d02396f524913a88fc126ade75ba8ecdf3a48bbb52a95b5be437e196393f1",
+  "expiresAt": "2026-10-22T12:29:55Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "scope": "Separate contact-only and unadopted reach-overshoot comparisons,500\u20131130ms. Actual Chromium normal/2x60fps and4x slow, fixed physical scale/path/floor. No takeoff/full-action acceptance.",
+  "controlCommit": "f950764a9614f3f161d8cfcc01d9cb4078525015",
+  "unchangedOtherPhasesVerified": true,
+  "contactOnly889ClearanceAt142": -1.847783225894375,
+  "contactOnly890ClearanceAt142": -0.9740853658536537,
+  "overshoot889ClearanceAt142": 3.6720338472763387,
+  "overshootAdopted": false,
+  "tallRevealedBounds": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "front",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 177.2682732375063
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "rear",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 153.253868701819
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "front",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 109.34069171576714
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "rear",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 109.45237413660156
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "front",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 110.53989959757456
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "rear",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 109.19453544901253
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "front",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 129.97544816955514
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "rear",
+      "allInsideStage": true,
+      "allInsideViewport": true,
+      "potentialUiOverlapSamples": [],
+      "minScreenTop": 111.01170928057041
+    }
+  ],
+  "limits": [
+    "The1130half key uses its retained registration anchor.",
+    "Positive paw clearance does not imply acceptable pose continuity.",
+    "UI intersections are alpha bounding-rectangle potential overlaps, not opaque-pixel occlusion.",
+    "Short-portrait Skip visibility, actual activation and combat remain unverified.",
+    "The stage fixture leaves production art/code unchanged but uses new candidate contact art."
+  ],
+  "files": {
+    "contact-handoff.mp4": {
+      "bytes": 1550000,
+      "sha256": "3ae1bacb64bd1e27ecac39e9f8446ba5b2d36c13f8771ef742b4d2ed58b4569a"
+    },
+    "contact-handoff-double.mp4": {
+      "bytes": 1191844,
+      "sha256": "6177f99d10a2a1fa2cfbf47c9283e5f88f14137b7e470fadcafb19c59e945872"
+    },
+    "contact-handoff-slow.mp4": {
+      "bytes": 2598748,
+      "sha256": "5184f0a879da8b80ff976789f3d10292eaca370e4e9d29436e89db9921052d5f"
+    },
+    "handoff-overshoot.mp4": {
+      "bytes": 543865,
+      "sha256": "d93fce99ab1c6e5a6f2369bf93ffc9fc5f1757fdac0cd0d386cc57d0d7a09273"
+    },
+    "handoff-overshoot-double.mp4": {
+      "bytes": 409698,
+      "sha256": "f6ca19dffd1e8618ec0ffc3de351395e50f6f4a56262c6757757e3b23e95cccf"
+    },
+    "handoff-overshoot-slow.mp4": {
+      "bytes": 900120,
+      "sha256": "defb315cd2f85b005fce6fe6f6861917f870b33b040042f391c13957e0ae328f"
+    },
+    "contact-handoff-checks.json": {
+      "bytes": 530188,
+      "sha256": "dd2129b92385357418fa8ced41fd592e3f568be4ac8e6c9c064180c01d67cbe6"
+    },
+    "handoff-overshoot-checks.json": {
+      "bytes": 434394,
+      "sha256": "d3029cc6563e3a11cfcb555eabf83a101c118ed0e3b3b5f2b8c00482fe3547ee"
+    },
+    "stage-checks.json": {
+      "bytes": 5255865,
+      "sha256": "272c1c4127201ef562e6af54d54c4db33ff2dbaf96bf608804640265a0113fd4"
+    },
+    "contact-handoff-1120-light-889.png": {
+      "bytes": 294963,
+      "sha256": "69311be8b609cf5c5e9e79cdbed4fc6c438dc2620c58a9cf540d96facd37a655"
+    },
+    "contact-handoff-1120-light-890.png": {
+      "bytes": 525165,
+      "sha256": "d320ee759e51738b15a20ab59d461c303bb6623b7cdae73613f49d3335db2a81"
+    },
+    "contact-handoff-1120-light-929.png": {
+      "bytes": 525356,
+      "sha256": "dbf5f8e28cadb3225838bed0df9e6eb7866190604c91953c872a59d1bbd87d11"
+    },
+    "contact-handoff-1120-light-930.png": {
+      "bytes": 292699,
+      "sha256": "e030aa78b878d82e23c86319fee0c07300820b5515666a67cc8a918d5fccf7f5"
+    },
+    "contact-handoff-390-dark-890.png": {
+      "bytes": 371914,
+      "sha256": "1b07a2510caea115580810f9b8b2d4e5f99561578cf6081a839366ed8b31d167"
+    },
+    "contact-handoff-390-dark-930.png": {
+      "bytes": 359993,
+      "sha256": "60964abe2cded88028925cb07d234e1f9e1a4246d3c8f9407f93945352212e61"
+    },
+    "handoff-overshoot-1120-light-889.png": {
+      "bytes": 511247,
+      "sha256": "e199b5ac929c190f91952955c0158444b66e78c1056edfad360945cdb11a1ec6"
+    },
+    "handoff-overshoot-1120-light-890.png": {
+      "bytes": 528578,
+      "sha256": "4ffb700485b90c094ffd85010378f86e2dda6edc9d333cb59f71137c3fecd71d"
+    }
+  }
+}

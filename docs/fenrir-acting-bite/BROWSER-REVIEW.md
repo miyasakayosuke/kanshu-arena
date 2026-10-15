@@ -334,3 +334,16 @@ All eight updated tall/revealed actual-layout sweeps still fit at fixed floor an
 width. Detailed independent review and exact artifact provenance are retained
 in evidence/f950764a/. The next bounded local repair is recorded before work in
 CONTACT-HANDOFF-REPAIR-PLAN.md. Production and acceptance remain unchanged.
+
+## f3776573 local handoff verdict
+
+Independent actual normal/2× and native130/142 light/dark review keeps the contact-
+only head-angle change as a modest rough improvement. The smaller930 head lift,
+subpixel-to-one-pixel contact penetration and chain-terminal reset remain. The
+second paw edit is rejected: positive clearance came from excessive retraction
+and creates a larger foot drop into contact. Both exact sources, prompts and
+separate actual comparisons remain in evidence/f3776573/ and evidence/contact-
+handoff/. The f950 sequence remains the comparison control. No third local art
+retry follows. The next two-key crouch/toe-off test is recorded in
+TAKEOFF-PAIR-PLAN.md before its artwork. Full production gaps are listed in
+REMAINING-PRODUCTION-PLAN.md; these are open work, not completion claims.
