@@ -30,7 +30,7 @@ jobs:
       - working-directory: qa/fenrir-acting-bite
         # Prior art and ten-case controlled matrix are retained with their exact run evidence.
         # This bounded follow-up changes no art/adapter and captures only two natural-clock cases.
-        run: node lifecycle-realtime-render.mjs
+        run: PIN_SKIP=1 node lifecycle-realtime-render.mjs
       - name: Retain browser videos, keyposes and checks
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

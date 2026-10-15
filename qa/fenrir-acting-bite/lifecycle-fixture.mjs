@@ -3,6 +3,7 @@ import React from'react';import{createRoot}from'react-dom/client';
 import{SOURCES,bridgePhaseAt}from'/docs/fenrir-acting-bite/extension-tuck-timing.mjs';
 import{offsetAt}from'/docs/fenrir-acting-bite/high-leap-timing.mjs';
 import{createBiteLifecycle}from'/docs/fenrir-acting-bite/lifecycle-adapter.mjs';
+import{proposeSkipPin,intersects}from'/docs/fenrir-acting-bite/skip-presentation.mjs';
 const q=new URLSearchParams(location.search),row=q.get('row')==='rear'?'rear':'front',assetMode=q.get('assets')||'ready';
 const sources={},cache={ready:false,errors:[]};
 async function load(name,file){const image=new Image();image.src='/docs/fenrir-acting-bite/assets/'+file;await image.decode();const c=document.createElement('canvas');c.width=image.width;c.height=image.height;const x=c.getContext('2d');x.drawImage(image,0,0);const a=x.getImageData(0,0,c.width,c.height).data;let l=c.width,t=c.height,r=0,b=0;for(let y=0;y<c.height;y++)for(let z=0;z<c.width;z++)if(a[(y*c.width+z)*4+3]>16){l=Math.min(l,z);t=Math.min(t,y);r=Math.max(r,z+1);b=Math.max(b,y+1);}sources[name]={image,box:[l,t,r,b]};}
@@ -12,15 +13,36 @@ const assetTask=(async()=>{await assetGate;try{await Promise.all(Object.entries(
 if(assetMode==='ready')await assetTask;
 const model=createBiteLifecycle(),style=document.createElement('style');document.head.append(style);
 const note=document.createElement('div');note.style.cssText='position:fixed;right:2px;bottom:2px;z-index:90;background:#172c3de8;color:white;font:10px system-ui;padding:3px;pointer-events:none';note.textContent='QA 実戦ライフサイクル / 未完成';document.body.append(note);
+const noteStyle=note.style.cssText,controlStyle=document.createElement('style');document.head.append(controlStyle);
 let generation=0,preparationResolve,lastState=null,lastFrame=null,lastDraw=null,fixedWidth=null,baseline=null,currentRun=null;
 const runs=[],clears=[],frames=[],draws=[],ordinaryDraws=[];
 const clone=x=>JSON.parse(JSON.stringify(x)),raf=()=>new Promise(r=>requestAnimationFrame(r));
 const rect=r=>({x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom});
 function layout(){const scene=document.querySelector('.battleScene'),battle=document.querySelector('.battle'),skip=document.querySelector('.playingPanel button');return{scene:scene?rect(scene.getBoundingClientRect()):null,battle:battle?{scrollTop:battle.scrollTop,clientHeight:battle.clientHeight,scrollHeight:battle.scrollHeight}:null,skip:skip?rect(skip.getBoundingClientRect()):null};}
-function clear(reason){generation++;model.clear();preparationResolve?.();preparationResolve=null;clears.push({reason,at:Date.now(),generation});}
+function clear(reason){generation++;model.clear();controlStyle.textContent='';note.style.cssText=noteStyle;preparationResolve?.();preparationResolve=null;clears.push({reason,at:Date.now(),generation});}
+function pinSkipBeforeClock(){
+ if(q.get('controls')!=='pin')return{requested:false,pinned:false,reason:'baseline'};
+ const skip=document.querySelector('.playingPanel>button'),status=document.querySelector('.playingPanel>p'),battle=document.querySelector('.battle');
+ if(!skip||!status||!battle)return{requested:true,pinned:false,reason:'missing-playing-control'};
+ const before=layout(),selectors=['.battleTop','.battleScene','.enemyVitals','.commanderRow','.battleMessage'];
+ const essential=()=>selectors.flatMap(name=>[...document.querySelectorAll(name)].map(e=>({name,box:rect(e.getBoundingClientRect())})));
+ const probe=document.createElement('div');probe.style.cssText='position:fixed;visibility:hidden;pointer-events:none;height:env(safe-area-inset-bottom,0px)';document.body.append(probe);const safeBottom=probe.getBoundingClientRect().height;probe.remove();
+ const proposal=proposeSkipPin({viewport:{width:innerWidth,height:innerHeight},battle:rect(battle.getBoundingClientRect()),skip:rect(skip.getBoundingClientRect()),essential:essential(),safeBottom});
+ const result={requested:true,...proposal,safeBottom,before,essentialBefore:essential(),sameButton:true,statusText:status.textContent};
+ if(!proposal.pinned)return result;
+ controlStyle.textContent=`.battleMode:not(.resultMode) .playingPanel>button{position:fixed;left:${proposal.center}px;bottom:${proposal.bottom}px;transform:translateX(-50%);width:${proposal.box.width}px;height:44px;min-height:44px;margin:0;z-index:10}.battleMode:not(.resultMode) .playingPanel>p{position:fixed;left:${proposal.statusBox.x}px;bottom:${proposal.bottom}px;width:${proposal.statusBox.width}px;height:44px;display:flex;align-items:center;margin:0;padding:0 4px;z-index:9}.battleMode:not(.resultMode) .playingPanel>.playPulse{visibility:hidden}`;
+ note.style.bottom='auto';note.style.top='2px';note.style.right='auto';note.style.left='12px';
+ const actual=rect(skip.getBoundingClientRect()),actualStatus=rect(status.getBoundingClientRect()),after=layout(),essentialAfter=essential();
+ const unchanged=['x','y','width','height'].every(k=>Math.abs(before.scene[k]-after.scene[k])<.01)&&before.battle.scrollTop===after.battle.scrollTop;
+ const overlaps=essentialAfter.filter(x=>intersects(actual,x.box,4)||intersects(actualStatus,x.box,4));
+ const inside=actual.x>=4&&actual.y>=4&&actual.right<=innerWidth-4&&actual.bottom<=innerHeight-4;
+ const statusFits=status.scrollHeight<=status.clientHeight&&status.scrollWidth<=status.clientWidth&&!intersects(actual,actualStatus,4);
+ if(!unchanged||overlaps.length||!inside||!statusFits){controlStyle.textContent='';note.style.cssText=noteStyle;return{...result,pinned:false,reason:'post-style-geometry-guard',actual,actualStatus,statusFits,after,essentialAfter,overlaps,sceneAndScrollUnchanged:unchanged};}
+ return{...result,actual,actualStatus,statusFits,after,essentialAfter,overlaps,sceneAndScrollUnchanged:unchanged,elementIdentityPreserved:document.querySelector('.playingPanel>button')===skip&&document.querySelector('.playingPanel>p')===status};
+}
 const api={row,originalReady:!!sources.original,
  prepare(){clear('prepare-next-turn');if(baseline&&fixedWidth){const gap=row==='rear'?70*baseline.stage.width/720:0,h=Math.max(baseline.stage.height,Math.ceil((1.31*fixedWidth+18+gap)/(358/460)));style.textContent=`.battleMode .layeredBattleStage .battleScene{height:${h}px!important;min-height:${h}px!important}`;}return generation;},
- async beforeClock(ticket,data){currentRun={...clone(data),ticket,preparedAt:Date.now(),startedAt:null,cues:[],finishes:[],preLayout:layout()};runs.push(currentRun);if(q.get('prepare')==='hold')await new Promise(r=>preparationResolve=r);await raf();await raf();if(ticket!==generation)return false;const scene=document.querySelector('.battleScene'),battle=document.querySelector('.battle'),header=document.querySelector('.battleNavigation');const b=scene.getBoundingClientRect(),top=header?.getBoundingClientRect().bottom??0;currentRun.revealed=b.y<top||b.bottom>innerHeight;currentRun.settledBeforeReveal=layout();if(currentRun.revealed)battle.scrollTop=0;await raf();if(ticket!==generation)return false;currentRun.clockLayout=layout();return true;},
+ async beforeClock(ticket,data){currentRun={...clone(data),ticket,preparedAt:Date.now(),startedAt:null,cues:[],finishes:[],preLayout:layout()};runs.push(currentRun);if(q.get('prepare')==='hold')await new Promise(r=>preparationResolve=r);await raf();await raf();if(ticket!==generation)return false;const scene=document.querySelector('.battleScene'),battle=document.querySelector('.battle'),header=document.querySelector('.battleNavigation');const b=scene.getBoundingClientRect(),top=header?.getBoundingClientRect().bottom??0;currentRun.revealed=b.y<top||b.bottom>innerHeight;currentRun.settledBeforeReveal=layout();if(currentRun.revealed)battle.scrollTop=0;await raf();if(ticket!==generation)return false;currentRun.controlPresentation=pinSkipBeforeClock();currentRun.clockLayout=layout();return true;},
  started(at){currentRun.startedAt=at;},
  cue(value){currentRun?.cues.push(clone(value));},
  finish(result){currentRun?.finishes.push({at:Date.now(),result:result?clone(result):null});clear('finish-or-skip');},clear,

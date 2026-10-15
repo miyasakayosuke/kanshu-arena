@@ -12,8 +12,9 @@ button or a second completion path. Keep the default presentation on screens
 where the ordinary button fits.
 
 The390x640 screenshots suggest a candidate bottom band below the ally cards.
-Test a minimum44px hit target with safe-area spacing, while reserving its space
-and accounting for the decorative pulse/status text. This is a placement
+Test a minimum44px hit target with safe-area spacing. Keep the existing status
+paragraph beside the same button in that band, preserving its text and checking
+that it fits; hide only the decorative pulse while pinned. This is a placement
 hypothesis, not a measured occlusion pass. It must not cover the arena, ally
 cards, status information, header controls or dialogs. Keep it below modal layers.
 
