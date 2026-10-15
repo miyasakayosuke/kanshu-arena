@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DURATION, IMPACT, SKILL, EXPOSURES, frameAt, makeController } from './motion.mjs';
+import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
+test('rigid support registration preserves neutral and airborne drawings', () => {
+  for (const name of ['original', 'open', 'bite']) assert.deepEqual(REGISTERED[name], BASELINE[name]);
+  for (const width of [130, 142, 420]) {
+    const original = supportPosition('original', width);
+    for (const name of ['preload', 'contact', 'recover']) {
+      const point = supportPosition(name, width);
+      point.forEach((value, i) => assert(Math.abs(value - original[i]) < 1e-9));
+    }
+    assert(Math.abs(supportPosition('drive', width)[1] - original[1]) < 1e-9);
+  }
+});
 test('existing one-hit skill constants and explicit impact exposure', () => {
   assert.deepEqual(SKILL, { name: '月下の一咬', power: 55, mp: 10 });
   assert.equal(IMPACT, 800); assert.equal(DURATION, 1500);

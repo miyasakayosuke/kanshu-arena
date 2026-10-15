@@ -1,13 +1,9 @@
 import { frameAt, makeController } from './motion.mjs';
-const specs = {
-  original: { source: 'reference', anchor: [300, 1170], scale: 1 / 1312 },
-  preload: { source: 'correction', seed: [350, 550], anchor: [230, 814], scale: 1 / 729 },
-  drive: { source: 'bridges', seed: [400, 430], anchor: [210, 630], scale: 1 / 729, lift: 16 },
-  open: { source: 'keys', seed: [1190, 200], anchor: [1110, 420], scale: 1 / 486, lift: 16 },
-  bite: { source: 'keys', seed: [200, 720], anchor: [155, 949], scale: 1 / 486, lift: 5 },
-  contact: { source: 'bridges', seed: [1150, 650], anchor: [970, 945], scale: 1 / 729 },
-  recover: { source: 'correction', seed: [1200, 550], anchor: [1044, 828], scale: 1 / 729 },
-};
+import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
+const baseline = new URLSearchParams(location.search).get('anchors') === 'baseline';
+const specs = baseline ? BASELINE : REGISTERED;
+document.querySelector('#placement').textContent = baseline
+  ? '配置: 比較用の修正前' : '配置: 支持足の位置合わせ後（作画は同じ）';
 const sources = { reference: 'reference.png', correction: 'anticipation-landing-correction.png',
   bridges: 'weight-transfer-bridges.png', keys: 'keyposes-first.png' };
 const frames = new Map();
@@ -65,6 +61,7 @@ function draw(sample) {
 function tick(now) { if (!paused) draw(controller.sample(now)); requestAnimationFrame(tick); }
 function setTime(ms) { paused = true; forced = { frame: frameAt(ms), ms, active: ms < 1500, hidden: false }; draw(forced); return forced; }
 window.preview = { setTime, setTheme(value) { theme = value; draw(forced || controller.sample(performance.now())); },
+  placement: { baseline, support: name => supportPosition(name, 142, baseline) },
   start(id, now, options) { paused = true; forced = null; controller.start(id, now, options); },
   sample(now) { forced = controller.sample(now); draw(forced); return forced; },
   cancel(options) { controller.cancel(options); forced = controller.sample(0); draw(forced); },

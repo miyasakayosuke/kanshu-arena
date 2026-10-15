@@ -7,7 +7,9 @@ body{margin:0;background:#e5e9e8;color:#23343b;font:15px system-ui}main{max-widt
 <main><h1>フェンリル「月下の一咬」</h1>
 <p class="warning">演技のつながりを確認するキーポーズ再生です。滑らかな完成モーションではありません。顔・鎖の連続性、着地と復帰、足の位置に未解決点があります。エフェクト・カメラ演出は使っていません。</p>
 <div class="controls"><button id="play">再生・再発動</button><select id="speed" aria-label="再生速度"><option value="1">1倍</option><option value="2">2倍</option></select><label><input id="reduced" type="checkbox">動きを減らす</label><button id="skip">スキップ</button><button id="defeat">中断・退場</button><button id="theme">背景切替</button></div>
-<input id="time" type="range" min="0" max="1500" step="1" value="0" aria-label="動作時刻"><p id="status">原画を読み込み中</p>
+<input id="time" type="range" min="0" max="1500" step="1" value="0" aria-label="動作時刻"><p id="placement"></p>
+<p><a href="?anchors=baseline">修正前の配置</a> · <a href="?anchors=registered">支持足の位置合わせ後</a></p>
+<p id="status">原画を読み込み中</p>
 <div class="views"><div class="large"><canvas width="640" height="490" data-size="420"></canvas><div class="caption">拡大表示 · 原画幅420 px相当</div></div><div class="small"><canvas width="300" height="180" data-size="142"></canvas><div class="caption">実戦サイズ · 原画幅142 CSS px</div><canvas width="300" height="180" data-size="130"></canvas><div class="caption">小さい実戦サイズ · 原画幅130 CSS px</div></div></div>
 <div class="notes"><p>140 ms：溜め → 360 ms：蹴り出し → 550 ms：開口・伸展 → 760 ms：噛み閉じ → <b>800 ms：既存の命中時刻</b> → 890 ms：前足接地 → 1040 ms：低い復帰 → 1350 ms：原画へ。</p><p>開始と終了は元のPNGをそのまま表示します。中間は全身作画を切り替え、輪郭の変形やクロスフェードで不足を隠していません。この診断画面はゲームに組み込まれておらず、威力55・消費MP10・命中800 ms・全体1500 msの仕様を保持します。</p><p><a href="pose-gallery.html">元のポーズ資料</a> · <a href="REVIEW.md">検証範囲と未解決点</a> · <a href="PLAN.md">演技一覧と計画</a></p></div></main>
 <script type="module" src="preview.mjs"></script></html>

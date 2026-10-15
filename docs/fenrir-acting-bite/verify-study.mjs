@@ -26,4 +26,7 @@ for (const [file, [width, height]] of Object.entries(expected)) {
 }
 assert.equal(entry.binarySha256['docs/fenrir-acting-bite/assets/reference.png'],
   'e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137');
-console.log('6 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');
+for (const [file, hash] of Object.entries(entry.binarySha256)) {
+  assert.equal(createHash('sha256').update(readFileSync(resolve(here, '../..', file))).digest('hex'), hash, file);
+}
+console.log('All registered binary byte hashes, including the retained browser clip, verified. 6 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');

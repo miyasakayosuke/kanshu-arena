@@ -42,7 +42,7 @@ Use the exact original neutral for the beginning and end. Do not regenerate the
 entire approach or hide missing drawings through crossfades, blur or body squash.
 Each corrected pose requires another independent check before more in-betweens.
 
-## Verification actually performed
+## Early checkpoint verification (before browser CI)
 
 - Source PNG identity and SHA-256 checked; original bytes unchanged.
 - Generated RGBA sheet dimensions and alpha inspected.
@@ -79,3 +79,7 @@ The new index.html is an isolated **discrete keypose diagnostic**, not a smooth 
 The renderer selects one connected whole wolf from each sheet, preserving its source RGBA and a four-pixel soft edge. This is whole-sprite isolation, not articulated body-part masking. Original files remain untouched. Transparent fringes, missing islands, ground contacts, relative scale and all transitions need actual rendered inspection; the selection algorithm does not establish visual quality.
 
 A branch-only isolated CI workflow renders normal, double-speed and reduced-motion videos, desktop/mobile light/dark key screenshots, and checks skip/repeat/late-load/defeat/fallback behavior. These are preview-controller checks, not proof of integration with the game's authoritative events. At this checkpoint CI and rendered review are pending. No game sources or release workflow are modified.
+
+## Actual browser follow-up
+
+The earlier pending browser status is historical. Exact baseline b0b697ed completed isolated Chromium CI and independent sampled rendered review. See [BROWSER-REVIEW.md](BROWSER-REVIEW.md) for provenance, retained evidence, corrected review findings and the same-art registration comparison. This remains an unapproved rough pilot, not a smooth animation or game integration.

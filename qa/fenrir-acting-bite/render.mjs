@@ -29,6 +29,12 @@ try {
     return a === b;
   });
   assert.equal(sourceIdentity, true); observations.neutralRoundTripPixelExact = true;
+  const support = await page.evaluate(() => Object.fromEntries(
+    ['original', 'preload', 'drive', 'contact', 'recover'].map(name => [name, window.preview.placement.support(name)])));
+  for (const name of ['preload', 'contact', 'recover']) support[name].forEach((value, i) =>
+    assert(Math.abs(value - support.original[i]) < 1e-8));
+  assert(Math.abs(support.drive[1] - support.original[1]) < 1e-8);
+  observations.supportRegistration = { sourceLandmarksOnly: true, visualAcceptance: false, points142: support };
   for (const speed of [1, 2]) {
     const result = await page.evaluate(speed => {
       window.preview.assets(true); window.preview.start('normal-' + speed, 0, { speed });
@@ -76,6 +82,30 @@ try {
     const encoded = spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', '30', '-i', dir + '%03d.png', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + name + '.mp4'], { stdio: 'inherit' });
     assert.equal(encoded.status, 0, `${name}: ffmpeg`);
   }
+  // Re-render the unchanged baseline placement with the same browser, artwork,
+  // page layout and clock. Boundary pairs expose the remaining pose-shape pops.
+  for (const variant of ['registered', 'baseline']) {
+    await page.goto(base + '?anchors=' + variant);
+    await page.waitForFunction(() => window.ready || window.previewError);
+    assert.equal(await page.evaluate(() => window.previewError || null), null);
+    for (const ms of [450, 1039, 1040, 1349, 1350]) {
+      await page.evaluate(ms => window.preview.setTime(ms), ms);
+      await page.screenshot({ path: `${out}placement-${variant}-${ms}.png`, fullPage: true });
+    }
+  }
+  const baselineDir = out + 'baseline-frames/'; await mkdir(baselineDir, { recursive: true });
+  await page.evaluate(() => window.preview.start('baseline-video', 400));
+  for (let i = 0; i < 69; i++) {
+    await page.evaluate(ms => window.preview.sample(ms), i * 1000 / 30);
+    await page.screenshot({ path: baselineDir + String(i).padStart(3, '0') + '.png' });
+  }
+  assert.equal(spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', '30', '-i', baselineDir + '%03d.png',
+    '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + 'baseline-normal.mp4'], { stdio: 'inherit' }).status, 0);
+  assert.equal(spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', out + 'baseline-normal.mp4', '-i', out + 'normal.mp4',
+    '-filter_complex', '[0:v][1:v]hstack=inputs=2[v]', '-map', '[v]', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
+    '-movflags', '+faststart', out + 'placement-before-after.mp4'], { stdio: 'inherit' }).status, 0);
+  observations.placementComparison = { left: 'baseline', right: 'support-registered', artworkChanged: false,
+    poseBoundaryTimes: [1039, 1040, 1349, 1350], smoothnessEstablished: false };
   const failedPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await failedPage.route('**/assets/weight-transfer-bridges.png', route => route.abort());
   await failedPage.goto(base); await failedPage.waitForFunction(() => window.previewError);

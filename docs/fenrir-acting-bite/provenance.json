@@ -63,7 +63,7 @@
     },
     {
       "file": "REVIEW.md",
-      "sha256": "640a50cce95883fa69d8dbdb98843adf81273296f48a5992842112ad2bc58410",
+      "sha256": "a1f731213082e29f7af0a4eefa351d8fb5d6aa949fd3af3b7a4fee3fd89eebc5",
       "origin": "Supplemental independent static-review findings and verification limits",
       "adopted": false
     },
@@ -91,5 +91,13 @@
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
-  "visualStatus": "Independent static review requires corrections; actual browser motion unverified."
+  "visualStatus": "Actual baseline Chromium output independently reviewed as a rough diagnostic; smoothness, identity continuity and game integration remain unmet. See BROWSER-REVIEW.md.",
+  "browserBaseline": {
+    "commit": "b0b697ed1469928267d45a6b6ecd970dd5fef208",
+    "run": "38701756188",
+    "artifact": "11956608251",
+    "archiveSha256": "7788badcca42ea72ce3855940fc3f62506222900270d3da7e24a36ca526d37bc",
+    "review": "BROWSER-REVIEW.md",
+    "visualAcceptance": false
+  }
 }
