@@ -68,12 +68,13 @@ def assignment(obj):
 
 COMMAND_FIELDS = {
     'status': set(), 'reconcile': set(),
-    'claim': {'task','role','worker','ttl','authorizationRef'},
+    'claim': {'task','role','worker','ttl','authorizationRef','planRevision'},
+    'replan': {'task','generation','planRevision','method','criteria','claimBudget','authorizationRef','evidence'},
     'heartbeat': {'task','worker','generation','ttl'},
     'submit': {'task','worker','generation','commit','checks','criteriaEvidence'},
     'review': {'task','worker','generation','commit','approved','evidence'},
     'release': {'task','worker','generation','commit','deployment','liveCheck','creditsCheck','noticesCheck'},
-    'fail': {'task','worker','generation','reason'}, 'block': {'task','worker','generation','reason'},
+    'fail': {'task','worker','generation','reason'}, 'block': {'task','worker','generation','reason','blockType'},
     'resolve': {'task','evidence','outcome','authorizationRef'},
     'accept': {'task','authorizationRef'}, 'owner-decision': {'task','authorizationRef','evidence'},
 }
@@ -88,20 +89,48 @@ def command(cmd):
             strings(value)
             if key == 'checks': check(set(value) == CHECK_NAMES)
         elif key == 'commit': text(value, sha=True)
-        elif key in {'expectedRevision','generation','ttl'}: check(type(value) is int and 0 <= value <= 1000000000)
+        elif key in {'expectedRevision','generation','ttl','planRevision','claimBudget'}: check(type(value) is int and 0 <= value <= 1000000000)
+        elif key == 'criteria':
+            check(isinstance(value, list) and 1 <= len(value) <= 20)
+            for item in value: text(item)
         elif key == 'approved': check(type(value) is bool)
         else: text(value)
 
 
 def result(obj):
-    keys(obj, {'revision','status','assignment','stale','decisionRecorded','notBefore'})
+    keys(obj, {'revision','status','assignment','stale','decisionRecorded','notBefore','planRevision'})
     for key, value in obj.items():
-        if key in {'revision','notBefore'}: check(type(value) in {int,float} and math.isfinite(value) and value >= 0)
+        if key in {'revision','notBefore','planRevision'}: check(type(value) in {int,float} and math.isfinite(value) and value >= 0)
         elif key == 'assignment': assignment(value)
         elif key == 'stale':
             check(isinstance(value,list))
             for item in value: identifier(item)
         else: text(value)
+
+
+SNAPSHOT_FIELDS = {'status','attempts','generation','block','commit','checks','criteriaEvidence',
+                   'review','release','acceptanceRef','publicationApprovalRef','lastFailure',
+                   'notBefore','implementer','candidateRefs'}
+
+
+def plan(obj):
+    fields = {'revision','startAttempts','claimBudget','method','criteria','authorizationRef','evidence','previous'}
+    keys(obj, fields, fields)
+    for key in {'revision','startAttempts'}:
+        check(type(obj[key]) is int and 0 <= obj[key] <= 1000000000)
+    check(type(obj['claimBudget']) is int and 1 <= obj['claimBudget'] <= 3)
+    for key in {'method','authorizationRef','evidence'}: text(obj[key])
+    check(isinstance(obj['criteria'], list) and 1 <= len(obj['criteria']) <= 20)
+    for item in obj['criteria']: text(item)
+    check(len(obj['criteria']) == len(set(obj['criteria'])))
+    prior = obj['previous']
+    keys(prior, SNAPSHOT_FIELDS, {'status','attempts','generation','block'})
+    # Validate all archived fields through the same strict field allowlists as
+    # live tasks; the synthetic envelope is validation-only, never persisted.
+    envelope = dict(id='archived-plan', title='Archived plan', kind='implementation',
+                    deliverableKind='release', criteria=['Archive'], required=True,
+                    dependsOn=[], **prior)
+    state(dict(schemaVersion=3, revision=0, operations={}, tasks=[envelope]))
 
 
 def state(s):
@@ -118,7 +147,7 @@ def state(s):
         text(s['provenance']['method'])
     check(isinstance(s['tasks'],list) and s['tasks'])
     for t in s['tasks']:
-        keys(t, {'id','title','status','kind','attempts','criteria','dependsOn','required','deliverableKind','generation','assignment','block','commit','checks','criteriaEvidence','review','release','acceptanceRef','publicationApprovalRef','lastFailure','notBefore','implementer','candidateRefs'}, {'id','title','status','kind','attempts','criteria','dependsOn','required','generation'})
+        keys(t, {'id','title','status','kind','attempts','criteria','dependsOn','required','deliverableKind','generation','assignment','block','commit','checks','criteriaEvidence','review','release','acceptanceRef','publicationApprovalRef','lastFailure','notBefore','implementer','candidateRefs','plans'}, {'id','title','status','kind','attempts','criteria','dependsOn','required','generation'})
         for key, value in t.items():
             if key in {'id','implementer'}: identifier(value)
             elif key in {'generation','attempts'}: check(type(value) is int and 0 <= value <= 1000000000)
@@ -128,6 +157,9 @@ def state(s):
             elif key in {'criteria','candidateRefs'}:
                 check(isinstance(value,list))
                 for item in value: text(item)
+            elif key == 'plans':
+                check(isinstance(value, list) and 1 <= len(value) <= 1000)
+                for item in value: plan(item)
             elif key == 'dependsOn':
                 check(isinstance(value,list))
                 for edge in value:

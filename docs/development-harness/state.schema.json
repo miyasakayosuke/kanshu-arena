@@ -132,6 +132,11 @@
                     "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,119}$",
                     "type": "string"
                   },
+                  "planRevision": {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
                   "role": {
                     "maxLength": 4000,
                     "minLength": 1,
@@ -512,6 +517,13 @@
                   "action": {
                     "const": "block"
                   },
+                  "blockType": {
+                    "enum": [
+                      "approval",
+                      "quality",
+                      "external"
+                    ]
+                  },
                   "expectedRevision": {
                     "minimum": 0,
                     "type": "integer"
@@ -689,6 +701,81 @@
                   "action"
                 ],
                 "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "action": {
+                    "const": "replan"
+                  },
+                  "authorizationRef": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "claimBudget": {
+                    "maximum": 3,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "criteria": {
+                    "items": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "maxItems": 20,
+                    "minItems": 1,
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  "evidence": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "expectedRevision": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "generation": {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "method": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "operationId": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "not": {
+                      "pattern": "[tT][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[nN]|[sS][^A-Za-z]*[eE][^A-Za-z]*[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[tT]|[pP][^A-Za-z]*[aA][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[wW][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[dD]|[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[dD][^A-Za-z]*[eE][^A-Za-z]*[nN][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[aA][^A-Za-z]*[lL]|[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[vV][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[eE][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[pP][^A-Za-z]*[iI][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[sS][^A-Za-z]*[eE][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[cC][^A-Za-z]*[oO][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[iI][^A-Za-z]*[eE]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[zZ][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[fF][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[gG][^A-Za-z]*[eE][^A-Za-z]*[rR][^A-Za-z]*[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[tT]"
+                    },
+                    "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,119}$",
+                    "type": "string"
+                  },
+                  "planRevision": {
+                    "maximum": 1000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "task": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "not": {
+                      "pattern": "[tT][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[nN]|[sS][^A-Za-z]*[eE][^A-Za-z]*[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[tT]|[pP][^A-Za-z]*[aA][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[wW][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[dD]|[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[dD][^A-Za-z]*[eE][^A-Za-z]*[nN][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[aA][^A-Za-z]*[lL]|[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[vV][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[eE][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[pP][^A-Za-z]*[iI][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[sS][^A-Za-z]*[eE][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[cC][^A-Za-z]*[oO][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[iI][^A-Za-z]*[eE]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[zZ][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[fF][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[gG][^A-Za-z]*[eE][^A-Za-z]*[rR][^A-Za-z]*[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[tT]"
+                    },
+                    "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,119}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "action"
+                ],
+                "type": "object"
               }
             ]
           },
@@ -743,6 +830,11 @@
               "notBefore": {
                 "minimum": 0,
                 "type": "number"
+              },
+              "planRevision": {
+                "maximum": 1000000000,
+                "minimum": 0,
+                "type": "integer"
               },
               "revision": {
                 "minimum": 0,
@@ -823,6 +915,24 @@
     "tasks": {
       "items": {
         "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "not": {
+                "required": [
+                  "plans"
+                ]
+              }
+            },
+            "then": {
+              "properties": {
+                "attempts": {
+                  "maximum": 3
+                }
+              }
+            }
+          }
+        ],
         "properties": {
           "acceptanceRef": {
             "maxLength": 4000,
@@ -866,7 +976,7 @@
             "type": "object"
           },
           "attempts": {
-            "maximum": 3,
+            "maximum": 1000000000,
             "minimum": 0,
             "type": "integer"
           },
@@ -889,7 +999,8 @@
                   "external",
                   "uncertain",
                   "exhausted",
-                  "dependency"
+                  "dependency",
+                  "quality"
                 ]
               }
             },
@@ -1047,6 +1158,298 @@
           "notBefore": {
             "minimum": 0,
             "type": "number"
+          },
+          "plans": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "authorizationRef": {
+                  "maxLength": 4000,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "claimBudget": {
+                  "maximum": 3,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "criteria": {
+                  "items": {
+                    "maxLength": 4000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 20,
+                  "minItems": 1,
+                  "type": "array",
+                  "uniqueItems": true
+                },
+                "evidence": {
+                  "maxLength": 4000,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "method": {
+                  "maxLength": 4000,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "previous": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "acceptanceRef": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "attempts": {
+                      "maximum": 1000000000,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "block": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "previousRole": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "reason": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "approval",
+                            "external",
+                            "uncertain",
+                            "exhausted",
+                            "dependency",
+                            "quality"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "reason"
+                      ],
+                      "type": "object"
+                    },
+                    "candidateRefs": {
+                      "items": {
+                        "maxLength": 4000,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "checks": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "build": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "rights:check": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "rights:test": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "scope-qa": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "test": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "rights:check",
+                        "scope-qa",
+                        "build",
+                        "test",
+                        "rights:test"
+                      ],
+                      "type": "object"
+                    },
+                    "commit": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "pattern": "^[0-9a-f]{40}$",
+                      "type": "string"
+                    },
+                    "criteriaEvidence": {
+                      "additionalProperties": {
+                        "maxLength": 4000,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "propertyNames": {
+                        "not": {
+                          "pattern": "[tT][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[nN]|[sS][^A-Za-z]*[eE][^A-Za-z]*[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[tT]|[pP][^A-Za-z]*[aA][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[wW][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[dD]|[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[dD][^A-Za-z]*[eE][^A-Za-z]*[nN][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[aA][^A-Za-z]*[lL]|[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[vV][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[eE][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[pP][^A-Za-z]*[iI][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[sS][^A-Za-z]*[eE][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[cC][^A-Za-z]*[oO][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[iI][^A-Za-z]*[eE]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[zZ][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[fF][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[gG][^A-Za-z]*[eE][^A-Za-z]*[rR][^A-Za-z]*[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[tT]"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "generation": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "implementer": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "not": {
+                        "pattern": "[tT][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[nN]|[sS][^A-Za-z]*[eE][^A-Za-z]*[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[tT]|[pP][^A-Za-z]*[aA][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[wW][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[dD]|[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[dD][^A-Za-z]*[eE][^A-Za-z]*[nN][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[aA][^A-Za-z]*[lL]|[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[vV][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[eE][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[pP][^A-Za-z]*[iI][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[sS][^A-Za-z]*[eE][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[cC][^A-Za-z]*[oO][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[iI][^A-Za-z]*[eE]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[zZ][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[fF][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[gG][^A-Za-z]*[eE][^A-Za-z]*[rR][^A-Za-z]*[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[tT]"
+                      },
+                      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,119}$",
+                      "type": "string"
+                    },
+                    "lastFailure": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "notBefore": {
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "publicationApprovalRef": {
+                      "maxLength": 4000,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "release": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "commit": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "pattern": "^[0-9a-f]{40}$",
+                          "type": "string"
+                        },
+                        "creditsCheck": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "deployment": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "liveCheck": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "noticesCheck": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "commit",
+                        "deployment",
+                        "liveCheck",
+                        "creditsCheck",
+                        "noticesCheck"
+                      ],
+                      "type": "object"
+                    },
+                    "review": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "commit": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "pattern": "^[0-9a-f]{40}$",
+                          "type": "string"
+                        },
+                        "evidence": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "worker": {
+                          "maxLength": 4000,
+                          "minLength": 1,
+                          "not": {
+                            "pattern": "[tT][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[nN]|[sS][^A-Za-z]*[eE][^A-Za-z]*[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[tT]|[pP][^A-Za-z]*[aA][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[wW][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[dD]|[cC][^A-Za-z]*[rR][^A-Za-z]*[eE][^A-Za-z]*[dD][^A-Za-z]*[eE][^A-Za-z]*[nN][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[aA][^A-Za-z]*[lL]|[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[vV][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[eE][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[pP][^A-Za-z]*[iI][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[kK][^A-Za-z]*[eE][^A-Za-z]*[yY]|[sS][^A-Za-z]*[eE][^A-Za-z]*[sS][^A-Za-z]*[sS][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[cC][^A-Za-z]*[oO][^A-Za-z]*[oO][^A-Za-z]*[kK][^A-Za-z]*[iI][^A-Za-z]*[eE]|[aA][^A-Za-z]*[uU][^A-Za-z]*[tT][^A-Za-z]*[hH][^A-Za-z]*[oO][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[zZ][^A-Za-z]*[aA][^A-Za-z]*[tT][^A-Za-z]*[iI][^A-Za-z]*[oO][^A-Za-z]*[nN]|[fF][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[gG][^A-Za-z]*[eE][^A-Za-z]*[rR][^A-Za-z]*[pP][^A-Za-z]*[rR][^A-Za-z]*[iI][^A-Za-z]*[nN][^A-Za-z]*[tT]"
+                          },
+                          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,119}$",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "worker",
+                        "commit",
+                        "evidence"
+                      ],
+                      "type": "object"
+                    },
+                    "status": {
+                      "enum": [
+                        "ready",
+                        "running",
+                        "review",
+                        "reviewing",
+                        "candidate",
+                        "publishing",
+                        "released",
+                        "accepted",
+                        "blocked",
+                        "retry",
+                        "decided",
+                        "verified"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "attempts",
+                    "generation",
+                    "block"
+                  ],
+                  "type": "object"
+                },
+                "revision": {
+                  "maximum": 1000000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "startAttempts": {
+                  "maximum": 1000000000,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "revision",
+                "startAttempts",
+                "claimBudget",
+                "method",
+                "criteria",
+                "authorizationRef",
+                "evidence",
+                "previous"
+              ],
+              "type": "object"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array"
           },
           "publicationApprovalRef": {
             "maxLength": 4000,

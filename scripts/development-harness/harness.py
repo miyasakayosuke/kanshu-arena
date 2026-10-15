@@ -17,6 +17,10 @@ STATES = {'ready', 'running', 'review', 'reviewing', 'candidate', 'publishing', 
 ROLES = {'implement': ('ready', 'running', 2), 'review': ('review', 'reviewing', 1), 'publish': ('candidate', 'publishing', 1)}
 SHA = re.compile(r'^[0-9a-f]{40}$')
 CHECKS = {'rights:test', 'rights:check', 'test', 'build', 'scope-qa'}
+REPLAN_BLOCKS = {'approval', 'quality', 'exhausted'}
+RETIRED_FIELDS = {'block', 'commit', 'checks', 'criteriaEvidence', 'review', 'release',
+                  'acceptanceRef', 'publicationApprovalRef', 'lastFailure', 'notBefore',
+                  'implementer', 'candidateRefs'}
 
 
 def require(ok, message):
@@ -30,6 +34,50 @@ def nonempty(value):
 
 def deliverable(t):
     return 'decision' if t['kind'] == 'decision' else t['deliverableKind']
+
+
+def plan_revision(t):
+    return len(t.get('plans', []))
+
+
+def claim_limit(t):
+    plans = t.get('plans', [])
+    return plans[-1]['startAttempts'] + plans[-1]['claimBudget'] if plans else 3
+
+
+def current_criteria(t):
+    return t['criteria'] + (t['plans'][-1]['criteria'] if t.get('plans') else [])
+
+
+def approval_refs(value):
+    """Public audit references only; none authenticate or grant permission."""
+    found = set()
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key in {'authorizationRef', 'publicationApprovalRef', 'acceptanceRef', 'reference'} and isinstance(item, str):
+                found.add(item)
+            found.update(approval_refs(item))
+    elif isinstance(value, list):
+        for item in value:
+            found.update(approval_refs(item))
+    return found
+
+
+def validate_plans(t):
+    require(not t.get('plans') or t['kind'] == 'implementation', 'only implementation tasks can have plan revisions')
+    ceiling, start, generation, refs, methods = 3, 0, -1, set(), set()
+    for revision, plan in enumerate(t.get('plans', []), 1):
+        prior = plan['previous']
+        require(plan['revision'] == revision, 'non-contiguous plan revision')
+        require(start < plan['startAttempts'] <= ceiling, 'plan must preserve consumed lifetime claims')
+        require(prior['attempts'] == plan['startAttempts'], 'plan baseline differs from retired claims')
+        require(prior['status'] == 'blocked' and prior['block']['type'] in REPLAN_BLOCKS, 'only resolved blocked plans can be retired')
+        require(prior['block'].get('previousRole') in {None, 'implement', 'review'}, 'publication or unknown role requires reconciliation, not replan')
+        require(generation < prior['generation'] < t['generation'], 'plan generation history is not monotonic')
+        require(plan['authorizationRef'] not in refs and plan['method'] not in methods, 'plan approval and method must be new')
+        require(not set(plan['criteria']) & set(t['criteria']), 'plan criteria must supplement original criteria')
+        refs.add(plan['authorizationRef']); methods.add(plan['method'])
+        start, ceiling, generation = plan['startAttempts'], plan['startAttempts'] + plan['claimBudget'], prior['generation']
 
 
 def dependencies(t):
@@ -64,7 +112,10 @@ def validate(s):
         require(t['status'] in STATES, 'invalid status')
         require(t['kind'] in {'implementation', 'decision', 'validation'}, 'invalid kind')
         require(type(t['generation']) is int and t['generation'] >= 0, 'invalid generation')
-        require(type(t['attempts']) is int and 0 <= t['attempts'] <= 3, 'invalid attempts')
+        validate_plans(t)
+        require(type(t['attempts']) is int and 0 <= t['attempts'] <= claim_limit(t), 'invalid lifetime claim count')
+        if t.get('plans'):
+            require(t['attempts'] >= t['plans'][-1]['startAttempts'], 'lifetime claims cannot be reset')
         require(isinstance(t['criteria'], list) and t['criteria'] and all(nonempty(x) for x in t['criteria']), 'criteria required')
         require(len(t['criteria']) == len(set(t['criteria'])), 'duplicate criterion')
         deps = dependencies(t)
@@ -86,7 +137,7 @@ def validate(s):
             require(assignment['generation'] == t['generation'] and nonempty(assignment['worker']), 'invalid assignment generation/worker')
             require(type(assignment['expiresAt']) in {int, float}, 'invalid assignment expiry')
         if t['status'] == 'blocked':
-            require(t.get('block', {}).get('type') in {'approval', 'uncertain', 'exhausted', 'external', 'dependency'}, 'block reason required')
+            require(t.get('block', {}).get('type') in {'approval', 'quality', 'uncertain', 'exhausted', 'external', 'dependency'}, 'block reason required')
         if t['status'] in {'review', 'reviewing', 'candidate', 'publishing', 'released', 'accepted', 'verified'}:
             require(bool(SHA.fullmatch(t.get('commit', ''))), 'exact candidate commit required')
         if t['status'] in {'candidate', 'publishing', 'released', 'accepted', 'verified'}:
@@ -94,7 +145,7 @@ def validate(s):
             require(nonempty(t.get('implementer')) and nonempty(t['review'].get('worker')) and t['review']['worker'] != t['implementer'], 'review must be independent')
             require(nonempty(t['review'].get('evidence')), 'review evidence required')
             require(set(t.get('checks', {})) >= CHECKS and all(nonempty(t['checks'][k]) for k in CHECKS), 'passing check evidence required')
-            require(set(t.get('criteriaEvidence', {})) == set(t['criteria']) and all(nonempty(v) for v in t['criteriaEvidence'].values()), 'criterion evidence required')
+            require(set(t.get('criteriaEvidence', {})) == set(current_criteria(t)) and all(nonempty(v) for v in t['criteriaEvidence'].values()), 'criterion evidence required')
         if t['status'] in {'released', 'accepted'}:
             require(t.get('release', {}).get('commit') == t['commit'], 'release does not match commit')
         if t['status'] == 'decided':
@@ -115,7 +166,8 @@ def validate(s):
 def summary(s, now):
     return {'revision': s['revision'], 'complete': all(complete_task(t) for t in s['tasks'] if t['required']),
             'tasks': [{'id': t['id'], 'status': t['status'], 'stale': bool(t.get('assignment') and t['assignment']['expiresAt'] <= now),
-                       'block': t.get('block'), 'notBefore': t.get('notBefore')} for t in s['tasks']]}
+                       'block': t.get('block'), 'notBefore': t.get('notBefore'), 'planRevision': plan_revision(t),
+                       'lifetimeClaims': t['attempts'], 'claimLimit': claim_limit(t)} for t in s['tasks']]}
 
 
 def operate(s, cmd, now):
@@ -132,8 +184,30 @@ def operate(s, cmd, now):
         return {'stale': stale}
     t = next((t for t in s['tasks'] if t['id'] == cmd.get('task')), None)
     require(t is not None, 'unknown task')
+    if action == 'replan':
+        require(t['kind'] == 'implementation' and t['status'] == 'blocked', 'replan requires blocked implementation work')
+        require(t['block']['type'] in REPLAN_BLOCKS and t['block'].get('previousRole') != 'publish', 'resolve uncertainty, external and publication gates before replanning')
+        require(cmd.get('generation') == t['generation'], 'stale replan generation')
+        require(cmd.get('planRevision') == plan_revision(t) + 1, 'stale plan revision')
+        require(t['attempts'] > (t['plans'][-1]['startAttempts'] if t.get('plans') else 0), 'consume a bounded claim before another plan')
+        require(nonempty(cmd.get('authorizationRef')) and cmd['authorizationRef'] not in approval_refs(s), 'fresh plan-specific owner approval reference required')
+        require(nonempty(cmd.get('evidence')), 'read-first worker, candidate and failure evidence required')
+        require(nonempty(cmd.get('method')) and cmd['method'] not in {p['method'] for p in t.get('plans', [])}, 'a new method is required')
+        require(type(cmd.get('claimBudget')) is int and 1 <= cmd['claimBudget'] <= 3, 'plan claim budget must be 1..3')
+        criteria = cmd.get('criteria')
+        require(isinstance(criteria, list) and criteria and len(criteria) == len(set(criteria)) and all(nonempty(x) for x in criteria), 'unique supplemental plan criteria required')
+        require(not set(criteria) & set(t['criteria']), 'plan criteria must supplement original criteria')
+        previous = {key: copy.deepcopy(value) for key, value in t.items() if key in RETIRED_FIELDS | {'status', 'attempts', 'generation'}}
+        plan = {key: copy.deepcopy(cmd[key]) for key in ('method', 'criteria', 'claimBudget', 'authorizationRef', 'evidence')}
+        plan.update(revision=cmd['planRevision'], startAttempts=t['attempts'], previous=previous)
+        t.setdefault('plans', []).append(plan)
+        for key in RETIRED_FIELDS:
+            t.pop(key, None)
+        t.update(status='ready', generation=t['generation'] + 1)
+        return {'status': 'ready', 'planRevision': plan['revision']}
     if action == 'claim':
         role = cmd['role']
+        require(not t.get('plans') or cmd.get('planRevision') == plan_revision(t), 'claim must name the current approved plan revision')
         require(role in ROLES, 'unknown role')
         eligible, active, cap = ROLES[role]
         require(nonempty(cmd.get('worker')), 'worker required')
@@ -144,7 +218,7 @@ def operate(s, cmd, now):
         require(sum(x['status'] == active for x in s['tasks']) < cap, 'capacity reached')
         if role == 'implement':
             require(t['kind'] != 'decision', 'owner decisions cannot be implemented')
-            require(t['attempts'] < 3, 'retry limit reached')
+            require(t['attempts'] < claim_limit(t), 'retry limit reached')
             t['attempts'] += 1
             t['implementer'] = cmd['worker']
         elif role == 'review':
@@ -152,6 +226,7 @@ def operate(s, cmd, now):
         else:
             require(deliverable(t) == 'release', 'only release deliverables can publish')
             require(nonempty(cmd.get('authorizationRef')), 'publication authorization required')
+            require(not t.get('plans') or cmd['authorizationRef'] not in approval_refs(s), 'fresh publication approval required after replan')
             t['publicationApprovalRef'] = cmd['authorizationRef']
         ttl = cmd.get('ttl', 1800)
         require(type(ttl) is int and 60 <= ttl <= 3600, 'assignment must be 60..3600 seconds')
@@ -172,7 +247,7 @@ def operate(s, cmd, now):
             require(assignment['role'] == 'implement', 'implementation assignment required')
             require(bool(SHA.fullmatch(cmd.get('commit', ''))), 'exact commit required')
             require(set(cmd.get('checks', {})) >= CHECKS and all(nonempty(cmd['checks'][key]) for key in CHECKS), 'passing test and scope-QA evidence required')
-            require(set(cmd.get('criteriaEvidence', {})) == set(t['criteria']) and all(nonempty(v) for v in cmd['criteriaEvidence'].values()), 'every criterion needs evidence')
+            require(set(cmd.get('criteriaEvidence', {})) == set(current_criteria(t)) and all(nonempty(v) for v in cmd['criteriaEvidence'].values()), 'every criterion needs evidence')
             t.update(status='review', commit=cmd['commit'], checks=cmd['checks'], criteriaEvidence=cmd['criteriaEvidence'])
             t.pop('review', None)
             t.pop('release', None)
@@ -195,8 +270,11 @@ def operate(s, cmd, now):
             # Publishing/review uncertainty is never automatically rerun.
             t.update(status='blocked', block={'type': 'uncertain', 'reason': cmd['reason'], 'previousRole': assignment['role']})
         else:
-            require(nonempty(cmd.get('reason')), 'approval reason required')
-            t.update(status='blocked', block={'type': 'approval', 'reason': cmd['reason'], 'previousRole': assignment['role']})
+            require(nonempty(cmd.get('reason')), 'block reason required')
+            block_type = cmd.get('blockType', 'approval')
+            require(block_type in {'approval', 'quality', 'external'}, 'unsupported block type')
+            require(block_type != 'quality' or assignment['role'] != 'publish', 'publisher outcome requires read-first uncertainty reconciliation')
+            t.update(status='blocked', block={'type': block_type, 'reason': cmd['reason'], 'previousRole': assignment['role']})
         del t['assignment']
         return {'status': t['status']}
     if action == 'resolve':
@@ -211,6 +289,7 @@ def operate(s, cmd, now):
         require(deliverable(t) == 'release', 'only release deliverables can be owner-accepted')
         require(t['status'] == 'released', 'only released work can be accepted')
         require(nonempty(cmd.get('authorizationRef')), 'explicit owner acceptance required')
+        require(not t.get('plans') or cmd['authorizationRef'] not in approval_refs(s), 'fresh owner acceptance required after replan')
         t.update(status='accepted', acceptanceRef=cmd['authorizationRef'])
         return {'status': 'accepted'}
     if action == 'owner-decision':
@@ -227,10 +306,10 @@ def operate(s, cmd, now):
 
 def retry(t, now, reason):
     t.pop('block', None)
-    if t['attempts'] >= 3:
+    if t['attempts'] >= claim_limit(t):
         t.update(status='blocked', block={'type': 'exhausted', 'reason': reason})
     else:
-        t.update(status='retry', notBefore=now + min(3600, 300 * 2 ** max(0, t['attempts'] - 1)), lastFailure=reason)
+        t.update(status='retry', notBefore=now + min(3600, 300 * 2 ** max(0, t['attempts'] - (t['plans'][-1]['startAttempts'] if t.get('plans') else 0) - 1)), lastFailure=reason)
 
 
 def transaction(path, cmd, now=None):

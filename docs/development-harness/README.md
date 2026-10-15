@@ -81,7 +81,10 @@ Read the current remote head/state and trusted worker status. Skip fresh active
 assignments; never duplicate them. Reconcile expired assignments into uncertainty
 without automatically retrying. Inspect the previous worker, branch and deployment
 before resolving uncertainty. Only then retry authorized work, using 5 then 10
-minute delays and at most three implementation attempts. Exhaustion stays blocked.
+minute delays and at most three implementation claims for an original plan.
+Exhaustion stays blocked until a separately approved bounded replan. A claim is
+not a completed visual failure: interrupted/restarted work still consumes its
+claim, and all lifetime counts remain preserved.
 
 Start an idle scoped worker, record its public assignment through confirmed remote
 CAS, freshly verify that assignment is still current, then permit work. Stop or
@@ -103,6 +106,67 @@ concurrent siblings cannot both fast-forward. It verifies ancestry and re-reads
 latest state before returning an assignment. A lost acknowledgement is reconciled
 read-first. The GitHub connector equivalent must also use expected SHA and
 force=false. Local revision locking alone is not cross-machine coordination.
+
+## Explicit bounded replan
+
+The optional schema-3 `plans` history is backwards-compatible for existing
+ledgers when using this version of the runtime. Older runtimes deliberately reject
+new plan fields rather than silently ignore their gates. No migration or reset is
+required. The original bootstrap template remains unchanged and must never be
+copied over canonical state. There is still no general task-registration command.
+The one-time maintenance registration is recorded separately in
+`evidence/bounded-replan-bootstrap.md` on the canonical state branch.
+
+`replan` is an orchestrator-only audit transaction for an existing blocked
+implementation task. It is never an automatic retry or permission grant. First
+verify the previous real worker has stopped, inspect its candidate, failure and
+any deployment, and independently verify that the owner approved the changed
+method and bounded scope. Public references document that check; their text,
+uniqueness or mere presence cannot authenticate the owner or establish approval.
+Never publish private messages, chat IDs or authentication data as that evidence.
+
+The command requires `task`, current `generation`, next `planRevision`, a genuinely
+new `method`, nonempty supplemental `criteria`, `claimBudget` from 1 through 3,
+fresh plan-specific `authorizationRef`, read-first `evidence`, `operationId` and
+`expectedRevision`. Reused approval references anywhere in the ledger fail closed.
+Use an exact public audit-document reference after verifying the actual private
+approval. Changing its spelling does not create new authorization. The current
+method must actually differ; the field check alone cannot determine this.
+
+Only approval, quality and exhausted blocks are eligible. Uncertain execution,
+external/dependency gates, active work and publisher blocks must first be resolved
+through their proper read-first flow. Decisions and completed tasks cannot replan.
+At least one implementation claim must have been consumed since the prior plan;
+replaying or stacking unused plans cannot replenish a budget. Every later replan
+again requires separately verified new owner intent and a new audit reference.
+
+The transaction keeps the same task ID, title, kind, original criteria,
+dependencies and deliverable kind. It appends a numbered plan containing its
+starting lifetime claim count, finite claim budget, method, supplemental criteria,
+approval/evidence references and the full previous dynamic failure/evidence
+snapshot. It increments generation, clears old current candidate/check/review/
+release/publication/acceptance fields, and returns the task to ready. No historical
+receipt, prior failure or lifetime claim is reset or deleted. Expired generations
+and old assignment receipts still cannot dispatch work. A fresh claim must name
+`planRevision`, pass ordinary capacity/dependency checks and be persisted/read back
+before work starts. The limit is `startAttempts + claimBudget`; no-plan tasks keep
+the original limit of three. Retry delays are based on claims within this plan.
+
+`block` optionally accepts `blockType: quality` for a confirmed rendered/quality
+failure, or `external` for an external blocker; omission preserves the old
+`approval` behavior. `fail` and expired assignments remain `uncertain`. A publisher
+cannot report a quality block to evade publication reconciliation. The history
+therefore distinguishes declared failure classes without misrepresenting old
+claim counts as a count of completed designs.
+
+A one-action art pilot can be developed under a supplemental plan and shown as
+an unapproved candidate. It does not satisfy the original whole-task release or
+owner-acceptance gates. Submission requires evidence for both original task and
+current plan criteria. Independent exact-commit review is still mandatory. A
+replanned release needs fresh publication approval and, later, fresh owner
+acceptance; neither may reuse the plan approval or any earlier approval reference.
+If original criteria are not met, preserve the pilot as candidate evidence and
+record the appropriate block instead of submitting false completion evidence.
 
 ## Review, release and completion gates
 
