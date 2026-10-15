@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "814f40d057dfe2481fdfee658e0de64a3ddd673a",
+  "baselineSourceCommit": "781309f67000ef8800b9f1c19d42418901d61142",
+  "workflowRun": 38764616520,
+  "workflowUrl": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38764616520",
+  "artifactId": 11987063352,
+  "artifactZipBytes": 3517454,
+  "artifactZipSha256": "f1f6b822643f333f629e0ec2f9b3a77979d5823233b15f30bcc05fdd97434593",
+  "artifactExpiresAt": "2026-10-22T15:58:54Z",
+  "rawJsonBytes": 2324870,
+  "rawJsonSha256": "137b05bba795974be0f23c89d6f05dc62956e38a5cee44af2bddaf618fc2ece9",
+  "gzipBytes": 126131,
+  "gzipSha256": "42dd05ea2dd6fffff097f3a51846d13e0a2ba18cf19ac8aaf29f3973823efa8e",
+  "gzipLosslessRoundTripVerified": true,
+  "clock": "Natural browser Date/timers/rAF; no page.clock",
+  "continuousVideoCadenceFps": 25,
+  "productionChanged": false,
+  "artChanged": false,
+  "visualAcceptance": false
+}

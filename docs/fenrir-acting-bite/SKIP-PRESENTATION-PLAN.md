@@ -1,7 +1,10 @@
 # Proposed next bounded UI candidate
 
-Status: design only. No new control code, artwork or browser rerun is included in
-this evidence checkpoint. Control is the reviewed781309f6 frozen-art fixture.
+Status: one implementation and two-case review completed at814f40d0. Retain the
+conditional band as the preferred opt-in short-screen candidate; stop this pass.
+The reviewed781309f6 control remains preserved. See evidence/814f40d0 for the
+actual result, command-scroll tradeoff and device-coverage limits. The plan below
+is retained as the prior acceptance contract, not a request for another iteration.
 
 ## Preferred experiment
 

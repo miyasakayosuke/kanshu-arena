@@ -24,15 +24,19 @@ result covers normal/2x/reduced, Skip, preparation cancellation, real consecutiv
 casts, delayed/failed assets and confirmed leave. The781309f6 two-case natural-
 clock follow-up verifies genuine Tab/Enter and wheel/pointer Skip on390x640.
 Both retain the full engine-state oracle and exactly-once result commitment.
-See their evidence directories for the actual videos, raw data and limits.
+The814f40d0 conditional existing-Skip/status band then passes the same two natural
+cases without scrolling to the control. It preserves the full arena after Skip.
+See all three evidence directories for actual videos, raw data and limits.
 
-Open technical/presentation gates: initial offscreen Skip and cropped post-Skip
-arena, natural simultaneous dead-actor interruption (only the pure adapter check
-is covered), runtime asset packaging/preload/memory budgets, and production
-integration review. Observed natural impact callbacks were11/10 wall-ms late
+Open technical/presentation gates: command-phase scrolling still needed on short
+screens; broader device safe-area/resize/rotation/modal-interaction review for the
+conditional control; natural simultaneous dead-actor interruption (only the pure
+adapter check is covered); runtime asset packaging/preload/memory budgets; and
+production integration review. Observed baseline impact callbacks were11/10 wall-ms late
 relative to their nominal deadlines, followed by closed-jaw draws10/8ms later.
 The older controlled clips observed16ms impact-to-draw lag. None establishes
-perfect same-frame synchronization or a universal hardware timing bound.
+perfect same-frame synchronization or a universal hardware timing bound. The
+pinned-control run observed5/6ms callback delay and11ms impact-to-draw lag.
 
 The existing adapter explicitly isolates generic travel/lift/tilt/scale and
 camera/effect movement for this exact bite while preserving other actions.
