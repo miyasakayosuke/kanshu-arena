@@ -1,0 +1,175 @@
+{
+  "sourceCommit": "f950764a9614f3f161d8cfcc01d9cb4078525015",
+  "workflowRun": 38729855309,
+  "artifactId": 11970225431,
+  "archiveBytes": 119589699,
+  "archiveSha256": "21329e4f8b4425f65d166be429f2f244a81e2d03d3779f6858d091a5d078ef12",
+  "expiresAt": "2026-10-22T11:56:58Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "scope": "Connected500–1130ms old/new comparison. Normal and2x60fps, exact boundaries, native130/142 and enlarged. Same-art actual-layout bounds with the new keys.",
+  "knownPrecontactClearanceAt889ms": [
+    {
+      "physicalWidth": 130,
+      "clearance": -1.691632530748393
+    },
+    {
+      "physicalWidth": 142,
+      "clearance": -1.847783225894375
+    },
+    {
+      "physicalWidth": 420,
+      "clearance": -5.465274330110105
+    }
+  ],
+  "tallRevealedBounds": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "front",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "row": "rear",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "front",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 640
+      },
+      "row": "rear",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "front",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "row": "rear",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "front",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    },
+    {
+      "viewport": {
+        "width": 1120,
+        "height": 900
+      },
+      "row": "rear",
+      "revealedStageFit": true,
+      "revealedViewportFit": true,
+      "potentialUiOverlapSamples": 0
+    }
+  ],
+  "evidenceLimits": [
+    "Source grid is shared through1080;1130 uses the retained REGISTERED.returnHalf anchor.",
+    "The stage fixture does not alter production art; its candidate input set includes the new closure and reach keys.",
+    "Capture phase manifests do not alone prove decoded-video visibility or smoothness.",
+    "Real combat and short-portrait Skip behavior remain outside this fixture."
+  ],
+  "files": {
+    "descent-contact.mp4": {
+      "bytes": 1489062,
+      "sha256": "9d2e9189f08056c5f9cf0e8809bab2de5cfb0c7ad4125f7e091bbfdf29dc3536"
+    },
+    "descent-contact-double.mp4": {
+      "bytes": 1111505,
+      "sha256": "1c915848d38dfbeae561f6f8360f4667d20ee12d8bc5b9ad379dfbf989507083"
+    },
+    "descent-contact-slow.mp4": {
+      "bytes": 2525747,
+      "sha256": "8a9eb8d829ec6d02e786e5e5aa726f7095acd739af45efb8e3b0d8ce212e0761"
+    },
+    "descent-checks.json": {
+      "bytes": 553690,
+      "sha256": "93f8769a94ed56cc73a29675403b34186cce68de828da1f53a6b5f92ddd65bbe"
+    },
+    "stage-checks.json": {
+      "bytes": 5255223,
+      "sha256": "af05cd7ca16231b726469e107d3d7b7087bb70fe6696a6d0f005328716b61df2"
+    },
+    "descent-1120-light-799.png": {
+      "bytes": 301821,
+      "sha256": "b2cccd931c4721f543edacaa2760c1c8aa3b2aae9923ac1d1f694ca98e8f9a99"
+    },
+    "descent-1120-light-800.png": {
+      "bytes": 515527,
+      "sha256": "1136110fe24353e18f29715065f37d0c340917711b3a44a083fbeb5d6b30c710"
+    },
+    "descent-1120-light-839.png": {
+      "bytes": 515904,
+      "sha256": "adc03579d942118f119f81ba760a412b3987c828a9deaf496b25f8dc461bc1a3"
+    },
+    "descent-1120-light-840.png": {
+      "bytes": 517854,
+      "sha256": "decde7f4d1b824ee6aeacfe5d7c0725a9744598449cd72f8f53d2f43322da012"
+    },
+    "descent-1120-light-889.png": {
+      "bytes": 520654,
+      "sha256": "ba0df7d26c0aa3acea0654c5edbe248d96924baa3e802da48507381f99e72fdb"
+    },
+    "descent-1120-light-890.png": {
+      "bytes": 317491,
+      "sha256": "b9aff5c6b2ae214436b1870b2ff0f31b2722dc008e5218ffc3a0dcc6996c2173"
+    },
+    "descent-390-dark-800.png": {
+      "bytes": 370330,
+      "sha256": "b194b9a8a439cb023148bc8736a6101a386bdfe08d9e3e1511a6e330d3ca6b82"
+    },
+    "descent-390-dark-840.png": {
+      "bytes": 371591,
+      "sha256": "04b63464b917f778087f841140b36104b66dbe81a8abb34fac950a1b01e1dae4"
+    },
+    "descent-390-dark-889.png": {
+      "bytes": 371112,
+      "sha256": "52f4cb232cb02cd8c652a6cc854895e1a0638bcfe6851828a650002380a54083"
+    },
+    "descent-390-dark-890.png": {
+      "bytes": 381170,
+      "sha256": "9cc6c5e8164818077f8d8670dd0513502f12d889268456df7a5ea7cc8ac8bd14"
+    }
+  }
+}

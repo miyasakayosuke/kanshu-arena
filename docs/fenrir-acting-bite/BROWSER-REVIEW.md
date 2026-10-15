@@ -322,3 +322,15 @@ Stop this art pass. Preserve the contact silhouette/model scale as the landing
 constraint for the requested high-leap and descending-bite choreography.
 
 Exact artifact provenance and retained videos: `evidence/c43d9015/`.
+
+## f950764a descending closure/reach comparison
+
+Actual Chromium clips and native 130/142 px light/dark captures establish a rough
+connection improvement: jaw closure and foreleg reach both appear in decoded
+normal and 2× videos. The two added keys remove the open-mouth drop straight into
+landing. The 890 head/chest/paw/chain reset and 1.69/1.85 native-pixel precontact
+toe penetration remain; this is not a smooth, forceful or complete high leap.
+All eight updated tall/revealed actual-layout sweeps still fit at fixed floor and
+width. Detailed independent review and exact artifact provenance are retained
+in evidence/f950764a/. The next bounded local repair is recorded before work in
+CONTACT-HANDOFF-REPAIR-PLAN.md. Production and acceptance remain unchanged.
