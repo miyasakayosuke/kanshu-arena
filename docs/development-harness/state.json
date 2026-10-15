@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 48,
+  "revision": 49,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -841,6 +841,25 @@
         "status": "blocked",
         "revision": 47
       }
+    },
+    "claim-bounded-replan-builder": {
+      "command": {
+        "action": "claim",
+        "task": "harness-bounded-replanning",
+        "role": "implement",
+        "worker": "harness-replan-builder",
+        "ttl": 3600,
+        "operationId": "claim-bounded-replan-builder"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "harness-replan-builder",
+          "generation": 1,
+          "expiresAt": 1792026547.9542599
+        },
+        "revision": 49
+      }
     }
   },
   "tasks": [
@@ -1127,9 +1146,9 @@
       "title": "Add audited bounded plan revisions",
       "kind": "implementation",
       "deliverableKind": "internal",
-      "status": "ready",
-      "attempts": 0,
-      "generation": 0,
+      "status": "running",
+      "attempts": 1,
+      "generation": 1,
       "required": true,
       "dependsOn": [],
       "criteria": [
@@ -1138,7 +1157,14 @@
         "Keep original task acceptance gates and invalidate stale candidate, review, publication and acceptance evidence on replan",
         "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap",
         "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests"
-      ]
+      ],
+      "implementer": "harness-replan-builder",
+      "assignment": {
+        "role": "implement",
+        "worker": "harness-replan-builder",
+        "generation": 1,
+        "expiresAt": 1792026547.9542599
+      }
     }
   ],
   "provenance": {
