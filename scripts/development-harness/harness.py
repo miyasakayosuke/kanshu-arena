@@ -284,7 +284,7 @@ def operate(s, cmd, now):
         require(t['kind'] != 'decision', 'decision requires owner-decision action')
         require(cmd.get('outcome') == 'retry', 'only retry is supported; uncertain release must be inspected and recorded by a new publisher')
         retry(t, now, cmd['evidence'])
-        return {'status': t['status'], 'notBefore': t.get('notBefore')}
+        return dict(status=t['status'], **({'notBefore': t['notBefore']} if 'notBefore' in t else {}))
     if action == 'accept':
         require(deliverable(t) == 'release', 'only release deliverables can be owner-accepted')
         require(t['status'] == 'released', 'only released work can be accepted')
@@ -307,6 +307,7 @@ def operate(s, cmd, now):
 def retry(t, now, reason):
     t.pop('block', None)
     if t['attempts'] >= claim_limit(t):
+        t.pop('notBefore', None)
         t.update(status='blocked', block={'type': 'exhausted', 'reason': reason})
     else:
         t.update(status='retry', notBefore=now + min(3600, 300 * 2 ** max(0, t['attempts'] - (t['plans'][-1]['startAttempts'] if t.get('plans') else 0) - 1)), lastFailure=reason)

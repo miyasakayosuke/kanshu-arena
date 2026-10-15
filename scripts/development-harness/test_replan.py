@@ -110,6 +110,54 @@ class ReplanTest(unittest.TestCase):
         self.assertEqual(5,t['attempts']);self.assertEqual('exhausted',t['block']['type'])
         with self.assertRaises(ValueError): self.claim(now=5000)
 
+    def test_every_claim_budget_exhausts_cleanly_after_failure_or_quality_block(self):
+        for budget in (1, 2, 3):
+            for failure in ('fail', 'quality'):
+                with self.subTest(budget=budget, failure=failure):
+                    fixture=ReplanTest();fixture.setUp()
+                    try:
+                        h.transaction(fixture.path,fixture.replan(claimBudget=budget),1000)
+                        now=1000
+                        for offset in range(budget):
+                            generation=fixture.claim(now=now)
+                            if failure=='fail':
+                                fixture.run_cmd('fail',now=now,task='motion',worker='builder',generation=generation,reason='Execution interrupted')
+                            else:
+                                fixture.run_cmd('block',now=now,task='motion',worker='builder',generation=generation,blockType='quality',reason='Rendered quality failed')
+                            result=fixture.run_cmd('resolve',now=now,task='motion',outcome='retry',evidence='Actual worker stopped and candidate inspected')
+                            if offset < budget-1:
+                                delay=300*2**offset
+                                self.assertEqual(now+delay,result['notBefore'])
+                                with self.assertRaises(ValueError):fixture.claim(now=now+delay-1)
+                                now+=delay
+                        t=fixture.read()['tasks'][0]
+                        self.assertEqual(3+budget,t['attempts']);self.assertEqual('exhausted',t['block']['type'])
+                        self.assertNotIn('notBefore',t);self.assertNotIn('notBefore',result)
+                        before=fixture.path.read_bytes()
+                        with self.assertRaises(ValueError):fixture.claim(now=now+9999)
+                        self.assertEqual(before,fixture.path.read_bytes())
+                    finally:fixture.doCleanups()
+
+    def test_one_claim_expiry_reconciles_and_next_plan_delay_restarts(self):
+        h.transaction(self.path,self.replan(claimBudget=1),1000)
+        self.claim()
+        self.run_cmd('reconcile',now=2800)
+        result=self.run_cmd('resolve',now=2800,task='motion',outcome='retry',evidence='Expired worker stopped; exact candidate and deployment inspected')
+        self.assertEqual('blocked',result['status']);self.assertNotIn('notBefore',result)
+        h.transaction(self.path,self.replan(claimBudget=2,method='Second genuinely changed method',authorizationRef='New approval for second plan'),2800)
+        generation=self.claim(now=2800,planRevision=2)
+        self.run_cmd('fail',now=2800,task='motion',worker='builder',generation=generation,reason='Execution interrupted')
+        result=self.run_cmd('resolve',now=2800,task='motion',outcome='retry',evidence='Worker stopped; no uncertain side effects remain')
+        self.assertEqual(3100,result['notBefore'])
+        self.assertEqual(5,self.read()['tasks'][0]['attempts'])
+
+    def test_original_exhausted_task_without_retry_timestamp_can_resolve(self):
+        s=self.read();s['tasks'][0]['block']['type']='uncertain';self.path.write_text(json.dumps(s))
+        result=self.run_cmd('resolve',task='motion',outcome='retry',evidence='Original worker and candidate checked')
+        self.assertEqual('blocked',result['status']);self.assertNotIn('notBefore',result)
+        self.assertEqual('exhausted',self.read()['tasks'][0]['block']['type'])
+        self.assertEqual(3,self.read()['tasks'][0]['attempts'])
+
     def test_plan_replay_never_replenishes_budget_or_dispatches_old_assignment(self):
         cmd=self.replan();first=h.transaction(self.path,cmd,1000)
         claim=self.cmd('claim',task='motion',role='implement',worker='builder',planRevision=1)
