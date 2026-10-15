@@ -143,6 +143,28 @@
       "mode": "RGBA",
       "origin": "Built-in imagegen sequential landing feasibility; contact is original/halfway-conditioned, compression is a direct adjacent-frame edit. Exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent static/native-size review permits the remaining bounded segment; local near-toe shift and limited tail lag remain unresolved. No motion acceptance.",
       "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-rear-land.png",
+      "sha256": "af09745a7f9493cde536e716517d98639b2e8ab249406233eac25fb8aafad7ba",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen direct adjacent rear-landing edit, then a separate local wrist-artifact cleanup sibling. Previous source is retained; exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent cleanup review confirms the cleaned sibling is a visually suitable conditioning source; texture is not pixel-exact. Earlier890/930 wrist and toe defects remain recorded.",
+      "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-rear-land-clean.png",
+      "sha256": "e05bc088ab7c6d5c0a0e9f3482a6c35f3e4438ad8e1142ed688eda1eb9803899",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen direct adjacent rear-landing edit, then a separate local wrist-artifact cleanup sibling. Previous source is retained; exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent cleanup review confirms the cleaned sibling is a visually suitable conditioning source; texture is not pixel-exact. Earlier890/930 wrist and toe defects remain recorded.",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",

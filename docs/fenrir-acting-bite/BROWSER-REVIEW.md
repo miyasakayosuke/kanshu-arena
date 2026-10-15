@@ -236,3 +236,24 @@ must show an explicit rear-foot landing/haunch load at970, then rise at1020 and
 1080 around the same forefeet toward the reviewed1130 halfway key. No independent
 scale fitting or unmotivated new foot placements. Actual rendered segment review
 is still required before any wider expansion.
+
+
+### Wrist-detail inspection and one local correction
+
+The970 rear-foot landing reads clearly, but closer fore-wrist inspection exposed
+a paired dark claw/paw-like protrusion above the far planted forepaw. Inspection
+of the actual contact/930 crops shows the same feature was already present in
+those earlier drawings; it must not be attributed solely to the970 edit. It is
+a local anatomy/detail defect, not evidence of an entire fifth limb. The prior
+static go did not constitute production-clean acceptance.
+
+One narrowly prompted cleanup sibling removes only that unwanted wrist detail
+from the970 source before it can condition later drawings. Both original970 and
+cleanup are retained with prompts. A generative edit is not assumed pixel-exact
+outside the requested patch. Independent cleanup review confirms the stray lobes are gone and the rear-foot
+landing, bent haunches, forepaw placement and overall masses remain visually
+preserved. Some texture/detail changed, so preservation is not pixel-exact. The
+cleaned970 source is suitable for the next two bounded drawings. The reviewer
+also rechecked and corrected the first-appearance attribution: both890 and930
+already have the same lobes. Those earlier wrist details and the near-toe drift
+remain explicit cleanup items; no further cleanup loop precedes1020/1080.
