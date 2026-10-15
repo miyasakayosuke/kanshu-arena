@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 60,
+  "revision": 61,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1081,6 +1081,21 @@
         ],
         "revision": 60
       }
+    },
+    "resolve-fenrir-plan1-02": {
+      "command": {
+        "action": "resolve",
+        "task": "replacement-animation",
+        "outcome": "retry",
+        "evidence": "Previous real worker confirmed stopped and ready. The interrupted action was only an unattached image blob; no commit, ref update or deployment followed. Exact blob lookup still returns not found; candidate and main remain at the preserved baseline. Renewed owner confirmation for saving the trial image was verified separately. Preserve plan 1 and all prior claims; resume only after cooldown and a fresh assignment.",
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/harness-public-v3/arena/docs/development-harness/evidence/fenrir-plan-one-resume.md",
+        "operationId": "resolve-fenrir-plan1-02"
+      },
+      "result": {
+        "status": "retry",
+        "notBefore": 1792046673.0449824,
+        "revision": 61
+      }
     }
   },
   "tasks": [
@@ -1196,7 +1211,7 @@
       "generation": 6,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "retry",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1228,11 +1243,8 @@
         }
       ],
       "implementer": "fenrir-acting-builder",
-      "block": {
-        "type": "uncertain",
-        "reason": "Assignment expired; inspect worker, branch, PR and deployment before retry.",
-        "previousRole": "implement"
-      }
+      "notBefore": 1792046673.0449824,
+      "lastFailure": "Previous real worker confirmed stopped and ready. The interrupted action was only an unattached image blob; no commit, ref update or deployment followed. Exact blob lookup still returns not found; candidate and main remain at the preserved baseline. Renewed owner confirmation for saving the trial image was verified separately. Preserve plan 1 and all prior claims; resume only after cooldown and a fresh assignment."
     },
     {
       "id": "v1-acceptance",
