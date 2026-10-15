@@ -42,3 +42,13 @@ No static-source or numeric support test establishes smoothness or game acceptan
 The full-study renderer also checks reduced-mode canvases against the exact
 original at eight action times and captures one representative image. This is an
 isolated renderer check, not the actual combat reduced-motion acceptance gate.
+
+## Capture setup correction
+
+The first full comparison attempt, commit acbbe86e / CI38740782634, stopped
+before rendering. All3587 game tests passed, but Vitest discovered a standalone
+Node-runner file ending in.test.mjs and reported no Vitest suite. It was renamed
+to high-leap-timing-checks.mjs, retaining all assertions and its explicit
+node --test invocation. A small filename/import guard now runs before the full
+suite, with positive/negative self-checks, to catch this collision early. No art,
+choreography or test assertion was removed to address the tooling failure.

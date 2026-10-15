@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run rights:test && npm run rights:check && npm test && npm run build
+      - run: node docs/fenrir-acting-bite/verify-study.mjs && npm run rights:test && npm run rights:check && npm test && npm run build
       - run: node docs/fenrir-acting-bite/verify-study.mjs && node --test docs/fenrir-acting-bite/motion-checks.mjs docs/fenrir-acting-bite/high-leap-timing-checks.mjs
       - working-directory: qa/fenrir-acting-bite
         run: npm ci --ignore-scripts --no-audit --no-fund
