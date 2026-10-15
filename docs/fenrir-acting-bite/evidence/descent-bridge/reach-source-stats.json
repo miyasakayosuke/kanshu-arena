@@ -1,0 +1,22 @@
+{
+  "path": "docs/fenrir-acting-bite/assets/high-leap-reach-study.png",
+  "bytes": 1768375,
+  "size": [
+    1254,
+    1254
+  ],
+  "sha256": "156b6b1bacb9dff93de356498a51b372406c2a0f8f71f4ac7d885da68ebdd09f",
+  "gitBlob": "b98874dbb5b8d4c99d237f176ab25e3114329603",
+  "alpha16Bounds": [
+    44,
+    83,
+    1254,
+    1216
+  ],
+  "rightEdge": {
+    "max": 107,
+    "above16": 34,
+    "above128": 0
+  },
+  "visualAcceptance": false
+}
