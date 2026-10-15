@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "5a4f5fd8e3c2781548ae63bb00910bed6f34da02",
+  "workflowRun": 38746908935,
+  "artifactId": 11978534096,
+  "artifactZipBytes": 89456034,
+  "artifactZipSha256": "799340b9d0533cc8e820240a8746a183ac0fc0f2b2e58cf853c5df809c105476",
+  "artifactExpiresAt": "2026-10-22T14:03:13Z",
+  "retainedFiles": {
+    "extension-tuck-full.mp4": "2f53caa5fc092fe72b150d2391b691ad85200fa52778c62a856b68d006b57d4e",
+    "extension-tuck-full-double.mp4": "d4988ee9d96b7c2cebda0c12081cac4ad88843ecf7429da59c4cbeeba1292771",
+    "extension-tuck-full-slow.mp4": "7bf3237fe61c06bdb153d70726ce2ef8ed9d54cd6eab1c38f01c7fb0ad552a73",
+    "extension-tuck-segment.mp4": "25cc907987e633906eaaec8711d5d5b1080db8696b9e2988bb70d15ab0eccf72",
+    "extension-tuck-segment-slow.mp4": "06b0e62c1ded7bce0e5b4599b1646c1d3b059bb777c76eb7cc9651217f450f92",
+    "extension-tuck-full-checks.json": "d0c7103342854f864ce871c4c0f2bc9ae85dacd5b37142e3a468519181d5caef",
+    "tuck-stage-checks.json": "4ce01568b5728ec018020f4820ed937db143db65b7e800b1758d6bd810b6311a",
+    "extension-tuck-full-reduced.png": "15932ac3f4bbc74e4934453d5a78a2b4b3f7b258c10159cc75a9fefb76d55bb1",
+    "extension-tuck-full-1120-light-399.png": "e57b2c879cab9dfd7009de51b493a6982dfe7beb152338fea84cf45a1e75289a",
+    "extension-tuck-full-1120-light-400.png": "eeec13f7158b8a7816baaa0b5851ce4b3e1279a30510c98acbd9a46f4b7591c4",
+    "extension-tuck-full-1120-light-429.png": "66ac2dcb88963f101d2e47b8974417c3e0678996162c3af0d3331c30622532dc",
+    "extension-tuck-full-1120-light-459.png": "a349344d69684357a2c14e6cf81ba2e18c120ff4901d5bcbb6415bb6f8866ce4",
+    "extension-tuck-full-1120-light-460.png": "c2d6720f2003dcc74b8dbf3d22323492f7a89cf90c123fe67276ea0ac6e26304",
+    "tuck-stage-390x640-front-400.png": "e09c8d83132cc4280c59a2c88ba0c13190e1437b32e73e183545491a12a49812",
+    "tuck-stage-390x640-front-460.png": "9809a2e885bff078da891f4e6767c1846b2f9f7fc0f2b746de50e43de6c96dc3",
+    "tuck-stage-390x640-rear-400.png": "f63a38ab42607ee2328249e5f8fea4f075587d697bfc758c2337a7f1456c0f24",
+    "tuck-stage-390x640-rear-460.png": "566b5e8a5bd12472d3b26d140319bafd399713379d59ae1586351076434c864b"
+  },
+  "visualAcceptance": false,
+  "productionIntegration": false
+}
