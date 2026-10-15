@@ -1,0 +1,62 @@
+{
+  "high-leap-reach-study.png": {
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      44,
+      83,
+      1254,
+      1216
+    ],
+    "nearFootBottom": 1216,
+    "edgePixels": 34,
+    "sha256": "156b6b1bacb9dff93de356498a51b372406c2a0f8f71f4ac7d885da68ebdd09f"
+  },
+  "high-leap-reach-clearance-study.png": {
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      43,
+      82,
+      1254,
+      1165
+    ],
+    "nearFootBottom": 1136,
+    "edgePixels": 111,
+    "sha256": "7d5b5bcc188fe9dadb8eba323c48f070b0ff71d3695c75f729984ec3ae5ddfd6"
+  },
+  "landing-contact-handoff-study.png": {
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      34,
+      115,
+      1253,
+      1205
+    ],
+    "nearFootBottom": 1205,
+    "edgePixels": 0,
+    "sha256": "0d1a4d85bed2322899fa6d9380f26bf5cae850af9e7a8f4616d5a72b4ffdddc1"
+  },
+  "landing-seq-compress.png": {
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      26,
+      221,
+      1248,
+      1208
+    ],
+    "nearFootBottom": 1208,
+    "edgePixels": 0,
+    "sha256": "1990d000add08d38e982ed0b448f818283ee8c68914fab85326cfa330abee9cc"
+  }
+}
