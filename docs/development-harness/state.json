@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 76,
+  "revision": 77,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1382,6 +1382,21 @@
         },
         "revision": 76
       }
+    },
+    "block-fenrir-plan1-final": {
+      "command": {
+        "action": "block",
+        "operationId": "block-fenrir-plan1-final",
+        "task": "replacement-animation",
+        "worker": "fenrir-acting-builder",
+        "generation": 7,
+        "blockType": "quality",
+        "reason": "The actual worker intentionally stopped after the reviewed rough high-leap bite and bounded test-only lifecycle/control diagnostics, with no outstanding action. Smoothness, articulation, identity, chain, foot and edge quality remain unmet. Runtime packaging, broader control coverage and natural in-combat defeat verification remain open. Owner visual adoption and release gates remain open; no whole-task submission or production release occurred. Preserve all prior failures and five lifetime claims. Frozen candidate: https://github.com/miyasakayosuke/kanshu-arena/commit/62fb3a46c05427445922e8e7205c81d8dfd8390b . Remaining gates: https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/POST-PREVIEW-GATES.md"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 77
+      }
     }
   },
   "tasks": [
@@ -1497,7 +1512,7 @@
       "generation": 7,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1531,11 +1546,10 @@
       "implementer": "fenrir-acting-builder",
       "notBefore": 1792046673.0449824,
       "lastFailure": "Previous real worker confirmed stopped and ready. The interrupted action was only an unattached image blob; no commit, ref update or deployment followed. Exact blob lookup still returns not found; candidate and main remain at the preserved baseline. Renewed owner confirmation for saving the trial image was verified separately. Preserve plan 1 and all prior claims; resume only after cooldown and a fresh assignment.",
-      "assignment": {
-        "role": "implement",
-        "worker": "fenrir-acting-builder",
-        "generation": 7,
-        "expiresAt": 1792081750.1464975
+      "block": {
+        "type": "quality",
+        "reason": "The actual worker intentionally stopped after the reviewed rough high-leap bite and bounded test-only lifecycle/control diagnostics, with no outstanding action. Smoothness, articulation, identity, chain, foot and edge quality remain unmet. Runtime packaging, broader control coverage and natural in-combat defeat verification remain open. Owner visual adoption and release gates remain open; no whole-task submission or production release occurred. Preserve all prior failures and five lifetime claims. Frozen candidate: https://github.com/miyasakayosuke/kanshu-arena/commit/62fb3a46c05427445922e8e7205c81d8dfd8390b . Remaining gates: https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/POST-PREVIEW-GATES.md",
+        "previousRole": "implement"
       }
     },
     {
