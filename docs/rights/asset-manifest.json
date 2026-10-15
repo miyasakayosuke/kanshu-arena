@@ -1390,6 +1390,7 @@
         "docs/fenrir-acting-bite/BROWSER-REVIEW.md",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md",
         "docs/fenrir-acting-bite/CORRECTION-PROMPT.md",
+        "docs/fenrir-acting-bite/HIGH-LEAP-DESCENDING-BITE-PLAN.md",
         "docs/fenrir-acting-bite/PLAN.md",
         "docs/fenrir-acting-bite/PROMPTS.md",
         "docs/fenrir-acting-bite/RETURN-REPAIR-PROMPT.md",
@@ -1421,6 +1422,15 @@
         "docs/fenrir-acting-bite/evidence/45133ceb/return-before-after.mp4",
         "docs/fenrir-acting-bite/evidence/b0b697ed/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/b0b697ed/normal.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/INDEPENDENT-REVIEW.md",
+        "docs/fenrir-acting-bite/evidence/c43d9015/browser-checks.json",
+        "docs/fenrir-acting-bite/evidence/c43d9015/double-speed.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-segment-slow.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-segment.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/normal.mp4",
+        "docs/fenrir-acting-bite/evidence/c43d9015/provenance.json",
+        "docs/fenrir-acting-bite/evidence/c43d9015/reduced.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/d155e88b/normal.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4",
@@ -1440,7 +1450,7 @@
         "qa/fenrir-acting-bite/package.json",
         "qa/fenrir-acting-bite/render.mjs"
       ],
-      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps.",
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork.",
       "reviewLimit": "Original reference provenance remains unverified. Actual Chromium output independently reviewed as an unapproved rough diagnostic; smoothness, chain/face identity, contact compression and game integration remain unmet. See BROWSER-REVIEW.md. No license or legal clearance is asserted.",
       "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
       "createdFor": "Single-action Moonlit Bite review pilot",
@@ -1466,8 +1476,8 @@
         ".github/workflows/fenrir-acting-bite-review.yml": "fb7f991a4306343fa7351f32f6f9df66228e53b8322a6b22dd265ed7927a0eaf",
         "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
         "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
-        "qa/fenrir-acting-bite/render.mjs": "0f306c0e763c416504a0c27ef06e30a4b7520d1eee678278262a42f810b6b7a2",
-        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "53b87d244643eb2188c9a1aa62d4939a2694eb16d98214ef3c22c941a3d8c5d1",
+        "qa/fenrir-acting-bite/render.mjs": "b4695ca20a3e4b80bc397891b7e908cf02bf9d48ecc383f4541e3fbebf4f99a0",
+        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "37197856d7f3d4043ad76492c809a8c466a5bdfe7174fe7920b1eefed1991e3d",
         "docs/fenrir-acting-bite/evidence/b0b697ed/browser-checks.json": "11e65634797a6e5ae33d7fbf253011bf38c4deaaa2706bc486b78094555003bf",
         "docs/fenrir-acting-bite/placement.mjs": "48f0be899e539638da6f2278d3a855eaf7aacef901a0b511da341193d36b27b2",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md": "6f19877a72fae08e5463af4d6081f800d70ae768afa503111c27c12bba55c0d7",
@@ -1477,7 +1487,11 @@
         "docs/fenrir-acting-bite/evidence/45133ceb/browser-checks.json": "63979f4d0f008b0d6324c7c28a36bcf7346441db44ab1b08d665e5ecc45d1c7c",
         "docs/fenrir-acting-bite/evidence/45133ceb/provenance.json": "fe0587eaa07184c0c043c08d112de49d90bd0bd0eed108e7f226403beb0ca069",
         "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PLAN.md": "5e1eef4e7a578ddbfbd83fd51d63f3339279b04807688a796b474640e8751801",
-        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PROMPTS.md": "f435175a2ad2b41172cdb7cf38efe7f69fbdc9e10dc6a0fbd8884e6d40966300"
+        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PROMPTS.md": "f435175a2ad2b41172cdb7cf38efe7f69fbdc9e10dc6a0fbd8884e6d40966300",
+        "docs/fenrir-acting-bite/HIGH-LEAP-DESCENDING-BITE-PLAN.md": "1f14aeb60ac8230dc61b197fa4f4ba168730b6724525a1cbb97d39a60ee71bb2",
+        "docs/fenrir-acting-bite/evidence/c43d9015/INDEPENDENT-REVIEW.md": "42c2c4158cc7814baa0ec4f9461405ede8d751934e8ae6369e08a4ed19ab62d9",
+        "docs/fenrir-acting-bite/evidence/c43d9015/browser-checks.json": "86670e9633c0222d952a89377a6f9e77bdd059c3eb88c44f6b860383d2a317ec",
+        "docs/fenrir-acting-bite/evidence/c43d9015/provenance.json": "54a3531a31f5e7b0b587e8345d7e1e7f7aa8ade7d1980bdc246d03984624a74f"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1507,7 +1521,13 @@
         "docs/fenrir-acting-bite/assets/landing-seq-rear-land.png": "af09745a7f9493cde536e716517d98639b2e8ab249406233eac25fb8aafad7ba",
         "docs/fenrir-acting-bite/assets/landing-seq-mid-rise.png": "c8a2084e38e243a8e2dee1422e6472329e351b0ac8abbe6bdab332ea450eeb2e",
         "docs/fenrir-acting-bite/assets/landing-seq-rise-study.png": "6418ae38328e3c2469ec88d9e0f3362f98b0c886e9ae20bf3f0c6d58d05f7828",
-        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-six-static.jpg": "0f27466b1663d7142d83b194cffba63a9efa8db458d6c5156668dfa09bc32ad5"
+        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-six-static.jpg": "0f27466b1663d7142d83b194cffba63a9efa8db458d6c5156668dfa09bc32ad5",
+        "docs/fenrir-acting-bite/evidence/c43d9015/double-speed.mp4": "110483ac80b0f260de9e310b6066211a44a21fce0f618d7cea117b9ac386ab7c",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-before-after.mp4": "452c516164d74ecbaeaac102eb3615db94ccefe07262345a64bbaeff1e125d81",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-segment-slow.mp4": "782fb10b86b7e752a77e718de58cb16e07534a1ca9932857ac44f92f7f93d9e1",
+        "docs/fenrir-acting-bite/evidence/c43d9015/landing-segment.mp4": "a2fa7aa0d992e28b3244c9b444df803047c0ccd2a0001081b3b644c8bb0017a9",
+        "docs/fenrir-acting-bite/evidence/c43d9015/normal.mp4": "3a6717359821b366ff2db3b40f326005a5a82c7b422a21a75d44ac11ac073bd5",
+        "docs/fenrir-acting-bite/evidence/c43d9015/reduced.mp4": "9ecb012a118e3f37e676fec7d7ede6a0ce980f53ace64309adeb12b2f2fded4a"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }

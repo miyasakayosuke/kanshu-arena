@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "c43d901545e9779a1a9b45c115b2b0d5e28cdab9",
+  "workflowRun": "38716899741",
+  "artifactId": "11963955248",
+  "archiveBytes": 32716218,
+  "archiveSha256": "ff14c450b2ea034ead8879fbb47b52308bf3b86507638d273b231748bcd187c5",
+  "artifactExpiresAt": "2026-10-22T10:04:24Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "captureLimit": "30fps double-speed samples skip some20ms wall-time key exposures; this does not show runtime omission. A60fps supplement is planned.",
+  "files": {
+    "normal.mp4": {
+      "bytes": 529128,
+      "sha256": "3a6717359821b366ff2db3b40f326005a5a82c7b422a21a75d44ac11ac073bd5"
+    },
+    "double-speed.mp4": {
+      "bytes": 441859,
+      "sha256": "110483ac80b0f260de9e310b6066211a44a21fce0f618d7cea117b9ac386ab7c"
+    },
+    "reduced.mp4": {
+      "bytes": 148229,
+      "sha256": "9ecb012a118e3f37e676fec7d7ede6a0ce980f53ace64309adeb12b2f2fded4a"
+    },
+    "landing-before-after.mp4": {
+      "bytes": 1015087,
+      "sha256": "452c516164d74ecbaeaac102eb3615db94ccefe07262345a64bbaeff1e125d81"
+    },
+    "landing-segment.mp4": {
+      "bytes": 544797,
+      "sha256": "a2fa7aa0d992e28b3244c9b444df803047c0ccd2a0001081b3b644c8bb0017a9"
+    },
+    "landing-segment-slow.mp4": {
+      "bytes": 869290,
+      "sha256": "782fb10b86b7e752a77e718de58cb16e07534a1ca9932857ac44f92f7f93d9e1"
+    },
+    "browser-checks.json": {
+      "bytes": 5143,
+      "sha256": "86670e9633c0222d952a89377a6f9e77bdd059c3eb88c44f6b860383d2a317ec"
+    }
+  }
+}

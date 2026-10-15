@@ -74,15 +74,16 @@ try {
   for (const [name, speed, reduced] of [['normal', 1, false], ['double-speed', 2, false], ['reduced', 1, true]]) {
     const dir = out + name + '-frames/'; await mkdir(dir, { recursive: true });
     await page.evaluate(({ speed, reduced }) => window.preview.start('video', 400, { speed, reduced }), { speed, reduced });
-    const count = Math.ceil((.4 + 1.5 / speed + .4) * 30);
+    const fps = speed === 2 ? 60 : 30;
+    const count = Math.ceil((.4 + 1.5 / speed + .4) * fps);
     for (let i = 0; i < count; i++) {
-      const boxes = await page.evaluate(ms => { window.preview.sample(ms); return window.preview.bounds(); }, i * 1000 / 30);
+      const boxes = await page.evaluate(ms => { window.preview.sample(ms); return window.preview.bounds(); }, i * 1000 / fps);
       for (const { box, canvas, name: pose } of boxes) {
         assert(box[0] >= 0 && box[1] >= 0 && box[2] <= canvas[0] && box[3] <= canvas[1], `${name}/${i}/${pose}: clipped source alpha bounds`);
       }
       await page.screenshot({ path: dir + String(i).padStart(3, '0') + '.png' });
     }
-    const encoded = spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', '30', '-i', dir + '%03d.png', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + name + '.mp4'], { stdio: 'inherit' });
+    const encoded = spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', String(fps), '-i', dir + '%03d.png', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + name + '.mp4'], { stdio: 'inherit' });
     assert.equal(encoded.status, 0, `${name}: ffmpeg`);
   }
   // Re-render the unchanged baseline placement with the same browser, artwork,
@@ -114,6 +115,7 @@ try {
     registration: 'shared-source-grid-not-perfect-foot-plant',
     knownDefects: ['early-wrist-detail','near-toe-drift','incomplete-smoothness','old-bite-chain','shallow-anticipation'] };
   observations.videoAlphaBoundsInsideCanvas = true;
+  observations.videoCaptureFps = {normal:30, doubleSpeed:60, reduced:30};
   const earlyEquality = [];
   for (const ms of [0, 250, 450, 650, 800, 1180, 1300, 1450]) {
     const images = [];
