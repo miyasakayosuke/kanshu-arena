@@ -166,3 +166,46 @@ CI compares early control canvases pixel-for-pixel and captures new return
 boundaries 1129/1130, 1239/1240, 1379/1380 plus normal/2x/reduced videos and actual
 130/142 px desktop/mobile light/dark panels. Actual review is pending at this source
 checkpoint. No further generation is planned before that bounded comparison.
+
+
+## Original-derived return result: retain as a rough improvement
+
+Exact source `45133cebd538e57b863bb76676c9d8f049d27a4f` completed actual
+Chromium run https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38710675023.
+Artifact `11960871640` was downloaded and SHA-256 verified: 23,682,326 bytes,
+`dc1d5112300820f82671cf9a14bf446e4d7929f5731c2afb39590e1c8a54550a`.
+The source artifact expires 2026-10-22 09:13:12 UTC. Normal, double-speed,
+reduced-motion and registered-control/current side-by-side videos, browser checks
+and their exact provenance are retained in `evidence/45133ceb/`.
+
+Independent review inspected decoded normal/comparison and double-speed frames,
+all 40 desktop/mobile light/dark captures at native 130/142 px and enlarged size,
+and reduced-motion samples. It found a net rough improvement: adult body
+proportions hold better through the rise, and the near-to-original change at
+1380 ms is now a small face/tail/detail change rather than the previous large
+height jump. The backward airborne glide is absent. No clipping, extra limb,
+ghost or new seam was observed. The foreground toe stays visually planted.
+The independent reviewer pixel-compared all 12 neutral/settled canvases: exact.
+Reduced-motion samples hold the original. These endpoint checks do not establish
+identity in every intermediate pose. Review used actual decoded video samples
+and screenshots, not a claim of continuous live playback or smoothness.
+
+Remaining defects are explicit:
+- At 1130 ms, old low recovery to the new halfway drawing changes the broad face,
+  torso and oversized tail abruptly; other paws relocate around the locked toe.
+- At 1240 ms, the head lift/turn is still pronounced, and the other feet relocate
+  without a depicted lift or step. One planted toe is not an all-feet plant.
+- Earlier loading remains shallow; landing lacks a strong weight-bearing
+  compression; the old bite/open keys still have inconsistent broken-chain tips.
+- Missing true in-betweens and middle-pose identity consistency remain unresolved.
+
+Keep this as an owner-showable rough keypose improvement. Stop this bounded
+return experiment here: further whole-sprite placement edits cannot supply the
+missing shape/contact transitions. No smooth-motion acceptance, game integration,
+release approval or task completion is asserted. The original registered and
+failed-grid/lunge controls remain available for comparison.
+
+The next documentation-only checkpoint corrects an overbroad explanatory sentence:
+whole-sprite airborne travel occurs only in the explicitly failed lunge variant.
+The current return comparison has no such travel. This wording fix does not
+change the captured renderer, artwork or motion timing.

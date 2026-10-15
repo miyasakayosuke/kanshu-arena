@@ -108,7 +108,7 @@
         1254
       ],
       "mode": "RGBA",
-      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independent static review only; rendered comparison pending.",
+      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independently reviewed actual browser output is a rough return improvement; continuity and identity acceptance remain unmet.",
       "adopted": false
     },
     {
@@ -119,12 +119,12 @@
         1254
       ],
       "mode": "RGBA",
-      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independent static review only; rendered comparison pending.",
+      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independently reviewed actual browser output is a rough return improvement; continuity and identity acceptance remain unmet.",
       "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
-  "visualStatus": "Failed grid/lunge variant retained; two original-derived full-height return drawings passed only static suitability review. Actual same-scale return comparison pending; acceptance and integration remain unmet.",
+  "visualStatus": "Original-derived return comparison is a net rough improvement after independent actual-render review. Recovery and head-turn discontinuities, loading, contact compression, chain consistency and smoothness remain unresolved. Acceptance and game integration are not established.",
   "browserBaseline": {
     "commit": "b0b697ed1469928267d45a6b6ecd970dd5fef208",
     "run": "38701756188",
@@ -132,5 +132,40 @@
     "archiveSha256": "7788badcca42ea72ce3855940fc3f62506222900270d3da7e24a36ca526d37bc",
     "review": "BROWSER-REVIEW.md",
     "visualAcceptance": false
+  },
+  "browserReturnRepair": {
+    "sourceCommit": "45133cebd538e57b863bb76676c9d8f049d27a4f",
+    "workflowRun": "38710675023",
+    "workflowUrl": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38710675023",
+    "artifactId": "11960871640",
+    "archiveBytes": 23682326,
+    "archiveSha256": "dc1d5112300820f82671cf9a14bf446e4d7929f5731c2afb39590e1c8a54550a",
+    "artifactExpiresAt": "2026-10-22T09:13:12Z",
+    "visualAcceptance": false,
+    "gameIntegration": false,
+    "result": "Net rough return improvement; remaining discontinuities and stronger-acting requirements unresolved.",
+    "retainedFiles": {
+      "browser-checks.json": {
+        "bytes": 4712,
+        "sha256": "63979f4d0f008b0d6324c7c28a36bcf7346441db44ab1b08d665e5ecc45d1c7c"
+      },
+      "double-speed.mp4": {
+        "bytes": 452597,
+        "sha256": "ef993a857d2a5e8df37d9d43fa4e5b7adadd678361ca16d55177209657dbb2af"
+      },
+      "normal.mp4": {
+        "bytes": 501182,
+        "sha256": "228075ec677026f30d09b31094429b479d9e140cc63610074bf848b93b14bd31"
+      },
+      "reduced.mp4": {
+        "bytes": 145524,
+        "sha256": "bc3e7fbe22bf558965915335750f88cd18674a0c97862df271932ec5e20fbc37"
+      },
+      "return-before-after.mp4": {
+        "bytes": 955355,
+        "sha256": "161e5db6df5ecc9d5523eaab52ff1bd92aedaae3b896efa53ea0e75ccacc184a"
+      }
+    },
+    "review": "BROWSER-REVIEW.md"
   }
 }

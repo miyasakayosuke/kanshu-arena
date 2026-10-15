@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "45133cebd538e57b863bb76676c9d8f049d27a4f",
+  "workflowRun": "38710675023",
+  "workflowUrl": "https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38710675023",
+  "artifactId": "11960871640",
+  "archiveBytes": 23682326,
+  "archiveSha256": "dc1d5112300820f82671cf9a14bf446e4d7929f5731c2afb39590e1c8a54550a",
+  "artifactExpiresAt": "2026-10-22T09:13:12Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "result": "Net rough return improvement; remaining discontinuities and stronger-acting requirements unresolved.",
+  "retainedFiles": {
+    "browser-checks.json": {
+      "bytes": 4712,
+      "sha256": "63979f4d0f008b0d6324c7c28a36bcf7346441db44ab1b08d665e5ecc45d1c7c"
+    },
+    "double-speed.mp4": {
+      "bytes": 452597,
+      "sha256": "ef993a857d2a5e8df37d9d43fa4e5b7adadd678361ca16d55177209657dbb2af"
+    },
+    "normal.mp4": {
+      "bytes": 501182,
+      "sha256": "228075ec677026f30d09b31094429b479d9e140cc63610074bf848b93b14bd31"
+    },
+    "reduced.mp4": {
+      "bytes": 145524,
+      "sha256": "bc3e7fbe22bf558965915335750f88cd18674a0c97862df271932ec5e20fbc37"
+    },
+    "return-before-after.mp4": {
+      "bytes": 955355,
+      "sha256": "161e5db6df5ecc9d5523eaab52ff1bd92aedaae3b896efa53ea0e75ccacc184a"
+    }
+  }
+}
