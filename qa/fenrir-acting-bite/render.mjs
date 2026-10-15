@@ -30,8 +30,8 @@ try {
   });
   assert.equal(sourceIdentity, true); observations.neutralRoundTripPixelExact = true;
   const support = await page.evaluate(() => Object.fromEntries(
-    ['original', 'preload', 'drive', 'contact', 'recover'].map(name => [name, window.preview.placement.support(name)])));
-  for (const name of ['preload', 'contact', 'recover']) support[name].forEach((value, i) =>
+    ['original', 'preload', 'drive', 'contact', 'recover', 'rise', 'near'].map(name => [name, window.preview.placement.support(name)])));
+  for (const name of ['preload', 'contact', 'recover', 'rise', 'near']) support[name].forEach((value, i) =>
     assert(Math.abs(value - support.original[i]) < 1e-8));
   assert(Math.abs(support.drive[1] - support.original[1]) < 1e-8);
   observations.supportRegistration = { sourceLandmarksOnly: true, visualAcceptance: false, points142: support };
@@ -58,7 +58,7 @@ try {
   assert.equal(fallback.frame, 'original'); observations.cases.push({ name: 'fallback', fallback });
   await page.screenshot({ path: out + 'fallback.png', fullPage: true });
   await page.evaluate(() => window.preview.assets(true));
-  const keys = [['neutral', 0], ['preload', 250], ['drive', 450], ['open', 650], ['bite', 800], ['contact', 950], ['recover', 1150], ['settled', 1450]];
+  const keys = [['neutral', 0], ['preload', 250], ['drive', 450], ['open', 650], ['bite', 800], ['contact', 980], ['recover', 1080], ['rise', 1180], ['near', 1300], ['settled', 1450]];
   for (const viewport of [{ width: 1120, height: 1000 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     for (const theme of ['light', 'dark']) {
@@ -76,7 +76,10 @@ try {
     await page.evaluate(({ speed, reduced }) => window.preview.start('video', 400, { speed, reduced }), { speed, reduced });
     const count = Math.ceil((.4 + 1.5 / speed + .4) * 30);
     for (let i = 0; i < count; i++) {
-      await page.evaluate(ms => window.preview.sample(ms), i * 1000 / 30);
+      const boxes = await page.evaluate(ms => { window.preview.sample(ms); return window.preview.bounds(); }, i * 1000 / 30);
+      for (const { box, canvas, name: pose } of boxes) {
+        assert(box[0] >= 0 && box[1] >= 0 && box[2] <= canvas[0] && box[3] <= canvas[1], `${name}/${i}/${pose}: clipped source alpha bounds`);
+      }
       await page.screenshot({ path: dir + String(i).padStart(3, '0') + '.png' });
     }
     const encoded = spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-framerate', '30', '-i', dir + '%03d.png', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + name + '.mp4'], { stdio: 'inherit' });
@@ -85,7 +88,7 @@ try {
   // Re-render the unchanged baseline placement with the same browser, artwork,
   // page layout and clock. Boundary pairs expose the remaining pose-shape pops.
   for (const variant of ['registered', 'baseline']) {
-    await page.goto(base + '?anchors=' + variant);
+    await page.goto(base + '?motion=registered&anchors=' + variant);
     await page.waitForFunction(() => window.ready || window.previewError);
     assert.equal(await page.evaluate(() => window.previewError || null), null);
     for (const ms of [450, 1039, 1040, 1349, 1350]) {
@@ -93,6 +96,7 @@ try {
       await page.screenshot({ path: `${out}placement-${variant}-${ms}.png`, fullPage: true });
     }
   }
+  await page.goto(base + '?motion=registered'); await page.waitForFunction(() => window.ready);
   const baselineDir = out + 'baseline-frames/'; await mkdir(baselineDir, { recursive: true });
   await page.evaluate(() => window.preview.start('baseline-video', 400));
   for (let i = 0; i < 69; i++) {
@@ -103,9 +107,11 @@ try {
     '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + 'baseline-normal.mp4'], { stdio: 'inherit' }).status, 0);
   assert.equal(spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', out + 'baseline-normal.mp4', '-i', out + 'normal.mp4',
     '-filter_complex', '[0:v][1:v]hstack=inputs=2[v]', '-map', '[v]', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
-    '-movflags', '+faststart', out + 'placement-before-after.mp4'], { stdio: 'inherit' }).status, 0);
-  observations.placementComparison = { left: 'baseline', right: 'support-registered', artworkChanged: false,
-    poseBoundaryTimes: [1039, 1040, 1349, 1350], smoothnessEstablished: false };
+    '-movflags', '+faststart', out + 'continuity-before-after.mp4'], { stdio: 'inherit' }).status, 0);
+  observations.placementComparison = { left: 'registered-prior-keys', right: 'recovery-bridges-and-airborne-lunge', artworkChanged: true,
+    poseBoundaryTimes: [1039, 1040, 1349, 1350], smoothnessEstablished: false,
+    addedPoses: ['rise', 'near'], rejectedForPurpose: ['deeper-anticipation', 'heavy-landing-compression'] };
+  observations.videoAlphaBoundsInsideCanvas = true;
   const failedPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await failedPage.route('**/assets/weight-transfer-bridges.png', route => route.abort());
   await failedPage.goto(base); await failedPage.waitForFunction(() => window.previewError);

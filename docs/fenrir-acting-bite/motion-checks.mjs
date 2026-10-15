@@ -1,17 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { DURATION, IMPACT, SKILL, EXPOSURES, frameAt, makeController } from './motion.mjs';
+import { DURATION, IMPACT, SKILL, EXPOSURES, frameAt, flightAt, makeController } from './motion.mjs';
 import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
 test('rigid support registration preserves neutral and airborne drawings', () => {
   for (const name of ['original', 'open', 'bite']) assert.deepEqual(REGISTERED[name], BASELINE[name]);
   for (const width of [130, 142, 420]) {
     const original = supportPosition('original', width);
-    for (const name of ['preload', 'contact', 'recover']) {
+    for (const name of ['preload', 'contact', 'recover', 'rise', 'near']) {
       const point = supportPosition(name, width);
       point.forEach((value, i) => assert(Math.abs(value - original[i]) < 1e-9));
     }
     assert(Math.abs(supportPosition('drive', width)[1] - original[1]) < 1e-9);
   }
+});
+test('bounded continuity uses recovery bridges and only airborne rigid travel', () => {
+  assert.equal(frameAt(800, true), 'bite'); assert.equal(frameAt(940, true), 'contact');
+  assert.equal(frameAt(1180, true), 'rise'); assert.equal(frameAt(1300, true), 'near');
+  assert.equal(frameAt(1400, true), 'original');
+  for (const ms of [0, 140, 360, 549, 940, 1040, 1130, 1240, 1500]) assert.deepEqual(flightAt(ms), [0, 0]);
+  assert.deepEqual(flightAt(800), [-.28, -.02]);
+  assert(Math.abs(flightAt(939.999)[0]) < 1e-7);
+  const c = makeController({ continuity: true }); c.assets(true); c.start('new', 0);
+  assert.equal(c.sample(800).impact, true); assert.equal(c.sample(1180).frame, 'rise');
+  c.start('reduced', 0, { reduced: true }); assert.equal(c.sample(800).frame, 'original');
 });
 test('existing one-hit skill constants and explicit impact exposure', () => {
   assert.deepEqual(SKILL, { name: '月下の一咬', power: 55, mp: 10 });

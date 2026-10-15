@@ -88,10 +88,21 @@
       "mode": "RGBA",
       "origin": "Built-in imagegen narrow grounded-drive and forepaw-contact bridges; exact prompt in BRIDGE-PROMPT.md",
       "adopted": false
+    },
+    {
+      "file": "assets/continuity-four-key-study.png",
+      "sha256": "29ea3290c0849f38a0bfe164925af85aad31869b8149c7c715fcb17fbdfe4f9d",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen bounded continuity study; exact prompt in CONTINUITY-PROMPT.md. Lower pair are transition candidates; upper pair rejected for the intended deep anticipation/heavy compression.",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
-  "visualStatus": "Actual baseline Chromium output independently reviewed as a rough diagnostic; smoothness, identity continuity and game integration remain unmet. See BROWSER-REVIEW.md.",
+  "visualStatus": "Registered support placement independently improved; bounded recovery/lunge comparison pending. Smoothness, middle-pose identity, old chain topology, heavy compression and integration remain unmet.",
   "browserBaseline": {
     "commit": "b0b697ed1469928267d45a6b6ecd970dd5fef208",
     "run": "38701756188",

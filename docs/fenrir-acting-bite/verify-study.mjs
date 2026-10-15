@@ -10,6 +10,7 @@ const entry = manifest.assets.find(item => item.id === 'fenrir-acting-bite-plan-
 assert(entry);
 const expected = {
   'assets/reference.png': [1312, 1199],
+  'assets/continuity-four-key-study.png': [1536, 1024],
   'assets/keyposes-first.png': [1536, 1024],
   'assets/inbetween-study.png': [1024, 1536],
   'pose-render.png': [1536, 2360],
@@ -29,4 +30,4 @@ assert.equal(entry.binarySha256['docs/fenrir-acting-bite/assets/reference.png'],
 for (const [file, hash] of Object.entries(entry.binarySha256)) {
   assert.equal(createHash('sha256').update(readFileSync(resolve(here, '../..', file))).digest('hex'), hash, file);
 }
-console.log('All registered binary byte hashes, including the retained browser clip, verified. 6 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');
+console.log('All registered binary byte hashes, including the retained browser clip, verified. 7 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');

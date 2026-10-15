@@ -60,3 +60,49 @@ The next browser run captures before/after boundary pairs at 1039/1040 and
 source-coordinate checks are not visual acceptance. Shape/identity changes can
 remain after anchor alignment and require a fresh independent rendered check.
 No extra drawings are generated for this correction.
+
+## Registered placement: actual result
+
+Exact source `d155e88bf5d05dd4784955d085c2d40fc8d46bf0` completed Chromium
+run https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38704319417 .
+Artifact `11957932101`, 18,451,818 bytes, SHA-256
+`346570d23944579b8bcc7e25e12033054c9fef62bdba271fe56a48bdeb1a7b9e`
+was downloaded and verified. Artifact expiry: 2026-10-22 08:19:50 UTC.
+Exact normal, side-by-side before/after video and checks are retained in
+`evidence/d155e88b/`.
+
+Independent rendered comparison found a real improvement: drive support toes no
+longer penetrate the guide, and the near foretoe stays essentially at the same
+world ground position across contact/recovery and recovery/original boundaries.
+The remaining changes are head/chest/hindquarters/tail shape and far-foot placement.
+Recovery is a fixed hold. Keep this registration; further whole-sprite nudges
+would sacrifice the planted toe without supplying missing transitional drawings.
+The result remains a rough diagnostic, not smooth-motion acceptance.
+
+## Bounded continuity and stronger-acting pass
+
+Requirement clarification: connect the liked rough direction and exaggerate the
+monster's physical action. No skill balance, timing, identity or acceptance gate
+changes. The exact prompt and planned stopping point are in CONTINUITY-PROMPT.md.
+
+One four-pose study was generated. Independent static review retained only the
+lower pair as candidate recovery/head-turn bridges. They add useful orientation
+and chest-height progression, but the near-original drawing is still wider and
+less upright than the real original, so an endpoint shape pop may remain. The
+upper pair has nearly identical all-four-foot crouched silhouettes and does not
+establish distinctly deeper anticipation and heavy impact compression. These
+upper poses are saved as failed-purpose evidence and are not used in playback.
+Four limbs, cuffs and open broken chain tips were readable in this small study.
+
+The new diagnostic adds only the two candidate recovery drawings, preserves the
+exact original endpoint and the existing good bite, and uses a rigid airborne
+lunge/recoil path. Grounded poses keep their registered support points. The stage
+is wider with the same origin in both comparison variants to leave room for the
+lunge; this is not a camera move or a body deformation. Impact remains 800 ms and
+total remains 1500 ms. Contact occurs only after the recoil returns to its ground
+anchor. `?motion=registered` retains the previous key schedule for comparison.
+
+The bounded pass stops at an actual rendered before/after comparison. Stronger
+anticipation/heavy landing, old attack chain topology, exact middle-pose identity,
+missing in-betweens and a possible endpoint pop remain explicit review gates.
+No claim of smoothness or integrated game behavior follows from passing tests.

@@ -6,11 +6,28 @@ export const EXPOSURES = Object.freeze([
   [0, 'original'], [140, 'preload'], [360, 'drive'], [550, 'open'],
   [760, 'bite'], [890, 'contact'], [1040, 'recover'], [1350, 'original'],
 ]);
-export function frameAt(ms) {
+export const CONTINUITY_EXPOSURES = Object.freeze([
+  [0, 'original'], [140, 'preload'], [360, 'drive'], [550, 'open'],
+  [760, 'bite'], [940, 'contact'], [1040, 'recover'], [1130, 'rise'],
+  [1240, 'near'], [1380, 'original'],
+]);
+export function frameAt(ms, continuity = false) {
   if (!Number.isFinite(ms) || ms < 0 || ms >= DURATION) return 'original';
-  return EXPOSURES.findLast(([start]) => start <= ms)[1];
+  return (continuity ? CONTINUITY_EXPOSURES : EXPOSURES).findLast(([start]) => start <= ms)[1];
 }
-export function makeController() {
+// Rigid whole-body airborne displacement only. Grounded keys never translate.
+// Recoil returns to the planted contact anchor before the contact drawing appears.
+export function flightAt(ms) {
+  if (ms < 550 || ms >= 940 || !Number.isFinite(ms)) return [0, 0];
+  if (ms < 760) {
+    const t = (ms - 550) / 210, e = 1 - (1 - t) ** 3;
+    return [-.28 * e, -.06 * Math.sin(Math.PI * t) - .02 * e];
+  }
+  if (ms < 840) return [-.28, -.02];
+  const t = (ms - 840) / 100, e = t * t * (3 - 2 * t);
+  return [-.28 * (1 - e), -.02 * (1 - e)];
+}
+export function makeController({ continuity = false } = {}) {
   let cast = null, assetsReady = false, hidden = false;
   return {
     assets(value) { assetsReady = !!value; },
@@ -25,7 +42,7 @@ export function makeController() {
       if (!cast) return { frame: 'original', ms: 0, active: false, impact: false, hidden, id: null };
       const ms = Math.max(0, (now - cast.now) * cast.speed);
       const active = ms < DURATION;
-      return { frame: active && cast.readyAtStart && !cast.reduced ? frameAt(ms) : 'original',
+      return { frame: active && cast.readyAtStart && !cast.reduced ? frameAt(ms, continuity) : 'original',
         ms: Math.min(ms, DURATION), active, impact: ms >= IMPACT && active, hidden: false, id: cast.id };
     },
   };
