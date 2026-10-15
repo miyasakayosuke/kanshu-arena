@@ -1395,10 +1395,13 @@
         "docs/fenrir-acting-bite/RETURN-REPAIR-PROMPT.md",
         "docs/fenrir-acting-bite/REVIEW.md",
         "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PLAN.md",
+        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PROMPTS.md",
         "docs/fenrir-acting-bite/assets/anticipation-landing-correction.png",
         "docs/fenrir-acting-bite/assets/continuity-four-key-study.png",
         "docs/fenrir-acting-bite/assets/inbetween-study.png",
         "docs/fenrir-acting-bite/assets/keyposes-first.png",
+        "docs/fenrir-acting-bite/assets/landing-seq-compress.png",
+        "docs/fenrir-acting-bite/assets/landing-seq-contact.png",
         "docs/fenrir-acting-bite/assets/reference.png",
         "docs/fenrir-acting-bite/assets/return-halfway.png",
         "docs/fenrir-acting-bite/assets/return-near-original.png",
@@ -1417,6 +1420,8 @@
         "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/d155e88b/normal.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-native.png",
+        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-overlay.jpg",
         "docs/fenrir-acting-bite/index.html",
         "docs/fenrir-acting-bite/motion-checks.mjs",
         "docs/fenrir-acting-bite/motion.mjs",
@@ -1451,13 +1456,13 @@
         "docs/fenrir-acting-bite/motion-checks.mjs": "1e6eef7db830276f1fdf790420e0f179d169ccbda77c0c3f556646ec77656713",
         "docs/fenrir-acting-bite/pose-gallery.html": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
         "docs/fenrir-acting-bite/preview.mjs": "1f4912e91db0f9a37dd860336a16e3bcec3896815516883274b2b45268320e4d",
-        "docs/fenrir-acting-bite/provenance.json": "db6729dc987ad48b3f88faa6b2f555a6df23e88984fda67e41400ef57766bad2",
-        "docs/fenrir-acting-bite/verify-study.mjs": "c1c3cbd7576c1eb998d13f751a02c18e48867d282804220aa71f1569607228f4",
+        "docs/fenrir-acting-bite/provenance.json": "361b306f8c40516e6b2ad7cfee4103173d3d2ba7f005a237411ec18661fc18c7",
+        "docs/fenrir-acting-bite/verify-study.mjs": "30cc41995d046017031b1e704ae8d5d69b3e7e4b73368327420c9b7c9b26137d",
         ".github/workflows/fenrir-acting-bite-review.yml": "fb7f991a4306343fa7351f32f6f9df66228e53b8322a6b22dd265ed7927a0eaf",
         "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
         "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
         "qa/fenrir-acting-bite/render.mjs": "7608f2a57edbd962671bdcec4fa382326d32bc24e699935a709e770879292087",
-        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "2656ccc5fa8ef04f39d5f7e518211a7bf50135747f5fcad8561f1d52c2f01ba0",
+        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "c85b3031221e209ae8149047c6ef34cb67e5242a41c23b21cb73d7684c205472",
         "docs/fenrir-acting-bite/evidence/b0b697ed/browser-checks.json": "11e65634797a6e5ae33d7fbf253011bf38c4deaaa2706bc486b78094555003bf",
         "docs/fenrir-acting-bite/placement.mjs": "2266e8a69e30399f11621e700c3d1adb2f6fd15c30db34e5be68caeb65dbacbc",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md": "6f19877a72fae08e5463af4d6081f800d70ae768afa503111c27c12bba55c0d7",
@@ -1466,7 +1471,8 @@
         "docs/fenrir-acting-bite/RETURN-REPAIR-PROMPT.md": "5ddfa7ae79e44cf21a7dca844c8c129162cc7255a69ad0163ea6d9eb3fea5bc9",
         "docs/fenrir-acting-bite/evidence/45133ceb/browser-checks.json": "63979f4d0f008b0d6324c7c28a36bcf7346441db44ab1b08d665e5ecc45d1c7c",
         "docs/fenrir-acting-bite/evidence/45133ceb/provenance.json": "fe0587eaa07184c0c043c08d112de49d90bd0bd0eed108e7f226403beb0ca069",
-        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PLAN.md": "5e1eef4e7a578ddbfbd83fd51d63f3339279b04807688a796b474640e8751801"
+        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PLAN.md": "5e1eef4e7a578ddbfbd83fd51d63f3339279b04807688a796b474640e8751801",
+        "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PROMPTS.md": "1bf4d1785e96c7e9033aabfd170fa21b13e5573bbd4100ddc080b55f4f4c2f46"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1487,7 +1493,11 @@
         "docs/fenrir-acting-bite/evidence/45133ceb/double-speed.mp4": "ef993a857d2a5e8df37d9d43fa4e5b7adadd678361ca16d55177209657dbb2af",
         "docs/fenrir-acting-bite/evidence/45133ceb/normal.mp4": "228075ec677026f30d09b31094429b479d9e140cc63610074bf848b93b14bd31",
         "docs/fenrir-acting-bite/evidence/45133ceb/reduced.mp4": "bc3e7fbe22bf558965915335750f88cd18674a0c97862df271932ec5e20fbc37",
-        "docs/fenrir-acting-bite/evidence/45133ceb/return-before-after.mp4": "161e5db6df5ecc9d5523eaab52ff1bd92aedaae3b896efa53ea0e75ccacc184a"
+        "docs/fenrir-acting-bite/evidence/45133ceb/return-before-after.mp4": "161e5db6df5ecc9d5523eaab52ff1bd92aedaae3b896efa53ea0e75ccacc184a",
+        "docs/fenrir-acting-bite/assets/landing-seq-compress.png": "1990d000add08d38e982ed0b448f818283ee8c68914fab85326cfa330abee9cc",
+        "docs/fenrir-acting-bite/assets/landing-seq-contact.png": "5f5eea0b807bf1b5d2095811bee1b1ab7a23c8f4c3ca1beb5e5a97c8ed8c3198",
+        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-native.png": "2baea89110cac6cb9e3d0e1d71c3b58e90ef7f4d8b2850fdba47c7ecfa13c5c6",
+        "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-overlay.jpg": "8bfc41d08d71ab3310d4364ecd58b1ca95f4786e29c4a8f03ef733587c54b4ee"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }

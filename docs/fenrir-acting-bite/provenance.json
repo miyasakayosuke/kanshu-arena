@@ -121,6 +121,28 @@
       "mode": "RGBA",
       "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independently reviewed actual browser output is a rough return improvement; continuity and identity acceptance remain unmet.",
       "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-contact.png",
+      "sha256": "5f5eea0b807bf1b5d2095811bee1b1ab7a23c8f4c3ca1beb5e5a97c8ed8c3198",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen sequential landing feasibility; contact is original/halfway-conditioned, compression is a direct adjacent-frame edit. Exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent static/native-size review permits the remaining bounded segment; local near-toe shift and limited tail lag remain unresolved. No motion acceptance.",
+      "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-compress.png",
+      "sha256": "1990d000add08d38e982ed0b448f818283ee8c68914fab85326cfa330abee9cc",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen sequential landing feasibility; contact is original/halfway-conditioned, compression is a direct adjacent-frame edit. Exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent static/native-size review permits the remaining bounded segment; local near-toe shift and limited tail lag remain unresolved. No motion acceptance.",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",

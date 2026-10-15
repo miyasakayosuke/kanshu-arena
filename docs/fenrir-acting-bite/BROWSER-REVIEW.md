@@ -209,3 +209,30 @@ The next documentation-only checkpoint corrects an overbroad explanatory sentenc
 whole-sprite airborne travel occurs only in the explicitly failed lunge variant.
 The current return comparison has no such travel. This wording fix does not
 change the captured renderer, artwork or motion timing.
+
+
+## Sequential landing pair: static feasibility gate
+
+The public-safe plan was saved before generation at ffcd676a. The first two
+1254-square drawings used the original/halfway model, then a direct edit of the
+contact frame to produce its immediate compression neighbor. Exact prompts are
+in SEQUENTIAL-LANDING-PROMPTS.md; the unshifted diagnostic overlay and fixed-scale
+420/142/130 comparisons are in evidence/sequential-pair/. Those diagnostics are
+review aids only, not motion frames and not browser evidence.
+
+Independent source/native-size review gives a limited go for the remaining three
+linked drawings. Contact-to-compression genuinely bends the near elbow, lowers
+chest/back and moves both airborne rear paws toward the floor. Face, paw mass
+and torso identity are substantially steadier than the earlier independent keys.
+Four limbs, cuffs and open chain terminals remain readable.
+
+The near-paw contour still shifts about20 source pixels (2.2 pixels at142;6.4 at
+enlarged420), while the far forepaw is almost fixed. This is an unresolved local
+artwork defect; globally translating the sprite would slide the other planted
+paw. Tail motion mostly follows the body down rather than providing distinct
+lag/overshoot. The pair is suitable for the bounded continuation, not production
+clean, not a perfect plant and not smoothness acceptance. The remaining keys
+must show an explicit rear-foot landing/haunch load at970, then rise at1020 and
+1080 around the same forefeet toward the reviewed1130 halfway key. No independent
+scale fitting or unmotivated new foot placements. Actual rendered segment review
+is still required before any wider expansion.
