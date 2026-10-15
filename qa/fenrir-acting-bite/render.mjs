@@ -12,7 +12,7 @@ const observations = { kind: 'isolated-browser-keypose-diagnostic', visualAccept
 const errors = [];
 let browser;
 async function ready(page) {
-  await page.goto(base + '?motion=return');
+  await page.goto(base + '?motion=landing');
   await page.waitForFunction(() => window.ready || window.previewError);
   assert.equal(await page.evaluate(() => window.previewError || null), null);
 }
@@ -58,7 +58,7 @@ try {
   assert.equal(fallback.frame, 'original'); observations.cases.push({ name: 'fallback', fallback });
   await page.screenshot({ path: out + 'fallback.png', fullPage: true });
   await page.evaluate(() => window.preview.assets(true));
-  const keys = [['neutral', 0], ['preload', 250], ['drive', 450], ['open', 650], ['bite', 800], ['contact', 980], ['recover', 1080], ['rise', 1180], ['near', 1300], ['settled', 1450]];
+  const keys = [['neutral', 0], ['preload', 250], ['drive', 450], ['open', 650], ['bite', 800], ['contact', 900], ['compress',950], ['rear-land',990], ['mid-rise',1040], ['late-rise',1100], ['rise',1180], ['near', 1300], ['settled', 1450]];
   for (const viewport of [{ width: 1120, height: 1000 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
     for (const theme of ['light', 'dark']) {
@@ -96,7 +96,7 @@ try {
       await page.screenshot({ path: `${out}placement-${variant}-${ms}.png`, fullPage: true });
     }
   }
-  await page.goto(base + '?motion=registered'); await page.waitForFunction(() => window.ready);
+  await page.goto(base + '?motion=return'); await page.waitForFunction(() => window.ready);
   const baselineDir = out + 'baseline-frames/'; await mkdir(baselineDir, { recursive: true });
   await page.evaluate(() => window.preview.start('baseline-video', 400));
   for (let i = 0; i < 69; i++) {
@@ -107,28 +107,42 @@ try {
     '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + 'baseline-normal.mp4'], { stdio: 'inherit' }).status, 0);
   assert.equal(spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', out + 'baseline-normal.mp4', '-i', out + 'normal.mp4',
     '-filter_complex', '[0:v][1:v]hstack=inputs=2[v]', '-map', '[v]', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
-    '-movflags', '+faststart', out + 'return-before-after.mp4'], { stdio: 'inherit' }).status, 0);
-  observations.placementComparison = { left: 'registered-prior-keys', right: 'original-derived-return-only', artworkChanged: true,
-    poseBoundaryTimes: [1039, 1040, 1349, 1350], smoothnessEstablished: false,
-    addedPoses: ['returnHalf', 'returnNear'], rejectedForPurpose: ['deeper-anticipation', 'heavy-landing-compression'] };
+    '-movflags', '+faststart', out + 'landing-before-after.mp4'], { stdio: 'inherit' }).status, 0);
+  observations.placementComparison = { left: 'reviewed-original-derived-return', right: 'sequential-landing-window', artworkChanged: true,
+    poseBoundaryTimes: [890,930,970,1020,1080,1130], smoothnessEstablished: false,
+    addedPoses: ['seqContact','seqCompress','seqLand','seqMid','seqRise'],
+    registration: 'shared-source-grid-not-perfect-foot-plant',
+    knownDefects: ['early-wrist-detail','near-toe-drift','incomplete-smoothness','old-bite-chain','shallow-anticipation'] };
   observations.videoAlphaBoundsInsideCanvas = true;
   const earlyEquality = [];
-  for (const ms of [0, 250, 450, 650, 800, 950, 1080]) {
+  for (const ms of [0, 250, 450, 650, 800, 1180, 1300, 1450]) {
     const images = [];
-    for (const mode of ['registered', 'return']) {
+    for (const mode of ['return', 'landing']) {
       await page.goto(base + '?motion=' + mode); await page.waitForFunction(() => window.ready);
       images.push(await page.evaluate(ms => { window.preview.setTime(ms); return [...document.querySelectorAll('canvas')].map(c => c.toDataURL()); }, ms));
     }
     assert.deepEqual(images[0], images[1]); earlyEquality.push(ms);
   }
-  observations.returnControlPixelExactBeforeNewKeys = earlyEquality;
-  for (const ms of [1129, 1130, 1239, 1240, 1379, 1380]) {
+  observations.landingControlPixelExactOutsideWindow = earlyEquality;
+  for (const ms of [889,890,929,930,969,970,1019,1020,1079,1080,1129,1130,1239,1240,1379,1380]) {
     await page.evaluate(ms => window.preview.setTime(ms), ms);
-    await page.screenshot({ path: `${out}return-boundary-${ms}.png`, fullPage: true });
+    await page.screenshot({ path: `${out}landing-boundary-${ms}.png`, fullPage: true });
   }
+  const segmentDir=out+'landing-segment-frames/'; await mkdir(segmentDir,{recursive:true});
+  await page.evaluate(() => { document.querySelector('#placement').textContent += ' / 区間だけの反復確認'; });
+  for(let i=0;i<64;i++) {
+    const ms=Math.min(1130,890+(i%16)*1000/60);
+    await page.evaluate(ms=>window.preview.setTime(ms),ms);
+    await page.screenshot({path:segmentDir+String(i).padStart(3,'0')+'.png'});
+  }
+  for(const [name,fps]of [['landing-segment',60],['landing-segment-slow',15]])
+    assert.equal(spawnSync('ffmpeg',['-loglevel','error','-y','-framerate',String(fps),'-i',segmentDir+'%03d.png',
+      '-c:v','libx264','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',out+name+'.mp4'],{stdio:'inherit'}).status,0);
+  observations.segmentCapture={fromMs:890,toMs:1130,repetitions:4,normalFps:60,inspectionFps:15,
+    loopBoundaryIsNotPartOfAction:true,gameTimingUnchanged:true};
   const failedPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await failedPage.route('**/assets/weight-transfer-bridges.png', route => route.abort());
-  await failedPage.goto(base); await failedPage.waitForFunction(() => window.previewError);
+  await failedPage.route('**/assets/landing-seq-mid-rise.png', route => route.abort());
+  await failedPage.goto(base+'?motion=landing'); await failedPage.waitForFunction(() => window.previewError);
   const failedLoad = await failedPage.evaluate(() => {
     window.preview.start('real-load-failure', 0); return { error: window.previewError, sample: window.preview.sample(800) };
   });
@@ -138,8 +152,8 @@ try {
   const latePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   let releaseAsset;
   const held = new Promise(resolve => { releaseAsset = resolve; });
-  await latePage.route('**/assets/weight-transfer-bridges.png', async route => { await held; await route.continue(); });
-  await latePage.goto(base);
+  await latePage.route('**/assets/landing-seq-mid-rise.png', async route => { await held; await route.continue(); });
+  await latePage.goto(base+'?motion=landing');
   await latePage.waitForFunction(() => window.preview && document.querySelector('#status').textContent.includes('0 / 1500'));
   await latePage.evaluate(() => window.preview.start('actual-late-load', 0));
   releaseAsset(); await latePage.waitForFunction(() => window.ready || window.previewError);

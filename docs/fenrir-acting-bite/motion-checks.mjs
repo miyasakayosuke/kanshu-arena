@@ -60,3 +60,19 @@ test('skip and defeat cannot be revived by late assets; fallback is latched per 
   assert.equal(c.sample(1800).hidden, true); assert.equal(c.sample(1800).active, false);
   c.assets(false); c.start('failed-load', 2000); assert.equal(c.sample(2800).frame, 'original');
 });
+
+test('sequential landing is bounded to890–1130 and uses a shared grid, not per-frame foot fitting', () => {
+  for (const ms of [0, 250, 450, 650, 800, 889, 1130, 1240, 1380, 1500])
+    assert.equal(frameAt(ms, false, false, true), frameAt(ms, false, true));
+  for (const [ms, name] of [[890,'seqContact'],[930,'seqCompress'],[970,'seqLand'],[1020,'seqMid'],[1080,'seqRise']]) {
+    assert.equal(frameAt(ms, false, false, true), name);
+    assert.equal(REGISTERED[name].scale, 1 / 1312);
+    assert.deepEqual(REGISTERED[name].anchor, [334.5,1196]);
+    assert.equal(REGISTERED[name].registration, 'shared-source-grid-not-perfect-foot-plant');
+  }
+  const c=makeController({landing:true});c.assets(true);c.start('segment',0);
+  assert.equal(c.sample(800).impact,true);assert.equal(c.sample(950).frame,'seqCompress');
+  c.start('twice',0,{speed:2});assert.equal(c.sample(510).frame,'seqMid');
+  c.start('still',0,{reduced:true});assert.equal(c.sample(950).frame,'original');
+  c.cancel({defeat:true});assert.equal(c.sample(1100).hidden,true);
+});

@@ -1,6 +1,12 @@
 // Source-pixel support landmarks, measured on the unchanged RGBA sheets.
 // This is rigid whole-sprite registration, not anatomy interpolation.
+// A shared source-frame origin for the new sequential set. This intentionally
+// does NOT independently re-register each claw: the known local toe drift stays visible.
+const sequential = source => ({ source, anchor: [334.5, 1196], scale: 1 / 1312,
+  registration: 'shared-source-grid-not-perfect-foot-plant' });
 export const BASELINE = {
+  seqContact: sequential('seqContact'), seqCompress: sequential('seqCompress'),
+  seqLand: sequential('seqLand'), seqMid: sequential('seqMid'), seqRise: sequential('seqRise'),
   original: { source: 'reference', anchor: [300, 1170], scale: 1 / 1312 },
   preload: { source: 'correction', seed: [350, 550], anchor: [230, 814], scale: 1 / 729 },
   drive: { source: 'bridges', seed: [400, 430], anchor: [210, 630], scale: 1 / 729, lift: 16 },

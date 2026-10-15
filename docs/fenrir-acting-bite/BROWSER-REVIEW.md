@@ -257,3 +257,38 @@ cleaned970 source is suitable for the next two bounded drawings. The reviewer
 also rechecked and corrected the first-appearance attribution: both890 and930
 already have the same lobes. Those earlier wrist details and the near-toe drift
 remain explicit cleanup items; no further cleanup loop precedes1020/1080.
+
+
+## Five-key sequential segment: render checkpoint
+
+The first planned early-rise request overshot its intended intermediate height.
+Independent review found it suitable only as a later1080 candidate, with a visible
+far-hind-paw step. The one remaining planned drawing therefore used cleaned970
+and that1080 pose as its two adjacent endpoints to make1020, preserving the real
+prompt history. It is higher than the geometric midpoint; static review finds an
+ordered970→1020→1080 rise that may read as fast rebound easing upward. No additional
+drawings were generated to hide that uncertainty.
+
+Independent inspection of the final source and same-scale six-pose diagnostic
+found no new blocking anatomy/topology defect: four readable limbs, clean far
+wrist after970, attached cuffs and open chain terminal. The far hind paw lifts
+through1020/1080 and must visibly plant into1130. This is suitability for an actual
+browser comparison only. Entry890, the fast rebound, local near-toe drift and
+1080→1130 face/foot/detail changes remain specific review targets.
+
+`?motion=landing` replaces only890–1130 ms with five linked full-body drawings:
+contact890, foreleg compression930, rear-foot landing970, mid-rise1020 and later
+rise1080, then the previously reviewed halfway key at1130. Early attack and later
+return phases are unchanged. The entire new set uses one fixed source-frame
+origin and1/1312 physical scale. No separate claw-fitting translations conceal
+the known toe drift. The previous return-only comparison remains the control.
+There is no body warp, crossfade, camera effect or airborne glide in this variant.
+
+Actual Chromium capture is planned for52 native-size/context key screenshots,
+normal/2×/reduced videos, before/after full context, boundary pairs, and an explicit
+890–1130 ms segment loop at60fps plus a slow inspection copy. The loop reset is a
+review aid, not a new motion inside the action. CI checks identical early and late
+control canvases and actual delayed/failed loading of a new sequential asset.
+Impact800, total1500, power55 and MP10 remain unchanged. No further art is planned
+before this rendered review. Smoothness, owner acceptance and game integration
+are still not established.

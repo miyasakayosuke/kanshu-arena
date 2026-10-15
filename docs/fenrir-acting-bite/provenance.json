@@ -165,6 +165,28 @@
       "mode": "RGBA",
       "origin": "Built-in imagegen direct adjacent rear-landing edit, then a separate local wrist-artifact cleanup sibling. Previous source is retained; exact prompts in SEQUENTIAL-LANDING-PROMPTS.md. Independent cleanup review confirms the cleaned sibling is a visually suitable conditioning source; texture is not pixel-exact. Earlier890/930 wrist and toe defects remain recorded.",
       "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-rise-study.png",
+      "sha256": "6418ae38328e3c2469ec88d9e0f3362f98b0c886e9ae20bf3f0c6d58d05f7828",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen adjacent-endpoint sequential rise experiment. First rise overshot and is tested at1080 after independent review; final midpoint conditioned on970 and1080 is tested at1020. Exact prompts and limits in SEQUENTIAL-LANDING-PROMPTS.md. No production adoption.",
+      "adopted": false
+    },
+    {
+      "file": "assets/landing-seq-mid-rise.png",
+      "sha256": "c8a2084e38e243a8e2dee1422e6472329e351b0ac8abbe6bdab332ea450eeb2e",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen adjacent-endpoint sequential rise experiment. First rise overshot and is tested at1080 after independent review; final midpoint conditioned on970 and1080 is tested at1020. Exact prompts and limits in SEQUENTIAL-LANDING-PROMPTS.md. No production adoption.",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
@@ -211,5 +233,29 @@
       }
     },
     "review": "BROWSER-REVIEW.md"
+  },
+  "sequentialLanding": {
+    "status": "static-suitable-actual-browser-pending",
+    "windowMs": [
+      890,
+      1130
+    ],
+    "keysMs": [
+      890,
+      930,
+      970,
+      1020,
+      1080
+    ],
+    "physicalScale": "1/1312",
+    "registration": "one shared source grid, not independent per-frame toe fitting",
+    "knownDefects": [
+      "890/930 wrist protrusions",
+      "near-toe contour drift",
+      "limited tail lag",
+      "fast970to1020 rebound",
+      "entry/exit continuity unverified"
+    ],
+    "noFurtherGenerationBeforeRenderedReview": true
   }
 }

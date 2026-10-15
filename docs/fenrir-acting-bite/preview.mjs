@@ -3,21 +3,27 @@ import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
 const baseline = new URLSearchParams(location.search).get('anchors') === 'baseline';
 const continuity = !baseline && new URLSearchParams(location.search).get('motion') === 'continuity';
 const returnRepair = !baseline && new URLSearchParams(location.search).get('motion') === 'return';
+const landing = !baseline && new URLSearchParams(location.search).get('motion') === 'landing';
 const specs = baseline ? BASELINE : REGISTERED;
 document.querySelector('#placement').textContent = baseline
   ? '配置: 比較用の修正前' : continuity ? '失敗比較：体格の変化と空中の後退が未解決'
+  : landing ? '連続作画の着地240 ms：足先・輪郭の課題を残した比較'
   : returnRepair ? '原画由来の復帰2枚：同じ物理スケールで比較中' : '配置: 支持足の位置合わせ後・前段階のキーポーズ';
-const sources = { reference: 'reference.png', correction: 'anticipation-landing-correction.png',
+const sources = { reference: 'reference.png', seqContact: 'landing-seq-contact.png', seqCompress: 'landing-seq-compress.png',
+  seqLand: 'landing-seq-rear-land-clean.png', seqMid: 'landing-seq-mid-rise.png', seqRise: 'landing-seq-rise-study.png',
+  correction: 'anticipation-landing-correction.png',
   bridges: 'weight-transfer-bridges.png', keys: 'keyposes-first.png', continuity: 'continuity-four-key-study.png',
   returnHalf: 'return-halfway.png', returnNear: 'return-near-original.png' };
 const frames = new Map();
 const bounds = new Map();
 let renderedBounds = [];
-const controller = makeController({ continuity, returnRepair });
+const controller = makeController({ continuity, returnRepair, landing });
 let theme = 'light', forced = null, paused = true, number = 0;
 const canvases = [...document.querySelectorAll('canvas[data-size]')];
 const status = document.querySelector('#status');
-document.querySelector('#timeline').textContent = returnRepair
+document.querySelector('#timeline').textContent = landing
+  ? '800 ms 命中 / 890 ms 前足接地 / 930 ms 胸の沈み / 970 ms 後足接地 / 1020・1080 ms 起き上がり / 1130・1240 ms 既存の復帰 / 1380 ms 原画。'
+  : returnRepair
   ? '140 ms 溜め / 360 ms 蹴り出し / 550 ms 開口 / 760 ms 噛み閉じ / 800 ms 命中 / 890 ms 接地 / 1040 ms 復帰 / 1130・1240 ms 立ち上がり / 1380 ms 原画。'
   : continuity
   ? '140 ms：溜め → 360 ms：蹴り出し → 550 ms：空中突進 → 760 ms：噛み閉じ → 800 ms：命中 → 940 ms：接地 → 1130 / 1240 ms：立ち上がりと振り向き → 1380 ms：原画へ。'
@@ -91,10 +97,10 @@ function draw(sample) {
   document.querySelector('#time').value = sample.ms;
 }
 function tick(now) { if (!paused) draw(controller.sample(now)); requestAnimationFrame(tick); }
-function setTime(ms) { paused = true; forced = { frame: frameAt(ms, continuity, returnRepair), ms, active: ms < 1500, hidden: false }; draw(forced); return forced; }
+function setTime(ms) { paused = true; forced = { frame: frameAt(ms, continuity, returnRepair, landing), ms, active: ms < 1500, hidden: false }; draw(forced); return forced; }
 window.preview = { setTime, setTheme(value) { theme = value; draw(forced || controller.sample(performance.now())); },
   bounds: () => renderedBounds,
-  placement: { baseline, continuity, returnRepair, support: name => supportPosition(name, 142, baseline) },
+  placement: { baseline, continuity, returnRepair, landing, support: name => supportPosition(name, 142, baseline) },
   start(id, now, options) { paused = true; forced = null; controller.start(id, now, options); },
   sample(now) { forced = controller.sample(now); draw(forced); return forced; },
   cancel(options) { controller.cancel(options); forced = controller.sample(0); draw(forced); },

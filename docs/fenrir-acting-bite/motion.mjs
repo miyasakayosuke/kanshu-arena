@@ -16,9 +16,15 @@ export const RETURN_EXPOSURES = Object.freeze([
   [760, 'bite'], [890, 'contact'], [1040, 'recover'], [1130, 'returnHalf'],
   [1240, 'returnNear'], [1380, 'original'],
 ]);
-export function frameAt(ms, continuity = false, returnRepair = false) {
+export const LANDING_EXPOSURES = Object.freeze([
+  [0, 'original'], [140, 'preload'], [360, 'drive'], [550, 'open'],
+  [760, 'bite'], [890, 'seqContact'], [930, 'seqCompress'], [970, 'seqLand'],
+  [1020, 'seqMid'], [1080, 'seqRise'], [1130, 'returnHalf'],
+  [1240, 'returnNear'], [1380, 'original'],
+]);
+export function frameAt(ms, continuity = false, returnRepair = false, landing = false) {
   if (!Number.isFinite(ms) || ms < 0 || ms >= DURATION) return 'original';
-  return (returnRepair ? RETURN_EXPOSURES : continuity ? CONTINUITY_EXPOSURES : EXPOSURES).findLast(([start]) => start <= ms)[1];
+  return (landing ? LANDING_EXPOSURES : returnRepair ? RETURN_EXPOSURES : continuity ? CONTINUITY_EXPOSURES : EXPOSURES).findLast(([start]) => start <= ms)[1];
 }
 // Rigid whole-body airborne displacement only. Grounded keys never translate.
 // Recoil returns to the planted contact anchor before the contact drawing appears.
@@ -32,7 +38,7 @@ export function flightAt(ms) {
   const t = (ms - 840) / 100, e = t * t * (3 - 2 * t);
   return [-.28 * (1 - e), -.02 * (1 - e)];
 }
-export function makeController({ continuity = false, returnRepair = false } = {}) {
+export function makeController({ continuity = false, returnRepair = false, landing = false } = {}) {
   let cast = null, assetsReady = false, hidden = false;
   return {
     assets(value) { assetsReady = !!value; },
@@ -47,7 +53,7 @@ export function makeController({ continuity = false, returnRepair = false } = {}
       if (!cast) return { frame: 'original', ms: 0, active: false, impact: false, hidden, id: null };
       const ms = Math.max(0, (now - cast.now) * cast.speed);
       const active = ms < DURATION;
-      return { frame: active && cast.readyAtStart && !cast.reduced ? frameAt(ms, continuity, returnRepair) : 'original',
+      return { frame: active && cast.readyAtStart && !cast.reduced ? frameAt(ms, continuity, returnRepair, landing) : 'original',
         ms: Math.min(ms, DURATION), active, impact: ms >= IMPACT && active, hidden: false, id: cast.id };
     },
   };
