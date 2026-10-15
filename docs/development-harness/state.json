@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 54,
+  "revision": 55,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -970,6 +970,25 @@
         "status": "review",
         "revision": 54
       }
+    },
+    "claim-replan-review-two": {
+      "command": {
+        "action": "claim",
+        "task": "harness-bounded-replanning",
+        "role": "review",
+        "worker": "harness-replan-reviewer",
+        "ttl": 3600,
+        "operationId": "claim-replan-review-two"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "harness-replan-reviewer",
+          "generation": 4,
+          "expiresAt": 1792027764.0821583
+        },
+        "revision": 55
+      }
     }
   },
   "tasks": [
@@ -1256,9 +1275,9 @@
       "title": "Add audited bounded plan revisions",
       "kind": "implementation",
       "deliverableKind": "internal",
-      "status": "review",
+      "status": "reviewing",
       "attempts": 2,
-      "generation": 3,
+      "generation": 4,
       "required": true,
       "dependsOn": [],
       "criteria": [
@@ -1285,7 +1304,13 @@
         "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests": "https://github.com/miyasakayosuke/kanshu-arena/blob/cb8021ae2f83b037922a6ee692feaf2206572ab9/docs/development-harness/evidence/bounded-replan-checks.md"
       },
       "notBefore": 1792023979.131959,
-      "lastFailure": "https://github.com/miyasakayosuke/kanshu-arena/blob/89399d26b59344882f7b9c703490830b351eaf23/docs/development-harness/evidence/replan-review-first.md"
+      "lastFailure": "https://github.com/miyasakayosuke/kanshu-arena/blob/89399d26b59344882f7b9c703490830b351eaf23/docs/development-harness/evidence/replan-review-first.md",
+      "assignment": {
+        "role": "review",
+        "worker": "harness-replan-reviewer",
+        "generation": 4,
+        "expiresAt": 1792027764.0821583
+      }
     }
   ],
   "provenance": {
