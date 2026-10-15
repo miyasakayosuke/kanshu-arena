@@ -106,3 +106,31 @@ The bounded pass stops at an actual rendered before/after comparison. Stronger
 anticipation/heavy landing, old attack chain topology, exact middle-pose identity,
 missing in-betweens and a possible endpoint pop remain explicit review gates.
 No claim of smoothness or integrated game behavior follows from passing tests.
+
+## Bounded continuity result: not adopted
+
+Exact source `0476082ce93b9fd2bf5237356c976265082dadfc` completed Chromium
+run https://github.com/miyasakayosuke/kanshu-arena/actions/runs/38707017345
+at 2026-10-15 08:43:23 UTC. Artifact `11958764029` was downloaded and verified:
+21,107,684 bytes, SHA-256
+`12e4b778b65411c10e56fe82cd08736c052c98a74b3713d4286ce76b295b34a8`.
+Expiry: 2026-10-22 08:43:17 UTC. Exact normal, before/after video and browser checks
+are retained in `evidence/0476082c/`.
+
+Despite passing technical checks, the independent rendered assessment found no
+net continuity improvement. The lower drawings improve head-turn ordering but
+shrink apparent body height/size, followed by a taller pop into the real original.
+The airborne forward movement is clearer, but returning the held bite image
+backward reads as a boomerang-like glide. These are real visual regressions.
+The previous registered key phase is retained as the default control; the failed
+comparison remains explicitly selectable as `?motion=continuity` for diagnosis.
+
+The reviewer recommends a bounded repair of one or two full-height return poses
+derived from the exact original, prioritizing near-original first. Canvas height
+alone is not acceptance: head/body proportions, physical scale, planted near
+foretoe, weight-bearing joints and progressive turn must match. Do not warp or
+rescale the shallow-grid drawings to disguise the mismatch. Do not replace the
+backward glide with an instantaneous offset reset at contact. Use the previous
+registered airborne phase as the next control; a forward-displaced landing would
+need a genuine recoil/back-step drawing sequence. No further artwork is adopted
+by this record, and the original visual/release gates remain open.

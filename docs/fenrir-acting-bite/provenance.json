@@ -102,7 +102,7 @@
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
-  "visualStatus": "Registered support placement independently improved; bounded recovery/lunge comparison pending. Smoothness, middle-pose identity, old chain topology, heavy compression and integration remain unmet.",
+  "visualStatus": "Bounded recovery/lunge variant0476082 failed independent continuity review: apparent body-size changes and backward held-bite glide. Previous registered key phase retained as control; no final acceptance.",
   "browserBaseline": {
     "commit": "b0b697ed1469928267d45a6b6ecd970dd5fef208",
     "run": "38701756188",

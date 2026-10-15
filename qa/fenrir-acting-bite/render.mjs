@@ -12,7 +12,7 @@ const observations = { kind: 'isolated-browser-keypose-diagnostic', visualAccept
 const errors = [];
 let browser;
 async function ready(page) {
-  await page.goto(base);
+  await page.goto(base + '?motion=continuity');
   await page.waitForFunction(() => window.ready || window.previewError);
   assert.equal(await page.evaluate(() => window.previewError || null), null);
 }

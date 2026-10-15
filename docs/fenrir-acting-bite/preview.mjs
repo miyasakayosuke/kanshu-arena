@@ -1,10 +1,10 @@
 import { frameAt, flightAt, makeController } from './motion.mjs';
 import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
 const baseline = new URLSearchParams(location.search).get('anchors') === 'baseline';
-const continuity = !baseline && new URLSearchParams(location.search).get('motion') !== 'registered';
+const continuity = !baseline && new URLSearchParams(location.search).get('motion') === 'continuity';
 const specs = baseline ? BASELINE : REGISTERED;
 document.querySelector('#placement').textContent = baseline
-  ? '配置: 比較用の修正前' : '配置: 支持足の位置合わせ後（作画は同じ）';
+  ? '配置: 比較用の修正前' : continuity ? '失敗比較：体格の変化と空中の後退が未解決' : '配置: 支持足の位置合わせ後・前段階のキーポーズ';
 const sources = { reference: 'reference.png', correction: 'anticipation-landing-correction.png',
   bridges: 'weight-transfer-bridges.png', keys: 'keyposes-first.png', continuity: 'continuity-four-key-study.png' };
 const frames = new Map();

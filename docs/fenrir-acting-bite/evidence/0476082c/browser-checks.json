@@ -1,0 +1,222 @@
+{
+  "kind": "isolated-browser-keypose-diagnostic",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "cases": [
+    {
+      "name": "speed-1",
+      "samples": [
+        {
+          "frame": "bite",
+          "ms": 799,
+          "active": true,
+          "impact": false,
+          "hidden": false,
+          "id": "normal-1"
+        },
+        {
+          "frame": "bite",
+          "ms": 800,
+          "active": true,
+          "impact": true,
+          "hidden": false,
+          "id": "normal-1"
+        },
+        {
+          "frame": "original",
+          "ms": 1500,
+          "active": false,
+          "impact": false,
+          "hidden": false,
+          "id": "normal-1"
+        }
+      ]
+    },
+    {
+      "name": "speed-2",
+      "samples": [
+        {
+          "frame": "bite",
+          "ms": 799,
+          "active": true,
+          "impact": false,
+          "hidden": false,
+          "id": "normal-2"
+        },
+        {
+          "frame": "bite",
+          "ms": 800,
+          "active": true,
+          "impact": true,
+          "hidden": false,
+          "id": "normal-2"
+        },
+        {
+          "frame": "original",
+          "ms": 1500,
+          "active": false,
+          "impact": false,
+          "hidden": false,
+          "id": "normal-2"
+        }
+      ]
+    },
+    {
+      "name": "reduced",
+      "reduced": {
+        "frame": "original",
+        "ms": 800,
+        "active": true,
+        "impact": true,
+        "hidden": false,
+        "id": "reduced"
+      }
+    },
+    {
+      "name": "skip",
+      "skipped": {
+        "frame": "original",
+        "ms": 0,
+        "active": false,
+        "impact": false,
+        "hidden": false,
+        "id": null
+      }
+    },
+    {
+      "name": "repeated-cast",
+      "repeated": {
+        "frame": "original",
+        "ms": 100,
+        "active": true,
+        "impact": false,
+        "hidden": false,
+        "id": "two"
+      }
+    },
+    {
+      "name": "late-assets",
+      "late": {
+        "frame": "original",
+        "ms": 800,
+        "active": true,
+        "impact": true,
+        "hidden": false,
+        "id": "late"
+      }
+    },
+    {
+      "name": "defeat-interruption",
+      "defeat": {
+        "frame": "original",
+        "ms": 0,
+        "active": false,
+        "impact": false,
+        "hidden": true,
+        "id": null
+      }
+    },
+    {
+      "name": "fallback",
+      "fallback": {
+        "frame": "original",
+        "ms": 600,
+        "active": true,
+        "impact": false,
+        "hidden": false,
+        "id": "fallback"
+      }
+    },
+    {
+      "name": "actual-network-failure",
+      "failedLoad": {
+        "error": "EncodingError: The source image cannot be decoded.",
+        "sample": {
+          "frame": "original",
+          "ms": 800,
+          "active": true,
+          "impact": true,
+          "hidden": false,
+          "id": "real-load-failure"
+        }
+      }
+    },
+    {
+      "name": "actual-network-delay",
+      "lateNetwork": {
+        "frame": "original",
+        "ms": 800,
+        "active": true,
+        "impact": true,
+        "hidden": false,
+        "id": "actual-late-load"
+      },
+      "nextNetwork": {
+        "frame": "open",
+        "ms": 600,
+        "active": true,
+        "impact": false,
+        "hidden": false,
+        "id": "after-late-load"
+      }
+    }
+  ],
+  "neutralRoundTripPixelExact": true,
+  "supportRegistration": {
+    "sourceLandmarksOnly": true,
+    "visualAcceptance": false,
+    "points142": {
+      "original": [
+        0.4870426829268293,
+        0.9740853658536586
+      ],
+      "preload": [
+        0.4870426829268319,
+        0.9740853658536638
+      ],
+      "drive": [
+        109.08093278463649,
+        0.9740853658536638
+      ],
+      "contact": [
+        0.4870426829268319,
+        0.9740853658536638
+      ],
+      "recover": [
+        0.4870426829268319,
+        0.9740853658536638
+      ],
+      "rise": [
+        0.4870426829268319,
+        0.9740853658536638
+      ],
+      "near": [
+        0.4870426829268319,
+        0.9740853658536638
+      ]
+    }
+  },
+  "placementComparison": {
+    "left": "registered-prior-keys",
+    "right": "recovery-bridges-and-airborne-lunge",
+    "artworkChanged": true,
+    "poseBoundaryTimes": [
+      1039,
+      1040,
+      1349,
+      1350
+    ],
+    "smoothnessEstablished": false,
+    "addedPoses": [
+      "rise",
+      "near"
+    ],
+    "rejectedForPurpose": [
+      "deeper-anticipation",
+      "heavy-landing-compression"
+    ]
+  },
+  "videoAlphaBoundsInsideCanvas": true,
+  "browserErrors": [],
+  "completed": true
+}

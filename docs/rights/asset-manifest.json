@@ -1399,6 +1399,9 @@
         "docs/fenrir-acting-bite/assets/keyposes-first.png",
         "docs/fenrir-acting-bite/assets/reference.png",
         "docs/fenrir-acting-bite/assets/weight-transfer-bridges.png",
+        "docs/fenrir-acting-bite/evidence/0476082c/browser-checks.json",
+        "docs/fenrir-acting-bite/evidence/0476082c/continuity-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/0476082c/normal.mp4",
         "docs/fenrir-acting-bite/evidence/b0b697ed/browser-checks.json",
         "docs/fenrir-acting-bite/evidence/b0b697ed/normal.mp4",
         "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json",
@@ -1433,22 +1436,23 @@
         "docs/fenrir-acting-bite/PLAN.md": "4af9ee7033c9c0cfd8fe258bfa157add75968eee8bff196313d6b29b978f330d",
         "docs/fenrir-acting-bite/PROMPTS.md": "96cf00e78f05096d02ac01216c47570afab29b9a623085300b77dba222265d94",
         "docs/fenrir-acting-bite/REVIEW.md": "a1f731213082e29f7af0a4eefa351d8fb5d6aa949fd3af3b7a4fee3fd89eebc5",
-        "docs/fenrir-acting-bite/index.html": "f989feaf194c9e6ddd548b621339fea0dede305dbf45ab0c9595f937795144e3",
+        "docs/fenrir-acting-bite/index.html": "ead79e965aacdfba6989aaff09ce781aa16de7b03f82a124c9e609c0cf7cb44d",
         "docs/fenrir-acting-bite/motion.mjs": "3c192ce5412f78a5202212c3886919834df733adb3e7c6ab92d0b5d4de8b629f",
         "docs/fenrir-acting-bite/motion-checks.mjs": "f070b78f1d08307d684e17a13e6b9dc15b35c0fb39a5a3b0ad6c5fa4c65e0e33",
         "docs/fenrir-acting-bite/pose-gallery.html": "bf8c45c9f4160c37dc39eb062eeebfeec8d6e326299e7bf3b816e4bc86f08084",
-        "docs/fenrir-acting-bite/preview.mjs": "511c540f3404fc8818122527760e433de09dd37043335133cb034368ac218230",
-        "docs/fenrir-acting-bite/provenance.json": "d281997031da5297142139a0d5c3fdc352ca03a50964163f2313e7370701ad25",
+        "docs/fenrir-acting-bite/preview.mjs": "ce8cf8f76ffea7c0c76bd51b7f8ffeb697b26908de6e59431455ad3aedabd0cc",
+        "docs/fenrir-acting-bite/provenance.json": "e8c9e50e2add3c4c521d463c720b7550689d0ac752570a3cf190179f62d9a8c8",
         "docs/fenrir-acting-bite/verify-study.mjs": "2c413332eb25f20c71d691dca385ddd25d11ea2233755fef64e9dc14d6071d3e",
         ".github/workflows/fenrir-acting-bite-review.yml": "fb7f991a4306343fa7351f32f6f9df66228e53b8322a6b22dd265ed7927a0eaf",
         "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
         "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
-        "qa/fenrir-acting-bite/render.mjs": "a7d669f8393f67a6d05aa0169955e687bfdf7bd720bf910976244cef780aee1e",
-        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "787cd91e80c6b7c9ce496a8b15aa9f78a972071e5d171727d88c9118a05577ac",
+        "qa/fenrir-acting-bite/render.mjs": "c2d031941ba4339286405db6a064ee5a76c68af782d7f6047bbb55f0cede2ef8",
+        "docs/fenrir-acting-bite/BROWSER-REVIEW.md": "1b8d33974b1808e5a77d3d0eb10bb25b0994f65f4023ad225a613aa1b4e13754",
         "docs/fenrir-acting-bite/evidence/b0b697ed/browser-checks.json": "11e65634797a6e5ae33d7fbf253011bf38c4deaaa2706bc486b78094555003bf",
         "docs/fenrir-acting-bite/placement.mjs": "bf2ad354d770a8b531a39ae67758bbc4334bb600393d7de3bbabbfe436f555f1",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md": "6f19877a72fae08e5463af4d6081f800d70ae768afa503111c27c12bba55c0d7",
-        "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json": "8ca4f01f231fd2f24841601b9961145e415e32cf9e42d12d45036a4cbdabe290"
+        "docs/fenrir-acting-bite/evidence/d155e88b/browser-checks.json": "8ca4f01f231fd2f24841601b9961145e415e32cf9e42d12d45036a4cbdabe290",
+        "docs/fenrir-acting-bite/evidence/0476082c/browser-checks.json": "a8f63d630d1e74a49aa1d93331f422eab5ffb0e26a726b65696667d365bd3b3c"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1461,7 +1465,9 @@
         "docs/fenrir-acting-bite/evidence/b0b697ed/normal.mp4": "98881e338296f8d2a7befab009abdf6c86a9c116b388b900fb226ec6f659ccfe",
         "docs/fenrir-acting-bite/assets/continuity-four-key-study.png": "29ea3290c0849f38a0bfe164925af85aad31869b8149c7c715fcb17fbdfe4f9d",
         "docs/fenrir-acting-bite/evidence/d155e88b/normal.mp4": "57011eab2c63ac408393cb7da9abc179f8a35b1ed6ba25961be12248b5c0b469",
-        "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4": "3fb28bb01b3861ea0e71f30f096e170afc30eda97d484197c4b0ba2cc2fc4d31"
+        "docs/fenrir-acting-bite/evidence/d155e88b/placement-before-after.mp4": "3fb28bb01b3861ea0e71f30f096e170afc30eda97d484197c4b0ba2cc2fc4d31",
+        "docs/fenrir-acting-bite/evidence/0476082c/continuity-before-after.mp4": "b21fcec4713a37878e4620df24be71baf0a03b1f1d65379a8a393b8ddb149742",
+        "docs/fenrir-acting-bite/evidence/0476082c/normal.mp4": "45c0993f322535de4ca9ce8c8608b114927d6a4c41847fe189585010a140fcfc"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }
