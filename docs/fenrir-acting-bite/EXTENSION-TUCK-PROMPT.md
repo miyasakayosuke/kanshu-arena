@@ -1,0 +1,13 @@
+# Extension-to-tuck single drawing
+
+Built-in image generation, transparent output, one call. Original output retained.
+References: high-leap-toe-off-study.png, high-leap-apex-study.png, reference.png.
+
+Use case: identity-preserve animation in-between edit.
+Create ONE transparent full-body sprite drawing, the midpoint of the same Fenrir changing from the upward-looking rear-leg extension in image 1 into the compact downward-looking airborne tuck in image 2. Image 1 and image 2 are the exact adjacent animation keys, not loose inspiration. Image 3 is the original character identity reference. This is a single controlled joint-articulation bridge, not a new design, keypose sheet, or replacement for either endpoint.
+
+Keep the same 1254-by-1254 source canvas and the same physical animal size as images 1 and 2. Preserve the adult skull/muzzle length and width, thick chest, torso length, paws, fur volume, turquoise markings, gold cuff on the foreground foreleg, gold cuff on the foreground hind leg, and ONE short attached broken chain with an open terminal. Exactly four anatomically connected limbs. Genuine transparent background, no ground, shadow, border, text, effects or extra objects. Keep all fur inside the canvas with a little clear edge space without shrinking the animal.
+
+The target is halfway through the articulation: torso still on a shallow rising diagonal rather than already horizontal; head looking mostly left and beginning to angle down, not still looking up and not yet fully down; forelegs folded in front with paws partway down toward image 2; hind knees/hocks beginning to gather under the body, not fully extended and not fully tucked. Rotate through plausible neck, shoulder, elbow, hip and hock joints while keeping their masses and bone lengths coherent. Mouth closed or barely parted. Tail curl follows the body turn, retaining the same volume and attachment; chain trails from the same cuff.
+
+Use the two adjacent drawings on their unchanged source coordinate grid. Rough guide corridors for the intermediate: skull center around(225,435), shoulder around(580,505), hip around(850,690), cuffed rear paw around(1115,1000), foreground forepaw around(328,823), farther forepaw around(175,780). These are approximate guides to corresponding features, not a demand to shrink or stretch anatomy to reach coordinates. The head and both forepaws must actually progress between the references, rather than replacing the whole wolf at a new size or position. Maintain the original adult face and paw masses. No rubber bending, no detached seams, no extra wrist/toe fragment, no chain topology changes. Match the existing painted fantasy sprite rendering and lighting. Return only the single clean intermediate sprite.

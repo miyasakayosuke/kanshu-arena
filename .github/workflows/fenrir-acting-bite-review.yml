@@ -28,7 +28,7 @@ jobs:
         run: npx --no-install playwright install --with-deps chromium
       - run: sudo apt-get install -y ffmpeg
       - working-directory: qa/fenrir-acting-bite
-        run: node render.mjs && node leap-render.mjs && node stage-render.mjs && node descent-render.mjs && node contact-render.mjs && HANDOFF_PAIR=1 node contact-render.mjs && node full-render.mjs && node full-stage-render.mjs
+        run: node render.mjs && node extension-tuck-render.mjs && TUCK_BRIDGE=1 node full-stage-render.mjs
       - name: Retain browser videos, keyposes and checks
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
