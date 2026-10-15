@@ -1406,10 +1406,12 @@
         "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PLAN.md",
         "docs/fenrir-acting-bite/SEQUENTIAL-LANDING-PROMPTS.md",
         "docs/fenrir-acting-bite/TAKEOFF-PAIR-PLAN.md",
+        "docs/fenrir-acting-bite/TAKEOFF-PAIR-PROMPTS.md",
         "docs/fenrir-acting-bite/assets/anticipation-landing-correction.png",
         "docs/fenrir-acting-bite/assets/continuity-four-key-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-apex-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-bite-close-study.png",
+        "docs/fenrir-acting-bite/assets/high-leap-deep-load-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-descent-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-reach-clearance-study.png",
         "docs/fenrir-acting-bite/assets/high-leap-reach-study.png",
@@ -1541,6 +1543,8 @@
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-native.png",
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-pair-overlay.jpg",
         "docs/fenrir-acting-bite/evidence/sequential-pair/sequential-six-static.jpg",
+        "docs/fenrir-acting-bite/evidence/takeoff-pair/takeoff-load-source-stats.json",
+        "docs/fenrir-acting-bite/evidence/takeoff-pair/takeoff-load-static.png",
         "docs/fenrir-acting-bite/high-leap-study.html",
         "docs/fenrir-acting-bite/high-leap-study.mjs",
         "docs/fenrir-acting-bite/index.html",
@@ -1563,7 +1567,7 @@
         "qa/fenrir-acting-bite/stage-render.mjs",
         "qa/fenrir-acting-bite/stage.config.mjs"
       ],
-      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment. One adjacent-conditioned descending jaw-closure key and its same-scale source inspection are retained with a visible tail-edge cleanup issue; no static-image or motion acceptance is implied. The single adjacent-conditioned forepaw-reach key and its static review are retained with a connected fixed-scale descent/contact diagnostic; early toe clearance and chain/edge defects remain exposed. No additional artwork or production integration is included. Actual connected normal/2x/slow Chromium evidence and independent review are retained with explicit toe/contact defects. A bounded local contact handoff repair is planned before further art. Two bounded local handoff edits are retained: contact has a modest head-angle change with unresolved toe/chain detail; reach clearance overshot and remains unadopted. Separate actual-browser comparisons isolate the contact candidate from the failed paw cleanup. No third art attempt. Independent actual review retains contact-only as a rough improvement and rejects the paw overshoot. Exact rendered evidence is preserved. The next original-derived crouch/toe-off pair is planned before artwork.",
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment. One adjacent-conditioned descending jaw-closure key and its same-scale source inspection are retained with a visible tail-edge cleanup issue; no static-image or motion acceptance is implied. The single adjacent-conditioned forepaw-reach key and its static review are retained with a connected fixed-scale descent/contact diagnostic; early toe clearance and chain/edge defects remain exposed. No additional artwork or production integration is included. Actual connected normal/2x/slow Chromium evidence and independent review are retained with explicit toe/contact defects. A bounded local contact handoff repair is planned before further art. Two bounded local handoff edits are retained: contact has a modest head-angle change with unresolved toe/chain detail; reach clearance overshot and remains unadopted. Separate actual-browser comparisons isolate the contact candidate from the failed paw cleanup. No third art attempt. Independent actual review retains contact-only as a rough improvement and rejects the paw overshoot. Exact rendered evidence is preserved. The next original-derived crouch/toe-off pair is planned before artwork. First original-derived deep-load key, exact prompt and same-physical-scale static inspection are retained pending the source gate; no grounded-motion acceptance is implied.",
       "reviewLimit": "Original reference provenance remains unverified. Actual Chromium output independently reviewed as an unapproved rough diagnostic; smoothness, chain/face identity, contact compression and game integration remain unmet. See BROWSER-REVIEW.md. No license or legal clearance is asserted.",
       "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
       "createdFor": "Single-action Moonlit Bite review pilot",
@@ -1653,7 +1657,9 @@
         "docs/fenrir-acting-bite/evidence/f3776573/provenance.json": "01435607909ab068dda5983c384cf4a64f7881d8e21fccd4e445ca594674035f",
         "docs/fenrir-acting-bite/evidence/f3776573/contact-handoff-checks.json": "dd2129b92385357418fa8ced41fd592e3f568be4ac8e6c9c064180c01d67cbe6",
         "docs/fenrir-acting-bite/TAKEOFF-PAIR-PLAN.md": "2a47f06e3888087f359c9db5894f892f0cc73e64174dc31feb2bbb305b94116f",
-        "docs/fenrir-acting-bite/REMAINING-PRODUCTION-PLAN.md": "81fd200bd8df1cb9cf96631542f8a7358cef71085b5fc1653401526618ee2763"
+        "docs/fenrir-acting-bite/REMAINING-PRODUCTION-PLAN.md": "81fd200bd8df1cb9cf96631542f8a7358cef71085b5fc1653401526618ee2763",
+        "docs/fenrir-acting-bite/TAKEOFF-PAIR-PROMPTS.md": "22ae7daebd1651ba982e9d3aea75ab6f97c897f7d5cceaa46d1542eca3e5ca44",
+        "docs/fenrir-acting-bite/evidence/takeoff-pair/takeoff-load-source-stats.json": "b8fa25055f76ebbe206954f2156dccc47bf6b95363a3ca5886643f0de4e9a5e1"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {
@@ -1753,7 +1759,9 @@
         "docs/fenrir-acting-bite/evidence/f3776573/handoff-overshoot-1120-light-889.png": "e199b5ac929c190f91952955c0158444b66e78c1056edfad360945cdb11a1ec6",
         "docs/fenrir-acting-bite/evidence/f3776573/handoff-overshoot-1120-light-890.png": "4ffb700485b90c094ffd85010378f86e2dda6edc9d333cb59f71137c3fecd71d",
         "docs/fenrir-acting-bite/evidence/f3776573/handoff-overshoot-slow.mp4": "defb315cd2f85b005fce6fe6f6861917f870b33b040042f391c13957e0ae328f",
-        "docs/fenrir-acting-bite/evidence/f3776573/contact-handoff-390-dark-890.png": "1b07a2510caea115580810f9b8b2d4e5f99561578cf6081a839366ed8b31d167"
+        "docs/fenrir-acting-bite/evidence/f3776573/contact-handoff-390-dark-890.png": "1b07a2510caea115580810f9b8b2d4e5f99561578cf6081a839366ed8b31d167",
+        "docs/fenrir-acting-bite/assets/high-leap-deep-load-study.png": "17f5b40bca310302c5bd57768502f937f978c6a75db9a23a99ba6c066adbd2e2",
+        "docs/fenrir-acting-bite/evidence/takeoff-pair/takeoff-load-static.png": "7c510232b1cbc99944dda551cf3ed699685320fa21586d80265eefbfe08f74ba"
       },
       "binaryVerification": "node docs/fenrir-acting-bite/verify-study.mjs"
     }
