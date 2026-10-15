@@ -1,0 +1,28 @@
+# Bounded original-derived return repair
+
+After the failed four-cell recovery/lunge comparison, independent review recommends one full-height near-original pose first, and at most a halfway pose if needed. Use the previous registered airborne phase as control, not the backward held-bite glide. One actual rendered comparison is the stopping point.
+
+Pre-generation acceptance: match original head/body proportions and physical scale; keep the near foretoe planted; show actual weight-bearing elbow, shoulder and haunch change; preserve four limbs, original face, cuffs and open broken chain; turn progressively toward the exact original endpoint. Canvas height is not acceptance. No warp or arbitrary scale change may disguise a proportion error.
+
+Input: assets/reference.png only, as the edit target and identity source. Built-in imagegen with transparent background.
+
+Exact near-original prompt:
+
+Use case: identity-preserve.
+Edit target: the ONE attached original Fenrir illustration. Make ONE original-derived full-body return-transition drawing, not a redesigned wolf and not a sprite sheet.
+Composition: one full-height character on a square transparent RGBA canvas, with safe transparent margins around ears, tail, paws and chain. Preserve the original figure's natural height-to-width ratio and original camera angle. No grid. Do not widen the torso or shorten the neck to fit a shallow box.
+This is the near-final return pose, about 90–95% of the way back to the attached exact neutral. Change only the pose as follows: keep all four paws in the same stance/contact locations; keep the nearer forepaw absolutely planted. The chest is only slightly lower than the original because the elbows and hind hocks are still subtly bent under weight. The front legs are nearly straight but not locked. The head has almost returned to the original right-facing three-quarter angle, a little lower and turned a few degrees toward the viewer. The torso, ears and curled tail are settling. Do not change the physical size of the head, chest, mane, torso, paws or tail.
+Identity and finish are strict: copy the attached original's long muzzle and skull, blue eyes, ear proportions, cream mane volume, detailed gray fur brushwork, exact teal flank motif, body proportions and curled plume silhouette. Keep the same gold near-foreleg cuff, same near-hindleg cuff, and the original single hanging chain with its attachment and visibly open broken final link. No generic husky face, no smaller head, no barrel-shaped torso, no shorter neck, no extra legs, no new accessories, no closed terminal ring.
+The original neutral remains the final frame; this output is only the immediately preceding recovery drawing. The pose should plausibly straighten into the exact attached original with a small joint movement, without the body growing or changing shape. No effects, motion trails, text, shadow, floor or background. Preserve transparent alpha.
+
+Independent static review found the near-original candidate substantially closer in chest, skull/muzzle, paw mass and overall proportions. It remains a redrawn bridge with small cuff/link-detail differences. Reviewer recommends one halfway pose before actual playback, with all four feet weight-bearing, planted near foretoe, bent elbows/hocks, lower partly-left head, closed mouth and original body/tail mass. Physical scale must follow landmarks, not automatic canvas fitting.
+
+Inputs for halfway: assets/reference.png and assets/return-near-original.png.
+Exact halfway prompt:
+
+Use case: identity-preserve.
+Asset: ONE full-height halfway-recovery sprite for the same Fenrir, transparent RGBA, square canvas, no grid.
+Image1 is the exact original character identity and physical proportions. Image2 is the reviewed late-return bridge. Create the ONE preceding halfway-rise pose, retaining image1 identity and image2's physical size; do not make a new wolf or redesign the paint style.
+Pose: all four paws support weight; the nearer forepaw remains at exactly the same contact location and orientation as image2. Keep the original paw mass and stance. The chest and shoulders are halfway raised from a low attack recovery toward image2, using visibly BENT ELBOWS and bent hind hocks. Chest/shoulder height is roughly one fifth of the original foreleg length lower than image2, without shortening bones or scaling the body. The head is clearly lower than image2 and is still turned partway LEFT: halfway between a left-facing recovery and image2's almost frontal head. Mouth CLOSED. This must be a real intermediate joint pose, not the same upright pose with the head pasted lower. The mane follows the lowered neck and shoulders as one continuous surface. Tail keeps the same physical volume and curl, with only a small settling change.
+Strict invariants: same long muzzle/skull, blue eyes, large cream mane and tall chest mass, gray painted fur, exact teal flank motif, muscular torso length and depth, original ears/paws/tail size, four coherently joined legs. Same gold cuff on the nearer foreleg and nearer hindleg; one chain hanging from the near fore-cuff with the same links/attachment and visibly OPEN broken terminal C link. No extra limbs, doubled feet, short-necked husky, barrel body, tiny head, shrunken chest, swollen tail or seam lines.
+Frame one whole character at natural aspect ratio with transparent safety margins and enough vertical room. Do NOT squeeze body proportions into a wide short box. No text, effects, floor, shadow or background. Preserve alpha. This will be followed by image2 and then the exact original, so preserve mass and stable grounded contacts across that progression.

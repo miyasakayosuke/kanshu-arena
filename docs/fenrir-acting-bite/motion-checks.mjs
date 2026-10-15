@@ -6,12 +6,22 @@ test('rigid support registration preserves neutral and airborne drawings', () =>
   for (const name of ['original', 'open', 'bite']) assert.deepEqual(REGISTERED[name], BASELINE[name]);
   for (const width of [130, 142, 420]) {
     const original = supportPosition('original', width);
-    for (const name of ['preload', 'contact', 'recover', 'rise', 'near']) {
+    for (const name of ['preload', 'contact', 'recover', 'rise', 'near', 'returnHalf', 'returnNear']) {
       const point = supportPosition(name, width);
       point.forEach((value, i) => assert(Math.abs(value - original[i]) < 1e-9));
     }
     assert(Math.abs(supportPosition('drive', width)[1] - original[1]) < 1e-9);
   }
+});
+test('original-derived return uses shared physical scale and unchanged airborne control', () => {
+  for (const ms of [0, 140, 360, 550, 760, 800, 890, 1040]) assert.equal(frameAt(ms, false, true), frameAt(ms));
+  assert.equal(frameAt(1180, false, true), 'returnHalf');
+  assert.equal(frameAt(1300, false, true), 'returnNear');
+  assert.equal(frameAt(1380, false, true), 'original');
+  for (const n of ['returnHalf', 'returnNear']) assert.equal(REGISTERED[n].scale, REGISTERED.original.scale);
+  const c = makeController({ returnRepair: true }); c.assets(true); c.start('return', 0);
+  assert.equal(c.sample(800).impact, true); assert.equal(c.sample(1180).frame, 'returnHalf');
+  c.cancel(); assert.equal(c.sample(1300).frame, 'original');
 });
 test('bounded continuity uses recovery bridges and only airborne rigid travel', () => {
   assert.equal(frameAt(800, true), 'bite'); assert.equal(frameAt(940, true), 'contact');

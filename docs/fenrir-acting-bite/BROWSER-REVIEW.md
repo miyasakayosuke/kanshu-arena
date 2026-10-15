@@ -134,3 +134,35 @@ backward glide with an instantaneous offset reset at contact. Use the previous
 registered airborne phase as the next control; a forward-displaced landing would
 need a genuine recoil/back-step drawing sequence. No further artwork is adopted
 by this record, and the original visual/release gates remain open.
+
+## Original-derived return repair: static checkpoint
+
+The failed comparison and default-control restoration are retained at
+`9be9929ec9d608d47005ec8ce1a4972710016fe2`; its CI 38708845551 completed
+successfully. This does not convert the visual failure into acceptance.
+
+Two single-character full-height drawings were created from the exact original,
+with the reviewed late-return drawing as the only additional halfway reference.
+Exact prompts and pre-generation criteria are in RETURN-REPAIR-PROMPT.md.
+Independent static review found substantially closer original-sized skull,
+paws, chest mass, tail and cuff treatment than in the grid poses. The progression
+halfway (lower/left-facing), near (raised/more frontal), exact original is worth
+actual browser comparison. Four limbs and open chain terminal remain readable;
+small link/cuff details differ, so the outputs are not exact original endpoints.
+
+Both new drawings use the original's fixed 1/1312 source-pixel physical scale,
+not a canvas fit or a continuously changing scale. Foretoe source landmarks are
+halfway (339, 1183); near (307, 1216); original (304.5, 1179), registered to one world point.
+This only locks that near toe. The far forepaw and rear-foot positions, the large
+halfway-to-near head lift/turn, and remaining face/chain identity differences still
+need actual playback review. Do not claim that all feet stay planted based on this
+single landmark.
+
+`?motion=return` adds only these two keys to the previous registered control.
+All frames through the low recovery and the entire airborne phase remain unchanged;
+there is no forward/backward whole-sprite travel in this comparison. The failed
+lunge variant remains opt-in evidence. Impact 800 ms and total 1500 ms remain fixed.
+CI compares early control canvases pixel-for-pixel and captures new return
+boundaries 1129/1130, 1239/1240, 1379/1380 plus normal/2x/reduced videos and actual
+130/142 px desktop/mobile light/dark panels. Actual review is pending at this source
+checkpoint. No further generation is planned before that bounded comparison.

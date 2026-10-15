@@ -10,11 +10,16 @@ export const BASELINE = {
   recover: { source: 'correction', seed: [1200, 550], anchor: [1044, 828], scale: 1 / 729 },
   rise: { source: 'continuity', seed: [400, 800], anchor: [226, 1019], scale: 1 / 729 },
   near: { source: 'continuity', seed: [1160, 800], anchor: [987, 1021], scale: 1 / 729 },
+  // Original-derived singles use the original physical source-pixel scale.
+  // They are not scaled to their canvas size or fitted to a bounding box.
+  returnHalf: { source: 'returnHalf', anchor: [339, 1183], scale: 1 / 1312 },
+  returnNear: { source: 'returnNear', anchor: [307, 1216], scale: 1 / 1312 },
 };
 export const SUPPORT = {
   original: [304.5, 1179], preload: [207, 833], drive: [770, 746],
   contact: [975, 956], recover: [1005.5, 842],
   rise: [226, 1019], near: [987, 1021],
+  returnHalf: [339, 1183], returnNear: [307, 1216],
 };
 const referenceOffset = SUPPORT.original.map((value, i) =>
   (value - BASELINE.original.anchor[i]) * BASELINE.original.scale);

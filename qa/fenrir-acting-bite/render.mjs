@@ -12,7 +12,7 @@ const observations = { kind: 'isolated-browser-keypose-diagnostic', visualAccept
 const errors = [];
 let browser;
 async function ready(page) {
-  await page.goto(base + '?motion=continuity');
+  await page.goto(base + '?motion=return');
   await page.waitForFunction(() => window.ready || window.previewError);
   assert.equal(await page.evaluate(() => window.previewError || null), null);
 }
@@ -30,8 +30,8 @@ try {
   });
   assert.equal(sourceIdentity, true); observations.neutralRoundTripPixelExact = true;
   const support = await page.evaluate(() => Object.fromEntries(
-    ['original', 'preload', 'drive', 'contact', 'recover', 'rise', 'near'].map(name => [name, window.preview.placement.support(name)])));
-  for (const name of ['preload', 'contact', 'recover', 'rise', 'near']) support[name].forEach((value, i) =>
+    ['original', 'preload', 'drive', 'contact', 'recover', 'returnHalf', 'returnNear'].map(name => [name, window.preview.placement.support(name)])));
+  for (const name of ['preload', 'contact', 'recover', 'returnHalf', 'returnNear']) support[name].forEach((value, i) =>
     assert(Math.abs(value - support.original[i]) < 1e-8));
   assert(Math.abs(support.drive[1] - support.original[1]) < 1e-8);
   observations.supportRegistration = { sourceLandmarksOnly: true, visualAcceptance: false, points142: support };
@@ -107,11 +107,25 @@ try {
     '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out + 'baseline-normal.mp4'], { stdio: 'inherit' }).status, 0);
   assert.equal(spawnSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', out + 'baseline-normal.mp4', '-i', out + 'normal.mp4',
     '-filter_complex', '[0:v][1:v]hstack=inputs=2[v]', '-map', '[v]', '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p',
-    '-movflags', '+faststart', out + 'continuity-before-after.mp4'], { stdio: 'inherit' }).status, 0);
-  observations.placementComparison = { left: 'registered-prior-keys', right: 'recovery-bridges-and-airborne-lunge', artworkChanged: true,
+    '-movflags', '+faststart', out + 'return-before-after.mp4'], { stdio: 'inherit' }).status, 0);
+  observations.placementComparison = { left: 'registered-prior-keys', right: 'original-derived-return-only', artworkChanged: true,
     poseBoundaryTimes: [1039, 1040, 1349, 1350], smoothnessEstablished: false,
-    addedPoses: ['rise', 'near'], rejectedForPurpose: ['deeper-anticipation', 'heavy-landing-compression'] };
+    addedPoses: ['returnHalf', 'returnNear'], rejectedForPurpose: ['deeper-anticipation', 'heavy-landing-compression'] };
   observations.videoAlphaBoundsInsideCanvas = true;
+  const earlyEquality = [];
+  for (const ms of [0, 250, 450, 650, 800, 950, 1080]) {
+    const images = [];
+    for (const mode of ['registered', 'return']) {
+      await page.goto(base + '?motion=' + mode); await page.waitForFunction(() => window.ready);
+      images.push(await page.evaluate(ms => { window.preview.setTime(ms); return [...document.querySelectorAll('canvas')].map(c => c.toDataURL()); }, ms));
+    }
+    assert.deepEqual(images[0], images[1]); earlyEquality.push(ms);
+  }
+  observations.returnControlPixelExactBeforeNewKeys = earlyEquality;
+  for (const ms of [1129, 1130, 1239, 1240, 1379, 1380]) {
+    await page.evaluate(ms => window.preview.setTime(ms), ms);
+    await page.screenshot({ path: `${out}return-boundary-${ms}.png`, fullPage: true });
+  }
   const failedPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await failedPage.route('**/assets/weight-transfer-bridges.png', route => route.abort());
   await failedPage.goto(base); await failedPage.waitForFunction(() => window.previewError);

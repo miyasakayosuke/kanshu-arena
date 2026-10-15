@@ -99,10 +99,32 @@
       "mode": "RGBA",
       "origin": "Built-in imagegen bounded continuity study; exact prompt in CONTINUITY-PROMPT.md. Lower pair are transition candidates; upper pair rejected for the intended deep anticipation/heavy compression.",
       "adopted": false
+    },
+    {
+      "file": "assets/return-halfway.png",
+      "sha256": "9edefa14ac692ef08bf39239f9f8a9341a4411a2330c91e29c6cd9f082f9fc59",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independent static review only; rendered comparison pending.",
+      "adopted": false
+    },
+    {
+      "file": "assets/return-near-original.png",
+      "sha256": "7534f62533826a20f2a2e188c6522718a8e8837f9b792399236033b165428cbf",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "origin": "Built-in imagegen original-derived full-height return repair; exact prompt in RETURN-REPAIR-PROMPT.md. Independent static review only; rendered comparison pending.",
+      "adopted": false
     }
   ],
   "sourceIdentityMeaning": "Only the supplied reference bytes are unchanged; generated pose identity is not accepted.",
-  "visualStatus": "Bounded recovery/lunge variant0476082 failed independent continuity review: apparent body-size changes and backward held-bite glide. Previous registered key phase retained as control; no final acceptance.",
+  "visualStatus": "Failed grid/lunge variant retained; two original-derived full-height return drawings passed only static suitability review. Actual same-scale return comparison pending; acceptance and integration remain unmet.",
   "browserBaseline": {
     "commit": "b0b697ed1469928267d45a6b6ecd970dd5fef208",
     "run": "38701756188",

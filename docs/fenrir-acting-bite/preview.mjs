@@ -2,19 +2,24 @@ import { frameAt, flightAt, makeController } from './motion.mjs';
 import { BASELINE, REGISTERED, supportPosition } from './placement.mjs';
 const baseline = new URLSearchParams(location.search).get('anchors') === 'baseline';
 const continuity = !baseline && new URLSearchParams(location.search).get('motion') === 'continuity';
+const returnRepair = !baseline && new URLSearchParams(location.search).get('motion') === 'return';
 const specs = baseline ? BASELINE : REGISTERED;
 document.querySelector('#placement').textContent = baseline
-  ? '配置: 比較用の修正前' : continuity ? '失敗比較：体格の変化と空中の後退が未解決' : '配置: 支持足の位置合わせ後・前段階のキーポーズ';
+  ? '配置: 比較用の修正前' : continuity ? '失敗比較：体格の変化と空中の後退が未解決'
+  : returnRepair ? '原画由来の復帰2枚：同じ物理スケールで比較中' : '配置: 支持足の位置合わせ後・前段階のキーポーズ';
 const sources = { reference: 'reference.png', correction: 'anticipation-landing-correction.png',
-  bridges: 'weight-transfer-bridges.png', keys: 'keyposes-first.png', continuity: 'continuity-four-key-study.png' };
+  bridges: 'weight-transfer-bridges.png', keys: 'keyposes-first.png', continuity: 'continuity-four-key-study.png',
+  returnHalf: 'return-halfway.png', returnNear: 'return-near-original.png' };
 const frames = new Map();
 const bounds = new Map();
 let renderedBounds = [];
-const controller = makeController({ continuity });
+const controller = makeController({ continuity, returnRepair });
 let theme = 'light', forced = null, paused = true, number = 0;
 const canvases = [...document.querySelectorAll('canvas[data-size]')];
 const status = document.querySelector('#status');
-document.querySelector('#timeline').textContent = continuity
+document.querySelector('#timeline').textContent = returnRepair
+  ? '140 ms 溜め / 360 ms 蹴り出し / 550 ms 開口 / 760 ms 噛み閉じ / 800 ms 命中 / 890 ms 接地 / 1040 ms 復帰 / 1130・1240 ms 立ち上がり / 1380 ms 原画。'
+  : continuity
   ? '140 ms：溜め → 360 ms：蹴り出し → 550 ms：空中突進 → 760 ms：噛み閉じ → 800 ms：命中 → 940 ms：接地 → 1130 / 1240 ms：立ち上がりと振り向き → 1380 ms：原画へ。'
   : '比較用の前段階：140 ms 溜め / 360 ms 蹴り出し / 550 ms 開口 / 760 ms 噛み閉じ / 800 ms 命中 / 890 ms 接地 / 1040 ms 復帰 / 1350 ms 原画。';
 function measure(img) {
@@ -86,10 +91,10 @@ function draw(sample) {
   document.querySelector('#time').value = sample.ms;
 }
 function tick(now) { if (!paused) draw(controller.sample(now)); requestAnimationFrame(tick); }
-function setTime(ms) { paused = true; forced = { frame: frameAt(ms, continuity), ms, active: ms < 1500, hidden: false }; draw(forced); return forced; }
+function setTime(ms) { paused = true; forced = { frame: frameAt(ms, continuity, returnRepair), ms, active: ms < 1500, hidden: false }; draw(forced); return forced; }
 window.preview = { setTime, setTheme(value) { theme = value; draw(forced || controller.sample(performance.now())); },
   bounds: () => renderedBounds,
-  placement: { baseline, continuity, support: name => supportPosition(name, 142, baseline) },
+  placement: { baseline, continuity, returnRepair, support: name => supportPosition(name, 142, baseline) },
   start(id, now, options) { paused = true; forced = null; controller.start(id, now, options); },
   sample(now) { forced = controller.sample(now); draw(forced); return forced; },
   cancel(options) { controller.cancel(options); forced = controller.sample(0); draw(forced); },
@@ -110,7 +115,8 @@ async function load() {
     if (name === 'reference') { frames.set('original', image); bounds.set('original', measure(image)); setTime(0); }
   }
   for (const [name, spec] of Object.entries(specs)) if (name !== 'original') {
-    const selected = isolate(images[spec.source], spec.seed); frames.set(name, selected); bounds.set(name, measure(selected));
+    const selected = spec.seed ? isolate(images[spec.source], spec.seed) : images[spec.source];
+    frames.set(name, selected); bounds.set(name, measure(selected));
   }
   controller.assets(true); window.ready = true; setTime(0);
 }
