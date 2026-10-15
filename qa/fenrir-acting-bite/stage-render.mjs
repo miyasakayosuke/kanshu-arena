@@ -27,6 +27,31 @@ try{for(let i=0;i<100;i++){try{if((await fetch('http://127.0.0.1:8884/qa/fenrir-
   assert(fixture.layout.scrollWidth<=viewport.width,'horizontal overflow');
   const button=page.locator('.turnStart');await button.scrollIntoViewIfNeeded();await button.focus();fixture.turnStartReachable=await button.evaluate(e=>document.activeElement===e&&e.getBoundingClientRect().bottom<=innerHeight+1&&e.getBoundingClientRect().top>=-1);
   await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-controls.png`});
+  // Supplement: actual inner scroller, keyboard focus and App layout state.
+  // Setting playing here changes only the real panel layout; it does not execute combat.
+  const layoutSnapshot=async()=>page.evaluate(()=>{
+   const battle=document.querySelector('.battle'),button=document.querySelector('.turnStart');
+   const r=button?.getBoundingClientRect();const hit=r?document.elementFromPoint(r.x+r.width/2,r.y+r.height/2):null;
+   return {battle:{clientHeight:battle.clientHeight,scrollHeight:battle.scrollHeight,scrollTop:battle.scrollTop,rect:battle.getBoundingClientRect().toJSON()},windowScrollY:scrollY,scene:document.querySelector('.battleScene').getBoundingClientRect().toJSON(),commandDock:document.querySelector('.commandDock').getBoundingClientRect().toJSON(),playingPanel:!!document.querySelector('.playingPanel'),turnStart:button?{rect:r.toJSON(),disabled:button.disabled,focused:document.activeElement===button,centerHitIsButton:hit===button||button.contains(hit)}:null,sprite:window.__stageStudy.get()};
+  });
+  fixture.programmaticFocusOnly=await layoutSnapshot();
+  await page.evaluate(()=>{document.querySelector('.battle').scrollTop=0;document.body.tabIndex=-1;document.body.focus({preventScroll:true});});
+  fixture.keyboard={before:await layoutSnapshot(),trace:[],reached:false};
+  for(let i=0;i<80;i++){
+   await page.keyboard.press('Tab');
+   const focus=await page.evaluate(()=>({tag:document.activeElement.tagName,className:document.activeElement.className,text:document.activeElement.textContent?.slice(0,60),turnStart:document.activeElement.matches('.turnStart'),scrollTop:document.querySelector('.battle').scrollTop}));
+   fixture.keyboard.trace.push(focus);if(focus.turnStart){fixture.keyboard.reached=true;break;}
+  }
+  await page.waitForTimeout(40);fixture.keyboard.after=await layoutSnapshot();
+  await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-keyboard.png`});
+  await sample(650);fixture.playingTransition={kind:'existing-App-state-layout-only-no-combat-or-activation',before:await layoutSnapshot()};
+  await page.evaluate(()=>window.__stageStudy.setPlayingForLayoutOnly(true));
+  await page.waitForSelector('.playingPanel');await page.waitForTimeout(100);
+  fixture.playingTransition.afterNaturalReflow=await layoutSnapshot();
+  await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-natural.png`});
+  await page.evaluate(()=>{document.querySelector('.battle').scrollTop=0;});await page.waitForTimeout(80);
+  fixture.playingTransition.afterExplicitTopScroll=await layoutSnapshot();
+  await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-top.png`});
   fixture.allSamplesInsideStage=fixture.samples.every(x=>x.withinStage);fixture.allSamplesInsideViewport=fixture.samples.every(x=>x.withinViewport);fixture.uiOverlapSamples=fixture.samples.filter(x=>x.uiIntersections.length).map(x=>({ms:x.ms,intersections:x.uiIntersections}));
   checks.fixtures.push(fixture);await page.close();
  }

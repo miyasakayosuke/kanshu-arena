@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "ad2e43380ce50f21781d62d28abd6547e7f217f8",
+  "workflowRun": 38723563531,
+  "artifactId": 11966569619,
+  "archiveBytes": 68167993,
+  "archiveSha256": "452f154ff93da0b7dc6b5e61b580682fb6c9c8f3221feb618c5371cd7a969ebc",
+  "expiresAt": "2026-10-22T11:01:06Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "scope": "Actual accepted-main layout with isolated same-art drawing hook and command UI; no cast-start state transition in this baseline.",
+  "files": {
+    "stage-checks.json": {
+      "bytes": 1563950,
+      "sha256": "754b9c12fceac6d589d700a8dc4dd7b79f17665f6eccc839747f73495a2c4bfc"
+    },
+    "stage-390x640-rear-clip-apex.png": {
+      "bytes": 155414,
+      "sha256": "a3724f13d8172b53833cea2b6152874bd20c436d592724beb02ee4f69bd3f35c"
+    },
+    "stage-390x640-rear-clip-descent.png": {
+      "bytes": 157149,
+      "sha256": "339ea002f0556d90cdcd5bc25650a51455e46e0158b4771fc2f68cbf0234f536"
+    },
+    "stage-390x640-rear-overlay-apex.png": {
+      "bytes": 163053,
+      "sha256": "865fb3d330b082086fd5b649d21361089573a508ccc2d6eb207278f8cd416656"
+    },
+    "stage-390x640-rear-overlay-descent.png": {
+      "bytes": 162654,
+      "sha256": "c8dc308a9764ba096bb5f2ae4c74ec968c07a168e9eb0de07ac3f30e97ec31eb"
+    },
+    "stage-390x640-rear-tall-apex.png": {
+      "bytes": 168721,
+      "sha256": "8321d7d1401471264b5091594f6bde8131e5b73f9b767df2833de1c5b9789ff3"
+    },
+    "stage-390x640-rear-tall-descent.png": {
+      "bytes": 169040,
+      "sha256": "0706034819c311b9eb3580455bd510d02237c658b113efd6dc644423afb49361"
+    },
+    "stage-390x640-rear-tall-controls.png": {
+      "bytes": 140804,
+      "sha256": "b98d417e96fb020a85129c3a276b2c32bae6cda4dddc8a1d1d8541dd06301b04"
+    },
+    "stage-844x390-rear-tall-apex.png": {
+      "bytes": 173073,
+      "sha256": "05a577c7263f222d298627f4f56e253611d9c3b5823b802256a6230b00386726"
+    }
+  }
+}

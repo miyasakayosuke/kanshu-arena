@@ -30,8 +30,11 @@ Compare three bounded modes:
 
 Sample500–890ms every10ms and capture original, apex, descent and contact in each
 case. Record screen/stage alpha bounds, UI intersections, source hashes, scene
-and command-dock rectangles, horizontal overflow, and keyboard-reachable turn
-controls after scrolling. Reduced-motion media is set only to suppress unrelated
+and command-dock rectangles, horizontal overflow, and programmatic focus of turn
+controls after scrolling. This original focus check does not establish Tab order
+or enabled activation. UI intersections are alpha-bound-rectangle potential
+overlap, not per-pixel opaque occlusion. Only Fenrir physical size is frozen;
+other enemies retain the real formation height-dependent sizing. Reduced-motion media is set only to suppress unrelated
 background motion in this staging diagnostic; the test hook still displays its
 explicit poses. This does not replace the motion controller's reduced-mode test.
 
@@ -40,3 +43,20 @@ missing jaw closure/reach, source-edge and anatomy-detail cleanup remain open.
 A green fixture run can faithfully record a rejected layout; independent visual
 review decides whether either accommodation is suitable for further candidate
 work. No final integration, smoothness, owner acceptance or release is implied.
+
+
+## Narrow layout-state supplement
+
+Retain the original command-UI comparison at ad2e4338. Before choosing staging,
+measure the actual `.battle` inner scroller (clientHeight, scrollHeight and
+scrollTop), then press real Tab keys from the document body until the turn-start
+button is reached. Record enabled state and center-point hit testing separately.
+Do not activate the button or claim a combat input test.
+
+The test-only Vite transform also exposes the existing App `setPlaying` setter.
+From the keyboard-reached command state, display the same descent key and switch
+to the real playing-panel layout. Record natural scroll clamping, scene/floor
+movement and viewport/UI bounds, then compare an explicit inner-scroll-to-top
+accommodation. This is layout-state QA without combat events or FX. It is not a
+claim that the production cast path currently scrolls or that its motion is
+integrated. No production file, timing, art, or endpoint changes are permitted.

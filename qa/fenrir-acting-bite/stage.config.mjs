@@ -16,7 +16,10 @@ for(const [path,sha]of Object.entries(expected)){const b=readFileSync(root+path)
 function once(code,from,to){if(!code.includes(from))throw Error('Fixture hook not found: '+from);return code.replace(from,to);}
 export default defineConfig({root,base:'/',server:{host:'127.0.0.1',port:8884,strictPort:true},plugins:[{
  name:'isolated-fenrir-stage-fixture',enforce:'pre',
- transform(code,id){if(id.endsWith('/src/App.tsx'))return once(code,'useState<State | null>(null)',"useState<State | null>(() => start([0,1,2,3,4], (window as any).__stageStudy.row === 'rear' ? [1,12,2,3,4] : [12,1,2,3,4], 42))");
+ transform(code,id){if(id.endsWith('/src/App.tsx')){
+ code=once(code,'useState<State | null>(null)',"useState<State | null>(() => start([0,1,2,3,4], (window as any).__stageStudy.row === 'rear' ? [1,12,2,3,4] : [12,1,2,3,4], 42))");
+ return once(code,'const [playing, setPlaying] = useState(false);', 'const [playing, setPlaying] = useState(false);\n  (window as any).__stageStudy.setPlayingForLayoutOnly = setPlaying;');
+ }
  if(id.endsWith('/src/navigation.ts'))return once(code,"useState<Screen>(() => readScreen() === 'battle' ? 'arena' : readScreen())","useState<Screen>('battle')");
  if(id.endsWith('/src/BattleStage.tsx'))return once(code,'const rigDrawn=unit.monster.id===0?',"const studyDrawn=unit.monster.id===12 && (window as any).__stageStudy?.draw(ctx,{index,foot,bodyScale,width,canvas:element});\n          const rigDrawn=studyDrawn || (unit.monster.id===0?").replace('sampleFenrirBattlePose(rigFrame),rigTarget):false;','sampleFenrirBattlePose(rigFrame),rigTarget):false);');
  }
