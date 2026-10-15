@@ -1,0 +1,107 @@
+{
+  "sourceCommit": "32fb2f3e558bf5938c19304f37c2ffa7fa2d4aad",
+  "workflowRun": 38720883619,
+  "artifactId": 11965785425,
+  "archiveBytes": 40488817,
+  "archiveSha256": "e34efe6aa0229bd677176f4f124efab2587b3701d6d29956252943b06fc59f12",
+  "expiresAt": "2026-10-22T10:35:07Z",
+  "visualAcceptance": false,
+  "gameIntegration": false,
+  "floorRule": "stageHeight minus22px; explicit surrogate, not actual formation",
+  "fitSummary": [
+    {
+      "spriteWidth": 130,
+      "stageHeight": 140,
+      "worstTop": -50.055816135084434,
+      "worstTopAtMs": 560,
+      "failedSamples": 38,
+      "sampleCount": 40
+    },
+    {
+      "spriteWidth": 130,
+      "stageHeight": 196,
+      "worstTop": 5.944183864915563,
+      "worstTopAtMs": 560,
+      "failedSamples": 0,
+      "sampleCount": 40
+    },
+    {
+      "spriteWidth": 130,
+      "stageHeight": 240,
+      "worstTop": 49.944183864915566,
+      "worstTopAtMs": 560,
+      "failedSamples": 0,
+      "sampleCount": 40
+    },
+    {
+      "spriteWidth": 142,
+      "stageHeight": 140,
+      "worstTop": -65.56866070139992,
+      "worstTopAtMs": 560,
+      "failedSamples": 39,
+      "sampleCount": 40
+    },
+    {
+      "spriteWidth": 142,
+      "stageHeight": 196,
+      "worstTop": -9.568660701399917,
+      "worstTopAtMs": 560,
+      "failedSamples": 17,
+      "sampleCount": 40
+    },
+    {
+      "spriteWidth": 142,
+      "stageHeight": 240,
+      "worstTop": 34.43133929860008,
+      "worstTopAtMs": 560,
+      "failedSamples": 0,
+      "sampleCount": 40
+    }
+  ],
+  "files": {
+    "leap-pair.mp4": {
+      "bytes": 315401,
+      "sha256": "f206c14cb6c5a41d66217305eb19b9775d2c48557e63e65eca3ff82a205f0224"
+    },
+    "leap-pair-slow.mp4": {
+      "bytes": 511944,
+      "sha256": "40d1a9a0dec346d8c2e556603bf371ddb7818545e55e99b704f76224a1b2efcc"
+    },
+    "leap-checks.json": {
+      "bytes": 106834,
+      "sha256": "edfdfdc8cae5fe8db7e9ec68566e63497990fde749de87e18624da80545bf84b"
+    },
+    "leap-1120-light-500.png": {
+      "bytes": 403012,
+      "sha256": "3d1b102a2447f9f925873995be1416e2440925e76893306cc94e647341f07107"
+    },
+    "leap-1120-light-650.png": {
+      "bytes": 414924,
+      "sha256": "17d9c66fc05d3a744a473333c5cec676694c6ff1cf4c6afbe10a5bef743923bc"
+    },
+    "leap-1120-dark-500.png": {
+      "bytes": 400792,
+      "sha256": "b2be8a8e8604a6db17bc6e2e6b22bd27bb2f941745352bdb29d424fa932652a4"
+    },
+    "leap-1120-dark-650.png": {
+      "bytes": 412957,
+      "sha256": "c4b5ff8c44f2e80e118bd8eb5997944c799d423581ccc2016d34ebe688c62555"
+    },
+    "leap-390-light-500.png": {
+      "bytes": 283701,
+      "sha256": "ebcc5012fcc74081706e34aea8a9140226e516d54601589ffb1221ca99169780"
+    },
+    "leap-390-light-650.png": {
+      "bytes": 292810,
+      "sha256": "a9afb222d8b14e2334f18903224805119fc091364c5335d44579204eb49e9c4f"
+    },
+    "leap-390-dark-500.png": {
+      "bytes": 284889,
+      "sha256": "7156038c1bfac8ef7b085de97a49d68d5281c36eaae39f7104905346d4c35764"
+    },
+    "leap-390-dark-650.png": {
+      "bytes": 294268,
+      "sha256": "0437c3c4838a4872eaecdd3b627c2a83d3229e5b996c097e46e7335463ca3102"
+    }
+  }
+}
