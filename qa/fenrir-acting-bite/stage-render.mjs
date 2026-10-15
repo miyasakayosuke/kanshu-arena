@@ -49,9 +49,15 @@ try{for(let i=0;i<100;i++){try{if((await fetch('http://127.0.0.1:8884/qa/fenrir-
   await page.waitForSelector('.playingPanel');await page.waitForTimeout(100);
   fixture.playingTransition.afterNaturalReflow=await layoutSnapshot();
   await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-natural.png`});
+  fixture.playingTransition.naturalSamples=[];
+  for(let ms=500;ms<=890;ms+=10){fixture.playingTransition.naturalSamples.push(await sample(ms));if(ms===560)await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-natural-pitch.png`});}
+  await sample(650);
   await page.evaluate(()=>{document.querySelector('.battle').scrollTop=0;});await page.waitForTimeout(80);
   fixture.playingTransition.afterExplicitTopScroll=await layoutSnapshot();
   await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-top.png`});
+  fixture.playingTransition.topSamples=[];
+  for(let ms=500;ms<=890;ms+=10){fixture.playingTransition.topSamples.push(await sample(ms));if(ms===560)await page.screenshot({path:out+`stage-${viewport.width}x${viewport.height}-${row}-${mode}-playing-top-pitch.png`});}
+  for(const key of ['naturalSamples','topSamples']){const states=fixture.playingTransition[key];assert(states.every(x=>Math.abs(x.physicalWidth-neutral.baseline.physicalWidth)<1e-6),'playing layout changed physical size');fixture.playingTransition[key+'Summary']={allInsideStage:states.every(x=>x.withinStage),allInsideViewport:states.every(x=>x.withinViewport),potentialUiOverlapSamples:states.filter(x=>x.uiIntersections.length).map(x=>({ms:x.ms,intersections:x.uiIntersections})),minScreenTop:Math.min(...states.map(x=>x.box[1]))};}
   fixture.allSamplesInsideStage=fixture.samples.every(x=>x.withinStage);fixture.allSamplesInsideViewport=fixture.samples.every(x=>x.withinViewport);fixture.uiOverlapSamples=fixture.samples.filter(x=>x.uiIntersections.length).map(x=>({ms:x.ms,intersections:x.uiIntersections}));
   checks.fixtures.push(fixture);await page.close();
  }

@@ -1442,6 +1442,7 @@
         "docs/fenrir-acting-bite/evidence/45133ceb/provenance.json",
         "docs/fenrir-acting-bite/evidence/45133ceb/reduced.mp4",
         "docs/fenrir-acting-bite/evidence/45133ceb/return-before-after.mp4",
+        "docs/fenrir-acting-bite/evidence/ad2e4338/INDEPENDENT-REVIEW.md",
         "docs/fenrir-acting-bite/evidence/ad2e4338/provenance.json",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-clip-apex.png",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-390x640-rear-clip-descent.png",
@@ -1542,13 +1543,14 @@
         "docs/fenrir-acting-bite/evidence/32fb2f3e/INDEPENDENT-REVIEW.md": "8154bac7c2588b9dbd13879f795658d4c5b55c388f5646919a4f308c21750498",
         "docs/fenrir-acting-bite/evidence/32fb2f3e/leap-checks.json": "edfdfdc8cae5fe8db7e9ec68566e63497990fde749de87e18624da80545bf84b",
         "docs/fenrir-acting-bite/evidence/32fb2f3e/provenance.json": "75d2cb2c721e9e58d35ad07ec0d53fce4778f9d1cc8fb1c40a2aa123e4bcd4d8",
-        "docs/fenrir-acting-bite/ACTUAL-STAGING-PLAN.md": "5b04ffad0f189993de659c0375bfd02cd80cf28821994e4674d45d1a777ba758",
+        "docs/fenrir-acting-bite/ACTUAL-STAGING-PLAN.md": "c55328920c185b95debf04440d40524822150b02110371679700dbbcdb52f4df",
         "qa/fenrir-acting-bite/stage.config.mjs": "7e6b6b2e5f00d5225bb7b32006fef1208d97dd7a5206f95ad6c76b97844b0da3",
         "qa/fenrir-acting-bite/stage-fixture.html": "51cd745c048f7b2b4a2e7638a9036907e281122cc67fa8ce889444779fdfaa64",
         "qa/fenrir-acting-bite/stage-fixture.mjs": "b1217f290678f051c003abddfd07cea0d93f235c65a36b195384beeae5c46efc",
-        "qa/fenrir-acting-bite/stage-render.mjs": "ea6d993ce58b3738d601b8b905286960d42892a2bf620c3a3eb5e1cdaf7cdfb8",
+        "qa/fenrir-acting-bite/stage-render.mjs": "40a2261a995e8de6cdade0a696f8d667507eed5e5bc279305784f403e49a4d11",
         "docs/fenrir-acting-bite/evidence/ad2e4338/stage-checks.json": "754b9c12fceac6d589d700a8dc4dd7b79f17665f6eccc839747f73495a2c4bfc",
-        "docs/fenrir-acting-bite/evidence/ad2e4338/provenance.json": "1084268631b23008a6e3026fe090056b9b9f4ec3b788bffafe6ac50cebd1c29a"
+        "docs/fenrir-acting-bite/evidence/ad2e4338/provenance.json": "1084268631b23008a6e3026fe090056b9b9f4ec3b788bffafe6ac50cebd1c29a",
+        "docs/fenrir-acting-bite/evidence/ad2e4338/INDEPENDENT-REVIEW.md": "f1f86f50d0acc932f7e9ae4032d9e8ea7195470c2c495a1c107a86fd35f9ba56"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {

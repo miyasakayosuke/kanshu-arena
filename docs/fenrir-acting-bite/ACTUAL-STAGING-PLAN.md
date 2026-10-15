@@ -60,3 +60,10 @@ movement and viewport/UI bounds, then compare an explicit inner-scroll-to-top
 accommodation. This is layout-state QA without combat events or FX. It is not a
 claim that the production cast path currently scrolls or that its motion is
 integrated. No production file, timing, art, or endpoint changes are permitted.
+
+
+The playing-state supplement repeats the complete500–890ms/10ms bounds sweep
+both after natural reflow and after explicit top scrolling, with extra560ms
+pitch screenshots. A650ms descent snapshot alone cannot establish the worst
+apex/pitch clearance. The real keyboard trial still records focus/enabled/hit
+state without activating the combat action.
