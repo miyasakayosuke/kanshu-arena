@@ -18,16 +18,35 @@ while owner feedback is pending; no final visual or release acceptance is implie
 
 ## Runtime and UI gates still open
 
-Current actual-App fixture is a layout study with manual pose time and a playing-
-layout setter. It does not execute the real combat playback. The isolated older
-controller checks do not close lifecycle gates for this new full-action renderer.
+The opt-in actual-App lifecycle fixture now executes real combat playback with
+the unchanged engine. The independently reviewed c05053e9 controlled10-case
+result covers normal/2x/reduced, Skip, preparation cancellation, real consecutive
+casts, delayed/failed assets and confirmed leave. The781309f6 two-case natural-
+clock follow-up verifies genuine Tab/Enter and wheel/pointer Skip on390x640.
+Both retain the full engine-state oracle and exactly-once result commitment.
+See their evidence directories for the actual videos, raw data and limits.
+
+Open technical/presentation gates: initial offscreen Skip and cropped post-Skip
+arena, natural simultaneous dead-actor interruption (only the pure adapter check
+is covered), runtime asset packaging/preload/memory budgets, and production
+integration review. Observed natural impact callbacks were11/10 wall-ms late
+relative to their nominal deadlines, followed by closed-jaw draws10/8ms later.
+The older controlled clips observed16ms impact-to-draw lag. None establishes
+perfect same-frame synchronization or a universal hardware timing bound.
+
+The existing adapter explicitly isolates generic travel/lift/tilt/scale and
+camera/effect movement for this exact bite while preserving other actions.
+Neutral/reduced/unready raster substitution is diagnostic; all-source failure
+still reaches the ordinary rig/image/emoji fallback. Production remains unchanged.
+
+### Historical lifecycle plan (implemented as an isolated diagnostic)
 
 Source inspection identifies an adapter risk: BattleStage applies generic action
 travel/lift/tilt/scale before the Fenrir draw. Adding the whole-body sprite path
 there unchanged would double-transform it. A candidate-only hook must explicitly
 account for that while preserving reactions/defeat and every unrelated action.
 
-Next coordinated bounded non-art diagnostic (no additional artwork):
+Original bounded non-art diagnostic contract (retained for traceability):
 1. Keep accepted-main App/BattleStage/navigation/style/formation source hash-locked;
    use only an isolated Vite/test adapter, not production adoption.
 2. Drive the real existing 月下の一咬 cast/age and authoritative event timeline,
