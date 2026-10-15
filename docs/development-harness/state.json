@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 56,
+  "revision": 57,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1005,6 +1005,31 @@
         "status": "verified",
         "revision": 56
       }
+    },
+    "replan-fenrir-acting-one": {
+      "command": {
+        "action": "replan",
+        "task": "replacement-animation",
+        "generation": 4,
+        "planRevision": 1,
+        "claimBudget": 2,
+        "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
+        "criteria": [
+          "Produce only the existing single-hit Moonlit Bite with unchanged power 55, MP 10, impact 800 ms and total duration 1500 ms",
+          "Show crouch, hind-leg push, one bite, forepaw landing and neutral recovery at battle and large sizes with effects and camera motion disabled",
+          "Preserve the selected character identity, four-limb anatomy, continuous body surfaces and stable cuffs and broken-chain topology",
+          "Verify normal, double-speed, skip, reduced-motion, repeated-cast, late-load, defeat-interruption and fallback behavior using actual rendering",
+          "Record provenance and independent rendered desktop/mobile light/dark review; an unapproved pilot does not satisfy the original visual acceptance or release gates"
+        ],
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/cf2a8187a9ef240012ee8ac46a7112ed1526518d/docs/development-harness/evidence/fenrir-acting-plan-one.md",
+        "evidence": "Prior real motion worker stopped; final rendered failure inspected; candidate remains isolated and main unchanged. A new acting-first single-motion request was verified separately. Prior candidate https://github.com/miyasakayosuke/kanshu-arena/commit/2e3d54f85d2662f915a8eef9e0f9acdf4cbfc71f",
+        "operationId": "replan-fenrir-acting-one"
+      },
+      "result": {
+        "status": "ready",
+        "planRevision": 1,
+        "revision": 57
+      }
     }
   },
   "tasks": [
@@ -1117,18 +1142,40 @@
       ],
       "required": true,
       "attempts": 3,
-      "generation": 4,
+      "generation": 5,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
-      "notBefore": 1791983839.8009763,
-      "lastFailure": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
-      "implementer": "fenrir-articulated",
-      "block": {
-        "type": "approval",
-        "reason": "Final articulated candidate has clearer foreleg action and passing technical capture, but independent rendered review still fails on geometric chest and thigh attachment edges after a bounded mask correction. Visual acceptance remains unmet. Third implementation attempt is complete; no further automatic iteration, adoption or deployment. Candidate and final review evidence are preserved separately.",
-        "previousRole": "implement"
-      }
+      "status": "ready",
+      "plans": [
+        {
+          "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
+          "criteria": [
+            "Produce only the existing single-hit Moonlit Bite with unchanged power 55, MP 10, impact 800 ms and total duration 1500 ms",
+            "Show crouch, hind-leg push, one bite, forepaw landing and neutral recovery at battle and large sizes with effects and camera motion disabled",
+            "Preserve the selected character identity, four-limb anatomy, continuous body surfaces and stable cuffs and broken-chain topology",
+            "Verify normal, double-speed, skip, reduced-motion, repeated-cast, late-load, defeat-interruption and fallback behavior using actual rendering",
+            "Record provenance and independent rendered desktop/mobile light/dark review; an unapproved pilot does not satisfy the original visual acceptance or release gates"
+          ],
+          "claimBudget": 2,
+          "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/cf2a8187a9ef240012ee8ac46a7112ed1526518d/docs/development-harness/evidence/fenrir-acting-plan-one.md",
+          "evidence": "Prior real motion worker stopped; final rendered failure inspected; candidate remains isolated and main unchanged. A new acting-first single-motion request was verified separately. Prior candidate https://github.com/miyasakayosuke/kanshu-arena/commit/2e3d54f85d2662f915a8eef9e0f9acdf4cbfc71f",
+          "revision": 1,
+          "startAttempts": 3,
+          "previous": {
+            "attempts": 3,
+            "generation": 4,
+            "status": "blocked",
+            "notBefore": 1791983839.8009763,
+            "lastFailure": "Previous worker stopped and current candidate remains isolated and unselected. Fresh source and remote state inspected with no active assignments. Prepare articulated foreleg lift, plant and weight transfer candidate without publishing or marking visual acceptance.",
+            "implementer": "fenrir-articulated",
+            "block": {
+              "type": "approval",
+              "reason": "Final articulated candidate has clearer foreleg action and passing technical capture, but independent rendered review still fails on geometric chest and thigh attachment edges after a bounded mask correction. Visual acceptance remains unmet. Third implementation attempt is complete; no further automatic iteration, adoption or deployment. Candidate and final review evidence are preserved separately.",
+              "previousRole": "implement"
+            }
+          }
+        }
+      ]
     },
     {
       "id": "v1-acceptance",
