@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 50,
+  "revision": 51,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -888,6 +888,25 @@
         "status": "review",
         "revision": 50
       }
+    },
+    "claim-bounded-replan-reviewer": {
+      "command": {
+        "action": "claim",
+        "task": "harness-bounded-replanning",
+        "role": "review",
+        "worker": "harness-replan-reviewer",
+        "ttl": 3600,
+        "operationId": "claim-bounded-replan-reviewer"
+      },
+      "result": {
+        "assignment": {
+          "role": "review",
+          "worker": "harness-replan-reviewer",
+          "generation": 2,
+          "expiresAt": 1792027040.546682
+        },
+        "revision": 51
+      }
     }
   },
   "tasks": [
@@ -1174,9 +1193,9 @@
       "title": "Add audited bounded plan revisions",
       "kind": "implementation",
       "deliverableKind": "internal",
-      "status": "review",
+      "status": "reviewing",
       "attempts": 1,
-      "generation": 1,
+      "generation": 2,
       "required": true,
       "dependsOn": [],
       "criteria": [
@@ -1201,6 +1220,12 @@
         "Keep original task acceptance gates and invalidate stale candidate, review, publication and acceptance evidence on replan": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
         "Retain stale-generation rejection, independent review, strict public disclosure checks and remote compare-and-swap": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md",
         "Pass existing harness tests and adversarial replan, approval-reuse and persistence tests": "https://github.com/miyasakayosuke/kanshu-arena/blob/33aef99fb6f7e606afd5d1636763f3f05dcdb2f2/docs/development-harness/evidence/bounded-replan-checks.md"
+      },
+      "assignment": {
+        "role": "review",
+        "worker": "harness-replan-reviewer",
+        "generation": 2,
+        "expiresAt": 1792027040.546682
       }
     }
   ],
