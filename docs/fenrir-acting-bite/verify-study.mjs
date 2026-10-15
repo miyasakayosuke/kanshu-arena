@@ -9,6 +9,8 @@ const manifest = JSON.parse(readFileSync(resolve(here, '../rights/asset-manifest
 const entry = manifest.assets.find(item => item.id === 'fenrir-acting-bite-plan-one-studies');
 assert(entry);
 const expected = {
+  'assets/high-leap-deep-load-study.png': [1254, 1254],
+  'assets/high-leap-toe-off-study.png': [1254, 1254],
   'assets/landing-contact-handoff-study.png': [1254, 1254],
   'assets/high-leap-reach-clearance-study.png': [1254, 1254],
   'assets/high-leap-reach-study.png': [1254, 1254],
@@ -44,4 +46,4 @@ assert.equal(entry.binarySha256['docs/fenrir-acting-bite/assets/reference.png'],
 for (const [file, hash] of Object.entries(entry.binarySha256)) {
   assert.equal(createHash('sha256').update(readFileSync(resolve(here, '../..', file))).digest('hex'), hash, file);
 }
-console.log('All registered binary byte hashes, including the retained browser clip, verified. 21 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');
+console.log('All registered binary byte hashes, including the retained browser clip, verified. 23 PNG byte hashes, dimensions and exact reference identity verified. Visual acceptance is not established.');

@@ -21,14 +21,14 @@ jobs:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run rights:test && npm run rights:check && npm test && npm run build
-      - run: node docs/fenrir-acting-bite/verify-study.mjs && node --test docs/fenrir-acting-bite/motion-checks.mjs
+      - run: node docs/fenrir-acting-bite/verify-study.mjs && node --test docs/fenrir-acting-bite/motion-checks.mjs docs/fenrir-acting-bite/high-leap-timing.test.mjs
       - working-directory: qa/fenrir-acting-bite
         run: npm ci --ignore-scripts --no-audit --no-fund
       - working-directory: qa/fenrir-acting-bite
         run: npx --no-install playwright install --with-deps chromium
       - run: sudo apt-get install -y ffmpeg
       - working-directory: qa/fenrir-acting-bite
-        run: node render.mjs && node leap-render.mjs && node stage-render.mjs && node descent-render.mjs && node contact-render.mjs && HANDOFF_PAIR=1 node contact-render.mjs
+        run: node render.mjs && node leap-render.mjs && node stage-render.mjs && node descent-render.mjs && node contact-render.mjs && HANDOFF_PAIR=1 node contact-render.mjs && node full-render.mjs && node full-stage-render.mjs
       - name: Retain browser videos, keyposes and checks
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
