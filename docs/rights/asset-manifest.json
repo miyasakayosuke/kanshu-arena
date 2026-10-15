@@ -1386,6 +1386,7 @@
       "kind": "isolated-raster-keypose-study",
       "files": [
         ".github/workflows/fenrir-acting-bite-review.yml",
+        "docs/fenrir-acting-bite/ACTUAL-STAGING-PLAN.md",
         "docs/fenrir-acting-bite/BRIDGE-PROMPT.md",
         "docs/fenrir-acting-bite/BROWSER-REVIEW.md",
         "docs/fenrir-acting-bite/CONTINUITY-PROMPT.md",
@@ -1472,9 +1473,13 @@
         "qa/fenrir-acting-bite/leap-render.mjs",
         "qa/fenrir-acting-bite/package-lock.json",
         "qa/fenrir-acting-bite/package.json",
-        "qa/fenrir-acting-bite/render.mjs"
+        "qa/fenrir-acting-bite/render.mjs",
+        "qa/fenrir-acting-bite/stage-fixture.html",
+        "qa/fenrir-acting-bite/stage-fixture.mjs",
+        "qa/fenrir-acting-bite/stage-render.mjs",
+        "qa/fenrir-acting-bite/stage.config.mjs"
       ],
-      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit.",
+      "provenance": "Owner-selected project reference retained byte-for-byte; two built-in image-generation studies, prompts, static gallery and deterministic Canvas2D inspection montage. No external animation service used. A subsequent narrow two-pose anticipation/landing correction is retained separately and remains unapproved. Two weight-transfer bridge keys, a discrete diagnostic renderer and branch-only Playwright QA are retained separately. Playwright1.56.1 is an isolated development dependency, not shipped in the game. A bounded four-pose continuity study is preserved, including two failed-purpose loading/compression drawings; only the lower two are candidate recovery bridges. Registered-placement browser evidence is retained separately. Two full-height original-derived return keys and their independently reviewed actual browser comparison are retained. The result is a rough continuity improvement, with remaining pose/contact and identity gaps. Five adjacent-conditioned landing/rise keys and their actual Chromium comparison are retained as a rough weight-transfer improvement. A same-action high-leap/descending-bite storyboard is recorded before new artwork. Two adjacent-conditioned high-leap apex/descent studies, exact prompts and static review are retained before the isolated bounds test. Their source-edge/detail and short-stage limitations are explicit. An isolated same-art staging fixture imports hash-verified accepted-main App/BattleStage/CSS with test-only in-memory hooks; no production source modification or deployment.",
       "reviewLimit": "Original reference provenance remains unverified. Actual Chromium output independently reviewed as an unapproved rough diagnostic; smoothness, chain/face identity, contact compression and game integration remain unmet. See BROWSER-REVIEW.md. No license or legal clearance is asserted.",
       "creator": "Built-in image generation with project-specific prompting; review documents and gallery authored with AI assistance.",
       "createdFor": "Single-action Moonlit Bite review pilot",
@@ -1497,7 +1502,7 @@
         "docs/fenrir-acting-bite/preview.mjs": "df8bea9fd55ffa4d3e8da72f2f526a7a80de1de9f0908ba8a08b5b741a05b745",
         "docs/fenrir-acting-bite/provenance.json": "99438cc18e7bd6e2fcc52bfa6fdf573692aaacfe0da06c3497960215c8849c92",
         "docs/fenrir-acting-bite/verify-study.mjs": "6798edd4f4c246112cb9708e62d312dba0f19d9aa98e92a1cd86a42e8230a5b0",
-        ".github/workflows/fenrir-acting-bite-review.yml": "8d81e9084166b00e21445758bfaa195990a056137cf729eca0df472652811bbd",
+        ".github/workflows/fenrir-acting-bite-review.yml": "6e0d39783fe8f87db51b97bb938e84d2449c441a351a578ba4346ec84b89bc6b",
         "qa/fenrir-acting-bite/package-lock.json": "41b9b64d565cfacb80186baf9ad16049f722c71a639a05906b7ddacd0057d459",
         "qa/fenrir-acting-bite/package.json": "571ace5ea44133ffad9ffb42663ae7ec85e6bbcafd85d7f25f70f3f1d8248b0e",
         "qa/fenrir-acting-bite/render.mjs": "b4695ca20a3e4b80bc397891b7e908cf02bf9d48ecc383f4541e3fbebf4f99a0",
@@ -1526,7 +1531,12 @@
         "docs/fenrir-acting-bite/evidence/3e8ed69c/provenance.json": "ee46c54ec64b5db3b44ba582482054c4436fb458aa06d8bb959b71610e913617",
         "docs/fenrir-acting-bite/evidence/32fb2f3e/INDEPENDENT-REVIEW.md": "8154bac7c2588b9dbd13879f795658d4c5b55c388f5646919a4f308c21750498",
         "docs/fenrir-acting-bite/evidence/32fb2f3e/leap-checks.json": "edfdfdc8cae5fe8db7e9ec68566e63497990fde749de87e18624da80545bf84b",
-        "docs/fenrir-acting-bite/evidence/32fb2f3e/provenance.json": "75d2cb2c721e9e58d35ad07ec0d53fce4778f9d1cc8fb1c40a2aa123e4bcd4d8"
+        "docs/fenrir-acting-bite/evidence/32fb2f3e/provenance.json": "75d2cb2c721e9e58d35ad07ec0d53fce4778f9d1cc8fb1c40a2aa123e4bcd4d8",
+        "docs/fenrir-acting-bite/ACTUAL-STAGING-PLAN.md": "8ac3ee79d7c59757479cae3bb67fb9e5605ba281b9c7a0d1d710c6ac4032eea6",
+        "qa/fenrir-acting-bite/stage.config.mjs": "21c5daf28c7986b30aff5754602ce689bba21de24c562b8460b099a990ada4a5",
+        "qa/fenrir-acting-bite/stage-fixture.html": "51cd745c048f7b2b4a2e7638a9036907e281122cc67fa8ce889444779fdfaa64",
+        "qa/fenrir-acting-bite/stage-fixture.mjs": "6c7b384941818de8e9b7b80f2a39b92863675b4ae541f8c40d9fa5ed8386b69b",
+        "qa/fenrir-acting-bite/stage-render.mjs": "9a49774a8503ea56760f31f4ff4293e644e08e74a3edddcc12bdf6a933680442"
       },
       "originalBinarySha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
       "binarySha256": {

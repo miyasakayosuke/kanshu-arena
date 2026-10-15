@@ -1,0 +1,42 @@
+# Same-art actual battle layout diagnostic
+
+Scope: compare presentation headroom and layering before further high-leap art.
+Use the same two keys and contact source, unchanged physical character size and
+unchanged800/1500ms action contract. Preserve the earlier surrogate failures.
+This is an isolated QA fixture, not production adoption.
+
+The fixture imports the real App, BattleStage, enemyFormation and CSS from the
+accepted main14134f351d8eca79714199e1f2b34dc76e826a4e. Exact Git-blob hashes of six
+production inputs are checked before serving. A test-only Vite transform supplies
+a deterministic five-enemy encounter, initial battle navigation and a Fenrir-only
+draw hook. It does not edit production source, combat logic or a deployed route.
+
+Use the real358/460 floor, real rear-row depth and actual responsive layout. Test
+front and rear Fenrir at390×844,390×640,844×390 and1120×900. The selected original
+PNG is the neutral endpoint. At each viewport, cache the baseline physical sprite
+width from the real formation and retain it across all study modes and phases.
+Report measured widths rather than relabeling them130/142 when the game differs.
+
+Compare three bounded modes:
+1. Existing clipped stage: demonstrate the current limitation in actual context.
+2. Airborne-only actor overlay at the existing floor: no sprite shrinking or
+   stage crop, but explicitly measure overlaps with header, turn controls, enemy
+   vitals and command UI. Return to the real enemy paint order for contact.
+3. Taller scene reserved before the action: derive sufficient headroom from the
+   same physical width and rear-row depth. Keep the landing floor stable during
+   that variant, preserve physical size, and retain the actual enemy paint order.
+   The scene is laid out before the cast; its absolute page floor and the amount
+   of scrolling can differ from the baseline. Report that reflow cost explicitly.
+
+Sample500–890ms every10ms and capture original, apex, descent and contact in each
+case. Record screen/stage alpha bounds, UI intersections, source hashes, scene
+and command-dock rectangles, horizontal overflow, and keyboard-reachable turn
+controls after scrolling. Reduced-motion media is set only to suppress unrelated
+background motion in this staging diagnostic; the test hook still displays its
+explicit poses. This does not replace the motion controller's reduced-mode test.
+
+No further artwork during this comparison. The existing two-key articulation pop,
+missing jaw closure/reach, source-edge and anatomy-detail cleanup remain open.
+A green fixture run can faithfully record a rejected layout; independent visual
+review decides whether either accommodation is suitable for further candidate
+work. No final integration, smoothness, owner acceptance or release is implied.
