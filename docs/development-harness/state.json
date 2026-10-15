@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 59,
+  "revision": 60,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1069,6 +1069,18 @@
         },
         "revision": 59
       }
+    },
+    "reconcile-fenrir-plan1-01": {
+      "command": {
+        "action": "reconcile",
+        "operationId": "reconcile-fenrir-plan1-01"
+      },
+      "result": {
+        "stale": [
+          "replacement-animation"
+        ],
+        "revision": 60
+      }
     }
   },
   "tasks": [
@@ -1184,7 +1196,7 @@
       "generation": 6,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1216,11 +1228,10 @@
         }
       ],
       "implementer": "fenrir-acting-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "fenrir-acting-builder",
-        "generation": 6,
-        "expiresAt": 1792030717.2497594
+      "block": {
+        "type": "uncertain",
+        "reason": "Assignment expired; inspect worker, branch, PR and deployment before retry.",
+        "previousRole": "implement"
       }
     },
     {
