@@ -1,0 +1,9 @@
+# Fixed skeleton transition pilot: bounded plan 2
+
+The trusted orchestrator verified a new one-trial authorization for a temporary model with fixed skeleton lengths and fixed body proportions. The only deliverable is a roughly 300 ms Moonlit Bite transition comparison. The selected original artwork must remain unchanged. This is not authorization for a broad method replacement, production adoption, publication, additional attempts, or final visual acceptance.
+
+Read-first reconciliation: the previous actual motion worker is stopped with no outstanding operation. The frozen candidate 62fb3a46c05427445922e8e7205c81d8dfd8390b and its CURRENT-STATUS.md and POST-PREVIEW-GATES.md were reread. Its five lifetime claims and quality failures remain preserved. Accepted main remains 14134f351d8eca79714199e1f2b34dc76e826a4e; no pilot deployment exists.
+
+Method: one procedural articulated placeholder model, not a new drawing sequence. Use invariant segment lengths and body dimensions, controlled joint rotation and a fixed camera/registration to study one named 300 ms airborne handoff. Show the same temporary geometry with stepped poses versus continuous interpolation, clearly distinguished from an original-art before/after comparison. Include boundary frames, native and enlarged playback, fixed camera and no effects. Do not change the original art, game mechanics, power, MP, impact, total action duration, accepted app, or runtime integration.
+
+Supplemental acceptance: mathematical invariants; actual rendered comparison with independent inspection; truthful placeholder-versus-finished-art labeling; source/provenance and exact commit; no whole-task completion claim. If visual quality is inadequate or actual rendered inspection cannot be completed, preserve evidence and block rather than starting another iteration. Claim budget is exactly one; lifetime attempts remain cumulative. Public release and owner acceptance require separate future authorization.
