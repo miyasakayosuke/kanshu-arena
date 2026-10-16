@@ -1,0 +1,96 @@
+{
+  "geometrySamples": 12010,
+  "sampleIntervalMs": 0.25,
+  "geometryTool": "librsvg actual stroked ink bounds",
+  "actorWithinEveryTestedViewport": true,
+  "betweenSamplesMarginProof": {
+    "maxAngularVelocityDegreesPerMs": 0.9743182326497705,
+    "maxVertexSpeedPxPerMs": 10.439714240853393,
+    "sampleIntervalMs": 0.25,
+    "betweenSampleDisplacementBoundPx": 2.609928560213348,
+    "maximumLeverArmSumRigUnits": 250,
+    "rootSpeedBoundPxPerMs": 3,
+    "notes": "Held intervals are bounded separately up to their right-open exposure boundary; the boundary itself is sampled. No bound is asserted across a held-pose jump."
+  },
+  "minimumMarginsPx": {
+    "600x600 at 420px": 10.874999999999943,
+    "296x213 at 130px": 20.94860382881336,
+    "296x213 at 142px": 14.81847709356947,
+    "230x198 at 130px": 14.800166328813305,
+    "230x198 at 142px": 8.664637163016494
+  },
+  "tightestSamples": {
+    "600x600 at 420px": {
+      "width": 600,
+      "height": 600,
+      "physicalWidth": 420,
+      "mode": "continuous",
+      "ms": 494.25
+    },
+    "296x213 at 130px": {
+      "width": 296,
+      "height": 213,
+      "physicalWidth": 130,
+      "mode": "held",
+      "ms": 360
+    },
+    "296x213 at 142px": {
+      "width": 296,
+      "height": 213,
+      "physicalWidth": 142,
+      "mode": "held",
+      "ms": 360
+    },
+    "230x198 at 130px": {
+      "width": 230,
+      "height": 198,
+      "physicalWidth": 130,
+      "mode": "held",
+      "ms": 360
+    },
+    "230x198 at 142px": {
+      "width": 230,
+      "height": 198,
+      "physicalWidth": 142,
+      "mode": "held",
+      "ms": 360
+    }
+  },
+  "videos": [
+    {
+      "file": "comparison-60fps.mp4",
+      "width": 1280,
+      "height": 1050,
+      "r_frame_rate": "60/1",
+      "duration": "5.400000",
+      "nb_read_frames": "324",
+      "decodedFrames": 324,
+      "uniqueDecodedFrames": 303,
+      "sha256": "0965fc7ce6727a08a37dbdebcd163758ec90b42cf44c5915c5387581ad9f0079"
+    },
+    {
+      "file": "normal-300ms-60fps.mp4",
+      "width": 1280,
+      "height": 1050,
+      "r_frame_rate": "60/1",
+      "duration": "0.300000",
+      "nb_read_frames": "18",
+      "decodedFrames": 18,
+      "uniqueDecodedFrames": 18,
+      "sha256": "30a47eff8eb43f3442db5a78e8a2d58b023cb774ddb7e20973ddb75a4e450a4f"
+    },
+    {
+      "file": "slow-1200ms-60fps.mp4",
+      "width": 1280,
+      "height": 1050,
+      "r_frame_rate": "60/1",
+      "duration": "1.200000",
+      "nb_read_frames": "72",
+      "decodedFrames": 72,
+      "uniqueDecodedFrames": 72,
+      "sha256": "6d40712e9732884c68ac035e5c822df6fb711768dac59ae455e7ace41c4b4617"
+    }
+  ],
+  "browserExecuted": false,
+  "note": "Vector bounds and deterministic decoded media checks are not browser or production-game QA."
+}

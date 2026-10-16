@@ -1,0 +1,25 @@
+{
+  "scope": "Isolated temporary fixed-rig mechanics pilot; no production asset replacement",
+  "sourceCommit": "62fb3a46c05427445922e8e7205c81d8dfd8390b",
+  "assets": [
+    {
+      "paths": ["source/rig.mjs", "index.html", "evidence/*.svg", "evidence/*.png", "evidence/*.mp4"],
+      "origin": "New procedural vector placeholder geometry and original code authored for the approved 300ms method experiment",
+      "method": "Forward kinematics with constant bone lengths and fixed body-part geometry; existing librsvg/Cairo rendering and ffmpeg encoding",
+      "references": ["reference/high-leap-timing.mjs", "reference/EXTENSION-TUCK-PLAN.md", "reference/CURRENT-STATUS.md"],
+      "originalArtworkPixelsUsed": false,
+      "originalArtworkEdited": false,
+      "imageGenerationUsed": false,
+      "externalServiceUsed": false,
+      "font": "Installed DejaVu Sans/system fallback rendered as text; no font binary bundled",
+      "license": "No new license selected for the project's own work",
+      "reviewStatus": "Mechanics-only evidence; independent visual review pending; no finished-art or legal clearance claim"
+    },
+    {
+      "paths": ["reference/high-leap-timing.mjs", "reference/EXTENSION-TUCK-PLAN.md", "reference/CURRENT-STATUS.md"],
+      "origin": "Existing files from the same repository at the frozen source commit",
+      "modifications": "No substantive reference changes; retained for attribution and reproducible timing checks"
+    }
+  ],
+  "notIncluded": ["Original character image files", "Extracted third-party game assets", "External artwork", "Font binaries", "New dependencies", "Gameplay or production integration"]
+}

@@ -1,0 +1,1644 @@
+{
+  "name": "Moonlit Bite fixed-rig pilot",
+  "sourceCommit": "62fb3a46c05427445922e8e7205c81d8dfd8390b",
+  "startMs": 360,
+  "endMs": 660,
+  "durationMs": 300,
+  "impactMs": 800,
+  "actionDurationMs": 1500,
+  "nominalWidth": 240,
+  "physicalWidths": [
+    130,
+    142,
+    420
+  ],
+  "browserVerified": false,
+  "originalArtworkEdited": false,
+  "productionIntegration": false,
+  "renderer": "Installed librsvg and Cairo; deterministic frame rendering, not browser capture",
+  "fps": 60,
+  "frameCount": 324,
+  "videoDurationSeconds": 5.4,
+  "frameRecords": [
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "NORMAL 1x",
+      "file": "frame-0001"
+    },
+    {
+      "timeMs": 376.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0002"
+    },
+    {
+      "timeMs": 393.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0003"
+    },
+    {
+      "timeMs": 410,
+      "label": "NORMAL 1x",
+      "file": "frame-0004"
+    },
+    {
+      "timeMs": 426.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0005"
+    },
+    {
+      "timeMs": 443.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0006"
+    },
+    {
+      "timeMs": 460,
+      "label": "NORMAL 1x",
+      "file": "frame-0007"
+    },
+    {
+      "timeMs": 476.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0008"
+    },
+    {
+      "timeMs": 493.33333333333337,
+      "label": "NORMAL 1x",
+      "file": "frame-0009"
+    },
+    {
+      "timeMs": 510,
+      "label": "NORMAL 1x",
+      "file": "frame-0010"
+    },
+    {
+      "timeMs": 526.6666666666666,
+      "label": "NORMAL 1x",
+      "file": "frame-0011"
+    },
+    {
+      "timeMs": 543.3333333333334,
+      "label": "NORMAL 1x",
+      "file": "frame-0012"
+    },
+    {
+      "timeMs": 560,
+      "label": "NORMAL 1x",
+      "file": "frame-0013"
+    },
+    {
+      "timeMs": 576.6666666666666,
+      "label": "NORMAL 1x",
+      "file": "frame-0014"
+    },
+    {
+      "timeMs": 593.3333333333334,
+      "label": "NORMAL 1x",
+      "file": "frame-0015"
+    },
+    {
+      "timeMs": 610,
+      "label": "NORMAL 1x",
+      "file": "frame-0016"
+    },
+    {
+      "timeMs": 626.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0017"
+    },
+    {
+      "timeMs": 643.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0018"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 1x next",
+      "file": "frame-0000"
+    },
+    {
+      "timeMs": 360,
+      "label": "NORMAL 1x",
+      "file": "frame-0001"
+    },
+    {
+      "timeMs": 376.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0002"
+    },
+    {
+      "timeMs": 393.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0003"
+    },
+    {
+      "timeMs": 410,
+      "label": "NORMAL 1x",
+      "file": "frame-0004"
+    },
+    {
+      "timeMs": 426.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0005"
+    },
+    {
+      "timeMs": 443.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0006"
+    },
+    {
+      "timeMs": 460,
+      "label": "NORMAL 1x",
+      "file": "frame-0007"
+    },
+    {
+      "timeMs": 476.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0008"
+    },
+    {
+      "timeMs": 493.33333333333337,
+      "label": "NORMAL 1x",
+      "file": "frame-0009"
+    },
+    {
+      "timeMs": 510,
+      "label": "NORMAL 1x",
+      "file": "frame-0010"
+    },
+    {
+      "timeMs": 526.6666666666666,
+      "label": "NORMAL 1x",
+      "file": "frame-0011"
+    },
+    {
+      "timeMs": 543.3333333333334,
+      "label": "NORMAL 1x",
+      "file": "frame-0012"
+    },
+    {
+      "timeMs": 560,
+      "label": "NORMAL 1x",
+      "file": "frame-0013"
+    },
+    {
+      "timeMs": 576.6666666666666,
+      "label": "NORMAL 1x",
+      "file": "frame-0014"
+    },
+    {
+      "timeMs": 593.3333333333334,
+      "label": "NORMAL 1x",
+      "file": "frame-0015"
+    },
+    {
+      "timeMs": 610,
+      "label": "NORMAL 1x",
+      "file": "frame-0016"
+    },
+    {
+      "timeMs": 626.6666666666667,
+      "label": "NORMAL 1x",
+      "file": "frame-0017"
+    },
+    {
+      "timeMs": 643.3333333333333,
+      "label": "NORMAL 1x",
+      "file": "frame-0018"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 1x finished",
+      "file": "frame-0019"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "START HOLD · 0.25x next",
+      "file": "frame-0020"
+    },
+    {
+      "timeMs": 360,
+      "label": "SLOW 0.25x",
+      "file": "frame-0021"
+    },
+    {
+      "timeMs": 364.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0022"
+    },
+    {
+      "timeMs": 368.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0023"
+    },
+    {
+      "timeMs": 372.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0024"
+    },
+    {
+      "timeMs": 376.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0025"
+    },
+    {
+      "timeMs": 380.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0026"
+    },
+    {
+      "timeMs": 385,
+      "label": "SLOW 0.25x",
+      "file": "frame-0027"
+    },
+    {
+      "timeMs": 389.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0028"
+    },
+    {
+      "timeMs": 393.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0029"
+    },
+    {
+      "timeMs": 397.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0030"
+    },
+    {
+      "timeMs": 401.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0031"
+    },
+    {
+      "timeMs": 405.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0032"
+    },
+    {
+      "timeMs": 410,
+      "label": "SLOW 0.25x",
+      "file": "frame-0033"
+    },
+    {
+      "timeMs": 414.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0034"
+    },
+    {
+      "timeMs": 418.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0035"
+    },
+    {
+      "timeMs": 422.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0036"
+    },
+    {
+      "timeMs": 426.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0037"
+    },
+    {
+      "timeMs": 430.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0038"
+    },
+    {
+      "timeMs": 435,
+      "label": "SLOW 0.25x",
+      "file": "frame-0039"
+    },
+    {
+      "timeMs": 439.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0040"
+    },
+    {
+      "timeMs": 443.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0041"
+    },
+    {
+      "timeMs": 447.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0042"
+    },
+    {
+      "timeMs": 451.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0043"
+    },
+    {
+      "timeMs": 455.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0044"
+    },
+    {
+      "timeMs": 460,
+      "label": "SLOW 0.25x",
+      "file": "frame-0045"
+    },
+    {
+      "timeMs": 464.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0046"
+    },
+    {
+      "timeMs": 468.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0047"
+    },
+    {
+      "timeMs": 472.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0048"
+    },
+    {
+      "timeMs": 476.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0049"
+    },
+    {
+      "timeMs": 480.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0050"
+    },
+    {
+      "timeMs": 485,
+      "label": "SLOW 0.25x",
+      "file": "frame-0051"
+    },
+    {
+      "timeMs": 489.16666666666663,
+      "label": "SLOW 0.25x",
+      "file": "frame-0052"
+    },
+    {
+      "timeMs": 493.33333333333337,
+      "label": "SLOW 0.25x",
+      "file": "frame-0053"
+    },
+    {
+      "timeMs": 497.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0054"
+    },
+    {
+      "timeMs": 501.66666666666663,
+      "label": "SLOW 0.25x",
+      "file": "frame-0055"
+    },
+    {
+      "timeMs": 505.83333333333337,
+      "label": "SLOW 0.25x",
+      "file": "frame-0056"
+    },
+    {
+      "timeMs": 510,
+      "label": "SLOW 0.25x",
+      "file": "frame-0057"
+    },
+    {
+      "timeMs": 514.1666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0058"
+    },
+    {
+      "timeMs": 518.3333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0059"
+    },
+    {
+      "timeMs": 522.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0060"
+    },
+    {
+      "timeMs": 526.6666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0061"
+    },
+    {
+      "timeMs": 530.8333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0062"
+    },
+    {
+      "timeMs": 535,
+      "label": "SLOW 0.25x",
+      "file": "frame-0063"
+    },
+    {
+      "timeMs": 539.1666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0064"
+    },
+    {
+      "timeMs": 543.3333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0065"
+    },
+    {
+      "timeMs": 547.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0066"
+    },
+    {
+      "timeMs": 551.6666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0067"
+    },
+    {
+      "timeMs": 555.8333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0068"
+    },
+    {
+      "timeMs": 560,
+      "label": "SLOW 0.25x",
+      "file": "frame-0069"
+    },
+    {
+      "timeMs": 564.1666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0070"
+    },
+    {
+      "timeMs": 568.3333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0071"
+    },
+    {
+      "timeMs": 572.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0072"
+    },
+    {
+      "timeMs": 576.6666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0073"
+    },
+    {
+      "timeMs": 580.8333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0074"
+    },
+    {
+      "timeMs": 585,
+      "label": "SLOW 0.25x",
+      "file": "frame-0075"
+    },
+    {
+      "timeMs": 589.1666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0076"
+    },
+    {
+      "timeMs": 593.3333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0077"
+    },
+    {
+      "timeMs": 597.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0078"
+    },
+    {
+      "timeMs": 601.6666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0079"
+    },
+    {
+      "timeMs": 605.8333333333334,
+      "label": "SLOW 0.25x",
+      "file": "frame-0080"
+    },
+    {
+      "timeMs": 610,
+      "label": "SLOW 0.25x",
+      "file": "frame-0081"
+    },
+    {
+      "timeMs": 614.1666666666666,
+      "label": "SLOW 0.25x",
+      "file": "frame-0082"
+    },
+    {
+      "timeMs": 618.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0083"
+    },
+    {
+      "timeMs": 622.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0084"
+    },
+    {
+      "timeMs": 626.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0085"
+    },
+    {
+      "timeMs": 630.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0086"
+    },
+    {
+      "timeMs": 635,
+      "label": "SLOW 0.25x",
+      "file": "frame-0087"
+    },
+    {
+      "timeMs": 639.1666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0088"
+    },
+    {
+      "timeMs": 643.3333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0089"
+    },
+    {
+      "timeMs": 647.5,
+      "label": "SLOW 0.25x",
+      "file": "frame-0090"
+    },
+    {
+      "timeMs": 651.6666666666667,
+      "label": "SLOW 0.25x",
+      "file": "frame-0091"
+    },
+    {
+      "timeMs": 655.8333333333333,
+      "label": "SLOW 0.25x",
+      "file": "frame-0092"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    },
+    {
+      "timeMs": 660,
+      "label": "END HOLD · 0.25x finished",
+      "file": "frame-0093"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+// Temporary mechanics-only rig. No original pixels or production files are used.
+export const META = Object.freeze({
+  name:'Moonlit Bite fixed-rig pilot', sourceCommit:'62fb3a46c05427445922e8e7205c81d8dfd8390b',
+  startMs:360, endMs:660, durationMs:300, impactMs:800, actionDurationMs:1500,
+  nominalWidth:240, physicalWidths:[130,142,420], browserVerified:false,
+  originalArtworkEdited:false, productionIntegration:false,
+});
+export const BONES = Object.freeze({body:106,neck:28,foreUpper:41,foreLower:38,hindUpper:45,hindLower:48,forePaw:19,hindPaw:23,tail1:40,tail2:34,tail3:24});
+export const MASSES = Object.freeze({torso:[130,52],head:[39,29],muzzle:[27,15],nearForePaw:[23,14],nearHindPaw:[27,16]});
+export const TIMES = Object.freeze([360,430,510,660]);
+// Absolute, unwrapped angles in degrees. All vertices are forward kinematics.
+// These are original schematic mechanics, not a tracing/retarget of the artwork.
+export const KEYS = Object.freeze({
+ body:[-135,-160,-178,-203], neck:[-142,-173,-200,-220], head:[-145,-177,-205,-222],
+ foreUpper:[60,37,18,58], foreLower:[155,151,139,137], forePaw:[170,169,161,157],
+ farForeUpper:[82,66,43,79], farForeLower:[163,167,154,148], farForePaw:[178,174,170,160],
+ hindUpper:[54,42,18,-2], hindLower:[67,116,153,113], hindPaw:[145,156,169,161],
+ farHindUpper:[67,61,36,17], farHindLower:[84,134,161,136], farHindPaw:[155,166,179,168],
+ tail1:[-12,-2,15,28], tail2:[-31,-13,6,17], tail3:[-68,-37,-11,8],
+});
+export const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const rad=d=>d*Math.PI/180;
+export const point=(p,len,a)=>[p[0]+len*Math.cos(rad(a)),p[1]+len*Math.sin(rad(a))];
+const add=(a,b)=>a.map((v,i)=>v+b[i]);
+const avg=(a,b)=>a.map((v,i)=>(v+b[i])/2);
+const rotate=(p,a)=>[p[0]*Math.cos(rad(a))-p[1]*Math.sin(rad(a)),p[0]*Math.sin(rad(a))+p[1]*Math.cos(rad(a))];
+export function slopes(values){
+ const h=TIMES.slice(1).map((t,i)=>t-TIMES[i]);
+ const d=values.slice(1).map((v,i)=>(v-values[i])/h[i]);
+ return [0,...[1,2].map(i=>{
+  if(d[i-1]*d[i]<=0)return 0;
+  const w1=2*h[i]+h[i-1],w2=h[i]+2*h[i-1];
+  return (w1+w2)/(w1/d[i-1]+w2/d[i]);
+ }),0];
+}
+export function angleAt(values,ms){
+ const t=clamp(ms,360,660),i=Math.min(2,TIMES.findLastIndex(v=>v<=t));
+ const h=TIMES[i+1]-TIMES[i],u=(t-TIMES[i])/h,m=slopes(values);
+ return (2*u**3-3*u*u+1)*values[i]+(u**3-2*u*u+u)*h*m[i]+(-2*u**3+3*u*u)*values[i+1]+(u**3-u*u)*h*m[i+1];
+}
+export function heldIndex(ms){return ms<400?0:ms<460?1:ms<560?2:3;}
+export function poseAt(ms,mode='continuous'){
+ if(!['continuous','held'].includes(mode))throw new Error('Unknown mode');
+ if(!Number.isFinite(ms))throw new Error('Finite timestamp required');
+ const t=clamp(ms,360,660);
+ return Object.fromEntries(Object.entries(KEYS).map(([k,v])=>[k,mode==='held'?v[heldIndex(t)]:angleAt(v,t)]));
+}
+// Exact source-origin translation from the frozen high-leap timing for 360–660.
+// Only a constant translation is removed to place the schematic into each panel.
+export function sourceOffset(ms,width){
+ const t=clamp(ms,360,660),s=width/1312,peak=.55*width-150*s;
+ const start=[-386*s,-1308*s],end=[-334.5*s,-1196*s-peak];
+ if(t<500){const u=(t-360)/140,e=1-(1-u)**2;return start.map((v,i)=>v+(end[i]-v)*e);}
+ const u=(t-500)/390;return[-334.5*s,-1196*s-peak*(1-u*u)];
+}
+export function rootDelta(ms,width){const a=sourceOffset(360,width),b=sourceOffset(ms,width);return b.map((v,i)=>v-a[i]);}
+export function skeletonAt(ms,mode='continuous'){
+ const q=poseAt(ms,mode),p={hip:[0,0]};p.shoulder=point(p.hip,BONES.body,q.body);p.head=point(p.shoulder,BONES.neck,q.neck);
+ // Four separate limbs remain attached to rigid body coordinates at all times.
+ p.farShoulder=add(p.shoulder,rotate([-8,-13],q.body));p.farHip=add(p.hip,rotate([0,-12],q.body));
+ for(const [stem,origin,upper,lower,paw]of[
+  ['fore',p.shoulder,'foreUpper','foreLower','forePaw'],['farFore',p.farShoulder,'farForeUpper','farForeLower','farForePaw'],
+  ['hind',p.hip,'hindUpper','hindLower','hindPaw'],['farHind',p.farHip,'farHindUpper','farHindLower','farHindPaw']]){
+  const fore=stem.toLowerCase().includes('fore'),a=fore?'fore':'hind';
+  p[stem+'Knee']=point(origin,BONES[a+'Upper'],q[upper]);p[stem+'Ankle']=point(p[stem+'Knee'],BONES[a+'Lower'],q[lower]);
+  p[stem+'Toe']=point(p[stem+'Ankle'],BONES[a+'Paw'],q[paw]);
+ }
+ p.tailBase=point(p.hip,15,q.body+180);p.tail1=point(p.tailBase,BONES.tail1,q.tail1);p.tail2=point(p.tail1,BONES.tail2,q.tail2);p.tail3=point(p.tail2,BONES.tail3,q.tail3);
+ p.muzzle=point(p.head,27,q.head);return {q,p};
+}
+export function boneEdges(){return [
+ ['hip','shoulder','body'],['shoulder','head','neck'],
+ ...['fore','farFore','hind','farHind'].flatMap(stem=>{const a=stem.toLowerCase().includes('fore')?'fore':'hind',o=stem==='fore'?'shoulder':stem==='farFore'?'farShoulder':stem==='hind'?'hip':'farHip';return[[o,stem+'Knee',a+'Upper'],[stem+'Knee',stem+'Ankle',a+'Lower'],[stem+'Ankle',stem+'Toe',a+'Paw']];}),
+ ['tailBase','tail1','tail1'],['tail1','tail2','tail2'],['tail2','tail3','tail3']
+];}
+const f=n=>Number(n.toFixed(5));
+const xy=p=>p.map(f).join(' ');
+const line=(a,b,w,color)=>`<path d="M ${xy(a)} L ${xy(b)}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round"/>`;
+const oval=(p,rx,ry,a,fill,stroke='#263d51',sw=1.8)=>`<ellipse cx="0" cy="0" rx="${rx}" ry="${ry}" transform="translate(${xy(p)}) rotate(${f(a)})" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+export function actorSvg(ms,mode,{joints=false}={}){
+ const {q,p}=skeletonAt(ms,mode),out=[],near='#b7cedb',far='#708997',edge='#263d51';
+ function limb(stem,origin,color){const a=stem.toLowerCase().includes('fore')?'fore':'hind',angle=q[stem+'Paw'];out.push(line(origin,p[stem+'Knee'],a==='fore'?16:22,edge),line(p[stem+'Knee'],p[stem+'Ankle'],13,edge),line(origin,p[stem+'Knee'],a==='fore'?12:18,color),line(p[stem+'Knee'],p[stem+'Ankle'],9,color),oval(avg(p[stem+'Ankle'],p[stem+'Toe']),a==='fore'?11.5:13.5,a==='fore'?7:8,angle,color));}
+ limb('farFore',p.farShoulder,far);limb('farHind',p.farHip,far);
+ out.push(line(p.tailBase,p.tail1,16,edge),line(p.tail1,p.tail2,12,edge),line(p.tail2,p.tail3,7,edge),line(p.tailBase,p.tail1,12,near),line(p.tail1,p.tail2,8,near),line(p.tail2,p.tail3,4,near));
+ out.push(oval(avg(p.hip,p.shoulder),65,26,q.body,near),oval(p.shoulder,25,28,q.body,near));
+ limb('hind',p.hip,near);limb('fore',p.shoulder,near);
+ out.push(line(p.shoulder,p.head,27,edge),line(p.shoulder,p.head,23,near),oval(p.head,19.5,14.5,q.head,near),oval(point(p.head,22,q.head),13.5,7.5,q.head,near));
+ // A fixed triangular ear and simple eye make facing direction legible, not artwork identity.
+ const ear=add(p.head,rotate([-5,-11],q.head)),e1=add(ear,rotate([-6,0],q.head)),e2=add(ear,rotate([3,-15],q.head)),e3=add(ear,rotate([8,4],q.head));
+ out.push(`<path d="M ${xy(e1)} L ${xy(e2)} L ${xy(e3)} Z" fill="${near}" stroke="${edge}" stroke-width="1.8"/>`);
+ const eye=add(p.head,rotate([9,-5],q.head));out.push(`<circle cx="${f(eye[0])}" cy="${f(eye[1])}" r="2.1" fill="#102839"/>`,line(point(p.head,15,q.head),point(p.head,33,q.head),1.6,edge));
+ if(joints){for(const [a,b]of boneEdges())out.push(line(p[a],p[b],1,'#ec964b'));for(const k of ['hip','shoulder','head','foreKnee','foreAnkle','hindKnee','hindAnkle'])out.push(`<circle cx="${f(p[k][0])}" cy="${f(p[k][1])}" r="2.5" fill="#f7b467" stroke="#6c4524" stroke-width=".8"/>`);}
+ return out.join('');
+}
+export function panelSvg(ms,mode,{width=600,height=600,physicalWidth=420,joints=false}={}){
+ const scale=physicalWidth/META.nominalWidth,root=panelRoot(width,height,physicalWidth),delta=rootDelta(ms,physicalWidth),origin=add(root,delta);
+ return `<svg x="0" y="0" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" rx="12" fill="#eef3f6"/><path d="M 14 ${height-17} H ${width-14}" stroke="#ced8df" stroke-dasharray="4 5"/><path d="M ${f(root[0]-4)} ${f(root[1])} h8 M ${f(root[0])} ${f(root[1]-4)} v8" stroke="#aac0cf"/><g transform="translate(${xy(origin)}) scale(${scale})">${actorSvg(ms,mode,{joints})}</g><text x="14" y="22" font-size="13" fill="#4f6576">${physicalWidth}px fixed reference scale${joints?' · fixed bones visible':''}</text></svg>`;
+}
+export function panelRoot(width,height,physicalWidth){return physicalWidth>200?[width*.62,height*.57]:[width*.64,height*.59];}
+const text=(x,y,s,size=18,color='#dce8ef')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}">${s}</text>`;
+export function comparisonSvg(ms,{playback='PAUSED',subtitle='Schematic method comparison. Not original artwork or game/browser capture.'}={}){
+ const w=1280,h=1050,out=[`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" font-family="DejaVu Sans,sans-serif"><rect width="${w}" height="${h}" fill="#101d2b"/>`,text(28,38,'MOONLIT BITE / FIXED-RIG PILOT',24),text(28,67,`${playback} · ${ms.toFixed(1)}ms / isolated 360–660ms window`,17,'#9bb8ce'),text(28,94,subtitle,15,'#9bb8ce')];
+ for(const [i,mode]of ['held','continuous'].entries()){
+  const x=28+i*632;out.push(text(x,133,mode==='held'?'A  SAME RIG · HELD KEY POSES':'B  SAME RIG · CONTINUOUS JOINTS',19,mode==='held'?'#eab98b':'#98dbc9'));
+  out.push(`<g transform="translate(${x} 149)">${panelSvg(ms,mode,{joints:true})}</g>`);
+  for(const [j,pw]of [130,142].entries())out.push(`<g transform="translate(${x+j*304} 768)">${panelSvg(ms,mode,{width:296,height:213,physicalWidth:pw})}</g>`);
+ }
+ out.push(text(28,1014,'Identical bone lengths, body/head/paw sizes, root path and endpoint poses. No scale animation or fades.',15),text(28,1037,'Placeholder only: face, fur, chain, impact, landing and original-art boundary continuity are not evaluated.',14,'#a3b6c6'),'</svg>');return out.join('');
+}

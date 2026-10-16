@@ -1,0 +1,28 @@
+diff --git a/evidence/retained-initial-layout/rig.mjs.txt b/source/rig.mjs
+index d8c04b1..73b859a 100644
+--- a/evidence/retained-initial-layout/rig.mjs.txt
++++ b/source/rig.mjs
+@@ -92,17 +92,18 @@ export function actorSvg(ms,mode,{joints=false}={}){
+  if(joints){for(const [a,b]of boneEdges())out.push(line(p[a],p[b],1,'#ec964b'));for(const k of ['hip','shoulder','head','foreKnee','foreAnkle','hindKnee','hindAnkle'])out.push(`<circle cx="${f(p[k][0])}" cy="${f(p[k][1])}" r="2.5" fill="#f7b467" stroke="#6c4524" stroke-width=".8"/>`);}
+  return out.join('');
+ }
+-export function panelSvg(ms,mode,{width=600,height=450,physicalWidth=420,joints=false}={}){
+- const scale=physicalWidth/META.nominalWidth,root=physicalWidth>200?[width*.72,height*.83]:[width*.68,height*.72],delta=rootDelta(ms,physicalWidth),origin=add(root,delta);
++export function panelSvg(ms,mode,{width=600,height=600,physicalWidth=420,joints=false}={}){
++ const scale=physicalWidth/META.nominalWidth,root=panelRoot(width,height,physicalWidth),delta=rootDelta(ms,physicalWidth),origin=add(root,delta);
+  return `<svg x="0" y="0" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" rx="12" fill="#eef3f6"/><path d="M 14 ${height-17} H ${width-14}" stroke="#ced8df" stroke-dasharray="4 5"/><path d="M ${f(root[0]-4)} ${f(root[1])} h8 M ${f(root[0])} ${f(root[1]-4)} v8" stroke="#aac0cf"/><g transform="translate(${xy(origin)}) scale(${scale})">${actorSvg(ms,mode,{joints})}</g><text x="14" y="22" font-size="13" fill="#4f6576">${physicalWidth}px fixed reference scale${joints?' · fixed bones visible':''}</text></svg>`;
+ }
++export function panelRoot(width,height,physicalWidth){return physicalWidth>200?[width*.62,height*.57]:[width*.64,height*.59];}
+ const text=(x,y,s,size=18,color='#dce8ef')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}">${s}</text>`;
+ export function comparisonSvg(ms,{playback='PAUSED',subtitle='Schematic method comparison. Not original artwork or game/browser capture.'}={}){
+- const w=1280,h=900,out=[`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" font-family="DejaVu Sans,sans-serif"><rect width="${w}" height="${h}" fill="#101d2b"/>`,text(28,38,'MOONLIT BITE / FIXED-RIG PILOT',24),text(28,67,`${playback} · ${ms.toFixed(1)}ms / isolated 360–660ms window`,17,'#9bb8ce'),text(28,94,subtitle,15,'#9bb8ce')];
++ const w=1280,h=1050,out=[`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" font-family="DejaVu Sans,sans-serif"><rect width="${w}" height="${h}" fill="#101d2b"/>`,text(28,38,'MOONLIT BITE / FIXED-RIG PILOT',24),text(28,67,`${playback} · ${ms.toFixed(1)}ms / isolated 360–660ms window`,17,'#9bb8ce'),text(28,94,subtitle,15,'#9bb8ce')];
+  for(const [i,mode]of ['held','continuous'].entries()){
+   const x=28+i*632;out.push(text(x,133,mode==='held'?'A  SAME RIG · HELD KEY POSES':'B  SAME RIG · CONTINUOUS JOINTS',19,mode==='held'?'#eab98b':'#98dbc9'));
+   out.push(`<g transform="translate(${x} 149)">${panelSvg(ms,mode,{joints:true})}</g>`);
+-  for(const [j,pw]of [130,142].entries())out.push(`<g transform="translate(${x+j*304} 618)">${panelSvg(ms,mode,{width:296,height:213,physicalWidth:pw})}</g>`);
++  for(const [j,pw]of [130,142].entries())out.push(`<g transform="translate(${x+j*304} 768)">${panelSvg(ms,mode,{width:296,height:213,physicalWidth:pw})}</g>`);
+  }
+- out.push(text(28,864,'Identical bone lengths, body/head/paw sizes, root path and endpoint poses. No scale animation or fades.',15),text(28,887,'Placeholder only: face, fur, chain, impact, landing and original-art boundary continuity are not evaluated.',14,'#a3b6c6'),'</svg>');return out.join('');
++ out.push(text(28,1014,'Identical bone lengths, body/head/paw sizes, root path and endpoint poses. No scale animation or fades.',15),text(28,1037,'Placeholder only: face, fur, chain, impact, landing and original-art boundary continuity are not evaluated.',14,'#a3b6c6'),'</svg>');return out.join('');
+ }

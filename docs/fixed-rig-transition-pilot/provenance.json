@@ -1,0 +1,46 @@
+{
+  "createdUtc": "2026-10-16T23:49:00Z",
+  "scope": "One isolated 300ms fixed-rig mechanics comparison, 360\u2013660ms",
+  "sourceRepository": "miyasakayosuke/kanshu-arena",
+  "frozenSourceCommit": "62fb3a46c05427445922e8e7205c81d8dfd8390b",
+  "references": [
+    {
+      "path": "reference/CURRENT-STATUS.md",
+      "url": "https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/CURRENT-STATUS.md",
+      "sha256": "1aebc42c331f342a9f47a8a117755709d3487743cce987c1f3eab0baea1bb60d"
+    },
+    {
+      "path": "reference/EXTENSION-TUCK-PLAN.md",
+      "url": "https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/EXTENSION-TUCK-PLAN.md",
+      "sha256": "457249d5ba11351696c0bf5f49a0bd59c9e93b24055c138e9ffbf269cddae8bd"
+    },
+    {
+      "path": "reference/high-leap-timing.mjs",
+      "url": "https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/high-leap-timing.mjs",
+      "sha256": "73837302260d5c3c8b546f60186ba150cd6af5a43bb7413b3e312811793c9906"
+    }
+  ],
+  "implementation": "Original vector mechanics proxy, no source artwork pixels",
+  "rendering": "Deterministic offline SVG through installed librsvg/Cairo; ffmpeg encoding",
+  "versions": {
+    "node": "v24.19.0",
+    "python": "3.12.14",
+    "librsvg": "2.60.0",
+    "cairo": "1.18.4",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "browserExecuted": false,
+  "productionIntegrated": false,
+  "originalArtworkChanged": false,
+  "imageGenerationUsed": false,
+  "newSoftwareInstalled": false,
+  "cameraCorrection": "Fixed origins and viewport only; first capture retained; rig and poses identical",
+  "independentVisualReview": "pending",
+  "releaseReadiness": "not established",
+  "commands": [
+    "node source/test-rig.mjs",
+    "node source/build-evidence.mjs",
+    "python source/render-evidence.py",
+    "python source/verify-render.py"
+  ]
+}

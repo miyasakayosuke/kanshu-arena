@@ -1,0 +1,112 @@
+{
+  "scope": "Standalone temporary rig only",
+  "sourceCommit": "62fb3a46c05427445922e8e7205c81d8dfd8390b",
+  "checks": [
+    {
+      "name": "Bone lengths invariant in both variants at 1201 samples",
+      "status": "passed",
+      "details": {
+        "maxBoneError": 2.842170943040401e-14
+      }
+    },
+    {
+      "name": "Root trajectory equals frozen source at all three widths",
+      "status": "passed",
+      "details": {
+        "maxRootError": 0
+      }
+    },
+    {
+      "name": "Continuous geometry has no quarter-millisecond teleport",
+      "status": "passed",
+      "details": {
+        "maxLandmarkStepInRigUnits": 0.3649826497355142
+      }
+    },
+    {
+      "name": "Both comparison endpoint poses exactly equal",
+      "status": "passed",
+      "details": {
+        "times": [
+          360,
+          660
+        ]
+      }
+    },
+    {
+      "name": "Every angle stays inside its local key interval; no spline overshoot",
+      "status": "passed",
+      "details": {}
+    },
+    {
+      "name": "Joint angular velocity continuous at internal spline knots",
+      "status": "passed",
+      "details": {
+        "maxVelocityMismatchDegreesPerMs": 0.00001630556312193221
+      }
+    },
+    {
+      "name": "Held control changes at original exposure boundaries; continuous rig has no jumps",
+      "status": "passed",
+      "details": [
+        {
+          "timeMs": 400,
+          "heldMaxJumpRigUnits": 75.34154195676585,
+          "continuousMaxDeltaRigUnits": 0.0014532977463585484
+        },
+        {
+          "timeMs": 460,
+          "heldMaxJumpRigUnits": 58.41496538768989,
+          "continuousMaxDeltaRigUnits": 0.0007901212127735706
+        },
+        {
+          "timeMs": 560,
+          "heldMaxJumpRigUnits": 69.84927373750475,
+          "continuousMaxDeltaRigUnits": 0.0006515186720065804
+        }
+      ]
+    },
+    {
+      "name": "Constant physical scale and no fades",
+      "status": "passed",
+      "details": {
+        "physicalWidths": [
+          130,
+          142,
+          420
+        ],
+        "masses": {
+          "torso": [
+            130,
+            52
+          ],
+          "head": [
+            39,
+            29
+          ],
+          "muzzle": [
+            27,
+            15
+          ],
+          "nearForePaw": [
+            23,
+            14
+          ],
+          "nearHindPaw": [
+            27,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "Paused seek, clamp and invalid-time guards",
+      "status": "passed",
+      "details": {}
+    }
+  ],
+  "browserQA": "not run",
+  "gameRegression": "not run; production code unchanged",
+  "originalArt": "not loaded or edited",
+  "visualVerdict": "pending independent review"
+}
