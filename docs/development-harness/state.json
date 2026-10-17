@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 86,
+  "revision": 87,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1575,6 +1575,31 @@
         "status": "blocked",
         "revision": 86
       }
+    },
+    "offscreen-rig-plan-five": {
+      "command": {
+        "action": "replan",
+        "task": "replacement-animation",
+        "generation": 13,
+        "planRevision": 5,
+        "method": "Fixed battle viewport with deliberate whole-actor top exit, brief hidden airborne interval, descending target-aligned bite and ground recovery",
+        "criteria": [
+          "Preserve the prior higher-jump candidate and fixed bone lengths, body size and camera in one temporary-model comparison",
+          "Make the actor fully exit the viewport top for a short measured interval, reenter continuously from above and bite a marked provisional target while descending",
+          "Keep major bite at 800 ms and total action at 1500 ms, with visible load, push, fore landing, rear landing and recovery",
+          "Distinguish intended top clipping from unintended side or bottom clipping and verify whole-actor ground clearance plus target alignment in actual normal and slow renders",
+          "Preserve independently reviewed candidate and safe evidence for owner evaluation only, without final art, runtime integration or publication"
+        ],
+        "claimBudget": 1,
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/bf40d252eeeae40dc9a9ff747352b569887e8885/docs/development-harness/evidence/offscreen-rig-plan-five.md",
+        "evidence": "Previous actual worker stopped and independent higher-jump comparison reviewed at https://github.com/miyasakayosuke/kanshu-arena/commit/188b11798d03796d527bd062837cdbb384094f0a . Eight prior lifetime claims preserved. Fresh explicit offscreen comparison prototype request verified separately. Prior restrictions remain in force.",
+        "operationId": "offscreen-rig-plan-five"
+      },
+      "result": {
+        "status": "ready",
+        "planRevision": 5,
+        "revision": 87
+      }
     }
   },
   "tasks": [
@@ -1687,10 +1712,10 @@
       ],
       "required": true,
       "attempts": 8,
-      "generation": 13,
+      "generation": 14,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "ready",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1798,14 +1823,34 @@
               "previousRole": "implement"
             }
           }
+        },
+        {
+          "method": "Fixed battle viewport with deliberate whole-actor top exit, brief hidden airborne interval, descending target-aligned bite and ground recovery",
+          "criteria": [
+            "Preserve the prior higher-jump candidate and fixed bone lengths, body size and camera in one temporary-model comparison",
+            "Make the actor fully exit the viewport top for a short measured interval, reenter continuously from above and bite a marked provisional target while descending",
+            "Keep major bite at 800 ms and total action at 1500 ms, with visible load, push, fore landing, rear landing and recovery",
+            "Distinguish intended top clipping from unintended side or bottom clipping and verify whole-actor ground clearance plus target alignment in actual normal and slow renders",
+            "Preserve independently reviewed candidate and safe evidence for owner evaluation only, without final art, runtime integration or publication"
+          ],
+          "claimBudget": 1,
+          "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/bf40d252eeeae40dc9a9ff747352b569887e8885/docs/development-harness/evidence/offscreen-rig-plan-five.md",
+          "evidence": "Previous actual worker stopped and independent higher-jump comparison reviewed at https://github.com/miyasakayosuke/kanshu-arena/commit/188b11798d03796d527bd062837cdbb384094f0a . Eight prior lifetime claims preserved. Fresh explicit offscreen comparison prototype request verified separately. Prior restrictions remain in force.",
+          "revision": 5,
+          "startAttempts": 8,
+          "previous": {
+            "attempts": 8,
+            "generation": 13,
+            "status": "blocked",
+            "implementer": "higher-rig-builder",
+            "block": {
+              "type": "approval",
+              "reason": "One bounded higher-jump correction completed and actual worker stopped. Root ascent increased from 78 to 117 rig units with fixed bones, body and camera. Known knee-ground intersection resolved by complete primitive and unmasked pixel checks. Frozen candidate https://github.com/miyasakayosuke/kanshu-arena/commit/3f5f401f079c077d17c842f1aef7d0341bd9c522 . Independent actual normal, slow and comparison review, regenerated byte identity and 95 remote files verified; report https://github.com/miyasakayosuke/kanshu-arena/blob/188b11798d03796d527bd062837cdbb384094f0a/docs/higher-rig-motion-preview/INDEPENDENT-REVIEW.md . Transport interruption recovered; frozen preservation completed. Eight lifetime claims retained; plan four one-claim budget consumed. Await owner evaluation of higher motion beside existing unchanged reference. No whole-task acceptance, final artwork, original provenance clearance, browser/game validation, integration or release. No automatic extra trial; earlier refused reference copying and cancelled prior report write remain untouched.",
+              "previousRole": "implement"
+            }
+          }
         }
-      ],
-      "implementer": "higher-rig-builder",
-      "block": {
-        "type": "approval",
-        "reason": "One bounded higher-jump correction completed and actual worker stopped. Root ascent increased from 78 to 117 rig units with fixed bones, body and camera. Known knee-ground intersection resolved by complete primitive and unmasked pixel checks. Frozen candidate https://github.com/miyasakayosuke/kanshu-arena/commit/3f5f401f079c077d17c842f1aef7d0341bd9c522 . Independent actual normal, slow and comparison review, regenerated byte identity and 95 remote files verified; report https://github.com/miyasakayosuke/kanshu-arena/blob/188b11798d03796d527bd062837cdbb384094f0a/docs/higher-rig-motion-preview/INDEPENDENT-REVIEW.md . Transport interruption recovered; frozen preservation completed. Eight lifetime claims retained; plan four one-claim budget consumed. Await owner evaluation of higher motion beside existing unchanged reference. No whole-task acceptance, final artwork, original provenance clearance, browser/game validation, integration or release. No automatic extra trial; earlier refused reference copying and cancelled prior report write remain untouched.",
-        "previousRole": "implement"
-      }
+      ]
     },
     {
       "id": "v1-acceptance",
