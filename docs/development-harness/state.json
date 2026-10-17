@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 89,
+  "revision": 90,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1635,6 +1635,30 @@
         "status": "blocked",
         "revision": 89
       }
+    },
+    "identity-poses-plan-six": {
+      "command": {
+        "action": "replan",
+        "task": "replacement-animation",
+        "generation": 15,
+        "planRevision": 6,
+        "method": "Reference-conditioned sparse whole-body identity poses before artwork attachment to the selected fixed-rig trajectory",
+        "criteria": [
+          "Produce at most three major full-body pose studies with the existing image-generation tool and unchanged original reference",
+          "Compare face muzzle ears torso limb proportions fur chain topology and limb count visually against the original and disclose every mismatch",
+          "Preserve selected offscreen proxy trajectory and exclude rejected cut-warp approaches without creating full final animation or runtime changes",
+          "Keep original provenance unresolved and independent service-limit review incomplete; stop for owner appearance evaluation without publication"
+        ],
+        "claimBudget": 1,
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/a0a6038ea9ba933a038d48970bef35171570aa2f/docs/development-harness/evidence/identity-poses-plan-six.md",
+        "evidence": "Previous actual worker stopped and assignment closed. Preserved proxy https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 and service-limited review checkpoint inspected. Fresh owner method-selection authorization independently verified. No new service or publication.",
+        "operationId": "identity-poses-plan-six"
+      },
+      "result": {
+        "status": "ready",
+        "planRevision": 6,
+        "revision": 90
+      }
     }
   },
   "tasks": [
@@ -1747,10 +1771,10 @@
       ],
       "required": true,
       "attempts": 9,
-      "generation": 15,
+      "generation": 16,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "ready",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1884,14 +1908,33 @@
               "previousRole": "implement"
             }
           }
+        },
+        {
+          "method": "Reference-conditioned sparse whole-body identity poses before artwork attachment to the selected fixed-rig trajectory",
+          "criteria": [
+            "Produce at most three major full-body pose studies with the existing image-generation tool and unchanged original reference",
+            "Compare face muzzle ears torso limb proportions fur chain topology and limb count visually against the original and disclose every mismatch",
+            "Preserve selected offscreen proxy trajectory and exclude rejected cut-warp approaches without creating full final animation or runtime changes",
+            "Keep original provenance unresolved and independent service-limit review incomplete; stop for owner appearance evaluation without publication"
+          ],
+          "claimBudget": 1,
+          "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/a0a6038ea9ba933a038d48970bef35171570aa2f/docs/development-harness/evidence/identity-poses-plan-six.md",
+          "evidence": "Previous actual worker stopped and assignment closed. Preserved proxy https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 and service-limited review checkpoint inspected. Fresh owner method-selection authorization independently verified. No new service or publication.",
+          "revision": 6,
+          "startAttempts": 9,
+          "previous": {
+            "attempts": 9,
+            "generation": 15,
+            "status": "blocked",
+            "implementer": "offscreen-rig-builder",
+            "block": {
+              "type": "approval",
+              "reason": "One bounded offscreen descent proxy completed; actual worker stopped. All 39 frozen candidate files preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 . Independent initial geometry and actual normal-frame review found the comparison showable; full regenerated-byte comparison and final independent report stopped at a service limit. Scope checkpoint https://github.com/miyasakayosuke/kanshu-arena/blob/cb7fa706a26f0a638c503c81794a850a1c8c1bef/docs/offscreen-rig-motion-preview/REVIEW-CHECKPOINT.md . Owner selected the demonstrated motion direction, not whole-task acceptance. Nine lifetime claims retained and plan five one-claim budget consumed. No final artwork, provenance clearance, browser/game validation, integration or release yet. New final-art preparation needs its own bounded plan and valid assignment. No limit bypass, automatic extra trial, refused reference-copy retry or cancelled old report-write retry.",
+              "previousRole": "implement"
+            }
+          }
         }
-      ],
-      "implementer": "offscreen-rig-builder",
-      "block": {
-        "type": "approval",
-        "reason": "One bounded offscreen descent proxy completed; actual worker stopped. All 39 frozen candidate files preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 . Independent initial geometry and actual normal-frame review found the comparison showable; full regenerated-byte comparison and final independent report stopped at a service limit. Scope checkpoint https://github.com/miyasakayosuke/kanshu-arena/blob/cb7fa706a26f0a638c503c81794a850a1c8c1bef/docs/offscreen-rig-motion-preview/REVIEW-CHECKPOINT.md . Owner selected the demonstrated motion direction, not whole-task acceptance. Nine lifetime claims retained and plan five one-claim budget consumed. No final artwork, provenance clearance, browser/game validation, integration or release yet. New final-art preparation needs its own bounded plan and valid assignment. No limit bypass, automatic extra trial, refused reference-copy retry or cancelled old report-write retry.",
-        "previousRole": "implement"
-      }
+      ]
     },
     {
       "id": "v1-acceptance",
