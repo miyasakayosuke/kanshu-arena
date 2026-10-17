@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "checks": [
+    "normal 1x",
+    "paused clock unchanged",
+    "seek pauses",
+    "slow 0.25x",
+    "exact endpoint stops",
+    "replay restarts",
+    "seek clamps",
+    "inline application syntax"
+  ],
+  "browserExecuted": false
+}

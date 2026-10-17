@@ -1,0 +1,59 @@
+{
+  "pass": true,
+  "samples": 6001,
+  "sampleSpacingMs": 0.25,
+  "checks": [
+    {
+      "name": "fixed bone lengths over 6001 samples",
+      "maxBoneError": 4.263256414560601e-14
+    },
+    {
+      "name": "world-space planted toe invariance",
+      "maxContactError": 0
+    },
+    {
+      "name": "IK reachability without stretch or clamp",
+      "minReachSlack": 8.130491537304138,
+      "maxReachFraction": 0.8970823856037451
+    },
+    {
+      "name": "paw capsule does not penetrate ground",
+      "maxFootInkY": 0
+    },
+    {
+      "name": "fixed-camera stroked ink bounds",
+      "minMargin": 54.21690164130395
+    },
+    {
+      "name": "quarter-millisecond landmark continuity",
+      "maxStep": 0.40265341236733937
+    },
+    {
+      "name": "finite release/landing and phase boundary transitions",
+      "maxBoundaryDelta": 0.0024190152279496397,
+      "maxVelocityJump": 0.00005369577332834175
+    },
+    {
+      "name": "exact proxy standing recovery translated -35 units",
+      "maxReturnError": 1.4210854715202004e-14
+    },
+    {
+      "name": "1500 ms / 800 ms impact / power 55 / MP 10 metadata and jaw closure",
+      "pass": true
+    },
+    {
+      "name": "input guards and finite clamping",
+      "pass": true
+    },
+    {
+      "name": "no source raster, animated scale, opacity concealment or substitutions",
+      "pass": true
+    }
+  ],
+  "limits": [
+    "Focused proxy checks only, not whole-game regression.",
+    "Root path and schematic pose are newly authored; not exact original source translation.",
+    "142/420 px are fixed nominal rig reference scales, not exact silhouette widths.",
+    "Browser and production game were not executed."
+  ]
+}

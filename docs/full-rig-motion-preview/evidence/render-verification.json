@@ -1,0 +1,42 @@
+{
+  "pass": true,
+  "movies": [
+    {
+      "file": "normal-1500ms-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "1.500000",
+      "nb_read_frames": "90",
+      "sha256": "7ce17c148d0052b64328886ced3b946020953a2f3868cd6d89434eb59df5b2c6",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "slow-6000ms-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "6.000000",
+      "nb_read_frames": "360",
+      "sha256": "c82b601b9d2d047629ebb1ab120b3b227df2e8d933ad6256172385f91382ed65",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "full-motion-review-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "11.500000",
+      "nb_read_frames": "690",
+      "sha256": "e7e0b65009c4322da727e098a053b42f2726c3a0f841638ee1569113cbdabe3e",
+      "decodedAllFrames": true
+    }
+  ],
+  "losslessPanelBordersChecked": 904,
+  "boundsMethod": "Analytical stroked primitive bounds sampled every 0.25ms; actual lossless rendered panel-border pixels checked for every unique movie frame.",
+  "browserExecuted": false,
+  "limitations": [
+    "No real-time human playback claimed. Independent visual decoded-frame review is separate.",
+    "Video compression is lossy; static PNGs preserve exact native pixel scale."
+  ]
+}

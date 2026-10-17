@@ -1,0 +1,135 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Moonlit Bite | full motion proxy</title><style>body{margin:0;background:#091725;color:#dbe9f2;font:16px system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:20px}h1{font-size:24px}p{line-height:1.6}button{font:inherit;background:#1b3c50;color:#e5f2fa;border:1px solid #59758b;border-radius:6px;padding:10px 14px;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #f0bd7d;outline-offset:3px}.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}#seek{flex:1;min-width:220px}#stage{overflow:auto;margin-top:16px}#stage svg{display:block;width:1280px;height:800px}a{color:#9cd4e9}.note{color:#edbf84}</style><main><h1>Moonlit Bite: full motion proxy</h1><p class="note">Temporary wireframe-like model, NOT finished Fenrir artwork. Review alongside the unchanged original standing image supplied separately.</p><div class="controls"><button id="normal">Play 1x</button><button id="slow">Play 0.25x</button><button id="pause">Pause</button><button id="restart">Restart</button><input id="seek" type="range" min="0" max="1500" step="1" value="0" aria-label="Paused animation time in milliseconds"><output id="time"></output></div><p class="controls">Pause at: <button data-ms="0">0 ms</button><button data-ms="180">180 ms</button><button data-ms="360">360 ms</button><button data-ms="500">500 ms</button><button data-ms="800">800 ms</button><button data-ms="890">890 ms</button><button data-ms="930">930 ms</button><button data-ms="970">970 ms</button><button data-ms="1500">1500 ms</button></p><div id="stage" aria-label="Enlarged and 142-pixel nominal-scale motion views"></div><p>Fixed camera and physical scale. The 142px / 420px labels refer to a 240-unit nominal rig width, not the changing silhouette width. The stage is deliberately not responsively rescaled; scroll to keep native pixels.</p><p>Offline evidence was rendered by librsvg/Cairo and decoded with ffmpeg. This HTML was syntax-checked but NOT browser-executed. No game integration, final art, or release acceptance is implied.</p><p><a href="https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/high-leap-timing.mjs">Historical choreography reference</a>. The new root path and phase-aware support model are self-contained, not an exact historical translation replay.</p></main><script>// One full-action motion proxy. Original schematic geometry, not final artwork.
+// The historical choreography is cited in README.md; no historical source import.
+const META = Object.freeze({name:'Moonlit Bite full-action motion proxy',durationMs:1500,impactMs:800,power:55,mp:10,nominalWidth:240,referenceWidths:[142,420],browserVerified:false,gameIntegration:false,finalArtwork:false});
+const BONES = Object.freeze({body:106,neck:28,foreUpper:41,foreLower:38,hindUpper:45,hindLower:48,forePaw:19,hindPaw:23,tail1:40,tail2:34,tail3:24,jaw:22});
+const PHASES = Object.freeze([[0,'STAND'],[100,'LOAD'],[220,'PUSH / TOE ROLL'],[360,'TAKEOFF'],[420,'FLIGHT / TUCK'],[500,'APEX'],[560,'DESCENT'],[760,'BITE APPROACH'],[800,'BITE'],[840,'FOREPAW REACH'],[890,'FORE CONTACT'],[930,'COMPRESSION'],[970,'REAR LANDING'],[1080,'RECOVERY'],[1380,'STAND']]);
+const SUPPORT = Object.freeze({fore:{release:220,land:890,toe:[-122,-5],landingToe:[-157,-5],rollStart:150,rollMax:32},farFore:{release:210,land:900,toe:[-134,-5],landingToe:[-169,-5],rollStart:145,rollMax:29},hind:{release:360,land:970,toe:[20,-5],landingToe:[-15,-5],rollStart:260,rollMax:34},farHind:{release:350,land:980,toe:[12,-5],landingToe:[-23,-5],rollStart:250,rollMax:31}});
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const mix=(a,b,u)=>a+(b-a)*u;
+const add=(a,b)=>a.map((v,i)=>v+b[i]);
+const sub=(a,b)=>a.map((v,i)=>v-b[i]);
+const avg=(a,b)=>a.map((v,i)=>(v+b[i])/2);
+const len=p=>Math.hypot(...p);
+const rad=d=>d*Math.PI/180;
+const vec=(l,a)=>[l*Math.cos(rad(a)),l*Math.sin(rad(a))];
+const point=(p,l,a)=>add(p,vec(l,a));
+const rotate=(p,a)=>[p[0]*Math.cos(rad(a))-p[1]*Math.sin(rad(a)),p[0]*Math.sin(rad(a))+p[1]*Math.cos(rad(a))];
+const smooth=u=>{const v=clamp(u,0,1);return v*v*(3-2*v);};
+const blend=(a,b,u)=>a.map((v,i)=>mix(v,b[i],u));
+
+// Monotone shape-preserving tracks drive the root/axial skeleton and AIR targets.
+// Ground support is not an angle track: each supported toe is fixed in world space.
+function track(keys,t){
+ if(t<=keys[0][0])return keys[0][1];if(t>=keys.at(-1)[0])return keys.at(-1)[1];
+ const h=keys.slice(1).map((k,i)=>k[0]-keys[i][0]);
+ const d=keys.slice(1).map((k,i)=>(k[1]-keys[i][1])/h[i]);
+ const m=keys.map((k,i)=>{if(i===0||i===keys.length-1)return 0;if(d[i-1]*d[i]<=0)return 0;const w1=2*h[i]+h[i-1],w2=h[i]+2*h[i-1];return(w1+w2)/(w1/d[i-1]+w2/d[i]);});
+ const i=keys.findLastIndex(k=>k[0]<=t),u=(t-keys[i][0])/h[i];
+ return(2*u**3-3*u*u+1)*keys[i][1]+(u**3-2*u*u+u)*h[i]*m[i]+(-2*u**3+3*u*u)*keys[i+1][1]+(u**3-u*u)*h[i]*m[i+1];
+}
+function axialAt(t){return {
+ x:track([[0,0],[100,0],[200,-8],[260,-8],[360,-5],[500,-20],[800,-30],[890,-35],[1500,-35]],t),
+ y:track([[0,-70],[100,-70],[200,-47],[260,-58],[360,-82],[500,-148],[800,-113],[890,-79],[930,-54],[970,-64],[1120,-70],[1500,-70]],t),
+ body:track([[0,-180],[100,-180],[200,-170],[260,-156],[360,-137],[430,-160],[500,-178],[660,-199],[800,-205],[890,-187],[930,-180],[1500,-180]],t),
+ neck:track([[0,-158],[100,-158],[200,-170],[360,-142],[500,-188],[660,-210],[800,-218],[890,-178],[1080,-158],[1500,-158]],t),
+ head:track([[0,-180],[100,-180],[200,-185],[360,-143],[500,-190],[660,-212],[760,-220],[800,-222],[890,-190],[1080,-180],[1500,-180]],t),
+ jawOpen:track([[0,0],[620,0],[700,18],[760,36],[800,0],[850,0],[900,4],[1000,0],[1500,0]],t),
+ tail1:track([[0,-20],[100,-20],[200,5],[360,50],[500,20],[800,-15],[970,-25],[1380,-20],[1500,-20]],t),
+ tail2:track([[0,-60],[100,-60],[200,-35],[360,30],[500,0],[800,-35],[970,-65],[1380,-60],[1500,-60]],t),
+ tail3:track([[0,-115],[100,-115],[200,-75],[360,10],[500,-35],[800,-50],[970,-120],[1380,-115],[1500,-115]],t),
+};}
+function ik(origin,target,a,b,bend){
+ const delta=sub(target,origin),d=len(delta);
+ if(d>=a+b||d<=Math.abs(a-b))throw new Error(`Unreachable IK target: ${d} not in (${Math.abs(a-b)},${a+b})`);
+ const base=Math.atan2(delta[1],delta[0]),offset=Math.acos(clamp((a*a+d*d-b*b)/(2*a*d),-1,1));
+ return add(origin,[a*Math.cos(base+bend*offset),a*Math.sin(base+bend*offset)]);
+}
+function airRelative(t,fore,far){
+ const x=fore?track([[0,20],[360,20],[500,0],[650,-8],[800,-24],[1500,-24]],t):track([[0,25],[420,25],[500,18],[650,38],[800,36],[890,27],[1500,27]],t);
+ const y=fore?track([[0,46],[360,46],[500,42],[650,48],[800,38],[1500,38]],t):track([[0,48],[420,48],[500,31],[650,35],[800,38],[890,35],[1500,35]],t);
+ return [x+(far?-8:0),y+(far?-4:0)];
+}
+function footState(stem,origin,t){
+ const s=SUPPORT[stem],fore=stem.toLowerCase().includes('fore'),far=stem.startsWith('far'),release=s.release,land=s.land;
+ let toe,angle,contact;
+ if(t<=release){toe=[...s.toe];angle=180-s.rollMax*smooth((t-s.rollStart)/(release-s.rollStart));contact='planted';}
+ else if(t>=land){toe=[...s.landingToe];angle=180;contact='planted';}
+ else{
+  const airborne=add(origin,airRelative(t,fore,far));
+  toe=blend(s.toe,airborne,smooth((t-release)/(fore?100:60)));
+  const approach=fore?800:890;toe=blend(toe,s.landingToe,smooth((t-approach)/(land-approach)));
+  const airborneAngle=fore?track([[0,148],[360,148],[500,170],[650,190],[800,180],[1500,180]],t):track([[0,146],[420,155],[500,150],[650,155],[800,160],[890,170],[1500,180]],t);
+  angle=mix(180-s.rollMax,airborneAngle,smooth((t-release)/65));angle=mix(angle,180,smooth((t-approach)/(land-approach)));contact='air';
+ }
+ const kind=fore?'fore':'hind',ankle=sub(toe,vec(BONES[kind+'Paw'],angle)),knee=ik(origin,ankle,BONES[kind+'Upper'],BONES[kind+'Lower'],fore?-1:1);
+ return {toe,ankle,knee,angle,contact,reach:len(sub(ankle,origin)),origin};
+}
+function skeletonAt(ms){
+ if(!Number.isFinite(ms))throw new Error('Finite time required');const t=clamp(ms,0,1500),q=axialAt(t),p={hip:[q.x,q.y]},feet={};
+ p.shoulder=point(p.hip,BONES.body,q.body);p.head=point(p.shoulder,BONES.neck,q.neck);
+ p.farShoulder=add(p.shoulder,rotate([-4,-4],q.body+180));p.farHip=add(p.hip,rotate([-5,-5],q.body+180));
+ for(const stem of Object.keys(SUPPORT)){
+  const o=stem==='fore'?'shoulder':stem==='farFore'?'farShoulder':stem==='hind'?'hip':'farHip';const foot=footState(stem,p[o],t);feet[stem]=foot;
+  p[stem+'Knee']=foot.knee;p[stem+'Ankle']=foot.ankle;p[stem+'Toe']=foot.toe;
+ }
+ p.tailBase=point(p.hip,15,q.body+180);p.tail1=point(p.tailBase,BONES.tail1,q.tail1);p.tail2=point(p.tail1,BONES.tail2,q.tail2);p.tail3=point(p.tail2,BONES.tail3,q.tail3);
+ p.muzzle=point(p.head,27,q.head);p.jawHinge=add(point(p.head,3,q.head),vec(5,q.head-90));p.jawTip=point(p.jawHinge,BONES.jaw,q.head-q.jawOpen);
+ return {t,q,p,feet,phase:PHASES.findLast(([n])=>t>=n)[1]};
+}
+function boneEdges(){return[['hip','shoulder','body'],['shoulder','head','neck'],...Object.keys(SUPPORT).flatMap(stem=>{const f=stem.toLowerCase().includes('fore'),a=f?'fore':'hind',o=stem==='fore'?'shoulder':stem==='farFore'?'farShoulder':stem==='hind'?'hip':'farHip';return[[o,stem+'Knee',a+'Upper'],[stem+'Knee',stem+'Ankle',a+'Lower'],[stem+'Ankle',stem+'Toe',a+'Paw']];}),['tailBase','tail1','tail1'],['tail1','tail2','tail2'],['tail2','tail3','tail3'],['jawHinge','jawTip','jaw']];}
+const f=n=>Number(n.toFixed(5));const xy=p=>p.map(f).join(' ');
+const line=(a,b,w,c,dash='')=>`<path d="M ${xy(a)} L ${xy(b)}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round"${dash?' stroke-dasharray="'+dash+'"':''}/>`;
+const oval=(p,rx,ry,a,c,fill='none',w=1.5)=>`<ellipse cx="0" cy="0" rx="${rx}" ry="${ry}" transform="translate(${xy(p)}) rotate(${f(a)})" fill="${fill}" stroke="${c}" stroke-width="${w}"/>`;
+function primitivesAt(ms){
+ const {q,p,feet}=skeletonAt(ms),s=[];const near='#c0dceb',edge='#7fb2cb',far='#638393',bone='#f0af68';
+ const L=(a,b,w,c)=>s.push({kind:'line',a,b,w,c});const O=(p,rx,ry,a,c,fill,w=1.5)=>s.push({kind:'oval',p,rx,ry,a,c,fill,w});
+ function limb(stem,c){const k=feet[stem];L(k.origin,k.knee,stem.toLowerCase().includes('fore')?12:17,c);L(k.knee,k.ankle,8,c);L(k.ankle,k.toe,10,c);L(k.origin,k.knee,1.4,bone);L(k.knee,k.ankle,1.4,bone);L(k.ankle,k.toe,1.4,bone);}
+ limb('farFore',far);limb('farHind',far);
+ L(p.tailBase,p.tail1,12,far);L(p.tail1,p.tail2,8,far);L(p.tail2,p.tail3,5,far);
+ O(avg(p.hip,p.shoulder),65,26,q.body,edge,'#193649',1.6);O(p.shoulder,25,28,q.body,edge,'#193649',1.6);
+ limb('hind',near);limb('fore',near);L(p.hip,p.shoulder,1.5,bone);L(p.shoulder,p.head,19,edge);L(p.shoulder,p.head,1.5,bone);
+ O(p.head,19.5,14.5,q.head,near,'#23485b',1.6);O(point(p.head,22,q.head),13.5,7.5,q.head,near,'#23485b',1.6);
+ L(p.jawHinge,p.jawTip,5,near);L(p.jawHinge,p.jawTip,1.2,bone);
+ const ear=add(p.head,rotate([-5,-11],q.head+180)),e1=add(ear,rotate([-6,0],q.head+180)),e2=add(ear,rotate([3,-15],q.head+180)),e3=add(ear,rotate([8,4],q.head+180));
+ s.push({kind:'triangle',points:[e1,e2,e3],c:near,fill:'#23485b',w:1.5});
+ const eye=add(p.head,rotate([-9,-5],q.head+180));O(eye,2.2,2.2,0,'#7ce4f0','#7ce4f0',0);
+ for(const k of ['hip','shoulder','head','foreKnee','foreAnkle','hindKnee','hindAnkle','tail1','tail2'])O(p[k],2,2,0,bone,bone,.5);
+ return s;
+}
+function actorSvg(ms){return primitivesAt(ms).map(s=>s.kind==='line'?line(s.a,s.b,s.w,s.c):s.kind==='oval'?oval(s.p,s.rx,s.ry,s.a,s.c,s.fill,s.w):`<path d="M ${s.points.map(xy).join(' L ')} Z" fill="${s.fill}" stroke="${s.c}" stroke-width="${s.w}"/>`).join('');}
+function inkBounds(ms){
+ let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;const include=(x,y,rx,ry)=>{x0=Math.min(x0,x-rx);y0=Math.min(y0,y-ry);x1=Math.max(x1,x+rx);y1=Math.max(y1,y+ry);};
+ for(const s of primitivesAt(ms))if(s.kind==='line'){include(...s.a,s.w/2,s.w/2);include(...s.b,s.w/2,s.w/2);}else if(s.kind==='oval'){const a=rad(s.a),rx=Math.hypot(s.rx*Math.cos(a),s.ry*Math.sin(a))+s.w/2,ry=Math.hypot(s.rx*Math.sin(a),s.ry*Math.cos(a))+s.w/2;include(...s.p,rx,ry);}else for(const p of s.points)include(...p,s.w,s.w);
+ return {x0,y0,x1,y1};
+}
+const PANEL = Object.freeze({large:{width:800,height:540,physicalWidth:420,origin:[487,460]},native:{width:360,height:260,physicalWidth:142,origin:[224,202]}});
+function panelSvg(ms,kind){
+ const cfg=PANEL[kind],{width,height,physicalWidth,origin}=cfg,scale=physicalWidth/240,{feet}=skeletonAt(ms);
+ let out=`<svg x="0" y="0" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%" height="100%" rx="12" fill="#122737"/><path d="M 14 ${origin[1]} H ${width-14}" stroke="#516677" stroke-width="1"/><g transform="translate(${xy(origin)}) scale(${scale})">`;
+ for(const [stem,k]of Object.entries(feet))if(k.contact==='planted')out+=`<circle cx="${f(k.toe[0])}" cy="0" r="3" fill="#84e7b1"/>`;
+ out+=actorSvg(ms)+'</g>';
+ out+=`<text x="16" y="25" fill="#b9d5e3" font-size="15">${physicalWidth}px fixed nominal scale${kind==='large'?' / enlarged':''}</text><text x="16" y="${height-16}" fill="#7fa0b4" font-size="13">Green = planted toe. Fixed camera and scale.</text></svg>`;return out;
+}
+const text=(x,y,s,size=18,c='#dbe9f2')=>`<text x="${x}" y="${y}" font-size="${size}" fill="${c}">${s}</text>`;
+function frameSvg(ms,{playback='PAUSED'}={}){
+ const {phase,feet}=skeletonAt(ms);const t=clamp(ms,0,1500);let out=`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="DejaVu Sans,sans-serif"><rect width="1280" height="800" fill="#091725"/>`;
+ out+=text(28,39,'MOONLIT BITE / FULL MOTION PROXY',25)+text(28,70,'Temporary wireframe-like model. NOT finished Fenrir artwork.',18,'#f0bd7d')+text(28,101,`${playback}  |  ${t.toFixed(1)} / 1500 ms  |  ${phase}`,19,'#9ccbdc');
+ out+=`<g transform="translate(28 125)">${panelSvg(t,'large')}</g><g transform="translate(856 125)">${panelSvg(t,'native')}</g>`;
+ out+=text(856,416,'SUPPORT STATE',17,'#aac9dc');let y=444;for(const [k,v]of Object.entries(feet)){out+=text(856,y,`${k.padEnd(8,' ')} : ${v.contact==='planted'?'PLANTED':'AIR'}`,16,v.contact==='planted'?'#84e7b1':'#aac0d0');y+=26;}
+ out+=text(856,570,'Bite: 800 ms',17)+text(856,598,'Power 55 / MP 10 unchanged',15)+text(856,626,'Offline render. Browser untested.',14,'#a5b8c7');
+ out+=`<path d="M 28 698 H 1216" stroke="#344d62" stroke-width="4"/><path d="M 28 698 H ${28+1188*t/1500}" stroke="#82d8c6" stroke-width="4"/>`;
+ for(const [n,label]of [[0,'LOAD'],[360,'TAKEOFF'],[500,'APEX'],[800,'BITE'],[970,'LAND'],[1500,'RECOVER']])out+=`<circle cx="${28+1188*n/1500}" cy="698" r="4" fill="${n===800?'#f0bd7d':'#a1bacd'}"/>`+text(Math.max(28,Math.min(1136,28+1188*n/1500-18)),727,label,12,'#a6bccc');
+ out+=text(28,766,'Review motion together with the unchanged original standing image. No game integration or final-art approval.',15,'#adbfcd');return out+'</svg>';
+}
+
+function playbackState(state,action){
+ const next={...state};
+ if(action.type==='play'){next.playing=true;next.rate=action.rate===.25?.25:1;if(next.ms>=1500)next.ms=0;}
+ else if(action.type==='pause')next.playing=false;
+ else if(action.type==='seek'){next.ms=Math.max(0,Math.min(1500,Number(action.ms)||0));next.playing=false;}
+ else if(action.type==='restart'){next.ms=0;next.playing=true;}
+ else if(action.type==='tick'&&next.playing){next.ms=Math.min(1500,next.ms+Math.max(0,action.delta)*next.rate);if(next.ms===1500)next.playing=false;}
+ return next;
+}
+
+let state={ms:0,rate:1,playing:false},lastClock=null;const stage=document.getElementById('stage'),seek=document.getElementById('seek');function draw(){stage.innerHTML=frameSvg(state.ms,{playback:state.playing?(state.rate===1?'NORMAL 1x':'SLOW 0.25x'):'PAUSED'});seek.value=state.ms;document.getElementById('time').textContent=state.ms.toFixed(1)+' / 1500 ms';}function act(action){state=playbackState(state,action);lastClock=null;draw();}document.getElementById('normal').onclick=()=>act({type:'play',rate:1});document.getElementById('slow').onclick=()=>act({type:'play',rate:.25});document.getElementById('pause').onclick=()=>act({type:'pause'});document.getElementById('restart').onclick=()=>act({type:'restart'});seek.oninput=()=>act({type:'seek',ms:seek.value});document.querySelectorAll('[data-ms]').forEach(b=>b.onclick=()=>act({type:'seek',ms:b.dataset.ms}));function tick(now){if(lastClock!==null)state=playbackState(state,{type:'tick',delta:now-lastClock});lastClock=now;if(state.playing||state.ms===1500)draw();requestAnimationFrame(tick);}draw();requestAnimationFrame(tick);</script></html>

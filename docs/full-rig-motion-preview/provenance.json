@@ -1,0 +1,20 @@
+{
+  "title": "Moonlit Bite full-action contact-constrained motion proxy",
+  "createdUtc": "2026-10-17",
+  "scope": "One full 1500 ms temporary mechanics proposal for owner review beside unchanged original standing image",
+  "sourceKind": "New self-contained schematic vector geometry and kinematic code",
+  "historicalTimingUrl": "https://github.com/miyasakayosuke/kanshu-arena/blob/62fb3a46c05427445922e8e7205c81d8dfd8390b/docs/fenrir-acting-bite/high-leap-timing.mjs",
+  "priorFrozenPilotUrl": "https://github.com/miyasakayosuke/kanshu-arena/tree/40b374c1a1e0e43001b632f72468cd96f8aa07f9/docs/fixed-rig-transition-pilot",
+  "originalReference": {
+    "sha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+    "gitBlob": "31516b206f4796c8bf8848eacc46186c2e43ea42",
+    "inspectedPixels": true,
+    "includedInPackage": false,
+    "modified": false,
+    "newExternalUpload": false
+  },
+  "timing": { "durationMs": 1500, "impactMs": 800, "lastToeReleaseMs": 360, "rootApexMs": 500, "firstForeContactMs": 890, "firstRearContactMs": 970, "power": 55, "mp": 10 },
+  "rendering": { "method": "System librsvg and Cairo", "video": "ffmpeg libx264", "fps": 60, "browserExecuted": false, "normalFrames": 90, "slowFrames": 360, "reviewFrames": 690 },
+  "claims": { "fixedBoneLengths": true, "fixedPartDimensions": true, "phaseAwareWorldSpaceToeSupport": true, "stretchFreeTwoBoneIK": true, "finiteToeRollAndLandingTransitions": true, "exactHistoricalRootPath": false, "originalArtIdentityMatched": false, "finalArtwork": false, "gameIntegration": false, "releaseAcceptance": false },
+  "corrections": "No geometry, design, or framing correction after the first render. Independent visual review is a separate gate."
+}
