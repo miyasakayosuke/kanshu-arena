@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 88,
+  "revision": 89,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1620,6 +1620,21 @@
         },
         "revision": 88
       }
+    },
+    "offscreen-rig-close-five": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "offscreen-rig-builder",
+        "generation": 15,
+        "blockType": "approval",
+        "reason": "One bounded offscreen descent proxy completed; actual worker stopped. All 39 frozen candidate files preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 . Independent initial geometry and actual normal-frame review found the comparison showable; full regenerated-byte comparison and final independent report stopped at a service limit. Scope checkpoint https://github.com/miyasakayosuke/kanshu-arena/blob/cb7fa706a26f0a638c503c81794a850a1c8c1bef/docs/offscreen-rig-motion-preview/REVIEW-CHECKPOINT.md . Owner selected the demonstrated motion direction, not whole-task acceptance. Nine lifetime claims retained and plan five one-claim budget consumed. No final artwork, provenance clearance, browser/game validation, integration or release yet. New final-art preparation needs its own bounded plan and valid assignment. No limit bypass, automatic extra trial, refused reference-copy retry or cancelled old report-write retry.",
+        "operationId": "offscreen-rig-close-five"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 89
+      }
     }
   },
   "tasks": [
@@ -1735,7 +1750,7 @@
       "generation": 15,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1872,11 +1887,10 @@
         }
       ],
       "implementer": "offscreen-rig-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "offscreen-rig-builder",
-        "generation": 15,
-        "expiresAt": 1792202066.5012605
+      "block": {
+        "type": "approval",
+        "reason": "One bounded offscreen descent proxy completed; actual worker stopped. All 39 frozen candidate files preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/ab60358af0967dc932d1b9b0432258f250dbe5a4 . Independent initial geometry and actual normal-frame review found the comparison showable; full regenerated-byte comparison and final independent report stopped at a service limit. Scope checkpoint https://github.com/miyasakayosuke/kanshu-arena/blob/cb7fa706a26f0a638c503c81794a850a1c8c1bef/docs/offscreen-rig-motion-preview/REVIEW-CHECKPOINT.md . Owner selected the demonstrated motion direction, not whole-task acceptance. Nine lifetime claims retained and plan five one-claim budget consumed. No final artwork, provenance clearance, browser/game validation, integration or release yet. New final-art preparation needs its own bounded plan and valid assignment. No limit bypass, automatic extra trial, refused reference-copy retry or cancelled old report-write retry.",
+        "previousRole": "implement"
       }
     },
     {
