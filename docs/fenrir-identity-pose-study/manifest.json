@@ -1,0 +1,182 @@
+{
+  "status": "non-adopted identity pose study; builder self-review only; independent final review unavailable",
+  "reference": {
+    "name": "Canonical Fenrir original PNG",
+    "git_blob_sha1": "31516b206f4796c8bf8848eacc46186c2e43ea42",
+    "sha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+    "unchanged": true
+  },
+  "generation_method": "built-in image_gen with original referenced_image_paths; 3 outputs total; no post-generation pixel edits",
+  "artifacts": [
+    {
+      "file_name": "01-load.png",
+      "bytes": 2468509,
+      "sha256": "0b2f33b05d4e5dfbe91015dc92c687fd0e9ddc0b3539a676a03cc41bf7a04128",
+      "width": 1491,
+      "height": 1055,
+      "mode": "RGBA",
+      "alpha_bounding_boxes_gt_threshold": {
+        "0": [
+          0,
+          15,
+          1491,
+          1055
+        ],
+        "16": [
+          8,
+          18,
+          1490,
+          1055
+        ],
+        "127": [
+          9,
+          18,
+          1489,
+          1054
+        ],
+        "250": [
+          14,
+          21,
+          1474,
+          1053
+        ]
+      },
+      "alpha_histogram_most_common": [
+        [
+          0,
+          626139
+        ],
+        [
+          252,
+          464795
+        ],
+        [
+          253,
+          303675
+        ],
+        [
+          251,
+          35451
+        ],
+        [
+          1,
+          27672
+        ]
+      ]
+    },
+    {
+      "file_name": "02-descending-bite.png",
+      "bytes": 2041166,
+      "sha256": "e44d4404fa408bca16bcae7c505f90dc74582b68d2a22391591249a3662bf50e",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "alpha_bounding_boxes_gt_threshold": {
+        "0": [
+          2,
+          0,
+          1312,
+          1199
+        ],
+        "16": [
+          46,
+          15,
+          1308,
+          1168
+        ],
+        "127": [
+          47,
+          16,
+          1306,
+          1167
+        ],
+        "250": [
+          51,
+          25,
+          1294,
+          1166
+        ]
+      },
+      "alpha_histogram_most_common": [
+        [
+          0,
+          793883
+        ],
+        [
+          252,
+          455929
+        ],
+        [
+          253,
+          158464
+        ],
+        [
+          251,
+          40390
+        ],
+        [
+          1,
+          25751
+        ]
+      ]
+    },
+    {
+      "file_name": "03-landing.png",
+      "bytes": 2407074,
+      "sha256": "0750fd3a70dfd7ad5e5f31226bc0cc5e9af63584179aa9a577d8dc5097d15243",
+      "width": 1312,
+      "height": 1199,
+      "mode": "RGBA",
+      "alpha_bounding_boxes_gt_threshold": {
+        "0": [
+          0,
+          0,
+          1312,
+          1199
+        ],
+        "16": [
+          11,
+          9,
+          1311,
+          1194
+        ],
+        "127": [
+          12,
+          10,
+          1306,
+          1193
+        ],
+        "250": [
+          18,
+          33,
+          1294,
+          1187
+        ]
+      },
+      "alpha_histogram_most_common": [
+        [
+          0,
+          671679
+        ],
+        [
+          252,
+          473073
+        ],
+        [
+          253,
+          222112
+        ],
+        [
+          251,
+          43873
+        ],
+        [
+          1,
+          33704
+        ]
+      ]
+    }
+  ],
+  "prompts": "prompts.json",
+  "identity_notes": "IDENTITY-REVIEW.md"
+}
