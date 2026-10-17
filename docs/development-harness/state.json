@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 79,
+  "revision": 80,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1440,6 +1440,21 @@
         },
         "revision": 79
       }
+    },
+    "fixed-rig-pilot-checkpoint": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "fixed-rig-pilot-builder",
+        "generation": 9,
+        "blockType": "approval",
+        "reason": "One bounded fixed-rig transition trial completed and actual worker stopped. Independent rendered mechanics-only comparison passed; no whole-task submission or release. Candidate https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 . Exact review and remote preservation limitations https://github.com/miyasakayosuke/kanshu-arena/blob/d6aedb9f7c34e3080e1f3d7ca047d2873721b5ed/docs/fixed-rig-transition-pilot/INDEPENDENT-REVIEW.md . Six lifetime claims preserved; one-claim plan exhausted. Full-action temporary-model and original-reference evaluation must use separately verified bounded authorization and a fresh plan/assignment. Final artwork, integration, provenance clearance and release remain pending.",
+        "operationId": "fixed-rig-pilot-checkpoint"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 80
+      }
     }
   },
   "tasks": [
@@ -1555,7 +1570,7 @@
       "generation": 9,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1614,11 +1629,10 @@
         }
       ],
       "implementer": "fixed-rig-pilot-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "fixed-rig-pilot-builder",
-        "generation": 9,
-        "expiresAt": 1792195781.078908
+      "block": {
+        "type": "approval",
+        "reason": "One bounded fixed-rig transition trial completed and actual worker stopped. Independent rendered mechanics-only comparison passed; no whole-task submission or release. Candidate https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 . Exact review and remote preservation limitations https://github.com/miyasakayosuke/kanshu-arena/blob/d6aedb9f7c34e3080e1f3d7ca047d2873721b5ed/docs/fixed-rig-transition-pilot/INDEPENDENT-REVIEW.md . Six lifetime claims preserved; one-claim plan exhausted. Full-action temporary-model and original-reference evaluation must use separately verified bounded authorization and a fresh plan/assignment. Final artwork, integration, provenance clearance and release remain pending.",
+        "previousRole": "implement"
       }
     },
     {
