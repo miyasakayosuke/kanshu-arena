@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 82,
+  "revision": 83,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1500,6 +1500,21 @@
         },
         "revision": 82
       }
+    },
+    "full-rig-close-three": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "full-rig-proxy-builder",
+        "generation": 11,
+        "blockType": "approval",
+        "reason": "One bounded full-action proxy trial completed; actual worker stopped. Candidate preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba . Independent review verified 41 file identities and exact reproduction of three videos, but did not approve mechanics: hind-knee ink intersects ground during 165.00-240.25 ms; current ground test covers paws only. Native limb and bite overlap, minor jaw reopen and translated final stance remain disclosed. Independent report/NEXT-GATES remote tree write was cancelled; their remote preservation is unconfirmed and not retried. Full-motion and unchanged-reference owner evaluation pending. All seven lifetime claims preserved and one-claim plan 3 exhausted; no automatic additional trial. Final artwork, original provenance, browser/game validation, integration and release remain pending.",
+        "operationId": "full-rig-close-three"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 83
+      }
     }
   },
   "tasks": [
@@ -1615,7 +1630,7 @@
       "generation": 11,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1700,11 +1715,10 @@
         }
       ],
       "implementer": "full-rig-proxy-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "full-rig-proxy-builder",
-        "generation": 11,
-        "expiresAt": 1792199000.0702648
+      "block": {
+        "type": "approval",
+        "reason": "One bounded full-action proxy trial completed; actual worker stopped. Candidate preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba . Independent review verified 41 file identities and exact reproduction of three videos, but did not approve mechanics: hind-knee ink intersects ground during 165.00-240.25 ms; current ground test covers paws only. Native limb and bite overlap, minor jaw reopen and translated final stance remain disclosed. Independent report/NEXT-GATES remote tree write was cancelled; their remote preservation is unconfirmed and not retried. Full-motion and unchanged-reference owner evaluation pending. All seven lifetime claims preserved and one-claim plan 3 exhausted; no automatic additional trial. Final artwork, original provenance, browser/game validation, integration and release remain pending.",
+        "previousRole": "implement"
       }
     },
     {
