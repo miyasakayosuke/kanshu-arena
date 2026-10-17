@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 83,
+  "revision": 84,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1515,6 +1515,31 @@
         "status": "blocked",
         "revision": 83
       }
+    },
+    "higher-rig-plan-four": {
+      "command": {
+        "action": "replan",
+        "task": "replacement-animation",
+        "generation": 11,
+        "planRevision": 4,
+        "method": "Higher fixed-size airborne torso trajectory with whole-leg ink ground-clearance constraints and matched-camera old-versus-new comparison",
+        "criteria": [
+          "Raise maximum torso reference ascent from the original standing point from 78 to 117 rig units without changing body dimensions or bone lengths",
+          "Preserve full 1500 ms phase ordering and major bite at 800 ms with stationary supported toes and finite landing transitions",
+          "Remove load-phase hind-knee ground intersection and verify complete leg and body drawing clearance rather than paws alone",
+          "Show original-height and higher-height normal-speed comparison with fixed matching camera scales plus actual native and enlarged slow renders without panel clipping",
+          "Preserve a bounded independently reviewed temporary-model candidate; do not edit original art or perform final art, runtime integration or release"
+        ],
+        "claimBudget": 1,
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/a09a3ea9eae5d69444411822a03fca43ab34a2e3/docs/development-harness/evidence/higher-rig-plan-four.md",
+        "evidence": "Previous actual worker stopped; candidate https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba and known knee-ground defect inspected. Seven lifetime claims and cancelled report preservation retained. Fresh explicit height correction request separately verified.",
+        "operationId": "higher-rig-plan-four"
+      },
+      "result": {
+        "status": "ready",
+        "planRevision": 4,
+        "revision": 84
+      }
     }
   },
   "tasks": [
@@ -1627,10 +1652,10 @@
       ],
       "required": true,
       "attempts": 7,
-      "generation": 11,
+      "generation": 12,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "ready",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1712,14 +1737,34 @@
               "previousRole": "implement"
             }
           }
+        },
+        {
+          "method": "Higher fixed-size airborne torso trajectory with whole-leg ink ground-clearance constraints and matched-camera old-versus-new comparison",
+          "criteria": [
+            "Raise maximum torso reference ascent from the original standing point from 78 to 117 rig units without changing body dimensions or bone lengths",
+            "Preserve full 1500 ms phase ordering and major bite at 800 ms with stationary supported toes and finite landing transitions",
+            "Remove load-phase hind-knee ground intersection and verify complete leg and body drawing clearance rather than paws alone",
+            "Show original-height and higher-height normal-speed comparison with fixed matching camera scales plus actual native and enlarged slow renders without panel clipping",
+            "Preserve a bounded independently reviewed temporary-model candidate; do not edit original art or perform final art, runtime integration or release"
+          ],
+          "claimBudget": 1,
+          "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/a09a3ea9eae5d69444411822a03fca43ab34a2e3/docs/development-harness/evidence/higher-rig-plan-four.md",
+          "evidence": "Previous actual worker stopped; candidate https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba and known knee-ground defect inspected. Seven lifetime claims and cancelled report preservation retained. Fresh explicit height correction request separately verified.",
+          "revision": 4,
+          "startAttempts": 7,
+          "previous": {
+            "attempts": 7,
+            "generation": 11,
+            "status": "blocked",
+            "implementer": "full-rig-proxy-builder",
+            "block": {
+              "type": "approval",
+              "reason": "One bounded full-action proxy trial completed; actual worker stopped. Candidate preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba . Independent review verified 41 file identities and exact reproduction of three videos, but did not approve mechanics: hind-knee ink intersects ground during 165.00-240.25 ms; current ground test covers paws only. Native limb and bite overlap, minor jaw reopen and translated final stance remain disclosed. Independent report/NEXT-GATES remote tree write was cancelled; their remote preservation is unconfirmed and not retried. Full-motion and unchanged-reference owner evaluation pending. All seven lifetime claims preserved and one-claim plan 3 exhausted; no automatic additional trial. Final artwork, original provenance, browser/game validation, integration and release remain pending.",
+              "previousRole": "implement"
+            }
+          }
         }
-      ],
-      "implementer": "full-rig-proxy-builder",
-      "block": {
-        "type": "approval",
-        "reason": "One bounded full-action proxy trial completed; actual worker stopped. Candidate preserved and read back at https://github.com/miyasakayosuke/kanshu-arena/commit/5ec50e4d39a3c49ab9a2b17442e7df871e5aedba . Independent review verified 41 file identities and exact reproduction of three videos, but did not approve mechanics: hind-knee ink intersects ground during 165.00-240.25 ms; current ground test covers paws only. Native limb and bite overlap, minor jaw reopen and translated final stance remain disclosed. Independent report/NEXT-GATES remote tree write was cancelled; their remote preservation is unconfirmed and not retried. Full-motion and unchanged-reference owner evaluation pending. All seven lifetime claims preserved and one-claim plan 3 exhausted; no automatic additional trial. Final artwork, original provenance, browser/game validation, integration and release remain pending.",
-        "previousRole": "implement"
-      }
+      ]
     },
     {
       "id": "v1-acceptance",
