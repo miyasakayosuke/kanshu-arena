@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 91,
+  "revision": 92,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1679,6 +1679,21 @@
         },
         "revision": 91
       }
+    },
+    "identity-poses-close-six": {
+      "command": {
+        "action": "block",
+        "task": "replacement-animation",
+        "worker": "identity-pose-builder",
+        "generation": 17,
+        "blockType": "quality",
+        "reason": "One bounded identity study completed; actual worker stopped after three image-generation outputs. Exact candidate https://github.com/miyasakayosuke/kanshu-arena/commit/a51b3d9c4f08e3f94cd10358593f2e477e8d3e3e preserved with three PNG identities and prompt, manifest and builder review readback. Broad identity is recognizable but face direction, chain topology, fur and proportions vary; load, forepaw tuck and landing do not match selected rig sufficiently. Studies are non-adopted and not final animation frames. Independent final review remains unavailable at service limit; original provenance and precise correction method remain unresolved. Ten lifetime claims and plan six one-claim budget retained. No further generation, artwork edits, full animation, integration or publication without a separately established bounded next step.",
+        "operationId": "identity-poses-close-six"
+      },
+      "result": {
+        "status": "blocked",
+        "revision": 92
+      }
     }
   },
   "tasks": [
@@ -1794,7 +1809,7 @@
       "generation": 17,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "running",
+      "status": "blocked",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1956,11 +1971,10 @@
         }
       ],
       "implementer": "identity-pose-builder",
-      "assignment": {
-        "role": "implement",
-        "worker": "identity-pose-builder",
-        "generation": 17,
-        "expiresAt": 1792203937.6237438
+      "block": {
+        "type": "quality",
+        "reason": "One bounded identity study completed; actual worker stopped after three image-generation outputs. Exact candidate https://github.com/miyasakayosuke/kanshu-arena/commit/a51b3d9c4f08e3f94cd10358593f2e477e8d3e3e preserved with three PNG identities and prompt, manifest and builder review readback. Broad identity is recognizable but face direction, chain topology, fur and proportions vary; load, forepaw tuck and landing do not match selected rig sufficiently. Studies are non-adopted and not final animation frames. Independent final review remains unavailable at service limit; original provenance and precise correction method remain unresolved. Ten lifetime claims and plan six one-claim budget retained. No further generation, artwork edits, full animation, integration or publication without a separately established bounded next step.",
+        "previousRole": "implement"
       }
     },
     {
