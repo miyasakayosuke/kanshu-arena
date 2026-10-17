@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 80,
+  "revision": 81,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1455,6 +1455,31 @@
         "status": "blocked",
         "revision": 80
       }
+    },
+    "full-rig-plan-three": {
+      "command": {
+        "action": "replan",
+        "task": "replacement-animation",
+        "generation": 9,
+        "planRevision": 3,
+        "method": "Phase-aware full-action fixed-skeleton proxy with planted-ground contact constraints and finite takeoff and landing transitions, reviewed beside the unchanged standing reference",
+        "criteria": [
+          "Show one full 1500 ms temporary Moonlit Bite sequence with load, rear push, takeoff, flight, single bite at 800 ms, fore landing, compression, rear landing and recovery",
+          "Maintain invariant bone lengths and body proportions with explicit support targets, tested planted-paw stability and reachable joints",
+          "Provide normal and slow native and enlarged actual renders plus stopped contact phases without camera tracking, fades or final-art generation",
+          "Pair the full proxy review with the existing unchanged standing reference and retain unresolved original provenance",
+          "Preserve candidate source, actual-render evidence and independent exact-commit review; stop before final artwork, game integration or release"
+        ],
+        "claimBudget": 1,
+        "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/0f2478446126513f737355b738d94bc5c4dc8c4e/docs/development-harness/evidence/full-rig-plan-three.md",
+        "evidence": "Actual preceding pilot worker stopped and its local renders and exact remote candidate reviewed. Six lifetime claims and all storage limits preserved. New full-proxy and standing-reference evaluation authorization independently verified; no final-art or release approval. Previous pilot https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 .",
+        "operationId": "full-rig-plan-three"
+      },
+      "result": {
+        "status": "ready",
+        "planRevision": 3,
+        "revision": 81
+      }
     }
   },
   "tasks": [
@@ -1567,10 +1592,10 @@
       ],
       "required": true,
       "attempts": 6,
-      "generation": 9,
+      "generation": 10,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "blocked",
+      "status": "ready",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1626,14 +1651,34 @@
               "previousRole": "implement"
             }
           }
+        },
+        {
+          "method": "Phase-aware full-action fixed-skeleton proxy with planted-ground contact constraints and finite takeoff and landing transitions, reviewed beside the unchanged standing reference",
+          "criteria": [
+            "Show one full 1500 ms temporary Moonlit Bite sequence with load, rear push, takeoff, flight, single bite at 800 ms, fore landing, compression, rear landing and recovery",
+            "Maintain invariant bone lengths and body proportions with explicit support targets, tested planted-paw stability and reachable joints",
+            "Provide normal and slow native and enlarged actual renders plus stopped contact phases without camera tracking, fades or final-art generation",
+            "Pair the full proxy review with the existing unchanged standing reference and retain unresolved original provenance",
+            "Preserve candidate source, actual-render evidence and independent exact-commit review; stop before final artwork, game integration or release"
+          ],
+          "claimBudget": 1,
+          "authorizationRef": "https://github.com/miyasakayosuke/kanshu-arena/blob/0f2478446126513f737355b738d94bc5c4dc8c4e/docs/development-harness/evidence/full-rig-plan-three.md",
+          "evidence": "Actual preceding pilot worker stopped and its local renders and exact remote candidate reviewed. Six lifetime claims and all storage limits preserved. New full-proxy and standing-reference evaluation authorization independently verified; no final-art or release approval. Previous pilot https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 .",
+          "revision": 3,
+          "startAttempts": 6,
+          "previous": {
+            "attempts": 6,
+            "generation": 9,
+            "status": "blocked",
+            "implementer": "fixed-rig-pilot-builder",
+            "block": {
+              "type": "approval",
+              "reason": "One bounded fixed-rig transition trial completed and actual worker stopped. Independent rendered mechanics-only comparison passed; no whole-task submission or release. Candidate https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 . Exact review and remote preservation limitations https://github.com/miyasakayosuke/kanshu-arena/blob/d6aedb9f7c34e3080e1f3d7ca047d2873721b5ed/docs/fixed-rig-transition-pilot/INDEPENDENT-REVIEW.md . Six lifetime claims preserved; one-claim plan exhausted. Full-action temporary-model and original-reference evaluation must use separately verified bounded authorization and a fresh plan/assignment. Final artwork, integration, provenance clearance and release remain pending.",
+              "previousRole": "implement"
+            }
+          }
         }
-      ],
-      "implementer": "fixed-rig-pilot-builder",
-      "block": {
-        "type": "approval",
-        "reason": "One bounded fixed-rig transition trial completed and actual worker stopped. Independent rendered mechanics-only comparison passed; no whole-task submission or release. Candidate https://github.com/miyasakayosuke/kanshu-arena/commit/40b374c1a1e0e43001b632f72468cd96f8aa07f9 . Exact review and remote preservation limitations https://github.com/miyasakayosuke/kanshu-arena/blob/d6aedb9f7c34e3080e1f3d7ca047d2873721b5ed/docs/fixed-rig-transition-pilot/INDEPENDENT-REVIEW.md . Six lifetime claims preserved; one-claim plan exhausted. Full-action temporary-model and original-reference evaluation must use separately verified bounded authorization and a fresh plan/assignment. Final artwork, integration, provenance clearance and release remain pending.",
-        "previousRole": "implement"
-      }
+      ]
     },
     {
       "id": "v1-acceptance",
