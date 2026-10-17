@@ -1,0 +1,86 @@
+{
+  "pass": true,
+  "samples": 6001,
+  "sampleSpacingMs": 0.25,
+  "checks": [
+    {
+      "name": "all actor primitives including whole leg strokes and body stay above ground",
+      "minWholeInkGroundClearance": 0,
+      "worstUpperLeg": {
+        "bottom": -0.5197583944546338,
+        "t": 930,
+        "limb": "hind"
+      },
+      "oldWorstPenetration": {
+        "y": 6.393969056951072,
+        "t": 200
+      }
+    },
+    {
+      "name": "fixed bone lengths over 6001 samples",
+      "maxBoneError": 4.263256414560601e-14
+    },
+    {
+      "name": "world-space planted toe invariance",
+      "maxContactError": 0
+    },
+    {
+      "name": "IK reachability without stretch or clamp",
+      "minReachSlack": 6.550224487274846,
+      "maxReachFraction": 0.9170857659838627
+    },
+    {
+      "name": "paw capsule does not penetrate ground",
+      "maxFootInkY": 0
+    },
+    {
+      "name": "fixed-camera stroked ink bounds",
+      "minMargin": 58
+    },
+    {
+      "name": "quarter-millisecond landmark continuity",
+      "maxStep": 0.4977286086670811
+    },
+    {
+      "name": "finite release/landing and phase boundary transitions",
+      "maxBoundaryDelta": 0.003237041325536698,
+      "maxVelocityJump": 0.00005433228901995292
+    },
+    {
+      "name": "existing hip/root anchor apex rise is exactly 1.5x",
+      "standingY": -70,
+      "oldApexY": -148,
+      "newApexY": -187,
+      "oldRise": 78,
+      "newRise": 117,
+      "ratio": 1.5,
+      "apexMs": 500
+    },
+    {
+      "name": "unchanged bones, primitive dimensions/counts, contact rules, panels, phases and non-Y axial tracks",
+      "pass": true
+    },
+    {
+      "name": "exact proxy standing recovery translated -35 units",
+      "maxReturnError": 1.4210854715202004e-14
+    },
+    {
+      "name": "1500 ms / 800 ms impact / power 55 / MP 10 metadata and jaw closure",
+      "pass": true
+    },
+    {
+      "name": "input guards and finite clamping",
+      "pass": true
+    },
+    {
+      "name": "no source raster, animated scale, opacity concealment or substitutions",
+      "pass": true
+    }
+  ],
+  "limits": [
+    "Focused proxy checks only, not whole-game regression.",
+    "One bounded correction to the frozen schematic: shallower load plus extra airborne root rise; no original-art or physical-simulation claim.",
+    "142/420 px are fixed nominal rig reference scales, not exact silhouette widths.",
+    "Browser and production game were not executed."
+  ]
+}

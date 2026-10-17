@@ -1,0 +1,558 @@
+{
+  "pass": true,
+  "method": "Actual unmasked full-actor alpha pixels rendered by system librsvg/Cairo on a 64-pixel overscan canvas; no clipping region, ground cover, labels, background or original raster.",
+  "timeCoverage": "Every integer ms 0\u20131500 plus every unique normal/slow video time rounded to 1e-6 ms. Geometry additionally sampled every .25 ms.",
+  "views": [
+    {
+      "view": "large",
+      "fixedScale": 1.75,
+      "testedTimestamps": 1801,
+      "maxPixelsBelowGround": 0,
+      "maxPixelsOutsidePanel": 0,
+      "minPanelMarginPx": 71,
+      "oldPositiveControl": {
+        "ms": 200,
+        "groundPixels": 343,
+        "outsidePanelPixels": 0,
+        "alphaBounds": [
+          242,
+          352,
+          697,
+          536
+        ],
+        "panelMarginPx": 68
+      }
+    },
+    {
+      "view": "native",
+      "fixedScale": 0.5916666666666667,
+      "testedTimestamps": 1801,
+      "maxPixelsBelowGround": 0,
+      "maxPixelsOutsidePanel": 0,
+      "minPanelMarginPx": 58,
+      "oldPositiveControl": {
+        "ms": 200,
+        "groundPixels": 50,
+        "outsidePanelPixels": 0,
+        "alphaBounds": [
+          183,
+          208,
+          338,
+          270
+        ],
+        "panelMarginPx": 54
+      }
+    }
+  ],
+  "selectedUnmaskedImages": [
+    {
+      "file": "unmasked-large-0ms.png",
+      "sha256": "813ace134b2c5fc16a06103d7a2e8570687ddd7af8e0dbc6146b55a4eef05997",
+      "ms": 0,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        256,
+        283,
+        680,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-165ms.png",
+      "sha256": "a2045c88d82618c9368ba1acbace18e702bb5c2235d75c99d0b17fc801865e06",
+      "ms": 165,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        245,
+        325,
+        685,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-180ms.png",
+      "sha256": "fca229495eceb0bdd1c09f4902d81a7d4b75094121eb6d58b7f187121de4a787",
+      "ms": 180,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        242,
+        341,
+        688,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-200ms.png",
+      "sha256": "5d489c9273e06333b2f2261f8f75d515dfd986754926904fb385fc0fdb858060",
+      "ms": 200,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        242,
+        338,
+        697,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-220ms.png",
+      "sha256": "ff5f45d9578a73741f844f7e860ea152a837043d9fc03211e1977ddfdf057510",
+      "ms": 220,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        245,
+        324,
+        707,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-240ms.png",
+      "sha256": "1a439c66ae5feb805840793abdde38898bd499e74f7d15420719077b8a847341",
+      "ms": 240,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        250,
+        303,
+        716,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-360ms.png",
+      "sha256": "1443c9553b699e43e527b3e4f6fce182a13520a25d07fc0ca3965f34d85f29c6",
+      "ms": 360,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        315,
+        181,
+        704,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-500ms.png",
+      "sha256": "c8575b91b57706e9e8f898c2858b5453def158d95292cc9d39623daf665c989d",
+      "ms": 500,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        219,
+        139,
+        707,
+        291
+      ],
+      "panelMarginPx": 75
+    },
+    {
+      "file": "unmasked-large-760ms.png",
+      "sha256": "841e9fb8e2c37541ca00a25171ea8ea2acf388ee214805117d5202848c431949",
+      "ms": 760,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        242,
+        220,
+        679,
+        468
+      ],
+      "panelMarginPx": 136
+    },
+    {
+      "file": "unmasked-large-800ms.png",
+      "sha256": "c880bad951e2d970ac8a44da4acf564781265ea346e3f83afef0919bdf463cb8",
+      "ms": 800,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        242,
+        226,
+        671,
+        481
+      ],
+      "panelMarginPx": 123
+    },
+    {
+      "file": "unmasked-large-889ms.png",
+      "sha256": "2150386a68ec61ccd17553891d1fdd0eec549a644163d1a65c15a3915b7c46bd",
+      "ms": 889,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        194,
+        261,
+        623,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-890ms.png",
+      "sha256": "3bb27b62129a0dd2a13f9c76334381ca469ee2d1c0ae3888bd898245baddbb1c",
+      "ms": 890,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        193,
+        261,
+        623,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-900ms.png",
+      "sha256": "e3c7252ca4c5b160f0852bfe9db6d56c9f12e7a0fcc314104246c087d9ef6bad",
+      "ms": 900,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        193,
+        272,
+        621,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-930ms.png",
+      "sha256": "51163870a6e604846286e4fe42dd59f7cf2233992feec9a57b9cf4a8ae709138",
+      "ms": 930,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        192,
+        304,
+        615,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-969ms.png",
+      "sha256": "43a3efa2adf84efccb75f7f64164ede8866d5dfd09bc13e7928aa1255ad7ccdd",
+      "ms": 969,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        193,
+        287,
+        612,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-970ms.png",
+      "sha256": "cf992d5eefdd3fd7e2c95a231c8668941749094e45b69991c047c55b0332ad38",
+      "ms": 970,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        193,
+        287,
+        612,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-980ms.png",
+      "sha256": "109ac995268a5f8d5ba72ad84c9c7c87f088f157611ecf4b7ed979c1914f41c2",
+      "ms": 980,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        193,
+        286,
+        612,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-large-1500ms.png",
+      "sha256": "35567648a2bd7eb9d5ecdbe7d10a3b6d364fdabe35a769a4fe01974973bc74b9",
+      "ms": 1500,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        195,
+        283,
+        619,
+        524
+      ],
+      "panelMarginPx": 80
+    },
+    {
+      "file": "unmasked-native-0ms.png",
+      "sha256": "3104ba21e95cce139e2e09e001e1dd4b5b33fe174d80e85e97e65a9666efd9eb",
+      "ms": 0,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        188,
+        184,
+        332,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-165ms.png",
+      "sha256": "473f061a1315d444ddfa1900b96e325126c90b0677dc2cb4018ecb5f972253b1",
+      "ms": 165,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        184,
+        199,
+        334,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-180ms.png",
+      "sha256": "c703d4c30d2731f5e1696c45b66f8004f0368b9a44bb21c3b7934ba38da92369",
+      "ms": 180,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        183,
+        204,
+        335,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-200ms.png",
+      "sha256": "7fd1c3d6239180038c94b0ba2d133ad43ab98ea4982267ce20fde1e7b093a6b7",
+      "ms": 200,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        183,
+        203,
+        338,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-220ms.png",
+      "sha256": "ac7a1585de2c64bcd7c98c2e22fdd91c0b8a5b963993a2708744fafda677a07c",
+      "ms": 220,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        184,
+        198,
+        341,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-240ms.png",
+      "sha256": "e5c7760550c240253c5846a3aa1b366e281c3d3f35207c0a8935f920a573c454",
+      "ms": 240,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        186,
+        191,
+        344,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-360ms.png",
+      "sha256": "0e95321e58b3a22a96e3218519f9ea088a7a173474a08241f40577b7f9e04070",
+      "ms": 360,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        208,
+        150,
+        340,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-500ms.png",
+      "sha256": "81415eca986f73ce5bdc6cc25747d3ee67540b29ab986ecd5d5600c9ee8312d8",
+      "ms": 500,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        175,
+        136,
+        341,
+        187
+      ],
+      "panelMarginPx": 72
+    },
+    {
+      "file": "unmasked-native-760ms.png",
+      "sha256": "1469bf0718c3d7427c7ca02b68bb2740284a78ceb00a7b6008d7beceef46a814",
+      "ms": 760,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        183,
+        163,
+        332,
+        247
+      ],
+      "panelMarginPx": 77
+    },
+    {
+      "file": "unmasked-native-800ms.png",
+      "sha256": "a8b4499070082dc2e9d7cefbe2e68baaf2bebbea2da49e11a846d63a3fbc98a7",
+      "ms": 800,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        183,
+        165,
+        329,
+        252
+      ],
+      "panelMarginPx": 72
+    },
+    {
+      "file": "unmasked-native-889ms.png",
+      "sha256": "f3de564b8abb436035e79a41ce4ca20ae8190adc7a8242c7a026030d90247c1c",
+      "ms": 889,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        177,
+        313,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-890ms.png",
+      "sha256": "c9be7fde42cbd476d79034fc9753c828d04e86ad1dd30416686033a4c0846473",
+      "ms": 890,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        177,
+        313,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-900ms.png",
+      "sha256": "e1f59fd7477d2971dd671afd8088e713de7d04a81beb2e2c7192ea4c4837da8e",
+      "ms": 900,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        181,
+        312,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-930ms.png",
+      "sha256": "b143ba936902ff5c3480ecb38ab8ea144f8a4b2d2b8ac74cf0c11ff738b26908",
+      "ms": 930,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        166,
+        191,
+        310,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-969ms.png",
+      "sha256": "e4b27ee737da973beaa88d2af5958df3568cacb3e89c0c5ab881dc81030722e3",
+      "ms": 969,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        186,
+        309,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-970ms.png",
+      "sha256": "3c9ab9936186d19d45ec0c8b7f489175e52ed4b07954c0a4e868a07eaa7c3746",
+      "ms": 970,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        186,
+        309,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-980ms.png",
+      "sha256": "c72810c85cbc662bc7d279c751221c6e8569ccbc7755bf144f782151d898e4e0",
+      "ms": 980,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        185,
+        309,
+        266
+      ],
+      "panelMarginPx": 58
+    },
+    {
+      "file": "unmasked-native-1500ms.png",
+      "sha256": "52af25ceece6f0f0aeefda99d27af4de06af2bd96607c070c8b00c34c8ac3b6d",
+      "ms": 1500,
+      "groundPixels": 0,
+      "outsidePanelPixels": 0,
+      "alphaBounds": [
+        167,
+        184,
+        311,
+        266
+      ],
+      "panelMarginPx": 58
+    }
+  ],
+  "browserExecuted": false,
+  "limits": [
+    "Raster coverage is sampled, not a continuous-time proof.",
+    "Alpha ink geometry test is not anatomical self-collision or physically realistic weight validation."
+  ]
+}

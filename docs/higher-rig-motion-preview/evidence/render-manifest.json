@@ -1,0 +1,4233 @@
+{
+  "fps": 60,
+  "width": 1280,
+  "height": 800,
+  "comparisonWidth": 1680,
+  "comparisonHeight": 1000,
+  "frames": [
+    {
+      "file": "comparison-000.svg",
+      "ms": 0,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-001.svg",
+      "ms": 16.666666666666668,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-002.svg",
+      "ms": 33.333333333333336,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-003.svg",
+      "ms": 50,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-004.svg",
+      "ms": 66.66666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-005.svg",
+      "ms": 83.33333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-006.svg",
+      "ms": 100,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-007.svg",
+      "ms": 116.66666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-008.svg",
+      "ms": 133.33333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-009.svg",
+      "ms": 150,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-010.svg",
+      "ms": 166.66666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-011.svg",
+      "ms": 183.33333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-012.svg",
+      "ms": 200,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-013.svg",
+      "ms": 216.66666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-014.svg",
+      "ms": 233.33333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-015.svg",
+      "ms": 250,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-016.svg",
+      "ms": 266.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-017.svg",
+      "ms": 283.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-018.svg",
+      "ms": 300,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-019.svg",
+      "ms": 316.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-020.svg",
+      "ms": 333.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-021.svg",
+      "ms": 350,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-022.svg",
+      "ms": 366.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-023.svg",
+      "ms": 383.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-024.svg",
+      "ms": 400,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-025.svg",
+      "ms": 416.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-026.svg",
+      "ms": 433.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-027.svg",
+      "ms": 450,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-028.svg",
+      "ms": 466.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-029.svg",
+      "ms": 483.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-030.svg",
+      "ms": 500,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-031.svg",
+      "ms": 516.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-032.svg",
+      "ms": 533.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-033.svg",
+      "ms": 550,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-034.svg",
+      "ms": 566.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-035.svg",
+      "ms": 583.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-036.svg",
+      "ms": 600,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-037.svg",
+      "ms": 616.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-038.svg",
+      "ms": 633.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-039.svg",
+      "ms": 650,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-040.svg",
+      "ms": 666.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-041.svg",
+      "ms": 683.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-042.svg",
+      "ms": 700,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-043.svg",
+      "ms": 716.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-044.svg",
+      "ms": 733.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-045.svg",
+      "ms": 750,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-046.svg",
+      "ms": 766.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-047.svg",
+      "ms": 783.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-048.svg",
+      "ms": 800,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-049.svg",
+      "ms": 816.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-050.svg",
+      "ms": 833.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-051.svg",
+      "ms": 850,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-052.svg",
+      "ms": 866.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-053.svg",
+      "ms": 883.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-054.svg",
+      "ms": 900,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-055.svg",
+      "ms": 916.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-056.svg",
+      "ms": 933.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-057.svg",
+      "ms": 950,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-058.svg",
+      "ms": 966.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-059.svg",
+      "ms": 983.3333333333334,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-060.svg",
+      "ms": 1000,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-061.svg",
+      "ms": 1016.6666666666666,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-062.svg",
+      "ms": 1033.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-063.svg",
+      "ms": 1050,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-064.svg",
+      "ms": 1066.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-065.svg",
+      "ms": 1083.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-066.svg",
+      "ms": 1100,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-067.svg",
+      "ms": 1116.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-068.svg",
+      "ms": 1133.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-069.svg",
+      "ms": 1150,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-070.svg",
+      "ms": 1166.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-071.svg",
+      "ms": 1183.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-072.svg",
+      "ms": 1200,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-073.svg",
+      "ms": 1216.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-074.svg",
+      "ms": 1233.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-075.svg",
+      "ms": 1250,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-076.svg",
+      "ms": 1266.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-077.svg",
+      "ms": 1283.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-078.svg",
+      "ms": 1300,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-079.svg",
+      "ms": 1316.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-080.svg",
+      "ms": 1333.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-081.svg",
+      "ms": 1350,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-082.svg",
+      "ms": 1366.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-083.svg",
+      "ms": 1383.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-084.svg",
+      "ms": 1400,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-085.svg",
+      "ms": 1416.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-086.svg",
+      "ms": 1433.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-087.svg",
+      "ms": 1450,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-088.svg",
+      "ms": 1466.6666666666667,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-089.svg",
+      "ms": 1483.3333333333333,
+      "label": "COMPARISON NORMAL 1x",
+      "comparison": true
+    },
+    {
+      "file": "comparison-hold-start.svg",
+      "ms": 0,
+      "label": "COMPARISON HOLD",
+      "comparison": true
+    },
+    {
+      "file": "comparison-hold-end.svg",
+      "ms": 1500,
+      "label": "COMPARISON HOLD",
+      "comparison": true
+    },
+    {
+      "file": "normal-000.svg",
+      "ms": 0,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-001.svg",
+      "ms": 16.666666666666668,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-002.svg",
+      "ms": 33.333333333333336,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-003.svg",
+      "ms": 50,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-004.svg",
+      "ms": 66.66666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-005.svg",
+      "ms": 83.33333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-006.svg",
+      "ms": 100,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-007.svg",
+      "ms": 116.66666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-008.svg",
+      "ms": 133.33333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-009.svg",
+      "ms": 150,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-010.svg",
+      "ms": 166.66666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-011.svg",
+      "ms": 183.33333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-012.svg",
+      "ms": 200,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-013.svg",
+      "ms": 216.66666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-014.svg",
+      "ms": 233.33333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-015.svg",
+      "ms": 250,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-016.svg",
+      "ms": 266.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-017.svg",
+      "ms": 283.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-018.svg",
+      "ms": 300,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-019.svg",
+      "ms": 316.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-020.svg",
+      "ms": 333.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-021.svg",
+      "ms": 350,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-022.svg",
+      "ms": 366.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-023.svg",
+      "ms": 383.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-024.svg",
+      "ms": 400,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-025.svg",
+      "ms": 416.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-026.svg",
+      "ms": 433.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-027.svg",
+      "ms": 450,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-028.svg",
+      "ms": 466.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-029.svg",
+      "ms": 483.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-030.svg",
+      "ms": 500,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-031.svg",
+      "ms": 516.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-032.svg",
+      "ms": 533.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-033.svg",
+      "ms": 550,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-034.svg",
+      "ms": 566.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-035.svg",
+      "ms": 583.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-036.svg",
+      "ms": 600,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-037.svg",
+      "ms": 616.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-038.svg",
+      "ms": 633.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-039.svg",
+      "ms": 650,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-040.svg",
+      "ms": 666.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-041.svg",
+      "ms": 683.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-042.svg",
+      "ms": 700,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-043.svg",
+      "ms": 716.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-044.svg",
+      "ms": 733.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-045.svg",
+      "ms": 750,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-046.svg",
+      "ms": 766.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-047.svg",
+      "ms": 783.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-048.svg",
+      "ms": 800,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-049.svg",
+      "ms": 816.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-050.svg",
+      "ms": 833.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-051.svg",
+      "ms": 850,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-052.svg",
+      "ms": 866.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-053.svg",
+      "ms": 883.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-054.svg",
+      "ms": 900,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-055.svg",
+      "ms": 916.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-056.svg",
+      "ms": 933.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-057.svg",
+      "ms": 950,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-058.svg",
+      "ms": 966.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-059.svg",
+      "ms": 983.3333333333334,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-060.svg",
+      "ms": 1000,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-061.svg",
+      "ms": 1016.6666666666666,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-062.svg",
+      "ms": 1033.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-063.svg",
+      "ms": 1050,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-064.svg",
+      "ms": 1066.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-065.svg",
+      "ms": 1083.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-066.svg",
+      "ms": 1100,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-067.svg",
+      "ms": 1116.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-068.svg",
+      "ms": 1133.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-069.svg",
+      "ms": 1150,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-070.svg",
+      "ms": 1166.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-071.svg",
+      "ms": 1183.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-072.svg",
+      "ms": 1200,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-073.svg",
+      "ms": 1216.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-074.svg",
+      "ms": 1233.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-075.svg",
+      "ms": 1250,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-076.svg",
+      "ms": 1266.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-077.svg",
+      "ms": 1283.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-078.svg",
+      "ms": 1300,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-079.svg",
+      "ms": 1316.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-080.svg",
+      "ms": 1333.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-081.svg",
+      "ms": 1350,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-082.svg",
+      "ms": 1366.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-083.svg",
+      "ms": 1383.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-084.svg",
+      "ms": 1400,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-085.svg",
+      "ms": 1416.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-086.svg",
+      "ms": 1433.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-087.svg",
+      "ms": 1450,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-088.svg",
+      "ms": 1466.6666666666667,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "normal-089.svg",
+      "ms": 1483.3333333333333,
+      "label": "NORMAL 1x"
+    },
+    {
+      "file": "slow-000.svg",
+      "ms": 0,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-001.svg",
+      "ms": 4.166666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-002.svg",
+      "ms": 8.333333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-003.svg",
+      "ms": 12.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-004.svg",
+      "ms": 16.666666666666668,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-005.svg",
+      "ms": 20.833333333333332,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-006.svg",
+      "ms": 25,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-007.svg",
+      "ms": 29.166666666666668,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-008.svg",
+      "ms": 33.333333333333336,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-009.svg",
+      "ms": 37.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-010.svg",
+      "ms": 41.666666666666664,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-011.svg",
+      "ms": 45.833333333333336,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-012.svg",
+      "ms": 50,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-013.svg",
+      "ms": 54.166666666666664,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-014.svg",
+      "ms": 58.333333333333336,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-015.svg",
+      "ms": 62.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-016.svg",
+      "ms": 66.66666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-017.svg",
+      "ms": 70.83333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-018.svg",
+      "ms": 75,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-019.svg",
+      "ms": 79.16666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-020.svg",
+      "ms": 83.33333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-021.svg",
+      "ms": 87.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-022.svg",
+      "ms": 91.66666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-023.svg",
+      "ms": 95.83333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-024.svg",
+      "ms": 100,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-025.svg",
+      "ms": 104.16666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-026.svg",
+      "ms": 108.33333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-027.svg",
+      "ms": 112.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-028.svg",
+      "ms": 116.66666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-029.svg",
+      "ms": 120.83333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-030.svg",
+      "ms": 125,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-031.svg",
+      "ms": 129.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-032.svg",
+      "ms": 133.33333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-033.svg",
+      "ms": 137.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-034.svg",
+      "ms": 141.66666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-035.svg",
+      "ms": 145.83333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-036.svg",
+      "ms": 150,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-037.svg",
+      "ms": 154.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-038.svg",
+      "ms": 158.33333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-039.svg",
+      "ms": 162.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-040.svg",
+      "ms": 166.66666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-041.svg",
+      "ms": 170.83333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-042.svg",
+      "ms": 175,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-043.svg",
+      "ms": 179.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-044.svg",
+      "ms": 183.33333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-045.svg",
+      "ms": 187.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-046.svg",
+      "ms": 191.66666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-047.svg",
+      "ms": 195.83333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-048.svg",
+      "ms": 200,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-049.svg",
+      "ms": 204.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-050.svg",
+      "ms": 208.33333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-051.svg",
+      "ms": 212.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-052.svg",
+      "ms": 216.66666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-053.svg",
+      "ms": 220.83333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-054.svg",
+      "ms": 225,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-055.svg",
+      "ms": 229.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-056.svg",
+      "ms": 233.33333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-057.svg",
+      "ms": 237.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-058.svg",
+      "ms": 241.66666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-059.svg",
+      "ms": 245.83333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-060.svg",
+      "ms": 250,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-061.svg",
+      "ms": 254.16666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-062.svg",
+      "ms": 258.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-063.svg",
+      "ms": 262.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-064.svg",
+      "ms": 266.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-065.svg",
+      "ms": 270.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-066.svg",
+      "ms": 275,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-067.svg",
+      "ms": 279.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-068.svg",
+      "ms": 283.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-069.svg",
+      "ms": 287.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-070.svg",
+      "ms": 291.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-071.svg",
+      "ms": 295.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-072.svg",
+      "ms": 300,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-073.svg",
+      "ms": 304.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-074.svg",
+      "ms": 308.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-075.svg",
+      "ms": 312.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-076.svg",
+      "ms": 316.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-077.svg",
+      "ms": 320.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-078.svg",
+      "ms": 325,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-079.svg",
+      "ms": 329.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-080.svg",
+      "ms": 333.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-081.svg",
+      "ms": 337.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-082.svg",
+      "ms": 341.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-083.svg",
+      "ms": 345.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-084.svg",
+      "ms": 350,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-085.svg",
+      "ms": 354.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-086.svg",
+      "ms": 358.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-087.svg",
+      "ms": 362.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-088.svg",
+      "ms": 366.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-089.svg",
+      "ms": 370.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-090.svg",
+      "ms": 375,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-091.svg",
+      "ms": 379.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-092.svg",
+      "ms": 383.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-093.svg",
+      "ms": 387.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-094.svg",
+      "ms": 391.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-095.svg",
+      "ms": 395.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-096.svg",
+      "ms": 400,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-097.svg",
+      "ms": 404.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-098.svg",
+      "ms": 408.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-099.svg",
+      "ms": 412.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-100.svg",
+      "ms": 416.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-101.svg",
+      "ms": 420.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-102.svg",
+      "ms": 425,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-103.svg",
+      "ms": 429.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-104.svg",
+      "ms": 433.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-105.svg",
+      "ms": 437.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-106.svg",
+      "ms": 441.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-107.svg",
+      "ms": 445.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-108.svg",
+      "ms": 450,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-109.svg",
+      "ms": 454.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-110.svg",
+      "ms": 458.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-111.svg",
+      "ms": 462.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-112.svg",
+      "ms": 466.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-113.svg",
+      "ms": 470.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-114.svg",
+      "ms": 475,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-115.svg",
+      "ms": 479.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-116.svg",
+      "ms": 483.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-117.svg",
+      "ms": 487.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-118.svg",
+      "ms": 491.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-119.svg",
+      "ms": 495.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-120.svg",
+      "ms": 500,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-121.svg",
+      "ms": 504.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-122.svg",
+      "ms": 508.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-123.svg",
+      "ms": 512.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-124.svg",
+      "ms": 516.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-125.svg",
+      "ms": 520.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-126.svg",
+      "ms": 525,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-127.svg",
+      "ms": 529.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-128.svg",
+      "ms": 533.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-129.svg",
+      "ms": 537.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-130.svg",
+      "ms": 541.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-131.svg",
+      "ms": 545.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-132.svg",
+      "ms": 550,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-133.svg",
+      "ms": 554.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-134.svg",
+      "ms": 558.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-135.svg",
+      "ms": 562.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-136.svg",
+      "ms": 566.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-137.svg",
+      "ms": 570.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-138.svg",
+      "ms": 575,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-139.svg",
+      "ms": 579.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-140.svg",
+      "ms": 583.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-141.svg",
+      "ms": 587.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-142.svg",
+      "ms": 591.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-143.svg",
+      "ms": 595.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-144.svg",
+      "ms": 600,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-145.svg",
+      "ms": 604.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-146.svg",
+      "ms": 608.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-147.svg",
+      "ms": 612.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-148.svg",
+      "ms": 616.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-149.svg",
+      "ms": 620.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-150.svg",
+      "ms": 625,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-151.svg",
+      "ms": 629.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-152.svg",
+      "ms": 633.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-153.svg",
+      "ms": 637.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-154.svg",
+      "ms": 641.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-155.svg",
+      "ms": 645.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-156.svg",
+      "ms": 650,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-157.svg",
+      "ms": 654.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-158.svg",
+      "ms": 658.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-159.svg",
+      "ms": 662.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-160.svg",
+      "ms": 666.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-161.svg",
+      "ms": 670.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-162.svg",
+      "ms": 675,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-163.svg",
+      "ms": 679.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-164.svg",
+      "ms": 683.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-165.svg",
+      "ms": 687.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-166.svg",
+      "ms": 691.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-167.svg",
+      "ms": 695.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-168.svg",
+      "ms": 700,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-169.svg",
+      "ms": 704.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-170.svg",
+      "ms": 708.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-171.svg",
+      "ms": 712.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-172.svg",
+      "ms": 716.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-173.svg",
+      "ms": 720.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-174.svg",
+      "ms": 725,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-175.svg",
+      "ms": 729.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-176.svg",
+      "ms": 733.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-177.svg",
+      "ms": 737.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-178.svg",
+      "ms": 741.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-179.svg",
+      "ms": 745.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-180.svg",
+      "ms": 750,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-181.svg",
+      "ms": 754.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-182.svg",
+      "ms": 758.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-183.svg",
+      "ms": 762.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-184.svg",
+      "ms": 766.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-185.svg",
+      "ms": 770.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-186.svg",
+      "ms": 775,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-187.svg",
+      "ms": 779.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-188.svg",
+      "ms": 783.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-189.svg",
+      "ms": 787.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-190.svg",
+      "ms": 791.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-191.svg",
+      "ms": 795.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-192.svg",
+      "ms": 800,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-193.svg",
+      "ms": 804.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-194.svg",
+      "ms": 808.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-195.svg",
+      "ms": 812.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-196.svg",
+      "ms": 816.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-197.svg",
+      "ms": 820.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-198.svg",
+      "ms": 825,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-199.svg",
+      "ms": 829.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-200.svg",
+      "ms": 833.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-201.svg",
+      "ms": 837.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-202.svg",
+      "ms": 841.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-203.svg",
+      "ms": 845.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-204.svg",
+      "ms": 850,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-205.svg",
+      "ms": 854.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-206.svg",
+      "ms": 858.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-207.svg",
+      "ms": 862.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-208.svg",
+      "ms": 866.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-209.svg",
+      "ms": 870.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-210.svg",
+      "ms": 875,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-211.svg",
+      "ms": 879.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-212.svg",
+      "ms": 883.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-213.svg",
+      "ms": 887.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-214.svg",
+      "ms": 891.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-215.svg",
+      "ms": 895.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-216.svg",
+      "ms": 900,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-217.svg",
+      "ms": 904.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-218.svg",
+      "ms": 908.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-219.svg",
+      "ms": 912.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-220.svg",
+      "ms": 916.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-221.svg",
+      "ms": 920.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-222.svg",
+      "ms": 925,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-223.svg",
+      "ms": 929.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-224.svg",
+      "ms": 933.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-225.svg",
+      "ms": 937.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-226.svg",
+      "ms": 941.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-227.svg",
+      "ms": 945.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-228.svg",
+      "ms": 950,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-229.svg",
+      "ms": 954.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-230.svg",
+      "ms": 958.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-231.svg",
+      "ms": 962.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-232.svg",
+      "ms": 966.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-233.svg",
+      "ms": 970.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-234.svg",
+      "ms": 975,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-235.svg",
+      "ms": 979.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-236.svg",
+      "ms": 983.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-237.svg",
+      "ms": 987.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-238.svg",
+      "ms": 991.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-239.svg",
+      "ms": 995.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-240.svg",
+      "ms": 1000,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-241.svg",
+      "ms": 1004.1666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-242.svg",
+      "ms": 1008.3333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-243.svg",
+      "ms": 1012.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-244.svg",
+      "ms": 1016.6666666666666,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-245.svg",
+      "ms": 1020.8333333333334,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-246.svg",
+      "ms": 1025,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-247.svg",
+      "ms": 1029.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-248.svg",
+      "ms": 1033.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-249.svg",
+      "ms": 1037.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-250.svg",
+      "ms": 1041.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-251.svg",
+      "ms": 1045.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-252.svg",
+      "ms": 1050,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-253.svg",
+      "ms": 1054.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-254.svg",
+      "ms": 1058.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-255.svg",
+      "ms": 1062.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-256.svg",
+      "ms": 1066.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-257.svg",
+      "ms": 1070.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-258.svg",
+      "ms": 1075,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-259.svg",
+      "ms": 1079.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-260.svg",
+      "ms": 1083.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-261.svg",
+      "ms": 1087.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-262.svg",
+      "ms": 1091.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-263.svg",
+      "ms": 1095.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-264.svg",
+      "ms": 1100,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-265.svg",
+      "ms": 1104.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-266.svg",
+      "ms": 1108.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-267.svg",
+      "ms": 1112.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-268.svg",
+      "ms": 1116.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-269.svg",
+      "ms": 1120.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-270.svg",
+      "ms": 1125,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-271.svg",
+      "ms": 1129.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-272.svg",
+      "ms": 1133.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-273.svg",
+      "ms": 1137.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-274.svg",
+      "ms": 1141.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-275.svg",
+      "ms": 1145.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-276.svg",
+      "ms": 1150,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-277.svg",
+      "ms": 1154.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-278.svg",
+      "ms": 1158.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-279.svg",
+      "ms": 1162.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-280.svg",
+      "ms": 1166.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-281.svg",
+      "ms": 1170.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-282.svg",
+      "ms": 1175,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-283.svg",
+      "ms": 1179.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-284.svg",
+      "ms": 1183.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-285.svg",
+      "ms": 1187.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-286.svg",
+      "ms": 1191.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-287.svg",
+      "ms": 1195.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-288.svg",
+      "ms": 1200,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-289.svg",
+      "ms": 1204.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-290.svg",
+      "ms": 1208.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-291.svg",
+      "ms": 1212.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-292.svg",
+      "ms": 1216.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-293.svg",
+      "ms": 1220.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-294.svg",
+      "ms": 1225,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-295.svg",
+      "ms": 1229.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-296.svg",
+      "ms": 1233.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-297.svg",
+      "ms": 1237.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-298.svg",
+      "ms": 1241.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-299.svg",
+      "ms": 1245.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-300.svg",
+      "ms": 1250,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-301.svg",
+      "ms": 1254.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-302.svg",
+      "ms": 1258.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-303.svg",
+      "ms": 1262.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-304.svg",
+      "ms": 1266.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-305.svg",
+      "ms": 1270.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-306.svg",
+      "ms": 1275,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-307.svg",
+      "ms": 1279.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-308.svg",
+      "ms": 1283.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-309.svg",
+      "ms": 1287.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-310.svg",
+      "ms": 1291.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-311.svg",
+      "ms": 1295.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-312.svg",
+      "ms": 1300,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-313.svg",
+      "ms": 1304.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-314.svg",
+      "ms": 1308.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-315.svg",
+      "ms": 1312.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-316.svg",
+      "ms": 1316.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-317.svg",
+      "ms": 1320.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-318.svg",
+      "ms": 1325,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-319.svg",
+      "ms": 1329.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-320.svg",
+      "ms": 1333.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-321.svg",
+      "ms": 1337.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-322.svg",
+      "ms": 1341.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-323.svg",
+      "ms": 1345.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-324.svg",
+      "ms": 1350,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-325.svg",
+      "ms": 1354.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-326.svg",
+      "ms": 1358.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-327.svg",
+      "ms": 1362.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-328.svg",
+      "ms": 1366.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-329.svg",
+      "ms": 1370.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-330.svg",
+      "ms": 1375,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-331.svg",
+      "ms": 1379.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-332.svg",
+      "ms": 1383.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-333.svg",
+      "ms": 1387.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-334.svg",
+      "ms": 1391.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-335.svg",
+      "ms": 1395.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-336.svg",
+      "ms": 1400,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-337.svg",
+      "ms": 1404.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-338.svg",
+      "ms": 1408.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-339.svg",
+      "ms": 1412.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-340.svg",
+      "ms": 1416.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-341.svg",
+      "ms": 1420.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-342.svg",
+      "ms": 1425,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-343.svg",
+      "ms": 1429.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-344.svg",
+      "ms": 1433.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-345.svg",
+      "ms": 1437.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-346.svg",
+      "ms": 1441.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-347.svg",
+      "ms": 1445.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-348.svg",
+      "ms": 1450,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-349.svg",
+      "ms": 1454.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-350.svg",
+      "ms": 1458.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-351.svg",
+      "ms": 1462.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-352.svg",
+      "ms": 1466.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-353.svg",
+      "ms": 1470.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-354.svg",
+      "ms": 1475,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-355.svg",
+      "ms": 1479.1666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-356.svg",
+      "ms": 1483.3333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-357.svg",
+      "ms": 1487.5,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-358.svg",
+      "ms": 1491.6666666666667,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "slow-359.svg",
+      "ms": 1495.8333333333333,
+      "label": "SLOW 0.25x"
+    },
+    {
+      "file": "hold-start.svg",
+      "ms": 0,
+      "label": "START HOLD / 0 ms"
+    },
+    {
+      "file": "hold-end.svg",
+      "ms": 1500,
+      "label": "END HOLD / 1500 ms"
+    }
+  ],
+  "clips": {
+    "normal": [
+      "normal-000.png",
+      "normal-001.png",
+      "normal-002.png",
+      "normal-003.png",
+      "normal-004.png",
+      "normal-005.png",
+      "normal-006.png",
+      "normal-007.png",
+      "normal-008.png",
+      "normal-009.png",
+      "normal-010.png",
+      "normal-011.png",
+      "normal-012.png",
+      "normal-013.png",
+      "normal-014.png",
+      "normal-015.png",
+      "normal-016.png",
+      "normal-017.png",
+      "normal-018.png",
+      "normal-019.png",
+      "normal-020.png",
+      "normal-021.png",
+      "normal-022.png",
+      "normal-023.png",
+      "normal-024.png",
+      "normal-025.png",
+      "normal-026.png",
+      "normal-027.png",
+      "normal-028.png",
+      "normal-029.png",
+      "normal-030.png",
+      "normal-031.png",
+      "normal-032.png",
+      "normal-033.png",
+      "normal-034.png",
+      "normal-035.png",
+      "normal-036.png",
+      "normal-037.png",
+      "normal-038.png",
+      "normal-039.png",
+      "normal-040.png",
+      "normal-041.png",
+      "normal-042.png",
+      "normal-043.png",
+      "normal-044.png",
+      "normal-045.png",
+      "normal-046.png",
+      "normal-047.png",
+      "normal-048.png",
+      "normal-049.png",
+      "normal-050.png",
+      "normal-051.png",
+      "normal-052.png",
+      "normal-053.png",
+      "normal-054.png",
+      "normal-055.png",
+      "normal-056.png",
+      "normal-057.png",
+      "normal-058.png",
+      "normal-059.png",
+      "normal-060.png",
+      "normal-061.png",
+      "normal-062.png",
+      "normal-063.png",
+      "normal-064.png",
+      "normal-065.png",
+      "normal-066.png",
+      "normal-067.png",
+      "normal-068.png",
+      "normal-069.png",
+      "normal-070.png",
+      "normal-071.png",
+      "normal-072.png",
+      "normal-073.png",
+      "normal-074.png",
+      "normal-075.png",
+      "normal-076.png",
+      "normal-077.png",
+      "normal-078.png",
+      "normal-079.png",
+      "normal-080.png",
+      "normal-081.png",
+      "normal-082.png",
+      "normal-083.png",
+      "normal-084.png",
+      "normal-085.png",
+      "normal-086.png",
+      "normal-087.png",
+      "normal-088.png",
+      "normal-089.png"
+    ],
+    "slow": [
+      "slow-000.png",
+      "slow-001.png",
+      "slow-002.png",
+      "slow-003.png",
+      "slow-004.png",
+      "slow-005.png",
+      "slow-006.png",
+      "slow-007.png",
+      "slow-008.png",
+      "slow-009.png",
+      "slow-010.png",
+      "slow-011.png",
+      "slow-012.png",
+      "slow-013.png",
+      "slow-014.png",
+      "slow-015.png",
+      "slow-016.png",
+      "slow-017.png",
+      "slow-018.png",
+      "slow-019.png",
+      "slow-020.png",
+      "slow-021.png",
+      "slow-022.png",
+      "slow-023.png",
+      "slow-024.png",
+      "slow-025.png",
+      "slow-026.png",
+      "slow-027.png",
+      "slow-028.png",
+      "slow-029.png",
+      "slow-030.png",
+      "slow-031.png",
+      "slow-032.png",
+      "slow-033.png",
+      "slow-034.png",
+      "slow-035.png",
+      "slow-036.png",
+      "slow-037.png",
+      "slow-038.png",
+      "slow-039.png",
+      "slow-040.png",
+      "slow-041.png",
+      "slow-042.png",
+      "slow-043.png",
+      "slow-044.png",
+      "slow-045.png",
+      "slow-046.png",
+      "slow-047.png",
+      "slow-048.png",
+      "slow-049.png",
+      "slow-050.png",
+      "slow-051.png",
+      "slow-052.png",
+      "slow-053.png",
+      "slow-054.png",
+      "slow-055.png",
+      "slow-056.png",
+      "slow-057.png",
+      "slow-058.png",
+      "slow-059.png",
+      "slow-060.png",
+      "slow-061.png",
+      "slow-062.png",
+      "slow-063.png",
+      "slow-064.png",
+      "slow-065.png",
+      "slow-066.png",
+      "slow-067.png",
+      "slow-068.png",
+      "slow-069.png",
+      "slow-070.png",
+      "slow-071.png",
+      "slow-072.png",
+      "slow-073.png",
+      "slow-074.png",
+      "slow-075.png",
+      "slow-076.png",
+      "slow-077.png",
+      "slow-078.png",
+      "slow-079.png",
+      "slow-080.png",
+      "slow-081.png",
+      "slow-082.png",
+      "slow-083.png",
+      "slow-084.png",
+      "slow-085.png",
+      "slow-086.png",
+      "slow-087.png",
+      "slow-088.png",
+      "slow-089.png",
+      "slow-090.png",
+      "slow-091.png",
+      "slow-092.png",
+      "slow-093.png",
+      "slow-094.png",
+      "slow-095.png",
+      "slow-096.png",
+      "slow-097.png",
+      "slow-098.png",
+      "slow-099.png",
+      "slow-100.png",
+      "slow-101.png",
+      "slow-102.png",
+      "slow-103.png",
+      "slow-104.png",
+      "slow-105.png",
+      "slow-106.png",
+      "slow-107.png",
+      "slow-108.png",
+      "slow-109.png",
+      "slow-110.png",
+      "slow-111.png",
+      "slow-112.png",
+      "slow-113.png",
+      "slow-114.png",
+      "slow-115.png",
+      "slow-116.png",
+      "slow-117.png",
+      "slow-118.png",
+      "slow-119.png",
+      "slow-120.png",
+      "slow-121.png",
+      "slow-122.png",
+      "slow-123.png",
+      "slow-124.png",
+      "slow-125.png",
+      "slow-126.png",
+      "slow-127.png",
+      "slow-128.png",
+      "slow-129.png",
+      "slow-130.png",
+      "slow-131.png",
+      "slow-132.png",
+      "slow-133.png",
+      "slow-134.png",
+      "slow-135.png",
+      "slow-136.png",
+      "slow-137.png",
+      "slow-138.png",
+      "slow-139.png",
+      "slow-140.png",
+      "slow-141.png",
+      "slow-142.png",
+      "slow-143.png",
+      "slow-144.png",
+      "slow-145.png",
+      "slow-146.png",
+      "slow-147.png",
+      "slow-148.png",
+      "slow-149.png",
+      "slow-150.png",
+      "slow-151.png",
+      "slow-152.png",
+      "slow-153.png",
+      "slow-154.png",
+      "slow-155.png",
+      "slow-156.png",
+      "slow-157.png",
+      "slow-158.png",
+      "slow-159.png",
+      "slow-160.png",
+      "slow-161.png",
+      "slow-162.png",
+      "slow-163.png",
+      "slow-164.png",
+      "slow-165.png",
+      "slow-166.png",
+      "slow-167.png",
+      "slow-168.png",
+      "slow-169.png",
+      "slow-170.png",
+      "slow-171.png",
+      "slow-172.png",
+      "slow-173.png",
+      "slow-174.png",
+      "slow-175.png",
+      "slow-176.png",
+      "slow-177.png",
+      "slow-178.png",
+      "slow-179.png",
+      "slow-180.png",
+      "slow-181.png",
+      "slow-182.png",
+      "slow-183.png",
+      "slow-184.png",
+      "slow-185.png",
+      "slow-186.png",
+      "slow-187.png",
+      "slow-188.png",
+      "slow-189.png",
+      "slow-190.png",
+      "slow-191.png",
+      "slow-192.png",
+      "slow-193.png",
+      "slow-194.png",
+      "slow-195.png",
+      "slow-196.png",
+      "slow-197.png",
+      "slow-198.png",
+      "slow-199.png",
+      "slow-200.png",
+      "slow-201.png",
+      "slow-202.png",
+      "slow-203.png",
+      "slow-204.png",
+      "slow-205.png",
+      "slow-206.png",
+      "slow-207.png",
+      "slow-208.png",
+      "slow-209.png",
+      "slow-210.png",
+      "slow-211.png",
+      "slow-212.png",
+      "slow-213.png",
+      "slow-214.png",
+      "slow-215.png",
+      "slow-216.png",
+      "slow-217.png",
+      "slow-218.png",
+      "slow-219.png",
+      "slow-220.png",
+      "slow-221.png",
+      "slow-222.png",
+      "slow-223.png",
+      "slow-224.png",
+      "slow-225.png",
+      "slow-226.png",
+      "slow-227.png",
+      "slow-228.png",
+      "slow-229.png",
+      "slow-230.png",
+      "slow-231.png",
+      "slow-232.png",
+      "slow-233.png",
+      "slow-234.png",
+      "slow-235.png",
+      "slow-236.png",
+      "slow-237.png",
+      "slow-238.png",
+      "slow-239.png",
+      "slow-240.png",
+      "slow-241.png",
+      "slow-242.png",
+      "slow-243.png",
+      "slow-244.png",
+      "slow-245.png",
+      "slow-246.png",
+      "slow-247.png",
+      "slow-248.png",
+      "slow-249.png",
+      "slow-250.png",
+      "slow-251.png",
+      "slow-252.png",
+      "slow-253.png",
+      "slow-254.png",
+      "slow-255.png",
+      "slow-256.png",
+      "slow-257.png",
+      "slow-258.png",
+      "slow-259.png",
+      "slow-260.png",
+      "slow-261.png",
+      "slow-262.png",
+      "slow-263.png",
+      "slow-264.png",
+      "slow-265.png",
+      "slow-266.png",
+      "slow-267.png",
+      "slow-268.png",
+      "slow-269.png",
+      "slow-270.png",
+      "slow-271.png",
+      "slow-272.png",
+      "slow-273.png",
+      "slow-274.png",
+      "slow-275.png",
+      "slow-276.png",
+      "slow-277.png",
+      "slow-278.png",
+      "slow-279.png",
+      "slow-280.png",
+      "slow-281.png",
+      "slow-282.png",
+      "slow-283.png",
+      "slow-284.png",
+      "slow-285.png",
+      "slow-286.png",
+      "slow-287.png",
+      "slow-288.png",
+      "slow-289.png",
+      "slow-290.png",
+      "slow-291.png",
+      "slow-292.png",
+      "slow-293.png",
+      "slow-294.png",
+      "slow-295.png",
+      "slow-296.png",
+      "slow-297.png",
+      "slow-298.png",
+      "slow-299.png",
+      "slow-300.png",
+      "slow-301.png",
+      "slow-302.png",
+      "slow-303.png",
+      "slow-304.png",
+      "slow-305.png",
+      "slow-306.png",
+      "slow-307.png",
+      "slow-308.png",
+      "slow-309.png",
+      "slow-310.png",
+      "slow-311.png",
+      "slow-312.png",
+      "slow-313.png",
+      "slow-314.png",
+      "slow-315.png",
+      "slow-316.png",
+      "slow-317.png",
+      "slow-318.png",
+      "slow-319.png",
+      "slow-320.png",
+      "slow-321.png",
+      "slow-322.png",
+      "slow-323.png",
+      "slow-324.png",
+      "slow-325.png",
+      "slow-326.png",
+      "slow-327.png",
+      "slow-328.png",
+      "slow-329.png",
+      "slow-330.png",
+      "slow-331.png",
+      "slow-332.png",
+      "slow-333.png",
+      "slow-334.png",
+      "slow-335.png",
+      "slow-336.png",
+      "slow-337.png",
+      "slow-338.png",
+      "slow-339.png",
+      "slow-340.png",
+      "slow-341.png",
+      "slow-342.png",
+      "slow-343.png",
+      "slow-344.png",
+      "slow-345.png",
+      "slow-346.png",
+      "slow-347.png",
+      "slow-348.png",
+      "slow-349.png",
+      "slow-350.png",
+      "slow-351.png",
+      "slow-352.png",
+      "slow-353.png",
+      "slow-354.png",
+      "slow-355.png",
+      "slow-356.png",
+      "slow-357.png",
+      "slow-358.png",
+      "slow-359.png"
+    ],
+    "review": [
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "hold-start.png",
+      "normal-000.png",
+      "normal-001.png",
+      "normal-002.png",
+      "normal-003.png",
+      "normal-004.png",
+      "normal-005.png",
+      "normal-006.png",
+      "normal-007.png",
+      "normal-008.png",
+      "normal-009.png",
+      "normal-010.png",
+      "normal-011.png",
+      "normal-012.png",
+      "normal-013.png",
+      "normal-014.png",
+      "normal-015.png",
+      "normal-016.png",
+      "normal-017.png",
+      "normal-018.png",
+      "normal-019.png",
+      "normal-020.png",
+      "normal-021.png",
+      "normal-022.png",
+      "normal-023.png",
+      "normal-024.png",
+      "normal-025.png",
+      "normal-026.png",
+      "normal-027.png",
+      "normal-028.png",
+      "normal-029.png",
+      "normal-030.png",
+      "normal-031.png",
+      "normal-032.png",
+      "normal-033.png",
+      "normal-034.png",
+      "normal-035.png",
+      "normal-036.png",
+      "normal-037.png",
+      "normal-038.png",
+      "normal-039.png",
+      "normal-040.png",
+      "normal-041.png",
+      "normal-042.png",
+      "normal-043.png",
+      "normal-044.png",
+      "normal-045.png",
+      "normal-046.png",
+      "normal-047.png",
+      "normal-048.png",
+      "normal-049.png",
+      "normal-050.png",
+      "normal-051.png",
+      "normal-052.png",
+      "normal-053.png",
+      "normal-054.png",
+      "normal-055.png",
+      "normal-056.png",
+      "normal-057.png",
+      "normal-058.png",
+      "normal-059.png",
+      "normal-060.png",
+      "normal-061.png",
+      "normal-062.png",
+      "normal-063.png",
+      "normal-064.png",
+      "normal-065.png",
+      "normal-066.png",
+      "normal-067.png",
+      "normal-068.png",
+      "normal-069.png",
+      "normal-070.png",
+      "normal-071.png",
+      "normal-072.png",
+      "normal-073.png",
+      "normal-074.png",
+      "normal-075.png",
+      "normal-076.png",
+      "normal-077.png",
+      "normal-078.png",
+      "normal-079.png",
+      "normal-080.png",
+      "normal-081.png",
+      "normal-082.png",
+      "normal-083.png",
+      "normal-084.png",
+      "normal-085.png",
+      "normal-086.png",
+      "normal-087.png",
+      "normal-088.png",
+      "normal-089.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "normal-000.png",
+      "normal-001.png",
+      "normal-002.png",
+      "normal-003.png",
+      "normal-004.png",
+      "normal-005.png",
+      "normal-006.png",
+      "normal-007.png",
+      "normal-008.png",
+      "normal-009.png",
+      "normal-010.png",
+      "normal-011.png",
+      "normal-012.png",
+      "normal-013.png",
+      "normal-014.png",
+      "normal-015.png",
+      "normal-016.png",
+      "normal-017.png",
+      "normal-018.png",
+      "normal-019.png",
+      "normal-020.png",
+      "normal-021.png",
+      "normal-022.png",
+      "normal-023.png",
+      "normal-024.png",
+      "normal-025.png",
+      "normal-026.png",
+      "normal-027.png",
+      "normal-028.png",
+      "normal-029.png",
+      "normal-030.png",
+      "normal-031.png",
+      "normal-032.png",
+      "normal-033.png",
+      "normal-034.png",
+      "normal-035.png",
+      "normal-036.png",
+      "normal-037.png",
+      "normal-038.png",
+      "normal-039.png",
+      "normal-040.png",
+      "normal-041.png",
+      "normal-042.png",
+      "normal-043.png",
+      "normal-044.png",
+      "normal-045.png",
+      "normal-046.png",
+      "normal-047.png",
+      "normal-048.png",
+      "normal-049.png",
+      "normal-050.png",
+      "normal-051.png",
+      "normal-052.png",
+      "normal-053.png",
+      "normal-054.png",
+      "normal-055.png",
+      "normal-056.png",
+      "normal-057.png",
+      "normal-058.png",
+      "normal-059.png",
+      "normal-060.png",
+      "normal-061.png",
+      "normal-062.png",
+      "normal-063.png",
+      "normal-064.png",
+      "normal-065.png",
+      "normal-066.png",
+      "normal-067.png",
+      "normal-068.png",
+      "normal-069.png",
+      "normal-070.png",
+      "normal-071.png",
+      "normal-072.png",
+      "normal-073.png",
+      "normal-074.png",
+      "normal-075.png",
+      "normal-076.png",
+      "normal-077.png",
+      "normal-078.png",
+      "normal-079.png",
+      "normal-080.png",
+      "normal-081.png",
+      "normal-082.png",
+      "normal-083.png",
+      "normal-084.png",
+      "normal-085.png",
+      "normal-086.png",
+      "normal-087.png",
+      "normal-088.png",
+      "normal-089.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "slow-000.png",
+      "slow-001.png",
+      "slow-002.png",
+      "slow-003.png",
+      "slow-004.png",
+      "slow-005.png",
+      "slow-006.png",
+      "slow-007.png",
+      "slow-008.png",
+      "slow-009.png",
+      "slow-010.png",
+      "slow-011.png",
+      "slow-012.png",
+      "slow-013.png",
+      "slow-014.png",
+      "slow-015.png",
+      "slow-016.png",
+      "slow-017.png",
+      "slow-018.png",
+      "slow-019.png",
+      "slow-020.png",
+      "slow-021.png",
+      "slow-022.png",
+      "slow-023.png",
+      "slow-024.png",
+      "slow-025.png",
+      "slow-026.png",
+      "slow-027.png",
+      "slow-028.png",
+      "slow-029.png",
+      "slow-030.png",
+      "slow-031.png",
+      "slow-032.png",
+      "slow-033.png",
+      "slow-034.png",
+      "slow-035.png",
+      "slow-036.png",
+      "slow-037.png",
+      "slow-038.png",
+      "slow-039.png",
+      "slow-040.png",
+      "slow-041.png",
+      "slow-042.png",
+      "slow-043.png",
+      "slow-044.png",
+      "slow-045.png",
+      "slow-046.png",
+      "slow-047.png",
+      "slow-048.png",
+      "slow-049.png",
+      "slow-050.png",
+      "slow-051.png",
+      "slow-052.png",
+      "slow-053.png",
+      "slow-054.png",
+      "slow-055.png",
+      "slow-056.png",
+      "slow-057.png",
+      "slow-058.png",
+      "slow-059.png",
+      "slow-060.png",
+      "slow-061.png",
+      "slow-062.png",
+      "slow-063.png",
+      "slow-064.png",
+      "slow-065.png",
+      "slow-066.png",
+      "slow-067.png",
+      "slow-068.png",
+      "slow-069.png",
+      "slow-070.png",
+      "slow-071.png",
+      "slow-072.png",
+      "slow-073.png",
+      "slow-074.png",
+      "slow-075.png",
+      "slow-076.png",
+      "slow-077.png",
+      "slow-078.png",
+      "slow-079.png",
+      "slow-080.png",
+      "slow-081.png",
+      "slow-082.png",
+      "slow-083.png",
+      "slow-084.png",
+      "slow-085.png",
+      "slow-086.png",
+      "slow-087.png",
+      "slow-088.png",
+      "slow-089.png",
+      "slow-090.png",
+      "slow-091.png",
+      "slow-092.png",
+      "slow-093.png",
+      "slow-094.png",
+      "slow-095.png",
+      "slow-096.png",
+      "slow-097.png",
+      "slow-098.png",
+      "slow-099.png",
+      "slow-100.png",
+      "slow-101.png",
+      "slow-102.png",
+      "slow-103.png",
+      "slow-104.png",
+      "slow-105.png",
+      "slow-106.png",
+      "slow-107.png",
+      "slow-108.png",
+      "slow-109.png",
+      "slow-110.png",
+      "slow-111.png",
+      "slow-112.png",
+      "slow-113.png",
+      "slow-114.png",
+      "slow-115.png",
+      "slow-116.png",
+      "slow-117.png",
+      "slow-118.png",
+      "slow-119.png",
+      "slow-120.png",
+      "slow-121.png",
+      "slow-122.png",
+      "slow-123.png",
+      "slow-124.png",
+      "slow-125.png",
+      "slow-126.png",
+      "slow-127.png",
+      "slow-128.png",
+      "slow-129.png",
+      "slow-130.png",
+      "slow-131.png",
+      "slow-132.png",
+      "slow-133.png",
+      "slow-134.png",
+      "slow-135.png",
+      "slow-136.png",
+      "slow-137.png",
+      "slow-138.png",
+      "slow-139.png",
+      "slow-140.png",
+      "slow-141.png",
+      "slow-142.png",
+      "slow-143.png",
+      "slow-144.png",
+      "slow-145.png",
+      "slow-146.png",
+      "slow-147.png",
+      "slow-148.png",
+      "slow-149.png",
+      "slow-150.png",
+      "slow-151.png",
+      "slow-152.png",
+      "slow-153.png",
+      "slow-154.png",
+      "slow-155.png",
+      "slow-156.png",
+      "slow-157.png",
+      "slow-158.png",
+      "slow-159.png",
+      "slow-160.png",
+      "slow-161.png",
+      "slow-162.png",
+      "slow-163.png",
+      "slow-164.png",
+      "slow-165.png",
+      "slow-166.png",
+      "slow-167.png",
+      "slow-168.png",
+      "slow-169.png",
+      "slow-170.png",
+      "slow-171.png",
+      "slow-172.png",
+      "slow-173.png",
+      "slow-174.png",
+      "slow-175.png",
+      "slow-176.png",
+      "slow-177.png",
+      "slow-178.png",
+      "slow-179.png",
+      "slow-180.png",
+      "slow-181.png",
+      "slow-182.png",
+      "slow-183.png",
+      "slow-184.png",
+      "slow-185.png",
+      "slow-186.png",
+      "slow-187.png",
+      "slow-188.png",
+      "slow-189.png",
+      "slow-190.png",
+      "slow-191.png",
+      "slow-192.png",
+      "slow-193.png",
+      "slow-194.png",
+      "slow-195.png",
+      "slow-196.png",
+      "slow-197.png",
+      "slow-198.png",
+      "slow-199.png",
+      "slow-200.png",
+      "slow-201.png",
+      "slow-202.png",
+      "slow-203.png",
+      "slow-204.png",
+      "slow-205.png",
+      "slow-206.png",
+      "slow-207.png",
+      "slow-208.png",
+      "slow-209.png",
+      "slow-210.png",
+      "slow-211.png",
+      "slow-212.png",
+      "slow-213.png",
+      "slow-214.png",
+      "slow-215.png",
+      "slow-216.png",
+      "slow-217.png",
+      "slow-218.png",
+      "slow-219.png",
+      "slow-220.png",
+      "slow-221.png",
+      "slow-222.png",
+      "slow-223.png",
+      "slow-224.png",
+      "slow-225.png",
+      "slow-226.png",
+      "slow-227.png",
+      "slow-228.png",
+      "slow-229.png",
+      "slow-230.png",
+      "slow-231.png",
+      "slow-232.png",
+      "slow-233.png",
+      "slow-234.png",
+      "slow-235.png",
+      "slow-236.png",
+      "slow-237.png",
+      "slow-238.png",
+      "slow-239.png",
+      "slow-240.png",
+      "slow-241.png",
+      "slow-242.png",
+      "slow-243.png",
+      "slow-244.png",
+      "slow-245.png",
+      "slow-246.png",
+      "slow-247.png",
+      "slow-248.png",
+      "slow-249.png",
+      "slow-250.png",
+      "slow-251.png",
+      "slow-252.png",
+      "slow-253.png",
+      "slow-254.png",
+      "slow-255.png",
+      "slow-256.png",
+      "slow-257.png",
+      "slow-258.png",
+      "slow-259.png",
+      "slow-260.png",
+      "slow-261.png",
+      "slow-262.png",
+      "slow-263.png",
+      "slow-264.png",
+      "slow-265.png",
+      "slow-266.png",
+      "slow-267.png",
+      "slow-268.png",
+      "slow-269.png",
+      "slow-270.png",
+      "slow-271.png",
+      "slow-272.png",
+      "slow-273.png",
+      "slow-274.png",
+      "slow-275.png",
+      "slow-276.png",
+      "slow-277.png",
+      "slow-278.png",
+      "slow-279.png",
+      "slow-280.png",
+      "slow-281.png",
+      "slow-282.png",
+      "slow-283.png",
+      "slow-284.png",
+      "slow-285.png",
+      "slow-286.png",
+      "slow-287.png",
+      "slow-288.png",
+      "slow-289.png",
+      "slow-290.png",
+      "slow-291.png",
+      "slow-292.png",
+      "slow-293.png",
+      "slow-294.png",
+      "slow-295.png",
+      "slow-296.png",
+      "slow-297.png",
+      "slow-298.png",
+      "slow-299.png",
+      "slow-300.png",
+      "slow-301.png",
+      "slow-302.png",
+      "slow-303.png",
+      "slow-304.png",
+      "slow-305.png",
+      "slow-306.png",
+      "slow-307.png",
+      "slow-308.png",
+      "slow-309.png",
+      "slow-310.png",
+      "slow-311.png",
+      "slow-312.png",
+      "slow-313.png",
+      "slow-314.png",
+      "slow-315.png",
+      "slow-316.png",
+      "slow-317.png",
+      "slow-318.png",
+      "slow-319.png",
+      "slow-320.png",
+      "slow-321.png",
+      "slow-322.png",
+      "slow-323.png",
+      "slow-324.png",
+      "slow-325.png",
+      "slow-326.png",
+      "slow-327.png",
+      "slow-328.png",
+      "slow-329.png",
+      "slow-330.png",
+      "slow-331.png",
+      "slow-332.png",
+      "slow-333.png",
+      "slow-334.png",
+      "slow-335.png",
+      "slow-336.png",
+      "slow-337.png",
+      "slow-338.png",
+      "slow-339.png",
+      "slow-340.png",
+      "slow-341.png",
+      "slow-342.png",
+      "slow-343.png",
+      "slow-344.png",
+      "slow-345.png",
+      "slow-346.png",
+      "slow-347.png",
+      "slow-348.png",
+      "slow-349.png",
+      "slow-350.png",
+      "slow-351.png",
+      "slow-352.png",
+      "slow-353.png",
+      "slow-354.png",
+      "slow-355.png",
+      "slow-356.png",
+      "slow-357.png",
+      "slow-358.png",
+      "slow-359.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png",
+      "hold-end.png"
+    ],
+    "comparison": [
+      "comparison-000.png",
+      "comparison-001.png",
+      "comparison-002.png",
+      "comparison-003.png",
+      "comparison-004.png",
+      "comparison-005.png",
+      "comparison-006.png",
+      "comparison-007.png",
+      "comparison-008.png",
+      "comparison-009.png",
+      "comparison-010.png",
+      "comparison-011.png",
+      "comparison-012.png",
+      "comparison-013.png",
+      "comparison-014.png",
+      "comparison-015.png",
+      "comparison-016.png",
+      "comparison-017.png",
+      "comparison-018.png",
+      "comparison-019.png",
+      "comparison-020.png",
+      "comparison-021.png",
+      "comparison-022.png",
+      "comparison-023.png",
+      "comparison-024.png",
+      "comparison-025.png",
+      "comparison-026.png",
+      "comparison-027.png",
+      "comparison-028.png",
+      "comparison-029.png",
+      "comparison-030.png",
+      "comparison-031.png",
+      "comparison-032.png",
+      "comparison-033.png",
+      "comparison-034.png",
+      "comparison-035.png",
+      "comparison-036.png",
+      "comparison-037.png",
+      "comparison-038.png",
+      "comparison-039.png",
+      "comparison-040.png",
+      "comparison-041.png",
+      "comparison-042.png",
+      "comparison-043.png",
+      "comparison-044.png",
+      "comparison-045.png",
+      "comparison-046.png",
+      "comparison-047.png",
+      "comparison-048.png",
+      "comparison-049.png",
+      "comparison-050.png",
+      "comparison-051.png",
+      "comparison-052.png",
+      "comparison-053.png",
+      "comparison-054.png",
+      "comparison-055.png",
+      "comparison-056.png",
+      "comparison-057.png",
+      "comparison-058.png",
+      "comparison-059.png",
+      "comparison-060.png",
+      "comparison-061.png",
+      "comparison-062.png",
+      "comparison-063.png",
+      "comparison-064.png",
+      "comparison-065.png",
+      "comparison-066.png",
+      "comparison-067.png",
+      "comparison-068.png",
+      "comparison-069.png",
+      "comparison-070.png",
+      "comparison-071.png",
+      "comparison-072.png",
+      "comparison-073.png",
+      "comparison-074.png",
+      "comparison-075.png",
+      "comparison-076.png",
+      "comparison-077.png",
+      "comparison-078.png",
+      "comparison-079.png",
+      "comparison-080.png",
+      "comparison-081.png",
+      "comparison-082.png",
+      "comparison-083.png",
+      "comparison-084.png",
+      "comparison-085.png",
+      "comparison-086.png",
+      "comparison-087.png",
+      "comparison-088.png",
+      "comparison-089.png"
+    ],
+    "comparisonReview": [
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-hold-start.png",
+      "comparison-000.png",
+      "comparison-001.png",
+      "comparison-002.png",
+      "comparison-003.png",
+      "comparison-004.png",
+      "comparison-005.png",
+      "comparison-006.png",
+      "comparison-007.png",
+      "comparison-008.png",
+      "comparison-009.png",
+      "comparison-010.png",
+      "comparison-011.png",
+      "comparison-012.png",
+      "comparison-013.png",
+      "comparison-014.png",
+      "comparison-015.png",
+      "comparison-016.png",
+      "comparison-017.png",
+      "comparison-018.png",
+      "comparison-019.png",
+      "comparison-020.png",
+      "comparison-021.png",
+      "comparison-022.png",
+      "comparison-023.png",
+      "comparison-024.png",
+      "comparison-025.png",
+      "comparison-026.png",
+      "comparison-027.png",
+      "comparison-028.png",
+      "comparison-029.png",
+      "comparison-030.png",
+      "comparison-031.png",
+      "comparison-032.png",
+      "comparison-033.png",
+      "comparison-034.png",
+      "comparison-035.png",
+      "comparison-036.png",
+      "comparison-037.png",
+      "comparison-038.png",
+      "comparison-039.png",
+      "comparison-040.png",
+      "comparison-041.png",
+      "comparison-042.png",
+      "comparison-043.png",
+      "comparison-044.png",
+      "comparison-045.png",
+      "comparison-046.png",
+      "comparison-047.png",
+      "comparison-048.png",
+      "comparison-049.png",
+      "comparison-050.png",
+      "comparison-051.png",
+      "comparison-052.png",
+      "comparison-053.png",
+      "comparison-054.png",
+      "comparison-055.png",
+      "comparison-056.png",
+      "comparison-057.png",
+      "comparison-058.png",
+      "comparison-059.png",
+      "comparison-060.png",
+      "comparison-061.png",
+      "comparison-062.png",
+      "comparison-063.png",
+      "comparison-064.png",
+      "comparison-065.png",
+      "comparison-066.png",
+      "comparison-067.png",
+      "comparison-068.png",
+      "comparison-069.png",
+      "comparison-070.png",
+      "comparison-071.png",
+      "comparison-072.png",
+      "comparison-073.png",
+      "comparison-074.png",
+      "comparison-075.png",
+      "comparison-076.png",
+      "comparison-077.png",
+      "comparison-078.png",
+      "comparison-079.png",
+      "comparison-080.png",
+      "comparison-081.png",
+      "comparison-082.png",
+      "comparison-083.png",
+      "comparison-084.png",
+      "comparison-085.png",
+      "comparison-086.png",
+      "comparison-087.png",
+      "comparison-088.png",
+      "comparison-089.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png",
+      "comparison-hold-end.png"
+    ]
+  },
+  "exposure": "Moving clips sample [0,1500); exact 1500 ms endpoint is in paused and review end-hold evidence.",
+  "renderer": "System librsvg/Cairo offline. Not browser execution."
+}

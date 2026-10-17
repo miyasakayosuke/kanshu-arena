@@ -1,0 +1,102 @@
+{
+  "title": "Moonlit Bite 1.5x higher-jump correction proxy",
+  "createdUtc": "2026-10-17",
+  "scope": "One bounded correction: 1.5x higher root apex rise and whole-hind-leg load ground clearance. No final artwork, game integration or release.",
+  "baseline": {
+    "commit": "5ec50e4d39a3c49ab9a2b17442e7df871e5aedba",
+    "path": "docs/full-rig-motion-preview",
+    "manifestSha256": "d6cdaf71a1cea851f228b2007279f10895cfeb59ef5b667f92dfc96f5bd9e3bf",
+    "syntheticRigSha256": "c23e119f2a29499816dcc60b7305a255a1793f34d797d39e5afaf7457cffea9b",
+    "modified": false
+  },
+  "heightMetric": {
+    "anchor": "existing hip/root torso point",
+    "standingY": -70,
+    "oldApexY": -148,
+    "newApexY": -187,
+    "oldRise": 78,
+    "newRise": 117,
+    "ratio": 1.5,
+    "apexMs": 500
+  },
+  "changes": {
+    "rootYLoadKey200ms": {
+      "old": -47,
+      "new": -55
+    },
+    "extraAirLiftKeys": [
+      [
+        0,
+        0
+      ],
+      [
+        360,
+        0
+      ],
+      [
+        500,
+        39
+      ],
+      [
+        800,
+        0
+      ],
+      [
+        1500,
+        0
+      ]
+    ],
+    "nonYTracksChanged": false,
+    "dimensionsChanged": false,
+    "contactRulesChanged": false,
+    "cameraChanged": false,
+    "scaleChanged": false
+  },
+  "originalReference": {
+    "sha256": "e072a556adb672e192065347486e674d091bb03892decfe0c84625c84ebd4137",
+    "inspectedPixels": true,
+    "copied": false,
+    "includedInPackage": false,
+    "modified": false,
+    "uploaded": false
+  },
+  "timing": {
+    "durationMs": 1500,
+    "impactMs": 800,
+    "lastToeReleaseMs": 360,
+    "rootApexMs": 500,
+    "foreContactsMs": [
+      890,
+      900
+    ],
+    "rearContactsMs": [
+      970,
+      980
+    ],
+    "power": 55,
+    "mp": 10
+  },
+  "rendering": {
+    "method": "System librsvg/Cairo offline",
+    "fps": 60,
+    "normalFrames": 90,
+    "slowFrames": 360,
+    "reviewFrames": 690,
+    "comparisonNormalFrames": 90,
+    "comparisonReviewFrames": 168,
+    "browserExecuted": false
+  },
+  "claims": {
+    "exactRootRiseRatio": true,
+    "fixedBoneLengths": true,
+    "wholeActorGroundInkAudit": true,
+    "unmaskedOverscanPixelAudit": true,
+    "originalArtIdentityMatched": false,
+    "physicalSimulation": false,
+    "gameIntegration": false,
+    "finalArtwork": false,
+    "releaseAcceptance": false,
+    "ownerAcceptance": false
+  },
+  "reviewPolicy": "Freeze one coherent candidate before independent review; no post-review change."
+}

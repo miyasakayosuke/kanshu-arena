@@ -1,0 +1,63 @@
+{
+  "pass": true,
+  "unmaskedPixelAudit": "pixel-audit.json",
+  "movies": [
+    {
+      "file": "normal-1500ms-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "1.500000",
+      "nb_read_frames": "90",
+      "sha256": "a070fb2471be0b1deff6c414b4ab2bafaf3efd6860e21ffbfffe4331c6a4ebe5",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "slow-6000ms-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "6.000000",
+      "nb_read_frames": "360",
+      "sha256": "d9a00e8e30d4c5b0e39e2cf2842477fcdeb978665615bde23a54c26cda820dba",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "full-motion-review-60fps.mp4",
+      "width": 1280,
+      "height": 800,
+      "r_frame_rate": "60/1",
+      "duration": "11.500000",
+      "nb_read_frames": "690",
+      "sha256": "67ff64f43bc389644b3bae0206616d18decb85e3d2770b20770cba170995e14f",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "comparison-normal-1500ms-60fps.mp4",
+      "width": 1680,
+      "height": 1000,
+      "r_frame_rate": "60/1",
+      "duration": "1.500000",
+      "nb_read_frames": "90",
+      "sha256": "712b06fe4ace7beffb749f74b6f61432388356bef95cc9e32afc9c6daec85aec",
+      "decodedAllFrames": true
+    },
+    {
+      "file": "comparison-review-60fps.mp4",
+      "width": 1680,
+      "height": 1000,
+      "r_frame_rate": "60/1",
+      "duration": "2.800000",
+      "nb_read_frames": "168",
+      "sha256": "f9f9bb7e5a988068cca99ac45c78c79d54cda3636654664dcccc8c5454e8f9a6",
+      "decodedAllFrames": true
+    }
+  ],
+  "losslessPanelBordersChecked": 1272,
+  "boundsMethod": "Analytical stroked primitive bounds sampled every 0.25ms; actual lossless rendered panel-border pixels checked for every unique movie frame.",
+  "browserExecuted": false,
+  "limitations": [
+    "No real-time human playback claimed. Independent visual decoded-frame review is separate.",
+    "Video compression is lossy; static PNGs preserve exact native pixel scale."
+  ]
+}
