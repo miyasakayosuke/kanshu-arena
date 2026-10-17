@@ -1,0 +1,66 @@
+{
+  "pass": true,
+  "samples": 6001,
+  "sampleSpacingMs": 0.25,
+  "maxBoneError": 4.263256414560601e-14,
+  "maxPlantedToeError": 0,
+  "minIkReachSlack": 6.550224487274846,
+  "maxWholeInkBelowGround": 0,
+  "minSideBottomMarginPx": 58,
+  "maxQuarterMsPointStep": 2.0040827553811424,
+  "minPawTargetInkGap": 1.8794508209420684,
+  "minBiteWindowPawTargetInkGap": 11.81575627160057,
+  "maxPrimitiveCount": 47,
+  "windows": {
+    "large": {
+      "firstTopCrossing": 436.75,
+      "firstFullyAbove": 453.75,
+      "lastFullyAbove": 662,
+      "firstReturnInView": 724.25,
+      "fullyAboveDurationAtSamplePrecisionMs": 208.25
+    },
+    "native": {
+      "firstTopCrossing": 449,
+      "firstFullyAbove": 465.5,
+      "lastFullyAbove": 614.75,
+      "firstReturnInView": 686.75,
+      "fullyAboveDurationAtSamplePrecisionMs": 149.25
+    }
+  },
+  "impact": {
+    "ms": 800,
+    "center": [
+      -165.78186547338822,
+      -31.708685117343663
+    ],
+    "radius": 7,
+    "jawTipDistance": 2.692582403567242,
+    "muzzleDistance": 2.692582403567242,
+    "jawOpenDegrees": 0,
+    "rootDownVelocity": 0.19695635454297644,
+    "jawDownVelocity": 0.1969397864201028,
+    "muzzleDownVelocity": 0.19694905941847196
+  },
+  "maxVelocityJump": 0.0002459474495562515,
+  "recoveryError": 1.4210854715202004e-14,
+  "rootApex": {
+    "ms": 500,
+    "standingY": -70,
+    "baselineY": -187,
+    "newY": -447
+  },
+  "unchanged": [
+    "bone lengths",
+    "all actor primitive dimensions/counts",
+    "camera origins and scales",
+    "support/release/contact times",
+    "all non-Y axial tracks",
+    "800 ms major bite and 1500 ms endpoint"
+  ],
+  "limits": [
+    "Sampled kinematics, not a continuous-time or physical-simulation proof.",
+    "Top clipping is intentional; all side/bottom clipping forbidden.",
+    "No browser, runtime, final-art or release claim.",
+    "Jaw/paw target separation checks the solid head, not cosmetic impact ring or static support arm."
+  ]
+}

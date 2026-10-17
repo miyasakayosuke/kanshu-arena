@@ -1,0 +1,59 @@
+{
+  "pass": true,
+  "movies": [
+    {
+      "file": "normal-1500ms-60fps.mp4",
+      "frames": 90,
+      "fps": 60,
+      "width": 1280,
+      "height": 800,
+      "sha256": "57bb22af083260608097804ae9465fee2e7eeb442d70c76035517ad56a5304c4",
+      "fullDecode": true
+    },
+    {
+      "file": "slow-6000ms-60fps.mp4",
+      "frames": 360,
+      "fps": 60,
+      "width": 1280,
+      "height": 800,
+      "sha256": "c31bb4029670d81e38868948985c9dfaecd071fe75b9f4663c1652885137fde8",
+      "fullDecode": true
+    },
+    {
+      "file": "full-motion-review-60fps.mp4",
+      "frames": 678,
+      "fps": 60,
+      "width": 1280,
+      "height": 800,
+      "sha256": "28455cc6ae9eb7b584f8d571a8c513b4baf255578e56213fb217ab218c4476d3",
+      "fullDecode": true
+    },
+    {
+      "file": "comparison-review-60fps.mp4",
+      "frames": 168,
+      "fps": 60,
+      "width": 1680,
+      "height": 1000,
+      "sha256": "d49a7efed02f3fe74ee25abd894305a2c763e367c25adc688021d88654d4c240",
+      "fullDecode": true
+    }
+  ],
+  "losslessPanelBorderChecks": 1272,
+  "decodedSheets": [
+    "decoded-normal-native-all.png",
+    "decoded-normal-enlarged-phases.png",
+    "decoded-slow-enlarged-phases.png",
+    "decoded-comparison-native.png"
+  ],
+  "exactEndpointDecoded": {
+    "reviewLastFrame": 677,
+    "comparisonLastFrame": 167,
+    "ms": 1500
+  },
+  "nativeResizing": false,
+  "browserExecuted": false,
+  "limits": [
+    "Decoded frame inspection is not real-time human playback.",
+    "Lossy movie frames differ from lossless SVG source pixels."
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "pass": true,
+  "method": "Unmasked full-actor alpha rendering with large top overscan; no viewport clip, background, ground cover, target or labels. All actor pixels retained in audit canvas.",
+  "timeCoverage": "Every integer millisecond 0-1500 plus every distinct normal/slow frame timestamp rounded to 1e-6 ms.",
+  "views": [
+    {
+      "view": "large",
+      "samples": 1801,
+      "scale": 1.75,
+      "overscan": {
+        "left": 32,
+        "top": 420,
+        "bottom": 32
+      },
+      "maxPixelsBelowGround": 0,
+      "maxSidePixels": 0,
+      "maxBottomPixels": 0,
+      "maxIntentionalTopPixels": 35340,
+      "overscanMinInkMarginPx": 36,
+      "firstTopCrossingMs": 437,
+      "lastTopCrossingMs": 724,
+      "firstFullyAboveMs": 454,
+      "lastFullyAboveMs": 662,
+      "fullyAboveDurationMs": 208
+    },
+    {
+      "view": "native",
+      "samples": 1801,
+      "scale": 0.5916666666666667,
+      "overscan": {
+        "left": 32,
+        "top": 112,
+        "bottom": 32
+      },
+      "maxPixelsBelowGround": 0,
+      "maxSidePixels": 0,
+      "maxBottomPixels": 0,
+      "maxIntentionalTopPixels": 4249,
+      "overscanMinInkMarginPx": 28,
+      "firstTopCrossingMs": 449,
+      "lastTopCrossingMs": 686,
+      "firstFullyAboveMs": 466,
+      "lastFullyAboveMs": 615,
+      "fullyAboveDurationMs": 149
+    }
+  ],
+  "selectedUnmaskedImages": [
+    {
+      "file": "unmasked-large-500ms.png",
+      "sha256": "963065cf68291d4c26b6aada766b1e5d69df161985037a0ac7bd61723ec38d53",
+      "ms": 500,
+      "alphaBounds": [
+        187,
+        40,
+        675,
+        192
+      ],
+      "visibleActorPixels": 0,
+      "pixelsAboveViewport": 33365,
+      "groundPixels": 0
+    },
+    {
+      "file": "unmasked-large-800ms.png",
+      "sha256": "707bafed1545666095346a5c6b187fbadb6fb4907b77810d5a020893d055bc9e",
+      "ms": 800,
+      "alphaBounds": [
+        210,
+        582,
+        639,
+        837
+      ],
+      "visibleActorPixels": 34161,
+      "pixelsAboveViewport": 0,
+      "groundPixels": 0
+    },
+    {
+      "file": "unmasked-large-930ms.png",
+      "sha256": "33eac16d1deafbf45488eac99b850c015c836654d7005d4295b50dee73073c0c",
+      "ms": 930,
+      "alphaBounds": [
+        160,
+        660,
+        583,
+        880
+      ],
+      "visibleActorPixels": 34226,
+      "pixelsAboveViewport": 0,
+      "groundPixels": 0
+    },
+    {
+      "file": "unmasked-native-500ms.png",
+      "sha256": "d5b56f8a37b5540c731fcf18f73692140009e603d4910c13c1b769a18699cd05",
+      "ms": 500,
+      "alphaBounds": [
+        143,
+        30,
+        309,
+        82
+      ],
+      "visibleActorPixels": 0,
+      "pixelsAboveViewport": 4012,
+      "groundPixels": 0
+    }
+  ],
+  "browserExecuted": false,
+  "limits": [
+    "Sampled raster evidence, not a continuous-time proof.",
+    "Top clipping is intentional only during flight.",
+    "No physical collision or runtime performance validation."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Moonlit Bite offscreen-leap temporary model",
+  "baselineCommit": "3f5f401f079c077d17c842f1aef7d0341bd9c522",
+  "baselineRigSha256": "91c28a97a909fdf719ccc848b8068ade27e8ea842ea9a43d659bfa86a8dcd318",
+  "baselinePriorFrozenFiles": 95,
+  "baselinePriorFrozenFilesUnchanged": true,
+  "sourceGeometry": "Previously authored synthetic schematic; no original raster pixels.",
+  "originalReferenceIncluded": false,
+  "originalReferenceCopiedEditedUploaded": false,
+  "originalReferenceCreationProvenance": "Unverified; unchanged and not used as build input.",
+  "durationMs": 1500,
+  "majorBiteMs": 800,
+  "offlineRenderer": "Preinstalled system librsvg/Cairo",
+  "videoEncoder": "Preinstalled ffmpeg libx264, 60fps, crf18, yuv420p",
+  "browserExecuted": false,
+  "networkUsedByBuilder": false,
+  "gameIntegration": false,
+  "finalArtwork": false,
+  "releaseAcceptance": false
+}

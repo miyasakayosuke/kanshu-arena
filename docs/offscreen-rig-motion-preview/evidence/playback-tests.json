@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "checks": [
+    "normal",
+    "pause",
+    "seek",
+    "slow",
+    "exact endpoint",
+    "replay",
+    "inline JS syntax"
+  ],
+  "browserExecuted": false
+}
