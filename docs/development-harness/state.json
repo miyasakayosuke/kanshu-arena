@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 90,
+  "revision": 91,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1659,6 +1659,26 @@
         "planRevision": 6,
         "revision": 90
       }
+    },
+    "identity-poses-claim-six": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "identity-pose-builder",
+        "planRevision": 6,
+        "ttl": 1800,
+        "operationId": "identity-poses-claim-six"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "identity-pose-builder",
+          "generation": 17,
+          "expiresAt": 1792203937.6237438
+        },
+        "revision": 91
+      }
     }
   },
   "tasks": [
@@ -1770,11 +1790,11 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 9,
-      "generation": 16,
+      "attempts": 10,
+      "generation": 17,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "ready",
+      "status": "running",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1934,7 +1954,14 @@
             }
           }
         }
-      ]
+      ],
+      "implementer": "identity-pose-builder",
+      "assignment": {
+        "role": "implement",
+        "worker": "identity-pose-builder",
+        "generation": 17,
+        "expiresAt": 1792203937.6237438
+      }
     },
     {
       "id": "v1-acceptance",
