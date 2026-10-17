@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "revision": 84,
+  "revision": 85,
   "operations": {
     "safe-cycle-one-reconcile": {
       "command": {
@@ -1540,6 +1540,26 @@
         "planRevision": 4,
         "revision": 84
       }
+    },
+    "higher-rig-claim-four": {
+      "command": {
+        "action": "claim",
+        "task": "replacement-animation",
+        "role": "implement",
+        "worker": "higher-rig-builder",
+        "ttl": 3600,
+        "planRevision": 4,
+        "operationId": "higher-rig-claim-four"
+      },
+      "result": {
+        "assignment": {
+          "role": "implement",
+          "worker": "higher-rig-builder",
+          "generation": 13,
+          "expiresAt": 1792200012.3396192
+        },
+        "revision": 85
+      }
     }
   },
   "tasks": [
@@ -1651,11 +1671,11 @@
         "Rollback-safe reviewed release evidence"
       ],
       "required": true,
-      "attempts": 7,
-      "generation": 12,
+      "attempts": 8,
+      "generation": 13,
       "dependsOn": [],
       "deliverableKind": "release",
-      "status": "ready",
+      "status": "running",
       "plans": [
         {
           "method": "Acting-first coherent whole-body key poses followed by sprite-led Moonlit Bite motion from the selected original character reference",
@@ -1764,7 +1784,14 @@
             }
           }
         }
-      ]
+      ],
+      "implementer": "higher-rig-builder",
+      "assignment": {
+        "role": "implement",
+        "worker": "higher-rig-builder",
+        "generation": 13,
+        "expiresAt": 1792200012.3396192
+      }
     },
     {
       "id": "v1-acceptance",
